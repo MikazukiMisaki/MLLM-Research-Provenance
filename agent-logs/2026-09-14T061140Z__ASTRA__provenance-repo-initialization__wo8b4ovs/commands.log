@@ -34,3 +34,7 @@ Filename-only ripgrep sensitive pattern scan; matching files reviewed as documen
 Authenticated GitHub get_repo verified expected repository, visibility=private, default_branch=main, push permission=true.
 Created README, INDEX, protocol v2, ignore rules, corrections and redaction notes. Redacted 26 occurrences in 7 evidence files; no historical RECORD.md changed. Reviewed all nonignored text, no files >1 MB, no unresolved high-confidence credential matches.
 Next: stage only audited provenance files, generate deterministic inventory, verify staged contents, commit initial import and push main. Exact resulting SHA and push verification will be recorded in follow-up provenance commit.
+
+Initial commit: 339bdc37e60ff0222bcb0e6044d03beb320940c2
+Executed git push -u origin main: PASS. git ls-remote origin refs/heads/main matched 339bdc37e60ff0222bcb0e6044d03beb320940c2.
+Finalized initialization RECORD.md and its index entry. Refreshed deterministic inventory. Next executed commands: git commit -m "astra(provenance): record provenance repository initialization"; git push origin main; verify HEAD/remote, tracked required files, hashes and clean status. Exact final output stored in ignored post-push-receipt.json to avoid altering committed evidence after hashing.
