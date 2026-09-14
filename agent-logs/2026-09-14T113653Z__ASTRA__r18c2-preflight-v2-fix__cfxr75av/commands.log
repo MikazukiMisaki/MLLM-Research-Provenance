@@ -1,0 +1,386 @@
+
+CWD /home/lizening/Alfworld-Self-Improvement-Project
+['git', 'fetch', 'origin']
+
+EXIT 0
+
+CWD /home/lizening/Alfworld-Self-Improvement-Project
+['git', 'branch', '--show-current']
+codex/progress-aware-recovery
+
+EXIT 0
+
+CWD /home/lizening/Alfworld-Self-Improvement-Project
+['git', 'rev-parse', 'HEAD']
+aa9fa3c34520941e7e3be00294b111e8254fd65b
+
+EXIT 0
+
+CWD /home/lizening/Alfworld-Self-Improvement-Project
+['git', 'rev-parse', 'origin/codex/progress-aware-recovery']
+aa9fa3c34520941e7e3be00294b111e8254fd65b
+
+EXIT 0
+
+CWD /home/lizening/Alfworld-Self-Improvement-Project
+['git', 'status', '--porcelain=v1']
+
+EXIT 0
+
+CWD /home/lizening/research-notes
+['git', 'fetch', 'origin']
+
+EXIT 0
+
+CWD /home/lizening/research-notes
+['git', 'status', '--short', '--branch']
+## main...origin/main
+?? agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/
+
+EXIT 0
+
+CWD /home/lizening/research-notes
+['git', 'rev-parse', 'HEAD']
+a895f60fc83b235d5a7fff8469a5f563016d9b26
+
+EXIT 0
+
+CWD /home/lizening/research-notes
+['git', 'rev-parse', 'origin/main']
+a895f60fc83b235d5a7fff8469a5f563016d9b26
+
+EXIT 0
+
+CWD /home/lizening/research-notes
+['git', 'remote', 'get-url', 'origin']
+git@github.com:MikazukiMisaki/MLLM-Research-Provenance.git
+
+EXIT 0
+
+UTC 2026-09-14T11:44:25.714661+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ bash -n /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/durable-wrapper-v2.sh
+
+EXIT 0
+
+UTC 2026-09-14T11:44:25.719270+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ bash -n /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/future-launch-v2.sh.txt
+
+EXIT 0
+
+UTC 2026-09-14T11:44:25.824003+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/test_process_identity_v2.py
+test_exact_scientific_module_is_reviewable (__main__.DetectorTests) ... ok
+test_exact_script_unexpected_invocation_stops (__main__.DetectorTests) ... ok
+test_false_positive_matrix (__main__.DetectorTests) ... ok
+test_legacy_wrapper_is_still_protected (__main__.DetectorTests) ... ok
+test_lock_probe_nontruncating_and_held_lock_stop (__main__.DetectorTests) ... ok
+test_no_exited_process_is_active (__main__.DetectorTests) ... ok
+test_pid_birth_and_boot (__main__.DetectorTests) ... ok
+test_proc_fixture_and_recorded_scan (__main__.DetectorTests) ... ok
+test_true_runner_forms (__main__.DetectorTests) ... ok
+test_wrapper_identity (__main__.DetectorTests) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.018s
+
+OK
+
+EXIT 0
+
+UTC 2026-09-14T11:45:17.744306+00:00
+CWD /home/lizening/Alfworld-Self-Improvement-Project
+$ /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/future-preflight-v2.py
+{
+  "preflight": "PASS",
+  "sha": "aa9fa3c34520941e7e3be00294b111e8254fd65b",
+  "manifest_status": "initialized",
+  "accepted_branches": 0,
+  "ledger_rows": 0,
+  "process_scan": {
+    "blockers": [],
+    "processes_inspected": 18,
+    "unreadable_unattributed_pids": [],
+    "boot_id": "b1dc88e1-5f49-447e-8d83-e3f3b16fcfc6"
+  },
+  "locks": {
+    "scientific": "available at probe time; immediately released",
+    "external": "absent (not created)"
+  },
+  "scientific_calls": 0
+}
+
+EXIT 0
+
+UTC 2026-09-14T11:45:25.545246+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/live-false-positive-test.py
+{
+  "live_unrelated_processes": 3,
+  "preflight": "PASS"
+}
+All owned false-positive processes exited and were reaped.
+
+EXIT 0
+
+UTC 2026-09-14T11:46:30.529457+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ bash /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-launch-v2.sh nonzero 7
+SYNTHETIC_DISPATCH_RETURNED 2026-09-14T11:46:30Z
+
+EXIT 0
+
+UTC 2026-09-14T11:46:40.147737+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/inspect-synthetic-v2.py nonzero
+{
+  "launcher": {
+    "pid": 621195,
+    "exe": "/usr/bin/bash",
+    "cwd": "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av",
+    "argv": [
+      "/usr/bin/bash",
+      "--noprofile",
+      "--norc",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/durable-wrapper-v2.sh",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-jobs/nonzero",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-launch.lock",
+      "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-payload-v2.py",
+      "--output",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-runtime",
+      "--resume"
+    ],
+    "start_ticks": 123644373,
+    "boot_id": "b1dc88e1-5f49-447e-8d83-e3f3b16fcfc6",
+    "state": "S",
+    "ppid": 1,
+    "pgid": 621195,
+    "sid": 621195,
+    "error": null
+  },
+  "runner": {
+    "pid": 621203,
+    "exe": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python3.10",
+    "cwd": "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av",
+    "argv": [
+      "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-payload-v2.py",
+      "--output",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-runtime",
+      "--resume"
+    ],
+    "start_ticks": 123644376,
+    "boot_id": "b1dc88e1-5f49-447e-8d83-e3f3b16fcfc6",
+    "state": "S",
+    "ppid": 621195,
+    "pgid": 621195,
+    "sid": 621195,
+    "error": null
+  },
+  "wrapper_verdict": {
+    "pid": 621195,
+    "kind": "wrapper",
+    "reason": "Bash executing exact task wrapper with exact payload/cwd/lock"
+  },
+  "launch_shell_returned": true,
+  "boot_and_start_identity": "PASS",
+  "lock_held": "PASS"
+}
+
+EXIT 0
+
+UTC 2026-09-14T11:46:40.165143+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ bash /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-launch-v2.sh duplicate 0
+SYNTHETIC_DISPATCH_RETURNED 2026-09-14T11:46:40Z
+
+EXIT 0
+
+UTC 2026-09-14T11:47:32.611456+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ sha256sum -c /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-jobs/nonzero/runner.log.sha256
+/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-jobs/nonzero/runner.log: OK
+
+EXIT 0
+
+UTC 2026-09-14T11:47:32.630760+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ bash /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-launch-v2.sh success 0
+SYNTHETIC_DISPATCH_RETURNED 2026-09-14T11:47:32Z
+
+EXIT 0
+
+UTC 2026-09-14T11:47:40.710510+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/inspect-synthetic-v2.py success
+{
+  "launcher": {
+    "pid": 621263,
+    "exe": "/usr/bin/bash",
+    "cwd": "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av",
+    "argv": [
+      "/usr/bin/bash",
+      "--noprofile",
+      "--norc",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/durable-wrapper-v2.sh",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-jobs/success",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-launch.lock",
+      "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-payload-v2.py",
+      "--output",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-runtime",
+      "--resume"
+    ],
+    "start_ticks": 123650583,
+    "boot_id": "b1dc88e1-5f49-447e-8d83-e3f3b16fcfc6",
+    "state": "S",
+    "ppid": 1,
+    "pgid": 621263,
+    "sid": 621263,
+    "error": null
+  },
+  "runner": {
+    "pid": 621271,
+    "exe": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python3.10",
+    "cwd": "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av",
+    "argv": [
+      "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-payload-v2.py",
+      "--output",
+      "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-runtime",
+      "--resume"
+    ],
+    "start_ticks": 123650586,
+    "boot_id": "b1dc88e1-5f49-447e-8d83-e3f3b16fcfc6",
+    "state": "S",
+    "ppid": 621263,
+    "pgid": 621263,
+    "sid": 621263,
+    "error": null
+  },
+  "wrapper_verdict": {
+    "pid": 621263,
+    "kind": "wrapper",
+    "reason": "Bash executing exact task wrapper with exact payload/cwd/lock"
+  },
+  "launch_shell_returned": true,
+  "boot_and_start_identity": "PASS",
+  "lock_held": "PASS"
+}
+
+EXIT 0
+
+UTC 2026-09-14T11:49:28.378638+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ sha256sum -c /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-jobs/nonzero/runner.log.sha256
+/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-jobs/nonzero/runner.log: OK
+
+EXIT 0
+
+UTC 2026-09-14T11:49:28.382535+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ sha256sum -c /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-jobs/success/runner.log.sha256
+/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-jobs/success/runner.log: OK
+
+EXIT 0
+
+UTC 2026-09-14T11:49:28.391046+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ bash /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/durable-wrapper-v2.sh /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-jobs/success /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-launch.lock /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-payload-v2.py
+mkdir: cannot create directory ‘/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/synthetic-jobs/success/launch.claim’: File exists
+
+EXIT 73
+
+UTC 2026-09-14T11:49:28.497547+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/test_process_identity_v2.py
+test_exact_scientific_module_is_reviewable (__main__.DetectorTests) ... ok
+test_exact_script_unexpected_invocation_stops (__main__.DetectorTests) ... ok
+test_false_positive_matrix (__main__.DetectorTests) ... ok
+test_legacy_wrapper_is_still_protected (__main__.DetectorTests) ... ok
+test_lock_probe_nontruncating_and_held_lock_stop (__main__.DetectorTests) ... ok
+test_no_exited_process_is_active (__main__.DetectorTests) ... ok
+test_pid_birth_and_boot (__main__.DetectorTests) ... ok
+test_proc_fixture_and_recorded_scan (__main__.DetectorTests) ... ok
+test_true_runner_forms (__main__.DetectorTests) ... ok
+test_wrapper_identity (__main__.DetectorTests) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.020s
+
+OK
+
+EXIT 0
+
+UTC 2026-09-14T11:49:28.502989+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ bash -n /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/durable-wrapper-v2.sh
+
+EXIT 0
+
+UTC 2026-09-14T11:49:28.508099+00:00
+CWD /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+$ bash -n /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/future-launch-v2.sh.txt
+
+EXIT 0
+
+UTC 2026-09-14T11:49:28.598711+00:00
+CWD /home/lizening/Alfworld-Self-Improvement-Project
+$ /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/future-preflight-v2.py
+{
+  "preflight": "PASS",
+  "sha": "aa9fa3c34520941e7e3be00294b111e8254fd65b",
+  "manifest_status": "initialized",
+  "accepted_branches": 0,
+  "ledger_rows": 0,
+  "process_scan": {
+    "blockers": [],
+    "processes_inspected": 14,
+    "unreadable_unattributed_pids": [],
+    "boot_id": "b1dc88e1-5f49-447e-8d83-e3f3b16fcfc6"
+  },
+  "locks": {
+    "scientific": "available at probe time; immediately released",
+    "external": "absent (not created)"
+  },
+  "scientific_calls": 0
+}
+
+EXIT 0
+
+UTC 2026-09-14T11:54:06.774586+00:00
+CWD /home/lizening/Alfworld-Self-Improvement-Project
+$ git branch --show-current
+codex/progress-aware-recovery
+
+EXIT 0
+
+UTC 2026-09-14T11:54:06.779141+00:00
+CWD /home/lizening/Alfworld-Self-Improvement-Project
+$ git rev-parse HEAD
+aa9fa3c34520941e7e3be00294b111e8254fd65b
+
+EXIT 0
+
+UTC 2026-09-14T11:54:06.781557+00:00
+CWD /home/lizening/Alfworld-Self-Improvement-Project
+$ git rev-parse origin/codex/progress-aware-recovery
+aa9fa3c34520941e7e3be00294b111e8254fd65b
+
+EXIT 0
+
+UTC 2026-09-14T11:54:06.788821+00:00
+CWD /home/lizening/Alfworld-Self-Improvement-Project
+$ git status --porcelain=v1
+
+EXIT 0
+
+UTC 2026-09-14T11:55:25.400600+00:00
+FINALIZATION: wrote detector-design.md, notes/R18_C2_PREFLIGHT_V2.md and final RECORD.md; appended INDEX.md PASS entry. Scientific/runtime/V1 verification: PASS. Credentials scan and provenance-only hashing/commit/push follow; Git receipt stored separately under protocol v2.
+
+SECURITY: new task and V2 note credential-pattern scan PASS, 47 files inspected, no findings, no files over 1 MB. Final hashes generated after this log entry. Commit/push output will be preserved in ignored post-push-receipt.json.

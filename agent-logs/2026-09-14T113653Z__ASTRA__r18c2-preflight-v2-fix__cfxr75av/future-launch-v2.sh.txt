@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# V2 DESIGN ONLY. A later worker needs separate explicit authorization for this SHA.
+set -e
+set -o pipefail
+umask 077
+frozen_sha=aa9fa3c34520941e7e3be00294b111e8254fd65b
+[[ "${R18C2_AUTHORIZED_SHA:-}" == "$frozen_sha" ]] || { echo 'STOP: separate authorization required'; exit 64; }
+audit_dir=/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av
+repo_dir=/home/lizening/Alfworld-Self-Improvement-Project
+python_bin=/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python
+source /home/lizening/miniconda3/etc/profile.d/conda.sh
+conda activate alfworld-self-improve
+export ALFWORLD_DATA=/home/lizening/alfworld_data
+export ALFWORLD_CONFIG_PATH=/home/lizening/Alfworld-Self-Improvement-Project/configs/local/alfworld_base_university.yaml
+export TOKENIZERS_PARALLELISM=false
+export PYTHONPATH=.
+cd "$repo_dir"
+TASK_RECORD_DIR=$(mktemp -d "/home/lizening/research-notes/agent-logs/$(date -u +%Y-%m-%dT%H%M%SZ)__ASTRA__r18c2-durable-resume__XXXXXXXX")
+export TASK_RECORD_DIR
+printf 'TASK_RECORD_DIR=%s\n' "$TASK_RECORD_DIR"
+printf 'ASTRA TASK RECORD\n\nSTATUS: PREFLIGHT\nSHA: %s\n' "$frozen_sha" > "$TASK_RECORD_DIR/RECORD.md"
+cat /proc/sys/kernel/random/boot_id > "$TASK_RECORD_DIR/boot-id.txt"
+# Fail closed and preserve this new record on preflight error.
+if ! (
+  git fetch origin && "$python_bin" "$audit_dir/future-preflight-v2.py"
+) > "$TASK_RECORD_DIR/preflight.log" 2>&1; then
+  printf 'STATUS: STOP; inspect preflight.log; no runner launched\n' >> "$TASK_RECORD_DIR/RECORD.md"
+  exit 65
+fi
+nvidia-smi > "$TASK_RECORD_DIR/gpu-before.txt"
+# Review current processes/GPU BEFORE using this script; no competing scientific job.
+# This external lock is shared by future attempts, separate from scientific writer.lock.
+launch_control=/home/lizening/research-notes/r18c2-launch-control
+mkdir -p "$launch_control"
+cp "$audit_dir/durable-wrapper-v2.sh" "$TASK_RECORD_DIR/durable-wrapper-v2.sh"
+sha256sum "$TASK_RECORD_DIR/durable-wrapper-v2.sh" > "$TASK_RECORD_DIR/wrapper.sha256"
+printf 'LAUNCH_REQUEST UTC=%s SHA=%s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$frozen_sha" > "$TASK_RECORD_DIR/commands.log"
+# The only formal Python child is this command. No tee, no monitoring-shell PIPESTATUS.
+nohup setsid --fork /usr/bin/bash --noprofile --norc \
+  "$TASK_RECORD_DIR/durable-wrapper-v2.sh" \
+  "$TASK_RECORD_DIR" "$repo_dir" "$launch_control/launcher.lock" \
+  "$python_bin" scripts/run_progress_aware_card_v2_r18_c2.py \
+  --output artifacts/runtime/validation/progress-aware-r18-c2-formal-aa9fa3c34520941e \
+  --resume > "$TASK_RECORD_DIR/dispatch.log" 2>&1 < /dev/null &
+printf '%s\n' "$!" > "$TASK_RECORD_DIR/dispatch.pid"
+printf 'STATUS: DISPATCHED; completion not yet known\n' >> "$TASK_RECORD_DIR/RECORD.md"
+printf 'DISPATCHED ONLY. Monitor %s; never relaunch on missing marker or IDE disconnect.\n' "$TASK_RECORD_DIR"

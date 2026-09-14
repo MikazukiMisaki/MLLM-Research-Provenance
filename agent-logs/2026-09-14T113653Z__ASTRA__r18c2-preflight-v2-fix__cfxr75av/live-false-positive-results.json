@@ -1,0 +1,77 @@
+{
+  "identities": [
+    {
+      "identity": {
+        "pid": 621158,
+        "exe": "/usr/bin/sleep",
+        "cwd": "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av",
+        "argv": [
+          "sleep",
+          "8"
+        ],
+        "start_ticks": 123637070,
+        "boot_id": "b1dc88e1-5f49-447e-8d83-e3f3b16fcfc6",
+        "state": "S",
+        "ppid": 621157,
+        "pgid": 621155,
+        "sid": 621155,
+        "error": null
+      },
+      "verdict": {
+        "pid": 621158,
+        "kind": "unrelated",
+        "reason": "no executed R18-C2 script identity"
+      }
+    },
+    {
+      "identity": {
+        "pid": 621159,
+        "exe": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python3.10",
+        "cwd": "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av",
+        "argv": [
+          "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+          "-c",
+          "import time; time.sleep(8)",
+          "/home/lizening/Alfworld-Self-Improvement-Project/scripts/run_progress_aware_card_v2_r18_c2.py"
+        ],
+        "start_ticks": 123637070,
+        "boot_id": "b1dc88e1-5f49-447e-8d83-e3f3b16fcfc6",
+        "state": "S",
+        "ppid": 621157,
+        "pgid": 621155,
+        "sid": 621155,
+        "error": null
+      },
+      "verdict": {
+        "pid": 621159,
+        "kind": "unrelated",
+        "reason": "no executed R18-C2 script identity"
+      }
+    },
+    {
+      "identity": {
+        "pid": 621160,
+        "exe": "/usr/bin/grep",
+        "cwd": "/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av",
+        "argv": [
+          "/usr/bin/grep",
+          "/home/lizening/Alfworld-Self-Improvement-Project/scripts/run_progress_aware_card_v2_r18_c2.py"
+        ],
+        "start_ticks": 123637070,
+        "boot_id": "b1dc88e1-5f49-447e-8d83-e3f3b16fcfc6",
+        "state": "S",
+        "ppid": 621157,
+        "pgid": 621155,
+        "sid": 621155,
+        "error": null
+      },
+      "verdict": {
+        "pid": 621160,
+        "kind": "unrelated",
+        "reason": "no executed R18-C2 script identity"
+      }
+    }
+  ],
+  "preflight_exit": 0,
+  "preflight_output": "{\n  \"preflight\": \"PASS\",\n  \"sha\": \"aa9fa3c34520941e7e3be00294b111e8254fd65b\",\n  \"manifest_status\": \"initialized\",\n  \"accepted_branches\": 0,\n  \"ledger_rows\": 0,\n  \"process_scan\": {\n    \"blockers\": [],\n    \"processes_inspected\": 18,\n    \"unreadable_unattributed_pids\": [],\n    \"boot_id\": \"b1dc88e1-5f49-447e-8d83-e3f3b16fcfc6\"\n  },\n  \"locks\": {\n    \"scientific\": \"available at probe time; immediately released\",\n    \"external\": \"absent (not created)\"\n  },\n  \"scientific_calls\": 0\n}\n"
+}
