@@ -1,0 +1,93 @@
+
+CWD: /home/lizening/wt-codex-r18c2
+$ git fetch origin
+
+EXIT: 0
+
+CWD: /home/lizening/wt-codex-r18c2
+$ git rev-parse origin/agent/astra-r18c2-final-fix
+5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39
+
+EXIT: 0
+
+CWD: /home/lizening/wt-codex-r18c2
+$ git rev-parse origin/agent/antigravity-r18c2
+10a33ca43eacd821a8f7e7f72fab4dd2ac96250e
+
+EXIT: 0
+
+CWD: /home/lizening/wt-codex-r18c2
+$ git rev-parse origin/agent/codex-r18c2
+b06b1fb9ad31f54fb2b660a48ada707a4aeababe
+
+EXIT: 0
+
+CWD: /home/lizening/wt-codex-r18c2
+$ git rev-parse origin/codex/progress-aware-recovery
+b06b1fb9ad31f54fb2b660a48ada707a4aeababe
+
+EXIT: 0
+
+CWD: /home/lizening/wt-codex-r18c2
+$ git show -s --format=%H%n%P%n%s 5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39
+5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39
+10a33ca43eacd821a8f7e7f72fab4dd2ac96250e
+fix(r18-c2): enforce single-writer execution and verified resume
+
+EXIT: 0
+
+CWD: /home/lizening/wt-codex-r18c2
+$ git worktree list
+/home/lizening/Alfworld-Self-Improvement-Project  b06b1fb [codex/progress-aware-recovery]
+/home/lizening/wt-antigravity-r18c2               10a33ca [agent/antigravity-r18c2]
+/home/lizening/wt-codex-r18c2                     5ebb7ff [agent/astra-r18c2-final-fix]
+/home/lizening/wt-gemini-r18c2-verify             5ebb7ff (detached HEAD)
+/home/lizening/wt-review-r18c2                    10a33ca (detached HEAD)
+
+EXIT: 0
+
+CWD: /home/lizening/wt-codex-r18c2
+$ git status --short --branch
+## agent/astra-r18c2-final-fix...origin/agent/astra-r18c2-final-fix
+
+EXIT: 0
+
+CWD: /home/lizening/wt-codex-r18c2
+$ git rev-parse HEAD
+5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39
+
+EXIT: 0
+
+CWD: /home/lizening/wt-codex-r18c2
+$ git branch --show-current
+agent/astra-r18c2-final-fix
+
+EXIT: 0
+
+CWD: /home/lizening/wt-codex-r18c2
+$ git status --porcelain
+
+EXIT: 0
+
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ git status --short --branch
+## codex/progress-aware-recovery...origin/codex/progress-aware-recovery
+
+EXIT: 0
+
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ git rev-parse HEAD
+b06b1fb9ad31f54fb2b660a48ada707a4aeababe
+
+EXIT: 0
+
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ git branch --show-current
+codex/progress-aware-recovery
+
+EXIT: 0
+
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ git status --porcelain
+
+EXIT: 0

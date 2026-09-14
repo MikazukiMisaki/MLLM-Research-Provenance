@@ -1,0 +1,128 @@
+
+OBSERVED PATH lookup:
+tmux: None
+screen: None
+systemd-run: None
+systemctl: None
+nohup: /usr/bin/nohup
+setsid: /usr/bin/setsid
+flock: /usr/bin/flock
+bash: /usr/bin/bash
+python: /home/lizening/miniconda3/bin/python
+pstree: None
+
+UTC: 2026-09-14T05:49:09.332410+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ systemctl --user is-system-running
+[Errno 2] No such file or directory: 'systemctl'
+
+EXIT: 127
+
+UTC: 2026-09-14T05:49:09.333408+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ systemctl --user show-environment
+[Errno 2] No such file or directory: 'systemctl'
+
+EXIT: 127
+
+UTC: 2026-09-14T05:50:28.960944+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ sed -n 1450,1498p scripts/run_progress_aware_card_v2_r18_c2.py
+
+def _run_branches(context, runtime, replay_records, *, resume):
+    _require_writer()
+    # Always obtain the accepted set under the lock; callers cannot supply stale state.
+    validated = _reconcile_durable_ledger(runtime, context)
+    manifest_path = runtime / "run_manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest.update(_execution_audit(runtime, validated, context))
+    models = None
+    started = time.monotonic()
+    try:
+        if len(validated) < 60:
+            models = _load_simultaneous(ADAPTER)
+            if models["fallback_used"] is not False or models["recovery_backend"] is getattr(models["sft_policy"], "_backend", models["sft_policy"]):
+                raise RuntimeError("R18-C2 requires distinct frozen recovery/SFT models without fallback")
+            manifest.update(model_load_seconds=models["load_seconds"], gpu_memory=models["gpu_memory"], fallback_used=models["fallback_used"])
+            write_json(manifest_path, manifest)
+        for position, prefix in enumerate(context["prefixes"], start=1):
+            pid = prefix["prefix_id"]
+            if pid in validated:
+                continue
+            events_path = runtime / "execution_events.jsonl"
+            past = load_jsonl(events_path) if events_path.exists() else []
+            attempt = 1 + sum(e["prefix_id"] == pid and e["event"] == "started" for e in past)
+            append_jsonl(events_path, {"prefix_id": pid, "event": "started", "attempt": attempt})
+            compact, raw = _run_branch(context, prefix, replay_records[position - 1], models["recovery_backend"], models["sft_policy"])
+            _validate_branch_record(raw, prefix, context)
+            write_json(runtime / "branches" / f"{pid}.json", raw)
+            append_jsonl(runtime / "card_v2_branches.jsonl", raw)
+            append_jsonl(events_path, {"prefix_id": pid, "event": "completed", "attempt": attempt,
+                                     "record_sha256": hashlib.sha256(_record_bytes(raw).encode()).hexdigest()})
+            append_jsonl(runtime / "branch_ledger.jsonl", _ledger_entry(runtime, context, prefix, raw))
+            validated[pid] = raw
+            manifest["accepted_branches"] = len(validated)
+            write_json(manifest_path, manifest)
+            print(f"R18-C2 CARD-v2 {position}/60 {pid} success={compact['r_card_v2']} recovery={compact['recovery_action_status']}", flush=True)
+    except BaseException as exc:
+        manifest.update(status="interrupted", operational_interruptions=manifest["operational_interruptions"] + 1,
+                        error={"type": type(exc).__name__, "message": str(exc)})
+        write_json(manifest_path, manifest)
+        raise
+    finally:
+        if models is not None:
+            _release_policy(models["recovery_backend"])
+            _release_policy(models["sft_policy"])
+    if len(validated) != 60:
+        raise RuntimeError("R18-C2 branch set is incomplete")
+    manifest.update(status="branches_complete", accepted_branches=60, completed_at_seconds=time.monotonic() - started)
+    manifest.update(_execution_audit(runtime, validated, context))
+
+EXIT: 0
+
+UTC: 2026-09-14T05:50:28.964661+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ setsid --help
+
+Usage:
+ setsid [options] <program> [arguments ...]
+
+Run a program in a new session.
+
+Options:
+ -c, --ctty     set the controlling terminal to the current one
+ -f, --fork     always fork
+ -w, --wait     wait program to exit, and use the same return
+ -h, --help     display this help
+ -V, --version  display version
+
+For more details see setsid(1).
+
+EXIT: 0
+
+UTC: 2026-09-14T05:50:28.968805+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ nohup --help
+Usage: nohup COMMAND [ARG]...
+  or:  nohup OPTION
+Run COMMAND, ignoring hangup signals.
+
+      --help     display this help and exit
+      --version  output version information and exit
+
+If standard input is a terminal, redirect it from an unreadable file.
+If standard output is a terminal, append output to 'nohup.out' if possible,
+'$HOME/nohup.out' otherwise.
+If standard error is a terminal, redirect it to standard output.
+To save output to FILE, use 'nohup COMMAND > FILE'.
+
+NOTE: your shell may have its own version of nohup, which usually supersedes
+the version described here.  Please refer to your shell's documentation
+for details about the options it supports.
+
+GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
+Report any translation bugs to <https://translationproject.org/team/>
+Full documentation <https://www.gnu.org/software/coreutils/nohup>
+or available locally via: info '(coreutils) nohup invocation'
+
+EXIT: 0

@@ -1,0 +1,31 @@
+{
+  "mechanism": "nohup + setsid --fork + detached bash wrapper, stdin /dev/null",
+  "success": {
+    "exitcode": 0,
+    "ticks": 7,
+    "stderr_ticks": 7,
+    "natural_completion": true,
+    "launcher_reaped": true,
+    "runner_reaped": true
+  },
+  "nonzero": {
+    "exitcode": 7,
+    "ticks": 7,
+    "stderr_ticks": 7,
+    "natural_completion": true,
+    "launcher_reaped": true,
+    "runner_reaped": true
+  },
+  "duplicate": {
+    "rejected": true,
+    "launcher_error": 75,
+    "runner_spawned": false
+  },
+  "independent_command_survival": "PASS for both jobs",
+  "shared_external_lock_released": true,
+  "same_task_relaunch": {
+    "rejected": true,
+    "status": 73,
+    "original_log_hash_unchanged": true
+  }
+}

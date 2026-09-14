@@ -1,0 +1,32 @@
+=== 1. GIT PREFLIGHT ===
+current_branch: codex/progress-aware-recovery
+local_HEAD: aa9fa3c34520941e7e3be00294b111e8254fd65b
+origin_HEAD: aa9fa3c34520941e7e3be00294b111e8254fd65b
+## codex/progress-aware-recovery...origin/codex/progress-aware-recovery
+=== 2. RUNTIME PROVENANCE VERIFICATION ===
+schema_version: progress_aware_r18_c2_runtime_v2 (expected: progress_aware_r18_c2_runtime_v2)
+status: initialized (expected: initialized)
+prefixes: 60 (expected: 60)
+accepted_branches: 0 (expected: 0)
+completed_branch_reruns: 0 (expected: 0)
+git_revision_before_inference: aa9fa3c34520941e7e3be00294b111e8254fd65b (expected: aa9fa3c34520941e7e3be00294b111e8254fd65b)
+provenance.implementation_commit: aa9fa3c34520941e7e3be00294b111e8254fd65b (expected: aa9fa3c34520941e7e3be00294b111e8254fd65b)
+r18_b_commit: aee5b6b21708dd7fa9c827453aa3b362e19fde22
+experiment.json runtime: /home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-r18-c2-formal-aa9fa3c34520941e
+experiment.json project_root: /home/lizening/Alfworld-Self-Improvement-Project
+card_v2_branches.jsonl records: 0 (expected: 0)
+branch_ledger.jsonl records: 0 (expected: 0)
+execution_events.jsonl: ABSENT (valid)
+Reports, summary, and CSV verified ABSENT.
+=== PROVENANCE VERIFICATION PASSED ===
+=== 3. CHECK NO OLD FORMAL PROCESS IS ALIVE ===
+No competing python/Qwen/pytest processes found.
+tmux sessions:
+No active tmux sessions.
+=== 4. ENVIRONMENT / GPU PREFLIGHT ===
+Python 3.10.20
+torch= 2.6.0+cu124
+cuda_available= True
+device= NVIDIA A40
+Adapter check:
+ADAPTER_PRESENT

@@ -1,0 +1,42 @@
+=== GIT PREFLIGHT ===
+current_branch: codex/progress-aware-recovery
+local_HEAD: aa9fa3c34520941e7e3be00294b111e8254fd65b
+origin_HEAD: aa9fa3c34520941e7e3be00294b111e8254fd65b
+## codex/progress-aware-recovery...origin/codex/progress-aware-recovery
+]633;E;} >> "$TASK_RECORD_DIR/preflight.log" 2>&1;f9ea4783-b8c9-409e-bfec-c2ade6f0fdc7]633;C
+=== PRIOR FORMAL STATE CHECK ===
+FORMAL_RUNTIME existence: EXISTS
+Listing FORMAL_RUNTIME contents:
+total 12
+drwxr-xr-x  2 lizening vscode 4096 Sep 14 04:36 .
+drwx------ 32 lizening vscode 4096 Sep 14 04:36 ..
+-rw-------  1 lizening vscode    0 Sep 14 04:36 branch_ledger.jsonl
+-rw-------  1 lizening vscode    0 Sep 14 04:36 card_v2_branches.jsonl
+-rw-------  1 lizening vscode 2992 Sep 14 04:36 run_manifest.json
+Listing control directory:
+total 12
+drwxr-xr-x  2 lizening vscode 4096 Sep 14 04:36 .
+drwx------ 13 lizening vscode 4096 Sep 14 04:36 ..
+-rw-------  1 lizening vscode  213 Sep 14 04:36 experiment.json
+-rw-r--r--  1 lizening vscode    0 Sep 14 04:36 writer.lock
+Checking experiment.json:
+experiment.json: EXISTS
+{
+  "project_root": "/home/lizening/Alfworld-Self-Improvement-Project",
+  "runtime": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-r18-c2-formal-aa9fa3c34520941e"
+}
+Checking writer.lock:
+writer.lock: EXISTS
+Checking reports:
+Formal report/summary/csv: ABSENT
+]633;E;} >> "$TASK_RECORD_DIR/preflight.log" 2>&1;f9ea4783-b8c9-409e-bfec-c2ade6f0fdc7]633;C
+=== ENVIRONMENT PREFLIGHT ===
+/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python
+Python 3.10.20
+torch= 2.6.0+cu124
+cuda_available= True
+device_count= 1
+device= NVIDIA A40
+]633;E;} >> "$TASK_RECORD_DIR/preflight.log" 2>&1;f9ea4783-b8c9-409e-bfec-c2ade6f0fdc7]633;C
+=== MODEL / ADAPTER CHECK ===
+ADAPTER_PRESENT

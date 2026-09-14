@@ -1,0 +1,157 @@
+
+UTC: 2026-09-14T05:52:34.071644+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ bash -n /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/durable-wrapper.sh
+
+EXIT: 0
+
+UTC: 2026-09-14T05:52:34.074563+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ bash -n /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-launch.sh
+
+EXIT: 0
+
+UTC: 2026-09-14T05:52:34.090752+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ bash /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-launch.sh nonzero 7
+DISPATCH_RETURNED 2026-09-14T05:52:34Z
+
+EXIT: 0
+
+UTC: 2026-09-14T05:52:44.404419+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ ps -p 564743,564749,564754 -o pid,ppid,pgid,sid,tty,stat,args
+    PID    PPID    PGID     SID TT       STAT COMMAND
+ 564749       1  564749  564749 ?        Ss   /usr/bin/bash --noprofile --norc /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/durable-wrapper.sh /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-nonzero /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-shared.lock /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic_payload.py /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-nonzero 7
+ 564754  564749  564749  564749 ?        S    /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic_payload.py /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-nonzero 7
+
+EXIT: 0
+
+UTC: 2026-09-14T05:52:44.419283+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ bash /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-launch.sh duplicate 0
+DISPATCH_RETURNED 2026-09-14T05:52:44Z
+
+EXIT: 0
+
+UTC: 2026-09-14T05:53:14.307683+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ sha256sum -c /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-nonzero/runner.log.sha256
+/home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-nonzero/runner.log: OK
+
+EXIT: 0
+
+OBSERVED: detached nonzero synthetic job survived dispatch-shell exit; natural completion; true child status 7 persisted; stdout/stderr seven ticks each; launcher/runner PIDs no longer exist. Concurrent duplicate rejected (launcher.error=75); no duplicate Python child.
+
+UTC: 2026-09-14T05:53:14.323931+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ bash /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-launch.sh success 0
+DISPATCH_RETURNED 2026-09-14T05:53:14Z
+
+EXIT: 0
+
+UTC: 2026-09-14T05:53:36.790310+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ ps -p 564925,564931,564936 -o pid,ppid,pgid,sid,tty,stat,args
+    PID    PPID    PGID     SID TT       STAT COMMAND
+ 564931       1  564931  564931 ?        Ss   /usr/bin/bash --noprofile --norc /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/durable-wrapper.sh /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-success /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-shared.lock /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic_payload.py /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-success 0
+ 564936  564931  564931  564931 ?        S    /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic_payload.py /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-success 0
+
+EXIT: 0
+
+UTC: 2026-09-14T05:56:03.628541+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ sha256sum -c /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-success/runner.log.sha256
+/home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-success/runner.log: OK
+
+EXIT: 0
+
+OBSERVED FINAL SYNTHETIC RESULTS
+{
+  "mechanism": "nohup + setsid --fork + detached bash wrapper, stdin /dev/null",
+  "success": {
+    "exitcode": 0,
+    "ticks": 7,
+    "stderr_ticks": 7,
+    "natural_completion": true,
+    "launcher_reaped": true,
+    "runner_reaped": true
+  },
+  "nonzero": {
+    "exitcode": 7,
+    "ticks": 7,
+    "stderr_ticks": 7,
+    "natural_completion": true,
+    "launcher_reaped": true,
+    "runner_reaped": true
+  },
+  "duplicate": {
+    "rejected": true,
+    "launcher_error": 75,
+    "runner_spawned": false
+  },
+  "independent_command_survival": "PASS for both jobs",
+  "shared_external_lock_released": true
+}
+
+SYNTHETIC nonzero COMPLETE LOG
+LAUNCHER_START 2026-09-14T05:52:34Z PID=564749
+CWD=/home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb
+COMMAND=/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic_payload.py /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-nonzero 7 
+CONDA_PREFIX=/home/lizening/miniconda3
+{"utc": "2026-09-14T05:52:34.143279+00:00", "pid": 564754, "ppid": 564749, "pgid": 564749, "sid": 564749, "tty": false, "tick": 0, "env_preserved": true}
+STDERR_TICK 0
+{"utc": "2026-09-14T05:52:39.148484+00:00", "pid": 564754, "ppid": 564749, "pgid": 564749, "sid": 564749, "tty": false, "tick": 1, "env_preserved": true}
+STDERR_TICK 1
+{"utc": "2026-09-14T05:52:44.153802+00:00", "pid": 564754, "ppid": 564749, "pgid": 564749, "sid": 564749, "tty": false, "tick": 2, "env_preserved": true}
+STDERR_TICK 2
+{"utc": "2026-09-14T05:52:49.159123+00:00", "pid": 564754, "ppid": 564749, "pgid": 564749, "sid": 564749, "tty": false, "tick": 3, "env_preserved": true}
+STDERR_TICK 3
+{"utc": "2026-09-14T05:52:54.164473+00:00", "pid": 564754, "ppid": 564749, "pgid": 564749, "sid": 564749, "tty": false, "tick": 4, "env_preserved": true}
+STDERR_TICK 4
+{"utc": "2026-09-14T05:52:59.169807+00:00", "pid": 564754, "ppid": 564749, "pgid": 564749, "sid": 564749, "tty": false, "tick": 5, "env_preserved": true}
+STDERR_TICK 5
+{"utc": "2026-09-14T05:53:04.175065+00:00", "pid": 564754, "ppid": 564749, "pgid": 564749, "sid": 564749, "tty": false, "tick": 6, "env_preserved": true}
+STDERR_TICK 6
+PAYLOAD_NATURAL_COMPLETION
+RUNNER_EXIT 2026-09-14T05:53:09Z status=7
+
+SYNTHETIC success COMPLETE LOG
+LAUNCHER_START 2026-09-14T05:53:14Z PID=564931
+CWD=/home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb
+COMMAND=/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic_payload.py /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-success 0 
+CONDA_PREFIX=/home/lizening/miniconda3
+{"utc": "2026-09-14T05:53:14.374667+00:00", "pid": 564936, "ppid": 564931, "pgid": 564931, "sid": 564931, "tty": false, "tick": 0, "env_preserved": true}
+STDERR_TICK 0
+{"utc": "2026-09-14T05:53:19.379851+00:00", "pid": 564936, "ppid": 564931, "pgid": 564931, "sid": 564931, "tty": false, "tick": 1, "env_preserved": true}
+STDERR_TICK 1
+{"utc": "2026-09-14T05:53:24.385146+00:00", "pid": 564936, "ppid": 564931, "pgid": 564931, "sid": 564931, "tty": false, "tick": 2, "env_preserved": true}
+STDERR_TICK 2
+{"utc": "2026-09-14T05:53:29.390460+00:00", "pid": 564936, "ppid": 564931, "pgid": 564931, "sid": 564931, "tty": false, "tick": 3, "env_preserved": true}
+STDERR_TICK 3
+{"utc": "2026-09-14T05:53:34.395761+00:00", "pid": 564936, "ppid": 564931, "pgid": 564931, "sid": 564931, "tty": false, "tick": 4, "env_preserved": true}
+STDERR_TICK 4
+{"utc": "2026-09-14T05:53:39.401073+00:00", "pid": 564936, "ppid": 564931, "pgid": 564931, "sid": 564931, "tty": false, "tick": 5, "env_preserved": true}
+STDERR_TICK 5
+{"utc": "2026-09-14T05:53:44.406372+00:00", "pid": 564936, "ppid": 564931, "pgid": 564931, "sid": 564931, "tty": false, "tick": 6, "env_preserved": true}
+STDERR_TICK 6
+PAYLOAD_NATURAL_COMPLETION
+RUNNER_EXIT 2026-09-14T05:53:49Z status=0
+
+SYNTHETIC duplicate COMPLETE LOG
+DUPLICATE_LAUNCH_REJECTED
+
+UTC: 2026-09-14T05:59:38.859162+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ bash -n /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/future-launch.sh.txt
+
+EXIT: 0
+
+UTC: 2026-09-14T05:59:38.867812+00:00
+CWD: /home/lizening/Alfworld-Self-Improvement-Project
+$ bash /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/durable-wrapper.sh /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-success /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-shared.lock /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic_payload.py /home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-success 0
+mkdir: cannot create directory ‘/home/lizening/research-notes/agent-logs/2026-09-14T054711Z__ASTRA__r18c2-operational-forensics__nvrcqcpb/synthetic-success/launch.claim’: File exists
+
+EXIT: 73
+
+OBSERVED: same-directory relaunch rejected with status 73; original sealed log hash unchanged. Both jobs: 7 stdout identity records, 7 stderr records, environment preserved, stdin non-TTY /dev/null; dispatch, launcher, runner PIDs absent. Future launch design Bash syntax and preflight Python AST pass without executing either.

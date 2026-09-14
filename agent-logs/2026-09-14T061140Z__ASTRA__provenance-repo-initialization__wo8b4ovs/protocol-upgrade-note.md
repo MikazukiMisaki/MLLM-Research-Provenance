@@ -1,0 +1,1 @@
+Protocol v2 preserves the former requirements for unique external records, finalization on all outcomes, command/test evidence, exact refs, and no inferred scientific authorization. It adds role boundaries, automatic provenance synchronization, size/secret handling, and explicit correction/redaction policy.

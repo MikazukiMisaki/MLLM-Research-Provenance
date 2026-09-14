@@ -1,0 +1,36 @@
+
+['du', '-sh', '.']
+1.7M	.
+
+exit=0
+
+['git', 'status', '--short', '--branch']
+fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+
+exit=128
+
+['git', 'remote', '-v']
+fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+
+exit=128
+
+['git', 'ls-remote', 'git@github.com:MikazukiMisaki/MLLM-Research-Provenance.git']
+
+exit=0
+
+['git', 'init', '-b', 'main']
+Initialized empty Git repository in /home/lizening/research-notes/.git/
+
+exit=0
+
+['git', 'remote', 'add', 'origin', 'git@github.com:MikazukiMisaki/MLLM-Research-Provenance.git']
+
+exit=0
+
+Filename-only ripgrep sensitive pattern scan; matching files reviewed as documented in secret-review.json. Exit 0
+
+Authenticated GitHub get_repo verified expected repository, visibility=private, default_branch=main, push permission=true.
+Created README, INDEX, protocol v2, ignore rules, corrections and redaction notes. Redacted 26 occurrences in 7 evidence files; no historical RECORD.md changed. Reviewed all nonignored text, no files >1 MB, no unresolved high-confidence credential matches.
+Next: stage only audited provenance files, generate deterministic inventory, verify staged contents, commit initial import and push main. Exact resulting SHA and push verification will be recorded in follow-up provenance commit.

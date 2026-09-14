@@ -1,0 +1,568 @@
+{
+  "record_dir": "/home/lizening/research-notes/agent-logs/2026-09-14T040520Z__ASTRA__r18c2-integration-continued__kfzflgn7",
+  "started": "2026-09-14T04:05:20.999589+00:00",
+  "status": "PASS",
+  "authorization": "User said continue following preflight STOP; restore clean integration checkout to required branch, then repeat all integration gates. No scientific execution authorized.",
+  "commands": [
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git fetch origin",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git rev-parse origin/agent/astra-r18c2-final-fix",
+      "exit_code": 0,
+      "output": "5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git rev-parse origin/agent/antigravity-r18c2",
+      "exit_code": 0,
+      "output": "10a33ca43eacd821a8f7e7f72fab4dd2ac96250e\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git rev-parse origin/agent/codex-r18c2",
+      "exit_code": 0,
+      "output": "b06b1fb9ad31f54fb2b660a48ada707a4aeababe\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git rev-parse origin/codex/progress-aware-recovery",
+      "exit_code": 0,
+      "output": "b06b1fb9ad31f54fb2b660a48ada707a4aeababe\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git show -s --format=%H%n%P%n%s 5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39",
+      "exit_code": 0,
+      "output": "5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39\n10a33ca43eacd821a8f7e7f72fab4dd2ac96250e\nfix(r18-c2): enforce single-writer execution and verified resume\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git worktree list",
+      "exit_code": 0,
+      "output": "/home/lizening/Alfworld-Self-Improvement-Project  b06b1fb [codex/progress-aware-recovery]\n/home/lizening/wt-antigravity-r18c2               10a33ca [agent/antigravity-r18c2]\n/home/lizening/wt-codex-r18c2                     5ebb7ff [agent/astra-r18c2-final-fix]\n/home/lizening/wt-gemini-r18c2-verify             5ebb7ff (detached HEAD)\n/home/lizening/wt-review-r18c2                    10a33ca (detached HEAD)\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git status --short --branch",
+      "exit_code": 0,
+      "output": "## agent/astra-r18c2-final-fix...origin/agent/astra-r18c2-final-fix\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git rev-parse HEAD",
+      "exit_code": 0,
+      "output": "5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git branch --show-current",
+      "exit_code": 0,
+      "output": "agent/astra-r18c2-final-fix\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git status --porcelain",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git status --short --branch",
+      "exit_code": 0,
+      "output": "## codex/progress-aware-recovery...origin/codex/progress-aware-recovery\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git rev-parse HEAD",
+      "exit_code": 0,
+      "output": "b06b1fb9ad31f54fb2b660a48ada707a4aeababe\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git branch --show-current",
+      "exit_code": 0,
+      "output": "codex/progress-aware-recovery\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git status --porcelain",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git rev-parse agent/codex-r18c2",
+      "exit_code": 0,
+      "output": "b06b1fb9ad31f54fb2b660a48ada707a4aeababe\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git switch agent/codex-r18c2",
+      "exit_code": 0,
+      "output": "Switched to branch 'agent/codex-r18c2'\nYour branch is up to date with 'origin/agent/codex-r18c2'.\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git status --short --branch",
+      "exit_code": 0,
+      "output": "## agent/codex-r18c2...origin/agent/codex-r18c2\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git rev-parse HEAD",
+      "exit_code": 0,
+      "output": "b06b1fb9ad31f54fb2b660a48ada707a4aeababe\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git branch --show-current",
+      "exit_code": 0,
+      "output": "agent/codex-r18c2\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git status --porcelain",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git fetch origin",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git rev-parse HEAD",
+      "exit_code": 0,
+      "output": "b06b1fb9ad31f54fb2b660a48ada707a4aeababe\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git rev-parse origin/agent/astra-r18c2-final-fix",
+      "exit_code": 0,
+      "output": "5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git branch --show-current",
+      "exit_code": 0,
+      "output": "agent/codex-r18c2\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git status --porcelain",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git merge --no-ff origin/agent/astra-r18c2-final-fix -m 'merge: integrate accepted R18-C2 final hardening'",
+      "exit_code": 0,
+      "output": "Merge made by the 'ort' strategy.\n CURRENT_EXPERIMENT.md                        |   12 +-\n scripts/run_progress_aware_card_v2_r18_c2.py | 2179 ++++++++++++++++++++++++++\n tests/test_progress_aware_card_v2_r18_c2.py  |  685 ++++++++\n 3 files changed, 2870 insertions(+), 6 deletions(-)\n create mode 100644 scripts/run_progress_aware_card_v2_r18_c2.py\n create mode 100644 tests/test_progress_aware_card_v2_r18_c2.py\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git rev-parse HEAD",
+      "exit_code": 0,
+      "output": "e537f441010077123a307e9d50ea40cf8dad8547\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git diff --exit-code 5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39 e537f441010077123a307e9d50ea40cf8dad8547",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git diff --stat 5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39 e537f441010077123a307e9d50ea40cf8dad8547",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git show -s --format=%H%n%P%n%s e537f441010077123a307e9d50ea40cf8dad8547",
+      "exit_code": 0,
+      "output": "e537f441010077123a307e9d50ea40cf8dad8547\nb06b1fb9ad31f54fb2b660a48ada707a4aeababe 5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39\nmerge: integrate accepted R18-C2 final hardening\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m py_compile scripts/run_progress_aware_card_v2_r18_c2.py tests/test_progress_aware_card_v2_r18_c2.py",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m pytest tests/test_progress_aware_card_v2_r18_c2.py -q",
+      "exit_code": 0,
+      "output": "........................................................................ [ 96%]\n...                                                                      [100%]\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "rg -n 'addopts|pytest|quiet' pyproject.toml setup.cfg",
+      "exit_code": 0,
+      "output": "pyproject.toml:15:dev = [\"pytest>=8\"]\npyproject.toml:21:[tool.pytest.ini_options]\npyproject.toml:23:addopts = \"-q\"\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git rev-parse HEAD",
+      "exit_code": 0,
+      "output": "e537f441010077123a307e9d50ea40cf8dad8547\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git status --porcelain",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m pytest -o addopts= tests/test_progress_aware_card_v2_r18_c2.py -q --junitxml=/home/lizening/research-notes/agent-logs/2026-09-14T040520Z__ASTRA__r18c2-integration-continued__kfzflgn7/focused-tests.xml",
+      "exit_code": 0,
+      "output": "........................................................................ [ 96%]\n...                                                                      [100%]\n- generated xml file: /home/lizening/research-notes/agent-logs/2026-09-14T040520Z__ASTRA__r18c2-integration-continued__kfzflgn7/focused-tests.xml -\n75 passed in 40.68s\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git status --porcelain",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git rev-parse HEAD",
+      "exit_code": 0,
+      "output": "e537f441010077123a307e9d50ea40cf8dad8547\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git status --porcelain",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git diff --exit-code 5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39 e537f441010077123a307e9d50ea40cf8dad8547",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git push origin agent/codex-r18c2",
+      "exit_code": 0,
+      "output": "To github.com:MikazukiMisaki/Alfworld-Self-Improvement-Project.git\n   b06b1fb..e537f44  agent/codex-r18c2 -> agent/codex-r18c2\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git fetch origin",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git rev-parse HEAD",
+      "exit_code": 0,
+      "output": "e537f441010077123a307e9d50ea40cf8dad8547\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git rev-parse origin/agent/codex-r18c2",
+      "exit_code": 0,
+      "output": "e537f441010077123a307e9d50ea40cf8dad8547\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git fetch origin",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git status --short --branch",
+      "exit_code": 0,
+      "output": "## codex/progress-aware-recovery...origin/codex/progress-aware-recovery\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git rev-parse HEAD",
+      "exit_code": 0,
+      "output": "b06b1fb9ad31f54fb2b660a48ada707a4aeababe\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git branch --show-current",
+      "exit_code": 0,
+      "output": "codex/progress-aware-recovery\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git status --porcelain",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git rev-parse origin/agent/codex-r18c2",
+      "exit_code": 0,
+      "output": "e537f441010077123a307e9d50ea40cf8dad8547\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git merge --no-ff origin/agent/codex-r18c2 -m 'merge: accept R18-C2 execution-hardened implementation'",
+      "exit_code": 0,
+      "output": "Merge made by the 'ort' strategy.\n CURRENT_EXPERIMENT.md                        |   12 +-\n scripts/run_progress_aware_card_v2_r18_c2.py | 2179 ++++++++++++++++++++++++++\n tests/test_progress_aware_card_v2_r18_c2.py  |  685 ++++++++\n 3 files changed, 2870 insertions(+), 6 deletions(-)\n create mode 100644 scripts/run_progress_aware_card_v2_r18_c2.py\n create mode 100644 tests/test_progress_aware_card_v2_r18_c2.py\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git rev-parse HEAD",
+      "exit_code": 0,
+      "output": "aa9fa3c34520941e7e3be00294b111e8254fd65b\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git diff --exit-code e537f441010077123a307e9d50ea40cf8dad8547 aa9fa3c34520941e7e3be00294b111e8254fd65b",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git diff --exit-code 5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39 aa9fa3c34520941e7e3be00294b111e8254fd65b",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git show -s --format=%H%n%P%n%s aa9fa3c34520941e7e3be00294b111e8254fd65b",
+      "exit_code": 0,
+      "output": "aa9fa3c34520941e7e3be00294b111e8254fd65b\nb06b1fb9ad31f54fb2b660a48ada707a4aeababe e537f441010077123a307e9d50ea40cf8dad8547\nmerge: accept R18-C2 execution-hardened implementation\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m py_compile scripts/run_progress_aware_card_v2_r18_c2.py tests/test_progress_aware_card_v2_r18_c2.py",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git status --short",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -c 'from pathlib import Path\nimport json\nroot=Path.cwd()\noutputs=['\"'\"'reports/PROGRESS_AWARE_RECOVERY_CARD_V2_R18_C2.md'\"'\"','\"'\"'reports/progress_aware_recovery_card_v2_r18_c2_summary.json'\"'\"','\"'\"'reports/progress_aware_r18_c2_card_v2_pairs.csv'\"'\"']\ncontrol=root/'\"'\"'artifacts/runtime/progress-aware-r18-c2-control'\"'\"'\nexperiment=control/'\"'\"'experiment.json'\"'\"'\nprint(json.dumps({'\"'\"'existing_outputs'\"'\"':[name for name in outputs if (root/name).exists() or (root/name).is_symlink()],'\"'\"'control_directory_exists'\"'\"':control.exists(),'\"'\"'control_entries'\"'\"':sorted(p.name for p in control.iterdir()) if control.exists() else [],'\"'\"'experiment_exists'\"'\"':experiment.exists() or experiment.is_symlink(),'\"'\"'experiment_contents'\"'\"':experiment.read_text() if experiment.exists() else None,'\"'\"'writer_lock_exists'\"'\"':(control/'\"'\"'writer.lock'\"'\"').exists()},indent=2))\n'",
+      "exit_code": 0,
+      "output": "{\n  \"existing_outputs\": [],\n  \"control_directory_exists\": false,\n  \"control_entries\": [],\n  \"experiment_exists\": false,\n  \"experiment_contents\": null,\n  \"writer_lock_exists\": false\n}\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git rev-parse HEAD",
+      "exit_code": 0,
+      "output": "aa9fa3c34520941e7e3be00294b111e8254fd65b\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git status --porcelain",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git push origin codex/progress-aware-recovery",
+      "exit_code": 0,
+      "output": "To github.com:MikazukiMisaki/Alfworld-Self-Improvement-Project.git\n   b06b1fb..aa9fa3c  codex/progress-aware-recovery -> codex/progress-aware-recovery\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git fetch origin",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git rev-parse HEAD",
+      "exit_code": 0,
+      "output": "aa9fa3c34520941e7e3be00294b111e8254fd65b\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git rev-parse origin/codex/progress-aware-recovery",
+      "exit_code": 0,
+      "output": "aa9fa3c34520941e7e3be00294b111e8254fd65b\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git rev-parse origin/agent/astra-r18c2-final-fix",
+      "exit_code": 0,
+      "output": "5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git rev-parse origin/agent/antigravity-r18c2",
+      "exit_code": 0,
+      "output": "10a33ca43eacd821a8f7e7f72fab4dd2ac96250e\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git rev-parse origin/agent/codex-r18c2",
+      "exit_code": 0,
+      "output": "e537f441010077123a307e9d50ea40cf8dad8547\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git rev-parse origin/codex/progress-aware-recovery",
+      "exit_code": 0,
+      "output": "aa9fa3c34520941e7e3be00294b111e8254fd65b\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git status --short --branch",
+      "exit_code": 0,
+      "output": "## agent/codex-r18c2...origin/agent/codex-r18c2\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git status --short --branch",
+      "exit_code": 0,
+      "output": "## codex/progress-aware-recovery...origin/codex/progress-aware-recovery\n"
+    },
+    {
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "command": "git status --porcelain",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "git status --porcelain",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "nvidia-smi",
+      "exit_code": 0,
+      "output": "Mon Sep 14 04:09:28 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 550.163.01             Driver Version: 550.163.01     CUDA Version: 12.4     |\n|-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA A40                     Off |   00000000:A2:00.0 Off |                    0 |\n|  0%   36C    P8             22W /  300W |      14MiB /  46068MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n                                                                                         \n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n+-----------------------------------------------------------------------------------------+\n"
+    },
+    {
+      "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "command": "ps -ef",
+      "exit_code": 0,
+      "output": "UID          PID    PPID  C STIME TTY          TIME CMD\nroot           1       0  0 Aug31 ?        00:00:00 /bin/bash /entrypoint.sh\nroot          29       1  0 Aug31 ?        00:00:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups\nlizening   14492       1  0 Sep02 ?        00:01:15 /home/lizening/.vscode-server/code-08d4889f9ec4a1685d257b9b95de036c8e1ce1e5 --cli-data-dir /home/lizening/.vscode-server/cli agent host\nlizening  226149       1  0 Sep13 ?        00:00:00 /home/lizening/.cache/JetBrains/RemoteDev/dist/f9d2e23427687_pycharm-2026.2.2/plugins/platform-ijent-bundledBinaries/ijent-x86_64-unknown-linux-musl-release grpc-server --address=127.0.0.1 --use-tls --no-shutdown-on-disconnect\nlizening  227601       1  0 Sep13 ?        00:00:00 /home/lizening/.cache/JetBrains/RemoteDev/dist/f9d2e23427687_pycharm-2026.2.2/plugins/platform-ijent-bundledBinaries/ijent-x86_64-unknown-linux-musl-release grpc-server --address=127.0.0.1 --use-tls --no-shutdown-on-disconnect\nlizening  232874       1  0 Sep13 ?        00:00:00 /home/lizening/.cache/JetBrains/RemoteDev/dist/f9d2e23427687_pycharm-2026.2.2/plugins/platform-ijent-bundledBinaries/ijent-x86_64-unknown-linux-musl-release grpc-server --address=127.0.0.1 --use-tls --no-shutdown-on-disconnect\nlizening  396656       1  0 Sep13 ?        00:02:18 codex -c features.code_mode_host=true app-server --listen unix://\nroot      459585      29  0 Sep13 ?        00:00:00 sshd: lizening [priv]\nlizening  459596  459585  0 Sep13 ?        00:00:02 sshd: lizening@notty\nroot      459597      29  0 Sep13 ?        00:00:00 sshd: lizening [priv]\nlizening  459599  459596  0 Sep13 ?        00:00:06 codex app-server proxy\nlizening  459614  459597  0 Sep13 ?        00:00:13 sshd: lizening@notty\nlizening  459620  459614  0 Sep13 ?        00:00:02 bash -s\nlizening  459647  459620  0 Sep13 ?        00:00:00 sh /home/lizening/.antigravity-ide-server/bin/2.5.5-ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8/bin/antigravity-ide-server --start-server --host=127.0.0.1 --port=0 --connection-token-file /home/lizening/.antigravity-ide-server/.ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8.token --telemetry-level off --enable-remote-auto-shutdown --accept-server-license-terms\nlizening  459654  459647  0 Sep13 ?        00:00:23 /home/lizening/.antigravity-ide-server/bin/2.5.5-ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8/node /home/lizening/.antigravity-ide-server/bin/2.5.5-ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8/out/server-main.js --start-server --host=127.0.0.1 --port=0 --connection-token-file /home/lizening/.antigravity-ide-server/.ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8.token --telemetry-level off --enable-remote-auto-shutdown --accept-server-license-terms\nlizening  459770  459654  0 Sep13 ?        00:00:04 /home/lizening/.antigravity-ide-server/bin/2.5.5-ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8/node /home/lizening/.antigravity-ide-server/bin/2.5.5-ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8/out/bootstrap-fork --type=fileWatcher\nlizening  459805  459654  3 Sep13 ?        00:13:12 /home/lizening/.antigravity-ide-server/bin/2.5.5-ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8/node --dns-result-order=ipv4first /home/lizening/.antigravity-ide-server/bin/2.5.5-ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false\nlizening  459830  459805  0 Sep13 ?        00:00:01 /home/lizening/.antigravity-ide-server/bin/2.5.5-ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8/node /home/lizening/.antigravity-ide-server/bin/2.5.5-ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8/extensions/markdown-language-features/dist/serverWorkerMain --node-ipc --clientProcessId=459805\nlizening  459874  459654  0 Sep13 ?        00:00:27 /home/lizening/.antigravity-ide-server/bin/2.5.5-ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8/node /home/lizening/.antigravity-ide-server/bin/2.5.5-ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8/out/bootstrap-fork --type=ptyHost --logsPath /home/lizening/.antigravity-ide-server/data/logs/20260913T223731\nlizening  459892  459874  0 Sep13 pts/0    00:00:00 /bin/bash --init-file /home/lizening/.antigravity-ide-server/bin/2.5.5-ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh\nlizening  459899  459805  0 Sep13 ?        00:01:14 /home/lizening/.antigravity-ide-server/bin/2.5.5-ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8/extensions/antigravity/bin/language_server_linux_x64 --enable_lsp --csrf_token [REDACTED_SESSION_TOKEN] --extension_server_port 46269 --extension_server_csrf_token [REDACTED_SESSION_TOKEN] --workspace_id file_home_lizening_wt_antigravity_r18c2 --cloud_code_endpoint https://daily-cloudcode-pa.googleapis.com --subclient_type ide --app_data_dir antigravity-ide --parent_pipe_path /tmp/server_4e14ec69d7b6cfad\nlizening  460642  396656  0 Sep13 ?        00:00:01 /home/lizening/.codex/packages/standalone/releases/0.154.0-x86_64-unknown-linux-musl/bin/codex-code-mode-host\nlizening  472422  459874  0 Sep13 pts/1    00:00:00 /bin/bash --init-file /home/lizening/.antigravity-ide-server/bin/2.5.5-ecfbad74d93962fc8ca485d93ab9b4f3d4cb6cf8/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh\nlizening  535884  396656  0 04:09 ?        00:00:00 /bin/bash -c python - <<'PY' import sys sys.path.insert(0,'/home/lizening/research-notes/agent-logs/2026-09-14T040520Z__ASTRA__r18c2-integration-continued__kfzflgn7') from integration_helpers import * try:  gate(S.get('stage2_preflight')=='PASS' and not S['errors'],'Stage 2 preflight incomplete')  gate(run(['git','rev-parse','HEAD'],AUTHORITATIVE)==S['authoritative_merge_sha'],'Authoritative HEAD changed')  gate(not run(['git','status','--porcelain'],AUTHORITATIVE),'Authoritative dirty')  print(run(['git','push','origin','codex/progress-aware-recovery'],AUTHORITATIVE),flush=True)  S['authoritative_pushed']=True;save()  run(['git','fetch','origin'],AUTHORITATIVE)  S['authoritative_local_verified']=run(['git','rev-parse','HEAD'],AUTHORITATIVE)  S['authoritative_remote_verified']=run(['git','rev-parse','origin/codex/progress-aware-recovery'],AUTHORITATIVE)  gate(S['authoritative_local_verified']==S['authoritative_remote_verified']==S['authoritative_merge_sha'],'Authoritative local/remote mismatch')  S['final_remote_refs']={ref:run(['git','rev-parse','origin/'+ref],AUTHORITATIVE) for ref in S['starting_remote_refs']}  expected=dict(S['starting_remote_refs']);expected['agent/codex-r18c2']=S['codex_merge_sha'];expected['codex/progress-aware-recovery']=S['authoritative_merge_sha']  gate(S['final_remote_refs']==expected,'Final remote mismatch')  S['final_worktree_status']={cwd:run(['git','status','--short','--branch'],cwd) for cwd in [INTEGRATION,AUTHORITATIVE]}  for cwd in [INTEGRATION,AUTHORITATIVE]:gate(not run(['git','status','--porcelain'],cwd),'Final worktree dirty: '+cwd)  S['gpu_output']=run(['nvidia-smi'],AUTHORITATIVE,log='gpu.log',check=False)  S['gpu_exit_code']=S['commands'][-1]['exit_code']  processes=run(['ps','-ef'],AUTHORITATIVE)  import re  matches=[line for line in processes.splitlines() if re.search('run_progress_aware_card_v2_r18_c2|pytest|Qwen|python',line)]  S['process_matches']=matches  (P/'scientific-processes.log').write_text('\\n'.join(matches)+'\\n')  save()  print(json.dumps({k:S[k] for k in ['authoritative_merge_sha','authoritative_remote_verified','final_remote_refs','final_worktree_status','gpu_exit_code','gpu_output','process_matches']},indent=2)) except Exception as e:stop(e) PY\nlizening  535887  535884  1 04:09 ?        00:00:00 python -\nlizening  535903  459620  0 04:09 ?        00:00:00 sleep 10\nlizening  535922  396656 51 04:09 ?        00:00:00 git -c diff.mnemonicPrefix=false -c diff.noprefix=false -c core.quotePath=false -c safe.bareRepository=explicit -c core.hooksPath=/dev/null -c core.fsmonitor= diff --no-ext-diff --no-textconv --color=never --src-prefix=a/ --dst-prefix=b/ aa88d3636cc917376146b4c89ce44f56b307d483 --find-renames --raw --no-abbrev --numstat -z -- CURRENT_EXPERIMENT.md configs/recovery/progress_aware_r13_1_a_prefix_selection.json configs/recovery/progress_aware_r13_1_a_prefix_selection.json.sha256 configs/recovery/progress_aware_r13_1_b_selector_audit.json configs/recovery/progress_aware_r13_1_b_selector_audit.json.sha256 configs/recovery/progress_aware_r18_b_development_protocol.json configs/recovery/progress_aware_source_exclusions.json configs/recovery/progress_aware_source_exclusions.json.sha256 configs/recovery/progress_aware_source_schedule.json configs/recovery/progress_aware_source_schedule.json.sha256 reports/PROGRESS_AWARE_RECOVERY_CONTINUE_R15.md reports/PROGRESS_AWARE_RECOVERY_FACT_TEXT_R18_C1.md reports/PROGRESS_AWARE_RECOVERY_OSR_R16.md reports/PROGRESS_AWARE_RECOVERY_PAR_R17.md reports/PROGRESS_AWARE_RECOVERY_PROTOCOL.md reports/PROGRESS_AWARE_RECOVERY_PROTOCOL.md.sha256 reports/PROGRESS_AWARE_RECOVERY_PROTOCOL_R13_1_A.md reports/PROGRESS_AWARE_RECOVERY_PROTOCOL_R13_1_A.md.sha256 reports/PROGRESS_AWARE_RECOVERY_PROTOCOL_R13_1_B.md reports/PROGRESS_AWARE_RECOVERY_PROTOCOL_R13_1_B.md.sha256 reports/PROGRESS_AWARE_RECOVERY_R13_1_C_SELECTION_PREVIEW.md reports/PROGRESS_AWARE_RECOVERY_R13_1_C_SELECTION_PREVIEW.md.sha256 reports/PROGRESS_AWARE_RECOVERY_R15_FREEZE.md reports/PROGRESS_AWARE_RECOVERY_R18_B_V2_TREATMENT_FREEZE.md reports/PROGRESS_AWARE_RECOVERY_SEMANTIC_AUDIT_R18_A.md reports/PROGRESS_AWARE_RECOVERY_SOURCE_POOL_R14.md reports/progress_aware_r13_1_selection_preview.json reports/progress_aware_r13_1_selection_preview.json.sha256 reports/progress_aware_r14_failure_capacity.json reports/progress_aware_r14_source_trajectories.jsonl reports/progress_aware_r15_continue_pairs.csv reports/progress_aware_r15_prefix_manifest.json reports/progress_aware_r15_progress_cards.json reports/progress_aware_r16_osr_pairs.csv reports/progress_aware_r17_par_pairs.csv reports/progress_aware_r18_a_human_review_queue.csv reports/progress_aware_r18_a_semantic_audit.json reports/progress_aware_r18_a_semantic_field_audit.csv reports/progress_aware_r18_a_semantic_prefix_summary.csv reports/progress_aware_r18_b_card_v2.json reports/progress_aware_r18_b_fact_text.json reports/progress_aware_r18_b_semantic_validation.json reports/progress_aware_r18_b_treatment_manifest.json reports/progress_aware_r18_b_validated_public_facts_v2.json reports/progress_aware_r18_c1_fact_text_pairs.csv reports/progress_aware_recovery_continue_r15_summary.json reports/progress_aware_recovery_fact_text_r18_c1_summary.json reports/progress_aware_recovery_osr_r16_summary.json reports/progress_aware_recovery_par_r17_summary.json reports/progress_aware_recovery_protocol.json reports/progress_aware_recovery_protocol.json.sha256 reports/progress_aware_recovery_source_pool_r14_summary.json reports/progress_aware_source_inventory_summary.json reports/progress_aware_source_inventory_summary.json.sha256 reports/progress_card_historical_validation.json reports/progress_card_historical_validation.json.sha256 scripts/freeze_progress_aware_r13_1_c_preview.py scripts/freeze_progress_aware_recovery.py scripts/run_progress_aware_card_v2_r18_c2.py scripts/run_progress_aware_fact_text_r18_c1.py scripts/run_progress_aware_source_pool_r14.py scripts/run_progress_card_semantic_audit_r18_a.py scripts/run_progress_card_treatment_freeze_r18_b.py src/recovery/progress_aware_protocol.py src/recovery/progress_aware_source_pool.py src/recovery/progress_card_semantic_audit.py src/recovery/public_progress_card.py src/recovery/public_progress_card_v2.py src/recovery/r13_1_prefix_selection.py src/trajectory/collector.py src/trajectory/trajectory.py tests/test_progress_aware_card_v2_r18_c2.py tests/test_progress_aware_fact_text_r18_c1.py tests/test_progress_aware_r13_1_a_selection.py tests/test_progress_aware_recovery_r13.py tests/test_progress_aware_source_pool.py tests/test_progress_card_semantic_audit_r18_a.py tests/test_progress_card_treatment_r18_b.py\nlizening  535935  535887  0 04:09 ?        00:00:00 ps -ef\n"
+    }
+  ],
+  "errors": [],
+  "starting_remote_refs": {
+    "agent/astra-r18c2-final-fix": "5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39",
+    "agent/antigravity-r18c2": "10a33ca43eacd821a8f7e7f72fab4dd2ac96250e",
+    "agent/codex-r18c2": "b06b1fb9ad31f54fb2b660a48ada707a4aeababe",
+    "codex/progress-aware-recovery": "b06b1fb9ad31f54fb2b660a48ada707a4aeababe"
+  },
+  "accepted_commit": "5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39\n10a33ca43eacd821a8f7e7f72fab4dd2ac96250e\nfix(r18-c2): enforce single-writer execution and verified resume",
+  "worktree_list": "/home/lizening/Alfworld-Self-Improvement-Project  b06b1fb [codex/progress-aware-recovery]\n/home/lizening/wt-antigravity-r18c2               10a33ca [agent/antigravity-r18c2]\n/home/lizening/wt-codex-r18c2                     5ebb7ff [agent/astra-r18c2-final-fix]\n/home/lizening/wt-gemini-r18c2-verify             5ebb7ff (detached HEAD)\n/home/lizening/wt-review-r18c2                    10a33ca (detached HEAD)",
+  "starting_worktrees": {
+    "/home/lizening/wt-codex-r18c2": {
+      "status": "## agent/astra-r18c2-final-fix...origin/agent/astra-r18c2-final-fix",
+      "head": "5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39",
+      "branch": "agent/astra-r18c2-final-fix",
+      "clean": true
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project": {
+      "status": "## codex/progress-aware-recovery...origin/codex/progress-aware-recovery",
+      "head": "b06b1fb9ad31f54fb2b660a48ada707a4aeababe",
+      "branch": "codex/progress-aware-recovery",
+      "clean": true
+    }
+  },
+  "checkout_restored": true,
+  "integration_preflight": {
+    "status": "## agent/codex-r18c2...origin/agent/codex-r18c2",
+    "head": "b06b1fb9ad31f54fb2b660a48ada707a4aeababe",
+    "branch": "agent/codex-r18c2",
+    "clean": true
+  },
+  "preflight": "PASS",
+  "codex_merge_sha": "e537f441010077123a307e9d50ea40cf8dad8547",
+  "codex_merge_details": "e537f441010077123a307e9d50ea40cf8dad8547\nb06b1fb9ad31f54fb2b660a48ada707a4aeababe 5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39\nmerge: integrate accepted R18-C2 final hardening",
+  "codex_parents": [
+    "b06b1fb9ad31f54fb2b660a48ada707a4aeababe",
+    "5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39"
+  ],
+  "codex_tree_identical": true,
+  "codex_py_compile": "PASS",
+  "focused_tests": "75 passed in 40.68s",
+  "unexpected_events": [
+    "Initial focused test command exited 0 with 75 pass dots and 100% completion. Repository addopts=-q combined with requested -q suppressed the summary. External result parser raised a provisional STOP because it expected a summary string, not because tests failed. Repeating tests with addopts cleared to capture explicit totals; no repository changes.",
+    "Configuration discovery rg command returned exit 2 because optional pytest.ini and tox.ini do not exist; pyproject.toml supplied addopts=-q. Follow-up search of existing files succeeded. No repository modification or test failure."
+  ],
+  "focused_test_totals": {
+    "tests": 75,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "stage1_verification": "PASS",
+  "codex_pushed": true,
+  "codex_local_verified": "e537f441010077123a307e9d50ea40cf8dad8547",
+  "codex_remote_verified": "e537f441010077123a307e9d50ea40cf8dad8547",
+  "authoritative_premerge": {
+    "status": "## codex/progress-aware-recovery...origin/codex/progress-aware-recovery",
+    "head": "b06b1fb9ad31f54fb2b660a48ada707a4aeababe",
+    "branch": "codex/progress-aware-recovery",
+    "clean": true
+  },
+  "authoritative_merge_sha": "aa9fa3c34520941e7e3be00294b111e8254fd65b",
+  "authoritative_tree_identical": true,
+  "authoritative_merge_details": "aa9fa3c34520941e7e3be00294b111e8254fd65b\nb06b1fb9ad31f54fb2b660a48ada707a4aeababe e537f441010077123a307e9d50ea40cf8dad8547\nmerge: accept R18-C2 execution-hardened implementation",
+  "authoritative_parents": [
+    "b06b1fb9ad31f54fb2b660a48ada707a4aeababe",
+    "e537f441010077123a307e9d50ea40cf8dad8547"
+  ],
+  "authoritative_py_compile": "PASS",
+  "authoritative_clean": true,
+  "formal_state": {
+    "existing_outputs": [],
+    "control_directory_exists": false,
+    "control_entries": [],
+    "experiment_exists": false,
+    "experiment_contents": null,
+    "writer_lock_exists": false
+  },
+  "stage2_preflight": "PASS",
+  "authoritative_pushed": true,
+  "authoritative_local_verified": "aa9fa3c34520941e7e3be00294b111e8254fd65b",
+  "authoritative_remote_verified": "aa9fa3c34520941e7e3be00294b111e8254fd65b",
+  "final_remote_refs": {
+    "agent/astra-r18c2-final-fix": "5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39",
+    "agent/antigravity-r18c2": "10a33ca43eacd821a8f7e7f72fab4dd2ac96250e",
+    "agent/codex-r18c2": "e537f441010077123a307e9d50ea40cf8dad8547",
+    "codex/progress-aware-recovery": "aa9fa3c34520941e7e3be00294b111e8254fd65b"
+  },
+  "final_worktree_status": {
+    "/home/lizening/wt-codex-r18c2": "## agent/codex-r18c2...origin/agent/codex-r18c2",
+    "/home/lizening/Alfworld-Self-Improvement-Project": "## codex/progress-aware-recovery...origin/codex/progress-aware-recovery"
+  },
+  "gpu_output": "Mon Sep 14 04:09:28 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 550.163.01             Driver Version: 550.163.01     CUDA Version: 12.4     |\n|-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA A40                     Off |   00000000:A2:00.0 Off |                    0 |\n|  0%   36C    P8             22W /  300W |      14MiB /  46068MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n                                                                                         \n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n+-----------------------------------------------------------------------------------------+",
+  "gpu_exit_code": 0,
+  "process_matches": [
+    "lizening  535884  396656  0 04:09 ?        00:00:00 /bin/bash -c python - <<'PY' import sys sys.path.insert(0,'/home/lizening/research-notes/agent-logs/2026-09-14T040520Z__ASTRA__r18c2-integration-continued__kfzflgn7') from integration_helpers import * try:  gate(S.get('stage2_preflight')=='PASS' and not S['errors'],'Stage 2 preflight incomplete')  gate(run(['git','rev-parse','HEAD'],AUTHORITATIVE)==S['authoritative_merge_sha'],'Authoritative HEAD changed')  gate(not run(['git','status','--porcelain'],AUTHORITATIVE),'Authoritative dirty')  print(run(['git','push','origin','codex/progress-aware-recovery'],AUTHORITATIVE),flush=True)  S['authoritative_pushed']=True;save()  run(['git','fetch','origin'],AUTHORITATIVE)  S['authoritative_local_verified']=run(['git','rev-parse','HEAD'],AUTHORITATIVE)  S['authoritative_remote_verified']=run(['git','rev-parse','origin/codex/progress-aware-recovery'],AUTHORITATIVE)  gate(S['authoritative_local_verified']==S['authoritative_remote_verified']==S['authoritative_merge_sha'],'Authoritative local/remote mismatch')  S['final_remote_refs']={ref:run(['git','rev-parse','origin/'+ref],AUTHORITATIVE) for ref in S['starting_remote_refs']}  expected=dict(S['starting_remote_refs']);expected['agent/codex-r18c2']=S['codex_merge_sha'];expected['codex/progress-aware-recovery']=S['authoritative_merge_sha']  gate(S['final_remote_refs']==expected,'Final remote mismatch')  S['final_worktree_status']={cwd:run(['git','status','--short','--branch'],cwd) for cwd in [INTEGRATION,AUTHORITATIVE]}  for cwd in [INTEGRATION,AUTHORITATIVE]:gate(not run(['git','status','--porcelain'],cwd),'Final worktree dirty: '+cwd)  S['gpu_output']=run(['nvidia-smi'],AUTHORITATIVE,log='gpu.log',check=False)  S['gpu_exit_code']=S['commands'][-1]['exit_code']  processes=run(['ps','-ef'],AUTHORITATIVE)  import re  matches=[line for line in processes.splitlines() if re.search('run_progress_aware_card_v2_r18_c2|pytest|Qwen|python',line)]  S['process_matches']=matches  (P/'scientific-processes.log').write_text('\\n'.join(matches)+'\\n')  save()  print(json.dumps({k:S[k] for k in ['authoritative_merge_sha','authoritative_remote_verified','final_remote_refs','final_worktree_status','gpu_exit_code','gpu_output','process_matches']},indent=2)) except Exception as e:stop(e) PY",
+    "lizening  535887  535884  1 04:09 ?        00:00:00 python -",
+    "lizening  535922  396656 51 04:09 ?        00:00:00 git -c diff.mnemonicPrefix=false -c diff.noprefix=false -c core.quotePath=false -c safe.bareRepository=explicit -c core.hooksPath=/dev/null -c core.fsmonitor= diff --no-ext-diff --no-textconv --color=never --src-prefix=a/ --dst-prefix=b/ aa88d3636cc917376146b4c89ce44f56b307d483 --find-renames --raw --no-abbrev --numstat -z -- CURRENT_EXPERIMENT.md configs/recovery/progress_aware_r13_1_a_prefix_selection.json configs/recovery/progress_aware_r13_1_a_prefix_selection.json.sha256 configs/recovery/progress_aware_r13_1_b_selector_audit.json configs/recovery/progress_aware_r13_1_b_selector_audit.json.sha256 configs/recovery/progress_aware_r18_b_development_protocol.json configs/recovery/progress_aware_source_exclusions.json configs/recovery/progress_aware_source_exclusions.json.sha256 configs/recovery/progress_aware_source_schedule.json configs/recovery/progress_aware_source_schedule.json.sha256 reports/PROGRESS_AWARE_RECOVERY_CONTINUE_R15.md reports/PROGRESS_AWARE_RECOVERY_FACT_TEXT_R18_C1.md reports/PROGRESS_AWARE_RECOVERY_OSR_R16.md reports/PROGRESS_AWARE_RECOVERY_PAR_R17.md reports/PROGRESS_AWARE_RECOVERY_PROTOCOL.md reports/PROGRESS_AWARE_RECOVERY_PROTOCOL.md.sha256 reports/PROGRESS_AWARE_RECOVERY_PROTOCOL_R13_1_A.md reports/PROGRESS_AWARE_RECOVERY_PROTOCOL_R13_1_A.md.sha256 reports/PROGRESS_AWARE_RECOVERY_PROTOCOL_R13_1_B.md reports/PROGRESS_AWARE_RECOVERY_PROTOCOL_R13_1_B.md.sha256 reports/PROGRESS_AWARE_RECOVERY_R13_1_C_SELECTION_PREVIEW.md reports/PROGRESS_AWARE_RECOVERY_R13_1_C_SELECTION_PREVIEW.md.sha256 reports/PROGRESS_AWARE_RECOVERY_R15_FREEZE.md reports/PROGRESS_AWARE_RECOVERY_R18_B_V2_TREATMENT_FREEZE.md reports/PROGRESS_AWARE_RECOVERY_SEMANTIC_AUDIT_R18_A.md reports/PROGRESS_AWARE_RECOVERY_SOURCE_POOL_R14.md reports/progress_aware_r13_1_selection_preview.json reports/progress_aware_r13_1_selection_preview.json.sha256 reports/progress_aware_r14_failure_capacity.json reports/progress_aware_r14_source_trajectories.jsonl reports/progress_aware_r15_continue_pairs.csv reports/progress_aware_r15_prefix_manifest.json reports/progress_aware_r15_progress_cards.json reports/progress_aware_r16_osr_pairs.csv reports/progress_aware_r17_par_pairs.csv reports/progress_aware_r18_a_human_review_queue.csv reports/progress_aware_r18_a_semantic_audit.json reports/progress_aware_r18_a_semantic_field_audit.csv reports/progress_aware_r18_a_semantic_prefix_summary.csv reports/progress_aware_r18_b_card_v2.json reports/progress_aware_r18_b_fact_text.json reports/progress_aware_r18_b_semantic_validation.json reports/progress_aware_r18_b_treatment_manifest.json reports/progress_aware_r18_b_validated_public_facts_v2.json reports/progress_aware_r18_c1_fact_text_pairs.csv reports/progress_aware_recovery_continue_r15_summary.json reports/progress_aware_recovery_fact_text_r18_c1_summary.json reports/progress_aware_recovery_osr_r16_summary.json reports/progress_aware_recovery_par_r17_summary.json reports/progress_aware_recovery_protocol.json reports/progress_aware_recovery_protocol.json.sha256 reports/progress_aware_recovery_source_pool_r14_summary.json reports/progress_aware_source_inventory_summary.json reports/progress_aware_source_inventory_summary.json.sha256 reports/progress_card_historical_validation.json reports/progress_card_historical_validation.json.sha256 scripts/freeze_progress_aware_r13_1_c_preview.py scripts/freeze_progress_aware_recovery.py scripts/run_progress_aware_card_v2_r18_c2.py scripts/run_progress_aware_fact_text_r18_c1.py scripts/run_progress_aware_source_pool_r14.py scripts/run_progress_card_semantic_audit_r18_a.py scripts/run_progress_card_treatment_freeze_r18_b.py src/recovery/progress_aware_protocol.py src/recovery/progress_aware_source_pool.py src/recovery/progress_card_semantic_audit.py src/recovery/public_progress_card.py src/recovery/public_progress_card_v2.py src/recovery/r13_1_prefix_selection.py src/trajectory/collector.py src/trajectory/trajectory.py tests/test_progress_aware_card_v2_r18_c2.py tests/test_progress_aware_fact_text_r18_c1.py tests/test_progress_aware_r13_1_a_selection.py tests/test_progress_aware_recovery_r13.py tests/test_progress_aware_source_pool.py tests/test_progress_card_semantic_audit_r18_a.py tests/test_progress_card_treatment_r18_b.py"
+  ],
+  "scientific_process_assessment": "No active Qwen, formal ALFWorld C2, pytest, or R18-C2 runner identified. Matches are the task command wrapper, its Python audit helper, and a read-only Git diff from the application; no scientific process. NVIDIA A40: 0% utilization, no listed GPU processes.",
+  "finished": "2026-09-14T04:10:39.368864+00:00",
+  "scientific_execution": {
+    "Qwen_calls": 0,
+    "formal_ALFWorld_calls": 0,
+    "CARD_v2_scientific_branches": 0,
+    "held_out_usage": 0,
+    "runner_invocations": 0,
+    "authorization": "NO"
+  },
+  "final_decision": "integration accepted",
+  "next_authorized_step": "NONE; STOP. Formal execution requires separate explicit authorization using final authoritative SHA."
+}

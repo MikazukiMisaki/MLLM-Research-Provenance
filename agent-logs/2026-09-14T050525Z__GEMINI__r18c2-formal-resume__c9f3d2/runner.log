@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/lizening/Alfworld-Self-Improvement-Project/scripts/run_progress_aware_card_v2_r18_c2.py", line 2179, in <module>
+    raise SystemExit(main())
+  File "/home/lizening/Alfworld-Self-Improvement-Project/scripts/run_progress_aware_card_v2_r18_c2.py", line 2175, in main
+    return _main_locked(args)
+  File "/home/lizening/Alfworld-Self-Improvement-Project/scripts/run_progress_aware_card_v2_r18_c2.py", line 2158, in _main_locked
+    replay_records = _run_replay_gate(context, args.output, resume=args.resume)
+  File "/home/lizening/Alfworld-Self-Improvement-Project/scripts/run_progress_aware_card_v2_r18_c2.py", line 604, in _run_replay_gate
+    environment = _environment(context, schedule)
+  File "/home/lizening/Alfworld-Self-Improvement-Project/scripts/run_progress_aware_card_v2_r18_c2.py", line 475, in _environment
+    _assert_environment_paths(context)
+  File "/home/lizening/Alfworld-Self-Improvement-Project/scripts/run_progress_aware_card_v2_r18_c2.py", line 471, in _assert_environment_paths
+    raise RuntimeError("ALFWORLD_DATA and ALFWORLD_CONFIG_PATH environment variables are required for environment interaction")
+RuntimeError: ALFWORLD_DATA and ALFWORLD_CONFIG_PATH environment variables are required for environment interaction

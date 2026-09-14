@@ -1,0 +1,17 @@
+EXECUTION NOT STARTED.
+Reason: Prior formal R18-C2 state detected during Step 3 preflight verification:
+- FORMAL_RUNTIME exists at /home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-r18-c2-formal-aa9fa3c34520941e
+- experiment.json exists at artifacts/runtime/progress-aware-r18-c2-control/experiment.json
+- writer.lock exists at artifacts/runtime/progress-aware-r18-c2-control/writer.lock
+
+Per Section 3 of R18-C2 execution protocol:
+"If FORMAL_RUNTIME, experiment.json, or formal result artifacts already exist:
+STOP.
+DO NOT delete anything.
+DO NOT restart.
+Record exactly what exists."
+
+Per Section 10:
+"A later --resume requires separate explicit authorization. This is intentional."
+
+Formal runner was not launched.
