@@ -1,0 +1,24 @@
+LAUNCH_REQUEST UTC=2026-09-14T12:04:19Z SHA=aa9fa3c34520941e7e3be00294b111e8254fd65b
+
+PRELAUNCH_READ_ONLY:
+cd /home/lizening/Alfworld-Self-Improvement-Project
+git branch --show-current
+git rev-parse HEAD
+git rev-parse origin/codex/progress-aware-recovery
+git status --porcelain=v1
+nvidia-smi
+ps -eo pid,ppid,pgid,sid,tty,stat,args | grep -E 'run_progress_aware_card_v2_r18_c2|durable-wrapper-v2' | grep -v grep || true
+
+AUTHORIZED_LAUNCH_EXACTLY_ONCE:
+R18C2_AUTHORIZED_SHA=aa9fa3c34520941e7e3be00294b111e8254fd65b \
+/usr/bin/bash \
+/home/lizening/research-notes/agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/future-launch-v2.sh.txt
+
+LAUNCH_OUTPUT:
+TASK_RECORD_DIR=/home/lizening/research-notes/agent-logs/2026-09-14T120417Z__ASTRA__r18c2-durable-resume__zgJ2NUTG
+DISPATCHED ONLY. Monitor /home/lizening/research-notes/agent-logs/2026-09-14T120417Z__ASTRA__r18c2-durable-resume__zgJ2NUTG; never relaunch on missing marker or IDE disconnect.
+
+READ_ONLY_POSTFLIGHT:
+- inspected preflight.log, dispatch.log, PID files, identity files, boot IDs, runner.log, runner.exitcode, runtime manifest/journal/ledger/event files, reports, GPU, and scientific Git state
+- validated result-key-fields.json with python -m json.tool
+- secret-pattern scan: no findings

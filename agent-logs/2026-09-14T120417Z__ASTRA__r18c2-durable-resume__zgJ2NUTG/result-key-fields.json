@@ -1,0 +1,186 @@
+{
+  "OUTCOMES": {
+    "continue_success": 29,
+    "osr_success": 31,
+    "fact_text_success": 32,
+    "card_v2_success": 30,
+    "card_v2_failure": 30
+  },
+  "PRIMARY_CARD_V2_vs_FACT_TEXT": {
+    "RepWins": 0,
+    "RepTies": 58,
+    "RepLosses": 2,
+    "NetRepWins": -2,
+    "mean_DeltaRep": -0.03333333333333333,
+    "discordant_D": 2,
+    "exact_two_sided_p": 0.5,
+    "directional_CARD_V2_gt_FACT_TEXT_p": 1.0
+  },
+  "SECONDARY_CARD_V2_vs_OSR": {
+    "InfoWins": 1,
+    "InfoTies": 57,
+    "InfoLosses": 2,
+    "NetInfoWins": -1,
+    "mean_DeltaInfo": -0.016666666666666666,
+    "discordant_D": 3,
+    "exact_two_sided_p": 1.0,
+    "directional_CARD_V2_gt_OSR_p": 0.875
+  },
+  "RESCUE_HARM": {
+    "N_c0": 31,
+    "card_v2_rescues": 3,
+    "additional_rescues_vs_fact_text": -2,
+    "additional_rescues_vs_osr": -1,
+    "N_c1": 29,
+    "card_v2_harms": 2,
+    "additional_harms_vs_fact_text": 0,
+    "additional_harms_vs_osr": 0
+  },
+  "MECHANISM": {
+    "diagnosis_changed_vs_fact": 37,
+    "subgoal_changed_vs_fact": 38,
+    "action_relations_fact": {
+      "different": 18,
+      "prior_executed_current_withheld": 4,
+      "same": 38
+    },
+    "diagnosis_changed_vs_osr": 51,
+    "subgoal_changed_vs_osr": 46,
+    "action_relations_osr": {
+      "both_withheld": 1,
+      "different": 19,
+      "prior_executed_current_withheld": 3,
+      "prior_withheld_current_executed": 2,
+      "same": 35
+    },
+    "different_action_fact_RepWin_Tie_Loss": {
+      "RepLoss": 1,
+      "RepTie": 17,
+      "RepWin": 0
+    },
+    "different_action_osr_InfoWin_Tie_Loss": {
+      "InfoLoss": 2,
+      "InfoTie": 17,
+      "InfoWin": 0
+    }
+  },
+  "LOOPS": {
+    "loops_vs_fact": {
+      "cross_tab": {
+        "increased": {
+          "RepTie": 3
+        },
+        "reduced": {
+          "RepLoss": 1,
+          "RepTie": 10
+        },
+        "unchanged": {
+          "RepLoss": 1,
+          "RepTie": 45
+        }
+      },
+      "increased": 3,
+      "reduced": 11,
+      "unchanged": 46
+    },
+    "loops_vs_osr": {
+      "cross_tab": {
+        "increased": {
+          "InfoLoss": 2,
+          "InfoTie": 7
+        },
+        "reduced": {
+          "InfoTie": 6,
+          "InfoWin": 1
+        },
+        "unchanged": {
+          "InfoTie": 44
+        }
+      },
+      "increased": 9,
+      "reduced": 7,
+      "unchanged": 44
+    }
+  },
+  "PICK_TWO": {
+    "N": 18,
+    "card_v2_success": 1,
+    "count_aware": 18,
+    "instance_aware": 17,
+    "location_aware": 3
+  },
+  "COST": {
+    "card_v2_local_tokens": {
+      "max": 2204,
+      "mean": 1364.5666666666666,
+      "median": 1263.0,
+      "min": 948
+    },
+    "card_v2_local_latency": {
+      "max": 1.904801185010001,
+      "mean": 1.459178250139424,
+      "median": 1.4318799205357209,
+      "min": 1.1340183191932738
+    },
+    "local_token_delta_vs_fact": {
+      "max": 29,
+      "mean": 7.566666666666666,
+      "median": 8.0,
+      "min": -4
+    },
+    "treatment_token_overhead_vs_fact": {
+      "max": 19,
+      "mean": 7.283333333333333,
+      "median": 8.0,
+      "min": -8
+    },
+    "full_branch_token_delta_vs_fact": {
+      "max": 18816,
+      "mean": 584.3166666666667,
+      "median": 8.0,
+      "min": -9319
+    },
+    "local_latency_delta_vs_fact": {
+      "max": 0.3561163729755208,
+      "mean": -0.0014550668245647102,
+      "median": 0.0015884640160948038,
+      "min": -0.8182660558959469
+    },
+    "full_branch_latency_delta_vs_fact": {
+      "max": 11.019202863564715,
+      "mean": 0.3404168619211608,
+      "median": 0.021680631092749536,
+      "min": -6.474712644936517
+    },
+    "local_token_delta_vs_osr": {
+      "max": 204,
+      "mean": 164.58333333333334,
+      "median": 159.0,
+      "min": 140
+    },
+    "treatment_token_overhead_vs_osr": {
+      "max": 203,
+      "mean": 164.25,
+      "median": 159.0,
+      "min": 141
+    },
+    "full_branch_token_delta_vs_osr": {
+      "max": 18783,
+      "mean": 904.6333333333333,
+      "median": 158.0,
+      "min": -10666
+    },
+    "local_latency_delta_vs_osr": {
+      "max": 0.5217597072478384,
+      "mean": 0.037385552485163016,
+      "median": 0.021796806424390525,
+      "min": -0.370574580039829
+    },
+    "full_branch_latency_delta_vs_osr": {
+      "max": 14.195313447504304,
+      "mean": 0.6400991637958213,
+      "median": 0.17551785771502182,
+      "min": -8.62115305219777
+    }
+  }
+}

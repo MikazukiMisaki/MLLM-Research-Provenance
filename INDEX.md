@@ -15,6 +15,7 @@ Oldest first. UTC is the task-directory timestamp; scientific SHA is the relevan
 | 2026-09-14 06:11:40 | ASTRA | Initialize MLLM-Research-Provenance repository | PASS | UNKNOWN | [RECORD.md](agent-logs/2026-09-14T061140Z__ASTRA__provenance-repo-initialization__wo8b4ovs/RECORD.md) |
 | 2026-09-14 10:09:50 | GEMINI | R18-C2 durable formal CARD-v2 resume | STOP | aa9fa3c34520941e7e3be00294b111e8254fd65b | [RECORD.md](agent-logs/2026-09-14T100950Z__GEMINI__r18c2-durable-resume__JKzeagYA/RECORD.md) |
 | 2026-09-14 11:36:53 | ASTRA | R18-C2 preflight false-positive fix and durable launcher V2 | PASS | aa9fa3c34520941e7e3be00294b111e8254fd65b | [RECORD.md](agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/RECORD.md) |
+| 2026-09-14 12:04:17 | GPT-5.6 Luna | R18-C2 V2 durable formal CARD-v2 resume | PASS | aa9fa3c34520941e7e3be00294b111e8254fd65b | [RECORD.md](agent-logs/2026-09-14T120417Z__ASTRA__r18c2-durable-resume__zgJ2NUTG/RECORD.md) |
 
 ## Import omissions
 
