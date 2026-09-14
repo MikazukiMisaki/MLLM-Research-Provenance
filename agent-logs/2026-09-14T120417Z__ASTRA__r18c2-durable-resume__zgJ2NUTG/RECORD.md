@@ -118,9 +118,10 @@ PROVENANCE ADMINISTRATION:
 - New provenance files: this finalized RECORD.md, commands.log additions, result-key-fields.json, artifact-hashes.txt, and secret-scan.json.
 - Important runtime and scientific output hashes are in artifact-hashes.txt.
 - Secret scan: corrected scan found no credential patterns and no credential-like filenames; evidence is in secret-scan.json.
-- INDEX.md and FILE_HASHES.sha256 are to be refreshed for this task and committed in the provenance repository only.
+- INDEX.md and FILE_HASHES.sha256 were refreshed for this task and committed in the provenance repository only.
 - Provenance starting/checkpoint SHA before Luna synchronization: 53a185876f82f9011bf927d386e8c797dc0e665c.
-- The final containing provenance commit SHA is intentionally resolved from Git history after commit rather than self-recorded in this record, per protocol.
+- First provenance synchronization commit: a50ad25ff4047a9e8ee422967836ff195fbab406.
+- The final containing provenance commit SHA for this corrected record is resolved from Git history rather than self-recorded in this record, per protocol; the ignored post-push-receipt.json records the verified ref.
 
 UNEXPECTED EVENTS:
 - An initial secret-scan command had a shell-quoting error before scanning; it made no changes. The corrected scan completed with no findings.
