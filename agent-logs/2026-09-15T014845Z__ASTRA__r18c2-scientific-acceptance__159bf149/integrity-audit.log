@@ -1,0 +1,70 @@
+{
+  "status": "PASS",
+  "observed_utc": "2026-09-15T01:53:50.961535+00:00",
+  "checks_passed": 674,
+  "execution_sha": "aa9fa3c34520941e7e3be00294b111e8254fd65b",
+  "execution_exit": 0,
+  "replay_exact": 60,
+  "branch_files": 60,
+  "ledger_rows": 60,
+  "execution_events": 120,
+  "zero_counters": {
+    "completed_branch_reruns": 0,
+    "incomplete_branch_retries": 0,
+    "operational_interruptions": 0,
+    "osr_runs": 0,
+    "fact_text_runs": 0,
+    "par_runs": 0,
+    "pbr_runs": 0,
+    "training_runs": 0,
+    "held_out_consumption": 0,
+    "model_calls_during_replay": 0,
+    "card_v2_regeneration_calls": 0
+  },
+  "adapter_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+  "result_key_fields_equal": true,
+  "paired_recomputed": {
+    "OSR_vs_CONTINUE": {
+      "W": 4,
+      "T": 54,
+      "L": 2,
+      "net": 2,
+      "mean_delta": 0.03333333333333333,
+      "D": 6,
+      "two_sided_p": 0.6875,
+      "directional_p": 0.34375
+    },
+    "FACT_TEXT_vs_OSR": {
+      "W": 3,
+      "T": 55,
+      "L": 2,
+      "net": 1,
+      "mean_delta": 0.016666666666666666,
+      "D": 5,
+      "two_sided_p": 1,
+      "directional_p": 0.5
+    },
+    "CARD_V2_vs_FACT_TEXT": {
+      "W": 0,
+      "T": 58,
+      "L": 2,
+      "net": -2,
+      "mean_delta": -0.03333333333333333,
+      "D": 2,
+      "two_sided_p": 0.5,
+      "directional_p": 1.0
+    },
+    "CARD_V2_vs_OSR": {
+      "W": 1,
+      "T": 57,
+      "L": 2,
+      "net": -1,
+      "mean_delta": -0.016666666666666666,
+      "D": 3,
+      "two_sided_p": 1,
+      "directional_p": 0.875
+    }
+  },
+  "report_summary_hash_note": "Report contains pre-metadata summary digest; independently verified by removing artifacts metadata in memory. Final file digest matches completed manifest and Luna inventory. No file rewritten.",
+  "scientific_calls_this_task": 0
+}

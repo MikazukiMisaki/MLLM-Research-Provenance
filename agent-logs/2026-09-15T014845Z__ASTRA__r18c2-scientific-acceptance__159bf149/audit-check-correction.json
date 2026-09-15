@@ -1,0 +1,7 @@
+{
+  "type": "audit implementation correction, not scientific data correction",
+  "initial_check": "Incorrectly compared rendered_prompt_sha256 against the plain user prompt digest.",
+  "evidence": "ExactGeneration.to_dict hashes rendered_prompt; _generate_exact uses Qwen user/assistant chat serialization with thinking disabled. The explicit chat serialization matches both saved generation digests for R15-F01.",
+  "correction": "Audit now hashes the explicit chat serialization for every recorded recovery input; no tokenizer, model, replay or scientific code called, no scientific files changed.",
+  "c1_schema_correction": "Initial C1 category assertion assumed the C2 label prior_withheld_current_executed. Frozen C1 uses osr_withheld_fact_executed; the count is the expected 3. Corrected the audit assertion only; all scientific data unchanged."
+}

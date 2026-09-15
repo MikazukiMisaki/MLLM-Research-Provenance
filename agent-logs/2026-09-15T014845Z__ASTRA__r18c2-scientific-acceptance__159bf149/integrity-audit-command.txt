@@ -1,0 +1,104 @@
+# Executed as a standard-library-only, read-only audit of frozen evidence.
+from pathlib import Path
+from collections import Counter
+from datetime import datetime, timezone
+import csv, hashlib, json, math, re, statistics, subprocess
+P=Path.cwd(); N=P.parents[1]; R=Path('/home/lizening/Alfworld-Self-Improvement-Project')
+T=R/'artifacts/runtime/validation/progress-aware-r18-c2-formal-aa9fa3c34520941e'
+E=N/'agent-logs/2026-09-14T120417Z__ASTRA__r18c2-durable-resume__zgJ2NUTG'
+SHA='aa9fa3c34520941e7e3be00294b111e8254fd65b'
+checks=[]
+def check(label, condition):
+    checks.append({'check':label,'pass':bool(condition)})
+    if not condition:
+        (P/'integrity-results.json').write_text(json.dumps({'status':'FAIL','checks':checks},indent=2)+'\n')
+        raise AssertionError(label)
+def digest(path):
+    h=hashlib.sha256()
+    with path.open('rb') as f:
+        for block in iter(lambda:f.read(1024*1024),b''): h.update(block)
+    return h.hexdigest()
+def j(path): return json.loads(path.read_text())
+def jl(path): return [json.loads(x) for x in path.read_text().splitlines() if x.strip()]
+def canon(x): return json.dumps(x,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False)
+def objhash(x): return hashlib.sha256(canon(x).encode()).hexdigest()
+def git(cwd,*args): return subprocess.check_output(['git',*args],cwd=cwd,text=True).strip()
+M=j(T/'run_manifest.json'); S=j(R/'reports/progress_aware_recovery_card_v2_r18_c2_summary.json')
+check('execution branch and local/remote implementation revision',git(R,'branch','--show-current')=='codex/progress-aware-recovery' and git(R,'rev-parse','HEAD')==git(R,'rev-parse','origin/codex/progress-aware-recovery')==SHA)
+check('source/index unchanged; only three generated outputs untracked',not git(R,'diff','HEAD','--name-only') and set(git(R,'ls-files','--others','--exclude-standard').splitlines())=={S['artifacts'][k] for k in ('report','summary','csv')})
+check('Luna final provenance checkpoint',git(N,'rev-parse','HEAD')=='983f5d52d9cebd1bab8c313472956e31b87497b5')
+for f in E.iterdir():
+    rel=str(f.relative_to(N))
+    if f.is_file() and subprocess.run(['git','ls-files','--error-unmatch',rel],cwd=N,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0:
+        check('committed execution evidence '+f.name,hashlib.sha256(subprocess.check_output(['git','show','983f5d52d9cebd1bab8c313472956e31b87497b5:'+rel],cwd=N)).hexdigest()==digest(f))
+check('authentic runner exit and sealed log', (E/'runner.exitcode').read_text()=='0\n' and digest(E/'runner.log')==(E/'runner.log.sha256').read_text().split()[0] and (E/'runner.log').read_text().endswith('RUNNER_EXIT 2026-09-14T12:35:46Z status=0\n'))
+check('wrapper matches accepted V2 bytes',digest(E/'durable-wrapper-v2.sh')==digest(N/'agent-logs/2026-09-14T113653Z__ASTRA__r18c2-preflight-v2-fix__cfxr75av/durable-wrapper-v2.sh'))
+hashes={}
+for line in (E/'artifact-hashes.txt').read_text().splitlines():
+    expected,name=line.split(None,1); f=Path(name.strip()); actual=digest(f)
+    check('execution recorded file hash '+f.name,actual==expected); hashes[str(f)]={'sha256':actual,'bytes':f.stat().st_size}
+for key in ('report','summary','csv'):
+    check('manifest final artifact hash '+key,digest(R/S['artifacts'][key])==M[key+'_sha256'])
+check('manifest completion/provenance',M['status']=='completed' and M['accepted_branches']==M['prefixes']==M['replay_exact']==60 and M['git_revision_before_inference']==S['provenance']['implementation_commit']==M['provenance']['implementation_commit']==SHA)
+zero=['completed_branch_reruns','incomplete_branch_retries','operational_interruptions','osr_runs','fact_text_runs','par_runs','pbr_runs','training_runs','held_out_consumption','model_calls_during_replay','card_v2_regeneration_calls']
+check('zero rerun/retry/interruption/comparator/training/heldout counters',all(M[k]==0 for k in zero) and all(v==0 for v in S['integrity'].values()))
+check('development only',S['development_only'] is True and S['not_held_out_confirmation'] is True)
+source=(R/'scripts/run_progress_aware_card_v2_r18_c2.py').read_text()
+pathvars={k:R/v for k,v in re.findall(r'^(\w+) = PROJECT_ROOT / "([^"]+)"',source,re.M)}
+frozenvars=dict(re.findall(r'"(r[0-9][^"]+)": \((\w+),',source))
+frozen={}
+for key,expected in M['provenance']['frozen_hashes'].items():
+    f=pathvars[frozenvars[key]]; actual=digest(f)
+    check('frozen prior input '+key,actual==expected==S['provenance']['frozen_prior_hashes'][key]); frozen[key]={'path':str(f),'sha256':actual}
+adapter=R/'artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter'; ah=hashlib.sha256()
+for f in sorted(x for x in adapter.rglob('*') if x.is_file()):
+    ah.update(str(f.relative_to(adapter)).encode())
+    with f.open('rb') as stream:
+        for block in iter(lambda:stream.read(1024*1024),b''): ah.update(block)
+check('frozen adapter directory hash',ah.hexdigest()==M['provenance']['adapter_sha256'])
+F=j(R/'reports/progress_aware_r15_prefix_manifest.json')['prefixes']; ids=[x['prefix_id'] for x in F]
+B=jl(T/'card_v2_branches.jsonl'); L=jl(T/'branch_ledger.jsonl'); EV=jl(T/'execution_events.jsonl'); RP=jl(T/'replay_validation.jsonl'); G=j(T/'replay_gate.json')
+check('60 unique frozen prefixes',len(ids)==len(set(ids))==60)
+for name,rows in [('branch journal',B),('ledger',L),('replay',RP),('summary',S['prefixes'])]:
+    check(name+' ordered one-to-one coverage',[x['prefix_id'] for x in rows]==ids)
+check('60 individual branch files', {p.stem for p in (T/'branches').glob('*.json')}==set(ids))
+check('replay gate equality and exact checks',G['records']==RP and G['exact']==G['scheduled']==60 and G['model_calls_during_replay']==0 and all(x['replay_pass'] and all(x['checks'].values()) for x in RP))
+check('120 ordered once-only execution events',len(EV)==120 and [x['prefix_id'] for x in EV]==[pid for pid in ids for _ in range(2)] and all(x['attempt']==1 for x in EV))
+C1={x['prefix_id']:x for x in j(R/'reports/progress_aware_recovery_fact_text_r18_c1_summary.json')['prefixes']}
+OSR={x['prefix_id']:x for x in j(R/'reports/progress_aware_recovery_osr_r16_summary.json')['prefixes']}
+facts={x['prefix_id']:x for x in j(R/'reports/progress_aware_r18_b_validated_public_facts_v2.json')['facts']}
+cards={x['prefix_id']:x for x in j(R/'reports/progress_aware_r18_b_card_v2.json')['cards']}
+texts={x['prefix_id']:x for x in j(R/'reports/progress_aware_r18_b_fact_text.json')['fact_text']}
+with (R/S['artifacts']['csv']).open(newline='') as f: CSV=list(csv.DictReader(f))
+check('60 CSV rows in schedule order',[x['prefix_id'] for x in CSV]==ids)
+for i,(prefix,b,l,rp,summary,csvrow) in enumerate(zip(F,B,L,RP,S['prefixes'],CSV)):
+    pid=prefix['prefix_id']; bf=T/'branches'/f'{pid}.json'
+    check(pid+' branch/journal/summary equality',j(bf)==b==summary)
+    check(pid+' ledger record/provenance',l['record_sha256']==objhash(b) and l['provenance']==b['provenance']==M['provenance'] and l['position']==i+1 and l['status']=='accepted' and R/l['branch_file']==bf)
+    check(pid+' once-only start/completion',EV[2*i]=={'attempt':1,'event':'started','prefix_id':pid} and EV[2*i+1]=={'attempt':1,'event':'completed','prefix_id':pid,'record_sha256':objhash(b)})
+    check(pid+' frozen prefix identity/horizon',all(b[k]==prefix[k] for k in ['task_id','schedule_index','selected_decision_index','remaining_horizon','stratum']) and b['task_family']==prefix['family'] and b['remaining_horizon']+b['selected_decision_index']==50)
+    check(pid+' replay evidence equality',all(b['replay'].get(k)==v for k,v in rp.items() if k!='position'))
+    check(pid+' frozen comparator linkage',all(b[k]==C1[pid][k] for k in ['r_continue','r_osr','r_fact_text']) and all(b[k]==OSR[pid][k] for k in ['r_continue','r_osr']) and all(b[k]==C1[pid][k]==OSR[pid][k] for k in ['task_id','schedule_index','selected_decision_index','remaining_horizon']))
+    check(pid+' CSV equality',all(csvrow[k]==('' if b[k] is None else str(b[k])) for k in csvrow))
+    check(pid+' frozen facts and renderings',b['card']==cards[pid]['rendered_card'] and b['card_sha256']==cards[pid]['card_sha256']==hashlib.sha256(b['card'].encode()).hexdigest() and b['fact_sha256']==facts[pid]['fact_sha256']==objhash(facts[pid]['fact_object']) and b['fact_text_sha256']==texts[pid]['fact_text_sha256']==C1[pid]['fact_text_sha256'])
+    recovery=b['recovery']; check(pid+' two frozen treatment inputs',all(recovery[f'stage_{stage}_prompt']==recovery[f'stage_{stage}_generation']['prompt'] and recovery[f'stage_{stage}_prompt'].count(b['card'])==1 and hashlib.sha256(('<|im_start|>user\n'+recovery[f'stage_{stage}_prompt']+'<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n').encode()).hexdigest()==recovery[f'stage_{stage}_generation']['rendered_prompt_sha256'] for stage in ['one','two']))
+    steps=b['continuation']['steps']; check(pid+' bounded execution and no treatment in SFT',len(recovery['environment_actions'])==int(b['recovery_action_executed'])<=1 and len(steps)+int(b['recovery_action_executed'])<=b['remaining_horizon'] and all(b['card'] not in step['policy_metadata']['prompt'] and texts[pid]['rendered_fact_text'] not in step['policy_metadata']['prompt'] for step in steps))
+check('semantic freeze validation',j(R/'reports/progress_aware_r18_b_semantic_validation.json')['semantic_equivalence']=={'count':60,'mismatches':0})
+# Explain the generated report's pre-metadata summary digest without altering or regenerating any artifact.
+without={k:v for k,v in S.items() if k!='artifacts'}
+before=hashlib.sha256((json.dumps(without,ensure_ascii=True,indent=2,sort_keys=True,allow_nan=False)+'\n').encode()).hexdigest()
+check('pre-metadata summary hash is correctly labeled',before==S['artifacts']['summary_sha256_before_hash_field'] and before in (R/S['artifacts']['report']).read_text())
+K=j(E/'result-key-fields.json')
+mapped={'OUTCOMES':{k:S['outcomes'][k] for k in K['OUTCOMES']},'PRIMARY_CARD_V2_vs_FACT_TEXT':S['primary_representation_effect'],'SECONDARY_CARD_V2_vs_OSR':S['secondary_information_effect'],'RESCUE_HARM':{k:S['rescue_harm'][k] for k in K['RESCUE_HARM']},'MECHANISM':{k:S['mechanism'][k] for k in K['MECHANISM']},'LOOPS':{k:S[k] for k in K['LOOPS']},'PICK_TWO':{k:S['pick_two'][k] for k in K['PICK_TWO']},'COST':S['cost']}
+check('all Luna result-key fields equal formal summary',K==mapped)
+def paired(a,b):
+    d=[row[a]-row[b] for row in B]; w=d.count(1); l=d.count(-1); t=d.count(0); n=w+l
+    return {'W':w,'T':t,'L':l,'net':w-l,'mean_delta':(w-l)/60,'D':n,'two_sided_p':min(1,2*sum(math.comb(n,k) for k in range(min(w,l)+1))/2**n),'directional_p':sum(math.comb(n,k) for k in range(w,n+1))/2**n}
+pairs={name:paired(a,b) for name,a,b in [('OSR_vs_CONTINUE','r_osr','r_continue'),('FACT_TEXT_vs_OSR','r_fact_text','r_osr'),('CARD_V2_vs_FACT_TEXT','r_card_v2','r_fact_text'),('CARD_V2_vs_OSR','r_card_v2','r_osr')]}
+for name,key,tag in [('CARD_V2_vs_FACT_TEXT','primary_representation_effect','Rep'),('CARD_V2_vs_OSR','secondary_information_effect','Info')]:
+    v=pairs[name]; f=S[key]
+    check(name+' independent exact paired statistics',all(v[k]==f[tag+suffix] for k,suffix in [('W','Wins'),('T','Ties'),('L','Losses')]) and v['mean_delta']==f['mean_Delta'+tag] and v['two_sided_p']==f['exact_two_sided_p'] and v['directional_p']==next(f[x] for x in f if x.startswith('directional_')))
+check('prior paired contrasts',pairs['OSR_vs_CONTINUE']=={'W':4,'T':54,'L':2,'net':2,'mean_delta':2/60,'D':6,'two_sided_p':0.6875,'directional_p':0.34375} and pairs['FACT_TEXT_vs_OSR']=={'W':3,'T':55,'L':2,'net':1,'mean_delta':1/60,'D':5,'two_sided_p':1.0,'directional_p':0.5})
+result={'status':'PASS','observed_utc':datetime.now(timezone.utc).isoformat(),'checks_passed':len(checks),'checks':checks,'execution_sha':SHA,'execution_exit':0,'replay_exact':60,'branch_files':60,'ledger_rows':60,'execution_events':120,'zero_counters':{k:M[k] for k in zero},'artifact_hashes':hashes,'frozen_inputs':frozen,'adapter_sha256':ah.hexdigest(),'result_key_fields_equal':True,'paired_recomputed':pairs,'report_summary_hash_note':'Report contains pre-metadata summary digest; independently verified by removing artifacts metadata in memory. Final file digest matches completed manifest and Luna inventory. No file rewritten.','scientific_calls_this_task':0}
+(P/'integrity-results.json').write_text(json.dumps(result,indent=2)+'\n')
+print(json.dumps({k:v for k,v in result.items() if k not in ['checks','artifact_hashes','frozen_inputs']},indent=2))

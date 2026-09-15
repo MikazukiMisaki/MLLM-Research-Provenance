@@ -1,0 +1,68 @@
+# Standard-library analysis of completed records only; no new labels or experiment.
+from pathlib import Path
+from collections import Counter,defaultdict
+from datetime import datetime,timezone
+import json,statistics,math
+P=Path.cwd();R=Path('/home/lizening/Alfworld-Self-Improvement-Project')
+def read(n):return json.loads((R/'reports'/n).read_text())
+S=read('progress_aware_recovery_card_v2_r18_c2_summary.json'); F=read('progress_aware_recovery_fact_text_r18_c1_summary.json'); O=read('progress_aware_recovery_osr_r16_summary.json')
+B=S['prefixes']; FM={x['prefix_id']:x for x in F['prefixes']};OM={x['prefix_id']:x for x in O['prefixes']}
+checks=[]
+def check(name,v):
+ checks.append({'check':name,'pass':bool(v)})
+ if not v:raise AssertionError(name)
+def stat(v):return {'mean':statistics.mean(v),'median':statistics.median(v),'min':min(v),'max':max(v)}
+def relation(prior,b):
+ if prior['recovery_action_executed'] and b['recovery_action_executed']:return 'same' if prior['recovery_mapped_command']==b['recovery_mapped_command'] else 'different'
+ if not prior['recovery_action_executed'] and not b['recovery_action_executed']:return 'both_withheld'
+ return 'prior_executed_current_withheld' if prior['recovery_action_executed'] else 'prior_withheld_current_executed'
+def loop(actions):
+ adjacent=sum(a==b for a,b in zip(actions,actions[1:]));cycle=sum(actions[i]==actions[i-2] and actions[i-1]==actions[i-3] for i in range(3,len(actions)));nav=[x.casefold() for x in actions if x.casefold().startswith('go to ')];repeat=len(nav)-len(set(nav))
+ return {'adjacent_repeat_events':adjacent,'two_cycle_events':cycle,'repeated_navigation_events':repeat,'total_loop_events':adjacent+cycle+repeat}
+out={};rescues={};harms={}
+for label,col in [('CONTINUE','r_continue'),('OSR','r_osr'),('FACT-TEXT','r_fact_text'),('CARD-v2','r_card_v2')]:
+ out[label]=sum(b[col] for b in B);rescues[label]=sum(b['r_continue']==0 and b[col]==1 for b in B);harms[label]=sum(b['r_continue']==1 and b[col]==0 for b in B)
+check('outcomes recomputed',out=={'CONTINUE':29,'OSR':31,'FACT-TEXT':32,'CARD-v2':30})
+check('rescues/harms recomputed',[rescues[x] for x in ['OSR','FACT-TEXT','CARD-v2']]==[4,5,3] and [harms[x] for x in ['OSR','FACT-TEXT','CARD-v2']]==[2,2,2])
+for b in B:
+ pid=b['prefix_id'];f=FM[pid];o=OM[pid]
+ check(pid+' terminal outcome',b['r_card_v2']==int(bool(b['continuation']['success'])) and b['terminal_reward']==b['continuation']['return'])
+ check(pid+' action relations from actual execution',b['action_relation_fact_card']==relation(f,b) and b['action_relation_osr_card']==relation(o,b))
+ check(pid+' parsed text comparison',b['diagnosis_same_as_fact']==(b['diagnosis']==f['recovery']['stage_one_parsed']['diagnosis']) and b['subgoal_same_as_fact']==(b['subgoal']==f['recovery']['stage_one_parsed']['subgoal']) and b['diagnosis_same_as_osr']==(b['diagnosis']==o['stage_one_parsed']['diagnosis']) and b['subgoal_same_as_osr']==(b['subgoal']==o['stage_one_parsed']['subgoal']))
+ actions=([b['recovery_mapped_command']] if b['recovery_action_executed'] else [])+[x['mapped_command'] for x in b['continuation']['steps'] if x['action_executed']]
+ check(pid+' loops reconstructed',loop(actions)==b['card_loops'])
+ for suffix,prior,col in [('fact',f,'fact_loops'),('osr',o,'osr_loop_indicators')]:
+  d=b['card_loops']['total_loop_events']-prior[col]['total_loop_events'];v='reduced' if d<0 else 'increased' if d>0 else 'unchanged'
+  check(pid+' loop relation '+suffix,v==b['loop_change_vs_'+suffix])
+  for measure in ['tokens','latency']:
+   costkey='total_tokens' if measure=='tokens' else 'latency_seconds'
+   for scope,storage in [('local','recovery_cost'),('branch','branch_cost')]:
+    d=b[storage][costkey]-prior[storage][costkey]
+    check(pid+f' {scope} {measure} delta {suffix}',math.isclose(d,b[f'delta_{scope}_{measure}_vs_{suffix}'],abs_tol=1e-10))
+mech={k:sum(not x['diagnosis_same_as_'+k] for x in B) for k in ['fact','osr']}
+check('diagnosis counts',mech=={'fact':37,'osr':51})
+check('subgoal counts',[sum(not x['subgoal_same_as_'+k] for x in B) for k in ['fact','osr']]==[38,46])
+for suffix,tag,classification in [('fact','Rep','representation_classification'),('osr','Info','info_classification')]:
+ counts=Counter(x['action_relation_'+suffix+'_card'] for x in B)
+ check('action counts '+suffix,dict(counts)==S['mechanism']['action_relations_'+suffix])
+ diff=Counter(x[classification] for x in B if x['action_relation_'+suffix+'_card']=='different')
+ check('changed-action outcomes '+suffix,all(diff[tag+k]==S['mechanism'][f'different_action_{suffix}_{tag}Win_Tie_Loss'][tag+k] for k in ['Win','Tie','Loss']))
+ cross=defaultdict(Counter)
+ for x in B:cross[x['loop_change_vs_'+suffix]][x[classification]]+=1
+ check('loop cross-tab '+suffix,dict(cross)==S['loops_vs_'+suffix]['cross_tab'])
+pick=[b for b in B if b['stratum']=='failure' and b['task_family']=='pick_two_obj_and_place']
+awareness={'N':len(pick),'count_aware':sum(x['pick_two']['required_count']==2 for x in pick),'instance_aware':sum(bool(x['pick_two']['known_targets']) for x in pick),'location_aware':sum(bool(x['pick_two']['known_unfinished_targets']) for x in pick),'card_v2_success':sum(x['r_card_v2'] for x in pick)}
+check('pick-two frozen descriptive proxies',awareness=={k:S['pick_two'][k] for k in awareness})
+costmapping={'card_v2_local_tokens':[x['recovery_cost']['total_tokens'] for x in B],'card_v2_local_latency':[x['recovery_cost']['latency_seconds'] for x in B]}
+for suffix in ['fact','osr']:
+ for published,stored in [('local_token_delta','delta_local_tokens'),('local_latency_delta','delta_local_latency'),('full_branch_token_delta','delta_branch_tokens'),('full_branch_latency_delta','delta_branch_latency'),('treatment_token_overhead','treatment_token_overhead')]:costmapping[published+'_vs_'+suffix]=[x[stored+'_vs_'+suffix] for x in B]
+for key,values in costmapping.items():check('cost summary '+key,all(math.isclose(v,S['cost'][key][k],abs_tol=1e-10) for k,v in stat(values).items()))
+# Frozen C1 descriptive checks; existing definitions only.
+check('C1 emitted changes',[sum(not x['diagnosis_same_as_osr'] for x in F['prefixes']),sum(not x['subgoal_same_as_osr'] for x in F['prefixes'])]==[54,51])
+c1actions=Counter(x['action_relation_osr_fact'] for x in F['prefixes']);check('C1 action categories',dict(c1actions)=={'same':34,'different':23,'osr_withheld_fact_executed':3})
+c1diff=Counter(x['info_classification'] for x in F['prefixes'] if x['action_relation_osr_fact']=='different');check('C1 different-action outcomes',dict(c1diff)=={'InfoWin':2,'InfoTie':19,'InfoLoss':2})
+withheld=[{k:x[k] for k in ['prefix_id','r_continue','r_osr','r_fact_text','r_card_v2','stage_one_status','representation_classification','info_classification']} for x in B if not x['recovery_action_executed']]
+losses=[{k:x[k] for k in ['prefix_id','task_family','r_continue','r_osr','r_fact_text','r_card_v2','action_relation_fact_card','stage_one_status','recovery_action_status']} for x in B if x['representation_classification']=='RepLoss']
+result={'status':'PASS','utc':datetime.now(timezone.utc).isoformat(),'checks':checks,'checks_passed':len(checks),'outcomes':out,'rescues':rescues,'harms':harms,'N_continue_failure':31,'N_continue_success':29,'unique_tasks':len({x['task_id'] for x in B}),'pick_two_proxies':awareness,'awareness_definition_note':'Input fact coverage, not model understanding. location_aware is nonempty known_unfinished_targets, not a direct location-knowledge measure.','diagnosis_definition_note':'Equality of parsed text, not semantic correctness or latent reasoning quality.','primary_loss_records':losses,'withheld_records':withheld,'cost_recomputed':{k:stat(v) for k,v in costmapping.items()},'new_mechanism_coding_performed':False,'scientific_model_environment_calls':0}
+(P/'analysis-verification.json').write_text(json.dumps(result,indent=2)+'\n')
+print(json.dumps({k:v for k,v in result.items() if k not in ['checks','cost_recomputed']},indent=2))

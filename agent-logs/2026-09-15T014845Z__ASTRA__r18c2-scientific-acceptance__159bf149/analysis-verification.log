@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "utc": "2026-09-15T01:56:26.401776+00:00",
+  "checks_passed": 866,
+  "outcomes": {
+    "CONTINUE": 29,
+    "OSR": 31,
+    "FACT-TEXT": 32,
+    "CARD-v2": 30
+  },
+  "rescues": {
+    "CONTINUE": 0,
+    "OSR": 4,
+    "FACT-TEXT": 5,
+    "CARD-v2": 3
+  },
+  "harms": {
+    "CONTINUE": 0,
+    "OSR": 2,
+    "FACT-TEXT": 2,
+    "CARD-v2": 2
+  },
+  "N_continue_failure": 31,
+  "N_continue_success": 29,
+  "unique_tasks": 60,
+  "pick_two_proxies": {
+    "N": 18,
+    "count_aware": 18,
+    "instance_aware": 17,
+    "location_aware": 3,
+    "card_v2_success": 1
+  },
+  "awareness_definition_note": "Input fact coverage, not model understanding. location_aware is nonempty known_unfinished_targets, not a direct location-knowledge measure.",
+  "diagnosis_definition_note": "Equality of parsed text, not semantic correctness or latent reasoning quality.",
+  "primary_loss_records": [
+    {
+      "prefix_id": "R15-F24",
+      "task_family": "pick_cool_then_place_in_recep",
+      "r_continue": 0,
+      "r_osr": 0,
+      "r_fact_text": 1,
+      "r_card_v2": 0,
+      "action_relation_fact_card": "prior_executed_current_withheld",
+      "stage_one_status": "subgoal_too_long",
+      "recovery_action_status": "stage_one_failure"
+    },
+    {
+      "prefix_id": "R15-F27",
+      "task_family": "pick_clean_then_place_in_recep",
+      "r_continue": 0,
+      "r_osr": 0,
+      "r_fact_text": 1,
+      "r_card_v2": 0,
+      "action_relation_fact_card": "different",
+      "stage_one_status": "valid",
+      "recovery_action_status": "executed"
+    }
+  ],
+  "withheld_records": [
+    {
+      "prefix_id": "R15-F05",
+      "r_continue": 0,
+      "r_osr": 0,
+      "r_fact_text": 0,
+      "r_card_v2": 0,
+      "stage_one_status": "subgoal_too_long",
+      "representation_classification": "RepTie",
+      "info_classification": "InfoTie"
+    },
+    {
+      "prefix_id": "R15-F10",
+      "r_continue": 0,
+      "r_osr": 0,
+      "r_fact_text": 0,
+      "r_card_v2": 0,
+      "stage_one_status": "truncated_stage_one",
+      "representation_classification": "RepTie",
+      "info_classification": "InfoTie"
+    },
+    {
+      "prefix_id": "R15-F24",
+      "r_continue": 0,
+      "r_osr": 0,
+      "r_fact_text": 1,
+      "r_card_v2": 0,
+      "stage_one_status": "subgoal_too_long",
+      "representation_classification": "RepLoss",
+      "info_classification": "InfoTie"
+    },
+    {
+      "prefix_id": "R15-S14",
+      "r_continue": 1,
+      "r_osr": 0,
+      "r_fact_text": 1,
+      "r_card_v2": 1,
+      "stage_one_status": "truncated_stage_one",
+      "representation_classification": "RepTie",
+      "info_classification": "InfoWin"
+    }
+  ],
+  "new_mechanism_coding_performed": false,
+  "scientific_model_environment_calls": 0
+}
