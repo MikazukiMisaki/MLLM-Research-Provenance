@@ -2,7 +2,7 @@
 
 - Agent/task: ASTRA; complete R19 execution path, evidence binding, statistics cross-check, and G1 re-review preparation.
 - Start UTC: 2026-10-22 04:27:45 UTC.
-- Finish UTC: pending final provenance synchronization.
+- Finish UTC: 2026-10-22 05:54:00 UTC.
 - Status: G1 PASS at exact SHA `dddf684…`; G2/G3 remain blocked by unresolved historical model identity and unapproved new baseline.
 - Scientific repository: `MikazukiMisaki/Alfworld-Self-Improvement-Project`.
 - Starting scientific branch/SHA: `codex/r19-recovery-duration-v1` / `fac6a92081cab84e23d2f4630a7f2ab6d18f8baf`.
@@ -57,7 +57,8 @@ All statements below distinguish observed evidence from unresolved claims. Exit 
 - Scientific commit `1c5eecad…` — closed the two findings from exact-9c review; its exact review returned BLOCKED on a historical-status contradiction and malformed receipt fields, preserved in `review-1c5eeca.log`.
 - Follow-up commit `dddf684…` — clarifies historical implementation-status prose and hardens supervisor exit evidence in response to exact-1c BLOCKED findings; exact G1 review PASS.
 - Task-owned files only were committed. The machine protocol JSON, prior preflight versions, historical source/configuration/results, and original BLOCKED review records remain unchanged. `R19_PROTOCOL.md` received only a historical implementation-status clarification; the old/new document hashes and no-method-change scope are recorded in `R19_PROTOCOL_DOCUMENT_ERRATUM.md`.
-- All task-owned scientific commits were pushed to the existing task branch; the latest remote SHA matches `dddf684…`. Provenance record/review artifacts remain to be finalized and pushed separately.
+- All task-owned scientific commits were pushed to the existing task branch; the latest remote SHA matches `dddf684…`. Provenance record/review artifacts were committed and pushed at checkpoint `fd18bc7…`; the final checkpoint-reference update follows in a descendant commit.
+- Provenance checkpoint commit: `fd18bc72319b84f6d340c7761ceb9e9567b00c09` on `MLLM-Research-Provenance/main`; it was pushed and remote-verified. This final record update will be committed as its descendant; the containing commit is resolved by Git history because a commit cannot include its own SHA in its contents.
 
 ## Final decision
 
