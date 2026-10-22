@@ -1,0 +1,8 @@
+git diff bf31f3da430ffc35bd17fc380e1752adce6d1467..51ec074cec6c2c2a7b1ecd64e0da33bc446a7e54  # complete eight-file delta
+git worktree add --detach /tmp/r19-source-review-51ec074 51ec074cec6c2c2a7b1ecd64e0da33bc446a7e54
+PYTHONPATH=src /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m pytest -o addopts= -q tests/test_r19_entrypoint_repair.py tests/test_r19_g3_authorization.py tests/test_r19_recovery_duration.py tests/test_r19_source_contract.py
+PYTHONPATH=src /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m pytest -o addopts= -q --tb=short tests/
+PYTHONPATH=src /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /tmp/r19-source-review-evidence-51ec074/probes.py
+PYTHONPATH=src /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /tmp/r19-source-review-evidence-51ec074/provenance_probe.py
+git diff --check
+No model or ALFWorld, positive production preflight or live execution. Synthetic fixture edges only.

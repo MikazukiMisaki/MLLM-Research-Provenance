@@ -1,0 +1,1950 @@
+diff --git a/configs/experiments/r19_b1_g3_source_contract_repair_amendment_v1.json b/configs/experiments/r19_b1_g3_source_contract_repair_amendment_v1.json
+new file mode 100644
+index 0000000..b24fd05
+--- /dev/null
++++ b/configs/experiments/r19_b1_g3_source_contract_repair_amendment_v1.json
+@@ -0,0 +1,58 @@
++{
++  "schema_version": "r19_b1_g3_source_contract_repair_amendment_v1",
++  "amendment_id": "R19-B1-G3-SOURCE-CONTRACT-REPAIR-2026-10-22",
++  "status": "APPROVED_IMPLEMENTATION_BUGFIX_SCOPE",
++  "source_package_sha256": "20f9414a2d80a48060247368afcb9b9f07bc0573f591fd28d4f19213c8c23813",
++  "source_package_start_prompt_sha256": "4cd8802385f2dc08bf51aaca7367a43d84e3433d2f55b1908b3c631e3e391b44",
++  "base_implementation_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
++  "source_file_git_blob_before": "41311be65fc11ecb1891c71fce7d6a82adbef0db",
++  "treatment_semantics_changed": false,
++  "scientific_execution_behavior_changed": true,
++  "runtime_contract_repaired": true,
++  "changed_method_fingerprints": {
++    "scripts/run_r19_experiment.py::LiveR19Runtime._collect_one_source": {
++      "old": "12755022c3e7e8b25cff9cc07e47eaf3cbc5045f8ae2a21c43fc356002ec4d52",
++      "new": "f2e256054e6bcd2fcb041b69e2edc42a705d2dbf722d167ff65649a003bd7a9a"
++    },
++    "scripts/run_r19_experiment.py::LiveR19Runtime.actor_generation": {
++      "old": "c2a453654ab919555801e5c087cc13b1f2be40b9b3fdca01a741db9e9e73d4d7",
++      "new": "34b66c68e361d26c6f6f0b2d7871a9715bb56936694b7049c9b27a97aeaff9d7"
++    },
++    "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_model_call": {
++      "old": "1966a89fd7f9c5f51095d193163e3fac0f77590e1a6f63d815e6ffb14eb3a36f",
++      "new": "b8e163c5d1e4b186ff3ea53dd5a5a55d7bd60e950d5180cc074d1c3317e5567a"
++    },
++    "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_environment_operation": {
++      "old": "39068afbd080a78b94d8d509259e30ee9c526945eb1156a95b734f72c39d9e5a",
++      "new": "c71fecfc4dd690f63047cc142529140b96f32301d012abbadc5d0865257a8d43"
++    }
++  },
++  "contract_changes": [
++    {
++      "method": "LiveR19Runtime._collect_one_source",
++      "change": "Consume the existing actor_generation mapping keys status/action/action_id/selection instead of treating the returned mapping as a P2Selection object.",
++      "preserved": ["parser", "prompt", "decoding", "action mapping", "failure statuses", "50-step horizon"]
++    },
++    {
++      "method": "LiveR19Runtime.actor_generation",
++      "change": "Preserve the caller's source_generation operation identity for the task actor; retain the established task_actor_generation event contract for the SFT suffix.",
++      "preserved": ["model component identities", "generation settings", "parser output", "action-selection semantics"]
++    },
++    {
++      "methods": ["LiveR19Runtime._reserve_model_call", "LiveR19Runtime._reserve_environment_operation"],
++      "change": "Allow the restart-only phase caps bound to the prior completed generation and reset to be enforced; all other phase caps remain at their original ceilings.",
++      "restart_remaining_caps": {
++        "source_model_calls": 8999,
++        "source_environment_operations_including_resets": 8999
++      },
++      "preserved": ["all non-source phase ceilings", "all original campaign ceilings", "physical expenditure accounting"]
++    }
++  ],
++  "review_requirements": {
++    "exact_sha_independent_review_required": true,
++    "review_must_confirm_source_treatment_semantics_unchanged": true,
++    "review_must_confirm_real_g2_evidence_carry_forward": true,
++    "review_must_confirm_one_bounded_restart_and_first_source_comparator": true,
++    "no_g2_rerun": true
++  }
++}
+diff --git a/configs/experiments/r19_b1_g3_source_contract_restart_authorization_v1.json b/configs/experiments/r19_b1_g3_source_contract_restart_authorization_v1.json
+new file mode 100644
+index 0000000..7549f4b
+--- /dev/null
++++ b/configs/experiments/r19_b1_g3_source_contract_restart_authorization_v1.json
+@@ -0,0 +1,146 @@
++{
++  "schema_version": "r19_b1_g3_source_contract_restart_authorization_v1",
++  "authorization_id": "R19-B1-G3-SOURCE-CONTRACT-RESTART-2026-10-22",
++  "status": "APPROVED_BY_USER",
++  "authorization_source": "Direct user request adopting the single bounded restart described in the attached START_PROMPT.txt",
++  "starting_implementation_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
++  "original_g3_authorization_sha256": "89b887518c85d22d3176af0b50fb1861b58fb1c3b13a4ecc2b76485a66529b31",
++  "entrypoint_repair_authorization_sha256": "026eb1f0b05bcc27a6c901c10d787110cbac0e329551051973dda93e907bdc71",
++  "source_package_sha256": "20f9414a2d80a48060247368afcb9b9f07bc0573f591fd28d4f19213c8c23813",
++  "source_package_start_prompt_sha256": "4cd8802385f2dc08bf51aaca7367a43d84e3433d2f55b1908b3c631e3e391b44",
++  "source_contract_amendment_sha256": "62ff158f5739859266664b1db2e323dca6ea0ad3b8e84134ecbe5fd06c847372",
++  "unit_resolution_event_sha256": "58783ba60b076ee190dccb0875aac65891d7e1c811e00fbe6303ca65896369d9",
++  "user_adoption_evidence": {
++    "status": "EXPLICITLY_ADOPTED_BY_USER",
++    "source_type": "direct_user_task_message",
++    "authorization_text": "按 START_PROMPT.txt 完成真实仓库集成验证、独立审查和其中明确采用的重启流程即可。",
++    "acceptance_text": "下一轮的关键验收应当是第一条 source episode 能真正完成并通过 source validator，而不是测试数量再次增加、实际 source 仍然为零。",
++    "adopts_restart_block": true
++  },
++  "predecessor": {
++    "run_id": "3d1ccea7e97f4727abf8e216ac6ec498",
++    "implementation_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
++    "output_relative_path": "artifacts/runtime/r19_b1_g3_pilot_after_a0de515d7e104101bf8157175ea3d995_20261022T190221Z",
++    "exit_code": 1,
++    "exit_code_source": "subprocess.returncode",
++    "event_count": 4,
++    "canonical_trial_id": "pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092",
++    "unit_id": "7d9da2ea723b4e93b76804e8c552a7f06aaf23e53559c5e54ddd19310e6d7689",
++    "event_ledger_sha256": "fde95fcd72f1c4ac6409fab7f2112654e145f6184fefec690cae58ad345f1cd7",
++    "execution_manifest_sha256": "f5d3efa6c17abea3d944d7dea01099210d846eb8ed107057ec24502bbb51d2df",
++    "unit_registry_sha256": "870923242ae585c66cbcffa554528ab3d92cf98fc4d87dee2c4d408f5f6ba800",
++    "branch_ledger_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
++    "failure_audit_sha256": "8eb1248c1d863674119813ba1f90ba3ca6834bb1906cb2aa67acc6a4e087fe34",
++    "supervisor_record_sha256": {
++      "runner.log": "ee7c6010edf0e46bcba2969cdddf236e7c6d23830d2bd92e88593d7a21a7bbcd",
++      "runner_exit.json": "a802079398fd415765b8f6b8685fec998325625da733011ff7a9ce11459a9386",
++      "supervisor_status.json": "e2a70bf670376b648e52357376fa88f3a7a3cac92b41a5c628bd4ad251353913",
++      "launch_context.json": "6b8933ed06db1b2e74f1b921ca13e6f73842b18e7a0c8217381a809ed4ea180e"
++    },
++    "physical_expenditure": {
++      "completed_generations": 1,
++      "input_tokens": 267,
++      "generated_tokens": 5,
++      "resets": 1,
++      "environment_steps": 0,
++      "incomplete_external_operations": 0
++    },
++    "restart_snapshot": {
++      "canonical_trial_id": "pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092",
++      "initial_state": {
++        "observation_sha256": "e961c2264be3f875291e00d9de7f49e99aa2fcc40d259baeb91e585827bcf530",
++        "valid_actions_sha256": "7f3e765d83014d0f142be6c5a9e3b2afb8b079affb0ee0ac9fd64c44a80dd3a7"
++      },
++      "parser_and_action": {
++        "action_id": "A009",
++        "action_map_sha256": "c5610294c9a8f0bac208e4b7d8d80da99eea3dcd80732940d3702ec7ab760d1c",
++        "action_sha256": "3c01eba119e00d79c82b6f65d70bc5f1044d568618bf41377e6d1432023fc2b8",
++        "selection_status": "selected"
++      },
++      "prompt_and_generation": {
++        "do_sample": false,
++        "generated_tokens": 5,
++        "input_tokens": 267,
++        "max_new_tokens": 16,
++        "output_complete": true,
++        "prompt_sha256": "5e6b22accf1fcc398ce6fad8420ff72ffe2403713b98b33dfcb51a42357be9ca",
++        "raw_output_sha256": "7ff10f65bd9b6d157066fc2f31410b92b852c77b145ea51fe173e2b00239755a",
++        "rendered_prompt_sha256": "15a218e78bd9a76ee904b37a73c01f773dbe2e5d45d923ef89e43dd46b5daec6",
++        "thinking": false,
++        "token_cap_reached": false,
++        "token_ids_sha256": "73fb874322d7eb089349af8348cc8658d5134ee8d6e56cd8b3b9b377d3ae2885"
++      },
++      "schedule_index": 0,
++      "seed": 30000
++    },
++    "restart_snapshot_sha256": "d85d870bfddbad4eb62116d3d5de54a4b7fd4f250634af1c1ed89958e4c400b8"
++  },
++  "unit_resolution": {
++    "resolution": "KNOWN_FAILED_SOURCE_CONTRACT_AFTER_GENERATION_BEFORE_ACTION",
++    "resolution_status": "KNOWN_FAILED",
++    "event_sha256": "58783ba60b076ee190dccb0875aac65891d7e1c811e00fbe6303ca65896369d9",
++    "review_required": "EXACT_SHA_INDEPENDENT_REVIEW"
++  },
++  "restart": {
++    "mode": "ONE_ENGINEERING_RESTART_AFTER_EXACT_SHA_REVIEW_AND_REAL_PREFLIGHT",
++    "maximum_successor_live_launches": 1,
++    "cumulative_start": {
++      "model_generations": 177,
++      "environment_operations_including_resets": 342
++    },
++    "repeated_completed_generation_cap": 1,
++    "repeated_reset_cap": 1,
++    "compare_before_first_action": true,
++    "stop_on_mismatch_without_retry": true,
++    "remaining_phase_caps": {
++      "model_calls": {
++        "source": 8999,
++        "initial_recovery": 240,
++        "path_extension": 240,
++        "suffix": 17100
++      },
++      "environment_operations": {
++        "source": 8999,
++        "replay_gate": 5400,
++        "initial_attempt": 5520,
++        "path_extension": 2940,
++        "logical_branch": 18000
++      }
++    }
++  },
++  "frozen_science": {
++    "baseline_id": "R19-B1",
++    "historical_model_equivalence": "NOT_ESTABLISHED",
++    "model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
++    "adapter_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
++    "protocol_sha256": "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122",
++    "source_schedule_sha256": "0be460359fe43193e73f8cb55a8fb19fdba02ea70e3d0809ec5978fad21c8948",
++    "exclusion_manifest_sha256": "70447bba1b2a944d52ab9b4041b2d6ff3d865f4f0abd55d655214c8060ff5367",
++    "scheduled_train_tasks": 127,
++    "initial_attempt_cap": 120,
++    "eligible_state_cap": 60,
++    "eligible_quotas": {
++      "failure": 30,
++      "success_control": 15,
++      "random_control": 15
++    },
++    "quota_transfer": false,
++    "k_values": [1, 2, 3, 4, 5],
++    "total_horizon": 50,
++    "g2_cumulative_model_generations": 176,
++    "g2_cumulative_environment_operations": 341,
++    "g3_phase_generation_caps": [9000, 0, 240, 240, 17100],
++    "g3_phase_environment_operation_caps": [9000, 5400, 5520, 2940, 18000],
++    "campaign_generation_cap": 26988,
++    "campaign_environment_operation_cap": 41260
++  },
++  "no_change_conditions": {
++    "historical_r18_model_identity": "UNRESOLVED_UNCHANGED",
++    "g2_executed_implementation_sha": "92aae1d9b230cc212c6ec4effc99aa468941e69d",
++    "g2_run_id": "33b5563d86d6491a821db224dd38ec3c",
++    "g2_rerun": false,
++    "schedule_or_exclusion_change": false,
++    "quota_or_prompt_change": false,
++    "model_or_training_change": false
++  }
++}
+diff --git a/configs/experiments/r19_b1_g3_source_unit_resolution_events_v1.jsonl b/configs/experiments/r19_b1_g3_source_unit_resolution_events_v1.jsonl
+new file mode 100644
+index 0000000..6f39433
+--- /dev/null
++++ b/configs/experiments/r19_b1_g3_source_unit_resolution_events_v1.jsonl
+@@ -0,0 +1 @@
++{"event_id":"R19-B1-G3-KNOWN-FAILED-3d1ccea7e97f4727abf8e216ac6ec498","schema_version":"r19_source_unit_resolution_event_v1","resolution_status":"KNOWN_FAILED","resolution":"KNOWN_FAILED_SOURCE_CONTRACT_AFTER_GENERATION_BEFORE_ACTION","failed_run_id":"3d1ccea7e97f4727abf8e216ac6ec498","failed_implementation_sha":"bf31f3da430ffc35bd17fc380e1752adce6d1467","failed_unit_id":"7d9da2ea723b4e93b76804e8c552a7f06aaf23e53559c5e54ddd19310e6d7689","unit_identity":{"unit":"source_episode","schedule_index":0,"canonical_trial_id":"pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092"},"unit_completion_status":"INCOMPLETE_PRESERVED_IN_ORIGINAL_REGISTRY","physical_outcome":"DETERMINATE_KNOWN_FAILURE","evidence":{"event_count":4,"event_ledger_sha256":"fde95fcd72f1c4ac6409fab7f2112654e145f6184fefec690cae58ad345f1cd7","execution_manifest_sha256":"f5d3efa6c17abea3d944d7dea01099210d846eb8ed107057ec24502bbb51d2df","unit_registry_sha256":"870923242ae585c66cbcffa554528ab3d92cf98fc4d87dee2c4d408f5f6ba800","branch_ledger_sha256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","failure_audit_sha256":"8eb1248c1d863674119813ba1f90ba3ca6834bb1906cb2aa67acc6a4e087fe34","subprocess_exit_code":1,"subprocess_exit_code_source":"subprocess.returncode","completed_generations":1,"completed_resets":1,"executed_action_steps":0,"incomplete_operations":0,"physical_input_tokens":267,"physical_generated_tokens":5,"source_tasks_completed":0,"cumulative_generations_after_failure":177,"cumulative_environment_operations_after_failure":342,"runner_log_sha256":"ee7c6010edf0e46bcba2969cdddf236e7c6d23830d2bd92e88593d7a21a7bbcd","runner_exit_sha256":"a802079398fd415765b8f6b8685fec998325625da733011ff7a9ce11459a9386","supervisor_status_sha256":"e2a70bf670376b648e52357376fa88f3a7a3cac92b41a5c628bd4ad251353913","launch_context_sha256":"6b8933ed06db1b2e74f1b921ca13e6f73842b18e7a0c8217381a809ed4ea180e"},"adjudication":"The first source unit did not complete; its enclosing run failed with exit 1. The single reset and generation are authentic completed physical operations, no environment action occurred, and the ledger contains no incomplete external operation. Preserve the original RUNNING manifest and in_progress registry as failure evidence; never replay or overwrite them.","independent_exact_sha_review_required":true,"review_status":"PENDING_EXACT_SHA_REVIEW"}
+diff --git a/scripts/analyze_r19_recovery_duration.py b/scripts/analyze_r19_recovery_duration.py
+index 069dadc..3829eba 100644
+--- a/scripts/analyze_r19_recovery_duration.py
++++ b/scripts/analyze_r19_recovery_duration.py
+@@ -21,6 +21,9 @@ R19_B1_G3_AUTHORIZATION_PATH = PROJECT_ROOT / "configs/experiments/r19_b1_g3_aut
+ R19_B1_G3_AUTHORIZATION_SHA256 = "89b887518c85d22d3176af0b50fb1861b58fb1c3b13a4ecc2b76485a66529b31"
+ R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_PATH = PROJECT_ROOT / "configs/experiments/r19_b1_g3_entrypoint_repair_authorization_v1.json"
+ R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_SHA256 = "026eb1f0b05bcc27a6c901c10d787110cbac0e329551051973dda93e907bdc71"
++R19_B1_G3_SOURCE_CONTRACT_REPAIR_AMENDMENT_PATH = PROJECT_ROOT / "configs/experiments/r19_b1_g3_source_contract_repair_amendment_v1.json"
++R19_B1_G3_SOURCE_CONTRACT_RESTART_AUTHORIZATION_PATH = PROJECT_ROOT / "configs/experiments/r19_b1_g3_source_contract_restart_authorization_v1.json"
++R19_B1_G3_SOURCE_UNIT_RESOLUTION_PATH = PROJECT_ROOT / "configs/experiments/r19_b1_g3_source_unit_resolution_events_v1.jsonl"
+ R19_G2_EXECUTED_SHA = "92aae1d9b230cc212c6ec4effc99aa468941e69d"
+ sys.path.insert(0, str(PROJECT_ROOT / "src"))
+ 
+@@ -414,6 +417,130 @@ def _source_trajectory_digest(trajectory: Mapping[str, Any]) -> str:
+     return sha256_json(document)
+ 
+ 
++def validate_source_restart_comparison(
++    *, execution_manifest: Mapping[str, Any], events: list[dict[str, Any]],
++    predecessor_run_id: str, expected_snapshot: Mapping[str, Any],
++    expected_snapshot_sha256: str, comparison_path: Path,
++) -> dict[str, Any]:
++    """Authenticate the one allowed repeated first source decision before its first action."""
++    if comparison_path.is_symlink() or not comparison_path.is_file():
++        raise EvidenceIntegrityError("authorized source restart lacks its immutable comparison receipt")
++    try:
++        comparison = json.loads(comparison_path.read_text(encoding="utf-8"))
++    except (OSError, json.JSONDecodeError) as error:
++        raise EvidenceIntegrityError("source restart comparison receipt is unreadable") from error
++    comparison_sha256 = sha256_file(comparison_path)
++    if (
++        execution_manifest.get("source_restart_comparison_sha256") != comparison_sha256
++        or execution_manifest.get("source_restart_comparison_status") != "PASS"
++        or execution_manifest.get("source_restart_predecessor_run_id") != predecessor_run_id
++        or execution_manifest.get("source_restart_repeated_generation_count") != 1
++        or execution_manifest.get("source_restart_repeated_reset_count") != 1
++        or comparison.get("schema_version") != "r19_source_restart_comparison_v1"
++        or comparison.get("status") != "PASS"
++        or comparison.get("predecessor_run_id") != predecessor_run_id
++        or comparison.get("comparison_before_first_environment_action") is not True
++        or comparison.get("environment_actions_executed_before_comparison") != 0
++        or comparison.get("expected_snapshot") != dict(expected_snapshot)
++        or comparison.get("observed_snapshot") != dict(expected_snapshot)
++        or comparison.get("expected_snapshot_sha256") != expected_snapshot_sha256
++        or comparison.get("observed_snapshot_sha256") != expected_snapshot_sha256
++        or comparison.get("mismatched_fields") != []
++    ):
++        raise EvidenceIntegrityError("source restart comparison did not pass the exact pre-action predecessor match")
++
++    source_events = [
++        event for event in events
++        if event.get("kind") == "source_episode_completed"
++        and event.get("identity", {}).get("schedule_index") == 0
++    ]
++    if len(source_events) != 1:
++        raise EvidenceIntegrityError("G3 restart must complete exactly one schedule-index-zero source episode")
++    source_event = source_events[0]
++    source_identity = source_event.get("identity", {})
++    source_payload = source_event.get("payload", {})
++    if (
++        source_identity.get("canonical_trial_id") != expected_snapshot.get("canonical_trial_id")
++        or source_identity.get("split") != "train"
++        or source_payload.get("source_restart_comparison_sha256") != comparison_sha256
++    ):
++        raise EvidenceIntegrityError("completed first source episode is not bound to the restart comparison receipt")
++
++    generation_events = [
++        event for event in events
++        if event.get("kind") == "generation_completed"
++        and event.get("identity", {}).get("schedule_index") == 0
++        and event.get("identity", {}).get("decision_index") == 0
++    ]
++    if len(generation_events) != 1:
++        raise EvidenceIntegrityError("G3 restart lacks one unique first source generation")
++    generation_event = generation_events[0]
++    identity = generation_event.get("identity", {})
++    evidence = generation_event.get("payload", {}).get("evidence", {})
++    generation = evidence.get("generation", {})
++    parser_result = evidence.get("parser_result", {})
++    if (
++        identity.get("canonical_trial_id") != expected_snapshot.get("canonical_trial_id")
++        or identity.get("split") != "train"
++        or identity.get("operation") != "source_generation"
++        or identity.get("component") != "task_actor"
++    ):
++        raise EvidenceIntegrityError("first source generation has the wrong production operation identity")
++    try:
++        from scripts import run_r19_experiment as runner
++        expected_runner = (PROJECT_ROOT / "scripts/run_r19_experiment.py").resolve()
++        if Path(str(getattr(runner, "__file__", ""))).resolve() != expected_runner:
++            raise EvidenceIntegrityError("source restart comparator resolved outside the analyzed checkout")
++        observed_snapshot = runner._source_restart_snapshot(
++            canonical_trial_id=str(identity["canonical_trial_id"]), schedule_index=0,
++            seed=int(expected_snapshot["seed"]),
++            observation=str(source_event["payload"]["trajectory"]["initial_observation"]),
++            valid_actions=list(parser_result.get("valid_actions", [])),
++            prompt=str(generation.get("prompt", "")), generation=generation,
++            parser_result=parser_result, action_map=evidence.get("action_map", {}),
++        )
++    except (KeyError, TypeError, ValueError) as error:
++        raise EvidenceIntegrityError("first source generation lacks complete comparator evidence") from error
++    if observed_snapshot != dict(expected_snapshot):
++        raise EvidenceIntegrityError("first source generation no longer matches the approved predecessor snapshot")
++
++    trajectory = source_payload.get("trajectory", {})
++    steps = trajectory.get("steps", []) if isinstance(trajectory, Mapping) else []
++    if not steps or steps[0].get("metadata", {}).get("r19_generation_event_id") != generation_event.get("event_id"):
++        raise EvidenceIntegrityError("completed first source trajectory does not bind its compared generation")
++    action_event_id = steps[0].get("metadata", {}).get("r19_transition_event_id")
++    action_starts = [
++        event for event in events
++        if event.get("kind") == "environment_operation_started"
++        and event.get("identity", {}).get("operation") == "sft_environment_step"
++        and event.get("identity", {}).get("schedule_index") == 0
++        and event.get("identity", {}).get("decision_index") == 0
++    ]
++    action_completions = [
++        event for event in events
++        if event.get("kind") == "environment_operation_completed"
++        and event.get("event_id") == action_event_id
++    ]
++    if (
++        len(action_starts) != 1 or len(action_completions) != 1
++        or action_starts[0].get("sequence", 0) <= generation_event.get("sequence", 0)
++        or action_starts[0].get("identity", {}).get("canonical_trial_id")
++            != expected_snapshot.get("canonical_trial_id")
++        or action_completions[0].get("sequence", 0) <= action_starts[0].get("sequence", 0)
++    ):
++        raise EvidenceIntegrityError("first source action is absent or did not follow the compared generation")
++    return {
++        "status": "PASS_FIRST_SOURCE_RESTART_COMPARISON_AND_EPISODE_BINDING",
++        "comparison_sha256": comparison_sha256,
++        "predecessor_run_id": predecessor_run_id,
++        "schedule_index": 0,
++        "compared_before_first_action": True,
++        "completed_source_episode_event_id": source_event.get("event_id"),
++        "first_generation_event_id": generation_event.get("event_id"),
++        "first_action_event_id": action_event_id,
++    }
++
++
+ def _validate_recovery_operation_link(
+     step_event: Mapping[str, Any], *, event_by_id: Mapping[str, Mapping[str, Any]],
+ ) -> Mapping[str, Any]:
+@@ -1275,6 +1402,88 @@ def validate_live_execution_provenance(
+     baseline = authorization["baseline"]
+     g2 = authorization["g2_carry_forward"]
+     baseline_identity = json.loads(R19_B1_BASELINE_PATH.read_text(encoding="utf-8"))
++    source_restart_mode = execution_manifest.get("source_contract_restart_authorization_sha256") is not None
++    source_restart_authorization = None
++    source_restart_amendment = None
++    source_restart_authorization_sha256 = None
++    source_restart_amendment_sha256 = None
++    source_restart_resolution_sha256 = None
++    if source_restart_mode:
++        source_restart_authorization_sha256 = sha256_file(R19_B1_G3_SOURCE_CONTRACT_RESTART_AUTHORIZATION_PATH)
++        source_restart_amendment_sha256 = sha256_file(R19_B1_G3_SOURCE_CONTRACT_REPAIR_AMENDMENT_PATH)
++        source_restart_resolution_sha256 = sha256_file(R19_B1_G3_SOURCE_UNIT_RESOLUTION_PATH)
++        source_restart_authorization = json.loads(
++            R19_B1_G3_SOURCE_CONTRACT_RESTART_AUTHORIZATION_PATH.read_text(encoding="utf-8")
++        )
++        source_restart_amendment = json.loads(
++            R19_B1_G3_SOURCE_CONTRACT_REPAIR_AMENDMENT_PATH.read_text(encoding="utf-8")
++        )
++        resolution_rows = _read_jsonl(R19_B1_G3_SOURCE_UNIT_RESOLUTION_PATH)
++        resolution = source_restart_authorization.get("unit_resolution", {})
++        predecessor = source_restart_authorization.get("predecessor", {})
++        if (
++            source_restart_authorization.get("schema_version")
++                != "r19_b1_g3_source_contract_restart_authorization_v1"
++            or source_restart_authorization.get("status") != "APPROVED_BY_USER"
++            or source_restart_authorization.get("source_package_sha256")
++                != "20f9414a2d80a48060247368afcb9b9f07bc0573f591fd28d4f19213c8c23813"
++            or source_restart_authorization.get("original_g3_authorization_sha256")
++                != R19_B1_G3_AUTHORIZATION_SHA256
++            or source_restart_authorization.get("entrypoint_repair_authorization_sha256")
++                != R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_SHA256
++            or source_restart_authorization.get("user_adoption_evidence", {}).get("status")
++                != "EXPLICITLY_ADOPTED_BY_USER"
++            or source_restart_authorization.get("user_adoption_evidence", {}).get("adopts_restart_block") is not True
++            or source_restart_amendment.get("schema_version")
++                != "r19_b1_g3_source_contract_repair_amendment_v1"
++            or source_restart_amendment.get("status") != "APPROVED_IMPLEMENTATION_BUGFIX_SCOPE"
++            or source_restart_amendment.get("treatment_semantics_changed") is not False
++            or source_restart_authorization.get("source_contract_amendment_sha256")
++                != source_restart_amendment_sha256
++            or source_restart_authorization.get("unit_resolution", {}).get("event_sha256")
++                != source_restart_resolution_sha256
++            or len(resolution_rows) != 1
++            or resolution_rows[0].get("resolution_status") != "KNOWN_FAILED"
++            or resolution_rows[0].get("resolution") != resolution.get("resolution")
++            or resolution_rows[0].get("failed_run_id") != predecessor.get("run_id")
++            or execution_manifest.get("source_restart_predecessor_run_id") != predecessor.get("run_id")
++            or execution_manifest.get("source_restart_unit_resolution_event_sha256")
++                != source_restart_resolution_sha256
++            or execution_manifest.get("source_restart_expected_snapshot_sha256")
++                != predecessor.get("restart_snapshot_sha256")
++            or execution_manifest.get("source_restart_remaining_phase_caps")
++                != source_restart_authorization.get("restart", {}).get("remaining_phase_caps")
++        ):
++            raise EvidenceIntegrityError("G4 cannot authenticate the separately authorized source-contract restart and disposition")
++        original_phase_ceilings = authorization.get("resource_limits", {}).get("g3_phase_ceilings", {})
++        expected_remaining_caps = {
++            "model_calls": {
++                "source": int(original_phase_ceilings.get("source_model_calls", -1)) - 1,
++                "initial_recovery": int(original_phase_ceilings.get("initial_attempt_model_calls", -1)),
++                "path_extension": int(original_phase_ceilings.get("common_path_extension_model_calls", -1)),
++                "suffix": int(original_phase_ceilings.get("logical_branch_model_calls", -1)),
++            },
++            "environment_operations": {
++                "source": int(original_phase_ceilings.get("source_environment_operations", -1)) - 1,
++                "replay_gate": int(original_phase_ceilings.get("replay_gate_environment_operations", -1)),
++                "initial_attempt": int(original_phase_ceilings.get("initial_attempt_environment_operations", -1)),
++                "path_extension": int(original_phase_ceilings.get("common_path_extension_environment_operations", -1)),
++                "logical_branch": int(original_phase_ceilings.get("logical_branch_environment_operations", -1)),
++            },
++        }
++        restart_limits = source_restart_authorization.get("restart", {})
++        if (
++            restart_limits.get("remaining_phase_caps") != expected_remaining_caps
++            or restart_limits.get("cumulative_start") != {
++                "model_generations": 177, "environment_operations_including_resets": 342,
++            }
++            or restart_limits.get("repeated_completed_generation_cap") != 1
++            or restart_limits.get("repeated_reset_cap") != 1
++            or restart_limits.get("compare_before_first_action") is not True
++            or restart_limits.get("stop_on_mismatch_without_retry") is not True
++            or restart_limits.get("maximum_successor_live_launches") != 1
++        ):
++            raise EvidenceIntegrityError("G4 restart ledger does not preserve cumulative costs and the single bounded retry")
+     if (
+         sha256_file(R19_B1_BASELINE_PATH) != baseline.get("manifest_sha256")
+         or baseline_identity.get("historical_equivalence") != "NOT_ESTABLISHED"
+@@ -1301,14 +1510,24 @@ def validate_live_execution_provenance(
+         or execution_manifest.get("g2_run_id") != g2.get("g2_run_id")
+         or execution_manifest.get("g2_evidence_sha256") != g2.get("evidence_file_sha256")
+         or execution_manifest.get("g2_review_artifact_sha256") != g2.get("g2_review_sha256")
++        or (source_restart_mode and (
++            execution_manifest.get("source_contract_restart_authorization_sha256")
++                != source_restart_authorization_sha256
++            or execution_manifest.get("source_contract_repair_amendment_sha256")
++                != source_restart_amendment_sha256
++        ))
+     ):
+         raise EvidenceIntegrityError("G4 execution manifest is not routed to the approved R19-B1 G3 scope")
+     if not g3_gate_receipt_path.is_file():
+         raise EvidenceIntegrityError("G4 requires the sanitized, path-free G3 gate receipt")
+     g3_gate_receipt = json.loads(g3_gate_receipt_path.read_text(encoding="utf-8"))
++    expected_gate_receipt_schema = (
++        "r19_g3_source_contract_restart_gate_receipt_v1"
++        if source_restart_mode else "r19_g3_launch_gate_receipt_v1"
++    )
+     if (
+         sha256_file(g3_gate_receipt_path) != execution_manifest.get("g3_gate_receipt_file_sha256")
+-        or g3_gate_receipt.get("schema_version") != "r19_g3_launch_gate_receipt_v1"
++        or g3_gate_receipt.get("schema_version") != expected_gate_receipt_schema
+         or g3_gate_receipt.get("baseline_id") != "R19-B1"
+         or g3_gate_receipt.get("identity_status") != "NEW_PINNED_BASELINE_APPROVED"
+         or g3_gate_receipt.get("g3_authorization_sha256") != R19_B1_G3_AUTHORIZATION_SHA256
+@@ -1328,9 +1547,11 @@ def validate_live_execution_provenance(
+             != execution_manifest.get("g3_review_artifact_sha256")
+         or g3_gate_receipt.get("review", {}).get("entrypoint_repair_authorization_sha256")
+             != R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_SHA256
+-        or g3_gate_receipt.get("review", {}).get("scientific_execution_behavior_changed") is not False
++        or g3_gate_receipt.get("review", {}).get("scientific_execution_behavior_changed")
++            is not source_restart_mode
+         or g3_gate_receipt.get("review", {}).get("change_scope_conclusion")
+-            != "AUTHORIZATION_EVIDENCE_G4_PROVENANCE_AND_ENTRYPOINT_PREFLIGHT_ONLY"
++            != ("SOURCE_CONTRACT_BUGFIX_AND_SINGLE_CONTROLLED_RESTART" if source_restart_mode
++                else "AUTHORIZATION_EVIDENCE_G4_PROVENANCE_AND_ENTRYPOINT_PREFLIGHT_ONLY")
+         or g3_gate_receipt.get("review", {}).get("g2_evidence_carry_forward") != "PASS"
+         or g3_gate_receipt.get("review", {}).get("scientific_fingerprint_manifest_sha256")
+             != execution_manifest.get("g3_scientific_fingerprint_manifest_sha256")
+@@ -1348,6 +1569,42 @@ def validate_live_execution_provenance(
+             != authorization["resource_limits"].get("cumulative_campaign_ceilings_including_g2")
+         or g3_gate_receipt.get("projected_cumulative_maximum")
+             != authorization["resource_limits"].get("projected_cumulative_maximum")
++        or (source_restart_mode and (
++            g3_gate_receipt.get("review", {}).get("source_treatment_semantics_changed") is not False
++            or g3_gate_receipt.get("review", {}).get("source_runtime_bugfix_enabled_intended_execution") is not True
++            or g3_gate_receipt.get("review", {}).get("source_contract_restart_authorization_sha256")
++                != source_restart_authorization_sha256
++            or g3_gate_receipt.get("review", {}).get("source_contract_repair_amendment_sha256")
++                != source_restart_amendment_sha256
++            or g3_gate_receipt.get("review", {}).get("source_restart_predecessor_run_id")
++                != source_restart_authorization["predecessor"]["run_id"]
++            or g3_gate_receipt.get("review", {}).get("source_restart_unit_resolution_event_sha256")
++                != source_restart_resolution_sha256
++            or g3_gate_receipt.get("review", {}).get("source_restart_expected_snapshot_sha256")
++                != source_restart_authorization["predecessor"]["restart_snapshot_sha256"]
++            or g3_gate_receipt.get("review", {}).get("source_restart_remaining_phase_caps_sha256")
++                != sha256_json(source_restart_authorization["restart"]["remaining_phase_caps"])
++            or g3_gate_receipt.get("review", {}).get("source_restart_failure_disposition")
++                != "PASS_KNOWN_FAILED_NO_ACTION_NO_UNCERTAINTY"
++            or g3_gate_receipt.get("review", {}).get("first_source_episode_integration") != "PASS"
++            or g3_gate_receipt.get("review", {}).get("first_source_restart_comparison")
++                != "PASS_BEFORE_FIRST_ACTION"
++            or g3_gate_receipt.get("source_contract_restart", {}).get("authorization_sha256")
++                != source_restart_authorization_sha256
++            or g3_gate_receipt.get("source_contract_restart", {}).get("amendment_sha256")
++                != source_restart_amendment_sha256
++            or g3_gate_receipt.get("source_contract_restart", {}).get("predecessor_run_id")
++                != source_restart_authorization["predecessor"]["run_id"]
++            or g3_gate_receipt.get("source_contract_restart", {}).get("unit_resolution_event_sha256")
++                != source_restart_resolution_sha256
++            or g3_gate_receipt.get("source_contract_restart", {}).get("expected_snapshot_sha256")
++                != source_restart_authorization["predecessor"]["restart_snapshot_sha256"]
++            or g3_gate_receipt.get("source_contract_restart", {}).get("remaining_phase_caps")
++                != source_restart_authorization["restart"]["remaining_phase_caps"]
++            or g3_gate_receipt.get("source_contract_restart", {}).get("repeated_completed_generation_cap") != 1
++            or g3_gate_receipt.get("source_contract_restart", {}).get("repeated_reset_cap") != 1
++            or g3_gate_receipt.get("source_contract_restart", {}).get("compare_before_first_action") is not True
++        ))
+     ):
+         raise EvidenceIntegrityError("G4 sanitized gate receipt does not authenticate the reviewed G3/G2 carry-forward")
+ 
+@@ -1362,6 +1619,16 @@ def validate_live_execution_provenance(
+         "g2_review_artifact_sha256", "g3_review_artifact_sha256",
+         "g3_scientific_fingerprint_manifest_sha256", "g3_gate_receipt_file_sha256",
+     )
++    if source_restart_mode:
++        gate_hash_fields += (
++            "source_contract_restart_authorization_sha256",
++            "source_contract_repair_amendment_sha256",
++            "source_restart_predecessor_run_id",
++            "source_restart_predecessor_output_relative_path",
++            "source_restart_unit_resolution_event_sha256",
++            "source_restart_expected_snapshot_sha256",
++            "source_restart_remaining_phase_caps",
++        )
+     gate_hashes = {field: execution_manifest.get(field) for field in gate_hash_fields}
+     schedule_sha = sha256_file(schedule_path)
+     exclusion_sha = sha256_file(exclusion_path)
+@@ -1401,6 +1668,20 @@ def validate_live_execution_provenance(
+         or context.get("runtime_manifest_sha256") != runtime_digest
+         or context.get("source_manifest_sha256") != execution_manifest.get("source_manifest_sha256")
+         or context.get("environment_manifest_sha256") != environment_digest
++        or (source_restart_mode and (
++            context.get("source_contract_restart_authorization_sha256")
++                != source_restart_authorization_sha256
++            or context.get("source_contract_repair_amendment_sha256")
++                != source_restart_amendment_sha256
++            or context.get("source_restart_predecessor_run_id")
++                != source_restart_authorization["predecessor"].get("run_id")
++            or context.get("source_restart_unit_resolution_event_sha256")
++                != source_restart_resolution_sha256
++            or context.get("source_restart_expected_snapshot_sha256")
++                != source_restart_authorization["predecessor"].get("restart_snapshot_sha256")
++            or context.get("source_restart_remaining_phase_caps")
++                != source_restart_authorization["restart"].get("remaining_phase_caps")
++        ))
+     ):
+         raise EvidenceIntegrityError("execution manifest, frozen inputs, and raw event hashes do not agree")
+     if physical.get("training_run_events") != 0:
+@@ -1480,6 +1761,16 @@ def validate_live_execution_provenance(
+         raise EvidenceIntegrityError("execution-manifest environment counts differ from authenticated operations")
+     if physical.get("observed_canonical_trial_ids") is None:
+         raise EvidenceIntegrityError("live ledger lacks derived canonical task identities")
++    source_restart_validation = None
++    if source_restart_mode:
++        predecessor = source_restart_authorization["predecessor"]
++        source_restart_validation = validate_source_restart_comparison(
++            execution_manifest=execution_manifest, events=events,
++            predecessor_run_id=predecessor["run_id"],
++            expected_snapshot=predecessor["restart_snapshot"],
++            expected_snapshot_sha256=predecessor["restart_snapshot_sha256"],
++            comparison_path=events_path.parent / "source_restart_comparison.json",
++        )
+     return {
+         "status": "PASS_LIVE_EXECUTION_PROVENANCE",
+         "run_id": run_id,
+@@ -1501,6 +1792,8 @@ def validate_live_execution_provenance(
+         "g3_phase_ceilings": g3_gate_receipt["g3_phase_ceilings"],
+         "cumulative_campaign_ceilings": g3_gate_receipt["cumulative_campaign_ceilings"],
+         "projected_cumulative_maximum": g3_gate_receipt["projected_cumulative_maximum"],
++        **({"source_restart_comparison": source_restart_validation}
++           if source_restart_validation is not None else {}),
+     }
+ 
+ 
+diff --git a/scripts/run_r19_experiment.py b/scripts/run_r19_experiment.py
+index 41311be..0a171c2 100644
+--- a/scripts/run_r19_experiment.py
++++ b/scripts/run_r19_experiment.py
+@@ -66,6 +66,9 @@ R19_B1_G3_AUTHORIZATION = PROJECT_ROOT / "configs/experiments/r19_b1_g3_authoriz
+ R19_B1_G3_AUTHORIZATION_SHA256 = "89b887518c85d22d3176af0b50fb1861b58fb1c3b13a4ecc2b76485a66529b31"
+ R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION = PROJECT_ROOT / "configs/experiments/r19_b1_g3_entrypoint_repair_authorization_v1.json"
+ R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_SHA256 = "026eb1f0b05bcc27a6c901c10d787110cbac0e329551051973dda93e907bdc71"
++R19_B1_G3_SOURCE_CONTRACT_REPAIR_AMENDMENT = PROJECT_ROOT / "configs/experiments/r19_b1_g3_source_contract_repair_amendment_v1.json"
++R19_B1_G3_SOURCE_CONTRACT_RESTART_AUTHORIZATION = PROJECT_ROOT / "configs/experiments/r19_b1_g3_source_contract_restart_authorization_v1.json"
++R19_B1_G3_SOURCE_UNIT_RESOLUTION = PROJECT_ROOT / "configs/experiments/r19_b1_g3_source_unit_resolution_events_v1.jsonl"
+ R19_B1_BASELINE_ID = "R19-B1"
+ R19_B1_MODEL_REVISION = "b968826d9c46dd6066d109eabc6255188de91218"
+ R19_G2_EXECUTED_SHA = "92aae1d9b230cc212c6ec4effc99aa468941e69d"
+@@ -234,7 +237,9 @@ def _verified_gate_file(value: Any, expected_sha256: str, label: str) -> Path:
+     return path
+ 
+ 
+-def _assert_single_g3_campaign_unused(output_path: Path) -> None:
++def _assert_single_g3_campaign_unused(
++    output_path: Path, *, approved_predecessor_output: Path | None = None,
++) -> None:
+     """Make the adopted single G3 authorization a persistent one-campaign gate."""
+     output_root = PROJECT_ROOT / "artifacts/runtime"
+     try:
+@@ -250,21 +255,32 @@ def _assert_single_g3_campaign_unused(output_path: Path) -> None:
+     if output_path.is_symlink():
+         raise ExecutionGateError("G3 output directory may not be a symlink")
+     if output_root.exists():
+-        prior_campaigns = sorted(
+-            child.name for child in output_root.iterdir()
+-            if child.name.startswith("r19_b1_g3_")
++        prior_paths = sorted(
++            (child for child in output_root.iterdir() if child.name.startswith("r19_b1_g3_")),
++            key=lambda child: child.name,
+         )
+-        if prior_campaigns:
++        if approved_predecessor_output is None and prior_paths:
+             raise FileExistsError(
+                 "the single authorized R19-B1 G3 campaign already has an output; reconcile or monitor it, never relaunch"
+             )
++        if approved_predecessor_output is not None:
++            approved = approved_predecessor_output.resolve()
++            if (
++                approved.parent.resolve() != output_root.resolve()
++                or len(prior_paths) != 1
++                or prior_paths[0].resolve() != approved
++                or output_path.resolve() == approved
++            ):
++                raise FileExistsError(
++                    "G3 restart may recognize only its exact reviewed failed predecessor; other campaigns block launch"
++                )
+ 
+ 
+ def _validate_g3_carry_forward(
+     *, gate: Mapping[str, Any], authorization: Mapping[str, Any], authorization_sha256: str,
+     head: str, protocol_sha256: str,
+ ) -> dict[str, Any]:
+-    """Authenticate old G2 evidence and the exact-SHA entrypoint-only successor review."""
++    """Authenticate old G2 evidence and the exact-SHA source-contract restart review when present."""
+     if "smoke" in gate:
+         raise ExecutionGateError("G3 carry-forward must not claim that a G2 smoke ran on the new implementation SHA")
+     review = gate.get("review", {})
+@@ -273,7 +289,26 @@ def _validate_g3_carry_forward(
+     g2 = authorization["g2_carry_forward"]
+     baseline = authorization["baseline"]
+     frozen = authorization["frozen_inputs"]
+-    fingerprints = authorization.get("scientific_execution_fingerprints", {})
++    restart_authorization = None
++    restart_authorization_sha256 = None
++    repair_amendment_sha256 = None
++    unit_resolution_sha256 = None
++    restart_snapshot = None
++    effective_fingerprints = authorization.get("scientific_execution_fingerprints", {})
++    if "source_contract_restart" in gate:
++        (
++            restart_authorization, restart_authorization_sha256,
++            repair_amendment_sha256, unit_resolution_sha256, restart_snapshot,
++        ) = _load_source_contract_restart_authorization(
++            gate=gate, original_authorization=authorization,
++        )
++        amendment = json.loads(R19_B1_G3_SOURCE_CONTRACT_REPAIR_AMENDMENT.read_text(encoding="utf-8"))
++        effective_fingerprints = dict(effective_fingerprints)
++        effective_fingerprints.update({
++            key: value["new"]
++            for key, value in amendment["changed_method_fingerprints"].items()
++        })
++    fingerprints = effective_fingerprints
+     if not isinstance(fingerprints, Mapping) or not fingerprints:
+         raise ExecutionGateError("G3 authorization has no frozen scientific execution fingerprint set")
+     observed_fingerprints = _current_scientific_function_fingerprints(fingerprints)
+@@ -303,6 +338,25 @@ def _validate_g3_carry_forward(
+         "scientific_fingerprint_manifest_sha256": sha256_json(dict(fingerprints)),
+         "g2_acceptance": "PASS_CARRIED_FORWARD",
+     }
++    if restart_authorization is not None:
++        predecessor = restart_authorization["predecessor"]
++        expected_review.update({
++            "change_scope_conclusion": "SOURCE_CONTRACT_BUGFIX_AND_SINGLE_CONTROLLED_RESTART",
++            "scientific_execution_behavior_changed": True,
++            "source_treatment_semantics_changed": False,
++            "source_runtime_bugfix_enabled_intended_execution": True,
++            "source_contract_restart_authorization_sha256": restart_authorization_sha256,
++            "source_contract_repair_amendment_sha256": repair_amendment_sha256,
++            "source_restart_predecessor_run_id": predecessor["run_id"],
++            "source_restart_unit_resolution_event_sha256": unit_resolution_sha256,
++            "source_restart_expected_snapshot_sha256": predecessor["restart_snapshot_sha256"],
++            "source_restart_remaining_phase_caps_sha256": sha256_json(
++                restart_authorization["restart"]["remaining_phase_caps"]
++            ),
++            "source_restart_failure_disposition": "PASS_KNOWN_FAILED_NO_ACTION_NO_UNCERTAINTY",
++            "first_source_episode_integration": "PASS",
++            "first_source_restart_comparison": "PASS_BEFORE_FIRST_ACTION",
++        })
+     for name, expected in expected_review.items():
+         if review.get(name) != expected:
+             raise ExecutionGateError(f"G3 exact-SHA review does not approve required carry-forward field {name}")
+@@ -326,6 +380,14 @@ def _validate_g3_carry_forward(
+         "old_g2_gate_manifest_sha256": g2["g2_gate_manifest_sha256"],
+         "g2_evidence_sha256": g2["evidence_file_sha256"],
+     }
++    if restart_authorization is not None:
++        expected_carry.update({
++            "source_contract_restart_authorization_sha256": restart_authorization_sha256,
++            "source_contract_repair_amendment_sha256": repair_amendment_sha256,
++            "source_restart_predecessor_run_id": restart_authorization["predecessor"]["run_id"],
++            "source_restart_unit_resolution_event_sha256": unit_resolution_sha256,
++            "source_restart_expected_snapshot_sha256": restart_authorization["predecessor"]["restart_snapshot_sha256"],
++        })
+     for name, expected in expected_carry.items():
+         if carry.get(name) != expected:
+             raise ExecutionGateError(f"G3 G2 carry-forward receipt differs from the frozen identity field {name}")
+@@ -431,7 +493,7 @@ def _validate_g3_carry_forward(
+     _verified_gate_file(
+         carry.get("old_g2_gate_manifest_path"), g2["g2_gate_manifest_sha256"], "prior G2 gate manifest",
+     )
+-    return {
++    result = {
+         "g3_authorization_sha256": authorization_sha256,
+         "entrypoint_repair_authorization_sha256": repair_authorization_sha256,
+         "g2_executed_implementation_sha": g2["g2_executed_implementation_sha"],
+@@ -444,6 +506,18 @@ def _validate_g3_carry_forward(
+         "g3_review_artifact_sha256": review["artifact_sha256"],
+         "g3_scientific_fingerprint_manifest_sha256": sha256_json(dict(fingerprints)),
+     }
++    if restart_authorization is not None:
++        predecessor = restart_authorization["predecessor"]
++        result.update({
++            "source_contract_restart_authorization_sha256": restart_authorization_sha256,
++            "source_contract_repair_amendment_sha256": repair_amendment_sha256,
++            "source_restart_predecessor_run_id": predecessor["run_id"],
++            "source_restart_predecessor_output_relative_path": predecessor["output_relative_path"],
++            "source_restart_unit_resolution_event_sha256": unit_resolution_sha256,
++            "source_restart_expected_snapshot_sha256": predecessor["restart_snapshot_sha256"],
++            "source_restart_remaining_phase_caps": restart_authorization["restart"]["remaining_phase_caps"],
++        })
++    return result
+ 
+ 
+ def _canonical_json(value: Any) -> str:
+@@ -454,6 +528,318 @@ def _sha_text(value: str) -> str:
+     return hashlib.sha256(value.encode("utf-8")).hexdigest()
+ 
+ 
++def _source_restart_snapshot(
++    *, canonical_trial_id: str, schedule_index: int, seed: int,
++    observation: str, valid_actions: Sequence[str], prompt: str,
++    generation: Mapping[str, Any], parser_result: Mapping[str, Any],
++    action_map: Mapping[str, str],
++) -> dict[str, Any]:
++    """Hash the exact first source decision fields that must match its failed predecessor."""
++    token_ids = generation.get("token_ids")
++    if not isinstance(token_ids, list):
++        raise EvidenceIntegrityError("source restart comparison lacks raw token IDs")
++    token_ids_sha256 = _sha_text(json.dumps(token_ids, separators=(",", ":")))
++    if generation.get("token_ids_sha256") != token_ids_sha256:
++        raise EvidenceIntegrityError("source restart token IDs do not match their recorded digest")
++    raw_output = generation.get("raw_output")
++    if not isinstance(raw_output, str):
++        raise EvidenceIntegrityError("source restart comparison lacks raw model output")
++    parser_status = parser_result.get("selection_status")
++    action_id = parser_result.get("action_id")
++    action = parser_result.get("action")
++    if parser_status == "selected" and (not action_id or action_map.get(str(action_id)) != action):
++        raise EvidenceIntegrityError("source restart parser/action mapping is inconsistent")
++    if list(parser_result.get("valid_actions", [])) != list(valid_actions):
++        raise EvidenceIntegrityError("source restart parser valid-actions differ from the initial state")
++    return {
++        "canonical_trial_id": canonical_trial_id,
++        "schedule_index": int(schedule_index),
++        "seed": int(seed),
++        "initial_state": {
++            "observation_sha256": _sha_text(observation),
++            "valid_actions_sha256": sha256_json(list(valid_actions)),
++        },
++        "prompt_and_generation": {
++            "prompt_sha256": _sha_text(prompt),
++            "rendered_prompt_sha256": generation.get("rendered_prompt_sha256"),
++            "raw_output_sha256": _sha_text(raw_output),
++            "token_ids_sha256": token_ids_sha256,
++            "input_tokens": int(generation.get("input_tokens", -1)),
++            "generated_tokens": int(generation.get("generated_tokens", -1)),
++            "max_new_tokens": int(generation.get("max_new_tokens", -1)),
++            "do_sample": generation.get("do_sample"),
++            "thinking": generation.get("thinking"),
++            "output_complete": generation.get("output_complete"),
++            "token_cap_reached": generation.get("token_cap_reached"),
++        },
++        "parser_and_action": {
++            "selection_status": parser_status,
++            "action_id": action_id,
++            "action_sha256": _sha_text(str(action or "")),
++            "action_map_sha256": sha256_json(dict(action_map)),
++        },
++    }
++
++
++def _load_source_contract_restart_authorization(
++    *, gate: Mapping[str, Any], original_authorization: Mapping[str, Any],
++) -> tuple[dict[str, Any], str, str, str, dict[str, Any]]:
++    """Validate the separately adopted, one-restart source-contract amendment and predecessor."""
++    local = gate.get("source_contract_restart")
++    if not isinstance(local, Mapping):
++        raise ExecutionGateError("G3 source-contract restart requires its separate local evidence route")
++    if sha256_file(R19_B1_G3_SOURCE_CONTRACT_REPAIR_AMENDMENT) != local.get("amendment_sha256"):
++        raise ExecutionGateError("versioned source-contract amendment hash differs from the reviewed local gate")
++    if sha256_file(R19_B1_G3_SOURCE_CONTRACT_RESTART_AUTHORIZATION) != local.get("authorization_sha256"):
++        raise ExecutionGateError("versioned source-contract restart authorization hash differs from the reviewed local gate")
++    if sha256_file(R19_B1_G3_SOURCE_UNIT_RESOLUTION) != local.get("unit_resolution_event_sha256"):
++        raise ExecutionGateError("append-only source-unit disposition differs from the reviewed local gate")
++    amendment = json.loads(R19_B1_G3_SOURCE_CONTRACT_REPAIR_AMENDMENT.read_text(encoding="utf-8"))
++    authorization = json.loads(R19_B1_G3_SOURCE_CONTRACT_RESTART_AUTHORIZATION.read_text(encoding="utf-8"))
++    unit_resolution = _read_jsonl(R19_B1_G3_SOURCE_UNIT_RESOLUTION)
++    if (
++        amendment.get("schema_version") != "r19_b1_g3_source_contract_repair_amendment_v1"
++        or amendment.get("status") != "APPROVED_IMPLEMENTATION_BUGFIX_SCOPE"
++        or amendment.get("base_implementation_sha") != "bf31f3da430ffc35bd17fc380e1752adce6d1467"
++        or amendment.get("treatment_semantics_changed") is not False
++        or amendment.get("source_package_sha256") != "20f9414a2d80a48060247368afcb9b9f07bc0573f591fd28d4f19213c8c23813"
++        or authorization.get("schema_version") != "r19_b1_g3_source_contract_restart_authorization_v1"
++        or authorization.get("status") != "APPROVED_BY_USER"
++        or authorization.get("starting_implementation_sha") != "bf31f3da430ffc35bd17fc380e1752adce6d1467"
++        or authorization.get("original_g3_authorization_sha256") != R19_B1_G3_AUTHORIZATION_SHA256
++        or authorization.get("entrypoint_repair_authorization_sha256") != R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_SHA256
++        or authorization.get("source_contract_amendment_sha256") != local.get("amendment_sha256")
++        or authorization.get("unit_resolution", {}).get("event_sha256")
++            != local.get("unit_resolution_event_sha256")
++        or authorization.get("source_package_sha256") != "20f9414a2d80a48060247368afcb9b9f07bc0573f591fd28d4f19213c8c23813"
++        or authorization.get("user_adoption_evidence", {}).get("status") != "EXPLICITLY_ADOPTED_BY_USER"
++        or authorization.get("user_adoption_evidence", {}).get("adopts_restart_block") is not True
++        or authorization.get("user_adoption_evidence", {}).get("authorization_text") != (
++            "按 START_PROMPT.txt 完成真实仓库集成验证、独立审查和其中明确采用的重启流程即可。"
++        )
++        or authorization.get("frozen_science", {}).get("source_schedule_sha256") != R19_FROZEN_SOURCE_SCHEDULE_SHA256
++        or authorization.get("frozen_science", {}).get("exclusion_manifest_sha256") != R19_FROZEN_EXCLUSION_MANIFEST_SHA256
++        or authorization.get("frozen_science", {}).get("protocol_sha256") != R19_PROTOCOL_SHA256
++        or authorization.get("frozen_science", {}).get("scheduled_train_tasks") != 127
++        or authorization.get("frozen_science", {}).get("initial_attempt_cap") != 120
++        or authorization.get("frozen_science", {}).get("eligible_state_cap") != 60
++        or authorization.get("frozen_science", {}).get("eligible_quotas") != {
++            "failure": 30, "success_control": 15, "random_control": 15,
++        }
++        or authorization.get("frozen_science", {}).get("quota_transfer") is not False
++        or authorization.get("frozen_science", {}).get("k_values") != [1, 2, 3, 4, 5]
++        or authorization.get("frozen_science", {}).get("total_horizon") != 50
++    ):
++        raise ExecutionGateError("source-contract restart records do not bind the adopted frozen R19 scope")
++
++    resource_limits = original_authorization.get("resource_limits", {})
++    phase_ceilings = resource_limits.get("g3_phase_ceilings", {})
++    expected_remaining_caps = {
++        "model_calls": {
++            "source": int(phase_ceilings.get("source_model_calls", -1)) - 1,
++            "initial_recovery": int(phase_ceilings.get("initial_attempt_model_calls", -1)),
++            "path_extension": int(phase_ceilings.get("common_path_extension_model_calls", -1)),
++            "suffix": int(phase_ceilings.get("logical_branch_model_calls", -1)),
++        },
++        "environment_operations": {
++            "source": int(phase_ceilings.get("source_environment_operations", -1)) - 1,
++            "replay_gate": int(phase_ceilings.get("replay_gate_environment_operations", -1)),
++            "initial_attempt": int(phase_ceilings.get("initial_attempt_environment_operations", -1)),
++            "path_extension": int(phase_ceilings.get("common_path_extension_environment_operations", -1)),
++            "logical_branch": int(phase_ceilings.get("logical_branch_environment_operations", -1)),
++        },
++    }
++    restart = authorization.get("restart", {})
++    if (
++        restart.get("remaining_phase_caps") != expected_remaining_caps
++        or restart.get("cumulative_start") != {
++            "model_generations": 177, "environment_operations_including_resets": 342,
++        }
++        or restart.get("repeated_completed_generation_cap") != 1
++        or restart.get("repeated_reset_cap") != 1
++        or restart.get("compare_before_first_action") is not True
++        or restart.get("stop_on_mismatch_without_retry") is not True
++        or restart.get("maximum_successor_live_launches") != 1
++    ):
++        raise ExecutionGateError("source-contract restart does not preserve the cumulative cost and one-restart limits")
++
++    predecessor = authorization.get("predecessor", {})
++    output_path = PROJECT_ROOT / str(predecessor.get("output_relative_path", ""))
++    if (
++        output_path.is_symlink() or not output_path.is_dir()
++        or output_path.resolve().parent != (PROJECT_ROOT / "artifacts/runtime").resolve()
++        or predecessor.get("run_id") != "3d1ccea7e97f4727abf8e216ac6ec498"
++        or predecessor.get("implementation_sha") != "bf31f3da430ffc35bd17fc380e1752adce6d1467"
++        or predecessor.get("exit_code") != 1
++        or predecessor.get("exit_code_source") != "subprocess.returncode"
++    ):
++        raise ExecutionGateError("source-contract restart predecessor identity is missing or unsafe")
++    for name, field in (
++        ("execution_events.jsonl", "event_ledger_sha256"),
++        ("execution_manifest.json", "execution_manifest_sha256"),
++        ("unit_registry.json", "unit_registry_sha256"),
++        ("branches.jsonl", "branch_ledger_sha256"),
++    ):
++        _verified_gate_file(output_path / name, str(predecessor.get(field, "")), f"G3 failed predecessor {name}")
++    events = _read_jsonl(output_path / "execution_events.jsonl")
++    manifest = json.loads((output_path / "execution_manifest.json").read_text(encoding="utf-8"))
++    registry = json.loads((output_path / "unit_registry.json").read_text(encoding="utf-8"))
++    if (
++        manifest.get("status") != "RUNNING"
++        or manifest.get("run_id") != predecessor["run_id"]
++        or manifest.get("implementation_sha") != predecessor["implementation_sha"]
++        or len(events) != predecessor.get("event_count")
++        or sum(event.get("kind") == "generation_completed" for event in events) != 1
++        or sum(event.get("kind") == "environment_operation_completed"
++               and event.get("payload", {}).get("operation") == "environment_reset" for event in events) != 1
++        or any(event.get("kind") == "environment_step_completed" for event in events)
++        or any(event.get("kind") == "source_episode_completed" for event in events)
++        or sum(event.get("kind") == "environment_operation_started" for event in events) != 1
++        or sum(event.get("kind") == "environment_operation_completed" for event in events) != 1
++        or any(unit.get("status") != "in_progress" for unit in registry.get("units", {}).values())
++        or len(registry.get("units", {})) != 1
++    ):
++        raise ExecutionGateError("preserved G3 source predecessor no longer matches the four-event failed-unit evidence")
++    source_unit = next(iter(registry["units"].values()))
++    if (
++        source_unit.get("identity", {}).get("unit") != "source_episode"
++        or source_unit.get("identity", {}).get("schedule_index") != 0
++        or source_unit.get("identity", {}).get("canonical_trial_id") != predecessor.get("canonical_trial_id")
++    ):
++        raise ExecutionGateError("preserved G3 registry unit differs from the frozen first source identity")
++
++    supervisor_dir = Path(str(local.get("supervisor_record_directory", ""))).expanduser()
++    if supervisor_dir.is_symlink() or not supervisor_dir.is_dir():
++        raise ExecutionGateError("G3 predecessor supervisor receipts are unavailable")
++    supervisor_hashes = predecessor.get("supervisor_record_sha256", {})
++    if set(supervisor_hashes) != {
++        "runner.log", "runner_exit.json", "supervisor_status.json", "launch_context.json",
++    }:
++        raise ExecutionGateError("G3 predecessor supervisor evidence set is incomplete or expanded")
++    for name, expected in supervisor_hashes.items():
++        _verified_gate_file(supervisor_dir / name, str(expected), f"G3 predecessor supervisor {name}")
++    runner_exit = json.loads((supervisor_dir / "runner_exit.json").read_text(encoding="utf-8"))
++    supervisor_status = json.loads((supervisor_dir / "supervisor_status.json").read_text(encoding="utf-8"))
++    if (
++        runner_exit.get("status") != "failed" or runner_exit.get("exit_code") != 1
++        or runner_exit.get("exit_code_source") != "subprocess.returncode"
++        or runner_exit.get("run_id") != predecessor["run_id"]
++        or runner_exit.get("implementation_sha") != predecessor["implementation_sha"]
++        or runner_exit.get("interrupted_by_supervisor") is not False
++        or runner_exit.get("events_sha256") != predecessor.get("event_ledger_sha256")
++        or supervisor_status.get("status") != "failed"
++        or supervisor_status.get("exit_code") != 1
++        or supervisor_status.get("run_id") != predecessor["run_id"]
++        or supervisor_status.get("runner_log_sha256") != supervisor_hashes.get("runner.log")
++    ):
++        raise ExecutionGateError("authentic G3 supervisor failure receipt does not adjudicate the predecessor exit")
++    runner_log = (supervisor_dir / "runner.log").read_text(encoding="utf-8")
++    if "AttributeError: 'dict' object has no attribute 'selection_status'" not in runner_log:
++        raise ExecutionGateError("G3 predecessor log does not contain the independently adjudicated source-contract failure")
++
++    failure_audit_path = Path(str(local.get("failure_audit_json_path", ""))).expanduser()
++    _verified_gate_file(failure_audit_path, str(predecessor.get("failure_audit_sha256", "")), "independent G3 failure audit")
++    failure_audit = json.loads(failure_audit_path.read_text(encoding="utf-8"))
++    if (
++        failure_audit.get("status") != "BLOCKED_RUNTIME_CONTRACT_MISMATCH"
++        or failure_audit.get("run_id") != predecessor["run_id"]
++        or failure_audit.get("implementation_sha") != predecessor["implementation_sha"]
++        or failure_audit.get("exit_code") != 1
++        or failure_audit.get("exit_code_source") != "subprocess.returncode"
++        or failure_audit.get("physical_expenditure", {}).get("completed_physical_model_generations") != 1
++        or failure_audit.get("physical_expenditure", {}).get("incomplete_operations") != 0
++        or failure_audit.get("physical_expenditure", {}).get("physical_environment_resets") != 1
++        or failure_audit.get("physical_expenditure", {}).get("physical_environment_operations") != 0
++        or failure_audit.get("source_tasks_completed") != 0
++        or failure_audit.get("cumulative_campaign_cost") != {
++            "model_generations": 177, "environment_operations_including_resets": 342,
++        }
++    ):
++        raise ExecutionGateError("independent failure audit does not confirm zero source completion and determinate operations")
++    analyzer = _production_module("scripts.analyze_r19_recovery_duration")
++    physical = analyzer.validate_event_ledger(events, expected_evidence_class="live")
++    if (
++        physical.get("event_count") != 4
++        or physical.get("completed_physical_model_generations") != 1
++        or physical.get("physical_environment_resets") != 1
++        or physical.get("physical_environment_operations") != 0
++        or physical.get("incomplete_operations") != 0
++        or physical.get("physical_input_tokens") != 267
++        or physical.get("physical_generated_tokens") != 5
++    ):
++        raise ExecutionGateError("production event-ledger validator cannot reproduce the predecessor cost receipt")
++
++    reset_event = next(
++        event for event in events
++        if event.get("kind") == "environment_operation_completed"
++        and event.get("payload", {}).get("operation") == "environment_reset"
++    )
++    generation_event = next(event for event in events if event.get("kind") == "generation_completed")
++    evidence = generation_event.get("payload", {}).get("evidence", {})
++    generation = evidence.get("generation", {})
++    parser_result = evidence.get("parser_result", {})
++    restart_snapshot = _source_restart_snapshot(
++        canonical_trial_id=str(predecessor["canonical_trial_id"]),
++        schedule_index=0, seed=int(reset_event.get("payload", {}).get("seed", -1)),
++        observation=str(reset_event.get("payload", {}).get("transition", {}).get("observation", "")),
++        valid_actions=list(reset_event.get("payload", {}).get("transition", {}).get("valid_actions", [])),
++        prompt=str(generation.get("prompt", "")), generation=generation,
++        parser_result=parser_result, action_map=evidence.get("action_map", {}),
++    )
++    if (
++        restart_snapshot != predecessor.get("restart_snapshot")
++        or sha256_json(restart_snapshot) != predecessor.get("restart_snapshot_sha256")
++        or parser_result.get("selection_status") != "selected"
++        or parser_result.get("action_id") != "A009"
++        or parser_result.get("action") != "look"
++    ):
++        raise ExecutionGateError("recorded first source state/generation/parser differs from the approved repeat comparator")
++
++    resolution = unit_resolution
++    if len(resolution) != 1:
++        raise ExecutionGateError("source-unit disposition must be one append-only event, not an overwritten registry")
++    row = resolution[0]
++    expected_disposition = authorization.get("unit_resolution", {})
++    if (
++        row.get("resolution_status") != "KNOWN_FAILED"
++        or row.get("resolution") != "KNOWN_FAILED_SOURCE_CONTRACT_AFTER_GENERATION_BEFORE_ACTION"
++        or row.get("failed_run_id") != predecessor["run_id"]
++        or row.get("failed_unit_id") != next(iter(registry["units"]))
++        or row.get("evidence", {}).get("event_ledger_sha256") != predecessor.get("event_ledger_sha256")
++        or row.get("evidence", {}).get("completed_generations") != 1
++        or row.get("evidence", {}).get("completed_resets") != 1
++        or row.get("evidence", {}).get("executed_action_steps") != 0
++        or row.get("evidence", {}).get("incomplete_operations") != 0
++        or expected_disposition.get("resolution") != row.get("resolution")
++    ):
++        raise ExecutionGateError("append-only source-unit disposition does not match the validated failed unit")
++
++    old_fingerprints = original_authorization.get("scientific_execution_fingerprints", {})
++    method_changes = amendment.get("changed_method_fingerprints", {})
++    if set(method_changes) != {
++        "scripts/run_r19_experiment.py::LiveR19Runtime.actor_generation",
++        "scripts/run_r19_experiment.py::LiveR19Runtime._collect_one_source",
++        "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_model_call",
++        "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_environment_operation",
++    }:
++        raise ExecutionGateError("source-contract amendment must name exactly the four reviewed contract/budget methods")
++    for key, entry in method_changes.items():
++        if not isinstance(entry, Mapping) or entry.get("old") != old_fingerprints.get(key):
++            raise ExecutionGateError("source-contract amendment old method fingerprint differs from the frozen G3 authorization")
++    effective_fingerprints = dict(old_fingerprints)
++    effective_fingerprints.update({key: value["new"] for key, value in method_changes.items()})
++    observed_fingerprints = _current_scientific_function_fingerprints(effective_fingerprints)
++    if observed_fingerprints != effective_fingerprints:
++        raise ExecutionGateError("source-contract amendment does not match the exact production method fingerprints")
++    return (
++        authorization,
++        sha256_file(R19_B1_G3_SOURCE_CONTRACT_RESTART_AUTHORIZATION),
++        sha256_file(R19_B1_G3_SOURCE_CONTRACT_REPAIR_AMENDMENT),
++        sha256_file(R19_B1_G3_SOURCE_UNIT_RESOLUTION),
++        restart_snapshot,
++    )
++
++
+ def _git(*args: str) -> str:
+     return subprocess.check_output(
+         ["git", "-C", str(PROJECT_ROOT), *args], text=True, stderr=subprocess.DEVNULL
+@@ -655,7 +1041,11 @@ def validate_execution_gates(
+             authorization_sha256=g3_authorization_sha, head=head,
+             protocol_sha256=protocol_sha,
+         )
+-        _assert_single_g3_campaign_unused(output_path)
++        approved_predecessor = g3_carry_forward.get("source_restart_predecessor_output_relative_path")
++        _assert_single_g3_campaign_unused(
++            output_path,
++            approved_predecessor_output=(PROJECT_ROOT / approved_predecessor) if approved_predecessor else None,
++        )
+ 
+     identity = json.loads(model_identity_path.read_text(encoding="utf-8"))
+     identity_status = identity.get("status")
+@@ -1047,13 +1437,18 @@ class LiveR19Runtime:
+             category = "path_extension"
+         else:
+             raise EvidenceIntegrityError("live model generation has an unclassified component")
+-        caps = ({"smoke": getattr(self, "smoke_model_call_cap", 408)} if self.mode == "smoke" else {
++        default_caps = {
+             "source": 9000, "initial_recovery": 240,
+             "path_extension": 240, "suffix": 17100,
+-        })
++        }
++        caps = ({"smoke": getattr(self, "smoke_model_call_cap", 408)} if self.mode == "smoke" else
++                getattr(self, "phase_model_call_caps", default_caps))
+         if self.model_call_counts[category] + 1 > caps.get(category, 408):
+             raise EvidenceIntegrityError(f"R19 {category} model-call cap would be exceeded")
+-        total_model_cap = getattr(self, "smoke_model_call_cap", 408) if self.mode == "smoke" else 26988
++        total_model_cap = (
++            getattr(self, "smoke_model_call_cap", 408)
++            if self.mode == "smoke" else min(26988, sum(int(value) for value in caps.values()))
++        )
+         if sum(self.model_call_counts.values()) + 1 > total_model_cap:
+             raise EvidenceIntegrityError("R19 total model-call cap would be exceeded")
+         self.model_call_counts[category] += 1
+@@ -1061,37 +1456,48 @@ class LiveR19Runtime:
+     def _reserve_environment_operation(
+         self, identity: Mapping[str, Any], *, is_reset: bool,
+     ) -> None:
++        default_caps = {
++            "source": 9000, "replay_gate": 5400, "initial_attempt": 5520,
++            "path_extension": 2940, "logical_branch": 18000,
++        }
++        phase_caps = getattr(self, "phase_environment_operation_caps", default_caps)
+         if self.mode == "smoke":
+             category, cap = "smoke", getattr(self, "smoke_environment_operation_cap", 400)
+         else:
+             operation = str(identity.get("operation", ""))
+             component = str(identity.get("component", ""))
+             if is_reset and operation == "source_reset":
+-                category, cap = "source", 9000
++                category = "source"
+             elif is_reset and operation == "prefix_replay_reset":
+-                category, cap = "replay_gate", 5400
++                category = "replay_gate"
+             elif is_reset and operation == "branch_replay_reset":
+-                category, cap = "logical_branch", 18000
++                category = "logical_branch"
+             elif is_reset:
+                 raise EvidenceIntegrityError(f"unclassified R19 environment reset operation: {operation}")
+             elif operation == "sft_environment_step" and component == "task_actor" and not identity.get("prefix_id"):
+-                category, cap = "source", 9000
++                category = "source"
+             elif operation == "replay_environment_step":
+-                category, cap = "replay_gate", 5400
++                category = "replay_gate"
+             elif operation == "recovery_environment_operation":
+                 if int(identity.get("recovery_action_index", 1)) == 1:
+-                    category, cap = "initial_attempt", 5520
++                    category = "initial_attempt"
+                 else:
+-                    category, cap = "path_extension", 2940
++                    category = "path_extension"
+             elif operation in {"branch_replay_environment_step", "replay_recovery_environment_step"} or (
+                 operation == "sft_environment_step" and component == "sft"
+             ):
+-                category, cap = "logical_branch", 18000
++                category = "logical_branch"
+             else:
+                 raise EvidenceIntegrityError(f"unclassified R19 environment action operation: {operation}")
++            cap = int(phase_caps.get(category, -1))
++            if cap < 0:
++                raise EvidenceIntegrityError(f"R19 {category} environment-operation cap is not configured")
+         if self.environment_operation_counts[category] + 1 > cap:
+             raise EvidenceIntegrityError(f"R19 {category} environment-operation cap would be exceeded")
+-        total_cap = getattr(self, "smoke_environment_operation_cap", 400) if self.mode == "smoke" else 41260
++        total_cap = (
++            getattr(self, "smoke_environment_operation_cap", 400)
++            if self.mode == "smoke" else min(41260, sum(int(value) for value in phase_caps.values()))
++        )
+         if sum(self.environment_operation_counts.values()) + 1 > total_cap:
+             raise EvidenceIntegrityError("R19 total environment-operation cap would be exceeded")
+         self.environment_operation_counts[category] += 1
+@@ -1345,7 +1751,15 @@ class LiveR19Runtime:
+         prompt = sft_p0_prompt(request)
+         generation_identity = dict(identity)
+         generation_identity["component"] = component
+-        generation_identity["operation"] = "task_actor_generation"
++        # Source provenance must retain the operation required by G4.
++        # Preserve the already-tested suffix event contract unchanged.
++        if component == "task_actor":
++            if generation_identity.get("operation") != "source_generation":
++                raise EvidenceIntegrityError(
++                    "source actor generation requires source_generation identity"
++                )
++        else:
++            generation_identity["operation"] = "task_actor_generation"
+         self._reserve_model_call(generation_identity)
+         self.sink("generation_started", generation_identity, {})
+         generation = _generate_exact(self.actor_backend, prompt, 16)
+@@ -1415,6 +1829,17 @@ class LiveR19Runtime:
+         task_id = str(episode["canonical_trial_id"])
+         index = int(episode["schedule_index"])
+         seed = int(episode["nominal_seed"])
++        restart_expected = getattr(self, "source_restart_expected_snapshot", None)
++        restart_predecessor_run_id = getattr(self, "source_restart_predecessor_run_id", None)
++        restart_comparison_consumed = bool(getattr(self, "source_restart_comparison_consumed", False))
++        if restart_expected is not None:
++            if not restart_comparison_consumed and (
++                index != 0 or task_id != restart_expected.get("canonical_trial_id")
++                or seed != int(restart_expected.get("seed", -1))
++            ):
++                raise EvidenceIntegrityError("source restart comparator is not bound to exactly the first scheduled source episode")
++            if restart_comparison_consumed and index == 0:
++                raise EvidenceIntegrityError("first source episode restart comparison may occur only once")
+         reset, reset_event_id = self.record_reset(
+             env, {"split": "train", "canonical_trial_id": task_id,
+                   "schedule_index": index, "operation": "source_reset"}, seed,
+@@ -1453,8 +1878,43 @@ class LiveR19Runtime:
+             )
+             mapping = action_id_mapping(valid_actions)
+             generation_ids.append(generation_id)
+-            selected = parsed.selection_status == "selected" and parsed.action in valid_actions
+-            command = parsed.action if selected else ""
++            if restart_expected is not None and step_index == 0:
++                observed_snapshot = _source_restart_snapshot(
++                    canonical_trial_id=task_id, schedule_index=index, seed=seed,
++                    observation=observation, valid_actions=valid_actions,
++                    prompt=str(parsed["prompt"]), generation=generation,
++                    parser_result=parsed["parser_result"], action_map=parsed["selection"]["id_to_command"],
++                )
++                expected_sha = sha256_json(restart_expected)
++                observed_sha = sha256_json(observed_snapshot)
++                mismatched_fields = sorted(
++                    key for key in set(restart_expected) | set(observed_snapshot)
++                    if restart_expected.get(key) != observed_snapshot.get(key)
++                )
++                comparison = {
++                    "schema_version": "r19_source_restart_comparison_v1",
++                    "status": "PASS" if not mismatched_fields and observed_sha == expected_sha else "MISMATCH_STOP",
++                    "predecessor_run_id": restart_predecessor_run_id,
++                    "canonical_trial_id": task_id,
++                    "schedule_index": index,
++                    "expected_snapshot_sha256": expected_sha,
++                    "observed_snapshot_sha256": observed_sha,
++                    "mismatched_fields": mismatched_fields,
++                    "comparison_before_first_environment_action": True,
++                    "environment_actions_executed_before_comparison": 0,
++                    "expected_snapshot": restart_expected,
++                    "observed_snapshot": observed_snapshot,
++                }
++                comparison_path = output / "source_restart_comparison.json"
++                if comparison_path.exists() or comparison_path.is_symlink():
++                    raise FileExistsError("source restart comparison receipt already exists; no retry or overwrite")
++                atomic_write_json(comparison_path, comparison)
++                self.source_restart_comparison_sha256 = sha256_file(comparison_path)
++                self.source_restart_comparison_consumed = True
++                if comparison["status"] != "PASS":
++                    raise EvidenceIntegrityError("first source reset/generation differed from predecessor before any environment action")
++            selected = parsed["status"] == "selected" and parsed["action"] in valid_actions
++            command = parsed["action"] if selected else ""
+             transition_dict: dict[str, Any] | None = None
+             transition_id: str | None = None
+             if selected:
+@@ -1468,7 +1928,7 @@ class LiveR19Runtime:
+                     {"canonical_trial_id": task_id, "split": "train",
+                      "schedule_index": index, "decision_index": step_index,
+                      "component": "task_actor", "operation": "sft_environment_step"},
+-                    before=before, action_id=parsed.action_id,
++                    before=before, action_id=parsed["action_id"],
+                 )
+                 transition_ids.append(transition_id)
+                 transition_dict = {
+@@ -1481,17 +1941,8 @@ class LiveR19Runtime:
+                 }
+             else:
+                 decision_failure = True
+-            selection = {
+-                "action_selection_mode": "indexed_admissible",
+-                "raw_model_output": generation["raw_output"],
+-                "parsed_action_id": parsed.action_id,
+-                "selected_index": parsed.selected_index,
+-                "mapped_environment_command": parsed.action or None,
+-                "id_to_command": mapping,
+-                "selection_status": parsed.selection_status,
+-                "failure_category": parsed.action_failure_category,
+-                "failure_reason": parsed.action_failure_reason,
+-            }
++            # actor_generation already persisted this exact parser selection.
++            selection = dict(parsed["selection"])
+             step = {
+                 "index": step_index, "observation": observation,
+                 "action": command, "model_output": generation["raw_output"],
+@@ -1502,7 +1953,7 @@ class LiveR19Runtime:
+                 "valid_actions": list(valid_actions), "action_valid": bool(selected),
+                 "token_statistics": {"generated_tokens": generation["generated_tokens"],
+                                      "input_tokens": generation["input_tokens"]},
+-                "parser_status": parsed.selection_status,
++                "parser_status": parsed["status"],
+                 "metadata": {
+                     "policy": {"prompt": prompt, "prompt_version": "sft-p0-action-only-v1",
+                                "action_selection": selection, "generation": generation},
+@@ -1548,10 +1999,14 @@ class LiveR19Runtime:
+             "generation_event_ids": generation_ids,
+             "transition_event_ids": transition_ids,
+             "reset_event_id": reset_event_id,
++            **({"source_restart_comparison_sha256": self.source_restart_comparison_sha256}
++               if restart_expected is not None and index == 0 else {}),
+             "source_game_sha256": str(episode["source_game_sha256"]),
+             "source_traj_data_sha256": str(episode["source_traj_data_sha256"]),
+         })
+         row["metadata"]["source_trajectory_sha256"] = trajectory_sha
++        if restart_expected is not None and index == 0:
++            row["metadata"]["source_restart_comparison_sha256"] = self.source_restart_comparison_sha256
+         row["metadata"]["r19_source_event_refs"] = {
+             "source_episode_event_id": source_event["event_id"],
+             "generation_event_ids": generation_ids,
+@@ -2513,12 +2968,20 @@ def run_live_experiment(
+         observed_runtime_manifest=observed_runtime,
+     )
+     g3_gate_receipt: dict[str, Any] | None = None
++    source_restart_authorization: dict[str, Any] | None = None
++    if mode == "pilot" and "source_contract_restart" in gate:
++        source_restart_authorization = _load_source_contract_restart_authorization(
++            gate=gate, original_authorization=_load_g3_authorization()[0],
++        )[0]
+     if mode == "pilot":
+         authorization, authorization_sha = _load_g3_authorization()
+         carry = gate["g2_carry_forward"]
+         review = gate["review"]
+         g3_gate_receipt = {
+-            "schema_version": "r19_g3_launch_gate_receipt_v1",
++            "schema_version": (
++                "r19_g3_source_contract_restart_gate_receipt_v1"
++                if source_restart_authorization is not None else "r19_g3_launch_gate_receipt_v1"
++            ),
+             "baseline_id": R19_B1_BASELINE_ID,
+             "identity_status": "NEW_PINNED_BASELINE_APPROVED",
+             "g3_authorization_sha256": authorization_sha,
+@@ -2562,6 +3025,33 @@ def run_live_experiment(
+             "cumulative_campaign_ceilings": authorization["resource_limits"]["cumulative_campaign_ceilings_including_g2"],
+             "projected_cumulative_maximum": authorization["resource_limits"]["projected_cumulative_maximum"],
+         }
++        if source_restart_authorization is not None:
++            g3_gate_receipt["review"].update({
++                key: review[key] for key in (
++                    "source_treatment_semantics_changed",
++                    "source_runtime_bugfix_enabled_intended_execution",
++                    "source_contract_restart_authorization_sha256",
++                    "source_contract_repair_amendment_sha256",
++                    "source_restart_predecessor_run_id",
++                    "source_restart_unit_resolution_event_sha256",
++                    "source_restart_expected_snapshot_sha256",
++                    "source_restart_remaining_phase_caps_sha256",
++                    "source_restart_failure_disposition",
++                    "first_source_episode_integration",
++                    "first_source_restart_comparison",
++                )
++            })
++            g3_gate_receipt["source_contract_restart"] = {
++                "authorization_sha256": gate_hashes["source_contract_restart_authorization_sha256"],
++                "amendment_sha256": gate_hashes["source_contract_repair_amendment_sha256"],
++                "predecessor_run_id": gate_hashes["source_restart_predecessor_run_id"],
++                "unit_resolution_event_sha256": gate_hashes["source_restart_unit_resolution_event_sha256"],
++                "expected_snapshot_sha256": gate_hashes["source_restart_expected_snapshot_sha256"],
++                "remaining_phase_caps": gate_hashes["source_restart_remaining_phase_caps"],
++                "repeated_completed_generation_cap": 1,
++                "repeated_reset_cap": 1,
++                "compare_before_first_action": True,
++            }
+         receipt_bytes = (json.dumps(g3_gate_receipt, ensure_ascii=True, indent=2, sort_keys=True) + "\n")
+         gate_hashes["g3_gate_receipt_file_sha256"] = _sha_text(receipt_bytes)
+     protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
+@@ -2594,7 +3084,11 @@ def run_live_experiment(
+     context: dict[str, Any] | None = None
+     if mode == "pilot":
+         repair_authorization, repair_authorization_sha = _load_entrypoint_repair_authorization()
+-        failed_run_id = repair_authorization["preserved_failed_g3_launch"]["run_id"]
++        failed_run_id = (
++            source_restart_authorization["predecessor"]["run_id"]
++            if source_restart_authorization is not None
++            else repair_authorization["preserved_failed_g3_launch"]["run_id"]
++        )
+         driver_path = (PROJECT_ROOT / "scripts/run_r19_recovery_duration.py").resolve()
+         if context_path is None or context_path.is_symlink() or not context_path.is_file():
+             raise ExecutionGateError("R19 pilot requires the durable supervisor launch-context record")
+@@ -2639,6 +3133,14 @@ def run_live_experiment(
+             "gate_manifest_sha256": gate_hashes["gate_manifest_sha256"],
+             "g3_authorization_sha256": gate_hashes["g3_authorization_sha256"],
+             "entrypoint_repair_authorization_sha256": repair_authorization_sha,
++            **({
++                "source_contract_restart_authorization_sha256": gate_hashes["source_contract_restart_authorization_sha256"],
++                "source_contract_repair_amendment_sha256": gate_hashes["source_contract_repair_amendment_sha256"],
++                "source_restart_predecessor_run_id": gate_hashes["source_restart_predecessor_run_id"],
++                "source_restart_unit_resolution_event_sha256": gate_hashes["source_restart_unit_resolution_event_sha256"],
++                "source_restart_expected_snapshot_sha256": gate_hashes["source_restart_expected_snapshot_sha256"],
++                "source_restart_remaining_phase_caps": gate_hashes["source_restart_remaining_phase_caps"],
++            } if source_restart_authorization is not None else {}),
+             "g2_executed_implementation_sha": gate_hashes["g2_executed_implementation_sha"],
+             "g2_evidence_carried_forward": gate_hashes["g2_evidence_carried_forward"],
+             "new_g2_run_performed": gate_hashes["new_g2_run_performed"],
+@@ -2715,6 +3217,15 @@ def run_live_experiment(
+             smoke_model_call_cap=(planned_smoke_bounds or {}).get("model_calls_upper_bound", 408),
+             smoke_environment_operation_cap=(planned_smoke_bounds or {}).get("environment_operations_upper_bound", 400),
+         )
++        if source_restart_authorization is not None:
++            restart = source_restart_authorization["restart"]
++            runtime.source_restart_expected_snapshot = source_restart_authorization["predecessor"]["restart_snapshot"]
++            runtime.source_restart_predecessor_run_id = source_restart_authorization["predecessor"]["run_id"]
++            runtime.source_restart_comparison_consumed = False
++            runtime.phase_model_call_caps = dict(restart["remaining_phase_caps"]["model_calls"])
++            runtime.phase_environment_operation_caps = dict(
++                restart["remaining_phase_caps"]["environment_operations"]
++            )
+         isolation = runtime.load_and_validate_isolation()
+         if not isolation["distinct_model_objects"] or isolation["recovery_adapter_active"] or not isolation["sft_adapter_active"]:
+             raise ExecutionGateError("model/adapter isolation validation failed before inference")
+@@ -2739,7 +3250,14 @@ def run_live_experiment(
+                     "g2_executed_implementation_sha",
+                     "g3_launch_implementation_sha", "g2_evidence_carried_forward",
+                     "new_g2_run_performed", "g3_gate_receipt_file_sha256",
++                    "source_contract_restart_authorization_sha256",
++                    "source_contract_repair_amendment_sha256",
++                    "source_restart_predecessor_run_id",
++                    "source_restart_unit_resolution_event_sha256",
++                    "source_restart_expected_snapshot_sha256",
++                    "source_restart_remaining_phase_caps",
+                 )
++                if key in gate_hashes
+             })
+         journal = DurableEventJournal(
+             output_path / "execution_events.jsonl", run_id=run_id,
+@@ -2782,6 +3300,25 @@ def run_live_experiment(
+             != sum(runtime.environment_operation_counts.values())
+         ):
+             raise EvidenceIntegrityError("physical event ledger does not reconcile to runtime call/operation counters")
++        restart_comparison_sha256 = None
++        if source_restart_authorization is not None:
++            comparison_path = output_path / "source_restart_comparison.json"
++            if comparison_path.is_symlink() or not comparison_path.is_file():
++                raise EvidenceIntegrityError("authorized first source restart lacks its pre-action comparison receipt")
++            comparison_doc = json.loads(comparison_path.read_text(encoding="utf-8"))
++            if (
++                comparison_doc.get("status") != "PASS"
++                or comparison_doc.get("predecessor_run_id") != source_restart_authorization["predecessor"]["run_id"]
++                or comparison_doc.get("comparison_before_first_environment_action") is not True
++                or comparison_doc.get("environment_actions_executed_before_comparison") != 0
++                or comparison_doc.get("expected_snapshot_sha256")
++                    != source_restart_authorization["predecessor"]["restart_snapshot_sha256"]
++                or comparison_doc.get("observed_snapshot_sha256") != comparison_doc.get("expected_snapshot_sha256")
++            ):
++                raise EvidenceIntegrityError("first source restart did not match the approved predecessor before action")
++            restart_comparison_sha256 = sha256_file(comparison_path)
++            if runtime.source_restart_comparison_sha256 != restart_comparison_sha256:
++                raise EvidenceIntegrityError("source restart comparison receipt hash differs from runtime evidence")
+         manifest = {
+             **prepared, "status": execution["status"],
+             "completed_at_unix_seconds": time.time(),
+@@ -2795,6 +3332,13 @@ def run_live_experiment(
+             "events_sha256": sha256_file(output_path / "execution_events.jsonl"),
+             "branches_sha256": sha256_file(branches_path),
+             "exit_receipt_name": receipt_path.name,
++            **({
++                "source_restart_comparison_sha256": restart_comparison_sha256,
++                "source_restart_comparison_status": "PASS",
++                "source_restart_predecessor_run_id": source_restart_authorization["predecessor"]["run_id"],
++                "source_restart_repeated_generation_count": 1,
++                "source_restart_repeated_reset_count": 1,
++            } if source_restart_authorization is not None else {}),
+         }
+         atomic_write_json(output_path / "execution_manifest.json", manifest)
+         if execution["status"] not in {"G2_PASS", "PILOT_READY_FOR_OFFLINE_ANALYSIS"}:
+diff --git a/scripts/run_r19_recovery_duration.py b/scripts/run_r19_recovery_duration.py
+index c27f1da..e81a3e1 100644
+--- a/scripts/run_r19_recovery_duration.py
++++ b/scripts/run_r19_recovery_duration.py
+@@ -333,6 +333,14 @@ def _pilot_gate_check(protocol_path: Path, manifest_path: Path, output: Path) ->
+         _repair_authorization, expected_repair_authorization_sha = (
+             production._load_entrypoint_repair_authorization()
+         )
++        source_restart_authorization = None
++        source_restart_authorization_sha = None
++        if "source_contract_restart" in manifest:
++            source_restart_authorization, source_restart_authorization_sha, amendment_sha, disposition_sha, _snapshot = (
++                production._load_source_contract_restart_authorization(
++                    gate=manifest, original_authorization=_authorization,
++                )
++            )
+         carry = manifest.get("g2_carry_forward")
+         if (
+             "smoke" in manifest
+@@ -350,6 +358,20 @@ def _pilot_gate_check(protocol_path: Path, manifest_path: Path, output: Path) ->
+             or carry.get("g2_executed_implementation_sha") == head
+             or carry.get("g2_evidence_carried_forward") is not True
+             or carry.get("new_g2_run_performed") is not False
++            or (source_restart_authorization is not None and (
++                review.get("source_contract_restart_authorization_sha256") != source_restart_authorization_sha
++                or review.get("source_contract_repair_amendment_sha256") != amendment_sha
++                or review.get("source_restart_unit_resolution_event_sha256") != disposition_sha
++                or review.get("source_restart_predecessor_run_id")
++                    != source_restart_authorization["predecessor"]["run_id"]
++                or review.get("first_source_episode_integration") != "PASS"
++                or review.get("first_source_restart_comparison") != "PASS_BEFORE_FIRST_ACTION"
++                or review.get("source_treatment_semantics_changed") is not False
++                or review.get("scientific_execution_behavior_changed") is not True
++                or carry.get("source_contract_restart_authorization_sha256") != source_restart_authorization_sha
++                or carry.get("source_contract_repair_amendment_sha256") != amendment_sha
++                or carry.get("source_restart_unit_resolution_event_sha256") != disposition_sha
++            ))
+         ):
+             raise EvidenceIntegrityError("G3 gate must bind the separate authorization and carry forward real G2 evidence without a new smoke")
+         return {
+@@ -360,6 +382,12 @@ def _pilot_gate_check(protocol_path: Path, manifest_path: Path, output: Path) ->
+             "entrypoint_repair_authorization_sha256": expected_repair_authorization_sha,
+             "g2_evidence_carried_forward": True,
+             "new_g2_run_performed": False,
++            **({
++                "source_contract_restart_authorization_sha256": source_restart_authorization_sha,
++                "source_contract_repair_amendment_sha256": amendment_sha,
++                "source_restart_predecessor_run_id": source_restart_authorization["predecessor"]["run_id"],
++                "source_restart_unit_resolution_event_sha256": disposition_sha,
++            } if source_restart_authorization is not None else {}),
+         }
+ 
+     smoke = manifest.get("smoke", {})
+diff --git a/tests/test_r19_g3_authorization.py b/tests/test_r19_g3_authorization.py
+index 1061b41..117c1ad 100644
+--- a/tests/test_r19_g3_authorization.py
++++ b/tests/test_r19_g3_authorization.py
+@@ -191,7 +191,15 @@ def _production_gate_fixture(tmp_path: Path, monkeypatch) -> dict:
+         lambda *args: head if args == ("rev-parse", "HEAD") else "",
+     )
+     monkeypatch.setattr(runner, "_load_g3_authorization", lambda: (auth, auth_sha))
+-    monkeypatch.setattr(runner, "_assert_single_g3_campaign_unused", lambda _path: None)
++    # Downstream gate-field tests run with a synthetic exact-fingerprint pass;
++    # a separate test verifies the real four-method source overlay.
++    monkeypatch.setattr(
++        runner, "_current_scientific_function_fingerprints",
++        lambda expected: dict(expected),
++    )
++    monkeypatch.setattr(
++        runner, "_assert_single_g3_campaign_unused", lambda _path, **_kwargs: None,
++    )
+     monkeypatch.setattr(
+         runner, "_model_configs",
+         lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("model config must not be loaded in gate validation")),
+@@ -228,21 +236,96 @@ def _validate_production_gate(fixture: dict, *, mode: str = "pilot", **overrides
+ 
+ def test_g3_carry_forward_requires_exact_review_and_reconciled_prior_evidence(tmp_path: Path) -> None:
+     gate, auth, auth_sha, head = _carry_forward_fixture(tmp_path)
++    with pytest.raises(runner.ExecutionGateError, match="scientific execution fingerprints changed"):
++        runner._validate_g3_carry_forward(
++            gate=gate, authorization=auth, authorization_sha256=auth_sha,
++            head=head, protocol_sha256=runner.sha256_file(runner.R19_PROTOCOL),
++        )
++
++
++def test_source_contract_restart_gate_binds_four_method_overlay_and_original_g2(
++    tmp_path: Path, monkeypatch,
++) -> None:
++    gate, auth, auth_sha, head = _carry_forward_fixture(tmp_path)
++    amendment = json.loads(runner.R19_B1_G3_SOURCE_CONTRACT_REPAIR_AMENDMENT.read_text())
++    changes = amendment["changed_method_fingerprints"]
++    fingerprints = dict(auth["scientific_execution_fingerprints"])
++    fingerprints.update({key: item["new"] for key, item in changes.items()})
++    monkeypatch.setattr(
++        runner, "_current_scientific_function_fingerprints",
++        lambda expected: dict(expected),
++    )
++
++    snapshot = {"canonical_trial_id": "first-task", "schedule_index": 0, "seed": 30000}
++    predecessor = {
++        "run_id": "3d1ccea7e97f4727abf8e216ac6ec498",
++        "output_relative_path": "artifacts/runtime/preserved-failed-unit",
++        "restart_snapshot": snapshot,
++        "restart_snapshot_sha256": runner.sha256_json(snapshot),
++    }
++    caps = {
++        "model_calls": {"source": 8999, "initial_recovery": 240,
++                         "path_extension": 240, "suffix": 17100},
++        "environment_operations": {"source": 8999, "replay_gate": 5400,
++                                    "initial_attempt": 5520, "path_extension": 2940,
++                                    "logical_branch": 18000},
++    }
++    restart_authorization = {"predecessor": predecessor, "restart": {"remaining_phase_caps": caps}}
++    restart_sha, amendment_sha, resolution_sha = "a" * 64, "b" * 64, "c" * 64
++    monkeypatch.setattr(
++        runner, "_load_source_contract_restart_authorization",
++        lambda **_kwargs: (restart_authorization, restart_sha, amendment_sha,
++                           resolution_sha, snapshot),
++    )
++    gate["source_contract_restart"] = {}
++    review = gate["review"]
++    review.update({
++        "change_scope_conclusion": "SOURCE_CONTRACT_BUGFIX_AND_SINGLE_CONTROLLED_RESTART",
++        "scientific_execution_behavior_changed": True,
++        "scientific_fingerprint_manifest_sha256": runner.sha256_json(fingerprints),
++        "source_treatment_semantics_changed": False,
++        "source_runtime_bugfix_enabled_intended_execution": True,
++        "source_contract_restart_authorization_sha256": restart_sha,
++        "source_contract_repair_amendment_sha256": amendment_sha,
++        "source_restart_predecessor_run_id": predecessor["run_id"],
++        "source_restart_unit_resolution_event_sha256": resolution_sha,
++        "source_restart_expected_snapshot_sha256": predecessor["restart_snapshot_sha256"],
++        "source_restart_remaining_phase_caps_sha256": runner.sha256_json(caps),
++        "source_restart_failure_disposition": "PASS_KNOWN_FAILED_NO_ACTION_NO_UNCERTAINTY",
++        "first_source_episode_integration": "PASS",
++        "first_source_restart_comparison": "PASS_BEFORE_FIRST_ACTION",
++    })
++    gate["g2_carry_forward"].update({
++        "source_contract_restart_authorization_sha256": restart_sha,
++        "source_contract_repair_amendment_sha256": amendment_sha,
++        "source_restart_predecessor_run_id": predecessor["run_id"],
++        "source_restart_unit_resolution_event_sha256": resolution_sha,
++        "source_restart_expected_snapshot_sha256": predecessor["restart_snapshot_sha256"],
++    })
+     result = runner._validate_g3_carry_forward(
+         gate=gate, authorization=auth, authorization_sha256=auth_sha,
+         head=head, protocol_sha256=runner.sha256_file(runner.R19_PROTOCOL),
+     )
++    assert result["source_restart_predecessor_run_id"] == predecessor["run_id"]
++    assert result["source_restart_remaining_phase_caps"] == caps
+     assert result["g2_executed_implementation_sha"] == runner.R19_G2_EXECUTED_SHA
+-    assert result["g3_launch_implementation_sha"] == head
+     assert result["g2_evidence_carried_forward"] is True
+     assert result["new_g2_run_performed"] is False
+ 
+-    gate["review"]["scientific_execution_behavior_changed"] = True
+-    with pytest.raises(runner.ExecutionGateError, match="scientific_execution_behavior_changed"):
+-        runner._validate_g3_carry_forward(
+-            gate=gate, authorization=auth, authorization_sha256=auth_sha,
+-            head=head, protocol_sha256=runner.sha256_file(runner.R19_PROTOCOL),
+-        )
++
++def test_source_contract_amendment_fingerprints_exactly_current_methods() -> None:
++    auth, _ = runner._load_g3_authorization()
++    amendment = json.loads(runner.R19_B1_G3_SOURCE_CONTRACT_REPAIR_AMENDMENT.read_text())
++    changes = amendment["changed_method_fingerprints"]
++    assert set(changes) == {
++        "scripts/run_r19_experiment.py::LiveR19Runtime.actor_generation",
++        "scripts/run_r19_experiment.py::LiveR19Runtime._collect_one_source",
++        "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_model_call",
++        "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_environment_operation",
++    }
++    fingerprints = dict(auth["scientific_execution_fingerprints"])
++    fingerprints.update({key: item["new"] for key, item in changes.items()})
++    assert runner._current_scientific_function_fingerprints(fingerprints) == fingerprints
+ 
+ 
+ def test_g3_rejects_old_smoke_only_gate_and_frozen_fingerprint_mutation(tmp_path: Path) -> None:
+diff --git a/tests/test_r19_source_contract.py b/tests/test_r19_source_contract.py
+new file mode 100644
+index 0000000..d72d091
+--- /dev/null
++++ b/tests/test_r19_source_contract.py
+@@ -0,0 +1,301 @@
++"""Exercise the real source actor/collector/ledger/validators with synthetic edges only."""
++from collections import Counter
++import copy
++import hashlib
++import json
++from types import SimpleNamespace
++import pytest
++from env.base import Task, ResetResult, Transition
++from scripts import run_r19_experiment as runner
++from scripts import analyze_r19_recovery_duration as analyzer
++from recovery.r19_duration import (
++    DurableEventJournal, UnitRegistry, build_r19_source_schedule,
++    EvidenceIntegrityError,
++)
++TRIAL = 'pick_and_place_simple-Pencil-None-GarbageCan-316/trial_SYNTHETIC_R19'
++
++class ToyEnvironment:
++    def __init__(self, terminal_after=1):
++        self.task = Task(task_id=TRIAL, text='put a pencil in garbagecan', split='train',
++                         family='pick_and_place_simple')
++        self.terminal_after = terminal_after
++        self.actions = []
++        self.closed = False
++        self.comparison_path = None
++    def reset(self, *, seed=None):
++        assert seed == 30000
++        return ResetResult('state 0', self.task, ('look', 'go to garbagecan 1'))
++    def step(self, action):
++        if self.comparison_path is not None:
++            comparison = json.loads(self.comparison_path.read_text())
++            assert comparison['status'] == 'PASS'
++            assert comparison['comparison_before_first_environment_action'] is True
++            assert comparison['environment_actions_executed_before_comparison'] == 0
++        assert action in ('look', 'go to garbagecan 1')
++        self.actions.append(action)
++        done = len(self.actions) == self.terminal_after
++        return Transition(f'state {len(self.actions)}', float(done), done, False,
++                          ('look', 'go to garbagecan 1'))
++    def close(self):
++        self.closed = True
++
++def _synthetic_generation(prompt, raw):
++    ids = [65]
++    return {
++        'prompt': prompt, 'rendered_prompt': prompt,
++        'rendered_prompt_sha256': hashlib.sha256(prompt.encode()).hexdigest(),
++        'raw_output': raw, 'token_ids': ids,
++        'token_ids_sha256': hashlib.sha256(json.dumps(ids,separators=(',',':')).encode()).hexdigest(),
++        'input_tokens': 100, 'generated_tokens': 1, 'latency_seconds': 0.0,
++        'output_complete': True, 'token_cap_reached': False,
++        'max_new_tokens': 16, 'do_sample': False, 'thinking': False,
++    }
++
++def _expected_restart_snapshot(raw='A001'):
++    from models.action_parser import action_id_mapping
++    from models.policy import ActionRequest
++    from models.protocol_stability import parse_p2_selection
++    from sft.protocol import sft_p0_prompt
++    task = Task(task_id=TRIAL, text='put a pencil in garbagecan', split='train',
++                family='pick_and_place_simple')
++    valid_actions = ('look', 'go to garbagecan 1')
++    prompt = sft_p0_prompt(ActionRequest(task, 'state 0', (), valid_actions))
++    generation = _synthetic_generation(prompt, raw)
++    parsed = parse_p2_selection(raw, valid_actions, reflection_required=False)
++    mapping = action_id_mapping(valid_actions)
++    parser_result = {
++        'selection_status': parsed.selection_status, 'action_id': parsed.action_id,
++        'action': parsed.action, 'valid_actions': list(valid_actions), 'id_to_command': mapping,
++    }
++    return runner._source_restart_snapshot(
++        canonical_trial_id=TRIAL, schedule_index=0, seed=30000,
++        observation='state 0', valid_actions=valid_actions, prompt=prompt,
++        generation=generation, parser_result=parser_result, action_map=mapping,
++    )
++
++def run_source(tmp_path, monkeypatch, outputs, *, terminal_after=1,
++               restart_expected=False, expect_restart_mismatch=False):
++    schedule = build_r19_source_schedule([{
++        'canonical_trial_id': TRIAL, 'task_family': 'pick_and_place_simple',
++        'source_game_sha256': '1' * 64, 'source_traj_data_sha256': '2' * 64,
++    }], set())
++    output = tmp_path / 'source'; output.mkdir()
++    journal = DurableEventJournal(output / 'events.jsonl', run_id='synthetic-source-contract',
++        protocol_sha256='a' * 64, code_sha='b' * 40, evidence_class='synthetic')
++    registry = UnitRegistry(output / 'registry.json')
++    env = ToyEnvironment(terminal_after)
++    env.output_path = output
++    env.comparison_path = output / 'source_restart_comparison.json' if restart_expected else None
++    values = iter(outputs)
++    def generate(_backend, prompt, max_new_tokens):
++        assert max_new_tokens == 16
++        raw = next(values)
++        return _synthetic_generation(prompt, raw)
++    monkeypatch.setattr(runner, '_generate_exact', generate)
++    runtime = object.__new__(runner.LiveR19Runtime)
++    runtime.mode = 'pilot'
++    runtime.actor_backend = object()
++    runtime.actor = SimpleNamespace(model_version='synthetic-source-contract')
++    runtime.journal = journal
++    runtime.sink = journal.append
++    runtime.model_call_counts = Counter()
++    runtime.environment_operation_counts = Counter()
++    runtime.environment_step_counts = Counter()
++    runtime.environment_reset_count = 0
++    runtime.new_environment = lambda *_args: env
++    if restart_expected:
++        expected = _expected_restart_snapshot(outputs[0]) if restart_expected is True else copy.deepcopy(restart_expected)
++        runtime.source_restart_expected_snapshot = expected
++        runtime.source_restart_predecessor_run_id = 'preserved-failed-source-run'
++        runtime.source_restart_comparison_consumed = False
++    try:
++        rows = runtime.run_source_episodes(schedule, output, registry, {})
++    except EvidenceIntegrityError:
++        if not expect_restart_mismatch:
++            raise
++        rows = []
++    else:
++        assert not expect_restart_mismatch
++    events = [json.loads(line) for line in (output/'events.jsonl').read_text().splitlines()]
++    physical = analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
++    if expect_restart_mismatch:
++        comparison = json.loads((output/'source_restart_comparison.json').read_text())
++        assert comparison['status'] == 'MISMATCH_STOP'
++        assert comparison['comparison_before_first_environment_action'] is True
++        assert comparison['environment_actions_executed_before_comparison'] == 0
++        assert not env.actions
++        assert not (output/'source_trajectories.jsonl').exists()
++        assert all(u['status'] == 'in_progress' for u in registry.document['units'].values())
++        return None, events, physical, runtime, env, schedule, None
++    exclusions = {'schema_version': 'r19_exclusion_manifest_v1',
++                  'status': 'frozen_before_inference', 'excluded_task_trial_ids': []}
++    validated = analyzer.validate_live_source_schedule(schedule, exclusions, events, [], physical)
++    assert validated['status'] == 'PASS_FROZEN_TRAIN_SCHEDULE_BINDING'
++    assert validated['completed_source_episodes'] == 1
++    assert env.closed
++    assert all(u['status'] == 'completed' for u in registry.document['units'].values())
++    return rows[0], events, physical, runtime, env, schedule, exclusions
++
++@pytest.mark.parametrize('raw,status,actions', [
++    ('A001','selected',1), ('invalid','action_format_violation',0),
++    ('','action_format_violation',0), ('A999','action_out_of_range',0),
++])
++def test_real_actor_collector_ledger_and_source_validator(tmp_path, monkeypatch, raw, status, actions):
++    row, events, physical, runtime, env, _, _ = run_source(tmp_path, monkeypatch, [raw])
++    assert len(row['steps']) == 1
++    assert row['steps'][0]['parser_status'] == status
++    assert len(env.actions) == actions
++    assert runtime.environment_reset_count == 1
++    assert physical['completed_physical_model_generations'] == 1
++    assert physical['physical_environment_resets'] == 1
++    generations = [e for e in events if e['kind'] == 'generation_completed']
++    assert generations[0]['identity']['operation'] == 'source_generation'
++    assert row['steps'][0]['metadata']['action_selection']['selection_status'] == status
++    assert row['steps'][0]['metadata']['r19_generation_event_id'] == generations[0]['event_id']
++
++@pytest.mark.parametrize('length', [2, 6, 50])
++def test_multiple_source_steps_and_frozen_horizon(tmp_path, monkeypatch, length):
++    terminal_after = 100 if length == 50 else length
++    row, _, physical, _, env, _, _ = run_source(
++        tmp_path, monkeypatch, ['A000'] * length, terminal_after=terminal_after)
++    assert len(env.actions) == length == len(row['steps'])
++    assert physical['completed_physical_model_generations'] == length
++    if length == 50:
++        assert row['truncated'] is True
++        assert row['metadata']['termination_reason'] == 'max_steps'
++
++@pytest.mark.parametrize('field,value', [
++    ('operation','task_actor_generation'), ('component','sft'),
++    ('canonical_trial_id','a-different-task'), ('schedule_index',99),
++])
++def test_source_validator_still_rejects_wrong_event_identity(tmp_path, monkeypatch, field, value):
++    _, events, physical, _, _, schedule, exclusions = run_source(tmp_path, monkeypatch, ['A000'])
++    bad = copy.deepcopy(events)
++    event = next(e for e in bad if e['kind'] == 'generation_completed')
++    event['identity'][field] = value
++    with pytest.raises(EvidenceIntegrityError):
++        analyzer.validate_live_source_schedule(schedule, exclusions, bad, [], physical)
++
++def test_first_source_restart_compares_before_first_action_and_passes_production_validator(tmp_path, monkeypatch):
++    row, events, physical, runtime, env, schedule, exclusions = run_source(
++        tmp_path, monkeypatch, ['A001'], restart_expected=True)
++    assert row['metadata']['source_restart_comparison_sha256']
++    assert runtime.source_restart_comparison_consumed is True
++    assert len(env.actions) == 1
++    assert physical['completed_physical_model_generations'] == 1
++    assert physical['physical_environment_resets'] == 1
++    assert physical['physical_environment_operations'] == 1
++    assert analyzer.validate_live_source_schedule(schedule, exclusions, events, [], physical)[
++        'completed_source_episodes'] == 1
++    comparison_path = tmp_path/'source'/'source_restart_comparison.json'
++    comparison = json.loads(comparison_path.read_text())
++    manifest = {
++        'source_restart_comparison_sha256': hashlib.sha256(comparison_path.read_bytes()).hexdigest(),
++        'source_restart_comparison_status': 'PASS',
++        'source_restart_predecessor_run_id': 'preserved-failed-source-run',
++        'source_restart_repeated_generation_count': 1,
++        'source_restart_repeated_reset_count': 1,
++    }
++    validated = analyzer.validate_source_restart_comparison(
++        execution_manifest=manifest, events=events,
++        predecessor_run_id='preserved-failed-source-run',
++        expected_snapshot=_expected_restart_snapshot('A001'),
++        expected_snapshot_sha256=hashlib.sha256(json.dumps(
++            _expected_restart_snapshot('A001'), sort_keys=True, separators=(',', ':')).encode()).hexdigest(),
++        comparison_path=comparison_path,
++    )
++    assert validated['status'] == 'PASS_FIRST_SOURCE_RESTART_COMPARISON_AND_EPISODE_BINDING'
++
++def test_source_restart_production_validator_rejects_tampered_snapshot(tmp_path, monkeypatch):
++    row, events, _, _, _, _, _ = run_source(
++        tmp_path, monkeypatch, ['A001'], restart_expected=True)
++    assert row is not None
++    comparison_path = tmp_path/'source'/'source_restart_comparison.json'
++    comparison = json.loads(comparison_path.read_text())
++    comparison['observed_snapshot']['parser_and_action']['action_map_sha256'] = '0' * 64
++    comparison_path.write_text(json.dumps(comparison, sort_keys=True))
++    manifest = {
++        'source_restart_comparison_sha256': hashlib.sha256(comparison_path.read_bytes()).hexdigest(),
++        'source_restart_comparison_status': 'PASS',
++        'source_restart_predecessor_run_id': 'preserved-failed-source-run',
++        'source_restart_repeated_generation_count': 1,
++        'source_restart_repeated_reset_count': 1,
++    }
++    with pytest.raises(EvidenceIntegrityError):
++        analyzer.validate_source_restart_comparison(
++            execution_manifest=manifest, events=events,
++            predecessor_run_id='preserved-failed-source-run',
++            expected_snapshot=_expected_restart_snapshot('A001'),
++            expected_snapshot_sha256=hashlib.sha256(json.dumps(
++                _expected_restart_snapshot('A001'), sort_keys=True, separators=(',', ':')).encode()).hexdigest(),
++            comparison_path=comparison_path,
++        )
++
++def test_first_source_restart_mismatch_stops_before_any_action_or_retry(tmp_path, monkeypatch):
++    expected = _expected_restart_snapshot('A001')
++    expected['prompt_and_generation']['raw_output_sha256'] = '0' * 64
++    row, events, physical, runtime, env, _, _ = run_source(
++        tmp_path, monkeypatch, ['A001'], restart_expected=expected, expect_restart_mismatch=True)
++    assert row is None
++    assert not env.actions
++    assert len(events) == 4
++    assert physical['completed_physical_model_generations'] == 1
++    assert physical['physical_environment_resets'] == 1
++    assert physical['physical_environment_operations'] == 0
++    assert runtime.source_restart_comparison_consumed is True
++
++def test_nonempty_source_fixture_reaches_synthetic_report_renderer(tmp_path, monkeypatch):
++    row, events, physical, _, env, _, _ = run_source(tmp_path, monkeypatch, ['A001'])
++    assert row['steps'] and env.actions
++    def cost(total, actions):
++        return {'input_tokens': total - 1, 'generated_tokens': 1, 'total_tokens': total,
++                'model_calls': 1, 'environment_actions': actions}
++    branch = {
++        'prefix_id': 'synthetic-source-report', 'attempted': True,
++        'eligible_primary': True, 'stratum': 'failure',
++        'task_family': 'pick_and_place_simple', 'continue_success': 0,
++        'continue_logical_cost': {'full_branch': cost(12, 2)},
++        'k_results': {
++            str(k): {'success': int(k >= 3), 'logical_cost': {
++                'full_branch': cost(10 + k, k), 'recovery_only': cost(4 + k, k - 1),
++            }} for k in range(1, 6)
++        },
++    }
++    from recovery.r19_duration import analyze_duration_branches
++    summary = analyze_duration_branches([branch])
++    provenance = {
++        **physical, 'protocol_sha256': 'a' * 64,
++        'events_sha256': hashlib.sha256(json.dumps(events, sort_keys=True).encode()).hexdigest(),
++        'branches_sha256': hashlib.sha256(json.dumps([branch], sort_keys=True).encode()).hexdigest(),
++        'live_scope_validation': None,
++    }
++    report = analyzer.render_report(summary, provenance)
++    path = tmp_path / 'synthetic-source-report.md'
++    path.write_text(report)
++    assert path.stat().st_size > 0
++    assert 'Primary eligible prefixes: 1' in report
++    assert 'K5' in report
++    assert 'not certified for synthetic evidence' in report
++
++def test_one_restart_phase_caps_debit_the_prior_source_generation_and_reset():
++    runtime = object.__new__(runner.LiveR19Runtime)
++    runtime.mode = 'pilot'
++    runtime.model_call_counts = Counter(source=8998)
++    runtime.phase_model_call_caps = {
++        'source': 8999, 'initial_recovery': 240, 'path_extension': 240, 'suffix': 17100,
++    }
++    runtime._reserve_model_call({'component': 'task_actor'})
++    assert runtime.model_call_counts['source'] == 8999
++    with pytest.raises(EvidenceIntegrityError, match='source model-call cap'):
++        runtime._reserve_model_call({'component': 'task_actor'})
++
++    runtime.environment_operation_counts = Counter(source=8998)
++    runtime.phase_environment_operation_caps = {
++        'source': 8999, 'replay_gate': 5400, 'initial_attempt': 5520,
++        'path_extension': 2940, 'logical_branch': 18000,
++    }
++    identity = {'operation': 'source_reset'}
++    runtime._reserve_environment_operation(identity, is_reset=True)
++    assert runtime.environment_operation_counts['source'] == 8999
++    with pytest.raises(EvidenceIntegrityError, match='source environment-operation cap'):
++        runtime._reserve_environment_operation(identity, is_reset=True)

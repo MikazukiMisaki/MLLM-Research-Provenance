@@ -1,0 +1,69 @@
+{
+  "implementation_sha": "51ec074cec6c2c2a7b1ecd64e0da33bc446a7e54",
+  "authentic_record_loader": "PASS_NO_MOCKS",
+  "record_hashes": {
+    "r19_b1_g3_source_contract_repair_amendment_v1.json": "62ff158f5739859266664b1db2e323dca6ea0ad3b8e84134ecbe5fd06c847372",
+    "r19_b1_g3_source_contract_restart_authorization_v1.json": "de634ba310e47d3d49838b8a73d9c6d87f7db87deed042311e3718061a7eb428",
+    "r19_b1_g3_source_unit_resolution_events_v1.jsonl": "58783ba60b076ee190dccb0875aac65891d7e1c811e00fbe6303ca65896369d9"
+  },
+  "expected_snapshot_sha256": "d85d870bfddbad4eb62116d3d5de54a4b7fd4f250634af1c1ed89958e4c400b8",
+  "fingerprints": {
+    "total": 40,
+    "changed_methods": {
+      "scripts/run_r19_experiment.py::LiveR19Runtime._collect_one_source": {
+        "old": "12755022c3e7e8b25cff9cc07e47eaf3cbc5045f8ae2a21c43fc356002ec4d52",
+        "new": "f2e256054e6bcd2fcb041b69e2edc42a705d2dbf722d167ff65649a003bd7a9a"
+      },
+      "scripts/run_r19_experiment.py::LiveR19Runtime.actor_generation": {
+        "old": "c2a453654ab919555801e5c087cc13b1f2be40b9b3fdca01a741db9e9e73d4d7",
+        "new": "34b66c68e361d26c6f6f0b2d7871a9715bb56936694b7049c9b27a97aeaff9d7"
+      },
+      "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_model_call": {
+        "old": "1966a89fd7f9c5f51095d193163e3fac0f77590e1a6f63d815e6ffb14eb3a36f",
+        "new": "b8e163c5d1e4b186ff3ea53dd5a5a55d7bd60e950d5180cc074d1c3317e5567a"
+      },
+      "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_environment_operation": {
+        "old": "39068afbd080a78b94d8d509259e30ee9c526945eb1156a95b734f72c39d9e5a",
+        "new": "c71fecfc4dd690f63047cc142529140b96f32301d012abbadc5d0865257a8d43"
+      }
+    },
+    "effective_manifest_sha256": "c8e5d4a5e5bf9f90d85916aa03cf3b1cbd35fae44bffc76cfd8c4d9343682919",
+    "all_match": true
+  },
+  "frozen_inputs": {
+    "protocol": "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122",
+    "schedule": "0be460359fe43193e73f8cb55a8fb19fdba02ea70e3d0809ec5978fad21c8948",
+    "exclusions": "70447bba1b2a944d52ab9b4041b2d6ff3d865f4f0abd55d655214c8060ff5367"
+  },
+  "g2_five_files": "PASS",
+  "caps": {
+    "model_calls": {
+      "source": 8999,
+      "initial_recovery": 240,
+      "path_extension": 240,
+      "suffix": 17100
+    },
+    "environment_operations": {
+      "source": 8999,
+      "replay_gate": 5400,
+      "initial_attempt": 5520,
+      "path_extension": 2940,
+      "logical_branch": 18000
+    }
+  },
+  "projected_cumulative_maximum": {
+    "model_calls": 26756,
+    "environment_operations": 41201
+  },
+  "global_ceilings": {
+    "model_calls": 26988,
+    "environment_operations": 41260
+  },
+  "scientific_calls": {
+    "models": 0,
+    "alfworld": 0,
+    "preflight": 0,
+    "live": 0
+  },
+  "one_restart_output_gate": "PASS: rejects a second successor sentinel"
+}

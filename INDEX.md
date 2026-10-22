@@ -28,6 +28,8 @@ Oldest first. UTC is the task-directory timestamp; scientific SHA is the relevan
 | 2026-10-22 19:25:07 | CODEX | R19-B1 G3 physical-cost reconciliation | PASS_READ_ONLY; 177 generations/342 environment operations; no relaunch/G4 | bf31f3da430ffc35bd17fc380e1752adce6d1467 | [RECORD.md](agent-logs/2026-10-22T192507Z__CODEX__r19-g3-physical-cost-audit__3d1ccea7/RECORD.md) |
 | 2026-10-22 22:42:23 | CODEX | R19-B1 source contract integration and controlled restart | READY_FOR_EXACT_SHA_REVIEW; restart not started | da7d348ffd3677d619dd31357e1e1e3cca28c9ec | [RECORD.md](agent-logs/2026-10-22T224223Z__CODEX__r19-source-contract-restart__51ec074/RECORD.md) |
 
+| 2026-10-22 22:52:15 | ASTRA | R19 source-contract exact-SHA implementation and restart review | FAIL: 1 BLOCKING / 2 MAJOR; no preflight or launch | 51ec074cec6c2c2a7b1ecd64e0da33bc446a7e54 | [RECORD.md](agent-logs/2026-10-22T225215Z__ASTRA__r19-source-contract-exact-review__51ec074/RECORD.md) |
+
 ## Import omissions
 
 No task directory or large provenance file was omitted. Transient PID/lock files and Python bytecode remain local and are ignored; exact paths, sizes, hashes and reasons are in [excluded-files.json](agent-logs/2026-09-14T061140Z__ASTRA__provenance-repo-initialization__wo8b4ovs/excluded-files.json). No file was deleted.
