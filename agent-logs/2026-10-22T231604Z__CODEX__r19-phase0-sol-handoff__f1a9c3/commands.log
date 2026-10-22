@@ -1,0 +1,31 @@
+Task scope: Sol-released R19 Phase0 read-only preparation and Luna-owned provenance drafts only.
+No code/test/model/prompt/dataset/protocol/frozen-config edit, no registry/manifest/resolution mutation, no gate creation, no preflight/live/G2/G4.
+
+Observed working directories:
+- Scientific repository: /home/lizening/wt-r19-recovery-duration-v1
+- Provenance repository: /home/lizening/research-notes
+
+Read-only checks performed in this task:
+- Verified handoff hashes: sha256sum LUNA_TASK.md INDEPENDENT_AUDIT.md.
+- Scientific git state: git status --short; git rev-parse HEAD; git branch --show-current; git worktree list --porcelain; git ls-remote --heads origin.
+- Rechecked developer worktree state with git -C /home/lizening/wt-r19-source-contract-review-fixes status --short --branch, rev-parse HEAD, branch --show-current, and ls-remote. Observed active uncommitted implementation/test files on base da7d348, but did not inspect diffs or edit/stage them.
+- Process/output state: ps -eo pid=,comm=,args= filtered for Python R19 supervisor/runner entrypoints; nvidia-smi --query-compute-apps=pid,process_name,used_memory --format=csv,noheader; find artifacts/runtime for r19 directories.
+- Read Sol's independent audit and evidence/state_and_cost_audit.json; verified its SHA256 and aggregate physical counters.
+- Read and re-used the prior finalized Luna readiness report and its hashes; read the authentic failed run receipts, source resolution event, exact-SHA review, G2 evidence hashes, frozen protocol/identity manifests, and supervisor launch context. No raw source evidence was edited.
+- Re-hashed frozen protocol, schedule, exclusions, baseline manifest, user authorizations/amendments, old resolution event, and local ALFWorld config.
+- Hashed the 12 pinned local Qwen3-8B model/tokenizer/config files directly against the frozen manifest; no weights were deserialized or loaded into a model.
+- Recomputed the 11-file SFT adapter directory digest using the documented directory_sha256 algorithm; verified runtime package versions with importlib.metadata only; checked adapter/data/config/interpreter paths exist.
+- A JSON query first used jq, which is unavailable; repeated the query with a standard-library JSON reader and printed only allowlisted environment names/values (no secrets). An earlier path lookup ran from the wrong repository root and returned missing-path errors; rerun from the correct root succeeded. No state changed.
+- The first `sha256sum -c` inventory verification was invoked from the provenance repository root although inventory entries are task-directory-relative; it exited nonzero without changing files. It was rerun from this task directory before staging.
+- A broad pgrep expression matched its own shell command once. A process-name-aware ps filter plus Sol's independent process audit showed no R19 process; no GPU compute process was listed.
+- Sent Sol an INDEX coordination message with `codex queue --thread 01a0994c-a209-7600-8a3e-5ff3096ed346`; queued message ID `01a165e4-cd88-7f21-a9cb-1038ea541680`. It says this task will stage only its own directory and one owned INDEX row, and asks Sol to report any overlapping publication.
+- Sent Sol two follow-up coordination/status messages through the same queue: IDs `01a165e9-d465-7e43-8e61-a350c7cdb43c` (acknowledged Sol's provenance publication and new untracked implementation directory) and `01a165ea-187e-7a63-85d3-9bb4e2bd0fb2` (reported the new local developer worktree and its status).
+- A read-only Codex thread-history read did not return within about 52 seconds and was canceled; coordination used the successful queued messages above. No task state was changed by the read attempt.
+- Current candidate inventory: remote R19 refs still only `bf31f3d` and `da7d348`; local developer worktree `/home/lizening/wt-r19-source-contract-review-fixes` is based at da7d348 with uncommitted implementation/test changes and no matching remote ref. No diff was read or edited.
+- Current shared provenance main was observed at `a5f59f0a2b3c46bdb15e8f8deeb05f6a9b5a1b6d` on both local and remote before this task's intended publication; Sol's published files were left untouched.
+- A further Sol-owned untracked provenance directory `agent-logs/2026-10-22T232008Z__SOL__r19-additional-contract-scope__677223/` appeared during the final check; it was not opened, modified, or staged.
+- Another Sol-owned untracked provenance directory `agent-logs/2026-10-22T232351Z__SOL__r19-alias-validator-scope__535726/` appeared; it likewise was not opened, modified, or staged.
+- Validation of this task's drafts: Python cross-check of all 12 local model/tokenizer/config digest rows against frozen baseline manifest returned `rows=12`, `manifest=12`, `equal=True`, `mismatches={}`. Credential-pattern scan produced no credential-like matches; generic prose hit `secret scan` was manually reviewed and is not a secret. Whitespace check and `git diff --check -- INDEX.md` passed.
+- Provenance publication plan for this task: stage exactly `INDEX.md` and `agent-logs/2026-10-22T231604Z__CODEX__r19-phase0-sol-handoff__f1a9c3/`; inspect staged names/diff; commit on main; push `origin main` without force; verify `git rev-parse HEAD` equals `git ls-remote origin refs/heads/main`; verify selected task-file SHA256 values at the pushed tree. No other untracked paths may be staged.
+
+Not performed: tests; model loading or generation; ALFWorld construction/reset/step; G2; preflight; G3; G4; gate creation; scientific code/config/test edits; registry/manifest/resolution writes.
