@@ -1,0 +1,74 @@
+{
+  "schema_version": "r19_independent_audit_and_task_coordination_v1",
+  "reviewer_task": "01a0994c-a209-7600-8a3e-5ff3096ed346",
+  "status": "AUDIT_COMPLETE_IMPLEMENTATION_BLOCKED_TASKS_QUEUED",
+  "observed_base_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+  "observed_candidate_sha": "da7d348ffd3677d619dd31357e1e1e3cca28c9ec",
+  "candidate_IMPLEMENTATION_REVIEW": "FAIL",
+  "G2_CARRY_FORWARD": "PASS_AUTHENTIC_OLD_EVIDENCE_AND_UNCHANGED_SMOKE_PATH_ONLY",
+  "confirmed_candidate_findings": [
+    "R19-SRC-01 BLOCKING: repeated comparison on episode2",
+    "R19-SRC-02 MAJOR: fresh-process comparator import",
+    "R19-SRC-03 MAJOR: persisted trajectory digest mismatch"
+  ],
+  "fresh_focused_tests": "93 passed in 9.86s",
+  "raw_cost_recount": {
+    "completed_physical_model_generations": 177,
+    "physical_environment_operations": 330,
+    "physical_environment_resets": 12,
+    "incomplete_operations": 0,
+    "environment_operations_including_resets": 342
+  },
+  "known_failed_disposition": "INCOMPLETE_SOURCE_KNOWN_SOFTWARE_FAILURE_NO_TASK_OUTCOME",
+  "restart_recommendation": "CONDITIONALLY_DEFENSIBLE_NOT_AUTHORIZED_NOW",
+  "positive_preflight_eligible": false,
+  "launch_clearance_issued": false,
+  "task_dependency": "New Agent implementation -> Sol exact-SHA review -> Luna preflight -> independent launch clearance -> explicitly authorized scientific execution -> G4",
+  "dispatch": [
+    {
+      "title": "New Agent / Sol Research",
+      "thread": "01a165de-c75e-7120-abc9-fa74cde1f17f",
+      "queue_returncode": 0,
+      "state": "QUEUED_ONLY_NOT_ACKNOWLEDGED_OR_STARTED"
+    },
+    {
+      "title": "Luna Excution",
+      "thread": "01a09fcb-ab5f-7b83-9acf-91026145b764",
+      "queue_returncode": 0,
+      "state": "QUEUED_ONLY_NOT_ACKNOWLEDGED_OR_STARTED"
+    }
+  ],
+  "scientific_side_effects": {
+    "model_loads": 0,
+    "model_generations": 0,
+    "alfworld_constructions": 0,
+    "alfworld_resets": 0,
+    "alfworld_steps": 0,
+    "g2_reruns": 0,
+    "real_preflights": 0,
+    "g3_launches": 0,
+    "g4_efficacy_analyses": 0
+  },
+  "completed_utc": "2026-10-22T23:14:10.588170+00:00",
+  "evidence_sha256": {
+    "NEW_AGENT_TASK.md": "01b53d97bf45b85bf2f207ce762278dc2586badf2ca08b2caad3e71f864c018d",
+    "LUNA_TASK.md": "d0f740910dde5f5d7809b35ff73126f681af66fd4413cdc81d92adb4d3a31db1",
+    "INDEPENDENT_AUDIT.md": "6fafc7d0776c988c6618d2a5420660b587e48d79ef56078db05e514568bb9a5a",
+    "handoff_manifest.json": "559ca9dd39176c3661893ff042bdf084e40a79ec89b6d74446bfb3f088f8f8cc",
+    "dispatch_receipts.json": "a83033e7ce245d995b1e656fd42be3daeee6d052fe6a387a9d9b77dc37edb026",
+    "evidence/fresh_comparator_result.json": "d88f7b2620c3511290c7ef44215b215e686ffc9f6f4a8fe41c307e0a6e8f233c",
+    "evidence/focused_tests.log": "c30b4c465de4c2c636df2f76aedb228f35c1235a4eb2803c66f37bc001d4bfe6",
+    "evidence/probes.log": "9a6463efe4fe2fe7acfc3c66cfd951bf413754b714087da9468e855346d47dda",
+    "evidence/probes.py": "65d0f0e1d6589824c99a3a709bc4400f64321a8e5ff801f16af918f648226dc1",
+    "evidence/fresh-comparator-input.json": "1ef66b0bc58295ebb53ff8a8aa541009a5b3ec31139c3030194e457a2f5ad2e6",
+    "evidence/state_and_cost_audit.json": "b666f5d2d69171a0305c6657f952d70f5ab304295c13b171fc77690a9cb05dab",
+    "evidence/second_source_failure_fixture/source_trajectories.jsonl": "751b6caa16acb764b3beb73f42c53143ae024f283a8d0f07e83d7800d717196a",
+    "evidence/second_source_failure_fixture/registry.json": "ee25df151fb6379027d32cd0cf52c7e0db8c43452bd24dbe67993db2f1ea24f5",
+    "evidence/second_source_failure_fixture/events.jsonl": "cca43e4f9b9800266c3a5a128bd5905ef4efcecf04b839262b668b00b145cb24",
+    "evidence/second_source_failure_fixture/source_restart_comparison.json": "a991fccb2ca7fcb56c5b430062e6c1c37e0dfe8dc70223ffdf410e43f3a178e2",
+    "evidence/first_source_fixture/source_trajectories.jsonl": "751b6caa16acb764b3beb73f42c53143ae024f283a8d0f07e83d7800d717196a",
+    "evidence/first_source_fixture/registry.json": "9418faf5e9ddab9e2681764de834be07302fab1c80cf056b59c3d8279daecedb",
+    "evidence/first_source_fixture/events.jsonl": "e9397cf0d9a9086dede029c46fa937bf395d1745e095748f55563df0269e398f",
+    "evidence/first_source_fixture/source_restart_comparison.json": "a991fccb2ca7fcb56c5b430062e6c1c37e0dfe8dc70223ffdf410e43f3a178e2"
+  }
+}
