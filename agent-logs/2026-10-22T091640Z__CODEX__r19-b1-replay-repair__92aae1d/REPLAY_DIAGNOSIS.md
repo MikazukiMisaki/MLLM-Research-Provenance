@@ -85,15 +85,17 @@ ledger was revalidated by the production event-ledger validator in
 The prior G2 remains `G2_FAIL_BEFORE_BRANCH_ARM_EXECUTION`, authentic exit 2.
 It consumed 19 physical environment operations, zero model generations, and
 zero branch executions. This offline diagnosis used zero physical operations.
-The original campaign cap therefore has at most 381 environment operations
-remaining. The frozen successor-smoke plan is capped at 374 operations, 228
-model calls, and six production arms, so it fits within the remaining original
-400 / 408 / 8 ceilings if all retry prerequisites pass. No successor G2 has
-started. G3 and fresh TRAIN tasks remain unauthorized.
+At the prelaunch point, 381 environment operations remained; the frozen
+successor-smoke plan was capped at 374 operations, 228 model calls, and six
+production arms, fitting within the original 400 / 408 / 8 ceilings. G3 and
+fresh TRAIN tasks remain unauthorized.
 
-The successor commit is pushed to the original branch and its remote ref
-matches. Exact-SHA independent review passed and the append-only unit
-resolution is recorded. A single successor G2 attempt has not started; it is
-eligible only under the already approved section-6 conditions, with the
-previous run and cumulative costs bound into its gate manifest. No second
-retry or G3 is authorized.
+After the exact-SHA review passed, the append-only unit resolution was
+recorded, the independent gate/campaign check passed, and all section-6 retry
+prerequisites were satisfied. The one user-authorized successor G2 attempt
+then ran and completed with `G2_PASS`: 322 physical environment operations
+including 10 resets, 176 model generations, and six branch executions. The
+cumulative campaign total is 341 / 400 operations, 176 / 408 generations,
+and 6 / 8 branches. The complete result and offline verification are in
+[`G2_SUCCESSOR_REPORT.md`](G2_SUCCESSOR_REPORT.md). The retry is consumed;
+there is no second retry or G3 authorization.
