@@ -1,0 +1,25 @@
+{
+  "label": "integrated_precommit",
+  "argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-m",
+    "pytest",
+    "-o",
+    "addopts=",
+    "-q",
+    "tests/test_r19_source_pipeline.py",
+    "tests/test_r19_source_contract.py",
+    "tests/test_r19_g3_authorization.py",
+    "tests/test_r19_recovery_duration.py",
+    "--tb=short"
+  ],
+  "cwd": "/home/lizening/wt-r19-source-contract-review-fixes",
+  "environment_overrides": {
+    "PYTHONPATH": "src"
+  },
+  "exit_code": 0,
+  "exit_code_source": "subprocess.returncode",
+  "started_unix": 1792712069.9582448,
+  "completed_unix": 1792712086.2032957,
+  "class": "software_checks_only_no_scientific_execution"
+}

@@ -1,0 +1,1247 @@
+diff --git a/configs/experiments/r19_b1_g3_source_contract_repair_amendment_v1.json b/configs/experiments/r19_b1_g3_source_contract_repair_amendment_v1.json
+index b24fd05..728bf59 100644
+--- a/configs/experiments/r19_b1_g3_source_contract_repair_amendment_v1.json
++++ b/configs/experiments/r19_b1_g3_source_contract_repair_amendment_v1.json
+@@ -12,7 +12,7 @@
+   "changed_method_fingerprints": {
+     "scripts/run_r19_experiment.py::LiveR19Runtime._collect_one_source": {
+       "old": "12755022c3e7e8b25cff9cc07e47eaf3cbc5045f8ae2a21c43fc356002ec4d52",
+-      "new": "f2e256054e6bcd2fcb041b69e2edc42a705d2dbf722d167ff65649a003bd7a9a"
++      "new": "e3086440b4c6aa8c0d5ad9d64a35bae582b5c72effce9a55d811e54bd0c45fb5"
+     },
+     "scripts/run_r19_experiment.py::LiveR19Runtime.actor_generation": {
+       "old": "c2a453654ab919555801e5c087cc13b1f2be40b9b3fdca01a741db9e9e73d4d7",
+@@ -25,6 +25,26 @@
+     "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_environment_operation": {
+       "old": "39068afbd080a78b94d8d509259e30ee9c526945eb1156a95b734f72c39d9e5a",
+       "new": "c71fecfc4dd690f63047cc142529140b96f32301d012abbadc5d0865257a8d43"
++    },
++    "scripts/run_r19_experiment.py::LiveR19Runtime._replay_source_prefix": {
++      "old": "d6f7683cd1a3b796939c623c076148223dbcdaa9ec49c17978c6860f17466be6",
++      "new": "848005948676fca8657e3373c3df7d15b4100a02ccc5bd69cb7980948feac2aa"
++    },
++    "scripts/run_r19_experiment.py::LiveR19Runtime.recovery_step_callback": {
++      "old": "d543d863241024ce9679e8e940aab4033a5b7574887edb5c3166c8d381d248d9",
++      "new": "0f2693fe6425c22a2ccddd8087a0f616f1e4021ca21e3ab4c70ce7e36adf40a4"
++    },
++    "scripts/run_r19_experiment.py::LiveR19Runtime.common_path_step_factory": {
++      "old": "12cdf4ef7a0876b8562ff0749739bdd8164ddc892b8cf19f42c20c3b6719ada3",
++      "new": "836076a44e60a8ec5efb0388f887c3da411b2507d1cc5b6fe335a3d082df06c8"
++    },
++    "scripts/analyze_r19_recovery_duration.py::validate_branch_evidence": {
++      "old": "55c982d9dc6a605d5e85433966535f80130ced4aa6a9071b0ffa4151fdcfee9f",
++      "new": "24e586665f26fc71c4122c58a5c8647f1ba1421241471bf407c9fb076f4bbc1b"
++    },
++    "scripts/analyze_r19_recovery_duration.py::_validate_recovery_operation_link": {
++      "old": "82974d671cf5536b633a6a374c7b71680a877adfcec95ed5adb60fbb2f499e07",
++      "new": "69c3bf8f90949bbe670d65a3bdbd3fe1774f3da407b6287949b81682891e053e"
+     }
+   },
+   "contract_changes": [
+@@ -54,5 +74,33 @@
+     "review_must_confirm_real_g2_evidence_carry_forward": true,
+     "review_must_confirm_one_bounded_restart_and_first_source_comparator": true,
+     "no_g2_rerun": true
++  },
++  "implementation_review_fixes": {
++    "base_candidate_sha": "da7d348ffd3677d619dd31357e1e1e3cca28c9ec",
++    "findings": [
++      "R19-SRC-01",
++      "R19-SRC-02",
++      "R19-SRC-03",
++      "R19-SRC-04",
++      "R19-SRC-05",
++      "R19-SRC-06"
++    ],
++    "review_status": "PENDING_INDEPENDENT_EXACT_SHA_REVIEW",
++    "execution_authorization": "NO_NEW_LIVE_AUTHORIZATION_GRANTED",
++    "hash_domain": "comparison receipt SHA included before canonical trajectory hashing; own digest and event references excluded",
++    "standalone_analyzer": "bootstrap repository root and retain exact production helper origin verification",
++    "additional_implementation_scope_rulings_sha256": [
++      "de8b780d1c310d6055da59c1b7c3a73f551c69033f96233a1348c9346e491767",
++      "2bb6fac00f8dd75a558289e4193bcf6242f505a65647347d23cf82274fadd9ee"
++    ],
++    "additional_contract_repairs": [
++      "Bind source replay Action-ID from its contemporaneous ordered action map",
++      "Retain original-common-path recovery indices and phase debits across extension",
++      "Authenticate aliases by actual event order and shared endpoint/suffix; reconstruct each K cost separately"
++    ],
++    "changed_frozen_methods": 9,
++    "changed_runtime_methods": 7,
++    "changed_frozen_analyzer_methods": 2,
++    "g2_carry_forward": "PENDING_NEW_EXACT_SHA_REVIEW_SHARED_CALLBACK_BOOKKEEPING_CHANGED"
+   }
+ }
+diff --git a/configs/experiments/r19_b1_g3_source_contract_restart_authorization_v1.json b/configs/experiments/r19_b1_g3_source_contract_restart_authorization_v1.json
+index 7549f4b..c577873 100644
+--- a/configs/experiments/r19_b1_g3_source_contract_restart_authorization_v1.json
++++ b/configs/experiments/r19_b1_g3_source_contract_restart_authorization_v1.json
+@@ -8,7 +8,7 @@
+   "entrypoint_repair_authorization_sha256": "026eb1f0b05bcc27a6c901c10d787110cbac0e329551051973dda93e907bdc71",
+   "source_package_sha256": "20f9414a2d80a48060247368afcb9b9f07bc0573f591fd28d4f19213c8c23813",
+   "source_package_start_prompt_sha256": "4cd8802385f2dc08bf51aaca7367a43d84e3433d2f55b1908b3c631e3e391b44",
+-  "source_contract_amendment_sha256": "62ff158f5739859266664b1db2e323dca6ea0ad3b8e84134ecbe5fd06c847372",
++  "source_contract_amendment_sha256": "1b94a0ed37284d37a21d07985a5ba18de25ea4e11f9ffa553ca624c9739aee1e",
+   "unit_resolution_event_sha256": "58783ba60b076ee190dccb0875aac65891d7e1c811e00fbe6303ca65896369d9",
+   "user_adoption_evidence": {
+     "status": "EXPLICITLY_ADOPTED_BY_USER",
+diff --git a/scripts/analyze_r19_recovery_duration.py b/scripts/analyze_r19_recovery_duration.py
+index 3829eba..a65cebd 100644
+--- a/scripts/analyze_r19_recovery_duration.py
++++ b/scripts/analyze_r19_recovery_duration.py
+@@ -6,12 +6,14 @@ from __future__ import annotations
+ import argparse
+ import hashlib
+ import json
++import random
+ import sys
+ from collections import Counter
+ from pathlib import Path
+ from typing import Any, Mapping
+ 
+ PROJECT_ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(PROJECT_ROOT))
+ R19_MACHINE_PROTOCOL_SHA256 = "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122"
+ R19_PROTOCOL_DOCUMENT_SHA256 = "7668d7fa5422ad6ad7d3affc72b2e573ec19aae53314198fc14b46dc74c9a3d9"
+ R19_SOURCE_SCHEDULE_SHA256 = "0be460359fe43193e73f8cb55a8fb19fdba02ea70e3d0809ec5978fad21c8948"
+@@ -29,6 +31,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
+ 
+ from recovery.r19_duration import (  # noqa: E402
+     EvidenceIntegrityError,
++    R19_SUFFIX_ORDER_SEED,
+     analyze_duration_branches,
+     atomic_write_json,
+     atomic_write_text,
+@@ -561,6 +564,7 @@ def _validate_recovery_operation_link(
+         or operation_identity.get("canonical_trial_id") != step_identity.get("canonical_trial_id")
+         or operation_identity.get("component") != "recovery"
+         or operation_identity.get("operation") != "recovery_environment_operation"
++        or operation_identity.get("recovery_action_index") != action.get("recovery_action_index")
+         or payload.get("command") != action.get("command")
+         or payload.get("action_id") != action.get("action_id")
+         or payload.get("transition", {}).get("executed_command") != action.get("command")
+@@ -810,6 +814,55 @@ def _check_cost_reconstruction(
+                 raise EvidenceIntegrityError(f"logical {scope} {field} disagrees with raw execution events")
+ 
+ 
++def _validate_duration_arm_order(
++    row: Mapping[str, Any], source_event: Mapping[str, Any],
++    events: list[dict[str, Any]], expected_ks: set[str],
++) -> dict[int, Mapping[str, Any]]:
++    """Authenticate physical arm order independently of numeric K order."""
++    prefix_id = row["prefix_id"]
++    order_events = [event for event in events if event.get("kind") == "suffix_order_frozen"
++                    and event.get("identity", {}).get("prefix_id") == prefix_id]
++    expected_order = sorted(map(int, expected_ks))
++    random.Random(R19_SUFFIX_ORDER_SEED).shuffle(expected_order)
++    if len(order_events) != 1:
++        raise EvidenceIntegrityError("branch lacks one frozen suffix-order event")
++    order_event = order_events[0]
++    _same_execution_identity(source_event, order_event)
++    if order_event.get("payload") != {
++        "seed": R19_SUFFIX_ORDER_SEED, "order": expected_order, "k_in_generation_prompt": False,
++    }:
++        raise EvidenceIntegrityError("branch changed the frozen suffix order or seed")
++    by_kind: dict[str, dict[int, Mapping[str, Any]]] = {}
++    for kind in ("duration_arm_started", "duration_arm_completed"):
++        selected = [event for event in events if event.get("kind") == kind
++                    and event.get("identity", {}).get("prefix_id") == prefix_id]
++        if len(selected) != len(expected_ks):
++            raise EvidenceIntegrityError("branch arm lifecycle is missing or repeated")
++        arms: dict[int, Mapping[str, Any]] = {}
++        for event in selected:
++            _same_execution_identity(source_event, event)
++            identity = event.get("identity", {})
++            k = identity.get("k")
++            if (type(k) is not int or str(k) not in expected_ks or k in arms
++                    or identity.get("canonical_trial_id", row["canonical_trial_id"]) != row["canonical_trial_id"]):
++                raise EvidenceIntegrityError("branch arm lifecycle changed K or task identity")
++            arms[k] = event
++        by_kind[kind] = arms
++    previous = int(order_event.get("sequence", -1))
++    for k in expected_order:
++        start = by_kind["duration_arm_started"][k]
++        complete = by_kind["duration_arm_completed"][k]
++        if not previous < int(start.get("sequence", -1)) < int(complete.get("sequence", -1)):
++            raise EvidenceIntegrityError("branch arms do not follow the frozen physical execution order")
++        if start.get("payload", {}).get("suffix_order_seed") != R19_SUFFIX_ORDER_SEED:
++            raise EvidenceIntegrityError("branch arm start changed the frozen suffix-order seed")
++        previous = int(complete["sequence"])
++        refs = row["evidence_refs"]["k_arms"][str(k)]
++        if refs.get("arm_event_id") != complete.get("event_id"):
++            raise EvidenceIntegrityError("branch arm completion differs from its physical lifecycle")
++    return by_kind["duration_arm_started"]
++
++
+ def validate_branch_evidence(
+     branches: list[dict[str, Any]], events: list[dict[str, Any]],
+     *, return_operation_ids: bool = False,
+@@ -935,8 +988,22 @@ def validate_branch_evidence(
+         expected_ks = {"1", "2", "3", "4", "5"} if row.get("eligible_primary") is True else {"1"}
+         if set(map(str, k_refs)) != expected_ks:
+             raise EvidenceIntegrityError("branch event references do not match its frozen eligibility status")
+-        validated_arm_rows: dict[int, Mapping[str, Any]] = {}
+-        validated_arm_event_ids: dict[int, str] = {}
++        if set(row.get("k_results", {})) != expected_ks:
++            raise EvidenceIntegrityError("branch result arms do not match their frozen evidence set")
++        arm_starts = _validate_duration_arm_order(row, source_event, events, expected_ks)
++        path_generations = [event for event in events if event.get("kind") == "generation_completed"
++                            and event.get("identity", {}).get("prefix_id") == prefix_id
++                            and event.get("identity", {}).get("component") in {"stage1", "stage2"}]
++        stage_ones = [event for event in path_generations if event["identity"]["component"] == "stage1"]
++        stage_twos = [event for event in path_generations if event["identity"]["component"] == "stage2"]
++        stage_twos.sort(key=lambda event: event["sequence"])
++        if len(stage_ones) != 1 or not 1 <= len(stage_twos) <= 5 or [
++            event["identity"].get("stage_two_attempt") for event in stage_twos
++        ] != list(range(1, len(stage_twos) + 1)):
++            raise EvidenceIntegrityError("branch lacks one canonical ordered recovery generation path")
++        path_transitions = [event for event in events if event.get("kind") == "environment_step_completed"
++                            and event.get("identity", {}).get("prefix_id") == prefix_id]
++        path_transitions.sort(key=lambda event: event["sequence"])
+         for k_text in sorted(expected_ks, key=int):
+             arm_refs = k_refs[k_text]
+             if not isinstance(arm_refs, Mapping):
+@@ -948,6 +1015,8 @@ def validate_branch_evidence(
+                 or arm_event.get("identity", {}).get("prefix_id") != prefix_id
+                 or int(arm_event.get("identity", {}).get("k", -1)) != int(k_text)
+                 or not isinstance(arm_row, Mapping)
++                or arm_row.get("k") != int(k_text)
++                or arm_row.get("arm_event_id") != arm_event.get("event_id")
+             ):
+                 raise EvidenceIntegrityError(f"K{k_text} does not resolve to its arm completion event")
+             _same_execution_identity(source_event, arm_event)
+@@ -959,16 +1028,33 @@ def validate_branch_evidence(
+                     raise EvidenceIntegrityError(f"K{k_text} names an alias event without an alias K")
+             else:
+                 alias_k = int(alias_value)
+-                prior = validated_arm_rows.get(alias_k)
++                prior = row.get("k_results", {}).get(str(alias_k))
++                prior_event = event_by_id.get(str(alias_event_id))
++                prior_refs = refs["k_arms"].get(str(alias_k), {})
+                 if (
+-                    alias_k >= int(k_text)
+-                    or prior is None
+-                    or alias_event_id != validated_arm_event_ids.get(alias_k)
+-                    or int(arm_row.get("success", -1)) != int(prior.get("success", -2))
+-                    or arm_row.get("logical_cost") != prior.get("logical_cost")
+-                    or arm_row.get("evidence_refs") != prior.get("evidence_refs")
++                    alias_k == int(k_text) or not isinstance(prior, Mapping)
++                    or prior_event is None or prior_event.get("kind") != "duration_arm_completed"
++                    or prior_event.get("identity", {}).get("prefix_id") != prefix_id
++                    or prior_event.get("identity", {}).get("k") != alias_k
++                    or prior_refs.get("arm_event_id") != alias_event_id
++                    or prior.get("arm_event_id") != alias_event_id
++                    or prior.get("derived_identity_from") is not None
++                    or int(prior_event.get("sequence", -1)) >= int(arm_starts[int(k_text)]["sequence"])
+                 ):
+                     raise EvidenceIntegrityError(f"K{k_text} alias is not bound to an exact earlier measured arm")
++                _same_execution_identity(source_event, prior_event)
++                # Only the endpoint and physically shared suffix are identical.
++                # Recovery generations/costs belong to each assigned K policy.
++                shared_fields = (
++                    "checkpoint", "recovery_environment_actions", "sft_action_cap", "terminal",
++                    "success", "sft_environment_actions", "sft_terminal", "sft_termination_reason",
++                    "replay_evidence",
++                )
++                shared_refs = ("recovery_transition_event_ids", "suffix_generation_event_ids", "suffix_transition_event_ids")
++                if (any(arm_row.get(field) != prior.get(field) for field in shared_fields)
++                        or any(arm_row.get("evidence_refs", {}).get(field, [])
++                               != prior.get("evidence_refs", {}).get(field, []) for field in shared_refs)):
++                    raise EvidenceIntegrityError(f"K{k_text} alias changed its checkpoint or shared physical suffix")
+             if (
+                 int(arm_payload.get("success", -1)) != int(arm_row.get("success", -2))
+                 or arm_payload.get("logical_cost") != arm_row.get("logical_cost")
+@@ -978,9 +1064,6 @@ def validate_branch_evidence(
+                 or dict(arm_payload.get("evidence_refs", {})) != dict(arm_refs.get("operations", {}))
+             ):
+                 raise EvidenceIntegrityError(f"K{k_text} arm event disagrees with its materialized branch row")
+-            validated_arm_rows[int(k_text)] = arm_row
+-            validated_arm_event_ids[int(k_text)] = str(arm_event["event_id"])
+-
+             operation_refs = arm_refs.get("operations")
+             if not isinstance(operation_refs, Mapping):
+                 raise EvidenceIntegrityError("K-arm has no raw operation-event references")
+@@ -1010,6 +1093,13 @@ def validate_branch_evidence(
+             charged_stage_two = int(arm_row.get("stage_two_attempts_charged", -1))
+             if charged_stage_two < 0 or len(recovery_generations) != charged_stage_two + 1:
+                 raise EvidenceIntegrityError("recovery generation count differs from the endpoint's charged attempts")
++            expected_generation_ids = [stage_ones[0]["event_id"], *[
++                event["event_id"] for event in stage_twos[:min(int(k_text), len(stage_twos))]
++            ]]
++            expected_transition_ids = [event["event_id"] for event in path_transitions[:min(int(k_text), len(path_transitions))]]
++            if (operation_refs.get("recovery_generation_event_ids") != expected_generation_ids
++                    or operation_refs.get("recovery_transition_event_ids", []) != expected_transition_ids):
++                raise EvidenceIntegrityError("K arm changed its own canonical recovery calls or checkpoint")
+             if [event.get("identity", {}).get("component") for event in recovery_generations[1:]] != ["stage2"] * charged_stage_two:
+                 raise EvidenceIntegrityError("Stage-2 generation evidence is missing or reordered")
+             if any(
+@@ -1056,6 +1146,27 @@ def validate_branch_evidence(
+             expected_consumed = original_prefix_actions + recovery_actions
+             if checkpoint != recovery_actions:
+                 raise EvidenceIntegrityError("K arm checkpoint and actual recovery action count disagree")
++            source_steps = source_trajectory["steps"]
++            endpoint_state = ({"observation": source_steps[original_prefix_actions]["observation"],
++                               "valid_actions": source_steps[original_prefix_actions]["valid_actions"]}
++                              if not recovery_transitions else recovery_transitions[-1]["payload"]["action"]["transition"])
++            endpoint_history = [[step["observation"], step["action"]] for step in source_steps[:original_prefix_actions]]
++            endpoint_history.extend([[event["payload"]["action"]["observation_before"], event["payload"]["action"]["command"]]
++                                     for event in recovery_transitions])
++            endpoint_identity = {
++                "task_id": canonical_trial_id, "canonical_trial_id": canonical_trial_id,
++                "nominal_seed": int(row["nominal_seed"]), "observation": endpoint_state["observation"],
++                "valid_actions": endpoint_state["valid_actions"], "history": endpoint_history,
++                "actions_consumed": expected_consumed,
++            }
++            start_payload = arm_starts[int(k_text)].get("payload", {})
++            recovery_terminal = bool(endpoint_state.get("done") or endpoint_state.get("truncated"))
++            if (start_payload.get("checkpoint") != checkpoint
++                    or arm_payload.get("checkpoint") != checkpoint
++                    or start_payload.get("checkpoint_state_sha256") != sha256_json(endpoint_identity)
++                    or arm_row.get("sft_action_cap") != 50 - expected_consumed
++                    or arm_row.get("terminal") is not recovery_terminal):
++                raise EvidenceIntegrityError("K arm lifecycle changed its exact endpoint state, terminal flag or horizon")
+             if arm_row.get("terminal") is True and (suffix_generations or suffix_transitions):
+                 raise EvidenceIntegrityError("terminal recovery arm contains SFT suffix operations")
+             suffix_generation_indices: list[int] = []
+@@ -1127,6 +1238,25 @@ def validate_branch_evidence(
+                         or transition_payload.get("transition", {}).get("executed_command") != parser.get("action")
+                     ):
+                         raise EvidenceIntegrityError("SFT executed command differs from its raw-output parser result")
++            suffix_terminal = bool(suffix_transitions and (
++                suffix_transitions[-1]["payload"]["transition"]["done"]
++                or suffix_transitions[-1]["payload"]["transition"]["truncated"]
++            ))
++            if recovery_terminal:
++                expected_reason = "recovery_terminal"
++            elif suffix_terminal:
++                expected_reason = ("environment_terminal" if suffix_transitions[-1]["payload"]["transition"]["done"]
++                                   else "environment_truncated")
++            elif suffix_generations and suffix_generations[-1]["payload"]["evidence"]["parser_result"]["selection_status"] != "selected":
++                expected_reason = "selection_failure"
++            else:
++                expected_reason = "remaining_horizon"
++                if len(suffix_transitions) != 50 - expected_consumed:
++                    raise EvidenceIntegrityError("SFT suffix stopped before its declared remaining horizon")
++            if (arm_row.get("sft_terminal") is not bool(recovery_terminal or suffix_terminal)
++                    or arm_row.get("sft_termination_reason") != expected_reason
++                    or arm_row.get("sft_environment_actions") != len(suffix_transitions)):
++                raise EvidenceIntegrityError("SFT termination metadata disagrees with its physical suffix")
+             arm_success, _ = _transition_outcome_and_count(recovery_transitions + suffix_transitions)
+             if int(arm_row.get("success", -1)) != arm_success:
+                 raise EvidenceIntegrityError(f"K{k_text} outcome disagrees with raw terminal transitions")
+diff --git a/scripts/run_r19_experiment.py b/scripts/run_r19_experiment.py
+index fd54564..5f85c97 100644
+--- a/scripts/run_r19_experiment.py
++++ b/scripts/run_r19_experiment.py
+@@ -845,8 +845,13 @@ def _load_source_contract_restart_authorization(
+         "scripts/run_r19_experiment.py::LiveR19Runtime._collect_one_source",
+         "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_model_call",
+         "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_environment_operation",
++        "scripts/run_r19_experiment.py::LiveR19Runtime._replay_source_prefix",
++        "scripts/run_r19_experiment.py::LiveR19Runtime.recovery_step_callback",
++        "scripts/run_r19_experiment.py::LiveR19Runtime.common_path_step_factory",
++        "scripts/analyze_r19_recovery_duration.py::validate_branch_evidence",
++        "scripts/analyze_r19_recovery_duration.py::_validate_recovery_operation_link",
+     }:
+-        raise ExecutionGateError("source-contract amendment must name exactly the four reviewed contract/budget methods")
++        raise ExecutionGateError("source-contract amendment must name exactly the nine scoped contract/validation methods")
+     for key, entry in method_changes.items():
+         if not isinstance(entry, Mapping) or entry.get("old") != old_fingerprints.get(key):
+             raise ExecutionGateError("source-contract amendment old method fingerprint differs from the frozen G3 authorization")
+@@ -1659,7 +1664,7 @@ class LiveR19Runtime:
+ 
+     def recovery_step_callback(
+         self, env: Any, prefix: RecoveryCursor, prefix_id: str,
+-        *, operation_prefix: str = "recovery",
++        *, operation_prefix: str = "recovery", recovery_action_offset: int = 0,
+     ) -> Any:
+         from models.action_parser import action_id_mapping
+ 
+@@ -1684,7 +1689,7 @@ class LiveR19Runtime:
+                  "split": "train",
+                  "component": "recovery",
+                  "operation": f"{operation_prefix}_environment_operation",
+-                 "recovery_action_index": current.actions_consumed - prefix.actions_consumed + 1},
++                 "recovery_action_index": recovery_action_offset + current.actions_consumed - prefix.actions_consumed + 1},
+                 before=before, action_id=action_id,
+             )
+             transition = {
+@@ -1715,7 +1720,9 @@ class LiveR19Runtime:
+             raise EvidenceIntegrityError("frozen eligible path lost its initial-attempt environment")
+         self.common_path_envs.append(env)
+         cursor = path.checkpoints[len(path.actions)]
+-        return self.recovery_step_callback(env, cursor, path.prefix_id)
++        return self.recovery_step_callback(
++            env, cursor, path.prefix_id, recovery_action_offset=len(path.actions),
++        )
+ 
+     def recovery_stage_one(self, cursor: RecoveryCursor) -> dict[str, Any]:
+         from models.policy import ActionRequest
+@@ -1902,7 +1909,7 @@ class LiveR19Runtime:
+             )
+             mapping = action_id_mapping(valid_actions)
+             generation_ids.append(generation_id)
+-            if restart_expected is not None and step_index == 0:
++            if restart_expected is not None and index == 0 and step_index == 0:
+                 observed_snapshot = _source_restart_snapshot(
+                     canonical_trial_id=task_id, schedule_index=index, seed=seed,
+                     observation=observation, valid_actions=valid_actions,
+@@ -2014,6 +2021,11 @@ class LiveR19Runtime:
+                 ),
+             },
+         }
++        # Bind the immutable comparison receipt before hashing or serializing
++        # any representation of this trajectory. Event references and the
++        # trajectory's own digest remain outside the canonical hash domain.
++        if restart_expected is not None and index == 0:
++            row["metadata"]["source_restart_comparison_sha256"] = self.source_restart_comparison_sha256
+         trajectory_sha = _trajectory_sha256(row)
+         source_event = self.sink("source_episode_completed", {
+             "canonical_trial_id": task_id, "split": "train", "schedule_index": index,
+@@ -2029,8 +2041,6 @@ class LiveR19Runtime:
+             "source_traj_data_sha256": str(episode["source_traj_data_sha256"]),
+         })
+         row["metadata"]["source_trajectory_sha256"] = trajectory_sha
+-        if restart_expected is not None and index == 0:
+-            row["metadata"]["source_restart_comparison_sha256"] = self.source_restart_comparison_sha256
+         row["metadata"]["r19_source_event_refs"] = {
+             "source_episode_event_id": source_event["event_id"],
+             "generation_event_ids": generation_ids,
+@@ -2072,6 +2082,12 @@ class LiveR19Runtime:
+             if not command or command not in valid_actions:
+                 env.close()
+                 raise EvidenceIntegrityError(f"source replay action {step_index} is not admissible")
++            from models.action_parser import action_id_mapping
++            replay_mapping = action_id_mapping(valid_actions)
++            replay_action_id = next((key for key, value in replay_mapping.items() if value == command), None)
++            if replay_action_id is None or replay_mapping[replay_action_id] != command:
++                env.close()
++                raise EvidenceIntegrityError("source replay command lacks its exact current Action-ID")
+             before = {"observation": observation, "valid_actions": list(valid_actions),
+                       "history": [list(pair) for pair in history], "actions_consumed": step_index}
+             transition, event_id = self.record_step(
+@@ -2079,7 +2095,8 @@ class LiveR19Runtime:
+                 {"prefix_id": prefix_id, "canonical_trial_id": task_id,
+                  "split": split, "operation": f"{replay_operation_prefix}_environment_step",
+                  "decision_index": step_index,
+-                 **({"k": int(replay_k)} if replay_k is not None else {})}, before=before,
++                 **({"k": int(replay_k)} if replay_k is not None else {})},
++                before=before, action_id=replay_action_id,
+             )
+             expected_transition = {
+                 "observation": expected.get("result_observation"),
+diff --git a/tests/test_r19_g3_authorization.py b/tests/test_r19_g3_authorization.py
+index 117c1ad..f593920 100644
+--- a/tests/test_r19_g3_authorization.py
++++ b/tests/test_r19_g3_authorization.py
+@@ -192,7 +192,7 @@ def _production_gate_fixture(tmp_path: Path, monkeypatch) -> dict:
+     )
+     monkeypatch.setattr(runner, "_load_g3_authorization", lambda: (auth, auth_sha))
+     # Downstream gate-field tests run with a synthetic exact-fingerprint pass;
+-    # a separate test verifies the real four-method source overlay.
++    # a separate test verifies the real scoped source/validation overlay.
+     monkeypatch.setattr(
+         runner, "_current_scientific_function_fingerprints",
+         lambda expected: dict(expected),
+@@ -243,7 +243,7 @@ def test_g3_carry_forward_requires_exact_review_and_reconciled_prior_evidence(tm
+         )
+ 
+ 
+-def test_source_contract_restart_gate_binds_four_method_overlay_and_original_g2(
++def test_source_contract_restart_gate_binds_scoped_method_overlay_and_original_g2(
+     tmp_path: Path, monkeypatch,
+ ) -> None:
+     gate, auth, auth_sha, head = _carry_forward_fixture(tmp_path)
+@@ -322,6 +322,11 @@ def test_source_contract_amendment_fingerprints_exactly_current_methods() -> Non
+         "scripts/run_r19_experiment.py::LiveR19Runtime._collect_one_source",
+         "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_model_call",
+         "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_environment_operation",
++        "scripts/run_r19_experiment.py::LiveR19Runtime._replay_source_prefix",
++        "scripts/run_r19_experiment.py::LiveR19Runtime.recovery_step_callback",
++        "scripts/run_r19_experiment.py::LiveR19Runtime.common_path_step_factory",
++        "scripts/analyze_r19_recovery_duration.py::validate_branch_evidence",
++        "scripts/analyze_r19_recovery_duration.py::_validate_recovery_operation_link",
+     }
+     fingerprints = dict(auth["scientific_execution_fingerprints"])
+     fingerprints.update({key: item["new"] for key, item in changes.items()})
+diff --git a/tests/test_r19_source_contract.py b/tests/test_r19_source_contract.py
+index d72d091..0e63c73 100644
+--- a/tests/test_r19_source_contract.py
++++ b/tests/test_r19_source_contract.py
+@@ -299,3 +299,22 @@ def test_one_restart_phase_caps_debit_the_prior_source_generation_and_reset():
+     assert runtime.environment_operation_counts['source'] == 8999
+     with pytest.raises(EvidenceIntegrityError, match='source environment-operation cap'):
+         runtime._reserve_environment_operation(identity, is_reset=True)
++
++
++def test_restart_trajectory_digest_matches_all_persisted_representations(tmp_path, monkeypatch):
++    row, events, _, _, _, _, _ = run_source(
++        tmp_path, monkeypatch, ['A001'], restart_expected=True)
++    stored = json.loads((tmp_path / 'source/source_trajectories.jsonl').read_text())
++    source = next(event for event in events if event['kind'] == 'source_episode_completed')
++    registry = json.loads((tmp_path / 'source/registry.json').read_text())
++    receipt = next(iter(registry['units'].values()))['receipt']
++    expected = row['metadata']['source_trajectory_sha256']
++    for value in (row, stored, source['payload']['trajectory']):
++        assert runner._trajectory_sha256(value) == expected
++        assert analyzer._source_trajectory_digest(value) == expected
++        assert value['metadata']['source_restart_comparison_sha256'] == runner.sha256_file(
++            tmp_path / 'source/source_restart_comparison.json')
++    assert source['payload']['trajectory_sha256'] == receipt['source_trajectory_sha256'] == expected
++    changed = copy.deepcopy(stored)
++    changed['metadata']['source_restart_comparison_sha256'] = '0' * 64
++    assert runner._trajectory_sha256(changed) != expected
+diff --git a/tests/test_r19_source_pipeline.py b/tests/test_r19_source_pipeline.py
+new file mode 100644
+index 0000000..98ae240
+--- /dev/null
++++ b/tests/test_r19_source_pipeline.py
+@@ -0,0 +1,748 @@
++"""Production R19 integration with synthetic generation/environment edges only.
++
++These fixtures are software evidence, never scientific runs or live G4 evidence.
++"""
++from collections import Counter
++import copy
++import hashlib
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++from types import SimpleNamespace
++
++import pytest
++
++from env.base import ResetResult, Task, Transition
++from models.action_parser import action_id_mapping
++from models.policy import ActionRequest
++from models.protocol_stability import parse_p2_selection
++from recovery.r19_duration import (
++    DurableEventJournal, EvidenceIntegrityError, IndeterminateUnitError,
++    UnitRegistry, build_r19_source_schedule, sha256_json,
++)
++from recovery.two_stage import parse_stage_one_output, stage_one_prompt
++from recovery.two_stage_v2 import parse_bare_stage_two_output, stage_two_prompt
++from scripts import analyze_r19_recovery_duration as analyzer
++from scripts import run_r19_experiment as runner
++from sft.protocol import sft_p0_prompt
++
++ROOT = Path(__file__).resolve().parents[1]
++ACTIONS = ('look', 'go to garbagecan 1')
++
++
++def generation(prompt, raw, cap=16):
++    # Synthetic token evidence; no tokenizer/model is loaded by these tests.
++    ids = [ord(raw[index]) for index in range(0, len(raw), 4)]
++    return {
++        'prompt': prompt, 'rendered_prompt': prompt,
++        'rendered_prompt_sha256': hashlib.sha256(prompt.encode()).hexdigest(),
++        'raw_output': raw, 'token_ids': ids,
++        'token_ids_sha256': hashlib.sha256(json.dumps(ids, separators=(',', ':')).encode()).hexdigest(),
++        'input_tokens': 100, 'generated_tokens': len(ids), 'latency_seconds': 0.0,
++        'output_complete': True, 'token_cap_reached': False,
++        'max_new_tokens': cap, 'do_sample': False, 'thinking': False,
++    }
++
++
++class SyntheticEnvironment:
++    def __init__(self, task_id, seed, *, terminal_after=100, fail_step=False):
++        self.task = Task(task_id=task_id, text='put a pencil in garbagecan',
++                         split='train', family='pick_and_place_simple')
++        self.seed = seed
++        self.terminal_after = terminal_after
++        self.fail_step = fail_step
++        self.actions = []
++        self.resets = 0
++        self.closed = False
++        self.before_step = None
++
++    def reset(self, *, seed):
++        assert seed == self.seed
++        self.resets += 1
++        return ResetResult('state 0', self.task, ACTIONS)
++
++    def step(self, command):
++        if self.before_step:
++            self.before_step()
++        if self.fail_step:
++            raise RuntimeError('synthetic interruption after environment start')
++        assert command in ACTIONS
++        self.actions.append(command)
++        done = len(self.actions) == self.terminal_after
++        return Transition(f'state {len(self.actions)}', float(done), done, False, ACTIONS)
++
++    def close(self):
++        self.closed = True
++
++
++def source_schedule(count=1):
++    return build_r19_source_schedule([
++        {'canonical_trial_id': f'pick_and_place_simple-Pencil-None-GarbageCan-{i}/trial_SYNTHETIC_R19',
++         'task_family': 'pick_and_place_simple',
++         'source_game_sha256': '1' * 64, 'source_traj_data_sha256': '2' * 64}
++        for i in range(count)
++    ], set())
++
++
++def restart_snapshot(episode):
++    task = SyntheticEnvironment(episode['canonical_trial_id'], episode['nominal_seed']).task
++    prompt = sft_p0_prompt(ActionRequest(task, 'state 0', (), ACTIONS))
++    parsed = parse_p2_selection('A000', ACTIONS, reflection_required=False)
++    mapping = action_id_mapping(ACTIONS)
++    return runner._source_restart_snapshot(
++        canonical_trial_id=task.task_id, schedule_index=0, seed=episode['nominal_seed'],
++        observation='state 0', valid_actions=ACTIONS, prompt=prompt,
++        generation=generation(prompt, 'A000'),
++        parser_result={'selection_status': parsed.selection_status, 'action_id': parsed.action_id,
++                       'action': parsed.action, 'valid_actions': list(ACTIONS)},
++        action_map=mapping,
++    )
++
++
++def runtime_fixture(tmp_path, monkeypatch, *, restart=False, count=1, terminal_after=100):
++    output = tmp_path / 'synthetic-output'
++    output.mkdir()
++    schedule = source_schedule(count)
++    runtime = object.__new__(runner.LiveR19Runtime)
++    runtime.mode = 'pilot'
++    runtime.actor_backend = object()
++    runtime.recovery_backend = object()
++    runtime.actor = SimpleNamespace(model_version='synthetic-software-only')
++    runtime.model_call_counts = Counter()
++    runtime.environment_operation_counts = Counter()
++    runtime.environment_step_counts = Counter()
++    runtime.environment_reset_count = 0
++    runtime.recovery_prefix_actions_by_task = {}
++    runtime.active_attempt_envs = {}
++    runtime.suffix_envs = {}
++    runtime.common_path_envs = []
++    runtime.parse_stage_one_output = parse_stage_one_output
++    runtime.stage_one_prompt = stage_one_prompt
++    runtime.parse_bare_stage_two_output = parse_bare_stage_two_output
++    runtime.stage_two_prompt = stage_two_prompt
++    runtime.journal = DurableEventJournal(
++        output / 'execution_events.jsonl', run_id='synthetic-production-pipeline',
++        protocol_sha256=runner.sha256_file(ROOT / 'configs/experiments/r19_recovery_duration_v1.json'),
++        code_sha='b' * 40, evidence_class='synthetic')
++    registry = UnitRegistry(output / 'unit_registry.json')
++    runtime.sink, pending = runner._install_unit_registry_sink(runtime.journal, registry)
++    envs = []
++
++    def new_environment(task_id, seed, split):
++        assert split == 'train'
++        env = SyntheticEnvironment(task_id, seed, terminal_after=terminal_after)
++        if restart:
++            def assert_compared_before_action():
++                comparison = json.loads((output / 'source_restart_comparison.json').read_text())
++                assert comparison['status'] == 'PASS'
++                assert comparison['observed_snapshot'] == comparison['expected_snapshot']
++                assert comparison['comparison_before_first_environment_action'] is True
++                assert comparison['environment_actions_executed_before_comparison'] == 0
++            env.before_step = assert_compared_before_action
++        envs.append(env)
++        return env
++
++    runtime.new_environment = new_environment
++
++    def generate(backend, prompt, cap):
++        assert backend in (runtime.actor_backend, runtime.recovery_backend)
++        raw = 'Diagnosis: Immediate issue\nSubgoal: take pencil 1 from desk 1' if cap == 40 else 'A000'
++        return generation(prompt, raw, cap)
++
++    monkeypatch.setattr(runner, '_generate_exact', generate)
++    if restart:
++        runtime.source_restart_expected_snapshot = restart_snapshot(schedule['episodes'][0])
++        runtime.source_restart_predecessor_run_id = 'synthetic-preserved-predecessor'
++        runtime.source_restart_comparison_consumed = False
++    return runtime, registry, schedule, output, envs, pending
++
++
++def read_events(output):
++    return [json.loads(line) for line in (output / 'execution_events.jsonl').read_text().splitlines()]
++
++
++def comparison_arguments(runtime, output):
++    return {
++        'execution_manifest': {
++            'source_restart_comparison_sha256': runner.sha256_file(output / 'source_restart_comparison.json'),
++            'source_restart_comparison_status': 'PASS',
++            'source_restart_predecessor_run_id': runtime.source_restart_predecessor_run_id,
++            'source_restart_repeated_generation_count': 1,
++            'source_restart_repeated_reset_count': 1,
++        },
++        'events': read_events(output),
++        'predecessor_run_id': runtime.source_restart_predecessor_run_id,
++        'expected_snapshot': runtime.source_restart_expected_snapshot,
++        'expected_snapshot_sha256': sha256_json(runtime.source_restart_expected_snapshot),
++        'comparison_path': str(output / 'source_restart_comparison.json'),
++    }
++
++
++def test_restart_two_consecutive_sources_and_duplicate_zero_before_new_operations(tmp_path, monkeypatch):
++    runtime, registry, schedule, output, envs, _ = runtime_fixture(
++        tmp_path, monkeypatch, restart=True, count=2, terminal_after=2)
++    rows = runtime.run_source_episodes(schedule, output, registry, {})
++    events = read_events(output)
++    physical = analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
++    assert len(rows) == 2 and all(len(env.actions) == 2 for env in envs)
++    assert physical['completed_physical_model_generations'] == 4
++    assert physical['physical_environment_resets'] == 2
++    assert physical['physical_environment_operations'] == 4
++    assert all(unit['status'] == 'completed' for unit in registry.document['units'].values())
++    comparison = (output / 'source_restart_comparison.json').read_bytes()
++    assert json.loads(comparison)['schedule_index'] == 0
++    assert runtime.source_restart_comparison_consumed is True
++    assert 'source_restart_comparison_sha256' in rows[0]['metadata']
++    assert 'source_restart_comparison_sha256' not in rows[1]['metadata']
++    args = comparison_arguments(runtime, output)
++    args['comparison_path'] = Path(args['comparison_path'])
++    assert analyzer.validate_source_restart_comparison(**args)['compared_before_first_action'] is True
++    assert analyzer.validate_live_source_schedule(
++        schedule, {'schema_version': 'r19_exclusion_manifest_v1', 'status': 'frozen_before_inference',
++                   'excluded_task_trial_ids': []}, events, [], physical)['completed_source_episodes'] == 2
++    before = (runtime.model_call_counts.copy(), runtime.environment_operation_counts.copy(), len(events))
++    duplicate_env = SyntheticEnvironment(schedule['episodes'][0]['canonical_trial_id'], 30000)
++    with pytest.raises(EvidenceIntegrityError, match='only once'):
++        runtime._collect_one_source(duplicate_env, schedule['episodes'][0], output, {})
++    assert duplicate_env.resets == 0 and not duplicate_env.actions
++    assert before == (runtime.model_call_counts, runtime.environment_operation_counts, len(read_events(output)))
++    assert (output / 'source_restart_comparison.json').read_bytes() == comparison
++    for row in rows:
++        assert runner._trajectory_sha256(row) == row['metadata']['source_trajectory_sha256']
++
++
++@pytest.mark.parametrize('category,field,value', [
++    ('initial_state', 'observation_sha256', '0' * 64),
++    ('initial_state', 'valid_actions_sha256', '0' * 64),
++    ('prompt_and_generation', 'prompt_sha256', '0' * 64),
++    ('prompt_and_generation', 'rendered_prompt_sha256', '0' * 64),
++    ('prompt_and_generation', 'raw_output_sha256', '0' * 64),
++    ('prompt_and_generation', 'token_ids_sha256', '0' * 64),
++    ('prompt_and_generation', 'input_tokens', 101),
++    ('prompt_and_generation', 'generated_tokens', 999),
++    ('prompt_and_generation', 'max_new_tokens', 17),
++    ('prompt_and_generation', 'do_sample', True),
++    ('prompt_and_generation', 'thinking', True),
++    ('prompt_and_generation', 'output_complete', False),
++    ('prompt_and_generation', 'token_cap_reached', True),
++    ('parser_and_action', 'selection_status', 'invalid'),
++    ('parser_and_action', 'action_id', 'A001'),
++    ('parser_and_action', 'action_sha256', '0' * 64),
++    ('parser_and_action', 'action_map_sha256', '0' * 64),
++])
++def test_restart_each_snapshot_category_stops_before_action(tmp_path, monkeypatch, category, field, value):
++    runtime, registry, schedule, output, envs, _ = runtime_fixture(tmp_path, monkeypatch, restart=True)
++    runtime.source_restart_expected_snapshot[category][field] = value
++    with pytest.raises(EvidenceIntegrityError, match='before any environment action'):
++        runtime.run_source_episodes(schedule, output, registry, {})
++    physical = analyzer.validate_event_ledger(read_events(output), expected_evidence_class='synthetic')
++    assert physical['completed_physical_model_generations'] == physical['physical_environment_resets'] == 1
++    assert physical['physical_environment_operations'] == 0 and not envs[0].actions
++    assert not (output / 'source_trajectories.jsonl').exists()
++    assert all(unit['status'] == 'in_progress' for unit in registry.document['units'].values())
++    assert json.loads((output / 'source_restart_comparison.json').read_text())['status'] == 'MISMATCH_STOP'
++
++
++def test_clean_fresh_comparator_nonempty_success_and_tampering(tmp_path, monkeypatch):
++    runtime, registry, schedule, output, _, _ = runtime_fixture(
++        tmp_path, monkeypatch, restart=True, terminal_after=2)
++    runtime.run_source_episodes(schedule, output, registry, {})
++    args = comparison_arguments(runtime, output)
++    fixture = tmp_path / 'comparator-input.json'
++    fixture.write_text(json.dumps(args))
++    script = '''import json,runpy,sys
++from pathlib import Path
++ns=runpy.run_path(sys.argv[1])
++args=json.loads(Path(sys.argv[2]).read_text())
++args['comparison_path']=Path(args['comparison_path'])
++print(json.dumps(ns['validate_source_restart_comparison'](**args)))
++'''
++    clean = dict(os.environ)
++    for key in ('PYTHONPATH', 'PYTHONHOME', 'VIRTUAL_ENV'):
++        clean.pop(key, None)
++    command = [sys.executable, '-c', script, str(ROOT / 'scripts/analyze_r19_recovery_duration.py'), str(fixture)]
++    result = subprocess.run(command, cwd=tmp_path, env=clean, text=True, capture_output=True)
++    assert result.returncode == 0, result.stderr
++    assert json.loads(result.stdout)['status'] == 'PASS_FIRST_SOURCE_RESTART_COMPARISON_AND_EPISODE_BINDING'
++    bad = copy.deepcopy(args)
++    bad['events'][3]['payload']['evidence']['generation']['raw_output'] = 'A001'
++    fixture.write_text(json.dumps(bad))
++    rejected = subprocess.run(command, cwd=tmp_path, env=clean, text=True, capture_output=True)
++    assert rejected.returncode != 0 and 'EvidenceIntegrityError' in rejected.stderr
++
++
++@pytest.mark.parametrize('suffix_case', ['horizon', 'terminal', 'invalid'])
++def test_production_pipeline_nonempty_branch_evidence_and_report(tmp_path, monkeypatch, suffix_case):
++    runtime, registry, schedule, output, _, pending = runtime_fixture(
++        tmp_path, monkeypatch, restart=True,
++        terminal_after=50 if suffix_case == 'terminal' else 100)
++    original_generation = runner._generate_exact
++    if suffix_case == 'invalid':
++        def generate(backend, prompt, cap):
++            if backend is runtime.actor_backend and runtime.model_call_counts['suffix']:
++                return generation(prompt, 'invalid', cap)
++            return original_generation(backend, prompt, cap)
++        monkeypatch.setattr(runner, '_generate_exact', generate)
++    execution = runner._run_frozen_pilot(
++        runtime=runtime, schedule=schedule, output_path=output, registry=registry,
++        sink=runtime.sink, pending_attempts=pending)
++    runtime.close_remaining_environments()
++    events = read_events(output)
++    physical = analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
++    branches = [json.loads(line) for line in (output / 'branches.jsonl').read_text().splitlines()]
++    assert execution['formal_branch_count'] == 1
++    evidence = analyzer.validate_branch_evidence(branches, events, return_operation_ids=True)
++    assert evidence['validated_k_arms'] == 5
++    assert analyzer.validate_live_source_schedule(
++        schedule, {'schema_version': 'r19_exclusion_manifest_v1', 'status': 'frozen_before_inference',
++                   'excluded_task_trial_ids': []}, events, evidence['_operation_event_ids'], physical)[
++                       'completed_source_episodes'] == 1
++    comparison = comparison_arguments(runtime, output)
++    comparison['comparison_path'] = Path(comparison['comparison_path'])
++    analyzer.validate_source_restart_comparison(**comparison)
++    assert physical['completed_physical_model_generations'] == sum(runtime.model_call_counts.values())
++    assert physical['physical_environment_operations'] + physical['physical_environment_resets'] == sum(
++        runtime.environment_operation_counts.values())
++    assert runtime.environment_step_counts['initial_attempt'] == 1
++    assert runtime.environment_step_counts['path_extension'] == 4
++    assert runtime.model_call_counts['initial_recovery'] == 2
++    assert runtime.model_call_counts['path_extension'] == 4
++    assert all(unit['status'] == 'completed' for unit in registry.document['units'].values())
++    for k, arm in branches[0]['k_results'].items():
++        assert arm['logical_cost']['recovery_only']['model_calls'] == 1 + int(k)
++        assert arm['logical_cost']['recovery_only']['environment_actions'] == int(k)
++        assert arm['logical_cost']['full_branch']['environment_actions'] <= 50 - branches[0]['decision_index']
++        assert arm['success'] == int(suffix_case == 'terminal')
++        if suffix_case == 'invalid':
++            assert arm['sft_termination_reason'] == 'selection_failure'
++            assert arm['sft_environment_actions'] == 0
++    clean = dict(os.environ)
++    for key in ('PYTHONPATH', 'PYTHONHOME', 'VIRTUAL_ENV'):
++        clean.pop(key, None)
++    command = [sys.executable, str(ROOT / 'scripts/analyze_r19_recovery_duration.py'),
++               '--protocol', str(ROOT / 'configs/experiments/r19_recovery_duration_v1.json'),
++               '--events', str(output / 'execution_events.jsonl'),
++               '--branches', str(output / 'branches.jsonl'), '--output', str(tmp_path / 'report'),
++               '--evidence-class', 'synthetic', '--allow-synthetic']
++    result = subprocess.run(command, cwd=tmp_path, env=clean, text=True, capture_output=True)
++    (tmp_path / 'analyzer_cli_result.json').write_text(json.dumps({
++        'argv': command, 'exit_code': result.returncode, 'exit_code_source': 'subprocess.returncode',
++        'stdout': result.stdout, 'stderr': result.stderr, 'class': 'synthetic_only'}, indent=2))
++    assert result.returncode == 0, result.stderr
++    assert (tmp_path / 'report/summary.json').is_file()
++    assert (tmp_path / 'report/R19_OPPORTUNITY_REPORT.md').is_file()
++    assert (tmp_path / 'report/report_hashes.json').is_file()
++    assert 'not certified for synthetic evidence' in (tmp_path / 'report/R19_OPPORTUNITY_REPORT.md').read_text()
++
++
++@pytest.mark.parametrize('raw', ['', 'invalid', 'A999', 'look'])
++def test_source_invalid_outputs_charge_generation_without_action(tmp_path, monkeypatch, raw):
++    runtime, registry, schedule, output, envs, _ = runtime_fixture(tmp_path, monkeypatch)
++    monkeypatch.setattr(runner, '_generate_exact', lambda _backend, prompt, cap: generation(prompt, raw, cap))
++    rows = runtime.run_source_episodes(schedule, output, registry, {})
++    physical = analyzer.validate_event_ledger(read_events(output), expected_evidence_class='synthetic')
++    assert physical['completed_physical_model_generations'] == 1
++    assert physical['physical_environment_resets'] == 1
++    assert physical['physical_environment_operations'] == 0
++    assert not envs[0].actions
++    assert rows[0]['metadata']['termination_reason'] == 'selection_failure'
++    assert rows[0]['steps'][0]['action_valid'] is False
++
++
++@pytest.mark.parametrize('boundary', ['before_source_event', 'after_source_event', 'after_trajectory_append'])
++def test_source_persistence_interruption_preserves_incomplete_unit(tmp_path, monkeypatch, boundary):
++    runtime, registry, schedule, output, _, _ = runtime_fixture(tmp_path, monkeypatch, terminal_after=2)
++    original_sink = runtime.sink
++    original_append = runner.append_jsonl_fsync
++
++    def sink(kind, identity, payload):
++        if kind == 'source_episode_completed' and boundary == 'before_source_event':
++            raise RuntimeError('synthetic persistence interruption')
++        event = original_sink(kind, identity, payload)
++        if kind == 'source_episode_completed' and boundary == 'after_source_event':
++            raise RuntimeError('synthetic persistence interruption')
++        return event
++
++    def append(path, row):
++        original_append(path, row)
++        if boundary == 'after_trajectory_append':
++            raise RuntimeError('synthetic persistence interruption')
++
++    runtime.sink = sink
++    monkeypatch.setattr(runner, 'append_jsonl_fsync', append)
++    with pytest.raises(RuntimeError, match='synthetic persistence interruption'):
++        runtime.run_source_episodes(schedule, output, registry, {})
++    events = read_events(output)
++    physical = analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
++    assert physical['completed_physical_model_generations'] == 2
++    assert physical['physical_environment_operations'] == 2
++    assert sum(event['kind'] == 'source_episode_completed' for event in events) == (
++        0 if boundary == 'before_source_event' else 1)
++    assert all(unit['status'] == 'in_progress' for unit in registry.document['units'].values())
++    assert (output / 'source_trajectories.jsonl').exists() == (boundary == 'after_trajectory_append')
++    unit = next(iter(registry.document['units'].values()))
++    with pytest.raises(IndeterminateUnitError):
++        registry.begin(unit['identity'])
++    assert runtime.model_call_counts['source'] == 2
++    assert all(unit['status'] == 'indeterminate' for unit in registry.document['units'].values())
++
++
++@pytest.mark.parametrize('edge', ['generation', 'environment'])
++def test_unreceipted_external_edge_blocks_journal_resume_and_unit_retry(tmp_path, monkeypatch, edge):
++    runtime, registry, schedule, output, _, _ = runtime_fixture(tmp_path, monkeypatch)
++    if edge == 'generation':
++        def fail_generation(*_args):
++            raise RuntimeError('synthetic generation interruption')
++        monkeypatch.setattr(runner, '_generate_exact', fail_generation)
++    else:
++        factory = runtime.new_environment
++        def fail_environment(*args):
++            env = factory(*args)
++            env.fail_step = True
++            return env
++        runtime.new_environment = fail_environment
++    with pytest.raises(RuntimeError, match='synthetic .*interruption'):
++        runtime.run_source_episodes(schedule, output, registry, {})
++    events = read_events(output)
++    assert not any(event['kind'] == 'source_episode_completed' for event in events)
++    with pytest.raises(EvidenceIntegrityError, match='indeterminate'):
++        analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
++    with pytest.raises(IndeterminateUnitError, match='without a durable completion'):
++        DurableEventJournal(output / 'execution_events.jsonl', run_id=runtime.journal.run_id,
++            protocol_sha256=runtime.journal.protocol_sha256, code_sha=runtime.journal.code_sha,
++            evidence_class='synthetic')
++    unit = next(iter(registry.document['units'].values()))
++    with pytest.raises(IndeterminateUnitError):
++        registry.begin(unit['identity'])
++    assert not (output / 'source_trajectories.jsonl').exists()
++
++
++def test_restart_budget_phase_constants_and_prior_expenditure_are_unchanged(tmp_path, monkeypatch):
++    runtime, _, _, _, _, _ = runtime_fixture(tmp_path, monkeypatch)
++    authorization = json.loads(runner.R19_B1_G3_SOURCE_CONTRACT_RESTART_AUTHORIZATION.read_text())
++    assert authorization['restart']['cumulative_start'] == {
++        'model_generations': 177, 'environment_operations_including_resets': 342}
++    caps = authorization['restart']['remaining_phase_caps']
++    assert caps == {
++        'model_calls': {'source': 8999, 'initial_recovery': 240, 'path_extension': 240, 'suffix': 17100},
++        'environment_operations': {'source': 8999, 'replay_gate': 5400, 'initial_attempt': 5520,
++                                   'path_extension': 2940, 'logical_branch': 18000}}
++    runtime.phase_model_call_caps = caps['model_calls']
++    runtime.phase_environment_operation_caps = caps['environment_operations']
++    for category, identity in [
++        ('source', {'component': 'task_actor'}),
++        ('initial_recovery', {'component': 'stage1'}),
++        ('path_extension', {'component': 'stage2', 'stage_two_attempt': 2}),
++        ('suffix', {'component': 'sft'}),
++    ]:
++        runtime.model_call_counts = Counter({category: caps['model_calls'][category] - 1})
++        runtime._reserve_model_call(identity)
++        with pytest.raises(EvidenceIntegrityError, match='cap'):
++            runtime._reserve_model_call(identity)
++    for category, identity, reset in [
++        ('source', {'operation': 'source_reset'}, True),
++        ('replay_gate', {'operation': 'prefix_replay_reset'}, True),
++        ('initial_attempt', {'operation': 'recovery_environment_operation', 'recovery_action_index': 1}, False),
++        ('path_extension', {'operation': 'recovery_environment_operation', 'recovery_action_index': 2}, False),
++        ('logical_branch', {'operation': 'branch_replay_reset'}, True),
++    ]:
++        runtime.environment_operation_counts = Counter({category: caps['environment_operations'][category] - 1})
++        runtime._reserve_environment_operation(identity, is_reset=reset)
++        with pytest.raises(EvidenceIntegrityError, match='cap'):
++            runtime._reserve_environment_operation(identity, is_reset=reset)
++    frozen = authorization['frozen_science']
++    assert frozen['campaign_generation_cap'] == 26988
++    assert frozen['campaign_environment_operation_cap'] == 41260
++
++
++@pytest.mark.parametrize('mismatch', ['reset', 'transition'])
++def test_production_source_replay_mismatch_stops_without_retry(tmp_path, monkeypatch, mismatch):
++    runtime, registry, schedule, output, _, _ = runtime_fixture(tmp_path, monkeypatch, terminal_after=6)
++    rows = runtime.run_source_episodes(schedule, output, registry, {})
++    before = runtime.environment_operation_counts.copy()
++    factory = runtime.new_environment
++
++    def wrong_environment(*args):
++        env = factory(*args)
++        if mismatch == 'reset':
++            original_reset = env.reset
++            def reset(*, seed):
++                value = original_reset(seed=seed)
++                return ResetResult('wrong reset observation', value.task, value.valid_actions)
++            env.reset = reset
++        else:
++            original_step = env.step
++            def step(command):
++                value = original_step(command)
++                return Transition('wrong replay observation', value.reward, value.done,
++                                  value.truncated, value.valid_actions)
++            env.step = step
++        return env
++
++    runtime.new_environment = wrong_environment
++    with pytest.raises(EvidenceIntegrityError, match='replay'):
++        runtime._replay_source_prefix(rows[0], 2, 'synthetic-mismatched-prefix')
++    assert runtime.environment_operation_counts['replay_gate'] - before['replay_gate'] == (
++        1 if mismatch == 'reset' else 2)
++    assert not runtime.active_attempt_envs and not runtime.suffix_envs
++    assert not any(e['kind'] == 'prefix_attempt_completed' for e in read_events(output))
++
++
++def test_source_comparison_receipt_tamper_and_wrong_checkout_origin_rejected(tmp_path, monkeypatch):
++    runtime, registry, schedule, output, _, _ = runtime_fixture(
++        tmp_path, monkeypatch, restart=True, terminal_after=2)
++    runtime.run_source_episodes(schedule, output, registry, {})
++    args = comparison_arguments(runtime, output)
++    args['comparison_path'] = Path(args['comparison_path'])
++    original = args['comparison_path'].read_bytes()
++    comparison = json.loads(original)
++    comparison['comparison_before_first_environment_action'] = False
++    args['comparison_path'].write_text(json.dumps(comparison))
++    with pytest.raises(EvidenceIntegrityError, match='exact pre-action'):
++        analyzer.validate_source_restart_comparison(**args)
++    args['comparison_path'].write_bytes(original)
++    fake = SimpleNamespace(__file__=str(tmp_path / 'other-checkout/scripts/run_r19_experiment.py'))
++    monkeypatch.setitem(sys.modules, 'scripts.run_r19_experiment', fake)
++    import scripts
++    monkeypatch.setattr(scripts, 'run_r19_experiment', fake)
++    with pytest.raises(EvidenceIntegrityError, match='outside the analyzed checkout'):
++        analyzer.validate_source_restart_comparison(**args)
++
++
++def stopped_pipeline(tmp_path, monkeypatch, *, stop='invalid_later'):
++    runtime, registry, schedule, output, _, pending = runtime_fixture(
++        tmp_path, monkeypatch, restart=True,
++        terminal_after=6 if stop == 'terminal_later' else 100)
++    stage_two_calls = 0
++
++    def generate(backend, prompt, cap):
++        nonlocal stage_two_calls
++        if cap == 40:
++            raw = 'Diagnosis: Immediate issue\nSubgoal: take pencil 1 from desk 1'
++        elif backend is runtime.recovery_backend:
++            stage_two_calls += 1
++            raw = 'invalid' if stop == 'invalid_later' and stage_two_calls == 2 else 'A000'
++        else:
++            raw = 'A000'
++        return generation(prompt, raw, cap)
++
++    monkeypatch.setattr(runner, '_generate_exact', generate)
++    execution = runner._run_frozen_pilot(
++        runtime=runtime, schedule=schedule, output_path=output, registry=registry,
++        sink=runtime.sink, pending_attempts=pending)
++    runtime.close_remaining_environments()
++    events = read_events(output)
++    branches = [json.loads(line) for line in (output / 'branches.jsonl').read_text().splitlines()]
++    physical = analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
++    validated = analyzer.validate_branch_evidence(branches, events, return_operation_ids=True)
++    assert validated['validated_k_arms'] == 5
++    assert analyzer.validate_live_source_schedule(
++        schedule, {'schema_version': 'r19_exclusion_manifest_v1', 'status': 'frozen_before_inference',
++                   'excluded_task_trial_ids': []}, events, validated['_operation_event_ids'], physical)[
++                       'completed_source_episodes'] == 1
++    assert physical['completed_physical_model_generations'] == sum(runtime.model_call_counts.values())
++    assert physical['physical_environment_operations'] + physical['physical_environment_resets'] == sum(
++        runtime.environment_operation_counts.values())
++    return runtime, output, events, branches, physical
++
++
++@pytest.mark.parametrize('stop', ['invalid_later', 'terminal_later'])
++def test_stopped_common_paths_authenticate_aliases_and_per_k_costs(tmp_path, monkeypatch, stop):
++    runtime, output, events, branches, physical = stopped_pipeline(tmp_path, monkeypatch, stop=stop)
++    arms = branches[0]['k_results']
++    order = next(event['payload']['order'] for event in events if event['kind'] == 'suffix_order_frozen')
++    assert order == [2, 5, 4, 1, 3]
++    if stop == 'invalid_later':
++        assert arms['1']['derived_identity_from'] == 2
++        assert arms['1']['logical_cost']['recovery_only']['model_calls'] == 2
++        for k in ('2', '3', '4', '5'):
++            assert arms[k]['logical_cost']['recovery_only']['model_calls'] == 3
++        measured = [arm for arm in arms.values() if arm['derived_identity_from'] is None]
++        assert len(measured) == 1
++        suffix_ids = measured[0]['evidence_refs']['suffix_generation_event_ids']
++        assert runtime.model_call_counts['suffix'] == len(suffix_ids)
++        assert all(arm['evidence_refs']['suffix_generation_event_ids'] == suffix_ids for arm in arms.values())
++        assert runtime.environment_step_counts['initial_attempt'] == 1
++        assert runtime.environment_step_counts['path_extension'] == 0
++    else:
++        assert arms['4']['derived_identity_from'] == 5
++        assert arms['3']['derived_identity_from'] == 5
++        assert arms['5']['terminal'] is True
++        assert not arms['5']['evidence_refs'].get('suffix_generation_event_ids')
++        assert arms['5']['replay_evidence'] is None
++        assert runtime.environment_step_counts['initial_attempt'] == 1
++        assert runtime.environment_step_counts['path_extension'] == 2
++    operations = [event for event in events if event['kind'] == 'environment_operation_completed'
++                  and event['identity'].get('operation') == 'recovery_environment_operation']
++    assert [event['identity']['recovery_action_index'] for event in operations] == list(range(1, len(operations) + 1))
++    clean = dict(os.environ)
++    for name in ('PYTHONPATH', 'PYTHONHOME', 'VIRTUAL_ENV'):
++        clean.pop(name, None)
++    command = [sys.executable, str(ROOT / 'scripts/analyze_r19_recovery_duration.py'),
++               '--protocol', str(ROOT / 'configs/experiments/r19_recovery_duration_v1.json'),
++               '--events', str(output / 'execution_events.jsonl'), '--branches', str(output / 'branches.jsonl'),
++               '--output', str(tmp_path / 'report'), '--evidence-class', 'synthetic', '--allow-synthetic']
++    result = subprocess.run(command, cwd=tmp_path, env=clean, text=True, capture_output=True)
++    (tmp_path / 'alias_cli_result.json').write_text(json.dumps({
++        'argv': command, 'exit_code': result.returncode, 'exit_code_source': 'subprocess.returncode',
++        'stdout': result.stdout, 'stderr': result.stderr, 'class': 'synthetic_only'}, indent=2))
++    assert result.returncode == 0, result.stderr
++    summary = json.loads((tmp_path / 'report/summary.json').read_text())
++    assert summary['physical_research_expenditure']['evidence_class'] == 'synthetic'
++    assert summary['physical_research_expenditure']['completed_physical_model_generations'] == physical['completed_physical_model_generations']
++
++
++@pytest.fixture(scope='module')
++def alias_bundle(tmp_path_factory):
++    with pytest.MonkeyPatch.context() as monkeypatch:
++        _, _, events, branches, _ = stopped_pipeline(tmp_path_factory.mktemp('synthetic-alias-negative'), monkeypatch)
++    return events, branches
++
++
++def synchronize_arm_claim(branches, events, k, field, value):
++    """Mutate both synthetic materializations so semantic checks, not row mismatch, reject."""
++    row = branches[0]
++    arm = row['k_results'][str(k)]
++    arm[field] = value
++    event = next(event for event in events if event['event_id'] == arm['arm_event_id'])
++    if field in event['payload']:
++        event['payload'][field] = copy.deepcopy(value)
++    if field == 'evidence_refs':
++        row['evidence_refs']['k_arms'][str(k)]['operations'] = copy.deepcopy(value)
++
++
++@pytest.mark.parametrize('mutation', [
++    'future', 'self', 'cycle', 'missing', 'wrong_source_k', 'wrong_source_event',
++    'wrong_prefix', 'wrong_run', 'wrong_task', 'checkpoint', 'state', 'horizon',
++    'swapped_suffix', 'success', 'terminal', 'termination_reason', 'cost', 'recovery_refs',
++    'order', 'seed',
++])
++def test_alias_semantic_tampering_rejected_by_real_branch_validator(alias_bundle, mutation):
++    events, branches = copy.deepcopy(alias_bundle)
++    arms = branches[0]['k_results']
++    source_event = next(event for event in events if event['event_id'] == arms['2']['arm_event_id'])
++    if mutation in {'future', 'self', 'missing', 'wrong_source_k'}:
++        k = {'future': 3, 'self': 1, 'missing': 99, 'wrong_source_k': 5}[mutation]
++        synchronize_arm_claim(branches, events, 1, 'derived_identity_from', k)
++        synchronize_arm_claim(branches, events, 1, 'derived_source_event_id',
++                              arms[str(k)]['arm_event_id'] if str(k) in arms and mutation != 'wrong_source_k'
++                              else (arms['2']['arm_event_id'] if mutation == 'wrong_source_k' else 'missing-event'))
++    elif mutation == 'cycle':
++        synchronize_arm_claim(branches, events, 2, 'derived_identity_from', 1)
++        synchronize_arm_claim(branches, events, 2, 'derived_source_event_id', arms['1']['arm_event_id'])
++    elif mutation == 'wrong_source_event':
++        synchronize_arm_claim(branches, events, 1, 'derived_source_event_id', 'missing-event')
++    elif mutation in {'wrong_prefix', 'wrong_task'}:
++        source_event['identity']['prefix_id' if mutation == 'wrong_prefix' else 'canonical_trial_id'] = 'wrong'
++    elif mutation == 'wrong_run':
++        source_event['run_id'] = 'another-synthetic-run'
++    elif mutation in {'checkpoint', 'horizon', 'success', 'terminal', 'termination_reason'}:
++        field = {'horizon': 'sft_action_cap', 'termination_reason': 'sft_termination_reason'}.get(mutation, mutation)
++        synchronize_arm_claim(branches, events, 1, field,
++                              True if mutation == 'terminal' else 'forged' if mutation == 'termination_reason' else 99)
++    elif mutation == 'state':
++        start = next(event for event in events if event['kind'] == 'duration_arm_started' and event['identity']['k'] == 1)
++        start['payload']['checkpoint_state_sha256'] = '0' * 64
++    elif mutation == 'swapped_suffix':
++        refs = copy.deepcopy(arms['1']['evidence_refs'])
++        refs['suffix_generation_event_ids'] = refs['suffix_generation_event_ids'][::-1]
++        synchronize_arm_claim(branches, events, 1, 'evidence_refs', refs)
++    elif mutation == 'cost':
++        cost = copy.deepcopy(arms['1']['logical_cost'])
++        cost['full_branch']['model_calls'] += 1
++        synchronize_arm_claim(branches, events, 1, 'logical_cost', cost)
++    elif mutation == 'recovery_refs':
++        synchronize_arm_claim(branches, events, 1, 'stage_two_attempts_charged', 2)
++        synchronize_arm_claim(branches, events, 1, 'evidence_refs', copy.deepcopy(arms['2']['evidence_refs']))
++        synchronize_arm_claim(branches, events, 1, 'logical_cost', copy.deepcopy(arms['2']['logical_cost']))
++    else:
++        order_event = next(event for event in events if event['kind'] == 'suffix_order_frozen')
++        if mutation == 'order':
++            order_event['payload']['order'] = [1, 2, 3, 4, 5]
++        else:
++            order_event['payload']['seed'] = 1
++    with pytest.raises(EvidenceIntegrityError):
++        analyzer.validate_branch_evidence(branches, events)
++
++
++def test_recovery_physical_index_must_match_scheduler_action(alias_bundle):
++    events, branches = copy.deepcopy(alias_bundle)
++    scheduler = next(event for event in events if event['kind'] == 'environment_step_completed')
++    operation_id = scheduler['payload']['action']['transition']['r19_environment_operation_event_id']
++    operation = next(event for event in events if event['event_id'] == operation_id)
++    operation['identity']['recovery_action_index'] = 2
++    with pytest.raises(EvidenceIntegrityError, match='scheduler recovery transition conflicts'):
++        analyzer.validate_branch_evidence(branches, events)
++
++
++@pytest.mark.parametrize('field', ['action_id', 'action_map'])
++def test_replay_receipt_map_tampering_is_rejected(alias_bundle, field):
++    events, _ = copy.deepcopy(alias_bundle)
++    event = next(event for event in events if event['kind'] == 'environment_operation_completed'
++                 and event['identity'].get('operation') == 'replay_environment_step')
++    assert event['payload']['action_map'][event['payload']['action_id']] == event['payload']['command']
++    start = next(value for value in events if value['kind'] == 'environment_operation_started'
++                 and value['identity'] == event['identity'])
++    for value in (start, event):
++        value['payload'][field] = 'A999' if field == 'action_id' else {'A000': 'wrong command'}
++    # Authenticate the mutated software fixture so the actual map check is reached.
++    previous = '0' * 64
++    for value in events:
++        value['payload_sha256'] = sha256_json(value['payload'])
++        value['previous_event_sha256'] = previous
++        value['event_id'] = sha256_json([
++            value['run_id'], value['sequence'], value['kind'], value['identity'], value['payload_sha256'],
++            previous, value['evidence_class'], value['run_context']])
++        previous = value['event_id']
++    with pytest.raises(EvidenceIntegrityError, match='contemporaneous admissible-action map'):
++        analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
++
++
++@pytest.mark.parametrize('field,value', [('sft_terminal', True), ('sft_termination_reason', 'forged'), ('success', 1)])
++def test_forging_all_shared_suffix_claims_does_not_bypass_raw_evidence(alias_bundle, field, value):
++    events, branches = copy.deepcopy(alias_bundle)
++    for k in range(1, 6):
++        synchronize_arm_claim(branches, events, k, field, value)
++    with pytest.raises(EvidenceIntegrityError):
++        analyzer.validate_branch_evidence(branches, events)
++
++
++def test_every_produced_replay_receipt_retains_exact_action_map_binding(alias_bundle):
++    events, _ = alias_bundle
++    replay = [event for event in events if event['kind'] == 'environment_operation_completed'
++              and event['identity'].get('operation') in {'replay_environment_step', 'branch_replay_environment_step'}]
++    assert {event['identity']['operation'] for event in replay} == {
++        'replay_environment_step', 'branch_replay_environment_step'}
++    for event in replay:
++        payload = event['payload']
++        assert payload['action_map'] == action_id_mapping(tuple(payload['before_state']['valid_actions']))
++        assert payload['action_map'][payload['action_id']] == payload['command']
++
++
++@pytest.mark.parametrize('initial_stop', ['stage_one_invalid', 'first_action_terminal'])
++def test_ineligible_initial_attempt_still_produces_valid_k1_evidence(tmp_path, monkeypatch, initial_stop):
++    runtime, registry, schedule, output, _, pending = runtime_fixture(
++        tmp_path, monkeypatch, restart=True,
++        terminal_after=2 if initial_stop == 'first_action_terminal' else 6)
++    original_generate = runner._generate_exact
++    if initial_stop == 'stage_one_invalid':
++        def invalid_stage_one(backend, prompt, cap):
++            if cap == 40:
++                return generation(prompt, 'malformed diagnosis', cap)
++            return original_generate(backend, prompt, cap)
++        monkeypatch.setattr(runner, '_generate_exact', invalid_stage_one)
++    runner._run_frozen_pilot(runtime=runtime, schedule=schedule, output_path=output,
++        registry=registry, sink=runtime.sink, pending_attempts=pending)
++    runtime.close_remaining_environments()
++    events = read_events(output)
++    branches = [json.loads(line) for line in (output / 'branches.jsonl').read_text().splitlines()]
++    assert branches[0]['eligible_primary'] is False
++    assert set(branches[0]['k_results']) == {'1'}
++    assert runtime.model_call_counts['initial_recovery'] == 2
++    assert runtime.model_call_counts['path_extension'] == 0
++    assert runtime.environment_step_counts['initial_attempt'] == int(initial_stop == 'first_action_terminal')
++    physical = analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
++    assert analyzer.validate_branch_evidence(branches, events)['validated_k_arms'] == 1
++    assert physical['completed_physical_model_generations'] == sum(runtime.model_call_counts.values())

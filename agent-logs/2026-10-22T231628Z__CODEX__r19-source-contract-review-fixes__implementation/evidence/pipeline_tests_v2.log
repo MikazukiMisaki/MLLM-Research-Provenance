@@ -1,0 +1,11 @@
+...................F                                                     [100%]
+=================================== FAILURES ===================================
+_________ test_production_pipeline_nonempty_branch_evidence_and_report _________
+tests/test_r19_source_pipeline.py:274: in test_production_pipeline_nonempty_branch_evidence_and_report
+    physical = analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
+scripts/analyze_r19_recovery_duration.py:354: in validate_event_ledger
+    raise EvidenceIntegrityError("environment command is not bound to its contemporaneous admissible-action map")
+E   recovery.r19_duration.EvidenceIntegrityError: environment command is not bound to its contemporaneous admissible-action map
+=========================== short test summary info ============================
+FAILED tests/test_r19_source_pipeline.py::test_production_pipeline_nonempty_branch_evidence_and_report
+1 failed, 19 passed in 2.08s

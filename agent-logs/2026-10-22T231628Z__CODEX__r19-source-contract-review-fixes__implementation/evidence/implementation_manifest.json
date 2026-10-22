@@ -1,0 +1,85 @@
+{
+  "implementation_sha": "2da980f631badc25086d12db60d128ff507d3ae6",
+  "branch": "codex/r19-source-contract-review-fixes",
+  "base_candidate": "da7d348ffd3677d619dd31357e1e1e3cca28c9ec",
+  "frozen_base": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+  "files": [
+    {
+      "path": "configs/experiments/r19_b1_g3_source_contract_repair_amendment_v1.json",
+      "sha256": "1b94a0ed37284d37a21d07985a5ba18de25ea4e11f9ffa553ca624c9739aee1e"
+    },
+    {
+      "path": "configs/experiments/r19_b1_g3_source_contract_restart_authorization_v1.json",
+      "sha256": "164179291d16066d7fc6d650a943011099e8be940f48b62d86970ba7f5c17048"
+    },
+    {
+      "path": "scripts/analyze_r19_recovery_duration.py",
+      "sha256": "7e6be1657c32d1e5dc0f8776ddf2ce99b3a3326ba7fd1aeccc2c3f292676d50f"
+    },
+    {
+      "path": "scripts/run_r19_experiment.py",
+      "sha256": "06bb8e11c3cc9e9484b8d5731c86690b97a4c445a0e5aa16b72b912c6c14dd5c"
+    },
+    {
+      "path": "tests/test_r19_g3_authorization.py",
+      "sha256": "10032cf4a6fbea7695bc98c05f02392343f7438ea0459b1a09edd7c79ac50d94"
+    },
+    {
+      "path": "tests/test_r19_source_contract.py",
+      "sha256": "5d93c67aeb10a1f175d12e01bcc37739747e1538d368056bc7cf2637d36bf622"
+    },
+    {
+      "path": "tests/test_r19_source_pipeline.py",
+      "sha256": "55625cf45450566d76b46b630b120907d1b5d62b8c48ff5e006a4c87b56da3bb"
+    }
+  ],
+  "changed_frozen_methods": {
+    "scripts/run_r19_experiment.py::LiveR19Runtime._collect_one_source": {
+      "old": "12755022c3e7e8b25cff9cc07e47eaf3cbc5045f8ae2a21c43fc356002ec4d52",
+      "new": "e3086440b4c6aa8c0d5ad9d64a35bae582b5c72effce9a55d811e54bd0c45fb5"
+    },
+    "scripts/run_r19_experiment.py::LiveR19Runtime.actor_generation": {
+      "old": "c2a453654ab919555801e5c087cc13b1f2be40b9b3fdca01a741db9e9e73d4d7",
+      "new": "34b66c68e361d26c6f6f0b2d7871a9715bb56936694b7049c9b27a97aeaff9d7"
+    },
+    "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_model_call": {
+      "old": "1966a89fd7f9c5f51095d193163e3fac0f77590e1a6f63d815e6ffb14eb3a36f",
+      "new": "b8e163c5d1e4b186ff3ea53dd5a5a55d7bd60e950d5180cc074d1c3317e5567a"
+    },
+    "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_environment_operation": {
+      "old": "39068afbd080a78b94d8d509259e30ee9c526945eb1156a95b734f72c39d9e5a",
+      "new": "c71fecfc4dd690f63047cc142529140b96f32301d012abbadc5d0865257a8d43"
+    },
+    "scripts/run_r19_experiment.py::LiveR19Runtime._replay_source_prefix": {
+      "old": "d6f7683cd1a3b796939c623c076148223dbcdaa9ec49c17978c6860f17466be6",
+      "new": "848005948676fca8657e3373c3df7d15b4100a02ccc5bd69cb7980948feac2aa"
+    },
+    "scripts/run_r19_experiment.py::LiveR19Runtime.recovery_step_callback": {
+      "old": "d543d863241024ce9679e8e940aab4033a5b7574887edb5c3166c8d381d248d9",
+      "new": "0f2693fe6425c22a2ccddd8087a0f616f1e4021ca21e3ab4c70ce7e36adf40a4"
+    },
+    "scripts/run_r19_experiment.py::LiveR19Runtime.common_path_step_factory": {
+      "old": "12cdf4ef7a0876b8562ff0749739bdd8164ddc892b8cf19f42c20c3b6719ada3",
+      "new": "836076a44e60a8ec5efb0388f887c3da411b2507d1cc5b6fe335a3d082df06c8"
+    },
+    "scripts/analyze_r19_recovery_duration.py::validate_branch_evidence": {
+      "old": "55c982d9dc6a605d5e85433966535f80130ced4aa6a9071b0ffa4151fdcfee9f",
+      "new": "24e586665f26fc71c4122c58a5c8647f1ba1421241471bf407c9fb076f4bbc1b"
+    },
+    "scripts/analyze_r19_recovery_duration.py::_validate_recovery_operation_link": {
+      "old": "82974d671cf5536b633a6a374c7b71680a877adfcec95ed5adb60fbb2f499e07",
+      "new": "69c3bf8f90949bbe670d65a3bdbd3fe1774f3da407b6287949b81682891e053e"
+    }
+  },
+  "scope_flags": {
+    "source_treatment_semantics_changed": false,
+    "scientific_execution_behavior_changed": true,
+    "independent_review": "PENDING",
+    "launch_clearance": "NOT_ISSUED",
+    "scientific_model_generations": 0,
+    "ALFWorld_operations": 0,
+    "real_preflight": 0,
+    "G2_rerun": 0,
+    "genuine_G4": 0
+  }
+}

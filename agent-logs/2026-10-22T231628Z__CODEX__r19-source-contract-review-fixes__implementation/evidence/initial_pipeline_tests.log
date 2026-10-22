@@ -1,0 +1,17 @@
+...................F                                                     [100%]
+=================================== FAILURES ===================================
+_________ test_production_pipeline_nonempty_branch_evidence_and_report _________
+tests/test_r19_source_pipeline.py:269: in test_production_pipeline_nonempty_branch_evidence_and_report
+    execution = runner._run_frozen_pilot(
+scripts/run_r19_experiment.py:3533: in _run_frozen_pilot
+    branches = execute_frozen_r19_enrollment(
+src/recovery/r19_duration.py:1502: in execute_frozen_r19_enrollment
+    handoffs = run_duration_handoffs(
+src/recovery/r19_duration.py:837: in run_duration_handoffs
+    validate_sft_isolation(path.stage_one, path.stage_two_attempts, sft_result)
+src/recovery/r19_duration.py:757: in validate_sft_isolation
+    raise EvidenceIntegrityError("recovery reasoning leaked into an SFT prompt")
+E   recovery.r19_duration.EvidenceIntegrityError: recovery reasoning leaked into an SFT prompt
+=========================== short test summary info ============================
+FAILED tests/test_r19_source_pipeline.py::test_production_pipeline_nonempty_branch_evidence_and_report
+1 failed, 19 passed in 1.54s

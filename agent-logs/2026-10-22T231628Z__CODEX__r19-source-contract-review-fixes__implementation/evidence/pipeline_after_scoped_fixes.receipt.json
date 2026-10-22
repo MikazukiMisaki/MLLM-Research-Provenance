@@ -1,0 +1,24 @@
+{
+  "label": "pipeline_after_scoped_fixes",
+  "argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-m",
+    "pytest",
+    "-o",
+    "addopts=",
+    "-q",
+    "tests/test_r19_source_pipeline.py",
+    "-k",
+    "production_pipeline_nonempty",
+    "--tb=short"
+  ],
+  "cwd": "/home/lizening/wt-r19-source-contract-review-fixes",
+  "environment_overrides": {
+    "PYTHONPATH": "src"
+  },
+  "exit_code": 0,
+  "exit_code_source": "subprocess.returncode",
+  "started_unix": 1792711685.5597212,
+  "completed_unix": 1792711689.613796,
+  "class": "software_checks_only_no_scientific_execution"
+}
