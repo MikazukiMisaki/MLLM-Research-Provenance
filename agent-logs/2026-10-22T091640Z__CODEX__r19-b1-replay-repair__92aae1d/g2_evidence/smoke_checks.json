@@ -1,0 +1,160 @@
+{
+  "all_scientific_units_completed": true,
+  "branch_execution_cap": 8,
+  "branch_executions": 6,
+  "checks": [
+    {
+      "all_arm_event_references_bound_to_prefix_and_k": true,
+      "environment_replay_exact": true,
+      "historical_osr_compatibility": [
+        {
+          "historical_osr_recovery_command": "go to fridge 1",
+          "historical_osr_success": false,
+          "interpretation": "historical OSR comparison is diagnostic only and is not a G2 pass predicate",
+          "observed_k1_recovery_command": "go to fridge 1",
+          "observed_k1_success": 0,
+          "recovery_command_matches": true,
+          "sft_handoff_within_original_horizon": true,
+          "success_matches": true
+        },
+        {
+          "historical_osr_recovery_command": "go to fridge 1",
+          "historical_osr_success": false,
+          "interpretation": "historical OSR comparison is diagnostic only and is not a G2 pass predicate",
+          "observed_k1_recovery_command": "go to fridge 1",
+          "observed_k1_success": null,
+          "recovery_command_matches": true,
+          "sft_handoff_within_original_horizon": null,
+          "success_matches": null
+        }
+      ],
+      "historical_osr_is_diagnostic_only": true,
+      "k1_reference_vs_production": {
+        "parser_and_action_mapping_match": true,
+        "production_event_ids": [
+          "2d1178ea2636a617dc9ad8cffff5920426bbdafc11b2959ec2fffabbe0061b8f",
+          "3b7c9c52395b3a5ad4e8060c700f767c9ba8bef1a9d64b0a5e0e73e709651355"
+        ],
+        "raw_generations_match": true,
+        "reference_event_ids": [
+          "343b8fe2af348f4aad20facd07e95c3a0bc7543853ec95c31216aed43d59e3d2",
+          "4d54b1643e4cce15b688ba786f29eb315aa5add8bcf96c16be205f352cffe538"
+        ],
+        "same_frozen_replay_bound": true,
+        "status": "PASS"
+      },
+      "k3_arm_event_ids_distinct": true,
+      "k3_checkpoint_replay_exact_or_recovery_terminal": true,
+      "k3_evidence_not_aliased": true,
+      "k3_evidence_sets_disjoint": true,
+      "k3_extension_coverage": true,
+      "k3_replay_evidence_present": true,
+      "k3_scientific_traces_match": true,
+      "k3_trace_signatures_rebuilt_from_raw_events": true,
+      "logical_costs_reconciled_to_raw_generations": true,
+      "multi_action_then_sft_handoff_coverage": true,
+      "original_50_action_horizon_preserved": true,
+      "passed": true,
+      "prefix_id": "R8-F16",
+      "production_arm_executions": 3,
+      "two_distinct_production_executions": true,
+      "two_k3_arms_present": true
+    },
+    {
+      "all_arm_event_references_bound_to_prefix_and_k": true,
+      "environment_replay_exact": true,
+      "historical_osr_compatibility": [
+        {
+          "historical_osr_recovery_command": "open drawer 2",
+          "historical_osr_success": true,
+          "interpretation": "historical OSR comparison is diagnostic only and is not a G2 pass predicate",
+          "observed_k1_recovery_command": "open drawer 2",
+          "observed_k1_success": 1,
+          "recovery_command_matches": true,
+          "sft_handoff_within_original_horizon": true,
+          "success_matches": true
+        },
+        {
+          "historical_osr_recovery_command": "open drawer 2",
+          "historical_osr_success": true,
+          "interpretation": "historical OSR comparison is diagnostic only and is not a G2 pass predicate",
+          "observed_k1_recovery_command": "open drawer 2",
+          "observed_k1_success": null,
+          "recovery_command_matches": true,
+          "sft_handoff_within_original_horizon": null,
+          "success_matches": null
+        }
+      ],
+      "historical_osr_is_diagnostic_only": true,
+      "k1_reference_vs_production": {
+        "parser_and_action_mapping_match": true,
+        "production_event_ids": [
+          "00af6201b0ee91f1ef1e5d60be567108faee6310cd2fe51496c00a263a5ab6e8",
+          "259b1449c9bd5ac7fb90bb01ba44dbdce7563d7e12f9459c1badee3a4967ae3f"
+        ],
+        "raw_generations_match": true,
+        "reference_event_ids": [
+          "9d0f73b3c50bf5049c2dd223798cd0ebdf40b0b0a0ee550ef78d020a840182d1",
+          "63ac0c87e37485ce8cd9dc7874c10aed718237ba50cdbb68dec7f96ec371037c"
+        ],
+        "same_frozen_replay_bound": true,
+        "status": "PASS"
+      },
+      "k3_arm_event_ids_distinct": true,
+      "k3_checkpoint_replay_exact_or_recovery_terminal": true,
+      "k3_evidence_not_aliased": true,
+      "k3_evidence_sets_disjoint": true,
+      "k3_extension_coverage": true,
+      "k3_replay_evidence_present": true,
+      "k3_scientific_traces_match": true,
+      "k3_trace_signatures_rebuilt_from_raw_events": true,
+      "logical_costs_reconciled_to_raw_generations": true,
+      "multi_action_then_sft_handoff_coverage": true,
+      "original_50_action_horizon_preserved": true,
+      "passed": true,
+      "prefix_id": "R8-S04",
+      "production_arm_executions": 3,
+      "two_distinct_production_executions": true,
+      "two_k3_arms_present": true
+    }
+  ],
+  "execution_prefix_ids": [
+    "R8-F16-repeat-1",
+    "R8-F16-repeat-2",
+    "R8-S04-repeat-1",
+    "R8-S04-repeat-2"
+  ],
+  "external_paid_model_calls": 0,
+  "heldout_tasks": 0,
+  "model_adapter_isolation_checked_before_inference": true,
+  "model_adapter_isolation_pass": true,
+  "multi_action_then_sft_handoff_coverage": true,
+  "observed_physical_environment_operations": 322,
+  "observed_physical_model_calls": 176,
+  "planned_upper_bounds": {
+    "environment_operations_upper_bound": 374,
+    "full_branch_arms": 6,
+    "model_calls_upper_bound": 228
+  },
+  "prefix_ids": [
+    "R8-F16",
+    "R8-S04"
+  ],
+  "repeat_policy": {
+    "independent_K1_reference_per_case": 1,
+    "production_K1": 1,
+    "production_K3_per_case": 2
+  },
+  "resource_bounds_pass": true,
+  "schema_version": "r19_b1_g2_smoke_report_v1",
+  "source_tasks_consumed": 0,
+  "status": "G2_PASS",
+  "task_ids": [
+    "pick_two_obj_and_place-Lettuce-None-Fridge-6/trial_T20190908_010219_785049",
+    "pick_clean_then_place_in_recep-Knife-None-DiningTable-15/trial_T20190908_162445_886312"
+  ],
+  "training_runs": 0,
+  "unit_registry_status_counts": {
+    "completed": 14
+  }
+}

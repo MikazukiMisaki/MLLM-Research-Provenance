@@ -1,0 +1,40 @@
+{
+  "schema_version": "r19_unit_resolution_proposal_v1",
+  "proposal_status": "PENDING_EXACT_SHA_INDEPENDENT_REVIEW",
+  "resolution_type": "KNOWN_FAILED_REPLAY_VALIDATION / NO_BRANCH_EXECUTED",
+  "failed_run_id": "089429e4a2554bc386580d87014b4951",
+  "failed_implementation_sha": "f4fb81842e949930433def5817723bab74159f14",
+  "successor_implementation_sha": "92aae1d9b230cc212c6ec4effc99aa468941e69d",
+  "original_unit": {
+    "unit_id": "43473a4b98e3dafbf76e6b1c5eab5ec8a31df201d87982741efb9e0d1ab344a1",
+    "unit": "prefix_replay_and_initial_recovery_attempt",
+    "prefix_id": "R8-F16-repeat-1",
+    "canonical_trial_id": "pick_two_obj_and_place-Lettuce-None-Fridge-6/trial_T20190908_010219_785049",
+    "decision_index": 18,
+    "original_registry_status": "in_progress",
+    "original_registry_sha256": "bada5f681a8d113182a570b6d4b4c33a453ab10c0766e4c5e3fd37a3ae402922"
+  },
+  "operation_evidence": {
+    "raw_event_ledger_sha256": "b2d9045514bc3251ee3e954e4787569566cf7ba995821adbdb5af6b1dfdf065c",
+    "operation_starts": 19,
+    "operation_completions": 19,
+    "incomplete_operation_pairs": 0,
+    "reset_count": 1,
+    "step_count": 18,
+    "model_generations": 0,
+    "branch_executions": 0,
+    "authentic_subprocess_exit_code": 2,
+    "supervisor_status": "failed",
+    "interrupted_by_supervisor": false,
+    "original_registry_will_remain_unchanged": true
+  },
+  "basis": "The saved raw ledger contains complete start/completion receipts for all 19 physical operations; the exact runner path raises during frozen-prefix validation before any branch-arm execution; the authentic supervisor receipt records exit 2 and no supervisor interruption. The enclosing unit is a known failed validation attempt, not a completed successful unit.",
+  "not_a_completion_receipt": true,
+  "review": {
+    "required": true,
+    "reviewed_exact_successor_sha": "92aae1d9b230cc212c6ec4effc99aa468941e69d",
+    "status": "PENDING"
+  },
+  "append_only_record_created": false,
+  "retry_authorized_by_this_proposal": false
+}

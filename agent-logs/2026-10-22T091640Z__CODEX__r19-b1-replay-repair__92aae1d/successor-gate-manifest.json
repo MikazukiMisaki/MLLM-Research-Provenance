@@ -1,0 +1,103 @@
+{
+  "schema_version": "r19_gate_manifest_v1",
+  "attempt": {
+    "attempt_id": "r19-b1-g2-after-089429e4-20261022T092806Z",
+    "mode": "smoke",
+    "output_id": "r19_b1_g2_recovery_after_089429e4_20261022T092806Z_92aae1d",
+    "predecessor_run_id": "089429e4a2554bc386580d87014b4951",
+    "retry_ordinal": 1,
+    "planned_retries_total": 1,
+    "unplanned_retries": 0
+  },
+  "implementation_sha": "92aae1d9b230cc212c6ec4effc99aa468941e69d",
+  "protocol_sha256": "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122",
+  "baseline_id": "R19-B1",
+  "baseline_manifest_sha256": "d503f35ae913b137dfff091263bf29c38aa0ade2eea648dc45d7e6cf80da0973",
+  "baseline_amendment_sha256": "f8a138045cde125f2c5e08a7d077f75e3838cc7f6d0c67703faffe1166099e49",
+  "runtime_expectations_sha256": "dbfb7aa1a1d48d1148ad25be93002e7424d8b22e85422125ed502ac0f4db967e",
+  "runtime_manifest_preload_sha256": "64ebf4667da70dc4acd0a49b645bb6b6d4c3e1fe5d3e8e6351a8bf66f148ab9a",
+  "smoke_prefix_manifest_sha256": "cfb3be3e0e87eec74216068d27530063307ead1698c39481e0b734ebe629f44f",
+  "r7_source_schedule_sha256": "24ff5e65d9ef38024d168031fb271770d28ec7e8f014c57b90cba90abbbc186e",
+  "r8_osr_summary_sha256": "f605bc6c9f87f21c55adddac04887ab72c1e742b40be7d8699af9273949944a6",
+  "review": {
+    "status": "PASS",
+    "implementation_sha": "92aae1d9b230cc212c6ec4effc99aa468941e69d",
+    "protocol_sha256": "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122",
+    "review_type": "independent_exact_sha",
+    "g2_acceptance": "PASS",
+    "baseline_manifest_sha256": "d503f35ae913b137dfff091263bf29c38aa0ade2eea648dc45d7e6cf80da0973",
+    "baseline_amendment_sha256": "f8a138045cde125f2c5e08a7d077f75e3838cc7f6d0c67703faffe1166099e49",
+    "runtime_expectations_sha256": "dbfb7aa1a1d48d1148ad25be93002e7424d8b22e85422125ed502ac0f4db967e",
+    "runtime_manifest_preload_sha256": "64ebf4667da70dc4acd0a49b645bb6b6d4c3e1fe5d3e8e6351a8bf66f148ab9a",
+    "reviewer": "Popper",
+    "report_path": "review-92aae1d.md",
+    "report_sha256": "61457bf5b04d82869f5f975c00eadec0187f8303066ff38db8de875ffdbf178a"
+  },
+  "predecessor_resolution": {
+    "failed_run_id": "089429e4a2554bc386580d87014b4951",
+    "failed_implementation_sha": "f4fb81842e949930433def5817723bab74159f14",
+    "original_registry_sha256": "bada5f681a8d113182a570b6d4b4c33a453ab10c0766e4c5e3fd37a3ae402922",
+    "original_event_ledger_sha256": "b2d9045514bc3251ee3e954e4787569566cf7ba995821adbdb5af6b1dfdf065c",
+    "append_only_resolution": "KNOWN_FAILED_REPLAY_VALIDATION / NO_BRANCH_EXECUTED",
+    "resolution_id": "b78e7bf3cfd100e2bd6866908e95ee7b7b43d201ac7c3d0edc96dc6bfc8a47eb",
+    "resolution_record_path": "unit_resolution_events.jsonl",
+    "resolution_record_file_sha256": "74f1e66489a35697c9e0a7c16e0da877193e8e616ec4e37380836abf59622708",
+    "original_registry_mutated": false,
+    "known_physical_operations": 19,
+    "known_model_generations": 0,
+    "known_branch_executions": 0,
+    "authentic_exit_code": 2,
+    "supervisor_interrupted": false
+  },
+  "campaign_reconciliation": {
+    "authorized_cases": ["R8-F16", "R8-S04"],
+    "historical_model_equivalence": "NOT_ESTABLISHED",
+    "total_caps": {
+      "environment_operations_including_resets": 400,
+      "model_generations": 408,
+      "branch_executions": 8
+    },
+    "predecessor_actual": {
+      "environment_operations_including_resets": 19,
+      "model_generations": 0,
+      "branch_executions": 0
+    },
+    "remaining_before_successor": {
+      "environment_operations_including_resets": 381,
+      "model_generations": 408,
+      "branch_executions": 8
+    },
+    "successor_prelaunch_upper_bounds": {
+      "environment_operations_including_resets": 374,
+      "model_generations": 228,
+      "branch_executions": 6
+    },
+    "projected_campaign_totals_at_upper_bounds": {
+      "environment_operations_including_resets": 393,
+      "model_generations": 228,
+      "branch_executions": 6
+    },
+    "remaining_after_upper_bounds": {
+      "environment_operations_including_resets": 7,
+      "model_generations": 180,
+      "branch_executions": 2
+    },
+    "planned_retries_total": 1,
+    "unplanned_retries": 0,
+    "completed_branch_reruns": 0,
+    "fresh_train_tasks": 0,
+    "g3_authorized": false,
+    "no_second_retry": true
+  },
+  "execution_scope": {
+    "g2_only": true,
+    "model_free_r8_f16_replay_required_before_generation": true,
+    "stop_on_first_replay_integrity_identity_or_budget_failure": true,
+    "model_or_baseline_change": false,
+    "quota_or_exclusion_change": false,
+    "prompt_change": false,
+    "training_dpo_or_orpo": false,
+    "held_out_or_fresh_train_collection": false,
+    "g3": false
+  }
+}

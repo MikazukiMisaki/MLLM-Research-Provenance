@@ -1,0 +1,138 @@
+{
+  "schema_version": "r19_production_replay_regression_v1",
+  "implementation_sha": "92aae1d9b230cc212c6ec4effc99aa468941e69d",
+  "production_method": "scripts.run_r19_experiment.LiveR19Runtime.replay_smoke_prefix",
+  "input_evidence": {
+    "failed_run_id": "089429e4a2554bc386580d87014b4951",
+    "failed_implementation_sha": "f4fb81842e949930433def5817723bab74159f14",
+    "raw_event_ledger_sha256": "b2d9045514bc3251ee3e954e4787569566cf7ba995821adbdb5af6b1dfdf065c",
+    "event_count": 38,
+    "reset_completion_event_id": "049132bc1e2306ca4d326b2eeb2555c8464237b0aa873fd0e13af7491b794d25",
+    "step_completion_event_ids": [
+      "62cdd750222fb2178e4cff6c42ee47c8c90c1eb18c6042c5fa415f3e9d3a1b29",
+      "87011497fea02e593017308728e38894be3655c22c03d9af67d607bbb88d4667",
+      "085b211aad4d983110907d7dce7aaa652749dc86c619fcff4068d0312f8d9b94",
+      "5d5175752880f17193a1fad8048d804c392bb586b75a345abf61e9ff4b018624",
+      "129e3facec4bf5fb5d3979a488a4f74f5fe2b86168a18dc8af7cd9422fa416ca",
+      "713b35d18a1c6ca6b96ec987417d18ce574daf541c47a60bbd2442c0072092d4",
+      "93152579d53349fb6f19c9cd742cae945ee3c82e535bb6524f02a65a6f011489",
+      "e87efd088aaadac64861cc81541c5a78b8ea93a02ba5a73638ed7cd5a59d8611",
+      "1c250c66b17507db334a6e9358c024f094b210f2e73feb89aa22004d164a1c36",
+      "60b50e552be5a07e6ff1299bbdb6758a96994e6f02423efeaa23d7f3248458b3",
+      "70208e6d86b9f8f5adf0c92506c3c84f2b2409af4c22bcffa349941d0803af7a",
+      "39203e75e2486b6ee2b4b83b6a849629e22708915dacc6244091c9bbb6deb9cf",
+      "e7adb8e83e2ff7f374845a6b6d9d571cc19801899e8b5d086285c48164feb8c9",
+      "9a007e2fca3ee340815471f26eb3c52db267328fffd0e33faaa776ca29bfad69",
+      "b5e1fa608bc344103c5c1731c36528b027a24da74aa527bc9f0a9b411b443852",
+      "9702c7fe10ea5bdec4524f7a46cd118ca7735e140a770038d77916ab0393e765",
+      "af41a436f37821d7e12ded66aa2a3d235f64732abe91e87d389265a7de4af21d",
+      "fe6f4e668a8d17baad2e7ffaebaed4ae84b623758b7b9690753af96235190d46"
+    ],
+    "r8_prefix_manifest_sha256": "cfb3be3e0e87eec74216068d27530063307ead1698c39481e0b734ebe629f44f",
+    "r8_complete_public_prefix_sha256": "15e6003118dac6272689ac5a8312f95efdd5013a71798ea6a43139065720dee0"
+  },
+  "method": "invoke exact production validator with archived reset/step outputs; mock only environment factory/reset/step boundary and journal sink; do not initialize model or ALFWorld",
+  "physical_operations_during_this_regression": {
+    "model_generations": 0,
+    "environment_resets": 0,
+    "environment_steps": 0,
+    "note": "18 saved transition outputs were consumed by mock boundary; not physical environment operations"
+  },
+  "positive_case": {
+    "result": "PASS",
+    "saved_transition_count": 18,
+    "commands_action_ids_and_full_before_state_history_match_archived_events": true,
+    "replay_match": true
+  },
+  "negative_cases": {
+    "current_observation": {
+      "result": "REJECTED",
+      "error": "old-development smoke replay differs from its frozen public prefix",
+      "stage": "frozen_public_prefix_comparison",
+      "first_mismatch": {
+        "name": "current_observation",
+        "json_path": "$.current_state.observation",
+        "transition_index": 18
+      },
+      "mocked_factory_calls": 1,
+      "mocked_resets": 1,
+      "mocked_saved_steps_consumed": 18
+    },
+    "ordered_action_map": {
+      "result": "REJECTED",
+      "error": "old-development smoke replay differs from its frozen public prefix",
+      "stage": "frozen_public_prefix_comparison",
+      "first_mismatch": {
+        "name": "ordered_action_map",
+        "json_path": "$.current_state.valid_actions",
+        "transition_index": 18
+      },
+      "mocked_factory_calls": 1,
+      "mocked_resets": 1,
+      "mocked_saved_steps_consumed": 18
+    },
+    "prior_public_history": {
+      "result": "REJECTED",
+      "error": "old-development smoke replay differs from its frozen public prefix",
+      "stage": "frozen_public_prefix_comparison",
+      "first_mismatch": {
+        "name": "complete_public_prefix",
+        "json_path": "$.complete_public_prefix_sha256",
+        "transition_index": null
+      },
+      "mocked_factory_calls": 1,
+      "mocked_resets": 1,
+      "mocked_saved_steps_consumed": 18
+    },
+    "off_by_one_recent_context": {
+      "result": "REJECTED",
+      "error": "old-development smoke replay differs from its frozen public prefix",
+      "stage": "frozen_public_prefix_comparison",
+      "first_mismatch": {
+        "name": "recent_context_k4",
+        "json_path": "$.recent_context_k4[0].action",
+        "transition_index": 14
+      },
+      "mocked_factory_calls": 1,
+      "mocked_resets": 1,
+      "mocked_saved_steps_consumed": 18
+    },
+    "task_identity": {
+      "result": "REJECTED",
+      "error": "old-development smoke reset returned a different task",
+      "stage": "reset_identity",
+      "first_mismatch": null,
+      "mocked_factory_calls": 1,
+      "mocked_resets": 1,
+      "mocked_saved_steps_consumed": 0
+    },
+    "seed": {
+      "result": "REJECTED",
+      "error": "frozen R8 smoke prefix identity/indexing is inconsistent",
+      "stage": "pre_environment_identity",
+      "first_mismatch": null,
+      "mocked_factory_calls": 0,
+      "mocked_resets": 0,
+      "mocked_saved_steps_consumed": 0
+    },
+    "horizon": {
+      "result": "REJECTED",
+      "error": "frozen R8 smoke prefix identity/indexing is inconsistent",
+      "stage": "pre_environment_identity",
+      "first_mismatch": null,
+      "mocked_factory_calls": 0,
+      "mocked_resets": 0,
+      "mocked_saved_steps_consumed": 0
+    }
+  },
+  "coverage": {
+    "observation": true,
+    "ordered_action_mapping": true,
+    "older_history_outside_k4": true,
+    "off_by_one_recent_context": true,
+    "task_identity": true,
+    "seed_before_environment_factory": true,
+    "horizon_before_environment_factory": true,
+    "durable_failure_diagnostic_emitted_before_raise": true
+  }
+}

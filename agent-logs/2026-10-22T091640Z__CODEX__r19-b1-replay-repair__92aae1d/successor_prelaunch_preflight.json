@@ -1,0 +1,54 @@
+{
+  "schema_version": "r19_successor_prelaunch_preflight_v1",
+  "status": "PREFLIGHT_PASS",
+  "attempt_id": "r19-b1-g2-after-089429e4-20261022T092806Z",
+  "implementation_sha": "92aae1d9b230cc212c6ec4effc99aa468941e69d",
+  "gate_manifest_sha256": "2e7beb89c0ade2adf3886e551b733b37f4edb55ceac68bfa2d076babd05de612",
+  "validated_gate_hashes": {
+    "baseline_id": "R19-B1",
+    "baseline_manifest_sha256": "d503f35ae913b137dfff091263bf29c38aa0ade2eea648dc45d7e6cf80da0973",
+    "baseline_amendment_sha256": "f8a138045cde125f2c5e08a7d077f75e3838cc7f6d0c67703faffe1166099e49",
+    "runtime_expectations_sha256": "dbfb7aa1a1d48d1148ad25be93002e7424d8b22e85422125ed502ac0f4db967e",
+    "runtime_manifest_preload_sha256": "64ebf4667da70dc4acd0a49b645bb6b6d4c3e1fe5d3e8e6351a8bf66f148ab9a",
+    "smoke_prefix_manifest_sha256": "cfb3be3e0e87eec74216068d27530063307ead1698c39481e0b734ebe629f44f",
+    "r7_source_schedule_sha256": "24ff5e65d9ef38024d168031fb271770d28ec7e8f014c57b90cba90abbbc186e",
+    "r8_osr_summary_sha256": "f605bc6c9f87f21c55adddac04887ab72c1e742b40be7d8699af9273949944a6",
+    "protocol_sha256": "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122",
+    "identity_status": "NEW_PINNED_BASELINE_APPROVED",
+    "pinned_model_revision": "b968826d9c46dd6066d109eabc6255188de91218"
+  },
+  "verified_local_identity": {
+    "base_model_snapshot_files": 12,
+    "adapter_files": 11,
+    "adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+    "runtime_preload_matches_frozen_identity": true,
+    "task_data_matches_frozen_identity": true
+  },
+  "authorized_cases": ["R8-F16", "R8-S04"],
+  "prelaunch_bounds": {
+    "environment_operations_including_resets": 374,
+    "model_generations": 228,
+    "branch_executions": 6
+  },
+  "campaign_caps": {
+    "environment_operations_total": 400,
+    "environment_operations_predecessor": 19,
+    "environment_operations_remaining_before": 381,
+    "environment_operations_projected_total": 393,
+    "model_generations_total": 408,
+    "model_generations_predecessor": 0,
+    "model_generations_projected_total": 228,
+    "branch_executions_total": 8,
+    "branch_executions_predecessor": 0,
+    "branch_executions_projected_total": 6
+  },
+  "prelaunch_side_effects": {
+    "output_path_already_existed": false,
+    "model_weights_loaded": false,
+    "model_generations": 0,
+    "alfworld_initialized": false,
+    "physical_environment_operations": 0,
+    "code_or_protocol_changed": false
+  },
+  "replay_gate": "R8-F16 production model-free replay is the first run operation before any generation; fail-closed, no second retry"
+}

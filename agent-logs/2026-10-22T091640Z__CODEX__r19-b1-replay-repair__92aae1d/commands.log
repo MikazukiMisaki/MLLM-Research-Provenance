@@ -1,0 +1,15 @@
+Sanitized task command record. Machine-local path prefixes and the raw supervisor argv are intentionally not reproduced here; see `EXCLUDED_FILES.md` and the sanitized receipt for SHA-256 linkage.
+
+1. Read-only inspection of actual failed-run ledger, execution/runtime manifests, supervisor receipt/log, frozen R8/R7 records, and production replay code. No model or ALFWorld initialization; no environment operation.
+2. Offline reproduction from the 19 saved operation results through the production validator, with environment/model boundaries mocked. Positive replay passed after repair; mutation checks for observation, action mapping order, prior history/recent-window index, task, seed, and horizon rejected. Zero physical operations and zero generations.
+3. Focused tests, compilation, diff checks; exact successor commit pushed and remote SHA verified. Independent exact-SHA source review PASS; append-only failed-unit resolution recorded without editing the old registry.
+4. Offline gate preflight in the frozen `alfworld-self-improve` runtime, using the explicitly selected frozen HF cache identity and offline flags. The pinned model/adapter file bytes, task data, runtime, protocol, baseline, cases, and resource bounds matched. Zero model weights loaded, generations, or environment operations.
+5. One supervised live command, sanitized form:
+
+   `python -m scripts.launch_r19_supervised --record-dir <PROVENANCE_ROOT>/supervisor_raw -- python -m scripts.run_r19_experiment smoke --protocol <PROJECT_ROOT>/configs/experiments/r19_recovery_duration_v1.json --gate-manifest <PROVENANCE_ROOT>/successor-gate-manifest.json --output <PROJECT_ROOT>/artifacts/runtime/r19_b1_g2_recovery_after_089429e4_20261022T092806Z_92aae1d --adapter <FROZEN_ADAPTER> --data-root <ALFWORLD_DATA> --config <PROJECT_ROOT>/configs/local/r19_b1_g2_alfworld.yaml`
+
+   Exact argv SHA-256: recorded in `supervisor_receipt_sanitized.json`. HF cache and transformer hub were set offline for the supervised process.
+6. Offline completed-G2 verification through `python -m scripts.verify_r19_b1_g2`, binding the exact output, gate, supervisor receipt, frozen adapter, task data, and local config. No environment/model calls.
+7. Copied the unmodified successor evidence files into `g2_evidence/` for upload; source SHA-256 values are inventoried in `FILE_HASHES.sha256`.
+
+An initial preflight invocation used the base Conda prefix without PyTorch and stopped before gate evaluation or any physical/model operation. The correctly frozen runtime was then selected and the full preflight passed. This did not start or count as a G2 retry.
