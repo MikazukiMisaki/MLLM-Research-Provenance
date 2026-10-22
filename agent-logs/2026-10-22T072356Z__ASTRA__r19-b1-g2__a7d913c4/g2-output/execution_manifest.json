@@ -1,0 +1,77 @@
+{
+  "adapter_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+  "baseline_amendment_sha256": "f8a138045cde125f2c5e08a7d077f75e3838cc7f6d0c67703faffe1166099e49",
+  "baseline_id": "R19-B1",
+  "baseline_manifest_sha256": "d503f35ae913b137dfff091263bf29c38aa0ade2eea648dc45d7e6cf80da0973",
+  "environment_manifest_sha256": "2a1e4d35db31cdd0d8adcdf15df60b577a79b3b7e51c74c2546ed97463c178d0",
+  "evidence_class": "live",
+  "gate_manifest_sha256": "2113b75824b8c3fc17d619bb63770c221b9bbb739e1b04e0f579a83fdf6f1aa7",
+  "identity_status": "NEW_PINNED_BASELINE_APPROVED",
+  "implementation_sha": "f4fb81842e949930433def5817723bab74159f14",
+  "mode": "smoke",
+  "model_adapter_isolation": {
+    "actor_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "distinct_model_objects": true,
+    "kv_cache_shared": false,
+    "recovery_adapter_active": false,
+    "recovery_controller": {
+      "active_adapters": [],
+      "chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+      "effective_attention_backend": "sdpa",
+      "loaded_commit_hash": "b968826d9c46dd6066d109eabc6255188de91218",
+      "model_config_class": "transformers.models.qwen3.configuration_qwen3.Qwen3Config",
+      "model_device": "cuda:0",
+      "model_type": "qwen3",
+      "parameter_dtype": "torch.bfloat16",
+      "tokenizer_class": "transformers.models.qwen2.tokenization_qwen2_fast.Qwen2TokenizerFast",
+      "tokenizer_length": 151669
+    },
+    "recovery_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "sft_adapter_active": true,
+    "task_actor": {
+      "active_adapters": [
+        "default"
+      ],
+      "chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+      "effective_attention_backend": "sdpa",
+      "loaded_commit_hash": "b968826d9c46dd6066d109eabc6255188de91218",
+      "model_config_class": "transformers.models.qwen3.configuration_qwen3.Qwen3Config",
+      "model_device": "cuda:0",
+      "model_type": "qwen3",
+      "parameter_dtype": "torch.bfloat16",
+      "tokenizer_class": "transformers.models.qwen2.tokenization_qwen2_fast.Qwen2TokenizerFast",
+      "tokenizer_length": 151669
+    }
+  },
+  "model_identity_sha256": "d503f35ae913b137dfff091263bf29c38aa0ade2eea648dc45d7e6cf80da0973",
+  "pinned_model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "planned_smoke_bounds": {
+    "environment_operations_upper_bound": 374,
+    "full_branch_arms": 6,
+    "model_calls_upper_bound": 228
+  },
+  "protocol_sha256": "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122",
+  "r7_source_schedule_sha256": "24ff5e65d9ef38024d168031fb271770d28ec7e8f014c57b90cba90abbbc186e",
+  "r8_osr_summary_sha256": "f605bc6c9f87f21c55adddac04887ab72c1e742b40be7d8699af9273949944a6",
+  "run_context": {
+    "baseline_amendment_sha256": "f8a138045cde125f2c5e08a7d077f75e3838cc7f6d0c67703faffe1166099e49",
+    "baseline_id": "R19-B1",
+    "environment_manifest_sha256": "2a1e4d35db31cdd0d8adcdf15df60b577a79b3b7e51c74c2546ed97463c178d0",
+    "experiment_id": "r19_recovery_duration_v1",
+    "model_identity_sha256": "d503f35ae913b137dfff091263bf29c38aa0ade2eea648dc45d7e6cf80da0973",
+    "pinned_model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "runtime_expectations_sha256": "dbfb7aa1a1d48d1148ad25be93002e7424d8b22e85422125ed502ac0f4db967e",
+    "runtime_manifest_sha256": "f4c6b5eac9b1558b82e0e626ea4412437ff924f839a62f8fe3962a141effe7f7",
+    "source_manifest_sha256": "12cd4694615d09d428006a92328a2f4c123795e6e413df8d12a0e45f881c776e"
+  },
+  "run_id": "089429e4a2554bc386580d87014b4951",
+  "runtime_expectations_sha256": "dbfb7aa1a1d48d1148ad25be93002e7424d8b22e85422125ed502ac0f4db967e",
+  "runtime_manifest_preload_sha256": "64ebf4667da70dc4acd0a49b645bb6b6d4c3e1fe5d3e8e6351a8bf66f148ab9a",
+  "runtime_manifest_sha256": "f4c6b5eac9b1558b82e0e626ea4412437ff924f839a62f8fe3962a141effe7f7",
+  "schedule_episode_count": 0,
+  "schema_version": "r19_execution_manifest_v1",
+  "smoke_prefix_manifest_sha256": "cfb3be3e0e87eec74216068d27530063307ead1698c39481e0b734ebe629f44f",
+  "source_manifest_sha256": "12cd4694615d09d428006a92328a2f4c123795e6e413df8d12a0e45f881c776e",
+  "started_at_unix_seconds": 1792654870.8768058,
+  "status": "RUNNING"
+}

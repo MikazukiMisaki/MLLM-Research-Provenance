@@ -1,0 +1,15 @@
+Exact-SHA independent review — read-only
+
+Target: 991ca1d7048f03b89ec444cb287fcb2fb1179605
+Reviewer: Wegener
+Verdict: BLOCKED
+
+The requested branch points to this commit; its parent is bd55e671…. Read-only review confirms the revision is validated as a 40-character commit separately from 64-character SHA-256 digests, the amendment hash matches the baseline manifest, historical MODEL_IDENTITY_UNRESOLVED is preserved, and R19-B1 is restricted to smoke.
+
+Blocking gap: the G2 acceptance check does not establish that each K3 arm’s evidence references belong to that arm’s execution. `_smoke_arm_cost_reconciles` looks up referenced events but does not verify their prefix or disjointness; the “no alias” predicate checks `derived_identity_from` and execution-prefix IDs only (`scripts/run_r19_experiment.py:2505–2552, 2597–2608`). The offline verifier reuses that predicate and does not independently rebuild the stored K3 trace signatures from raw events (`scripts/run_r19_experiment.py:3067–3076`). Thus aliased K3 evidence references could pass under matching traces, contrary to the frozen no-alias requirement.
+
+Requested closure: validate every arm’s referenced events against its execution prefix and K value, require the two K3 evidence sets to be disjoint, and add a synthetic alias-rejection test; then request a new exact-SHA review.
+
+Reviewer confirmed: no files were changed; no tests, weights, generation, ALFWorld, G2, or G3 were run.
+
+No PASS was issued. G2 must not start on this SHA.

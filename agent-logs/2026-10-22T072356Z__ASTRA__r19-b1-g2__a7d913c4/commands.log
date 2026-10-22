@@ -1,0 +1,72 @@
+2026-10-22 07:23 UTC — read-only scientific repository verification
+  git status --short
+  git branch --show-current
+  git rev-parse HEAD
+  git ls-remote origin refs/heads/codex/r19-recovery-duration-v1
+  Result: clean worktree; local and remote branch both 991ca1d7048f03b89ec444cb287fcb2fb1179605.
+
+2026-10-22 07:23 UTC — exact focused R19 test suite
+  conda run -n alfworld-self-improve env PYTHONPATH=src python -m pytest -q tests/test_r19_recovery_duration.py
+  Result: exit 0; 46 passed.
+
+2026-10-22 07:23 UTC — frozen input hashes
+  configs/experiments/r19_recovery_duration_v1.json: 3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122
+  configs/experiments/r19_b1_baseline_manifest.json: d503f35ae913b137dfff091263bf29c38aa0ade2eea648dc45d7e6cf80da0973
+  R19_B1_G2_AMENDMENT.md: f8a138045cde125f2c5e08a7d077f75e3838cc7f6d0c67703faffe1166099e49
+  reports/persistent_recovery_prefix_manifest.json: cfb3be3e0e87eec74216068d27530063307ead1698c39481e0b734ebe629f44f
+  configs/local/r19_b1_g2_alfworld.yaml: e90f93eb4604a473b6eb4a259a19ef1ca3c296bba1771ba70a1c9b0edbc99700
+
+2026-10-22 07:23 UTC — read-only resource and process checks
+  Checked local ALFWorld data root and SFT-P0 adapter directory are present.
+  Checked no existing *r19-b1-g2* runtime output directory.
+  Checked no R19 runner/supervisor, ALFWorld, or focused-test process remained after tests.
+
+2026-10-22 07:24 UTC — requested reviewer to prioritize explicit exact-SHA verdict.
+  No scientific execution was launched while review is pending.
+
+Post-review — reviewed BLOCKED finding and read the user-adopted handoff authorization (exact command timestamp was not separately captured).
+  Handoff explicitly authorizes targeted K3 repeat-evidence repair, synthetic tests, and review of the exact successor.
+
+Post-remediation — exact-target focused test and static checks (exact command timestamp was not separately captured).
+  conda run -n alfworld-self-improve env PYTHONPATH=src python -m pytest -q -o addopts='' tests/test_r19_recovery_duration.py
+  Result at b7abaf30b0ddd0242391461f421e36f5466acc16: exit 0; 46 passed in 0.88s.
+  conda run -n alfworld-self-improve env PYTHONPATH=src python -m py_compile scripts/run_r19_experiment.py tests/test_r19_recovery_duration.py
+  git diff --check
+  Result: exit 0.
+
+Post-review — task-owned scientific commit and non-force push (exact command timestamp was not separately captured).
+  Commit: b7abaf30b0ddd0242391461f421e36f5466acc16
+  git push origin HEAD:refs/heads/codex/r19-recovery-duration-v1
+  Result: push succeeded.
+  git rev-parse HEAD
+  git ls-remote origin refs/heads/codex/r19-recovery-duration-v1
+  Result: local HEAD and verified remote ref both equal b7abaf30b0ddd0242391461f421e36f5466acc16.
+  Exact independent review requested from Noether. Review verdict pending; no G2.
+
+After the exact b7abaf30 review returned BLOCKED:
+  Updated scripts/run_r19_experiment.py to read the recovery action index from the production event payload.
+  Updated the synthetic test event to put the index in payload.action and omit it from identity.
+  conda run -n alfworld-self-improve env PYTHONPATH=src python -m pytest -q -o addopts='' tests/test_r19_recovery_duration.py
+  Result: 46 passed in 0.87s; exit 0.
+  py_compile and git diff --check: exit 0.
+  Commit f4fb81842e949930433def5817723bab74159f14; normal push succeeded.
+  git ls-remote verified refs/heads/codex/r19-recovery-duration-v1 equals f4fb81842e949930433def5817723bab74159f14.
+  Post-push exact-SHA test: 46 passed in 0.89s; exit 0.
+  Independent exact-SHA review requested from Chandrasekhar. The exact review later returned PASS; see review-f4fb818.log.
+
+2026-10-22 07:40:52.478596Z–07:41:43.001255Z — one authorized durable-supervisor G2 smoke (no retry)
+  run_id: 089429e4a2554bc386580d87014b4951
+  reviewed implementation: f4fb81842e949930433def5817723bab74159f14
+  Scope: frozen smoke cases R8-F16 and R8-S04, original resource bounds; no fresh-task collection.
+  Result: runner raised EvidenceIntegrityError because R8-F16 replay differed from its frozen public prefix, before any branch arm or model generation. Authentic subprocess exit code 2; supervisor status failed; interrupted_by_supervisor=false.
+  Actual coverage: R8-F16 only; 0/6 production arms; K1 reference/production=0/0; K3 repeats=0; R8-S04 not started.
+  Physical ledger: 0 model generations/tokens; 18 environment steps + 1 reset; 19 charged operations; no incomplete environment operations.
+  Unit registry: one prefix_replay_and_initial_recovery_attempt remains in_progress, treated as one incomplete/indeterminate unit. It was not edited, regenerated, or retried.
+  Raw G2 output preserved byte-exactly under g2-output/. execution_manifest.json remains status RUNNING because the replay exception preceded finalization; this is retained as authentic output, not rewritten.
+  Full offline G2 verifier: exit 2, OFFLINE_VERIFICATION_FAILED because smoke_checks.json is absent; offline_verification.json was not created. Separate production raw-event ledger validation: exit 0.
+  Sanitized supervisor receipt summary is supervisor_receipt_summary.json. Original receipts with machine-specific absolute argv paths remain local and are excluded from upload.
+  No scientific source/configuration was modified after review or after the observed result. No retries, extra cases, fresh tasks, held-out tasks, training, or G3.
+
+2026-10-22 07:48 UTC — provenance finalization
+  Updated RECORD.md to G2_FAIL before branch-arm execution and recorded the authentic physical/event accounting and final status.
+  Remaining steps: path/secret scan, SHA-256 inventory, provenance commit/push, and exact remote SHA verification.

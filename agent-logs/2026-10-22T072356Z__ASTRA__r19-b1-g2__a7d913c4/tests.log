@@ -1,0 +1,18 @@
+Command: conda run -n alfworld-self-improve env PYTHONPATH=src python -m pytest -q tests/test_r19_recovery_duration.py
+Target: exact scientific commit 991ca1d7048f03b89ec444cb287fcb2fb1179605
+Result: .............................................. [100%]
+Summary: 46 passed
+Process exit code: 0
+
+Post-review remediation rerun:
+Command: conda run -n alfworld-self-improve env PYTHONPATH=src python -m pytest -q -o addopts='' tests/test_r19_recovery_duration.py
+Target: dirty successor worktree based on 991ca1d7048f03b89ec444cb287fcb2fb1179605
+Result: .............................................. [100%]
+Summary: 46 passed in 1.07s
+Process exit code: 0
+Synthetic closure checks in the existing test: cross-execution K3 event-ref alias is rejected even when arm event payload is altered consistently; stored equal K3 signatures are rejected when raw events differ; offline raw-signature verifier rejects the forged signature.
+
+Static checks after remediation:
+  conda run -n alfworld-self-improve env PYTHONPATH=src python -m py_compile scripts/run_r19_experiment.py tests/test_r19_recovery_duration.py
+  git diff --check
+Result: both checks passed; combined process exit code 0.

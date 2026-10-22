@@ -1,0 +1,12 @@
+Exact-SHA independent review — read-only
+
+Target: f4fb81842e949930433def5817723bab74159f14
+Reviewer: Chandrasekhar
+Verdict: PASS
+Severity-ranked findings: none.
+
+Reviewer verified local and GitHub refs match and the worktree is clean. The prior issues are closed: recovery action indexing reads `payload.action.recovery_action_index`, matching the actual producer; the synthetic G2 fixture no longer relies on an identity field the producer does not emit; K3 evidence refs are bound to each execution prefix; K3 repeat evidence sets must be disjoint; and offline verification rebuilds K3 signatures from raw events. Alias and forged-signature rejection tests are present. The earlier plain-model adapter probe also has a focused test.
+
+Reviewer reports R19-focused suite 46 tests and `git diff --check` passed, and protocol/baseline/amendment hashes match. This PASS applies only to the exact review gate at f4fb81842e949930433def5817723bab74159f14; it is not a G2 result.
+
+Reviewer confirmed no weights were loaded, no text was generated, no ALFWorld environment was instantiated/operated, and no G2/G3 was run.

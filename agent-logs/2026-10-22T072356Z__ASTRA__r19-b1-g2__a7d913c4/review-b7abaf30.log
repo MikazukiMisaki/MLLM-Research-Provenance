@@ -1,0 +1,11 @@
+Exact-SHA independent review — read-only
+
+Target: b7abaf30b0ddd0242391461f421e36f5466acc16
+Reviewer: Noether
+Verdict: BLOCKED
+
+The gate reads `recovery_action_index` from event identity, but production puts it in the event payload; valid recovery transitions therefore fail arm binding. The synthetic test uses a different identity shape, so its 46 passing tests miss this mismatch. Review references: `scripts/run_r19_experiment.py` at the arm evidence validator; `src/recovery/r19_duration.py` in the production recovery step event producer; `tests/test_r19_recovery_duration.py` in the synthetic fixture.
+
+Reviewer reports that pinned revision, baseline/runtime binding, budgets, historical-identity status, and G3 boundary otherwise appear intact; protocol and baseline hashes match.
+
+Reviewer confirmed no files were changed, no model was loaded, and no ALFWorld operation was run. No PASS was issued; G2 must not start on this SHA.

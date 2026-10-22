@@ -19,6 +19,7 @@ Oldest first. UTC is the task-directory timestamp; scientific SHA is the relevan
 | 2026-09-15 01:48:45 | ASTRA | R18-C2 scientific acceptance and integrated interpretation | PASS | aa9fa3c34520941e7e3be00294b111e8254fd65b | [RECORD.md](agent-logs/2026-09-15T014845Z__ASTRA__r18c2-scientific-acceptance__159bf149/RECORD.md) |
 | 2026-10-22 02:48:04 | ASTRA | R19 recovery-control duration opportunity pilot | BLOCKED | fac6a92081cab84e23d2f4630a7f2ab6d18f8baf | [RECORD.md](agent-logs/2026-10-22T024804Z__ASTRA__r19-recovery-duration__f4c9d8/RECORD.md) |
 | 2026-10-22 04:27:45 | ASTRA | R19 G1 implementation and evidence remediation | G1 PASS; G2/G3 BLOCKED (model identity) | dddf684f488873537196588beeec324cb1893dd7 | [RECORD.md](agent-logs/2026-10-22T042745Z__ASTRA__r19-g1-remediation__e3b9a7c2/RECORD.md) |
+| 2026-10-22 07:23:56 | ASTRA | R19-B1 bounded G2 smoke | G2_FAIL before branch-arm execution | f4fb81842e949930433def5817723bab74159f14 | [RECORD.md](agent-logs/2026-10-22T072356Z__ASTRA__r19-b1-g2__a7d913c4/RECORD.md) |
 
 ## Import omissions
 

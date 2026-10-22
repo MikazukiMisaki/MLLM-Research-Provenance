@@ -1,0 +1,16 @@
+Authorized offline G2 verification attempt (no model/environment calls)
+
+Command summary: conda run -n alfworld-self-improve env PYTHONPATH=src python -m scripts.verify_r19_b1_g2 with the exact reviewed gate, single G2 output, supervisor record, approved adapter, ALFWorld data root, and frozen local config.
+
+Result JSON:
+{"error":"offline G2 bundle is missing required files: smoke_checks.json","error_type":"EvidenceIntegrityError","status":"OFFLINE_VERIFICATION_FAILED"}
+
+Authentic process exit code: 2.
+The verifier did not create offline_verification.json. The incomplete branch output was preserved unchanged.
+
+Separate offline raw-event ledger check:
+- 38 events; 19 environment_operation_started; 19 environment_operation_completed.
+- completed physical model generations: 0; external paid calls: 0; training events: 0.
+- physical environment steps: 18; physical resets: 1; incomplete operations: 0.
+- observed canonical task: R8-F16 only.
+- process exit code: 0.
