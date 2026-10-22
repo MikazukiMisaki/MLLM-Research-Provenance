@@ -1,0 +1,177 @@
+{
+  "schema_version": "r19_independent_exact_sha_source_contract_review_v1",
+  "status": "FAIL",
+  "review_type": "independent_exact_sha",
+  "reviewer_task": "01a0994c-a209-7600-8a3e-5ff3096ed346",
+  "reviewed_at_utc": "2026-10-22T22:58:58.012883+00:00",
+  "implementation_sha": "da7d348ffd3677d619dd31357e1e1e3cca28c9ec",
+  "comparison_base_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+  "IMPLEMENTATION_REVIEW": "FAIL",
+  "G2_CARRY_FORWARD": "PASS",
+  "G2_CARRY_FORWARD_scope": "Authentic G2 evidence and unchanged smoke-path semantics only; overall implementation/restart gate is FAIL, and no G2 executed on this SHA.",
+  "source_treatment_semantics_changed": false,
+  "scientific_execution_behavior_changed": true,
+  "first_source_episode_integration": "PASS_SYNTHETIC_SINGLE_EPISODE",
+  "first_source_restart_comparison": "FAIL_MULTI_EPISODE_LIFECYCLE",
+  "first_source_index_zero_pre_action_match": "PASS_SYNTHETIC_ONLY",
+  "known_failed_disposition": "PASS_KNOWN_FAILED_NO_ACTION_NO_UNCERTAINTY",
+  "restart_gate_review": "FAIL_IMPLEMENTATION_BLOCKER",
+  "launch_clearance_issued": false,
+  "positive_production_preflight": "NOT_RUN_BY_REVIEWER",
+  "new_live_execution": "NOT_RUN_BY_REVIEWER",
+  "three_record_hashes": {
+    "r19_b1_g3_source_contract_repair_amendment_v1.json": "62ff158f5739859266664b1db2e323dca6ea0ad3b8e84134ecbe5fd06c847372",
+    "r19_b1_g3_source_contract_restart_authorization_v1.json": "de634ba310e47d3d49838b8a73d9c6d87f7db87deed042311e3718061a7eb428",
+    "r19_b1_g3_source_unit_resolution_events_v1.jsonl": "58783ba60b076ee190dccb0875aac65891d7e1c811e00fbe6303ca65896369d9"
+  },
+  "package_sha256": "20f9414a2d80a48060247368afcb9b9f07bc0573f591fd28d4f19213c8c23813",
+  "start_prompt_sha256": "4cd8802385f2dc08bf51aaca7367a43d84e3433d2f55b1908b3c631e3e391b44",
+  "frozen_inputs": {
+    "protocol": "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122",
+    "schedule": "0be460359fe43193e73f8cb55a8fb19fdba02ea70e3d0809ec5978fad21c8948",
+    "exclusions": "70447bba1b2a944d52ab9b4041b2d6ff3d865f4f0abd55d655214c8060ff5367"
+  },
+  "predecessor_audit_sha256": "8eb1248c1d863674119813ba1f90ba3ca6834bb1906cb2aa67acc6a4e087fe34",
+  "predecessor_event_ledger_sha256": "fde95fcd72f1c4ac6409fab7f2112654e145f6184fefec690cae58ad345f1cd7",
+  "expected_restart_snapshot_sha256": "d85d870bfddbad4eb62116d3d5de54a4b7fd4f250634af1c1ed89958e4c400b8",
+  "fingerprints": {
+    "total": 40,
+    "changed_methods": {
+      "scripts/run_r19_experiment.py::LiveR19Runtime._collect_one_source": {
+        "old": "12755022c3e7e8b25cff9cc07e47eaf3cbc5045f8ae2a21c43fc356002ec4d52",
+        "new": "f2e256054e6bcd2fcb041b69e2edc42a705d2dbf722d167ff65649a003bd7a9a"
+      },
+      "scripts/run_r19_experiment.py::LiveR19Runtime.actor_generation": {
+        "old": "c2a453654ab919555801e5c087cc13b1f2be40b9b3fdca01a741db9e9e73d4d7",
+        "new": "34b66c68e361d26c6f6f0b2d7871a9715bb56936694b7049c9b27a97aeaff9d7"
+      },
+      "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_model_call": {
+        "old": "1966a89fd7f9c5f51095d193163e3fac0f77590e1a6f63d815e6ffb14eb3a36f",
+        "new": "b8e163c5d1e4b186ff3ea53dd5a5a55d7bd60e950d5180cc074d1c3317e5567a"
+      },
+      "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_environment_operation": {
+        "old": "39068afbd080a78b94d8d509259e30ee9c526945eb1156a95b734f72c39d9e5a",
+        "new": "c71fecfc4dd690f63047cc142529140b96f32301d012abbadc5d0865257a8d43"
+      }
+    },
+    "effective_manifest_sha256": "c8e5d4a5e5bf9f90d85916aa03cf3b1cbd35fae44bffc76cfd8c4d9343682919",
+    "all_match": true
+  },
+  "remaining_phase_caps": {
+    "model_calls": {
+      "source": 8999,
+      "initial_recovery": 240,
+      "path_extension": 240,
+      "suffix": 17100
+    },
+    "environment_operations": {
+      "source": 8999,
+      "replay_gate": 5400,
+      "initial_attempt": 5520,
+      "path_extension": 2940,
+      "logical_branch": 18000
+    }
+  },
+  "projected_cumulative_maximum": {
+    "model_calls": 26756,
+    "environment_operations": 41201
+  },
+  "global_ceilings": {
+    "model_calls": 26988,
+    "environment_operations": 41260
+  },
+  "one_restart_output_gate": "PASS_REJECT_SECOND_SUCCESSOR",
+  "tests": {
+    "targeted": "93 passed in 10.77s",
+    "full_suite": "3 failed, 550 passed, 77 errors in 27.71s",
+    "baseline_failure_error_id_set": "UNCHANGED_RELATIVE_TO_INDEPENDENT_BF31_BASELINE",
+    "new_test_failure_error_ids": [],
+    "py_compile": "PASS",
+    "git_diff_check": "PASS",
+    "independent_probes": "All three implementation findings freshly reproduced at da7d348; no verdict inherited solely from superseded SHA."
+  },
+  "findings": [
+    {
+      "id": "R19-SRC-01",
+      "severity": "BLOCKING",
+      "path": "scripts/run_r19_experiment.py",
+      "line": 1905,
+      "title": "One-time restart comparison runs again on source episode 2",
+      "evidence": "Fresh exact-da7d348 probe: after one matching, completed synthetic first source episode, a second source episode (schedule index 1) completes one synthetic reset and one synthetic generation, then raises FileExistsError at line 1934 because source_restart_comparison.json already exists. It executes zero second-episode actions. The guard at line 1905 checks restart_expected and step_index == 0 for every episode; it lacks a once-only schedule-index-zero condition. The 127-source campaign cannot complete.",
+      "minimal_fix": "Restrict comparison creation to the first scheduled source decision exactly once, preserving duplicate-index-zero rejection and mismatch-stop behavior. Add an integration regression with two consecutive episodes in the same runtime."
+    },
+    {
+      "id": "R19-SRC-02",
+      "severity": "MAJOR",
+      "path": "scripts/analyze_r19_recovery_duration.py",
+      "line": 490,
+      "title": "G4 comparator cannot resolve production runner in a clean standalone analyzer process",
+      "evidence": "Fresh pinned-Python process with PYTHONPATH/PYTHONHOME/VIRTUAL_ENV removed, cwd outside the repository, loads the actual analyzer using runpy and calls validate_source_restart_comparison on the passing nonempty synthetic first-source fixture. It fails at line 490 with ImportError: cannot import name run_r19_experiment from scripts (unknown location). In-process tests already import the runner and mask this dependency. This demonstrates the comparator failure; a full genuine G4 CLI was not run.",
+      "minimal_fix": "Resolve the production dependency from the analyzer file's repository root with origin verification, or share the pure snapshot helper under src. Verify the successful comparator/report path in a clean fresh process."
+    },
+    {
+      "id": "R19-SRC-03",
+      "severity": "MAJOR",
+      "path": "scripts/run_r19_experiment.py",
+      "line": 2033,
+      "title": "Persisted first-source trajectory does not reproduce its declared canonical hash",
+      "evidence": "Fresh exact-da7d348 probe: the returned and source_trajectories.jsonl first-source rows declare hash 17a8aea3ed7aaa1be4e99c3cf2c25ec19daaf8fdd9f19730c794b062d04dee74, but production canonical recomputation is 6458ff7785d1c133c57b1227c76777bd8610eb8a3aa536f3fd27f109c5b45532. trajectory_sha is computed at line 2017 and source_episode_completed serialized before metadata.source_restart_comparison_sha256 is added at line 2033. Both canonical helpers retain this new field, so the persisted artifact does not reproduce its declared hash. This is an artifact-integrity defect; it is not a claim that the current event-only source validator always rejects it.",
+      "minimal_fix": "Use a consistent documented hash domain: include the sidecar reference before hashing/serialization, or keep it outside the trajectory hash domain consistently. Assert canonical digest equality across returned row, persisted source JSONL and durable source-event trajectory."
+    }
+  ],
+  "conditions": [
+    "Resolve R19-SRC-01, R19-SRC-02 and R19-SRC-03, then obtain independent review of the replacement exact SHA before real positive preflight.",
+    "No PASS is issued for da7d348 or superseded 51ec074. No launch clearance is issued.",
+    "G2 carry-forward applies only to authentic execution SHA 92aae1d9b230cc212c6ec4effc99aa468941e69d; do not rerun G2.",
+    "Preserve predecessor raw evidence and incomplete unit, including residual RUNNING/in_progress statuses and cumulative physical cost 177 generations / 342 operations.",
+    "One future bounded restart remains contingent on all reviews, real positive preflight and a separate valid launch clearance; prior consumed clearance is never reusable."
+  ],
+  "review_environment": {
+    "reviewer_root": "/home/lizening/wt-codex-r18c2",
+    "reviewer_branch": "agent/codex-r18c2",
+    "exact_detached_checkout": "/tmp/r19-source-review-da7d348",
+    "detached_clean": true,
+    "author_checkout": "/home/lizening/wt-r19-recovery-duration-v1",
+    "author_checkout_clean_at_target": true,
+    "authentic_record_loader_scope": "Read-only call in the original exact-SHA checkout so authentic absolute cwd/argv bindings are preserved; no execution entrypoint invoked.",
+    "scientific_source_or_test_edits": false
+  },
+  "scientific_side_effects": {
+    "model_loads": 0,
+    "model_generations": 0,
+    "alfworld_instances": 0,
+    "alfworld_resets": 0,
+    "alfworld_steps": 0,
+    "heldout_consumption": 0,
+    "g2_reruns": 0,
+    "preflight_calls": 0,
+    "live_launches": 0
+  },
+  "evidence_sha256": {
+    "checks.json": "9306ebab7a929130a71893001a2c2d5a5658af22b2507a42c7e7c096a440317b",
+    "first_source_fixture/events.jsonl": "6a272f15495e2467115f29bb58d637cbb9cc5dc9f1259df8c20f4b91cee80ed6",
+    "first_source_fixture/registry.json": "73bb3152379a1a3e00bfc76fbb3024161af1a551045971c38b1d5967435b51c4",
+    "first_source_fixture/source_restart_comparison.json": "a991fccb2ca7fcb56c5b430062e6c1c37e0dfe8dc70223ffdf410e43f3a178e2",
+    "first_source_fixture/source_trajectories.jsonl": "6a91b6994335022b0053233bc8617c4f2f9454b64a0adebfb559e30519573045",
+    "fresh-comparator-input.json": "0d23e03b77c9b091d3407db5df90bc219a42e8a42c1027116345f196a9e63fc2",
+    "fresh_comparator_result.json": "4c9fdd45c6107444f9653c05f18c8024c10ec69473765cf25873f0e696bbc127",
+    "full_tests.log": "44742aed4dc4a6012977a66001556017312b25e93dfee40684ca37c2f20ec2d2",
+    "probes.log": "9fa1f3884bce35599c982edab84a5008d0bc0ba164afd9070a3912215f5d5b8d",
+    "probes.py": "bc3e59d855532030f29826e8d02e799ec67a898ed5fbb233b742257c275d4588",
+    "provenance_checks.json": "362506991e6ac2dac1a90dc41571810d27cf8f28249d0016ceb08ae66b3027de",
+    "provenance_checks.log": "362506991e6ac2dac1a90dc41571810d27cf8f28249d0016ceb08ae66b3027de",
+    "provenance_probe.py": "113d0c21f5109bdfe62aef3885f3c03b4f45d6e40bde8a1ea00c9422096829c2",
+    "reviewed.diff": "018291c57bd9b215adc77f266a0acd9aa2c0d4cb1dda77239455e223acc0e615",
+    "safety_checks.json": "473ee58c3cdb41b11b3a3456b03875c0a2d88e703d2026dc1943a85ef4ae860c",
+    "safety_probe.py": "207a84bf157e74df492069f22215d99d9847aec6c5ef9acb4fe0da804d6864ea",
+    "second_source_failure_fixture/events.jsonl": "a5dba03e30b50f7839fd708334545fa8c680c3fb43ac3a8a84b3f5d61df44b7e",
+    "second_source_failure_fixture/registry.json": "7883d7afc3a203fe415d8aefd89626e7c626d6362ac351cacbf598047d2505f4",
+    "second_source_failure_fixture/source_restart_comparison.json": "a991fccb2ca7fcb56c5b430062e6c1c37e0dfe8dc70223ffdf410e43f3a178e2",
+    "second_source_failure_fixture/source_trajectories.jsonl": "6a91b6994335022b0053233bc8617c4f2f9454b64a0adebfb559e30519573045",
+    "targeted_tests.log": "b0cc95eb03535fca3f97e0931ca42bdd14b0bc9816ba50689512eb48ca7c3655"
+  },
+  "supersedes_requested_review_sha": "51ec074cec6c2c2a7b1ecd64e0da33bc446a7e54",
+  "positive_preflight_eligible": false,
+  "supervisor_context_binding": "PASS_AUTHENTIC_RECORDS_AND_PINNED_HASH_TAMPER_REJECTION",
+  "source_to_report_integration": "PASS_SYNTHETIC_NONEMPTY_SOURCE_AND_RENDERER_ONLY; full genuine G4 not run; clean-process comparator FAIL"
+}

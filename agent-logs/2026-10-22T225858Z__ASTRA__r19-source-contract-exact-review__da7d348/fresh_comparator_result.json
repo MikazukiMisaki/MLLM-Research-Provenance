@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-c",
+    "import json,runpy,sys\nfrom pathlib import Path\nns=runpy.run_path(sys.argv[1])\nargs=json.loads(Path(sys.argv[2]).read_text())\nargs[\"comparison_path\"]=Path(args[\"comparison_path\"])\nprint(ns[\"validate_source_restart_comparison\"](**args))\n",
+    "/tmp/r19-source-review-da7d348/scripts/analyze_r19_recovery_duration.py",
+    "/tmp/r19-source-review-evidence-da7d348/fresh-comparator-input.json"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 6, in <module>\n  File \"/tmp/r19-source-review-da7d348/scripts/analyze_r19_recovery_duration.py\", line 490, in validate_source_restart_comparison\n    from scripts import run_r19_experiment as runner\nImportError: cannot import name 'run_r19_experiment' from 'scripts' (unknown location)\n"
+}

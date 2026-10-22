@@ -1,0 +1,13 @@
+Reviewer identity: pwd; git rev-parse --show-toplevel; git branch --show-current; git status --short --branch; git rev-parse HEAD, in /home/lizening/wt-codex-r18c2.
+Target branch/head/status and git ls-remote origin refs/heads/codex/r19-source-contract-repair independently verified before/after review.
+git worktree add --detach /tmp/r19-source-review-da7d348 da7d348ffd3677d619dd31357e1e1e3cca28c9ec
+git diff bf31f3da430ffc35bd17fc380e1752adce6d1467..da7d348ffd3677d619dd31357e1e1e3cca28c9ec
+In clean detached checkout, with pinned /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python:
+PYTHONPATH=src python -m pytest -o addopts= -q tests/test_r19_entrypoint_repair.py tests/test_r19_g3_authorization.py tests/test_r19_recovery_duration.py tests/test_r19_source_contract.py  # exit 0, raw targeted_tests.log
+PYTHONPATH=src python -m pytest -o addopts= -q --tb=short tests/  # exit 1, raw full_tests.log; identical baseline failure/error IDs
+PYTHONPATH=src python /tmp/r19-source-review-evidence-da7d348/probes.py  # probe runner exit 0; expected defects captured
+PYTHONPATH=src python /tmp/r19-source-review-evidence-da7d348/provenance_probe.py  # exit 0; read-only import from original exact checkout for authentic absolute provenance bindings
+PYTHONPATH=src python /tmp/r19-source-review-evidence-da7d348/safety_probe.py  # exit 0; copied/tampered records rejected; fake gate sentinel directories in temp sandbox only
+python -m py_compile scripts/run_r19_experiment.py scripts/run_r19_recovery_duration.py scripts/analyze_r19_recovery_duration.py tests/test_r19_g3_authorization.py tests/test_r19_source_contract.py  # exit 0
+git diff --check bf31f3da..da7d348  # exit 0
+No production preflight/live command invoked, no model loaded/generated, no ALFWorld constructed/reset/stepped.
