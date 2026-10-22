@@ -1,0 +1,29 @@
+Scientific worktree: /home/lizening/wt-r19-recovery-duration-v1
+Base: bf31f3da430ffc35bd17fc380e1752adce6d1467
+Branch: codex/r19-source-contract-repair
+
+OBSERVED: package START_PROMPT hash and package manifest were verified; guarded base/blob check and the package's exact-base patch application were completed before this checkpoint.
+
+Commands/checks in this checkpoint:
+- `git status --short && git branch --show-current && git rev-parse HEAD` (initial branch was created at the verified base; no reset or cleanup used).
+- `sha256sum` on the predecessor event ledger, execution manifest, unit registry, branches ledger, failure audit and supervisor receipts; all matched the adopted restart record.
+- Pinned Python, with PYTHONPATH/PYTHONHOME/VIRTUAL_ENV removed: `python -m py_compile scripts/run_r19_experiment.py scripts/run_r19_recovery_duration.py scripts/analyze_r19_recovery_duration.py tests/test_r19_source_contract.py tests/test_r19_g3_authorization.py` — exit 0.
+- Pinned Python, clean environment: `python -m pytest -q tests/test_r19_source_contract.py tests/test_r19_entrypoint_repair.py tests/test_r19_g3_authorization.py tests/test_r19_recovery_duration.py` — 93 collected / 93 passed / exit 0.
+- Pinned Python production `_load_source_contract_restart_authorization` against authentic local predecessor receipts — PASS; no mocks, model load or environment construction.
+- `git diff --check` — PASS.
+- `git push -u origin codex/r19-source-contract-repair` — PASS; initial remote match was `51ec074cec6c2c2a7b1ecd64e0da33bc446a7e54`; a later exact-SHA review-hardening commit superseded it.
+
+NOT YET PERFORMED: exact-SHA reviewer request/response; new restart positive supervisor preflight; any new live model/environment call; G3 successor; G4; provenance upload.
+
+## Continuation checkpoint: exact-SHA review candidate da7d348
+
+- Applied a further read-only evidence-binding hardening to `_load_source_contract_restart_authorization`: bind authentic predecessor supervisor argv/cwd, launch context, run IDs, command hashes, receipts, and explicit absence of PYTHONPATH/PYTHONHOME/VIRTUAL_ENV. This does not alter the four amended scientific execution methods or frozen protocol.
+- `git commit -m 'Bind source restart to predecessor supervisor receipts'` — PASS; commit `da7d348ffd3677d619dd31357e1e1e3cca28c9ec`.
+- `git push origin codex/r19-source-contract-repair` — PASS; `git ls-remote origin refs/heads/codex/r19-source-contract-repair` returned the same full SHA. Worktree clean.
+- Initial pinned-interpreter suite while this hardening was uncommitted: 92 passed, 1 CLI assertion did not reach its target because the production gate correctly rejected the dirty worktree first. No code/test bypass was made. After committing, rerun of the exact suite below passed 93/93.
+- `/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m pytest -q tests/test_r19_source_contract.py tests/test_r19_entrypoint_repair.py tests/test_r19_g3_authorization.py tests/test_r19_recovery_duration.py` — exit 0, 93 passed.
+- The source-contract suite exercises the real producer, collector, parser, durable journal, unit registry, source validator, and nonempty synthetic report path; only model-generation and environment boundaries are synthetic.
+- Pinned `py_compile` for the three production modules and two relevant tests — exit 0. `git diff --check` — exit 0. A first attempt with the default Miniconda Python found pytest absent; no dependency was installed or changed.
+- New clean-process production-loader check, with `PYTHONPATH`, `PYTHONHOME`, and `VIRTUAL_ENV` unset, directly consumed the authentic predecessor output, failure audit, supervisor receipts, authorization/disposition, exact method fingerprints, and remaining caps. Exit 0; output: `PASS authentic predecessor, four-event ledger, source disposition, supervisor argv/cwd/environment receipts, fingerprints, and 177/342 restart caps; snapshot=pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092`.
+- Exact-SHA independent review request for `da7d348ffd3677d619dd31357e1e1e3cca28c9ec` queued to thread `01a0994c-a209-7600-8a3e-5ff3096ed346`, message IDs `01a165ca-c1b1-7872-b0c6-b032d433cf2d` and follow-up `01a165cb-6830-73a1-8d56-cfad1d9b690f`. No review decision has been received in this checkpoint.
+- NOT PERFORMED: new local G3 gate, positive preflight, any new model/environment operation, source episode/restart, G3 successor, or G4. Do not proceed until the exact-SHA independent review is received and PASS.
