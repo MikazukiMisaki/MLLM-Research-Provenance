@@ -1,7 +1,7 @@
 # Task record
 
 - Agent/task: Codex — R19-B1 G3 entrypoint repair, real preflight-path verification, and conditional G3/G4 handoff.
-- Start UTC: 2026-10-22 11:50:54 (earliest recorded repair commit; task preparation may have started earlier). Finish UTC: pending remote provenance verification; the final record commit will replace this field with the observed finish time.
+- Start UTC: 2026-10-22 11:50:54 (earliest recorded repair commit; task preparation may have started earlier). Finish UTC: 2026-10-22 12:05:30 (final implementation and test results were frozen; remote verification is recorded below).
 - Status: **READY_FOR_REVIEW**. Safe implementation and tests are complete. Independent exact-SHA approval and a successful production CLI preflight were not obtained; therefore no G3 successor launch and no G4 analysis were performed.
 - Scientific repository: `MikazukiMisaki/Alfworld-Self-Improvement-Project`.
 - Branch: `codex/r19-recovery-duration-v1`. Starting SHA: `ef2328f06256054a6b71c6dc4bdc74dab3a1d3d9`. Ending SHA: `bf31f3da430ffc35bd17fc380e1752adce6d1467`.
@@ -36,6 +36,6 @@ See `tests.log` for commands and exact observed outcomes. The three R19 test fil
 ## Pushes, hashes, and next step
 
 - Scientific branch was pushed normally. `git ls-remote` verified `refs/heads/codex/r19-recovery-duration-v1` at `bf31f3da430ffc35bd17fc380e1752adce6d1467`.
-- Provenance repository started at `c257dc82921a939a3bbe63d57d7815135db1c708`. This record, sanitized review status, test outcomes, exclusion/redaction notes, and refreshed file hashes are committed and pushed to `MLLM-Research-Provenance/main`; the final remote SHA is reported in the handoff after verification.
+- Provenance repository started at `c257dc82921a939a3bbe63d57d7815135db1c708`. Checkpoint `96ea664e55e32ffb8daa2c25baf3586c0d1d3b06` was pushed and verified at `origin/main`. The final record update is committed and pushed afterward; its containing commit is resolved from Git history and reported in the handoff. Task-owned remote file SHA-256 values are checked against that final remote tree.
 - Raw prior failed-launch receipts are not duplicated; their local location and hashes are in the linked earlier G3 record. No raw successful or failed scientific data was generated here. Temporary synthetic gate/test fixtures and ignored machine-local gate files are excluded.
 - **NEXT: obtain a genuine independent exact-SHA review of `bf31f3da430ffc35bd17fc380e1752adce6d1467`, then run the required successful same-supervisor production preflight. Only if all launch conditions pass may the single authorized G3 successor launch proceed. If reviewer remains unavailable, retain READY_FOR_REVIEW and STOP.**
