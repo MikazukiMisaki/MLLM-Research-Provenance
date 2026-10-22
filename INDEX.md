@@ -38,6 +38,10 @@ Oldest first. UTC is the task-directory timestamp; scientific SHA is the relevan
 | 2026-10-22 23:08:25 | SOL | R19 independent audit and development/execution task handoff | AUDIT FAIL; implementation and read-only preparation tasks QUEUED | da7d348ffd3677d619dd31357e1e1e3cca28c9ec | [RECORD.md](agent-logs/2026-10-22T230825Z__SOL__r19-independent-audit-task-handoff__599954/RECORD.md) |
 | 2026-10-22 23:16:04 | CODEX | R19 Sol Phase0 readiness and execution drafts | PHASE0_COMPLETE; NOT_READY; no gate/preflight/live | da7d348ffd3677d619dd31357e1e1e3cca28c9ec | [RECORD.md](agent-logs/2026-10-22T231604Z__CODEX__r19-phase0-sol-handoff__f1a9c3/RECORD.md) |
 
+| 2026-10-22 23:20:08 | SOL | R19 SRC04/05 independent reproduction and scope ruling | Narrow scope APPROVED; no implementation/execution PASS | da7d348ffd3677d619dd31357e1e1e3cca28c9ec | [RECORD.md](agent-logs/2026-10-22T232008Z__SOL__r19-additional-contract-scope__677223/RECORD.md) |
+| 2026-10-22 23:23:51 | SOL | R19 SRC06 alias validator independent scope ruling | Validator scope APPROVED; no implementation/execution PASS | da7d348ffd3677d619dd31357e1e1e3cca28c9ec | [RECORD.md](agent-logs/2026-10-22T232351Z__SOL__r19-alias-validator-scope__535726/RECORD.md) |
+| 2026-10-22 23:29:00 | SOL | R19 Phase0 receipt, draft correction and scope publication | Phase0 RECEIVED; no preflight/execution release | da7d348ffd3677d619dd31357e1e1e3cca28c9ec | [RECORD.md](agent-logs/2026-10-22T232900Z__SOL__r19-phase0-receipt-scope-publication__449570/RECORD.md) |
+
 ## Import omissions
 
 No task directory or large provenance file was omitted. Transient PID/lock files and Python bytecode remain local and are ignored; exact paths, sizes, hashes and reasons are in [excluded-files.json](agent-logs/2026-09-14T061140Z__ASTRA__provenance-repo-initialization__wo8b4ovs/excluded-files.json). No file was deleted.

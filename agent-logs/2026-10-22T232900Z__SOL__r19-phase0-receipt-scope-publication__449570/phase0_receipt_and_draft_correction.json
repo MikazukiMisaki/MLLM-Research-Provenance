@@ -1,0 +1,45 @@
+{
+  "schema_version": "r19_phase0_draft_correction_receipt_v1",
+  "phase0_provenance_commit": "ee96cb08ff7dfda047384c785f838a2c6ad99d37",
+  "phase0_readiness_sha256": "283236c166a55c9adbb2608c5f71ded4e8487c9c69ad12deaed992eaa1bcb7d0",
+  "not_approved_draft_sha256": "df01aa26bcfb666074903a9ce84dd10c2b62d40703a872f78e2524def3b37496",
+  "phase0_files_verified_against_committed_bytes": 9,
+  "status": "PHASE0_READ_ONLY_HANDOFF_RECEIVED_NOT_EXECUTION_READY",
+  "correction": {
+    "file": "/home/lizening/research-notes/agent-logs/2026-10-22T231604Z__CODEX__r19-phase0-sol-handoff__f1a9c3/R19_NOT_APPROVED_GATE_DRAFT.md",
+    "row": "historical G2 runtime receipts / environment manifest",
+    "incorrect_digest": "81ea3b3aea86a850c70c88846f1ce12dfb276cca34aacb9f598ea13e733bf902",
+    "correct_digest": "81ea3b3aea86a850c70d88846f1ce12dfb276cca34aacb9f598ea13e733bf902",
+    "verified_original_path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_pilot_after_a0de515d7e104101bf8157175ea3d995_20261022T190221Z/environment_manifest.json",
+    "action": "Preserve finalized Luna draft unchanged; any future revised draft or gate must use the verified correct digest and explicit source/hash-domain provenance."
+  },
+  "frozen_model_checks_scope": "Luna reports direct hashes of12 frozen snapshot/tokenizer/config files and11 adapter files. Sol read the inventory report and verified its published bytes; Sol did not rehash model weights in this receipt task. No model/environment initialized.",
+  "new_scope_publication": [
+    {
+      "directory": "/home/lizening/research-notes/agent-logs/2026-10-22T232008Z__SOL__r19-additional-contract-scope__677223",
+      "scope_ruling_sha256": "de8b780d1c310d6055da59c1b7c3a73f551c69033f96233a1348c9346e491767",
+      "decision": "IMPLEMENTATION_SCOPE_ONLY_NOT_PASS"
+    },
+    {
+      "directory": "/home/lizening/research-notes/agent-logs/2026-10-22T232351Z__SOL__r19-alias-validator-scope__535726",
+      "scope_ruling_sha256": "2bb6fac00f8dd75a558289e4193bcf6242f505a65647347d23cf82274fadd9ee",
+      "decision": "IMPLEMENTATION_SCOPE_ONLY_NOT_PASS"
+    }
+  ],
+  "known_failed_source": "INCOMPLETE_PRESERVED_NOT_TASK_FAILURE_OR_SUCCESS",
+  "cumulative_real_cost": {
+    "generations": 177,
+    "nonreset_operations": 330,
+    "resets": 12,
+    "operations_including_resets": 342,
+    "incomplete_external_operations": 0
+  },
+  "implementation_state": "UNCOMMITTED_DEVELOPER_REPAIRS_NO_REPLACEMENT_SHA_AVAILABLE_AT_CHECK",
+  "candidate_review": "da7d348 remains FAIL; final candidate must resolve SRC01..06 and pass independent exactSHA review",
+  "G2_carry_forward": "Historical old candidate PASS only; new candidate callback compatibility pending independent review; no rerun.",
+  "phase1_release_issued": false,
+  "launch_clearance_issued": false,
+  "scientific_execution_authorized": false,
+  "shared_publication_window": "Taken by Sol after Luna reports Phase0 publication complete; no developer directories staged",
+  "observed_at_utc": "2026-10-22T23:29:00.449570+00:00"
+}

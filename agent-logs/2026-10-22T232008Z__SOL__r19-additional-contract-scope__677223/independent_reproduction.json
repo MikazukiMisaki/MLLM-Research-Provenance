@@ -1,0 +1,76 @@
+{
+  "classification": "independent_software_only_reproduction_no_scientific_operations",
+  "base_head": "da7d348ffd3677d619dd31357e1e1e3cca28c9ec",
+  "uncommitted_source_sha256": {
+    "/home/lizening/wt-r19-source-contract-review-fixes/scripts/run_r19_experiment.py": "9196df68d3c6b2e63eeb40ea3e37d847701b3b00e914cb5d8f1ccc20be196f7e",
+    "/home/lizening/wt-r19-source-contract-review-fixes/scripts/analyze_r19_recovery_duration.py": "c5c0f28934c38adca8503f223896fecfef032bda11b49ff9292b4cb3a06dbcb7",
+    "/home/lizening/wt-r19-source-contract-review-fixes/tests/test_r19_source_pipeline.py": "f5c6b76e2ada88a517ecca4d408b578399869a9b9deb3562e8799c739fc50401"
+  },
+  "execution": {
+    "status": "PILOT_READY_FOR_OFFLINE_ANALYSIS",
+    "source_episode_count": 1,
+    "candidate_queue_counts": {
+      "failure": 1,
+      "success_control": 0,
+      "random_control": 0
+    },
+    "initial_attempt_count": 1,
+    "eligible_by_stratum": {
+      "failure": 1,
+      "success_control": 0,
+      "random_control": 0
+    },
+    "exhausted_queues": [
+      "failure",
+      "success_control",
+      "random_control"
+    ],
+    "enrollment_sha256": "84f7902ae5eadd1d714a981f372b58e7f73e821eda3bdf825a967122dd7373ca",
+    "formal_branch_count": 1,
+    "branch_arm_count": 5
+  },
+  "validation_failure": {
+    "type": "EvidenceIntegrityError",
+    "message": "environment command is not bound to its contemporaneous admissible-action map",
+    "traceback": "Traceback (most recent call last):\n  File \"/tmp/r19-scope-reproduce.py\", line 18, in <module>\n    try:analyzer.validate_event_ledger(events,expected_evidence_class='synthetic')\n  File \"/home/lizening/wt-r19-source-contract-review-fixes/scripts/analyze_r19_recovery_duration.py\", line 354, in validate_event_ledger\n    raise EvidenceIntegrityError(\"environment command is not bound to its contemporaneous admissible-action map\")\nrecovery.r19_duration.EvidenceIntegrityError: environment command is not bound to its contemporaneous admissible-action map\n"
+  },
+  "replay_completions": 24,
+  "first_replay_receipt": {
+    "identity": {
+      "canonical_trial_id": "pick_and_place_simple-Pencil-None-GarbageCan-0/trial_SYNTHETIC_R19",
+      "decision_index": 0,
+      "operation": "replay_environment_step",
+      "prefix_id": "R19-failure-1cdf36b53dbd247f6b35",
+      "split": "train"
+    },
+    "command": "look",
+    "action_id": null,
+    "action_map": {
+      "A000": "look",
+      "A001": "go to garbagecan 1"
+    }
+  },
+  "physical_recovery_indices": [
+    1,
+    1,
+    2,
+    3,
+    4
+  ],
+  "scheduler_recovery_indices": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "recovery_events": [],
+  "phase_env_operation_counts": {
+    "source": 51,
+    "replay_gate": 5,
+    "initial_attempt": 2,
+    "path_extension": 3,
+    "logical_branch": 255
+  },
+  "source_snapshot_unchanged_during_probe": true
+}
