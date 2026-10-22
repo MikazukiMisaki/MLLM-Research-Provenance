@@ -1,0 +1,12 @@
+Focused target at exact implementation SHA ef2328f06256054a6b71c6dc4bdc74dab3a1d3d9:
+
+Command: python -m pytest -ra tests/test_r19_g3_authorization.py tests/test_r19_recovery_duration.py
+Result: 69 passed in 13.79s
+
+Additional checks:
+- py_compile: PASS
+- git diff --check: PASS
+- 40 protected scientific-function fingerprints: PASS, 0 mismatches
+- Production G3 gate offline validation with authentic carried G2 evidence: PASS_PRODUCTION_GATE_OFFLINE
+- Live runner launch: FAILED before live-runner entry, subprocess exit code 1; ModuleNotFoundError for scripts.run_r19_experiment. Not a scientific execution or successful test.
+- Full repository suite at the final exact SHA: NOT RUN. A prior full-suite attempt at an earlier implementation checkpoint had unrelated historical R12/R18 artifact failures and an old adapter-hash mismatch; no R19 failures were reported.

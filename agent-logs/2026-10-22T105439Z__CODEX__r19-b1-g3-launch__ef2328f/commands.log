@@ -1,0 +1,9 @@
+# Sanitized command summary; machine-specific absolute paths and runtime argv omitted.
+
+1. Inspected the launch handoff and repository task-record protocol; verified scientific branch, starting SHA, clean worktree, and pre-existing task-local untracked data to preserve.
+2. Ran offline authorization, frozen-identity, production-gate, and read-only local input-hash preflights. No model loading or environment/task calls occurred.
+3. Ran the focused R19 authorization/recovery test suite: 69 passed.
+4. Started one durable-supervised G3 pilot attempt on the exact reviewed SHA. The supervisor captured subprocess exit code 1 before entry into the R19 live runner; error recorded in `supervisor_receipt_summary.json`.
+5. Did not retry, edit scientific code, create a replacement output directory, or run G4.
+6. Pushed the reviewed scientific branch by normal fast-forward. Remote branch ref SHA was read back and matched the local launch SHA.
+7. Prepared sanitized task evidence, scanned for secrets, updated the task index and hash inventory, and pushed only the intended provenance files. Remote byte-level SHA checks are recorded in the task's local post-push receipt.

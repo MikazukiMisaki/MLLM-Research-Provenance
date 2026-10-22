@@ -1,0 +1,59 @@
+{
+  "schema_version": "r19_g3_gate_manifest_summary_v1",
+  "record_type": "sanitized_summary_of_local_gate_not_an_execution_receipt",
+  "g3_launch_implementation_sha": "ef2328f06256054a6b71c6dc4bdc74dab3a1d3d9",
+  "g2_executed_implementation_sha": "92aae1d9b230cc212c6ec4effc99aa468941e69d",
+  "authorization_sha256": "89b887518c85d22d3176af0b50fb1861b58fb1c3b13a4ecc2b76485a66529b31",
+  "local_gate_manifest_sha256": "41ccaae32b1adebf22743f5c5f23df074820e7698d7b77ec97f1777c3c733e59",
+  "protocol_sha256": "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122",
+  "baseline_manifest_sha256": "d503f35ae913b137dfff091263bf29c38aa0ade2eea648dc45d7e6cf80da0973",
+  "baseline_amendment_sha256": "f8a138045cde125f2c5e08a7d077f75e3838cc7f6d0c67703faffe1166099e49",
+  "source_schedule_sha256": "0be460359fe43193e73f8cb55a8fb19fdba02ea70e3d0809ec5978fad21c8948",
+  "exclusion_manifest_sha256": "70447bba1b2a944d52ab9b4041b2d6ff3d865f4f0abd55d655214c8060ff5367",
+  "review": {
+    "status": "PASS",
+    "type": "independent_exact_sha",
+    "artifact_sha256": "bcc32fd8d01b71882bf1377efad950834977c01f34c9980185034292dd367525",
+    "change_scope": "AUTHORIZATION_AND_EVIDENCE_ROUTING_ONLY",
+    "scientific_execution_behavior_changed": false
+  },
+  "g2_carry_forward": {
+    "status": "PASS",
+    "g2_run_id": "33b5563d86d6491a821db224dd38ec3c",
+    "g2_evidence_carried_forward": true,
+    "new_g2_run_performed": false,
+    "g2_evidence_sha256": {
+      "execution_manifest.json": "7d8758bcc1fa5e40bb0f1b8f3e13707062104f6a2038673dd3cff93171de4c39",
+      "execution_events.jsonl": "1456c43f7d3f0a849fe4bb8015164815fd70f4e2813d343449c1a34c2eaebe0c",
+      "branches.jsonl": "c91f9ff8ab5869bfcdcddd850e038b84c84ad317a7098928a4a09129652e96d3",
+      "offline_verification.json": "80b704131ec4e9738aca25d30512e2d4b84d675ac7537eec27a1083e16cc0b29",
+      "smoke_checks.json": "bf1fed5ff1731fc59280d5d3c55acb540c657eef1f34255bd3816619641f91bb"
+    },
+    "cumulative_prior_cost": {
+      "physical_model_generations": 176,
+      "physical_environment_operations": 341,
+      "completed_production_arms": 6
+    }
+  },
+  "g3_scope": {
+    "source_split": "TRAIN",
+    "scheduled_source_identities": 127,
+    "max_initial_attempts": 120,
+    "max_eligible_states": 60,
+    "eligible_targets_by_stratum": {
+      "failure": 30,
+      "success_control": 15,
+      "random_control": 15
+    },
+    "k_values": [1, 2, 3, 4, 5],
+    "total_horizon": 50,
+    "automatic_retry": false
+  },
+  "offline_validator": "PASS_PRODUCTION_GATE_OFFLINE",
+  "supervisor_launch_attempted": true,
+  "r19_live_execution_started": false,
+  "path_redaction": {
+    "repo_paths": "replaced with repository-relative names or local-only aliases",
+    "machine_absolute_paths": "excluded from this uploaded summary"
+  }
+}

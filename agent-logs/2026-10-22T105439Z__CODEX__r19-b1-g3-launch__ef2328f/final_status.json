@@ -1,0 +1,138 @@
+{
+  "status": "BLOCKED",
+  "campaign": "R19-B1-G3",
+  "starting_source_sha": "92aae1d9b230cc212c6ec4effc99aa468941e69d",
+  "exact_launch_sha": "ef2328f06256054a6b71c6dc4bdc74dab3a1d3d9",
+  "branch": "codex/r19-recovery-duration-v1",
+  "authorization_sha256": "89b887518c85d22d3176af0b50fb1861b58fb1c3b13a4ecc2b76485a66529b31",
+  "independent_review": {
+    "status": "PASS",
+    "exact_sha": "ef2328f06256054a6b71c6dc4bdc74dab3a1d3d9",
+    "raw_review_sha256": "bcc32fd8d01b71882bf1377efad950834977c01f34c9980185034292dd367525",
+    "allowlisted_change_scope": "authorization_and_evidence_routing_only",
+    "scientific_execution_behavior_changed": false,
+    "note": "The review's initial launch-clearance check preceded staging of the local gate; production offline gate validation subsequently passed."
+  },
+  "g2_carry_forward": {
+    "g2_executed_sha": "92aae1d9b230cc212c6ec4effc99aa468941e69d",
+    "g2_evidence_carried_forward": true,
+    "new_g2_run_performed": false,
+    "prior_g2_review_and_evidence": "agent-logs/2026-10-22T091640Z__CODEX__r19-b1-replay-repair__92aae1d/RECORD.md"
+  },
+  "identities": {
+    "machine_protocol_sha256": "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122",
+    "protocol_document_sha256": "7668d7fa5422ad6ad7d3affc72b2e573ec19aae53314198fc14b46dc74c9a3d9",
+    "baseline_manifest_sha256": "d503f35ae913b137dfff091263bf29c38aa0ade2eea648dc45d7e6cf80da0973",
+    "baseline_amendment_sha256": "f8a138045cde125f2c5e08a7d077f75e3838cc7f6d0c67703faffe1166099e49",
+    "source_schedule_sha256": "0be460359fe43193e73f8cb55a8fb19fdba02ea70e3d0809ec5978fad21c8948",
+    "exclusions_sha256": "70447bba1b2a944d52ab9b4041b2d6ff3d865f4f0abd55d655214c8060ff5367",
+    "model_tokenizer_snapshot_identity": "b968826d9c46dd6066d109eabc6255188de91218",
+    "adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+    "historical_model_equivalence": "NOT_ESTABLISHED; not re-investigated in this task",
+    "runtime": {
+      "preflight_match": true,
+      "python": "3.10.20",
+      "gpu": "NVIDIA A40",
+      "torch": "2.6.0+cu124",
+      "cuda": "12.4",
+      "hf_cache_identity_match": true
+    }
+  },
+  "production_gate": "PASS_PRODUCTION_GATE_OFFLINE",
+  "prelaunch_fingerprints": {
+    "checked": 40,
+    "mismatches": 0
+  },
+  "supervisor": {
+    "run_id": "a0de515d7e104101bf8157175ea3d995",
+    "status": "failed_before_r19_live_runner_entry",
+    "exit_code": 1,
+    "exit_code_source": "subprocess.returncode",
+    "error": "ModuleNotFoundError: No module named 'scripts.run_r19_experiment'",
+    "failure_location": "scripts/run_r19_recovery_duration.py::_pilot_gate_check",
+    "live_runner_started": false,
+    "g3_output_directory_created": false,
+    "execution_manifest_created": false,
+    "raw_runner_log_sha256": "45eda8a835a07f841657da7ce00d0f5bddda182c1dc4f8cd50cfc7291f6e59cd",
+    "raw_runner_exit_sha256": "7e1fc0771c78fa4022717c6b9926147f5565f6cdbe5e04cdec7f165cc732e6c4",
+    "raw_supervisor_status_sha256": "e71147fe2f0f9097cbae38357c4b2186159fd0341d3211a9e7c9988f3c58474c"
+  },
+  "scope_and_flow": {
+    "scheduled_train_sources": 127,
+    "source_episodes_completed": 0,
+    "initial_attempts_cap": 120,
+    "initial_attempts_observed": 0,
+    "eligible_states_cap": 60,
+    "eligible_states_observed": 0,
+    "eligible_targets": {
+      "failure": 30,
+      "success_control": 15,
+      "random_control": 15
+    },
+    "shortfall": "Not measured; launch failed before source collection/enrollment.",
+    "k_values": [1, 2, 3, 4, 5],
+    "total_horizon": 50,
+    "logical_arms_completed": 0,
+    "unique_generation_suffix_units": 0,
+    "derived_aliases": 0
+  },
+  "costs": {
+    "previous_g2": {
+      "model_generations": 176,
+      "environment_operations": 341,
+      "production_arms": 6
+    },
+    "current_g3": {
+      "model_generations": 0,
+      "environment_operations": 0,
+      "environment_resets": 0,
+      "supervisor_launch_attempts_not_research_calls": 1
+    },
+    "g3_phase_caps": {
+      "source": {"model_calls": 9000, "environment_operations": 9000},
+      "replay_gate": {"model_calls": 0, "environment_operations": 5400},
+      "initial_attempts": {"model_calls": 240, "environment_operations": 5520},
+      "common_path_extension": {"model_calls": 240, "environment_operations": 2940},
+      "logical_branch_replay_execution": {"model_calls": 17100, "environment_operations": 18000},
+      "phase_ceiling_sum": {"model_calls": 26580, "environment_operations": 40860}
+    },
+    "campaign_aggregate_caps": {"model_generations": 26988, "environment_operations": 41260},
+    "cumulative_actual": {"model_generations": 176, "environment_operations": 341},
+    "aggregate_remaining": {"model_generations": 26812, "environment_operations": 40919}
+  },
+  "retry_and_unit_state": {
+    "automatic_retry": false,
+    "g3_retry_count": 0,
+    "indeterminate_scientific_units": 0,
+    "completed_reruns": 0,
+    "g2_historical_retry_count": 1
+  },
+  "k1_to_k5_results": "NOT_EXECUTED_NOT_ESTIMABLE",
+  "logical_policy_costs": "NOT_COMPUTED_NO_G3_EXECUTION",
+  "paired_statistics": "NOT_EXECUTED_NOT_ESTIMABLE",
+  "best_fixed_k": "NOT_ESTIMABLE",
+  "hindsight_headroom_and_cost_opportunity": "NOT_ESTIMABLE",
+  "passive_stopping_analysis": "NOT_EXECUTED",
+  "g4": {
+    "status": "NOT_RUN_NO_G3_SCIENTIFIC_EVIDENCE",
+    "verifier": "NOT_RUN",
+    "evidence_coverage": "No G3 manifest, event ledger, branch ledger, or result directory exists."
+  },
+  "prohibited_activity_evidence": {
+    "training": 0,
+    "dpo_or_orpo": 0,
+    "selector_training": 0,
+    "heldout_tasks": 0,
+    "new_models": 0,
+    "external_model_calls": 0,
+    "quota_or_exclusion_changes": 0,
+    "prompt_tuning_or_bo": 0,
+    "confirmation_runs": 0
+  },
+  "remote": {
+    "scientific_branch_sha_verified": "ef2328f06256054a6b71c6dc4bdc74dab3a1d3d9",
+    "provenance_commit_sha": "Resolved through remote Git history for this task record; see final handoff for exact SHA."
+  },
+  "excluded_local_only_files": "EXCLUDED_FILES.md",
+  "next": "STOP; no automatic repair, review, relaunch, G4 without authentic G3 data, training, extra tasks, or confirmation run."
+}
