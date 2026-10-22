@@ -1,0 +1,26 @@
+Task scope: read-only R19 execution readiness preparation; no scientific write or execution.
+Scientific worktree: /home/lizening/wt-r19-recovery-duration-v1
+Observed branch/SHA: codex/r19-source-contract-repair / da7d348ffd3677d619dd31357e1e1e3cca28c9ec
+
+Read-only checks performed:
+- `git status --short; git rev-parse HEAD; git branch --show-current; git worktree list --porcelain`
+- `git ls-remote origin refs/heads/codex/r19-source-contract-repair`
+- `pgrep -af '[l]aunch_r19_supervised.py|[r]un_r19_recovery_duration.py|[r]un_r19_experiment.py'`; `ps -p 759377,759380 -o pid,ppid,etimes,stat,args`
+- `find artifacts/runtime -maxdepth 1 -mindepth 1 -type d -iname 'r19*' -printf ...`
+- `sha256sum` on original G3 event journal, execution manifest, unit registry, branch ledger, supervisor runner log/exit/status/launch context, failure audit, frozen R19 inputs, baseline/auth/amendment/disposition, and historical runtime receipts.
+- Read original four-line `execution_events.jsonl`, registry, manifest, supervisor receipts, preflight receipt, append-only unit resolution and exact-SHA review JSON/REVIEW.md. No files were modified.
+- `/home/lizening/miniconda3/bin/python -c ...` parsed the frozen source schedule and authorization: 127 episodes, 127 unique canonical identities, indexes 0..126 contiguous, all TRAIN; verified index 0 and scope/quota/cap fields.
+- `/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python --version` and `importlib.metadata` package-version query; file/directory existence checks for the pinned interpreter, adapter directory, data root and local ALFWorld config. No model/runtime initialization.
+- `git -C /home/lizening/research-notes rev-parse HEAD; git -C /home/lizening/research-notes ls-remote origin refs/heads/main` — both were d54ebb7eec421f6e5c70565f895adfdbe6498ee2 at inspection.
+- Read-only supplemental check of the newly appearing, untracked Sol evidence directory `agent-logs/2026-10-22T230825Z__SOL__r19-independent-audit-task-handoff__599954/`: inspected its file list, `evidence/probes.log`, and `evidence/fresh_comparator_result.json`; did not modify or stage it.
+
+Observed review:
+- `/home/lizening/research-notes/agent-logs/2026-10-22T225858Z__ASTRA__r19-source-contract-exact-review__da7d348/independent_review.json`
+- SHA256 `8fcd731bcbfd01b2e89228e79f70834e15c57a5f3502e1a68f559355ab2e3c40`
+- Exact target da7d348; IMPLEMENTATION_REVIEW FAIL; G2_CARRY_FORWARD PASS limited to authentic old G2 evidence/unchanged smoke; no positive preflight eligibility or launch clearance.
+
+An initial read-only schedule-summary one-liner used the wrong key `task_id` and exited with KeyError; inspection of the frozen JSON schema showed the correct key is `canonical_trial_id`, and the corrected check passed. No state was changed.
+
+One combined staged-diff/hash verification was first issued from `/home/lizening` instead of the provenance repository. `git diff --cached --check` exited nonzero before the chained checks ran; no files changed. Reissued from `/home/lizening/research-notes`, the staged diff check passed and local provenance HEAD matched `origin/main`; the hash check was then run from this task directory and passed.
+
+Not performed: tests by Luna; model loads/generations; ALFWorld construction/reset/step; G2; preflight; G3; G4; gate creation; source code/config/test edits.
