@@ -1,0 +1,28 @@
+R19 command and boundary log (machine-specific paths omitted)
+
+Repository verification:
+- Confirmed local and remote `codex/progress-aware-recovery` both named accepted SHA `4f5c2e18e0dfdf48e9471fcba0a3ee715be3ca3b` before work.
+- Created isolated linked worktree and task branch `codex/r19-recovery-duration-v1` from that exact SHA.
+- Verified R19 candidate parent/base, clean worktree after commit, and remote task branch SHA equal to local `fac6a92081cab84e23d2f4630a7f2ab6d18f8baf`.
+- Verified protected-file manifest against the accepted base: PASS; 443 expected, zero changed, zero missing, zero newly tracked.
+
+Model-free preflight:
+- Ran R19 `validate` against `configs/experiments/r19_recovery_duration_v1.json`; static validation passed and reported inference_performed=false. Exact examples: (4,2)=0.6875, (3,2)=1.0, (0,2)=0.5, (0,0)=1.0. SciPy cross-check unavailable.
+- Ran model-free source/exclusion preflight three times to preserve immutable outputs after scanner correction and documentation clarification. V2 and v3 are byte-identical for source schedule, exclusions, protected manifest, and preflight summary. No model/environment operation occurred.
+- Initial inventory attempt stopped before writing on an unrelated ALFWorld family; narrowed to six frozen protocol families and produced successful immutable outputs. No scientific unit was involved or regenerated.
+
+Tests and static checks:
+- Focused: `PYTHONPATH=src python -m pytest -q tests/test_r19_recovery_duration.py` — 19 passed, exit 0.
+- Full historical suite: `python -m pytest -q` from accepted-base checkout with R19 source overlay on PYTHONPATH — reached 100%, exit 0.
+- `python -m py_compile` for R19 source, runner, analyzer, and tests — exit 0.
+- `git diff --check` — exit 0 after whitespace cleanup.
+- R19 protocol CLI `validate` — exit 0, static protocol validation only.
+- Read-only SciPy import probe in both the pinned research environment and the default Python interpreter — unavailable in both; no dependency was installed.
+
+Execution boundaries:
+- No Qwen/model loading or generation.
+- No ALFWorld reset, step, source collection, recovery replay, or branch execution.
+- No training, held-out evaluation, paid external model call, or fresh scientific task consumption.
+- G2 live smoke and G3 pilot not run; no authentic runtime exit status exists for either because neither was launched.
+
+Exit codes above are recorded only where directly observed from the command runner. No model or environment runner exit code is implied.

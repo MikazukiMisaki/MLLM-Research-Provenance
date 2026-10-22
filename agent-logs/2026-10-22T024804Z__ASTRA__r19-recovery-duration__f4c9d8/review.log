@@ -1,0 +1,28 @@
+Independent exact-commit G1 review
+
+Reviewed scientific commit: fac6a92081cab84e23d2f4630a7f2ab6d18f8baf
+Branch: codex/r19-recovery-duration-v1
+Machine protocol JSON SHA-256: 3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122 (matched)
+R19_PROTOCOL.md SHA-256: 3839d10c07f67c03e0a3c8d9e7b8f210f030c58533c87aab9acadce470ee48a1 (matched)
+Reviewer role: independent Codex reviewer (subagent nickname Hilbert)
+Verdict: BLOCKED; not approved for G2/G3.
+Reviewer made no file changes and no model/environment calls.
+
+P1 findings:
+1. Live smoke harness and pilot execution driver are NOT_IMPLEMENTED. No source actor collection, frozen cohort enrollment, real adapter-separation check, reset/replay smoke, or pilot execution path is present.
+2. Analyzer does not bind branch outcomes/costs to authentic event payloads, verify split and prohibited-use evidence, or require authentic process exit codes. Its synthetic report test accepts populated branch rows with an empty event ledger.
+3. Required independent SciPy exact-test cross-check is unavailable and not enforced; custom arithmetic examples alone do not satisfy the specified cross-check.
+4. Historical Qwen3-8B revision equivalence is unproven: the historical loader did not pin a revision and the archived R18 record does not establish its resolved snapshot.
+
+Checks acknowledged by reviewer:
+- Frozen v3 source schedule validates against the exclusion manifest: 2,642 excluded identities, 127 scheduled TRAIN identities, family counts 30/0/30/30/30/7, no quota transfer.
+- V2 and v3 preflight outputs are byte-identical.
+- Changes from accepted base are additive; focused synthetic suite passed 19 tests; static protocol validation passed while reporting SciPy unavailable.
+
+Gate decisions:
+- G0: not fully closed (executable runner and external statistical cross-check missing).
+- G1: BLOCKED; no approval.
+- G2: not run; harness missing.
+- G3/G4: not run and not authorized to start before blockers are resolved and G1/G2 pass.
+
+No inference, smoke, source collection, recovery replay, model/environment operation, or fresh-task consumption occurred in this R19 task.

@@ -1,0 +1,11 @@
+Observed validation results
+
+1. Focused synthetic suite at final candidate: 19 passed; process exit code 0.
+2. Full historical suite in accepted-base checkout with additive R19 source overlay: output reached 100%; process exit code 0.
+3. Protocol static validation: PASS_STATIC_PROTOCOL_VALIDATION; process exit code 0; SciPy cross-check UNAVAILABLE; inference_performed=false.
+4. Python compilation of R19 implementation, CLI, analyzer, and test module: exit code 0.
+5. Protected historical-file verification: PASS; 443 expected files; changed=0, missing=0, newly_tracked=0.
+6. Git whitespace validation after cleanup: exit code 0.
+
+No smoke, model, environment, source-collection, or pilot test was run.
+An additional read-only import probe confirmed SciPy is also unavailable in the default Python interpreter; no package or environment was changed.
