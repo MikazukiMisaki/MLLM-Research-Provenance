@@ -1,0 +1,42 @@
+{
+  "schema_version": "r19_exact_sha_review_evidence_supplement_v1",
+  "implementation_sha": "da7d348ffd3677d619dd31357e1e1e3cca28c9ec",
+  "reviewer_task": "01a0994c-a209-7600-8a3e-5ff3096ed346",
+  "parent_review_sha256": "8fcd731bcbfd01b2e89228e79f70834e15c57a5f3502e1a68f559355ab2e3c40",
+  "parent_review_provenance_commit": "8cb595540ee4d936bd5ab2324172ca995f40cd17",
+  "supplement_status": "PASS_CLEAN_PROCESS_PREDECESSOR_LOADER_ONLY",
+  "independent_new_process_check": "PASS_NO_MOCKS",
+  "command_exit_code": 0,
+  "environment_key_presence": {
+    "PYTHONPATH": false,
+    "PYTHONHOME": false,
+    "VIRTUAL_ENV": false
+  },
+  "tests": "Prior reviewer run: 93 passed in 10.77s; not rerun for this supplemental check. User additionally reports 93/93 clean pinned-interpreter pass.",
+  "scope": "Real predecessor events/manifest/registry, independent failure audit, four frozen supervisor receipts and context binding, fingerprints, append-only unit disposition, frozen inputs, G2 evidence and 177/342 cumulative cost with 8999/8999 source remaining caps. Gate augmented only in process memory; no new gate file.",
+  "import_scope": "Read-only harness explicitly inserts reviewed root/src; this is distinct from the standalone analyzer path with its reproduced import defect.",
+  "IMPLEMENTATION_REVIEW": "FAIL",
+  "G2_CARRY_FORWARD": "PASS_EXISTING_EVIDENCE_ONLY",
+  "positive_preflight_eligible": false,
+  "unresolved_findings": [
+    "R19-SRC-01",
+    "R19-SRC-02",
+    "R19-SRC-03"
+  ],
+  "launch_clearance_issued": false,
+  "scientific_side_effects": {
+    "models": 0,
+    "alfworld": 0,
+    "preflight": 0,
+    "live": 0
+  },
+  "original_scientific_checkout_clean_after": true,
+  "prior_immutable_review_unchanged": true,
+  "finished_utc": "2026-10-22T23:00:55.697815+00:00",
+  "evidence_sha256": {
+    "command_result.json": "5d15f0ecb249a98785b17414237aac56748ac98b1961a8cf09d5bc34d98d2956",
+    "loader.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "clean_loader_probe.py": "8edd3793efe699e7031993bb55dd5e8b96570678ad0b70095b1984501ae51b48",
+    "loader.stdout.json": "04d9c63d0cd845f1c7c9c22ed241f969d68c4fc6c66bcd4ba675825f7f981aaf"
+  }
+}
