@@ -1,0 +1,26 @@
+R19-focused tests at final source SHA bf31f3da430ffc35bd17fc380e1752adce6d1467
+
+Exact command:
+PYTHONPATH=src /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m pytest -o addopts= -q tests/test_r19_entrypoint_repair.py tests/test_r19_g3_authorization.py tests/test_r19_recovery_duration.py
+
+Observed result: exit code 0; 75 passed in 31.36s.
+
+Additional checks at final source SHA:
+- `python -m py_compile scripts/run_r19_recovery_duration.py scripts/run_r19_experiment.py scripts/launch_r19_supervised.py scripts/analyze_r19_recovery_duration.py`: PASS, exit code 0.
+- `git diff --check`: PASS, exit code 0.
+- Frozen scientific function fingerprints: 40 expected, 40 exact matches, all_match=true.
+- Fresh-process import-origin test: PASS; runner and analyzer resolve to this checkout after removing PYTHONPATH/PYTHONHOME/VIRTUAL_ENV from the child environment.
+- Real preflight-only supervisor + pilot CLI bad-authorization test: PASS as a rejection test; child exit code 2, supervisor receipt records subprocess.returncode, no preflight receipt or scientific output directory created, no ModuleNotFoundError. It is not a positive preflight.
+- Synthetic scheduler tests cover the production frozen enrollment/K path. Fresh analyzer CLI test reaches the empty-event-ledger validator and fails closed without writing reports. Positive synthetic G4 provenance-validator fixture passes; complete successful CLI report rendering/writing was not exercised.
+
+Full repository suite, run with:
+`PYTHONPATH=src /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m pytest -q --tb=no`
+
+Observed exit code: 1. Three failures were listed:
+- `tests/test_persistent_recovery_r12.py::test_public_source_excludes_hidden_facts_and_frozen_manifest_is_not_written`
+- `tests/test_progress_aware_card_v2_r18_c2.py::test_frozen_hashes_and_r18_c1_provenance`
+- `tests/test_progress_card_semantic_audit_r18_a.py::test_frozen_phase_artifact_is_hashable_and_self_describing`
+
+Additional setup/runtime errors in historical R12/R18 modules referenced absent archived validation artifacts (including old persistent-recovery R9/R7 outputs and an R18 phase freeze); the R18 frozen adapter check reported a hash mismatch. The complete long error list was truncated by the tool output limit, so the total number of ERROR outcomes is not claimed. The failures are outside the three R19 test files; they were not repaired or bypassed.
+
+One earlier run of the new integration test, while its test-only patch was still uncommitted, was rejected by `_pilot_gate_check` at the clean-worktree condition before module import. The test was committed as `bf31f3d` and the final R19 suite rerun cleanly. No research unit was started by that earlier test invocation.

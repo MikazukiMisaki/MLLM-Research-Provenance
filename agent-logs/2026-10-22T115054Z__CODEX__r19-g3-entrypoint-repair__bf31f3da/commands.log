@@ -1,0 +1,20 @@
+Source repository: MikazukiMisaki/Alfworld-Self-Improvement-Project
+Branch: codex/r19-recovery-duration-v1
+Starting SHA: ef2328f06256054a6b71c6dc4bdc74dab3a1d3d9
+Final SHA: bf31f3da430ffc35bd17fc380e1752adce6d1467
+
+Implementation commits:
+- 42f972297c1acad70215f802d34b7effd89a244c — fix: add supervised R19 G3 preflight entrypoint
+- dedb958f8fca9ad03bb98e3af898b4c9e05834f6 — docs: make R19 review scope include G4 provenance routing
+- bf31f3da430ffc35bd17fc380e1752adce6d1467 — test: keep R19 CLI auth probe in preflight-only mode
+
+Checks:
+- `PYTHONPATH=src /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m pytest -o addopts= -q tests/test_r19_entrypoint_repair.py tests/test_r19_g3_authorization.py tests/test_r19_recovery_duration.py` — exit 0, 75 passed in 31.36s.
+- `PYTHONPATH=src /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m pytest -q --tb=no` — exit 1, full-suite failures/errors documented in tests.log.
+- `/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m py_compile scripts/run_r19_recovery_duration.py scripts/run_r19_experiment.py scripts/launch_r19_supervised.py scripts/analyze_r19_recovery_duration.py` — exit 0.
+- `git diff --check` — exit 0.
+- Production scientific fingerprint check — 40/40 exact matches.
+- `git ls-remote origin refs/heads/codex/r19-recovery-duration-v1` — returned `bf31f3da430ffc35bd17fc380e1752adce6d1467`, equal to local HEAD.
+- Provenance remote main SHA is recorded after the provenance push.
+
+No formal G3 runner command was executed in this task. The only real supervisor/CLI integration launch used evidence class `preflight_only`, linked to prior failed run `a0de515d7e104101bf8157175ea3d995`, and failed closed on a deliberately incorrect authorization SHA with child exit code 2.

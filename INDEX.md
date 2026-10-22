@@ -22,6 +22,7 @@ Oldest first. UTC is the task-directory timestamp; scientific SHA is the relevan
 | 2026-10-22 07:23:56 | ASTRA | R19-B1 bounded G2 smoke | G2_FAIL before branch-arm execution | f4fb81842e949930433def5817723bab74159f14 | [RECORD.md](agent-logs/2026-10-22T072356Z__ASTRA__r19-b1-g2__a7d913c4/RECORD.md) |
 | 2026-10-22 09:16:40 | CODEX | R19-B1 replay recovery and bounded G2 successor | G2_PASS; cumulative costs reconciled | 92aae1d9b230cc212c6ec4effc99aa468941e69d | [RECORD.md](agent-logs/2026-10-22T091640Z__CODEX__r19-b1-replay-repair__92aae1d/RECORD.md) |
 | 2026-10-22 10:54:39 | CODEX | R19-B1 G3 authorization, supervised launch, and G4 | BLOCKED before live runner; no retry | ef2328f06256054a6b71c6dc4bdc74dab3a1d3d9 | [RECORD.md](agent-logs/2026-10-22T105439Z__CODEX__r19-b1-g3-launch__ef2328f/RECORD.md) |
+| 2026-10-22 11:50:54 | CODEX | R19-B1 G3 entrypoint repair and preflight | READY_FOR_REVIEW; no G3/G4 execution | bf31f3da430ffc35bd17fc380e1752adce6d1467 | [RECORD.md](agent-logs/2026-10-22T115054Z__CODEX__r19-g3-entrypoint-repair__bf31f3da/RECORD.md) |
 
 ## Import omissions
 
