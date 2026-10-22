@@ -1,0 +1,10 @@
+Read-only cost reconciliation on 2026-10-22; no source, runtime, registry, or manifest writes.
+
+1. Parsed the original G2 failed-predecessor, G2 successful-smoke, and G3 failed-successor JSONL ledgers with Python 3 read-only JSON parsing. Counted event kinds, environment-operation classes, generation start/completion records, token evidence, and external-operation starts minus completions paired by trial/operation/schedule/payload operation.
+2. Cross-checked each ledger against its corresponding execution manifest; checked the G3 unit registry and authentic durable-supervisor runner_exit.json/supervisor_status.json.
+3. Read the prior G3 import-failure supervisor summary to confirm zero scientific output/model/environment use.
+4. Verified source SHA and clean source worktree; verified provenance remote main matched local at audit start and previously uploaded artifact SHA values matched remote content.
+
+Current G3 raw event ledger SHA-256: fde95fcd72f1c4ac6409fab7f2112654e145f6184fefec690cae58ad345f1cd7.
+Current G3 authentic subprocess return code: 1.
+No G2 rerun, G3 relaunch, model call, environment construction/reset/step, or G4 analysis occurred during this audit.

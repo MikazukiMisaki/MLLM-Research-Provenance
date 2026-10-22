@@ -1,0 +1,119 @@
+{
+  "schema_version": "r19_g3_physical_cost_reconciliation_v1",
+  "status": "PASS_READ_ONLY_COST_RECONCILIATION_NO_NEW_EXECUTION",
+  "scientific_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+  "runs": [
+    {
+      "name": "G2_failed_replay_predecessor",
+      "event_count": 38,
+      "event_kinds": {
+        "environment_operation_started": 19,
+        "environment_operation_completed": 19
+      },
+      "operation_completions": {
+        "smoke_replay_environment_step": 18,
+        "environment_reset": 1
+      },
+      "model_generations_started": 0,
+      "model_generations_completed": 0,
+      "physical_environment_action_operations": 18,
+      "environment_resets": 1,
+      "environment_operations_including_resets": 19,
+      "incomplete_external_operations": 0,
+      "events_path": "agent-logs/2026-10-22T072356Z__ASTRA__r19-b1-g2__a7d913c4/g2-output/execution_events.jsonl",
+      "events_sha256": "b2d9045514bc3251ee3e954e4787569566cf7ba995821adbdb5af6b1dfdf065c",
+      "manifest_path": "agent-logs/2026-10-22T072356Z__ASTRA__r19-b1-g2__a7d913c4/g2-output/execution_manifest.json",
+      "manifest_sha256": "83ef899e4b241052b1fa03470f1c942f8b9ba8489afdd5d8ce24ac83e760977e"
+    },
+    {
+      "name": "G2_successful_smoke",
+      "event_count": 1063,
+      "generation_started": 176,
+      "generation_completed": 176,
+      "generation_input_tokens": 112527,
+      "generation_output_tokens": 1021,
+      "generation_total_tokens": 113548,
+      "environment_operation_started": 322,
+      "environment_operation_completed": 322,
+      "environment_operation_classes": {
+        "recovery_environment_operation": 12,
+        "sft_environment_step": 156,
+        "smoke_replay_environment_step": 130,
+        "smoke_replay_recovery_step": 14,
+        "environment_reset": 10
+      },
+      "physical_environment_action_operations": 312,
+      "environment_resets": 10,
+      "environment_operations_including_resets": 322,
+      "incomplete_external_operations": 0,
+      "events_path": "agent-logs/2026-10-22T091640Z__CODEX__r19-b1-replay-repair__92aae1d/g2_evidence/execution_events.jsonl",
+      "events_sha256": "1456c43f7d3f0a849fe4bb8015164815fd70f4e2813d343449c1a34c2eaebe0c",
+      "manifest_path": "agent-logs/2026-10-22T091640Z__CODEX__r19-b1-replay-repair__92aae1d/g2_evidence/execution_manifest.json",
+      "manifest_sha256": "7d8758bcc1fa5e40bb0f1b8f3e13707062104f6a2038673dd3cff93171de4c39"
+    },
+    {
+      "name": "earlier_G3_import_failure_a0de515d7e104101bf8157175ea3d995",
+      "scientific_output_created": false,
+      "model_generations": 0,
+      "physical_environment_action_operations": 0,
+      "environment_resets": 0,
+      "environment_operations_including_resets": 0,
+      "incomplete_external_operations": 0,
+      "receipt_summary_path": "agent-logs/2026-10-22T105439Z__CODEX__r19-b1-g3-launch__ef2328f/supervisor_receipt_summary.json",
+      "receipt_summary_sha256": "5a1558378b2168c1da7d358b070bfdf299841c532a5f10124e8405b63544c819"
+    },
+    {
+      "name": "G3_failed_successor_3d1ccea7e97f4727abf8e216ac6ec498",
+      "event_count": 4,
+      "event_kinds": {
+        "environment_operation_started": 1,
+        "environment_operation_completed": 1,
+        "generation_started": 1,
+        "generation_completed": 1
+      },
+      "operation_completions": {
+        "environment_reset": 1
+      },
+      "generation_input_tokens": 267,
+      "generation_output_tokens": 5,
+      "generation_total_tokens": 272,
+      "model_generations_started": 1,
+      "model_generations_completed": 1,
+      "environment_action_steps_started": 0,
+      "environment_action_steps_completed": 0,
+      "physical_environment_action_operations": 0,
+      "environment_resets": 1,
+      "environment_operations_including_resets": 1,
+      "incomplete_external_operations": 0,
+      "source_units_started": 1,
+      "source_units_completed": 0,
+      "registry_state": "in_progress",
+      "execution_manifest_state": "RUNNING",
+      "supervisor_runner_exit": 1,
+      "events_path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_pilot_after_a0de515d7e104101bf8157175ea3d995_20261022T190221Z/execution_events.jsonl",
+      "events_sha256": "fde95fcd72f1c4ac6409fab7f2112654e145f6184fefec690cae58ad345f1cd7",
+      "manifest_sha256": "f5d3efa6c17abea3d944d7dea01099210d846eb8ed107057ec24502bbb51d2df",
+      "registry_sha256": "870923242ae585c66cbcffa554528ab3d92cf98fc4d87dee2c4d408f5f6ba800",
+      "runner_exit_sha256": "a802079398fd415765b8f6b8685fec998325625da733011ff7a9ce11459a9386",
+      "supervisor_status_sha256": "e2a70bf670376b648e52357376fa88f3a7a3cac92b41a5c628bd4ad251353913"
+    }
+  ],
+  "cumulative": {
+    "model_generations_completed": 177,
+    "physical_environment_action_operations_excluding_resets": 330,
+    "environment_resets": 12,
+    "environment_operations_including_resets": 342,
+    "incomplete_external_operations": 0,
+    "physical_generation_input_tokens": 112794,
+    "physical_generation_output_tokens": 1026,
+    "physical_generation_total_tokens": 113820,
+    "method": "G2 failed predecessor + successful G2 smoke + earlier G3 import failure (zero scientific cost) + current G3 failed successor; totals are event-derived with resets counted as environment operations"
+  },
+  "boundaries": {
+    "model_or_environment_execution_during_this_audit": false,
+    "raw_evidence_modified": false,
+    "registry_or_manifest_modified": false,
+    "g4_efficacy_analysis_run": false,
+    "automatic_retry": false
+  }
+}
