@@ -1,8 +1,8 @@
 # Task record
 
 - Agent/task: Codex — R19-B1 G2 replay recovery and one conditionally authorized successor smoke.
-- Start: 2026-10-22 09:16:40 UTC. Scientific work completed: 2026-10-22 09:38 UTC; provenance synchronization follows.
-- Status: G2_PASS; offline verification PASS; sanitized provenance synchronization pending.
+- Start: 2026-10-22 09:16:40 UTC. Scientific work and first remote evidence verification completed: 2026-10-22 09:41:08 UTC; the final record/hash sync is metadata-only bookkeeping.
+- Status: G2_PASS; offline verification PASS; sanitized provenance evidence uploaded and remote SHA-256 checks passed.
 - Scientific repository: `MikazukiMisaki/Alfworld-Self-Improvement-Project`.
 - Scientific branch: `codex/r19-recovery-duration-v1`; initial failure SHA `f4fb81842e949930433def5817723bab74159f14`; ending/reviewed/executed SHA `92aae1d9b230cc212c6ec4effc99aa468941e69d`; local and remote branch matched at inspection.
 - Scientific changes in the successor commit: `scripts/run_r19_experiment.py` and `tests/test_r19_recovery_duration.py`; no scientific code/test changes after exact-SHA review.
@@ -14,6 +14,6 @@
 - Tests: focused R19 suite 47 passed; compilation and diff checks passed. Saved-data production validator regression passed with negative mutation cases. Gate preflight and completed-run offline verification passed.
 - Physical costs: predecessor 19 operations / 0 generations / 0 branches; successor 312 environment actions + 10 resets = 322 operations / 176 generations / 6 branches; cumulative 341/400 operations, 176/408 generations, 6/8 branches. Held-out/fresh tasks/training/external paid calls: 0.
 - Execution boundary: exactly one planned successor retry; no unplanned retry or branch rerun; no G3, fresh TRAIN, held-out evaluation, training, DPO/ORPO, model replacement, prompt change, quota/exclusion change, or additional case.
-- Provenance repository checkpoint before this task's upload: `2d12f3f505984b84285d20cad57b3125244c6ac0`. The final containing Git commit is resolved by the pushed history and reported to the user; a record cannot include its own final commit SHA.
+- Provenance repository base before this task: `2d12f3f505984b84285d20cad57b3125244c6ac0`. Evidence commit `621da8bd1142e0684543412b6b4a0cd0acaa0cd6` was pushed to `main`; 29 task/root files were independently read back from the remote commit and SHA-256 matched. This task record and inventories are finalized in a subsequent metadata-only commit; its SHA is resolved from pushed history and reported separately because a commit cannot contain its own SHA.
 
 Exact command summaries and the raw-to-sanitized supervisor mapping are in `commands.log` and `EXCLUDED_FILES.md`. Review and result artifacts: `G2_SUCCESSOR_REPORT.md`, `REPLAY_DIAGNOSIS.md`, `replay_diff.json`, `production_validator_regression.json`, `unit_resolution_events.jsonl`, `review-92aae1d.md`, `successor_gate_review.md`, and `g2_evidence/`.
