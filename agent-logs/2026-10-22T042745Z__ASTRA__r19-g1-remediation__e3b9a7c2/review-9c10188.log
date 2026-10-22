@@ -1,0 +1,19 @@
+Independent exact-SHA review — 9c101889408926d6fcc5bd5c41f6f7d73df83bc9
+Reviewer: Darwin
+Verdict: BLOCKED. Do not treat this review as G1 acceptance.
+
+Observed identities:
+
+- Commit: `9c101889408926d6fcc5bd5c41f6f7d73df83bc9`
+- Machine protocol: `3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122`
+- `R19_PROTOCOL.md`: `3839d10c07f67c03e0a3c8d9e7b8f210f030c58533c87aab9acadce470ee48a1`
+- Frozen schedule: `0be460359fe43193e73f8cb55a8fb19fdba02ea70e3d0809ec5978fad21c8948`
+- Frozen exclusions: `70447bba1b2a944d52ab9b4041b2d6ff3d865f4f0abd55d655214c8060ff5367`
+
+**P1 — Live analysis does not pin inputs to those canonical frozen hashes.** The analyzer checks the supplied protocol’s schema, validates a supplied schedule against supplied exclusions, and compares their hashes to the supplied execution manifest. It does not require the frozen hashes above. A different internally valid schedule/exclusion pair, with matching manifest and event hashes, can therefore be reported as frozen. The same schema-only check leaves the protocol hash unpinned in report-only analysis. Reviewer references: `scripts/analyze_r19_recovery_duration.py:1574`, `:1037`, `:1265`, and `:1272`; canonical hashes are recorded in `R19_PREFLIGHT.md:51`.
+
+**P2 — The analyzer does not establish that the supplied exit JSON came from the supervisor.** It checks the receipt’s asserted `exit_code_source`, code, run identity, and event/branch hashes, but does not verify the supervisor status record’s `runner_exit_sha256`, or compare the receipt’s command/log hashes. The supervisor writes that status hash, while the analyzer accepts only the receipt path; its PASS can thus rest on a self-asserted JSON receipt. Tests exercised real return-code capture by the supervisor but did not test analyzer receipt validation or rejection of a fabricated receipt. Reviewer references: `scripts/analyze_r19_recovery_duration.py:1387`, `scripts/launch_r19_supervised.py:139`, `scripts/analyze_r19_recovery_duration.py:1603`, `tests/test_r19_recovery_duration.py:654`.
+
+The earlier K1 smoke concern was addressed: signatures exclude Stage-2 attempts and recovery actions after the first, and omit path-extension markers. A synthetic K1/K3 fixture covers this. Reset calls reserve operation budget before `env.reset()`. Live operation attribution and prohibited-use counts are reconstructed from the ledger and checked against the execution manifest. Reviewer references: `scripts/run_r19_experiment.py:1882`, `tests/test_r19_recovery_duration.py:854`, `scripts/run_r19_experiment.py:470` and `:525`, `scripts/analyze_r19_recovery_duration.py:1186` and `:1289`.
+
+The commit changed only the analyzer, runner, and R19 tests; protocol, quotas, historical reports, and the recovery state-machine module were untouched. Synthetic tests covered the key K1, reset-cap, attribution, and count-reconstruction paths, but did not close the two findings above. This was a read-only review; no tests or model/environment/live calls were run.

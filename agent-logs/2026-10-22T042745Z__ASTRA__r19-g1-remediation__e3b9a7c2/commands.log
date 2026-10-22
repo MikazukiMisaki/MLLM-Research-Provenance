@@ -1,0 +1,88 @@
+R19 G1 remediation command log
+Scientific commit under test: 10cbd79b9d70af5dce352b25412269a189e3ee98
+Machine protocol SHA-256: 3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122
+
+All commands below were read-only checks or local tests unless noted. No live R19 runner was launched.
+
+1. `python -m py_compile scripts/run_r19_experiment.py scripts/run_r19_recovery_duration.py scripts/analyze_r19_recovery_duration.py scripts/audit_r19_family_inventory.py scripts/verify_r19_stats_reference.py scripts/launch_r19_supervised.py src/models/qwen.py src/recovery/r19_duration.py tests/test_r19_recovery_duration.py`
+   - Exit: 0.
+
+2. `python -m pytest -q tests/test_r19_recovery_duration.py` at exact commit 10cbd79…
+   - Exit: 0; 32 passed.
+
+3. `python scripts/verify_r19_stats_reference.py --fixture tests/fixtures/R19_Stats_Reference_Fixtures.json` at exact commit 10cbd79…
+   - Exit: 0; actual production functions compared against all frozen rows.
+
+4. `python scripts/run_r19_recovery_duration.py validate --protocol configs/experiments/r19_recovery_duration_v1.json` in the separate CPU analysis environment (Python 3.11.16, SciPy 1.17.1).
+   - Exit: 0; PASS_STATIC_PROTOCOL_VALIDATION; scipy_crosscheck=PASS; inference_performed=false.
+
+5. `git diff --check` after final source changes and before commit.
+   - Exit: 0.
+
+6. Full historical suite from the accepted-base worktree with the R19 `src` tree as the sole PYTHONPATH overlay: `python -m pytest -q --tb=no`.
+   - Accepted base HEAD: 4f5c2e18e0dfdf48e9471fcba0a3ee715be3ca3b.
+   - Import probe resolved `recovery.r19_duration` to the R19 source overlay.
+   - Exit: 0; reached 100%. Accepted-base worktree was clean before and after.
+
+7. Full suite from the isolated R19 worktree: `python -m pytest -q --tb=no`.
+   - Exit: 1; reached 100%, with three failures and multiple setup errors tied to unavailable ignored historical runtime artifacts in this worktree and an R18 adapter hash mismatch. No historical data was reconstructed or copied.
+
+8. Protected-file verifier against the R19 tip initially refused because its contract requires HEAD equal to the accepted scientific base; no files were changed by that refusal. Re-run against the exact accepted-base worktree and the frozen v3 manifest.
+   - Corrected verification: PASS; 443 expected files, changed=0, missing=0, newly_tracked=0; process exit 0.
+
+9. `git push origin codex/r19-recovery-duration-v1` (non-force).
+   - Exit: 0. Subsequent `git ls-remote` returned 10cbd79b9d70af5dce352b25412269a189e3ee98 for `refs/heads/codex/r19-recovery-duration-v1`.
+
+Observed boundary: no model loading/generation, ALFWorld reset/step, smoke, pilot, source collection, recovery replay, or scientific task consumption.
+
+## Successor remediation commit
+
+Target commit: `9c101889408926d6fcc5bd5c41f6f7d73df83bc9`; branch `codex/r19-recovery-duration-v1`.
+
+1. `PYTHONPATH=src /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m pytest -o addopts='' -q tests/test_r19_recovery_duration.py`
+   - Exit 0; 34 passed.
+2. `/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m py_compile scripts/run_r19_experiment.py scripts/analyze_r19_recovery_duration.py tests/test_r19_recovery_duration.py`
+   - Exit 0.
+3. `/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python scripts/verify_r19_stats_reference.py`
+   - Exit 0; actual production statistics fixture PASS.
+4. `/home/lizening/miniconda3/envs/qwen-image21/bin/python scripts/run_r19_recovery_duration.py validate --protocol configs/experiments/r19_recovery_duration_v1.json`
+   - Exit 0; Python 3.11.16 / SciPy 1.17.1; static protocol and SciPy cross-check PASS; inference_performed=false.
+5. `git diff --check`
+   - Exit 0.
+6. `sha256sum R19_PROTOCOL.md`
+   - `3839d10c07f67c03e0a3c8d9e7b8f210f030c58533c87aab9acadce470ee48a1`.
+7. `git commit -m "Close R19 G1 evidence and budget blockers"`
+   - Created commit `9c101889408926d6fcc5bd5c41f6f7d73df83bc9`; only the analyzer, runner, and R19 tests were changed.
+8. `git push origin codex/r19-recovery-duration-v1`; then `git ls-remote origin refs/heads/codex/r19-recovery-duration-v1`
+   - Push exit 0; verified remote SHA `9c101889408926d6fcc5bd5c41f6f7d73df83bc9` exactly matches local HEAD.
+9. Independent reviewer launched for exact SHA `9c101889408926d6fcc5bd5c41f6f7d73df83bc9` with frozen protocol hashes and explicit no-live-call scope; verdict pending at log update.
+
+## Exact-commit remediation after 9c10188 review
+
+Target SHA: `1c5eecad9b1b3b669c8293276d94551324ac3c36` on `codex/r19-recovery-duration-v1`.
+
+1. Focused R19 synthetic suite at the exact committed tree: 36 passed; exit 0.
+2. Python compilation and `git diff --check`: exit 0.
+3. Production statistics cross-check: exit 0; status PASS over 7,381 exact-p rows, 6 Holm cases, 48 paired-interval cases.
+4. Separate CPU protocol/SciPy validation: exit 0; `PASS_STATIC_PROTOCOL_VALIDATION`, `scipy_crosscheck=PASS`, `inference_performed=false`.
+5. Verified canonical frozen hashes: machine protocol `3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122`; R19 document `3839d10c07f67c03e0a3c8d9e7b8f210f030c58533c87aab9acadce470ee48a1`; source schedule `0be460359fe43193e73f8cb55a8fb19fdba02ea70e3d0809ec5978fad21c8948`; exclusions `70447bba1b2a944d52ab9b4041b2d6ff3d865f4f0abd55d655214c8060ff5367`.
+6. Commit `1c5eecad9b1b3b669c8293276d94551324ac3c36` created with only `scripts/analyze_r19_recovery_duration.py`, `scripts/launch_r19_supervised.py`, `scripts/run_r19_experiment.py`, and `tests/test_r19_recovery_duration.py`.
+7. Non-force push completed; `git ls-remote origin refs/heads/codex/r19-recovery-duration-v1` exactly matched `1c5eecad9b1b3b669c8293276d94551324ac3c36`; local worktree clean.
+8. Independent exact-SHA review requested for `1c5eecad9b1b3b669c8293276d94551324ac3c36`; disposition pending.
+
+No live model/environment call, G2 smoke, source collection, replay, or G3 pilot was run.
+
+## Exact-commit review dispositions and follow-up
+
+- Exact review of `9c101889408926d6fcc5bd5c41f6f7d73df83bc9`: BLOCKED; report archived as `review-9c10188.log`.
+- Exact review of `1c5eecad9b1b3b669c8293276d94551324ac3c36`: BLOCKED; report archived as `review-1c5eeca.log`.
+- Follow-up commit `dddf684f488873537196588beeec324cb1893dd7` resolves those findings with historical-status clarification and strict receipt exit/argv integrity checks. Exact tests and hashes are recorded in `tests.log`.
+- `dddf684…` was pushed non-force and remote SHA verified. Independent exact-SHA G1 review returned PASS with no new severity-ranked findings; report archived as `review-dddf684.log`.
+
+## Read-only model-identity artifact check
+
+- Confirmed the historical R18 runtime manifest, execution-event ledger, and R15-F01 branch artifact exist in the accepted-base worktree and match the manifest-recorded SHA-256 values: `2090d87d…1c7c`, `cf93a2dd…35d94`, and `26a50066…c7d90` respectively.
+- Inspected only identity-related fields in the historical run manifest. It records the pre-inference code revision and adapter hash, but no resolved base-weight revision/shard hashes, tokenizer revision/file hashes, or runtime versions.
+- Reconfirmed `configs/experiments/r19_model_identity_manifest.json` remains `MODEL_IDENTITY_UNRESOLVED`; the new local snapshot is not historical proof. No model load, environment call, smoke, or task consumption occurred.
+
+Full linked-worktree test diagnostic on the successor code reached 100%, exit 1, due only to absent ignored historical validation artifacts and an old adapter hash mismatch in non-R19 tests. No historical files were synthesized or copied.

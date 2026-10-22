@@ -1,0 +1,19 @@
+Independent exact-SHA G1 review — dddf684f488873537196588beeec324cb1893dd7
+Reviewer: Carver
+Verdict: PASS for exact-commit G1 only.
+
+HEAD matched the requested SHA and branch `codex/r19-recovery-duration-v1`; the worktree was clean. All four supplied frozen hashes matched:
+
+- Machine protocol: `3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122`
+- Clarified `R19_PROTOCOL.md`: `7668d7fa5422ad6ad7d3affc72b2e573ec19aae53314198fc14b46dc74c9a3d9`
+- Source schedule: `0be460359fe43193e73f8cb55a8fb19fdba02ea70e3d0809ec5978fad21c8948`
+- Exclusions: `70447bba1b2a944d52ab9b4041b2d6ff3d865f4f0abd55d655214c8060ff5367`
+
+The two findings from exact review of `1c5eeca` are closed:
+
+- The implementation-status passage is explicitly historical in `R19_PROTOCOL.md:104`; the document-only erratum records old and clarified hashes in `R19_PROTOCOL_DOCUMENT_ERRATUM.md:5`.
+- The analyzer requires an actual integer-zero exit code and validates command argv plus lowercase SHA-256 digest in `scripts/analyze_r19_recovery_duration.py:1405`. It binds argv/digest to supervisor final status and receipt hash at `scripts/analyze_r19_recovery_duration.py:1442`. The supervisor records argv in receipt/status, and atomic JSON writes set mode `0600` (`scripts/launch_r19_supervised.py:130`, `src/recovery/r19_duration.py:94`).
+
+Verification: all 36 R19 tests passed, including malformed receipt/status cases (`tests/test_r19_recovery_duration.py:711`); SciPy protocol cross-check passed; statistical fixture comparison passed across 7,381 rows; syntax and diff checks passed. No new severity-ranked findings.
+
+This PASS applies only to exact-commit G1. Historical model identity remains unresolved; G2 smoke and G3 pilot were not run and remain outside this review. No model or environment calls were made.

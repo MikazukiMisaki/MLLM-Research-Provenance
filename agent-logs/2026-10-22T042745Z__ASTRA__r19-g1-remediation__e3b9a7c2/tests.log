@@ -1,0 +1,79 @@
+R19 G1 remediation tests and model-free validation
+Exact implementation SHA: 10cbd79b9d70af5dce352b25412269a189e3ee98
+Protocol SHA-256: 3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122
+
+Focused R19 synthetic tests
+- Command: `python -m pytest -q tests/test_r19_recovery_duration.py`
+- Result: 32 passed; process exit 0.
+- Coverage includes one common recovery path, enrollment freeze, K1-only no-extension smoke behavior, horizon accounting, invalid Stage-1/Stage-2 outputs, action-map validity, terminal isolation, logical versus physical costs, same-suffix aliases, source schedule/queue determinism, public stopping, unit registry idempotence/indeterminate state, concurrent writer exclusion, supervised exit capture, durable event pairing/hash/restart/interruption, summary-only rejection, raw parser reconstruction, unresolved model gate, smoke action cap, and repeat trace filtering.
+
+Production statistics cross-check
+- Command: `python scripts/verify_r19_stats_reference.py --fixture tests/fixtures/R19_Stats_Reference_Fixtures.json`
+- Result: PASS; process exit 0.
+- Exact p-values: 7,381 rows (7,380 positive discordance rows plus the separately specified D=0 -> p=1 case).
+- Holm correction: 6 vectors.
+- Conservative paired intervals: 48 vectors; includes marginal 97.5% Clopper-Pearson endpoints and nondegenerate W=L=0,N>0 behavior.
+- Maximum absolute errors: exact p 1.2212453270876722e-15; Holm 0; marginal interval 4.953927892903387e-13; paired interval 5.572764472105973e-13.
+- Tolerances: 2e-14 for p/Holm; 2e-10 for interval endpoints.
+- Fixture SHA-256: 4df3f02ab9c35a11f565a9b2473c55126289c7d73135bcf8aab1674905b2ec94.
+- Reference environment recorded in fixture: Python 3.13.5 / NumPy 2.3.5 / SciPy 1.17.0 / statsmodels 0.14.6.
+
+Protocol validation
+- Separate CPU analysis environment: Python 3.11.16 / SciPy 1.17.1.
+- Result: PASS_STATIC_PROTOCOL_VALIDATION; scipy_crosscheck=PASS; inference_performed=false; process exit 0.
+- No dependency was installed in the inference environment.
+
+Baseline-matched historical suite
+- Accepted base: 4f5c2e18e0dfdf48e9471fcba0a3ee715be3ca3b.
+- R19 source overlay import origin was verified before execution.
+- Full suite reached 100%; process exit 0; base worktree clean before/after.
+
+Diagnostic worktree-wide suite
+- Full suite in the R19 linked worktree reached 100%; process exit 1.
+- Three failures plus multiple setup errors resulted from absent ignored historical runtime artifacts in that linked worktree and an R18 adapter hash mismatch. No historical artifacts were generated, copied, or overwritten.
+
+Static validation
+- Python compilation: exit 0.
+- `git diff --check`: exit 0.
+- Protected historical-file check at exact accepted base: 443 expected files; changed=0, missing=0, newly tracked=0; exit 0.
+
+No live model or environment operations occurred. G2 and G3 remain NOT RUN.
+
+## Successor commit verification
+
+Exact implementation SHA: `9c101889408926d6fcc5bd5c41f6f7d73df83bc9`.
+Frozen protocol hashes unchanged: machine protocol `3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122`; `R19_PROTOCOL.md` `3839d10c07f67c03e0a3c8d9e7b8f210f030c58533c87aab9acadce470ee48a1`.
+
+- `PYTHONPATH=src python -m pytest -o addopts='' -q tests/test_r19_recovery_duration.py`: 34 passed; exit 0. Added regressions exercise K1 filtering of untagged K3 extension generations/actions, frozen schedule/source-operation reconciliation, runtime/execution-manifest counters, and reset reservation at the environment-operation cap.
+- `python -m py_compile scripts/run_r19_experiment.py scripts/analyze_r19_recovery_duration.py tests/test_r19_recovery_duration.py`: exit 0.
+- `git diff --check`: exit 0.
+- `python scripts/verify_r19_stats_reference.py`: PASS; exit 0; actual production functions compared over 7,381 exact-p rows, 6 Holm cases, and 48 interval cases. Maximum absolute errors and fixture hash are unchanged from the preceding section.
+- Separate CPU environment `Python 3.11.16 / SciPy 1.17.1`: `python scripts/run_r19_recovery_duration.py validate --protocol configs/experiments/r19_recovery_duration_v1.json` returned `PASS_STATIC_PROTOCOL_VALIDATION`, `scipy_crosscheck=PASS`, `inference_performed=false`; exit 0.
+- Full suite in the R19 linked worktree reached 100% but exited 1. Three failures and multiple setup errors are attributable to absent ignored historical runtime artifacts in this worktree and the existing R18 adapter hash mismatch. Targeted examples: `test_public_source_excludes_hidden_facts_and_frozen_manifest_is_not_written` cannot read the ignored R7 trajectories file; `test_frozen_hashes_and_r18_c1_provenance` reports the old adapter hash mismatch; `test_frozen_phase_artifact_is_hashable_and_self_describing` cannot read the ignored R18-A phase artifact. No historical data was generated, copied, or changed. The accepted-base historical suite PASS recorded above remains unchanged.
+
+Independent review of `10cbd79b9d70af5dce352b25412269a189e3ee98` returned BLOCKED with three P1 findings; full review summary is preserved in `review-10cbd79.log`. Independent exact-SHA review of `9c101889408926d6fcc5bd5c41f6f7d73df83bc9` returned BLOCKED with a canonical-input P1 and supervisor-receipt P2; report preserved in `review-9c10188.log`.
+
+## Exact-commit validation at 1c5eecad9b1b3b669c8293276d94551324ac3c36
+
+- Focused synthetic suite: `PYTHONPATH=src /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m pytest -o addopts='' -q tests/test_r19_recovery_duration.py`; 36 passed; exit 0.
+- Static syntax and diff check: `python -m py_compile scripts/run_r19_experiment.py scripts/analyze_r19_recovery_duration.py scripts/launch_r19_supervised.py tests/test_r19_recovery_duration.py && git diff --check`; exit 0.
+- Production stats verifier: exit 0, status PASS; 7,381 exact-p rows, 6 Holm cases, and 48 paired-interval cases; maximum absolute errors and fixture hash unchanged from previous section.
+- Separate CPU protocol/SciPy check: `PASS_STATIC_PROTOCOL_VALIDATION`, `scipy_crosscheck=PASS`, `inference_performed=false`; exit 0.
+- Frozen identities rechecked: machine protocol `3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122`; protocol document `3839d10c07f67c03e0a3c8d9e7b8f210f030c58533c87aab9acadce470ee48a1`; source schedule `0be460359fe43193e73f8cb55a8fb19fdba02ea70e3d0809ec5978fad21c8948`; exclusions `70447bba1b2a944d52ab9b4041b2d6ff3d865f4f0abd55d655214c8060ff5367`.
+- Commit pushed non-force; `git ls-remote` exactly matched local HEAD. No model/environment calls, G2 smoke, source collection, replay, or G3 pilot occurred.
+- Exact-SHA independent review of `1c5eeca…` subsequently returned BLOCKED; see `review-1c5eeca.log`. No G1 acceptance is inferred.
+
+## Follow-up remediation after exact review of 1c5eecad
+
+Exact review `1c5eecad9b1b3b669c8293276d94551324ac3c36` returned BLOCKED (full report in `review-1c5eeca.log`). In response, `R19_PROTOCOL.md` now labels the stale implementation-status passage as historical; the machine protocol and scientific design remain byte-identical. Receipt validation now rejects non-integer/boolean exit codes, requires canonical `command_argv` plus a well-formed/recomputed SHA-256, and checks the argv in supervisor status. Synthetic negative cases include `False`, `0.5`, missing digest, altered argv, and malformed status.
+
+- Focused R19 suite on the follow-up worktree: 36 passed; exit 0.
+- Python compilation and `git diff --check`: exit 0.
+- Production statistics fixture: PASS; 7,381 exact-p rows, 6 Holm cases, 48 intervals; exit 0.
+- CPU SciPy static protocol validation: PASS; `inference_performed=false`; exit 0.
+- New document-only hash: `7668d7fa5422ad6ad7d3affc72b2e573ec19aae53314198fc14b46dc74c9a3d9`; machine protocol remains `3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122`.
+- Follow-up commit `dddf684f488873537196588beeec324cb1893dd7` passed these checks at its exact tree, was pushed, and remote SHA was verified. Independent exact-SHA G1 review returned PASS with no new severity-ranked findings; full report is in `review-dddf684.log`. G2/G3/live/model/environment operations did not occur.
+
+## Read-only historical model identity recheck
+
+The referenced retained R18 files exist in the accepted-base worktree and match the manifest hashes: run manifest `2090d87d310dc34c97650c63756ec8d6eadab44a4331a56bf86c47796c7d1c7c`; execution events `cf93a2dd9c14bc006194be0c2e127cd079d7e9252f354f0ef9cf974e5e935d94`; R15-F01 branch `26a50066285d0ae73d4707821c7b69e4f77be9807e85b9297399271c794c7d90`. The run manifest records the inference implementation commit and adapter SHA but no base weight revision/shard hashes, tokenizer revision/file hashes, or runtime versions. Identity remains `MODEL_IDENTITY_UNRESOLVED`; candidate snapshot `b968826d…` does not establish historical equivalence. The proposed separately named baseline remains unapproved. No model or environment was loaded or called.

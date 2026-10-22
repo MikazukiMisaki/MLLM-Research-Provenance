@@ -1,0 +1,18 @@
+Independent exact-SHA review — 1c5eecad9b1b3b669c8293276d94551324ac3c36
+Reviewer: Galileo
+Verdict: G1 BLOCKED.
+
+The review was read-only. HEAD matched the requested SHA, the worktree was clean, and all four supplied frozen hashes matched:
+
+- Machine protocol: `3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122`
+- `R19_PROTOCOL.md`: `3839d10c07f67c03e0a3c8d9e7b8f210f030c58533c87aab9acadce470ee48a1`
+- Source schedule: `0be460359fe43193e73f8cb55a8fb19fdba02ea70e3d0809ec5978fad21c8948`
+- Exclusions: `70447bba1b2a944d52ab9b4041b2d6ff3d865f4f0abd55d655214c8060ff5367`
+
+**P1 — Frozen protocol contradicts the implementation.** The protocol document said the pilot was only a placeholder, the runtime driver and smoke harness were blockers, and G0/G1/G2 must not be marked passed. The live pilot entrypoint exists at `scripts/run_r19_recovery_duration.py:387`. Reconcile the stale paragraph as historical status or amend it and update the pinned protocol-document hash; until then, the frozen gate instructions and actual entrypoint disagree.
+
+**P2 — Receipt validation accepts malformed integrity fields.** `scripts/analyze_r19_recovery_duration.py:1410` coerced `exit_code` with `int()`, allowing values such as `false` or `0.5` to be treated as zero. At line 1434, `command_sha256` was only compared between receipt and status; both missing values passed. Require an actual non-boolean integer exit code of zero and a valid command digest; retain or verify the canonical supervised argv; add negative tests.
+
+The prior implementation findings appeared closed: K1 signature filtering excludes later-K operations; analysis pins canonical protocol/schedule/exclusions and binds operations to scheduled TRAIN tasks; prohibited-use counts are derived from the event ledger; and resets are counted against operation caps. Receipt validation cross-checked supervisor status, runner log, and artifact hashes, but retained the malformed-field gap above.
+
+The reviewer reran 36 R19 tests, SciPy protocol validation, the frozen statistical fixture comparison, syntax compilation, and `git diff --check`; all passed. No model/environment calls or edits were made; the supervisor unit test used a dummy subprocess only. Model identity remained unresolved; G2 and G3 were not run. No G1 approval is inferred.

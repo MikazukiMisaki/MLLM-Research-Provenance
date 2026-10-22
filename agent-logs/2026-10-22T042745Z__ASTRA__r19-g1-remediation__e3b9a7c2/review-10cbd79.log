@@ -1,0 +1,20 @@
+Independent exact-commit review — historical blocker disposition
+
+Reviewed SHA: 10cbd79b9d70af5dce352b25412269a189e3ee98
+Branch: codex/r19-recovery-duration-v1
+Protocol SHA-256: 3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122
+Verdict: BLOCKED
+
+Reviewer findings:
+
+P1 — Smoke K1 repeatability was inconsistent. The first repeat executes K1 and K3, and the common path is extended for K3. Stage-2 generations beyond attempt one had no K identity and entered the K1 signature; the second K1-only repeat did not contain them. Recovery operation completions beyond action one were similarly not excluded. Existing smoke signature regression did not model those events.
+
+P1 — The analyzer did not reconcile live source sampling with the frozen schedule/exclusion manifest, did not require all live operations to be claimed by a source episode or branch, and returned hard-coded zero counts for held-out tasks, training, and external paid calls. Reviewer noted the existing supervised-exit checks did bind run ID, implementation/protocol hashes, event/branch hashes, and exit code zero.
+
+P1 — Environment-operation caps counted steps but not resets: reset operations were recorded without reserving from the frozen operation budget.
+
+Additional reviewer note: R19_PROTOCOL.md still said the pilot was not implemented; reviewer treated it as a stale pre-implementation record, not current execution evidence. Machine protocol hash matched the frozen value.
+
+Identity boundary: model manifest remained MODEL_IDENTITY_UNRESOLVED; no historical equivalence was inferred. Reviewer observed zero model loads/generations, ALFWorld reset/step calls, smoke/pilot runs, or task consumption. No files were changed by this review.
+
+This BLOCKED verdict applies only to 10cbd79 and remains immutable historical evidence. The successor review is requested against 9c101889408926d6fcc5bd5c41f6f7d73df83bc9.
