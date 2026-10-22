@@ -1,0 +1,79 @@
+{
+  "schema_version": "r19_g3_preflight_verification_v1",
+  "status": "PREFLIGHT_ONLY_PASS",
+  "scientific_repository": {
+    "branch": "codex/r19-recovery-duration-v1",
+    "local_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+    "origin_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+    "worktree_clean": true
+  },
+  "supervised_preflight": {
+    "run_id": "837b6a4c18214867b0df6f29313f58ed",
+    "evidence_class": "preflight_only",
+    "supersedes_run_id": "a0de515d7e104101bf8157175ea3d995",
+    "runner_exit_code": 0,
+    "runner_exit_code_source": "subprocess.returncode",
+    "receipt_status": "PREFLIGHT_ONLY_PASS",
+    "receipt_sha256": "88625bc943023b8b45116966596d0d4318290e4b4dc8df1dffb307c1759d2dc1",
+    "runner_exit_sha256": "fedf91606dc5baf1195efd8daaa8ae440461b76478f6ba4a3fa8a67c635fd132",
+    "supervisor_status_sha256": "fc782610695cb8ff0df408dc0783e27e37457a964ed20996bf053be3c2dc36ca",
+    "launch_context_sha256": "85465ec2601362e092422c11f8c31d391b7ce37bf68158d81c5083f112beba89",
+    "runner_log_sha256": "3307a68696e6b867743e43256a0cd4fac98d6347f5d46f901143c08cabf36307"
+  },
+  "gate_and_frozen_identity": {
+    "local_gate": "configs/local/r19_b1_g3_gate_bf31f3.json",
+    "gate_sha256": "63d6634f14fe9f768b3cc8c4120d7b85ba09bd54ca2b8e1f2c103a705137e1ee",
+    "provenance_gate_copy_sha256": "63d6634f14fe9f768b3cc8c4120d7b85ba09bd54ca2b8e1f2c103a705137e1ee",
+    "original_review_sha256": "73d3325343896bec3cd6f6b08ea77bae96211b75192b16094e6e6c963ad0ba27",
+    "g3_authorization_sha256": "89b887518c85d22d3176af0b50fb1861b58fb1c3b13a4ecc2b76485a66529b31",
+    "entrypoint_repair_authorization_sha256": "026eb1f0b05bcc27a6c901c10d787110cbac0e329551051973dda93e907bdc71",
+    "protocol_sha256": "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122",
+    "baseline_manifest_sha256": "d503f35ae913b137dfff091263bf29c38aa0ade2eea648dc45d7e6cf80da0973",
+    "baseline_amendment_sha256": "f8a138045cde125f2c5e08a7d077f75e3838cc7f6d0c67703faffe1166099e49",
+    "runtime_expectations_sha256": "dbfb7aa1a1d48d1148ad25be93002e7424d8b22e85422125ed502ac0f4db967e",
+    "runtime_manifest_preload_sha256": "64ebf4667da70dc4acd0a49b645bb6b6d4c3e1fe5d3e8e6351a8bf66f148ab9a",
+    "source_schedule_sha256": "0be460359fe43193e73f8cb55a8fb19fdba02ea70e3d0809ec5978fad21c8948",
+    "exclusion_manifest_sha256": "70447bba1b2a944d52ab9b4041b2d6ff3d865f4f0abd55d655214c8060ff5367",
+    "g2_executed_implementation_sha": "92aae1d9b230cc212c6ec4effc99aa468941e69d",
+    "g2_evidence_carried_forward": true,
+    "new_g2_run_performed": false,
+    "old_gate_preserved_sha256": "41ccaae32b1adebf22743f5c5f23df074820e7698d7b77ec97f1777c3c733e59"
+  },
+  "runtime_and_input_checks": {
+    "frozen_preload_runtime_match": true,
+    "model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "model_files_manifest_sha256": "3b9a89434920ea29980853cf1edd03ae531acde62dbebb2f17d0c9da65cdf92a",
+    "adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+    "scheduled_train_tasks_validated": 127,
+    "source_file_manifest_sha256": "3b8674f8b2c529195652ad07022a67bfd511b61eff95c375a4c9edadb7b98930",
+    "production_module_origins": {
+      "scripts.run_r19_experiment": "<R19_CHECKOUT>/scripts/run_r19_experiment.py",
+      "scripts.analyze_r19_recovery_duration": "<R19_CHECKOUT>/scripts/analyze_r19_recovery_duration.py"
+    },
+    "pythonpath_pythonhome_virtual_env_absent": true
+  },
+  "scientific_side_effects": {
+    "model_objects_loaded": 0,
+    "model_generations": 0,
+    "environment_instances_constructed": 0,
+    "environment_resets": 0,
+    "environment_steps": 0,
+    "scientific_units_created": 0,
+    "fresh_train_attempts": 0
+  },
+  "scientific_output_path_absent_at_preflight": true,
+  "live_launch_clearance_at_preflight": "NOT_YET_GRANTED",
+  "reviewer_clearance_sha256": "594bfa7978ee5cc4962c22eb2804f8f4cdbb1f202501330dd1faf993ccdca06b",
+  "live_g3_started": true,
+  "live_g3_output_path_created": true,
+  "live_g3_status": "FAILED_STOPPED_NO_RETRY",
+  "live_g3_run_id": "3d1ccea7e97f4727abf8e216ac6ec498",
+  "live_g3_exit_code": 1,
+  "live_g3_runner_exit_sha256": "a802079398fd415765b8f6b8685fec998325625da733011ff7a9ce11459a9386",
+  "live_g3_events_sha256": "fde95fcd72f1c4ac6409fab7f2112654e145f6184fefec690cae58ad345f1cd7",
+  "cumulative_cost_after_failed_live": {
+    "model_generations": 177,
+    "environment_operations": 342
+  },
+  "g4_analysis": "NOT_RUN_NO_COMPLETED_G3_EVIDENCE"
+}

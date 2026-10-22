@@ -1,0 +1,1152 @@
+diff --git a/configs/experiments/r19_b1_g3_entrypoint_repair_authorization_v1.json b/configs/experiments/r19_b1_g3_entrypoint_repair_authorization_v1.json
+new file mode 100644
+index 0000000..26f6355
+--- /dev/null
++++ b/configs/experiments/r19_b1_g3_entrypoint_repair_authorization_v1.json
+@@ -0,0 +1,83 @@
++{
++  "schema_version": "r19_b1_g3_entrypoint_repair_authorization_v1",
++  "authorization_id": "R19-B1-G3-ENTRYPOINT-REPAIR-2026-10-22",
++  "status": "APPROVED_BY_USER",
++  "authorization_source": "Direct user task message adopting the entrypoint-repair handoff",
++  "user_authorization_text": "本轮授权：最小启动/import 修复、无科学副作用的真实 CLI 测试、独立审查，通过后一次 G3 successor launch，并在有真实数据后完成 G4。",
++  "source_package_sha256": "7d0235f9cd56ae7299e54a30a31bb37e71230c419f632ed02f7ac0a659d976e2",
++  "starting_source_sha": "ef2328f06256054a6b71c6dc4bdc74dab3a1d3d9",
++  "branch": "codex/r19-recovery-duration-v1",
++  "preserved_failed_g3_launch": {
++    "run_id": "a0de515d7e104101bf8157175ea3d995",
++    "implementation_sha": "ef2328f06256054a6b71c6dc4bdc74dab3a1d3d9",
++    "exit_code": 1,
++    "exit_code_source": "subprocess.returncode",
++    "runner_log_sha256": "45eda8a835a07f841657da7ce00d0f5bddda182c1dc4f8cd50cfc7291f6e59cd",
++    "runner_exit_sha256": "7e1fc0771c78fa4022717c6b9926147f5565f6cdbe5e04cdec7f165cc732e6c4",
++    "supervisor_status_sha256": "e71147fe2f0f9097cbae38357c4b2186159fd0341d3211a9e7c9988f3c58474c",
++    "observed_error": "ModuleNotFoundError: No module named 'scripts.run_r19_experiment'",
++    "scientific_calls": {
++      "model_generations": 0,
++      "environment_operations": 0,
++      "fresh_train_attempts": 0
++    }
++  },
++  "prior_g2": {
++    "executed_implementation_sha": "92aae1d9b230cc212c6ec4effc99aa468941e69d",
++    "evidence_carried_forward_only_after_independent_review": true,
++    "new_g2_run_authorized": false
++  },
++  "allowed_work": [
++    "Minimal repository-root Python import bootstrap derived from the executing file",
++    "Exact production-module origin verification for the reviewed worktree",
++    "Explicit pilot preflight-only mode reusing production authorization, gate, runtime-identity, and immutable-input checks without scientific side effects",
++    "Supervisor evidence for argv, cwd, interpreter, and redacted/import-relevant environment identity",
++    "CPU, subprocess, synthetic scheduler, and report-entry tests with model/environment boundaries prevented",
++    "Independent exact-SHA review and one conditional G3 successor launch",
++    "Offline G4 analysis only after genuine G3 scientific evidence exists"
++  ],
++  "launch_conditions": {
++    "maximum_successor_g3_live_launches": 1,
++    "must_pass_real_supervisor_cli_preflight": true,
++    "must_pass_exact_sha_independent_review": true,
++    "must_bind_new_local_gate_to_review_command_and_frozen_inputs": true,
++    "g2_executed_implementation_sha": "92aae1d9b230cc212c6ec4effc99aa468941e69d",
++    "g2_relaunch_allowed": false,
++    "automatic_retry_allowed": false,
++    "new_task_directory_must_not_reset_budget": true
++  },
++  "frozen_science": {
++    "baseline_id": "R19-B1",
++    "historical_model_equivalence": "NOT_ESTABLISHED",
++    "model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
++    "adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
++    "machine_protocol_sha256": "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122",
++    "baseline_manifest_sha256": "d503f35ae913b137dfff091263bf29c38aa0ade2eea648dc45d7e6cf80da0973",
++    "baseline_amendment_sha256": "f8a138045cde125f2c5e08a7d077f75e3838cc7f6d0c67703faffe1166099e49",
++    "source_schedule_sha256": "0be460359fe43193e73f8cb55a8fb19fdba02ea70e3d0809ec5978fad21c8948",
++    "exclusion_manifest_sha256": "70447bba1b2a944d52ab9b4041b2d6ff3d865f4f0abd55d655214c8060ff5367",
++    "scheduled_train_tasks": 127,
++    "initial_attempt_cap": 120,
++    "eligible_state_cap": 60,
++    "eligible_quotas": {
++      "failure": 30,
++      "success_control": 15,
++      "random_control": 15
++    },
++    "quota_transfer": false,
++    "k_values": [1, 2, 3, 4, 5],
++    "total_horizon": 50,
++    "g2_cumulative_model_generations": 176,
++    "g2_cumulative_environment_operations": 341,
++    "g3_phase_generation_caps": [9000, 0, 240, 240, 17100],
++    "g3_phase_environment_operation_caps": [9000, 5400, 5520, 2940, 18000],
++    "campaign_generation_cap": 26988,
++    "campaign_environment_operation_cap": 41260
++  },
++  "prohibited": [
++    "Scientific execution behavior changes",
++    "G2 rerun or smoke relabeling",
++    "Automatic successor retry or replacement output directory after a live failure",
++    "Training, DPO, ORPO, selector training, held-out tasks, new models, Bayesian optimization, prompt tuning, quota/exclusion changes, or sample expansion"
++  ]
++}
+diff --git a/scripts/analyze_r19_recovery_duration.py b/scripts/analyze_r19_recovery_duration.py
+index a5d395a..069dadc 100644
+--- a/scripts/analyze_r19_recovery_duration.py
++++ b/scripts/analyze_r19_recovery_duration.py
+@@ -19,6 +19,8 @@ R19_EXCLUSION_MANIFEST_SHA256 = "70447bba1b2a944d52ab9b4041b2d6ff3d865f4f0abd55d
+ R19_B1_BASELINE_PATH = PROJECT_ROOT / "configs/experiments/r19_b1_baseline_manifest.json"
+ R19_B1_G3_AUTHORIZATION_PATH = PROJECT_ROOT / "configs/experiments/r19_b1_g3_authorization_v1.json"
+ R19_B1_G3_AUTHORIZATION_SHA256 = "89b887518c85d22d3176af0b50fb1861b58fb1c3b13a4ecc2b76485a66529b31"
++R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_PATH = PROJECT_ROOT / "configs/experiments/r19_b1_g3_entrypoint_repair_authorization_v1.json"
++R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_SHA256 = "026eb1f0b05bcc27a6c901c10d787110cbac0e329551051973dda93e907bdc71"
+ R19_G2_EXECUTED_SHA = "92aae1d9b230cc212c6ec4effc99aa468941e69d"
+ sys.path.insert(0, str(PROJECT_ROOT / "src"))
+ 
+@@ -1267,6 +1269,8 @@ def validate_live_execution_provenance(
+ 
+     if sha256_file(R19_B1_G3_AUTHORIZATION_PATH) != R19_B1_G3_AUTHORIZATION_SHA256:
+         raise EvidenceIntegrityError("versioned R19-B1 G3 authorization bytes do not match the frozen approval")
++    if sha256_file(R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_PATH) != R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_SHA256:
++        raise EvidenceIntegrityError("versioned R19-B1 entrypoint-repair authorization bytes do not match the frozen approval")
+     authorization = json.loads(R19_B1_G3_AUTHORIZATION_PATH.read_text(encoding="utf-8"))
+     baseline = authorization["baseline"]
+     g2 = authorization["g2_carry_forward"]
+@@ -1288,6 +1292,8 @@ def validate_live_execution_provenance(
+         or execution_manifest.get("pinned_model_revision") != baseline.get("model_snapshot_revision")
+         or execution_manifest.get("adapter_sha256") != baseline.get("adapter_directory_sha256")
+         or execution_manifest.get("g3_authorization_sha256") != R19_B1_G3_AUTHORIZATION_SHA256
++        or execution_manifest.get("entrypoint_repair_authorization_sha256")
++            != R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_SHA256
+         or execution_manifest.get("g2_executed_implementation_sha") != R19_G2_EXECUTED_SHA
+         or execution_manifest.get("g3_launch_implementation_sha") != implementation_sha
+         or execution_manifest.get("g2_evidence_carried_forward") is not True
+@@ -1306,6 +1312,8 @@ def validate_live_execution_provenance(
+         or g3_gate_receipt.get("baseline_id") != "R19-B1"
+         or g3_gate_receipt.get("identity_status") != "NEW_PINNED_BASELINE_APPROVED"
+         or g3_gate_receipt.get("g3_authorization_sha256") != R19_B1_G3_AUTHORIZATION_SHA256
++        or g3_gate_receipt.get("entrypoint_repair_authorization_sha256")
++            != R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_SHA256
+         or g3_gate_receipt.get("g3_launch_implementation_sha") != implementation_sha
+         or g3_gate_receipt.get("protocol_sha256") != R19_MACHINE_PROTOCOL_SHA256
+         or g3_gate_receipt.get("baseline_manifest_sha256") != baseline.get("manifest_sha256")
+@@ -1318,8 +1326,11 @@ def validate_live_execution_provenance(
+         or g3_gate_receipt.get("review", {}).get("implementation_sha") != implementation_sha
+         or g3_gate_receipt.get("review", {}).get("artifact_sha256")
+             != execution_manifest.get("g3_review_artifact_sha256")
++        or g3_gate_receipt.get("review", {}).get("entrypoint_repair_authorization_sha256")
++            != R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_SHA256
+         or g3_gate_receipt.get("review", {}).get("scientific_execution_behavior_changed") is not False
+-        or g3_gate_receipt.get("review", {}).get("change_scope_conclusion") != "AUTHORIZATION_AND_EVIDENCE_ROUTING_ONLY"
++        or g3_gate_receipt.get("review", {}).get("change_scope_conclusion")
++            != "AUTHORIZATION_EVIDENCE_G4_PROVENANCE_AND_ENTRYPOINT_PREFLIGHT_ONLY"
+         or g3_gate_receipt.get("review", {}).get("g2_evidence_carry_forward") != "PASS"
+         or g3_gate_receipt.get("review", {}).get("scientific_fingerprint_manifest_sha256")
+             != execution_manifest.get("g3_scientific_fingerprint_manifest_sha256")
+@@ -1346,6 +1357,7 @@ def validate_live_execution_provenance(
+         "baseline_manifest_sha256", "runtime_expectations_sha256", "runtime_manifest_preload_sha256",
+         "pinned_model_revision", "source_schedule_sha256", "exclusion_manifest_sha256",
+         "g3_authorization_sha256", "g2_executed_implementation_sha", "g3_launch_implementation_sha",
++        "entrypoint_repair_authorization_sha256",
+         "g2_evidence_carried_forward", "new_g2_run_performed", "g2_run_id", "g2_evidence_sha256",
+         "g2_review_artifact_sha256", "g3_review_artifact_sha256",
+         "g3_scientific_fingerprint_manifest_sha256", "g3_gate_receipt_file_sha256",
+@@ -1379,6 +1391,8 @@ def validate_live_execution_provenance(
+         or context.get("model_identity_sha256") != execution_manifest.get("model_identity_sha256")
+         or context.get("baseline_id") != "R19-B1"
+         or context.get("g3_authorization_sha256") != R19_B1_G3_AUTHORIZATION_SHA256
++        or context.get("entrypoint_repair_authorization_sha256")
++            != R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_SHA256
+         or context.get("g2_executed_implementation_sha") != R19_G2_EXECUTED_SHA
+         or context.get("g3_launch_implementation_sha") != implementation_sha
+         or context.get("g2_evidence_carried_forward") is not True
+@@ -1475,6 +1489,9 @@ def validate_live_execution_provenance(
+         "environment_manifest_sha256": environment_digest,
+         "source_manifest_sha256": execution_manifest.get("source_manifest_sha256"),
+         "baseline_id": execution_manifest.get("baseline_id"),
++        "entrypoint_repair_authorization_sha256": execution_manifest.get(
++            "entrypoint_repair_authorization_sha256"
++        ),
+         "g2_executed_implementation_sha": execution_manifest.get("g2_executed_implementation_sha"),
+         "g3_launch_implementation_sha": implementation_sha,
+         "g2_evidence_carried_forward": execution_manifest.get("g2_evidence_carried_forward"),
+diff --git a/scripts/launch_r19_supervised.py b/scripts/launch_r19_supervised.py
+index a3fec86..e83186e 100644
+--- a/scripts/launch_r19_supervised.py
++++ b/scripts/launch_r19_supervised.py
+@@ -17,6 +17,7 @@ from pathlib import Path
+ from typing import Any, Sequence
+ 
+ PROJECT_ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(PROJECT_ROOT))
+ sys.path.insert(0, str(PROJECT_ROOT / "src"))
+ 
+ from recovery.r19_duration import atomic_write_json, canonical_json, sha256_file  # noqa: E402
+@@ -39,9 +40,27 @@ def _option_path(argv: Sequence[str], name: str) -> Path | None:
+     return None
+ 
+ 
+-def supervise(argv: Sequence[str], *, record_dir: Path, cwd: Path = PROJECT_ROOT) -> dict[str, Any]:
++_RECORDED_ENVIRONMENT_KEYS = (
++    "PYTHONPATH", "PYTHONHOME", "VIRTUAL_ENV", "CONDA_PREFIX", "PATH",
++    "ALFWORLD_DATA", "ALFWORLD_CONFIG_PATH", "HF_HOME", "HF_HUB_CACHE",
++    "HF_HUB_OFFLINE", "TRANSFORMERS_OFFLINE", "CUDA_VISIBLE_DEVICES", "CUDA_HOME",
++)
++
++
++def supervise(
++    argv: Sequence[str], *, record_dir: Path, cwd: Path = PROJECT_ROOT,
++    evidence_class: str = "live", supersedes_run_id: str | None = None,
++) -> dict[str, Any]:
+     if not argv or not all(isinstance(value, str) and value for value in argv):
+         raise ValueError("supervised command must be a nonempty argv list")
++    if evidence_class not in {"live", "preflight_only"}:
++        raise ValueError("unsupported supervisor evidence class")
++    if evidence_class == "preflight_only" and "--preflight-only" not in argv:
++        raise ValueError("preflight_only supervisor mode requires the production preflight-only CLI")
++    if evidence_class == "preflight_only" and not supersedes_run_id:
++        raise ValueError("preflight-only evidence must link the preserved failed predecessor")
++    if evidence_class == "preflight_only" and os.environ.get("PYTHONPATH"):
++        raise ValueError("preflight-only launch must not rely on inherited PYTHONPATH")
+     if record_dir.exists():
+         raise FileExistsError("supervisor record directory already exists; do not overwrite")
+     record_dir.mkdir(parents=True, mode=0o700)
+@@ -59,6 +78,39 @@ def supervise(argv: Sequence[str], *, record_dir: Path, cwd: Path = PROJECT_ROOT
+     status_path = record_dir / "supervisor_status.json"
+     log_path = record_dir / "runner.log"
+     receipt_path = record_dir / "runner_exit.json"
++    context_path = record_dir / "launch_context.json"
++    child_environment = dict(os.environ)
++    child_environment.update({
++        "R19_RUN_ID": run_id,
++        "R19_EVIDENCE_CLASS": evidence_class,
++        "R19_EXIT_RECEIPT_PATH": str(receipt_path),
++        "R19_SUPERVISOR_CONTEXT_PATH": str(context_path),
++    })
++    effective_environment = {
++        key: child_environment[key] for key in _RECORDED_ENVIRONMENT_KEYS if key in child_environment
++    }
++    launch_context = {
++        "schema_version": "r19_supervisor_launch_context_v1",
++        "run_id": run_id,
++        "implementation_sha": implementation_sha,
++        "evidence_class": evidence_class,
++        "supersedes_run_id": supersedes_run_id,
++        "cwd": str(Path(cwd).resolve()),
++        "supervisor_entrypoint": str(Path(__file__).resolve()),
++        "supervisor_argv": [sys.executable, *sys.argv],
++        "supervisor_interpreter": sys.executable,
++        "command_argv": command_argv,
++        "command_sha256": command_sha256,
++        "interpreter": command_argv[0],
++        "environment_allowlist": list(_RECORDED_ENVIRONMENT_KEYS),
++        "effective_environment": effective_environment,
++        "omitted_environment_key_presence": {
++            key: key in child_environment for key in ("PYTHONPATH", "PYTHONHOME", "VIRTUAL_ENV")
++        },
++    }
++    atomic_write_json(context_path, launch_context)
++    os.chmod(context_path, 0o600)
++    context_sha256 = sha256_file(context_path)
+     atomic_write_json(status_path, {
+         "schema_version": "r19_supervisor_status_v1",
+         "status": "in_progress",
+@@ -67,17 +119,15 @@ def supervise(argv: Sequence[str], *, record_dir: Path, cwd: Path = PROJECT_ROOT
+         "protocol_sha256": protocol_sha256,
+         "command_argv": command_argv,
+         "command_sha256": command_sha256,
++        "evidence_class": evidence_class,
++        "supersedes_run_id": supersedes_run_id,
++        "cwd": str(Path(cwd).resolve()),
++        "launch_context_sha256": context_sha256,
+         "supervisor_pid": os.getpid(),
+         "started_at": started_at,
+         "last_heartbeat_at": started_at,
+     })
+ 
+-    child_environment = dict(os.environ)
+-    child_environment.update({
+-        "R19_RUN_ID": run_id,
+-        "R19_EVIDENCE_CLASS": "live",
+-        "R19_EXIT_RECEIPT_PATH": str(receipt_path),
+-    })
+     return_code: int | None = None
+     interrupted = False
+     last_heartbeat = time.monotonic()
+@@ -101,6 +151,10 @@ def supervise(argv: Sequence[str], *, record_dir: Path, cwd: Path = PROJECT_ROOT
+                         "protocol_sha256": protocol_sha256,
+                         "command_argv": command_argv,
+                         "command_sha256": command_sha256,
++                        "evidence_class": evidence_class,
++                        "supersedes_run_id": supersedes_run_id,
++                        "cwd": str(Path(cwd).resolve()),
++                        "launch_context_sha256": context_sha256,
+                         "supervisor_pid": os.getpid(),
+                         "child_pid": child.pid,
+                         "started_at": started_at,
+@@ -121,7 +175,8 @@ def supervise(argv: Sequence[str], *, record_dir: Path, cwd: Path = PROJECT_ROOT
+     receipt = {
+         "schema_version": "r19_supervised_exit_v1",
+         "status": "completed" if return_code == 0 else "failed",
+-        "evidence_class": "live",
++        "evidence_class": evidence_class,
++        "supersedes_run_id": supersedes_run_id,
+         "exit_code": return_code,
+         "exit_code_source": "subprocess.returncode",
+         "run_id": run_id,
+@@ -129,6 +184,8 @@ def supervise(argv: Sequence[str], *, record_dir: Path, cwd: Path = PROJECT_ROOT
+         "protocol_sha256": protocol_sha256,
+         "command_argv": command_argv,
+         "command_sha256": command_sha256,
++        "cwd": str(Path(cwd).resolve()),
++        "launch_context_sha256": context_sha256,
+         "events_sha256": event_sha256,
+         "branches_sha256": branch_sha256,
+         "runner_log_sha256": sha256_file(log_path),
+@@ -148,6 +205,10 @@ def supervise(argv: Sequence[str], *, record_dir: Path, cwd: Path = PROJECT_ROOT
+         "protocol_sha256": protocol_sha256,
+         "command_argv": command_argv,
+         "command_sha256": command_sha256,
++        "evidence_class": evidence_class,
++        "supersedes_run_id": supersedes_run_id,
++        "cwd": str(Path(cwd).resolve()),
++        "launch_context_sha256": context_sha256,
+         "exit_code": return_code,
+         "completed_at": completed_at,
+         "events_sha256": event_sha256,
+@@ -161,12 +222,18 @@ def supervise(argv: Sequence[str], *, record_dir: Path, cwd: Path = PROJECT_ROOT
+ def main(argv: list[str] | None = None) -> int:
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("--record-dir", type=Path, required=True)
++    parser.add_argument("--evidence-class", choices=("live", "preflight_only"), default="live")
++    parser.add_argument("--supersedes-run-id")
+     parser.add_argument("command", nargs=argparse.REMAINDER)
+     args = parser.parse_args(argv)
+     command = list(args.command)
+     if command and command[0] == "--":
+         command = command[1:]
+-    receipt = supervise(command, record_dir=args.record_dir)
++    receipt = supervise(
++        command, record_dir=args.record_dir,
++        evidence_class=args.evidence_class,
++        supersedes_run_id=args.supersedes_run_id,
++    )
+     print(json.dumps({
+         "status": receipt["status"],
+         "exit_code": receipt["exit_code"],
+diff --git a/scripts/run_r19_experiment.py b/scripts/run_r19_experiment.py
+index 7acac5f..41311be 100644
+--- a/scripts/run_r19_experiment.py
++++ b/scripts/run_r19_experiment.py
+@@ -11,6 +11,7 @@ from __future__ import annotations
+ import argparse
+ import ast
+ import hashlib
++import importlib
+ import importlib.metadata
+ import json
+ import os
+@@ -24,6 +25,7 @@ from pathlib import Path
+ from typing import Any, Mapping, Sequence
+ 
+ PROJECT_ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(PROJECT_ROOT))
+ sys.path.insert(0, str(PROJECT_ROOT / "src"))
+ 
+ from recovery.r19_duration import (  # noqa: E402
+@@ -62,6 +64,8 @@ R19_B1_BASELINE = PROJECT_ROOT / "configs/experiments/r19_b1_baseline_manifest.j
+ R19_B1_AMENDMENT = PROJECT_ROOT / "R19_B1_G2_AMENDMENT.md"
+ R19_B1_G3_AUTHORIZATION = PROJECT_ROOT / "configs/experiments/r19_b1_g3_authorization_v1.json"
+ R19_B1_G3_AUTHORIZATION_SHA256 = "89b887518c85d22d3176af0b50fb1861b58fb1c3b13a4ecc2b76485a66529b31"
++R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION = PROJECT_ROOT / "configs/experiments/r19_b1_g3_entrypoint_repair_authorization_v1.json"
++R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_SHA256 = "026eb1f0b05bcc27a6c901c10d787110cbac0e329551051973dda93e907bdc71"
+ R19_B1_BASELINE_ID = "R19-B1"
+ R19_B1_MODEL_REVISION = "b968826d9c46dd6066d109eabc6255188de91218"
+ R19_G2_EXECUTED_SHA = "92aae1d9b230cc212c6ec4effc99aa468941e69d"
+@@ -76,6 +80,18 @@ class ExecutionGateError(RuntimeError):
+     """A required review, scope, identity, or immutable-input gate is absent."""
+ 
+ 
++def _production_module(name: str):
++    """Import a production module only from this source checkout."""
++    module = importlib.import_module(name)
++    expected = (PROJECT_ROOT / (name.replace(".", "/") + ".py")).resolve()
++    origin_text = getattr(module, "__file__", None)
++    if not origin_text or Path(origin_text).resolve() != expected:
++        raise ExecutionGateError(
++            f"production module {name} resolved outside the reviewed repository"
++        )
++    return module
++
++
+ def _load_g3_authorization() -> tuple[dict[str, Any], str]:
+     """Load the separately versioned user authorization and its frozen identity."""
+     actual_sha = sha256_file(R19_B1_G3_AUTHORIZATION)
+@@ -120,6 +136,63 @@ def _load_g3_authorization() -> tuple[dict[str, Any], str]:
+     return document, actual_sha
+ 
+ 
++def _load_entrypoint_repair_authorization() -> tuple[dict[str, Any], str]:
++    """Load the versioned, narrow authorization for entrypoint repair and one successor."""
++    actual_sha = sha256_file(R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION)
++    if actual_sha != R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION_SHA256:
++        raise ExecutionGateError("R19-B1 entrypoint-repair authorization bytes differ from the adopted user scope")
++    document = json.loads(
++        R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION.read_text(encoding="utf-8")
++    )
++    frozen = document.get("frozen_science", {})
++    launch = document.get("launch_conditions", {})
++    failed = document.get("preserved_failed_g3_launch", {})
++    if (
++        document.get("schema_version") != "r19_b1_g3_entrypoint_repair_authorization_v1"
++        or document.get("status") != "APPROVED_BY_USER"
++        or document.get("authorization_id") != "R19-B1-G3-ENTRYPOINT-REPAIR-2026-10-22"
++        or document.get("starting_source_sha") != "ef2328f06256054a6b71c6dc4bdc74dab3a1d3d9"
++        or document.get("source_package_sha256") != "7d0235f9cd56ae7299e54a30a31bb37e71230c419f632ed02f7ac0a659d976e2"
++        or failed.get("run_id") != "a0de515d7e104101bf8157175ea3d995"
++        or failed.get("implementation_sha") != "ef2328f06256054a6b71c6dc4bdc74dab3a1d3d9"
++        or failed.get("exit_code") != 1
++        or failed.get("exit_code_source") != "subprocess.returncode"
++        or failed.get("scientific_calls") != {
++            "model_generations": 0, "environment_operations": 0,
++            "fresh_train_attempts": 0,
++        }
++        or document.get("prior_g2", {}).get("executed_implementation_sha") != R19_G2_EXECUTED_SHA
++        or document.get("prior_g2", {}).get("new_g2_run_authorized") is not False
++        or launch.get("maximum_successor_g3_live_launches") != 1
++        or launch.get("must_pass_real_supervisor_cli_preflight") is not True
++        or launch.get("must_pass_exact_sha_independent_review") is not True
++        or launch.get("automatic_retry_allowed") is not False
++        or frozen.get("baseline_id") != R19_B1_BASELINE_ID
++        or frozen.get("historical_model_equivalence") != "NOT_ESTABLISHED"
++        or frozen.get("model_revision") != R19_B1_MODEL_REVISION
++        or frozen.get("machine_protocol_sha256") != R19_PROTOCOL_SHA256
++        or frozen.get("source_schedule_sha256") != R19_FROZEN_SOURCE_SCHEDULE_SHA256
++        or frozen.get("exclusion_manifest_sha256") != R19_FROZEN_EXCLUSION_MANIFEST_SHA256
++        or frozen.get("scheduled_train_tasks") != 127
++        or frozen.get("initial_attempt_cap") != 120
++        or frozen.get("eligible_state_cap") != 60
++        or frozen.get("eligible_quotas") != {
++            "failure": 30, "success_control": 15, "random_control": 15,
++        }
++        or frozen.get("quota_transfer") is not False
++        or frozen.get("k_values") != [1, 2, 3, 4, 5]
++        or frozen.get("total_horizon") != 50
++        or frozen.get("g2_cumulative_model_generations") != 176
++        or frozen.get("g2_cumulative_environment_operations") != 341
++        or frozen.get("g3_phase_generation_caps") != [9000, 0, 240, 240, 17100]
++        or frozen.get("g3_phase_environment_operation_caps") != [9000, 5400, 5520, 2940, 18000]
++        or frozen.get("campaign_generation_cap") != 26988
++        or frozen.get("campaign_environment_operation_cap") != 41260
++    ):
++        raise ExecutionGateError("entrypoint-repair authorization does not bind the adopted frozen R19-B1 scope")
++    return document, actual_sha
++
++
+ def _current_scientific_function_fingerprints(expected: Mapping[str, str]) -> dict[str, str]:
+     """Hash frozen execution/statistics function source spans without importing a model."""
+     observed: dict[str, str] = {}
+@@ -191,11 +264,12 @@ def _validate_g3_carry_forward(
+     *, gate: Mapping[str, Any], authorization: Mapping[str, Any], authorization_sha256: str,
+     head: str, protocol_sha256: str,
+ ) -> dict[str, Any]:
+-    """Authenticate the old G2 evidence and the exact-SHA authorization-only successor review."""
++    """Authenticate old G2 evidence and the exact-SHA entrypoint-only successor review."""
+     if "smoke" in gate:
+         raise ExecutionGateError("G3 carry-forward must not claim that a G2 smoke ran on the new implementation SHA")
+     review = gate.get("review", {})
+     carry = gate.get("g2_carry_forward", {})
++    _repair_authorization, repair_authorization_sha256 = _load_entrypoint_repair_authorization()
+     g2 = authorization["g2_carry_forward"]
+     baseline = authorization["baseline"]
+     frozen = authorization["frozen_inputs"]
+@@ -213,13 +287,14 @@ def _validate_g3_carry_forward(
+         "implementation_sha": head,
+         "protocol_sha256": protocol_sha256,
+         "g3_authorization_sha256": authorization_sha256,
++        "entrypoint_repair_authorization_sha256": repair_authorization_sha256,
+         "baseline_manifest_sha256": baseline["manifest_sha256"],
+         "baseline_amendment_sha256": baseline["amendment_sha256"],
+         "runtime_expectations_sha256": baseline["runtime_expectations_sha256"],
+         "runtime_manifest_preload_sha256": baseline["runtime_manifest_preload_sha256"],
+         "source_schedule_sha256": frozen["source_schedule_sha256"],
+         "exclusion_manifest_sha256": frozen["exclusion_manifest_sha256"],
+-        "change_scope_conclusion": "AUTHORIZATION_AND_EVIDENCE_ROUTING_ONLY",
++        "change_scope_conclusion": "AUTHORIZATION_EVIDENCE_G4_PROVENANCE_AND_ENTRYPOINT_PREFLIGHT_ONLY",
+         "scientific_execution_behavior_changed": False,
+         "g2_evidence_carry_forward": "PASS",
+         "g2_executed_implementation_sha": g2["g2_executed_implementation_sha"],
+@@ -240,6 +315,7 @@ def _validate_g3_carry_forward(
+     expected_carry = {
+         "status": "PASS",
+         "g3_authorization_sha256": authorization_sha256,
++        "entrypoint_repair_authorization_sha256": repair_authorization_sha256,
+         "g2_executed_implementation_sha": g2["g2_executed_implementation_sha"],
+         "g2_run_id": g2["g2_run_id"],
+         "g2_evidence_carried_forward": True,
+@@ -357,6 +433,7 @@ def _validate_g3_carry_forward(
+     )
+     return {
+         "g3_authorization_sha256": authorization_sha256,
++        "entrypoint_repair_authorization_sha256": repair_authorization_sha256,
+         "g2_executed_implementation_sha": g2["g2_executed_implementation_sha"],
+         "g3_launch_implementation_sha": head,
+         "g2_evidence_carried_forward": True,
+@@ -2390,8 +2467,13 @@ def _install_unit_registry_sink(
+ def run_live_experiment(
+     *, mode: str, protocol_path: Path, gate_manifest_path: Path, output_path: Path,
+     adapter_path: Path, data_root: Path | None = None, config_path: Path | None = None,
++    preflight_only: bool = False, preflight_receipt_path: Path | None = None,
+ ) -> dict[str, Any]:
+-    """Run one exact-gated live R19 smoke or pilot; never resumes existing output."""
++    """Run one exact-gated R19 smoke/pilot, or validate a zero-science pilot preflight."""
++    if preflight_only and mode != "pilot":
++        raise ExecutionGateError("preflight-only mode is available only for the authorized G3 pilot")
++    if preflight_only != (preflight_receipt_path is not None):
++        raise ExecutionGateError("preflight-only mode requires exactly one separate preflight receipt path")
+     gate = json.loads(gate_manifest_path.read_text(encoding="utf-8"))
+     schedule_path = exclusion_path = None
+     if mode == "pilot":
+@@ -2405,6 +2487,10 @@ def run_live_experiment(
+         raise ExecutionGateError("ALFWORLD_DATA and ALFWORLD_CONFIG_PATH must identify the local TRAIN runtime")
+     if output_path.is_symlink() or output_path.exists():
+         raise FileExistsError("R19 output already exists; completed or uncertain work is never regenerated")
++    if preflight_receipt_path is not None and (
++        preflight_receipt_path.is_symlink() or preflight_receipt_path.exists()
++    ):
++        raise FileExistsError("preflight receipt already exists; do not overwrite prior gate evidence")
+ 
+     identity_path = R19_B1_BASELINE if mode in {"smoke", "pilot"} else R19_MODEL_IDENTITY
+     identity = json.loads(identity_path.read_text(encoding="utf-8"))
+@@ -2436,6 +2522,9 @@ def run_live_experiment(
+             "baseline_id": R19_B1_BASELINE_ID,
+             "identity_status": "NEW_PINNED_BASELINE_APPROVED",
+             "g3_authorization_sha256": authorization_sha,
++            "entrypoint_repair_authorization_sha256": gate_hashes[
++                "entrypoint_repair_authorization_sha256"
++            ],
+             "g3_launch_implementation_sha": gate_hashes["implementation_sha"],
+             "protocol_sha256": gate_hashes["protocol_sha256"],
+             "baseline_manifest_sha256": gate_hashes["baseline_manifest_sha256"],
+@@ -2450,6 +2539,9 @@ def run_live_experiment(
+                 "artifact_sha256": review["artifact_sha256"],
+                 "implementation_sha": review["implementation_sha"],
+                 "protocol_sha256": review["protocol_sha256"],
++                "entrypoint_repair_authorization_sha256": review[
++                    "entrypoint_repair_authorization_sha256"
++                ],
+                 "change_scope_conclusion": review["change_scope_conclusion"],
+                 "scientific_execution_behavior_changed": review["scientific_execution_behavior_changed"],
+                 "scientific_fingerprint_manifest_sha256": review["scientific_fingerprint_manifest_sha256"],
+@@ -2479,12 +2571,17 @@ def run_live_experiment(
+         protocol=protocol, identity=identity,
+     )
+     run_id = os.environ.get("R19_RUN_ID", "")
+-    if not run_id or os.environ.get("R19_EVIDENCE_CLASS") != "live":
+-        raise ExecutionGateError("live R19 execution must be launched by the durable supervisor")
++    expected_evidence_class = "preflight_only" if preflight_only else "live"
++    if not run_id or os.environ.get("R19_EVIDENCE_CLASS") != expected_evidence_class:
++        raise ExecutionGateError(
++            f"R19 {expected_evidence_class} execution must be launched by the durable supervisor"
++        )
+     receipt_text = os.environ.get("R19_EXIT_RECEIPT_PATH", "")
+     if not receipt_text or not Path(receipt_text).parent.exists():
+         raise ExecutionGateError("supervisor exit-receipt path is not configured")
+     receipt_path = Path(receipt_text)
++    context_text = os.environ.get("R19_SUPERVISOR_CONTEXT_PATH", "")
++    context_path = Path(context_text) if context_text else None
+ 
+     output_path = output_path.resolve()
+     try:
+@@ -2494,6 +2591,85 @@ def run_live_experiment(
+     if relative_output is not None and relative_output.parts[:2] != ("artifacts", "runtime"):
+         raise ExecutionGateError("in-repository R19 outputs must stay under ignored artifacts/runtime/")
+ 
++    context: dict[str, Any] | None = None
++    if mode == "pilot":
++        repair_authorization, repair_authorization_sha = _load_entrypoint_repair_authorization()
++        failed_run_id = repair_authorization["preserved_failed_g3_launch"]["run_id"]
++        driver_path = (PROJECT_ROOT / "scripts/run_r19_recovery_duration.py").resolve()
++        if context_path is None or context_path.is_symlink() or not context_path.is_file():
++            raise ExecutionGateError("R19 pilot requires the durable supervisor launch-context record")
++        context = json.loads(context_path.read_text(encoding="utf-8"))
++        command_argv = context.get("command_argv")
++        omitted_presence = context.get("omitted_environment_key_presence", {})
++        if (
++            context.get("evidence_class") != expected_evidence_class
++            or context.get("run_id") != run_id
++            or context.get("implementation_sha") != gate_hashes["implementation_sha"]
++            or context.get("cwd") != str(PROJECT_ROOT.resolve())
++            or context.get("supersedes_run_id") != failed_run_id
++            or context.get("supervisor_entrypoint") != str((PROJECT_ROOT / "scripts/launch_r19_supervised.py").resolve())
++            or Path(str(context.get("supervisor_interpreter", ""))).resolve() != Path(sys.executable).resolve()
++            or Path(str(context.get("interpreter", ""))).resolve() != Path(sys.executable).resolve()
++            or not isinstance(command_argv, list)
++            or len(command_argv) < 3
++            or Path(str(command_argv[1])).resolve() != driver_path
++            or command_argv[2] != "pilot"
++            or bool("--preflight-only" in command_argv) != preflight_only
++            or omitted_presence.get("PYTHONPATH") is not False
++            or context_path.parent.resolve() != receipt_path.parent.resolve()
++        ):
++            raise ExecutionGateError("R19 pilot supervisor context does not bind this exact reviewed invocation")
++
++    if preflight_only:
++        assert preflight_receipt_path is not None
++        assert context is not None and context_path is not None
++        if preflight_receipt_path.parent.resolve() != receipt_path.parent.resolve():
++            raise ExecutionGateError("preflight supervisor context does not bind this reviewed, linked CLI invocation")
++        analyzer = _production_module("scripts.analyze_r19_recovery_duration")
++        expected_analyzer = (PROJECT_ROOT / "scripts/analyze_r19_recovery_duration.py").resolve()
++        if Path(analyzer.__file__).resolve() != expected_analyzer:
++            raise ExecutionGateError("production analyzer import resolved outside the reviewed repository")
++        preflight_receipt = {
++            "schema_version": "r19_pilot_preflight_only_receipt_v1",
++            "status": "PREFLIGHT_ONLY_PASS",
++            "mode": "pilot",
++            "run_id": run_id,
++            "implementation_sha": gate_hashes["implementation_sha"],
++            "protocol_sha256": gate_hashes["protocol_sha256"],
++            "gate_manifest_sha256": gate_hashes["gate_manifest_sha256"],
++            "g3_authorization_sha256": gate_hashes["g3_authorization_sha256"],
++            "entrypoint_repair_authorization_sha256": repair_authorization_sha,
++            "g2_executed_implementation_sha": gate_hashes["g2_executed_implementation_sha"],
++            "g2_evidence_carried_forward": gate_hashes["g2_evidence_carried_forward"],
++            "new_g2_run_performed": gate_hashes["new_g2_run_performed"],
++            "baseline_id": R19_B1_BASELINE_ID,
++            "historical_model_equivalence": "NOT_ESTABLISHED",
++            "model_revision": local_inputs["model_bytes"]["snapshot_revision"],
++            "adapter_sha256": local_inputs["adapter_sha256"],
++            "model_files_sha256": sha256_json(local_inputs["model_bytes"]),
++            "source_schedule_sha256": gate_hashes["source_schedule_sha256"],
++            "exclusion_manifest_sha256": gate_hashes["exclusion_manifest_sha256"],
++            "scheduled_train_tasks": len(local_inputs["schedule"]["episodes"]),
++            "source_file_manifest_sha256": sha256_json(local_inputs["source_files"]),
++            "production_module_origins": {
++                "scripts.run_r19_experiment": str(Path(__file__).resolve()),
++                "scripts.analyze_r19_recovery_duration": str(expected_analyzer),
++            },
++            "supervisor_context_sha256": sha256_file(context_path),
++            "output_path_absent": True,
++            "scientific_side_effects": {
++                "model_objects_loaded": 0,
++                "model_generations": 0,
++                "environment_instances_constructed": 0,
++                "environment_resets": 0,
++                "environment_steps": 0,
++                "scientific_units_created": 0,
++                "fresh_train_attempts": 0,
++            },
++        }
++        atomic_write_json(preflight_receipt_path, preflight_receipt)
++        return preflight_receipt
++
+     source_manifest_sha = sha256_json(gate_hashes)
+     environment_manifest = {
+         "schema_version": "r19_environment_identity_v1", "split": "train",
+@@ -2559,7 +2735,8 @@ def run_live_experiment(
+         if mode == "pilot":
+             run_context.update({
+                 key: gate_hashes[key] for key in (
+-                    "g3_authorization_sha256", "g2_executed_implementation_sha",
++                    "g3_authorization_sha256", "entrypoint_repair_authorization_sha256",
++                    "g2_executed_implementation_sha",
+                     "g3_launch_implementation_sha", "g2_evidence_carried_forward",
+                     "new_g2_run_performed", "g3_gate_receipt_file_sha256",
+                 )
+diff --git a/scripts/run_r19_recovery_duration.py b/scripts/run_r19_recovery_duration.py
+index 79d5b0e..c27f1da 100644
+--- a/scripts/run_r19_recovery_duration.py
++++ b/scripts/run_r19_recovery_duration.py
+@@ -5,6 +5,7 @@ from __future__ import annotations
+ 
+ import argparse
+ import hashlib
++import importlib
+ import json
+ import os
+ import re
+@@ -15,6 +16,7 @@ from pathlib import Path
+ from typing import Any, Iterable, Mapping
+ 
+ PROJECT_ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(PROJECT_ROOT))
+ sys.path.insert(0, str(PROJECT_ROOT / "src"))
+ 
+ from recovery.persistent_prefix_selection import FAMILY_ORDER  # noqa: E402
+@@ -50,6 +52,18 @@ def _git(root: Path, *arguments: str) -> str:
+     ).strip()
+ 
+ 
++def _production_module(name: str):
++    """Import a production module only from this source checkout."""
++    module = importlib.import_module(name)
++    expected = (PROJECT_ROOT / (name.replace(".", "/") + ".py")).resolve()
++    origin_text = getattr(module, "__file__", None)
++    if not origin_text or Path(origin_text).resolve() != expected:
++        raise EvidenceIntegrityError(
++            f"production module {name} resolved outside the reviewed repository"
++        )
++    return module
++
++
+ def _tracked_protected_hashes(root: Path) -> dict[str, str]:
+     names = _git(root, "ls-files", "-z").split("\0")
+     result: dict[str, str] = {}
+@@ -314,13 +328,16 @@ def _pilot_gate_check(protocol_path: Path, manifest_path: Path, output: Path) ->
+     # field; this legacy wrapper only routes that gate format to it.
+     review = manifest.get("review", {})
+     if isinstance(review, Mapping) and review.get("g3_authorization_sha256") is not None:
+-        from scripts.run_r19_experiment import _load_g3_authorization
+-
+-        _authorization, expected_authorization_sha = _load_g3_authorization()
++        production = _production_module("scripts.run_r19_experiment")
++        _authorization, expected_authorization_sha = production._load_g3_authorization()
++        _repair_authorization, expected_repair_authorization_sha = (
++            production._load_entrypoint_repair_authorization()
++        )
+         carry = manifest.get("g2_carry_forward")
+         if (
+             "smoke" in manifest
+             or review.get("g3_authorization_sha256") != expected_authorization_sha
++            or review.get("entrypoint_repair_authorization_sha256") != expected_repair_authorization_sha
+             or review.get("status") != "PASS"
+             or review.get("review_type") != "independent_exact_sha"
+             or review.get("implementation_sha") != head
+@@ -328,6 +345,7 @@ def _pilot_gate_check(protocol_path: Path, manifest_path: Path, output: Path) ->
+             or review.get("g2_executed_implementation_sha") == head
+             or not isinstance(carry, Mapping)
+             or carry.get("g3_authorization_sha256") != expected_authorization_sha
++            or carry.get("entrypoint_repair_authorization_sha256") != expected_repair_authorization_sha
+             or carry.get("g3_launch_implementation_sha") != head
+             or carry.get("g2_executed_implementation_sha") == head
+             or carry.get("g2_evidence_carried_forward") is not True
+@@ -339,6 +357,7 @@ def _pilot_gate_check(protocol_path: Path, manifest_path: Path, output: Path) ->
+             "implementation_sha": head,
+             "protocol_sha256": protocol_sha,
+             "g3_authorization_sha256": expected_authorization_sha,
++            "entrypoint_repair_authorization_sha256": expected_repair_authorization_sha,
+             "g2_evidence_carried_forward": True,
+             "new_g2_run_performed": False,
+         }
+@@ -389,6 +408,8 @@ def main(argv: list[str] | None = None) -> int:
+     pilot_parser.add_argument("--protocol", type=Path, required=True)
+     pilot_parser.add_argument("--manifest", type=Path, required=True, help="exact G1/G2 and frozen-inventory gate manifest")
+     pilot_parser.add_argument("--output", type=Path, required=True)
++    pilot_parser.add_argument("--preflight-only", action="store_true")
++    pilot_parser.add_argument("--preflight-receipt", type=Path)
+     smoke_parser = commands.add_parser("smoke")
+     smoke_parser.add_argument("--protocol", type=Path, required=True)
+     smoke_parser.add_argument("--manifest", type=Path, required=True, help="exact-SHA G1 gate and frozen smoke-input manifest")
+@@ -399,6 +420,20 @@ def main(argv: list[str] | None = None) -> int:
+         command_parser.add_argument("--config", type=Path)
+     args = parser.parse_args(argv)
+ 
++    if args.command == "pilot":
++        if args.preflight_only != (args.preflight_receipt is not None):
++            raise EvidenceIntegrityError(
++                "pilot preflight-only mode requires exactly one --preflight-receipt"
++            )
++        if args.preflight_only and os.environ.get("R19_EVIDENCE_CLASS") != "preflight_only":
++            raise EvidenceIntegrityError(
++                "preflight-only CLI must be launched by the durable supervisor in preflight_only mode"
++            )
++        if not args.preflight_only and os.environ.get("R19_EVIDENCE_CLASS") == "preflight_only":
++            raise EvidenceIntegrityError(
++                "a preflight-only supervisor cannot invoke scientific pilot execution"
++            )
++
+     if args.command == "validate":
+         result = validate_protocol(args.protocol)
+     elif args.command == "preflight":
+@@ -413,19 +448,21 @@ def main(argv: list[str] | None = None) -> int:
+     elif args.command == "verify-protected":
+         result = _verify_protected_hashes(args.root, args.manifest)
+     elif args.command == "smoke":
+-        from scripts.run_r19_experiment import run_live_experiment
+-        result = run_live_experiment(
++        production = _production_module("scripts.run_r19_experiment")
++        result = production.run_live_experiment(
+             mode="smoke", protocol_path=args.protocol,
+             gate_manifest_path=args.manifest, output_path=args.output,
+             adapter_path=args.adapter, data_root=args.data_root, config_path=args.config,
+         )
+     else:
+         _pilot_gate_check(args.protocol, args.manifest, args.output)
+-        from scripts.run_r19_experiment import run_live_experiment
+-        result = run_live_experiment(
++        production = _production_module("scripts.run_r19_experiment")
++        result = production.run_live_experiment(
+             mode="pilot", protocol_path=args.protocol,
+             gate_manifest_path=args.manifest, output_path=args.output,
+             adapter_path=args.adapter, data_root=args.data_root, config_path=args.config,
++            preflight_only=args.preflight_only,
++            preflight_receipt_path=args.preflight_receipt,
+         )
+     print(json.dumps(result, ensure_ascii=True, sort_keys=True))
+     return 0
+diff --git a/tests/test_r19_entrypoint_repair.py b/tests/test_r19_entrypoint_repair.py
+new file mode 100644
+index 0000000..883423f
+--- /dev/null
++++ b/tests/test_r19_entrypoint_repair.py
+@@ -0,0 +1,263 @@
++from __future__ import annotations
++
++import hashlib
++import json
++import os
++import subprocess
++import sys
++from pathlib import Path
++
++import pytest
++
++from scripts.launch_r19_supervised import supervise
++from scripts import run_r19_experiment as runner
++
++
++PROJECT_ROOT = Path(__file__).resolve().parents[1]
++DRIVER = PROJECT_ROOT / "scripts/run_r19_recovery_duration.py"
++SUPERVISOR = PROJECT_ROOT / "scripts/launch_r19_supervised.py"
++ANALYZER = PROJECT_ROOT / "scripts/analyze_r19_recovery_duration.py"
++PROTOCOL = PROJECT_ROOT / "configs/experiments/r19_recovery_duration_v1.json"
++FAILED_RUN_ID = "a0de515d7e104101bf8157175ea3d995"
++
++
++def _clean_python_environment() -> dict[str, str]:
++    environment = dict(os.environ)
++    for name in ("PYTHONPATH", "PYTHONHOME", "VIRTUAL_ENV"):
++        environment.pop(name, None)
++    return environment
++
++
++def test_fresh_process_imports_runner_and_analyzer_from_this_checkout(tmp_path: Path) -> None:
++    code = """
++import json, runpy, sys
++from pathlib import Path
++root = Path(sys.argv[1]).resolve()
++namespace = runpy.run_path(str(root / 'scripts/run_r19_recovery_duration.py'))
++runner = namespace['_production_module']('scripts.run_r19_experiment')
++analyzer = runner._production_module('scripts.analyze_r19_recovery_duration')
++print(json.dumps({'runner': str(Path(runner.__file__).resolve()),
++                  'analyzer': str(Path(analyzer.__file__).resolve())}))
++"""
++    result = subprocess.run(
++        [sys.executable, "-c", code, str(PROJECT_ROOT)], cwd=tmp_path,
++        env=_clean_python_environment(), text=True, capture_output=True, check=True,
++    )
++    origins = json.loads(result.stdout)
++    assert origins == {
++        "runner": str((PROJECT_ROOT / "scripts/run_r19_experiment.py").resolve()),
++        "analyzer": str(ANALYZER.resolve()),
++    }
++
++
++def test_preflight_branch_returns_before_scientific_runtime_or_output_creation(
++    tmp_path: Path, monkeypatch,
++) -> None:
++    supervisor_dir = tmp_path / "supervisor-record"
++    supervisor_dir.mkdir()
++    output = tmp_path / "artifacts/runtime/r19_b1_g3_no-science"
++    preflight_receipt = supervisor_dir / "preflight_receipt.json"
++    context_path = supervisor_dir / "launch_context.json"
++    run_id = "synthetic-preflight-run"
++    head = "c" * 40
++    protocol_sha = runner.sha256_file(PROTOCOL)
++    repair_authorization, repair_sha = runner._load_entrypoint_repair_authorization()
++    g3_auth, g3_auth_sha = runner._load_g3_authorization()
++    failed_run_id = repair_authorization["preserved_failed_g3_launch"]["run_id"]
++    command_argv = [sys.executable, str(DRIVER), "pilot", "--preflight-only"]
++    context = {
++        "evidence_class": "preflight_only", "run_id": run_id,
++        "implementation_sha": head, "cwd": str(PROJECT_ROOT.resolve()),
++        "supersedes_run_id": failed_run_id,
++        "supervisor_entrypoint": str(SUPERVISOR.resolve()),
++        "interpreter": sys.executable, "supervisor_interpreter": sys.executable,
++        "command_argv": command_argv,
++        "omitted_environment_key_presence": {"PYTHONPATH": False},
++    }
++    context_path.write_text(json.dumps(context) + "\n", encoding="utf-8")
++    gate = {
++        "source_schedule_path": str(PROJECT_ROOT / "configs/experiments/r19_preflight_v3/source_schedule.json"),
++        "exclusion_manifest_path": str(PROJECT_ROOT / "configs/experiments/r19_preflight_v3/exclusion_manifest.json"),
++        "review": {
++            "status": "PASS", "review_type": "independent_exact_sha",
++            "artifact_sha256": "a" * 64, "implementation_sha": head,
++            "protocol_sha256": protocol_sha,
++            "entrypoint_repair_authorization_sha256": repair_sha,
++            "change_scope_conclusion": "AUTHORIZATION_EVIDENCE_G4_PROVENANCE_AND_ENTRYPOINT_PREFLIGHT_ONLY",
++            "scientific_execution_behavior_changed": False,
++            "scientific_fingerprint_manifest_sha256": "b" * 64,
++            "g2_evidence_carry_forward": "PASS",
++        },
++        "g2_carry_forward": {
++            "status": "PASS", "g2_run_id": g3_auth["g2_carry_forward"]["g2_run_id"],
++            "g2_executed_implementation_sha": runner.R19_G2_EXECUTED_SHA,
++            "g2_evidence_carried_forward": True, "new_g2_run_performed": False,
++            "g2_evidence_sha256": g3_auth["g2_carry_forward"]["evidence_file_sha256"],
++            "old_g2_review_sha256": g3_auth["g2_carry_forward"]["g2_review_sha256"],
++            "old_g2_gate_manifest_sha256": g3_auth["g2_carry_forward"]["g2_gate_manifest_sha256"],
++        },
++    }
++    gate_path = tmp_path / "gate.json"
++    gate_path.write_text(json.dumps(gate) + "\n", encoding="utf-8")
++    monkeypatch.setenv("R19_RUN_ID", run_id)
++    monkeypatch.setenv("R19_EVIDENCE_CLASS", "preflight_only")
++    monkeypatch.setenv("R19_EXIT_RECEIPT_PATH", str(supervisor_dir / "runner_exit.json"))
++    monkeypatch.setenv("R19_SUPERVISOR_CONTEXT_PATH", str(context_path))
++    identity = json.loads(runner.R19_B1_BASELINE.read_text(encoding="utf-8"))
++    monkeypatch.setattr(runner, "_runtime_manifest", lambda **_kwargs: identity["runtime_expectations"]["preload"])
++    monkeypatch.setattr(runner, "_load_g3_authorization", lambda: (g3_auth, g3_auth_sha))
++    monkeypatch.setattr(runner, "_assert_single_g3_campaign_unused", lambda _path: None)
++    monkeypatch.setattr(
++        runner, "validate_execution_gates",
++        lambda **_kwargs: {
++            "implementation_sha": head, "protocol_sha256": protocol_sha,
++            "gate_manifest_sha256": runner.sha256_file(gate_path),
++            "g3_authorization_sha256": g3_auth_sha,
++            "entrypoint_repair_authorization_sha256": repair_sha,
++            "baseline_manifest_sha256": g3_auth["baseline"]["manifest_sha256"],
++            "baseline_amendment_sha256": g3_auth["baseline"]["amendment_sha256"],
++            "runtime_expectations_sha256": g3_auth["baseline"]["runtime_expectations_sha256"],
++            "runtime_manifest_preload_sha256": g3_auth["baseline"]["runtime_manifest_preload_sha256"],
++            "g2_executed_implementation_sha": runner.R19_G2_EXECUTED_SHA,
++            "g2_evidence_carried_forward": True, "new_g2_run_performed": False,
++            "source_schedule_sha256": runner.R19_FROZEN_SOURCE_SCHEDULE_SHA256,
++            "exclusion_manifest_sha256": runner.R19_FROZEN_EXCLUSION_MANIFEST_SHA256,
++        },
++    )
++    monkeypatch.setattr(
++        runner, "_read_exact_local_inputs",
++        lambda **_kwargs: {
++            "schedule": {"episodes": [{} for _ in range(127)]},
++            "source_files": {"synthetic": {"game_sha256": "1" * 64}},
++            "adapter_sha256": "2" * 64,
++            "model_bytes": {"snapshot_revision": runner.R19_B1_MODEL_REVISION,
++                            "snapshot_file_sha256": {"synthetic": "3" * 64}},
++        },
++    )
++    monkeypatch.setattr(
++        runner, "LiveR19Runtime",
++        lambda *_args, **_kwargs: pytest.fail("preflight must not construct a scientific runtime"),
++    )
++    result = runner.run_live_experiment(
++        mode="pilot", protocol_path=PROTOCOL, gate_manifest_path=gate_path,
++        output_path=output, adapter_path=tmp_path / "adapter",
++        data_root=tmp_path, config_path=tmp_path / "config.yaml",
++        preflight_only=True, preflight_receipt_path=preflight_receipt,
++    )
++    assert result["status"] == "PREFLIGHT_ONLY_PASS"
++    assert result["scientific_side_effects"] == {
++        "model_objects_loaded": 0, "model_generations": 0,
++        "environment_instances_constructed": 0, "environment_resets": 0,
++        "environment_steps": 0, "scientific_units_created": 0,
++        "fresh_train_attempts": 0,
++    }
++    assert preflight_receipt.is_file()
++    assert not output.exists()
++
++
++def test_supervisor_records_only_allowlisted_import_relevant_environment(tmp_path: Path) -> None:
++    record = tmp_path / "supervised-context"
++    receipt = supervise([sys.executable, "-c", "pass"], record_dir=record)
++    context = json.loads((record / "launch_context.json").read_text(encoding="utf-8"))
++    assert receipt["exit_code"] == 0
++    assert context["cwd"] == str(PROJECT_ROOT.resolve())
++    assert context["command_argv"][0] == sys.executable
++    assert context["supervisor_interpreter"] == sys.executable
++    assert context["supervisor_argv"][0] == sys.executable
++    assert context["omitted_environment_key_presence"]["PYTHONPATH"] is (
++        "PYTHONPATH" in os.environ
++    )
++    assert "effective_environment" in context
++    assert "HF_TOKEN" not in context["effective_environment"]
++
++
++def test_real_preflight_supervisor_and_pilot_cli_reject_bad_repair_auth_without_science(
++    tmp_path: Path,
++) -> None:
++    head = subprocess.check_output(
++        ["git", "-C", str(PROJECT_ROOT), "rev-parse", "HEAD"], text=True,
++    ).strip()
++    protocol_sha = hashlib.sha256(PROTOCOL.read_bytes()).hexdigest()
++    old_authorization = json.loads(
++        (PROJECT_ROOT / "configs/experiments/r19_b1_g3_authorization_v1.json")
++        .read_text(encoding="utf-8")
++    )
++    old_authorization_sha = hashlib.sha256(
++        (PROJECT_ROOT / "configs/experiments/r19_b1_g3_authorization_v1.json").read_bytes()
++    ).hexdigest()
++    bad_repair_sha = "0" * 64
++    gate = {
++        "schema_version": "r19_gate_manifest_v1",
++        "implementation_sha": head,
++        "protocol_sha256": protocol_sha,
++        "review": {
++            "status": "BLOCKED", "review_type": "independent_exact_sha",
++            "implementation_sha": head, "g3_launch_implementation_sha": head,
++            "g3_authorization_sha256": old_authorization_sha,
++            "entrypoint_repair_authorization_sha256": bad_repair_sha,
++        },
++        "g2_carry_forward": {
++            "g3_authorization_sha256": old_authorization_sha,
++            "entrypoint_repair_authorization_sha256": bad_repair_sha,
++            "g3_launch_implementation_sha": head,
++            "g2_executed_implementation_sha": old_authorization[
++                "g2_carry_forward"
++            ]["g2_executed_implementation_sha"],
++            "g2_evidence_carried_forward": True,
++            "new_g2_run_performed": False,
++        },
++    }
++    gate_path = tmp_path / "bad-g3-gate.json"
++    gate_path.write_text(json.dumps(gate) + "\n", encoding="utf-8")
++    output = tmp_path / "must-not-be-created"
++    record = tmp_path / "supervisor-record"
++    preflight_receipt = record / "preflight_receipt.json"
++    command = [
++        sys.executable, str(DRIVER), "pilot",
++        "--protocol", str(PROTOCOL), "--manifest", str(gate_path),
++        "--output", str(output), "--preflight-only",
++        "--preflight-receipt", str(preflight_receipt),
++    ]
++    result = subprocess.run(
++        [
++            sys.executable, str(SUPERVISOR), "--record-dir", str(record),
++            "--evidence-class", "preflight_only", "--supersedes-run-id", FAILED_RUN_ID,
++            "--", *command,
++        ],
++        cwd=tmp_path, env=_clean_python_environment(), text=True, capture_output=True,
++    )
++    assert result.returncode == 2
++    runner_log = (record / "runner.log").read_text(encoding="utf-8")
++    assert "G3 gate must bind the separate authorization" in runner_log
++    assert "ModuleNotFoundError" not in runner_log
++    launch_context = json.loads((record / "launch_context.json").read_text(encoding="utf-8"))
++    assert launch_context["evidence_class"] == "preflight_only"
++    assert launch_context["supersedes_run_id"] == FAILED_RUN_ID
++    assert launch_context["command_argv"] == command
++    assert "--preflight-only" in launch_context["command_argv"]
++    assert not output.exists()
++    assert not preflight_receipt.exists()
++    exit_receipt = json.loads((record / "runner_exit.json").read_text(encoding="utf-8"))
++    assert exit_receipt["exit_code"] == 2
++    assert exit_receipt["exit_code_source"] == "subprocess.returncode"
++
++
++def test_fresh_analyzer_cli_reaches_synthetic_event_validation(tmp_path: Path) -> None:
++    events = tmp_path / "events.jsonl"
++    branches = tmp_path / "branches.jsonl"
++    output = tmp_path / "report-must-not-exist"
++    events.write_text("", encoding="utf-8")
++    branches.write_text("", encoding="utf-8")
++    result = subprocess.run(
++        [
++            sys.executable, str(ANALYZER), "--protocol", str(PROTOCOL),
++            "--events", str(events), "--branches", str(branches),
++            "--output", str(output), "--evidence-class", "synthetic",
++            "--allow-synthetic",
++        ],
++        cwd=tmp_path, env=_clean_python_environment(), text=True, capture_output=True,
++    )
++    assert result.returncode != 0
++    assert "event ledger is empty" in result.stderr
++    assert "ModuleNotFoundError" not in result.stderr
++    assert not output.exists()
+diff --git a/tests/test_r19_g3_authorization.py b/tests/test_r19_g3_authorization.py
+index 47b1c90..1061b41 100644
+--- a/tests/test_r19_g3_authorization.py
++++ b/tests/test_r19_g3_authorization.py
+@@ -24,6 +24,7 @@ def _write_json(path: Path, value: dict) -> Path:
+ 
+ def _carry_forward_fixture(tmp_path: Path) -> tuple[dict, dict, str, str]:
+     frozen, frozen_sha = runner._load_g3_authorization()
++    _repair_authorization, repair_sha = runner._load_entrypoint_repair_authorization()
+     auth = json.loads(json.dumps(frozen))
+     g2 = auth["g2_carry_forward"]
+     g2_dir = tmp_path / "old-g2-evidence"
+@@ -123,13 +124,14 @@ def _carry_forward_fixture(tmp_path: Path) -> tuple[dict, dict, str, str]:
+         "status": "PASS", "review_type": "independent_exact_sha",
+         "implementation_sha": head, "protocol_sha256": protocol_sha,
+         "g3_authorization_sha256": frozen_sha,
++        "entrypoint_repair_authorization_sha256": repair_sha,
+         "baseline_manifest_sha256": auth["baseline"]["manifest_sha256"],
+         "baseline_amendment_sha256": auth["baseline"]["amendment_sha256"],
+         "runtime_expectations_sha256": auth["baseline"]["runtime_expectations_sha256"],
+         "runtime_manifest_preload_sha256": auth["baseline"]["runtime_manifest_preload_sha256"],
+         "source_schedule_sha256": auth["frozen_inputs"]["source_schedule_sha256"],
+         "exclusion_manifest_sha256": auth["frozen_inputs"]["exclusion_manifest_sha256"],
+-        "change_scope_conclusion": "AUTHORIZATION_AND_EVIDENCE_ROUTING_ONLY",
++        "change_scope_conclusion": "AUTHORIZATION_EVIDENCE_G4_PROVENANCE_AND_ENTRYPOINT_PREFLIGHT_ONLY",
+         "scientific_execution_behavior_changed": False,
+         "g2_evidence_carry_forward": "PASS",
+         "g2_executed_implementation_sha": runner.R19_G2_EXECUTED_SHA,
+@@ -144,6 +146,7 @@ def _carry_forward_fixture(tmp_path: Path) -> tuple[dict, dict, str, str]:
+     }
+     carry = {
+         "status": "PASS", "g3_authorization_sha256": frozen_sha,
++        "entrypoint_repair_authorization_sha256": repair_sha,
+         "g2_executed_implementation_sha": runner.R19_G2_EXECUTED_SHA,
+         "g2_run_id": g2["g2_run_id"], "g2_evidence_carried_forward": True,
+         "new_g2_run_performed": False, "g3_launch_implementation_sha": head,
+@@ -280,6 +283,7 @@ def test_g3_exact_authorization_accepts_b1_schedule_without_live_calls(tmp_path:
+     [
+         ("implementation_sha", "R19 gate receipts do not name this exact implementation"),
+         ("review_sha", "exact-SHA independent G1 review is not PASS"),
++        ("repair_authorization", "G3 exact-SHA review does not approve required carry-forward field entrypoint_repair_authorization_sha256"),
+         ("baseline", "G2 gate manifest does not bind the exact R19-B1 baseline manifest"),
+         ("schedule", "source schedule SHA differs from the exact G1/G2 gate manifest"),
+         ("schedule_bytes", "pilot source schedule is not the canonical frozen R19 schedule"),
+@@ -303,6 +307,8 @@ def test_g3_production_gate_fails_closed_without_live_calls(
+         gate["implementation_sha"] = "c" * 40
+     elif mutation == "review_sha":
+         gate["review"]["implementation_sha"] = "c" * 40
++    elif mutation == "repair_authorization":
++        gate["review"]["entrypoint_repair_authorization_sha256"] = "0" * 64
+     elif mutation == "baseline":
+         gate["baseline_manifest_sha256"] = "0" * 64
+     elif mutation == "schedule":
+diff --git a/tests/test_r19_recovery_duration.py b/tests/test_r19_recovery_duration.py
+index cf5f826..56eb70f 100644
+--- a/tests/test_r19_recovery_duration.py
++++ b/tests/test_r19_recovery_duration.py
+@@ -1821,6 +1821,9 @@ def test_report_only_g4_provenance_validation_uses_no_model_or_environment(
+         "schema_version": "r19_g3_launch_gate_receipt_v1",
+         "baseline_id": "R19-B1", "identity_status": "NEW_PINNED_BASELINE_APPROVED",
+         "g3_authorization_sha256": r19_runner.sha256_file(r19_runner.R19_B1_G3_AUTHORIZATION),
++        "entrypoint_repair_authorization_sha256": r19_runner.sha256_file(
++            r19_runner.R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION
++        ),
+         "g3_launch_implementation_sha": code_sha,
+         "protocol_sha256": r19_runner.sha256_file(protocol_path),
+         "baseline_manifest_sha256": baseline["manifest_sha256"],
+@@ -1833,7 +1836,10 @@ def test_report_only_g4_provenance_validation_uses_no_model_or_environment(
+             "status": "PASS", "review_type": "independent_exact_sha",
+             "artifact_sha256": g3_review_sha, "implementation_sha": code_sha,
+             "protocol_sha256": r19_runner.sha256_file(protocol_path),
+-            "change_scope_conclusion": "AUTHORIZATION_AND_EVIDENCE_ROUTING_ONLY",
++            "entrypoint_repair_authorization_sha256": r19_runner.sha256_file(
++                r19_runner.R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION
++            ),
++            "change_scope_conclusion": "AUTHORIZATION_EVIDENCE_G4_PROVENANCE_AND_ENTRYPOINT_PREFLIGHT_ONLY",
+             "scientific_execution_behavior_changed": False,
+             "scientific_fingerprint_manifest_sha256": fingerprint_sha,
+             "g2_evidence_carry_forward": "PASS",
+@@ -1863,6 +1869,9 @@ def test_report_only_g4_provenance_validation_uses_no_model_or_environment(
+         "runtime_expectations_sha256": baseline["runtime_expectations_sha256"],
+         "pinned_model_revision": baseline["model_snapshot_revision"],
+         "g3_authorization_sha256": r19_runner.sha256_file(r19_runner.R19_B1_G3_AUTHORIZATION),
++        "entrypoint_repair_authorization_sha256": r19_runner.sha256_file(
++            r19_runner.R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION
++        ),
+         "g2_executed_implementation_sha": r19_runner.R19_G2_EXECUTED_SHA,
+         "g3_launch_implementation_sha": code_sha,
+         "g2_evidence_carried_forward": True,
+@@ -1884,6 +1893,9 @@ def test_report_only_g4_provenance_validation_uses_no_model_or_environment(
+         "source_schedule_sha256": file_sha(schedule_path),
+         "exclusion_manifest_sha256": file_sha(exclusion_path),
+         "g3_authorization_sha256": r19_runner.sha256_file(r19_runner.R19_B1_G3_AUTHORIZATION),
++        "entrypoint_repair_authorization_sha256": r19_runner.sha256_file(
++            r19_runner.R19_B1_G3_ENTRYPOINT_REPAIR_AUTHORIZATION
++        ),
+         "g2_executed_implementation_sha": r19_runner.R19_G2_EXECUTED_SHA,
+         "g3_launch_implementation_sha": code_sha,
+         "g2_evidence_carried_forward": True,

@@ -1,0 +1,7 @@
+git diff ef2328f..bf31f3da -- all eight changed files
+PYTHONPATH=src /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m pytest -o addopts= -q tests/test_r19_entrypoint_repair.py tests/test_r19_g3_authorization.py tests/test_r19_recovery_duration.py
+PYTHONPATH=src /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -m pytest -o addopts= -q --tb=short tests/  # reviewed checkout, then detached baseline
+/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /tmp/r19-independent-review/synthetic_report_probe.py
+Independent 40-function fingerprints, actual G2 frozen-file hashes and production carry-forward validator: no mocks, zero model/environment calls.
+git diff --check
+git ls-remote origin refs/heads/codex/r19-recovery-duration-v1

@@ -1,0 +1,53 @@
+{
+  "status": "BLOCKED_RUNTIME_CONTRACT_MISMATCH",
+  "run_id": "3d1ccea7e97f4727abf8e216ac6ec498",
+  "implementation_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+  "exit_code": 1,
+  "exit_code_source": "subprocess.returncode",
+  "physical_expenditure": {
+    "event_count": 4,
+    "evidence_class": "live",
+    "run_ids": [
+      "3d1ccea7e97f4727abf8e216ac6ec498"
+    ],
+    "completed_physical_model_generations": 1,
+    "physical_input_tokens": 267,
+    "physical_generated_tokens": 5,
+    "physical_total_tokens": 272,
+    "physical_environment_operations": 0,
+    "physical_environment_resets": 1,
+    "incomplete_operations": 0,
+    "training_run_events": 0,
+    "external_paid_model_call_events": 0,
+    "observed_canonical_trial_ids": [
+      "pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092"
+    ]
+  },
+  "cumulative_campaign_cost": {
+    "model_generations": 177,
+    "environment_operations_including_resets": 342
+  },
+  "source_tasks_started": 1,
+  "source_tasks_completed": 0,
+  "recovery_attempts": 0,
+  "eligible_prefixes": 0,
+  "g4_efficacy_analysis": "NOT_REACHED",
+  "launch_authorization": "single successor consumed; no automatic retry",
+  "findings": [
+    {
+      "severity": "BLOCKING",
+      "path": "scripts/run_r19_experiment.py",
+      "line": 1456,
+      "finding": "actor_generation returns a mapping but _collect_one_source reads P2Selection attributes; actual first source generation triggers AttributeError.",
+      "minimal_fix_design": "Make source collector consume the existing mapping contract consistently, preserving parser and action-selection semantics; SFT suffix already consumes mapping. Test actual actor_generation-to-source-collector integration with only the generation/environment boundaries synthetic."
+    },
+    {
+      "severity": "MAJOR",
+      "path": "scripts/run_r19_experiment.py",
+      "line": 1350,
+      "finding": "actor_generation overwrites caller operation source_generation with task_actor_generation. The recorded source generation proves the emitted value; G4 validate_live_source_schedule requires source_generation. This is a separate latent provenance mismatch if the first crash is repaired.",
+      "minimal_fix_design": "Reconcile the emitter and validator against the intended frozen source-operation contract, and test a source episode through actual report validation. Do not rewrite existing event evidence."
+    }
+  ],
+  "boundaries": "No source edits, model calls, ALFWorld calls, replay, registry changes or relaunch by reviewer."
+}

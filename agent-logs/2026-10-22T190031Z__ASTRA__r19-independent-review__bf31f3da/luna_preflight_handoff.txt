@@ -1,0 +1,11 @@
+独立 exact-SHA 实现审查已完成，由我本人检查完整 ef2328f..bf31f3da 八文件 delta，并独立执行 CPU/新进程/synthetic 验证。IMPLEMENTATION_REVIEW=PASS，G2_CARRY_FORWARD=PASS。真实审查记录：/home/lizening/research-notes/agent-logs/2026-10-22T190031Z__ASTRA__r19-independent-review__bf31f3da/independent_review.json，SHA256=73d3325343896bec3cd6f6b08ea77bae96211b75192b16094e6e6c963ad0ba27。详细 RECORD.md、40函数指纹、原始测试输出和成功 synthetic CLI 证据同目录。不要修改或自行重述这个原始审查输出。目标科学 SHA 必须保持 bf31f3da430ffc35bd17fc380e1752adce6d1467。
+
+请立即执行已授权的正向真实 CLI 预检：
+1. 消费上述真实 review，保留现有旧 gate，另建 configs/local/ 下被忽略的新 gate；绑定当前 SHA、两份冻结授权、真实 G2 执行 SHA=92aae1d及所有 frozen hashes。不要伪造新 G2/smoke，不重跑 G2。
+2. 通过同一 /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python、真实 scripts/launch_r19_supervised.py + scripts/run_r19_recovery_duration.py pilot --preflight-only --preflight-receipt 运行。supervisor evidence-class=preflight_only，supersedes-run-id=a0de515d7e104101bf8157175ea3d995；清除 PYTHONPATH/PYTHONHOME/VIRTUAL_ENV，使用原真实配置、adapter/data 输入，记录准确 argv/cwd/env allowlist，不升级环境。
+3. 预检必须 exit=0、receipt.status=PREFLIGHT_ONLY_PASS、源码模块来自该 checkout、source/gate/runtime/review hashes 均正确、科学输出目录不存在、模型加载/生成/ALFWorld构造resetstep/科学单元均0。允许重复 CPU 预检定位工程问题；任何具体源码错误返回我，不边修科学代码。
+4. 立即向本审查任务发送预检收据目录、gate路径与hash、planned live argv（仅去掉preflight标志/receipt并切换evidence_class和新run identity）、远端/本地科学SHA；我将核验并发最终 launch clearance。不需要用户再确认。
+5. 当前 LIVE_LAUNCH_CLEARANCE=NOT_YET_GRANTED；此条不启动 live G3。收到我核验后的 clearance 后，执行现有授权的一次 G3 successor，累积从176 generations/341 operations起，127 TRAIN identities、120 attempts、60 eligible、30/15/15、K1..5、horizon50和所有原预算不变；真实失败保留原始证据，不自动重试；完成后真实G4。
+6. 最后上传脱敏证据和真实结果到 provenance，按AGENT_TASK_RECORD_PROTOCOL更新index/hash、正常push并核验远端SHA；不得把review/gate提交科学分支。预检通过、正式执行完成/失败、上传完成均通过 codex queue --thread 01a0994c-a209-7600-8a3e-5ff3096ed346 --message 向我回报。每阶段保留可读 checkpoint，方便我跟进。我的审查目录属于此审查任务，上传时可包含其原始只读文件，勿改写。
+
+补充：独立75项R19 tests全部通过；完整suite为3 failed/532 passed/77 errors，而独立ef2328f基线为3 failed/526 passed/77 errors，失败error ID集合完全相同。不要修历史产物缺失。成功synthetic CLI已实际写出非空ineligible fixture报告，退出0，零真实科学调用；不要把它当G4真实结果。

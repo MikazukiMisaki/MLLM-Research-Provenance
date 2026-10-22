@@ -1,0 +1,15 @@
+最终 launch clearance 已由我独立核验并出具，可以继续一次已授权的 G3 successor。
+
+我已直接读取真实 preflight_supervisor 的 pilot_preflight_receipt.json / runner_exit.json / supervisor_status.json / launch_context.json，核验 exit=0、PREFLIGHT_ONLY_PASS、源码SHA、gate/review/授权hash、原始log与收据交叉hash、127任务、模型revision/adapter、零科学副作用、真实生产carry-forward validator、clean worktree，以及正式输出不存在且单次campaign尚未消耗，全部PASS。
+
+唯一执行依据：/home/lizening/research-notes/agent-logs/2026-10-22T190031Z__ASTRA__r19-independent-review__bf31f3da/launch_clearance.json
+SHA256=594bfa7978ee5cc4962c22eb2804f8f4cdbb1f202501330dd1faf993ccdca06b
+status=GRANTED_FOR_ONE_AUTHORIZED_SUCCESSOR
+精确 live child argv 已在文件中，canonical argv SHA256=972ee7903bce0bed38189a8878426558821c81dec689e048a3860a3114c727f5。
+Gate必须保持SHA256=63d6634f14fe9f768b3cc8c4120d7b85ba09bd54ca2b8e1f2c103a705137e1ee，科学SHA保持bf31f3da430ffc35bd17fc380e1752adce6d1467。独立审查JSON原件保持不变；positive preflight与最终clearance另存文件。
+
+请现在按文件中的live_child_argv执行真实 durable supervisor，evidence-class=live，保留supersedes-run-id=a0de515d7e104101bf8157175ea3d995，使用新的 supervisor run identity/record目录；清除PYTHONPATH/PYTHONHOME/VIRTUAL_ENV并保持其它有效runtime/input完全一致。不要重跑G2，不要重做science，不要再停在READY或等待用户重复确认。
+
+只允许这一次 successor live启动。出现真实非零失败或不确定外部操作就保留原始日志、真实exit与registry并停止返回，不自动重试，不换新输出目录复跑，不在运行中改源码。按原127 TRAIN、120 attempts、60 eligible、30/15/15、K1..5、horizon50、预算与累计起点176/341执行。成功后用真实G3 bundle做report-only G4；数据/配额不足如实报告，不扩样本。
+
+请启动后立即向我回报supervisor目录/run_id/PID及实际到达阶段；完成后上传脱敏原始证据、结果摘要、哈希并核验provenance远端SHA，再通过codex queue --thread 01a0994c-a209-7600-8a3e-5ff3096ed346 --message 返回。G3/G4结果验收我负责，你负责执行、监控、上传。审查目录新增clearance与verification文件也请纳入安全证据上传，勿改写review原件。

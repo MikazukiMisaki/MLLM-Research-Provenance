@@ -1,0 +1,49 @@
+{
+  "schema_version": "r19_independent_launch_clearance_v1",
+  "status": "GRANTED_FOR_ONE_AUTHORIZED_SUCCESSOR",
+  "reviewer_task": "01a0994c-a209-7600-8a3e-5ff3096ed346",
+  "issued_at_utc": "2026-10-22T19:08:21.336392+00:00",
+  "implementation_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+  "review_artifact_sha256": "73d3325343896bec3cd6f6b08ea77bae96211b75192b16094e6e6c963ad0ba27",
+  "gate_manifest_sha256": "63d6634f14fe9f768b3cc8c4120d7b85ba09bd54ca2b8e1f2c103a705137e1ee",
+  "positive_preflight_receipt_sha256": "88625bc943023b8b45116966596d0d4318290e4b4dc8df1dffb307c1759d2dc1",
+  "positive_preflight_exit_sha256": "fedf91606dc5baf1195efd8daaa8ae440461b76478f6ba4a3fa8a67c635fd132",
+  "positive_preflight_context_sha256": "85465ec2601362e092422c11f8c31d391b7ce37bf68158d81c5083f112beba89",
+  "preflight_run_id": "837b6a4c18214867b0df6f29313f58ed",
+  "supervisor_evidence_class_for_live": "live",
+  "supersedes_run_id": "a0de515d7e104101bf8157175ea3d995",
+  "live_child_argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "/home/lizening/wt-r19-recovery-duration-v1/scripts/run_r19_recovery_duration.py",
+    "pilot",
+    "--protocol",
+    "/home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_recovery_duration_v1.json",
+    "--manifest",
+    "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g3_gate_bf31f3.json",
+    "--output",
+    "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_pilot_after_a0de515d7e104101bf8157175ea3d995_20261022T190221Z",
+    "--adapter",
+    "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+    "--data-root",
+    "/home/lizening/alfworld_data",
+    "--config",
+    "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml"
+  ],
+  "live_child_argv_sha256": "972ee7903bce0bed38189a8878426558821c81dec689e048a3860a3114c727f5",
+  "maximum_live_launches": 1,
+  "automatic_retry": false,
+  "g2_rerun": false,
+  "cumulative_start": {
+    "model_generations": 176,
+    "environment_operations": 341
+  },
+  "required_conditions": [
+    "same source SHA, gate, runtime and input files as successful preflight",
+    "new supervisor run identity and record directory",
+    "unchanged pinned protocol, 127 TRAIN identities, 120 attempts, 60 eligible, 30/15/15, K=1..5, horizon=50 and original budgets",
+    "preserve authentic nonzero failure and stop without automatic live retry",
+    "G4 only on genuine completed G3 evidence",
+    "upload sanitized evidence and verified remote commit; report to reviewer"
+  ],
+  "checks": "all assertions in verify_preflight.py passed; no reviewer model or environment calls"
+}

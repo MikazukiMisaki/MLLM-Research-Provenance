@@ -1,0 +1,596 @@
+{
+  "analysis": {
+    "attempted_n": 1,
+    "continue_successes_primary": 0,
+    "cost_per_additional_net_success": {
+      "K2_vs_K1": {
+        "net_additional_successes": 0,
+        "tokens_per_net_additional_success": null,
+        "total_full_branch_token_difference": 0
+      },
+      "K3_vs_K1": {
+        "net_additional_successes": 0,
+        "tokens_per_net_additional_success": null,
+        "total_full_branch_token_difference": 0
+      },
+      "K4_vs_K1": {
+        "net_additional_successes": 0,
+        "tokens_per_net_additional_success": null,
+        "total_full_branch_token_difference": 0
+      },
+      "K5_vs_K1": {
+        "net_additional_successes": 0,
+        "tokens_per_net_additional_success": null,
+        "total_full_branch_token_difference": 0
+      }
+    },
+    "duration_opportunity": {
+      "adjacent_contrasts": {
+        "K2_minus_K1": {
+          "comparison": "one additional recovery action then SFT versus handing off now",
+          "losses": 0,
+          "mean_paired_difference": null,
+          "n": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "K3_minus_K2": {
+          "comparison": "one additional recovery action then SFT versus handing off now",
+          "losses": 0,
+          "mean_paired_difference": null,
+          "n": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "K4_minus_K3": {
+          "comparison": "one additional recovery action then SFT versus handing off now",
+          "losses": 0,
+          "mean_paired_difference": null,
+          "n": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "K5_minus_K4": {
+          "comparison": "one additional recovery action then SFT versus handing off now",
+          "losses": 0,
+          "mean_paired_difference": null,
+          "n": 0,
+          "ties": 0,
+          "wins": 0
+        }
+      },
+      "development_selected_fixed_k": null,
+      "fixed_k_candidates_tied_after_cost": [],
+      "fixed_k_candidates_tied_on_success": [],
+      "h_success": null,
+      "interpretation": "empirical hindsight stopping envelope for tested common recovery paths",
+      "outcome_pattern_frequencies": {},
+      "s_fixed": null,
+      "s_oracle": null,
+      "states_harmed_by_extra_recovery_vs_k1": 0,
+      "states_helped_by_extra_recovery_vs_k1": 0,
+      "successful_duration_sets": {}
+    },
+    "family_summaries": {
+      "look_at_obj_in_light": {
+        "K1_successes": 0,
+        "K2_successes": 0,
+        "K3_successes": 0,
+        "K4_successes": 0,
+        "K5_successes": 0,
+        "n": 0
+      },
+      "pick_and_place_simple": {
+        "K1_successes": 0,
+        "K2_successes": 0,
+        "K3_successes": 0,
+        "K4_successes": 0,
+        "K5_successes": 0,
+        "n": 0
+      },
+      "pick_clean_then_place_in_recep": {
+        "K1_successes": 0,
+        "K2_successes": 0,
+        "K3_successes": 0,
+        "K4_successes": 0,
+        "K5_successes": 0,
+        "n": 0
+      },
+      "pick_cool_then_place_in_recep": {
+        "K1_successes": 0,
+        "K2_successes": 0,
+        "K3_successes": 0,
+        "K4_successes": 0,
+        "K5_successes": 0,
+        "n": 0
+      },
+      "pick_heat_then_place_in_recep": {
+        "K1_successes": 0,
+        "K2_successes": 0,
+        "K3_successes": 0,
+        "K4_successes": 0,
+        "K5_successes": 0,
+        "n": 0
+      },
+      "pick_two_obj_and_place": {
+        "K1_successes": 0,
+        "K2_successes": 0,
+        "K3_successes": 0,
+        "K4_successes": 0,
+        "K5_successes": 0,
+        "n": 0
+      }
+    },
+    "logical_cost_by_policy": {
+      "CONTINUE": {
+        "mean_full_branch_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "mean_full_branch_total_tokens": null,
+        "mean_recovery_only_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "n": 0,
+        "success_rate": null
+      },
+      "K1": {
+        "mean_full_branch_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "mean_full_branch_total_tokens": null,
+        "mean_recovery_only_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "mean_recovery_only_total_tokens": null,
+        "n": 0,
+        "success_rate": null
+      },
+      "K2": {
+        "mean_full_branch_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "mean_full_branch_total_tokens": null,
+        "mean_recovery_only_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "mean_recovery_only_total_tokens": null,
+        "n": 0,
+        "success_rate": null
+      },
+      "K3": {
+        "mean_full_branch_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "mean_full_branch_total_tokens": null,
+        "mean_recovery_only_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "mean_recovery_only_total_tokens": null,
+        "n": 0,
+        "success_rate": null
+      },
+      "K4": {
+        "mean_full_branch_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "mean_full_branch_total_tokens": null,
+        "mean_recovery_only_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "mean_recovery_only_total_tokens": null,
+        "n": 0,
+        "success_rate": null
+      },
+      "K5": {
+        "mean_full_branch_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "mean_full_branch_total_tokens": null,
+        "mean_recovery_only_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "mean_recovery_only_total_tokens": null,
+        "n": 0,
+        "success_rate": null
+      }
+    },
+    "matched_success_cost_vs_k1": {
+      "K2_vs_K1": {
+        "matched_failure": 0,
+        "matched_success": 0,
+        "mean_full_branch_token_difference": null,
+        "n": 0
+      },
+      "K3_vs_K1": {
+        "matched_failure": 0,
+        "matched_success": 0,
+        "mean_full_branch_token_difference": null,
+        "n": 0
+      },
+      "K4_vs_K1": {
+        "matched_failure": 0,
+        "matched_success": 0,
+        "mean_full_branch_token_difference": null,
+        "n": 0
+      },
+      "K5_vs_K1": {
+        "matched_failure": 0,
+        "matched_success": 0,
+        "mean_full_branch_token_difference": null,
+        "n": 0
+      }
+    },
+    "paired_k1_vs_continue_attempted": {
+      "both_failure": 1,
+      "both_success": 0,
+      "comparator_successes": 0,
+      "harm_rate": null,
+      "losses": 0,
+      "mean_paired_difference": 0.0,
+      "n": 1,
+      "reference_successes": 0,
+      "rescue_rate": 0.0,
+      "ties": 1,
+      "wins": 0
+    },
+    "paired_k_gt_1_vs_k1": {
+      "K2_vs_K1": {
+        "both_failure": 0,
+        "both_success": 0,
+        "comparator_successes": 0,
+        "exact_two_sided_p": 1.0,
+        "harm_rate": null,
+        "holm_adjusted_p": 1.0,
+        "losses": 0,
+        "mean_paired_difference": null,
+        "n": 0,
+        "paired_difference_conservative_95_model_based": null,
+        "reference_successes": 0,
+        "rescue_rate": null,
+        "ties": 0,
+        "wins": 0
+      },
+      "K3_vs_K1": {
+        "both_failure": 0,
+        "both_success": 0,
+        "comparator_successes": 0,
+        "exact_two_sided_p": 1.0,
+        "harm_rate": null,
+        "holm_adjusted_p": 1.0,
+        "losses": 0,
+        "mean_paired_difference": null,
+        "n": 0,
+        "paired_difference_conservative_95_model_based": null,
+        "reference_successes": 0,
+        "rescue_rate": null,
+        "ties": 0,
+        "wins": 0
+      },
+      "K4_vs_K1": {
+        "both_failure": 0,
+        "both_success": 0,
+        "comparator_successes": 0,
+        "exact_two_sided_p": 1.0,
+        "harm_rate": null,
+        "holm_adjusted_p": 1.0,
+        "losses": 0,
+        "mean_paired_difference": null,
+        "n": 0,
+        "paired_difference_conservative_95_model_based": null,
+        "reference_successes": 0,
+        "rescue_rate": null,
+        "ties": 0,
+        "wins": 0
+      },
+      "K5_vs_K1": {
+        "both_failure": 0,
+        "both_success": 0,
+        "comparator_successes": 0,
+        "exact_two_sided_p": 1.0,
+        "harm_rate": null,
+        "holm_adjusted_p": 1.0,
+        "losses": 0,
+        "mean_paired_difference": null,
+        "n": 0,
+        "paired_difference_conservative_95_model_based": null,
+        "reference_successes": 0,
+        "rescue_rate": null,
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "paired_positive_k_vs_continue_attempted": {
+      "K1_vs_CONTINUE": {
+        "both_failure": 1,
+        "both_success": 0,
+        "comparator_successes": 0,
+        "harm_rate": null,
+        "losses": 0,
+        "mean_paired_difference": 0.0,
+        "n": 1,
+        "reference_successes": 0,
+        "rescue_rate": 0.0,
+        "ties": 1,
+        "wins": 0
+      }
+    },
+    "paired_positive_k_vs_continue_primary": {
+      "K1_vs_CONTINUE": {
+        "both_failure": 0,
+        "both_success": 0,
+        "comparator_successes": 0,
+        "harm_rate": null,
+        "losses": 0,
+        "mean_paired_difference": null,
+        "n": 0,
+        "reference_successes": 0,
+        "rescue_rate": null,
+        "ties": 0,
+        "wins": 0
+      },
+      "K2_vs_CONTINUE": {
+        "both_failure": 0,
+        "both_success": 0,
+        "comparator_successes": 0,
+        "harm_rate": null,
+        "losses": 0,
+        "mean_paired_difference": null,
+        "n": 0,
+        "reference_successes": 0,
+        "rescue_rate": null,
+        "ties": 0,
+        "wins": 0
+      },
+      "K3_vs_CONTINUE": {
+        "both_failure": 0,
+        "both_success": 0,
+        "comparator_successes": 0,
+        "harm_rate": null,
+        "losses": 0,
+        "mean_paired_difference": null,
+        "n": 0,
+        "reference_successes": 0,
+        "rescue_rate": null,
+        "ties": 0,
+        "wins": 0
+      },
+      "K4_vs_CONTINUE": {
+        "both_failure": 0,
+        "both_success": 0,
+        "comparator_successes": 0,
+        "harm_rate": null,
+        "losses": 0,
+        "mean_paired_difference": null,
+        "n": 0,
+        "reference_successes": 0,
+        "rescue_rate": null,
+        "ties": 0,
+        "wins": 0
+      },
+      "K5_vs_CONTINUE": {
+        "both_failure": 0,
+        "both_success": 0,
+        "comparator_successes": 0,
+        "harm_rate": null,
+        "losses": 0,
+        "mean_paired_difference": null,
+        "n": 0,
+        "reference_successes": 0,
+        "rescue_rate": null,
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "primary_n": 0,
+    "public_stopping_diagnostic": {
+      "coverage_only_count": 0,
+      "diagnostic_records": 0,
+      "exact_suffix_mapped_count": 0,
+      "mapped_offline_success_rate": null,
+      "mean_estimated_detector_cpu_nanoseconds": null,
+      "new_environment_operations": 0,
+      "new_model_calls": 0,
+      "primary_n": 0,
+      "satisfied_handoff_count": 0,
+      "satisfied_handoff_success_rate": null,
+      "satisfied_handoff_successes": 0,
+      "supported_predicate_count": 0,
+      "unsupported_or_ambiguous_count": 0
+    },
+    "sampling_note": "enriched TRAIN-development sample; no general ALFWorld accuracy or population claim",
+    "schema_version": "r19_duration_analysis_v1",
+    "scientific_conclusion": "INCONCLUSIVE",
+    "stratum_summaries": {
+      "failure": {
+        "K1_successes": 0,
+        "K2_successes": 0,
+        "K3_successes": 0,
+        "K4_successes": 0,
+        "K5_successes": 0,
+        "n": 0
+      },
+      "random_control": {
+        "K1_successes": 0,
+        "K2_successes": 0,
+        "K3_successes": 0,
+        "K4_successes": 0,
+        "K5_successes": 0,
+        "n": 0
+      },
+      "success_control": {
+        "K1_successes": 0,
+        "K2_successes": 0,
+        "K3_successes": 0,
+        "K4_successes": 0,
+        "K5_successes": 0,
+        "n": 0
+      }
+    },
+    "success_by_k": {
+      "K1": 0,
+      "K2": 0,
+      "K3": 0,
+      "K4": 0,
+      "K5": 0
+    },
+    "success_cost_pareto_rows": [
+      {
+        "mean_full_branch_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "n": 0,
+        "policy": "K1",
+        "success_rate": null
+      },
+      {
+        "mean_full_branch_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "n": 0,
+        "policy": "K2",
+        "success_rate": null
+      },
+      {
+        "mean_full_branch_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "n": 0,
+        "policy": "K3",
+        "success_rate": null
+      },
+      {
+        "mean_full_branch_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "n": 0,
+        "policy": "K4",
+        "success_rate": null
+      },
+      {
+        "mean_full_branch_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "n": 0,
+        "policy": "K5",
+        "success_rate": null
+      },
+      {
+        "mean_full_branch_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "n": 0,
+        "policy": "CONTINUE",
+        "success_rate": null
+      }
+    ],
+    "success_rate_by_k": {
+      "K1": null,
+      "K2": null,
+      "K3": null,
+      "K4": null,
+      "K5": null
+    }
+  },
+  "physical_research_expenditure": {
+    "branch_evidence_validation": {
+      "branch_bound_operation_event_ids": 6,
+      "validated_k_arms": 1,
+      "validated_prefix_rows": 1
+    },
+    "branches_sha256": "5370ae8bdf8e256766525756607b4fc40ffc66c4fa4c1dc1fad7eca77d43412d",
+    "completed_physical_model_generations": 4,
+    "event_count": 15,
+    "events_sha256": "9eb2d62dc01b5a2d45f25cb8c1cc6c8f6e613163e17d9d2ab832446f646a6639",
+    "evidence_class": "synthetic",
+    "external_paid_model_call_events": 0,
+    "incomplete_operations": 0,
+    "live_execution_validation": null,
+    "live_scope_validation": null,
+    "observed_canonical_trial_ids": [
+      "synthetic-review-only/trial-001"
+    ],
+    "physical_environment_operations": 0,
+    "physical_environment_resets": 2,
+    "physical_generated_tokens": 12,
+    "physical_input_tokens": 80,
+    "physical_total_tokens": 92,
+    "protocol_sha256": "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122",
+    "run_ids": [
+      "independent-synthetic-cli-only"
+    ],
+    "supervised_exit_validation": null,
+    "training_run_events": 0
+  }
+}

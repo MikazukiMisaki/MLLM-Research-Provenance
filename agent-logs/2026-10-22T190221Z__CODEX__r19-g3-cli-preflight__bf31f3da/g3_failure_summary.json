@@ -1,0 +1,94 @@
+{
+  "schema_version": "r19_g3_single_successor_failure_v1",
+  "status": "G3_FAILED_STOPPED_NO_RETRY_G4_NOT_RUN",
+  "scientific_repository": {
+    "branch": "codex/r19-recovery-duration-v1",
+    "implementation_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+    "local_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+    "origin_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+    "scientific_source_modified": false,
+    "scientific_branch_commit_created": false
+  },
+  "launch": {
+    "clearance_artifact_sha256": "594bfa7978ee5cc4962c22eb2804f8f4cdbb1f202501330dd1faf993ccdca06b",
+    "run_id": "3d1ccea7e97f4727abf8e216ac6ec498",
+    "evidence_class": "live",
+    "supersedes_run_id": "a0de515d7e104101bf8157175ea3d995",
+    "started_at_utc": "2026-10-22T19:10:42.744547Z",
+    "completed_at_utc": "2026-10-22T19:11:25.157792Z",
+    "supervisor_status": "failed",
+    "runner_exit_code": 1,
+    "runner_exit_code_source": "subprocess.returncode",
+    "interrupted_by_supervisor": false,
+    "automatic_retry": false,
+    "g2_rerun": false
+  },
+  "root_cause": {
+    "type": "AttributeError",
+    "message": "'dict' object has no attribute 'selection_status'",
+    "traceback_location": "scripts/run_r19_experiment.py:1456",
+    "producer": "LiveR19Runtime.actor_generation at scripts/run_r19_experiment.py:1335 returns a dictionary at line 1378",
+    "consumer": "_collect_one_source reads parsed.selection_status as if the return were the P2Selection object",
+    "diagnosis": "production caller/return-value shape mismatch on the first source episode path",
+    "source_fix_attempted": false
+  },
+  "partial_scientific_work": {
+    "scheduled_train_identity_count": 127,
+    "source_schedule_index_started": 0,
+    "source_episode_units_started": 1,
+    "source_episode_units_completed": 0,
+    "source_unit_registry_status": "in_progress",
+    "execution_manifest_status_preserved": "RUNNING",
+    "task_actor_generations_completed": 1,
+    "physical_generation_input_tokens": 267,
+    "physical_generation_output_tokens": 5,
+    "physical_generation_total_tokens": 272,
+    "recovery_controller_generations_completed": 0,
+    "environment_instances_constructed": 1,
+    "environment_resets_completed": 1,
+    "environment_steps_completed": 0,
+    "completed_recovery_attempts": 0,
+    "eligible_states_enrolled": 0,
+    "branch_executions": 0,
+    "branch_ledger_bytes": 0,
+    "g4_analysis_run": false
+  },
+  "cumulative_physical_cost": {
+    "g2_start_model_generations": 176,
+    "g2_start_environment_operations_including_resets": 341,
+    "failed_g3_additional_model_generations": 1,
+    "failed_g3_additional_environment_resets": 1,
+    "failed_g3_additional_environment_steps": 0,
+    "cumulative_model_generations": 177,
+    "cumulative_environment_operations_including_resets": 342
+  },
+  "independent_failure_audit": {
+    "status": "BLOCKED_RUNTIME_CONTRACT_MISMATCH",
+    "record_path": "agent-logs/2026-10-22T191409Z__ASTRA__r19-g3-failure-audit__3d1ccea7/RECORD.md",
+    "failure_audit_json_sha256": "8eb1248c1d863674119813ba1f90ba3ca6834bb1906cb2aa67acc6a4e087fe34",
+    "event_count": 4,
+    "additional_unreached_finding": "actor_generation emits task_actor_generation while the live-source validator requires source_generation",
+    "repair_or_relaunch_authorized": false
+  },
+  "raw_evidence": {
+    "scientific_output_directory": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_pilot_after_a0de515d7e104101bf8157175ea3d995_20261022T190221Z",
+    "execution_events_sha256": "fde95fcd72f1c4ac6409fab7f2112654e145f6184fefec690cae58ad345f1cd7",
+    "execution_manifest_sha256": "f5d3efa6c17abea3d944d7dea01099210d846eb8ed107057ec24502bbb51d2df",
+    "unit_registry_sha256": "870923242ae585c66cbcffa554528ab3d92cf98fc4d87dee2c4d408f5f6ba800",
+    "empty_branches_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "supervisor_directory": "live_supervisor/",
+    "runner_exit_sha256": "a802079398fd415765b8f6b8685fec998325625da733011ff7a9ce11459a9386",
+    "supervisor_status_sha256": "e2a70bf670376b648e52357376fa88f3a7a3cac92b41a5c628bd4ad251353913",
+    "launch_context_sha256": "6b8933ed06db1b2e74f1b921ca13e6f73842b18e7a0c8217381a809ed4ea180e",
+    "runner_log_sha256": "ee7c6010edf0e46bcba2969cdddf236e7c6d23830d2bd92e88593d7a21a7bbcd",
+    "archive": "g3_failure_bundle.tar.gz",
+    "archive_sha256": "84f3f72e98a78ada64e56a819b2e5f7f5d1b37b4f7469e9f5dc3eea7badc6a77"
+  },
+  "stop_decision": {
+    "second_live_launch": "NOT_AUTHORIZED_AND_NOT_ATTEMPTED",
+    "automatic_retry": "PROHIBITED",
+    "g2_smoke": "NOT_REPEATED",
+    "g4": "NOT_RUN_BECAUSE_G3_DID_NOT_COMPLETE",
+    "next_step": "return preserved evidence to the task owner; require new direction before any code repair or scientific execution"
+  }
+}

@@ -1,0 +1,29 @@
+R19-B1 G3 production CLI preflight (no live execution)
+UTC invocation: 2026-10-22T19:05:32Z
+Scientific checkout cwd: /home/lizening/wt-r19-recovery-duration-v1
+Interpreter used for supervisor and child: /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python
+
+Exact invocation:
+env -u PYTHONPATH -u PYTHONHOME -u VIRTUAL_ENV ALFWORLD_DATA=/home/lizening/alfworld_data ALFWORLD_CONFIG_PATH=/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml HF_HUB_CACHE=/home/lizening/.cache/huggingface/hub HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/wt-r19-recovery-duration-v1/scripts/launch_r19_supervised.py --record-dir /home/lizening/research-notes/agent-logs/2026-10-22T190221Z__CODEX__r19-g3-cli-preflight__bf31f3da/preflight_supervisor --evidence-class preflight_only --supersedes-run-id a0de515d7e104101bf8157175ea3d995 -- /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/wt-r19-recovery-duration-v1/scripts/run_r19_recovery_duration.py pilot --protocol /home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_recovery_duration_v1.json --manifest /home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g3_gate_bf31f3.json --output /home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_pilot_after_a0de515d7e104101bf8157175ea3d995_20261022T190221Z --adapter /home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter --data-root /home/lizening/alfworld_data --config /home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml --preflight-only --preflight-receipt /home/lizening/research-notes/agent-logs/2026-10-22T190221Z__CODEX__r19-g3-cli-preflight__bf31f3da/preflight_supervisor/pilot_preflight_receipt.json
+
+Supervisor-written launch_context.json is the verbatim argv/cwd/interpreter/environment evidence. Its environment allowlist is:
+PYTHONPATH, PYTHONHOME, VIRTUAL_ENV, CONDA_PREFIX, PATH, ALFWORLD_DATA, ALFWORLD_CONFIG_PATH, HF_HOME, HF_HUB_CACHE, HF_HUB_OFFLINE, TRANSFORMERS_OFFLINE, CUDA_VISIBLE_DEVICES, CUDA_HOME.
+PYTHONPATH, PYTHONHOME and VIRTUAL_ENV were absent. ALFWORLD_DATA, ALFWORLD_CONFIG_PATH, HF_HUB_CACHE, HF_HUB_OFFLINE and TRANSFORMERS_OFFLINE were explicitly bound as shown above; other allowlisted inherited values are preserved exactly in launch_context.json.
+
+Observed supervisor run_id: 837b6a4c18214867b0df6f29313f58ed
+Observed child return code: 0 (source: subprocess.returncode)
+Observed supervisor status: completed; evidence_class=preflight_only; supersedes_run_id=a0de515d7e104101bf8157175ea3d995
+Observed CLI receipt status: PREFLIGHT_ONLY_PASS
+
+Verified reviewer launch-clearance artifact:
+/home/lizening/research-notes/agent-logs/2026-10-22T190031Z__ASTRA__r19-independent-review__bf31f3da/launch_clearance.json
+Clearance SHA-256: 594bfa7978ee5cc4962c22eb2804f8f4cdbb1f202501330dd1faf993ccdca06b
+The reviewer-specified live child argv matched the preflight child argv after removing only --preflight-only and --preflight-receipt <receipt-path>; its canonical argv SHA-256 was 972ee7903bce0bed38189a8878426558821c81dec689e048a3860a3114c727f5.
+
+Exact single live invocation:
+env -u PYTHONPATH -u PYTHONHOME -u VIRTUAL_ENV ALFWORLD_DATA=/home/lizening/alfworld_data ALFWORLD_CONFIG_PATH=/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml HF_HUB_CACHE=/home/lizening/.cache/huggingface/hub HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/wt-r19-recovery-duration-v1/scripts/launch_r19_supervised.py --record-dir /home/lizening/research-notes/agent-logs/2026-10-22T190221Z__CODEX__r19-g3-cli-preflight__bf31f3da/live_supervisor --evidence-class live --supersedes-run-id a0de515d7e104101bf8157175ea3d995 -- /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/wt-r19-recovery-duration-v1/scripts/run_r19_recovery_duration.py pilot --protocol /home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_recovery_duration_v1.json --manifest /home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g3_gate_bf31f3.json --output /home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_pilot_after_a0de515d7e104101bf8157175ea3d995_20261022T190221Z --adapter /home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter --data-root /home/lizening/alfworld_data --config /home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml
+
+Observed live supervisor run_id: 3d1ccea7e97f4727abf8e216ac6ec498
+Observed live child return code: 1 (source: subprocess.returncode)
+Observed live supervisor status: failed; interrupted_by_supervisor=false; automatic retry was not submitted.
+The raw incomplete execution manifest and in_progress source unit are preserved unchanged. No G4 analysis was run because G3 did not complete.

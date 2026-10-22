@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/lizening/wt-r19-recovery-duration-v1/scripts/run_r19_recovery_duration.py", line 473, in <module>
+    raise SystemExit(main())
+  File "/home/lizening/wt-r19-recovery-duration-v1/scripts/run_r19_recovery_duration.py", line 460, in main
+    result = production.run_live_experiment(
+  File "/home/lizening/wt-r19-recovery-duration-v1/scripts/run_r19_experiment.py", line 2768, in run_live_experiment
+    execution = _run_frozen_pilot(
+  File "/home/lizening/wt-r19-recovery-duration-v1/scripts/run_r19_experiment.py", line 2931, in _run_frozen_pilot
+    source_rows = runtime.run_source_episodes(schedule, output_path, registry, source_unit_ids)
+  File "/home/lizening/wt-r19-recovery-duration-v1/scripts/run_r19_experiment.py", line 1399, in run_source_episodes
+    row = self._collect_one_source(env, episode, output, unit_ids)
+  File "/home/lizening/wt-r19-recovery-duration-v1/scripts/run_r19_experiment.py", line 1456, in _collect_one_source
+    selected = parsed.selection_status == "selected" and parsed.action in valid_actions
+AttributeError: 'dict' object has no attribute 'selection_status'
