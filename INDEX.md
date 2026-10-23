@@ -52,6 +52,8 @@ Oldest first. UTC is the task-directory timestamp; scientific SHA is the relevan
 
 | 2026-10-23 00:22:00 | CODEX / Luna | R19-B1 concrete live-successor proposal | PREPARATION_ONLY; exact proposal pending independent review; no launch clearance or fresh science authorization | 2da980f631badc25086d12db60d128ff507d3ae6 | [RECORD.md](agent-logs/2026-10-23T002200Z__LUNA__r19-live-proposal__2da980f/RECORD.md) |
 
+| 2026-10-23 00:29:52 | SOL | R19 independent exact live proposal review | Proposal FAIL:3 evidence-binding errors; implementation/preflight PASS unchanged; no launch | 2da980f631badc25086d12db60d128ff507d3ae6 | [RECORD.md](agent-logs/2026-10-23T002952Z__SOL__r19-exact-live-proposal-review__2da980f_5a72b1/RECORD.md) |
+
 ## Import omissions
 
 No task directory or large provenance file was omitted. Transient PID/lock files and Python bytecode remain local and are ignored; exact paths, sizes, hashes and reasons are in [excluded-files.json](agent-logs/2026-09-14T061140Z__ASTRA__provenance-repo-initialization__wo8b4ovs/excluded-files.json). No file was deleted.

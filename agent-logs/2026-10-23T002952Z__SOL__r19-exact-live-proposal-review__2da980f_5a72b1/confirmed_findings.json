@@ -1,0 +1,90 @@
+[
+  {
+    "blocks_exact_proposal_acceptance": true,
+    "evidence": {
+      "correct_run": {
+        "events_sha256": "fde95fcd72f1c4ac6409fab7f2112654e145f6184fefec690cae58ad345f1cd7",
+        "exit_code": 1,
+        "implementation_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+        "run_id": "3d1ccea7e97f4727abf8e216ac6ec498"
+      },
+      "old_live_runner_exit_sha256": {
+        "required_path": "/home/lizening/research-notes/agent-logs/2026-10-22T190221Z__CODEX__r19-g3-cli-preflight__bf31f3da/live_supervisor/runner_exit.json",
+        "required_sha256": "a802079398fd415765b8f6b8685fec998325625da733011ff7a9ce11459a9386",
+        "submitted": "7e1fc0771c78fa4022717c6b9926147f5565f6cdbe5e04cdec7f165cc732e6c4",
+        "submitted_matches_path": "/home/lizening/research-notes/agent-logs/2026-10-22T105439Z__CODEX__r19-b1-g3-launch__ef2328f/supervisor_raw/runner_exit.json"
+      },
+      "old_live_runner_log_sha256": {
+        "required_path": "/home/lizening/research-notes/agent-logs/2026-10-22T190221Z__CODEX__r19-g3-cli-preflight__bf31f3da/live_supervisor/runner.log",
+        "required_sha256": "ee7c6010edf0e46bcba2969cdddf236e7c6d23830d2bd92e88593d7a21a7bbcd",
+        "submitted": "45eda8a835a07f841657da7ce00d0f5bddda182c1dc4f8cd50cfc7291f6e59cd",
+        "submitted_matches_path": "/home/lizening/research-notes/agent-logs/2026-10-22T105439Z__CODEX__r19-b1-g3-launch__ef2328f/supervisor_raw/runner.log"
+      },
+      "old_live_supervisor_status_sha256": {
+        "required_path": "/home/lizening/research-notes/agent-logs/2026-10-22T190221Z__CODEX__r19-g3-cli-preflight__bf31f3da/live_supervisor/supervisor_status.json",
+        "required_sha256": "e2a70bf670376b648e52357376fa88f3a7a3cac92b41a5c628bd4ad251353913",
+        "submitted": "e71147fe2f0f9097cbae38357c4b2186159fd0341d3211a9e7c9988f3c58474c",
+        "submitted_matches_path": "/home/lizening/research-notes/agent-logs/2026-10-22T105439Z__CODEX__r19-b1-g3-launch__ef2328f/supervisor_raw/supervisor_status.json"
+      },
+      "wrong_run": {
+        "events_sha256": null,
+        "exit_code": 1,
+        "implementation_sha": "ef2328f06256054a6b71c6dc4bdc74dab3a1d3d9",
+        "run_id": "a0de515d7e104101bf8157175ea3d995"
+      }
+    },
+    "file": "/home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-live-proposal__2da980f/bindings.json",
+    "id": "LIVE-P01",
+    "line": 76,
+    "required_fix": "Bind all four authentic3d1ccea7 supervisor artifact paths/raw hashes and run identity; retain a0de historical import failure only as a distinct optional historical record.",
+    "severity": "MAJOR",
+    "title": "Wrong failed-run supervisor identity",
+    "trigger": "Use failed_predecessor_and_cost old_live_* fields to authenticate named predecessor3d1ccea7."
+  },
+  {
+    "authorization_path": "/home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_b1_g3_source_contract_restart_authorization_v1.json",
+    "blocks_exact_proposal_acceptance": true,
+    "file": "/home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-live-proposal__2da980f/bindings.json",
+    "id": "LIVE-P02",
+    "line": 94,
+    "protocol_path": "/home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_recovery_duration_v1.json",
+    "required": {
+      "failure": 30,
+      "random_control": 15,
+      "success_control": 15
+    },
+    "required_fix": "Use failure30/success_control15/random_control15; phase labels initial_attempt/recovery/suffix are not enrollment strata. Do not change actual frozen protocol or code.",
+    "severity": "MAJOR",
+    "submitted": {
+      "initial_attempt": 30,
+      "recovery": 15,
+      "suffix": 15
+    },
+    "title": "Eligible quota categories do not match frozen protocol",
+    "trigger": "Interpret future_protocol_limits_not_authorization.fixed_quotas as scientific cohort quotas."
+  },
+  {
+    "actual_domains": {
+      "runtime_manifest.json": {
+        "canonical_object_sha256": "f4c6b5eac9b1558b82e0e626ea4412437ff924f839a62f8fe3962a141effe7f7",
+        "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_pilot_after_a0de515d7e104101bf8157175ea3d995_20261022T190221Z/runtime_manifest.json",
+        "raw_file_sha256": "306a9e7c2d1b968e2a56e258fcd07aaf7467739460802a2b94c5e20411264916"
+      },
+      "runtime_manifest_preload.json": {
+        "canonical_object_sha256": "de8daea0611f844cc785499677621f849845cd93d7609cf29585b4c23a5327ba",
+        "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_pilot_after_a0de515d7e104101bf8157175ea3d995_20261022T190221Z/runtime_manifest_preload.json",
+        "raw_file_sha256": "6395e65abf266ba5f6a0834023b1da5c3799550b124a75db4d819cf613ee3312"
+      }
+    },
+    "blocks_exact_proposal_acceptance": true,
+    "file": "/home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-live-proposal__2da980f/bindings.json",
+    "frozen_runtime_preload_expectations_sha256": "64ebf4667da70dc4acd0a49b645bb6b6d4c3e1fe5d3e8e6351a8bf66f148ab9a",
+    "id": "LIVE-P03",
+    "line": 48,
+    "required_fix": "Bind explicit historical artifact path/raw-file hash/canonical-object hash and domain.6395... is historical runtime_manifest_preload.json raw hash;306a... is runtime_manifest.json raw hash;f4c6... canonical runtime identity.64eb... remains frozen preload expectations. Future live post-load runtime is not yet observed; do not label an old preload as it.",
+    "severity": "MAJOR",
+    "submitted": "6395e65abf266ba5f6a0834023b1da5c3799550b124a75db4d819cf613ee3312",
+    "title": "Runtime preload file digest mislabeled as runtime manifest identity",
+    "trigger": "Resolve scientific_and_input_bindings.runtime_manifest_sha256 to historical runtime_manifest.json or canonical runtime identity."
+  }
+]
