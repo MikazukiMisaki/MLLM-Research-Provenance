@@ -1,0 +1,26 @@
+# Command/evidence trace — R19 Phase1 preflight
+
+This is a concise operator trace; authoritative full child/supervisor argv and actual environment are in `preflight_supervisor/launch_context.json`. No scientific command is inferred from a prepared shell string.
+
+1. Read Sol's `LUNA_PHASE1_RELEASE.md` and `phase1_release.json`; raw release SHA256 verified as `d634514f0d177ff7b6b2712dd160fa0d1c86ba193e3e377260c5bc872e27ae46`.
+2. Recomputed canonical JSON SHA256 from the release `supervisor_argv.json` and `child_argv.json`: `7c1519ccb6f34683ee1ac09d4757d8a00bc225576b6a4f8370736790a2b9235b` and `eea6b0032ca714ec011b3d48f9c6a1a1bec3879560910ae77ce3da1c924aaa68`. Recomputed the environment file raw/canonical hashes: `59fbf34e59cb02fbe1a06dc11cff6b966cde3ed2a90805a6da6368d630b5c03b` and `f6814cb23d94fcacb28f73f0ce786192e48c425469d942941450f2c940a02028`.
+3. Read-only pre-stage rechecks: `git status`, `git rev-parse`, `git ls-remote`; process table; `nvidia-smi`; onboarding original/copy hashes and mode; gate/record/output/move-destination nonexistence. No R19 process; GPU 0% / 14 MiB. Exact remote source ref `2da980f631badc25086d12db60d128ff507d3ae6` verified.
+4. Read-only input verification at the reviewed candidate: rehashed 12 snapshot files, 11 adapter files, 127 TRAIN schedule entries / 254 source files, protocol, B1 manifest, source-contract amendment, authorizations, resolution event, schedule, exclusions and local ALFWorld config. All matched. One initial digest comparison against the still-restored `da7d348` source-contract amendment differed as expected; no staging decision was based on that old-branch value. Exact-SHA values passed after staging.
+5. `mv -- R19_IMPLEMENTATION_ONBOARDING.md <own-provenance>/preserved/R19_IMPLEMENTATION_ONBOARDING.execution-original.md`; both preserved copies SHA256 `27be0ca4c3e5abffa4fa492aaf47bf087328f41718fcc5f774c43fdf5b1c4e7e`, mode `0644`.
+6. `git switch --detach 2da980f631badc25086d12db60d128ff507d3ae6`; exit 0. Verified detached exact HEAD, tracked/nonignored clean worktree and matching remote.
+7. Byte-copied Sol's reviewed gate to `configs/local/r19_b1_g3_gate_2da980f_phase1.json`; resulting SHA256 `c285692615eaaf1c7cb7139b0417528022db6ee03c510de13f881d126f14415e`. Confirmed local config remains ignored, no tracked changes, no gate/output/record collision.
+8. Launched exactly one supervisor by loading the release JSON argv array and using `os.execve(argv[0], argv, env)`. Helper preconditions verified release/gate/argv/env digests, exact CWD/HEAD, clean worktree, absent output/record paths, zero live-launch allowance, and actual effective environment equality. The supervisor command was not reconstructed from a shell command string.
+9. Actual run `a9ca70cb082b4f2387d242664031b0bc`: supervisor PID `776941`, child PID `776946`; authentic `subprocess.returncode=0`. Supervisor completed; CLI receipt `PREFLIGHT_ONLY_PASS`.
+10. Post-run offline validation: exact source/gate/review/adjudication/runtime/input bindings; recorded effective-environment canonical SHA `84a59e93bd64b751ec5e1baad246314776562158bdb46019a864d5dba52697c0`; all seven side-effect counters zero; module origins within exact checkout; output absent; exit/status/context/receipt/log hashes cross-consistent.
+11. Rehashed carried-forward G2 and failed G3 ledgers/manifests/registry/branch evidence after preflight; all frozen hashes unchanged. Recounted actual completed event ledgers: G2 failed predecessor 19 environment operations; G2 PASS 176 generations/322 operations; failed G3 predecessor 1 generation/1 operation; cumulative 177 generations and 342 operations (330 non-reset, 12 resets). Preflight added zero.
+12. Post-run process/GPU check: no R19 runner/ALFWorld process; GPU 0% / 14 MiB. Exact reviewed detached source remains clean; no live command, G2 rerun, or G4 invoked.
+
+## Authentic preflight outputs
+
+| File | SHA256 |
+|---|---|
+| `preflight_supervisor/runner.log` | `9652604e8e033ea62fac1436f5bd9f4d1a6528ab2a8e8326b431b3a8db81f392` |
+| `preflight_supervisor/runner_exit.json` | `7323984be1fbac09a88586feeda2e98a4ab13be1c72110ec5fb2e22bce46af6c` |
+| `preflight_supervisor/supervisor_status.json` | `9ae5417d129178a64cc21c5ba50f38f1a3df037ba1231e866964c8ba391308de` |
+| `preflight_supervisor/launch_context.json` | `aa6bf1f1dc18ec7d0c52c1b9afa069973ca9304fdf917eab2241f0b75f21546a` |
+| `preflight_supervisor/pilot_preflight_receipt.json` | `aed33e7f813a7ce2992b7860fbef59cabe814e31543c3e8eb1dcac5b95390574` |
