@@ -1,0 +1,696 @@
+{
+  "initial_observation": "-= Welcome to TextWorld, ALFRED! =-\n\nYou are in the middle of a room. Looking quickly around you, you see a bed 1, a desk 1, a drawer 2, a drawer 1, a garbagecan 1, a shelf 1, and a sidetable 1.\n\nYour task is to: put some pencil on garbagecan.",
+  "metadata": {
+    "max_steps": 50,
+    "nominal_seed": 30000,
+    "r19_source_event_refs": {
+      "generation_event_ids": [
+        "9d35a2ae4dc885623b26ea962670aa4f3019fcedc00f81af234fdbd79c4e754f",
+        "76e7339bb51f6b83271fdad0c501bfa8f702119c65ee38a65b1ed4549c641ca1",
+        "b35a5f4bba2c83e791577b1854f03d025d1d362506cfe283bdd0adb820888dcd",
+        "4feaa12c7219fcefa7ff80d04da6d30e5e180bb7aa9a2865097d36c417bd0cb8",
+        "758c198fe9203d7344b2ec1a56b2663a5b56657fda649756b8a0c38c5c5cc03e",
+        "636bc3d36604accf6b0149179c98a1f24351b99e9dec87486a8271560fdf12e4"
+      ],
+      "reset_event_id": "5a8c49daf6691ebd1bd644e12662bc66894d93153618e9488bce7e4db27f7a31",
+      "source_episode_event_id": "5b33aa201afd47ea08eed919d04d341376c5c4dd8c1c75f6c8d4f2f1dd9657cb",
+      "transition_event_ids": [
+        "1ea5a22b8e17db14c06c32771e666fe643dfc60b870c60938bf41cd10ba57cba",
+        "0c26efe64990c54841fd3add0e3e5e8f21f09b2c2a473b1332f41079d0527f06",
+        "1c05a907fad6a89579acb90ee5da7bcae582b98c87c949a58440925501b81d62",
+        "f56543b41e4052d537e8c4b97e56b34801a14618fa6936bd6681ef2d6f314490",
+        "8ceb6a3a26294dfe21534f22538761063a8fb409201d7ebfbec7d2e8a5cf15e9",
+        "d1dcb78957dc68c9d55cff94464c4e4b1020871a13673afb18ff4bd943baaca3"
+      ]
+    },
+    "reset_order_position": 0,
+    "schedule_index": 0,
+    "source_game_sha256": "e393d4f3f521c7ceba7a6201a09884aec0f8941b4c87bcd4d427ea33a717bb99",
+    "source_restart_comparison_sha256": "8d3269fccd346da464c990ff4f50bf1e913031fa210eb3feb8c4307ea8777ee9",
+    "source_traj_data_sha256": "eb817b82a0b7d4f3d08bebe43a581194f8dc796fb894b17f826c0c1c16ede385",
+    "source_trajectory_sha256": "fba2a4278c4f1d9640c1c39f527fe3d5e7022ab50af4d353bc017bb31bbead89",
+    "split": "train",
+    "task_family": "pick_and_place_simple",
+    "termination_reason": "environment_terminal"
+  },
+  "model_version": "Qwen/Qwen3-8B+lora:/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+  "seed": 30000,
+  "steps": [
+    {
+      "action": "look",
+      "action_valid": true,
+      "done": false,
+      "index": 0,
+      "metadata": {
+        "action_selection": {
+          "action_selection_mode": "indexed_admissible",
+          "failure_category": null,
+          "failure_reason": null,
+          "id_to_command": {
+            "A000": "go to bed 1",
+            "A001": "go to desk 1",
+            "A002": "go to drawer 1",
+            "A003": "go to drawer 2",
+            "A004": "go to garbagecan 1",
+            "A005": "go to shelf 1",
+            "A006": "go to sidetable 1",
+            "A007": "help",
+            "A008": "inventory",
+            "A009": "look"
+          },
+          "mapped_environment_command": "look",
+          "parsed_action_id": "A009",
+          "raw_model_output": "A009",
+          "selected_index": 9,
+          "selection_status": "selected"
+        },
+        "policy": {
+          "action_selection": {
+            "action_selection_mode": "indexed_admissible",
+            "failure_category": null,
+            "failure_reason": null,
+            "id_to_command": {
+              "A000": "go to bed 1",
+              "A001": "go to desk 1",
+              "A002": "go to drawer 1",
+              "A003": "go to drawer 2",
+              "A004": "go to garbagecan 1",
+              "A005": "go to shelf 1",
+              "A006": "go to sidetable 1",
+              "A007": "help",
+              "A008": "inventory",
+              "A009": "look"
+            },
+            "mapped_environment_command": "look",
+            "parsed_action_id": "A009",
+            "raw_model_output": "A009",
+            "selected_index": 9,
+            "selection_status": "selected"
+          },
+          "generation": {
+            "do_sample": false,
+            "generated_tokens": 5,
+            "input_tokens": 267,
+            "latency_seconds": 0.8524449225515127,
+            "max_new_tokens": 16,
+            "output_complete": true,
+            "prompt": "You are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\n-= Welcome to TextWorld, ALFRED! =-\n\nYou are in the middle of a room. Looking quickly around you, you see a bed 1, a desk 1, a drawer 2, a drawer 1, a garbagecan 1, a shelf 1, and a sidetable 1.\n\nYour task is to: put some pencil on garbagecan.\n\nRecent action/result transitions (last 4):\n(none)\n\nIndexed admissible actions:\n[A000] go to bed 1\n[A001] go to desk 1\n[A002] go to drawer 1\n[A003] go to drawer 2\n[A004] go to garbagecan 1\n[A005] go to shelf 1\n[A006] go to sidetable 1\n[A007] help\n[A008] inventory\n[A009] look\n\nYour response:",
+            "raw_output": "A009",
+            "rendered_prompt": "<|im_start|>user\nYou are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\n-= Welcome to TextWorld, ALFRED! =-\n\nYou are in the middle of a room. Looking quickly around you, you see a bed 1, a desk 1, a drawer 2, a drawer 1, a garbagecan 1, a shelf 1, and a sidetable 1.\n\nYour task is to: put some pencil on garbagecan.\n\nRecent action/result transitions (last 4):\n(none)\n\nIndexed admissible actions:\n[A000] go to bed 1\n[A001] go to desk 1\n[A002] go to drawer 1\n[A003] go to drawer 2\n[A004] go to garbagecan 1\n[A005] go to shelf 1\n[A006] go to sidetable 1\n[A007] help\n[A008] inventory\n[A009] look\n\nYour response:<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "rendered_prompt_sha256": "15a218e78bd9a76ee904b37a73c01f773dbe2e5d45d923ef89e43dd46b5daec6",
+            "thinking": false,
+            "token_cap_reached": false,
+            "token_ids": [
+              32,
+              15,
+              15,
+              24,
+              151645
+            ],
+            "token_ids_sha256": "73fb874322d7eb089349af8348cc8658d5134ee8d6e56cd8b3b9b377d3ae2885"
+          },
+          "prompt": "You are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\n-= Welcome to TextWorld, ALFRED! =-\n\nYou are in the middle of a room. Looking quickly around you, you see a bed 1, a desk 1, a drawer 2, a drawer 1, a garbagecan 1, a shelf 1, and a sidetable 1.\n\nYour task is to: put some pencil on garbagecan.\n\nRecent action/result transitions (last 4):\n(none)\n\nIndexed admissible actions:\n[A000] go to bed 1\n[A001] go to desk 1\n[A002] go to drawer 1\n[A003] go to drawer 2\n[A004] go to garbagecan 1\n[A005] go to shelf 1\n[A006] go to sidetable 1\n[A007] help\n[A008] inventory\n[A009] look\n\nYour response:",
+          "prompt_version": "sft-p0-action-only-v1"
+        },
+        "r19_generation_event_id": "9d35a2ae4dc885623b26ea962670aa4f3019fcedc00f81af234fdbd79c4e754f",
+        "r19_transition_event_id": "1ea5a22b8e17db14c06c32771e666fe643dfc60b870c60938bf41cd10ba57cba",
+        "transition_truncated": false
+      },
+      "model_output": "A009",
+      "observation": "-= Welcome to TextWorld, ALFRED! =-\n\nYou are in the middle of a room. Looking quickly around you, you see a bed 1, a desk 1, a drawer 2, a drawer 1, a garbagecan 1, a shelf 1, and a sidetable 1.\n\nYour task is to: put some pencil on garbagecan.",
+      "parser_status": "selected",
+      "result_observation": "You are in the middle of a room. Looking quickly around you, you see nothing.",
+      "reward": 0.0,
+      "timestamp": 1792717169.476001,
+      "token_statistics": {
+        "generated_tokens": 5,
+        "input_tokens": 267
+      },
+      "valid_actions": [
+        "go to bed 1",
+        "go to desk 1",
+        "go to drawer 1",
+        "go to drawer 2",
+        "go to garbagecan 1",
+        "go to shelf 1",
+        "go to sidetable 1",
+        "help",
+        "inventory",
+        "look"
+      ]
+    },
+    {
+      "action": "go to sidetable 1",
+      "action_valid": true,
+      "done": false,
+      "index": 1,
+      "metadata": {
+        "action_selection": {
+          "action_selection_mode": "indexed_admissible",
+          "failure_category": null,
+          "failure_reason": null,
+          "id_to_command": {
+            "A000": "go to bed 1",
+            "A001": "go to desk 1",
+            "A002": "go to drawer 1",
+            "A003": "go to drawer 2",
+            "A004": "go to garbagecan 1",
+            "A005": "go to shelf 1",
+            "A006": "go to sidetable 1",
+            "A007": "help",
+            "A008": "inventory",
+            "A009": "look"
+          },
+          "mapped_environment_command": "go to sidetable 1",
+          "parsed_action_id": "A006",
+          "raw_model_output": "A006",
+          "selected_index": 6,
+          "selection_status": "selected"
+        },
+        "policy": {
+          "action_selection": {
+            "action_selection_mode": "indexed_admissible",
+            "failure_category": null,
+            "failure_reason": null,
+            "id_to_command": {
+              "A000": "go to bed 1",
+              "A001": "go to desk 1",
+              "A002": "go to drawer 1",
+              "A003": "go to drawer 2",
+              "A004": "go to garbagecan 1",
+              "A005": "go to shelf 1",
+              "A006": "go to sidetable 1",
+              "A007": "help",
+              "A008": "inventory",
+              "A009": "look"
+            },
+            "mapped_environment_command": "go to sidetable 1",
+            "parsed_action_id": "A006",
+            "raw_model_output": "A006",
+            "selected_index": 6,
+            "selection_status": "selected"
+          },
+          "generation": {
+            "do_sample": false,
+            "generated_tokens": 5,
+            "input_tokens": 228,
+            "latency_seconds": 0.3278318773955107,
+            "max_new_tokens": 16,
+            "output_complete": true,
+            "prompt": "You are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\nYou are in the middle of a room. Looking quickly around you, you see nothing.\n\nRecent action/result transitions (last 4):\nAction: look\nResult: You are in the middle of a room. Looking quickly around you, you see nothing.\n\nIndexed admissible actions:\n[A000] go to bed 1\n[A001] go to desk 1\n[A002] go to drawer 1\n[A003] go to drawer 2\n[A004] go to garbagecan 1\n[A005] go to shelf 1\n[A006] go to sidetable 1\n[A007] help\n[A008] inventory\n[A009] look\n\nYour response:",
+            "raw_output": "A006",
+            "rendered_prompt": "<|im_start|>user\nYou are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\nYou are in the middle of a room. Looking quickly around you, you see nothing.\n\nRecent action/result transitions (last 4):\nAction: look\nResult: You are in the middle of a room. Looking quickly around you, you see nothing.\n\nIndexed admissible actions:\n[A000] go to bed 1\n[A001] go to desk 1\n[A002] go to drawer 1\n[A003] go to drawer 2\n[A004] go to garbagecan 1\n[A005] go to shelf 1\n[A006] go to sidetable 1\n[A007] help\n[A008] inventory\n[A009] look\n\nYour response:<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "rendered_prompt_sha256": "912af1c7e85cf035f1b0f1842a1c4613c9d224e3a24d13bff8bcd998e4022ef4",
+            "thinking": false,
+            "token_cap_reached": false,
+            "token_ids": [
+              32,
+              15,
+              15,
+              21,
+              151645
+            ],
+            "token_ids_sha256": "1d377e6e728224f2806e1f27bb2ca2e769c234cc7f3fe8c1ce94cd5c32e564a0"
+          },
+          "prompt": "You are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\nYou are in the middle of a room. Looking quickly around you, you see nothing.\n\nRecent action/result transitions (last 4):\nAction: look\nResult: You are in the middle of a room. Looking quickly around you, you see nothing.\n\nIndexed admissible actions:\n[A000] go to bed 1\n[A001] go to desk 1\n[A002] go to drawer 1\n[A003] go to drawer 2\n[A004] go to garbagecan 1\n[A005] go to shelf 1\n[A006] go to sidetable 1\n[A007] help\n[A008] inventory\n[A009] look\n\nYour response:",
+          "prompt_version": "sft-p0-action-only-v1"
+        },
+        "r19_generation_event_id": "76e7339bb51f6b83271fdad0c501bfa8f702119c65ee38a65b1ed4549c641ca1",
+        "r19_transition_event_id": "0c26efe64990c54841fd3add0e3e5e8f21f09b2c2a473b1332f41079d0527f06",
+        "transition_truncated": false
+      },
+      "model_output": "A006",
+      "observation": "You are in the middle of a room. Looking quickly around you, you see nothing.",
+      "parser_status": "selected",
+      "result_observation": "You arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.",
+      "reward": 0.0,
+      "timestamp": 1792717169.876851,
+      "token_statistics": {
+        "generated_tokens": 5,
+        "input_tokens": 228
+      },
+      "valid_actions": [
+        "go to bed 1",
+        "go to desk 1",
+        "go to drawer 1",
+        "go to drawer 2",
+        "go to garbagecan 1",
+        "go to shelf 1",
+        "go to sidetable 1",
+        "help",
+        "inventory",
+        "look"
+      ]
+    },
+    {
+      "action": "go to shelf 1",
+      "action_valid": true,
+      "done": false,
+      "index": 2,
+      "metadata": {
+        "action_selection": {
+          "action_selection_mode": "indexed_admissible",
+          "failure_category": null,
+          "failure_reason": null,
+          "id_to_command": {
+            "A000": "examine sidetable 1",
+            "A001": "go to bed 1",
+            "A002": "go to desk 1",
+            "A003": "go to drawer 1",
+            "A004": "go to drawer 2",
+            "A005": "go to garbagecan 1",
+            "A006": "go to shelf 1",
+            "A007": "help",
+            "A008": "inventory",
+            "A009": "look",
+            "A010": "take cd 3 from sidetable 1",
+            "A011": "take creditcard 3 from sidetable 1",
+            "A012": "take keychain 1 from sidetable 1"
+          },
+          "mapped_environment_command": "go to shelf 1",
+          "parsed_action_id": "A006",
+          "raw_model_output": "A006",
+          "selected_index": 6,
+          "selection_status": "selected"
+        },
+        "policy": {
+          "action_selection": {
+            "action_selection_mode": "indexed_admissible",
+            "failure_category": null,
+            "failure_reason": null,
+            "id_to_command": {
+              "A000": "examine sidetable 1",
+              "A001": "go to bed 1",
+              "A002": "go to desk 1",
+              "A003": "go to drawer 1",
+              "A004": "go to drawer 2",
+              "A005": "go to garbagecan 1",
+              "A006": "go to shelf 1",
+              "A007": "help",
+              "A008": "inventory",
+              "A009": "look",
+              "A010": "take cd 3 from sidetable 1",
+              "A011": "take creditcard 3 from sidetable 1",
+              "A012": "take keychain 1 from sidetable 1"
+            },
+            "mapped_environment_command": "go to shelf 1",
+            "parsed_action_id": "A006",
+            "raw_model_output": "A006",
+            "selected_index": 6,
+            "selection_status": "selected"
+          },
+          "generation": {
+            "do_sample": false,
+            "generated_tokens": 5,
+            "input_tokens": 337,
+            "latency_seconds": 0.3526207832619548,
+            "max_new_tokens": 16,
+            "output_complete": true,
+            "prompt": "You are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\nYou arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.\n\nRecent action/result transitions (last 4):\nAction: look\nResult: You are in the middle of a room. Looking quickly around you, you see nothing.\n\nAction: go to sidetable 1\nResult: You arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.\n\nIndexed admissible actions:\n[A000] examine sidetable 1\n[A001] go to bed 1\n[A002] go to desk 1\n[A003] go to drawer 1\n[A004] go to drawer 2\n[A005] go to garbagecan 1\n[A006] go to shelf 1\n[A007] help\n[A008] inventory\n[A009] look\n[A010] take cd 3 from sidetable 1\n[A011] take creditcard 3 from sidetable 1\n[A012] take keychain 1 from sidetable 1\n\nYour response:",
+            "raw_output": "A006",
+            "rendered_prompt": "<|im_start|>user\nYou are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\nYou arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.\n\nRecent action/result transitions (last 4):\nAction: look\nResult: You are in the middle of a room. Looking quickly around you, you see nothing.\n\nAction: go to sidetable 1\nResult: You arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.\n\nIndexed admissible actions:\n[A000] examine sidetable 1\n[A001] go to bed 1\n[A002] go to desk 1\n[A003] go to drawer 1\n[A004] go to drawer 2\n[A005] go to garbagecan 1\n[A006] go to shelf 1\n[A007] help\n[A008] inventory\n[A009] look\n[A010] take cd 3 from sidetable 1\n[A011] take creditcard 3 from sidetable 1\n[A012] take keychain 1 from sidetable 1\n\nYour response:<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "rendered_prompt_sha256": "c47695740d96c452090ba37ce732f92d7a9a5005afe3a2382095d27068de10ac",
+            "thinking": false,
+            "token_cap_reached": false,
+            "token_ids": [
+              32,
+              15,
+              15,
+              21,
+              151645
+            ],
+            "token_ids_sha256": "1d377e6e728224f2806e1f27bb2ca2e769c234cc7f3fe8c1ce94cd5c32e564a0"
+          },
+          "prompt": "You are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\nYou arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.\n\nRecent action/result transitions (last 4):\nAction: look\nResult: You are in the middle of a room. Looking quickly around you, you see nothing.\n\nAction: go to sidetable 1\nResult: You arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.\n\nIndexed admissible actions:\n[A000] examine sidetable 1\n[A001] go to bed 1\n[A002] go to desk 1\n[A003] go to drawer 1\n[A004] go to drawer 2\n[A005] go to garbagecan 1\n[A006] go to shelf 1\n[A007] help\n[A008] inventory\n[A009] look\n[A010] take cd 3 from sidetable 1\n[A011] take creditcard 3 from sidetable 1\n[A012] take keychain 1 from sidetable 1\n\nYour response:",
+          "prompt_version": "sft-p0-action-only-v1"
+        },
+        "r19_generation_event_id": "b35a5f4bba2c83e791577b1854f03d025d1d362506cfe283bdd0adb820888dcd",
+        "r19_transition_event_id": "1c05a907fad6a89579acb90ee5da7bcae582b98c87c949a58440925501b81d62",
+        "transition_truncated": false
+      },
+      "model_output": "A006",
+      "observation": "You arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.",
+      "parser_status": "selected",
+      "result_observation": "You arrive at shelf 1. On the shelf 1, you see a pen 2, and a pencil 2.",
+      "reward": 0.0,
+      "timestamp": 1792717170.2968125,
+      "token_statistics": {
+        "generated_tokens": 5,
+        "input_tokens": 337
+      },
+      "valid_actions": [
+        "examine sidetable 1",
+        "go to bed 1",
+        "go to desk 1",
+        "go to drawer 1",
+        "go to drawer 2",
+        "go to garbagecan 1",
+        "go to shelf 1",
+        "help",
+        "inventory",
+        "look",
+        "take cd 3 from sidetable 1",
+        "take creditcard 3 from sidetable 1",
+        "take keychain 1 from sidetable 1"
+      ]
+    },
+    {
+      "action": "take pencil 2 from shelf 1",
+      "action_valid": true,
+      "done": false,
+      "index": 3,
+      "metadata": {
+        "action_selection": {
+          "action_selection_mode": "indexed_admissible",
+          "failure_category": null,
+          "failure_reason": null,
+          "id_to_command": {
+            "A000": "examine shelf 1",
+            "A001": "go to bed 1",
+            "A002": "go to desk 1",
+            "A003": "go to drawer 1",
+            "A004": "go to drawer 2",
+            "A005": "go to garbagecan 1",
+            "A006": "go to sidetable 1",
+            "A007": "help",
+            "A008": "inventory",
+            "A009": "look",
+            "A010": "take pen 2 from shelf 1",
+            "A011": "take pencil 2 from shelf 1"
+          },
+          "mapped_environment_command": "take pencil 2 from shelf 1",
+          "parsed_action_id": "A011",
+          "raw_model_output": "A011",
+          "selected_index": 11,
+          "selection_status": "selected"
+        },
+        "policy": {
+          "action_selection": {
+            "action_selection_mode": "indexed_admissible",
+            "failure_category": null,
+            "failure_reason": null,
+            "id_to_command": {
+              "A000": "examine shelf 1",
+              "A001": "go to bed 1",
+              "A002": "go to desk 1",
+              "A003": "go to drawer 1",
+              "A004": "go to drawer 2",
+              "A005": "go to garbagecan 1",
+              "A006": "go to sidetable 1",
+              "A007": "help",
+              "A008": "inventory",
+              "A009": "look",
+              "A010": "take pen 2 from shelf 1",
+              "A011": "take pencil 2 from shelf 1"
+            },
+            "mapped_environment_command": "take pencil 2 from shelf 1",
+            "parsed_action_id": "A011",
+            "raw_model_output": "A011",
+            "selected_index": 11,
+            "selection_status": "selected"
+          },
+          "generation": {
+            "do_sample": false,
+            "generated_tokens": 5,
+            "input_tokens": 345,
+            "latency_seconds": 0.35378856677562,
+            "max_new_tokens": 16,
+            "output_complete": true,
+            "prompt": "You are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\nYou arrive at shelf 1. On the shelf 1, you see a pen 2, and a pencil 2.\n\nRecent action/result transitions (last 4):\nAction: look\nResult: You are in the middle of a room. Looking quickly around you, you see nothing.\n\nAction: go to sidetable 1\nResult: You arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.\n\nAction: go to shelf 1\nResult: You arrive at shelf 1. On the shelf 1, you see a pen 2, and a pencil 2.\n\nIndexed admissible actions:\n[A000] examine shelf 1\n[A001] go to bed 1\n[A002] go to desk 1\n[A003] go to drawer 1\n[A004] go to drawer 2\n[A005] go to garbagecan 1\n[A006] go to sidetable 1\n[A007] help\n[A008] inventory\n[A009] look\n[A010] take pen 2 from shelf 1\n[A011] take pencil 2 from shelf 1\n\nYour response:",
+            "raw_output": "A011",
+            "rendered_prompt": "<|im_start|>user\nYou are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\nYou arrive at shelf 1. On the shelf 1, you see a pen 2, and a pencil 2.\n\nRecent action/result transitions (last 4):\nAction: look\nResult: You are in the middle of a room. Looking quickly around you, you see nothing.\n\nAction: go to sidetable 1\nResult: You arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.\n\nAction: go to shelf 1\nResult: You arrive at shelf 1. On the shelf 1, you see a pen 2, and a pencil 2.\n\nIndexed admissible actions:\n[A000] examine shelf 1\n[A001] go to bed 1\n[A002] go to desk 1\n[A003] go to drawer 1\n[A004] go to drawer 2\n[A005] go to garbagecan 1\n[A006] go to sidetable 1\n[A007] help\n[A008] inventory\n[A009] look\n[A010] take pen 2 from shelf 1\n[A011] take pencil 2 from shelf 1\n\nYour response:<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "rendered_prompt_sha256": "e88ede924923c52d9b624e7073bd58d306567544deb09c98543b814cb3f991ef",
+            "thinking": false,
+            "token_cap_reached": false,
+            "token_ids": [
+              32,
+              15,
+              16,
+              16,
+              151645
+            ],
+            "token_ids_sha256": "29a029326fd931f3d462658c3d07cad4430cc5e86a732ec896eba8640d35a846"
+          },
+          "prompt": "You are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\nYou arrive at shelf 1. On the shelf 1, you see a pen 2, and a pencil 2.\n\nRecent action/result transitions (last 4):\nAction: look\nResult: You are in the middle of a room. Looking quickly around you, you see nothing.\n\nAction: go to sidetable 1\nResult: You arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.\n\nAction: go to shelf 1\nResult: You arrive at shelf 1. On the shelf 1, you see a pen 2, and a pencil 2.\n\nIndexed admissible actions:\n[A000] examine shelf 1\n[A001] go to bed 1\n[A002] go to desk 1\n[A003] go to drawer 1\n[A004] go to drawer 2\n[A005] go to garbagecan 1\n[A006] go to sidetable 1\n[A007] help\n[A008] inventory\n[A009] look\n[A010] take pen 2 from shelf 1\n[A011] take pencil 2 from shelf 1\n\nYour response:",
+          "prompt_version": "sft-p0-action-only-v1"
+        },
+        "r19_generation_event_id": "4feaa12c7219fcefa7ff80d04da6d30e5e180bb7aa9a2865097d36c417bd0cb8",
+        "r19_transition_event_id": "f56543b41e4052d537e8c4b97e56b34801a14618fa6936bd6681ef2d6f314490",
+        "transition_truncated": false
+      },
+      "model_output": "A011",
+      "observation": "You arrive at shelf 1. On the shelf 1, you see a pen 2, and a pencil 2.",
+      "parser_status": "selected",
+      "result_observation": "You pick up the pencil 2 from the shelf 1.",
+      "reward": 0.0,
+      "timestamp": 1792717170.7121983,
+      "token_statistics": {
+        "generated_tokens": 5,
+        "input_tokens": 345
+      },
+      "valid_actions": [
+        "examine shelf 1",
+        "go to bed 1",
+        "go to desk 1",
+        "go to drawer 1",
+        "go to drawer 2",
+        "go to garbagecan 1",
+        "go to sidetable 1",
+        "help",
+        "inventory",
+        "look",
+        "take pen 2 from shelf 1",
+        "take pencil 2 from shelf 1"
+      ]
+    },
+    {
+      "action": "go to garbagecan 1",
+      "action_valid": true,
+      "done": false,
+      "index": 4,
+      "metadata": {
+        "action_selection": {
+          "action_selection_mode": "indexed_admissible",
+          "failure_category": null,
+          "failure_reason": null,
+          "id_to_command": {
+            "A000": "examine pencil 2",
+            "A001": "examine shelf 1",
+            "A002": "go to bed 1",
+            "A003": "go to desk 1",
+            "A004": "go to drawer 1",
+            "A005": "go to drawer 2",
+            "A006": "go to garbagecan 1",
+            "A007": "go to sidetable 1",
+            "A008": "help",
+            "A009": "inventory",
+            "A010": "look",
+            "A011": "move pencil 2 to shelf 1"
+          },
+          "mapped_environment_command": "go to garbagecan 1",
+          "parsed_action_id": "A006",
+          "raw_model_output": "A006",
+          "selected_index": 6,
+          "selection_status": "selected"
+        },
+        "policy": {
+          "action_selection": {
+            "action_selection_mode": "indexed_admissible",
+            "failure_category": null,
+            "failure_reason": null,
+            "id_to_command": {
+              "A000": "examine pencil 2",
+              "A001": "examine shelf 1",
+              "A002": "go to bed 1",
+              "A003": "go to desk 1",
+              "A004": "go to drawer 1",
+              "A005": "go to drawer 2",
+              "A006": "go to garbagecan 1",
+              "A007": "go to sidetable 1",
+              "A008": "help",
+              "A009": "inventory",
+              "A010": "look",
+              "A011": "move pencil 2 to shelf 1"
+            },
+            "mapped_environment_command": "go to garbagecan 1",
+            "parsed_action_id": "A006",
+            "raw_model_output": "A006",
+            "selected_index": 6,
+            "selection_status": "selected"
+          },
+          "generation": {
+            "do_sample": false,
+            "generated_tokens": 5,
+            "input_tokens": 354,
+            "latency_seconds": 0.3581492006778717,
+            "max_new_tokens": 16,
+            "output_complete": true,
+            "prompt": "You are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\nYou pick up the pencil 2 from the shelf 1.\n\nRecent action/result transitions (last 4):\nAction: look\nResult: You are in the middle of a room. Looking quickly around you, you see nothing.\n\nAction: go to sidetable 1\nResult: You arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.\n\nAction: go to shelf 1\nResult: You arrive at shelf 1. On the shelf 1, you see a pen 2, and a pencil 2.\n\nAction: take pencil 2 from shelf 1\nResult: You pick up the pencil 2 from the shelf 1.\n\nIndexed admissible actions:\n[A000] examine pencil 2\n[A001] examine shelf 1\n[A002] go to bed 1\n[A003] go to desk 1\n[A004] go to drawer 1\n[A005] go to drawer 2\n[A006] go to garbagecan 1\n[A007] go to sidetable 1\n[A008] help\n[A009] inventory\n[A010] look\n[A011] move pencil 2 to shelf 1\n\nYour response:",
+            "raw_output": "A006",
+            "rendered_prompt": "<|im_start|>user\nYou are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\nYou pick up the pencil 2 from the shelf 1.\n\nRecent action/result transitions (last 4):\nAction: look\nResult: You are in the middle of a room. Looking quickly around you, you see nothing.\n\nAction: go to sidetable 1\nResult: You arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.\n\nAction: go to shelf 1\nResult: You arrive at shelf 1. On the shelf 1, you see a pen 2, and a pencil 2.\n\nAction: take pencil 2 from shelf 1\nResult: You pick up the pencil 2 from the shelf 1.\n\nIndexed admissible actions:\n[A000] examine pencil 2\n[A001] examine shelf 1\n[A002] go to bed 1\n[A003] go to desk 1\n[A004] go to drawer 1\n[A005] go to drawer 2\n[A006] go to garbagecan 1\n[A007] go to sidetable 1\n[A008] help\n[A009] inventory\n[A010] look\n[A011] move pencil 2 to shelf 1\n\nYour response:<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "rendered_prompt_sha256": "b8d167d54bbc6de5e80e11a9cd2927d45b733873d5cfa0baf76ef18c7331a1c5",
+            "thinking": false,
+            "token_cap_reached": false,
+            "token_ids": [
+              32,
+              15,
+              15,
+              21,
+              151645
+            ],
+            "token_ids_sha256": "1d377e6e728224f2806e1f27bb2ca2e769c234cc7f3fe8c1ce94cd5c32e564a0"
+          },
+          "prompt": "You are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\nYou pick up the pencil 2 from the shelf 1.\n\nRecent action/result transitions (last 4):\nAction: look\nResult: You are in the middle of a room. Looking quickly around you, you see nothing.\n\nAction: go to sidetable 1\nResult: You arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.\n\nAction: go to shelf 1\nResult: You arrive at shelf 1. On the shelf 1, you see a pen 2, and a pencil 2.\n\nAction: take pencil 2 from shelf 1\nResult: You pick up the pencil 2 from the shelf 1.\n\nIndexed admissible actions:\n[A000] examine pencil 2\n[A001] examine shelf 1\n[A002] go to bed 1\n[A003] go to desk 1\n[A004] go to drawer 1\n[A005] go to drawer 2\n[A006] go to garbagecan 1\n[A007] go to sidetable 1\n[A008] help\n[A009] inventory\n[A010] look\n[A011] move pencil 2 to shelf 1\n\nYour response:",
+          "prompt_version": "sft-p0-action-only-v1"
+        },
+        "r19_generation_event_id": "758c198fe9203d7344b2ec1a56b2663a5b56657fda649756b8a0c38c5c5cc03e",
+        "r19_transition_event_id": "8ceb6a3a26294dfe21534f22538761063a8fb409201d7ebfbec7d2e8a5cf15e9",
+        "transition_truncated": false
+      },
+      "model_output": "A006",
+      "observation": "You pick up the pencil 2 from the shelf 1.",
+      "parser_status": "selected",
+      "result_observation": "You arrive at garbagecan 1. On the garbagecan 1, you see a cd 2.",
+      "reward": 0.0,
+      "timestamp": 1792717171.1376102,
+      "token_statistics": {
+        "generated_tokens": 5,
+        "input_tokens": 354
+      },
+      "valid_actions": [
+        "examine pencil 2",
+        "examine shelf 1",
+        "go to bed 1",
+        "go to desk 1",
+        "go to drawer 1",
+        "go to drawer 2",
+        "go to garbagecan 1",
+        "go to sidetable 1",
+        "help",
+        "inventory",
+        "look",
+        "move pencil 2 to shelf 1"
+      ]
+    },
+    {
+      "action": "move pencil 2 to garbagecan 1",
+      "action_valid": true,
+      "done": true,
+      "index": 5,
+      "metadata": {
+        "action_selection": {
+          "action_selection_mode": "indexed_admissible",
+          "failure_category": null,
+          "failure_reason": null,
+          "id_to_command": {
+            "A000": "examine garbagecan 1",
+            "A001": "examine pencil 2",
+            "A002": "go to bed 1",
+            "A003": "go to desk 1",
+            "A004": "go to drawer 1",
+            "A005": "go to drawer 2",
+            "A006": "go to shelf 1",
+            "A007": "go to sidetable 1",
+            "A008": "help",
+            "A009": "inventory",
+            "A010": "look",
+            "A011": "move pencil 2 to garbagecan 1"
+          },
+          "mapped_environment_command": "move pencil 2 to garbagecan 1",
+          "parsed_action_id": "A011",
+          "raw_model_output": "A011",
+          "selected_index": 11,
+          "selection_status": "selected"
+        },
+        "policy": {
+          "action_selection": {
+            "action_selection_mode": "indexed_admissible",
+            "failure_category": null,
+            "failure_reason": null,
+            "id_to_command": {
+              "A000": "examine garbagecan 1",
+              "A001": "examine pencil 2",
+              "A002": "go to bed 1",
+              "A003": "go to desk 1",
+              "A004": "go to drawer 1",
+              "A005": "go to drawer 2",
+              "A006": "go to shelf 1",
+              "A007": "go to sidetable 1",
+              "A008": "help",
+              "A009": "inventory",
+              "A010": "look",
+              "A011": "move pencil 2 to garbagecan 1"
+            },
+            "mapped_environment_command": "move pencil 2 to garbagecan 1",
+            "parsed_action_id": "A011",
+            "raw_model_output": "A011",
+            "selected_index": 11,
+            "selection_status": "selected"
+          },
+          "generation": {
+            "do_sample": false,
+            "generated_tokens": 5,
+            "input_tokens": 373,
+            "latency_seconds": 0.3624054240062833,
+            "max_new_tokens": 16,
+            "output_complete": true,
+            "prompt": "You are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\nYou arrive at garbagecan 1. On the garbagecan 1, you see a cd 2.\n\nRecent action/result transitions (last 4):\nAction: go to sidetable 1\nResult: You arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.\n\nAction: go to shelf 1\nResult: You arrive at shelf 1. On the shelf 1, you see a pen 2, and a pencil 2.\n\nAction: take pencil 2 from shelf 1\nResult: You pick up the pencil 2 from the shelf 1.\n\nAction: go to garbagecan 1\nResult: You arrive at garbagecan 1. On the garbagecan 1, you see a cd 2.\n\nIndexed admissible actions:\n[A000] examine garbagecan 1\n[A001] examine pencil 2\n[A002] go to bed 1\n[A003] go to desk 1\n[A004] go to drawer 1\n[A005] go to drawer 2\n[A006] go to shelf 1\n[A007] go to sidetable 1\n[A008] help\n[A009] inventory\n[A010] look\n[A011] move pencil 2 to garbagecan 1\n\nYour response:",
+            "raw_output": "A011",
+            "rendered_prompt": "<|im_start|>user\nYou are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\nYou arrive at garbagecan 1. On the garbagecan 1, you see a cd 2.\n\nRecent action/result transitions (last 4):\nAction: go to sidetable 1\nResult: You arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.\n\nAction: go to shelf 1\nResult: You arrive at shelf 1. On the shelf 1, you see a pen 2, and a pencil 2.\n\nAction: take pencil 2 from shelf 1\nResult: You pick up the pencil 2 from the shelf 1.\n\nAction: go to garbagecan 1\nResult: You arrive at garbagecan 1. On the garbagecan 1, you see a cd 2.\n\nIndexed admissible actions:\n[A000] examine garbagecan 1\n[A001] examine pencil 2\n[A002] go to bed 1\n[A003] go to desk 1\n[A004] go to drawer 1\n[A005] go to drawer 2\n[A006] go to shelf 1\n[A007] go to sidetable 1\n[A008] help\n[A009] inventory\n[A010] look\n[A011] move pencil 2 to garbagecan 1\n\nYour response:<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "rendered_prompt_sha256": "39c7b1b327b573937c7195e40f829a1ae6c3428cbdbcae86de5140d9ded78e65",
+            "thinking": false,
+            "token_cap_reached": false,
+            "token_ids": [
+              32,
+              15,
+              16,
+              16,
+              151645
+            ],
+            "token_ids_sha256": "29a029326fd931f3d462658c3d07cad4430cc5e86a732ec896eba8640d35a846"
+          },
+          "prompt": "You are an ALFWorld household agent. Select exactly one next action.\nReturn exactly one bare action ID in the form Axyz. Do not output a label, command, explanation, reasoning, or <think> tags.\n\nTask goal:\nput some pencil on garbagecan\n\nCurrent observation:\nYou arrive at garbagecan 1. On the garbagecan 1, you see a cd 2.\n\nRecent action/result transitions (last 4):\nAction: go to sidetable 1\nResult: You arrive at sidetable 1. On the sidetable 1, you see a cd 3, a creditcard 3, and a keychain 1.\n\nAction: go to shelf 1\nResult: You arrive at shelf 1. On the shelf 1, you see a pen 2, and a pencil 2.\n\nAction: take pencil 2 from shelf 1\nResult: You pick up the pencil 2 from the shelf 1.\n\nAction: go to garbagecan 1\nResult: You arrive at garbagecan 1. On the garbagecan 1, you see a cd 2.\n\nIndexed admissible actions:\n[A000] examine garbagecan 1\n[A001] examine pencil 2\n[A002] go to bed 1\n[A003] go to desk 1\n[A004] go to drawer 1\n[A005] go to drawer 2\n[A006] go to shelf 1\n[A007] go to sidetable 1\n[A008] help\n[A009] inventory\n[A010] look\n[A011] move pencil 2 to garbagecan 1\n\nYour response:",
+          "prompt_version": "sft-p0-action-only-v1"
+        },
+        "r19_generation_event_id": "636bc3d36604accf6b0149179c98a1f24351b99e9dec87486a8271560fdf12e4",
+        "r19_transition_event_id": "d1dcb78957dc68c9d55cff94464c4e4b1020871a13673afb18ff4bd943baaca3",
+        "transition_truncated": false
+      },
+      "model_output": "A011",
+      "observation": "You arrive at garbagecan 1. On the garbagecan 1, you see a cd 2.",
+      "parser_status": "selected",
+      "result_observation": "You move the pencil 2 to the garbagecan 1.",
+      "reward": 1.0,
+      "timestamp": 1792717171.564525,
+      "token_statistics": {
+        "generated_tokens": 5,
+        "input_tokens": 373
+      },
+      "valid_actions": [
+        "examine garbagecan 1",
+        "examine pencil 2",
+        "go to bed 1",
+        "go to desk 1",
+        "go to drawer 1",
+        "go to drawer 2",
+        "go to shelf 1",
+        "go to sidetable 1",
+        "help",
+        "inventory",
+        "look",
+        "move pencil 2 to garbagecan 1"
+      ]
+    }
+  ],
+  "task": {
+    "family": null,
+    "metadata": {
+      "game_file": "/home/lizening/alfworld_data/json_2.1.1/train/pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092/game.tw-pddl"
+    },
+    "split": "train",
+    "task_id": "pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092",
+    "text": "put some pencil on garbagecan"
+  },
+  "trajectory_id": "aea7c51203026ec5ec1fdb57",
+  "truncated": false
+}

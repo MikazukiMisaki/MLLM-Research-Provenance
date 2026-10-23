@@ -1,0 +1,1441 @@
+{
+  "created_at": "2026-10-23T01:36:47.043377Z",
+  "event_id": "9c21f04be4a25f50396b1d6fff7ede648976a3d42d45a4303947678729e05d57",
+  "evidence_class": "live",
+  "identity": {
+    "split": "train"
+  },
+  "implementation_sha": "2da980f631badc25086d12db60d128ff507d3ae6",
+  "kind": "candidate_queues_frozen",
+  "payload": {
+    "no_quota_transfer": true,
+    "queue_counts": {
+      "failure": 7,
+      "random_control": 30,
+      "success_control": 30
+    },
+    "queue_sha256": "6daeae9247772cc2e68c766d35dc376ea6aa7f5f850f20ecdc0ae0939c27f5e6",
+    "queues": {
+      "failure": [
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-30/trial_T20190907_220045_510017",
+          "decision_index": 23,
+          "nominal_seed": 30003,
+          "prefix_id": "R19-failure-22984d06767be55e8b1a",
+          "queue_hash": "2307697f4205949509a1403a4d6b7457de613aa0c02e85898cffa1f9a8cf7a9a",
+          "remaining_horizon": 27,
+          "selection_reason": {
+            "candidate_count": 46,
+            "candidate_region_start": 0,
+            "method": "midpoint",
+            "sorted_candidate_ordinal": 23
+          },
+          "source_episode_event_id": "6a5f1bef3a6a11dbde34301ed08a060f3c06eb848e5defe77404e78378d5a701",
+          "source_schedule_index": 3,
+          "source_success": false,
+          "stratum": "failure",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "64f3f0893e829cbd795d35032d8234d1a1382fa72733611a442c3cbaa8d841e2"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Pan-None-StoveBurner-27/trial_T20190907_182355_408484",
+          "decision_index": 23,
+          "nominal_seed": 30061,
+          "prefix_id": "R19-failure-0d469302da15668cdf66",
+          "queue_hash": "7067902b331b11dcf47b7b6adf80cbf988a0201d6b337f04d86818e62fb58592",
+          "remaining_horizon": 27,
+          "selection_reason": {
+            "candidate_count": 46,
+            "candidate_region_start": 0,
+            "method": "midpoint",
+            "sorted_candidate_ordinal": 23
+          },
+          "source_episode_event_id": "0da9c88645882114a85ca4d06c7b8e921a652b9b449c821d879bef5b4e34ca8c",
+          "source_schedule_index": 61,
+          "source_success": false,
+          "stratum": "failure",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "002516b8d0cc7d0bb0104aeb9f96026371129947b10f824d66cf684bce17e3c7"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Pan-None-StoveBurner-27/trial_T20190906_212820_391099",
+          "decision_index": 23,
+          "nominal_seed": 30027,
+          "prefix_id": "R19-failure-64171e0fe05f9e99c96f",
+          "queue_hash": "9f76d20ce1bb0981c47e7e974acb8d948674d569d65370c928ccd0ec1b6e9833",
+          "remaining_horizon": 27,
+          "selection_reason": {
+            "candidate_count": 46,
+            "candidate_region_start": 0,
+            "method": "midpoint",
+            "sorted_candidate_ordinal": 23
+          },
+          "source_episode_event_id": "78439afb1977f25d648257f0330fb5263af6767f194e524ef864b4dfa37e177a",
+          "source_schedule_index": 27,
+          "source_success": false,
+          "stratum": "failure",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "264518ddb72d8e7e12c178e099d95a644833ae462fa3b42d142649284dc33934"
+        },
+        {
+          "canonical_trial_id": "pick_clean_then_place_in_recep-Cloth-None-Drawer-427/trial_T20190909_070356_398456",
+          "decision_index": 11,
+          "nominal_seed": 30006,
+          "prefix_id": "R19-failure-4d2993f7fe2478492ff6",
+          "queue_hash": "a4ff298c1467553b10e0bfb2d8212ea4b8d3fce3408f0549e132400724ef7ff4",
+          "remaining_horizon": 39,
+          "selection_reason": {
+            "candidate_region_start": 0,
+            "completed_action_index": 10,
+            "event_completed_at_state": 11,
+            "method": "two-cycle"
+          },
+          "source_episode_event_id": "6f22ec8dadc85644054663c0f0016b2903afc437a2426c6e8ff8ff98d5979b3e",
+          "source_schedule_index": 6,
+          "source_success": false,
+          "stratum": "failure",
+          "task_family": "pick_clean_then_place_in_recep",
+          "trajectory_sha256": "27ed045b4d97fc5ac8855f12e35e4b1f150eeea313ead7e87d4ad8d6c77475ae"
+        },
+        {
+          "canonical_trial_id": "pick_clean_then_place_in_recep-Ladle-None-Drawer-30/trial_T20190907_194033_752745",
+          "decision_index": 23,
+          "nominal_seed": 30124,
+          "prefix_id": "R19-failure-a33d7ca26ecbe46dc4b6",
+          "queue_hash": "b6b92e989464bf469a2e3164f1c1219986614615e8ec92efb857bfca2adf0a2d",
+          "remaining_horizon": 27,
+          "selection_reason": {
+            "candidate_count": 46,
+            "candidate_region_start": 0,
+            "method": "midpoint",
+            "sorted_candidate_ordinal": 23
+          },
+          "source_episode_event_id": "d351c1a8f9d0baa0c01b07b4ca8fb99077e99173877f57b1a02518d7757b89d0",
+          "source_schedule_index": 124,
+          "source_success": false,
+          "stratum": "failure",
+          "task_family": "pick_clean_then_place_in_recep",
+          "trajectory_sha256": "0a16b5d48f0ed34b6a16666d5d571bf6903de7bcbe0e1685461904fa661c4fde"
+        },
+        {
+          "canonical_trial_id": "look_at_obj_in_light-Vase-None-DeskLamp-303/trial_T20190907_150403_049073",
+          "decision_index": 31,
+          "nominal_seed": 30009,
+          "prefix_id": "R19-failure-b3ab21b8e193f6adf6ff",
+          "queue_hash": "cc2471598b90798a04e550b048e56bc1d0f7171c017693846985fd64ea191b19",
+          "remaining_horizon": 19,
+          "selection_reason": {
+            "candidate_region_start": 9,
+            "completed_action_index": 30,
+            "event_completed_at_state": 31,
+            "method": "two-cycle"
+          },
+          "source_episode_event_id": "d5c38b04f1a80a40d21751069283faf235370cd50a8b9fff26dec98a3ef28c1d",
+          "source_schedule_index": 9,
+          "source_success": false,
+          "stratum": "failure",
+          "task_family": "look_at_obj_in_light",
+          "trajectory_sha256": "0689b0f236f395a467be2acf1065cc8cbd041703570ccb63d98ec7afa632ce16"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Mug-None-Shelf-7/trial_T20190907_022430_495851",
+          "decision_index": 23,
+          "nominal_seed": 30023,
+          "prefix_id": "R19-failure-79723e267eec3320ed2f",
+          "queue_hash": "e3606c1f666f3a90c18030739165c92052988b3bae6ab656ec4ef6b2add4af78",
+          "remaining_horizon": 27,
+          "selection_reason": {
+            "candidate_count": 46,
+            "candidate_region_start": 0,
+            "method": "midpoint",
+            "sorted_candidate_ordinal": 23
+          },
+          "source_episode_event_id": "d3dda6d1ae9ae9351d9104a04a8115521ceb78d79219cd26362ea74e70ab253d",
+          "source_schedule_index": 23,
+          "source_success": false,
+          "stratum": "failure",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "15df95c1c567663db051b120ceb0b4ffb42efe468f2be5820ff0e3955d04e671"
+        }
+      ],
+      "random_control": [
+        {
+          "canonical_trial_id": "pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-401/trial_T20190908_215242_151083",
+          "decision_index": 5,
+          "nominal_seed": 30123,
+          "prefix_id": "R19-random-control-ebd8255e6ee2e535a974",
+          "queue_hash": "00a5f1cc26255fcadef62124650f1673e03ff2221a0e2855e90c3a5ca2da67c5",
+          "remaining_horizon": 45,
+          "selection_reason": {
+            "eligible_state_count": 7,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "0bf8df69d91e1d406205325203a665d1d7fc9b4ae68997cc2dba0ed6ed70944b"
+          },
+          "source_episode_event_id": "9665f0ecd75cf3371f413dd19543e772904969f55a8a211e30e32a1b7cfe18f0",
+          "source_schedule_index": 123,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_and_place_simple",
+          "trajectory_sha256": "35b868cb7e3a77ab690492e20b9d19f0a1efd832c32f1b608d39116ab98cc7a4"
+        },
+        {
+          "canonical_trial_id": "look_at_obj_in_light-Book-None-DeskLamp-309/trial_T20190907_175846_963560",
+          "decision_index": 7,
+          "nominal_seed": 30014,
+          "prefix_id": "R19-random-control-8ec4fc037229710f8f13",
+          "queue_hash": "062d5b58e91dfdd6adf12f3811c0805e91ec4ae3afcab21e1085ccc6dbd37710",
+          "remaining_horizon": 43,
+          "selection_reason": {
+            "eligible_state_count": 16,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "1cb29edff4f4519e76985993c3b302f40125c6f0afec54a1ab5b47af4acaaba9"
+          },
+          "source_episode_event_id": "a3bbf4259ce97874240609eb51b5996510c53592d5e03d571b908d0161a9d7ea",
+          "source_schedule_index": 14,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "look_at_obj_in_light",
+          "trajectory_sha256": "20d2a2892074f9f8a583f59ec69e6039fe8a385e4da7e15835a04a289f411581"
+        },
+        {
+          "canonical_trial_id": "pick_and_place_simple-Candle-None-Toilet-407/trial_T20190909_055216_511429",
+          "decision_index": 3,
+          "nominal_seed": 30047,
+          "prefix_id": "R19-random-control-05859806ca56c4b9c655",
+          "queue_hash": "0a4a098411743952c7d1f1eb98f045a77ae146a429f5fb215ad95323ff534c5d",
+          "remaining_horizon": 47,
+          "selection_reason": {
+            "eligible_state_count": 6,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "4de6a8787f557205039cc3e8fbd025ca5ba742f085f52e54d29e73645a1889bb"
+          },
+          "source_episode_event_id": "5b3db3b10373dbc5f5df6d18431c06c606a3de01931fd62dc0402a388ceaab97",
+          "source_schedule_index": 47,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_and_place_simple",
+          "trajectory_sha256": "2e2b486e2c43063a460fca4a24348922203600e1d2881fcc779e0892553fdb3f"
+        },
+        {
+          "canonical_trial_id": "look_at_obj_in_light-Pillow-None-DeskLamp-307/trial_T20190908_190618_308570",
+          "decision_index": 2,
+          "nominal_seed": 30034,
+          "prefix_id": "R19-random-control-4d58c67a0a72189681f8",
+          "queue_hash": "0c430ad30d8355688318983ce22b25a8d2a5f676aecd60ec27ede850d31744e0",
+          "remaining_horizon": 48,
+          "selection_reason": {
+            "eligible_state_count": 5,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "0c029e1f833bd1e8ed2fa91cb2107b9d9b6ca6c60f7c3b1dac372876bd6fbcca"
+          },
+          "source_episode_event_id": "7c5c96ba50b1eadeb66e4d841175e8fc12909832c228d8e3a9215abf49d2a131",
+          "source_schedule_index": 34,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "look_at_obj_in_light",
+          "trajectory_sha256": "b96e84ceecab425f2c31b55585ac599dd4f779d28e3010c033326f58cf7303ae"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Tomato-None-Fridge-25/trial_T20190909_103031_754410",
+          "decision_index": 8,
+          "nominal_seed": 30050,
+          "prefix_id": "R19-random-control-52197b722db208865b48",
+          "queue_hash": "1167cca6ecaf0b29414aca6c0d99b08cbeba097b1a7eee1345b5e44be3eb15f3",
+          "remaining_horizon": 42,
+          "selection_reason": {
+            "eligible_state_count": 12,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "3b3e6a28d978286860c1c71a46b98d6f7444d2d25a413c204aaad3aca31aa1d2"
+          },
+          "source_episode_event_id": "a9b7fb7c7598eda2430e9ca5b73fb11550a4485d305f6c89a2c20001ebf1e60f",
+          "source_schedule_index": 50,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "b42eccc4f58787ec0bd177df61cc4a5cd4b95c3876529f64201a83660abf5d10"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Egg-None-Microwave-20/trial_T20190908_052011_844993",
+          "decision_index": 2,
+          "nominal_seed": 30089,
+          "prefix_id": "R19-random-control-9d989320346ee12ce454",
+          "queue_hash": "15257de59f414f3c1e6d5a47fd5b8504255ee525997a1d1c6446e84feb97fbc5",
+          "remaining_horizon": 48,
+          "selection_reason": {
+            "eligible_state_count": 16,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "0ffc7fd5cbd61cdd3851485c7b4951f2d8879bd1fe1a8407fb9ce2d210751629"
+          },
+          "source_episode_event_id": "4cb127992dfa8e2e1e77349ccb20158727f0916aeaddc341a8f2db1c7603be86",
+          "source_schedule_index": 89,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "9a2b246c06cc66aa1c29eb59da6340988a004254d0665b737ec767e1f408988c"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Tomato-None-Fridge-7/trial_T20190909_022842_145387",
+          "decision_index": 1,
+          "nominal_seed": 30102,
+          "prefix_id": "R19-random-control-bf0ed0343dfdde17e5fa",
+          "queue_hash": "17c896668c4868c433332bd04a439d0c273e11dd1f44754e4954d061f3b486a0",
+          "remaining_horizon": 49,
+          "selection_reason": {
+            "eligible_state_count": 16,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "02a254cbfe7ec57deaeed24214c4b3a9a28076f2765606be111b5f06c6cf1b6d"
+          },
+          "source_episode_event_id": "c2783abb443841da34826be041dea5d48611a441f20888ac239d5a6aee37198b",
+          "source_schedule_index": 102,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "01cd4ad45cbfc020829d995fd46567ca6e2f3f04790202e4ea34c9d25fdccaba"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Apple-None-SideTable-21/trial_T20190907_180932_300568",
+          "decision_index": 1,
+          "nominal_seed": 30117,
+          "prefix_id": "R19-random-control-0cd5ed676700233832c7",
+          "queue_hash": "1a0d781782d81acdd0c396e0f71cd43e251ecc1e662761422c848352b3719682",
+          "remaining_horizon": 49,
+          "selection_reason": {
+            "eligible_state_count": 8,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "27f25ce64aab1b68fae34867a3df77e82406583ef3fead4fb2c877e8f5e7deaf"
+          },
+          "source_episode_event_id": "840141241554c56967175e1fe8b5475c014244f347144f4453611161018de209",
+          "source_schedule_index": 117,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "9c2fd8c996e853a673a5a03bb5abfef6af4f8e8ee70bec21df9f28cf26a66f5e"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Egg-None-CounterTop-12/trial_T20190907_151629_832433",
+          "decision_index": 5,
+          "nominal_seed": 30073,
+          "prefix_id": "R19-random-control-2fc89d8a465734caa339",
+          "queue_hash": "1dcf1ab9ae9359cc5a03e3be870e5c90ca03e94937b0beecfb817190ddb433f2",
+          "remaining_horizon": 45,
+          "selection_reason": {
+            "eligible_state_count": 7,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "16061b4fb1c821af47b0ff73db13b42f8a041054a0760c8e3aba7006e6221430"
+          },
+          "source_episode_event_id": "729ebbc17b6325668d553066a2f9e381e53103e606fbf05ceee7865c4fb19c7e",
+          "source_schedule_index": 73,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "86e8a73c1ae5d7208ce255c402c840059f42a9183f1128dd1dabe7a3e1bd7b43"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Bread-None-CounterTop-17/trial_T20190907_151028_159967",
+          "decision_index": 5,
+          "nominal_seed": 30121,
+          "prefix_id": "R19-random-control-bf448be94724da4562c0",
+          "queue_hash": "1e360892e8a83bbc786902df4695041894cc7c332b01b7458d589daef4cc19ea",
+          "remaining_horizon": 45,
+          "selection_reason": {
+            "eligible_state_count": 15,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "05b387edcc9845636e08799e84528d2bb7e440dfc2c9db194afe3139407cf305"
+          },
+          "source_episode_event_id": "ff1923da7d671c9ed51cefa81b93d98d20038251bc1300a2fc1f017efb964a55",
+          "source_schedule_index": 121,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "d1decc671f0c41b4c5102a1d15f2ee61b46a2eff29d8af2b76aae01c579bc050"
+        },
+        {
+          "canonical_trial_id": "pick_clean_then_place_in_recep-Pan-None-StoveBurner-13/trial_T20190907_123712_820281",
+          "decision_index": 3,
+          "nominal_seed": 30072,
+          "prefix_id": "R19-random-control-e8d6be1ec3dbe79231ff",
+          "queue_hash": "2481be3c834d942310b785364f85444c40cf5229c70b35b26920885663ec09cb",
+          "remaining_horizon": 47,
+          "selection_reason": {
+            "eligible_state_count": 11,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "04473a06b6bdcfeab5dd23854a109bc4203affaf6671fb50666817cc67296522"
+          },
+          "source_episode_event_id": "6989d0ad72ff311ec8b5aa94a8296b581ab033d015e7e692cb748ce87f8e4d78",
+          "source_schedule_index": 72,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_clean_then_place_in_recep",
+          "trajectory_sha256": "aa195756fd7ea68a7d0a8fd8453ebcff5a97f7d0c4598f8079e9076b996eaed2"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Potato-None-CounterTop-8/trial_T20190906_180641_973990",
+          "decision_index": 3,
+          "nominal_seed": 30078,
+          "prefix_id": "R19-random-control-329d2417bbaea38f5511",
+          "queue_hash": "29ebe07bd7309e40f320fe012dcc3b1fe245af93e184639a0122f7462058ad20",
+          "remaining_horizon": 47,
+          "selection_reason": {
+            "eligible_state_count": 14,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "1d0c4cc269a988738668148ec76e9e3fd2f027b029d2f2d6d87144b63a9a8e8b"
+          },
+          "source_episode_event_id": "17f787cd44d76d396e8826178a02dbe1e0d998139ed7163afa20f543f981b138",
+          "source_schedule_index": 78,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "836dd05b43a6d167addc0b10408952abb0731355a6e28727bef853595bbcbba6"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Egg-None-Fridge-6/trial_T20190907_184715_099476",
+          "decision_index": 1,
+          "nominal_seed": 30038,
+          "prefix_id": "R19-random-control-be382ea467bfb513fdb7",
+          "queue_hash": "2a1baa39c6e48a1b53cd0ddf457bf2aee67c4b889b44c0fdcdda2b3b806c9e05",
+          "remaining_horizon": 49,
+          "selection_reason": {
+            "eligible_state_count": 12,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "07dc818f457871ea8c13c1ff033966d86317fd04b2285fb5f00200a8c696b0d8"
+          },
+          "source_episode_event_id": "abec0e29c54f5588ef25b9872cf9831288ca1ab7dd314511abe3bdf84fc010f0",
+          "source_schedule_index": 38,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "0758a8e3480e0a5b5a10e3d935ba52c1647ad7803aad912aefdf479fe1f7c6ca"
+        },
+        {
+          "canonical_trial_id": "pick_and_place_simple-PepperShaker-None-Drawer-5/trial_T20190908_195236_701456",
+          "decision_index": 15,
+          "nominal_seed": 30087,
+          "prefix_id": "R19-random-control-892da8a85142c10ddc4e",
+          "queue_hash": "2b270ff2d4ddc20a431e85c2114f7f890f3b3063f882d55f26ac17dc9075007a",
+          "remaining_horizon": 35,
+          "selection_reason": {
+            "eligible_state_count": 18,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "25943acc688a9251198f4d4fe9148bda037d165be502e31e66619c8775bade76"
+          },
+          "source_episode_event_id": "6124c6e6432c5fd1c6c1a532fc1e02bddf98200a8cb874700fb22adf33e3b857",
+          "source_schedule_index": 87,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_and_place_simple",
+          "trajectory_sha256": "074e38c58415972f0640dd0870fb28a0d92c8e43f7739df5f7f1b19bd09afae4"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Tomato-None-SideTable-28/trial_T20190908_031506_186347",
+          "decision_index": 14,
+          "nominal_seed": 30090,
+          "prefix_id": "R19-random-control-50ae37d13d2dd103d13e",
+          "queue_hash": "2d77500d8760347314e4787aa13917544aec1e706fc6f8b4804ebb3e3bbd67be",
+          "remaining_horizon": 36,
+          "selection_reason": {
+            "eligible_state_count": 16,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "01f81c8f8d8e55d0c49fc6b79fef273d5fc28ff88970682b77036fc0a4151dfd"
+          },
+          "source_episode_event_id": "472a16282bcd73ecbb8c4546442a8a542a99afc195de9350c655e61abee97e1a",
+          "source_schedule_index": 90,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "a784ca9cd6b609c404935d83e48e74cb9194bfa39989d738d4429e02a5ca6aa8"
+        },
+        {
+          "canonical_trial_id": "pick_clean_then_place_in_recep-Ladle-None-DiningTable-27/trial_T20190911_131452_462560",
+          "decision_index": 6,
+          "nominal_seed": 30056,
+          "prefix_id": "R19-random-control-6baa1b9cd932f23ba51d",
+          "queue_hash": "30d4d5056d819ea135ccc82863fb39b107ca249c764641e25dfa0fe80f15f875",
+          "remaining_horizon": 44,
+          "selection_reason": {
+            "eligible_state_count": 10,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "114753d14b882db45c113459aa351cad8df5d3776ef3c9dc729e218e83595248"
+          },
+          "source_episode_event_id": "cbaad12e252c08449001b84a056e96fcaa8b43163fb1cbb9c9c0ca72e543f11e",
+          "source_schedule_index": 56,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_clean_then_place_in_recep",
+          "trajectory_sha256": "5f35d14423df1e1451cf16fc5009d53dafc2f37906c36b6d21bcacc3241678dc"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Pan-None-StoveBurner-16/trial_T20190907_103940_774938",
+          "decision_index": 8,
+          "nominal_seed": 30037,
+          "prefix_id": "R19-random-control-47bcdcad9c56a38ac146",
+          "queue_hash": "312a203209f1b3141d64d305921e84ffac4ebfb702bb1e8ee29650b4b400ba82",
+          "remaining_horizon": 42,
+          "selection_reason": {
+            "eligible_state_count": 41,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "01ec6d50f9f6ed3fbf186f7e6174343d39774e70455669fa2c3039187cc1eb28"
+          },
+          "source_episode_event_id": "c906bfa594c837945e27b04e86a0a73f897a4bf50b30ddb75dc389c36600005d",
+          "source_schedule_index": 37,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "93a08f0e479c05e98b7f444648dc2cc5d6cd904ed89dbfd6d0395adbb13c91f0"
+        },
+        {
+          "canonical_trial_id": "pick_and_place_simple-AlarmClock-None-Desk-307/trial_T20190907_072303_146844",
+          "decision_index": 1,
+          "nominal_seed": 30055,
+          "prefix_id": "R19-random-control-2345a2239599ae3fca61",
+          "queue_hash": "33b089f4941eac92f819c68462bc992746fb9c50abc2fda8574f5cd7e7785cab",
+          "remaining_horizon": 49,
+          "selection_reason": {
+            "eligible_state_count": 5,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "251128f016313df0aba43a2930cd58dbfe44213376d938ac3c0d8f6493eedb78"
+          },
+          "source_episode_event_id": "35381851a7aa90657d020119bcd17c85f86e5725721d4af7d9640155a5dcedca",
+          "source_schedule_index": 55,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_and_place_simple",
+          "trajectory_sha256": "b863adf07610e648ea784400d16c27611344270af793048814f80477504c3d98"
+        },
+        {
+          "canonical_trial_id": "pick_and_place_simple-KeyChain-None-ArmChair-213/trial_T20190907_001825_048110",
+          "decision_index": 4,
+          "nominal_seed": 30103,
+          "prefix_id": "R19-random-control-27cfe81e9ae9856152f9",
+          "queue_hash": "37dc997cde68c080f30c84b8b1ce4b844d6ec53bf841360e4c4b30f6884e8782",
+          "remaining_horizon": 46,
+          "selection_reason": {
+            "eligible_state_count": 5,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "0d0fe70ab452771d2b65a4cff9ff558471a3b101a29b3bbed7a5b345ce421f7a"
+          },
+          "source_episode_event_id": "25df245a46da7a492877e6291bb2ce282f8208de695fd380cf6d3d628c9b1685",
+          "source_schedule_index": 103,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_and_place_simple",
+          "trajectory_sha256": "059c8dac8c7672c5ea65a8696132909c9eb093753958bed36f415d0f3180d3fe"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Potato-None-GarbageCan-19/trial_T20190907_073005_559245",
+          "decision_index": 7,
+          "nominal_seed": 30008,
+          "prefix_id": "R19-random-control-1d302ef130f726311578",
+          "queue_hash": "3bffe3158d59391ff7466ce7e92e457a03d8f111911b60aa2e0fa0e72d6a73b9",
+          "remaining_horizon": 43,
+          "selection_reason": {
+            "eligible_state_count": 15,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "1cf67f01c7b38aec29c7a36707b3a973cea31983ee553d516d3be0fac80643ed"
+          },
+          "source_episode_event_id": "7405078fc7d4913ff9e11687d9aa92f1bed5a7ed48e53796c3e83f6bf3bd520a",
+          "source_schedule_index": 8,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "d286a3ab88509b08fe16500425c3909b68dfd0d0dcf8d34ab0ef663dc9f79cf4"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Bread-None-CounterTop-11/trial_T20190908_030106_508574",
+          "decision_index": 0,
+          "nominal_seed": 30085,
+          "prefix_id": "R19-random-control-27e84409f51d5d42782a",
+          "queue_hash": "3d1d53f94a7d07ddb05cce3e94882c9b46214424045a600a52e5087d9dae7057",
+          "remaining_horizon": 50,
+          "selection_reason": {
+            "eligible_state_count": 14,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "0302a633173310acf7805adbe039d014ebe1f3bffd1818f268234918a7abaa9c"
+          },
+          "source_episode_event_id": "73a7c28ff86c65f7934fc24b7b35f768a6664a5572b11f4187a14235dc83c17d",
+          "source_schedule_index": 85,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "0d96c2b24e1ef4eebb107ac12f73d704ea4da055cae3bfa4c40a41480ac3700a"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Mug-None-Cabinet-26/trial_T20190909_023042_670199",
+          "decision_index": 17,
+          "nominal_seed": 30098,
+          "prefix_id": "R19-random-control-1402431fe044f69bbb8a",
+          "queue_hash": "3f5f2f978c15cd8184cdbfdf3143fb8a4b71042bb1e0f82be2798cecdb82423e",
+          "remaining_horizon": 33,
+          "selection_reason": {
+            "eligible_state_count": 18,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "128da488db1f0111da7b7910080b872f1ba7d2eab9171333487057f70aceb05b"
+          },
+          "source_episode_event_id": "be264e7871dd54e9b1afec7b27ddb6cb53374df3ae776cc609bc12571f7580d7",
+          "source_schedule_index": 98,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "2f90c41d3b51718667d04d0ffeba3f3a3902f3580b503cc64257f1002b7593f3"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Cup-None-DiningTable-24/trial_T20190909_020224_927852",
+          "decision_index": 0,
+          "nominal_seed": 30069,
+          "prefix_id": "R19-random-control-85a9970d6dc4684cbd37",
+          "queue_hash": "3fb25583b849d97c4e25d4bd19d1a0dbdc23e4afbb8e23887188a53c5708224e",
+          "remaining_horizon": 50,
+          "selection_reason": {
+            "eligible_state_count": 32,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "09f59f9bd962f64118e072206b4d224b4580311e81a98a60f5f411eb3a4a7eda"
+          },
+          "source_episode_event_id": "42808ec7d97d76e36e8f9e105a6af63d925b130f45977fac133d805ffb8bdaf6",
+          "source_schedule_index": 69,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "ca794606babd1629e7cec5c216b619e9b433eb4705f876442bf9457149fece6f"
+        },
+        {
+          "canonical_trial_id": "pick_and_place_simple-SprayBottle-None-GarbageCan-428/trial_T20190909_101548_443245",
+          "decision_index": 2,
+          "nominal_seed": 30091,
+          "prefix_id": "R19-random-control-67f5ef101dec752e27ab",
+          "queue_hash": "40c1b2724b3b4959ee4c587a3ed355a7f819ea8697f54fda6e7333c8a5291cbf",
+          "remaining_horizon": 48,
+          "selection_reason": {
+            "eligible_state_count": 10,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "272c57ece2ff28c824b263412cc07961b33c94cdd67607149214c56be2b059fb"
+          },
+          "source_episode_event_id": "c0efa2b990c8081cc3b32462e780ca56e8f5541cebbc4808143e67081a2c3827",
+          "source_schedule_index": 91,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_and_place_simple",
+          "trajectory_sha256": "1d5e74209f6236c7b8f29c23a5684b4db1ea0039629535e319bd504d3ea4913e"
+        },
+        {
+          "canonical_trial_id": "pick_clean_then_place_in_recep-Kettle-None-DiningTable-7/trial_T20190907_144338_014196",
+          "decision_index": 1,
+          "nominal_seed": 30100,
+          "prefix_id": "R19-random-control-c09e255a36efbf5574a0",
+          "queue_hash": "411fe4f7f42974837b0ba8237ae8eeba4cc627998b7103551426eddf82a031ef",
+          "remaining_horizon": 49,
+          "selection_reason": {
+            "eligible_state_count": 7,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "13f56f770753d396e8efe47ac03e183b6953ebf5990a8a682170cccc5bde61dd"
+          },
+          "source_episode_event_id": "972411130015d6d754e2597f1ab7a0b50a97e3896fe9d0652c0fc631b640f5a4",
+          "source_schedule_index": 100,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_clean_then_place_in_recep",
+          "trajectory_sha256": "b4cd3bc5bbe841ae2f1623baadfba5af8ed174557a21efa5f18adc103a53a23a"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Cup-None-CounterTop-17/trial_T20190908_131013_005229",
+          "decision_index": 5,
+          "nominal_seed": 30114,
+          "prefix_id": "R19-random-control-608a6bef0b406b08fda9",
+          "queue_hash": "437dd02a86ac474ec79dad656ed82ea20a6b9a2f2898d5c358dc6bbfc1a3bafe",
+          "remaining_horizon": 45,
+          "selection_reason": {
+            "eligible_state_count": 19,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "099401e4beacc6760be079d6b998b9da4b2d8e83041ca3df96970ef8e14a668a"
+          },
+          "source_episode_event_id": "c6cb29d36a178626800f33d2ded3330e183b12564a6ff7a165a4fbdac209d272",
+          "source_schedule_index": 114,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "7654a9803e85c22eca4dd600ceaef2688027f2a6c8e12e12a5d4b3893e6f7a49"
+        },
+        {
+          "canonical_trial_id": "pick_and_place_simple-Kettle-None-Shelf-1/trial_T20190907_011711_519188",
+          "decision_index": 1,
+          "nominal_seed": 30075,
+          "prefix_id": "R19-random-control-e88f68581b1a7edba0f5",
+          "queue_hash": "43b5630f0f1f1b1d13551748cfc2463468662a625a26be015663d6359c64e06e",
+          "remaining_horizon": 49,
+          "selection_reason": {
+            "eligible_state_count": 5,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "1559f8a36cdb77ad5a1a450cfb6ac9fbcc803417bb472589d8366cfc39cb7771"
+          },
+          "source_episode_event_id": "fa3f671f119d0033c2de0df42ab0c877ea185981f484ef73cd717a628ac9db55",
+          "source_schedule_index": 75,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_and_place_simple",
+          "trajectory_sha256": "38d281d2fbb9ecdf896d893148c9061b25ac6c569891cf1f26ecaa43bbaedeb4"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Cup-None-CounterTop-13/trial_T20190907_013449_796900",
+          "decision_index": 9,
+          "nominal_seed": 30118,
+          "prefix_id": "R19-random-control-073562e1005ce35e776e",
+          "queue_hash": "461e2b1e782f55f74051669fc2477e3dad90bbc54a887a7ba33db06b20256479",
+          "remaining_horizon": 41,
+          "selection_reason": {
+            "eligible_state_count": 19,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "07a02bb61be444e92c2615349f775e2f41f92329622a2dcab26583b22ac12fc2"
+          },
+          "source_episode_event_id": "9de9cf588d6ba6919ebf140e9120bf9463ba145539f39ec6733fa59e98c835b8",
+          "source_schedule_index": 118,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "cb74c53909f135b909177166ecf3c263175454061a485a155d90146210b37b86"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Apple-None-Fridge-12/trial_T20190909_151749_236238",
+          "decision_index": 8,
+          "nominal_seed": 30110,
+          "prefix_id": "R19-random-control-cfe696247a29fbfb5328",
+          "queue_hash": "4979357eef5106ec4597cbc51d0fbae1fbe7326655aa6f2653ce4461599c5770",
+          "remaining_horizon": 42,
+          "selection_reason": {
+            "eligible_state_count": 12,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "27dca538110ab8aed124203076913e3988a3da848c934a764f3263b97939159c"
+          },
+          "source_episode_event_id": "3c0a756ef10e763c9e74b4d7f17a43340df0982755b54e18f0d8967acb6c452a",
+          "source_schedule_index": 110,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "ece740607aa685138c864d4368c4c01301a06825cd9e072b5821b9ce4b805122"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Lettuce-None-GarbageCan-27/trial_T20190908_135424_349613",
+          "decision_index": 4,
+          "nominal_seed": 30053,
+          "prefix_id": "R19-random-control-ccc331ba81f3f3cc169a",
+          "queue_hash": "4a0ed79263128edcfa7ba28c8ef9fbd2d7f5772efbdba1482225642de0812ea1",
+          "remaining_horizon": 46,
+          "selection_reason": {
+            "eligible_state_count": 12,
+            "hash_domain": "persistent-recovery-r8-random-state",
+            "method": "lowest-random-state-hash",
+            "ranked_state_ordinal": 0,
+            "state_hash": "00034489c2c3b322d88e5e8fcc6bfd2306c174121838e68a55599ffe1a9329b1"
+          },
+          "source_episode_event_id": "065195c798ade5101b93e8a458ff3df02e1727ae93fab7170ee0622739f9c610",
+          "source_schedule_index": 53,
+          "source_success": true,
+          "stratum": "random_control",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "bf9d3a387f37284f9290866cc210e348686e543e68c800830da37c811fb14955"
+        }
+      ],
+      "success_control": [
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-2/trial_T20190907_044207_650433",
+          "decision_index": 17,
+          "nominal_seed": 30032,
+          "prefix_id": "R19-success-control-76ca5628f70bdaea9d9d",
+          "queue_hash": "012e8f9e314c436bbd8fd773a29e44396e4c1b88fe7d658b44784a0d2f31eba3",
+          "remaining_horizon": 33,
+          "selection_reason": {
+            "candidate_count": 35,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 17
+          },
+          "source_episode_event_id": "dd7b9b8d44d2a1306fd004c1b50b2c24810997b41a4d9210566573bb15090fb5",
+          "source_schedule_index": 32,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "e02031b634abf446ec8b9337a1b15780838dc6952abe1e91ed3fbef4bed51926"
+        },
+        {
+          "canonical_trial_id": "pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-415/trial_T20190908_050534_003993",
+          "decision_index": 3,
+          "nominal_seed": 30059,
+          "prefix_id": "R19-success-control-c6706bb3216d1e563838",
+          "queue_hash": "02fb5eefd0d27131534b681025e175693fdd154de98fd6ac5e0b3e23b9990afd",
+          "remaining_horizon": 47,
+          "selection_reason": {
+            "candidate_count": 6,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 3
+          },
+          "source_episode_event_id": "cc0ccf9e8562aeb6ba325bdd660e2ee1a472219ca13be2d614d05d42e43d6878",
+          "source_schedule_index": 59,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_and_place_simple",
+          "trajectory_sha256": "b1e49dd23faebaa643b11ec06c961d188b59d5050375d3c280077b3a311c03e7"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Apple-None-SideTable-21/trial_T20190909_000149_199484",
+          "decision_index": 4,
+          "nominal_seed": 30066,
+          "prefix_id": "R19-success-control-803b720b341906ade8ac",
+          "queue_hash": "0887b1b2428247635cf535ae223d30baabb055b42eb895955ed3d836d51a6580",
+          "remaining_horizon": 46,
+          "selection_reason": {
+            "candidate_count": 8,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 4
+          },
+          "source_episode_event_id": "007e56cdb5020e17a1a7e93a153d1b9481e3e70f5387c9816631f90491fbab91",
+          "source_schedule_index": 66,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "8d66eca380dc5e1f39140d2d1b344b8be111ef8e3181a249d404ab67cfd2f1e4"
+        },
+        {
+          "canonical_trial_id": "pick_and_place_simple-CD-None-Shelf-319/trial_T20190908_060942_585532",
+          "decision_index": 7,
+          "nominal_seed": 30025,
+          "prefix_id": "R19-success-control-fe255c4dc92eb6278708",
+          "queue_hash": "0e97501e1765132fde8d3d045fc8c8030260991712ca1cfdb9e3b7b9c0e2efce",
+          "remaining_horizon": 43,
+          "selection_reason": {
+            "candidate_count": 15,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 7
+          },
+          "source_episode_event_id": "bdf2cb26de0a89cc927500c7764de28cbff6a228ad28a34f4d6e346321311986",
+          "source_schedule_index": 25,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_and_place_simple",
+          "trajectory_sha256": "531f8498fca10ec3f9dce4f43f29662afbaa9ebbbd9c9e7763b56487469f62cc"
+        },
+        {
+          "canonical_trial_id": "pick_and_place_simple-RemoteControl-None-ArmChair-207/trial_T20190908_140544_546482",
+          "decision_index": 2,
+          "nominal_seed": 30067,
+          "prefix_id": "R19-success-control-1d89ca0de579b365cd33",
+          "queue_hash": "100f2f92651f4843f300d046fcdecd2d1bb23080f62b95cb943e6571e75f029c",
+          "remaining_horizon": 48,
+          "selection_reason": {
+            "candidate_count": 5,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 2
+          },
+          "source_episode_event_id": "3a848772102126a5b0fef2532462e66a9ae98f0fb878d2a8d56e5c427da05539",
+          "source_schedule_index": 67,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_and_place_simple",
+          "trajectory_sha256": "29bfe79228a7ab0ce000af6d54c15e6147f95cecf7b3d3944a02349ecc282e42"
+        },
+        {
+          "canonical_trial_id": "look_at_obj_in_light-Pillow-None-DeskLamp-302/trial_T20190909_150929_316139",
+          "decision_index": 3,
+          "nominal_seed": 30004,
+          "prefix_id": "R19-success-control-44e543bac8febb311402",
+          "queue_hash": "1408516031ea8e2c0e69d87cf7b5ace9c06b0297e3612a0f103ab7907b36c9c1",
+          "remaining_horizon": 47,
+          "selection_reason": {
+            "candidate_count": 6,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 3
+          },
+          "source_episode_event_id": "a9da4c7c8d2b753287cbf7f778b87213b7f7a7f2c9002e1e182e16d17488854b",
+          "source_schedule_index": 4,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "look_at_obj_in_light",
+          "trajectory_sha256": "9876443c89df8a238d2efddd33856f65b949f700a6612da0f852451574c3d0ec"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Egg-None-CounterTop-2/trial_T20190908_122832_412609",
+          "decision_index": 7,
+          "nominal_seed": 30028,
+          "prefix_id": "R19-success-control-fed313fe82c0c417528d",
+          "queue_hash": "181f493c4175c0241c7e12b843d58eecfe5c98e5750d3d5cf34789ace577ae10",
+          "remaining_horizon": 43,
+          "selection_reason": {
+            "candidate_count": 14,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 7
+          },
+          "source_episode_event_id": "7dee392cbf520bbb2c378b0d94a511caeec8dc811ae97d9921e502c1188c7ad3",
+          "source_schedule_index": 28,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "3ef9deaf9b111bd6b973c80051505eabbc69b3dce1da1a08f209116602729d19"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-11/trial_T20190907_164357_593878",
+          "decision_index": 6,
+          "nominal_seed": 30122,
+          "prefix_id": "R19-success-control-4e4b4ee973ef0b083f58",
+          "queue_hash": "18472e3ef2e9e535f0abfed0803824a4f37bc1fea5ca7877cf3482324af204b9",
+          "remaining_horizon": 44,
+          "selection_reason": {
+            "candidate_count": 12,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 6
+          },
+          "source_episode_event_id": "53d6290afe15ee168a39b6d0498fcd62981438cfd7ae2eee34e8ac417873c062",
+          "source_schedule_index": 122,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "a12024be3765e184a6f5d860acac18d8cbdccbc5ca82ffac0e03d3a8d83d707c"
+        },
+        {
+          "canonical_trial_id": "pick_clean_then_place_in_recep-Bowl-None-Fridge-6/trial_T20190908_081813_754018",
+          "decision_index": 17,
+          "nominal_seed": 30016,
+          "prefix_id": "R19-success-control-b8d3baa417c821d30701",
+          "queue_hash": "1a944455bf7ae492a72137123af0496a32047c69d5845d77727779674818985c",
+          "remaining_horizon": 33,
+          "selection_reason": {
+            "candidate_count": 35,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 17
+          },
+          "source_episode_event_id": "41448147e9023b022e12da23c8bb820c63c5c401fa810dd85f0efb20c90c23ca",
+          "source_schedule_index": 16,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_clean_then_place_in_recep",
+          "trajectory_sha256": "f7095f430a729d0efd28878983a3c185aee5325d5cf86411a089a0bcf8a8fba1"
+        },
+        {
+          "canonical_trial_id": "pick_clean_then_place_in_recep-Bowl-None-DiningTable-23/trial_T20190907_221803_588693",
+          "decision_index": 12,
+          "nominal_seed": 30120,
+          "prefix_id": "R19-success-control-fd2fa170071894c22ade",
+          "queue_hash": "1b5f44410d1ff41b4aa660d375cba5f07ad48752ae4f6e78806e03c5183d4636",
+          "remaining_horizon": 38,
+          "selection_reason": {
+            "candidate_count": 24,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 12
+          },
+          "source_episode_event_id": "6dd58f20fbdc94bdccfaa87aa399de1e0490348fb8683772533d4ad0b42e46b1",
+          "source_schedule_index": 120,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_clean_then_place_in_recep",
+          "trajectory_sha256": "90ccb2fcafeb1511bc54ec0604f1646b55c7d16589c1ce0c3573868a3050d321"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Potato-None-CounterTop-14/trial_T20190908_053544_835832",
+          "decision_index": 8,
+          "nominal_seed": 30097,
+          "prefix_id": "R19-success-control-58293a302586d8f5b865",
+          "queue_hash": "21d053a3f188bf73c57eb920015f1e32669b07755719ccf45c8084dfcd6bb25d",
+          "remaining_horizon": 42,
+          "selection_reason": {
+            "candidate_count": 16,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 8
+          },
+          "source_episode_event_id": "f0e3850132a252a18ba37aa241281afabc11c9267886405ea61320c8e7d2b380",
+          "source_schedule_index": 97,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "eab8f736214c0cd5a821e257ee22d05f176aa1bd774df5da1e068ce67e5bec66"
+        },
+        {
+          "canonical_trial_id": "pick_and_place_simple-CreditCard-None-Desk-310/trial_T20190908_033230_602789",
+          "decision_index": 3,
+          "nominal_seed": 30015,
+          "prefix_id": "R19-success-control-a970bede98aadc04cf59",
+          "queue_hash": "220aff1145e2f020af9d0c9fc3abc2faa36263f45c44eda7c57a7182718cf649",
+          "remaining_horizon": 47,
+          "selection_reason": {
+            "candidate_count": 6,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 3
+          },
+          "source_episode_event_id": "9b59c76320420934141bbc1c6bf3efb837ddcc6078998d60f41395c548ecdbb4",
+          "source_schedule_index": 15,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_and_place_simple",
+          "trajectory_sha256": "30905b5aa828350bf74cc4f749c6e546300b0d74d66b34c8d2b95032445c9020"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Bread-None-CounterTop-4/trial_T20190907_232940_130727",
+          "decision_index": 7,
+          "nominal_seed": 30065,
+          "prefix_id": "R19-success-control-84efdd5bf22d2d94e13e",
+          "queue_hash": "22559b617888de009f067855fb659cc3afe8535018e9f39aed07f8c6084d442a",
+          "remaining_horizon": 43,
+          "selection_reason": {
+            "candidate_count": 14,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 7
+          },
+          "source_episode_event_id": "e5dcc1921afb7f88133d9ebc239bfda0760e4af02aa52961d6e784f259c7ff54",
+          "source_schedule_index": 65,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "b26d64ef49609ca148010da62af35448a6067d1cfec34f6eeea21d8e3b4eaf54"
+        },
+        {
+          "canonical_trial_id": "pick_clean_then_place_in_recep-Cloth-None-Drawer-416/trial_T20190908_040609_717998",
+          "decision_index": 8,
+          "nominal_seed": 30076,
+          "prefix_id": "R19-success-control-9ee33251743f45bb194c",
+          "queue_hash": "236cc3b75e4ae733cba63d5208f21656dddd98b234f46df313f62feef3195c7e",
+          "remaining_horizon": 42,
+          "selection_reason": {
+            "candidate_count": 17,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 8
+          },
+          "source_episode_event_id": "d416ea77cafd9c74282d1f5a992d6eeacfd9971ae8ec6466d2c57501d9909c55",
+          "source_schedule_index": 76,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_clean_then_place_in_recep",
+          "trajectory_sha256": "03daa30c9612b1a68654f92249ba64623fc084d6ced9af660277280929aa9ca7"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Egg-None-GarbageCan-1/trial_T20190908_132828_295041",
+          "decision_index": 7,
+          "nominal_seed": 30058,
+          "prefix_id": "R19-success-control-afc6ea00fdfb2368343e",
+          "queue_hash": "238f5bf7e55b79d789114c1738f4028afc417eb3bf8f704659dcd74a32f8c4e5",
+          "remaining_horizon": 43,
+          "selection_reason": {
+            "candidate_count": 15,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 7
+          },
+          "source_episode_event_id": "6e0bf235bb6b25d32c20b73d1ea050e90af481fada65b2f61522076ed9739ad5",
+          "source_schedule_index": 58,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "fc2b280b2bcf07989a19309425d2ca8add680b06f4fd7ad96aa72f18cf9690e4"
+        },
+        {
+          "canonical_trial_id": "pick_and_place_simple-SoapBottle-None-Toilet-405/trial_T20190908_015700_206003",
+          "decision_index": 3,
+          "nominal_seed": 30005,
+          "prefix_id": "R19-success-control-a2497d398a7a2983e538",
+          "queue_hash": "2538fde8dbd155bbabbd2955e23733fd0c9acf3f1f351cef3923ed2c67572d60",
+          "remaining_horizon": 47,
+          "selection_reason": {
+            "candidate_count": 7,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 3
+          },
+          "source_episode_event_id": "aad26eb0bafa985b14055fa5b2285578c8f0ae6c6d6c5c035d51c5f499698470",
+          "source_schedule_index": 5,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_and_place_simple",
+          "trajectory_sha256": "6cfcdff06594b3a2e0ffbbdce4be7f6cc54e10df1bdbaef37823964eb45bccf8"
+        },
+        {
+          "canonical_trial_id": "pick_clean_then_place_in_recep-Spoon-None-DiningTable-20/trial_T20190909_034621_566395",
+          "decision_index": 5,
+          "nominal_seed": 30001,
+          "prefix_id": "R19-success-control-9c04590d35dc96efd625",
+          "queue_hash": "258d3bc01d9d883a7aaa892f96f0a6d74d096665921ce5e35621b7e462e10301",
+          "remaining_horizon": 45,
+          "selection_reason": {
+            "candidate_count": 10,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 5
+          },
+          "source_episode_event_id": "170caf6f82d53ff21f34dbb41f5214663367e1c85c8370999f32bbe367a4ace6",
+          "source_schedule_index": 1,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_clean_then_place_in_recep",
+          "trajectory_sha256": "5481a3d1eeb7467d2dbef1bc55c6174ebc5c8b0ef5e8bdde75573d09b9114b4a"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Bread-None-CounterTop-17/trial_T20190907_151002_383149",
+          "decision_index": 7,
+          "nominal_seed": 30113,
+          "prefix_id": "R19-success-control-af11b37203914551d02a",
+          "queue_hash": "27b52bf318a9d84f211098a758ac8177b6287648487b36078baaaf60b982a60f",
+          "remaining_horizon": 43,
+          "selection_reason": {
+            "candidate_count": 14,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 7
+          },
+          "source_episode_event_id": "5e9accbb9ff0d22e332a2a13984ea7110216d91de90218c0caa2e049ee4ea22d",
+          "source_schedule_index": 113,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "4355aadfbbe39d3f26a579e6ad903bf48f95b9a9f3a419063bc1aedb16e998d0"
+        },
+        {
+          "canonical_trial_id": "pick_clean_then_place_in_recep-Kettle-None-DiningTable-7/trial_T20190907_144235_625346",
+          "decision_index": 4,
+          "nominal_seed": 30112,
+          "prefix_id": "R19-success-control-2deca8db3eceb82a9b24",
+          "queue_hash": "27f40f2474b4280b0d9bc2c62a3b5817b605859ff23a49bcde21a306f9633a92",
+          "remaining_horizon": 46,
+          "selection_reason": {
+            "candidate_count": 9,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 4
+          },
+          "source_episode_event_id": "346202c24c0479541dcea50065b36787053f12b0bffab4c0ad5cc314ce50251f",
+          "source_schedule_index": 112,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_clean_then_place_in_recep",
+          "trajectory_sha256": "96d3a58bd6f5a022b4a2e01e95d41ed17fe70bd5bf02894759b827d689cb99d4"
+        },
+        {
+          "canonical_trial_id": "pick_clean_then_place_in_recep-Fork-None-Drawer-8/trial_T20190908_132042_019953",
+          "decision_index": 15,
+          "nominal_seed": 30104,
+          "prefix_id": "R19-success-control-117baa111bc0953903a7",
+          "queue_hash": "2ea7099966d7f72e48b4aa1ab59b905bad70ee26de23b0a6fd5eca0aa1080e15",
+          "remaining_horizon": 35,
+          "selection_reason": {
+            "candidate_count": 30,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 15
+          },
+          "source_episode_event_id": "7882845654cdef174788c939fe35fb11149161270626ad29fbf206e80e199759",
+          "source_schedule_index": 104,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_clean_then_place_in_recep",
+          "trajectory_sha256": "c9fd56408428fdb8435c5cac76f6a726c2393c2ece73dc0023ce16015c431375"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Pan-None-Cabinet-18/trial_T20190907_212755_456877",
+          "decision_index": 5,
+          "nominal_seed": 30101,
+          "prefix_id": "R19-success-control-b9f7216124033a8ecc9f",
+          "queue_hash": "317999f7f669a8577b7579cb6da353ef745b92b782110d6e4d232013392ab85f",
+          "remaining_horizon": 45,
+          "selection_reason": {
+            "candidate_count": 10,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 5
+          },
+          "source_episode_event_id": "dd96e10e2736dc22fba9b438bedb7f6383685afb59b89d8d57e610dd90172b50",
+          "source_schedule_index": 101,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "36f61057bb672216440eec9d8ef6e50af5169bab713fd33a09b305bf8767cc8c"
+        },
+        {
+          "canonical_trial_id": "pick_and_place_simple-SprayBottle-None-Toilet-426/trial_T20190908_155247_137362",
+          "decision_index": 14,
+          "nominal_seed": 30083,
+          "prefix_id": "R19-success-control-2548fb71bf2c799447a8",
+          "queue_hash": "353cb2f7e5880aa8e503a2161b8608420408080c73152a792a9c19d59437e6de",
+          "remaining_horizon": 36,
+          "selection_reason": {
+            "candidate_count": 29,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 14
+          },
+          "source_episode_event_id": "65638b3a9f68a467f240be51b185acd305c175922988656e1ae19f66768f65d3",
+          "source_schedule_index": 83,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_and_place_simple",
+          "trajectory_sha256": "9f061971486da970bb902454f575a18ee6f3351c167cb562b56e7f90de75799a"
+        },
+        {
+          "canonical_trial_id": "pick_clean_then_place_in_recep-Lettuce-None-DiningTable-21/trial_T20190908_215554_002650",
+          "decision_index": 4,
+          "nominal_seed": 30068,
+          "prefix_id": "R19-success-control-fa81788556eb9c4cf92d",
+          "queue_hash": "38c9e87da1ffbacd2a6d4821742aa0ce5a649180ad16d4a7b39f59da2c178aac",
+          "remaining_horizon": 46,
+          "selection_reason": {
+            "candidate_count": 8,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 4
+          },
+          "source_episode_event_id": "667438e765808071dcf155cd10308734d29cbfb6674e5ec572b3e4da0b5b0f51",
+          "source_schedule_index": 68,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_clean_then_place_in_recep",
+          "trajectory_sha256": "d72716cd54db92c0e4ed48c5f175fc05e48fc642984195547223ad26e97e9c6e"
+        },
+        {
+          "canonical_trial_id": "pick_clean_then_place_in_recep-Tomato-None-GarbageCan-15/trial_T20190908_190029_853407",
+          "decision_index": 7,
+          "nominal_seed": 30044,
+          "prefix_id": "R19-success-control-3735bbf667ba689c98a2",
+          "queue_hash": "399c96e5cb29a9f2b117d06f904211480522ba5427a7f560f408733d4beb5791",
+          "remaining_horizon": 43,
+          "selection_reason": {
+            "candidate_count": 14,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 7
+          },
+          "source_episode_event_id": "2e1b853c5a606cbefdb81eabdbd9b40e281851fe34fdc025f10235a7f323f6f0",
+          "source_schedule_index": 44,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_clean_then_place_in_recep",
+          "trajectory_sha256": "1a45ff9c9c8b18fb537ab0205e97963e51462788511ef1f0f75ae4c8a35a5405"
+        },
+        {
+          "canonical_trial_id": "pick_and_place_simple-KeyChain-None-Safe-323/trial_T20190918_181136_220658",
+          "decision_index": 23,
+          "nominal_seed": 30010,
+          "prefix_id": "R19-success-control-cd93e6ddbc283693ecf4",
+          "queue_hash": "3a52d98bd4590a250923a5dbffa04d860159da39a23ae78d5bac79fd5233d7b0",
+          "remaining_horizon": 27,
+          "selection_reason": {
+            "candidate_count": 46,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 23
+          },
+          "source_episode_event_id": "b95e0674361c7e87ecaec92aea9b2502ff1426501e78fe3d9f9ef06715db997e",
+          "source_schedule_index": 10,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_and_place_simple",
+          "trajectory_sha256": "b7e2705bbffd1471cb1e7e9c71fadc09ac8849465de975523b0221c2a1cdea52"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Egg-None-Microwave-6/trial_T20190909_035020_801070",
+          "decision_index": 6,
+          "nominal_seed": 30002,
+          "prefix_id": "R19-success-control-5b23057b77898954058b",
+          "queue_hash": "3c041e0fd5586527732901ab2102cd56315ee26c48c3d14276e3d37314646e15",
+          "remaining_horizon": 44,
+          "selection_reason": {
+            "candidate_count": 12,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 6
+          },
+          "source_episode_event_id": "5c88c3597422631db955a14a12822f267e15d90593e19bf134b554f23ec8c574",
+          "source_schedule_index": 2,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "1c53329300878a25b9845e4a715815cd236e38c925619b1a63e8dc7ba41362ef"
+        },
+        {
+          "canonical_trial_id": "pick_clean_then_place_in_recep-Pan-None-StoveBurner-13/trial_T20190907_123642_135397",
+          "decision_index": 3,
+          "nominal_seed": 30096,
+          "prefix_id": "R19-success-control-0b5d4045bee671f5f200",
+          "queue_hash": "3c2034011716893a1b1e9f97e0a20039c9ccb00246e2ffb6d9fe910ed9ca2b7e",
+          "remaining_horizon": 47,
+          "selection_reason": {
+            "candidate_count": 6,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 3
+          },
+          "source_episode_event_id": "7584e1bda199a00ff58c08af43aac092e444801493cb062d1d6ab651b2bf77ab",
+          "source_schedule_index": 96,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_clean_then_place_in_recep",
+          "trajectory_sha256": "99028c305890aa96689bc3fcb10c4fecad0cac7b8610e41744aca766431d7193"
+        },
+        {
+          "canonical_trial_id": "pick_cool_then_place_in_recep-Mug-None-Shelf-5/trial_T20190907_210616_427958",
+          "decision_index": 16,
+          "nominal_seed": 30057,
+          "prefix_id": "R19-success-control-7005ffc440af8b779e6c",
+          "queue_hash": "3f224c34bf1bb04fe942e135de7c4d55ccb7e7d3443550ca05de284abc8c154f",
+          "remaining_horizon": 34,
+          "selection_reason": {
+            "candidate_count": 33,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 16
+          },
+          "source_episode_event_id": "ae02a691fec78305cc99da9a87f88dea5e1fd72eb584be27eb949360dd72fe92",
+          "source_schedule_index": 57,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_cool_then_place_in_recep",
+          "trajectory_sha256": "0425d8b8a3c809a6b17fc7243a6222a3fd03ccc6e0d42209fa2d46c398848a93"
+        },
+        {
+          "canonical_trial_id": "pick_and_place_simple-SoapBottle-None-Toilet-413/trial_T20190909_042914_071706",
+          "decision_index": 3,
+          "nominal_seed": 30035,
+          "prefix_id": "R19-success-control-20715389e5408430a9ec",
+          "queue_hash": "3f2fb808a7bbea19717543dc841d1d6bb445c695ba44c24821e5525f806e49b7",
+          "remaining_horizon": 47,
+          "selection_reason": {
+            "candidate_count": 6,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 3
+          },
+          "source_episode_event_id": "a789d27b83be91ac528593dcf0b3fec11e6c09b2ec21e336821bf2cf4a869ff3",
+          "source_schedule_index": 35,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_and_place_simple",
+          "trajectory_sha256": "a7d315100237ec0131b4271308be9017c4a4cf89b04e2aea3fc47833c933a720"
+        },
+        {
+          "canonical_trial_id": "pick_heat_then_place_in_recep-Potato-None-DiningTable-11/trial_T20190909_101238_901434",
+          "decision_index": 5,
+          "nominal_seed": 30086,
+          "prefix_id": "R19-success-control-3ab3e00b653fafc0866d",
+          "queue_hash": "3f4b18901d6eb0aadfe844693f2e6110dc48016f7f101b711a6f7ce74bc5d786",
+          "remaining_horizon": 45,
+          "selection_reason": {
+            "candidate_count": 11,
+            "method": "midpoint",
+            "rule": "T[floor(m/2)]",
+            "sorted_candidate_ordinal": 5
+          },
+          "source_episode_event_id": "5a77abba09115f945dae9c6a556359734c5e146dda0a56a63ac26a6f2c16babe",
+          "source_schedule_index": 86,
+          "source_success": true,
+          "stratum": "success_control",
+          "task_family": "pick_heat_then_place_in_recep",
+          "trajectory_sha256": "7210fec11945f099c5e904f223de108b6a4fef12d618c558c6b53f4f7e8966f4"
+        }
+      ]
+    }
+  },
+  "payload_sha256": "e32ec26cb0cae065cd166edae0a08195ed7dfd3c1573b0653ab463eb4011e7dd",
+  "previous_event_sha256": "bdf0afc1b1c4187679e0de45ab44038e61b572477ca51b9921fee0d7edb0710b",
+  "protocol_sha256": "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122",
+  "run_context": {
+    "baseline_amendment_sha256": "f8a138045cde125f2c5e08a7d077f75e3838cc7f6d0c67703faffe1166099e49",
+    "baseline_id": "R19-B1",
+    "entrypoint_repair_authorization_sha256": "026eb1f0b05bcc27a6c901c10d787110cbac0e329551051973dda93e907bdc71",
+    "environment_manifest_sha256": "2a1e4d35db31cdd0d8adcdf15df60b577a79b3b7e51c74c2546ed97463c178d0",
+    "experiment_id": "r19_recovery_duration_v1",
+    "g2_evidence_carried_forward": true,
+    "g2_executed_implementation_sha": "92aae1d9b230cc212c6ec4effc99aa468941e69d",
+    "g3_authorization_sha256": "89b887518c85d22d3176af0b50fb1861b58fb1c3b13a4ecc2b76485a66529b31",
+    "g3_gate_receipt_file_sha256": "4ab84099f361bf563327168237ac052c19506cd997e159aacd5f1244e3a9c773",
+    "g3_launch_implementation_sha": "2da980f631badc25086d12db60d128ff507d3ae6",
+    "model_identity_sha256": "d503f35ae913b137dfff091263bf29c38aa0ade2eea648dc45d7e6cf80da0973",
+    "new_g2_run_performed": false,
+    "pinned_model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "runtime_expectations_sha256": "dbfb7aa1a1d48d1148ad25be93002e7424d8b22e85422125ed502ac0f4db967e",
+    "runtime_manifest_sha256": "f4c6b5eac9b1558b82e0e626ea4412437ff924f839a62f8fe3962a141effe7f7",
+    "source_contract_repair_amendment_sha256": "1b94a0ed37284d37a21d07985a5ba18de25ea4e11f9ffa553ca624c9739aee1e",
+    "source_contract_restart_authorization_sha256": "164179291d16066d7fc6d650a943011099e8be940f48b62d86970ba7f5c17048",
+    "source_manifest_sha256": "2cc065dd09642b1b9bd1dd2a5067b1b9f4f9a55bea6a988d40d9275a9b685c37",
+    "source_restart_expected_snapshot_sha256": "d85d870bfddbad4eb62116d3d5de54a4b7fd4f250634af1c1ed89958e4c400b8",
+    "source_restart_predecessor_run_id": "3d1ccea7e97f4727abf8e216ac6ec498",
+    "source_restart_remaining_phase_caps": {
+      "environment_operations": {
+        "initial_attempt": 5520,
+        "logical_branch": 18000,
+        "path_extension": 2940,
+        "replay_gate": 5400,
+        "source": 8999
+      },
+      "model_calls": {
+        "initial_recovery": 240,
+        "path_extension": 240,
+        "source": 8999,
+        "suffix": 17100
+      }
+    },
+    "source_restart_unit_resolution_event_sha256": "58783ba60b076ee190dccb0875aac65891d7e1c811e00fbe6303ca65896369d9"
+  },
+  "run_id": "260422ac02bd42a8b2929d7ef240526b",
+  "schema_version": "r19_event_v2",
+  "sequence": 8566
+}

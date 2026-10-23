@@ -1,0 +1,30 @@
+{
+  "status": "MONITOR_DISPLAY_DOUBLE_COUNT_CORRECTED_BY_PRODUCTION_PHYSICAL_LEDGER_VALIDATOR",
+  "verified_at_utc": "2026-10-23T02:44:27.865936+00:00",
+  "run_id": "260422ac02bd42a8b2929d7ef240526b",
+  "old_monitor_nonreset_count": 7442,
+  "authoritative_new_nonreset_count": 7273,
+  "duplicate_wrapper_count": 169,
+  "evidence": {
+    "wrapper_event_id": "25666fcc43cdedc2c18450a5f4de360ac0cf5f95405b90f5466a8bd1a2b49136",
+    "linked_physical_environment_operation_event_id": "d909a2889906bcd39e03fc82e5a096bf3a71180c62da16e0c1e4199616a1ab56"
+  },
+  "all169_wrapper_transitions_link_to_existing_physical_operation_events": true,
+  "old_display_cumulative_envops": 8118,
+  "authoritative_cumulative_envops": 7949,
+  "authoritative_new_cost": {
+    "environment_operations_including_resets": 7607,
+    "incomplete_external_operations": 0,
+    "model_generations": 4965,
+    "non_reset_environment_operations": 7273,
+    "resets": 334
+  },
+  "authoritative_cumulative_cost": {
+    "environment_operations_including_resets": 7949,
+    "incomplete_external_operations": 0,
+    "model_generations": 5142,
+    "non_reset_environment_operations": 7603,
+    "resets": 346
+  },
+  "explanation": "environment_step_completed wraps a transition already recorded as environment_operation_completed. Count the actual API operation once; all actual generation/reset/action costs retained. Raw scientific files and earlier monitoring observations not altered. Earlier in-progress displayed envops were conservative duplicate counts, not budget authority."
+}

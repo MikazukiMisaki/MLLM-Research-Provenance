@@ -1,0 +1,33 @@
+{
+  "status": "CONFIRMED_FUTURE_G4_RUNTIME_SCHEMA_CONTRACT_MISMATCH",
+  "observed_at_utc": "2026-10-23T02:30:29.072408+00:00",
+  "scientific_source_sha": "2da980f631badc25086d12db60d128ff507d3ae6",
+  "run_id": "260422ac02bd42a8b2929d7ef240526b",
+  "scope": "G4 consumer blocker; actual frozen-v2 G3 runtime is not drift and live pilot has not failed. G4 is excluded from current user authorization.",
+  "producer_file": "/home/lizening/wt-r19-recovery-duration-v1/scripts/run_r19_experiment.py",
+  "producer_schema_line": 937,
+  "raw_runtime_path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/runtime_manifest.json",
+  "raw_runtime_sha256": "306a9e7c2d1b968e2a56e258fcd07aaf7467739460802a2b94c5e20411264916",
+  "actual_runtime_schema": "r19_inference_runtime_manifest_v2",
+  "actual_nested_inference": {
+    "external_model_calls": false,
+    "generation": "greedy; thinking disabled; synchronized per-generation latency",
+    "local_files_only": true,
+    "offline_environment": {
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1"
+    },
+    "transport": "local_transformers"
+  },
+  "frozen_baseline_preload_schema": "r19_inference_runtime_manifest_v2",
+  "frozen_baseline_nested_inference_matches_actual": true,
+  "consumer_file": "/home/lizening/wt-r19-recovery-duration-v1/scripts/analyze_r19_recovery_duration.py",
+  "consumer_function": "validate_live_execution_provenance",
+  "consumer_if_line": 1517,
+  "consumer_reject_predicate": "runtime_manifest.get('schema_version') != 'r19_inference_runtime_manifest_v1' or runtime_manifest.get('local_files_only') is not True or runtime_manifest.get('inference_transport') != 'local_transformers' or (runtime_manifest.get('external_model_calls') is not False)",
+  "predicate_evaluated_on_genuine_runtime_result": true,
+  "rejection_message": "live runtime manifest does not prove local-only inference",
+  "reproduction": "Evaluate the exact AST rejection predicate from the tracked consumer on the genuine raw runtime dict. No fabricated final execution_manifest, no G4 main/report/statistics invocation, no source/model/env call.",
+  "future_trigger": "A completed pilot passed with its unchanged raw runtime_manifest.json to the existing G4 analyzer main -> validate_live_execution_provenance will reject v2/nested inference at this condition.",
+  "action": "Preserve genuine raw manifests, record blocker, no conversion/flattening/patch/relaunch. Continue sole authorized healthy G3. Full G4 acceptance pending separate future reviewed consumer repair/authorization."
+}
