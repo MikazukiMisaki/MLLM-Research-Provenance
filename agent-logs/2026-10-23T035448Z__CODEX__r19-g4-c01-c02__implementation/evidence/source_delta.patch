@@ -1,0 +1,873 @@
+diff --git a/scripts/analyze_r19_recovery_duration.py b/scripts/analyze_r19_recovery_duration.py
+index a65cebd..0b3121d 100644
+--- a/scripts/analyze_r19_recovery_duration.py
++++ b/scripts/analyze_r19_recovery_duration.py
+@@ -1485,6 +1485,33 @@ def validate_live_source_schedule(
+     }
+ 
+ 
++def _validate_local_inference_runtime(runtime: Mapping[str, Any]) -> None:
++    """Validate each producer schema without changing the document used for hashes."""
++    if not isinstance(runtime, Mapping):
++        raise EvidenceIntegrityError("live runtime manifest is not an object")
++    schema = runtime.get("schema_version")
++    flat_keys = {"local_files_only", "inference_transport", "external_model_calls", "transport"}
++    if schema == "r19_inference_runtime_manifest_v1" and not {"inference", "transport"}.intersection(runtime):
++        inference = runtime
++        transport_key = "inference_transport"
++    elif (
++        schema == "r19_inference_runtime_manifest_v2"
++        and not flat_keys.intersection(runtime)
++        and isinstance(runtime.get("inference"), Mapping)
++        and "inference_transport" not in runtime["inference"]
++    ):
++        inference = runtime["inference"]
++        transport_key = "transport"
++    else:
++        raise EvidenceIntegrityError("live runtime manifest has an invalid versioned inference shape")
++    if (
++        inference.get("local_files_only") is not True
++        or inference.get(transport_key) != "local_transformers"
++        or inference.get("external_model_calls") is not False
++    ):
++        raise EvidenceIntegrityError("live runtime manifest does not prove local-only inference")
++
++
+ def validate_live_execution_provenance(
+     *, execution_manifest: Mapping[str, Any], runtime_manifest: Mapping[str, Any],
+     environment_manifest: Mapping[str, Any], schedule_path: Path,
+@@ -1514,13 +1541,7 @@ def validate_live_execution_provenance(
+ 
+     runtime_digest = sha256_json(dict(runtime_manifest))
+     environment_digest = sha256_json(dict(environment_manifest))
+-    if (
+-        runtime_manifest.get("schema_version") != "r19_inference_runtime_manifest_v1"
+-        or runtime_manifest.get("local_files_only") is not True
+-        or runtime_manifest.get("inference_transport") != "local_transformers"
+-        or runtime_manifest.get("external_model_calls") is not False
+-    ):
+-        raise EvidenceIntegrityError("live runtime manifest does not prove local-only inference")
++    _validate_local_inference_runtime(runtime_manifest)
+     if environment_manifest.get("split") != "train":
+         raise EvidenceIntegrityError("live environment manifest is not restricted to TRAIN")
+ 
+@@ -1927,6 +1948,147 @@ def validate_live_execution_provenance(
+     }
+ 
+ 
++def _supervisor_option(argv: list[str], name: str) -> str:
++    values = []
++    for index, argument in enumerate(argv):
++        if argument == name:
++            if index + 1 == len(argv) or argv[index + 1].startswith("--"):
++                raise EvidenceIntegrityError(f"supervisor command lacks a value for {name}")
++            values.append(argv[index + 1])
++        elif argument.startswith(name + "="):
++            values.append(argument.split("=", 1)[1])
++    if len(values) != 1 or not values[0]:
++        raise EvidenceIntegrityError(f"supervisor command requires one unambiguous {name}")
++    return values[0]
++
++
++def _read_supervisor_object(path: Path) -> dict[str, Any]:
++    try:
++        value = json.loads(path.read_text(encoding="utf-8"))
++    except (OSError, ValueError) as error:
++        raise EvidenceIntegrityError(f"supervisor evidence is unreadable: {path.name}") from error
++    if not isinstance(value, dict):
++        raise EvidenceIntegrityError(f"supervisor evidence is not an object: {path.name}")
++    return value
++
++
++def _validate_supervisor_launch_context(
++    receipt: Mapping[str, Any], status: Mapping[str, Any], *, receipt_path: Path,
++    events_path: Path, branches_path: Path,
++    context: Mapping[str, Any],
++) -> str:
++    """Authenticate the persisted pilot launch when the journal has no start event."""
++    path = receipt_path.parent / "launch_context.json"
++    launch = _read_supervisor_object(path)
++    digest = sha256_file(path)
++    argv = receipt["command_argv"]
++    cwd = launch.get("cwd")
++    bound_keys = (
++        "run_id", "implementation_sha", "evidence_class", "supersedes_run_id",
++        "cwd", "command_argv", "command_sha256",
++    )
++    if (
++        launch.get("schema_version") != "r19_supervisor_launch_context_v1"
++        or receipt.get("launch_context_sha256") != digest
++        or status.get("launch_context_sha256") != digest
++        or any(launch.get(key) != receipt.get(key) or launch.get(key) != status.get(key)
++               for key in bound_keys)
++        or not isinstance(cwd, str) or not Path(cwd).is_absolute()
++        or launch.get("interpreter") != argv[0]
++        or len(argv) < 3
++        or Path(argv[1]) != Path(cwd) / "scripts/run_r19_recovery_duration.py"
++        or argv[2] != "pilot" or "--preflight-only" in argv
++    ):
++        raise EvidenceIntegrityError("supervisor launch context does not authenticate the pilot ledger")
++
++    def launch_path(value: str) -> Path:
++        return (Path(cwd) / value).resolve()
++
++    protocol = launch_path(_supervisor_option(argv, "--protocol"))
++    output = launch_path(_supervisor_option(argv, "--output"))
++    if (
++        not protocol.is_file() or sha256_file(protocol) != receipt["protocol_sha256"]
++        or events_path.resolve() != output / "execution_events.jsonl"
++        or branches_path.resolve() != output / "branches.jsonl"
++    ):
++        raise EvidenceIntegrityError("supervisor launch protocol/output differs from the supplied evidence")
++    supervisor_argv = launch.get("supervisor_argv")
++    entrypoint = str(Path(cwd) / "scripts/launch_r19_supervised.py")
++    if (
++        not isinstance(supervisor_argv, list) or len(supervisor_argv) < 4
++        or any(not isinstance(item, str) or not item for item in supervisor_argv)
++        or not isinstance(launch.get("supervisor_interpreter"), str)
++        or not launch.get("supervisor_interpreter")
++        or supervisor_argv[:2] != [launch["supervisor_interpreter"], entrypoint]
++        or launch.get("supervisor_entrypoint") != entrypoint
++        or supervisor_argv.count("--") != 1
++    ):
++        raise EvidenceIntegrityError("supervisor launch invocation is malformed or inconsistent")
++    boundary = supervisor_argv.index("--")
++    options = supervisor_argv[2:boundary]
++    if (
++        supervisor_argv[boundary + 1:] != argv
++        or launch_path(_supervisor_option(options, "--record-dir")) != receipt_path.parent.resolve()
++        or _supervisor_option(options, "--evidence-class") != "live"
++        or (launch.get("supersedes_run_id") is not None
++            and _supervisor_option(options, "--supersedes-run-id") != launch["supersedes_run_id"])
++    ):
++        raise EvidenceIntegrityError("supervisor invocation does not bind this launch and receipt")
++
++    environment = launch.get("effective_environment")
++    allowlist = launch.get("environment_allowlist")
++    omitted = launch.get("omitted_environment_key_presence")
++    if (
++        not isinstance(environment, Mapping) or not isinstance(allowlist, list)
++        or any(not isinstance(key, str) or not key for key in allowlist)
++        or len(set(allowlist)) != len(allowlist)
++        or any(key not in allowlist or not isinstance(value, str)
++               for key, value in environment.items())
++        or not isinstance(omitted, Mapping)
++        or set(omitted) != {"PYTHONPATH", "PYTHONHOME", "VIRTUAL_ENV"}
++        or any(omitted[key] is not False or key in environment for key in omitted)
++    ):
++        raise EvidenceIntegrityError("supervisor launch environment proof is malformed or contaminated")
++    runtime = _read_supervisor_object(output / "runtime_manifest.json")
++    environment_manifest = _read_supervisor_object(output / "environment_manifest.json")
++    if (
++        sha256_json(runtime) != context["runtime_manifest_sha256"]
++        or sha256_json(environment_manifest) != context["environment_manifest_sha256"]
++    ):
++        raise EvidenceIntegrityError("supervisor launch manifests differ from the immutable event context")
++    _validate_local_inference_runtime(runtime)
++    if runtime["schema_version"] == "r19_inference_runtime_manifest_v2":
++        offline = runtime["inference"].get("offline_environment")
++        if not isinstance(offline, Mapping) or any(
++            offline.get(key) != environment.get(key) or environment.get(key) != "1"
++            for key in ("HF_HUB_OFFLINE", "TRANSFORMERS_OFFLINE")
++        ):
++            raise EvidenceIntegrityError("supervisor launch offline environment differs from the runtime")
++    runtime_environment = runtime.get("environment", {})
++    if not isinstance(runtime_environment, Mapping):
++        raise EvidenceIntegrityError("supervisor launch runtime environment is malformed")
++    if "hf_hub_cache_identity_sha256" in runtime_environment:
++        cache = environment.get("HF_HUB_CACHE")
++        if not cache and environment.get("HF_HOME"):
++            cache = str(Path(environment["HF_HOME"]) / "hub")
++        if (
++            not cache or not Path(cache).is_absolute()
++            or hashlib.sha256(str(launch_path(cache)).encode()).hexdigest()
++                != runtime_environment["hf_hub_cache_identity_sha256"]
++        ):
++            raise EvidenceIntegrityError("supervisor launch cache identity differs from the runtime")
++    config = launch_path(_supervisor_option(argv, "--config"))
++    data_root = launch_path(_supervisor_option(argv, "--data-root"))
++    if (
++        not config.is_file() or sha256_file(config) != environment_manifest.get("alfworld_config_sha256")
++        or hashlib.sha256(str(data_root).encode()).hexdigest() != environment_manifest.get("data_root_identity_sha256")
++        or environment.get("ALFWORLD_CONFIG_PATH") != str(config)
++        or environment.get("ALFWORLD_DATA") != str(data_root)
++    ):
++        raise EvidenceIntegrityError("supervisor launch environment paths differ from the frozen environment")
++    return digest
++
++
+ def validate_live_exit_receipt(
+     receipt: Mapping[str, Any], *, events: list[dict[str, Any]],
+     protocol_sha256: str, events_path: Path, branches_path: Path,
+@@ -1936,11 +2098,10 @@ def validate_live_exit_receipt(
+     required_files = (receipt_path, supervisor_status_path, runner_log_path)
+     if any(not path.is_file() for path in required_files):
+         raise EvidenceIntegrityError("live supervisor receipt, status, or runner log is missing")
+-    try:
+-        receipt_on_disk = json.loads(receipt_path.read_text(encoding="utf-8"))
+-        status_record = json.loads(supervisor_status_path.read_text(encoding="utf-8"))
+-    except (OSError, json.JSONDecodeError) as error:
+-        raise EvidenceIntegrityError("supervisor evidence file is unreadable or invalid JSON") from error
++    if not isinstance(receipt, Mapping) or not events or any(not isinstance(event, Mapping) for event in events):
++        raise EvidenceIntegrityError("live exit proof requires an object receipt and a nonempty object ledger")
++    receipt_on_disk = _read_supervisor_object(receipt_path)
++    status_record = _read_supervisor_object(supervisor_status_path)
+     if receipt_on_disk != dict(receipt):
+         raise EvidenceIntegrityError("supplied exit receipt differs from the supervisor's on-disk receipt")
+ 
+@@ -1960,9 +2121,12 @@ def validate_live_exit_receipt(
+     ):
+         raise EvidenceIntegrityError("supervisor command argv or SHA-256 digest is missing, malformed, or inconsistent")
+ 
+-    run_ids = {str(event.get("run_id", "")) for event in events}
+-    implementation_shas = {str(event.get("implementation_sha", "")) for event in events}
+-    protocol_shas = {str(event.get("protocol_sha256", "")) for event in events}
++    if any(not isinstance(event.get(key), str) or not event[key]
++           for event in events for key in ("run_id", "implementation_sha", "protocol_sha256")):
++        raise EvidenceIntegrityError("live event identity is missing or malformed")
++    run_ids = {event["run_id"] for event in events}
++    implementation_shas = {event["implementation_sha"] for event in events}
++    protocol_shas = {event["protocol_sha256"] for event in events}
+     if len(run_ids) != 1 or "" in run_ids or len(implementation_shas) != 1 or "" in implementation_shas:
+         raise EvidenceIntegrityError("formal live analysis requires one run and one exact implementation SHA")
+     if (
+@@ -1984,6 +2148,7 @@ def validate_live_exit_receipt(
+     if (
+         status_record.get("schema_version") != "r19_supervisor_status_v1"
+         or status_record.get("status") != "completed"
++        or status_record.get("evidence_class") != "live"
+         or status_record.get("run_id") != receipt.get("run_id")
+         or status_record.get("implementation_sha") != receipt.get("implementation_sha")
+         or status_record.get("protocol_sha256") != protocol_sha256
+@@ -2007,12 +2172,29 @@ def validate_live_exit_receipt(
+         "source_manifest_sha256", "environment_manifest_sha256",
+     )
+     if not isinstance(context, Mapping) or any(
+-        not isinstance(context.get(key), str) or len(str(context[key])) != 64
++        not isinstance(context.get(key), str) or len(context[key]) != 64
++        or any(char not in "0123456789abcdef" for char in context[key])
+         for key in required_context[1:]
+     ) or not isinstance(context.get("experiment_id"), str) or not context.get("experiment_id"):
+         raise EvidenceIntegrityError("live run context lacks frozen model/runtime/environment/source identities")
+-    if not any(event.get("kind") == "run_started" for event in events):
+-        raise EvidenceIntegrityError("live event ledger lacks its run-start envelope")
++    if events != _read_jsonl(events_path):
++        raise EvidenceIntegrityError("live event view differs from the receipt-authenticated persisted ledger")
++    starts = [event for event in events if event.get("kind") == "run_started"]
++    launch_digest = None
++    if starts:
++        if len(starts) != 1 or events[0] is not starts[0]:
++            raise EvidenceIntegrityError("live run-start envelope is duplicated or not first")
++        payload = starts[0].get("payload", {})
++        if not isinstance(payload, Mapping) or any(
++            key in payload and payload[key] != starts[0].get(key)
++            for key in ("run_id", "implementation_sha", "protocol_sha256", "run_context")
++        ):
++            raise EvidenceIntegrityError("live run-start envelope contradicts its authenticated identity/context")
++    else:
++        launch_digest = _validate_supervisor_launch_context(
++            receipt, status_record, receipt_path=receipt_path,
++            events_path=events_path, branches_path=branches_path, context=context,
++        )
+     return {
+         "status": "PASS_SUPERVISED_EXIT_RECEIPT",
+         "run_id": next(iter(run_ids)),
+@@ -2022,6 +2204,8 @@ def validate_live_exit_receipt(
+         "supervisor_status_sha256": sha256_file(supervisor_status_path),
+         "runner_log_sha256": sha256_file(runner_log_path),
+         "command_sha256": receipt.get("command_sha256"),
++        "start_proof": "run_started" if starts else "supervisor_launch_context",
++        **({"launch_context_sha256": launch_digest} if launch_digest is not None else {}),
+     }
+ 
+ 
+diff --git a/tests/test_r19_g3_authorization.py b/tests/test_r19_g3_authorization.py
+index f593920..b3c25da 100644
+--- a/tests/test_r19_g3_authorization.py
++++ b/tests/test_r19_g3_authorization.py
+@@ -1,8 +1,10 @@
+ from __future__ import annotations
+ 
++import ast
+ import hashlib
+ import json
+ from pathlib import Path
++import subprocess
+ 
+ import pytest
+ 
+@@ -10,6 +12,53 @@ import scripts.run_r19_recovery_duration as legacy_driver
+ import scripts.run_r19_experiment as runner
+ 
+ _LOAD_G3_AUTHORIZATION = runner._load_g3_authorization
++_EXECUTED_G3_SHA = "2da980f631badc25086d12db60d128ff507d3ae6"
++
++
++def _executed_g3_source(relative_path: str) -> str:
++    result = subprocess.run(
++        ["git", "-C", str(runner.PROJECT_ROOT), "show", f"{_EXECUTED_G3_SHA}:{relative_path}"],
++        capture_output=True,
++    )
++    assert result.returncode == 0, f"required exact executed-G3 Git object unavailable: {result.stderr}"
++    return result.stdout.decode("utf-8")
++
++
++def _historical_method_sha(key: str) -> str:
++    relative_path, object_path = key.split("::", 1)
++    source = _executed_g3_source(relative_path)
++    nodes = ast.parse(source).body
++    for component in object_path.split("."):
++        matches = [node for node in nodes
++                   if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
++                   and node.name == component]
++        assert len(matches) == 1, f"missing or ambiguous historical method: {key}"
++        node = matches[0]
++        nodes = node.body
++    segment = ast.get_source_segment(source, node)
++    assert segment
++    return hashlib.sha256(segment.encode()).hexdigest()
++
++
++def _assert_only_g4_consumer_ast_delta() -> None:
++    path = "scripts/analyze_r19_recovery_duration.py"
++    historical = ast.parse(_executed_g3_source(path))
++    current = ast.parse((runner.PROJECT_ROOT / path).read_text())
++    changed = {"validate_live_execution_provenance", "validate_live_exit_receipt"}
++    added = {"_validate_local_inference_runtime", "_supervisor_option",
++             "_read_supervisor_object", "_validate_supervisor_launch_context"}
++    old_methods = {node.name: node for node in historical.body if isinstance(node, ast.FunctionDef)}
++    new_methods = {node.name: node for node in current.body if isinstance(node, ast.FunctionDef)}
++    assert len(new_methods) == sum(isinstance(node, ast.FunctionDef) for node in current.body)
++    assert set(new_methods) - set(old_methods) == added
++    assert not set(old_methods) - set(new_methods)
++    assert {name for name in old_methods
++            if ast.dump(old_methods[name]) != ast.dump(new_methods[name])} == changed
++    # Imports, constants, classes, guards and every other definition remain exact.
++    def remainder(tree, permitted):
++        return [ast.dump(node) for node in tree.body
++                if not (isinstance(node, ast.FunctionDef) and node.name in permitted)]
++    assert remainder(historical, changed) == remainder(current, changed | added)
+ 
+ 
+ def _sha(path: Path) -> str:
+@@ -330,7 +379,20 @@ def test_source_contract_amendment_fingerprints_exactly_current_methods() -> Non
+     }
+     fingerprints = dict(auth["scientific_execution_fingerprints"])
+     fingerprints.update({key: item["new"] for key, item in changes.items()})
+-    assert runner._current_scientific_function_fingerprints(fingerprints) == fingerprints
++    assert len(fingerprints) == 40
++    assert _sha(runner.R19_B1_G3_AUTHORIZATION) == runner.R19_B1_G3_AUTHORIZATION_SHA256
++    restart = json.loads(_executed_g3_source(
++        "configs/experiments/r19_b1_g3_source_contract_restart_authorization_v1.json"))
++    assert _sha(runner.R19_B1_G3_SOURCE_CONTRACT_REPAIR_AMENDMENT) == restart["source_contract_amendment_sha256"]
++    for path in (runner.R19_B1_G3_AUTHORIZATION, runner.R19_B1_G3_SOURCE_CONTRACT_REPAIR_AMENDMENT):
++        relative_path = str(path.relative_to(runner.PROJECT_ROOT))
++        assert path.read_bytes() == _executed_g3_source(relative_path).encode("utf-8")
++    assert {key: _historical_method_sha(key) for key in fingerprints} == fingerprints
++    consumer_key = "scripts/analyze_r19_recovery_duration.py::validate_live_exit_receipt"
++    unchanged = {key: value for key, value in fingerprints.items() if key != consumer_key}
++    assert len(unchanged) == 39
++    assert runner._current_scientific_function_fingerprints(unchanged) == unchanged
++    _assert_only_g4_consumer_ast_delta()
+ 
+ 
+ def test_g3_rejects_old_smoke_only_gate_and_frozen_fingerprint_mutation(tmp_path: Path) -> None:
+diff --git a/tests/test_r19_g4_consumer_contracts.py b/tests/test_r19_g4_consumer_contracts.py
+new file mode 100644
+index 0000000..da27564
+--- /dev/null
++++ b/tests/test_r19_g4_consumer_contracts.py
+@@ -0,0 +1,391 @@
++"""Software fixtures only: no supervisor, model, ALFWorld, or scientific run.
++
++The receipt unit fixtures emulate live wire fields to test that consumer. Their
++contents and return values are never published as authentic live evidence. The
++separate source-to-report CLI stays explicitly synthetic throughout.
++"""
++import copy
++import hashlib
++import json
++import os
++from pathlib import Path
++import runpy
++import subprocess
++import sys
++
++import pytest
++
++from recovery.r19_duration import EvidenceIntegrityError, sha256_file, sha256_json
++from scripts import analyze_r19_recovery_duration as analyzer
++
++ROOT = Path(__file__).resolve().parents[1]
++
++
++def write_json(path, value):
++    path.write_text(json.dumps(value, indent=2) + '\n')
++
++
++def runtime_v2():
++    # Frozen producer's nested format. Metadata are explicitly synthetic.
++    return {
++        'schema_version': 'r19_inference_runtime_manifest_v2',
++        'python': 'synthetic', 'packages': {}, 'gpu': {'name': 'synthetic'},
++        'device': {'precision': 'bfloat16'},
++        'inference': {'transport': 'local_transformers', 'local_files_only': True,
++                      'external_model_calls': False,
++                      'generation': 'greedy; thinking disabled; synchronized per-generation latency',
++                      'offline_environment': {'HF_HUB_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1'}},
++    }
++
++
++@pytest.mark.parametrize('version', [1, 2])
++def test_explicit_runtime_versions_preserve_raw_document(version):
++    runtime = runtime_v2() if version == 2 else {
++        'schema_version': 'r19_inference_runtime_manifest_v1', 'local_files_only': True,
++        'inference_transport': 'local_transformers', 'external_model_calls': False}
++    original = copy.deepcopy(runtime)
++    before = sha256_json(runtime)
++    analyzer._validate_local_inference_runtime(runtime)
++    assert runtime == original and sha256_json(runtime) == before
++
++
++@pytest.mark.parametrize('mutation', [
++    'missing-schema', 'unknown-schema', 'missing-inference', 'null-inference',
++    'list-inference', 'string-inference', 'missing-local', 'missing-external',
++    'missing-transport', 'local-false', 'local-string', 'local-integer',
++    'external-true', 'external-string', 'external-integer', 'transport',
++    'mixed-consistent', 'mixed-conflicting', 'mixed-transport', 'nested-transport', 'v1-nested', 'v1-local-integer',
++    'v1-external-integer', 'v1-transport', 'nonobject',
++])
++def test_runtime_shape_and_local_only_negatives(mutation):
++    runtime = runtime_v2()
++    inference = runtime['inference']
++    if mutation == 'missing-schema':
++        del runtime['schema_version']
++    elif mutation == 'unknown-schema':
++        runtime['schema_version'] = 'r19_inference_runtime_manifest_v3'
++    elif mutation == 'missing-inference':
++        del runtime['inference']
++    elif mutation.endswith('-inference'):
++        runtime['inference'] = {'null': None, 'list': [], 'string': 'local'}[mutation.split('-')[0]]
++    elif mutation.startswith('missing-'):
++        del inference[{'missing-local': 'local_files_only', 'missing-external': 'external_model_calls',
++                       'missing-transport': 'transport'}[mutation]]
++    elif mutation.startswith('local-'):
++        inference['local_files_only'] = {'false': False, 'string': 'true', 'integer': 1}[mutation.split('-')[1]]
++    elif mutation.startswith('external-'):
++        inference['external_model_calls'] = {'true': True, 'string': 'false', 'integer': 0}[mutation.split('-')[1]]
++    elif mutation == 'transport':
++        inference['transport'] = 'external'
++    elif mutation == 'nested-transport':
++        inference['inference_transport'] = 'external'
++    elif mutation == 'mixed-transport':
++        runtime['transport'] = 'external'
++    elif mutation.startswith('mixed-'):
++        runtime['local_files_only'] = mutation == 'mixed-consistent'
++    elif mutation.startswith('v1-'):
++        runtime = {'schema_version': 'r19_inference_runtime_manifest_v1', 'local_files_only': True,
++                   'inference_transport': 'local_transformers', 'external_model_calls': False}
++        if mutation == 'v1-nested':
++            runtime['inference'] = inference
++        else:
++            runtime[{'v1-local-integer': 'local_files_only', 'v1-external-integer': 'external_model_calls',
++                     'v1-transport': 'inference_transport'}[mutation]] = {
++                         'v1-local-integer': 1, 'v1-external-integer': 0, 'v1-transport': 'remote'}[mutation]
++    else:
++        runtime = []
++    with pytest.raises(EvidenceIntegrityError):
++        analyzer._validate_local_inference_runtime(runtime)
++
++
++def synthetic_receipt_bundle(tmp_path):
++    """Persist wire-format unit inputs; never execute the recorded command."""
++    output = tmp_path / 'synthetic-contract-output'
++    record = tmp_path / 'synthetic-contract-supervisor'
++    output.mkdir()
++    record.mkdir()
++    config = tmp_path / 'synthetic-config.yaml'
++    config.write_text('synthetic-only: true\n')
++    runtime = runtime_v2()
++    runtime['environment'] = {'hf_hub_cache_identity_sha256': hashlib.sha256(str(tmp_path / 'cache').encode()).hexdigest()}
++    environment = {'schema_version': 'r19_environment_identity_v1', 'split': 'train',
++                   'alfworld_config_sha256': sha256_file(config),
++                   'data_root_identity_sha256': hashlib.sha256(str(tmp_path).encode()).hexdigest()}
++    write_json(output / 'runtime_manifest.json', runtime)
++    write_json(output / 'environment_manifest.json', environment)
++    context = {'experiment_id': 'SYNTHETIC_CONTRACT_UNIT_FIXTURE',
++               'model_identity_sha256': 'a' * 64, 'source_manifest_sha256': 'b' * 64,
++               'runtime_manifest_sha256': sha256_json(runtime),
++               'environment_manifest_sha256': sha256_json(environment)}
++    protocol = ROOT / 'configs/experiments/r19_recovery_duration_v1.json'
++    events = [{'kind': 'source_episode_completed', 'run_id': 'SYNTHETIC_CONTRACT_UNIT_FIXTURE',
++               'implementation_sha': 'b' * 40, 'protocol_sha256': sha256_file(protocol),
++               'run_context': context}]
++    events_path = output / 'execution_events.jsonl'
++    events_path.write_text(json.dumps(events[0]) + '\n')
++    branches_path = output / 'branches.jsonl'
++    branches_path.write_text('synthetic-receipt-unit-placeholder\n')
++    argv = [sys.executable, str(ROOT / 'scripts/run_r19_recovery_duration.py'), 'pilot',
++            '--protocol', str(protocol), '--output', str(output), '--config', str(config),
++            '--data-root', str(tmp_path)]
++    shared = {'run_id': events[0]['run_id'], 'implementation_sha': events[0]['implementation_sha'],
++              'evidence_class': 'live', 'supersedes_run_id': 'SYNTHETIC_PREDECESSOR',
++              'cwd': str(ROOT), 'command_argv': argv, 'command_sha256': sha256_json(argv)}
++    supervisor_argv = [sys.executable, str(ROOT / 'scripts/launch_r19_supervised.py'),
++                       '--record-dir', str(record), '--evidence-class', 'live',
++                       '--supersedes-run-id', shared['supersedes_run_id'], '--', *argv]
++    launch = {'schema_version': 'r19_supervisor_launch_context_v1', **shared,
++              'interpreter': argv[0], 'supervisor_interpreter': sys.executable,
++              'supervisor_entrypoint': supervisor_argv[1], 'supervisor_argv': supervisor_argv,
++              'environment_allowlist': ['HF_HUB_CACHE', 'HF_HUB_OFFLINE', 'TRANSFORMERS_OFFLINE', 'ALFWORLD_DATA',
++                                       'ALFWORLD_CONFIG_PATH', 'PYTHONPATH', 'PYTHONHOME', 'VIRTUAL_ENV'],
++              'effective_environment': {'HF_HUB_CACHE': str(tmp_path / 'cache'), 'HF_HUB_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1',
++                                        'ALFWORLD_DATA': str(tmp_path), 'ALFWORLD_CONFIG_PATH': str(config)},
++              'omitted_environment_key_presence': {'PYTHONPATH': False, 'PYTHONHOME': False, 'VIRTUAL_ENV': False}}
++    write_json(record / 'launch_context.json', launch)
++    (record / 'runner.log').write_text('SYNTHETIC UNIT FIXTURE; NO CHILD EXECUTED\n')
++    receipt = {'schema_version': 'r19_supervised_exit_v1', **shared, 'status': 'completed',
++               'exit_code': 0, 'exit_code_source': 'subprocess.returncode',
++               'protocol_sha256': events[0]['protocol_sha256'],
++               'launch_context_sha256': sha256_file(record / 'launch_context.json'),
++               'events_sha256': sha256_file(events_path), 'branches_sha256': sha256_file(branches_path),
++               'runner_log_sha256': sha256_file(record / 'runner.log'), 'artifacts_complete': True,
++               'interrupted_by_supervisor': False, 'completed_at': 'SYNTHETIC_TIMESTAMP'}
++    write_json(record / 'runner_exit.json', receipt)
++    status = {**receipt, 'schema_version': 'r19_supervisor_status_v1',
++              'runner_exit_sha256': sha256_file(record / 'runner_exit.json')}
++    write_json(record / 'supervisor_status.json', status)
++    kwargs = {'events': events, 'protocol_sha256': events[0]['protocol_sha256'],
++              'events_path': events_path, 'branches_path': branches_path,
++              'receipt_path': record / 'runner_exit.json', 'supervisor_status_path': record / 'supervisor_status.json',
++              'runner_log_path': record / 'runner.log'}
++    return receipt, status, launch, kwargs
++
++
++def reseal(receipt, status, launch, kwargs):
++    """Recompute fixture containers to test semantic rejection beyond hash checks."""
++    path = kwargs['receipt_path'].parent / 'launch_context.json'
++    write_json(path, launch)
++    receipt['launch_context_sha256'] = sha256_file(path)
++    status['launch_context_sha256'] = receipt['launch_context_sha256']
++    write_json(kwargs['receipt_path'], receipt)
++    status['runner_exit_sha256'] = sha256_file(kwargs['receipt_path'])
++    write_json(kwargs['supervisor_status_path'], status)
++
++
++def test_no_start_requires_authenticated_persisted_launch(tmp_path):
++    receipt, _, _, kwargs = synthetic_receipt_bundle(tmp_path)
++    paths = [p for p in tmp_path.rglob('*') if p.is_file()]
++    before = {str(p): sha256_file(p) for p in paths}
++    result = analyzer.validate_live_exit_receipt(receipt, **kwargs)
++    assert result['start_proof'] == 'supervisor_launch_context'
++    assert result['launch_context_sha256'] == receipt['launch_context_sha256']
++    assert before == {str(p): sha256_file(p) for p in paths}
++
++
++@pytest.mark.parametrize('mutation', [
++    'missing-launch', 'raw-launch', 'launch-digest', 'status-launch-digest',
++    'launch-schema', 'launch-run', 'launch-source', 'launch-class', 'launch-cwd',
++    'launch-argv', 'launch-interpreter', 'supervisor-argv', 'supervisor-entrypoint',
++    'record-dir', 'supervisor-class', 'supersedes', 'offline-environment',
++    'config-environment', 'data-environment', 'cache-environment', 'allowlist', 'omitted-environment',
++    'runtime-context', 'environment-context', 'runtime-file', 'environment-file',
++    'empty-context', 'mixed-context', 'empty-ledger', 'malformed-ledger', 'null-run',
++    'cross-run', 'mixed-source', 'protocol', 'exit-nonzero', 'exit-string', 'exit-bool',
++    'incomplete', 'interrupted', 'events-bytes', 'branches-bytes', 'log-bytes',
++    'status-missing', 'status-array', 'status-interrupted', 'status-class',
++    'status-receipt', 'receipt-bytes', 'receipt-array', 'event-view', 'contradictory-start',
++])
++def test_launch_receipt_tampering_fails_closed(tmp_path, mutation):
++    receipt, status, launch, kwargs = synthetic_receipt_bundle(tmp_path)
++    launch_path = kwargs['receipt_path'].parent / 'launch_context.json'
++    semantic = True
++    if mutation == 'missing-launch':
++        launch_path.unlink(); semantic = False
++    elif mutation == 'raw-launch':
++        launch_path.write_text('{}'); semantic = False
++    elif mutation in {'launch-digest', 'status-launch-digest'}:
++        (receipt if mutation == 'launch-digest' else status)['launch_context_sha256'] = '0' * 64
++        semantic = False
++    elif mutation.startswith('launch-'):
++        key = {'schema': 'schema_version', 'run': 'run_id', 'source': 'implementation_sha',
++               'class': 'evidence_class', 'cwd': 'cwd', 'argv': 'command_argv',
++               'interpreter': 'interpreter'}[mutation[7:]]
++        launch[key] = ['/tampered'] if key == 'command_argv' else '/tampered'
++    elif mutation == 'supervisor-argv':
++        launch['supervisor_argv'][-1] = 'tampered'
++    elif mutation == 'supervisor-entrypoint':
++        launch['supervisor_entrypoint'] = '/other/supervisor.py'
++    elif mutation in {'record-dir', 'supervisor-class'}:
++        key = '--record-dir' if mutation == 'record-dir' else '--evidence-class'
++        launch['supervisor_argv'][launch['supervisor_argv'].index(key) + 1] = '/tampered'
++    elif mutation == 'supersedes':
++        launch['supersedes_run_id'] = 'WRONG_PREDECESSOR'
++    elif mutation.endswith('-environment'):
++        if mutation == 'omitted-environment':
++            launch['omitted_environment_key_presence']['PYTHONPATH'] = 0
++        else:
++            launch['effective_environment'][{'offline-environment': 'HF_HUB_OFFLINE',
++                                             'config-environment': 'ALFWORLD_CONFIG_PATH',
++                                             'data-environment': 'ALFWORLD_DATA',
++                                             'cache-environment': 'HF_HUB_CACHE'}[mutation]] = '/tampered'
++    elif mutation == 'allowlist':
++        launch['environment_allowlist'] = []
++    elif mutation in {'runtime-context', 'environment-context'}:
++        kwargs['events'][0]['run_context'][mutation.split('-')[0] + '_manifest_sha256'] = 'f' * 64
++        kwargs['events_path'].write_text(json.dumps(kwargs['events'][0]) + '\n')
++        receipt['events_sha256'] = status['events_sha256'] = sha256_file(kwargs['events_path'])
++    elif mutation in {'runtime-file', 'environment-file'}:
++        write_json(kwargs['events_path'].parent / (mutation.split('-')[0] + '_manifest.json'), {})
++    elif mutation == 'empty-context':
++        kwargs['events'][0]['run_context'] = {}
++    elif mutation in {'mixed-context', 'cross-run', 'mixed-source'}:
++        other = copy.deepcopy(kwargs['events'][0])
++        if mutation == 'mixed-context':
++            other['run_context']['experiment_id'] = 'other'
++        else:
++            other['run_id' if mutation == 'cross-run' else 'implementation_sha'] = 'other'
++        kwargs['events'].append(other)
++    elif mutation == 'empty-ledger':
++        kwargs['events'] = []
++    elif mutation == 'malformed-ledger':
++        kwargs['events'] = [None]
++    elif mutation == 'null-run':
++        kwargs['events'][0]['run_id'] = None
++    elif mutation == 'protocol':
++        kwargs['protocol_sha256'] = 'f' * 64
++    elif mutation.startswith('exit-'):
++        receipt['exit_code'] = {'nonzero': 1, 'string': '0', 'bool': False}[mutation[5:]]
++    elif mutation in {'incomplete', 'interrupted'}:
++        receipt['artifacts_complete' if mutation == 'incomplete' else 'interrupted_by_supervisor'] = mutation != 'incomplete'
++    elif mutation in {'events-bytes', 'branches-bytes', 'log-bytes'}:
++        kwargs[{'events-bytes': 'events_path', 'branches-bytes': 'branches_path', 'log-bytes': 'runner_log_path'}[mutation]].write_text('tampered')
++    elif mutation.startswith('status-'):
++        if mutation in {'status-missing', 'status-array'}:
++            if mutation == 'status-missing':
++                kwargs['supervisor_status_path'].unlink()
++            else:
++                write_json(kwargs['supervisor_status_path'], [])
++            semantic = False
++        else:
++            status[{'status-interrupted': 'status', 'status-class': 'evidence_class',
++                    'status-receipt': 'runner_exit_sha256'}[mutation]] = 'tampered'
++            semantic = False
++    elif mutation in {'receipt-bytes', 'receipt-array'}:
++        write_json(kwargs['receipt_path'], {} if mutation == 'receipt-bytes' else [])
++        semantic = False
++    elif mutation == 'event-view':
++        kwargs['events'][0]['kind'] = 'unpersisted'
++    elif mutation == 'contradictory-start':
++        kwargs['events'][0]['kind'] = 'run_started'
++        kwargs['events'][0]['payload'] = {'run_context': {}}
++        kwargs['events_path'].write_text(json.dumps(kwargs['events'][0]) + '\n')
++        receipt['events_sha256'] = status['events_sha256'] = sha256_file(kwargs['events_path'])
++    else:
++        raise AssertionError(mutation)
++    if semantic:
++        reseal(receipt, status, launch, kwargs)
++    elif mutation not in {'receipt-bytes', 'receipt-array', 'status-array', 'status-missing'}:
++        write_json(kwargs['receipt_path'], receipt)
++        if mutation != 'status-receipt':
++            status['runner_exit_sha256'] = sha256_file(kwargs['receipt_path'])
++        write_json(kwargs['supervisor_status_path'], status)
++    with pytest.raises(EvidenceIntegrityError):
++        analyzer.validate_live_exit_receipt(receipt, **kwargs)
++
++
++@pytest.mark.parametrize('mutation', ['protocol', 'output', 'duplicate-output', 'mode', 'preflight'])
++def test_resealed_command_cannot_rebind_protocol_output_or_mode(tmp_path, mutation):
++    receipt, status, launch, kwargs = synthetic_receipt_bundle(tmp_path)
++    argv = receipt['command_argv']
++    if mutation == 'protocol':
++        path = tmp_path / 'wrong-protocol.json'
++        write_json(path, {'synthetic_wrong_protocol': True})
++        argv[argv.index('--protocol') + 1] = str(path)
++    elif mutation == 'output':
++        argv[argv.index('--output') + 1] = str(tmp_path / 'other-output')
++    elif mutation == 'duplicate-output':
++        argv.extend(['--output', str(tmp_path)])
++    elif mutation == 'mode':
++        argv[2] = 'smoke'
++    else:
++        argv.append('--preflight-only')
++    for document in (receipt, status, launch):
++        document['command_sha256'] = sha256_json(argv)
++    boundary = launch['supervisor_argv'].index('--')
++    launch['supervisor_argv'] = [*launch['supervisor_argv'][:boundary + 1], *argv]
++    reseal(receipt, status, launch, kwargs)
++    with pytest.raises(EvidenceIntegrityError):
++        analyzer.validate_live_exit_receipt(receipt, **kwargs)
++
++
++def test_fresh_process_synthetic_source_to_report_and_consumer_paths(tmp_path):
++    clean = dict(os.environ)
++    for key in ('PYTHONPATH', 'PYTHONHOME', 'VIRTUAL_ENV'):
++        clean.pop(key, None)
++    # This child imports production modules from this checkout, then uses the
++    # existing collector fixture whose only external edges are synthetic.
++    script = '''import json, os, runpy, subprocess, sys
++from pathlib import Path
++root, output = map(Path, sys.argv[1:])
++sys.path[:0] = [str(root), str(root / 'src')]
++import pytest
++from scripts import analyze_r19_recovery_duration as a
++from scripts import run_r19_experiment as r
++from recovery import r19_duration as d
++fixture = runpy.run_path(str(root / 'tests/test_r19_source_pipeline.py'))
++contracts = runpy.run_path(str(root / 'tests/test_r19_g4_consumer_contracts.py'))
++wire = output / 'wire-fixture'
++wire.mkdir()
++receipt, status, launch, kwargs = contracts['synthetic_receipt_bundle'](wire)
++visited = set()
++def trace(frame, event, arg):
++    if event == 'call' and frame.f_code.co_filename == a.__file__:
++        visited.add(frame.f_code.co_name)
++    return trace
++sys.settrace(trace)
++before = {str(p): d.sha256_file(p) for p in wire.rglob('*') if p.is_file()}
++a._validate_local_inference_runtime(contracts['runtime_v2']())
++a.validate_live_exit_receipt(receipt, **kwargs)  # isolated wire-format unit fixture
++assert before == {str(p): d.sha256_file(p) for p in wire.rglob('*') if p.is_file()}
++with pytest.MonkeyPatch.context() as patch:
++    runtime, registry, schedule, path, envs, pending = fixture['runtime_fixture'](
++        output, patch, restart=True, count=2, terminal_after=50)
++    r._run_frozen_pilot(runtime=runtime, schedule=schedule, output_path=path,
++                        registry=registry, sink=runtime.sink, pending_attempts=pending)
++    runtime.close_remaining_environments()
++    inputs = {str(p): d.sha256_file(p) for p in path.rglob('*') if p.is_file()}
++    argv = ['--protocol', str(root / 'configs/experiments/r19_recovery_duration_v1.json'),
++            '--events', str(path / 'execution_events.jsonl'), '--branches', str(path / 'branches.jsonl'),
++            '--output', str(output / 'report'), '--evidence-class', 'synthetic', '--allow-synthetic']
++    assert a.main(argv) == 0
++    assert inputs == {str(p): d.sha256_file(p) for p in path.rglob('*') if p.is_file()}
++sys.settrace(None)
++command = [sys.executable, str(root / 'scripts/analyze_r19_recovery_duration.py'), *argv]
++cli = subprocess.run(command, cwd=output, env=dict(os.environ), text=True, capture_output=True)
++(output / 'synthetic_cli_receipt.json').write_text(json.dumps({
++    'class': 'SYNTHETIC_SOFTWARE_ONLY', 'argv': command, 'exit_code': cli.returncode,
++    'exit_code_source': 'subprocess.returncode', 'stdout': cli.stdout, 'stderr': cli.stderr}, indent=2))
++assert cli.returncode == 0, cli.stderr
++assert inputs == {str(p): d.sha256_file(p) for p in path.rglob('*') if p.is_file()}
++summary = json.loads((output / 'report/summary.json').read_text())
++assert summary['analysis']['primary_n'] == 2
++assert summary['physical_research_expenditure']['evidence_class'] == 'synthetic'
++assert summary['physical_research_expenditure']['live_execution_validation'] is None
++assert 'not certified for synthetic evidence' in (output / 'report/R19_OPPORTUNITY_REPORT.md').read_text()
++assert {'_validate_local_inference_runtime', 'validate_live_exit_receipt', '_validate_supervisor_launch_context',
++        'validate_event_ledger', 'validate_branch_evidence', 'main', 'render_report'} <= visited
++record = {'class': 'SYNTHETIC_SOFTWARE_ONLY', 'science_authority': False, 'argv': argv,
++          'process_argv': sys.argv, 'environment_presence': {key: key in os.environ for key in
++          ('PYTHONPATH','PYTHONHOME','VIRTUAL_ENV')}, 'input_hashes': inputs,
++          'wire_fixture_hashes': before, 'executed_consumer_functions': sorted(visited),
++          'origins': {'analyzer': a.__file__, 'producer': r.__file__, 'duration': d.__file__}}
++(output / 'synthetic_integration_evidence.json').write_text(json.dumps(record, indent=2))
++'''
++    command = [sys.executable, '-c', script, str(ROOT), str(tmp_path)]
++    result = subprocess.run(command, cwd=tmp_path, env=clean, text=True, capture_output=True)
++    write_json(tmp_path / 'synthetic_process_receipt.json', {
++        'class': 'SYNTHETIC_SOFTWARE_ONLY', 'argv': command,
++        'exit_code': result.returncode, 'exit_code_source': 'subprocess.returncode',
++        'stdout': result.stdout, 'stderr': result.stderr})
++    assert result.returncode == 0, result.stderr
+diff --git a/tests/test_r19_recovery_duration.py b/tests/test_r19_recovery_duration.py
+index 56eb70f..ce1864d 100644
+--- a/tests/test_r19_recovery_duration.py
++++ b/tests/test_r19_recovery_duration.py
+@@ -34,6 +34,7 @@ from recovery.r19_duration import (
+     offline_public_stopping_estimate,
+     passive_stopping_decision,
+     remaining_horizon,
++    sha256_file,
+     sha256_json,
+     run_duration_handoffs,
+     validate_exact_test_examples,
+@@ -675,15 +676,9 @@ def test_analyzer_cross_checks_receipt_status_command_and_supervisor_log(tmp_pat
+     output_dir.mkdir()
+     events_path = output_dir / "execution_events.jsonl"
+     branches_path = output_dir / "branches.jsonl"
+-    events_path.write_text("synthetic event placeholder\n", encoding="utf-8")
+     branches_path.write_text("synthetic branch placeholder\n", encoding="utf-8")
+     protocol_path = Path(__file__).resolve().parents[1] / "configs/experiments/r19_recovery_duration_v1.json"
+     record_dir = tmp_path / "supervisor-record"
+-    receipt = supervise(
+-        [sys.executable, "-c", "print('non-scientific supervisor validation')",
+-         "--protocol", str(protocol_path), "--output", str(output_dir)],
+-        record_dir=record_dir,
+-    )
+     run_context = {
+         "experiment_id": "r19_recovery_duration_v1",
+         "model_identity_sha256": "a" * 64,
+@@ -691,12 +686,22 @@ def test_analyzer_cross_checks_receipt_status_command_and_supervisor_log(tmp_pat
+         "source_manifest_sha256": "c" * 64,
+         "environment_manifest_sha256": "d" * 64,
+     }
+-    events = [{
+-        "kind": "run_started", "run_id": receipt["run_id"],
+-        "implementation_sha": receipt["implementation_sha"],
+-        "protocol_sha256": receipt["protocol_sha256"],
+-        "run_context": run_context,
+-    }]
++    # A harmless child persists its own injected supervisor identity. This tests
++    # the legacy start format against the bytes actually hashed by the receipt.
++    child = (
++        "import json,os,subprocess\nfrom pathlib import Path\n"
++        f"context={run_context!r}\n"
++        "event={'kind':'run_started','run_id':os.environ['R19_RUN_ID'],"
++        "'implementation_sha':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),"
++        f"'protocol_sha256':{sha256_file(protocol_path)!r},'run_context':context}}\n"
++        f"Path({str(events_path)!r}).write_text(json.dumps(event)+'\\n')\n"
++        "print('non-scientific supervisor validation')\n"
++    )
++    receipt = supervise(
++        [sys.executable, "-c", child, "--protocol", str(protocol_path), "--output", str(output_dir)],
++        record_dir=record_dir,
++    )
++    events = [json.loads(line) for line in events_path.read_text().splitlines()]
+     kwargs = {
+         "events": events, "protocol_sha256": receipt["protocol_sha256"],
+         "events_path": events_path, "branches_path": branches_path,
+@@ -1774,8 +1779,9 @@ def test_live_schedule_binding_requires_exact_source_rows_and_claims_every_opera
+         validate_live_source_schedule(schedule, exclusion_manifest, [*events, unclaimed], [], physical)
+ 
+ 
++@pytest.mark.parametrize("runtime_version", [1, 2])
+ def test_report_only_g4_provenance_validation_uses_no_model_or_environment(
+-    tmp_path: Path, monkeypatch,
++    tmp_path: Path, monkeypatch, runtime_version,
+ ) -> None:
+     root = Path(__file__).resolve().parents[1]
+ 
+@@ -1807,6 +1813,12 @@ def test_report_only_g4_provenance_validation_uses_no_model_or_environment(
+         "local_files_only": True, "inference_transport": "local_transformers",
+         "external_model_calls": False,
+     }
++    if runtime_version == 2:
++        runtime = {
++            "schema_version": "r19_inference_runtime_manifest_v2",
++            "inference": {"local_files_only": True, "transport": "local_transformers",
++                          "external_model_calls": False},
++        }
+     environment = {"split": "train"}
+     runtime_path = write_json("runtime.json", runtime)
+     environment_path = write_json("environment.json", environment)
+@@ -1959,6 +1971,20 @@ def test_report_only_g4_provenance_validation_uses_no_model_or_environment(
+     )
+     assert result["status"] == "PASS_LIVE_EXECUTION_PROVENANCE"
+ 
++    # A valid shape still needs its original canonical hash and baseline binding.
++    for changed_runtime, changed_execution in (
++        ({**runtime, "changed_metadata": "synthetic tamper"}, execution),
++        (runtime, {**execution, "model_identity_sha256": "0" * 64}),
++    ):
++        with pytest.raises(EvidenceIntegrityError):
++            validate_live_execution_provenance(
++                execution_manifest=changed_execution, runtime_manifest=changed_runtime,
++                environment_manifest=environment, schedule_path=schedule_path,
++                exclusion_path=exclusion_path, protocol_path=protocol_path,
++                events_path=events_path, branches_path=branches_path, events=events,
++                g3_gate_receipt_path=g3_gate_receipt_path, physical=physical,
++            )
++
+     alternate_schedule_path = write_json("alternate-schedule.json", {})
+     with pytest.raises(EvidenceIntegrityError, match="canonical frozen R19"):
+         validate_live_execution_provenance(

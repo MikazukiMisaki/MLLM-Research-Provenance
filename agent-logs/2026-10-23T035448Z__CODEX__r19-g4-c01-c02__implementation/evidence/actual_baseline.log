@@ -1,0 +1,21 @@
+validate_event_ledger RETURNED
+validate_branch_evidence RETURNED
+validate_live_source_schedule RETURNED
+validate_live_execution_provenance Traceback (most recent call last):
+  File "/home/lizening/research-notes/agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/actual_integrity_only.py", line 45, in check
+    value = function()
+  File "/home/lizening/research-notes/agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/actual_integrity_only.py", line 70, in <lambda>
+    check('validate_live_execution_provenance', lambda: module['validate_live_execution_provenance'](
+  File "/home/lizening/wt-r19-source-contract-review-fixes/scripts/analyze_r19_recovery_duration.py", line 1523, in validate_live_execution_provenance
+    raise EvidenceIntegrityError("live runtime manifest does not prove local-only inference")
+recovery.r19_duration.EvidenceIntegrityError: live runtime manifest does not prove local-only inference
+
+validate_live_exit_receipt Traceback (most recent call last):
+  File "/home/lizening/research-notes/agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/actual_integrity_only.py", line 45, in check
+    value = function()
+  File "/home/lizening/research-notes/agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/actual_integrity_only.py", line 76, in <lambda>
+    check('validate_live_exit_receipt', lambda: module['validate_live_exit_receipt'](
+  File "/home/lizening/wt-r19-source-contract-review-fixes/scripts/analyze_r19_recovery_duration.py", line 2015, in validate_live_exit_receipt
+    raise EvidenceIntegrityError("live event ledger lacks its run-start envelope")
+recovery.r19_duration.EvidenceIntegrityError: live event ledger lacks its run-start envelope
+
