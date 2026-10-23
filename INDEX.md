@@ -48,6 +48,8 @@ Oldest first. UTC is the task-directory timestamp; scientific SHA is the relevan
 | 2026-10-23 00:00:29 | SOL | R19 exact2da Phase1 zero-science preflight release | One preflight_only RELEASED; actual preflight NOT_RUN; live clearance NOT_GRANTED | 2da980f631badc25086d12db60d128ff507d3ae6 | [RECORD.md](agent-logs/2026-10-23T000029Z__SOL__r19-phase1-preflight-release__2da980f_669620/RECORD.md) |
 | 2026-10-23 00:12:01 | CODEX | R19 exact2da Phase1 zero-science preflight | PREFLIGHT_ONLY_PASS; child exit 0; cumulative177/342; no live clearance | 2da980f631badc25086d12db60d128ff507d3ae6 | [RECORD.md](agent-logs/2026-10-22T235413Z__CODEX__r19-phase1-preparation__2da980f/RECORD.md) |
 
+| 2026-10-23 00:18:40 | SOL | R19 exact2da independent actual-preflight verification | Real preflight VERIFIED PASS; zero science; live clearance NOT_GRANTED | 2da980f631badc25086d12db60d128ff507d3ae6 | [RECORD.md](agent-logs/2026-10-23T001840Z__SOL__r19-phase1-independent-verification__2da980f_d9db8d/RECORD.md) |
+
 ## Import omissions
 
 No task directory or large provenance file was omitted. Transient PID/lock files and Python bytecode remain local and are ignored; exact paths, sizes, hashes and reasons are in [excluded-files.json](agent-logs/2026-09-14T061140Z__ASTRA__provenance-repo-initialization__wo8b4ovs/excluded-files.json). No file was deleted.

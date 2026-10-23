@@ -1,0 +1,53 @@
+{
+  "cudnn_version": 90100,
+  "device": {
+    "bf16_supported": true,
+    "cudnn_tf32": true,
+    "matmul_tf32": false,
+    "policy": "auto",
+    "precision": "bfloat16"
+  },
+  "environment": {
+    "alfred_domain_sha256": "f1473041ed01da514de1f87adfd7ef0804862361f83ccf63c75e43633b0eb280",
+    "alfred_grammar_sha256": "c5b22f0f73309a7fd7c8e5b71de42ad4803b60766ab4a51cc2feb34162be036b",
+    "alfworld_config_sha256": "e90f93eb4604a473b6eb4a259a19ef1ca3c296bba1771ba70a1c9b0edbc99700",
+    "data_root_identity_sha256": "d62900a7a31a181ad4e3f317932c7cb42db93daef4b5e4aff3625dbb12a6fe4a",
+    "hf_hub_cache_identity_sha256": "6c5ad0875b8f06f749a5bd05acacfa51fbdcd4d95503eaf9a46d24b2c2f79870"
+  },
+  "gpu": {
+    "capability": [
+      8,
+      6
+    ],
+    "driver_version": "550.163.01",
+    "name": "NVIDIA A40",
+    "nvidia_smi_memory_total_mib": 46068,
+    "total_memory_bytes": 47608692736
+  },
+  "inference": {
+    "external_model_calls": false,
+    "generation": "greedy; thinking disabled; synchronized per-generation latency",
+    "local_files_only": true,
+    "offline_environment": {
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1"
+    },
+    "transport": "local_transformers"
+  },
+  "packages": {
+    "PyYAML": "6.0.2",
+    "accelerate": "1.10.1",
+    "alfworld": "0.4.2",
+    "huggingface-hub": "0.36.2",
+    "numpy": "1.26.4",
+    "peft": "0.17.1",
+    "safetensors": "0.8.0",
+    "textworld": "1.7.0",
+    "tokenizers": "0.22.2",
+    "torch": "2.6.0+cu124",
+    "transformers": "4.56.2"
+  },
+  "python": "3.10.20 (main, Jun 11 2026, 15:17:37) [GCC 14.3.0]",
+  "schema_version": "r19_inference_runtime_manifest_v2",
+  "torch_cuda": "12.4"
+}
