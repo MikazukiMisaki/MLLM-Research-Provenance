@@ -1,0 +1,102 @@
+........................................................................ [ 30%]
+........................................................................ [ 60%]
+....................................................................F... [ 90%]
+F......................                                                  [100%]
+=================================== FAILURES ===================================
+_ test_real_preflight_supervisor_and_pilot_cli_reject_bad_repair_auth_without_science _
+
+tmp_path = PosixPath('/home/lizening/research-notes/agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/raw_focused_draft/test_real_preflight_supervisor0')
+
+    def test_real_preflight_supervisor_and_pilot_cli_reject_bad_repair_auth_without_science(
+        tmp_path: Path,
+    ) -> None:
+        head = subprocess.check_output(
+            ["git", "-C", str(PROJECT_ROOT), "rev-parse", "HEAD"], text=True,
+        ).strip()
+        protocol_sha = hashlib.sha256(PROTOCOL.read_bytes()).hexdigest()
+        old_authorization = json.loads(
+            (PROJECT_ROOT / "configs/experiments/r19_b1_g3_authorization_v1.json")
+            .read_text(encoding="utf-8")
+        )
+        old_authorization_sha = hashlib.sha256(
+            (PROJECT_ROOT / "configs/experiments/r19_b1_g3_authorization_v1.json").read_bytes()
+        ).hexdigest()
+        bad_repair_sha = "0" * 64
+        gate = {
+            "schema_version": "r19_gate_manifest_v1",
+            "implementation_sha": head,
+            "protocol_sha256": protocol_sha,
+            "review": {
+                "status": "BLOCKED", "review_type": "independent_exact_sha",
+                "implementation_sha": head, "g3_launch_implementation_sha": head,
+                "g3_authorization_sha256": old_authorization_sha,
+                "entrypoint_repair_authorization_sha256": bad_repair_sha,
+            },
+            "g2_carry_forward": {
+                "g3_authorization_sha256": old_authorization_sha,
+                "entrypoint_repair_authorization_sha256": bad_repair_sha,
+                "g3_launch_implementation_sha": head,
+                "g2_executed_implementation_sha": old_authorization[
+                    "g2_carry_forward"
+                ]["g2_executed_implementation_sha"],
+                "g2_evidence_carried_forward": True,
+                "new_g2_run_performed": False,
+            },
+        }
+        gate_path = tmp_path / "bad-g3-gate.json"
+        gate_path.write_text(json.dumps(gate) + "\n", encoding="utf-8")
+        output = tmp_path / "must-not-be-created"
+        record = tmp_path / "supervisor-record"
+        preflight_receipt = record / "preflight_receipt.json"
+        command = [
+            sys.executable, str(DRIVER), "pilot",
+            "--protocol", str(PROTOCOL), "--manifest", str(gate_path),
+            "--output", str(output), "--preflight-only",
+            "--preflight-receipt", str(preflight_receipt),
+        ]
+        result = subprocess.run(
+            [
+                sys.executable, str(SUPERVISOR), "--record-dir", str(record),
+                "--evidence-class", "preflight_only", "--supersedes-run-id", FAILED_RUN_ID,
+                "--", *command,
+            ],
+            cwd=tmp_path, env=_clean_python_environment(), text=True, capture_output=True,
+        )
+        assert result.returncode == 2
+        runner_log = (record / "runner.log").read_text(encoding="utf-8")
+>       assert "G3 gate must bind the separate authorization" in runner_log
+E       assert 'G3 gate must bind the separate authorization' in '{"error": "pilot requires the exact reviewed implementation commit and a clean worktree", "error_type": "EvidenceIntegrityError", "status": "BLOCKED"}\n'
+
+tests/test_r19_entrypoint_repair.py:231: AssertionError
+_____ test_source_contract_amendment_fingerprints_exactly_current_methods ______
+
+    def test_source_contract_amendment_fingerprints_exactly_current_methods() -> None:
+        auth, _ = runner._load_g3_authorization()
+        amendment = json.loads(runner.R19_B1_G3_SOURCE_CONTRACT_REPAIR_AMENDMENT.read_text())
+        changes = amendment["changed_method_fingerprints"]
+        assert set(changes) == {
+            "scripts/run_r19_experiment.py::LiveR19Runtime.actor_generation",
+            "scripts/run_r19_experiment.py::LiveR19Runtime._collect_one_source",
+            "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_model_call",
+            "scripts/run_r19_experiment.py::LiveR19Runtime._reserve_environment_operation",
+            "scripts/run_r19_experiment.py::LiveR19Runtime._replay_source_prefix",
+            "scripts/run_r19_experiment.py::LiveR19Runtime.recovery_step_callback",
+            "scripts/run_r19_experiment.py::LiveR19Runtime.common_path_step_factory",
+            "scripts/analyze_r19_recovery_duration.py::validate_branch_evidence",
+            "scripts/analyze_r19_recovery_duration.py::_validate_recovery_operation_link",
+        }
+        fingerprints = dict(auth["scientific_execution_fingerprints"])
+        fingerprints.update({key: item["new"] for key, item in changes.items()})
+>       assert runner._current_scientific_function_fingerprints(fingerprints) == fingerprints
+E       AssertionError: assert {'scripts/ana...c9d40fb', ...} == {'scripts/ana...c9d40fb', ...}
+E         
+E         Omitting 39 identical items, use -vv to show
+E         Differing items:
+E         {'scripts/analyze_r19_recovery_duration.py::validate_live_exit_receipt': '0669b07bb44c188a3f78e47517d40a780c4f8b3e93b31c658b8b4cd4a4685fd3'} != {'scripts/analyze_r19_recovery_duration.py::validate_live_exit_receipt': '87b95e896e62c77183e78c517edc23f5ecfd88d9dade2135f0804e3cedf9929b'}
+E         Use -v to get more diff
+
+tests/test_r19_g3_authorization.py:333: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r19_entrypoint_repair.py::test_real_preflight_supervisor_and_pilot_cli_reject_bad_repair_auth_without_science
+FAILED tests/test_r19_g3_authorization.py::test_source_contract_amendment_fingerprints_exactly_current_methods
+2 failed, 237 passed in 43.53s

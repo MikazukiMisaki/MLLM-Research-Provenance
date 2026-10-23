@@ -1,0 +1,28 @@
+{
+  "observed_at_utc": "2026-10-23T04:10:35.150479+00:00",
+  "review_type": "TEST_SCOPE_CAUSE_VERIFICATION_ONLY_NOT_CANDIDATE_ACCEPTANCE",
+  "base_sha": "2da980f631badc25086d12db60d128ff507d3ae6",
+  "candidate_head": "2da980f631badc25086d12db60d128ff507d3ae6",
+  "candidate_status": " M scripts/analyze_r19_recovery_duration.py\n M tests/test_r19_recovery_duration.py\n?? tests/test_r19_g4_consumer_contracts.py\n",
+  "frozen_fingerprint_count": 40,
+  "all_historical_fingerprints_match_exact_2da_git_source": true,
+  "current_mismatches": {
+    "scripts/analyze_r19_recovery_duration.py::validate_live_exit_receipt": {
+      "historical_expected": "87b95e896e62c77183e78c517edc23f5ecfd88d9dade2135f0804e3cedf9929b",
+      "historical_git_object_observed": "87b95e896e62c77183e78c517edc23f5ecfd88d9dade2135f0804e3cedf9929b",
+      "candidate_working_observed": "0669b07bb44c188a3f78e47517d40a780c4f8b3e93b31c658b8b4cd4a4685fd3"
+    }
+  },
+  "historical_auth_amendment_bytes_unchanged": true,
+  "candidate_existing_analyzer_method_changes": [
+    "validate_live_execution_provenance",
+    "validate_live_exit_receipt"
+  ],
+  "candidate_added_analyzer_helpers": [
+    "_read_supervisor_object",
+    "_supervisor_option",
+    "_validate_local_inference_runtime",
+    "_validate_supervisor_launch_context"
+  ],
+  "production_or_test_runs_by_reviewer": 0
+}

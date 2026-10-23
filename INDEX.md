@@ -67,6 +67,8 @@ Oldest first. UTC is the task-directory timestamp; scientific SHA is the relevan
 
 | 2026-10-23 03:51:19 | SOL | R19 minimum two-contract G4 consumer repair assignment | Queued to Sol Research; independent review PENDING; Luna preparation not released; formal G4 NOT_AUTHORIZED | 2da980f631badc25086d12db60d128ff507d3ae6 | [RECORD.md](agent-logs/2026-10-23T035119Z__SOL__r19-g4-minimal-contract-repair-assignment__9c5a99/RECORD.md) |
 
+| 2026-10-23 04:10:35 | SOL | R19 G4 historical/current fingerprint test scope | TEST_ONLY_APPROVED; historical40/current39 retained; no production scope expansion; review PENDING and G4 held | 2da980f631badc25086d12db60d128ff507d3ae6 | [RECORD.md](agent-logs/2026-10-23T041035Z__SOL__r19-g4-fingerprint-test-scope__b0f8de/RECORD.md) |
+
 ## Import omissions
 
 No task directory or large provenance file was omitted. Transient PID/lock files and Python bytecode remain local and are ignored; exact paths, sizes, hashes and reasons are in [excluded-files.json](agent-logs/2026-09-14T061140Z__ASTRA__provenance-repo-initialization__wo8b4ovs/excluded-files.json). No file was deleted.
