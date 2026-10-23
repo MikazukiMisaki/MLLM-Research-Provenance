@@ -1,0 +1,9 @@
+Upload-only archival action, UTC 2026-10-23.
+
+- Captured SHA256 for every regular file in the complete scientific G3 output directory, the authentic supervisor_live directory, and launcher_stdout.log before archive creation.
+- Created one gzip -n compressed tar stream containing the complete output directory plus supervisor context/status/exit/log and launcher receipt. Archive path: r19_g3_complete_evidence.tar.gz.
+- Recomputed the same source SHA256 list after archive creation; `cmp` confirmed before/after lists identical.
+- Enumerated archive members; streamed each member through SHA256 and compared byte length/hash against the original source file. All 15 regular-file members matched.
+- Ran credential-pattern scan over archive-member data and inspected filenames for weight/adapter/cache/input-dataset payload. No credential patterns or disallowed filenames found.
+- Recorded archive SHA256/size and member inventory; no split required because the compressed archive is below 100 MB.
+- No experiment-related process or command was invoked; no existing task/run record or raw scientific file was modified.
