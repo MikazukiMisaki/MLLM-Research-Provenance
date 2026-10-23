@@ -1,0 +1,40 @@
+{
+  "schema": "r19_luna_live_proposal_environment_v1",
+  "status": "PROPOSAL_ONLY_NOT_AUTHORIZED",
+  "set": {
+    "ALFWORLD_CONFIG_PATH": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml",
+    "ALFWORLD_DATA": "/home/lizening/alfworld_data",
+    "CONDA_PREFIX": "/home/lizening/miniconda3",
+    "HF_HUB_CACHE": "/home/lizening/.cache/huggingface/hub",
+    "HF_HUB_OFFLINE": "1",
+    "PATH": "/home/lizening/.local/bin:/home/lizening/.local/bin:/home/lizening/.local/bin:/usr/local/cuda/bin:/home/lizening/.codex/packages/standalone/releases/0.163.0-x86_64-unknown-linux-musl/codex-path:/home/lizening/.codex/tmp/arg0-linux/codex-arg0VXC9gg:/home/lizening/.local/bin:/home/lizening/.local/bin:/home/lizening/.local/bin:/home/lizening/.local/bin:/home/lizening/miniconda3/bin:/home/lizening/miniconda3/condabin:/home/lizening/.local/bin:/usr/local/cuda/bin:/home/lizening/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "supervisor_injected_after_future_authorization": {
+    "R19_EVIDENCE_CLASS": "live",
+    "R19_EXIT_RECEIPT_PATH": "/home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-g3-live-successor__2da980f/supervisor_live/runner_exit.json",
+    "R19_RUN_ID": "SUPERVISOR_GENERATES_FRESH_UUID_ONLY_AFTER_BOTH_RELEASES",
+    "R19_SUPERVISOR_CONTEXT_PATH": "/home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-g3-live-successor__2da980f/supervisor_live/launch_context.json"
+  },
+  "unset": [
+    "PYTHONPATH",
+    "PYTHONHOME",
+    "VIRTUAL_ENV",
+    "HF_HOME",
+    "CUDA_VISIBLE_DEVICES",
+    "CUDA_HOME",
+    "R19_RUN_ID",
+    "R19_EVIDENCE_CLASS",
+    "R19_EXIT_RECEIPT_PATH",
+    "R19_SUPERVISOR_CONTEXT_PATH"
+  ],
+  "hashing": {
+    "canonicalization": "UTF-8 JSON, sorted keys, separators=(',',':'), ensure_ascii=false; SHA256",
+    "dynamic_uuid": "Not generated or included in this proposal; supervisor must generate only after independent clearance and fresh explicit user authorization."
+  },
+  "environment_constraints": [
+    "Use exactly these pinned set/unset values; do not inherit Python overrides or stale R19 supervisor keys.",
+    "Do not pre-set supervisor-injected fields in the parent environment.",
+    "Before any future launch, compare the actual recorded effective allowlist to this plan and stop on drift."
+  ]
+}
