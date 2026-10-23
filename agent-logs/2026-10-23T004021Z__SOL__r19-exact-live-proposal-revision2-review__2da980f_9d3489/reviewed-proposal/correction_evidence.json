@@ -1,0 +1,135 @@
+{
+  "schema": "r19_live_proposal_binding_correction_evidence_v1",
+  "status": "READ_ONLY_RAW_COMPARISONS_COMPLETED",
+  "method": {
+    "file_hashing": "SHA256 over original file bytes",
+    "json_canonicalization": "UTF-8 JSON with sorted keys, compact separators (',', ':'), ensure_ascii=false",
+    "actions": "Read and hash existing files; parse JSON fields; compare values to exact proposal requirements. No supervisor, preflight, model, environment, G2, G3, or G4 invocation."
+  },
+  "LIVE_P01_run_identity_and_supervisor_artifacts": {
+    "expected_run_id": "3d1ccea7e97f4727abf8e216ac6ec498",
+    "restart_authorization_path": "/home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_b1_g3_source_contract_restart_authorization_v1.json",
+    "restart_authorization_raw_sha256": "164179291d16066d7fc6d650a943011099e8be940f48b62d86970ba7f5c17048",
+    "restart_authorization_predecessor_identity": {
+      "run_id": "3d1ccea7e97f4727abf8e216ac6ec498",
+      "implementation_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+      "exit_code": 1,
+      "event_ledger_sha256": "fde95fcd72f1c4ac6409fab7f2112654e145f6184fefec690cae58ad345f1cd7",
+      "unit_registry_sha256": "870923242ae585c66cbcffa554528ab3d92cf98fc4d87dee2c4d408f5f6ba800",
+      "execution_manifest_sha256": "f5d3efa6c17abea3d944d7dea01099210d846eb8ed107057ec24502bbb51d2df",
+      "branch_ledger_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual_files": {
+      "launch_context.json": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-22T190221Z__CODEX__r19-g3-cli-preflight__bf31f3da/live_supervisor/launch_context.json",
+        "actual_raw_sha256": "6b8933ed06db1b2e74f1b921ca13e6f73842b18e7a0c8217381a809ed4ea180e",
+        "restart_authorization_expected_raw_sha256": "6b8933ed06db1b2e74f1b921ca13e6f73842b18e7a0c8217381a809ed4ea180e",
+        "parsed_run_id": "3d1ccea7e97f4727abf8e216ac6ec498",
+        "parsed_implementation_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+        "parsed_evidence_class": "live",
+        "parsed_supersedes_run_id": "a0de515d7e104101bf8157175ea3d995",
+        "matches_named_run_and_authorization": true
+      },
+      "runner.log": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-22T190221Z__CODEX__r19-g3-cli-preflight__bf31f3da/live_supervisor/runner.log",
+        "actual_raw_sha256": "ee7c6010edf0e46bcba2969cdddf236e7c6d23830d2bd92e88593d7a21a7bbcd",
+        "restart_authorization_expected_raw_sha256": "ee7c6010edf0e46bcba2969cdddf236e7c6d23830d2bd92e88593d7a21a7bbcd",
+        "identity_source": "Same directory as launch_context.json; linked by runner_exit.json and supervisor_status.json raw hashes."
+      },
+      "runner_exit.json": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-22T190221Z__CODEX__r19-g3-cli-preflight__bf31f3da/live_supervisor/runner_exit.json",
+        "actual_raw_sha256": "a802079398fd415765b8f6b8685fec998325625da733011ff7a9ce11459a9386",
+        "restart_authorization_expected_raw_sha256": "a802079398fd415765b8f6b8685fec998325625da733011ff7a9ce11459a9386",
+        "parsed_run_id": "3d1ccea7e97f4727abf8e216ac6ec498",
+        "parsed_implementation_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+        "parsed_exit_code": 1,
+        "parsed_status": "failed",
+        "parsed_events_sha256": "fde95fcd72f1c4ac6409fab7f2112654e145f6184fefec690cae58ad345f1cd7",
+        "parsed_launch_context_sha256": "6b8933ed06db1b2e74f1b921ca13e6f73842b18e7a0c8217381a809ed4ea180e",
+        "parsed_runner_log_sha256": "ee7c6010edf0e46bcba2969cdddf236e7c6d23830d2bd92e88593d7a21a7bbcd"
+      },
+      "supervisor_status.json": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-22T190221Z__CODEX__r19-g3-cli-preflight__bf31f3da/live_supervisor/supervisor_status.json",
+        "actual_raw_sha256": "e2a70bf670376b648e52357376fa88f3a7a3cac92b41a5c628bd4ad251353913",
+        "restart_authorization_expected_raw_sha256": "e2a70bf670376b648e52357376fa88f3a7a3cac92b41a5c628bd4ad251353913",
+        "parsed_run_id": "3d1ccea7e97f4727abf8e216ac6ec498",
+        "parsed_implementation_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+        "parsed_exit_code": 1,
+        "parsed_status": "failed",
+        "parsed_runner_exit_sha256": "a802079398fd415765b8f6b8685fec998325625da733011ff7a9ce11459a9386",
+        "parsed_runner_log_sha256": "ee7c6010edf0e46bcba2969cdddf236e7c6d23830d2bd92e88593d7a21a7bbcd"
+      }
+    },
+    "old_proposal_misbound_hash_trio_is_a0de_not_3d1": {
+      "historical_record_directory": "/home/lizening/research-notes/agent-logs/2026-10-22T105439Z__CODEX__r19-b1-g3-launch__ef2328f/supervisor_raw",
+      "runner_exit_json_raw_sha256": "7e1fc0771c78fa4022717c6b9926147f5565f6cdbe5e04cdec7f165cc732e6c4",
+      "supervisor_status_json_raw_sha256": "e71147fe2f0f9097cbae38357c4b2186159fd0341d3211a9e7c9988f3c58474c",
+      "runner_log_raw_sha256": "45eda8a835a07f841657da7ce00d0f5bddda182c1dc4f8cd50cfc7291f6e59cd",
+      "parsed_run_id": "a0de515d7e104101bf8157175ea3d995",
+      "parsed_implementation_sha": "ef2328f06256054a6b71c6dc4bdc74dab3a1d3d9",
+      "parsed_events_sha256": null,
+      "parsed_exit_code": 1,
+      "failure_location": "scripts/run_r19_recovery_duration.py::_pilot_gate_check",
+      "interpretation": "These authentic bytes describe a distinct earlier a0de import failure and are not bound as evidence for predecessor3d1. The earlier proposal remains immutable and is superseded rather than rewritten."
+    },
+    "comparison_result": "PASS_CORRECTED_BINDING_MATCHES_RAW_3d1_RUN"
+  },
+  "LIVE_P02_quota_semantics": {
+    "protocol_path": "/home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_recovery_duration_v1.json",
+    "protocol_raw_sha256": "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122",
+    "protocol_parsed_field": "population.eligible_targets_by_stratum",
+    "protocol_parsed_value": {"failure": 30, "success_control": 15, "random_control": 15},
+    "restart_authorization_path": "/home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_b1_g3_source_contract_restart_authorization_v1.json",
+    "restart_authorization_raw_sha256": "164179291d16066d7fc6d650a943011099e8be940f48b62d86970ba7f5c17048",
+    "authorization_parsed_field": "frozen_science.eligible_quotas",
+    "authorization_parsed_value": {"failure": 30, "success_control": 15, "random_control": 15},
+    "other_distinct_protocol_field": {
+      "field": "population.candidate_queue_targets",
+      "value": {"failure": 60, "success_control": 30, "random_control": 30},
+      "meaning": "candidate queue target counts, not eligible-state quotas"
+    },
+    "no_science_inputs_changed": true,
+    "comparison_result": "PASS_PROTOCOL_AND_RESTART_AUTHORIZATION_AGREE"
+  },
+  "LIVE_P03_runtime_digest_domains": {
+    "historical_runtime_manifest": {
+      "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_pilot_after_a0de515d7e104101bf8157175ea3d995_20261022T190221Z/runtime_manifest.json",
+      "actual_raw_sha256": "306a9e7c2d1b968e2a56e258fcd07aaf7467739460802a2b94c5e20411264916",
+      "actual_canonical_object_sha256": "f4c6b5eac9b1558b82e0e626ea4412437ff924f839a62f8fe3962a141effe7f7",
+      "comparison_result": "PASS_PATH_AND_RAW_AND_CANONICAL_MATCH_REQUIREMENTS"
+    },
+    "historical_runtime_manifest_preload": {
+      "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_pilot_after_a0de515d7e104101bf8157175ea3d995_20261022T190221Z/runtime_manifest_preload.json",
+      "actual_raw_sha256": "6395e65abf266ba5f6a0834023b1da5c3799550b124a75db4d819cf613ee3312",
+      "actual_canonical_object_sha256": "de8daea0611f844cc785499677621f849845cd93d7609cf29585b4c23a5327ba",
+      "comparison_result": "PASS_PATH_AND_RAW_AND_CANONICAL_MATCH_REQUIREMENTS"
+    },
+    "frozen_pure_preload_expectation": {
+      "source_path": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g3_gate_2da980f_phase1.json",
+      "source_raw_sha256": "c285692615eaaf1c7cb7139b0417528022db6ee03c510de13f881d126f14415e",
+      "field": "runtime_manifest_preload_sha256",
+      "canonical_sha256": "64ebf4667da70dc4acd0a49b645bb6b6d4c3e1fe5d3e8e6351a8bf66f148ab9a",
+      "identity_domain": "frozen pure preload runtime expectation; not either historical runtime JSON file digest",
+      "distinct_neighbor_field": {"field": "runtime_expectations_sha256", "value": "dbfb7aa1a1d48d1148ad25be93002e7424d8b22e85422125ed502ac0f4db967e", "meaning": "separate gate runtime expectations identity; not the requested 64eb preload identity"}
+    },
+    "future_live_post_load_runtime": "NOT_OBSERVED"
+  },
+  "model_aggregate_field_check": {
+    "receipt_path": "/home/lizening/research-notes/agent-logs/2026-10-23T001840Z__SOL__r19-phase1-independent-verification__2da980f_d9db8d/raw-preflight/pilot_preflight_receipt.json",
+    "receipt_raw_sha256": "aed33e7f813a7ce2992b7860fbef59cabe814e31543c3e8eb1dcac5b95390574",
+    "actual_json_field": "model_files_sha256",
+    "actual_value": "3b9a89434920ea29980853cf1edd03ae531acde62dbebb2f17d0c9da65cdf92a",
+    "revision_binding_field": "scientific_and_input_bindings.preflight_receipt_model_files_sha256",
+    "comparison_result": "PASS_VALUE_AND_PROVENANCE_FIELD_MATCH"
+  },
+  "scope_guard": {
+    "source_head": "2da980f631badc25086d12db60d128ff507d3ae6",
+    "working_tree_clean": true,
+    "active_r19_processes_observed": 0,
+    "new_supervisor_or_preflight_or_scientific_invocations": 0,
+    "future_output_path_created": false,
+    "future_supervisor_record_path_created": false,
+    "cumulative_cost_unchanged": {"model_generations": 177, "environment_operations": 342},
+    "old_predecessor_unit_state_rewritten": false
+  }
+}

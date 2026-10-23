@@ -1,0 +1,9 @@
+# Luna handoff — review PASS, execution HOLD
+
+Exact proposal revision2 `d6b4ebb9f77c434411e39f9ef13aea1bc42f86580bdaadf43c529e267202f754` and bindings `a6fd21f10c0acd28740c153521b3d0027e1445c51ce2600089eb73fd56cc82d9` received independent technical PASS. Machine review `/home/lizening/research-notes/agent-logs/2026-10-23T004021Z__SOL__r19-exact-live-proposal-revision2-review__2da980f_9d3489/exact_proposal_revision2_review.json`, SHA256 `ac47276b1f97cf4c6d623460b23f13e48035726b73ae7a909877ba71bd573514`. LIVE-P01/02/03 are resolved; accepted implementation/G2/actual preflight PASS remains unchanged.
+
+**No supervisor/model/ALFWorld/preflight/G2/G3/G4 execution is released.** There is no new launch clearance and no fresh user science authorization. Your current task is to preserve the clean exact checkout, proposal and evidence and remain idle. Do not create the output/record/UUID, alter gate/source, rerun checks that invoke a preflight, strip flags to execute, or reuse consumed clearances. No further proposal edits or development are requested.
+
+The pending specific user decision is `/home/lizening/research-notes/agent-logs/2026-10-23T004021Z__SOL__r19-exact-live-proposal-revision2-review__2da980f_9d3489/user_authorization_request.json`, SHA256 `75412c4733663ffa14d9b9802c9775d681f0f5cd40d359328acc96db31503402`; it is a request, not authorization. After explicit user approval, Sol will recheck current drift and issue a distinct exact launch clearance before sending an actual execution instruction. Require both genuine records, with exact proposal/source/argv/env/path identities and one-live/no-retry boundary. Report unexpected drift using read-only observations; do not repair it.
+
+Prior actual cost177/342 and incomplete old source stay preserved. No genuine first-source completion or G3/G4 result is implied by this review. Await separate dispatch; do not start science on this message.
