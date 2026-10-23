@@ -50,6 +50,8 @@ Oldest first. UTC is the task-directory timestamp; scientific SHA is the relevan
 
 | 2026-10-23 00:18:40 | SOL | R19 exact2da independent actual-preflight verification | Real preflight VERIFIED PASS; zero science; live clearance NOT_GRANTED | 2da980f631badc25086d12db60d128ff507d3ae6 | [RECORD.md](agent-logs/2026-10-23T001840Z__SOL__r19-phase1-independent-verification__2da980f_d9db8d/RECORD.md) |
 
+| 2026-10-23 00:22:00 | CODEX / Luna | R19-B1 concrete live-successor proposal | PREPARATION_ONLY; exact proposal pending independent review; no launch clearance or fresh science authorization | 2da980f631badc25086d12db60d128ff507d3ae6 | [RECORD.md](agent-logs/2026-10-23T002200Z__LUNA__r19-live-proposal__2da980f/RECORD.md) |
+
 ## Import omissions
 
 No task directory or large provenance file was omitted. Transient PID/lock files and Python bytecode remain local and are ignored; exact paths, sizes, hashes and reasons are in [excluded-files.json](agent-logs/2026-09-14T061140Z__ASTRA__provenance-repo-initialization__wo8b4ovs/excluded-files.json). No file was deleted.
