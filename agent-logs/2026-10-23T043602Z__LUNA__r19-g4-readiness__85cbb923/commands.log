@@ -1,0 +1,13 @@
+Read-only commands/checks performed (UTC 2026-10-23 04:35–04:36):
+- sha256sum of the supplied independent_review.json and LUNA_READ_ONLY_G4_PREPARATION_TASK.md; both matched the user-specified SHA-256.
+- Read immutable INDEPENDENT_REVIEW.md and independent_review.json; confirmed IMPLEMENTATION_REVIEW=PASS, exact analyzer SHA, G3 carry-forward PASS, and FORMAL_G4_AUTHORIZATION=NOT_GRANTED.
+- Read review's actual_independent.pre_hashes.json and recomputed hashes for all 15 original G3 output files plus all four original supervisor files; every value matched.
+- Rehashed the analyzer file, complete raw G3 archive, protocol, source schedule, exclusions, and execution gate; all matched the review-bound values.
+- Checked both scientific Git worktrees: analyzer checkout clean at 85cbb92395e5e2420c2adeb1fa0634653e742910, matching local/remote branch; execution checkout clean, detached at 2da980f631badc25086d12db60d128ff507d3ae6.
+- Inspected the parser declaration statically (source text only) to prepare exact future flags. Did not import or invoke analyzer.
+- Inspected process list and GPU status: no R19/analyzer/model/ALFWorld process matched; GPU reported no active processes and 14 MiB used.
+- Confirmed proposed future report path did not exist before this readiness task; no report path was created.
+- Checked provenance local HEAD and origin/main at 9b09a263e71f3216ed918006418d88ad9ba4d7ed before preparing this task.
+- Canonicalized the proposed argv/environment JSON with UTF-8, sorted object keys, compact separators, and no trailing newline; SHA-256 values are recorded in the readiness and input binding files. This was serialization/hash work only; the proposal was not executed.
+
+Not performed: analyzer or validator invocation, tests, preflight, supervisor, model call, ALFWorld construction/reset/step, G2/G3/G4 execution, statistics, report generation, outcome aggregation, or scientific interpretation. No source, protocol, frozen input, original receipt, ledger, manifest, or evidence file was modified.

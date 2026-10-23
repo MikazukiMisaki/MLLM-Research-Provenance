@@ -72,6 +72,7 @@ Oldest first. UTC is the task-directory timestamp; scientific SHA is the relevan
 | 2026-10-23 03:54:48 | SOL RESEARCH | R19 G4 C01/C02 developer engineering freeze | Exact85cbb923 developer handoff; 246focused;703passed+known3fail77errors; no actual G4; independent review separate | 85cbb92395e5e2420c2adeb1fa0634653e742910 | [RECORD.md](agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/RECORD.md) |
 
 | 2026-10-23 04:23:27 | SOL | R19 exact85 G4 consumer independent review | IMPLEMENTATION PASS; independent246focused/703full+unchanged80historicalfailures; five genuine validators PASS; Luna read-only prep only; formalG4 NOT_AUTHORIZED | 85cbb92395e5e2420c2adeb1fa0634653e742910 | [RECORD.md](agent-logs/2026-10-23T042327Z__SOL__r19-g4-exact-sha-review__85cbb923_379dac/RECORD.md) |
+| 2026-10-23 04:36:02 | LUNA | R19 G4 read-only readiness proposal | READY_FOR_PROPOSAL_REVIEW; PREPARATION_ONLY; FORMAL_G4_NOT_AUTHORIZED; no analyzer/report/science invocation | 85cbb92395e5e2420c2adeb1fa0634653e742910 (reviewed analyzer; executed G3 remains 2da980f631badc25086d12db60d128ff507d3ae6) | [RECORD.md](agent-logs/2026-10-23T043602Z__LUNA__r19-g4-readiness__85cbb923/RECORD.md) |
 
 ## Import omissions
 
