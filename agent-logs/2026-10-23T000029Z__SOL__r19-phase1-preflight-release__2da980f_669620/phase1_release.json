@@ -1,0 +1,123 @@
+{
+  "LIVE_LAUNCH_CLEARANCE": "NOT_GRANTED",
+  "adjudication": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-22T234140Z__SOL__r19-exact-sha-independent-review__2da980f_198732/known_failed_adjudication.json",
+    "sha256": "3abea8efc2bd9d88677d71031aef0a21e905e6dd7b3ed75d06f1486d4c6718e0"
+  },
+  "argv": {
+    "child_canonical_sha256": "eea6b0032ca714ec011b3d48f9c6a1a1bec3879560910ae77ce3da1c924aaa68",
+    "child_path": "/home/lizening/research-notes/agent-logs/2026-10-23T000029Z__SOL__r19-phase1-preflight-release__2da980f_669620/child_argv.json",
+    "supervisor_canonical_sha256": "7c1519ccb6f34683ee1ac09d4757d8a00bc225576b6a4f8370736790a2b9235b",
+    "supervisor_path": "/home/lizening/research-notes/agent-logs/2026-10-23T000029Z__SOL__r19-phase1-preflight-release__2da980f_669620/supervisor_argv.json"
+  },
+  "automatic_retry": false,
+  "base_scientific_sha": "bf31f3da430ffc35bd17fc380e1752adce6d1467",
+  "cumulative_start": {
+    "environment_operations_including_resets": 342,
+    "incomplete_external_operations": 0,
+    "model_generations": 177,
+    "non_reset_environment_operations": 330,
+    "resets": 12
+  },
+  "environment": {
+    "apply_rule": "Apply set and remove unset before absolute supervisor invocation; do not preset injected fields; compare recorded effective allowlist to set exactly.",
+    "canonical_sha256": "f6814cb23d94fcacb28f73f0ce786192e48c425469d942941450f2c940a02028",
+    "file_sha256": "59fbf34e59cb02fbe1a06dc11cff6b966cde3ed2a90805a6da6368d630b5c03b",
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-23T000029Z__SOL__r19-phase1-preflight-release__2da980f_669620/environment_set_unset.json",
+    "prior_proposal_digest": "6f9462a0234a24fb6967946b165bd99db54641c926de88cd0bac33580b702516",
+    "prior_proposal_digest_verification": "UNVERIFIED: canonical input object not supplied; this explicit file supersedes only the ambiguous digest representation, preserves proposed runtime values.",
+    "recorded_effective_environment_canonical_sha256": "84a59e93bd64b751ec5e1baad246314776562158bdb46019a864d5dba52697c0"
+  },
+  "evidence_class": "preflight_only",
+  "execution_cwd": "/home/lizening/wt-r19-recovery-duration-v1",
+  "fresh_user_scientific_authorization": "NOT_GRANTED_BY_THIS_RELEASE",
+  "gate": {
+    "copy_rule": "Create exclusively from reviewed bytes; stop if destination already exists. Never edit old gates.",
+    "destination": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g3_gate_2da980f_phase1.json",
+    "reviewed_bytes_path": "/home/lizening/research-notes/agent-logs/2026-10-23T000029Z__SOL__r19-phase1-preflight-release__2da980f_669620/reviewed_phase1_gate.json",
+    "sha256": "c285692615eaaf1c7cb7139b0417528022db6ee03c510de13f881d126f14415e"
+  },
+  "global_ceilings": {
+    "environment_operations": 41260,
+    "model_calls": 26988
+  },
+  "implementation_sha": "2da980f631badc25086d12db60d128ff507d3ae6",
+  "issued_at_utc": "2026-10-23T00:05:54.619257+00:00",
+  "maximum_alfworld_constructions": 0,
+  "maximum_environment_resets": 0,
+  "maximum_environment_steps": 0,
+  "maximum_live_launches": 0,
+  "maximum_model_generations": 0,
+  "maximum_model_objects_loaded": 0,
+  "maximum_scientific_units": 0,
+  "maximum_supervised_preflight_invocations": 1,
+  "next_dependency": "Independent review of actual positive preflight -> separate live launch clearance and fresh explicit user scientific authorization -> one bounded live successor -> genuine G3 -> G4",
+  "operator": "Luna Excution",
+  "operator_task": "01a09fcb-ab5f-7b83-9acf-91026145b764",
+  "predecessor_run_id": "3d1ccea7e97f4727abf8e216ac6ec498",
+  "preflight_receipt_path": "/home/lizening/research-notes/agent-logs/2026-10-22T235413Z__CODEX__r19-phase1-preparation__2da980f/preflight_supervisor/pilot_preflight_receipt.json",
+  "preflight_result": "NOT_RUN",
+  "prior_live_clearance": "CONSUMED; NOT_REUSABLE",
+  "proposal": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-22T235413Z__CODEX__r19-phase1-preparation__2da980f/R19_PHASE1_PREPARATION_PROPOSAL.md",
+    "sha256": "7bcdcff209bbf462d8aced19efef0b2c74352f9129e779f35272a04cf72fbc2c"
+  },
+  "read_only_inputs": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-23T000029Z__SOL__r19-phase1-preflight-release__2da980f_669620/input_runtime_verification.json",
+    "runtime_preload_sha256": "64ebf4667da70dc4acd0a49b645bb6b6d4c3e1fe5d3e8e6351a8bf66f148ab9a",
+    "sha256": "5f5f10b3fc199b5f7e760d33fc03067f0b36a84f4042a531cd5d3a460c2d04e6"
+  },
+  "remaining_phase_caps": {
+    "environment_operations": {
+      "initial_attempt": 5520,
+      "logical_branch": 18000,
+      "path_extension": 2940,
+      "replay_gate": 5400,
+      "source": 8999
+    },
+    "model_calls": {
+      "initial_recovery": 240,
+      "path_extension": 240,
+      "source": 8999,
+      "suffix": 17100
+    }
+  },
+  "return_evidence": [
+    "run_id and authentic launch_context.json, runner_exit.json, supervisor_status.json, runner.log, pilot_preflight_receipt.json with hashes",
+    "exact HEAD/clean status, local gate hash, env omissions and effective allowlist, production module origins, frozen input/runtime/review bindings",
+    "all zero-side-effect counters, output-sentinel absence, protected predecessor/G2 hashes unchanged, cumulative actual 177/342",
+    "own finalized RECORD/hash inventory and coordinated provenance publication"
+  ],
+  "review": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-22T234140Z__SOL__r19-exact-sha-independent-review__2da980f_198732/independent_review.json",
+    "sha256": "85a694f24da347dcb0e6f09f4fe0d33afefb46abf1d5b0063361870c3fe7820b"
+  },
+  "reviewer": "Sol",
+  "reviewer_task": "01a0994c-a209-7600-8a3e-5ff3096ed346",
+  "schema_version": "r19_phase1_zero_science_preflight_release_v1",
+  "scientific_execution_authorized": false,
+  "scientific_output_must_remain_absent": true,
+  "scientific_output_sentinel": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_preflight_2da980f_20261022T235413Z",
+  "staging": {
+    "authorized": true,
+    "initial_branch": "codex/r19-source-contract-repair",
+    "initial_sha": "da7d348ffd3677d619dd31357e1e1e3cca28c9ec",
+    "move_original_exclusively_to": "/home/lizening/research-notes/agent-logs/2026-10-22T235413Z__CODEX__r19-phase1-preparation__2da980f/preserved/R19_IMPLEMENTATION_ONBOARDING.execution-original.md",
+    "on_pass": "Keep clean exact reviewed detached checkout pending independent receipt review. No live execution.",
+    "onboarding_mode": "0644",
+    "onboarding_sha256": "27be0ca4c3e5abffa4fa492aaf47bf087328f41718fcc5f774c43fdf5b1c4e7e",
+    "onboarding_source": "/home/lizening/wt-r19-recovery-duration-v1/R19_IMPLEMENTATION_ONBOARDING.md",
+    "restore_on_stop_or_failure": "After authentic child/supervisor exit and evidence preservation, restore original branch/HEAD and onboarding bytes/mode, without reset/clean/ignore changes. Stop/report restoration conflict.",
+    "target": "detached exact implementation SHA",
+    "verified_copy": "/home/lizening/research-notes/agent-logs/2026-10-22T235413Z__CODEX__r19-phase1-preparation__2da980f/preserved/R19_IMPLEMENTATION_ONBOARDING.md"
+  },
+  "status": "RELEASED_FOR_ONE_PREFLIGHT_ONLY",
+  "stop_rules": [
+    "Any source/ref/hash/runtime/input/cwd/environment drift or concurrent R19/GPU process",
+    "Any already-existing gate, supervisor record directory, output sentinel or move-destination",
+    "Any staging/preflight failure, mismatch, timeout or interruption; preserve evidence and report, no retry",
+    "Any model/environment/scientific side effect or nonzero counter",
+    "Missing authentic subprocess exit, nonzero child exit, status other than PREFLIGHT_ONLY_PASS, or output sentinel created"
+  ],
+  "supervisor_record_directory": "/home/lizening/research-notes/agent-logs/2026-10-22T235413Z__CODEX__r19-phase1-preparation__2da980f/preflight_supervisor"
+}
