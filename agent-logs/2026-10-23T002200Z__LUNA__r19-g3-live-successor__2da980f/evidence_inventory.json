@@ -1,0 +1,43 @@
+{
+  "schema_version": "r19_luna_live_evidence_inventory_v1",
+  "record_directory": "agent-logs/2026-10-23T002200Z__LUNA__r19-g3-live-successor__2da980f",
+  "scientific_output_directory": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z",
+  "published_unchanged_evidence_directory": "evidence/",
+  "local_only_raw_payloads": [
+    {
+      "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_events.jsonl",
+      "bytes": 187978473,
+      "sha256": "05e1d443ff304eaa25d08b92a4e19d204a6c93a4f46bbe50aefef3271f211762",
+      "reason": "Exceeds provenance protocol >50 MB limit; preserved locally as authentic raw event journal."
+    },
+    {
+      "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_trajectories.jsonl",
+      "bytes": 19726633,
+      "sha256": "c6f37a7da28e326c70818524c79c17bbd85a286754c111f17db07cbe151a4f1c",
+      "reason": "Over 10 MB; contains task-level trajectory observations/actions, treated as dataset-like payload and not uploaded."
+    }
+  ],
+  "other_scientific_payloads": "Model weights, adapter files, caches, and dataset payloads were not copied or uploaded.",
+  "clearance_and_review": {
+    "sol_clearance_directory": "agent-logs/2026-10-23T004857Z__SOL__r19-revision2-live-clearance__2da980f_7dae7b/",
+    "launch_clearance_sha256": "1702806e11d0f4efa9933de7dcc7c353f5220b43b135ab4768bb6cfd81612232",
+    "user_authorization_sha256": "36dfecc6436cf91321535d51215c1483bbd5b78df286264d004b73337ce3186d",
+    "final_drift_check_sha256": "42f98d83df5c6d1a7ce11013f01f0737e1adf725b81c6a84d2cbf8986109d29c",
+    "revision_2_review_sha256": "ac47276b1f97cf4c6d623460b23f13e48035726b73ae7a909877ba71bd573514",
+    "preflight_verification_sha256": "ded8456fdf9d0e76e52a0d6979aa9f442c5f6feca587935028e9e629730812f7"
+  },
+  "raw_supervisor_evidence_sha256": {
+    "runner_exit.json": "015fe2296f5dce979d6e9db2a17dc03d217958620dd13a29a73b256d56cb144b",
+    "supervisor_status.json": "df9ae52504c3f25a7f949ddea0a25b517dfe280d7e5a2ff23880fca68a7d5c99",
+    "launch_context.json": "399137330d5dfaccdd8734f7c39b219cfd7040808649e6090af8c9b733af39ac",
+    "runner.log": "849cea6fc021205b1bcc3f12fc403726c726b9050a0aef928af8d591db365ae4",
+    "execution_manifest.json": "b00e8e4eed375532a080da6579940b44bc09089d7917540aea3ca4c227daffa0",
+    "branches.jsonl": "eff9b5e74d3d5daa928cb662dcc59fc3f434f66796b673679d40b374f3c8636f",
+    "source_restart_comparison.json": "8d3269fccd346da464c990ff4f50bf1e913031fa210eb3feb8c4307ea8777ee9",
+    "unit_registry.json": "c3898492c1fe542d60ea7c9f9363f48e352058f2b7ee86c812b54ef4e18f0cc8",
+    "runtime_manifest.json": "306a9e7c2d1b968e2a56e258fcd07aaf7467739460802a2b94c5e20411264916",
+    "runtime_manifest_preload.json": "6395e65abf266ba5f6a0834023b1da5c3799550b124a75db4d819cf613ee3312",
+    "environment_manifest.json": "81ea3b3aea86a850c70d88846f1ce12dfb276cca34aacb9f598ea13e733bf902",
+    "g3_gate_receipt.json": "4ab84099f361bf563327168237ac052c19506cd997e159aacd5f1244e3a9c773"
+  }
+}

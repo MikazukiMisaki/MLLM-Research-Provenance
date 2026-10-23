@@ -1,0 +1,93 @@
+{
+  "schema_version": "r19_luna_postrun_offline_validation_v1",
+  "validation_mode": "read_only_production_validators",
+  "scientific_sha": "2da980f631badc25086d12db60d128ff507d3ae6",
+  "run_id": "260422ac02bd42a8b2929d7ef240526b",
+  "evidence_class": "live",
+  "checks": {
+    "event_ledger": {
+      "status": "PASS",
+      "event_count": 26163,
+      "completed_physical_model_generations": 4965,
+      "nonreset_environment_operations": 7273,
+      "environment_resets": 334,
+      "total_environment_operations_including_resets": 7607,
+      "physical_input_tokens": 3098660,
+      "physical_generated_tokens": 25817,
+      "physical_total_tokens": 3124477,
+      "incomplete_operations": 0,
+      "training_run_events": 0,
+      "external_paid_model_call_events": 0
+    },
+    "branch_evidence": {
+      "status": "PASS",
+      "validated_prefix_rows": 39,
+      "validated_k_arms": 183,
+      "branch_bound_operation_events": 9424
+    },
+    "frozen_source_schedule": {
+      "status": "PASS_FROZEN_TRAIN_SCHEDULE_BINDING",
+      "scheduled_source_episodes": 127,
+      "completed_source_episodes": 127,
+      "source_bound_operation_events": 4219,
+      "all_live_operation_events_bound": 12741,
+      "heldout_tasks": 0,
+      "training_runs": 0,
+      "external_paid_model_calls": 0
+    },
+    "first_source_restart_comparison": {
+      "status": "PASS_FIRST_SOURCE_RESTART_COMPARISON_AND_EPISODE_BINDING",
+      "predecessor_run_id": "3d1ccea7e97f4727abf8e216ac6ec498",
+      "schedule_index": 0,
+      "compared_before_first_action": true,
+      "comparison_sha256": "8d3269fccd346da464c990ff4f50bf1e913031fa210eb3feb8c4307ea8777ee9"
+    }
+  },
+  "manifest_execution_counts": {
+    "status": "PILOT_READY_FOR_OFFLINE_ANALYSIS",
+    "source_episode_count": 127,
+    "initial_attempt_count": 39,
+    "eligible_by_stratum": {
+      "failure": 6,
+      "success_control": 15,
+      "random_control": 15
+    },
+    "formal_branch_count": 39,
+    "branch_arm_count": 183,
+    "candidate_queue_counts": {
+      "failure": 7,
+      "success_control": 30,
+      "random_control": 30
+    },
+    "exhausted_queues": ["failure"]
+  },
+  "phase_counts": {
+    "model_generations": {
+      "initial_recovery": 78,
+      "path_extension": 133,
+      "source": 2046,
+      "suffix": 2708
+    },
+    "environment_actions_excluding_resets": {
+      "initial_attempt": 36,
+      "logical_branch": 4701,
+      "path_extension": 133,
+      "replay_gate": 357,
+      "source": 2046
+    },
+    "environment_operations_including_resets": {
+      "initial_attempt": 36,
+      "logical_branch": 4869,
+      "path_extension": 133,
+      "replay_gate": 396,
+      "source": 2173
+    }
+  },
+  "cumulative_with_previously_audited_177_generations_342_operations": {
+    "model_generations": 5142,
+    "nonreset_environment_operations": 7603,
+    "environment_resets": 346,
+    "total_environment_operations": 7949
+  },
+  "g4_analysis": "NOT_RUN_EXPLICITLY_OUT_OF_SCOPE"
+}

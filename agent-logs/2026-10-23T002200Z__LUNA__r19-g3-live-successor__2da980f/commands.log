@@ -1,0 +1,20 @@
+Execution and post-run verification command summary (UTC 2026-10-23)
+
+Launch was performed once using the reviewed exact supervisor_argv.json and child_argv.json arrays and environment set/unset record from:
+  /home/lizening/research-notes/agent-logs/2026-10-23T004857Z__SOL__r19-revision2-live-clearance__2da980f_7dae7b/
+No shell reconstruction of the child argv was used. Canonical hashes: supervisor c2270f4e43d88d53022b38bc4bc0e1890bc49b738387f99485045fd9020e450a; child 93aa3a833fbb65241fcab6b7e68d3863fa83985084d9c1b27875c730285f55ef.
+
+Runner-reported command (exact argv also preserved in evidence/runner_exit.json):
+  /home/lizening/miniconda3/envs/alfworld-self-improve/bin/python /home/lizening/wt-r19-recovery-duration-v1/scripts/run_r19_recovery_duration.py pilot --protocol /home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_recovery_duration_v1.json --manifest /home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g3_gate_2da980f_phase1.json --output /home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z --adapter /home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter --data-root /home/lizening/alfworld_data --config /home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml
+
+Read-only integrity checks after natural process completion:
+- Pinned environment Python loaded scripts.analyze_r19_recovery_duration production validators.
+- validate_event_ledger(events, expected_evidence_class="live")
+- validate_branch_evidence(branches, events, return_operation_ids=True)
+- validate_live_source_schedule(frozen_schedule, frozen_exclusions, events, branch_operation_event_ids, physical_ledger)
+- validate_source_restart_comparison(execution_manifest=..., events=..., predecessor_run_id=..., expected_snapshot=..., expected_snapshot_sha256=..., comparison_path=...)
+- sha256sum over supervisor receipts/logs and authentic output artifacts; process check for the recorded supervisor/child PIDs.
+
+The first local-only validator invocation used positional arguments for a keyword-only restart validator and returned TypeError before any scientific operation. It was corrected to the documented keyword-only call above; the final read-only production validator set returned the results in offline_validation.json. No data or experiment state was changed by this invocation error.
+
+No G4/statistics/report command, model call, or ALFWorld command was run after the supervised child exited.
