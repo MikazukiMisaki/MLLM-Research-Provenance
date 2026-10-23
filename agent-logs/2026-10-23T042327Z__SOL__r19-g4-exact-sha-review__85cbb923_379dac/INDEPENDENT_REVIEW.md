@@ -1,0 +1,27 @@
+# R19 G4 consumer repair — independent exact-SHA review
+
+**IMPLEMENTATION_REVIEW: PASS**, restricted to analyzer commit `85cbb92395e5e2420c2adeb1fa0634653e742910`. Direct parent/executed-G3 source is `2da980f631badc25086d12db60d128ff507d3ae6`, run `260422ac02bd42a8b2929d7ef240526b`. This permits Luna's read-only G4 preparation; it grants no formal G4 execution or launch clearance. Machine review SHA256 `8817b955846624936d591a104a0bcbedde1b66c9c1e1573b6eb60de7db965579`.
+
+## Scope and implementation conclusions
+
+I reviewed the complete four-file delta independently in a clean detached checkout. Only two analyzer consumers and four private contract helpers changed; the other three files are tests. All other analyzer AST (including report/statistical functions, imports, constants and guards), runtime producers, supervisor, protocol, schedule/exclusions, budgets/treatments and historical fingerprint/authorization/disposition artifacts remain unchanged. Forty historical fingerprints authenticate exact2da Git source;39 unchanged current methods still match. The test-only exception is exactly the separately authorized exit-consumer change, with no broad exemption or skipped regression.
+
+C01 now discriminates strict flat-v1/nested-v2 shapes and exact booleans/transport, rejects unknown/mixed/malformed forms, and uses the original manifest for existing hashes and frozen baseline bindings. C02 retains authentic integer-zero/completed/live/uninterrupted receipt/status/log/events/branches proofs, authenticates the persisted event view/context, and uses original receipt/status-bound launch_context when no run_started was emitted. It binds supervisor/child argv, original cwd/protocol/output, original runtime/environment/cache/offline/config/data identity. Legacy start envelopes must be first/unique and noncontradictory. There is no fake event, runtime conversion or special run exemption.
+
+## Independently executed evidence
+
+- Focused R19: **246passed, actual exit0**. A separate collection receipt confirms all246 cases were selected.
+- Full candidate: **703passed/3failed/77errors, actual exit1**. Independent exact2da full baseline: **617passed/3failed/77errors, actual exit1**. All80 exact failure/error IDs match each other and developer raw logs, preserving parametrized spaces; zero new or removed failure/error IDs. Candidate XML confirms783tests,0skips. Historical unavailable artifacts were not repaired; the genuine five-validator path did not require them.
+- Compile and exact source diff check exit0. Both detached checkouts and original execution/developer/reviewer roots are clean at their respective pinned SHAs after checks; live remote candidate and frozen2da refs match.
+- My own fresh-process actual-data script invoked allfive production integrity validators on the full authentic original G3 bundle: ledger, branch, frozen source schedule, execution provenance and exit receipt all returned PASS. It imported the isolated exact85 analyzer/duration module and changed no constants/PROJECT_ROOT/receipts.44 protected inputs were byte-equal before/after; I separately rehashed all48 developer-bound input paths and matched their original pre/post hashes. Actual G3 remains2da with authentic exit0; launch-context SHA39913733... resolves C02 directly. Profile guards record no actual-data analyzer main/statistics/report calls.
+- Independently rerun fresh-process nonempty synthetic software integration produced2sources/2branches/10Karms, explicit-synthetic CLI/report and separate marked wire-format consumer fixtures with clean module origins. Synthetic CLI does not itself certify its live-only provenance branch, and no synthetic report is a G4 result.
+
+Initial reviewer test-command mistakes (unexpanded glob and a directory-valued XML option) exited4 before collection; original receipts are retained alongside the corrected successful runs. They are harness errors, not hidden candidate regressions. Existing negative test subprocesses/harmless file-writing child are software fixtures, not official science or preflight.
+
+## Evidence custody and execution boundary
+
+Original live evidence and old known-failed source/disposition, G2 evidence, consumed clearances and earlier review/finding records were not modified. The old exact2da G4 blocker reports remain historically true; this distinct exact85 review records the now-fixed consumer interpretation. Physical cumulative cost is still **5142generations/7949operations**, with original177/342 fully retained; no new model/environment operation, G3/G2 rerun, held-out use, training, actual G4 statistics or report.
+
+The developer's62 selected compact files were coordinated and published unchanged at `9b097a5ddee6a08de7f9a219cd473e54604a5dc0`; all64 intended blobs including INDEX/rootinventory were verified against remote Git objects. This later upload supersedes only their earlier LOCAL_ONLY publication snapshot; developer records were not rewritten. The existing complete original G3 archive remains unchanged at SHA c7b09370e7b7625d60ad257a4a4cfe023cceb5a47f48d1f660b2ae36fd5c808f. Reviewer raw logs/scripts/receipts and full delta are retained here.
+
+**Next authorized step: Luna read-only G4 preparation only.** The sibling task binds this review and both source identities. No actual-data analyzer main/statistics/report or formal G4 until fresh explicit user authorization. Any later drift/integrity failure stops without scientific rerun or evidence repair. Unexecuted formal CLI/report behavior is not claimed PASS.

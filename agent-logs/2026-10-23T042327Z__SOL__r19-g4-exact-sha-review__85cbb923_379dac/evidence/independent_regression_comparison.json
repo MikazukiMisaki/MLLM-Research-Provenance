@@ -1,0 +1,358 @@
+{
+  "status": "PASS_NO_NEW_FAILURE_OR_ERROR_IDS",
+  "independent_candidate_counts": {
+    "passed": 703,
+    "failed": 3,
+    "errors": 77,
+    "actual_exit": 1
+  },
+  "independent_baseline_counts": {
+    "passed": 617,
+    "failed": 3,
+    "errors": 77,
+    "actual_exit": 1
+  },
+  "independent_focused": {
+    "collected": 246,
+    "passed": 246,
+    "actual_exit": 0
+  },
+  "exact_failure_error_id_count": 80,
+  "failure_error_ids_all_equal": true,
+  "new_ids": [],
+  "removed_ids": [],
+  "failure_error_ids": [
+    [
+      "ERROR",
+      "tests/test_persistent_recovery_r12.py::test_control_pick_two_audit_is_present"
+    ],
+    [
+      "ERROR",
+      "tests/test_persistent_recovery_r12.py::test_discordant_ids_and_tie_partition"
+    ],
+    [
+      "ERROR",
+      "tests/test_persistent_recovery_r12.py::test_frozen_provenance_and_result_arithmetic"
+    ],
+    [
+      "ERROR",
+      "tests/test_persistent_recovery_r12.py::test_handoff_context_and_horizon_metrics"
+    ],
+    [
+      "ERROR",
+      "tests/test_persistent_recovery_r12.py::test_pick_two_public_progress_and_exact_instance_identity"
+    ],
+    [
+      "ERROR",
+      "tests/test_persistent_recovery_r12.py::test_subgoal_staleness_rule_and_frozen_counts"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_actual_sft_continuation_rejects_both_treatment_leaks[card]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_actual_sft_continuation_rejects_both_treatment_leaks[fact]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_changed_real_head_cannot_resume"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_completed_run_rejects_fresh_output_and_same_output"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[continuation protocol]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[empty generation]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[empty success]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[invented status]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[malformed executed]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[missing nested decisions]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[missing nested loops]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[missing trace]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[nonfinite latency]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[parsed diagnosis]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[raw output]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[terminal reward]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[termination reason]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[trace twice]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[transition list]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong comparator]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong cost delta]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong derived cost]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong generation limit]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong prompt]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong relation]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_execution_journal_detects_actual_completed_then_started"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_global_lock_is_shared_by_linked_worktrees"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_identical_full_records_deduplicate"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_jsonl_only_completion_remains_sixty_executions"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_late_crash_reconstructs_reports_without_scientific_calls[completed_manifest]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_late_crash_reconstructs_reports_without_scientific_calls[report]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_ledger_conflicts_fail_closed[branch_file-branches/wrong.json]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_ledger_conflicts_fail_closed[position-2]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_ledger_conflicts_fail_closed[record_sha256-0000000000000000000000000000000000000000000000000000000000000000]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_ledger_conflicts_fail_closed[status-unknown]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_lock_survives_exceptions_and_process_death"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[missing_model_isolation]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[missing_provenance]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[missing_r18_b_commit]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[wrong_commit]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[wrong_model_isolation]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[wrong_schema]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[continuation-cross-source]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[continuation-jsonl]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[cost-cross-source]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[cost-jsonl]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[generation-cross-source]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[generation-jsonl]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[replay-cross-source]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[replay-jsonl]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_orphaned_report_staging_does_not_block_resume"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_output_paths_fail_before_execution[../outside]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_output_paths_fail_before_execution[/tmp/outside-workspace]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_output_paths_fail_before_execution[scripts/forbidden]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_continuation_and_terminal_semantics[horizon]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_continuation_and_terminal_semantics[recovery_terminal]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_continuation_and_terminal_semantics[recovery_terminal_failure]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_continuation_and_terminal_semantics[sft_failure]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_continuation_and_terminal_semantics[sft_terminal]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_guard_rejects_unrelated_changes[modified]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_guard_rejects_unrelated_changes[rename]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_guard_rejects_unrelated_changes[untracked]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_overlapping_entry_paths_execute_only_sixty[False]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_overlapping_entry_paths_execute_only_sixty[True]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_parser_failure_continues_and_persists[diagnosis_too_long]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_parser_failure_continues_and_persists[malformed_stage_one]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_parser_failure_continues_and_persists[subgoal_too_long]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_parser_failure_continues_and_persists[truncated_stage_one]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_parser_failure_continues_and_persists[truncated_stage_two]"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_unignored_output_rejected_before_execution"
+    ],
+    [
+      "ERROR",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_withheld_recovery_rejects_any_transition"
+    ],
+    [
+      "FAILED",
+      "tests/test_persistent_recovery_r12.py::test_public_source_excludes_hidden_facts_and_frozen_manifest_is_not_written"
+    ],
+    [
+      "FAILED",
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_frozen_hashes_and_r18_c1_provenance"
+    ],
+    [
+      "FAILED",
+      "tests/test_progress_card_semantic_audit_r18_a.py::test_frozen_phase_artifact_is_hashable_and_self_describing"
+    ]
+  ],
+  "candidate_junit_counts": {
+    "tests": 783,
+    "failures": 3,
+    "errors": 77,
+    "skipped": 0
+  },
+  "validation_sources": {
+    "independent_baseline": "/home/lizening/research-notes/agent-logs/2026-10-23T042327Z__SOL__r19-g4-exact-sha-review__85cbb923_379dac/evidence/independent_baseline_full.log",
+    "independent_candidate": "/home/lizening/research-notes/agent-logs/2026-10-23T042327Z__SOL__r19-g4-exact-sha-review__85cbb923_379dac/evidence/independent_candidate_full_corrected.log",
+    "developer_baseline": "/home/lizening/research-notes/agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/evidence/baseline_full.log",
+    "developer_candidate": "/home/lizening/research-notes/agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/evidence/final_full.log"
+  }
+}

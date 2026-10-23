@@ -1,0 +1,93 @@
+{
+  "schema_version": "r19_g4_consumer_exact_sha_independent_review_v1",
+  "reviewer": "Sol",
+  "reviewer_thread": "01a0994c-a209-7600-8a3e-5ff3096ed346",
+  "finalized_at_utc": "2026-10-23T04:33:45.649835+00:00",
+  "IMPLEMENTATION_REVIEW": "PASS",
+  "reviewed_analyzer_source_sha": "85cbb92395e5e2420c2adeb1fa0634653e742910",
+  "reviewed_analyzer_file_sha256": "0edadbda5840786400eba0d13decc9c504957e4cda6224fefb98405d41af8b24",
+  "direct_parent_and_executed_G3_sha": "2da980f631badc25086d12db60d128ff507d3ae6",
+  "executed_G3_run_id": "260422ac02bd42a8b2929d7ef240526b",
+  "G3_GENUINE_EVIDENCE_CARRY_FORWARD": "PASS_UNCHANGED_ORIGINALS_NO_RERUN",
+  "G2_CARRY_FORWARD": "PRESERVED_UNCHANGED_HISTORICAL_EXECUTION_92aae1d_NO_RERUN",
+  "source_treatment_semantics_changed": false,
+  "scientific_execution_behavior_changed": false,
+  "offline_evidence_validation_behavior_changed": true,
+  "two_contracts": {
+    "C01": "PASS_ORIGINAL_NESTED_V2_WITH_STRICT_VERSIONED_SCHEMA_AND_RAW_HASH_BINDING",
+    "C02": "PASS_NO_START_EVENT_USING_AUTHENTIC_HASH_BOUND_SUPERVISOR_LAUNCH_CONTEXT"
+  },
+  "scope_checks": {
+    "changed_file_count": 4,
+    "existing_methods_changed": 2,
+    "private_helpers_added": 4,
+    "historical_fingerprints_exact_2da": 40,
+    "current_unchanged_fingerprints": 39,
+    "no_producer_or_stats_or_protocol_or_old_fingerprint_edit": true
+  },
+  "independent_tests": {
+    "focused_passed": 246,
+    "focused_actual_exit": 0,
+    "candidate_full_passed": 703,
+    "candidate_full_failed": 3,
+    "candidate_full_errors": 77,
+    "candidate_full_actual_exit": 1,
+    "fresh_exact2da_full_passed": 617,
+    "fresh_exact2da_full_failed": 3,
+    "fresh_exact2da_full_errors": 77,
+    "fresh_exact2da_full_actual_exit": 1,
+    "same_exact_failure_error_IDs": 80,
+    "new_failure_error_IDs": [],
+    "compile_exit": 0,
+    "diff_check_exit": 0
+  },
+  "independent_original_data_checks": {
+    "production_integrity_validators_passed": 5,
+    "protected_input_count": 44,
+    "pre_post_hashes_equal": true,
+    "executed_G3_identity_still_2da": true,
+    "model_environment_calls": 0,
+    "actual_main_statistics_report_calls": 0,
+    "developer_48_input_hashes_separately_rechecked": true
+  },
+  "independent_nonempty_synthetic": {
+    "explicit_synthetic_CLI": "PASS",
+    "two_sources_two_branches_ten_K_arms": true,
+    "separate_wire_contract_fixtures": "PASS",
+    "live_cli_branch_not_claimed": true
+  },
+  "cumulative_scientific_cost": {
+    "model_generations": 5142,
+    "environment_operations_including_resets": 7949,
+    "historical_177_generations_342_operations_retained": true,
+    "new_scientific_cost": 0
+  },
+  "blocking_findings": [],
+  "coverage_limits": [
+    "No formal actual-data analyzer CLI/statistics/report has run. Integrity-only acceptance and explicit-synthetic CLI are distinct.",
+    "Known historical3fail77errors independently reproduced unchanged; they are not silently repaired or skipped and were not required by the real G4 integrity path.",
+    "Initial reviewer test-launch argument errors are preserved and separately corrected; they collected no tests and are not candidate failures."
+  ],
+  "historical_blocker_records": "Remain immutable; this new exact85cbb review resolves the two consumer blockers for these original artifacts, without rewriting earlier exact2da findings or G3 evidence.",
+  "developer_evidence_publication_commit": "9b097a5ddee6a08de7f9a219cd473e54604a5dc0",
+  "developer_selected_compact_files_published": 62,
+  "developer_handoff_sha256": "92c49f2d3fe4541563662b71a8187809ebf1e15fbb72a9729e6d29e0812797da",
+  "evidence_sha256": {
+    "static_exact_sha_review.json": "aed383803f2d4dc8d5cbd4b4af10d1475ab0aa99d5997a5224ac3f2314d06feb",
+    "actual_independent.json": "43f28d801a40fea6abeda31ed8fa80de94b52bf8b0df3a9a9d150f92528d31cb",
+    "independent_regression_comparison.json": "0979c8932d5e6c3f51ec917dbf16c8b96e6051b4401aad96576dfa042aa4cc7e",
+    "independent_synthetic/synthetic_integration_evidence.json": "8079fe09d8f6083b59c9948ae39e748acccd424d2eb26d820dbefec59fa58ca5",
+    "final_git_states.json": "47b0114db702884a0c84694376f1ec6974788a408bcbfc2fe0d2603aea1a5832"
+  },
+  "LUNA_READ_ONLY_G4_PREPARATION": "RELEASED_AFTER_THIS_PASS",
+  "FORMAL_G4_AUTHORIZATION": "NOT_GRANTED_AWAIT_FRESH_DIRECT_USER_AUTHORIZATION",
+  "ACTUAL_DATA_G4_CLI": "NOT_RUN",
+  "launch_clearance": "NOT_ISSUED",
+  "any_G3_retry_authorized": false,
+  "conditions": [
+    "Luna may only inspect/hash/read inputs and prepare exact argv/env/output proposal; no analyzer main or actual-data statistics/report.",
+    "Bind reviewed analyzerSHA85cbb separately from executedG3SHA2da and original run/receipts.",
+    "Original output/supervisor/failure/G2/clearance artifacts stay unchanged; no model/ALFWorld/preflight/supervisor/G2/G3 calls.",
+    "Formal G4 requires separate direct user authorization after readiness/proposal review. Any drift or new integrity failure stops without auto repair/retry."
+  ]
+}
