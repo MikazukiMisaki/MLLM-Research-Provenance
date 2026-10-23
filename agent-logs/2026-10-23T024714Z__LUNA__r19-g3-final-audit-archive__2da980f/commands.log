@@ -1,0 +1,9 @@
+Read-only audit inspection and archive actions, UTC 2026-10-23.
+
+- Read Sol-owned final_g3_integrity_audit.json, monitor_display_cost_correction.json, and g4_runtime_schema_contract_finding.json; computed SHA256 without editing or staging those files.
+- Read authentic run exit, execution manifest, raw runtime manifest, existing restart comparison and existing G3 evidence receipts. No scientific command or validator was invoked in this archival task.
+- Compressed the two original raw JSONL files with deterministic gzip level 1 and no embedded filename/timestamp:
+  gzip -1 -n -c <original execution_events.jsonl> > raw/execution_events.jsonl.gz
+  gzip -1 -n -c <original source_trajectories.jsonl> > raw/source_trajectories.jsonl.gz
+- Verified round-trip bytes by streaming `gzip -dc <archive> | sha256sum`; resulting hashes equal the original event and trajectory SHA256 values in raw_payload_manifest.json.
+- No source, runtime, registry, manifest, event, trajectory or supervisor receipt was changed. No model, ALFWorld, preflight, supervisor, G2, G3 or G4 was invoked.

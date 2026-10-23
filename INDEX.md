@@ -60,6 +60,7 @@ Oldest first. UTC is the task-directory timestamp; scientific SHA is the relevan
 | 2026-10-23 00:40:21 | SOL | R19 exact live proposal revision2 independent review | Proposal technical PASS;3 bindings resolved; user science authorization/launch clearance NOT_GRANTED | 2da980f631badc25086d12db60d128ff507d3ae6 | [RECORD.md](agent-logs/2026-10-23T004021Z__SOL__r19-exact-live-proposal-revision2-review__2da980f_9d3489/RECORD.md) |
 
 | 2026-10-23 00:48:57 | SOL | R19 Revision2 fresh user authorization and independent live clearance | Drift PASS; ONE supervised live G3 GRANTED; no retry/G4; not yet executed by reviewer | 2da980f631badc25086d12db60d128ff507d3ae6 | [RECORD.md](agent-logs/2026-10-23T004857Z__SOL__r19-revision2-live-clearance__2da980f_7dae7b/RECORD.md) |
+| 2026-10-23 02:47:14 | Luna | R19-B1 G3 final audit clarification and raw evidence archive | G3 integrity PASS; corrected cumulative physical cost 5,142 generations/7,949 operations; G4 BLOCKED by two confirmed consumer contracts; no G4 execution | 2da980f631badc25086d12db60d128ff507d3ae6 | [RECORD.md](agent-logs/2026-10-23T024714Z__LUNA__r19-g3-final-audit-archive__2da980f/RECORD.md) |
 
 ## Import omissions
 

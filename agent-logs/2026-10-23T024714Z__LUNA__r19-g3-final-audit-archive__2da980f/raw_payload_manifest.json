@@ -1,0 +1,28 @@
+{
+  "schema_version": "r19_g3_raw_payload_archive_v1",
+  "run_id": "260422ac02bd42a8b2929d7ef240526b",
+  "archive_format": "deterministic_gzip_level_1_no_filename_or_timestamp",
+  "raw_files": [
+    {
+      "source_path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_events.jsonl",
+      "archive_path": "raw/execution_events.jsonl.gz",
+      "original_bytes": 187978473,
+      "original_sha256": "05e1d443ff304eaa25d08b92a4e19d204a6c93a4f46bbe50aefef3271f211762",
+      "archive_bytes": 15696610,
+      "archive_sha256": "264bea21db4a0e9ac1a73b2ac6a8db0c4723e35a98fce789d1dd449d35874b26"
+    },
+    {
+      "source_path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_trajectories.jsonl",
+      "archive_path": "raw/source_trajectories.jsonl.gz",
+      "original_bytes": 19726633,
+      "original_sha256": "c6f37a7da28e326c70818524c79c17bbd85a286754c111f17db07cbe151a4f1c",
+      "archive_bytes": 2106822,
+      "archive_sha256": "b9d3e8221080e2cb76036175635f560c695d7e5926301d83d87d110741f0171f"
+    }
+  ],
+  "roundtrip_verification": {
+    "execution_events_uncompressed_sha256_matches_original": true,
+    "source_trajectories_uncompressed_sha256_matches_original": true
+  },
+  "excluded": ["model weights", "adapter weights", "caches", "source dataset files"]
+}
