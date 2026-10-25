@@ -1,0 +1,49 @@
+{
+  "scope": "static code reading, no imports/project validators",
+  "bindings": [
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/training.py",
+      "sha256": "0c722ca6ff17aa50da6fb294b632619f65f99936ce41e61ec0dab6288c7b584e",
+      "bytes": 11777
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/configs/sft/sft_run_config.json",
+      "sha256": "15e2db7522e78b98fd9fcfc9f08537108b54353128c986043b8f2e947567a2ec",
+      "bytes": 1803
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/protocol.py",
+      "sha256": "cb9a8ee23d1208064348810ef3580773ba14403bfaac6a4e7f4a43c5540178a8",
+      "bytes": 11229
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/recovery/two_stage_v2.py",
+      "sha256": "ed4fc18621eea343f40c216ff3b3c36c65deb817144a718df3bf75ada5ecdfb2",
+      "bytes": 5190
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/scripts/run_r19_experiment.py",
+      "sha256": "06bb8e11c3cc9e9484b8d5731c86690b97a4c445a0e5aa16b72b912c6c14dd5c",
+      "bytes": 263109
+    }
+  ],
+  "concrete_engineering_prerequisites": [
+    {
+      "code": "src/sft/training.py:95-155",
+      "finding": "Historical SFT trainer creates fresh LoRA on base, selects lowest offline-validation checkpoint, and performs smoke max_steps8. SI-P3 B/C must instead independently load the exact existing trainable P0 adapter and use one fixed final update; do not reuse this entrypoint as if it already implements continuation/no-checkpoint-search.",
+      "disposition": "new additive implementation/exact-SHA review later; original SFT preserved"
+    },
+    {
+      "code": "scripts/run_r19_experiment.py:1253 and :1433",
+      "finding": "R19 runtime overrides Stage1 to40 and actor16; standalone historical TwoStage constant/constructor may differ. Bind exact production caller configuration, not just same function names.",
+      "disposition": "freeze40/16/16 explicitly in new protocol adapter; no prompt/decoding changes"
+    },
+    {
+      "code": "src/sft/protocol.py:56",
+      "finding": "Public P0 uses goal/current observation/H4/action map; step observation is pre-action, next observation supplies transition result.",
+      "disposition": "prevent future reward/done/output/diagnosis leakage; first teacher bare-ID only"
+    }
+  ],
+  "implementation_ready": false,
+  "execution_authorized": false
+}

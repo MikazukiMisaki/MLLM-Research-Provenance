@@ -1,0 +1,66 @@
+{
+  "acquisition": [
+    {
+      "acquisition_tasks": 96,
+      "source_generations_max": 4800,
+      "teacher_generations_max": 192,
+      "suffix_generations_max": 4704,
+      "total_generations_max": 9696,
+      "source_resets": 96,
+      "replay_resets": 96,
+      "source_actions_max": 4800,
+      "replay_plus_teacher_plus_suffix_actions_max": 4800,
+      "environment_operations_including_resets_max": 9792,
+      "generated_token_upper_bound": 157440,
+      "dependence": "generations = 101-d per task if both full H50 and teacher valid; conservative d>=0; env bound has replay d cancelling remaining suffix; no extra baseline/replay model invocation"
+    },
+    {
+      "acquisition_tasks": 384,
+      "source_generations_max": 19200,
+      "teacher_generations_max": 768,
+      "suffix_generations_max": 18816,
+      "total_generations_max": 38784,
+      "source_resets": 384,
+      "replay_resets": 384,
+      "source_actions_max": 19200,
+      "replay_plus_teacher_plus_suffix_actions_max": 19200,
+      "environment_operations_including_resets_max": 39168,
+      "generated_token_upper_bound": 629760,
+      "dependence": "generations = 101-d per task if both full H50 and teacher valid; conservative d>=0; env bound has replay d cancelling remaining suffix; no extra baseline/replay model invocation"
+    },
+    {
+      "acquisition_tasks": 480,
+      "source_generations_max": 24000,
+      "teacher_generations_max": 960,
+      "suffix_generations_max": 23520,
+      "total_generations_max": 48480,
+      "source_resets": 480,
+      "replay_resets": 480,
+      "source_actions_max": 24000,
+      "replay_plus_teacher_plus_suffix_actions_max": 24000,
+      "environment_operations_including_resets_max": 48960,
+      "generated_token_upper_bound": 787200,
+      "dependence": "generations = 101-d per task if both full H50 and teacher valid; conservative d>=0; env bound has replay d cancelling remaining suffix; no extra baseline/replay model invocation"
+    }
+  ],
+  "evaluation_E600_three_arms": {
+    "episodes": 1800,
+    "generations_max": 90000,
+    "resets": 1800,
+    "actions_max": 90000,
+    "environment_operations_with_resets_max": 91800,
+    "generated_tokens_max": 1440000
+  },
+  "full_acquisition_plus_evaluation_excludes_software_runtime_checks_and_training": {
+    "new_generations_max": 138480,
+    "new_operations_with_resets_max": 140760,
+    "new_generated_tokens_max": 2227200,
+    "historical_R19_plus_these_planned_components_generations": 143622,
+    "historical_R19_plus_these_planned_components_environment_operations": 148709
+  },
+  "prior_cost_actual": {
+    "model_generations": 5142,
+    "environment_operations_with_resets": 7949
+  },
+  "no_actual_new_science": true
+}

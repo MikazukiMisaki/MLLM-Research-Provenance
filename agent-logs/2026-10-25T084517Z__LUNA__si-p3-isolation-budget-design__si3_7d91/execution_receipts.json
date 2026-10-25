@@ -1,0 +1,35 @@
+{
+  "schema": "SI_P3_METADATA_COMMAND_RECEIPTS_V1",
+  "scope": "stdlib metadata-only; all commands were local reads/calculation in the Luna-owned directory",
+  "commands": [
+    {
+      "argv": ["python3", "metadata_audit.py"],
+      "cwd": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__LUNA__si-p3-isolation-budget-design__si3_7d91",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__LUNA__si-p3-isolation-budget-design__si3_7d91/metadata_audit.py\", line 84, in <module>\n    assert sum(presence_family[\"train\"].values()) == presence_doc[\"splits\"][\"train\"][\"six_family_with_existing_game\"]\n                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nKeyError: 'six_family_with_existing_game'\n",
+      "classification": "local receipt-parser key typo; no scientific/source records changed",
+      "action": "inspected scalar metadata keys, corrected only metadata_audit.py in own task directory"
+    },
+    {
+      "argv": ["python3", "-c", "import json; p=\"/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__SOL__self-improvement-phase0__b1c48c/independent_identity_file_presence.json\"; d=json.load(open(p)); print({k:{x:y for x,y in v.items() if not isinstance(y,(list,dict))} for k,v in d[\"splits\"].items()})"],
+      "cwd": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__LUNA__si-p3-isolation-budget-design__si3_7d91",
+      "returncode": 0,
+      "stdout": "{'train': {'directory_identities': 6374, 'six_family_with_existing_game_file': 3553, 'directory_difference_candidates': 3962, 'difference_candidate_without_supported_existing_game': 2821, 'file_presence_candidate_difference_count': 1141, 'candidate_ids_hash': '12475e2952dbd74113a6163dad351c3951b14cb0dcc5438546c2cccd4a4aada0'}, 'valid_seen': {'directory_identities': 251, 'six_family_with_existing_game_file': 140, 'directory_difference_candidates': 111, 'difference_candidate_without_supported_existing_game': 111, 'file_presence_candidate_difference_count': 0, 'candidate_ids_hash': '4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945'}, 'valid_unseen': {'directory_identities': 255, 'six_family_with_existing_game_file': 134, 'directory_difference_candidates': 195, 'difference_candidate_without_supported_existing_game': 121, 'file_presence_candidate_difference_count': 74, 'candidate_ids_hash': '3de25fc148848a721a688f4154f88dec41d59384f0a642371f36a862c856db2b'}}\n",
+      "stderr": ""
+    },
+    {
+      "argv": ["python3", "metadata_audit.py"],
+      "cwd": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__LUNA__si-p3-isolation-budget-design__si3_7d91",
+      "returncode": 0,
+      "stdout": "{\"candidate_counts\": {\"train\": 1141, \"valid_seen\": 0, \"valid_unseen\": 74}, \"candidate_family_counts\": {\"train\": {\"look_at_obj_in_light\": 2, \"pick_and_place_simple\": 419, \"pick_clean_then_place_in_recep\": 301, \"pick_cool_then_place_in_recep\": 194, \"pick_heat_then_place_in_recep\": 106, \"pick_two_obj_and_place\": 119}, \"valid_seen\": {}, \"valid_unseen\": {\"look_at_obj_in_light\": 8, \"pick_and_place_simple\": 14, \"pick_clean_then_place_in_recep\": 21, \"pick_cool_then_place_in_recep\": 11, \"pick_heat_then_place_in_recep\": 13, \"pick_two_obj_and_place\": 7}}, \"candidate_known_overlap\": {\"train\": 0, \"valid_seen\": 0, \"valid_unseen\": 0}, \"inputs_unchanged\": true, \"known_union\": 2612, \"partition_counts\": {\"acquisition_train\": 480, \"development_train\": 60, \"final_evaluation_train\": 600, \"unallocated_reserve\": 1}, \"partition_family_counts\": {\"acquisition_train\": {\"look_at_obj_in_light\": 1, \"pick_and_place_simple\": 176, \"pick_clean_then_place_in_recep\": 127, \"pick_cool_then_place_in_recep\": 82, \"pick_heat_then_place_in_recep\": 44, \"pick_two_obj_and_place\": 50}, \"development_train\": {\"pick_and_place_simple\": 22, \"pick_clean_then_place_in_recep\": 16, \"pick_cool_then_place_in_recep\": 10, \"pick_heat_then_place_in_recep\": 6, \"pick_two_obj_and_place\": 6}, \"final_evaluation_train\": {\"look_at_obj_in_light\": 1, \"pick_and_place_simple\": 220, \"pick_clean_then_place_in_recep\": 158, \"pick_cool_then_place_in_recep\": 102, \"pick_heat_then_place_in_recep\": 56, \"pick_two_obj_and_place\": 63}, \"unallocated_reserve\": {\"pick_and_place_simple\": 1}}, \"presence_family_counts\": {\"train\": {\"look_at_obj_in_light\": 308, \"pick_and_place_simple\": 790, \"pick_clean_then_place_in_recep\": 650, \"pick_cool_then_place_in_recep\": 533, \"pick_heat_then_place_in_recep\": 459, \"pick_two_obj_and_place\": 813}, \"valid_seen\": {\"look_at_obj_in_light\": 13, \"pick_and_place_simple\": 35, \"pick_clean_then_place_in_recep\": 27, \"pick_cool_then_place_in_recep\": 25, \"pick_heat_then_place_in_recep\": 16, \"pick_two_obj_and_place\": 24}, \"valid_unseen\": {\"look_at_obj_in_light\": 18, \"pick_and_place_simple\": 24, \"pick_clean_then_place_in_recep\": 31, \"pick_cool_then_place_in_recep\": 21, \"pick_heat_then_place_in_recep\": 23, \"pick_two_obj_and_place\": 17}}, \"status\": \"complete\"}\n",
+      "stderr": ""
+    }
+  ],
+  "delivery_structure_checks": [
+    {"command_summary": "stdlib JSON structure/cross-count check; initial checker referenced nonexistent environment_operations_max field", "returncode": 1, "stderr_suffix": "KeyError: 'environment_operations_max'", "artifact_effect": "none"},
+    {"command_summary": "stdlib JSON structure/arithmetic check; second checker mistakenly added three resets a second time to the already reset-inclusive arm formula", "returncode": 1, "stderr_suffix": "AssertionError", "artifact_effect": "none"},
+    {"command_summary": "same stdlib structure/arithmetic check with correct reset-inclusive expected formula 600*(3*51)", "returncode": 0, "stdout": "delivery_structure=PASS; proposal_rows=1141; partition_counts={'acquisition_train': 480, 'development_train': 60, 'final_evaluation_train': 600, 'unallocated_reserve': 1}; arithmetic=PASS; source_metadata_inputs=4", "stderr": ""}
+  ],
+  "prohibited_activity_counts": {"model": 0, "environment": 0, "tokenizer": 0, "training": 0, "project_validator": 0, "pytest": 0, "policy_replay": 0, "schedule_or_gate_created": 0}
+}

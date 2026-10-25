@@ -1,0 +1,191 @@
+{
+  "scope": "PAPER_INTEGER_ARITHMETIC_ONLY_NO_TASK_DATA_OR_POLICY_EXECUTION",
+  "source_metadata_sha256": "b245b93819b513561b86bb3e614f607ecdddc7b7e640a13eabc21938952ec93c",
+  "fixed_denominator": 1139,
+  "excluded_light_candidates": 2,
+  "capacity_nonlight": {
+    "pick_and_place_simple": 419,
+    "pick_clean_then_place_in_recep": 301,
+    "pick_cool_then_place_in_recep": 194,
+    "pick_heat_then_place_in_recep": 106,
+    "pick_two_obj_and_place": 119
+  },
+  "rounding_rule": "For each n use ORIGINAL capacity weights cap_f/1139; floor and largest integer remainders; ties canonical family string ascending; do not recompute weights after each reservation",
+  "hamilton": {
+    "24": {
+      "pick_and_place_simple": 9,
+      "pick_clean_then_place_in_recep": 6,
+      "pick_cool_then_place_in_recep": 4,
+      "pick_heat_then_place_in_recep": 2,
+      "pick_two_obj_and_place": 3
+    },
+    "48": {
+      "pick_and_place_simple": 18,
+      "pick_clean_then_place_in_recep": 13,
+      "pick_cool_then_place_in_recep": 8,
+      "pick_heat_then_place_in_recep": 4,
+      "pick_two_obj_and_place": 5
+    },
+    "96": {
+      "pick_and_place_simple": 35,
+      "pick_clean_then_place_in_recep": 26,
+      "pick_cool_then_place_in_recep": 16,
+      "pick_heat_then_place_in_recep": 9,
+      "pick_two_obj_and_place": 10
+    },
+    "120": {
+      "pick_and_place_simple": 44,
+      "pick_clean_then_place_in_recep": 32,
+      "pick_cool_then_place_in_recep": 20,
+      "pick_heat_then_place_in_recep": 11,
+      "pick_two_obj_and_place": 13
+    },
+    "384": {
+      "pick_and_place_simple": 141,
+      "pick_clean_then_place_in_recep": 102,
+      "pick_cool_then_place_in_recep": 65,
+      "pick_heat_then_place_in_recep": 36,
+      "pick_two_obj_and_place": 40
+    },
+    "480": {
+      "pick_and_place_simple": 176,
+      "pick_clean_then_place_in_recep": 127,
+      "pick_cool_then_place_in_recep": 82,
+      "pick_heat_then_place_in_recep": 45,
+      "pick_two_obj_and_place": 50
+    },
+    "600": {
+      "pick_and_place_simple": 221,
+      "pick_clean_then_place_in_recep": 158,
+      "pick_cool_then_place_in_recep": 102,
+      "pick_heat_then_place_in_recep": 56,
+      "pick_two_obj_and_place": 63
+    }
+  },
+  "deferred_384_must_be_480_minus_96": {
+    "pick_and_place_simple": 141,
+    "pick_clean_then_place_in_recep": 101,
+    "pick_cool_then_place_in_recep": 66,
+    "pick_heat_then_place_in_recep": 36,
+    "pick_two_obj_and_place": 40
+  },
+  "independent_H384_is_not_same_as_difference": true,
+  "independent_96_plus_H384": {
+    "pick_and_place_simple": 176,
+    "pick_clean_then_place_in_recep": 128,
+    "pick_cool_then_place_in_recep": 81,
+    "pick_heat_then_place_in_recep": 45,
+    "pick_two_obj_and_place": 50
+  },
+  "full_envelope_residual_nonlight": {
+    "pick_and_place_simple": 4,
+    "pick_clean_then_place_in_recep": 3,
+    "pick_cool_then_place_in_recep": 2,
+    "pick_heat_then_place_in_recep": 1,
+    "pick_two_obj_and_place": 1
+  },
+  "full_envelope_residual_total_including_light": 13,
+  "only96_acquisition_with_same_E600_D48_nonlight_not_acquired_or_reserved_to_current_acquisition": {
+    "pick_and_place_simple": 145,
+    "pick_clean_then_place_in_recep": 104,
+    "pick_cool_then_place_in_recep": 68,
+    "pick_heat_then_place_in_recep": 37,
+    "pick_two_obj_and_place": 41
+  },
+  "only96_nonlight_remaining_total": 395,
+  "only96_with_light_remaining_total": 397,
+  "prefix_count_matrix_not_schedule": {
+    "pick_and_place_simple": {
+      "5": 9,
+      "10": 9,
+      "15": 9,
+      "20": 8
+    },
+    "pick_clean_then_place_in_recep": {
+      "5": 7,
+      "10": 6,
+      "15": 6,
+      "20": 7
+    },
+    "pick_cool_then_place_in_recep": {
+      "5": 4,
+      "10": 4,
+      "15": 4,
+      "20": 4
+    },
+    "pick_heat_then_place_in_recep": {
+      "5": 2,
+      "10": 3,
+      "15": 2,
+      "20": 2
+    },
+    "pick_two_obj_and_place": {
+      "5": 2,
+      "10": 2,
+      "15": 3,
+      "20": 3
+    }
+  },
+  "prefix_d_global_counts": {
+    "5": 24,
+    "10": 24,
+    "15": 24,
+    "20": 24
+  },
+  "prefix_d_mean": 12.5,
+  "quality_min_per_family_ceil_5_over_8_of_stage1": {
+    "pick_and_place_simple": 22,
+    "pick_clean_then_place_in_recep": 17,
+    "pick_cool_then_place_in_recep": 10,
+    "pick_heat_then_place_in_recep": 6,
+    "pick_two_obj_and_place": 7
+  },
+  "foreground24_per_family": {
+    "pick_and_place_simple": 9,
+    "pick_clean_then_place_in_recep": 6,
+    "pick_cool_then_place_in_recep": 4,
+    "pick_heat_then_place_in_recep": 2,
+    "pick_two_obj_and_place": 3
+  },
+  "neutral_min_per_family": {
+    "pick_and_place_simple": 9,
+    "pick_clean_then_place_in_recep": 6,
+    "pick_cool_then_place_in_recep": 4,
+    "pick_heat_then_place_in_recep": 2,
+    "pick_two_obj_and_place": 3
+  },
+  "background120_per_family": {
+    "pick_and_place_simple": 44,
+    "pick_clean_then_place_in_recep": 32,
+    "pick_cool_then_place_in_recep": 20,
+    "pick_heat_then_place_in_recep": 11,
+    "pick_two_obj_and_place": 13
+  },
+  "training_geometry_unchanged": {
+    "foreground24": 24,
+    "background120": 120,
+    "per_arm_examples": 144,
+    "epochs": 2,
+    "effective_batch": 16,
+    "optimizer_updates": 18
+  },
+  "acquisition_cost_ceiling96": {
+    "generations": 8496,
+    "reset_inclusive_operations": 9792,
+    "generated_tokens": 138240
+  },
+  "acquisition_cost_ceiling480": {
+    "generations": 42480,
+    "reset_inclusive_operations": 48960,
+    "generated_tokens": 691200
+  },
+  "incremental_384_cost_ceiling": {
+    "generations": 33984,
+    "reset_inclusive_operations": 39168
+  },
+  "future600_three_actor_eval_ceiling_no_dev_calls": {
+    "generations": 90000,
+    "reset_inclusive_operations": 91800
+  },
+  "all_science_calls_this_addendum": 0
+}

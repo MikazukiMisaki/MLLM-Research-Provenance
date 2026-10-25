@@ -1,0 +1,27 @@
+{
+  "schema": "SI_P3_FAMILY_CAPACITY_ADDENDUM_RECEIPT_V1",
+  "status": "DESIGN_ONLY",
+  "command": {
+    "argv": ["python3", "family_capacity_addendum_build.py"],
+    "cwd": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__LUNA__si-p3-isolation-budget-design__si3_7d91",
+    "returncode": 0,
+    "stdout": "{\"candidate_counts\": {\"pick_and_place_simple\": 419, \"pick_clean_then_place_in_recep\": 301, \"pick_cool_then_place_in_recep\": 194, \"pick_heat_then_place_in_recep\": 106, \"pick_two_obj_and_place\": 119}, \"excluded_light\": 2, \"family_quotas\": {\"acquisition_train\": {\"pick_and_place_simple\": 176, \"pick_clean_then_place_in_recep\": 127, \"pick_cool_then_place_in_recep\": 82, \"pick_heat_then_place_in_recep\": 45, \"pick_two_obj_and_place\": 50}, \"engineering_development_train\": {\"pick_and_place_simple\": 18, \"pick_clean_then_place_in_recep\": 13, \"pick_cool_then_place_in_recep\": 8, \"pick_heat_then_place_in_recep\": 4, \"pick_two_obj_and_place\": 5}, \"final_evaluation_train\": {\"pick_and_place_simple\": 221, \"pick_clean_then_place_in_recep\": 158, \"pick_cool_then_place_in_recep\": 102, \"pick_heat_then_place_in_recep\": 56, \"pick_two_obj_and_place\": 63}, \"unallocated_nonlight_reserve\": {\"pick_and_place_simple\": 4, \"pick_clean_then_place_in_recep\": 3, \"pick_cool_then_place_in_recep\": 2, \"pick_heat_then_place_in_recep\": 1, \"pick_two_obj_and_place_in_recep\": 1}}, \"output\": \"/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__LUNA__si-p3-isolation-budget-design__si3_7d91/partition_proposal_family_capacity_addendum.json\", \"output_sha256\": \"be8710b348b4c90ad90171ea6a691d5bffc67d27c5ff74ac2869be2965929817\", \"partition_counts\": {\"acquisition_train\": 480, \"engineering_development_train\": 48, \"final_evaluation_train\": 600, \"unallocated_nonlight_reserve\": 11}, \"source_sha256\": \"fd145fe6abee849b44231e1d0c816aa65813be2b67c48715f7ce7d2635e98d23\"}\n",
+    "stderr": ""
+  },
+  "bindings": {
+    "prior_non_executable_proposal_path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__LUNA__si-p3-isolation-budget-design__si3_7d91/partition_proposal.json",
+    "prior_non_executable_proposal_sha256": "fd145fe6abee849b44231e1d0c816aa65813be2b67c48715f7ce7d2635e98d23",
+    "shared_constraints_path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/COMMON_DESIGN_CONSTRAINTS.md",
+    "shared_constraints_sha256": "33e090877817c47a8fd4f046a3567fe06bc4498e52f343a3e3ca61dc21168647"
+  },
+  "post_generation_validation": {
+    "command": "sha256sum -c FILE_HASHES.sha256 && python3 -c <stdlib JSON identity/family/disjoint-count assertions>",
+    "cwd": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__LUNA__si-p3-isolation-budget-design__si3_7d91",
+    "returncode": 0,
+    "stdout_summary": "All eight original FILE_HASHES entries OK; addendum_partition=PASS; five_families=5; rows=1139; counts=480/48/600/11; light_excluded=2; old_deliverable_hashes=PASS",
+    "stderr": ""
+  },
+  "scientific_calls": {"model": 0, "environment": 0, "tokenizer": 0, "training": 0, "policy_replay": 0, "project_validator": 0, "pytest": 0},
+  "old_draft_files_modified": false,
+  "shared_index_or_git_modified": false
+}

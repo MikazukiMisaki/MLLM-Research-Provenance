@@ -1,0 +1,107 @@
+{
+  "status": "PROPOSED_DESIGN_RULE_ARITHMETIC_NOT_EXECUTABLE",
+  "rule": "For fixed nominal source order before opening any outcomes, decision d cycles5,10,15,20 at nominal index modulo4. All source positions remain even if early terminal/invalid/unreachable; no choosing alternative d or using leftover call allowance. Exact task call order/seed/runtime still future non-executed attachments.",
+  "scope": "source H50 +once Stage1/2 +one teacher action +remaining P0; one replay with0 model calls; source CONTINUE reused",
+  "acquisition": [
+    {
+      "N": 96,
+      "preassigned_decisions": [
+        5,
+        10,
+        15,
+        20
+      ],
+      "nominal_cutoff_counts": {
+        "5": 24,
+        "10": 24,
+        "15": 24,
+        "20": 24
+      },
+      "sum_d": 1200,
+      "source_generations_max": 4800,
+      "teacher_generations_max": 192,
+      "actor_suffix_generations_max": 3504,
+      "all_generations_max": 8496,
+      "reset_max": 192,
+      "source_actions_max": 4800,
+      "replay_actions_max": 1200,
+      "teacher_actions_max": 96,
+      "actor_suffix_actions_max": 3504,
+      "nonreset_actions_max": 9600,
+      "environment_operations_with_resets_max": 9792,
+      "generated_tokens_max": 138240,
+      "input_tokens_max_at_guard8192": 69599232
+    },
+    {
+      "N": 384,
+      "preassigned_decisions": [
+        5,
+        10,
+        15,
+        20
+      ],
+      "nominal_cutoff_counts": {
+        "5": 96,
+        "10": 96,
+        "15": 96,
+        "20": 96
+      },
+      "sum_d": 4800,
+      "source_generations_max": 19200,
+      "teacher_generations_max": 768,
+      "actor_suffix_generations_max": 14016,
+      "all_generations_max": 33984,
+      "reset_max": 768,
+      "source_actions_max": 19200,
+      "replay_actions_max": 4800,
+      "teacher_actions_max": 384,
+      "actor_suffix_actions_max": 14016,
+      "nonreset_actions_max": 38400,
+      "environment_operations_with_resets_max": 39168,
+      "generated_tokens_max": 552960,
+      "input_tokens_max_at_guard8192": 278396928
+    },
+    {
+      "N": 480,
+      "preassigned_decisions": [
+        5,
+        10,
+        15,
+        20
+      ],
+      "nominal_cutoff_counts": {
+        "5": 120,
+        "10": 120,
+        "15": 120,
+        "20": 120
+      },
+      "sum_d": 6000,
+      "source_generations_max": 24000,
+      "teacher_generations_max": 960,
+      "actor_suffix_generations_max": 17520,
+      "all_generations_max": 42480,
+      "reset_max": 960,
+      "source_actions_max": 24000,
+      "replay_actions_max": 6000,
+      "teacher_actions_max": 480,
+      "actor_suffix_actions_max": 17520,
+      "nonreset_actions_max": 48000,
+      "environment_operations_with_resets_max": 48960,
+      "generated_tokens_max": 691200,
+      "input_tokens_max_at_guard8192": 347996160
+    }
+  ],
+  "combined_full_acquisition_plus_final600_three_actors": {
+    "new_generations_max": 132480,
+    "new_environment_operations_with_resets_max": 140760,
+    "new_generated_tokens_max": 2131200,
+    "new_input_tokens_max_at_guard8192": 1085276160,
+    "software_dev_smoke_training_excluded": true
+  },
+  "prior_R19_actual": {
+    "generations": 5142,
+    "environment_operations": 7949
+  },
+  "actual_new_science": 0,
+  "limits": "Input guard8192 is proposed cap below observed40960 model config, not proof all future prompts fit; no truncation. Hardware/device time cap and software-operation budgets must be frozen before release. This tighter budget relies on exact preassigned cutoff balance; prior101N universal caps retained only as conservative draft/reference."
+}

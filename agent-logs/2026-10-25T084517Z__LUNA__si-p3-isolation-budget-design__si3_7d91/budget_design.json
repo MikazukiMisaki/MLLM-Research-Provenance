@@ -1,0 +1,102 @@
+{
+  "schema": "SI_P3_BUDGET_DESIGN_V1",
+  "status": "DESIGN_ONLY_NOT_AUTHORIZED",
+  "assumptions": {
+    "acquisition_tasks": [96, 480],
+    "development_tasks_reference": 60,
+    "evaluation_tasks_reference": 600,
+    "horizon": 50,
+    "teacher_stage1_output_cap_tokens": 40,
+    "teacher_stage2_output_cap_tokens": 16,
+    "p0_suffix_output_cap_tokens_per_action": 16,
+    "source_continue_reused_as_baseline": true,
+    "prefix_replay_count": 1,
+    "prefix_replay_model_calls": 0,
+    "one_recovery_action_is_stage2_first_action": true,
+    "development_and_evaluation_costs_are_not_in_acquisition_totals": true
+  },
+  "per_acquisition_task_worst_case": {
+    "symbols": {
+      "d": "source failure/decision action index, 0..49",
+      "source_generations": "50",
+      "source_actions": "50",
+      "replay_resets": "1",
+      "replay_actions": "d",
+      "teacher_generations": "2 (Stage1 + Stage2)",
+      "teacher_tokens": "40 + 16 = 56",
+      "recovery_suffix_generations": "49 - d",
+      "recovery_suffix_actions": "49 - d"
+    },
+    "physical_model_generations": "50 + 2 + (49-d) = 101-d; range 52..101",
+    "environment_resets": 2,
+    "nonreset_environment_actions": "50 + d + 1 + (49-d) = 100",
+    "reset_inclusive_environment_operations": 102,
+    "output_tokens_upper_bound": "16*50 + 40 + 16 + 16*(49-d) = 1640-16*d; range 856..1640",
+    "notes": [
+      "The source CONTINUE trajectory is generated once and reused as the baseline arm; it is not regenerated per policy.",
+      "Prefix replay is one reset plus exactly d actions and has no model generation.",
+      "Stage2's first action is the single recovery action; it is not an additional model call.",
+      "The suffix is bounded by the remaining original H=50 horizon; no added horizon or recovery round.",
+      "Worst case at d=0 is used for aggregate caps; output tokens are a cap-based bound, not a prediction."
+    ]
+  },
+  "aggregate_physical_caps": {
+    "acquisition_N96_initial_feasibility": {
+      "model_generations_max": 9696,
+      "environment_resets_max": 192,
+      "nonreset_actions_max": 9600,
+      "reset_inclusive_environment_operations_max": 9792,
+      "output_tokens_max": 157440
+    },
+    "acquisition_N480_total_reference_including_initial_96": {
+      "model_generations_max": 48480,
+      "environment_resets_max": 960,
+      "nonreset_actions_max": 48000,
+      "reset_inclusive_environment_operations_max": 48960,
+      "output_tokens_max": 787200
+    },
+    "incremental_acquisition_384_after_96_if_separately_released": {
+      "model_generations_max": 38784,
+      "environment_resets_max": 768,
+      "nonreset_actions_max": 38400,
+      "reset_inclusive_environment_operations_max": 39168,
+      "output_tokens_max": 629760,
+      "authorization": "NOT_GRANTED; no automatic continuation"
+    },
+    "evaluation_E600_three_arms_A_B_C_horizon50": {
+      "model_generations_max": 90000,
+      "environment_resets_max": 1800,
+      "nonreset_actions_max": 90000,
+      "reset_inclusive_environment_operations_max": 91800,
+      "output_tokens_max_at_16_per_generation": 1440000,
+      "teacher_calls": 0,
+      "note": "Conditional design arithmetic only; evaluation tasks are disjoint from acquisition/development and no evaluation execution is authorized."
+    },
+    "combined_scenarios_not_single_authorized_budget": {
+      "N96_plus_E600": {"generations_max": 99696, "resets_max": 1992, "actions_max": 99600, "environment_operations_max": 101592, "output_tokens_max": 1597440},
+      "N480_plus_E600": {"generations_max": 138480, "resets_max": 2760, "actions_max": 138000, "environment_operations_max": 140760, "output_tokens_max": 2227200},
+      "warning": "Keep acquisition and evaluation ledgers separate; combined arithmetic is not permission to spend. Development, software smoke, training, and infrastructure are excluded."
+    }
+  },
+  "accounting": {
+    "physical": "Charge each actual generation, reset, action, and output token once to the shared task/source ledger. Count prefix replay reset/actions as physical operations.",
+    "logical_per_policy": "Record each policy arm's attributable logical exposure/outcome separately. Shared source CONTINUE evidence is referenced by identity and must not be multiplied into physical cost for each arm.",
+    "shared_pool": "Acquisition source and its reusable baseline are one shared physical source event. B success-only includes qualifying C examples; C is the B subset restricted to source-baseline failures. Do not add duplicate source generation for B/C.",
+    "historical_R19": {"generations": 5142, "environment_operations_including_resets": 7949, "predecessor_177_342_already_included": true, "new_SI_P3_cost_added": 0},
+    "software_smoke_dev_training": "Separately budget and authorize before use; excluded from all totals above and not treated as zero-cost work."
+  },
+  "pre_freeze_measurements_required": [
+    "Exact pinned tokenizer/model revisions and adapter identity, without loading them during this design task.",
+    "Per-family serialized prompt/input-token distributions, max context length, truncation policy, and tokenization version; current historical input_tokens_seen padding semantics are unresolved and cannot supply this bound.",
+    "Actual Stage1/Stage2/actor prompt templates and maximum input/context tokens, to verify the 40/16 output caps fit the frozen model context window.",
+    "Exact training recipe if later proposed: epochs/steps, examples and target masks, batch size, gradient accumulation, sequence length, padding, optimizer, checkpoint policy, and total input/output tokens.",
+    "A separately approved GPU-hour/device-second cap and measured runtime only after a bounded software/dev protocol is authorized; no runtime estimate is inferred here.",
+    "Environment reset/step accounting contract, replay action count d convention, and persisted per-operation event schema.",
+    "Task-family capacity and source eligibility before allocation; no outcome-based top-up, quota transfer, or replacement."
+  ],
+  "stopping": [
+    "N=96 is only a feasibility tranche; any additional 384 acquisition tasks require new review/authorization and do not start automatically.",
+    "E=600 is a reference planning size, not a powered sample claim or execution release.",
+    "No dev, training, model/environment, replay, or policy calls are authorized by this design."
+  ]
+}

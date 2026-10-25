@@ -1,0 +1,9 @@
+# Luna交付独立复审及记录更正
+
+分区1139行/identity/hash/排序/Hamilton配额以及96/384/480/600预算由协调方独立实现重算匹配，可按此明确范围验收。不能据作者自评或其原始草案直接全部PASS。
+
+`input_bindings.json`冻结SHA88e1d3...中确有三个路径漏`agent-logs/`；逐字解析Path.exists为false，对应metadata_audit.json原始inputs_before/after为真实存在path且hash匹配。作者随后erratum开头声称没有此遗漏，该叙述不接受。其附表实际给出正确路径；完整逐项更正见independent_luna_delivery_corrections.json。作者同SHA文件没有被改动，不能描述为已经修好。
+
+另一个addendum receipt的stdout为人工转录，含family键拼写错误。协调方通过read_thread直接取回原本执行builder的commandExecution工具返回，真实exit0，正确stdout与proposal完全相符，保存为luna_original_build_tool_receipt.json。接受erratum关于人工转录的披露，不用该转录充当raw stdout。未重跑作者的writer脚本。
+
+全部作者原件/原始失败的metadata命令与erratum保持字节不变。本轮记录错误不扩展为任务数据缺陷、科学运行失败或许可；也不能隐去错误后声称所有原报告原来一致。最终共同协议以协调方独立审查为准。Luna不写共享INDEX，协调方统一发布。

@@ -1,0 +1,11 @@
+# 审计脚本、scope及复现边界
+
+本目录脚本只用于metadata/纸上概率或hash检查；没有生产validator/analyzer/模型/环境/tokenizer导入。它们的输出不是policy数据，也不是正式测试/预检PASS。
+
+执行过的writer脚本与真实stdout/returncode保留原字节。一开始的independent_design_math.py读取本机临时/tmp/si_p3_paths.json定位三个本任务目录，其内容目录映射保存在START_STATE.json，不能把临时文件缺失当科学输入缺失。其字节保留以对应原执行；不要在冻结目录重跑writer。最终verify_final_deliveries.py、verify_luna_metadata_proposal.py和verify_adopted_design.py使用自身__file__位置并有目录guard；它们也会写新检查结果，不能在已冻结任务里重跑。
+
+未来如需重复审计，先在新的唯一任务目录复制所需只读算法、把输出限定新OWN并重新登记原件SHA，不能执行旧硬编码ROOT的脚本覆盖历史。所有本地/实际remote原件位置的真实性以metadata_audit原始inputs_before/after及协调方逐项校正表为准，拒绝Luna手写漏agent-logs字段作为路径权威。
+
+ROOT的initial universal预算101N、480容量试算、原global-cutoff-cycle纸算和原作者六family初稿为保留的设计轨迹；最终标准以MINIMAL_CONTROLLED_EXPERIENCE_PROTOCOL.md/ADOPTED_METADATA_RESERVATIONS.json及phase3_independent_review.json优先级为准。最终采用均衡family×d矩阵，全局d各24，支出帽8496/9792/138240及更紧16M input/4devicehours，只有96候选、不含自动384。算术一致不等于runtime实际可完成，也不是授权。
+
+三个任务目录的identity/hash/partition metadata是审查依据，没有环境payload/训练行/权重/adapter/cache；实际训练dataset与推理argv/gate未生成。大概率验收数是是假设结果的数学分布，不含任何新task outcome。已存在G3只作字节hash漂移校验，未运行科学分析/重算其统计。

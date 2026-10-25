@@ -1,0 +1,11 @@
+# 同状态配对标签：设计中的可识别性与负例
+
+这是预先列出的未来软件合同检查，不是已经执行的validator/test。首动作teacher包=固定Stage1/Stage2文本生成、唯一合法环境动作、随后的相同P0 actor；学生只学习该第一动作ID。
+
+- R_A取原source相同剩余H50约束的真实continuation终局，R_T取重放至同prefix后一次teacher动作及相同P0suffix终局。task、seed、计步器、原公开状态、H4、map以及实际replay prefix必须精确绑定。若replay不能保证等价起点，只能说两个轨迹结果不同，不能当合格paired rescue。
+- 同一恢复首动作若与原source在该prefix的合法原命令相同，在相同状态、同一确定性actor/环境与相同horizon假设下，其后公共prompt和continuation应一致。若记录成C（R_T1/R_A0）或harm却没有后续差异的合法来源，必须STOP审计不能当新正例；可直接比较已产生的两条轨迹/原prompt/raw，不为验证再调用模型或环境。前缀原actor若无合法动作，则没有“相同已执行command”这一条件，不制造伪等价。
+- 这是一项确定性接口不变量，不按动作是否不同筛掉B中的合法neutral-success；B仍可包含相同动作和C。恢复首动作不同也不等于需要新技能或已证明可学；完整终局的环境效应和学生从弱标签泛化是不同层次的问题。
+- 无效teacher输出、空map、source早结束、source parser失败、horizon耗尽等预期科学路径必须留在完整pool及原分母里，不重试/换task。技术中断、缺receipt、漂移或不完整外部操作则STOP整run，不能当科学失败来凑完整样本。
+- 已完成失败/neutral源信息可以作为离线采纳标签与描述，不进入模型prompt、anchor选择、逐步teacher纠错或未来final任务选择。只做一次collect→adopt→train→evaluate，不增加在线autonomous循环。
+
+最终主张是固定起点与共享生成池下的失败感知采纳训练配方；即便每个环境配对严格，仍不能由C>B自动识别一种独特价值函数，或证明每个teacher动作有因果的学习增益。

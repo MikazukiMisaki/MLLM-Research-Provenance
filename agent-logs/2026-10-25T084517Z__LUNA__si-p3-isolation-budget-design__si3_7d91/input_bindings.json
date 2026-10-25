@@ -1,0 +1,81 @@
+{
+  "schema": "SI_P3_INPUT_BINDINGS_V1",
+  "status": "READ_ONLY_METADATA_BINDINGS_NOT_EXECUTION_AUTHORIZATION",
+  "common_constraints": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/COMMON_DESIGN_CONSTRAINTS.md",
+    "sha256": "33e090877817c47a8fd4f046a3567fe06bc4498e52f343a3e3ca61dc21168647",
+    "role": "fixed design constraints"
+  },
+  "metadata_inputs": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__LUNA__si-p1-isolation-budget__caae4c/KNOWN_USE_IDENTITIES.json",
+      "sha256": "98580db9a8322c52c87d6f30dcb75858b00f3b0ec6d3494a4a87923504ddca60",
+      "bytes": 601295,
+      "used_fields": ["registered_identity_members", "known_use_difference_by_split"],
+      "use": "form the 2,612 known-use identity union and calculate candidate intersections"
+    },
+    {
+      "path": "/home/lizening/research-notes/2026-10-25T065200Z__SOL__si-p1-protocol-review__caae4c/P0_SCOPE_INCIDENT_SNAPSHOT/SUPPORTED_IDENTITY_CANDIDATES.json",
+      "sha256": "a47101a6e2413695208a256b3174b4723c9c6fc1aef67bb08bb74b1c1b08b48d",
+      "used_fields": ["identity", "identity_sha256", "split name"],
+      "use": "supported identity/hash/family inventory only; no task payload"
+    },
+    {
+      "path": "/home/lizening/research-notes/2026-10-25T054106Z__SOL__self-improvement-phase0__b1c48c/independent_identity_file_presence.json",
+      "sha256": "5c386b5ad43192582ee7d77041e6551fb9fb55192dbfdfe2d79cf0ff164d5b11",
+      "used_fields": ["split counts", "family_counts_with_existing_game", "file_presence_candidate_difference_count", "status"],
+      "use": "cross-check metadata and expose known-use difference versus disk-presence distinction"
+    },
+    {
+      "path": "/home/lizening/research-notes/2026-10-25T065200Z__LUNA__si-p1-isolation-budget__caae4c/corrected_isolation_budget_v2.json",
+      "sha256": "17b8124496e402b98a5e2411cff704c926a40c0338b8ea5f8d804e20764fd6f7",
+      "used_fields": ["historic R19 costs", "prior planning assumptions", "authorization caveats"],
+      "use": "historical cost context only; no new calls"
+    }
+  ],
+  "verified_counts": {
+    "registered_known_use_identity_union": 2612,
+    "supported_candidates": {"TRAIN": 1141, "valid_seen": 0, "valid_unseen": 74},
+    "candidate_known_use_intersections": {"TRAIN": 0, "valid_seen": 0, "valid_unseen": 0},
+    "candidate_family_counts": {
+      "TRAIN": {
+        "look_at_obj_in_light": 2,
+        "pick_and_place_simple": 419,
+        "pick_clean_then_place_in_recep": 301,
+        "pick_cool_then_place_in_recep": 194,
+        "pick_heat_then_place_in_recep": 106,
+        "pick_two_obj_and_place": 119
+      },
+      "valid_seen": {},
+      "valid_unseen": {
+        "look_at_obj_in_light": 8,
+        "pick_and_place_simple": 14,
+        "pick_clean_then_place_in_recep": 21,
+        "pick_cool_then_place_in_recep": 11,
+        "pick_heat_then_place_in_recep": 13,
+        "pick_two_obj_and_place": 7
+      }
+    }
+  },
+  "historic_identity_file_presence_family_counts_not_candidate_counts": {
+    "train": {"look_at_obj_in_light": 308, "pick_and_place_simple": 790, "pick_clean_then_place_in_recep": 650, "pick_cool_then_place_in_recep": 533, "pick_heat_then_place_in_recep": 459, "pick_two_obj_and_place": 813},
+    "valid_seen": {"look_at_obj_in_light": 13, "pick_and_place_simple": 35, "pick_clean_then_place_in_recep": 27, "pick_cool_then_place_in_recep": 25, "pick_heat_then_place_in_recep": 16, "pick_two_obj_and_place": 24},
+    "valid_unseen": {"look_at_obj_in_light": 18, "pick_and_place_simple": 24, "pick_clean_then_place_in_recep": 31, "pick_cool_then_place_in_recep": 21, "pick_heat_then_place_in_recep": 23, "pick_two_obj_and_place": 17}
+  },
+  "limitations_and_isolation_risks": [
+    "Known-use exclusion is only as complete as the registered identity/alias records; zero overlap is not proof of never-viewed/never-used status.",
+    "A canonical task/trial identity is the split unit. All prefixes, seeds, aliases, and derivative records mapped to that identity must inherit its one partition.",
+    "Only identity metadata and already-produced aggregate metadata were read. The 74 valid_unseen candidates are excluded from every proposed partition and are not held-out evidence.",
+    "The 1,141 TRAIN candidates are a metadata difference set, not a clean-data certification or a claim that historical exclusions are fully known.",
+    "The look_at_obj_in_light family has only 2 supported TRAIN candidates, so it cannot appear in all three disjoint partitions; the proposed assignment leaves it absent from development and marks this limitation rather than moving quotas after outcomes.",
+    "File presence and historical use are distinct concepts; the 1,141/0/74 supported difference counts match the independent presence-difference counts but do not establish content validity."
+  ],
+  "negative_scope": {
+    "task_body_opened": false,
+    "unused_task_results_opened": false,
+    "model_or_environment_called": false,
+    "tokenizer_loaded": false,
+    "project_validator_or_pytest_run": false,
+    "scientific_code_or_historical_evidence_modified": false
+  }
+}
