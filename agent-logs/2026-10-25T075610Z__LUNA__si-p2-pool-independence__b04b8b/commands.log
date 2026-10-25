@@ -1,0 +1,29 @@
+SI-P2 read-only audit command receipts
+Working directory: /home/lizening/research-notes/agent-logs/2026-10-25T075610Z__LUNA__si-p2-pool-independence__b04b8b
+Allowed method: Python standard library only; no project validator/test runner.
+
+Actual nonzero development receipts (not discarded):
+1. `python audit_pool.py` — return code 1. Initial manifest locator incorrectly resolved under the Luna output directory; FileNotFoundError. Script was corrected to read only the supplied task directory. No source/output scientific data was changed.
+2. `python audit_pool.py` — return code 1. Parent row digest assertion failed because the first implementation omitted the JSONL line terminator. Inspection showed the supplied row hash covers exact serialized bytes including newline. Hash implementation was corrected; no source row was rewritten.
+3. A read-only inspection command — return code 1. A follow-up diagnostic used a task directory path missing the `agent-logs` component. It was corrected and rerun read-only.
+4. A stdlib-only output consistency check — return code 1. It detected that the R19 target-command hash was not copied into the event-joined parent-row representation, undercounting exact pairs. The audit script was corrected and rerun; no scientific input or raw evidence was changed.
+
+Final authoritative invocation:
+`python audit_pool.py`
+Return code: 0
+Stdout: `{"rows": 171, "unique_tasks": 169, "q_hist": {"HOLD": 90, "PASS": 81}, "q_pin": {"HOLD_EXACT_WEIGHTS_TOKENIZER_AND_LOADED_ADAPTER_ROLE_NOT_ALL_BOUND": 132, "HOLD": 4, "PASS": 35}, "raw_B": 99, "raw_C": 11, "event_ids": 2167, "status": "complete"}`
+The command is a local, bounded, stdlib audit script pinned to this exact
+output directory (`OWN == EXPECTED_OWN`). Its final source is
+`audit_pool.py`; the resulting full per-row receipt and before/after hashes
+are in `pool_identity_audit.json`. Earlier successful iterations were
+development reads; only this final invocation is the accepted result.
+
+No model, environment, tokenizer, training, policy replay, project analyzer,
+project validator, pytest, supervisor, preflight, G2/G3/G4, or schedule
+generation command was invoked. No source/protocol/shared provenance/index
+file was written.
+
+Post-output stdlib consistency check: return code 0; verified 171 identities,
+81 Q_hist rows, 80 final exact input-target pairs, unchanged input/source/ledger
+hashes, all 11 fixed historical dispositions, 171/171 known-use membership,
+and C_student as a subset of B_pool.

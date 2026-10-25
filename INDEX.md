@@ -97,6 +97,11 @@ Oldest first. UTC is the task-directory timestamp; scientific SHA is the relevan
 | 2026-10-25 06:52:00 | CODEX / Sol Research | SI-P1 eleven learning-target lineage audit and additive terminal-predicate clarification | 11/11 mechanical lineage;10partial/1pinned model identities;9explicit/2missing rawwon;trainingNOT_READY;no science | analyzer85cbb923 / G3source2da980f unchanged | [RECORD.md](agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/RECORD.md) |
 | 2026-10-25 06:52:00 | LUNA | SI-P1 isolation and budget evidence with additive V2 corrections | Registered mappings closed;known-use complement not clean certificate;P0 scope incident archived/restored;no science | analyzer85cbb923 / G3source2da980f unchanged | [RECORD.md](agent-logs/2026-10-25T065200Z__LUNA__si-p1-isolation-budget__caae4c/RECORD.md) |
 
+
+| 2026-10-25 07:56:10 | SOL | SI-P2 same-pool independent review and data adequacy | SETS_DISTINGUISHABLE;finalB95/C10/neutral85;current-pool formal learning NO_GO;0science;5142/7949unchanged | analyzer85cbb923 / G3source2da980f unchanged | [RECORD.md](agent-logs/2026-10-25T075610Z__SOL__si-p2-same-pool-review__b04b8b/RECORD.md) |
+| 2026-10-25 07:56:10 | CODEX / Sol Research | SI-P2 full-source common quality audit | 171rows;164PASS/7EXCLUDE;162task anchors;B95/C10;strict29/1;cap-draft preserved;no science | analyzer85cbb923 / G3source2da980f unchanged | [RECORD.md](agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/RECORD.md) |
+| 2026-10-25 07:56:10 | LUNA | SI-P2 identity/preQ anchor and cost evidence | 171metadata rows independently matched;local81/90mask NONAUTHORITATIVE per scope addendum;0science | analyzer85cbb923 / G3source2da980f unchanged | [RECORD.md](agent-logs/2026-10-25T075610Z__LUNA__si-p2-pool-independence__b04b8b/RECORD.md) |
+
 ## Import omissions
 
 No task directory or large provenance file was omitted. Transient PID/lock files and Python bytecode remain local and are ignored; exact paths, sizes, hashes and reasons are in [excluded-files.json](agent-logs/2026-09-14T061140Z__ASTRA__provenance-repo-initialization__wo8b4ovs/excluded-files.json). No file was deleted.

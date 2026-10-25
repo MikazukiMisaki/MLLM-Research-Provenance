@@ -1,0 +1,71 @@
+{
+  "R4": {
+    "axis": "MODEL_IDENTITY_PARTIAL",
+    "base_model": "Qwen/Qwen3-8B",
+    "weights_revision": "UNKNOWN",
+    "tokenizer_revision": "UNKNOWN",
+    "loaded_adapter_roles_pinned": false,
+    "implementation_sha": "7a01a6107b4bc9c994893220aab078af39fe4fff",
+    "teacher": "adapter-off base first recovery target",
+    "suffix": "adapter-on SFT-P0, evidence only",
+    "source_manifest": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-feasibility-r4-20260908T080000Z/run_manifest.json",
+    "identity_checks": {
+      "historical_exact_weights_tokenizer_and_loaded_roles_receipt": "NOT_RECORDED"
+    },
+    "limitation": "Original runtime receipts only; no model/cache/tokenizer loading or retrospective current-cache fill."
+  },
+  "R10_OSR": {
+    "axis": "MODEL_IDENTITY_PARTIAL",
+    "base_model": "Qwen/Qwen3-8B",
+    "weights_revision": "UNKNOWN",
+    "tokenizer_revision": "UNKNOWN",
+    "loaded_adapter_roles_pinned": false,
+    "implementation_sha": "8926d8fb10e634489031de3da910c572b50d8d44",
+    "teacher": "adapter-off base first recovery target",
+    "suffix": "adapter-on SFT-P0, evidence only",
+    "source_manifest": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/run_manifest.json",
+    "identity_checks": {
+      "historical_exact_weights_tokenizer_and_loaded_roles_receipt": "NOT_RECORDED"
+    },
+    "limitation": "Original runtime receipts only; no model/cache/tokenizer loading or retrospective current-cache fill."
+  },
+  "R16_OSR": {
+    "axis": "MODEL_IDENTITY_PARTIAL",
+    "base_model": "Qwen/Qwen3-8B",
+    "weights_revision": "UNKNOWN",
+    "tokenizer_revision": "UNKNOWN",
+    "loaded_adapter_roles_pinned": false,
+    "implementation_sha": "d1ef841ea9dc7423177fb7647906e2e719f0fbe7",
+    "teacher": "adapter-off base first recovery target",
+    "suffix": "adapter-on SFT-P0, evidence only",
+    "source_manifest": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/run_manifest.json",
+    "identity_checks": {
+      "historical_exact_weights_tokenizer_and_loaded_roles_receipt": "NOT_RECORDED"
+    },
+    "limitation": "Original runtime receipts only; no model/cache/tokenizer loading or retrospective current-cache fill."
+  },
+  "R19_K1": {
+    "axis": "MODEL_IDENTITY_PINNED",
+    "base_model": "Qwen/Qwen3-8B",
+    "weights_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "tokenizer_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "loaded_adapter_roles_pinned": true,
+    "implementation_sha": "2da980f631badc25086d12db60d128ff507d3ae6",
+    "teacher": "adapter-off base first recovery target",
+    "suffix": "adapter-on SFT-P0, evidence only",
+    "source_manifest": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_manifest.json",
+    "identity_checks": {
+      "weights_revision_equals_snapshot": true,
+      "loaded_actor_commit_bound": true,
+      "loaded_recovery_commit_bound": true,
+      "tokenizer_files_hashed": true,
+      "actor_tokenizer_template_bound": true,
+      "recovery_tokenizer_template_bound": true,
+      "adapter_directory_bound": true,
+      "recovery_adapter_off": true,
+      "actor_adapter_on": true,
+      "separate_model_objects": true
+    },
+    "limitation": "Original runtime receipts only; no model/cache/tokenizer loading or retrospective current-cache fill."
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "schema": "SI_P2_CAP_COMPLETION_STATIC_EVIDENCE",
+  "observed_utc": "2026-10-25T08:13:36.364513+00:00",
+  "events": [
+    {
+      "line": 9690,
+      "row_sha256": "dafb7fff63bd7cf9ed781f4ebfa7ebd44c8305ff3d0f57d310f58216a6cdd5e1",
+      "event_id": "0298b176cd2ecde03292a043a54f9e771f3f95f29073a0f71d49bc989259dd76",
+      "component": "stage1",
+      "status": "valid",
+      "output_complete": true,
+      "token_cap_reached": true,
+      "generated_tokens": 40,
+      "max_new_tokens": 40,
+      "token_ids_available": true,
+      "last_token_id": 151645,
+      "raw_output_sha256": "7fc2232e4a1cc7cf35d3897c391fe16ab8b4edef4c5004b96e5a0c774fd199c2"
+    },
+    {
+      "line": 9692,
+      "row_sha256": "797bc84555a34e8d0e1de95ba9f9b028c42049377e65ea021c48a0f677d76352",
+      "event_id": "760cd1fed1648e86389223beca3421be35f575d995675a1c25f675b7493f608f",
+      "component": "stage2",
+      "status": "selected",
+      "output_complete": true,
+      "token_cap_reached": false,
+      "generated_tokens": 5,
+      "max_new_tokens": 16,
+      "token_ids_available": true,
+      "last_token_id": 151645,
+      "raw_output_sha256": "12ff36d4f98458bec7426116abe79ad0d2eb5ae37c811debb33c63d1d7bdcb19"
+    }
+  ],
+  "static_contracts": [
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/scripts/run_r19_experiment.py",
+      "method": "_generate_exact",
+      "lines": [
+        1323,
+        1372
+      ],
+      "file_sha256": "06bb8e11c3cc9e9484b8d5731c86690b97a4c445a0e5aa16b72b912c6c14dd5c",
+      "AST_sha256": "707e8f3c641374fef7c7a7ce56b2081adfb964197163379a7413d2d00450a4c9",
+      "executed_2da_AST_equal": true,
+      "git_read": {
+        "argv": [
+          "git",
+          "show",
+          "2da980f631badc25086d12db60d128ff507d3ae6:scripts/run_r19_experiment.py"
+        ],
+        "actual_returncode": 0,
+        "returncode_source": "subprocess.returncode",
+        "stdout_sha256": "06bb8e11c3cc9e9484b8d5731c86690b97a4c445a0e5aa16b72b912c6c14dd5c"
+      }
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/recovery/two_stage.py",
+      "method": "parse_stage_one_output",
+      "lines": [
+        295,
+        353
+      ],
+      "file_sha256": "7fbdfa36268083a167ff1ce04f8dcb33b20024ee115ed65424e1c257b9329629",
+      "AST_sha256": "02a2f708dec3bc0029c469c71fa18068ab784d69fe03e8011585f9acdc8147ba",
+      "executed_2da_AST_equal": true,
+      "git_read": {
+        "argv": [
+          "git",
+          "show",
+          "2da980f631badc25086d12db60d128ff507d3ae6:src/recovery/two_stage.py"
+        ],
+        "actual_returncode": 0,
+        "returncode_source": "subprocess.returncode",
+        "stdout_sha256": "7fbdfa36268083a167ff1ce04f8dcb33b20024ee115ed65424e1c257b9329629"
+      }
+    }
+  ],
+  "conclusion": "cap reached and complete true is compatible with ending in EOS; not truncated_stage_one under the frozen parser. No parser/model/tokenizer execution.",
+  "science_calls_added": 0
+}

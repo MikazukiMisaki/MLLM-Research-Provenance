@@ -1,0 +1,3 @@
+# CAP/role 追加记录
+
+只使用新写cap_role_addendum.py（OWN由__file__绑定并校验）读取协调方指定解释及既有本轮封存JSON/manifest；没有执行任何旧脚本或项目模块。按原记录确认本case早已在最终v2为neutral-success并保留，两口径质量/集合不变。55项旧文件与旧manifest未改；真实子进程argv、stdout/returncode、程序hash见cap_role_addendum.receipt.json与同名log。新增独立hash清单绑定本追加6项文件，不覆盖旧FILE_HASHES/commands.log。科学增量0，训练N与收益未证明；不宣称独立review PASS。

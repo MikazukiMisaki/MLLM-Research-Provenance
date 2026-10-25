@@ -1,0 +1,15 @@
+# SI-P2 RECORD
+
+任务SI-P2，接收后仅在OWN（本文件父目录）写入新程序/证据摘要，OWN由__file__.resolve().parent并assert精确分配路径。未执行前轮脚本，未导入项目模块。所有parent171原行/4文件hash由唯一manifest认证；源source/replay/CONTINUE和R19 initial+K1事件静态读取，其他K不做目标/结果审计。一次早期字段形状辅助打印展开了分支原evidence_refs中的其他K引用locator；没有据此选择目标、计数其他K结局或新增评估，正式审计只使用初始与K1引用。大raw、权重、完整prompt不复制，无可训练JSONL导出。
+
+真实过程收据：parent_inspection.receipt.json、r19_event_inspection.receipt.json、common_quality_audit.receipt.json（初稿）、common_quality_final.receipt.json（最终v2）、document_completion.receipt.json（由外层进程在本程序退出后写入）。这些stdlib子进程使用真实stdout/stderr与returncode，commands.log逐条记录。静态Git对象读取和工作树命令各自有argv/真实rc/stdout hash或原输出，见static_contract_receipts.json、frozen_worktree_receipts.json。没有pytest或科学执行，不能称独立review PASS。
+
+初稿误把cap标志当截断，造成一项EOS-at-cap valid Stage1误排；初稿8份输出及hash保存draft_v1，程序70fa20ca5fd4b19e2b1c200db3b0eadfd31b67986c462d6ccfb2b9dbb3239832保持不变。最终v2 d680091dd733282cfbe5053b1b0d752be417801795429e519fc4363763b45aa5 按原output_complete契约纠正；没有重选anchor/调整成功标签或挽救rescue。原11项projection和第一目标与P1一致；Q_hist164 PASS/7 EXCLUDE、final162anchors，B95/C10/neutral85；Q_pin36 PASS、final36anchors，B29/C1/neutral28。质量通过不是训练数据充分或学习增益证明。
+
+保留的辅助工具错误（均只读，未造成输入变动）：工具chunk f31718 的rg读取两个猜测路径 src/sft/r15.py 与 scripts/run_progress_aware_recovery.py 返回exit2（文件不存在）；其后用rg定位实际源码。chunk 3c9eba 的临时Python打印表达式多一括号返回exit1 SyntaxError，chunk 3fddab 修正后返回0。真实工具回执指针见auxiliary_tool_receipts.json。没有倒填成项目测试失败或科学失败。
+
+完整输入hash前后核对表complete_input_bindings.json、INPUT_HASHES.sha256；旧P1主manifest51项和成功谓词追加manifest8项保持原字节。冻结review根e537f、analyzer85、executed2da的HEAD/branch/clean由真实只读Git命令核对。自己的FILE_HASHES.sha256在所有子进程日志/receipts写完后生成，含本轮初稿及最终产物，不含自身。文件冻结后不再改；协调方统一独立审查/发布。没有对remote做新声称，没有commit/push或共享索引改动。
+
+权限/成本：无模型/环境/tokenizer/训练/项目analyzer/validator/pytest/source/replay/G2/G3/G4/preflight/policy评估；无额外agent或线程消息；新增科学调用0，累计R19 5142/7949（含177/342）保持。DATA_FEASIBILITY=NOT_READY，qualified training N=NOT_ESTABLISHED，learning gain=NOT_PROVEN。后续任何科学执行仍NOT_GRANTED。
+
+封存前编辑澄清：主报告中128指Q_hist通过的legacy行，原parent legacy为132；anchor规则由协调方事前固定，程序的先后顺序不代表人工首次接触结果前封存hash，字段probe已读既有结果。仅修正文义，不重跑审计或改任何集合/判据；编辑前主文原字节保留draft_v1/COMMON_QUALITY_AUDIT_before_editorial_clarification.md，最终主文hash由FROZEN_HANDOFF及FILE_HASHES绑定。pool_quality_audit.json为1.26MB，略高于建议<1MB，以保留171行完整布尔项与逐条原始locator；无全prompt、全action map或原raw复制。

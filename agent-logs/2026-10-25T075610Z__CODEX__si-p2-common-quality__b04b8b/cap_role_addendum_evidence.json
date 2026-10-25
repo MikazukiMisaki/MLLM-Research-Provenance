@@ -1,0 +1,410 @@
+{
+  "interpretation": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__SOL__si-p2-same-pool-review__b04b8b/CAP_AND_ROLE_INTERPRETATION.md",
+    "sha256": "964b5a31dcb78516c16c61780a91be677c55964a6c4e044c505b3d360349ee0c"
+  },
+  "frozen_original_manifest": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/FILE_HASHES.sha256",
+    "sha256": "35119df7b4416cf870eea7c5d8d4e85ceafc0b8878f757afd48723bf75620553"
+  },
+  "frozen_machine_audit": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/pool_quality_audit.json",
+    "sha256": "ff4eeea6654ed60fee42e2283e0a8afa2314710ada46553076bb67037da66a59"
+  },
+  "case_id": "R19_K1:R19-random-control-47bcdcad9c56a38ac146",
+  "case_before_and_after_disposition": "UNCHANGED_PASS_B_MINUS_C_NOT_C",
+  "case_flags": {
+    "stage1": {
+      "input_tokens": 743,
+      "generated_tokens": 40,
+      "max_new_tokens": 40,
+      "output_complete": true,
+      "token_cap_reached": true
+    },
+    "stage2": {
+      "input_tokens": 990,
+      "generated_tokens": 5,
+      "max_new_tokens": 16,
+      "output_complete": true,
+      "token_cap_reached": false
+    }
+  },
+  "original_event_references": {
+    "initial_stage1": {
+      "file_id": "F013",
+      "line": 9690,
+      "raw_line_sha256": "dafb7fff63bd7cf9ed781f4ebfa7ebd44c8305ff3d0f57d310f58216a6cdd5e1",
+      "pointer": null,
+      "event_id": "0298b176cd2ecde03292a043a54f9e771f3f95f29073a0f71d49bc989259dd76",
+      "kind": "generation_completed"
+    },
+    "initial_stage2": {
+      "file_id": "F013",
+      "line": 9692,
+      "raw_line_sha256": "797bc84555a34e8d0e1de95ba9f9b028c42049377e65ea021c48a0f677d76352",
+      "pointer": null,
+      "event_id": "760cd1fed1648e86389223beca3421be35f575d995675a1c25f675b7493f608f",
+      "kind": "generation_completed"
+    },
+    "first_environment_step": {
+      "file_id": "F013",
+      "line": 9696,
+      "raw_line_sha256": "c6ddd480bb3beb53f8022f0479149da01af122483498e7e926882d08d5387f7d",
+      "pointer": "/payload/action/transition",
+      "event_id": "970bf3768ae036ce3e63036eb03bcb6ab05c545e36309effbc536d74544d3eba",
+      "kind": "environment_step_completed"
+    },
+    "source_episode": {
+      "file_id": "F013",
+      "line": 3282,
+      "raw_line_sha256": "5ee382637273187a03b9a41eb7f0e7ac5c55b18e4f78c7dcbb33d33264a6b986",
+      "pointer": null,
+      "event_id": "c906bfa594c837945e27b04e86a0a73f897a4bf50b30ddb75dc389c36600005d",
+      "kind": "source_episode_completed"
+    },
+    "K1_arm": {
+      "file_id": "F013",
+      "line": 25973,
+      "raw_line_sha256": "457e58871b6700d41334350682aa55d36812f5d92a19ccee9e7429a1ed7ab396",
+      "pointer": null,
+      "event_id": "bf19c67b0cb86c663e1d216ffff2e3c1a53d4fb82504e641a2fb0211c7128099",
+      "kind": "duration_arm_completed"
+    },
+    "K1_derived_source_event_id": null,
+    "first_target_only": true
+  },
+  "old_55_files": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/COMMON_QUALITY_AUDIT.md",
+      "sha256_before": "c49fb5f67783c18c30749faced7d6bbfbdac937e2e26c20bf99f2e59e5357e45",
+      "sha256_after": "c49fb5f67783c18c30749faced7d6bbfbdac937e2e26c20bf99f2e59e5357e45",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/FROZEN_HANDOFF.json",
+      "sha256_before": "1b0d6da081b44c54cde2e921c45d2e875efbaeb1d1013150722be7a1cb915af8",
+      "sha256_after": "1b0d6da081b44c54cde2e921c45d2e875efbaeb1d1013150722be7a1cb915af8",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/INPUT_HASHES.sha256",
+      "sha256_before": "36b5282b3951b1db1c8ba3e81c7bdaa5c9479f4679cfa82beaf9cf94e8f9230e",
+      "sha256_after": "36b5282b3951b1db1c8ba3e81c7bdaa5c9479f4679cfa82beaf9cf94e8f9230e",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/RECORD.md",
+      "sha256_before": "5ddae68613749d6ad05b37f8b8c3b96ac5151e4eebec8fb88c043d0621a15785",
+      "sha256_after": "5ddae68613749d6ad05b37f8b8c3b96ac5151e4eebec8fb88c043d0621a15785",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/__pycache__/audit_io.cpython-313.pyc",
+      "sha256_before": "5aaa621adf4cb7d3cc3255c6f3afce51f1481d892b7bfd0abd1d1565dda43d50",
+      "sha256_after": "5aaa621adf4cb7d3cc3255c6f3afce51f1481d892b7bfd0abd1d1565dda43d50",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/anchor_keys_pre_outcome.json",
+      "sha256_before": "cfe1e600b16f070d44793e0da8580b4681ba1d5dcd4daa528f185eb513b3f012",
+      "sha256_after": "cfe1e600b16f070d44793e0da8580b4681ba1d5dcd4daa528f185eb513b3f012",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/audit_completion_summary.json",
+      "sha256_before": "ce9188137c6ed1bf6f861355875ff4dad0268986aa696fe2fae2bd8cb67a92c2",
+      "sha256_after": "ce9188137c6ed1bf6f861355875ff4dad0268986aa696fe2fae2bd8cb67a92c2",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/audit_io.py",
+      "sha256_before": "32ab9278c96b1b5b0958d119c276b496f41d9ca54c363f6c35edebbbd5be3fc4",
+      "sha256_after": "32ab9278c96b1b5b0958d119c276b496f41d9ca54c363f6c35edebbbd5be3fc4",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/auxiliary_tool_receipts.json",
+      "sha256_before": "af1e1264bcb15cb32f8c74529ae6bce85c51e0e7c40392b2c134f19ec3adea2f",
+      "sha256_after": "af1e1264bcb15cb32f8c74529ae6bce85c51e0e7c40392b2c134f19ec3adea2f",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/commands.log",
+      "sha256_before": "b16f4d8cf589b321c4ceabbc9625bfd01b9b103700dd05da929d8d540957359f",
+      "sha256_after": "b16f4d8cf589b321c4ceabbc9625bfd01b9b103700dd05da929d8d540957359f",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/common_quality_audit.log",
+      "sha256_before": "e822e0ff3597860ff66722f9ec0f229720cf3eb0a8db73e8f1867a989e3dad7b",
+      "sha256_after": "e822e0ff3597860ff66722f9ec0f229720cf3eb0a8db73e8f1867a989e3dad7b",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/common_quality_audit.py",
+      "sha256_before": "70fa20ca5fd4b19e2b1c200db3b0eadfd31b67986c462d6ccfb2b9dbb3239832",
+      "sha256_after": "70fa20ca5fd4b19e2b1c200db3b0eadfd31b67986c462d6ccfb2b9dbb3239832",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/common_quality_audit.receipt.json",
+      "sha256_before": "968620b785717d384d0bd086a7160aa55ed610fffa5de7f3bc7e979fea962a05",
+      "sha256_after": "968620b785717d384d0bd086a7160aa55ed610fffa5de7f3bc7e979fea962a05",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/common_quality_audit_v2.py",
+      "sha256_before": "d680091dd733282cfbe5053b1b0d752be417801795429e519fc4363763b45aa5",
+      "sha256_after": "d680091dd733282cfbe5053b1b0d752be417801795429e519fc4363763b45aa5",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/common_quality_final.log",
+      "sha256_before": "471d90b98d9aad4f0839ebee29eda77c54b91a443142c68671ab55c424aff181",
+      "sha256_after": "471d90b98d9aad4f0839ebee29eda77c54b91a443142c68671ab55c424aff181",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/common_quality_final.receipt.json",
+      "sha256_before": "4f6ed29137122dec139c18313b6e9799579a645880c970caa6088e0934b42701",
+      "sha256_after": "4f6ed29137122dec139c18313b6e9799579a645880c970caa6088e0934b42701",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/complete_input_bindings.json",
+      "sha256_before": "8fdfaa482c585b390d2cdabcb626df9462f7fbf0120f232aade6898dc21972c5",
+      "sha256_after": "8fdfaa482c585b390d2cdabcb626df9462f7fbf0120f232aade6898dc21972c5",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/document_completion.log",
+      "sha256_before": "1ef3d10be302908c0d33e698a22a623ab4655aa9f0adab028b74021c370f18cf",
+      "sha256_after": "1ef3d10be302908c0d33e698a22a623ab4655aa9f0adab028b74021c370f18cf",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/document_completion.receipt.json",
+      "sha256_before": "2b4df828b900cd62cfe7fff26437ffb46f4f08d003bbfb15cc40a530b73d4434",
+      "sha256_after": "2b4df828b900cd62cfe7fff26437ffb46f4f08d003bbfb15cc40a530b73d4434",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/draft_v1/COMMON_QUALITY_AUDIT_before_editorial_clarification.md",
+      "sha256_before": "c0f28a5adc8043321df3615a4537fbe62f004214a347b39ada4754df6a261b0a",
+      "sha256_after": "c0f28a5adc8043321df3615a4537fbe62f004214a347b39ada4754df6a261b0a",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/draft_v1/DRAFT_BINDINGS.json",
+      "sha256_before": "e3c5cdd394217c9f026750ad8b9f243cc9bee517570bbe1ab0b9068723895a94",
+      "sha256_after": "e3c5cdd394217c9f026750ad8b9f243cc9bee517570bbe1ab0b9068723895a94",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/draft_v1/anchor_keys_pre_outcome.json",
+      "sha256_before": "cfe1e600b16f070d44793e0da8580b4681ba1d5dcd4daa528f185eb513b3f012",
+      "sha256_after": "cfe1e600b16f070d44793e0da8580b4681ba1d5dcd4daa528f185eb513b3f012",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/draft_v1/input_bindings.json",
+      "sha256_before": "5d6d8385dbdf5469d8ddf011825b90c17adeca8e293f8f786b96901aef1d1036",
+      "sha256_after": "5d6d8385dbdf5469d8ddf011825b90c17adeca8e293f8f786b96901aef1d1036",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/draft_v1/model_identity_bindings.json",
+      "sha256_before": "17fc2c77365a8c5e29f5818caea7cec5a52bb90ffdc80268067d50d0c1082e82",
+      "sha256_after": "17fc2c77365a8c5e29f5818caea7cec5a52bb90ffdc80268067d50d0c1082e82",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/draft_v1/original_eleven_dispositions.json",
+      "sha256_before": "e2f9e4df3cf6dcdcedeaa1778a4ecb89a7089d38b0bd9d4abdc8077410701dc3",
+      "sha256_after": "e2f9e4df3cf6dcdcedeaa1778a4ecb89a7089d38b0bd9d4abdc8077410701dc3",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/draft_v1/pipeline_counts.json",
+      "sha256_before": "eee6b3fa248c78bab5b671041728a580cb80e4ece552c75b59e72254de95aafc",
+      "sha256_after": "eee6b3fa248c78bab5b671041728a580cb80e4ece552c75b59e72254de95aafc",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/draft_v1/pool_quality_audit.json",
+      "sha256_before": "9e8c0ccc4ea573300b6058342e36b0c0947fa6d46b791b36acd4083afb9e5b60",
+      "sha256_after": "9e8c0ccc4ea573300b6058342e36b0c0947fa6d46b791b36acd4083afb9e5b60",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/draft_v1/pool_sets.json",
+      "sha256_before": "acde8cd5e49209b50431c829f393e71ec7f6a8c6b42308b6719536675aedd97a",
+      "sha256_after": "acde8cd5e49209b50431c829f393e71ec7f6a8c6b42308b6719536675aedd97a",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/draft_v1/selection_inputs_without_outcomes.json",
+      "sha256_before": "096c2937ec676817615e03f9696b6a97c5e961b48f3f001335809aa765e6d00e",
+      "sha256_after": "096c2937ec676817615e03f9696b6a97c5e961b48f3f001335809aa765e6d00e",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/final_input_immutability_receipt.json",
+      "sha256_before": "73565a14cb6bc4bbc1be8fdebf2cade59f52d3c2b2ace52437c453caffcb2cf1",
+      "sha256_after": "73565a14cb6bc4bbc1be8fdebf2cade59f52d3c2b2ace52437c453caffcb2cf1",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/finalization.log",
+      "sha256_before": "8b883c065802e76de21eb5563d66c46da98621e3309f4ca526ed5e159134fe0c",
+      "sha256_after": "8b883c065802e76de21eb5563d66c46da98621e3309f4ca526ed5e159134fe0c",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/finalization.receipt.json",
+      "sha256_before": "e49964cd0933b04423023fbe922e330fbb0773c7a746fadb8e4791bcb50f05fd",
+      "sha256_after": "e49964cd0933b04423023fbe922e330fbb0773c7a746fadb8e4791bcb50f05fd",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/finalize_evidence.py",
+      "sha256_before": "33d19302608672544b24188121f140d9ecd4f01d5d9aa0f779922b1ea64e3e9f",
+      "sha256_after": "33d19302608672544b24188121f140d9ecd4f01d5d9aa0f779922b1ea64e3e9f",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/frozen_worktree_receipts.json",
+      "sha256_before": "424b663fa894af25c6c62448509c0a18122fe7f1b25095ed348e12fff9080d0b",
+      "sha256_after": "424b663fa894af25c6c62448509c0a18122fe7f1b25095ed348e12fff9080d0b",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/input_bindings.json",
+      "sha256_before": "a35032a25fb9ca7a4ce660779b5e61d42d1aca8efcb12f335a00ca5c2289345e",
+      "sha256_after": "a35032a25fb9ca7a4ce660779b5e61d42d1aca8efcb12f335a00ca5c2289345e",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/inspect_parent.py",
+      "sha256_before": "7d8bcbaf8b215927018f72fc59c52e00989fb9df1003b1c1608991ddd932ef60",
+      "sha256_after": "7d8bcbaf8b215927018f72fc59c52e00989fb9df1003b1c1608991ddd932ef60",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/inspect_r19_events.py",
+      "sha256_before": "f4d6fafce0f898dedd192f6e0faf0027b7a969abf6b26c533f7626acaa5a0670",
+      "sha256_after": "f4d6fafce0f898dedd192f6e0faf0027b7a969abf6b26c533f7626acaa5a0670",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/inspection_input_bindings.json",
+      "sha256_before": "3186d8a31808084f0771678be2e354e2699cabd6130b91453e4616ed40d62ffd",
+      "sha256_after": "3186d8a31808084f0771678be2e354e2699cabd6130b91453e4616ed40d62ffd",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/model_identity_bindings.json",
+      "sha256_before": "17fc2c77365a8c5e29f5818caea7cec5a52bb90ffdc80268067d50d0c1082e82",
+      "sha256_after": "17fc2c77365a8c5e29f5818caea7cec5a52bb90ffdc80268067d50d0c1082e82",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/original_eleven_dispositions.json",
+      "sha256_before": "e2f9e4df3cf6dcdcedeaa1778a4ecb89a7089d38b0bd9d4abdc8077410701dc3",
+      "sha256_after": "e2f9e4df3cf6dcdcedeaa1778a4ecb89a7089d38b0bd9d4abdc8077410701dc3",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/parent_inspection.log",
+      "sha256_before": "898b7a034654a2eccd610dc7a078cf8d10c24212909d2bc0c391fb5b7f7a629d",
+      "sha256_after": "898b7a034654a2eccd610dc7a078cf8d10c24212909d2bc0c391fb5b7f7a629d",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/parent_inspection.receipt.json",
+      "sha256_before": "b8ec186555bdb09a7d4ee8074fbd37e157fcb41c95228fc0ce7e6310b297eff0",
+      "sha256_after": "b8ec186555bdb09a7d4ee8074fbd37e157fcb41c95228fc0ce7e6310b297eff0",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/parent_shape_inspection.json",
+      "sha256_before": "7b04cc96b78231bd275e75a199c1268fdcc5b0dff78be7445ccfec3d28c22fb3",
+      "sha256_after": "7b04cc96b78231bd275e75a199c1268fdcc5b0dff78be7445ccfec3d28c22fb3",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/pipeline_counts.json",
+      "sha256_before": "fc09ed3dbe33380c1b2a471fa97f6997fd492842106d8e3c2717885d71d48ea4",
+      "sha256_after": "fc09ed3dbe33380c1b2a471fa97f6997fd492842106d8e3c2717885d71d48ea4",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/pool_quality_audit.json",
+      "sha256_before": "ff4eeea6654ed60fee42e2283e0a8afa2314710ada46553076bb67037da66a59",
+      "sha256_after": "ff4eeea6654ed60fee42e2283e0a8afa2314710ada46553076bb67037da66a59",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/pool_sets.json",
+      "sha256_before": "28a9c33dce119efd268b02ab89a2e9c5921f211a7d58b800fa2654eca66ff37c",
+      "sha256_after": "28a9c33dce119efd268b02ab89a2e9c5921f211a7d58b800fa2654eca66ff37c",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/prior_p1_immutability_check.json",
+      "sha256_before": "0c10f34fa5f0ceacbbe5879d2b9cc05c0de8d9a2d9c2198eae5120384695288e",
+      "sha256_after": "0c10f34fa5f0ceacbbe5879d2b9cc05c0de8d9a2d9c2198eae5120384695288e",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/r19_event_inspection.log",
+      "sha256_before": "fe48f8d9b76087c197b12ca7b5804fd92bc23b6eff3c081d1c25f57e44100798",
+      "sha256_after": "fe48f8d9b76087c197b12ca7b5804fd92bc23b6eff3c081d1c25f57e44100798",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/r19_event_inspection.receipt.json",
+      "sha256_before": "db992cfaf3472d03561f4c8d07dd27a4151a4dd21e12d7b8d1e6af988d713117",
+      "sha256_after": "db992cfaf3472d03561f4c8d07dd27a4151a4dd21e12d7b8d1e6af988d713117",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/r19_event_shape_inspection.json",
+      "sha256_before": "5714b096367421e5dafe0cf874a3d100fb836ddbf89b9abd67262153c8f540bc",
+      "sha256_after": "5714b096367421e5dafe0cf874a3d100fb836ddbf89b9abd67262153c8f540bc",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/r19_inspection_input_bindings.json",
+      "sha256_before": "40e7392d83dcebec1e74a6c17ac432bc047a7750767296161e63a5539763dfa6",
+      "sha256_after": "40e7392d83dcebec1e74a6c17ac432bc047a7750767296161e63a5539763dfa6",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/seal_guard_failure.receipt.json",
+      "sha256_before": "62e0e64c713e6c1a4b114fb863a6587e857ef10c6a58ca9fc21c4963652c2238",
+      "sha256_after": "62e0e64c713e6c1a4b114fb863a6587e857ef10c6a58ca9fc21c4963652c2238",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/selection_inputs_without_outcomes.json",
+      "sha256_before": "2e874f12b5dac708c14a5a92366b5bab5941857fffd02b919acaee86dc760567",
+      "sha256_after": "2e874f12b5dac708c14a5a92366b5bab5941857fffd02b919acaee86dc760567",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/static_contract_receipts.json",
+      "sha256_before": "7fdc56a523a046a782f50af4a04c0216cc391f2b2c45ce6dc413c29a3c9b7aa7",
+      "sha256_after": "7fdc56a523a046a782f50af4a04c0216cc391f2b2c45ce6dc413c29a3c9b7aa7",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/write_documents.py",
+      "sha256_before": "d11a74dd5a38b50361b81cf785d921ba5df83d78a75dcede68a6ded5f9488b5d",
+      "sha256_after": "d11a74dd5a38b50361b81cf785d921ba5df83d78a75dcede68a6ded5f9488b5d",
+      "unchanged": true
+    }
+  ],
+  "no_other_agent_file_read": true,
+  "scientific_calls_added": 0
+}

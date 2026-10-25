@@ -1,0 +1,60 @@
+{
+  "schema": "SI_P2_LUNA_READ_ONLY_EXECUTION_RECEIPTS_V1",
+  "task": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__SOL__si-p2-same-pool-review__b04b8b/LUNA_TASK.md",
+    "sha256": "76e8880f83dffe40857eb78457dc48766c8ca74bedea46d5f985e4bc7e94cbe7",
+    "common_rules_sha256": "ab5e3afe8bb1e65ae1473254810ba56dfa769cefbd0952d0b2a0bdb32368ea69",
+    "parent_manifest_sha256": "a3e2548e89280d150cbe83cceca632f9f91275ede0a4a9d89133e53691826078"
+  },
+  "environment": {
+    "python": "Python 3.13.13",
+    "execution_method": "local direct Python invocation; stdlib-only; no shell pipeline for the audit",
+    "science_calls": {
+      "model": 0,
+      "environment": 0,
+      "training": 0,
+      "tokenizer": 0,
+      "policy_replay": 0,
+      "project_analyzer_or_validator": 0,
+      "pytest": 0
+    }
+  },
+  "development_failures_preserved_in_operator_log": [
+    {
+      "command": "python audit_pool.py",
+      "returncode": 1,
+      "failure": "Initial manifest locator pointed at the Luna output directory; FileNotFoundError. Corrected to the supplied task directory."
+    },
+    {
+      "command": "python audit_pool.py",
+      "returncode": 1,
+      "failure": "Initial row hash implementation excluded the JSONL newline; parent exact-byte SHA assertion failed. Corrected to hash exact line bytes, including the terminator."
+    },
+    {
+      "command": "read-only Python event-shape diagnostic",
+      "returncode": 1,
+      "failure": "Diagnostic manifest path omitted the agent-logs component; corrected path and reran read-only."
+    },
+    {
+      "command": "stdlib-only output consistency check",
+      "returncode": 1,
+      "failure": "Exact input-target pair uniqueness assertion exposed that the joined R19 target-command hash was not copied to the parent row; corrected the audit script and reran it. Scientific inputs were unchanged."
+    }
+  ],
+  "accepted_final_invocation": {
+    "command_argv": ["python", "audit_pool.py"],
+    "cwd": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__LUNA__si-p2-pool-independence__b04b8b",
+    "completion_observed_utc": "2026-10-25T08:12Z window; exact process start timestamp was not separately captured",
+    "returncode": 0,
+    "stdout": "{\"rows\": 171, \"unique_tasks\": 169, \"q_hist\": {\"HOLD\": 90, \"PASS\": 81}, \"q_pin\": {\"HOLD_EXACT_WEIGHTS_TOKENIZER_AND_LOADED_ADAPTER_ROLE_NOT_ALL_BOUND\": 132, \"HOLD\": 4, \"PASS\": 35}, \"raw_B\": 99, \"raw_C\": 11, \"event_ids\": 2167, \"status\": \"complete\"}",
+    "output_files": ["pool_identity_audit.json", "parent_anchor_plan.json"],
+    "input_pre_post_hashes_in": "pool_identity_audit.json.audit_inputs_before and audit_inputs_after",
+    "raw_R19_ledger_pre_post_hashes_in": "pool_identity_audit.json.physical_alias.r19_event_journal and r19_event_journal_after"
+  },
+  "post_output_consistency_receipt": {
+    "method": "stdlib JSON assertions only; not pytest and not a project validator",
+    "returncode": 0,
+    "stdout": "stdlib output consistency checks PASS; inputs unchanged; 171 rows; Q_hist 81/90; final pairs 80; fixed-eleven 11; known-use 171/171"
+  },
+  "scope_attestation": "Only fixed consumed cohort evidence and previously finalized P1 identity/cost evidence were read. No source input, historical record, shared INDEX, scientific worktree, or provenance publication was modified."
+}

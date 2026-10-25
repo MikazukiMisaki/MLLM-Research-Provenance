@@ -1,0 +1,15 @@
+{
+  "source": "Actual tool result from this conversation",
+  "chunk_id": "f6dbab",
+  "exit_code": 1,
+  "stdout_stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 12, in <module>\nAssertionError\n",
+  "failed_guard": "No __pycache__ files in the new OWN directory",
+  "effect": "Guard failed before creating FILE_HASHES.sha256. No old input or primary output changed. Task-local audit_io helper bytecode exists from an auxiliary Python import; it is retained and hashed, not scientific execution.",
+  "task_local_cached_files": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T075610Z__CODEX__si-p2-common-quality__b04b8b/__pycache__/audit_io.cpython-313.pyc",
+      "sha256": "5aaa621adf4cb7d3cc3255c6f3afce51f1481d892b7bfd0abd1d1565dda43d50"
+    }
+  ],
+  "seal_policy": "Hash all task-owned files including this retained local cache; coordinator may leave cache local. No deletion or old-directory write."
+}
