@@ -1,0 +1,49 @@
+{
+  "schema": "SI_E2_UUID_FROZEN_HANDOFF_V1",
+  "source_sha": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+  "base_sha": "dfc00e49d1ef4d48453d2331507429f8a0c7bbc5",
+  "branch": "codex/si-e2-cuda-uuid-compat",
+  "remote_ref": "refs/heads/codex/si-e2-cuda-uuid-compat",
+  "remote_equality": {
+    "source_sha": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+    "remote_ref": "refs/heads/codex/si-e2-cuda-uuid-compat",
+    "tracking_sha": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+    "live_remote_line": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd\trefs/heads/codex/si-e2-cuda-uuid-compat",
+    "equal": true,
+    "clean": true,
+    "force_used": false,
+    "provenance_pushed": false,
+    "observed_utc": "2026-10-25T14:37:59.363047+00:00"
+  },
+  "focused": {
+    "passed": 153,
+    "returncode": 0
+  },
+  "full": {
+    "passed": 953,
+    "failed": 3,
+    "errors": 77,
+    "returncode": 1,
+    "same_exact_80_baseline_ids": true,
+    "new_cases_all_pass": 70
+  },
+  "compile_returncode": 0,
+  "diff_check_returncode": 0,
+  "captured_wire_software_returncode": 0,
+  "independent_review_at_creation": "PENDING",
+  "runtime": "BLOCKED_UNMAPPED_HOST_PID",
+  "new_execution_release": false,
+  "real_GPU_8B_P0_ALFWorld_calls": 0,
+  "historical_science": {
+    "generations": 5142,
+    "environment_operations": 7949
+  },
+  "changed_existing_production_methods": [
+    "LocalInference.load"
+  ],
+  "added_production_functions": [
+    "cuda_uuid_matches",
+    "verify_cuda_uuid"
+  ],
+  "own_publication_authority": false
+}

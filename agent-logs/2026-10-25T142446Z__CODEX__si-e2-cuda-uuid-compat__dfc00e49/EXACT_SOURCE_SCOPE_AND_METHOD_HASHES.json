@@ -1,0 +1,53 @@
+{
+  "schema": "SI_E2_UUID_EXACT_SOURCE_SCOPE_V1",
+  "base_sha": "dfc00e49d1ef4d48453d2331507429f8a0c7bbc5",
+  "source_sha": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+  "changed_files": [
+    "M\tsrc/self_improvement/si_p3/runtime_backend.py",
+    "A\ttests/test_si_e2_cuda_uuid_compat.py"
+  ],
+  "old_tracked_file_count": 542,
+  "unchanged_old_tracked_file_count": 541,
+  "only_existing_production_method_changed": [
+    "LocalInference.load"
+  ],
+  "added_production_functions": [
+    "cuda_uuid_matches",
+    "verify_cuda_uuid"
+  ],
+  "load_original_old_new_exact_two_assertion_overlay": true,
+  "inspect_gpu_and_pid_uid_guard_blob_unchanged": true,
+  "ledger_and_cost_counters_blob_unchanged": true,
+  "all_other_tracked_blobs_unchanged": true,
+  "method_hash_definition": "SHA256 of ast.dump(node, include_attributes=False), including decorators",
+  "methods": [
+    {
+      "qualname": "cuda_uuid_matches",
+      "old_ast_sha256": null,
+      "new_ast_sha256": "0a5ba224655eef781af0e904960e48301a01aa344d0c02e254e00036988fd19e",
+      "definition_lineno": 32
+    },
+    {
+      "qualname": "verify_cuda_uuid",
+      "old_ast_sha256": null,
+      "new_ast_sha256": "61c58250048635836ded9cc20b1ffe03fc148b88255dd9963f5b1e8a6f2041c2",
+      "definition_lineno": 42
+    },
+    {
+      "qualname": "LocalInference.load",
+      "old_ast_sha256": "6fc9e897fa9c16b745339e8093aeaa117bdb7574c07f768d5dee61a16fd73779",
+      "new_ast_sha256": "84a9e3a5cf5042b513f11714c2f17e681cde0844221a731210e1cb3d411a5709",
+      "definition_lineno": 119
+    }
+  ],
+  "full_changed_file_hashes": [
+    {
+      "path": "src/self_improvement/si_p3/runtime_backend.py",
+      "sha256": "7a448e745c1d5a2b40a11a7c788b5b945a800223edc439871e2291e59b4850c3"
+    },
+    {
+      "path": "tests/test_si_e2_cuda_uuid_compat.py",
+      "sha256": "55f8cd72062af8c7dc2e3a9a15d5c8a19a994c35fe5aee26aef5493ba37adefa"
+    }
+  ]
+}

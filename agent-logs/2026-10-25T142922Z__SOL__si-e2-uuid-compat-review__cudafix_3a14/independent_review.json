@@ -1,0 +1,93 @@
+{
+  "schema": "SI_E2_UUID_INDEPENDENT_EXACT_SHA_REVIEW_V1",
+  "reviewer_thread": "01a0994c-a209-7600-8a3e-5ff3096ed346",
+  "UTC": "2026-10-25T14:43:43.867187+00:00",
+  "source_SHA": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+  "base_SHA": "dfc00e49d1ef4d48453d2331507429f8a0c7bbc5",
+  "branch": "codex/si-e2-cuda-uuid-compat",
+  "IMPLEMENTATION_REVIEW": "PASS_ENGINEERING_UUID_COMPATIBILITY_ONLY",
+  "source_treatment_semantics_changed": false,
+  "scientific_execution_behavior_changed": false,
+  "engineering_identity_and_journal_emission_behavior_changed": true,
+  "G2_CARRY_FORWARD": "HISTORICAL_EVIDENCE_ONLY_NO_RERUN_OR_NEW_RUNTIME_RELEASE",
+  "source_scope": {
+    "old_files_changed": 1,
+    "files_added": 1,
+    "old_blobs_identical": 541,
+    "old_methods_changed": [
+      "LocalInference.load"
+    ],
+    "functions_added": [
+      "cuda_uuid_matches",
+      "verify_cuda_uuid"
+    ],
+    "PID_UID_foreign_process_guard": "BYTE_IDENTICAL"
+  },
+  "independent_full_suite": {
+    "passed": 953,
+    "failed": 3,
+    "errors": 77,
+    "authentic_returncode": 1,
+    "baseline_failure_error_IDs_types_unchanged": true,
+    "new_test_count": 70,
+    "all_new_pass": true,
+    "compile_diffcheck_returncodes": [
+      0,
+      0
+    ]
+  },
+  "independent_saved_real_UUID_wire_checks": {
+    "cases": 9,
+    "production_journal_and_reconstruct": "PASS",
+    "malformed_failure_raw_receipt_before_error": "PASS",
+    "actual_CUDA_model_world_calls": 0
+  },
+  "independent_static_critic": "Complete exact two-file delta reviewed; no findings; no tests/CUDA/model/world calls by critic",
+  "developer_frozen_handoff_confirmed": true,
+  "live_remote_SHA_verified": true,
+  "REAL_RUNTIME_READINESS": "BLOCKED_UNPROVEN_HOST_LOCAL_PID_MAPPING",
+  "actual8B_P0_or_ALFWorld_revalidation": "NOT_RUN_NOT_RELEASED",
+  "existing_host_inspection_route": "SSH_AUTHENTICATION_FAILED_255; remote source/device/namespace NOT_OBSERVED",
+  "unknown_PID_must_not_be_whitelisted": true,
+  "two_earlier_engineering_releases": "CONSUMED; unchanged failures and nonzero device times preserved",
+  "scientific_cumulative_unchanged": {
+    "generations": 5142,
+    "reset_inclusive_operations": 7949
+  },
+  "new_acquisition_training_evaluation": "NOT_RUN_NOT_GRANTED; drivers still absent",
+  "LAUNCH_CLEARANCE": "NOT_GRANTED",
+  "required_conditions": [
+    "Prove same-namespace own GPU PID/UID or authenticated host/local process mapping without temporal/memory inference",
+    "Use fresh zero-model identity diagnostic after trusted context exists; old releases never reusable",
+    "Any later full engineering proposal binds this new exactSHA/review/inputs/environment/output, receives fresh independent release and remains bounded",
+    "New96 acquisition/student training/evaluation need separate implemented reviewed drivers and scientific release"
+  ],
+  "worktrees": {
+    "wt-codex-r18c2": {
+      "HEAD": "e537f441010077123a307e9d50ea40cf8dad8547",
+      "branch": "agent/codex-r18c2",
+      "status": ""
+    },
+    "wt-si-p3-runtime-adaptation": {
+      "HEAD": "dfc00e49d1ef4d48453d2331507429f8a0c7bbc5",
+      "branch": "codex/si-p3-runtime-adaptation",
+      "status": ""
+    },
+    "wt-si-e2-cuda-uuid-compat": {
+      "HEAD": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+      "branch": "codex/si-e2-cuda-uuid-compat",
+      "status": ""
+    }
+  },
+  "evidence": {
+    "/home/lizening/research-notes/agent-logs/2026-10-25T142922Z__SOL__si-e2-uuid-compat-review__cudafix_3a14/full_suite.receipt.json": "e0b43c476bc7e407dc3d959edc1607a9b5cbc092086f8ff4c2ef239616b7bbff",
+    "/home/lizening/research-notes/agent-logs/2026-10-25T142922Z__SOL__si-e2-uuid-compat-review__cudafix_3a14/full_suite.xml": "ddb5fd76b936c6730dac599f572f153cbbfdab8ff5f69583a3e1f425ad92cbd9",
+    "/home/lizening/research-notes/agent-logs/2026-10-25T142922Z__SOL__si-e2-uuid-compat-review__cudafix_3a14/independent_regression_comparison.json": "e438781e3f6e0569bae30e918104903725103fbec0dd403086d8826aa8aad430",
+    "/home/lizening/research-notes/agent-logs/2026-10-25T142922Z__SOL__si-e2-uuid-compat-review__cudafix_3a14/independent_exact_source_scope.json": "7c396ffb5cf6ed4585f2bc141b562e69663bf80a81cb38ac3a7623fd567e1c12",
+    "/home/lizening/research-notes/agent-logs/2026-10-25T142922Z__SOL__si-e2-uuid-compat-review__cudafix_3a14/captured_wire_independent_check.json": "24b6c451b807e527c33b9d84c1c1bbffff91b3e8c5b22110f9e2a78b707bac6a",
+    "/home/lizening/research-notes/agent-logs/2026-10-25T142922Z__SOL__si-e2-uuid-compat-review__cudafix_3a14/candidate_live_remote_receipt.json": "c59cdfbcabeb6473286b220029a89ef868233b5350256651320fe247eabe3a5b",
+    "/home/lizening/research-notes/agent-logs/2026-10-25T142922Z__SOL__si-e2-uuid-compat-review__cudafix_3a14/independent_context_inspection_review.json": "25e59e8aa45e3c070459c4eba4669365cf2b6f56e1252eb139c7bb05ac80b3d2",
+    "/home/lizening/research-notes/agent-logs/2026-10-25T142446Z__CODEX__si-e2-cuda-uuid-compat__dfc00e49/FROZEN_HANDOFF.json": "ae2f6a138bf202ef12c8f28361fc5e956aca433793c9928e723255b58a9348ef",
+    "/home/lizening/research-notes/agent-logs/2026-10-25T142446Z__CODEX__si-e2-cuda-uuid-compat__dfc00e49/HANDOFF.md": "bd0075f393148547316db3db4fd55652570175923698444f22ebbf1652fd49a0"
+  }
+}

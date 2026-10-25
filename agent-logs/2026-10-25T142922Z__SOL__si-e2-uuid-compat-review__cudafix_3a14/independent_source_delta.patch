@@ -1,0 +1,386 @@
+diff --git a/src/self_improvement/si_p3/runtime_backend.py b/src/self_improvement/si_p3/runtime_backend.py
+index 99cb52b..232461e 100644
+--- a/src/self_improvement/si_p3/runtime_backend.py
++++ b/src/self_improvement/si_p3/runtime_backend.py
+@@ -6,6 +6,7 @@ from dataclasses import asdict, dataclass
+ from pathlib import Path
+ from typing import Any, Callable, Mapping
+ import json
++import re
+ import time
+ import importlib.metadata
+ 
+@@ -28,6 +29,36 @@ def module_origin(module: Any) -> dict[str, str]:
+     return {"path": str(path), "sha256": file_hash(path), "version": str(getattr(module, "__version__", ""))}
+ 
+ 
++def cuda_uuid_matches(observed: str | None, expected: str) -> bool:
++    """Compare complete CUDA/NVML UUIDs, never partial IDs, ordinals or MIG IDs."""
++    if type(observed) is not str or type(expected) is not str:
++        return False
++    canonical = r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
++    actual = re.fullmatch(r"(?:GPU-)?(" + canonical + r")", observed)
++    bound = re.fullmatch(r"GPU-(" + canonical + r")", expected)
++    return actual is not None and bound is not None and actual[1].lower() == bound[1].lower()
++
++
++def verify_cuda_uuid(torch: Any, ledger: EngineeringLedger, expected: str, *, point: str) -> None:
++    """Fsync the unnormalized observation before either UUID assertion can fail."""
++    missing = object()
++    raw: dict[str, Any] = {"present": False, "type_module": None, "type_name": None,
++                           "str": None, "repr": None}
++    observed: dict[str, Any] = {"device": 0, "expected_uuid": expected, "uuid": raw}
++    try:
++        value = getattr(torch.cuda.get_device_properties(0), "uuid", missing)
++        if value is not missing:
++            raw.update(present=True, type_module=type(value).__module__, type_name=type(value).__name__)
++            raw["str"] = str(value)
++            raw["repr"] = repr(value)
++    except BaseException as error:
++        observed["observation_error"] = {"exception": type(error).__name__, "message": str(error)}
++        ledger.append("resource", {"point": point, "observed": observed})
++        raise
++    ledger.append("resource", {"point": point, "observed": observed})
++    require(cuda_uuid_matches(raw["str"], expected), "actual CUDA device UUID differs or is unobservable")
++
++
+ def installed_distribution_versions() -> dict[str, str | None]:
+     """Supplement module attributes, whose absence must not be invented as a version."""
+     result = {}
+@@ -112,8 +143,7 @@ class LocalInference:
+             check = lambda: inspect_gpu(permit.gpu_uuid, allowed_pids={__import__("os").getpid()}, require_owned_context=True)
+             # Resolve namespace/ownership cheaply, before allocating the 8B weights.
+             torch.cuda.init()
+-            require(str(getattr(torch.cuda.get_device_properties(0), "uuid", "")) == permit.gpu_uuid,
+-                    "actual CUDA device UUID differs or is unobservable")
++            verify_cuda_uuid(torch, ledger, permit.gpu_uuid, point="cuda_uuid_before_context")
+             context_probe = torch.empty(1, dtype=torch.uint8, device="cuda:0")
+             ledger.append("resource", {"point": "one_byte_context_before_weights", "observed": check()})
+             del context_probe
+@@ -134,8 +164,7 @@ class LocalInference:
+                     Path(actual_config["name_or_path"]).resolve() == Path(permit.proposal["model"]["base_snapshot"]).resolve(),
+                     "effective Qwen3/config/sdpa identity")
+             require(all(value in (0, "cuda:0") for value in actual_config["hf_device_map"].values()), "no CPU/disk offload map")
+-            require(str(getattr(torch.cuda.get_device_properties(0), "uuid", "")) == permit.gpu_uuid,
+-                    "actual CUDA device UUID differs or is unobservable")
++            verify_cuda_uuid(torch, ledger, permit.gpu_uuid, point="cuda_uuid_after_load")
+             result = cls(tokenizer, model, torch, ledger, check)
+             ledger.complete("model-load", {"origins": {m.__name__: module_origin(m) for m in (torch, transformers, peft, qwen)},
+                 "adapter_state": adapter_state(model), "distribution_versions": installed_distribution_versions(), "effective_model_config": actual_config, "device": str(model.device),
+diff --git a/tests/test_si_e2_cuda_uuid_compat.py b/tests/test_si_e2_cuda_uuid_compat.py
+new file mode 100644
+index 0000000..47ff5f1
+--- /dev/null
++++ b/tests/test_si_e2_cuda_uuid_compat.py
+@@ -0,0 +1,311 @@
++"""Strict UUID wire compatibility; all CUDA/model boundaries below are software fakes."""
++from dataclasses import dataclass
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++from types import ModuleType, SimpleNamespace
++
++import pytest
++
++from self_improvement.si_p3.contract import ContractError
++from self_improvement.si_p3 import runtime_backend as backend
++from self_improvement.si_p3 import runtime_gate
++from self_improvement.si_p3.runtime_ledger import EngineeringLedger, reconstruct
++from si_e2_support import GPU, permit
++
++BARE = GPU[4:]
++OTHER = "87654321-abcd-abcd-abcd-123456789abc"
++MISSING = object()
++
++
++class _CUuuid:
++    """Software object reproducing the separately observed installed wire format."""
++    __module__ = "torch._C"
++
++    def __init__(self, value):
++        self.value = value
++
++    def __str__(self):
++        return self.value
++
++    def __repr__(self):
++        return "<synthetic torch._C._CUuuid>"
++
++
++@pytest.fixture
++def journal(tmp_path):
++    p = permit(tmp_path)
++    p.output.mkdir()
++    path = p.output / "uuid_events.jsonl"
++    ledger = EngineeringLedger(path, p, evidence_class="synthetic_software_fixture")
++    yield p, path, ledger
++    ledger.close()
++
++
++@pytest.mark.parametrize("actual,expected", [
++    (BARE, GPU), (GPU, GPU), (BARE.upper(), GPU),
++    ("GPU-" + BARE.upper(), GPU), (BARE, "GPU-" + BARE.upper()),
++])
++def test_complete_cuda_nvml_uuid_identity(actual, expected):
++    assert backend.cuda_uuid_matches(actual, expected)
++
++
++BAD = [None, "", False, 0, b"1234", [BARE], BARE[:8], "GPU-" + BARE[:8],
++       "GPU-GPU-" + BARE, "MIG-" + BARE, "MIG-GPU-" + BARE + "/1/0",
++       "urn:uuid:" + BARE, "{" + BARE + "}", " " + BARE, BARE + " ",
++       BARE + "\n", BARE + "\x00", BARE + "," + BARE,
++       BARE.replace("-", ""), BARE.replace("-", "\u2010"), "g" + BARE[1:],
++       "gpu-" + BARE, "GPU-" + BARE + "-extra", OTHER, "GPU-" + OTHER]
++
++
++@pytest.mark.parametrize("actual", BAD)
++def test_malformed_unobservable_or_different_observation_rejected(actual):
++    assert not backend.cuda_uuid_matches(actual, GPU)
++
++
++@pytest.mark.parametrize("expected", [*BAD, BARE])
++def test_expected_must_be_one_complete_gpu_prefixed_uuid(expected):
++    assert not backend.cuda_uuid_matches(BARE, expected)
++
++
++def test_raw_object_type_repr_and_case_are_fsynced_unnormalized(journal, monkeypatch):
++    _, path, ledger = journal
++    real_fsync = os.fsync
++    durable = []
++
++    def fsync(fd):
++        real_fsync(fd)
++        durable.append(path.read_text())
++
++    monkeypatch.setattr(os, "fsync", fsync)
++    value = _CUuuid(BARE.upper())
++    torch = SimpleNamespace(cuda=SimpleNamespace(get_device_properties=lambda ordinal: SimpleNamespace(uuid=value)))
++    backend.verify_cuda_uuid(torch, ledger, GPU, point="cuda_uuid_before_context")
++    row = json.loads(durable[-1].splitlines()[-1])
++    assert row["kind"] == "resource" and row["payload"]["point"] == "cuda_uuid_before_context"
++    assert row["payload"]["observed"] == {"device": 0, "expected_uuid": GPU, "uuid": {
++        "present": True, "type_module": "torch._C", "type_name": "_CUuuid",
++        "str": BARE.upper(), "repr": repr(value)}}
++    assert reconstruct([json.loads(line) for line in path.read_text().splitlines()])["external_started"] == 0
++
++
++@pytest.mark.parametrize("value", [MISSING, None, "", _CUuuid(OTHER)])
++def test_negative_identity_has_raw_evidence_before_assertion(journal, value):
++    _, path, ledger = journal
++    props = SimpleNamespace() if value is MISSING else SimpleNamespace(uuid=value)
++    torch = SimpleNamespace(cuda=SimpleNamespace(get_device_properties=lambda ordinal: props))
++    with pytest.raises(ContractError, match="UUID differs or is unobservable"):
++        backend.verify_cuda_uuid(torch, ledger, GPU, point="cuda_uuid_before_context")
++    row = json.loads(path.read_text().splitlines()[-1])
++    raw = row["payload"]["observed"]["uuid"]
++    assert raw["present"] is (value is not MISSING)
++    assert raw["str"] == (None if value is MISSING else str(value))
++    assert raw["repr"] == (None if value is MISSING else repr(value))
++
++
++@pytest.mark.parametrize("failure", ["properties", "str", "repr"])
++def test_observation_errors_are_preserved_and_propagated(journal, failure):
++    _, path, ledger = journal
++
++    class Broken:
++        def __str__(self):
++            if failure == "str":
++                raise RuntimeError("synthetic str unavailable")
++            return BARE
++
++        def __repr__(self):
++            raise RuntimeError("synthetic repr unavailable")
++
++    def properties(ordinal):
++        if failure == "properties":
++            raise RuntimeError("synthetic properties unavailable")
++        return SimpleNamespace(uuid=Broken())
++
++    with pytest.raises(RuntimeError, match="synthetic " + failure + " unavailable"):
++        backend.verify_cuda_uuid(SimpleNamespace(cuda=SimpleNamespace(get_device_properties=properties)),
++                                 ledger, GPU, point="cuda_uuid_before_context")
++    observed = json.loads(path.read_text().splitlines()[-1])["payload"]["observed"]
++    assert observed["observation_error"] == {"exception": "RuntimeError", "message": "synthetic " + failure + " unavailable"}
++    assert observed["uuid"]["present"] is (failure != "properties")
++
++
++@dataclass
++class Status:
++    enabled: bool = True
++    active_adapters: tuple = ()
++    merged_adapters: tuple = ()
++    available_adapters: tuple = ()
++    num_adapter_layers: int = 1
++    trainable_params: int = 0
++
++
++@pytest.fixture
++def load_edges(journal, monkeypatch):
++    """Fake external model/CUDA edges only; use the actual loader, journal and ownership guards."""
++    p, path, ledger = journal
++    calls = []
++    values = [_CUuuid(BARE), _CUuuid(BARE)]
++    foreign_pid = [None]
++    base = Path(p.proposal["model"]["base_snapshot"])
++    base.mkdir()
++    (base / "config.json").write_text("{}")
++
++    class Param:
++        device = "cuda:0"
++        dtype = "bf16"
++        requires_grad = False
++
++        def is_floating_point(self):
++            return True
++
++        def requires_grad_(self, value):
++            self.requires_grad = value
++
++    parameter = Param()
++    status = Status(active_adapters=["default"], merged_adapters=[], available_adapters=["default"])
++    model = SimpleNamespace(device="cuda:0", parameters=lambda: [parameter],
++        named_parameters=lambda: [("weight", parameter)], eval=lambda: None,
++        get_model_status=lambda: status, get_layer_status=lambda: [status],
++        config=SimpleNamespace(model_type="qwen3", _attn_implementation="sdpa", _name_or_path=str(base),
++                               hidden_size=1, num_hidden_layers=1))
++
++    class Tokenizer:
++        eos_token_id = 1
++
++        def apply_chat_template(self, messages, **kwargs):
++            return messages[0]["content"]
++
++        def __call__(self, rendered, **kwargs):
++            return {"input_ids": [1], "attention_mask": [1]}
++
++    tokenizer = Tokenizer()
++
++    def properties(ordinal):
++        assert ordinal == 0
++        calls.append("properties")
++        value = values.pop(0)
++        return SimpleNamespace() if value is MISSING else SimpleNamespace(uuid=value)
++
++    def empty(*args, **kwargs):
++        assert args == (1,) and kwargs == {"dtype": "u8", "device": "cuda:0"}
++        calls.append("one_byte_fake")
++        return object()
++
++    def base_load(self):
++        calls.append("base_load_fake")
++        return tokenizer, model, None
++
++    def adapter_load(actual_base, adapter_path, **kwargs):
++        assert actual_base is model and adapter_path == p.proposal["model"]["adapter_path"]
++        assert kwargs == {"is_trainable": False, "local_files_only": True}
++        calls.append("adapter_load_fake")
++        return model
++
++    torch = ModuleType("torch")
++    torch.cuda = SimpleNamespace(is_available=lambda: True, device_count=lambda: 1,
++        init=lambda: calls.append("cuda_init_fake"), get_device_properties=properties,
++        memory_allocated=lambda: 0, memory_reserved=lambda: 0, max_memory_allocated=lambda: 0)
++    torch.empty, torch.uint8, torch.bfloat16, torch.float32 = empty, "u8", "bf16", "f32"
++    transformers = ModuleType("transformers")
++    transformers.AutoTokenizer = SimpleNamespace(from_pretrained=lambda *a, **k: tokenizer)
++    peft = ModuleType("peft")
++    peft.PeftModel = SimpleNamespace(from_pretrained=adapter_load)
++    qwen = ModuleType("models.qwen")
++    qwen.QwenPolicyConfig = lambda **kwargs: SimpleNamespace(**kwargs)
++    qwen.QwenPolicy = type("QwenPolicy", (), {"__init__": lambda self, config: None, "_load": base_load})
++    for name, module in [("torch", torch), ("transformers", transformers), ("peft", peft), ("models.qwen", qwen)]:
++        module_path = path.parent / (name.replace(".", "_") + ".py")
++        module_path.write_text("# explicit software external boundary\n")
++        module.__file__, module.__version__ = str(module_path), "software-fixture"
++        monkeypatch.setitem(sys.modules, name, module)
++        if name in p.proposal["packages"]:
++            p.proposal["packages"][name] = backend.module_origin(module)
++    import models
++    monkeypatch.setattr(models, "qwen", qwen, raising=False)
++
++    def query(argv, **kwargs):
++        if "--query-gpu=uuid,name,memory.total,memory.used" in argv:
++            return GPU + ", NVIDIA A40, 46068, 14\n"
++        assert "--query-compute-apps=gpu_uuid,pid,process_name,used_gpu_memory" in argv
++        pid = os.getpid() if foreign_pid[0] is None else foreign_pid[0]
++        return GPU + ", " + str(pid) + ", [Not Found], 262\n"
++
++    monkeypatch.setattr(subprocess, "check_output", query)
++    return p, path, ledger, calls, values, foreign_pid
++
++
++def test_actual_loader_reaches_both_strict_checks_with_software_edges(load_edges):
++    p, path, ledger, calls, _, _ = load_edges
++    loaded = backend.LocalInference.load(p, ledger)
++    assert loaded.software_fixture is False  # Actual production load/validation path, fake external objects.
++    assert calls == ["cuda_init_fake", "properties", "one_byte_fake", "base_load_fake", "adapter_load_fake", "properties"]
++    rows = [r["payload"] for r in ledger.events if r["kind"] == "resource"]
++    assert [r["point"] for r in rows] == ["cuda_uuid_before_context", "one_byte_context_before_weights", "cuda_uuid_after_load"]
++    assert ledger.snapshot()["open_units"] == [] and ledger.snapshot()["external_completed"] == 1
++
++
++@pytest.mark.parametrize("value", [MISSING, _CUuuid(OTHER)])
++def test_first_assertion_stops_before_context_tensor_or_weights(load_edges, value):
++    p, path, ledger, calls, values, _ = load_edges
++    values[0] = value
++    with pytest.raises(ContractError, match="UUID differs or is unobservable"):
++        backend.LocalInference.load(p, ledger)
++    assert calls == ["cuda_init_fake", "properties"]
++    rows = [json.loads(line) for line in path.read_text().splitlines()]
++    assert rows[-2]["payload"]["point"] == "cuda_uuid_before_context"
++    assert rows[-1]["kind"] == "external_failed"
++    assert reconstruct(rows)["failed_units"] == ["model-load"]
++
++
++def test_postload_uuid_drift_uses_same_strict_check_and_keeps_both_observations(load_edges):
++    p, path, ledger, calls, values, _ = load_edges
++    values[1] = _CUuuid(OTHER)
++    with pytest.raises(ContractError, match="UUID differs or is unobservable"):
++        backend.LocalInference.load(p, ledger)
++    rows = [r["payload"] for r in ledger.events if r["kind"] == "resource" and "uuid" in r["payload"]["observed"]]
++    assert [r["observed"]["uuid"]["str"] for r in rows] == [BARE, OTHER]
++    assert rows[-1]["point"] == "cuda_uuid_after_load"
++    assert ledger.snapshot()["failed_units"] == ["model-load"]
++
++
++def test_unmapped_foreign_nvml_pid_still_stops_before_weights_with_raw_receipt(load_edges):
++    p, path, ledger, calls, values, foreign_pid = load_edges
++    foreign_pid[0] = os.getpid() + 100000
++    with pytest.raises(ContractError, match="foreign GPU process"):
++        backend.LocalInference.load(p, ledger)
++    assert calls == ["cuda_init_fake", "properties", "one_byte_fake"]
++    row = ledger.events[-1]
++    assert row["payload"]["resource_evidence"]["process_raw"] == GPU + ", " + str(foreign_pid[0]) + ", [Not Found], 262\n"
++    assert ledger.snapshot()["failed_units"] == ["model-load"]
++
++
++def test_raw_identity_survives_abrupt_child_exit_without_ledger_close(tmp_path):
++    script = r"""
++import json, os, sys
++from pathlib import Path
++from types import SimpleNamespace
++sys.path[:0] = sys.argv[1:3]
++from si_e2_support import GPU, permit
++from self_improvement.si_p3.runtime_backend import verify_cuda_uuid
++from self_improvement.si_p3.runtime_ledger import EngineeringLedger
++from self_improvement.si_p3.contract import ContractError
++p=permit(Path(sys.argv[3]));p.output.mkdir()
++ledger=EngineeringLedger(p.output/'durable.jsonl',p,evidence_class='synthetic_software_fixture')
++try:
++    verify_cuda_uuid(SimpleNamespace(cuda=SimpleNamespace(get_device_properties=lambda ordinal: SimpleNamespace(uuid='missing'))),ledger,GPU,point='cuda_uuid_before_context')
++except ContractError:
++    os._exit(23)
++os._exit(99)
++"""
++    repo = Path(__file__).resolve().parents[1]
++    argv = [sys.executable, "-I", "-c", script, str(repo / "src"), str(repo / "tests"), str(tmp_path)]
++    child = subprocess.run(argv, capture_output=True, env={"PATH": os.defpath, "CUDA_VISIBLE_DEVICES": "", "PYTHONDONTWRITEBYTECODE": "1"}, timeout=20)
++    (tmp_path / "child.stdout").write_bytes(child.stdout)
++    (tmp_path / "child.stderr").write_bytes(child.stderr)
++    (tmp_path / "child_receipt.json").write_text(json.dumps({"argv": argv, "authentic_returncode": child.returncode}))
++    assert child.returncode == 23, child.stderr.decode()
++    rows = [json.loads(line) for line in (tmp_path / "output/durable.jsonl").read_text().splitlines()]
++    assert rows[-1]["payload"]["observed"]["uuid"]["str"] == "missing"
++    assert reconstruct(rows)["external_started"] == 0

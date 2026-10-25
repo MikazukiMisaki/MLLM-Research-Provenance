@@ -1,0 +1,59 @@
+{
+  "UTC": "2026-10-25T14:33:47.617471+00:00",
+  "status": "PASS_SOFTWARE_WITH_CAPTURED_REAL_WIRE_TEXT",
+  "source_module": "/tmp/si-e2-uuid-independent-review-844cc4b7/src/self_improvement/si_p3/runtime_backend.py",
+  "source_module_sha256": "7a448e745c1d5a2b40a11a7c788b5b945a800223edc439871e2291e59b4850c3",
+  "real_observation_path": "/home/lizening/research-notes/agent-logs/2026-10-25T141400Z__LUNA__si-e2-cuda-identity__dfc00e49_2e79/identity_run/pre_allocation_identity.json",
+  "real_observation_sha256": "41712d0516832fc48ddaadccee66a9e93ad48d4c0fa744ec5b5eb5c171824335",
+  "checks": [
+    {
+      "label": "real_saved_wire",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "label": "NVML_wire",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "label": "uppercase_complete_uuid",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "label": "other_uuid",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "label": "prefix_partial",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "label": "leading_space",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "label": "newline",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "label": "MIG",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "label": "missing",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "actual_ledger_hashchain_and_reconstruct": "PASS",
+  "negative_raw_value_persisted_before_error": true,
+  "new_CUDA_or_model_or_environment_calls": 0,
+  "GPU_process_ownership": "STILL_UNPROVEN_NOT_TESTED_BY_THIS_SCRIPT"
+}

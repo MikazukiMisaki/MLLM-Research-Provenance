@@ -1,0 +1,709 @@
+{
+  "schema": "SI_E2_UUID_REGRESSION_COMPARISON_V1",
+  "base_sha": "dfc00e49d1ef4d48453d2331507429f8a0c7bbc5",
+  "candidate_sha": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+  "base_counts": {
+    "passed": 883,
+    "error": 77,
+    "failure": 3
+  },
+  "candidate_counts": {
+    "passed": 953,
+    "error": 77,
+    "failure": 3
+  },
+  "focused_counts": {
+    "passed": 153
+  },
+  "new_case_count": 70,
+  "all_old_test_statuses_unchanged": true,
+  "same_exact_80_failure_error_id_and_type_pairs": true,
+  "new_failure_error_ids": [],
+  "missing_old_ids": [],
+  "new_skips_or_xfails": false,
+  "baseline_source": "immutable saved clean exact-dfc software run; not rerun",
+  "failure_error_ids": [
+    {
+      "classname": "tests.test_persistent_recovery_r12",
+      "name": "test_control_pick_two_audit_is_present",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_persistent_recovery_r12",
+      "name": "test_discordant_ids_and_tie_partition",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_persistent_recovery_r12",
+      "name": "test_frozen_provenance_and_result_arithmetic",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_persistent_recovery_r12",
+      "name": "test_handoff_context_and_horizon_metrics",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_persistent_recovery_r12",
+      "name": "test_pick_two_public_progress_and_exact_instance_identity",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_persistent_recovery_r12",
+      "name": "test_public_source_excludes_hidden_facts_and_frozen_manifest_is_not_written",
+      "kind": "failure"
+    },
+    {
+      "classname": "tests.test_persistent_recovery_r12",
+      "name": "test_subgoal_staleness_rule_and_frozen_counts",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_actual_sft_continuation_rejects_both_treatment_leaks[card]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_actual_sft_continuation_rejects_both_treatment_leaks[fact]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_changed_real_head_cannot_resume",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_completed_run_rejects_fresh_output_and_same_output",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[continuation protocol]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[empty generation]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[empty success]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[invented status]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[malformed executed]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[missing nested decisions]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[missing nested loops]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[missing trace]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[nonfinite latency]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[parsed diagnosis]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[raw output]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[terminal reward]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[termination reason]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[trace twice]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[transition list]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[wrong comparator]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[wrong cost delta]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[wrong derived cost]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[wrong generation limit]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[wrong prompt]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_corrupt_result_fails_during_reconciliation[wrong relation]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_execution_journal_detects_actual_completed_then_started",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_frozen_hashes_and_r18_c1_provenance",
+      "kind": "failure"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_global_lock_is_shared_by_linked_worktrees",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_identical_full_records_deduplicate",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_jsonl_only_completion_remains_sixty_executions",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_late_crash_reconstructs_reports_without_scientific_calls[completed_manifest]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_late_crash_reconstructs_reports_without_scientific_calls[report]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_ledger_conflicts_fail_closed[branch_file-branches/wrong.json]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_ledger_conflicts_fail_closed[position-2]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_ledger_conflicts_fail_closed[record_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_ledger_conflicts_fail_closed[status-unknown]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_lock_survives_exceptions_and_process_death",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_manifest_provenance_required_before_resume[missing_model_isolation]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_manifest_provenance_required_before_resume[missing_provenance]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_manifest_provenance_required_before_resume[missing_r18_b_commit]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_manifest_provenance_required_before_resume[wrong_commit]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_manifest_provenance_required_before_resume[wrong_model_isolation]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_manifest_provenance_required_before_resume[wrong_schema]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_nested_conflicts_never_select_a_winner[continuation-cross-source]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_nested_conflicts_never_select_a_winner[continuation-jsonl]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_nested_conflicts_never_select_a_winner[cost-cross-source]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_nested_conflicts_never_select_a_winner[cost-jsonl]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_nested_conflicts_never_select_a_winner[generation-cross-source]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_nested_conflicts_never_select_a_winner[generation-jsonl]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_nested_conflicts_never_select_a_winner[replay-cross-source]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_nested_conflicts_never_select_a_winner[replay-jsonl]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_orphaned_report_staging_does_not_block_resume",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_output_paths_fail_before_execution[../outside]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_output_paths_fail_before_execution[/tmp/outside-workspace]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_output_paths_fail_before_execution[scripts/forbidden]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_real_continuation_and_terminal_semantics[horizon]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_real_continuation_and_terminal_semantics[recovery_terminal]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_real_continuation_and_terminal_semantics[recovery_terminal_failure]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_real_continuation_and_terminal_semantics[sft_failure]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_real_continuation_and_terminal_semantics[sft_terminal]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_real_guard_rejects_unrelated_changes[modified]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_real_guard_rejects_unrelated_changes[rename]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_real_guard_rejects_unrelated_changes[untracked]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_real_overlapping_entry_paths_execute_only_sixty[False]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_real_overlapping_entry_paths_execute_only_sixty[True]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_real_parser_failure_continues_and_persists[diagnosis_too_long]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_real_parser_failure_continues_and_persists[malformed_stage_one]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_real_parser_failure_continues_and_persists[subgoal_too_long]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_real_parser_failure_continues_and_persists[truncated_stage_one]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_real_parser_failure_continues_and_persists[truncated_stage_two]",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_unignored_output_rejected_before_execution",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_aware_card_v2_r18_c2",
+      "name": "test_withheld_recovery_rejects_any_transition",
+      "kind": "error"
+    },
+    {
+      "classname": "tests.test_progress_card_semantic_audit_r18_a",
+      "name": "test_frozen_phase_artifact_is_hashable_and_self_describing",
+      "kind": "failure"
+    }
+  ],
+  "all_new_ids": [
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_actual_loader_reaches_both_strict_checks_with_software_edges"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_complete_cuda_nvml_uuid_identity[12345678-ABCD-ABCD-ABCD-123456789ABC-GPU-12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_complete_cuda_nvml_uuid_identity[12345678-abcd-abcd-abcd-123456789abc-GPU-12345678-ABCD-ABCD-ABCD-123456789ABC]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_complete_cuda_nvml_uuid_identity[12345678-abcd-abcd-abcd-123456789abc-GPU-12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_complete_cuda_nvml_uuid_identity[GPU-12345678-ABCD-ABCD-ABCD-123456789ABC-GPU-12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_complete_cuda_nvml_uuid_identity[GPU-12345678-abcd-abcd-abcd-123456789abc-GPU-12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[ 12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[0]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[12345678-abcd-abcd-abcd-123456789abc ]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[12345678-abcd-abcd-abcd-123456789abc,12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[12345678-abcd-abcd-abcd-123456789abc\\n]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[12345678-abcd-abcd-abcd-123456789abc\\x00]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[12345678\\u2010abcd\\u2010abcd\\u2010abcd\\u2010123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[12345678]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[12345678abcdabcdabcd123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[1234]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[87654321-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[False]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[GPU-12345678-abcd-abcd-abcd-123456789abc-extra]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[GPU-12345678]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[GPU-87654321-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[GPU-GPU-12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[MIG-12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[MIG-GPU-12345678-abcd-abcd-abcd-123456789abc/1/0]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[None]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[expected5]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[g2345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[gpu-12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[urn:uuid:12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_expected_must_be_one_complete_gpu_prefixed_uuid[{12345678-abcd-abcd-abcd-123456789abc}]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_first_assertion_stops_before_context_tensor_or_weights[value0]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_first_assertion_stops_before_context_tensor_or_weights[value1]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[ 12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[0]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[12345678-abcd-abcd-abcd-123456789abc ]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[12345678-abcd-abcd-abcd-123456789abc,12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[12345678-abcd-abcd-abcd-123456789abc\\n]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[12345678-abcd-abcd-abcd-123456789abc\\x00]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[12345678\\u2010abcd\\u2010abcd\\u2010abcd\\u2010123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[12345678]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[12345678abcdabcdabcd123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[1234]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[87654321-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[False]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[GPU-12345678-abcd-abcd-abcd-123456789abc-extra]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[GPU-12345678]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[GPU-87654321-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[GPU-GPU-12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[MIG-12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[MIG-GPU-12345678-abcd-abcd-abcd-123456789abc/1/0]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[None]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[actual5]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[g2345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[gpu-12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[urn:uuid:12345678-abcd-abcd-abcd-123456789abc]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_malformed_unobservable_or_different_observation_rejected[{12345678-abcd-abcd-abcd-123456789abc}]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_negative_identity_has_raw_evidence_before_assertion[None]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_negative_identity_has_raw_evidence_before_assertion[]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_negative_identity_has_raw_evidence_before_assertion[value0]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_negative_identity_has_raw_evidence_before_assertion[value3]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_observation_errors_are_preserved_and_propagated[properties]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_observation_errors_are_preserved_and_propagated[repr]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_observation_errors_are_preserved_and_propagated[str]"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_postload_uuid_drift_uses_same_strict_check_and_keeps_both_observations"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_raw_identity_survives_abrupt_child_exit_without_ledger_close"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_raw_object_type_repr_and_case_are_fsynced_unnormalized"
+    },
+    {
+      "classname": "tests.test_si_e2_cuda_uuid_compat",
+      "name": "test_unmapped_foreign_nvml_pid_still_stops_before_weights_with_raw_receipt"
+    }
+  ]
+}
