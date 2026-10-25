@@ -1,0 +1,111 @@
+{
+  "observed_utc": "2026-10-25T07:34:53.369191+00:00",
+  "scope": "Static AST/text only; no imports/exec/project validator; no historical installed binary attestation",
+  "checks": [
+    {
+      "file": "src/trajectory/trajectory.py",
+      "method": "succeeded",
+      "current_lines": [
+        60,
+        62
+      ],
+      "current_AST_sha256": "2f530611b6508d5b9c9764c5c109571cdb1aed9d20d210c2f15261f7925a5d28",
+      "executed_2da_AST_sha256": "2f530611b6508d5b9c9764c5c109571cdb1aed9d20d210c2f15261f7925a5d28",
+      "AST_equal": true,
+      "static_checks": {
+        "done_and_positive_reward": true
+      },
+      "git_object_read": {
+        "argv": [
+          "git",
+          "show",
+          "2da980f631badc25086d12db60d128ff507d3ae6:src/trajectory/trajectory.py"
+        ],
+        "cwd": "/home/lizening/wt-r19-g4-consumer-contract-repair",
+        "actual_returncode": 0,
+        "returncode_source": "subprocess.returncode",
+        "stdout_sha256": "31bbd35c7960ddcf87c6d1c38376d10aaf95e741f9dedecbe4f8e23a97fdb958",
+        "stderr": ""
+      }
+    },
+    {
+      "file": "src/env/alfworld.py",
+      "method": "step",
+      "current_lines": [
+        58,
+        72
+      ],
+      "current_AST_sha256": "2d76fe6ff761a40e84ddea0e0ef7d141c55e481693ee0832472f7dd6d6b59aa4",
+      "executed_2da_AST_sha256": "2d76fe6ff761a40e84ddea0e0ef7d141c55e481693ee0832472f7dd6d6b59aa4",
+      "AST_equal": true,
+      "static_checks": {},
+      "git_object_read": {
+        "argv": [
+          "git",
+          "show",
+          "2da980f631badc25086d12db60d128ff507d3ae6:src/env/alfworld.py"
+        ],
+        "cwd": "/home/lizening/wt-r19-g4-consumer-contract-repair",
+        "actual_returncode": 0,
+        "returncode_source": "subprocess.returncode",
+        "stdout_sha256": "086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d",
+        "stderr": ""
+      }
+    },
+    {
+      "file": "scripts/run_r19_experiment.py",
+      "method": "run_sft_suffix",
+      "current_lines": [
+        2204,
+        2277
+      ],
+      "current_AST_sha256": "e8a22a804a6fb1c689fa1ab0fa4fd8eff7614d0589f337890844070bfae9edd5",
+      "executed_2da_AST_sha256": "e8a22a804a6fb1c689fa1ab0fa4fd8eff7614d0589f337890844070bfae9edd5",
+      "AST_equal": true,
+      "static_checks": {
+        "terminal_done_and_positive_reward": true
+      },
+      "git_object_read": {
+        "argv": [
+          "git",
+          "show",
+          "2da980f631badc25086d12db60d128ff507d3ae6:scripts/run_r19_experiment.py"
+        ],
+        "cwd": "/home/lizening/wt-r19-g4-consumer-contract-repair",
+        "actual_returncode": 0,
+        "returncode_source": "subprocess.returncode",
+        "stdout_sha256": "06bb8e11c3cc9e9484b8d5731c86690b97a4c445a0e5aa16b72b912c6c14dd5c",
+        "stderr": ""
+      }
+    },
+    {
+      "file": "scripts/run_r19_experiment.py",
+      "method": "record_step",
+      "current_lines": [
+        1635,
+        1663
+      ],
+      "current_AST_sha256": "367f5e08662d784b515ebd6a7e6ac8e2f2f74a5464f55bd71fdfe81c9373a2d9",
+      "executed_2da_AST_sha256": "367f5e08662d784b515ebd6a7e6ac8e2f2f74a5464f55bd71fdfe81c9373a2d9",
+      "AST_equal": true,
+      "static_checks": {
+        "does_not_export_won": true,
+        "contains_reward_and_done": true
+      },
+      "git_object_read": {
+        "argv": [
+          "git",
+          "show",
+          "2da980f631badc25086d12db60d128ff507d3ae6:scripts/run_r19_experiment.py"
+        ],
+        "cwd": "/home/lizening/wt-r19-g4-consumer-contract-repair",
+        "actual_returncode": 0,
+        "returncode_source": "subprocess.returncode",
+        "stdout_sha256": "06bb8e11c3cc9e9484b8d5731c86690b97a4c445a0e5aa16b72b912c6c14dd5c",
+        "stderr": ""
+      }
+    }
+  ],
+  "all_match": true,
+  "new_scientific_calls": 0
+}

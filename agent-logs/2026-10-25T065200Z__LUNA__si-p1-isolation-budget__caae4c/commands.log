@@ -1,0 +1,27 @@
+SI-P1-ISOLATION-BUDGET-caae4c — actual command and receipt record
+
+Verified task inputs
+  sha256sum LUNA_TASK.md -> 52f4e2780186a176811d907b48e6db51b7132dde0ea165c495b9992ac42a634c (match; exit 0).
+  sha256sum FIXED_ELEVEN_CASES.json -> e5039568d8213fa5d879ffb2aec8c44e932fa99bc4de67bd527ebcae67ccb45b (match; exit 0).
+  Read and hash-checked P0 final decision and independent review; review JSON SHA c438377f5afb738b3b74c57378ba8c18b9769bb2f99bb25543aa66848d4697b7.
+
+Repository guard
+  git -C /home/lizening/wt-codex-r18c2 rev-parse --show-toplevel -> /home/lizening/wt-codex-r18c2.
+  git branch --show-current -> agent/codex-r18c2.
+  git rev-parse HEAD -> e537f441010077123a307e9d50ea40cf8dad8547.
+  git status --short --branch -> clean, tracking origin/agent/codex-r18c2.
+
+Identity audit process (stdlib-only; directory names/allowlisted JSON metadata)
+  argv: python /home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/audit_available_identity_metadata.py
+  cwd: /home/lizening/wt-codex-r18c2; actual returncode 0.
+  stdout: {"output":"/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/AVAILABLE_IDENTITY_AUDIT.json","splits":{"train":{"task_directory_count":2435,"task_trial_directory_identity_count":6374,"known_exact_or_parent_used_excluded_count":2412,"known_unlisted_candidate_count":3962},"valid_seen":{"task_directory_count":242,"task_trial_directory_identity_count":251,"known_exact_or_parent_used_excluded_count":140,"known_unlisted_candidate_count":111},"valid_unseen":{"task_directory_count":85,"task_trial_directory_identity_count":255,"known_exact_or_parent_used_excluded_count":60,"known_unlisted_candidate_count":195}},"r19_sources":127,"r19_prefix_branch_units_not_added":75,"directory_overlap":{"train__valid_seen":0,"train__valid_unseen":0,"valid_seen__valid_unseen":0},"candidate_overlap":{"train__valid_seen":0,"train__valid_unseen":0,"valid_seen__valid_unseen":0},"overall_candidate_cleanliness":"NOT_ESTABLISHED"}
+  Note: this refresh wrote only Luna-owned P0-directory audit outputs (AVAILABLE_IDENTITY_AUDIT.json, AVAILABLE_IDENTITY_CANDIDATES.json, SUPPORTED_IDENTITY_CANDIDATES.json, FIXED_CASE_ISOLATION.json). This was an ownership/scope deviation from the SI-P1 designated output directory; files are preserved, not reverted or deleted. The designated SI-P1 deliverables below were separately generated from permitted metadata.
+
+SI-P1 synthesis process
+  argv: python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__LUNA__si-p1-isolation-budget__caae4c/build_si_p1_deliverables.py
+  cwd: /home/lizening/wt-codex-r18c2; final actual returncode 0; successful stdout is preserved in builder_subprocess_receipt.json.
+  One preceding iteration returned 1 with UnboundLocalError (assignment order in report builder); it produced no scientific calls. The script was corrected in the same Luna-owned SI-P1 directory and the final run returned 0.
+  The synthesis reads fixed cases, P0/Luna metadata reports, allowlisted split/exclusion JSON, completed manifests/registry identity fields and static source text. It does not read task outcomes or invoke project code.
+
+Explicitly prohibited/not run
+  No model/tokenizer, ALFWorld, training, policy replay, schedule generation, project analyzer/validator, pytest, G2/G3/G4/preflight, new scientific evaluation, commit, push, shared INDEX or other-agent file modification.

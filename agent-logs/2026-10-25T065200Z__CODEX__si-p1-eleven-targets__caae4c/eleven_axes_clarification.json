@@ -1,0 +1,1032 @@
+{
+  "schema": "SI_P1_SUCCESS_AXES_CLARIFICATION_V1",
+  "task_id": "SI-P1-TARGET-caae4c",
+  "scope": "Additive reviewer clarification of frozen 11-case audit; no new case, raw relabel, policy evaluation or training dataset.",
+  "scientific_permission": "NOT_GRANTED",
+  "scientific_calls_added": 0,
+  "frozen_original_audit_sha256": "f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901",
+  "frozen_original_manifest_sha256": "14189f7752494eee84fdc6adad161957b0afe34b597f68fedce845d4d5976572",
+  "summary": {
+    "rows": 11,
+    "canonical_tasks": 10,
+    "input_target_lineage_supported": 11,
+    "model_identity_partial": 10,
+    "model_identity_pinned": 1,
+    "recover_RAW_WON_EXPLICIT_TRUE": 9,
+    "recover_RAW_WON_NOT_RECORDED": 2,
+    "historical_CONTINUE0_recover1_retained": 11,
+    "qualified_training_N": "NOT_ESTABLISHED",
+    "DATA_FEASIBILITY": "NOT_READY",
+    "B_pool_ready": false,
+    "learning_gain": "NOT_PROVEN"
+  },
+  "semantic_limit": "Original repository success labels use done and positive terminal reward. Wrapper forwards underlying reward and done. Static source does not certify a historical installed-environment binary or a universal reward/won equivalence; absence of raw won remains a corroboration limit, not a replacement failure label.",
+  "cases": [
+    {
+      "case_id": "R4:R2-F01",
+      "canonical_task": "look_at_obj_in_light-AlarmClock-None-DeskLamp-303/trial_T20190908_144950_175895",
+      "original_audit": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit.json",
+        "sha256": "f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901",
+        "pointer": "/cases/0"
+      },
+      "input_target_axis": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "basis": "All original mechanical source/replay/public-input/ordered-map/first-target/execution checks are true; missing won is not a target invalidity.",
+      "original_checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_task_identity": true,
+        "replay_current_observation": true,
+        "replay_current_action_order": true,
+        "replay_recent_H4": true,
+        "source_prefix_actions_replayed_exactly": true,
+        "R4_replay_hashes_bind_source_and_R3": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "model_identity_axis": "MODEL_IDENTITY_PARTIAL",
+      "terminal_corroboration_axis": {
+        "original_success_predicate": "terminal done && reward > 0",
+        "historical_recover_success": 1,
+        "historical_CONTINUE_success": 0,
+        "recorded_terminal_predicate_check": {
+          "recover": 1,
+          "CONTINUE": 0
+        },
+        "recover_raw_won_status": "RAW_WON_NOT_RECORDED",
+        "CONTINUE_raw_won_status": "RAW_WON_EXPLICIT_FALSE",
+        "recover_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-feasibility-r4-20260908T080000Z/pairs.jsonl",
+            "line": 1,
+            "raw_line_sha256": "97fa552daf6bad6e3a827d99ad352a0c19bc7e169403d688a46da17d175de593",
+            "pointer": "/recover/continuation/steps/0"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [],
+          "step_record_sha256": "51eec577f505e40563a2b13ad6b97fa606c2762322f1a16f89dbdaeb886b3d31"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-replay-continue-r3-20260908T055308Z/continue_branches.jsonl",
+            "line": 1,
+            "raw_line_sha256": "cb8a3991589e3f898472ce7d9206518d716cec0eb2beb2a5a5d26edf5990e900",
+            "pointer": "/continue/steps/28"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "81757f84aa6aac5dc3becbea9d232de6c33ec2f94cf138d4fd2186cbf2c94062"
+        },
+        "historical_success_labels_retained": true,
+        "missing_won_is_new_G3_failure": false
+      },
+      "old_combined_disposition_preserved_in_frozen_original": "HOLD_EVIDENCE",
+      "overall_training_eligibility": "HOLD_NOT_READY",
+      "training_row_approved": false,
+      "learning_gain": "NOT_PROVEN",
+      "teacher_target": "Executed adapter-off first recovery action only; adapter-on suffix remains separate."
+    },
+    {
+      "case_id": "R10_OSR:R8-F02",
+      "canonical_task": "pick_two_obj_and_place-Book-None-Bed-314/trial_T20190910_072508_733981",
+      "original_audit": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit.json",
+        "sha256": "f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901",
+        "pointer": "/cases/1"
+      },
+      "input_target_axis": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "basis": "All original mechanical source/replay/public-input/ordered-map/first-target/execution checks are true; missing won is not a target invalidity.",
+      "original_checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_current_observation": true,
+        "replay_current_action_order": true,
+        "replay_recent_H4": true,
+        "source_prefix_actions_replayed_exactly": true,
+        "replay_all_pre_action_maps_match": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "model_identity_axis": "MODEL_IDENTITY_PARTIAL",
+      "terminal_corroboration_axis": {
+        "original_success_predicate": "terminal done && reward > 0",
+        "historical_recover_success": 1,
+        "historical_CONTINUE_success": 0,
+        "recorded_terminal_predicate_check": {
+          "recover": 1,
+          "CONTINUE": 0
+        },
+        "recover_raw_won_status": "RAW_WON_EXPLICIT_TRUE",
+        "CONTINUE_raw_won_status": "RAW_WON_EXPLICIT_FALSE",
+        "recover_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+            "line": 2,
+            "raw_line_sha256": "bf4a211a8c32b4e12c88e156fb282ec25a438e0dc469e5d9c2ebf5ab1f61507e",
+            "pointer": "/recovery_transition"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "4fed1c839f27d2082c3b2a46fa60c2e9129597ae242c8f76d8b22daa8ef0061d"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl",
+            "line": 2,
+            "raw_line_sha256": "4d446da64d2493d969416ea5788d993157d0faac9b4add46021bb123c312acfa",
+            "pointer": "/continue_full/steps/37"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "4fd0b58287fc25167c1e6fb574b8dc288f38cdb2f50067818a97278c427a68ba"
+        },
+        "historical_success_labels_retained": true,
+        "missing_won_is_new_G3_failure": false
+      },
+      "old_combined_disposition_preserved_in_frozen_original": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "overall_training_eligibility": "HOLD_NOT_READY",
+      "training_row_approved": false,
+      "learning_gain": "NOT_PROVEN",
+      "teacher_target": "Executed adapter-off first recovery action only; adapter-on suffix remains separate."
+    },
+    {
+      "case_id": "R10_OSR:R8-F20",
+      "canonical_task": "look_at_obj_in_light-Book-None-DeskLamp-303/trial_T20190909_085355_202971",
+      "original_audit": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit.json",
+        "sha256": "f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901",
+        "pointer": "/cases/2"
+      },
+      "input_target_axis": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "basis": "All original mechanical source/replay/public-input/ordered-map/first-target/execution checks are true; missing won is not a target invalidity.",
+      "original_checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_current_observation": true,
+        "replay_current_action_order": true,
+        "replay_recent_H4": true,
+        "source_prefix_actions_replayed_exactly": true,
+        "replay_all_pre_action_maps_match": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "model_identity_axis": "MODEL_IDENTITY_PARTIAL",
+      "terminal_corroboration_axis": {
+        "original_success_predicate": "terminal done && reward > 0",
+        "historical_recover_success": 1,
+        "historical_CONTINUE_success": 0,
+        "recorded_terminal_predicate_check": {
+          "recover": 1,
+          "CONTINUE": 0
+        },
+        "recover_raw_won_status": "RAW_WON_EXPLICIT_TRUE",
+        "CONTINUE_raw_won_status": "RAW_WON_EXPLICIT_FALSE",
+        "recover_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+            "line": 20,
+            "raw_line_sha256": "6e442dcf93d0cd92964e5034d82b4ad403be0ad8e7bb01292879920504808df8",
+            "pointer": "/continuation_full/steps/0"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "af14d42c3e440cabbcb38358bd3521db2484f7aaed4ef502fd44122196d86744"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl",
+            "line": 20,
+            "raw_line_sha256": "b08aa93d16470490e791d61e88fb9df369fa9c1e616a537d7adf3b76881d4a3c",
+            "pointer": "/continue_full/steps/7"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "77daac2ca79ea5d59dd8008582d4d5b7a4dba81edbb169daf653999a6e2fd3ff"
+        },
+        "historical_success_labels_retained": true,
+        "missing_won_is_new_G3_failure": false
+      },
+      "old_combined_disposition_preserved_in_frozen_original": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "overall_training_eligibility": "HOLD_NOT_READY",
+      "training_row_approved": false,
+      "learning_gain": "NOT_PROVEN",
+      "teacher_target": "Executed adapter-off first recovery action only; adapter-on suffix remains separate."
+    },
+    {
+      "case_id": "R10_OSR:R8-F21",
+      "canonical_task": "look_at_obj_in_light-Bowl-None-DeskLamp-301/trial_T20190909_150737_210323",
+      "original_audit": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit.json",
+        "sha256": "f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901",
+        "pointer": "/cases/3"
+      },
+      "input_target_axis": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "basis": "All original mechanical source/replay/public-input/ordered-map/first-target/execution checks are true; missing won is not a target invalidity.",
+      "original_checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_current_observation": true,
+        "replay_current_action_order": true,
+        "replay_recent_H4": true,
+        "source_prefix_actions_replayed_exactly": true,
+        "replay_all_pre_action_maps_match": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "model_identity_axis": "MODEL_IDENTITY_PARTIAL",
+      "terminal_corroboration_axis": {
+        "original_success_predicate": "terminal done && reward > 0",
+        "historical_recover_success": 1,
+        "historical_CONTINUE_success": 0,
+        "recorded_terminal_predicate_check": {
+          "recover": 1,
+          "CONTINUE": 0
+        },
+        "recover_raw_won_status": "RAW_WON_EXPLICIT_TRUE",
+        "CONTINUE_raw_won_status": "RAW_WON_EXPLICIT_FALSE",
+        "recover_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+            "line": 21,
+            "raw_line_sha256": "4c40f2a5b93ee329636de9084c8d608cd228ffce650c484b37b39aac0b5e005b",
+            "pointer": "/continuation_full/steps/2"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "d94599a32f2e36116a2da505a43acfd4ad384c2f8a595d0369cb467f5602f601"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl",
+            "line": 21,
+            "raw_line_sha256": "27c2a563592d1204b62ec504f59f2d616488d1f72a5812224fa3939a69d94990",
+            "pointer": "/continue_full/steps/14"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "57d1881f68be9c65db3ec54345509f12c936a25f0d84b7d79a5e5651879ef6c5"
+        },
+        "historical_success_labels_retained": true,
+        "missing_won_is_new_G3_failure": false
+      },
+      "old_combined_disposition_preserved_in_frozen_original": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "overall_training_eligibility": "HOLD_NOT_READY",
+      "training_row_approved": false,
+      "learning_gain": "NOT_PROVEN",
+      "teacher_target": "Executed adapter-off first recovery action only; adapter-on suffix remains separate."
+    },
+    {
+      "case_id": "R10_OSR:R8-F22",
+      "canonical_task": "look_at_obj_in_light-Book-None-DeskLamp-303/trial_T20190909_085406_916808",
+      "original_audit": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit.json",
+        "sha256": "f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901",
+        "pointer": "/cases/4"
+      },
+      "input_target_axis": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "basis": "All original mechanical source/replay/public-input/ordered-map/first-target/execution checks are true; missing won is not a target invalidity.",
+      "original_checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_current_observation": true,
+        "replay_current_action_order": true,
+        "replay_recent_H4": true,
+        "source_prefix_actions_replayed_exactly": true,
+        "replay_all_pre_action_maps_match": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "model_identity_axis": "MODEL_IDENTITY_PARTIAL",
+      "terminal_corroboration_axis": {
+        "original_success_predicate": "terminal done && reward > 0",
+        "historical_recover_success": 1,
+        "historical_CONTINUE_success": 0,
+        "recorded_terminal_predicate_check": {
+          "recover": 1,
+          "CONTINUE": 0
+        },
+        "recover_raw_won_status": "RAW_WON_EXPLICIT_TRUE",
+        "CONTINUE_raw_won_status": "RAW_WON_EXPLICIT_FALSE",
+        "recover_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+            "line": 22,
+            "raw_line_sha256": "cf202fe3b0726955789a94c6b8f4ca6a77d8c58dbd71f1d7345430bd5eed3961",
+            "pointer": "/continuation_full/steps/1"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "4442445361858be6142e732349cc32d3658d1873a3b413b0eed03f28cd9b2250"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl",
+            "line": 22,
+            "raw_line_sha256": "e91e165d7e5a54df6eb5302a606545618c3cab6134b2130ca6d4c879f1e8cb7a",
+            "pointer": "/continue_full/steps/26"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "e9ca279dcd382310f5c20f4628e0d7d728e5f1e4e3b101843210739a4af1bd88"
+        },
+        "historical_success_labels_retained": true,
+        "missing_won_is_new_G3_failure": false
+      },
+      "old_combined_disposition_preserved_in_frozen_original": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "overall_training_eligibility": "HOLD_NOT_READY",
+      "training_row_approved": false,
+      "learning_gain": "NOT_PROVEN",
+      "teacher_target": "Executed adapter-off first recovery action only; adapter-on suffix remains separate."
+    },
+    {
+      "case_id": "R10_OSR:R8-F23",
+      "canonical_task": "look_at_obj_in_light-Book-None-DeskLamp-303/trial_T20190909_085406_916808",
+      "original_audit": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit.json",
+        "sha256": "f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901",
+        "pointer": "/cases/5"
+      },
+      "input_target_axis": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "basis": "All original mechanical source/replay/public-input/ordered-map/first-target/execution checks are true; missing won is not a target invalidity.",
+      "original_checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_current_observation": true,
+        "replay_current_action_order": true,
+        "replay_recent_H4": true,
+        "source_prefix_actions_replayed_exactly": true,
+        "replay_all_pre_action_maps_match": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "model_identity_axis": "MODEL_IDENTITY_PARTIAL",
+      "terminal_corroboration_axis": {
+        "original_success_predicate": "terminal done && reward > 0",
+        "historical_recover_success": 1,
+        "historical_CONTINUE_success": 0,
+        "recorded_terminal_predicate_check": {
+          "recover": 1,
+          "CONTINUE": 0
+        },
+        "recover_raw_won_status": "RAW_WON_EXPLICIT_TRUE",
+        "CONTINUE_raw_won_status": "RAW_WON_EXPLICIT_FALSE",
+        "recover_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+            "line": 23,
+            "raw_line_sha256": "d8b5e8b3a5d8a08b0f16a2682b5dd28936f88551ad73342a37c15c0e3d79b269",
+            "pointer": "/continuation_full/steps/1"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "fd0ea39c00d804573ce5468d9200fdec3f805fd348315de00247c2ab8ddc9e17"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl",
+            "line": 23,
+            "raw_line_sha256": "1f8d8cf0c2d27cf38f7ab97efdaea72ea41e977a927950f76c0ecca7b8dd3e3b",
+            "pointer": "/continue_full/steps/21"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "af86a944165f1c47aaf3a484967b72c62db7a9530dbe6b00b74465521c86f30a"
+        },
+        "historical_success_labels_retained": true,
+        "missing_won_is_new_G3_failure": false
+      },
+      "old_combined_disposition_preserved_in_frozen_original": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "overall_training_eligibility": "HOLD_NOT_READY",
+      "training_row_approved": false,
+      "learning_gain": "NOT_PROVEN",
+      "teacher_target": "Executed adapter-off first recovery action only; adapter-on suffix remains separate."
+    },
+    {
+      "case_id": "R16_OSR:R15-F01",
+      "canonical_task": "pick_two_obj_and_place-Tomato-None-CounterTop-19/trial_T20190907_144716_566859",
+      "original_audit": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit.json",
+        "sha256": "f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901",
+        "pointer": "/cases/6"
+      },
+      "input_target_axis": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "basis": "All original mechanical source/replay/public-input/ordered-map/first-target/execution checks are true; missing won is not a target invalidity.",
+      "original_checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_task_identity": true,
+        "replay_observation_digest": true,
+        "replay_map_digest": true,
+        "replay_recent_H4_digest": true,
+        "all_recorded_transition_checks_true": true,
+        "branch_replay_summary_binds_ledger": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "model_identity_axis": "MODEL_IDENTITY_PARTIAL",
+      "terminal_corroboration_axis": {
+        "original_success_predicate": "terminal done && reward > 0",
+        "historical_recover_success": 1,
+        "historical_CONTINUE_success": 0,
+        "recorded_terminal_predicate_check": {
+          "recover": 1,
+          "CONTINUE": 0
+        },
+        "recover_raw_won_status": "RAW_WON_EXPLICIT_TRUE",
+        "CONTINUE_raw_won_status": "RAW_WON_EXPLICIT_FALSE",
+        "recover_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+            "line": 1,
+            "raw_line_sha256": "996f31f3f5c5ba433320f5d548a68b42581ba51b9843dd2e3868fbd81eb902ca",
+            "pointer": "/continuation_full/steps/11"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "b1a91f4b6644e80af4ff629897072f31b8949405e0c5a3bf74130f6d87bd040c"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r15-b-20260910T000000Z/continue_ledger.jsonl",
+            "line": 1,
+            "raw_line_sha256": "b8a9b50bd769faca6f3fda5bb2c83a3af52baaf3452d2076ae3aecf269f757cf",
+            "pointer": "/steps/35"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "4bc8af73032b6ea8e9bda34857accea5002e9b701df32954f66c09a0a591fbc3"
+        },
+        "historical_success_labels_retained": true,
+        "missing_won_is_new_G3_failure": false
+      },
+      "old_combined_disposition_preserved_in_frozen_original": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "overall_training_eligibility": "HOLD_NOT_READY",
+      "training_row_approved": false,
+      "learning_gain": "NOT_PROVEN",
+      "teacher_target": "Executed adapter-off first recovery action only; adapter-on suffix remains separate."
+    },
+    {
+      "case_id": "R16_OSR:R15-F22",
+      "canonical_task": "pick_heat_then_place_in_recep-Mug-None-Cabinet-22/trial_T20190908_072939_855818",
+      "original_audit": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit.json",
+        "sha256": "f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901",
+        "pointer": "/cases/7"
+      },
+      "input_target_axis": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "basis": "All original mechanical source/replay/public-input/ordered-map/first-target/execution checks are true; missing won is not a target invalidity.",
+      "original_checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_task_identity": true,
+        "replay_observation_digest": true,
+        "replay_map_digest": true,
+        "replay_recent_H4_digest": true,
+        "all_recorded_transition_checks_true": true,
+        "branch_replay_summary_binds_ledger": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "model_identity_axis": "MODEL_IDENTITY_PARTIAL",
+      "terminal_corroboration_axis": {
+        "original_success_predicate": "terminal done && reward > 0",
+        "historical_recover_success": 1,
+        "historical_CONTINUE_success": 0,
+        "recorded_terminal_predicate_check": {
+          "recover": 1,
+          "CONTINUE": 0
+        },
+        "recover_raw_won_status": "RAW_WON_EXPLICIT_TRUE",
+        "CONTINUE_raw_won_status": "RAW_WON_EXPLICIT_FALSE",
+        "recover_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+            "line": 22,
+            "raw_line_sha256": "3437d1634b3f4ad303d95da2ac043230189277623efcda996eeadd1419bbb061",
+            "pointer": "/continuation_full/steps/41"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "a6e1f77b86fff9cb1b6f8b85df6a489a7e95386c596672caab92c65b97c907f0"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r15-b-20260910T000000Z/continue_ledger.jsonl",
+            "line": 22,
+            "raw_line_sha256": "e8587795db1cb0fb7a3505899a2bb818915538b5be106a224b799471ea4283c4",
+            "pointer": "/steps/42"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "2de8ff4fa577c1cf497466b9adf9b0bac357ccbb8b82e195409589aa48fbf57d"
+        },
+        "historical_success_labels_retained": true,
+        "missing_won_is_new_G3_failure": false
+      },
+      "old_combined_disposition_preserved_in_frozen_original": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "overall_training_eligibility": "HOLD_NOT_READY",
+      "training_row_approved": false,
+      "learning_gain": "NOT_PROVEN",
+      "teacher_target": "Executed adapter-off first recovery action only; adapter-on suffix remains separate."
+    },
+    {
+      "case_id": "R16_OSR:R15-F23",
+      "canonical_task": "pick_and_place_simple-Watch-None-Shelf-207/trial_T20190908_122255_167374",
+      "original_audit": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit.json",
+        "sha256": "f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901",
+        "pointer": "/cases/8"
+      },
+      "input_target_axis": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "basis": "All original mechanical source/replay/public-input/ordered-map/first-target/execution checks are true; missing won is not a target invalidity.",
+      "original_checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_task_identity": true,
+        "replay_observation_digest": true,
+        "replay_map_digest": true,
+        "replay_recent_H4_digest": true,
+        "all_recorded_transition_checks_true": true,
+        "branch_replay_summary_binds_ledger": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "model_identity_axis": "MODEL_IDENTITY_PARTIAL",
+      "terminal_corroboration_axis": {
+        "original_success_predicate": "terminal done && reward > 0",
+        "historical_recover_success": 1,
+        "historical_CONTINUE_success": 0,
+        "recorded_terminal_predicate_check": {
+          "recover": 1,
+          "CONTINUE": 0
+        },
+        "recover_raw_won_status": "RAW_WON_EXPLICIT_TRUE",
+        "CONTINUE_raw_won_status": "RAW_WON_EXPLICIT_FALSE",
+        "recover_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+            "line": 23,
+            "raw_line_sha256": "bad0b573b5b108d283f0cc7c1ae9a4996c53d646d16631cc3529c7c2ae45c62b",
+            "pointer": "/continuation_full/steps/5"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "d51fa8cd95126eec553e45b326c101273fae423a911a6d7405a5848a2d82fcf7"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r15-b-20260910T000000Z/continue_ledger.jsonl",
+            "line": 23,
+            "raw_line_sha256": "d70d7b9c04be01c9b28e7bcab2cea9083252aa4797f7f9d9e55d190709a37e41",
+            "pointer": "/steps/39"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "81ed89314f0092cefc5bf2135c1022a5ccd8bf3e4ee7e6c71c394aa81e4ac27e"
+        },
+        "historical_success_labels_retained": true,
+        "missing_won_is_new_G3_failure": false
+      },
+      "old_combined_disposition_preserved_in_frozen_original": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "overall_training_eligibility": "HOLD_NOT_READY",
+      "training_row_approved": false,
+      "learning_gain": "NOT_PROVEN",
+      "teacher_target": "Executed adapter-off first recovery action only; adapter-on suffix remains separate."
+    },
+    {
+      "case_id": "R16_OSR:R15-F25",
+      "canonical_task": "look_at_obj_in_light-Bowl-None-DeskLamp-301/trial_T20190909_150931_522935",
+      "original_audit": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit.json",
+        "sha256": "f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901",
+        "pointer": "/cases/9"
+      },
+      "input_target_axis": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "basis": "All original mechanical source/replay/public-input/ordered-map/first-target/execution checks are true; missing won is not a target invalidity.",
+      "original_checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_task_identity": true,
+        "replay_observation_digest": true,
+        "replay_map_digest": true,
+        "replay_recent_H4_digest": true,
+        "all_recorded_transition_checks_true": true,
+        "branch_replay_summary_binds_ledger": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "model_identity_axis": "MODEL_IDENTITY_PARTIAL",
+      "terminal_corroboration_axis": {
+        "original_success_predicate": "terminal done && reward > 0",
+        "historical_recover_success": 1,
+        "historical_CONTINUE_success": 0,
+        "recorded_terminal_predicate_check": {
+          "recover": 1,
+          "CONTINUE": 0
+        },
+        "recover_raw_won_status": "RAW_WON_EXPLICIT_TRUE",
+        "CONTINUE_raw_won_status": "RAW_WON_EXPLICIT_FALSE",
+        "recover_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+            "line": 25,
+            "raw_line_sha256": "9aa206fe866975ff67eccd0f17c7bcda26eb171daaee9759457acea1336f370c",
+            "pointer": "/continuation_full/steps/8"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "7d9ab9299c432f452ff0e9283d54faea136eb38d308e52de9d90860635a130c6"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r15-b-20260910T000000Z/continue_ledger.jsonl",
+            "line": 25,
+            "raw_line_sha256": "a5501d08d8e98b9de206b625275454932bfb05e18810813e2bd5c5ec55c59221",
+            "pointer": "/steps/43"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "3e73b8a5dfee4fbc3850dfb5c681a194ee6b5dc772b9f56cb5cd8c6b14c02d4e"
+        },
+        "historical_success_labels_retained": true,
+        "missing_won_is_new_G3_failure": false
+      },
+      "old_combined_disposition_preserved_in_frozen_original": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "overall_training_eligibility": "HOLD_NOT_READY",
+      "training_row_approved": false,
+      "learning_gain": "NOT_PROVEN",
+      "teacher_target": "Executed adapter-off first recovery action only; adapter-on suffix remains separate."
+    },
+    {
+      "case_id": "R19_K1:R19-failure-b3ab21b8e193f6adf6ff",
+      "canonical_task": "look_at_obj_in_light-Vase-None-DeskLamp-303/trial_T20190907_150403_049073",
+      "original_audit": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit.json",
+        "sha256": "f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901",
+        "pointer": "/cases/10"
+      },
+      "input_target_axis": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "basis": "All original mechanical source/replay/public-input/ordered-map/first-target/execution checks are true; missing won is not a target invalidity.",
+      "original_checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "initial_replay_count_before_recovery": true,
+        "initial_replay_source_action_observation_map_match": true,
+        "recovery_event_before_history_exact": true,
+        "recovery_event_before_observation_exact": true,
+        "recovery_event_before_order_exact": true,
+        "recovery_event_index_is_one": true,
+        "K1_stage_two_attempt_one": true,
+        "recovery_event_map_exact": true,
+        "event_implementation_is_executed2da": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "model_identity_axis": "MODEL_IDENTITY_PINNED",
+      "terminal_corroboration_axis": {
+        "original_success_predicate": "terminal done && reward > 0",
+        "historical_recover_success": 1,
+        "historical_CONTINUE_success": 0,
+        "recorded_terminal_predicate_check": {
+          "recover": 1,
+          "CONTINUE": 0
+        },
+        "recover_raw_won_status": "RAW_WON_NOT_RECORDED",
+        "CONTINUE_raw_won_status": "RAW_WON_NOT_RECORDED",
+        "recover_terminal": {
+          "source": {
+            "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_events.jsonl",
+            "line": 13463,
+            "raw_line_sha256": "ca96976216ac70659f7bd2fd083b1e323eea0174fd3b67b031ab57a9aa46baec",
+            "pointer": "/payload/transition"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [],
+          "step_record_sha256": "c0c48820347ed3de00fe4f965e8a72b9ebaab92a126f338b2e20abc1df4c3be8"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_trajectories.jsonl",
+            "line": 10,
+            "raw_line_sha256": "fca1fa57e5c9097930ac133bcb400a3e6160cff3d08fc481ab0d07d670ae0d7a",
+            "pointer": "/steps/49"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": null,
+          "won_entries": [],
+          "step_record_sha256": "e6a5a0884b8954d2ce8741fd5795dfe309a0dec1147dcd6815e2f70c4b99de8f"
+        },
+        "historical_success_labels_retained": true,
+        "missing_won_is_new_G3_failure": false
+      },
+      "old_combined_disposition_preserved_in_frozen_original": "HOLD_EVIDENCE",
+      "overall_training_eligibility": "HOLD_NOT_READY",
+      "training_row_approved": false,
+      "learning_gain": "NOT_PROVEN",
+      "teacher_target": "Executed adapter-off first recovery action only; adapter-on suffix remains separate."
+    }
+  ]
+}

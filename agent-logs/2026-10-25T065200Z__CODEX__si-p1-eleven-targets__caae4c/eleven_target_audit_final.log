@@ -1,0 +1,37 @@
+{
+  "rows": 11,
+  "canonical_tasks": 10,
+  "families_by_row": {
+    "look_at_obj_in_light": 7,
+    "pick_two_obj_and_place": 2,
+    "pick_heat_then_place_in_recep": 1,
+    "pick_and_place_simple": 1
+  },
+  "dispositions": {
+    "HOLD_EVIDENCE": 2,
+    "INPUT_TARGET_LINEAGE_SUPPORTED": 9
+  },
+  "mechanical_input_target_checks_all_true": 11,
+  "model_identity_axes": {
+    "MODEL_IDENTITY_PARTIAL": 10,
+    "MODEL_IDENTITY_PINNED": 1
+  },
+  "terminal_axes": {
+    "DONE_POSITIVE_REWARD_WON_NOT_RECORDED": 2,
+    "EXPLICIT_DONE_WON_TRUE_REWARD_POSITIVE": 9
+  },
+  "same_public_input_multitarget_groups": 0,
+  "qualified_training_N": "NOT_ESTABLISHED; no training row approval",
+  "B_pool_ready": false
+}
+R4:R2-F01 HOLD_EVIDENCE A003 go to desk 1 bad [] gaps ['TERMINAL_WON_MISSING: raw terminal done/reward recorded; wrapper forwards score, does not substitute won. No success re-label or historical-result rejection.']
+R10_OSR:R8-F02 INPUT_TARGET_LINEAGE_SUPPORTED A013 move book 2 to bed 1 bad [] gaps []
+R10_OSR:R8-F20 INPUT_TARGET_LINEAGE_SUPPORTED A005 go to desk 1 bad [] gaps []
+R10_OSR:R8-F21 INPUT_TARGET_LINEAGE_SUPPORTED A002 go to desk 1 bad [] gaps []
+R10_OSR:R8-F22 INPUT_TARGET_LINEAGE_SUPPORTED A004 go to desk 1 bad [] gaps []
+R10_OSR:R8-F23 INPUT_TARGET_LINEAGE_SUPPORTED A004 go to desk 1 bad [] gaps []
+R16_OSR:R15-F01 INPUT_TARGET_LINEAGE_SUPPORTED A001 go to cabinet 1 bad [] gaps []
+R16_OSR:R15-F22 INPUT_TARGET_LINEAGE_SUPPORTED A001 examine stoveburner 2 bad [] gaps []
+R16_OSR:R15-F23 INPUT_TARGET_LINEAGE_SUPPORTED A001 examine shelf 6 bad [] gaps []
+R16_OSR:R15-F25 INPUT_TARGET_LINEAGE_SUPPORTED A003 go to desk 1 bad [] gaps []
+R19_K1:R19-failure-b3ab21b8e193f6adf6ff HOLD_EVIDENCE A002 examine dresser 1 bad [] gaps ['TERMINAL_WON_MISSING: raw terminal done/reward recorded; wrapper forwards score, does not substitute won. No success re-label or historical-result rejection.']

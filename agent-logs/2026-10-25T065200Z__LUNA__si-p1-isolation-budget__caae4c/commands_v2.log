@@ -1,0 +1,19 @@
+SI-P1 V2 additive correction — read-only command record
+
+Input verification
+  sha256sum LUNA_REVIEW_FEEDBACK_V2.md -> 3941621eba2324d54175d19e1414d1e841312fda11bdeac349ed6eaf9cee4b2b (match).
+  sha256sum independent_source_hash_and_identity_join.json -> 462a1e723199d76a1ca732c2821832d0cdafe3d3bd01895d0e2b4a27225d942b (match).
+  P0_SCOPE_INCIDENT_AND_RESTORATION.json -> c7947a2249f838948a07b28f6d02c21d02af2055a15e1e1205b068eed898bc35.
+  P0 experience_inventory.json -> 1b0b7766d5901894d71f635433b9055223648d07bf5bda4e648c1129403cd8c0.
+  No P0 script was executed. No prior P1 file or P1 FILE_HASHES.sha256 was changed.
+
+Cross-check command
+  python -c '<stdlib-only JSON checks recorded verbatim in v2_crosscheck_receipt.json>'
+  cwd=/home/lizening/wt-codex-r18c2; returncode=0.
+  stdout: V2_READ_ONLY_CROSSCHECK=PASS; source_rows=351; fixed_cases=11; source_full_hashes=11; rc=0
+  stderr: empty.
+
+Checks performed
+  Independent join status true; seven named cohorts total 351 rows; V2 fixed 11 case IDs equal join IDs; every fixed case has verified full-file and row SHA; wall time is not labeled GPU device time; frozen minimal protocol has C_extra=0 and R_extra=0; model calls=0.
+
+V2 files only: CORRECTED_ISOLATION_AND_BUDGET_V2.md, corrected_isolation_budget_v2.json, commands_v2.log, v2_crosscheck_receipt.json, and V2_HASHES.sha256. No scientific calls, no P0/P1 V1 edits, no commit/push/shared INDEX change.

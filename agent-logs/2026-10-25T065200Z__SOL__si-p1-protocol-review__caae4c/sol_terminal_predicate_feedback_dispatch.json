@@ -1,0 +1,6 @@
+{
+  "message": "SI-P1独立review补充：保持11完整case与三个轴。你报告R4/R19缺显式won，但原冻结成功规则是Trajectory.succeeded（src/trajectory/trajectory.py:59附近）和R19 task_actor_callback（run_r19_experiment.py:2264）的 done && reward>0；R19 record_step导出的transition本就只保留done/reward等字段。请按任务单核对原wrapper/reward语义并区分“input-target来源链成立”和“raw won显式佐证缺失”；不要仅因缺won把机械目标标成非法/强行发明新的G3失败。可以保留最终训练资格HOLD/conditional，但写清旧正式成功标签及原predicate，标RAW_WON_NOT_RECORDED而不是抹掉历史success。若原件不足以证明奖励语义就明确限定，不补跑或修改raw。另Luna执行P0脚本曾写旧目录，我已将4项变动字节保存并恢复5774774旧目录；你不要执行任何旧审计脚本（内部ROOT会写旧路径），仅静态读或在自有目录新写stdlib。你未被要求读LunaP1未完成文件。这条是审查澄清，不扩11清单/实验范围；无需为等反馈延长，冻结返回即可。",
+  "actual_returncode": 0,
+  "stdout": "Queued message 01a171e9-865d-7eb1-b2b3-070a23b597ad for thread 01a165de-c75e-7120-abc9-fa74cde1f17f.\n",
+  "stderr": ""
+}

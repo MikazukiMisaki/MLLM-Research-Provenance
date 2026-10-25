@@ -1,0 +1,3731 @@
+{
+  "schema": "SI_P1_ELEVEN_TARGET_LINEAGE_V1",
+  "fixed_case_count": 11,
+  "fixed_canonical_tasks": 10,
+  "audit_not_training_dataset": true,
+  "scientific_permission": "NOT_GRANTED",
+  "data_feasibility": "NOT_READY",
+  "qualified_training_N": null,
+  "projection_contract": "SI_P1_P0_PUBLIC_FIELDS_V1",
+  "projection_encoding": "ASCII JSON, sort_keys=True, separators comma/colon; ordered map serialized as id-command pair list; no task id/index/treatment/target in input hash",
+  "cases": [
+    {
+      "case_id": "R4:R2-F01",
+      "prefix_id": "R2-F01",
+      "stage": "R4",
+      "canonical_task": "look_at_obj_in_light-AlarmClock-None-DeskLamp-303/trial_T20190908_144950_175895",
+      "family": "look_at_obj_in_light",
+      "decision_index": 21,
+      "remaining_horizon": 29,
+      "source_episode": {
+        "reference": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-source-pool-r1-20260908T042933Z/trajectories.jsonl",
+          "line": 19,
+          "raw_line_sha256": "16763f486d00fefa18fc605d81f7c41533cd6e3d62ba5748b75f25de39c281bc",
+          "pointer": null
+        },
+        "trajectory_id": "68b0fad78f3600cd36f41d61",
+        "public_prefix_action_count": 21,
+        "full_public_prefix_field_sha256": "67c4c19b04304876b9fbbd7bdb3ff809497094119975334a3f676cc732021f72"
+      },
+      "branch_record": {
+        "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-feasibility-r4-20260908T080000Z/pairs.jsonl",
+        "line": 1,
+        "raw_line_sha256": "97fa552daf6bad6e3a827d99ad352a0c19bc7e169403d688a46da17d175de593",
+        "pointer": null
+      },
+      "public_projection": {
+        "contract": "STATIC_PUBLIC_FIELDS_AND_P0_PUBLIC_TEXT_ONLY",
+        "projection_sha256": "43f8f79509a0251a3123d568e2fab784d5bb6acd5a5f1353c1e59b6a3ce8d340",
+        "source_actor_public_prompt_sha256": "b0a6289a133ded54008897bd9a6dba3b47cb42473da5a3476b780e27e3fa092d",
+        "static_public_text_sha256": "b0a6289a133ded54008897bd9a6dba3b47cb42473da5a3476b780e27e3fa092d",
+        "existing_chat_render_sha256": "862eeaa1a3269b597bffd410fef63837669f6950ae1b36d0f529a13ae701f570",
+        "chat_template_or_tokenizer_revalidation": "NOT_PERFORMED",
+        "full_prompt_or_JSONL_exported": false,
+        "fields": {
+          "goal": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-source-pool-r1-20260908T042933Z/trajectories.jsonl",
+              "line": 19,
+              "raw_line_sha256": "16763f486d00fefa18fc605d81f7c41533cd6e3d62ba5748b75f25de39c281bc",
+              "pointer": "/task/text"
+            },
+            "sha256_utf8": "4afad538c6e99fdfadcb84f992e26aaf291c9b48782150ef8b6461515bd6cbe5",
+            "available_before_decision": 21
+          },
+          "observation": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-source-pool-r1-20260908T042933Z/trajectories.jsonl",
+              "line": 19,
+              "raw_line_sha256": "16763f486d00fefa18fc605d81f7c41533cd6e3d62ba5748b75f25de39c281bc",
+              "pointer": "/steps/21/observation"
+            },
+            "sha256_utf8": "59739535781cf2ed33ad64b13dda29abf6e22e19307cb725c5eccdcd4f5d4d7b",
+            "available_before_decision": 21
+          },
+          "history": {
+            "source_steps": [
+              {
+                "action_pointer": "/steps/17/action",
+                "result_pointer": "/steps/18/observation",
+                "result_available_by_state_index": 18,
+                "entry_sha256": "1a3ac580579772903ee5f8c5472bfd9f79ee94c516c9e874bcc18c5d34cdcfde"
+              },
+              {
+                "action_pointer": "/steps/18/action",
+                "result_pointer": "/steps/19/observation",
+                "result_available_by_state_index": 19,
+                "entry_sha256": "950a71652a3b54f81ce3e44b46280b30019be45f2f710b5013f0addd135ce38d"
+              },
+              {
+                "action_pointer": "/steps/19/action",
+                "result_pointer": "/steps/20/observation",
+                "result_available_by_state_index": 20,
+                "entry_sha256": "046643480158026d0f361644d0ddc2ddaf9b006d8711ff4be6726ee47598acc7"
+              },
+              {
+                "action_pointer": "/steps/20/action",
+                "result_pointer": "/steps/21/observation",
+                "result_available_by_state_index": 21,
+                "entry_sha256": "b67bf39755599d5938ed7ebf6100c5c923be7e20728e9ff1f1b8408ad0e88a60"
+              }
+            ],
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-source-pool-r1-20260908T042933Z/trajectories.jsonl",
+              "line": 19,
+              "raw_line_sha256": "16763f486d00fefa18fc605d81f7c41533cd6e3d62ba5748b75f25de39c281bc",
+              "pointer": null
+            },
+            "sha256": "89c7ea4994c75daa9ba6ea387f458c9ddac489abb743b5d8d7b19bb1cd38695d",
+            "transition_count": 4,
+            "uses_current_action_or_its_result": false
+          },
+          "ordered_action_map": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-source-pool-r1-20260908T042933Z/trajectories.jsonl",
+              "line": 19,
+              "raw_line_sha256": "16763f486d00fefa18fc605d81f7c41533cd6e3d62ba5748b75f25de39c281bc",
+              "pointer": "/steps/21/valid_actions"
+            },
+            "action_count": 27,
+            "ordered_actions_sha256": "6136fb8bca073436b0af5ad21bc1f3e3c479907495a168d290d79075e97684cd",
+            "indexed_map_sha256": "5cf5f23bdf538f2332e3cdb2756d8bb6b6a3a3e6106cc376fb8c025eeea1a787",
+            "all_source_policy_ids_match": true
+          }
+        },
+        "excluded_fields": [
+          "teacher diagnosis/subgoal/card",
+          "current source action/model output/result/environment_metadata",
+          "terminal/reward/won",
+          "stratum/K/oracle/future actions",
+          "expert_plan/facts"
+        ],
+        "source_step_current_metadata_environment_is_post_action_not_input": true
+      },
+      "existing_replay": {
+        "source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-replay-continue-r3-20260908T055308Z/replay_validation.jsonl",
+          "line": 1,
+          "raw_line_sha256": "b4ea5f29d1baaafc8e4d1bfc83e9721aacd7d4a5222e889e7a2d0f32852bbf3b",
+          "pointer": null
+        },
+        "replay_record_sha256": "22a74ac100aef1745b357430bc7a4709301ed2a630e31451b5c0f6629d01c4dc",
+        "transitions_count": 21,
+        "first_and_last_transition_sha256": [
+          "87e49e778c76ebe7afa7ad14bb3d893e628f80df39a14bb6914ef0dcd1c12088",
+          "59d35cb607c4ccdd5e2688843d909bee7ec0f680e82a61d383a7a27b74a69824"
+        ],
+        "R4_source_summary": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-feasibility-r4-20260908T080000Z/pairs.jsonl",
+          "line": 1,
+          "raw_line_sha256": "97fa552daf6bad6e3a827d99ad352a0c19bc7e169403d688a46da17d175de593",
+          "pointer": "/prefix_replay"
+        },
+        "limitation": "Full R3 public replay plus R4 own exact-replay hash receipt; no new replay."
+      },
+      "first_recovery_target": {
+        "producer": "adapter-off recovery base",
+        "generation_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-feasibility-r4-20260908T080000Z/pairs.jsonl",
+          "line": 1,
+          "raw_line_sha256": "97fa552daf6bad6e3a827d99ad352a0c19bc7e169403d688a46da17d175de593",
+          "pointer": "/raw_generations/recovery/stage_two/generation"
+        },
+        "parsed_source_pointer": "/raw_generations/recovery/stage_two/parsed",
+        "failure_reason": null,
+        "teacher_valid_actions_list_recorded": false,
+        "teacher_ordered_ID_command_pairs_sha256": "bbd101082fbb9d99d1e87d43a069f2f6f7dd86f34a883d71f28bd5c26716cc5a",
+        "transition_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-feasibility-r4-20260908T080000Z/pairs.jsonl",
+          "line": 1,
+          "raw_line_sha256": "97fa552daf6bad6e3a827d99ad352a0c19bc7e169403d688a46da17d175de593",
+          "pointer": "/recover/recovery_transition"
+        },
+        "raw_output": "A003",
+        "raw_output_sha256": "a0e3ed09b3d06014303ef03ea8d645660b13d072504aecd6915c4668888909e8",
+        "recorded_parser_status": "selected",
+        "action_id": "A003",
+        "mapped_command": "go to desk 1",
+        "teacher_map_sha256": "5cf5f23bdf538f2332e3cdb2756d8bb6b6a3a3e6106cc376fb8c025eeea1a787",
+        "P0_map_sha256": "5cf5f23bdf538f2332e3cdb2756d8bb6b6a3a3e6106cc376fb8c025eeea1a787",
+        "all_entries_ID_command_equal": true,
+        "executed_command": "go to desk 1",
+        "transition_source_pointer": "/recover/recovery_transition",
+        "transition_sha256": "5b08f6b421fc82b1345209bc433df0b864baa434d13a0c41ded6d0749a08d885",
+        "done_after_first": false,
+        "reward_after_first": 0.0,
+        "source_end_state_observation_sha256": "00b2ab1e3884e4421427c3dad2350b6f0a5f3be6fca0f3728d6210f4d042871e"
+      },
+      "checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_task_identity": true,
+        "replay_current_observation": true,
+        "replay_current_action_order": true,
+        "replay_recent_H4": true,
+        "source_prefix_actions_replayed_exactly": true,
+        "R4_replay_hashes_bind_source_and_R3": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "failed_or_unresolved_checks": [],
+      "terminal_corroboration": {
+        "axis": "DONE_POSITIVE_REWARD_WON_NOT_RECORDED",
+        "recovery_branch_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-feasibility-r4-20260908T080000Z/pairs.jsonl",
+            "line": 1,
+            "raw_line_sha256": "97fa552daf6bad6e3a827d99ad352a0c19bc7e169403d688a46da17d175de593",
+            "pointer": "/recover/continuation/steps/0"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [],
+          "step_record_sha256": "51eec577f505e40563a2b13ad6b97fa606c2762322f1a16f89dbdaeb886b3d31"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-replay-continue-r3-20260908T055308Z/continue_branches.jsonl",
+            "line": 1,
+            "raw_line_sha256": "cb8a3991589e3f898472ce7d9206518d716cec0eb2beb2a5a5d26edf5990e900",
+            "pointer": "/continue/steps/28"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "81757f84aa6aac5dc3becbea9d232de6c33ec2f94cf138d4fd2186cbf2c94062"
+        },
+        "historical_success_label_retained": true,
+        "not_inferred_from_subgoal_or_shaping_reward": true
+      },
+      "model_identity": {
+        "axis": "MODEL_IDENTITY_PARTIAL",
+        "teacher_role": "adapter-off recovery base, distinct from adapter-on SFT suffix",
+        "base_model": "Qwen/Qwen3-8B",
+        "resolved_weights_revision": "UNKNOWN",
+        "resolved_tokenizer_revision": "UNKNOWN",
+        "tokenizer_identity_basis": "No historical resolved revision in the read run manifests",
+        "actor_adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+        "implementation_sha": "7a01a6107b4bc9c994893220aab078af39fe4fff",
+        "recovery_adapter_active": "NOT_EXPLICIT_IN_MANIFEST; static distinct recovery construction",
+        "suffix_adapter_active": true,
+        "source_manifest": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-feasibility-r4-20260908T080000Z/run_manifest.json",
+        "source_actor_recorded_model_version": "Qwen/Qwen3-8B+lora:/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+        "static_contract_binding": "historical_contracts.json: executed stage method AST matches frozen85, no historical model revision inference",
+        "runtime_loaded_commit_and_adapter_record": "Historical run manifest isolation fields only; no loaded commit/tokenizer revision receipt",
+        "isolation_receipt": null,
+        "limitation": "Historical main-resolution weights/tokenizer not retrospectively filled from R19"
+      },
+      "suffix_separate": {
+        "producer": "adapter-on frozen SFT-P0",
+        "actions": 1,
+        "target_adopted_here": false,
+        "target_identity_not_adapter_off": true,
+        "suffix_action_ids_sha256": "44483f7e0127ee2411972e44ca85f19e7ee7dd0b6203658fa09319a9d3088098",
+        "generation_or_step_refs": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-feasibility-r4-20260908T080000Z/pairs.jsonl",
+          "line": 1,
+          "raw_line_sha256": "97fa552daf6bad6e3a827d99ad352a0c19bc7e169403d688a46da17d175de593",
+          "pointer": "/recover/continuation/steps"
+        },
+        "semantic_public_action_sequence_sha256": "0bb6c3f6250056a61fb8111e9d14b25f200fe4f9ce1de56e0b1385204d339e5e",
+        "physical_alias_evidence": "No derived alias among fixed cases; legacy lacks event IDs, so semantic equality alone does not assert physical reuse",
+        "source_endpoints": {
+          "first_sha256": "51eec577f505e40563a2b13ad6b97fa606c2762322f1a16f89dbdaeb886b3d31",
+          "last_sha256": "51eec577f505e40563a2b13ad6b97fa606c2762322f1a16f89dbdaeb886b3d31"
+        },
+        "original_prefix_0to1_not_per_suffix_step_causal_label": true
+      },
+      "recorded_tokens": {
+        "first_recovery_stage1": {
+          "input_tokens": 526,
+          "generated_tokens": 32,
+          "max_new_tokens": 40
+        },
+        "first_recovery_stage2": {
+          "input_tokens": 651,
+          "generated_tokens": 5,
+          "max_new_tokens": 16
+        },
+        "source_actor_same_public_P0": {
+          "generated_tokens": 5,
+          "input_tokens": 562,
+          "mean_token_entropy": 0.35538961107567957,
+          "mean_token_log_probability": -0.16086993806454758
+        },
+        "prospective_projected_training_tokens": null,
+        "note": "Recorded inference counts only; no tokenizer. Teacher prompt length is not P0 projected training length."
+      },
+      "event_refs": [],
+      "disposition": "HOLD_EVIDENCE",
+      "evidence_gaps": [
+        "TERMINAL_WON_MISSING: raw terminal done/reward recorded; wrapper forwards underlying reward, does not substitute won. No success re-label or historical-result rejection."
+      ],
+      "learning_gain": "NOT_PROVEN",
+      "training_row_approved": false
+    },
+    {
+      "case_id": "R10_OSR:R8-F02",
+      "prefix_id": "R8-F02",
+      "stage": "R10_OSR",
+      "canonical_task": "pick_two_obj_and_place-Book-None-Bed-314/trial_T20190910_072508_733981",
+      "family": "pick_two_obj_and_place",
+      "decision_index": 12,
+      "remaining_horizon": 38,
+      "source_episode": {
+        "reference": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+          "line": 44,
+          "raw_line_sha256": "fa8b90faf5d13c705f7ab7816fb9a0e27907a5350e7b72d786a033e74a74ac8e",
+          "pointer": null
+        },
+        "trajectory_id": "622f246cd4b38df2dd5db57e",
+        "public_prefix_action_count": 12,
+        "full_public_prefix_field_sha256": "3663f0e67c306db88cdd435c55d6656f836cd7c8fa020de9cc34a22b78bbfb1e"
+      },
+      "branch_record": {
+        "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+        "line": 2,
+        "raw_line_sha256": "bf4a211a8c32b4e12c88e156fb282ec25a438e0dc469e5d9c2ebf5ab1f61507e",
+        "pointer": null
+      },
+      "public_projection": {
+        "contract": "STATIC_PUBLIC_FIELDS_AND_P0_PUBLIC_TEXT_ONLY",
+        "projection_sha256": "6af6c6df67fdd2ddb6d97e45d48ed12bf31132911b99e5f452d1b7004004cd4d",
+        "source_actor_public_prompt_sha256": "1cadfdf3d995a397d0a0028d6d3626c54797ab838475d7ff460d8ec7a8d10173",
+        "static_public_text_sha256": "1cadfdf3d995a397d0a0028d6d3626c54797ab838475d7ff460d8ec7a8d10173",
+        "existing_chat_render_sha256": "5adea904fc47bfb7985d239f284a6ba99c49ce0a453cb71f9eb2776a85c3974f",
+        "chat_template_or_tokenizer_revalidation": "NOT_PERFORMED",
+        "full_prompt_or_JSONL_exported": false,
+        "fields": {
+          "goal": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 44,
+              "raw_line_sha256": "fa8b90faf5d13c705f7ab7816fb9a0e27907a5350e7b72d786a033e74a74ac8e",
+              "pointer": "/task/text"
+            },
+            "sha256_utf8": "57509eea2c6b66bb840a96847eb1a320a90158115d8a9e9aca40230c9b456722",
+            "available_before_decision": 12
+          },
+          "observation": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 44,
+              "raw_line_sha256": "fa8b90faf5d13c705f7ab7816fb9a0e27907a5350e7b72d786a033e74a74ac8e",
+              "pointer": "/steps/12/observation"
+            },
+            "sha256_utf8": "0009e87e9a2b2258bcd2f8f0867560893ba3bf46c5fb3be04c0b9e9cdb0c9586",
+            "available_before_decision": 12
+          },
+          "history": {
+            "source_steps": [
+              {
+                "action_pointer": "/steps/8/action",
+                "result_pointer": "/steps/9/observation",
+                "result_available_by_state_index": 9,
+                "entry_sha256": "be727790b04b3b2d3c896b6a1f083118bac1bb1302ccc6426a57a8a85986d8ab"
+              },
+              {
+                "action_pointer": "/steps/9/action",
+                "result_pointer": "/steps/10/observation",
+                "result_available_by_state_index": 10,
+                "entry_sha256": "15915155d8009f518003ed7ba9f37d06ad8917c29a3eca1b7f42100dff714258"
+              },
+              {
+                "action_pointer": "/steps/10/action",
+                "result_pointer": "/steps/11/observation",
+                "result_available_by_state_index": 11,
+                "entry_sha256": "be727790b04b3b2d3c896b6a1f083118bac1bb1302ccc6426a57a8a85986d8ab"
+              },
+              {
+                "action_pointer": "/steps/11/action",
+                "result_pointer": "/steps/12/observation",
+                "result_available_by_state_index": 12,
+                "entry_sha256": "15915155d8009f518003ed7ba9f37d06ad8917c29a3eca1b7f42100dff714258"
+              }
+            ],
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 44,
+              "raw_line_sha256": "fa8b90faf5d13c705f7ab7816fb9a0e27907a5350e7b72d786a033e74a74ac8e",
+              "pointer": null
+            },
+            "sha256": "415df8731ca4f190981b8fe7417eb6142edce3e04133fe55ae12ad1c4e8c0933",
+            "transition_count": 4,
+            "uses_current_action_or_its_result": false
+          },
+          "ordered_action_map": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 44,
+              "raw_line_sha256": "fa8b90faf5d13c705f7ab7816fb9a0e27907a5350e7b72d786a033e74a74ac8e",
+              "pointer": "/steps/12/valid_actions"
+            },
+            "action_count": 14,
+            "ordered_actions_sha256": "25f17c780d2e0ec7be01fe6f0079756a4acd6ceae7d42a11bbb23bab5317dbc7",
+            "indexed_map_sha256": "cedd4659152036e00202a9d41af88edcad2273349632ff0a1929223590c70b00",
+            "all_source_policy_ids_match": true
+          }
+        },
+        "excluded_fields": [
+          "teacher diagnosis/subgoal/card",
+          "current source action/model output/result/environment_metadata",
+          "terminal/reward/won",
+          "stratum/K/oracle/future actions",
+          "expert_plan/facts"
+        ],
+        "source_step_current_metadata_environment_is_post_action_not_input": true
+      },
+      "existing_replay": {
+        "source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 2,
+          "raw_line_sha256": "bf4a211a8c32b4e12c88e156fb282ec25a438e0dc469e5d9c2ebf5ab1f61507e",
+          "pointer": "/replay_full"
+        },
+        "replay_record_sha256": "132e56c18eb405d3f7920caba96cf998eb3e86fa9f69f0089b3181cb0fe4268b",
+        "transitions_count": 12,
+        "first_and_last_transition_sha256": [
+          "98740863f76e8c6543f2f6a7c739078714f4ba6466dacd66d1e7e0ef4b2b2e19",
+          "b033304286b148682f510649448c0f18ea2beebccd5c4234a5476dd541f450dc"
+        ],
+        "note": "Existing full public replay trace"
+      },
+      "first_recovery_target": {
+        "producer": "adapter-off recovery base",
+        "generation_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 2,
+          "raw_line_sha256": "bf4a211a8c32b4e12c88e156fb282ec25a438e0dc469e5d9c2ebf5ab1f61507e",
+          "pointer": "/recovery_full/stage_two/generation"
+        },
+        "parsed_source_pointer": "/recovery_full/stage_two/parsed",
+        "failure_reason": null,
+        "teacher_valid_actions_list_recorded": false,
+        "teacher_ordered_ID_command_pairs_sha256": "d9323c9bc3da3ea275288eec9e15cd1a719865dc2bb142efcaf755899722d5e4",
+        "transition_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 2,
+          "raw_line_sha256": "bf4a211a8c32b4e12c88e156fb282ec25a438e0dc469e5d9c2ebf5ab1f61507e",
+          "pointer": "/recovery_transition"
+        },
+        "raw_output": "A013",
+        "raw_output_sha256": "66bb26dda37baff0a0b8be90f56d837f97814c72a2432ea91236e4bc127228c7",
+        "recorded_parser_status": "selected",
+        "action_id": "A013",
+        "mapped_command": "move book 2 to bed 1",
+        "teacher_map_sha256": "cedd4659152036e00202a9d41af88edcad2273349632ff0a1929223590c70b00",
+        "P0_map_sha256": "cedd4659152036e00202a9d41af88edcad2273349632ff0a1929223590c70b00",
+        "all_entries_ID_command_equal": true,
+        "executed_command": "move book 2 to bed 1",
+        "transition_source_pointer": "/recovery_transition",
+        "transition_sha256": "4fed1c839f27d2082c3b2a46fa60c2e9129597ae242c8f76d8b22daa8ef0061d",
+        "done_after_first": true,
+        "reward_after_first": 1.0,
+        "source_end_state_observation_sha256": "69c8f689272cb6340ac7bc9c000db25c34a5673646f16710776c8901c98649d3"
+      },
+      "checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_current_observation": true,
+        "replay_current_action_order": true,
+        "replay_recent_H4": true,
+        "source_prefix_actions_replayed_exactly": true,
+        "replay_all_pre_action_maps_match": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "failed_or_unresolved_checks": [],
+      "terminal_corroboration": {
+        "axis": "EXPLICIT_DONE_WON_TRUE_REWARD_POSITIVE",
+        "recovery_branch_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+            "line": 2,
+            "raw_line_sha256": "bf4a211a8c32b4e12c88e156fb282ec25a438e0dc469e5d9c2ebf5ab1f61507e",
+            "pointer": "/recovery_transition"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "4fed1c839f27d2082c3b2a46fa60c2e9129597ae242c8f76d8b22daa8ef0061d"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl",
+            "line": 2,
+            "raw_line_sha256": "4d446da64d2493d969416ea5788d993157d0faac9b4add46021bb123c312acfa",
+            "pointer": "/continue_full/steps/37"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "4fd0b58287fc25167c1e6fb574b8dc288f38cdb2f50067818a97278c427a68ba"
+        },
+        "historical_success_label_retained": true,
+        "not_inferred_from_subgoal_or_shaping_reward": true
+      },
+      "model_identity": {
+        "axis": "MODEL_IDENTITY_PARTIAL",
+        "teacher_role": "adapter-off recovery base, distinct from adapter-on SFT suffix",
+        "base_model": "Qwen/Qwen3-8B",
+        "resolved_weights_revision": "UNKNOWN",
+        "resolved_tokenizer_revision": "UNKNOWN",
+        "tokenizer_identity_basis": "No historical resolved revision in the read run manifests",
+        "actor_adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+        "implementation_sha": "8926d8fb10e634489031de3da910c572b50d8d44",
+        "recovery_adapter_active": false,
+        "suffix_adapter_active": true,
+        "source_manifest": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/run_manifest.json",
+        "source_actor_recorded_model_version": "Qwen/Qwen3-8B+lora:/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+        "static_contract_binding": "historical_contracts.json: executed stage method AST matches frozen85, no historical model revision inference",
+        "runtime_loaded_commit_and_adapter_record": "Historical run manifest isolation fields only; no loaded commit/tokenizer revision receipt",
+        "isolation_receipt": {
+          "distinct_model_objects": true,
+          "fallback_used": false,
+          "generation_settings_reset_per_call": true,
+          "kv_cache_shared": false,
+          "recovery_adapter_active": false,
+          "sft_adapter_active": true
+        },
+        "limitation": "Historical main-resolution weights/tokenizer not retrospectively filled from R19"
+      },
+      "suffix_separate": {
+        "producer": "adapter-on frozen SFT-P0",
+        "actions": 0,
+        "target_adopted_here": false,
+        "target_identity_not_adapter_off": true,
+        "suffix_action_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "generation_or_step_refs": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 2,
+          "raw_line_sha256": "bf4a211a8c32b4e12c88e156fb282ec25a438e0dc469e5d9c2ebf5ab1f61507e",
+          "pointer": "/continuation_full/steps"
+        },
+        "semantic_public_action_sequence_sha256": null,
+        "physical_alias_evidence": "No derived alias among fixed cases; legacy lacks event IDs, so semantic equality alone does not assert physical reuse",
+        "source_endpoints": {
+          "first_sha256": null,
+          "last_sha256": null
+        },
+        "original_prefix_0to1_not_per_suffix_step_causal_label": true
+      },
+      "recorded_tokens": {
+        "first_recovery_stage1": {
+          "input_tokens": 394,
+          "generated_tokens": 26,
+          "max_new_tokens": 40
+        },
+        "first_recovery_stage2": {
+          "input_tokens": 461,
+          "generated_tokens": 5,
+          "max_new_tokens": 16
+        },
+        "source_actor_same_public_P0": {
+          "generated_tokens": 5,
+          "input_tokens": 378,
+          "mean_token_entropy": 0.0007888284850547933,
+          "mean_token_log_probability": -8.231419378574855e-05
+        },
+        "prospective_projected_training_tokens": null,
+        "note": "Recorded inference counts only; no tokenizer. Teacher prompt length is not P0 projected training length."
+      },
+      "event_refs": [],
+      "disposition": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "evidence_gaps": [],
+      "learning_gain": "NOT_PROVEN",
+      "training_row_approved": false
+    },
+    {
+      "case_id": "R10_OSR:R8-F20",
+      "prefix_id": "R8-F20",
+      "stage": "R10_OSR",
+      "canonical_task": "look_at_obj_in_light-Book-None-DeskLamp-303/trial_T20190909_085355_202971",
+      "family": "look_at_obj_in_light",
+      "decision_index": 42,
+      "remaining_horizon": 8,
+      "source_episode": {
+        "reference": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+          "line": 90,
+          "raw_line_sha256": "bffa2c998e3d08e677a12f58ba2a28267d41e8e7fe7d2d4fb437a29a09d0cf31",
+          "pointer": null
+        },
+        "trajectory_id": "e08c2ae33bc82824e4437d00",
+        "public_prefix_action_count": 42,
+        "full_public_prefix_field_sha256": "3a67b837c75ea3a9afbb86cba245ff86aa3889f2eed16f4cf047b48503efb2ea"
+      },
+      "branch_record": {
+        "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+        "line": 20,
+        "raw_line_sha256": "6e442dcf93d0cd92964e5034d82b4ad403be0ad8e7bb01292879920504808df8",
+        "pointer": null
+      },
+      "public_projection": {
+        "contract": "STATIC_PUBLIC_FIELDS_AND_P0_PUBLIC_TEXT_ONLY",
+        "projection_sha256": "14726ad1c214942125366068709fa8eae3a7ec60186192a1dddf3bb965016b27",
+        "source_actor_public_prompt_sha256": "856625ccf799a6519ce82ad56cdfbbaff3c4d965e9346f98f50eb9b0705e1b84",
+        "static_public_text_sha256": "856625ccf799a6519ce82ad56cdfbbaff3c4d965e9346f98f50eb9b0705e1b84",
+        "existing_chat_render_sha256": "6ba3ed37a10a6cfcf1ec4ef3f08e5b8208d7af07bdc6efedd2e8182904245598",
+        "chat_template_or_tokenizer_revalidation": "NOT_PERFORMED",
+        "full_prompt_or_JSONL_exported": false,
+        "fields": {
+          "goal": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 90,
+              "raw_line_sha256": "bffa2c998e3d08e677a12f58ba2a28267d41e8e7fe7d2d4fb437a29a09d0cf31",
+              "pointer": "/task/text"
+            },
+            "sha256_utf8": "795d49194ca5723dd22b91a03883e68010ec96653a720d688da99d26db0f7d77",
+            "available_before_decision": 42
+          },
+          "observation": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 90,
+              "raw_line_sha256": "bffa2c998e3d08e677a12f58ba2a28267d41e8e7fe7d2d4fb437a29a09d0cf31",
+              "pointer": "/steps/42/observation"
+            },
+            "sha256_utf8": "c5f9df8c7fd1b9476b20639598940c1caad43c974576af9b96218694ac3b72e8",
+            "available_before_decision": 42
+          },
+          "history": {
+            "source_steps": [
+              {
+                "action_pointer": "/steps/38/action",
+                "result_pointer": "/steps/39/observation",
+                "result_available_by_state_index": 39,
+                "entry_sha256": "5855875d2b7059771426c3bd9ef4bbf54174e44c8dbe5b6d6482fbc94c7113a6"
+              },
+              {
+                "action_pointer": "/steps/39/action",
+                "result_pointer": "/steps/40/observation",
+                "result_available_by_state_index": 40,
+                "entry_sha256": "f2ebffada632b23ab821930de5d8a154fbf1db9d7203307be8b99e497a6dcbc6"
+              },
+              {
+                "action_pointer": "/steps/40/action",
+                "result_pointer": "/steps/41/observation",
+                "result_available_by_state_index": 41,
+                "entry_sha256": "5855875d2b7059771426c3bd9ef4bbf54174e44c8dbe5b6d6482fbc94c7113a6"
+              },
+              {
+                "action_pointer": "/steps/41/action",
+                "result_pointer": "/steps/42/observation",
+                "result_available_by_state_index": 42,
+                "entry_sha256": "f2ebffada632b23ab821930de5d8a154fbf1db9d7203307be8b99e497a6dcbc6"
+              }
+            ],
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 90,
+              "raw_line_sha256": "bffa2c998e3d08e677a12f58ba2a28267d41e8e7fe7d2d4fb437a29a09d0cf31",
+              "pointer": null
+            },
+            "sha256": "68c47e980079665c42b430c447d6e3120231d02750f9eaceb717207627c3f0d9",
+            "transition_count": 4,
+            "uses_current_action_or_its_result": false
+          },
+          "ordered_action_map": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 90,
+              "raw_line_sha256": "bffa2c998e3d08e677a12f58ba2a28267d41e8e7fe7d2d4fb437a29a09d0cf31",
+              "pointer": "/steps/42/valid_actions"
+            },
+            "action_count": 29,
+            "ordered_actions_sha256": "4b522f7c27a52d42f1de298751f38317c09b6f6d417d31591b3d3b126816709b",
+            "indexed_map_sha256": "caf81a3bd486dc6e760be15a6159f6a402f62b334324dcf33da83fda124698a4",
+            "all_source_policy_ids_match": true
+          }
+        },
+        "excluded_fields": [
+          "teacher diagnosis/subgoal/card",
+          "current source action/model output/result/environment_metadata",
+          "terminal/reward/won",
+          "stratum/K/oracle/future actions",
+          "expert_plan/facts"
+        ],
+        "source_step_current_metadata_environment_is_post_action_not_input": true
+      },
+      "existing_replay": {
+        "source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 20,
+          "raw_line_sha256": "6e442dcf93d0cd92964e5034d82b4ad403be0ad8e7bb01292879920504808df8",
+          "pointer": "/replay_full"
+        },
+        "replay_record_sha256": "599598f4e1878aae253dbcdcd7a80c72d8b20f776037bbaaf5eb35b830acf783",
+        "transitions_count": 42,
+        "first_and_last_transition_sha256": [
+          "9a6fe568d6d6897026c7f58e54435ae16bcf1e9ea33a392e0e4fff9500813508",
+          "99e3932ab98d6cb9112f1ef710b8af5205ca8491871dc1bc59f84cb187ee9e03"
+        ],
+        "note": "Existing full public replay trace"
+      },
+      "first_recovery_target": {
+        "producer": "adapter-off recovery base",
+        "generation_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 20,
+          "raw_line_sha256": "6e442dcf93d0cd92964e5034d82b4ad403be0ad8e7bb01292879920504808df8",
+          "pointer": "/recovery_full/stage_two/generation"
+        },
+        "parsed_source_pointer": "/recovery_full/stage_two/parsed",
+        "failure_reason": null,
+        "teacher_valid_actions_list_recorded": false,
+        "teacher_ordered_ID_command_pairs_sha256": "20ee19ffb449684ae0646ae3bccda0c4f33a751caa55cdd9aa60b3c5b24a98ed",
+        "transition_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 20,
+          "raw_line_sha256": "6e442dcf93d0cd92964e5034d82b4ad403be0ad8e7bb01292879920504808df8",
+          "pointer": "/recovery_transition"
+        },
+        "raw_output": "A005",
+        "raw_output_sha256": "baabb6b8d2c595ddbe225760477448aab3fb17b85b79170a323dc18b408db085",
+        "recorded_parser_status": "selected",
+        "action_id": "A005",
+        "mapped_command": "go to desk 1",
+        "teacher_map_sha256": "caf81a3bd486dc6e760be15a6159f6a402f62b334324dcf33da83fda124698a4",
+        "P0_map_sha256": "caf81a3bd486dc6e760be15a6159f6a402f62b334324dcf33da83fda124698a4",
+        "all_entries_ID_command_equal": true,
+        "executed_command": "go to desk 1",
+        "transition_source_pointer": "/recovery_transition",
+        "transition_sha256": "491845feae9aef539db7c98b6b03638055f0ec9143c8520dffafb097a7d9694e",
+        "done_after_first": false,
+        "reward_after_first": 0.0,
+        "source_end_state_observation_sha256": "8623073194ec37af92463b5caee14218d43e1118f58a34c2a4de2143df69beff"
+      },
+      "checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_current_observation": true,
+        "replay_current_action_order": true,
+        "replay_recent_H4": true,
+        "source_prefix_actions_replayed_exactly": true,
+        "replay_all_pre_action_maps_match": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "failed_or_unresolved_checks": [],
+      "terminal_corroboration": {
+        "axis": "EXPLICIT_DONE_WON_TRUE_REWARD_POSITIVE",
+        "recovery_branch_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+            "line": 20,
+            "raw_line_sha256": "6e442dcf93d0cd92964e5034d82b4ad403be0ad8e7bb01292879920504808df8",
+            "pointer": "/continuation_full/steps/0"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "af14d42c3e440cabbcb38358bd3521db2484f7aaed4ef502fd44122196d86744"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl",
+            "line": 20,
+            "raw_line_sha256": "b08aa93d16470490e791d61e88fb9df369fa9c1e616a537d7adf3b76881d4a3c",
+            "pointer": "/continue_full/steps/7"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "77daac2ca79ea5d59dd8008582d4d5b7a4dba81edbb169daf653999a6e2fd3ff"
+        },
+        "historical_success_label_retained": true,
+        "not_inferred_from_subgoal_or_shaping_reward": true
+      },
+      "model_identity": {
+        "axis": "MODEL_IDENTITY_PARTIAL",
+        "teacher_role": "adapter-off recovery base, distinct from adapter-on SFT suffix",
+        "base_model": "Qwen/Qwen3-8B",
+        "resolved_weights_revision": "UNKNOWN",
+        "resolved_tokenizer_revision": "UNKNOWN",
+        "tokenizer_identity_basis": "No historical resolved revision in the read run manifests",
+        "actor_adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+        "implementation_sha": "8926d8fb10e634489031de3da910c572b50d8d44",
+        "recovery_adapter_active": false,
+        "suffix_adapter_active": true,
+        "source_manifest": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/run_manifest.json",
+        "source_actor_recorded_model_version": "Qwen/Qwen3-8B+lora:/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+        "static_contract_binding": "historical_contracts.json: executed stage method AST matches frozen85, no historical model revision inference",
+        "runtime_loaded_commit_and_adapter_record": "Historical run manifest isolation fields only; no loaded commit/tokenizer revision receipt",
+        "isolation_receipt": {
+          "distinct_model_objects": true,
+          "fallback_used": false,
+          "generation_settings_reset_per_call": true,
+          "kv_cache_shared": false,
+          "recovery_adapter_active": false,
+          "sft_adapter_active": true
+        },
+        "limitation": "Historical main-resolution weights/tokenizer not retrospectively filled from R19"
+      },
+      "suffix_separate": {
+        "producer": "adapter-on frozen SFT-P0",
+        "actions": 1,
+        "target_adopted_here": false,
+        "target_identity_not_adapter_off": true,
+        "suffix_action_ids_sha256": "44483f7e0127ee2411972e44ca85f19e7ee7dd0b6203658fa09319a9d3088098",
+        "generation_or_step_refs": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 20,
+          "raw_line_sha256": "6e442dcf93d0cd92964e5034d82b4ad403be0ad8e7bb01292879920504808df8",
+          "pointer": "/continuation_full/steps"
+        },
+        "semantic_public_action_sequence_sha256": "c0d50697ff48661f94cee5feae7f55a2372ac5d2128e6a6883560254a15d3554",
+        "physical_alias_evidence": "No derived alias among fixed cases; legacy lacks event IDs, so semantic equality alone does not assert physical reuse",
+        "source_endpoints": {
+          "first_sha256": "af14d42c3e440cabbcb38358bd3521db2484f7aaed4ef502fd44122196d86744",
+          "last_sha256": "af14d42c3e440cabbcb38358bd3521db2484f7aaed4ef502fd44122196d86744"
+        },
+        "original_prefix_0to1_not_per_suffix_step_causal_label": true
+      },
+      "recorded_tokens": {
+        "first_recovery_stage1": {
+          "input_tokens": 468,
+          "generated_tokens": 39,
+          "max_new_tokens": 40
+        },
+        "first_recovery_stage2": {
+          "input_tokens": 608,
+          "generated_tokens": 5,
+          "max_new_tokens": 16
+        },
+        "source_actor_same_public_P0": {
+          "generated_tokens": 5,
+          "input_tokens": 512,
+          "mean_token_entropy": 0.0010251822198313221,
+          "mean_token_log_probability": -0.00010307566544156543
+        },
+        "prospective_projected_training_tokens": null,
+        "note": "Recorded inference counts only; no tokenizer. Teacher prompt length is not P0 projected training length."
+      },
+      "event_refs": [],
+      "disposition": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "evidence_gaps": [],
+      "learning_gain": "NOT_PROVEN",
+      "training_row_approved": false
+    },
+    {
+      "case_id": "R10_OSR:R8-F21",
+      "prefix_id": "R8-F21",
+      "stage": "R10_OSR",
+      "canonical_task": "look_at_obj_in_light-Bowl-None-DeskLamp-301/trial_T20190909_150737_210323",
+      "family": "look_at_obj_in_light",
+      "decision_index": 35,
+      "remaining_horizon": 15,
+      "source_episode": {
+        "reference": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+          "line": 24,
+          "raw_line_sha256": "7036b06f0bbd3cb92aece8bd94f096cf9ee4ca41640694d67774f985ae71da70",
+          "pointer": null
+        },
+        "trajectory_id": "0a0ac29d7d12089a013efb30",
+        "public_prefix_action_count": 35,
+        "full_public_prefix_field_sha256": "cc1297dc4162e794aae9cefc1f00d1458772ff5b7d92eeae75619e5b1ce54051"
+      },
+      "branch_record": {
+        "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+        "line": 21,
+        "raw_line_sha256": "4c40f2a5b93ee329636de9084c8d608cd228ffce650c484b37b39aac0b5e005b",
+        "pointer": null
+      },
+      "public_projection": {
+        "contract": "STATIC_PUBLIC_FIELDS_AND_P0_PUBLIC_TEXT_ONLY",
+        "projection_sha256": "3d547f94dc359ea729f94180be3efc93ccfe3f97562d82902b285f7db11bdeca",
+        "source_actor_public_prompt_sha256": "6a95444587a2098dc65e9e78453ba1f4f361f77d3dd5d5d53103dc66c5e9bc94",
+        "static_public_text_sha256": "6a95444587a2098dc65e9e78453ba1f4f361f77d3dd5d5d53103dc66c5e9bc94",
+        "existing_chat_render_sha256": "fd00f39b55f28660045d66e100a284c8a9082a53595538c1c6d1288154f4315e",
+        "chat_template_or_tokenizer_revalidation": "NOT_PERFORMED",
+        "full_prompt_or_JSONL_exported": false,
+        "fields": {
+          "goal": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 24,
+              "raw_line_sha256": "7036b06f0bbd3cb92aece8bd94f096cf9ee4ca41640694d67774f985ae71da70",
+              "pointer": "/task/text"
+            },
+            "sha256_utf8": "d49b1e07d26c821ff98018745152ec8c4b9a663ada8e6c891ac498b5854c154a",
+            "available_before_decision": 35
+          },
+          "observation": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 24,
+              "raw_line_sha256": "7036b06f0bbd3cb92aece8bd94f096cf9ee4ca41640694d67774f985ae71da70",
+              "pointer": "/steps/35/observation"
+            },
+            "sha256_utf8": "ac52157e7eb8423d83091bf1ef5ae14bdf9595b05f92c7880bba7e95b3a4e38f",
+            "available_before_decision": 35
+          },
+          "history": {
+            "source_steps": [
+              {
+                "action_pointer": "/steps/31/action",
+                "result_pointer": "/steps/32/observation",
+                "result_available_by_state_index": 32,
+                "entry_sha256": "ff25af699899f21c94544a871d88b69625b4486492d9134cae06d72f3372e90b"
+              },
+              {
+                "action_pointer": "/steps/32/action",
+                "result_pointer": "/steps/33/observation",
+                "result_available_by_state_index": 33,
+                "entry_sha256": "f164c3d1058a01f1fcbf54085c022c59cd73c5a88b543b88a483075217300d9d"
+              },
+              {
+                "action_pointer": "/steps/33/action",
+                "result_pointer": "/steps/34/observation",
+                "result_available_by_state_index": 34,
+                "entry_sha256": "d780f94548220a9163b3d02981ef1246cdf73928f33385e407766c983770d400"
+              },
+              {
+                "action_pointer": "/steps/34/action",
+                "result_pointer": "/steps/35/observation",
+                "result_available_by_state_index": 35,
+                "entry_sha256": "8654caf34b1a8d8893ca85e198f26a196e167493213c5cfce63294ce4804aad2"
+              }
+            ],
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 24,
+              "raw_line_sha256": "7036b06f0bbd3cb92aece8bd94f096cf9ee4ca41640694d67774f985ae71da70",
+              "pointer": null
+            },
+            "sha256": "3279008761cf06163e50146b6d91f24384d123f01f8e47a87d68bc66d73c0b09",
+            "transition_count": 4,
+            "uses_current_action_or_its_result": false
+          },
+          "ordered_action_map": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 24,
+              "raw_line_sha256": "7036b06f0bbd3cb92aece8bd94f096cf9ee4ca41640694d67774f985ae71da70",
+              "pointer": "/steps/35/valid_actions"
+            },
+            "action_count": 30,
+            "ordered_actions_sha256": "8aa2ead21854b66be9c3298ffd77d76129c69bb943d848860b20d7767131a012",
+            "indexed_map_sha256": "f06f6df9aafbe489fe2d8e359dd0eb0573d81c98dbd109c51a3f3de83f69dd43",
+            "all_source_policy_ids_match": true
+          }
+        },
+        "excluded_fields": [
+          "teacher diagnosis/subgoal/card",
+          "current source action/model output/result/environment_metadata",
+          "terminal/reward/won",
+          "stratum/K/oracle/future actions",
+          "expert_plan/facts"
+        ],
+        "source_step_current_metadata_environment_is_post_action_not_input": true
+      },
+      "existing_replay": {
+        "source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 21,
+          "raw_line_sha256": "4c40f2a5b93ee329636de9084c8d608cd228ffce650c484b37b39aac0b5e005b",
+          "pointer": "/replay_full"
+        },
+        "replay_record_sha256": "dfb052a47dd3def17173f0c8f1feeb89eb2975b0a7ee5be32db7807b8d8bd282",
+        "transitions_count": 35,
+        "first_and_last_transition_sha256": [
+          "4ba75df8d76b6d6013acb3cc894f978d958e6c1bcf178fead0acfb79704e4c15",
+          "1c8df81dffd6d190d21a4ebd0070b1e5fe354e45590a2f3180867df408b23b67"
+        ],
+        "note": "Existing full public replay trace"
+      },
+      "first_recovery_target": {
+        "producer": "adapter-off recovery base",
+        "generation_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 21,
+          "raw_line_sha256": "4c40f2a5b93ee329636de9084c8d608cd228ffce650c484b37b39aac0b5e005b",
+          "pointer": "/recovery_full/stage_two/generation"
+        },
+        "parsed_source_pointer": "/recovery_full/stage_two/parsed",
+        "failure_reason": null,
+        "teacher_valid_actions_list_recorded": false,
+        "teacher_ordered_ID_command_pairs_sha256": "f0c96c2fcb847b52f012292dc9f2d706a23f3f8e2962f314eea1a013c60ed42e",
+        "transition_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 21,
+          "raw_line_sha256": "4c40f2a5b93ee329636de9084c8d608cd228ffce650c484b37b39aac0b5e005b",
+          "pointer": "/recovery_transition"
+        },
+        "raw_output": "A002",
+        "raw_output_sha256": "4d2dd6d6ba19a00e87d483e42fdb11f043cd192805d88c38c3757689bbce1e73",
+        "recorded_parser_status": "selected",
+        "action_id": "A002",
+        "mapped_command": "go to desk 1",
+        "teacher_map_sha256": "f06f6df9aafbe489fe2d8e359dd0eb0573d81c98dbd109c51a3f3de83f69dd43",
+        "P0_map_sha256": "f06f6df9aafbe489fe2d8e359dd0eb0573d81c98dbd109c51a3f3de83f69dd43",
+        "all_entries_ID_command_equal": true,
+        "executed_command": "go to desk 1",
+        "transition_source_pointer": "/recovery_transition",
+        "transition_sha256": "b4132546b82678a64c91a73270b683ce98ada5cb034cfaf21b80987f2b09a8bb",
+        "done_after_first": false,
+        "reward_after_first": 0.0,
+        "source_end_state_observation_sha256": "ac4d55949a086a6ed1832672cde58cb6392d23951a7d08c731d2b5104d0bafda"
+      },
+      "checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_current_observation": true,
+        "replay_current_action_order": true,
+        "replay_recent_H4": true,
+        "source_prefix_actions_replayed_exactly": true,
+        "replay_all_pre_action_maps_match": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "failed_or_unresolved_checks": [],
+      "terminal_corroboration": {
+        "axis": "EXPLICIT_DONE_WON_TRUE_REWARD_POSITIVE",
+        "recovery_branch_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+            "line": 21,
+            "raw_line_sha256": "4c40f2a5b93ee329636de9084c8d608cd228ffce650c484b37b39aac0b5e005b",
+            "pointer": "/continuation_full/steps/2"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "d94599a32f2e36116a2da505a43acfd4ad384c2f8a595d0369cb467f5602f601"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl",
+            "line": 21,
+            "raw_line_sha256": "27c2a563592d1204b62ec504f59f2d616488d1f72a5812224fa3939a69d94990",
+            "pointer": "/continue_full/steps/14"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "57d1881f68be9c65db3ec54345509f12c936a25f0d84b7d79a5e5651879ef6c5"
+        },
+        "historical_success_label_retained": true,
+        "not_inferred_from_subgoal_or_shaping_reward": true
+      },
+      "model_identity": {
+        "axis": "MODEL_IDENTITY_PARTIAL",
+        "teacher_role": "adapter-off recovery base, distinct from adapter-on SFT suffix",
+        "base_model": "Qwen/Qwen3-8B",
+        "resolved_weights_revision": "UNKNOWN",
+        "resolved_tokenizer_revision": "UNKNOWN",
+        "tokenizer_identity_basis": "No historical resolved revision in the read run manifests",
+        "actor_adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+        "implementation_sha": "8926d8fb10e634489031de3da910c572b50d8d44",
+        "recovery_adapter_active": false,
+        "suffix_adapter_active": true,
+        "source_manifest": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/run_manifest.json",
+        "source_actor_recorded_model_version": "Qwen/Qwen3-8B+lora:/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+        "static_contract_binding": "historical_contracts.json: executed stage method AST matches frozen85, no historical model revision inference",
+        "runtime_loaded_commit_and_adapter_record": "Historical run manifest isolation fields only; no loaded commit/tokenizer revision receipt",
+        "isolation_receipt": {
+          "distinct_model_objects": true,
+          "fallback_used": false,
+          "generation_settings_reset_per_call": true,
+          "kv_cache_shared": false,
+          "recovery_adapter_active": false,
+          "sft_adapter_active": true
+        },
+        "limitation": "Historical main-resolution weights/tokenizer not retrospectively filled from R19"
+      },
+      "suffix_separate": {
+        "producer": "adapter-on frozen SFT-P0",
+        "actions": 3,
+        "target_adopted_here": false,
+        "target_identity_not_adapter_off": true,
+        "suffix_action_ids_sha256": "ed57a0c5c515f1df25f4115cade185dbd0beb04d0c3e3f6b5d07ad24bb79d79b",
+        "generation_or_step_refs": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 21,
+          "raw_line_sha256": "4c40f2a5b93ee329636de9084c8d608cd228ffce650c484b37b39aac0b5e005b",
+          "pointer": "/continuation_full/steps"
+        },
+        "semantic_public_action_sequence_sha256": "dcdd54b397030e5dce6fc021b536f4fcf050015fd64a36b9c20ed7d4621db99c",
+        "physical_alias_evidence": "No derived alias among fixed cases; legacy lacks event IDs, so semantic equality alone does not assert physical reuse",
+        "source_endpoints": {
+          "first_sha256": "12aa1ca395c9400317a1f7b8fbbff39e63c404a96f239b1f1cb7905fac8e295a",
+          "last_sha256": "d94599a32f2e36116a2da505a43acfd4ad384c2f8a595d0369cb467f5602f601"
+        },
+        "original_prefix_0to1_not_per_suffix_step_causal_label": true
+      },
+      "recorded_tokens": {
+        "first_recovery_stage1": {
+          "input_tokens": 488,
+          "generated_tokens": 32,
+          "max_new_tokens": 40
+        },
+        "first_recovery_stage2": {
+          "input_tokens": 625,
+          "generated_tokens": 5,
+          "max_new_tokens": 16
+        },
+        "source_actor_same_public_P0": {
+          "generated_tokens": 5,
+          "input_tokens": 536,
+          "mean_token_entropy": 0.02670257789930659,
+          "mean_token_log_probability": -0.005193412629677141
+        },
+        "prospective_projected_training_tokens": null,
+        "note": "Recorded inference counts only; no tokenizer. Teacher prompt length is not P0 projected training length."
+      },
+      "event_refs": [],
+      "disposition": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "evidence_gaps": [],
+      "learning_gain": "NOT_PROVEN",
+      "training_row_approved": false
+    },
+    {
+      "case_id": "R10_OSR:R8-F22",
+      "prefix_id": "R8-F22",
+      "stage": "R10_OSR",
+      "canonical_task": "look_at_obj_in_light-Book-None-DeskLamp-303/trial_T20190909_085406_916808",
+      "family": "look_at_obj_in_light",
+      "decision_index": 23,
+      "remaining_horizon": 27,
+      "source_episode": {
+        "reference": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+          "line": 6,
+          "raw_line_sha256": "7724f09fc7794135411e65befa529ebdb34a791d64f2b6062e8e9a8b6481d0a0",
+          "pointer": null
+        },
+        "trajectory_id": "e572984f53b9f5a576b27674",
+        "public_prefix_action_count": 23,
+        "full_public_prefix_field_sha256": "f27f2983c9d988389915ac0a4752929c6e0ab1953366b13857cc3f783ca4cc69"
+      },
+      "branch_record": {
+        "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+        "line": 22,
+        "raw_line_sha256": "cf202fe3b0726955789a94c6b8f4ca6a77d8c58dbd71f1d7345430bd5eed3961",
+        "pointer": null
+      },
+      "public_projection": {
+        "contract": "STATIC_PUBLIC_FIELDS_AND_P0_PUBLIC_TEXT_ONLY",
+        "projection_sha256": "800f0c98f2dee4b471580fefee031e370716d258fe2a437c4b9733d3755eef73",
+        "source_actor_public_prompt_sha256": "310416fdb50cbe3be3a77cfe4e778f57e4fa4acbc8ec6a79c50aa6910b5a84ae",
+        "static_public_text_sha256": "310416fdb50cbe3be3a77cfe4e778f57e4fa4acbc8ec6a79c50aa6910b5a84ae",
+        "existing_chat_render_sha256": "1e3f3baaff15e3472086465be6bbca8ee3f0ea1b16c5ffe4f6368b4e8d22fbd7",
+        "chat_template_or_tokenizer_revalidation": "NOT_PERFORMED",
+        "full_prompt_or_JSONL_exported": false,
+        "fields": {
+          "goal": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 6,
+              "raw_line_sha256": "7724f09fc7794135411e65befa529ebdb34a791d64f2b6062e8e9a8b6481d0a0",
+              "pointer": "/task/text"
+            },
+            "sha256_utf8": "795d49194ca5723dd22b91a03883e68010ec96653a720d688da99d26db0f7d77",
+            "available_before_decision": 23
+          },
+          "observation": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 6,
+              "raw_line_sha256": "7724f09fc7794135411e65befa529ebdb34a791d64f2b6062e8e9a8b6481d0a0",
+              "pointer": "/steps/23/observation"
+            },
+            "sha256_utf8": "2c994077db246009517a1e1c410d6172cacf055c761b3a746739b4feb040e99e",
+            "available_before_decision": 23
+          },
+          "history": {
+            "source_steps": [
+              {
+                "action_pointer": "/steps/19/action",
+                "result_pointer": "/steps/20/observation",
+                "result_available_by_state_index": 20,
+                "entry_sha256": "5855875d2b7059771426c3bd9ef4bbf54174e44c8dbe5b6d6482fbc94c7113a6"
+              },
+              {
+                "action_pointer": "/steps/20/action",
+                "result_pointer": "/steps/21/observation",
+                "result_available_by_state_index": 21,
+                "entry_sha256": "9aa89f274c203e9308a7090673de208489edaa41736a8ceaf923294afa58562a"
+              },
+              {
+                "action_pointer": "/steps/21/action",
+                "result_pointer": "/steps/22/observation",
+                "result_available_by_state_index": 22,
+                "entry_sha256": "5855875d2b7059771426c3bd9ef4bbf54174e44c8dbe5b6d6482fbc94c7113a6"
+              },
+              {
+                "action_pointer": "/steps/22/action",
+                "result_pointer": "/steps/23/observation",
+                "result_available_by_state_index": 23,
+                "entry_sha256": "9aa89f274c203e9308a7090673de208489edaa41736a8ceaf923294afa58562a"
+              }
+            ],
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 6,
+              "raw_line_sha256": "7724f09fc7794135411e65befa529ebdb34a791d64f2b6062e8e9a8b6481d0a0",
+              "pointer": null
+            },
+            "sha256": "18a4c3c346d1c62a4c6873e820448f48a281e71fb42f014ec6cec16b4f9ee137",
+            "transition_count": 4,
+            "uses_current_action_or_its_result": false
+          },
+          "ordered_action_map": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 6,
+              "raw_line_sha256": "7724f09fc7794135411e65befa529ebdb34a791d64f2b6062e8e9a8b6481d0a0",
+              "pointer": "/steps/23/valid_actions"
+            },
+            "action_count": 32,
+            "ordered_actions_sha256": "b4260caa836ff7538ede608e80862b78ad90b0ab738a67d2f59efb7f9957e1ba",
+            "indexed_map_sha256": "9481f26247fd7ea0daefe1c4d3e3404c576b0c25de8b026e87c3dc9bd412c663",
+            "all_source_policy_ids_match": true
+          }
+        },
+        "excluded_fields": [
+          "teacher diagnosis/subgoal/card",
+          "current source action/model output/result/environment_metadata",
+          "terminal/reward/won",
+          "stratum/K/oracle/future actions",
+          "expert_plan/facts"
+        ],
+        "source_step_current_metadata_environment_is_post_action_not_input": true
+      },
+      "existing_replay": {
+        "source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 22,
+          "raw_line_sha256": "cf202fe3b0726955789a94c6b8f4ca6a77d8c58dbd71f1d7345430bd5eed3961",
+          "pointer": "/replay_full"
+        },
+        "replay_record_sha256": "f17507f2945a0e5b7865acc930bacbe59511ef9fd5c54eaaf66385e12c8168a5",
+        "transitions_count": 23,
+        "first_and_last_transition_sha256": [
+          "9a6fe568d6d6897026c7f58e54435ae16bcf1e9ea33a392e0e4fff9500813508",
+          "07e80d462cdf6faf06acf50a6bcab4511562ec2ab52a49916e0f6e91a1f32bbe"
+        ],
+        "note": "Existing full public replay trace"
+      },
+      "first_recovery_target": {
+        "producer": "adapter-off recovery base",
+        "generation_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 22,
+          "raw_line_sha256": "cf202fe3b0726955789a94c6b8f4ca6a77d8c58dbd71f1d7345430bd5eed3961",
+          "pointer": "/recovery_full/stage_two/generation"
+        },
+        "parsed_source_pointer": "/recovery_full/stage_two/parsed",
+        "failure_reason": null,
+        "teacher_valid_actions_list_recorded": false,
+        "teacher_ordered_ID_command_pairs_sha256": "9dc37cdf514970d6975731395710fd4de118a78037ce6c03cd61ac6475f859e6",
+        "transition_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 22,
+          "raw_line_sha256": "cf202fe3b0726955789a94c6b8f4ca6a77d8c58dbd71f1d7345430bd5eed3961",
+          "pointer": "/recovery_transition"
+        },
+        "raw_output": "A004",
+        "raw_output_sha256": "6ac400b9a74d9f6585d9a3dcd957986c6dd289a7103bef70a956455f1296a6ae",
+        "recorded_parser_status": "selected",
+        "action_id": "A004",
+        "mapped_command": "go to desk 1",
+        "teacher_map_sha256": "9481f26247fd7ea0daefe1c4d3e3404c576b0c25de8b026e87c3dc9bd412c663",
+        "P0_map_sha256": "9481f26247fd7ea0daefe1c4d3e3404c576b0c25de8b026e87c3dc9bd412c663",
+        "all_entries_ID_command_equal": true,
+        "executed_command": "go to desk 1",
+        "transition_source_pointer": "/recovery_transition",
+        "transition_sha256": "d8c2721dcf065bc295c7ab89b405115aae7d48a146dab07896cb4f61b3dbba2e",
+        "done_after_first": false,
+        "reward_after_first": 0.0,
+        "source_end_state_observation_sha256": "60292321c785f5dc1df820a03a5fc62af4508a9a1b3ca08247aa50e5a2c4f153"
+      },
+      "checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_current_observation": true,
+        "replay_current_action_order": true,
+        "replay_recent_H4": true,
+        "source_prefix_actions_replayed_exactly": true,
+        "replay_all_pre_action_maps_match": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "failed_or_unresolved_checks": [],
+      "terminal_corroboration": {
+        "axis": "EXPLICIT_DONE_WON_TRUE_REWARD_POSITIVE",
+        "recovery_branch_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+            "line": 22,
+            "raw_line_sha256": "cf202fe3b0726955789a94c6b8f4ca6a77d8c58dbd71f1d7345430bd5eed3961",
+            "pointer": "/continuation_full/steps/1"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "4442445361858be6142e732349cc32d3658d1873a3b413b0eed03f28cd9b2250"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl",
+            "line": 22,
+            "raw_line_sha256": "e91e165d7e5a54df6eb5302a606545618c3cab6134b2130ca6d4c879f1e8cb7a",
+            "pointer": "/continue_full/steps/26"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "e9ca279dcd382310f5c20f4628e0d7d728e5f1e4e3b101843210739a4af1bd88"
+        },
+        "historical_success_label_retained": true,
+        "not_inferred_from_subgoal_or_shaping_reward": true
+      },
+      "model_identity": {
+        "axis": "MODEL_IDENTITY_PARTIAL",
+        "teacher_role": "adapter-off recovery base, distinct from adapter-on SFT suffix",
+        "base_model": "Qwen/Qwen3-8B",
+        "resolved_weights_revision": "UNKNOWN",
+        "resolved_tokenizer_revision": "UNKNOWN",
+        "tokenizer_identity_basis": "No historical resolved revision in the read run manifests",
+        "actor_adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+        "implementation_sha": "8926d8fb10e634489031de3da910c572b50d8d44",
+        "recovery_adapter_active": false,
+        "suffix_adapter_active": true,
+        "source_manifest": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/run_manifest.json",
+        "source_actor_recorded_model_version": "Qwen/Qwen3-8B+lora:/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+        "static_contract_binding": "historical_contracts.json: executed stage method AST matches frozen85, no historical model revision inference",
+        "runtime_loaded_commit_and_adapter_record": "Historical run manifest isolation fields only; no loaded commit/tokenizer revision receipt",
+        "isolation_receipt": {
+          "distinct_model_objects": true,
+          "fallback_used": false,
+          "generation_settings_reset_per_call": true,
+          "kv_cache_shared": false,
+          "recovery_adapter_active": false,
+          "sft_adapter_active": true
+        },
+        "limitation": "Historical main-resolution weights/tokenizer not retrospectively filled from R19"
+      },
+      "suffix_separate": {
+        "producer": "adapter-on frozen SFT-P0",
+        "actions": 2,
+        "target_adopted_here": false,
+        "target_identity_not_adapter_off": true,
+        "suffix_action_ids_sha256": "755028b168c0d87107448a845f764c2ea575064fcd41e35ab99a43c2e343480b",
+        "generation_or_step_refs": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 22,
+          "raw_line_sha256": "cf202fe3b0726955789a94c6b8f4ca6a77d8c58dbd71f1d7345430bd5eed3961",
+          "pointer": "/continuation_full/steps"
+        },
+        "semantic_public_action_sequence_sha256": "4c2493fa1cf07265ebc5e26a2eebc0308e8dcbd35842a5d3d6b73a4a34275843",
+        "physical_alias_evidence": "No derived alias among fixed cases; legacy lacks event IDs, so semantic equality alone does not assert physical reuse",
+        "source_endpoints": {
+          "first_sha256": "1b738bbb86c861f183ead620086cc2dcae6a3fadce1e9862e3f44e03a78b8e1f",
+          "last_sha256": "4442445361858be6142e732349cc32d3658d1873a3b413b0eed03f28cd9b2250"
+        },
+        "original_prefix_0to1_not_per_suffix_step_causal_label": true
+      },
+      "recorded_tokens": {
+        "first_recovery_stage1": {
+          "input_tokens": 507,
+          "generated_tokens": 30,
+          "max_new_tokens": 40
+        },
+        "first_recovery_stage2": {
+          "input_tokens": 650,
+          "generated_tokens": 5,
+          "max_new_tokens": 16
+        },
+        "source_actor_same_public_P0": {
+          "generated_tokens": 5,
+          "input_tokens": 563,
+          "mean_token_entropy": 0.0021514713408691934,
+          "mean_token_log_probability": -0.0002446900478162206
+        },
+        "prospective_projected_training_tokens": null,
+        "note": "Recorded inference counts only; no tokenizer. Teacher prompt length is not P0 projected training length."
+      },
+      "event_refs": [],
+      "disposition": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "evidence_gaps": [],
+      "learning_gain": "NOT_PROVEN",
+      "training_row_approved": false
+    },
+    {
+      "case_id": "R10_OSR:R8-F23",
+      "prefix_id": "R8-F23",
+      "stage": "R10_OSR",
+      "canonical_task": "look_at_obj_in_light-Book-None-DeskLamp-303/trial_T20190909_085406_916808",
+      "family": "look_at_obj_in_light",
+      "decision_index": 28,
+      "remaining_horizon": 22,
+      "source_episode": {
+        "reference": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+          "line": 6,
+          "raw_line_sha256": "7724f09fc7794135411e65befa529ebdb34a791d64f2b6062e8e9a8b6481d0a0",
+          "pointer": null
+        },
+        "trajectory_id": "e572984f53b9f5a576b27674",
+        "public_prefix_action_count": 28,
+        "full_public_prefix_field_sha256": "73ffc8a87c12123defb4ca33f0706ae27cfb8aaa8d35be3a5564b285ff733b16"
+      },
+      "branch_record": {
+        "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+        "line": 23,
+        "raw_line_sha256": "d8b5e8b3a5d8a08b0f16a2682b5dd28936f88551ad73342a37c15c0e3d79b269",
+        "pointer": null
+      },
+      "public_projection": {
+        "contract": "STATIC_PUBLIC_FIELDS_AND_P0_PUBLIC_TEXT_ONLY",
+        "projection_sha256": "da964a17e28d06c0732d22b369967748ac31cefefe1fd7d58c0bb80c2d1e3cca",
+        "source_actor_public_prompt_sha256": "4b5e658e68a7c05348682d9744e982719c8319b7cd6ff92e96700e870f83955f",
+        "static_public_text_sha256": "4b5e658e68a7c05348682d9744e982719c8319b7cd6ff92e96700e870f83955f",
+        "existing_chat_render_sha256": "98f48673d648dda384c9f80f66711c79ac3fff2b8238718f0588ea47b9ff8181",
+        "chat_template_or_tokenizer_revalidation": "NOT_PERFORMED",
+        "full_prompt_or_JSONL_exported": false,
+        "fields": {
+          "goal": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 6,
+              "raw_line_sha256": "7724f09fc7794135411e65befa529ebdb34a791d64f2b6062e8e9a8b6481d0a0",
+              "pointer": "/task/text"
+            },
+            "sha256_utf8": "795d49194ca5723dd22b91a03883e68010ec96653a720d688da99d26db0f7d77",
+            "available_before_decision": 28
+          },
+          "observation": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 6,
+              "raw_line_sha256": "7724f09fc7794135411e65befa529ebdb34a791d64f2b6062e8e9a8b6481d0a0",
+              "pointer": "/steps/28/observation"
+            },
+            "sha256_utf8": "673deaef46c4bbecd409f09e2532208b7540e5fd964214e4ed6f86ee728cf8cc",
+            "available_before_decision": 28
+          },
+          "history": {
+            "source_steps": [
+              {
+                "action_pointer": "/steps/24/action",
+                "result_pointer": "/steps/25/observation",
+                "result_available_by_state_index": 25,
+                "entry_sha256": "9aa89f274c203e9308a7090673de208489edaa41736a8ceaf923294afa58562a"
+              },
+              {
+                "action_pointer": "/steps/25/action",
+                "result_pointer": "/steps/26/observation",
+                "result_available_by_state_index": 26,
+                "entry_sha256": "5855875d2b7059771426c3bd9ef4bbf54174e44c8dbe5b6d6482fbc94c7113a6"
+              },
+              {
+                "action_pointer": "/steps/26/action",
+                "result_pointer": "/steps/27/observation",
+                "result_available_by_state_index": 27,
+                "entry_sha256": "9aa89f274c203e9308a7090673de208489edaa41736a8ceaf923294afa58562a"
+              },
+              {
+                "action_pointer": "/steps/27/action",
+                "result_pointer": "/steps/28/observation",
+                "result_available_by_state_index": 28,
+                "entry_sha256": "5855875d2b7059771426c3bd9ef4bbf54174e44c8dbe5b6d6482fbc94c7113a6"
+              }
+            ],
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 6,
+              "raw_line_sha256": "7724f09fc7794135411e65befa529ebdb34a791d64f2b6062e8e9a8b6481d0a0",
+              "pointer": null
+            },
+            "sha256": "e4b363723a0b59c0fa583c8e9e6ba57d05081e4775ae53af141b4a7505b9691e",
+            "transition_count": 4,
+            "uses_current_action_or_its_result": false
+          },
+          "ordered_action_map": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+              "line": 6,
+              "raw_line_sha256": "7724f09fc7794135411e65befa529ebdb34a791d64f2b6062e8e9a8b6481d0a0",
+              "pointer": "/steps/28/valid_actions"
+            },
+            "action_count": 32,
+            "ordered_actions_sha256": "b4260caa836ff7538ede608e80862b78ad90b0ab738a67d2f59efb7f9957e1ba",
+            "indexed_map_sha256": "9481f26247fd7ea0daefe1c4d3e3404c576b0c25de8b026e87c3dc9bd412c663",
+            "all_source_policy_ids_match": true
+          }
+        },
+        "excluded_fields": [
+          "teacher diagnosis/subgoal/card",
+          "current source action/model output/result/environment_metadata",
+          "terminal/reward/won",
+          "stratum/K/oracle/future actions",
+          "expert_plan/facts"
+        ],
+        "source_step_current_metadata_environment_is_post_action_not_input": true
+      },
+      "existing_replay": {
+        "source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 23,
+          "raw_line_sha256": "d8b5e8b3a5d8a08b0f16a2682b5dd28936f88551ad73342a37c15c0e3d79b269",
+          "pointer": "/replay_full"
+        },
+        "replay_record_sha256": "a5f48dbfdddf6c32b5bf99d1ed7823d27a083d68a9f967a00612a06c82a24fe5",
+        "transitions_count": 28,
+        "first_and_last_transition_sha256": [
+          "9a6fe568d6d6897026c7f58e54435ae16bcf1e9ea33a392e0e4fff9500813508",
+          "ab36970505b21aa6bc097d8591cc3451fe6d3dfb1d518baddf3c50259ec3ba62"
+        ],
+        "note": "Existing full public replay trace"
+      },
+      "first_recovery_target": {
+        "producer": "adapter-off recovery base",
+        "generation_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 23,
+          "raw_line_sha256": "d8b5e8b3a5d8a08b0f16a2682b5dd28936f88551ad73342a37c15c0e3d79b269",
+          "pointer": "/recovery_full/stage_two/generation"
+        },
+        "parsed_source_pointer": "/recovery_full/stage_two/parsed",
+        "failure_reason": null,
+        "teacher_valid_actions_list_recorded": false,
+        "teacher_ordered_ID_command_pairs_sha256": "9dc37cdf514970d6975731395710fd4de118a78037ce6c03cd61ac6475f859e6",
+        "transition_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 23,
+          "raw_line_sha256": "d8b5e8b3a5d8a08b0f16a2682b5dd28936f88551ad73342a37c15c0e3d79b269",
+          "pointer": "/recovery_transition"
+        },
+        "raw_output": "A004",
+        "raw_output_sha256": "6ac400b9a74d9f6585d9a3dcd957986c6dd289a7103bef70a956455f1296a6ae",
+        "recorded_parser_status": "selected",
+        "action_id": "A004",
+        "mapped_command": "go to desk 1",
+        "teacher_map_sha256": "9481f26247fd7ea0daefe1c4d3e3404c576b0c25de8b026e87c3dc9bd412c663",
+        "P0_map_sha256": "9481f26247fd7ea0daefe1c4d3e3404c576b0c25de8b026e87c3dc9bd412c663",
+        "all_entries_ID_command_equal": true,
+        "executed_command": "go to desk 1",
+        "transition_source_pointer": "/recovery_transition",
+        "transition_sha256": "d8c2721dcf065bc295c7ab89b405115aae7d48a146dab07896cb4f61b3dbba2e",
+        "done_after_first": false,
+        "reward_after_first": 0.0,
+        "source_end_state_observation_sha256": "60292321c785f5dc1df820a03a5fc62af4508a9a1b3ca08247aa50e5a2c4f153"
+      },
+      "checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_current_observation": true,
+        "replay_current_action_order": true,
+        "replay_recent_H4": true,
+        "source_prefix_actions_replayed_exactly": true,
+        "replay_all_pre_action_maps_match": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "failed_or_unresolved_checks": [],
+      "terminal_corroboration": {
+        "axis": "EXPLICIT_DONE_WON_TRUE_REWARD_POSITIVE",
+        "recovery_branch_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+            "line": 23,
+            "raw_line_sha256": "d8b5e8b3a5d8a08b0f16a2682b5dd28936f88551ad73342a37c15c0e3d79b269",
+            "pointer": "/continuation_full/steps/1"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "fd0ea39c00d804573ce5468d9200fdec3f805fd348315de00247c2ab8ddc9e17"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl",
+            "line": 23,
+            "raw_line_sha256": "1f8d8cf0c2d27cf38f7ab97efdaea72ea41e977a927950f76c0ecca7b8dd3e3b",
+            "pointer": "/continue_full/steps/21"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "af86a944165f1c47aaf3a484967b72c62db7a9530dbe6b00b74465521c86f30a"
+        },
+        "historical_success_label_retained": true,
+        "not_inferred_from_subgoal_or_shaping_reward": true
+      },
+      "model_identity": {
+        "axis": "MODEL_IDENTITY_PARTIAL",
+        "teacher_role": "adapter-off recovery base, distinct from adapter-on SFT suffix",
+        "base_model": "Qwen/Qwen3-8B",
+        "resolved_weights_revision": "UNKNOWN",
+        "resolved_tokenizer_revision": "UNKNOWN",
+        "tokenizer_identity_basis": "No historical resolved revision in the read run manifests",
+        "actor_adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+        "implementation_sha": "8926d8fb10e634489031de3da910c572b50d8d44",
+        "recovery_adapter_active": false,
+        "suffix_adapter_active": true,
+        "source_manifest": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/run_manifest.json",
+        "source_actor_recorded_model_version": "Qwen/Qwen3-8B+lora:/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+        "static_contract_binding": "historical_contracts.json: executed stage method AST matches frozen85, no historical model revision inference",
+        "runtime_loaded_commit_and_adapter_record": "Historical run manifest isolation fields only; no loaded commit/tokenizer revision receipt",
+        "isolation_receipt": {
+          "distinct_model_objects": true,
+          "fallback_used": false,
+          "generation_settings_reset_per_call": true,
+          "kv_cache_shared": false,
+          "recovery_adapter_active": false,
+          "sft_adapter_active": true
+        },
+        "limitation": "Historical main-resolution weights/tokenizer not retrospectively filled from R19"
+      },
+      "suffix_separate": {
+        "producer": "adapter-on frozen SFT-P0",
+        "actions": 2,
+        "target_adopted_here": false,
+        "target_identity_not_adapter_off": true,
+        "suffix_action_ids_sha256": "755028b168c0d87107448a845f764c2ea575064fcd41e35ab99a43c2e343480b",
+        "generation_or_step_refs": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+          "line": 23,
+          "raw_line_sha256": "d8b5e8b3a5d8a08b0f16a2682b5dd28936f88551ad73342a37c15c0e3d79b269",
+          "pointer": "/continuation_full/steps"
+        },
+        "semantic_public_action_sequence_sha256": "4c2493fa1cf07265ebc5e26a2eebc0308e8dcbd35842a5d3d6b73a4a34275843",
+        "physical_alias_evidence": "No derived alias among fixed cases; legacy lacks event IDs, so semantic equality alone does not assert physical reuse",
+        "source_endpoints": {
+          "first_sha256": "924cc31644a9264d5eb765b7395c771edc46fdfd5a1e91710eb5cdf9dc32c1eb",
+          "last_sha256": "fd0ea39c00d804573ce5468d9200fdec3f805fd348315de00247c2ab8ddc9e17"
+        },
+        "original_prefix_0to1_not_per_suffix_step_causal_label": true
+      },
+      "recorded_tokens": {
+        "first_recovery_stage1": {
+          "input_tokens": 522,
+          "generated_tokens": 28,
+          "max_new_tokens": 40
+        },
+        "first_recovery_stage2": {
+          "input_tokens": 663,
+          "generated_tokens": 5,
+          "max_new_tokens": 16
+        },
+        "source_actor_same_public_P0": {
+          "generated_tokens": 5,
+          "input_tokens": 578,
+          "mean_token_entropy": 0.6821780292678199,
+          "mean_token_log_probability": -0.6477033853528156
+        },
+        "prospective_projected_training_tokens": null,
+        "note": "Recorded inference counts only; no tokenizer. Teacher prompt length is not P0 projected training length."
+      },
+      "event_refs": [],
+      "disposition": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "evidence_gaps": [],
+      "learning_gain": "NOT_PROVEN",
+      "training_row_approved": false
+    },
+    {
+      "case_id": "R16_OSR:R15-F01",
+      "prefix_id": "R15-F01",
+      "stage": "R16_OSR",
+      "canonical_task": "pick_two_obj_and_place-Tomato-None-CounterTop-19/trial_T20190907_144716_566859",
+      "family": "pick_two_obj_and_place",
+      "decision_index": 14,
+      "remaining_horizon": 36,
+      "source_episode": {
+        "reference": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+          "line": 2,
+          "raw_line_sha256": "79d95ed593149d109a02c85b70532120cbd5ac5d86e7a983cb381c8003d0ee81",
+          "pointer": null
+        },
+        "trajectory_id": "b30d51cccd45aaa8ed2d8f74",
+        "public_prefix_action_count": 14,
+        "full_public_prefix_field_sha256": "67826c3b54569219238c1735ad96a68a6dc899c299b328547de6819b3d433de4"
+      },
+      "branch_record": {
+        "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+        "line": 1,
+        "raw_line_sha256": "996f31f3f5c5ba433320f5d548a68b42581ba51b9843dd2e3868fbd81eb902ca",
+        "pointer": null
+      },
+      "public_projection": {
+        "contract": "STATIC_PUBLIC_FIELDS_AND_P0_PUBLIC_TEXT_ONLY",
+        "projection_sha256": "4e4708a11f1b9f9aff473020e7773e7f8002c7160f5b224077f1bbc7074f9135",
+        "source_actor_public_prompt_sha256": "2341211a2d7084ff621c894dd47de66e31898a0504b51d57ff5e101c224a94b4",
+        "static_public_text_sha256": "2341211a2d7084ff621c894dd47de66e31898a0504b51d57ff5e101c224a94b4",
+        "existing_chat_render_sha256": "8e4d36e560fb3197167189556257ee60939a15d27b98eaf56324e95c36a5f0a8",
+        "chat_template_or_tokenizer_revalidation": "NOT_PERFORMED",
+        "full_prompt_or_JSONL_exported": false,
+        "fields": {
+          "goal": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 2,
+              "raw_line_sha256": "79d95ed593149d109a02c85b70532120cbd5ac5d86e7a983cb381c8003d0ee81",
+              "pointer": "/task/text"
+            },
+            "sha256_utf8": "77b42360d7324145730eca61db76ea19bdcf9efa42e2848620d7b993c21861bd",
+            "available_before_decision": 14
+          },
+          "observation": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 2,
+              "raw_line_sha256": "79d95ed593149d109a02c85b70532120cbd5ac5d86e7a983cb381c8003d0ee81",
+              "pointer": "/steps/14/observation"
+            },
+            "sha256_utf8": "777295d63ed606b265cf86da9d1cd9debc520a375a64995cd20301c0c0b1cf77",
+            "available_before_decision": 14
+          },
+          "history": {
+            "source_steps": [
+              {
+                "action_pointer": "/steps/10/action",
+                "result_pointer": "/steps/11/observation",
+                "result_available_by_state_index": 11,
+                "entry_sha256": "2ca1f6684a01485f7da038b6e4045d7463b07c44cbd4f0e563f988c31a76959b"
+              },
+              {
+                "action_pointer": "/steps/11/action",
+                "result_pointer": "/steps/12/observation",
+                "result_available_by_state_index": 12,
+                "entry_sha256": "84854e0595f0542dd792f762c9da996e8744071b1a69e5335420778bc5fdaff5"
+              },
+              {
+                "action_pointer": "/steps/12/action",
+                "result_pointer": "/steps/13/observation",
+                "result_available_by_state_index": 13,
+                "entry_sha256": "2ca1f6684a01485f7da038b6e4045d7463b07c44cbd4f0e563f988c31a76959b"
+              },
+              {
+                "action_pointer": "/steps/13/action",
+                "result_pointer": "/steps/14/observation",
+                "result_available_by_state_index": 14,
+                "entry_sha256": "84854e0595f0542dd792f762c9da996e8744071b1a69e5335420778bc5fdaff5"
+              }
+            ],
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 2,
+              "raw_line_sha256": "79d95ed593149d109a02c85b70532120cbd5ac5d86e7a983cb381c8003d0ee81",
+              "pointer": null
+            },
+            "sha256": "752af84c396a79de0dfa54d019cf0966d19737b6d650d3196f769b66e306a5ba",
+            "transition_count": 4,
+            "uses_current_action_or_its_result": false
+          },
+          "ordered_action_map": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 2,
+              "raw_line_sha256": "79d95ed593149d109a02c85b70532120cbd5ac5d86e7a983cb381c8003d0ee81",
+              "pointer": "/steps/14/valid_actions"
+            },
+            "action_count": 42,
+            "ordered_actions_sha256": "09f8a0d74edc7b563489a45d44d4a53b9a813f3e72c9c3ab8f2ebb3ba105ad2d",
+            "indexed_map_sha256": "eb59458b5b36b0d503b9e97c02583c964456fa3f7e309e226d1b65033acacab0",
+            "all_source_policy_ids_match": true
+          }
+        },
+        "excluded_fields": [
+          "teacher diagnosis/subgoal/card",
+          "current source action/model output/result/environment_metadata",
+          "terminal/reward/won",
+          "stratum/K/oracle/future actions",
+          "expert_plan/facts"
+        ],
+        "source_step_current_metadata_environment_is_post_action_not_input": true
+      },
+      "existing_replay": {
+        "source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/replay_ledger.jsonl",
+          "line": 1,
+          "raw_line_sha256": "620e414e63e45af629de6cd4f9f17d954eaa3721062fddfa85e8813bfbca8765",
+          "pointer": null
+        },
+        "replay_record_sha256": "3b8a0b02e616374c35d46d944a863236c85186340fdca6ef523b45c4ebeb1a62",
+        "transitions_count": 14,
+        "first_and_last_transition_sha256": [
+          "64d221c27f03e67cb59b8c3910879476fbd3f734bc991fa3084e7ddfddd20320",
+          "ddfeab31764ef1750b44d7825e8c31cfdf4e44ab4fc049faa901b58004de8f49"
+        ],
+        "note": "Existing per-transition equality receipts + complete prefix hash; original public source remains bound."
+      },
+      "first_recovery_target": {
+        "producer": "adapter-off recovery base",
+        "generation_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+          "line": 1,
+          "raw_line_sha256": "996f31f3f5c5ba433320f5d548a68b42581ba51b9843dd2e3868fbd81eb902ca",
+          "pointer": "/recovery_full/stage_two/generation"
+        },
+        "parsed_source_pointer": "/recovery_full/stage_two/parsed",
+        "failure_reason": null,
+        "teacher_valid_actions_list_recorded": false,
+        "teacher_ordered_ID_command_pairs_sha256": "c0fa666e9202a705ab9bee933b2fe32f5c62d8ec21d4f2dfc3f24c292b50e562",
+        "transition_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+          "line": 1,
+          "raw_line_sha256": "996f31f3f5c5ba433320f5d548a68b42581ba51b9843dd2e3868fbd81eb902ca",
+          "pointer": "/recovery_transition"
+        },
+        "raw_output": "A001",
+        "raw_output_sha256": "8e7d97a738983490f8d9e266e5938c7aaf0be0e4b31d299b0b9c47df4913bd36",
+        "recorded_parser_status": "selected",
+        "action_id": "A001",
+        "mapped_command": "go to cabinet 1",
+        "teacher_map_sha256": "eb59458b5b36b0d503b9e97c02583c964456fa3f7e309e226d1b65033acacab0",
+        "P0_map_sha256": "eb59458b5b36b0d503b9e97c02583c964456fa3f7e309e226d1b65033acacab0",
+        "all_entries_ID_command_equal": true,
+        "executed_command": "go to cabinet 1",
+        "transition_source_pointer": "/recovery_transition",
+        "transition_sha256": "9f2d2c21e29bb3601c70ad5288415736cc0b40e4ccedc1222cff3d39340ef4d3",
+        "done_after_first": false,
+        "reward_after_first": 0.0,
+        "source_end_state_observation_sha256": "3d3900a5b225caf853e70b0feba41de3d0e7facdce786e3cb84371e97d6fb128"
+      },
+      "checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_task_identity": true,
+        "replay_observation_digest": true,
+        "replay_map_digest": true,
+        "replay_recent_H4_digest": true,
+        "all_recorded_transition_checks_true": true,
+        "branch_replay_summary_binds_ledger": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "failed_or_unresolved_checks": [],
+      "terminal_corroboration": {
+        "axis": "EXPLICIT_DONE_WON_TRUE_REWARD_POSITIVE",
+        "recovery_branch_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+            "line": 1,
+            "raw_line_sha256": "996f31f3f5c5ba433320f5d548a68b42581ba51b9843dd2e3868fbd81eb902ca",
+            "pointer": "/continuation_full/steps/11"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "b1a91f4b6644e80af4ff629897072f31b8949405e0c5a3bf74130f6d87bd040c"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r15-b-20260910T000000Z/continue_ledger.jsonl",
+            "line": 1,
+            "raw_line_sha256": "b8a9b50bd769faca6f3fda5bb2c83a3af52baaf3452d2076ae3aecf269f757cf",
+            "pointer": "/steps/35"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "4bc8af73032b6ea8e9bda34857accea5002e9b701df32954f66c09a0a591fbc3"
+        },
+        "historical_success_label_retained": true,
+        "not_inferred_from_subgoal_or_shaping_reward": true
+      },
+      "model_identity": {
+        "axis": "MODEL_IDENTITY_PARTIAL",
+        "teacher_role": "adapter-off recovery base, distinct from adapter-on SFT suffix",
+        "base_model": "Qwen/Qwen3-8B",
+        "resolved_weights_revision": "UNKNOWN",
+        "resolved_tokenizer_revision": "UNKNOWN",
+        "tokenizer_identity_basis": "No historical resolved revision in the read run manifests",
+        "actor_adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+        "implementation_sha": "d1ef841ea9dc7423177fb7647906e2e719f0fbe7",
+        "recovery_adapter_active": false,
+        "suffix_adapter_active": true,
+        "source_manifest": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/run_manifest.json",
+        "source_actor_recorded_model_version": "Qwen/Qwen3-8B+lora:/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+        "static_contract_binding": "historical_contracts.json: executed stage method AST matches frozen85, no historical model revision inference",
+        "runtime_loaded_commit_and_adapter_record": "Historical run manifest isolation fields only; no loaded commit/tokenizer revision receipt",
+        "isolation_receipt": {
+          "distinct_model_objects": true,
+          "fallback_used": false,
+          "gpu_memory": {
+            "allocated_mib": 31585,
+            "device": 0,
+            "name": "NVIDIA A40",
+            "peak_allocated_mib": 31922,
+            "peak_reserved_mib": 31942,
+            "reserved_mib": 31942,
+            "total_mib": 45403
+          },
+          "recovery_adapter_active": false,
+          "seconds": 12.811728113912977,
+          "sft_adapter_active": true
+        },
+        "limitation": "Historical main-resolution weights/tokenizer not retrospectively filled from R19"
+      },
+      "suffix_separate": {
+        "producer": "adapter-on frozen SFT-P0",
+        "actions": 12,
+        "target_adopted_here": false,
+        "target_identity_not_adapter_off": true,
+        "suffix_action_ids_sha256": "01c68c366e52bd81e3ac9556e265c11bfa12df73fc215292d60368d642852299",
+        "generation_or_step_refs": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+          "line": 1,
+          "raw_line_sha256": "996f31f3f5c5ba433320f5d548a68b42581ba51b9843dd2e3868fbd81eb902ca",
+          "pointer": "/continuation_full/steps"
+        },
+        "semantic_public_action_sequence_sha256": "9e37f3ca19e997589c8b6b86ef7e7c68e90f3fc3f4974dfe99156422d5571a6e",
+        "physical_alias_evidence": "No derived alias among fixed cases; legacy lacks event IDs, so semantic equality alone does not assert physical reuse",
+        "source_endpoints": {
+          "first_sha256": "575dc1e4e5dfd3b64f4f33476898b808bddc3a64fe0ce8649048e3f0ab2827a9",
+          "last_sha256": "b1a91f4b6644e80af4ff629897072f31b8949405e0c5a3bf74130f6d87bd040c"
+        },
+        "original_prefix_0to1_not_per_suffix_step_causal_label": true
+      },
+      "recorded_tokens": {
+        "first_recovery_stage1": {
+          "input_tokens": 569,
+          "generated_tokens": 25,
+          "max_new_tokens": 40
+        },
+        "first_recovery_stage2": {
+          "input_tokens": 745,
+          "generated_tokens": 5,
+          "max_new_tokens": 16
+        },
+        "source_actor_same_public_P0": {
+          "generated_tokens": 5,
+          "input_tokens": 665,
+          "mean_token_entropy": 0.0026893778557153985,
+          "mean_token_log_probability": -0.00034219620237649904
+        },
+        "prospective_projected_training_tokens": null,
+        "note": "Recorded inference counts only; no tokenizer. Teacher prompt length is not P0 projected training length."
+      },
+      "event_refs": [],
+      "disposition": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "evidence_gaps": [],
+      "learning_gain": "NOT_PROVEN",
+      "training_row_approved": false
+    },
+    {
+      "case_id": "R16_OSR:R15-F22",
+      "prefix_id": "R15-F22",
+      "stage": "R16_OSR",
+      "canonical_task": "pick_heat_then_place_in_recep-Mug-None-Cabinet-22/trial_T20190908_072939_855818",
+      "family": "pick_heat_then_place_in_recep",
+      "decision_index": 7,
+      "remaining_horizon": 43,
+      "source_episode": {
+        "reference": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+          "line": 35,
+          "raw_line_sha256": "8a1d65584c4f9ac388f7213cde43500aef38d3a4f9642032803680a4dcc7df17",
+          "pointer": null
+        },
+        "trajectory_id": "136df1dfbbc02f9ffd581650",
+        "public_prefix_action_count": 7,
+        "full_public_prefix_field_sha256": "b7dc49f740e690121cd255f08d4be02ea4594fd38ed3907756c2ea644e91a06f"
+      },
+      "branch_record": {
+        "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+        "line": 22,
+        "raw_line_sha256": "3437d1634b3f4ad303d95da2ac043230189277623efcda996eeadd1419bbb061",
+        "pointer": null
+      },
+      "public_projection": {
+        "contract": "STATIC_PUBLIC_FIELDS_AND_P0_PUBLIC_TEXT_ONLY",
+        "projection_sha256": "f7f7adf956ecf066582e6b8473901c9d30f04518d5f41c0a17b9c760dc755192",
+        "source_actor_public_prompt_sha256": "55ce5d2b51201c69b29e976a358f078da95578ef278c3aa2ebe64d3df5e8d445",
+        "static_public_text_sha256": "55ce5d2b51201c69b29e976a358f078da95578ef278c3aa2ebe64d3df5e8d445",
+        "existing_chat_render_sha256": "c5860aff138b46e853b02eb8a9393c2257acbfda9e24774066db0a23494f8f52",
+        "chat_template_or_tokenizer_revalidation": "NOT_PERFORMED",
+        "full_prompt_or_JSONL_exported": false,
+        "fields": {
+          "goal": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 35,
+              "raw_line_sha256": "8a1d65584c4f9ac388f7213cde43500aef38d3a4f9642032803680a4dcc7df17",
+              "pointer": "/task/text"
+            },
+            "sha256_utf8": "b6594ee13d6e61e12f432b4a7ed8c146f6a0f7584cd07f762ee15204fac451e3",
+            "available_before_decision": 7
+          },
+          "observation": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 35,
+              "raw_line_sha256": "8a1d65584c4f9ac388f7213cde43500aef38d3a4f9642032803680a4dcc7df17",
+              "pointer": "/steps/7/observation"
+            },
+            "sha256_utf8": "578cf21e68dc1c7131cea265282c5a5a556c4174465a829539e8235a38f3d829",
+            "available_before_decision": 7
+          },
+          "history": {
+            "source_steps": [
+              {
+                "action_pointer": "/steps/3/action",
+                "result_pointer": "/steps/4/observation",
+                "result_available_by_state_index": 4,
+                "entry_sha256": "aff3ebd9767ab9a9f98c8eefd27e0f28fbdea3ed00baabbef54172b63aab79b5"
+              },
+              {
+                "action_pointer": "/steps/4/action",
+                "result_pointer": "/steps/5/observation",
+                "result_available_by_state_index": 5,
+                "entry_sha256": "d65a176b1682a729373c8602fcbc7e105e2abc9100bf1fd43f8c36c9f85f5e8b"
+              },
+              {
+                "action_pointer": "/steps/5/action",
+                "result_pointer": "/steps/6/observation",
+                "result_available_by_state_index": 6,
+                "entry_sha256": "aff3ebd9767ab9a9f98c8eefd27e0f28fbdea3ed00baabbef54172b63aab79b5"
+              },
+              {
+                "action_pointer": "/steps/6/action",
+                "result_pointer": "/steps/7/observation",
+                "result_available_by_state_index": 7,
+                "entry_sha256": "d65a176b1682a729373c8602fcbc7e105e2abc9100bf1fd43f8c36c9f85f5e8b"
+              }
+            ],
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 35,
+              "raw_line_sha256": "8a1d65584c4f9ac388f7213cde43500aef38d3a4f9642032803680a4dcc7df17",
+              "pointer": null
+            },
+            "sha256": "de25cfed34ad2ad776cd36a39ae0da2e4030799e62b781ed87e3fa6a1a14c730",
+            "transition_count": 4,
+            "uses_current_action_or_its_result": false
+          },
+          "ordered_action_map": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 35,
+              "raw_line_sha256": "8a1d65584c4f9ac388f7213cde43500aef38d3a4f9642032803680a4dcc7df17",
+              "pointer": "/steps/7/valid_actions"
+            },
+            "action_count": 41,
+            "ordered_actions_sha256": "daa917c04df8e96df7d8948717be7e18e1a02093058e1196b21b1e741b6f0948",
+            "indexed_map_sha256": "e593f04795cb1fb52fd339f981417dd2b39c0e03ed2a81cc678e8f0df3af2de4",
+            "all_source_policy_ids_match": true
+          }
+        },
+        "excluded_fields": [
+          "teacher diagnosis/subgoal/card",
+          "current source action/model output/result/environment_metadata",
+          "terminal/reward/won",
+          "stratum/K/oracle/future actions",
+          "expert_plan/facts"
+        ],
+        "source_step_current_metadata_environment_is_post_action_not_input": true
+      },
+      "existing_replay": {
+        "source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/replay_ledger.jsonl",
+          "line": 22,
+          "raw_line_sha256": "00899686778dcccd7c0bced9dd82f2375b677b32089ee13ea32642080cc0fc43",
+          "pointer": null
+        },
+        "replay_record_sha256": "f113b1beef1d82bc2008247eba92f8039a442481d5b9dc7d54f456ab7eaf28ff",
+        "transitions_count": 7,
+        "first_and_last_transition_sha256": [
+          "64d221c27f03e67cb59b8c3910879476fbd3f734bc991fa3084e7ddfddd20320",
+          "ce6bd95d7d428d40a9f9639663a16cd789f253891bde1c9157314a6f51b9ada7"
+        ],
+        "note": "Existing per-transition equality receipts + complete prefix hash; original public source remains bound."
+      },
+      "first_recovery_target": {
+        "producer": "adapter-off recovery base",
+        "generation_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+          "line": 22,
+          "raw_line_sha256": "3437d1634b3f4ad303d95da2ac043230189277623efcda996eeadd1419bbb061",
+          "pointer": "/recovery_full/stage_two/generation"
+        },
+        "parsed_source_pointer": "/recovery_full/stage_two/parsed",
+        "failure_reason": null,
+        "teacher_valid_actions_list_recorded": false,
+        "teacher_ordered_ID_command_pairs_sha256": "5d7ce78da5619b8692a89c1347789738175210840759c17477b0fd2830d81386",
+        "transition_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+          "line": 22,
+          "raw_line_sha256": "3437d1634b3f4ad303d95da2ac043230189277623efcda996eeadd1419bbb061",
+          "pointer": "/recovery_transition"
+        },
+        "raw_output": "A001",
+        "raw_output_sha256": "8e7d97a738983490f8d9e266e5938c7aaf0be0e4b31d299b0b9c47df4913bd36",
+        "recorded_parser_status": "selected",
+        "action_id": "A001",
+        "mapped_command": "examine stoveburner 2",
+        "teacher_map_sha256": "e593f04795cb1fb52fd339f981417dd2b39c0e03ed2a81cc678e8f0df3af2de4",
+        "P0_map_sha256": "e593f04795cb1fb52fd339f981417dd2b39c0e03ed2a81cc678e8f0df3af2de4",
+        "all_entries_ID_command_equal": true,
+        "executed_command": "examine stoveburner 2",
+        "transition_source_pointer": "/recovery_transition",
+        "transition_sha256": "f58b7593e4576372fdd1c0b1f479e2dc1bfb5b7d9fb8e4c41170234edf7ab031",
+        "done_after_first": false,
+        "reward_after_first": 0.0,
+        "source_end_state_observation_sha256": "8e0d2983def3ff208b90ae10af4800090d2db52b1f22e3daceb82d7dd76182d7"
+      },
+      "checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_task_identity": true,
+        "replay_observation_digest": true,
+        "replay_map_digest": true,
+        "replay_recent_H4_digest": true,
+        "all_recorded_transition_checks_true": true,
+        "branch_replay_summary_binds_ledger": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "failed_or_unresolved_checks": [],
+      "terminal_corroboration": {
+        "axis": "EXPLICIT_DONE_WON_TRUE_REWARD_POSITIVE",
+        "recovery_branch_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+            "line": 22,
+            "raw_line_sha256": "3437d1634b3f4ad303d95da2ac043230189277623efcda996eeadd1419bbb061",
+            "pointer": "/continuation_full/steps/41"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "a6e1f77b86fff9cb1b6f8b85df6a489a7e95386c596672caab92c65b97c907f0"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r15-b-20260910T000000Z/continue_ledger.jsonl",
+            "line": 22,
+            "raw_line_sha256": "e8587795db1cb0fb7a3505899a2bb818915538b5be106a224b799471ea4283c4",
+            "pointer": "/steps/42"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "2de8ff4fa577c1cf497466b9adf9b0bac357ccbb8b82e195409589aa48fbf57d"
+        },
+        "historical_success_label_retained": true,
+        "not_inferred_from_subgoal_or_shaping_reward": true
+      },
+      "model_identity": {
+        "axis": "MODEL_IDENTITY_PARTIAL",
+        "teacher_role": "adapter-off recovery base, distinct from adapter-on SFT suffix",
+        "base_model": "Qwen/Qwen3-8B",
+        "resolved_weights_revision": "UNKNOWN",
+        "resolved_tokenizer_revision": "UNKNOWN",
+        "tokenizer_identity_basis": "No historical resolved revision in the read run manifests",
+        "actor_adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+        "implementation_sha": "d1ef841ea9dc7423177fb7647906e2e719f0fbe7",
+        "recovery_adapter_active": false,
+        "suffix_adapter_active": true,
+        "source_manifest": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/run_manifest.json",
+        "source_actor_recorded_model_version": "Qwen/Qwen3-8B+lora:/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+        "static_contract_binding": "historical_contracts.json: executed stage method AST matches frozen85, no historical model revision inference",
+        "runtime_loaded_commit_and_adapter_record": "Historical run manifest isolation fields only; no loaded commit/tokenizer revision receipt",
+        "isolation_receipt": {
+          "distinct_model_objects": true,
+          "fallback_used": false,
+          "gpu_memory": {
+            "allocated_mib": 31585,
+            "device": 0,
+            "name": "NVIDIA A40",
+            "peak_allocated_mib": 31922,
+            "peak_reserved_mib": 31942,
+            "reserved_mib": 31942,
+            "total_mib": 45403
+          },
+          "recovery_adapter_active": false,
+          "seconds": 12.811728113912977,
+          "sft_adapter_active": true
+        },
+        "limitation": "Historical main-resolution weights/tokenizer not retrospectively filled from R19"
+      },
+      "suffix_separate": {
+        "producer": "adapter-on frozen SFT-P0",
+        "actions": 42,
+        "target_adopted_here": false,
+        "target_identity_not_adapter_off": true,
+        "suffix_action_ids_sha256": "cb5d036d8d5924dc1897e6b432d63231832e65b9a097ddfd276d0a91e61bdffe",
+        "generation_or_step_refs": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+          "line": 22,
+          "raw_line_sha256": "3437d1634b3f4ad303d95da2ac043230189277623efcda996eeadd1419bbb061",
+          "pointer": "/continuation_full/steps"
+        },
+        "semantic_public_action_sequence_sha256": "feaae5aef100560e902dfdd84ca06f7b4787ed43b1ce6033a6264a4d882aab9d",
+        "physical_alias_evidence": "No derived alias among fixed cases; legacy lacks event IDs, so semantic equality alone does not assert physical reuse",
+        "source_endpoints": {
+          "first_sha256": "fddc846e177638c1bce734f5e1fe63b0bc0003d0ea2d26e283fee4f02ec988e5",
+          "last_sha256": "a6e1f77b86fff9cb1b6f8b85df6a489a7e95386c596672caab92c65b97c907f0"
+        },
+        "original_prefix_0to1_not_per_suffix_step_causal_label": true
+      },
+      "recorded_tokens": {
+        "first_recovery_stage1": {
+          "input_tokens": 610,
+          "generated_tokens": 31,
+          "max_new_tokens": 40
+        },
+        "first_recovery_stage2": {
+          "input_tokens": 788,
+          "generated_tokens": 5,
+          "max_new_tokens": 16
+        },
+        "source_actor_same_public_P0": {
+          "generated_tokens": 5,
+          "input_tokens": 702,
+          "mean_token_entropy": 0.003152855901260088,
+          "mean_token_log_probability": -0.0003320978954320708
+        },
+        "prospective_projected_training_tokens": null,
+        "note": "Recorded inference counts only; no tokenizer. Teacher prompt length is not P0 projected training length."
+      },
+      "event_refs": [],
+      "disposition": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "evidence_gaps": [],
+      "learning_gain": "NOT_PROVEN",
+      "training_row_approved": false
+    },
+    {
+      "case_id": "R16_OSR:R15-F23",
+      "prefix_id": "R15-F23",
+      "stage": "R16_OSR",
+      "canonical_task": "pick_and_place_simple-Watch-None-Shelf-207/trial_T20190908_122255_167374",
+      "family": "pick_and_place_simple",
+      "decision_index": 10,
+      "remaining_horizon": 40,
+      "source_episode": {
+        "reference": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+          "line": 49,
+          "raw_line_sha256": "37871bf2f24148fe4de4a74d4fd7eed2fce49896305ee8b5c2ae9a4bb7fe1303",
+          "pointer": null
+        },
+        "trajectory_id": "dac88c57d5a81dd4aaf8328e",
+        "public_prefix_action_count": 10,
+        "full_public_prefix_field_sha256": "25195e3e366db98ad2b8da9115bb3ce0d9d55c342009eca78bf6f910f9fc56bf"
+      },
+      "branch_record": {
+        "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+        "line": 23,
+        "raw_line_sha256": "bad0b573b5b108d283f0cc7c1ae9a4996c53d646d16631cc3529c7c2ae45c62b",
+        "pointer": null
+      },
+      "public_projection": {
+        "contract": "STATIC_PUBLIC_FIELDS_AND_P0_PUBLIC_TEXT_ONLY",
+        "projection_sha256": "e4499b517e80ba3e92e5996bd72373771cf5755510af4de2e34b0dd4457a1caf",
+        "source_actor_public_prompt_sha256": "b67581795a2966c79991a2e40c2f0e1d55c048d070f0d943ee5393f0b22d37eb",
+        "static_public_text_sha256": "b67581795a2966c79991a2e40c2f0e1d55c048d070f0d943ee5393f0b22d37eb",
+        "existing_chat_render_sha256": "af5ef6c0ef0ff3d160e716b69fd2a0ab6ebb80f70cca9e4692c6b1359981848d",
+        "chat_template_or_tokenizer_revalidation": "NOT_PERFORMED",
+        "full_prompt_or_JSONL_exported": false,
+        "fields": {
+          "goal": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 49,
+              "raw_line_sha256": "37871bf2f24148fe4de4a74d4fd7eed2fce49896305ee8b5c2ae9a4bb7fe1303",
+              "pointer": "/task/text"
+            },
+            "sha256_utf8": "76f0ad571acc10a06e375a2357578ece211ba59e37a4011c7a4b1378428ac3e6",
+            "available_before_decision": 10
+          },
+          "observation": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 49,
+              "raw_line_sha256": "37871bf2f24148fe4de4a74d4fd7eed2fce49896305ee8b5c2ae9a4bb7fe1303",
+              "pointer": "/steps/10/observation"
+            },
+            "sha256_utf8": "692031b383711b5cb3b063dbb83d65e6278dc5c2252031d89c6ca51462bb5bdb",
+            "available_before_decision": 10
+          },
+          "history": {
+            "source_steps": [
+              {
+                "action_pointer": "/steps/6/action",
+                "result_pointer": "/steps/7/observation",
+                "result_available_by_state_index": 7,
+                "entry_sha256": "b44c36e124d5b58d94a3911f601becd88f1316eda364c8f0e6cafb242a0d0951"
+              },
+              {
+                "action_pointer": "/steps/7/action",
+                "result_pointer": "/steps/8/observation",
+                "result_available_by_state_index": 8,
+                "entry_sha256": "485a06095d74fcfeb3cf2a094b768276d4b112963d8bab1b05a8e487c24b0c3b"
+              },
+              {
+                "action_pointer": "/steps/8/action",
+                "result_pointer": "/steps/9/observation",
+                "result_available_by_state_index": 9,
+                "entry_sha256": "b44c36e124d5b58d94a3911f601becd88f1316eda364c8f0e6cafb242a0d0951"
+              },
+              {
+                "action_pointer": "/steps/9/action",
+                "result_pointer": "/steps/10/observation",
+                "result_available_by_state_index": 10,
+                "entry_sha256": "485a06095d74fcfeb3cf2a094b768276d4b112963d8bab1b05a8e487c24b0c3b"
+              }
+            ],
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 49,
+              "raw_line_sha256": "37871bf2f24148fe4de4a74d4fd7eed2fce49896305ee8b5c2ae9a4bb7fe1303",
+              "pointer": null
+            },
+            "sha256": "34c07fcf23e3cfb19ed427a658d5bfba62895ac8cca3ac2a956f973d0b0b7d8c",
+            "transition_count": 4,
+            "uses_current_action_or_its_result": false
+          },
+          "ordered_action_map": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 49,
+              "raw_line_sha256": "37871bf2f24148fe4de4a74d4fd7eed2fce49896305ee8b5c2ae9a4bb7fe1303",
+              "pointer": "/steps/10/valid_actions"
+            },
+            "action_count": 18,
+            "ordered_actions_sha256": "e2c1ae4ac01f823e4d6813bb490fb83ac9cda48e51fb6130f9a9ea65b839075b",
+            "indexed_map_sha256": "0646885d7d334b86fdd62cb534e65c980905beb8633711d292851b133035f15a",
+            "all_source_policy_ids_match": true
+          }
+        },
+        "excluded_fields": [
+          "teacher diagnosis/subgoal/card",
+          "current source action/model output/result/environment_metadata",
+          "terminal/reward/won",
+          "stratum/K/oracle/future actions",
+          "expert_plan/facts"
+        ],
+        "source_step_current_metadata_environment_is_post_action_not_input": true
+      },
+      "existing_replay": {
+        "source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/replay_ledger.jsonl",
+          "line": 23,
+          "raw_line_sha256": "909936a0a927af21e927f0a055cb55fe3a9709949b3d23742423e7cbc17eefc2",
+          "pointer": null
+        },
+        "replay_record_sha256": "594f2b55adc2074f87d1d1d6bdc2b1037d359f106d18522c32514ffddb013c20",
+        "transitions_count": 10,
+        "first_and_last_transition_sha256": [
+          "64d221c27f03e67cb59b8c3910879476fbd3f734bc991fa3084e7ddfddd20320",
+          "4fab1b47eff5922ecc7f405ec3c7613023a80ccdd1553935ad63d8b3a397ddb4"
+        ],
+        "note": "Existing per-transition equality receipts + complete prefix hash; original public source remains bound."
+      },
+      "first_recovery_target": {
+        "producer": "adapter-off recovery base",
+        "generation_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+          "line": 23,
+          "raw_line_sha256": "bad0b573b5b108d283f0cc7c1ae9a4996c53d646d16631cc3529c7c2ae45c62b",
+          "pointer": "/recovery_full/stage_two/generation"
+        },
+        "parsed_source_pointer": "/recovery_full/stage_two/parsed",
+        "failure_reason": null,
+        "teacher_valid_actions_list_recorded": false,
+        "teacher_ordered_ID_command_pairs_sha256": "79f723ab825727ac971c7a56a6f0883e2f29b7d67d987ff03bf9a9eacc2f6b1c",
+        "transition_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+          "line": 23,
+          "raw_line_sha256": "bad0b573b5b108d283f0cc7c1ae9a4996c53d646d16631cc3529c7c2ae45c62b",
+          "pointer": "/recovery_transition"
+        },
+        "raw_output": "A001",
+        "raw_output_sha256": "8e7d97a738983490f8d9e266e5938c7aaf0be0e4b31d299b0b9c47df4913bd36",
+        "recorded_parser_status": "selected",
+        "action_id": "A001",
+        "mapped_command": "examine shelf 6",
+        "teacher_map_sha256": "0646885d7d334b86fdd62cb534e65c980905beb8633711d292851b133035f15a",
+        "P0_map_sha256": "0646885d7d334b86fdd62cb534e65c980905beb8633711d292851b133035f15a",
+        "all_entries_ID_command_equal": true,
+        "executed_command": "examine shelf 6",
+        "transition_source_pointer": "/recovery_transition",
+        "transition_sha256": "626577d12cb748f2010a68c9c24d1dd5f5f169c052bc95d0d9873b4c79a9a16d",
+        "done_after_first": false,
+        "reward_after_first": 0.0,
+        "source_end_state_observation_sha256": "7694205819ed3118f14f9b582c71c83f31ca8cbe99cc072f09f482c2837dcfb6"
+      },
+      "checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_task_identity": true,
+        "replay_observation_digest": true,
+        "replay_map_digest": true,
+        "replay_recent_H4_digest": true,
+        "all_recorded_transition_checks_true": true,
+        "branch_replay_summary_binds_ledger": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "failed_or_unresolved_checks": [],
+      "terminal_corroboration": {
+        "axis": "EXPLICIT_DONE_WON_TRUE_REWARD_POSITIVE",
+        "recovery_branch_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+            "line": 23,
+            "raw_line_sha256": "bad0b573b5b108d283f0cc7c1ae9a4996c53d646d16631cc3529c7c2ae45c62b",
+            "pointer": "/continuation_full/steps/5"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "d51fa8cd95126eec553e45b326c101273fae423a911a6d7405a5848a2d82fcf7"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r15-b-20260910T000000Z/continue_ledger.jsonl",
+            "line": 23,
+            "raw_line_sha256": "d70d7b9c04be01c9b28e7bcab2cea9083252aa4797f7f9d9e55d190709a37e41",
+            "pointer": "/steps/39"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "81ed89314f0092cefc5bf2135c1022a5ccd8bf3e4ee7e6c71c394aa81e4ac27e"
+        },
+        "historical_success_label_retained": true,
+        "not_inferred_from_subgoal_or_shaping_reward": true
+      },
+      "model_identity": {
+        "axis": "MODEL_IDENTITY_PARTIAL",
+        "teacher_role": "adapter-off recovery base, distinct from adapter-on SFT suffix",
+        "base_model": "Qwen/Qwen3-8B",
+        "resolved_weights_revision": "UNKNOWN",
+        "resolved_tokenizer_revision": "UNKNOWN",
+        "tokenizer_identity_basis": "No historical resolved revision in the read run manifests",
+        "actor_adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+        "implementation_sha": "d1ef841ea9dc7423177fb7647906e2e719f0fbe7",
+        "recovery_adapter_active": false,
+        "suffix_adapter_active": true,
+        "source_manifest": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/run_manifest.json",
+        "source_actor_recorded_model_version": "Qwen/Qwen3-8B+lora:/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+        "static_contract_binding": "historical_contracts.json: executed stage method AST matches frozen85, no historical model revision inference",
+        "runtime_loaded_commit_and_adapter_record": "Historical run manifest isolation fields only; no loaded commit/tokenizer revision receipt",
+        "isolation_receipt": {
+          "distinct_model_objects": true,
+          "fallback_used": false,
+          "gpu_memory": {
+            "allocated_mib": 31585,
+            "device": 0,
+            "name": "NVIDIA A40",
+            "peak_allocated_mib": 31922,
+            "peak_reserved_mib": 31942,
+            "reserved_mib": 31942,
+            "total_mib": 45403
+          },
+          "recovery_adapter_active": false,
+          "seconds": 12.811728113912977,
+          "sft_adapter_active": true
+        },
+        "limitation": "Historical main-resolution weights/tokenizer not retrospectively filled from R19"
+      },
+      "suffix_separate": {
+        "producer": "adapter-on frozen SFT-P0",
+        "actions": 6,
+        "target_adopted_here": false,
+        "target_identity_not_adapter_off": true,
+        "suffix_action_ids_sha256": "2a3a5cf629df21c83547024255ca413a2410295a3ddb35403773679e62b70dbc",
+        "generation_or_step_refs": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+          "line": 23,
+          "raw_line_sha256": "bad0b573b5b108d283f0cc7c1ae9a4996c53d646d16631cc3529c7c2ae45c62b",
+          "pointer": "/continuation_full/steps"
+        },
+        "semantic_public_action_sequence_sha256": "a730860ccaa6886f59e49e8c3e9f4d37aed7bc7687ea00e1582e83fcfec7c321",
+        "physical_alias_evidence": "No derived alias among fixed cases; legacy lacks event IDs, so semantic equality alone does not assert physical reuse",
+        "source_endpoints": {
+          "first_sha256": "b9a5c1be3a8b672a2f55267c1b7d378cd36864a031892d340591c6d2fd118726",
+          "last_sha256": "d51fa8cd95126eec553e45b326c101273fae423a911a6d7405a5848a2d82fcf7"
+        },
+        "original_prefix_0to1_not_per_suffix_step_causal_label": true
+      },
+      "recorded_tokens": {
+        "first_recovery_stage1": {
+          "input_tokens": 379,
+          "generated_tokens": 22,
+          "max_new_tokens": 40
+        },
+        "first_recovery_stage2": {
+          "input_tokens": 458,
+          "generated_tokens": 5,
+          "max_new_tokens": 16
+        },
+        "source_actor_same_public_P0": {
+          "generated_tokens": 5,
+          "input_tokens": 379,
+          "mean_token_entropy": 0.054930842404861124,
+          "mean_token_log_probability": -0.011826938389634733
+        },
+        "prospective_projected_training_tokens": null,
+        "note": "Recorded inference counts only; no tokenizer. Teacher prompt length is not P0 projected training length."
+      },
+      "event_refs": [],
+      "disposition": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "evidence_gaps": [],
+      "learning_gain": "NOT_PROVEN",
+      "training_row_approved": false
+    },
+    {
+      "case_id": "R16_OSR:R15-F25",
+      "prefix_id": "R15-F25",
+      "stage": "R16_OSR",
+      "canonical_task": "look_at_obj_in_light-Bowl-None-DeskLamp-301/trial_T20190909_150931_522935",
+      "family": "look_at_obj_in_light",
+      "decision_index": 6,
+      "remaining_horizon": 44,
+      "source_episode": {
+        "reference": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+          "line": 66,
+          "raw_line_sha256": "31020bc1997b14c633f7c08c5e0a9671b4eb1ac4dfa3f2554fa582af99b345b2",
+          "pointer": null
+        },
+        "trajectory_id": "4249733ece9032a79d40c5bb",
+        "public_prefix_action_count": 6,
+        "full_public_prefix_field_sha256": "98d98f1334e939fa6b9701736d20263323e6e167a0e578744d02a8ccc9b0944b"
+      },
+      "branch_record": {
+        "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+        "line": 25,
+        "raw_line_sha256": "9aa206fe866975ff67eccd0f17c7bcda26eb171daaee9759457acea1336f370c",
+        "pointer": null
+      },
+      "public_projection": {
+        "contract": "STATIC_PUBLIC_FIELDS_AND_P0_PUBLIC_TEXT_ONLY",
+        "projection_sha256": "616425033374a3bcc35951e469c23ee71bd9e2cb249874240ac85068e84bcef6",
+        "source_actor_public_prompt_sha256": "eadd66d1c9360ebf444ceb51ed05c434b5464fea629e81d75ab3d76137773f08",
+        "static_public_text_sha256": "eadd66d1c9360ebf444ceb51ed05c434b5464fea629e81d75ab3d76137773f08",
+        "existing_chat_render_sha256": "79c3493548bd1599316cc8e5276a2cbea0e4211c5b2727e0075f4e39e93ad897",
+        "chat_template_or_tokenizer_revalidation": "NOT_PERFORMED",
+        "full_prompt_or_JSONL_exported": false,
+        "fields": {
+          "goal": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 66,
+              "raw_line_sha256": "31020bc1997b14c633f7c08c5e0a9671b4eb1ac4dfa3f2554fa582af99b345b2",
+              "pointer": "/task/text"
+            },
+            "sha256_utf8": "d0e9e132b468f66fea727da5a659d8e6a91c1372faada12b574fb1d49d38ddb3",
+            "available_before_decision": 6
+          },
+          "observation": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 66,
+              "raw_line_sha256": "31020bc1997b14c633f7c08c5e0a9671b4eb1ac4dfa3f2554fa582af99b345b2",
+              "pointer": "/steps/6/observation"
+            },
+            "sha256_utf8": "01bfe4502b4d1ca665c7ea35ae0db5b43f35a7b4d27ac6eb256b00998b49568e",
+            "available_before_decision": 6
+          },
+          "history": {
+            "source_steps": [
+              {
+                "action_pointer": "/steps/2/action",
+                "result_pointer": "/steps/3/observation",
+                "result_available_by_state_index": 3,
+                "entry_sha256": "ad2ed9df71c73095e34f027d01b7c4146085f29a123effb79771661c37d99b30"
+              },
+              {
+                "action_pointer": "/steps/3/action",
+                "result_pointer": "/steps/4/observation",
+                "result_available_by_state_index": 4,
+                "entry_sha256": "66af6885125f2d40356ef33f7d42beb490e7d20ec30447da821f9b9a8d593e16"
+              },
+              {
+                "action_pointer": "/steps/4/action",
+                "result_pointer": "/steps/5/observation",
+                "result_available_by_state_index": 5,
+                "entry_sha256": "ad2ed9df71c73095e34f027d01b7c4146085f29a123effb79771661c37d99b30"
+              },
+              {
+                "action_pointer": "/steps/5/action",
+                "result_pointer": "/steps/6/observation",
+                "result_available_by_state_index": 6,
+                "entry_sha256": "66af6885125f2d40356ef33f7d42beb490e7d20ec30447da821f9b9a8d593e16"
+              }
+            ],
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 66,
+              "raw_line_sha256": "31020bc1997b14c633f7c08c5e0a9671b4eb1ac4dfa3f2554fa582af99b345b2",
+              "pointer": null
+            },
+            "sha256": "bf26f25b3e502478bf892f62dbcde1e72b403b5cce494c6cc5fe1d3f132ba39e",
+            "transition_count": 4,
+            "uses_current_action_or_its_result": false
+          },
+          "ordered_action_map": {
+            "source": {
+              "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+              "line": 66,
+              "raw_line_sha256": "31020bc1997b14c633f7c08c5e0a9671b4eb1ac4dfa3f2554fa582af99b345b2",
+              "pointer": "/steps/6/valid_actions"
+            },
+            "action_count": 30,
+            "ordered_actions_sha256": "2e75c6e54595fd04bdc42e980d99ae5ff18ef32d242fcd006875618fd6b88958",
+            "indexed_map_sha256": "9ef3fd19ca08cf4ee09183baa4b9ab8a188dab5b01bfca52593e5f3a87325e7d",
+            "all_source_policy_ids_match": true
+          }
+        },
+        "excluded_fields": [
+          "teacher diagnosis/subgoal/card",
+          "current source action/model output/result/environment_metadata",
+          "terminal/reward/won",
+          "stratum/K/oracle/future actions",
+          "expert_plan/facts"
+        ],
+        "source_step_current_metadata_environment_is_post_action_not_input": true
+      },
+      "existing_replay": {
+        "source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/replay_ledger.jsonl",
+          "line": 25,
+          "raw_line_sha256": "54607c5d15a97746fa2078217ae8f7fa9172776f8cc0f6f8cfd392a96b159d5c",
+          "pointer": null
+        },
+        "replay_record_sha256": "36c08e2f0cd6fdabd7ba5a01eee71aee68e25fce80ca2cbd286b29ea97ce8890",
+        "transitions_count": 6,
+        "first_and_last_transition_sha256": [
+          "64d221c27f03e67cb59b8c3910879476fbd3f734bc991fa3084e7ddfddd20320",
+          "2d6207af98b6e38e5bb188e679c53f973c924c2aa2d0c7bf14db6e6e62ec6b62"
+        ],
+        "note": "Existing per-transition equality receipts + complete prefix hash; original public source remains bound."
+      },
+      "first_recovery_target": {
+        "producer": "adapter-off recovery base",
+        "generation_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+          "line": 25,
+          "raw_line_sha256": "9aa206fe866975ff67eccd0f17c7bcda26eb171daaee9759457acea1336f370c",
+          "pointer": "/recovery_full/stage_two/generation"
+        },
+        "parsed_source_pointer": "/recovery_full/stage_two/parsed",
+        "failure_reason": null,
+        "teacher_valid_actions_list_recorded": false,
+        "teacher_ordered_ID_command_pairs_sha256": "9b73444d96c07bdb9148432ebe2c073348c595d4bbe45507b19479de3116817c",
+        "transition_source": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+          "line": 25,
+          "raw_line_sha256": "9aa206fe866975ff67eccd0f17c7bcda26eb171daaee9759457acea1336f370c",
+          "pointer": "/recovery_transition"
+        },
+        "raw_output": "A003",
+        "raw_output_sha256": "a0e3ed09b3d06014303ef03ea8d645660b13d072504aecd6915c4668888909e8",
+        "recorded_parser_status": "selected",
+        "action_id": "A003",
+        "mapped_command": "go to desk 1",
+        "teacher_map_sha256": "9ef3fd19ca08cf4ee09183baa4b9ab8a188dab5b01bfca52593e5f3a87325e7d",
+        "P0_map_sha256": "9ef3fd19ca08cf4ee09183baa4b9ab8a188dab5b01bfca52593e5f3a87325e7d",
+        "all_entries_ID_command_equal": true,
+        "executed_command": "go to desk 1",
+        "transition_source_pointer": "/recovery_transition",
+        "transition_sha256": "443c6712636ca4c77de5d69e76d96902dca048e94d8c67b0b8e87efa10abe0f5",
+        "done_after_first": false,
+        "reward_after_first": 0.0,
+        "source_end_state_observation_sha256": "26cd6d9d71c0f4bfafeb9064ba580c681888b7568902a29169041121c1e2f7c4"
+      },
+      "checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "replay_task_identity": true,
+        "replay_observation_digest": true,
+        "replay_map_digest": true,
+        "replay_recent_H4_digest": true,
+        "all_recorded_transition_checks_true": true,
+        "branch_replay_summary_binds_ledger": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "failed_or_unresolved_checks": [],
+      "terminal_corroboration": {
+        "axis": "EXPLICIT_DONE_WON_TRUE_REWARD_POSITIVE",
+        "recovery_branch_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+            "line": 25,
+            "raw_line_sha256": "9aa206fe866975ff67eccd0f17c7bcda26eb171daaee9759457acea1336f370c",
+            "pointer": "/continuation_full/steps/8"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": true
+            }
+          ],
+          "step_record_sha256": "7d9ab9299c432f452ff0e9283d54faea136eb38d308e52de9d90860635a130c6"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r15-b-20260910T000000Z/continue_ledger.jsonl",
+            "line": 25,
+            "raw_line_sha256": "a5501d08d8e98b9de206b625275454932bfb05e18810813e2bd5c5ec55c59221",
+            "pointer": "/steps/43"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": false,
+          "won_entries": [
+            {
+              "pointer": "/environment_metadata/alfworld_info/won",
+              "value": false
+            }
+          ],
+          "step_record_sha256": "3e73b8a5dfee4fbc3850dfb5c681a194ee6b5dc772b9f56cb5cd8c6b14c02d4e"
+        },
+        "historical_success_label_retained": true,
+        "not_inferred_from_subgoal_or_shaping_reward": true
+      },
+      "model_identity": {
+        "axis": "MODEL_IDENTITY_PARTIAL",
+        "teacher_role": "adapter-off recovery base, distinct from adapter-on SFT suffix",
+        "base_model": "Qwen/Qwen3-8B",
+        "resolved_weights_revision": "UNKNOWN",
+        "resolved_tokenizer_revision": "UNKNOWN",
+        "tokenizer_identity_basis": "No historical resolved revision in the read run manifests",
+        "actor_adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+        "implementation_sha": "d1ef841ea9dc7423177fb7647906e2e719f0fbe7",
+        "recovery_adapter_active": false,
+        "suffix_adapter_active": true,
+        "source_manifest": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/run_manifest.json",
+        "source_actor_recorded_model_version": "Qwen/Qwen3-8B+lora:/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+        "static_contract_binding": "historical_contracts.json: executed stage method AST matches frozen85, no historical model revision inference",
+        "runtime_loaded_commit_and_adapter_record": "Historical run manifest isolation fields only; no loaded commit/tokenizer revision receipt",
+        "isolation_receipt": {
+          "distinct_model_objects": true,
+          "fallback_used": false,
+          "gpu_memory": {
+            "allocated_mib": 31585,
+            "device": 0,
+            "name": "NVIDIA A40",
+            "peak_allocated_mib": 31922,
+            "peak_reserved_mib": 31942,
+            "reserved_mib": 31942,
+            "total_mib": 45403
+          },
+          "recovery_adapter_active": false,
+          "seconds": 12.811728113912977,
+          "sft_adapter_active": true
+        },
+        "limitation": "Historical main-resolution weights/tokenizer not retrospectively filled from R19"
+      },
+      "suffix_separate": {
+        "producer": "adapter-on frozen SFT-P0",
+        "actions": 9,
+        "target_adopted_here": false,
+        "target_identity_not_adapter_off": true,
+        "suffix_action_ids_sha256": "62addfe29bd355b7c4a6a4888352cb60b6b07c6827502f8a9475aa5ad104405c",
+        "generation_or_step_refs": {
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+          "line": 25,
+          "raw_line_sha256": "9aa206fe866975ff67eccd0f17c7bcda26eb171daaee9759457acea1336f370c",
+          "pointer": "/continuation_full/steps"
+        },
+        "semantic_public_action_sequence_sha256": "d582f67c5adb66db97584e22c684901c92b19887e66e3973450f2dd90fbf66c7",
+        "physical_alias_evidence": "No derived alias among fixed cases; legacy lacks event IDs, so semantic equality alone does not assert physical reuse",
+        "source_endpoints": {
+          "first_sha256": "0597af35d38d4d7c12b7727db24beda496776057a80dd6b5056e2061c61465de",
+          "last_sha256": "7d9ab9299c432f452ff0e9283d54faea136eb38d308e52de9d90860635a130c6"
+        },
+        "original_prefix_0to1_not_per_suffix_step_causal_label": true
+      },
+      "recorded_tokens": {
+        "first_recovery_stage1": {
+          "input_tokens": 468,
+          "generated_tokens": 39,
+          "max_new_tokens": 40
+        },
+        "first_recovery_stage2": {
+          "input_tokens": 610,
+          "generated_tokens": 5,
+          "max_new_tokens": 16
+        },
+        "source_actor_same_public_P0": {
+          "generated_tokens": 5,
+          "input_tokens": 516,
+          "mean_token_entropy": 0.029228042092927353,
+          "mean_token_log_probability": -0.005527304923430165
+        },
+        "prospective_projected_training_tokens": null,
+        "note": "Recorded inference counts only; no tokenizer. Teacher prompt length is not P0 projected training length."
+      },
+      "event_refs": [],
+      "disposition": "INPUT_TARGET_LINEAGE_SUPPORTED",
+      "evidence_gaps": [],
+      "learning_gain": "NOT_PROVEN",
+      "training_row_approved": false
+    },
+    {
+      "case_id": "R19_K1:R19-failure-b3ab21b8e193f6adf6ff",
+      "prefix_id": "R19-failure-b3ab21b8e193f6adf6ff",
+      "stage": "R19_K1",
+      "canonical_task": "look_at_obj_in_light-Vase-None-DeskLamp-303/trial_T20190907_150403_049073",
+      "family": "look_at_obj_in_light",
+      "decision_index": 31,
+      "remaining_horizon": 19,
+      "source_episode": {
+        "reference": {
+          "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_trajectories.jsonl",
+          "line": 10,
+          "raw_line_sha256": "fca1fa57e5c9097930ac133bcb400a3e6160cff3d08fc481ab0d07d670ae0d7a",
+          "pointer": null
+        },
+        "trajectory_id": "e57425953e1f90561012134a",
+        "public_prefix_action_count": 31,
+        "full_public_prefix_field_sha256": "acbc8d1d21d3f8b6efd7604e7f8cdbdc3f07e514a84c5a00ee6ae355bbeab0b0"
+      },
+      "branch_record": {
+        "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/branches.jsonl",
+        "line": 6,
+        "raw_line_sha256": "15049449b94f7d5bfa85c62fbe626a0705fe04cdcebc3719d345bce5bab434f6",
+        "pointer": null
+      },
+      "public_projection": {
+        "contract": "STATIC_PUBLIC_FIELDS_AND_P0_PUBLIC_TEXT_ONLY",
+        "projection_sha256": "23e01e811d9fbaa086ae2e603c89c2b4866c436ccf518e8ba1c1096524091f22",
+        "source_actor_public_prompt_sha256": "f2125f91c9e923c39a401fd8a239aaa77515bc399aad0b6f35dc07dd44057a33",
+        "static_public_text_sha256": "f2125f91c9e923c39a401fd8a239aaa77515bc399aad0b6f35dc07dd44057a33",
+        "existing_chat_render_sha256": "21f639db7e5afdfa9d779a98925b3089ed89aaf4e2881331fb04a3129e31989f",
+        "chat_template_or_tokenizer_revalidation": "NOT_PERFORMED",
+        "full_prompt_or_JSONL_exported": false,
+        "fields": {
+          "goal": {
+            "source": {
+              "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_trajectories.jsonl",
+              "line": 10,
+              "raw_line_sha256": "fca1fa57e5c9097930ac133bcb400a3e6160cff3d08fc481ab0d07d670ae0d7a",
+              "pointer": "/task/text"
+            },
+            "sha256_utf8": "1cae21cb21e6431450cb1b7c716f499776cf32b09f213c9b5825074d07c16d2f",
+            "available_before_decision": 31
+          },
+          "observation": {
+            "source": {
+              "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_trajectories.jsonl",
+              "line": 10,
+              "raw_line_sha256": "fca1fa57e5c9097930ac133bcb400a3e6160cff3d08fc481ab0d07d670ae0d7a",
+              "pointer": "/steps/31/observation"
+            },
+            "sha256_utf8": "2c994077db246009517a1e1c410d6172cacf055c761b3a746739b4feb040e99e",
+            "available_before_decision": 31
+          },
+          "history": {
+            "source_steps": [
+              {
+                "action_pointer": "/steps/27/action",
+                "result_pointer": "/steps/28/observation",
+                "result_available_by_state_index": 28,
+                "entry_sha256": "5855875d2b7059771426c3bd9ef4bbf54174e44c8dbe5b6d6482fbc94c7113a6"
+              },
+              {
+                "action_pointer": "/steps/28/action",
+                "result_pointer": "/steps/29/observation",
+                "result_available_by_state_index": 29,
+                "entry_sha256": "9aa89f274c203e9308a7090673de208489edaa41736a8ceaf923294afa58562a"
+              },
+              {
+                "action_pointer": "/steps/29/action",
+                "result_pointer": "/steps/30/observation",
+                "result_available_by_state_index": 30,
+                "entry_sha256": "5855875d2b7059771426c3bd9ef4bbf54174e44c8dbe5b6d6482fbc94c7113a6"
+              },
+              {
+                "action_pointer": "/steps/30/action",
+                "result_pointer": "/steps/31/observation",
+                "result_available_by_state_index": 31,
+                "entry_sha256": "9aa89f274c203e9308a7090673de208489edaa41736a8ceaf923294afa58562a"
+              }
+            ],
+            "source": {
+              "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_trajectories.jsonl",
+              "line": 10,
+              "raw_line_sha256": "fca1fa57e5c9097930ac133bcb400a3e6160cff3d08fc481ab0d07d670ae0d7a",
+              "pointer": null
+            },
+            "sha256": "18a4c3c346d1c62a4c6873e820448f48a281e71fb42f014ec6cec16b4f9ee137",
+            "transition_count": 4,
+            "uses_current_action_or_its_result": false
+          },
+          "ordered_action_map": {
+            "source": {
+              "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_trajectories.jsonl",
+              "line": 10,
+              "raw_line_sha256": "fca1fa57e5c9097930ac133bcb400a3e6160cff3d08fc481ab0d07d670ae0d7a",
+              "pointer": "/steps/31/valid_actions"
+            },
+            "action_count": 27,
+            "ordered_actions_sha256": "ee4815f82699421664edcf166f05cd84754fc954fb920222b08f1eefa5bd2aff",
+            "indexed_map_sha256": "7ad03e720620e55c63a7235da1ac18d432b06b51d9ebd0606a2c33d6b9946ff6",
+            "all_source_policy_ids_match": true
+          }
+        },
+        "excluded_fields": [
+          "teacher diagnosis/subgoal/card",
+          "current source action/model output/result/environment_metadata",
+          "terminal/reward/won",
+          "stratum/K/oracle/future actions",
+          "expert_plan/facts"
+        ],
+        "source_step_current_metadata_environment_is_post_action_not_input": true
+      },
+      "existing_replay": {
+        "source": {
+          "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_events.jsonl",
+          "line": 8896,
+          "raw_line_sha256": "400d7868a889fc417bf29dbf215950804d11eb73212017cab8a3e82741178bfd",
+          "pointer": "/payload/replay_evidence"
+        },
+        "replay_record_sha256": "49c2d378285c7d964d2a6378b3bc01d535a657de8370c82852bbabaf3a7d4960",
+        "transitions_count": 31,
+        "first_and_last_transition_sha256": [
+          "f62c0a4122b8b22e80a6c5c57cffd72f1fbfad184626c993f8fc215908c9544d",
+          "9408848c1910f81a50a4df3d5ab783709b6d87e3c349062471fa483722d74479"
+        ],
+        "recovery_source_event_id": "eb1aed10f969bf5d066dce584f7ec3fac1cf72dafbf5d673fd3713615f4c0aab",
+        "K1_post_recovery_replay_not_used_as_original_prefix": true,
+        "no_K2_target_read": true
+      },
+      "first_recovery_target": {
+        "producer": "adapter-off recovery base",
+        "generation_source": {
+          "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_events.jsonl",
+          "line": 8891,
+          "raw_line_sha256": "f7d3aba0eca83893219364d4eae6e338785e19e959a41e6751da815eef2db74a",
+          "pointer": "/payload/evidence/generation"
+        },
+        "parsed_source_pointer": "/payload/evidence",
+        "failure_reason": null,
+        "teacher_valid_actions_list_recorded": true,
+        "teacher_ordered_ID_command_pairs_sha256": "0f651d9b37462e26c3c546dfa88d1e35c4540501977ff6de4e36d0e3a3ac4e94",
+        "transition_source": {
+          "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_events.jsonl",
+          "line": 8895,
+          "raw_line_sha256": "36d0a1054e5039455c72cbf2557c6b296ce7e5d3e984333ee0ecedaf60681ee2",
+          "pointer": "/payload/action/transition"
+        },
+        "raw_output": "A002",
+        "raw_output_sha256": "4d2dd6d6ba19a00e87d483e42fdb11f043cd192805d88c38c3757689bbce1e73",
+        "recorded_parser_status": "selected",
+        "action_id": "A002",
+        "mapped_command": "examine dresser 1",
+        "teacher_map_sha256": "7ad03e720620e55c63a7235da1ac18d432b06b51d9ebd0606a2c33d6b9946ff6",
+        "P0_map_sha256": "7ad03e720620e55c63a7235da1ac18d432b06b51d9ebd0606a2c33d6b9946ff6",
+        "all_entries_ID_command_equal": true,
+        "executed_command": "examine dresser 1",
+        "transition_source_pointer": "/payload/action/transition",
+        "transition_sha256": "beb34dfa84e6665ae812a17d01c319bdfe2604fdbac7c0394cf031e752ed855c",
+        "done_after_first": false,
+        "reward_after_first": 0.0,
+        "source_end_state_observation_sha256": "0f11bc01c77173b947f83333dda2ba25a8da719ffb7689851422b082d618577d"
+      },
+      "checks": {
+        "fixed_row_hash_matches": true,
+        "source_task_matches": true,
+        "source_nonterminal_before_action": true,
+        "remaining_horizon_50_minus_d": true,
+        "stored_actor_public_prompt_matches_static_P0": true,
+        "source_P0_map_equals_ordered_admissibles": true,
+        "recorded_exact_replay": true,
+        "initial_replay_count_before_recovery": true,
+        "initial_replay_source_action_observation_map_match": true,
+        "recovery_event_before_history_exact": true,
+        "recovery_event_before_observation_exact": true,
+        "recovery_event_before_order_exact": true,
+        "recovery_event_index_is_one": true,
+        "K1_stage_two_attempt_one": true,
+        "recovery_event_map_exact": true,
+        "event_implementation_is_executed2da": true,
+        "CONTINUE_recorded_zero": true,
+        "recover_recorded_one": true,
+        "stage_one_valid": true,
+        "raw_output_is_recorded_ID": true,
+        "teacher_selected_status": true,
+        "teacher_map_equals_P0_by_every_ID": true,
+        "teacher_valid_actions_order_if_present": true,
+        "recorded_ID_resolves_same_command": true,
+        "executed_flag_command_transition": true,
+        "no_truncated_generation": true,
+        "recovery_terminal_done_positive_reward_recorded": true,
+        "continuation_horizon_with_first_recovery": true
+      },
+      "failed_or_unresolved_checks": [],
+      "terminal_corroboration": {
+        "axis": "DONE_POSITIVE_REWARD_WON_NOT_RECORDED",
+        "recovery_branch_terminal": {
+          "source": {
+            "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_events.jsonl",
+            "line": 13463,
+            "raw_line_sha256": "ca96976216ac70659f7bd2fd083b1e323eea0174fd3b67b031ab57a9aa46baec",
+            "pointer": "/payload/transition"
+          },
+          "done": true,
+          "reward": 1.0,
+          "truncated": false,
+          "won_entries": [],
+          "step_record_sha256": "c0c48820347ed3de00fe4f965e8a72b9ebaab92a126f338b2e20abc1df4c3be8"
+        },
+        "CONTINUE_terminal": {
+          "source": {
+            "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_trajectories.jsonl",
+            "line": 10,
+            "raw_line_sha256": "fca1fa57e5c9097930ac133bcb400a3e6160cff3d08fc481ab0d07d670ae0d7a",
+            "pointer": "/steps/49"
+          },
+          "done": true,
+          "reward": 0.0,
+          "truncated": null,
+          "won_entries": [],
+          "step_record_sha256": "e6a5a0884b8954d2ce8741fd5795dfe309a0dec1147dcd6815e2f70c4b99de8f"
+        },
+        "historical_success_label_retained": true,
+        "not_inferred_from_subgoal_or_shaping_reward": true
+      },
+      "model_identity": {
+        "axis": "MODEL_IDENTITY_PINNED",
+        "teacher_role": "adapter-off recovery base, distinct from adapter-on SFT suffix",
+        "base_model": "Qwen/Qwen3-8B",
+        "resolved_weights_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+        "resolved_tokenizer_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+        "tokenizer_identity_basis": {
+          "snapshot_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+          "recorded_snapshot_tokenizer_json_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "recorded_actor_chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+          "recorded_recovery_chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+        },
+        "actor_adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+        "implementation_sha": "2da980f631badc25086d12db60d128ff507d3ae6",
+        "recovery_adapter_active": false,
+        "suffix_adapter_active": true,
+        "source_manifest": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_manifest.json",
+        "source_actor_recorded_model_version": "Qwen/Qwen3-8B+lora:/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+        "static_contract_binding": "historical_contracts.json: executed stage method AST matches frozen85, no historical model revision inference",
+        "runtime_loaded_commit_and_adapter_record": {
+          "actor_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+          "distinct_model_objects": true,
+          "kv_cache_shared": false,
+          "recovery_adapter_active": false,
+          "recovery_controller": {
+            "active_adapters": [],
+            "chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+            "effective_attention_backend": "sdpa",
+            "loaded_commit_hash": "b968826d9c46dd6066d109eabc6255188de91218",
+            "model_config_class": "transformers.models.qwen3.configuration_qwen3.Qwen3Config",
+            "model_device": "cuda:0",
+            "model_type": "qwen3",
+            "parameter_dtype": "torch.bfloat16",
+            "tokenizer_class": "transformers.models.qwen2.tokenization_qwen2_fast.Qwen2TokenizerFast",
+            "tokenizer_length": 151669
+          },
+          "recovery_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+          "sft_adapter_active": true,
+          "task_actor": {
+            "active_adapters": [
+              "default"
+            ],
+            "chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+            "effective_attention_backend": "sdpa",
+            "loaded_commit_hash": "b968826d9c46dd6066d109eabc6255188de91218",
+            "model_config_class": "transformers.models.qwen3.configuration_qwen3.Qwen3Config",
+            "model_device": "cuda:0",
+            "model_type": "qwen3",
+            "parameter_dtype": "torch.bfloat16",
+            "tokenizer_class": "transformers.models.qwen2.tokenization_qwen2_fast.Qwen2TokenizerFast",
+            "tokenizer_length": 151669
+          }
+        },
+        "isolation_receipt": {
+          "actor_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+          "distinct_model_objects": true,
+          "kv_cache_shared": false,
+          "recovery_adapter_active": false,
+          "recovery_controller": {
+            "active_adapters": [],
+            "chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+            "effective_attention_backend": "sdpa",
+            "loaded_commit_hash": "b968826d9c46dd6066d109eabc6255188de91218",
+            "model_config_class": "transformers.models.qwen3.configuration_qwen3.Qwen3Config",
+            "model_device": "cuda:0",
+            "model_type": "qwen3",
+            "parameter_dtype": "torch.bfloat16",
+            "tokenizer_class": "transformers.models.qwen2.tokenization_qwen2_fast.Qwen2TokenizerFast",
+            "tokenizer_length": 151669
+          },
+          "recovery_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+          "sft_adapter_active": true,
+          "task_actor": {
+            "active_adapters": [
+              "default"
+            ],
+            "chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+            "effective_attention_backend": "sdpa",
+            "loaded_commit_hash": "b968826d9c46dd6066d109eabc6255188de91218",
+            "model_config_class": "transformers.models.qwen3.configuration_qwen3.Qwen3Config",
+            "model_device": "cuda:0",
+            "model_type": "qwen3",
+            "parameter_dtype": "torch.bfloat16",
+            "tokenizer_class": "transformers.models.qwen2.tokenization_qwen2_fast.Qwen2TokenizerFast",
+            "tokenizer_length": 151669
+          }
+        },
+        "limitation": "Pinned in original runtime and execution manifests; no model files loaded or new runtime validation"
+      },
+      "suffix_separate": {
+        "producer": "adapter-on frozen SFT-P0",
+        "actions": 13,
+        "target_adopted_here": false,
+        "target_identity_not_adapter_off": true,
+        "suffix_action_ids_sha256": "6facd3c1fe285ebd3daa475d39922de9f7feb799d78a5b460923e5a959413254",
+        "generation_or_step_refs": [
+          "ac94aab389151dbdb6e7740329ad8b671d88c1db46b3e922eb1b32a134dd34e5",
+          "b2026671687f612aaacbf9fbcb16e3578aa8d73649a1c67c51bbdc134f85ca82",
+          "d08630c0d7ad23405adb18aa660178cdfe088c7fbcdc39514f33e720947039ae",
+          "8da5667b93716da5b7e2b60e9eb49014f23cb07b726dc3c4f8ca940d9b3d7591",
+          "8cf39ad27fc1958d8b3beba35104d8ca906aa95bb4b358591f70d8d5ae3e612e",
+          "6c415ef0b8a6c0d7db061b4e6c48c5c533cf69cdd43097192321042936d6a278",
+          "69129aba3288f4880bf879fbc08ac6c837c3daa356889a6307d33bfd5d5629af",
+          "1ef203a574d4bcff9854a3dd075a128d5d724cb92ce7417b72ef066ba0de41f4",
+          "ad45ae296e06bc3a54bf209a5aa4861e8a8c49924a378ac3a550d3ea0eb3c74c",
+          "2ff14502305e5e98f02a4eae3266c4f4720f3af5e146bac8091bab041f27ce32",
+          "8d8b81f3c370bdb25ce1eee82844f0e7dca18d6bc069ee8d933171b4515fd191",
+          "20a19af444c4a97ecc669a22e7c61b8a04bcd694d7791f4b84762c233ee4826f",
+          "3fe41dd9389613733dc9516c405a99d00b1d0022461928bd0da985ba98067d76"
+        ],
+        "semantic_public_action_sequence_sha256": "f765cab31c2dc4c4efc8582703b2bd094538fb45fab72c1f2740ace510a62605",
+        "physical_alias_evidence": "No derived alias among fixed cases; legacy lacks event IDs, so semantic equality alone does not assert physical reuse",
+        "source_endpoints": {
+          "first_sha256": "6464cbc60495d68985224195cfd7c74901582e4e95e98d4e5acf98f9d7c0de8b",
+          "last_sha256": "c0c48820347ed3de00fe4f965e8a72b9ebaab92a126f338b2e20abc1df4c3be8"
+        },
+        "original_prefix_0to1_not_per_suffix_step_causal_label": true
+      },
+      "recorded_tokens": {
+        "first_recovery_stage1": {
+          "input_tokens": 452,
+          "generated_tokens": 26,
+          "max_new_tokens": 40
+        },
+        "first_recovery_stage2": {
+          "input_tokens": 571,
+          "generated_tokens": 5,
+          "max_new_tokens": 16
+        },
+        "source_actor_same_public_P0": {
+          "generated_tokens": 5,
+          "input_tokens": 488
+        },
+        "prospective_projected_training_tokens": null,
+        "note": "Recorded inference counts only; no tokenizer. Teacher prompt length is not P0 projected training length."
+      },
+      "event_refs": [
+        {
+          "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_events.jsonl",
+          "line": 8891,
+          "raw_line_sha256": "f7d3aba0eca83893219364d4eae6e338785e19e959a41e6751da815eef2db74a",
+          "pointer": null,
+          "event_id": "30cfe7860b0f49ed3cdbf76b0c77ffe66f1c582b38179d4f3ecfee3d3317667c",
+          "kind": "generation_completed"
+        },
+        {
+          "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_events.jsonl",
+          "line": 8895,
+          "raw_line_sha256": "36d0a1054e5039455c72cbf2557c6b296ce7e5d3e984333ee0ecedaf60681ee2",
+          "pointer": null,
+          "event_id": "eb1aed10f969bf5d066dce584f7ec3fac1cf72dafbf5d673fd3713615f4c0aab",
+          "kind": "environment_step_completed"
+        },
+        {
+          "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_events.jsonl",
+          "line": 13463,
+          "raw_line_sha256": "ca96976216ac70659f7bd2fd083b1e323eea0174fd3b67b031ab57a9aa46baec",
+          "pointer": null,
+          "event_id": "0ea4faf7078c26df0a55c38c6db6bb91f7ca795c6e749ad0a7e1ed6b2efb859f",
+          "kind": "environment_operation_completed"
+        }
+      ],
+      "disposition": "HOLD_EVIDENCE",
+      "evidence_gaps": [
+        "CONTINUE_TERMINAL_WON_MISSING: done=true and reward=0 plus original CONTINUE=0 are recorded; do not fabricate won=false.",
+        "TERMINAL_WON_MISSING: raw terminal done/reward recorded; wrapper forwards underlying reward, does not substitute won. No success re-label or historical-result rejection."
+      ],
+      "learning_gain": "NOT_PROVEN",
+      "training_row_approved": false
+    }
+  ],
+  "same_public_input_groups": [],
+  "same_task_multiple_prefix_groups": {
+    "look_at_obj_in_light-Book-None-DeskLamp-303/trial_T20190909_085406_916808": [
+      "R10_OSR:R8-F22",
+      "R10_OSR:R8-F23"
+    ]
+  },
+  "same_semantic_suffix_groups": [
+    {
+      "suffix_sequence_sha256": "4c2493fa1cf07265ebc5e26a2eebc0308e8dcbd35842a5d3d6b73a4a34275843",
+      "case_ids": [
+        "R10_OSR:R8-F22",
+        "R10_OSR:R8-F23"
+      ],
+      "meaning": "Repeated public behavior, not proof of physically reused generation or independent training examples"
+    }
+  ],
+  "summary": {
+    "rows": 11,
+    "canonical_tasks": 10,
+    "families_by_row": {
+      "look_at_obj_in_light": 7,
+      "pick_two_obj_and_place": 2,
+      "pick_heat_then_place_in_recep": 1,
+      "pick_and_place_simple": 1
+    },
+    "dispositions": {
+      "HOLD_EVIDENCE": 2,
+      "INPUT_TARGET_LINEAGE_SUPPORTED": 9
+    },
+    "mechanical_input_target_checks_all_true": 11,
+    "model_identity_axes": {
+      "MODEL_IDENTITY_PARTIAL": 10,
+      "MODEL_IDENTITY_PINNED": 1
+    },
+    "terminal_axes": {
+      "DONE_POSITIVE_REWARD_WON_NOT_RECORDED": 2,
+      "EXPLICIT_DONE_WON_TRUE_REWARD_POSITIVE": 9
+    },
+    "same_public_input_multitarget_groups": 0,
+    "qualified_training_N": "NOT_ESTABLISHED; no training row approval",
+    "B_pool_ready": false
+  },
+  "input_bindings": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__SOL__si-p1-protocol-review__caae4c/FIXED_ELEVEN_CASES.json",
+      "bytes": 11683,
+      "sha256_before": "e5039568d8213fa5d879ffb2aec8c44e932fa99bc4de67bd527ebcae67ccb45b",
+      "sha256_after": "e5039568d8213fa5d879ffb2aec8c44e932fa99bc4de67bd527ebcae67ccb45b",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-source-pool-r1-20260908T042933Z/trajectories.jsonl",
+      "bytes": 61086377,
+      "sha256_before": "8a23c081e06d2f741fba9a5e0f7c3f15c7f73a696b74173748399f3785c6c59f",
+      "sha256_after": "8a23c081e06d2f741fba9a5e0f7c3f15c7f73a696b74173748399f3785c6c59f",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+      "bytes": 120987905,
+      "sha256_before": "780603bf96fc5ae5abdd4f588f76c7187dd191feabdb9a230e1e1c9c78eddac8",
+      "sha256_after": "780603bf96fc5ae5abdd4f588f76c7187dd191feabdb9a230e1e1c9c78eddac8",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/raw_trajectories.jsonl",
+      "bytes": 181317920,
+      "sha256_before": "d27153ef1556c0a8076f4896a20403d58e7549e15c48336926193393dba3a810",
+      "sha256_after": "d27153ef1556c0a8076f4896a20403d58e7549e15c48336926193393dba3a810",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_trajectories.jsonl",
+      "bytes": 19726633,
+      "sha256_before": "c6f37a7da28e326c70818524c79c17bbd85a286754c111f17db07cbe151a4f1c",
+      "sha256_after": "c6f37a7da28e326c70818524c79c17bbd85a286754c111f17db07cbe151a4f1c",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-feasibility-r4-20260908T080000Z/pairs.jsonl",
+      "bytes": 3790580,
+      "sha256_before": "6f53ac7434bfb84f68de88d31730ad2206194d77f4aac7c134ce562cd81d2415",
+      "sha256_after": "6f53ac7434bfb84f68de88d31730ad2206194d77f4aac7c134ce562cd81d2415",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl",
+      "bytes": 35436058,
+      "sha256_before": "ef953743d95fea93fb48b43a68b4b1b470aaee910becedfbfe4fd2c10008a76e",
+      "sha256_after": "ef953743d95fea93fb48b43a68b4b1b470aaee910becedfbfe4fd2c10008a76e",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl",
+      "bytes": 48207142,
+      "sha256_before": "548d06f7479e33306780d2c3434d1888957f0d4b42da6e4f510d949db310bacf",
+      "sha256_after": "548d06f7479e33306780d2c3434d1888957f0d4b42da6e4f510d949db310bacf",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/branches.jsonl",
+      "bytes": 1482426,
+      "sha256_before": "eff9b5e74d3d5daa928cb662dcc59fc3f434f66796b673679d40b374f3c8636f",
+      "sha256_after": "eff9b5e74d3d5daa928cb662dcc59fc3f434f66796b673679d40b374f3c8636f",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-replay-continue-r3-20260908T055308Z/replay_validation.jsonl",
+      "bytes": 550009,
+      "sha256_before": "b8fdb2f1ce6c5d64aa9b43d911e3770d3dff4e043e3eb15a0b86207f823b17d7",
+      "sha256_after": "b8fdb2f1ce6c5d64aa9b43d911e3770d3dff4e043e3eb15a0b86207f823b17d7",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/replay_ledger.jsonl",
+      "bytes": 195917,
+      "sha256_before": "9492882c7cfef8cd7f9cf03ac28757db7823c611ddd6a644aca307e1f96e8e1c",
+      "sha256_after": "9492882c7cfef8cd7f9cf03ac28757db7823c611ddd6a644aca307e1f96e8e1c",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_events.jsonl",
+      "bytes": 187978473,
+      "sha256_before": "05e1d443ff304eaa25d08b92a4e19d204a6c93a4f46bbe50aefef3271f211762",
+      "sha256_after": "05e1d443ff304eaa25d08b92a4e19d204a6c93a4f46bbe50aefef3271f211762",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-feasibility-r4-20260908T080000Z/run_manifest.json",
+      "bytes": 2034,
+      "sha256_before": "3cb7aee16e0900fe6a41a198afa8e53ec2e5ed939fa260ee74a6f3ae23d9e5e4",
+      "sha256_after": "3cb7aee16e0900fe6a41a198afa8e53ec2e5ed939fa260ee74a6f3ae23d9e5e4",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/run_manifest.json",
+      "bytes": 3651,
+      "sha256_before": "fb096f5672ef22d6f328d75e2b8e47d278338aac54b93c96c135697c718899c8",
+      "sha256_after": "fb096f5672ef22d6f328d75e2b8e47d278338aac54b93c96c135697c718899c8",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/run_manifest.json",
+      "bytes": 3247,
+      "sha256_before": "1ad1b1e4ab791330789cddeb33e9d07d4793d4e24bc0b76bbda5f008392c1273",
+      "sha256_after": "1ad1b1e4ab791330789cddeb33e9d07d4793d4e24bc0b76bbda5f008392c1273",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_manifest.json",
+      "bytes": 21758,
+      "sha256_before": "b00e8e4eed375532a080da6579940b44bc09089d7917540aea3ca4c227daffa0",
+      "sha256_after": "b00e8e4eed375532a080da6579940b44bc09089d7917540aea3ca4c227daffa0",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/runtime_manifest.json",
+      "bytes": 5711,
+      "sha256_before": "306a9e7c2d1b968e2a56e258fcd07aaf7467739460802a2b94c5e20411264916",
+      "sha256_after": "306a9e7c2d1b968e2a56e258fcd07aaf7467739460802a2b94c5e20411264916",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-replay-continue-r3-20260908T055308Z/continue_branches.jsonl",
+      "bytes": 19397967,
+      "sha256_before": "eba101c0e8d6a894879548dc79aa93042d2a5e11b4659277fc1a5c3dd1bf0c13",
+      "sha256_after": "eba101c0e8d6a894879548dc79aa93042d2a5e11b4659277fc1a5c3dd1bf0c13",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl",
+      "bytes": 34703287,
+      "sha256_before": "b04ea7cbea1ddd5818a2875e6a806b468e6db03afed09cfeaa792f8a05af2e99",
+      "sha256_after": "b04ea7cbea1ddd5818a2875e6a806b468e6db03afed09cfeaa792f8a05af2e99",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r15-b-20260910T000000Z/continue_ledger.jsonl",
+      "bytes": 45868962,
+      "sha256_before": "30acd05a5ef7d0a0a2f71967fecff643374c844e8ee21a7914c188c23e7c91ce",
+      "sha256_after": "30acd05a5ef7d0a0a2f71967fecff643374c844e8ee21a7914c188c23e7c91ce",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/env/alfworld.py",
+      "bytes": 7989,
+      "sha256_before": "086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d",
+      "sha256_after": "086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/protocol.py",
+      "bytes": 11229,
+      "sha256_before": "cb9a8ee23d1208064348810ef3580773ba14403bfaac6a4e7f4a43c5540178a8",
+      "sha256_after": "cb9a8ee23d1208064348810ef3580773ba14403bfaac6a4e7f4a43c5540178a8",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/models/action_parser.py",
+      "bytes": 4918,
+      "sha256_before": "0a1c668d590980d1d8cdd4104a2b3c9aa851037fc238a2c73c45b57ab4432fbe",
+      "sha256_after": "0a1c668d590980d1d8cdd4104a2b3c9aa851037fc238a2c73c45b57ab4432fbe",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/alfworld/agents/environment/alfred_tw_env.py",
+      "bytes": 10728,
+      "sha256_before": "4d9166363e32f0fa70c63530a900785ddb45c79387a02ebcb9a21252869a8924",
+      "sha256_after": "4d9166363e32f0fa70c63530a900785ddb45c79387a02ebcb9a21252869a8924",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__SOL__si-p1-protocol-review__caae4c/SOL_RESEARCH_TASK.md",
+      "bytes": 6435,
+      "sha256_before": "adcb03193e40baf839e14f9d521e3f7a309c28ce901d6a4dcf1d044660ec579b",
+      "sha256_after": "adcb03193e40baf839e14f9d521e3f7a309c28ce901d6a4dcf1d044660ec579b",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__SOL__self-improvement-phase0__b1c48c/PHASE0_DECISION_AND_NEXT_STEPS.md",
+      "bytes": 6035,
+      "sha256_before": "824115c4c5b4c2d18511630bc7baa9f53cee66d00a2d31d7a45b164491346b2f",
+      "sha256_after": "824115c4c5b4c2d18511630bc7baa9f53cee66d00a2d31d7a45b164491346b2f",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__SOL__self-improvement-phase0__b1c48c/phase0_independent_review.json",
+      "bytes": 13118,
+      "sha256_before": "c438377f5afb738b3b74c57378ba8c18b9769bb2f99bb25543aa66848d4697b7",
+      "sha256_after": "c438377f5afb738b3b74c57378ba8c18b9769bb2f99bb25543aa66848d4697b7",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/policy.py",
+      "bytes": 4700,
+      "sha256_before": "9e5bac82bc617304c4a30758000fcc4c47e2f477fcccb0d58003eb2d0716e91f",
+      "sha256_after": "9e5bac82bc617304c4a30758000fcc4c47e2f477fcccb0d58003eb2d0716e91f",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/r3.py",
+      "bytes": 18559,
+      "sha256_before": "0bd83fd5c06193c3347fedf90be25fde37a8ef4f257e5636c2384401b4727ace",
+      "sha256_after": "0bd83fd5c06193c3347fedf90be25fde37a8ef4f257e5636c2384401b4727ace",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/r9.py",
+      "bytes": 14433,
+      "sha256_before": "33fcbc8d88f6c1a0ad1af7aaefd10002cb0369c7d1313ccabc41a88e18bb61f3",
+      "sha256_after": "33fcbc8d88f6c1a0ad1af7aaefd10002cb0369c7d1313ccabc41a88e18bb61f3",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/recovery/persistent_prefix_selection.py",
+      "bytes": 71928,
+      "sha256_before": "7604146eff4489ca067a95d392853f0a9f88518d5b69772f24135206a25e9397",
+      "sha256_after": "7604146eff4489ca067a95d392853f0a9f88518d5b69772f24135206a25e9397",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/recovery/r13_1_prefix_selection.py",
+      "bytes": 56489,
+      "sha256_before": "808a8efd21186a2ae20d66898fa81307be998ec03c9d090af69d54daa2b5a7ec",
+      "sha256_after": "808a8efd21186a2ae20d66898fa81307be998ec03c9d090af69d54daa2b5a7ec",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/scripts/run_sft_recovery_feasibility.py",
+      "bytes": 67487,
+      "sha256_before": "80d498216e648eabdadf588f3bb205656f15c6d2b239127f7ec64001b903fdf4",
+      "sha256_after": "80d498216e648eabdadf588f3bb205656f15c6d2b239127f7ec64001b903fdf4",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/scripts/run_persistent_recovery_osr_control.py",
+      "bytes": 73830,
+      "sha256_before": "cbe3293dcfe3a7ec8bf304a3b94a5e2cdb316cc1b684e574bb902e9a0924ec45",
+      "sha256_after": "cbe3293dcfe3a7ec8bf304a3b94a5e2cdb316cc1b684e574bb902e9a0924ec45",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/scripts/run_r19_experiment.py",
+      "bytes": 263109,
+      "sha256_before": "06bb8e11c3cc9e9484b8d5731c86690b97a4c445a0e5aa16b72b912c6c14dd5c",
+      "sha256_after": "06bb8e11c3cc9e9484b8d5731c86690b97a4c445a0e5aa16b72b912c6c14dd5c",
+      "unchanged": true
+    }
+  ]
+}

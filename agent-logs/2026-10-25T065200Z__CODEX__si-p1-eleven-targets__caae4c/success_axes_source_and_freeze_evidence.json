@@ -1,0 +1,668 @@
+{
+  "created_at_UTC": "2026-10-25T07:31:48.608250+00:00",
+  "operation": "Static source and sealed-record clarification only",
+  "original_manifest_entries_checked": 51,
+  "original_manifest_and_seal_also_checked": true,
+  "frozen_original_files_before_after": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/ELEVEN_TARGET_AUDIT.md",
+      "expected_sha256": "c2373e021ec099f24647a1632be00872a57c863bd0e0fe9c0f90f00570fb5a8d",
+      "sha256_before": "c2373e021ec099f24647a1632be00872a57c863bd0e0fe9c0f90f00570fb5a8d",
+      "sha256_after": "c2373e021ec099f24647a1632be00872a57c863bd0e0fe9c0f90f00570fb5a8d",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/FROZEN_HANDOFF.json",
+      "expected_sha256": "dec0d496ca33e5713af96fa34602d9390a9aa2072ed122877a7380c5c42a5e77",
+      "sha256_before": "dec0d496ca33e5713af96fa34602d9390a9aa2072ed122877a7380c5c42a5e77",
+      "sha256_after": "dec0d496ca33e5713af96fa34602d9390a9aa2072ed122877a7380c5c42a5e77",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/INPUT_HASHES.sha256",
+      "expected_sha256": "a4b2665655e59d720934c55c0bb2bca45b11d298f71e53c0def81388a75d8727",
+      "sha256_before": "a4b2665655e59d720934c55c0bb2bca45b11d298f71e53c0def81388a75d8727",
+      "sha256_after": "a4b2665655e59d720934c55c0bb2bca45b11d298f71e53c0def81388a75d8727",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/PUBLIC_INPUT_CONTRACT.md",
+      "expected_sha256": "4a8e7e89ea540eb647ebd23d3cf2352b55e2e8f553bb844af54fa8927a7f08d2",
+      "sha256_before": "4a8e7e89ea540eb647ebd23d3cf2352b55e2e8f553bb844af54fa8927a7f08d2",
+      "sha256_after": "4a8e7e89ea540eb647ebd23d3cf2352b55e2e8f553bb844af54fa8927a7f08d2",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/RECORD.md",
+      "expected_sha256": "7abb91528d678b3eeb2efc14e9e2dcc8249bcf0a0029a6408fe0291d1bf3c2c1",
+      "sha256_before": "7abb91528d678b3eeb2efc14e9e2dcc8249bcf0a0029a6408fe0291d1bf3c2c1",
+      "sha256_after": "7abb91528d678b3eeb2efc14e9e2dcc8249bcf0a0029a6408fe0291d1bf3c2c1",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/SCOPE_RECEIPT.json",
+      "expected_sha256": "12faa0fecbfaae702ac67dedc77f59886ffe31662173e55d91227de80268db51",
+      "sha256_before": "12faa0fecbfaae702ac67dedc77f59886ffe31662173e55d91227de80268db51",
+      "sha256_after": "12faa0fecbfaae702ac67dedc77f59886ffe31662173e55d91227de80268db51",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/audit_documents.log",
+      "expected_sha256": "34c50cc6e8605ed1e8751e9bbbb3071acd5da5de735a253098381101ce960372",
+      "sha256_before": "34c50cc6e8605ed1e8751e9bbbb3071acd5da5de735a253098381101ce960372",
+      "sha256_after": "34c50cc6e8605ed1e8751e9bbbb3071acd5da5de735a253098381101ce960372",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/audit_documents.receipt.json",
+      "expected_sha256": "85368605a25b87dbd62c26f8a77ed2025374593135e8c310adbcd51a3f5eb155",
+      "sha256_before": "85368605a25b87dbd62c26f8a77ed2025374593135e8c310adbcd51a3f5eb155",
+      "sha256_after": "85368605a25b87dbd62c26f8a77ed2025374593135e8c310adbcd51a3f5eb155",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/commands.log",
+      "expected_sha256": "dd419f65cba4b39d9b1aa02d91f7ac06468058b33e6e54ce4b47453550ac2576",
+      "sha256_before": "dd419f65cba4b39d9b1aa02d91f7ac06468058b33e6e54ce4b47453550ac2576",
+      "sha256_after": "dd419f65cba4b39d9b1aa02d91f7ac06468058b33e6e54ce4b47453550ac2576",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/deliver_eleven.py",
+      "expected_sha256": "87ce0e42bf6f9e73fc552c50c2111bd43e503b4a302973d1a27011c7ac36fc5c",
+      "sha256_before": "87ce0e42bf6f9e73fc552c50c2111bd43e503b4a302973d1a27011c7ac36fc5c",
+      "sha256_after": "87ce0e42bf6f9e73fc552c50c2111bd43e503b4a302973d1a27011c7ac36fc5c",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_audit.py",
+      "expected_sha256": "d2634d233072f1a0ef365fe722c5e0d786a535528425c2fad45f2e901c781199",
+      "sha256_before": "d2634d233072f1a0ef365fe722c5e0d786a535528425c2fad45f2e901c781199",
+      "sha256_after": "d2634d233072f1a0ef365fe722c5e0d786a535528425c2fad45f2e901c781199",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit.json",
+      "expected_sha256": "f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901",
+      "sha256_before": "f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901",
+      "sha256_after": "f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit_complete.log",
+      "expected_sha256": "6da8a17768dd1a1aefaeb129e56438f0d4e694f9dae512a3a10b42ab03e6e489",
+      "sha256_before": "6da8a17768dd1a1aefaeb129e56438f0d4e694f9dae512a3a10b42ab03e6e489",
+      "sha256_after": "6da8a17768dd1a1aefaeb129e56438f0d4e694f9dae512a3a10b42ab03e6e489",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit_complete.receipt.json",
+      "expected_sha256": "d66562339d05679516c99604c1f440c20c1971a3a2ff15895be1fbcab858a3c0",
+      "sha256_before": "d66562339d05679516c99604c1f440c20c1971a3a2ff15895be1fbcab858a3c0",
+      "sha256_after": "d66562339d05679516c99604c1f440c20c1971a3a2ff15895be1fbcab858a3c0",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit_draft.log",
+      "expected_sha256": "57102dcacfe05f1b16100f6d5be9337cde598b8c70e197ac959e35c157fd165b",
+      "sha256_before": "57102dcacfe05f1b16100f6d5be9337cde598b8c70e197ac959e35c157fd165b",
+      "sha256_after": "57102dcacfe05f1b16100f6d5be9337cde598b8c70e197ac959e35c157fd165b",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit_draft.receipt.json",
+      "expected_sha256": "e5862b97cca39fe792943a1dc32f0bc372f9ea97d5329f1d5bc2c1d819381230",
+      "sha256_before": "e5862b97cca39fe792943a1dc32f0bc372f9ea97d5329f1d5bc2c1d819381230",
+      "sha256_after": "e5862b97cca39fe792943a1dc32f0bc372f9ea97d5329f1d5bc2c1d819381230",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit_final.log",
+      "expected_sha256": "57102dcacfe05f1b16100f6d5be9337cde598b8c70e197ac959e35c157fd165b",
+      "sha256_before": "57102dcacfe05f1b16100f6d5be9337cde598b8c70e197ac959e35c157fd165b",
+      "sha256_after": "57102dcacfe05f1b16100f6d5be9337cde598b8c70e197ac959e35c157fd165b",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit_final.receipt.json",
+      "expected_sha256": "5b682e08072e209a0c57e4facba4876680325349e805f4adea58b2df3253338a",
+      "sha256_before": "5b682e08072e209a0c57e4facba4876680325349e805f4adea58b2df3253338a",
+      "sha256_after": "5b682e08072e209a0c57e4facba4876680325349e805f4adea58b2df3253338a",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/executed2da_final_head.log",
+      "expected_sha256": "4fae1ce388142ba7ab4f4499ca388b601ae7d8f38fac83c82ffc71d2f1199383",
+      "sha256_before": "4fae1ce388142ba7ab4f4499ca388b601ae7d8f38fac83c82ffc71d2f1199383",
+      "sha256_after": "4fae1ce388142ba7ab4f4499ca388b601ae7d8f38fac83c82ffc71d2f1199383",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/executed2da_final_head.receipt.json",
+      "expected_sha256": "066b4b51feb425fb9dd24a65ac0d7370068548dfc06f5a10607b8f0aecaea3b2",
+      "sha256_before": "066b4b51feb425fb9dd24a65ac0d7370068548dfc06f5a10607b8f0aecaea3b2",
+      "sha256_after": "066b4b51feb425fb9dd24a65ac0d7370068548dfc06f5a10607b8f0aecaea3b2",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/executed2da_final_status.log",
+      "expected_sha256": "ba051334ebc33f3162a4fd5be48615e03c8dac8ec7977e7c2752dbc1cf981841",
+      "sha256_before": "ba051334ebc33f3162a4fd5be48615e03c8dac8ec7977e7c2752dbc1cf981841",
+      "sha256_after": "ba051334ebc33f3162a4fd5be48615e03c8dac8ec7977e7c2752dbc1cf981841",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/executed2da_final_status.receipt.json",
+      "expected_sha256": "524e852e2fde8e71d4dd30e8ef36e80463b223b0c549b10adf4c79355f0cb102",
+      "sha256_before": "524e852e2fde8e71d4dd30e8ef36e80463b223b0c549b10adf4c79355f0cb102",
+      "sha256_after": "524e852e2fde8e71d4dd30e8ef36e80463b223b0c549b10adf4c79355f0cb102",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/final_evidence_summary.log",
+      "expected_sha256": "a72c681172549a9ada2140235bce339e3b40c546db6e25cf42c6f5153380e27e",
+      "sha256_before": "a72c681172549a9ada2140235bce339e3b40c546db6e25cf42c6f5153380e27e",
+      "sha256_after": "a72c681172549a9ada2140235bce339e3b40c546db6e25cf42c6f5153380e27e",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/final_evidence_summary.receipt.json",
+      "expected_sha256": "13a4b1be3caf9db742623536ad98a7985b00d9ba5127982d1ade1f12d1b1071e",
+      "sha256_before": "13a4b1be3caf9db742623536ad98a7985b00d9ba5127982d1ade1f12d1b1071e",
+      "sha256_after": "13a4b1be3caf9db742623536ad98a7985b00d9ba5127982d1ade1f12d1b1071e",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/final_input_hash_check.json",
+      "expected_sha256": "9e7a54a55ad6d7c1136a0a3214b711e2bc647a97e69195b73eb1ea4b9dbe563f",
+      "sha256_before": "9e7a54a55ad6d7c1136a0a3214b711e2bc647a97e69195b73eb1ea4b9dbe563f",
+      "sha256_after": "9e7a54a55ad6d7c1136a0a3214b711e2bc647a97e69195b73eb1ea4b9dbe563f",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/finalization.log",
+      "expected_sha256": "da5106df7be2eff2dbb0556401c5730faf82e45b1813c9940d8b9feb2ee20420",
+      "sha256_before": "da5106df7be2eff2dbb0556401c5730faf82e45b1813c9940d8b9feb2ee20420",
+      "sha256_after": "da5106df7be2eff2dbb0556401c5730faf82e45b1813c9940d8b9feb2ee20420",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/finalization.receipt.json",
+      "expected_sha256": "99f97eccb4a683eff10f0c7b12264c38494fbe73d8ed8a1401a4a89a9b8318a6",
+      "sha256_before": "99f97eccb4a683eff10f0c7b12264c38494fbe73d8ed8a1401a4a89a9b8318a6",
+      "sha256_after": "99f97eccb4a683eff10f0c7b12264c38494fbe73d8ed8a1401a4a89a9b8318a6",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/fixed_case_probe.log",
+      "expected_sha256": "e1e15580954f1d36177d5ab82caf23d8214079836fb987d860fb3dfcc1a9b7bb",
+      "sha256_before": "e1e15580954f1d36177d5ab82caf23d8214079836fb987d860fb3dfcc1a9b7bb",
+      "sha256_after": "e1e15580954f1d36177d5ab82caf23d8214079836fb987d860fb3dfcc1a9b7bb",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/fixed_case_probe.receipt.json",
+      "expected_sha256": "b3c4ac5bfb9e8283ce7924a43209ade5aca116197e11e117db0bd993062e0a2b",
+      "sha256_before": "b3c4ac5bfb9e8283ce7924a43209ade5aca116197e11e117db0bd993062e0a2b",
+      "sha256_after": "b3c4ac5bfb9e8283ce7924a43209ade5aca116197e11e117db0bd993062e0a2b",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/fixed_case_probe_empty_suffix.log",
+      "expected_sha256": "b05d28f2924b7ced6ce5380e06d16a13e6ce15d0440ca8741b0e5cd2beb17cb4",
+      "sha256_before": "b05d28f2924b7ced6ce5380e06d16a13e6ce15d0440ca8741b0e5cd2beb17cb4",
+      "sha256_after": "b05d28f2924b7ced6ce5380e06d16a13e6ce15d0440ca8741b0e5cd2beb17cb4",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/fixed_case_probe_empty_suffix.receipt.json",
+      "expected_sha256": "a54d479ed3a217d3dfdcf3b40ee843a9bec0d71da31cf6ad23ff5138f58c7a0a",
+      "sha256_before": "a54d479ed3a217d3dfdcf3b40ee843a9bec0d71da31cf6ad23ff5138f58c7a0a",
+      "sha256_after": "a54d479ed3a217d3dfdcf3b40ee843a9bec0d71da31cf6ad23ff5138f58c7a0a",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/freeze_eleven.py",
+      "expected_sha256": "425c7935a90e853dc2a8e1847c854f8b9ffb328f769ff12a01621c88b37c6390",
+      "sha256_before": "425c7935a90e853dc2a8e1847c854f8b9ffb328f769ff12a01621c88b37c6390",
+      "sha256_after": "425c7935a90e853dc2a8e1847c854f8b9ffb328f769ff12a01621c88b37c6390",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/frozen85_final_head.log",
+      "expected_sha256": "956e4f282a3b749ff52216d0098b5fae1b384846a18287cd633b6bc4edf2c328",
+      "sha256_before": "956e4f282a3b749ff52216d0098b5fae1b384846a18287cd633b6bc4edf2c328",
+      "sha256_after": "956e4f282a3b749ff52216d0098b5fae1b384846a18287cd633b6bc4edf2c328",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/frozen85_final_head.receipt.json",
+      "expected_sha256": "e7bf96f89006494750235fa6d0748c84715e9bd73b8de1816631924a496af3f5",
+      "sha256_before": "e7bf96f89006494750235fa6d0748c84715e9bd73b8de1816631924a496af3f5",
+      "sha256_after": "e7bf96f89006494750235fa6d0748c84715e9bd73b8de1816631924a496af3f5",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/frozen85_final_status.log",
+      "expected_sha256": "e951d71482b62a111de0ed0845a8e2fca5df0ae016b26879b27dd01656499707",
+      "sha256_before": "e951d71482b62a111de0ed0845a8e2fca5df0ae016b26879b27dd01656499707",
+      "sha256_after": "e951d71482b62a111de0ed0845a8e2fca5df0ae016b26879b27dd01656499707",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/frozen85_final_status.receipt.json",
+      "expected_sha256": "b60b021ffa4a663867cc8122ad6419c42eba4f178ba271402c9d0e750de9ab66",
+      "sha256_before": "b60b021ffa4a663867cc8122ad6419c42eba4f178ba271402c9d0e750de9ab66",
+      "sha256_after": "b60b021ffa4a663867cc8122ad6419c42eba4f178ba271402c9d0e750de9ab66",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/historical_contract_read.receipts.json",
+      "expected_sha256": "9a1074d90334066c29b17cf8848a9febd01b9dabf97f257d9b4fdfcd04ec8602",
+      "sha256_before": "9a1074d90334066c29b17cf8848a9febd01b9dabf97f257d9b4fdfcd04ec8602",
+      "sha256_after": "9a1074d90334066c29b17cf8848a9febd01b9dabf97f257d9b4fdfcd04ec8602",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/historical_contracts.json",
+      "expected_sha256": "65998fc9a145098ff09e551a2659d0f3a41ed29d2a088f0bad89b174dab579b6",
+      "sha256_before": "65998fc9a145098ff09e551a2659d0f3a41ed29d2a088f0bad89b174dab579b6",
+      "sha256_after": "65998fc9a145098ff09e551a2659d0f3a41ed29d2a088f0bad89b174dab579b6",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/historical_static_contracts.log",
+      "expected_sha256": "44634249bcb2c917ce3da7258c03c525ee4835738df52ccfa1d8b8e3c8fc2287",
+      "sha256_before": "44634249bcb2c917ce3da7258c03c525ee4835738df52ccfa1d8b8e3c8fc2287",
+      "sha256_after": "44634249bcb2c917ce3da7258c03c525ee4835738df52ccfa1d8b8e3c8fc2287",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/historical_static_contracts.receipt.json",
+      "expected_sha256": "9db78044b2ffa45d342c2f6043374d3f02195b609564539717857ddaa8fe7f18",
+      "sha256_before": "9db78044b2ffa45d342c2f6043374d3f02195b609564539717857ddaa8fe7f18",
+      "sha256_after": "9db78044b2ffa45d342c2f6043374d3f02195b609564539717857ddaa8fe7f18",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/history_contracts.py",
+      "expected_sha256": "2e40bfb14ce04e54375b8b501ac00050777263b6447887d299c816c10070c7ee",
+      "sha256_before": "2e40bfb14ce04e54375b8b501ac00050777263b6447887d299c816c10070c7ee",
+      "sha256_after": "2e40bfb14ce04e54375b8b501ac00050777263b6447887d299c816c10070c7ee",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/input_bindings.json",
+      "expected_sha256": "0d6ad1cf41ba0ef4d7061cb54dcf6198573b74eabc62c68629f42b83d85e5d12",
+      "sha256_before": "0d6ad1cf41ba0ef4d7061cb54dcf6198573b74eabc62c68629f42b83d85e5d12",
+      "sha256_after": "0d6ad1cf41ba0ef4d7061cb54dcf6198573b74eabc62c68629f42b83d85e5d12",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/probe.json",
+      "expected_sha256": "c947ec7269fad264b5b9e3ccfd18cdb4a200237db416582d9a08841d5747e55d",
+      "sha256_before": "c947ec7269fad264b5b9e3ccfd18cdb4a200237db416582d9a08841d5747e55d",
+      "sha256_after": "c947ec7269fad264b5b9e3ccfd18cdb4a200237db416582d9a08841d5747e55d",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py",
+      "expected_sha256": "f67aeeb2e2558676cac82a66c1b9c83a32070b0f5db48d53a5ce9ffc6ef59abb",
+      "sha256_before": "f67aeeb2e2558676cac82a66c1b9c83a32070b0f5db48d53a5ce9ffc6ef59abb",
+      "sha256_after": "f67aeeb2e2558676cac82a66c1b9c83a32070b0f5db48d53a5ce9ffc6ef59abb",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/replay_event_probe.log",
+      "expected_sha256": "90c956194551f35b99923c3db6b54a3c5197f932c86165e26468880add362cf7",
+      "sha256_before": "90c956194551f35b99923c3db6b54a3c5197f932c86165e26468880add362cf7",
+      "sha256_after": "90c956194551f35b99923c3db6b54a3c5197f932c86165e26468880add362cf7",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/replay_event_probe.receipt.json",
+      "expected_sha256": "f92f2839544f9e75d14f6703b9fc4b66a2472e873229eef78582be995bf7acab",
+      "sha256_before": "f92f2839544f9e75d14f6703b9fc4b66a2472e873229eef78582be995bf7acab",
+      "sha256_after": "f92f2839544f9e75d14f6703b9fc4b66a2472e873229eef78582be995bf7acab",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/root_final_head.log",
+      "expected_sha256": "1f4d1530d6dbb0a329eeb62ba9dc7f78dfd74709b996765c073c88eb885c7d8d",
+      "sha256_before": "1f4d1530d6dbb0a329eeb62ba9dc7f78dfd74709b996765c073c88eb885c7d8d",
+      "sha256_after": "1f4d1530d6dbb0a329eeb62ba9dc7f78dfd74709b996765c073c88eb885c7d8d",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/root_final_head.receipt.json",
+      "expected_sha256": "89e6c5e3d29759e8e87ab66754fedf13d498ea4bdca87a5f03113f7b46aefeb8",
+      "sha256_before": "89e6c5e3d29759e8e87ab66754fedf13d498ea4bdca87a5f03113f7b46aefeb8",
+      "sha256_after": "89e6c5e3d29759e8e87ab66754fedf13d498ea4bdca87a5f03113f7b46aefeb8",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/root_final_status.log",
+      "expected_sha256": "2bb0b3aea3c63c78c18683a7ebf07770f0c7189a995031069de23680d1d616d2",
+      "sha256_before": "2bb0b3aea3c63c78c18683a7ebf07770f0c7189a995031069de23680d1d616d2",
+      "sha256_after": "2bb0b3aea3c63c78c18683a7ebf07770f0c7189a995031069de23680d1d616d2",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/root_final_status.receipt.json",
+      "expected_sha256": "32ea11972a481622f73197ec0140f0f5575164dcbc01a4ca4b0914907377b1b7",
+      "sha256_before": "32ea11972a481622f73197ec0140f0f5575164dcbc01a4ca4b0914907377b1b7",
+      "sha256_after": "32ea11972a481622f73197ec0140f0f5575164dcbc01a4ca4b0914907377b1b7",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/target_audit_impl.py",
+      "expected_sha256": "362433ac0f8ab5c460ce024a1e4ec60b85bfbbb63eca3d4cd33ba5d232d5aad1",
+      "sha256_before": "362433ac0f8ab5c460ce024a1e4ec60b85bfbbb63eca3d4cd33ba5d232d5aad1",
+      "sha256_after": "362433ac0f8ab5c460ce024a1e4ec60b85bfbbb63eca3d4cd33ba5d232d5aad1",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/FILE_HASHES.sha256",
+      "expected_sha256": "14189f7752494eee84fdc6adad161957b0afe34b597f68fedce845d4d5976572",
+      "sha256_before": "14189f7752494eee84fdc6adad161957b0afe34b597f68fedce845d4d5976572",
+      "sha256_after": "14189f7752494eee84fdc6adad161957b0afe34b597f68fedce845d4d5976572",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/SEAL_CHECK.json",
+      "expected_sha256": "d791f83b3181e703af274d06b6b892832d793ff0200eeae753d69f114267cdce",
+      "sha256_before": "d791f83b3181e703af274d06b6b892832d793ff0200eeae753d69f114267cdce",
+      "sha256_after": "d791f83b3181e703af274d06b6b892832d793ff0200eeae753d69f114267cdce",
+      "unchanged": true
+    }
+  ],
+  "current_source_and_authority_before_after": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__SOL__si-p1-protocol-review__caae4c/SOL_RESEARCH_TASK.md",
+      "sha256_before": "adcb03193e40baf839e14f9d521e3f7a309c28ce901d6a4dcf1d044660ec579b",
+      "sha256_after": "adcb03193e40baf839e14f9d521e3f7a309c28ce901d6a4dcf1d044660ec579b",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__SOL__si-p1-protocol-review__caae4c/FIXED_ELEVEN_CASES.json",
+      "sha256_before": "e5039568d8213fa5d879ffb2aec8c44e932fa99bc4de67bd527ebcae67ccb45b",
+      "sha256_after": "e5039568d8213fa5d879ffb2aec8c44e932fa99bc4de67bd527ebcae67ccb45b",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/historical_contracts.json",
+      "sha256_before": "65998fc9a145098ff09e551a2659d0f3a41ed29d2a088f0bad89b174dab579b6",
+      "sha256_after": "65998fc9a145098ff09e551a2659d0f3a41ed29d2a088f0bad89b174dab579b6",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/trajectory/trajectory.py",
+      "sha256_before": "31bbd35c7960ddcf87c6d1c38376d10aaf95e741f9dedecbe4f8e23a97fdb958",
+      "sha256_after": "31bbd35c7960ddcf87c6d1c38376d10aaf95e741f9dedecbe4f8e23a97fdb958",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/env/alfworld.py",
+      "sha256_before": "086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d",
+      "sha256_after": "086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d",
+      "unchanged": true
+    },
+    {
+      "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/scripts/run_r19_experiment.py",
+      "sha256_before": "06bb8e11c3cc9e9484b8d5731c86690b97a4c445a0e5aa16b72b912c6c14dd5c",
+      "sha256_after": "06bb8e11c3cc9e9484b8d5731c86690b97a4c445a0e5aa16b72b912c6c14dd5c",
+      "unchanged": true
+    }
+  ],
+  "current_static_methods": {
+    "Trajectory.succeeded": {
+      "method": "succeeded",
+      "line": 60,
+      "end_line": 62,
+      "AST_sha256": "2f530611b6508d5b9c9764c5c109571cdb1aed9d20d210c2f15261f7925a5d28",
+      "source_text": "def succeeded(self) -> bool:\n        \"\"\"Return whether ALFWorld emitted a positive terminal reward.\"\"\"\n        return bool(self.steps and self.steps[-1].done and self.steps[-1].reward > 0)"
+    },
+    "AlfWorldTextEnvironment.step": {
+      "method": "step",
+      "line": 58,
+      "end_line": 72,
+      "AST_sha256": "2d76fe6ff761a40e84ddea0e0ef7d141c55e481693ee0832472f7dd6d6b59aa4",
+      "source_text": "def step(self, action: str) -> Transition:\n        \"\"\"Apply one text action to ALFWorld.\"\"\"\n        if self._environment is None:\n            raise RuntimeError(\"reset() must be called before step()\")\n        observations, rewards, dones, info = self._environment.step([action])\n        info_dict = self._info_dict(info)\n        self._valid_actions = self._valid_actions_from_info(info_dict)\n        return Transition(\n            observation=self._first(observations),\n            reward=float(self._first(rewards)),\n            done=bool(self._first(dones)),\n            truncated=False,\n            valid_actions=self._valid_actions,\n            metadata={\"alfworld_info\": info_dict},\n        )"
+    },
+    "R19.record_step": {
+      "method": "record_step",
+      "line": 1635,
+      "end_line": 1663,
+      "AST_sha256": "367f5e08662d784b515ebd6a7e6ac8e2f2f74a5464f55bd71fdfe81c9373a2d9",
+      "source_text": "def record_step(\n        self, env: Any, command: str, identity: Mapping[str, Any],\n        *, before: Mapping[str, Any], action_id: str | None = None,\n    ) -> tuple[Any, str]:\n        from models.action_parser import action_id_mapping\n\n        self._reserve_environment_step(identity)\n        mapping = action_id_mapping(tuple(map(str, before[\"valid_actions\"])))\n        start_identity = dict(identity)\n        self.sink(\"environment_operation_started\", start_identity, {\n            \"operation\": identity.get(\"operation\"), \"command\": command,\n            \"action_id\": action_id, \"action_map\": mapping,\n            \"before_state\": dict(before),\n        })\n        transition_obj = env.step(command)\n        transition = {\n            \"observation\": str(transition_obj.observation),\n            \"valid_actions\": list(transition_obj.valid_actions or ()),\n            \"reward\": float(transition_obj.reward),\n            \"done\": bool(transition_obj.done),\n            \"truncated\": bool(transition_obj.truncated),\n            \"executed_command\": command,\n        }\n        complete = self.sink(\"environment_operation_completed\", start_identity, {\n            \"operation\": identity.get(\"operation\"), \"command\": command,\n            \"action_id\": action_id, \"action_map\": mapping,\n            \"before_state\": dict(before), \"transition\": transition,\n        })\n        return transition_obj, str(complete[\"event_id\"])"
+    },
+    "R19.run_sft_suffix": {
+      "method": "run_sft_suffix",
+      "line": 2204,
+      "end_line": 2277,
+      "AST_sha256": "e8a22a804a6fb1c689fa1ab0fa4fd8eff7614d0589f337890844070bfae9edd5",
+      "source_text": "def run_sft_suffix(\n        self, prefix_id: str, canonical_trial_id: str, cursor: RecoveryCursor,\n        action_cap: int, k: int,\n    ) -> dict[str, Any]:\n        from models.action_parser import action_id_mapping\n\n        env = self.suffix_envs.pop((prefix_id, int(k)), None)\n        if env is None:\n            raise EvidenceIntegrityError(\"SFT suffix has no isolated reset-and-replay environment\")\n        generations: list[dict[str, Any]] = []\n        generation_ids: list[str] = []\n        transition_ids: list[str] = []\n        prompts: list[str] = []\n        env_actions = 0\n        success = 0\n        terminal = False\n        reason = \"remaining_horizon\"\n        current = cursor\n        try:\n            for offset in range(action_cap):\n                generation_identity = {\n                    \"prefix_id\": prefix_id, \"canonical_trial_id\": canonical_trial_id,\n                    \"operation\": \"sft_generation\",\n                    \"k\": int(k), \"decision_index\": offset,\n                    \"actions_consumed\": current.actions_consumed,\n                }\n                generation, parsed, generation_id = self.actor_generation(\n                    current, component=\"sft\", identity=generation_identity,\n                )\n                generation_ids.append(generation_id)\n                generations.append(generation)\n                prompts.append(parsed[\"prompt\"])\n                if parsed[\"status\"] != \"selected\":\n                    reason = \"selection_failure\"\n                    break\n                before = {\"observation\": current.observation,\n                          \"valid_actions\": list(current.valid_actions),\n                          \"history\": [list(item) for item in current.history],\n                          \"actions_consumed\": current.actions_consumed}\n                transition, transition_id = self.record_step(\n                    env, str(parsed[\"action\"]),\n                    {\"prefix_id\": prefix_id,\n                     \"canonical_trial_id\": canonical_trial_id,\n                     \"component\": \"sft\", \"operation\": \"sft_environment_step\",\n                     \"k\": int(k), \"decision_index\": offset},\n                    before=before, action_id=parsed[\"action_id\"],\n                )\n                transition_ids.append(transition_id)\n                env_actions += 1\n                current = RecoveryCursor(\n                    task=current.task, task_id=current.task_id,\n                    canonical_trial_id=current.canonical_trial_id,\n                    nominal_seed=current.nominal_seed,\n                    observation=str(transition.observation),\n                    valid_actions=tuple(map(str, transition.valid_actions or ())),\n                    history=(*current.history, (current.observation, str(parsed[\"action\"]))),\n                    actions_consumed=current.actions_consumed + 1,\n                )\n                terminal = bool(transition.done or transition.truncated)\n                if terminal:\n                    success = int(bool(transition.done and float(transition.reward) > 0))\n                    reason = \"environment_terminal\" if transition.done else \"environment_truncated\"\n                    break\n            return {\n                \"success\": success, \"generations\": generations,\n                \"environment_actions\": env_actions, \"terminal\": terminal,\n                \"termination_reason\": reason, \"prompts\": prompts,\n                \"evidence_refs\": {\n                    \"suffix_generation_event_ids\": generation_ids,\n                    \"suffix_transition_event_ids\": transition_ids,\n                },\n            }\n        finally:\n            env.close()"
+    }
+  },
+  "historical_source_object_reads_real_receipts": [
+    {
+      "stage": "R4",
+      "revision": "7a01a6107b4bc9c994893220aab078af39fe4fff",
+      "path": "src/trajectory/trajectory.py",
+      "argv": [
+        "git",
+        "-C",
+        "/home/lizening/wt-r19-g4-consumer-contract-repair",
+        "show",
+        "7a01a6107b4bc9c994893220aab078af39fe4fff:src/trajectory/trajectory.py"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "8c204fcf1f1881c7b7e9462cd11d93b04d7f2e05cdf8a0d6a6951d0a11bb4e7d",
+      "stderr": "",
+      "historical_method": {
+        "method": "succeeded",
+        "line": 59,
+        "end_line": 61,
+        "AST_sha256": "2f530611b6508d5b9c9764c5c109571cdb1aed9d20d210c2f15261f7925a5d28",
+        "source_text": "def succeeded(self) -> bool:\n        \"\"\"Return whether ALFWorld emitted a positive terminal reward.\"\"\"\n        return bool(self.steps and self.steps[-1].done and self.steps[-1].reward > 0)"
+      },
+      "matches_frozen85_AST": true
+    },
+    {
+      "stage": "R10_OSR",
+      "revision": "8926d8fb10e634489031de3da910c572b50d8d44",
+      "path": "src/trajectory/trajectory.py",
+      "argv": [
+        "git",
+        "-C",
+        "/home/lizening/wt-r19-g4-consumer-contract-repair",
+        "show",
+        "8926d8fb10e634489031de3da910c572b50d8d44:src/trajectory/trajectory.py"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "8c204fcf1f1881c7b7e9462cd11d93b04d7f2e05cdf8a0d6a6951d0a11bb4e7d",
+      "stderr": "",
+      "historical_method": {
+        "method": "succeeded",
+        "line": 59,
+        "end_line": 61,
+        "AST_sha256": "2f530611b6508d5b9c9764c5c109571cdb1aed9d20d210c2f15261f7925a5d28",
+        "source_text": "def succeeded(self) -> bool:\n        \"\"\"Return whether ALFWorld emitted a positive terminal reward.\"\"\"\n        return bool(self.steps and self.steps[-1].done and self.steps[-1].reward > 0)"
+      },
+      "matches_frozen85_AST": true
+    },
+    {
+      "stage": "R16_OSR",
+      "revision": "d1ef841ea9dc7423177fb7647906e2e719f0fbe7",
+      "path": "src/trajectory/trajectory.py",
+      "argv": [
+        "git",
+        "-C",
+        "/home/lizening/wt-r19-g4-consumer-contract-repair",
+        "show",
+        "d1ef841ea9dc7423177fb7647906e2e719f0fbe7:src/trajectory/trajectory.py"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "31bbd35c7960ddcf87c6d1c38376d10aaf95e741f9dedecbe4f8e23a97fdb958",
+      "stderr": "",
+      "historical_method": {
+        "method": "succeeded",
+        "line": 60,
+        "end_line": 62,
+        "AST_sha256": "2f530611b6508d5b9c9764c5c109571cdb1aed9d20d210c2f15261f7925a5d28",
+        "source_text": "def succeeded(self) -> bool:\n        \"\"\"Return whether ALFWorld emitted a positive terminal reward.\"\"\"\n        return bool(self.steps and self.steps[-1].done and self.steps[-1].reward > 0)"
+      },
+      "matches_frozen85_AST": true
+    },
+    {
+      "stage": "R19_K1",
+      "revision": "2da980f631badc25086d12db60d128ff507d3ae6",
+      "path": "src/trajectory/trajectory.py",
+      "argv": [
+        "git",
+        "-C",
+        "/home/lizening/wt-r19-g4-consumer-contract-repair",
+        "show",
+        "2da980f631badc25086d12db60d128ff507d3ae6:src/trajectory/trajectory.py"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "31bbd35c7960ddcf87c6d1c38376d10aaf95e741f9dedecbe4f8e23a97fdb958",
+      "stderr": "",
+      "historical_method": {
+        "method": "succeeded",
+        "line": 60,
+        "end_line": 62,
+        "AST_sha256": "2f530611b6508d5b9c9764c5c109571cdb1aed9d20d210c2f15261f7925a5d28",
+        "source_text": "def succeeded(self) -> bool:\n        \"\"\"Return whether ALFWorld emitted a positive terminal reward.\"\"\"\n        return bool(self.steps and self.steps[-1].done and self.steps[-1].reward > 0)"
+      },
+      "matches_frozen85_AST": true
+    },
+    {
+      "stage": "R19_K1",
+      "revision": "2da980f631badc25086d12db60d128ff507d3ae6",
+      "path": "scripts/run_r19_experiment.py",
+      "argv": [
+        "git",
+        "-C",
+        "/home/lizening/wt-r19-g4-consumer-contract-repair",
+        "show",
+        "2da980f631badc25086d12db60d128ff507d3ae6:scripts/run_r19_experiment.py"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "06bb8e11c3cc9e9484b8d5731c86690b97a4c445a0e5aa16b72b912c6c14dd5c",
+      "stderr": "",
+      "methods": [
+        {
+          "method": "record_step",
+          "line": 1635,
+          "end_line": 1663,
+          "AST_sha256": "367f5e08662d784b515ebd6a7e6ac8e2f2f74a5464f55bd71fdfe81c9373a2d9",
+          "source_text": "def record_step(\n        self, env: Any, command: str, identity: Mapping[str, Any],\n        *, before: Mapping[str, Any], action_id: str | None = None,\n    ) -> tuple[Any, str]:\n        from models.action_parser import action_id_mapping\n\n        self._reserve_environment_step(identity)\n        mapping = action_id_mapping(tuple(map(str, before[\"valid_actions\"])))\n        start_identity = dict(identity)\n        self.sink(\"environment_operation_started\", start_identity, {\n            \"operation\": identity.get(\"operation\"), \"command\": command,\n            \"action_id\": action_id, \"action_map\": mapping,\n            \"before_state\": dict(before),\n        })\n        transition_obj = env.step(command)\n        transition = {\n            \"observation\": str(transition_obj.observation),\n            \"valid_actions\": list(transition_obj.valid_actions or ()),\n            \"reward\": float(transition_obj.reward),\n            \"done\": bool(transition_obj.done),\n            \"truncated\": bool(transition_obj.truncated),\n            \"executed_command\": command,\n        }\n        complete = self.sink(\"environment_operation_completed\", start_identity, {\n            \"operation\": identity.get(\"operation\"), \"command\": command,\n            \"action_id\": action_id, \"action_map\": mapping,\n            \"before_state\": dict(before), \"transition\": transition,\n        })\n        return transition_obj, str(complete[\"event_id\"])",
+          "matches_frozen85_AST": true
+        },
+        {
+          "method": "run_sft_suffix",
+          "line": 2204,
+          "end_line": 2277,
+          "AST_sha256": "e8a22a804a6fb1c689fa1ab0fa4fd8eff7614d0589f337890844070bfae9edd5",
+          "source_text": "def run_sft_suffix(\n        self, prefix_id: str, canonical_trial_id: str, cursor: RecoveryCursor,\n        action_cap: int, k: int,\n    ) -> dict[str, Any]:\n        from models.action_parser import action_id_mapping\n\n        env = self.suffix_envs.pop((prefix_id, int(k)), None)\n        if env is None:\n            raise EvidenceIntegrityError(\"SFT suffix has no isolated reset-and-replay environment\")\n        generations: list[dict[str, Any]] = []\n        generation_ids: list[str] = []\n        transition_ids: list[str] = []\n        prompts: list[str] = []\n        env_actions = 0\n        success = 0\n        terminal = False\n        reason = \"remaining_horizon\"\n        current = cursor\n        try:\n            for offset in range(action_cap):\n                generation_identity = {\n                    \"prefix_id\": prefix_id, \"canonical_trial_id\": canonical_trial_id,\n                    \"operation\": \"sft_generation\",\n                    \"k\": int(k), \"decision_index\": offset,\n                    \"actions_consumed\": current.actions_consumed,\n                }\n                generation, parsed, generation_id = self.actor_generation(\n                    current, component=\"sft\", identity=generation_identity,\n                )\n                generation_ids.append(generation_id)\n                generations.append(generation)\n                prompts.append(parsed[\"prompt\"])\n                if parsed[\"status\"] != \"selected\":\n                    reason = \"selection_failure\"\n                    break\n                before = {\"observation\": current.observation,\n                          \"valid_actions\": list(current.valid_actions),\n                          \"history\": [list(item) for item in current.history],\n                          \"actions_consumed\": current.actions_consumed}\n                transition, transition_id = self.record_step(\n                    env, str(parsed[\"action\"]),\n                    {\"prefix_id\": prefix_id,\n                     \"canonical_trial_id\": canonical_trial_id,\n                     \"component\": \"sft\", \"operation\": \"sft_environment_step\",\n                     \"k\": int(k), \"decision_index\": offset},\n                    before=before, action_id=parsed[\"action_id\"],\n                )\n                transition_ids.append(transition_id)\n                env_actions += 1\n                current = RecoveryCursor(\n                    task=current.task, task_id=current.task_id,\n                    canonical_trial_id=current.canonical_trial_id,\n                    nominal_seed=current.nominal_seed,\n                    observation=str(transition.observation),\n                    valid_actions=tuple(map(str, transition.valid_actions or ())),\n                    history=(*current.history, (current.observation, str(parsed[\"action\"]))),\n                    actions_consumed=current.actions_consumed + 1,\n                )\n                terminal = bool(transition.done or transition.truncated)\n                if terminal:\n                    success = int(bool(transition.done and float(transition.reward) > 0))\n                    reason = \"environment_terminal\" if transition.done else \"environment_truncated\"\n                    break\n            return {\n                \"success\": success, \"generations\": generations,\n                \"environment_actions\": env_actions, \"terminal\": terminal,\n                \"termination_reason\": reason, \"prompts\": prompts,\n                \"evidence_refs\": {\n                    \"suffix_generation_event_ids\": generation_ids,\n                    \"suffix_transition_event_ids\": transition_ids,\n                },\n            }\n        finally:\n            env.close()",
+          "matches_frozen85_AST": true
+        }
+      ]
+    }
+  ],
+  "wrapper_historical_bindings_referenced_from_frozen_previous_audit": [
+    {
+      "stage": "R4",
+      "executed_implementation_sha": "7a01a6107b4bc9c994893220aab078af39fe4fff",
+      "source_path": "src/env/alfworld.py",
+      "method": "AlfWorldTextEnvironment.step",
+      "historical_git_object_read_returncode": 0,
+      "historical_file_sha256": "086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d",
+      "frozen85_file_sha256": "086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d",
+      "historical_method": {
+        "line": 58,
+        "end_line": 72,
+        "AST_sha256": "2d76fe6ff761a40e84ddea0e0ef7d141c55e481693ee0832472f7dd6d6b59aa4"
+      },
+      "frozen85_method": {
+        "line": 58,
+        "end_line": 72,
+        "AST_sha256": "2d76fe6ff761a40e84ddea0e0ef7d141c55e481693ee0832472f7dd6d6b59aa4"
+      },
+      "method_AST_equal": true,
+      "status": "STATIC_METHOD_BOUND"
+    },
+    {
+      "stage": "R10_OSR",
+      "executed_implementation_sha": "8926d8fb10e634489031de3da910c572b50d8d44",
+      "source_path": "src/env/alfworld.py",
+      "method": "AlfWorldTextEnvironment.step",
+      "historical_git_object_read_returncode": 0,
+      "historical_file_sha256": "086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d",
+      "frozen85_file_sha256": "086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d",
+      "historical_method": {
+        "line": 58,
+        "end_line": 72,
+        "AST_sha256": "2d76fe6ff761a40e84ddea0e0ef7d141c55e481693ee0832472f7dd6d6b59aa4"
+      },
+      "frozen85_method": {
+        "line": 58,
+        "end_line": 72,
+        "AST_sha256": "2d76fe6ff761a40e84ddea0e0ef7d141c55e481693ee0832472f7dd6d6b59aa4"
+      },
+      "method_AST_equal": true,
+      "status": "STATIC_METHOD_BOUND"
+    },
+    {
+      "stage": "R16_OSR",
+      "executed_implementation_sha": "d1ef841ea9dc7423177fb7647906e2e719f0fbe7",
+      "source_path": "src/env/alfworld.py",
+      "method": "AlfWorldTextEnvironment.step",
+      "historical_git_object_read_returncode": 0,
+      "historical_file_sha256": "086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d",
+      "frozen85_file_sha256": "086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d",
+      "historical_method": {
+        "line": 58,
+        "end_line": 72,
+        "AST_sha256": "2d76fe6ff761a40e84ddea0e0ef7d141c55e481693ee0832472f7dd6d6b59aa4"
+      },
+      "frozen85_method": {
+        "line": 58,
+        "end_line": 72,
+        "AST_sha256": "2d76fe6ff761a40e84ddea0e0ef7d141c55e481693ee0832472f7dd6d6b59aa4"
+      },
+      "method_AST_equal": true,
+      "status": "STATIC_METHOD_BOUND"
+    },
+    {
+      "stage": "R19_K1",
+      "executed_implementation_sha": "2da980f631badc25086d12db60d128ff507d3ae6",
+      "source_path": "src/env/alfworld.py",
+      "method": "AlfWorldTextEnvironment.step",
+      "historical_git_object_read_returncode": 0,
+      "historical_file_sha256": "086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d",
+      "frozen85_file_sha256": "086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d",
+      "historical_method": {
+        "line": 58,
+        "end_line": 72,
+        "AST_sha256": "2d76fe6ff761a40e84ddea0e0ef7d141c55e481693ee0832472f7dd6d6b59aa4"
+      },
+      "frozen85_method": {
+        "line": 58,
+        "end_line": 72,
+        "AST_sha256": "2d76fe6ff761a40e84ddea0e0ef7d141c55e481693ee0832472f7dd6d6b59aa4"
+      },
+      "method_AST_equal": true,
+      "status": "STATIC_METHOD_BOUND"
+    }
+  ],
+  "original_raw_hash_checks": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/final_input_hash_check.json",
+    "sha256": "9e7a54a55ad6d7c1136a0a3214b711e2bc647a97e69195b73eb1ea4b9dbe563f",
+    "scope": "Referenced existing 35-input pre/post receipt; not a new full raw rehash or analysis."
+  },
+  "project_modules_imported_or_executed": false,
+  "old_audit_scripts_executed": false,
+  "new_policy_replay_or_scientific_calls": 0
+}

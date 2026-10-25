@@ -1,0 +1,503 @@
+{
+  "thread": {
+    "id": "01a165de-c75e-7120-abc9-fa74cde1f17f",
+    "status": {
+      "type": "idle"
+    }
+  },
+  "turns": [
+    {
+      "id": "01a171f2-f6a8-7c43-aed6-81ddf8c3bc1e",
+      "status": "completed",
+      "startedAt": 1792913110,
+      "completedAt": 1792913612,
+      "messages": [
+        {
+          "phase": "commentary",
+          "text": "收到。我会只读核对原成功谓词和 transition 导出契约，保留已封存文件，另写澄清补充：11例机械来源链均成立；缺 `won` 标为 `RAW_WON_NOT_RECORDED`，不改变旧成功标签，也不据此认定目标非法或 G3 失败。不会执行旧审计脚本、读取 Luna 未完成文件、补跑或修改 raw。"
+        },
+        {
+          "phase": "commentary",
+          "text": "已核对原成功判断为终态 `done && reward>0`，R19 的 transition 导出也确实未包含 `won`。我会将两例缺 `won` 单列为佐证缺口，保留全部11例的机械来源链结论和历史成功标签；训练资格仍未建立。现在封存追加说明和逐案三轴表。"
+        },
+        {
+          "phase": "final_answer",
+          "text": "已完成并冻结追加澄清：\n\n- 11状态／10任务的机械来源链均成立；模型身份10项 PARTIAL、1项 PINNED；学习收益仍为 NOT_PROVEN，训练资格未建立。\n- R4、R19 两例标为 `RAW_WON_NOT_RECORDED`；原 `done && reward>0` 成功谓词及历史0→1标签全部保留。\n\n[澄清报告](/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/SUCCESS_PREDICATE_AND_AXES_ADDENDUM.md)  \nSHA256：`13c9f66633d4e938b019f8438da5b79c8c1a09ab2fe3db4252d9aa9fa1d0ca3f`\n\n[冻结交接：逐案表、证据及真实回执](/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/SUCCESS_AXES_FINAL_HANDOFF.md)  \nSHA256：`0f76a695aff4d256ec8fa4f89ca5a2a49b3ba4868962be28e11387f597c2dbdc`\n\nstdlib核对真实返回码0；原51项封存文件未变。未执行旧脚本，新增科学调用0，无 commit/push。等待独立审查。"
+        }
+      ],
+      "command_summary": [
+        {
+          "id": "exec-0cb1175d-c1d9-46b2-879d-3a20fc85e8a9",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg -n -A 100 -B 12 'def task_actor_callback|def record_step' /home/lizening/wt-r19-g4-consumer-contract-repair/scripts/run_r19_experiment.py\"",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-97cff68f-0018-458f-a243-c05471b5c425",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg -n -A 18 -B 12 'def succeeded|def task_actor_callback|def record_step|def _public_transition|won|reward=float' /home/lizening/wt-r19-g4-consumer-contract-repair/s",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-7284f8f8-1085-4ccc-ad05-1b33d9e5fcd9",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'sha256sum /home/lizening/wt-r19-g4-consumer-contract-repair/src/trajectory/trajectory.py /home/lizening/wt-r19-g4-consumer-contract-repair/src/env/alfworld.py /home/",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-8e7e8da8-3b19-4c23-b3b9-937e944b933a",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"sed -n '2215,2310p' /home/lizening/wt-r19-g4-consumer-contract-repair/scripts/run_r19_experiment.py\"",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-622e1603-48aa-4b9c-a2c2-909e984f8485",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\nimport hashlib\np=Path('/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__SOL__si-p1-protocol-review__caae4c/SOL_R",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-e067f969-19bc-426d-821b-4bc7d69b1a06",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg -n -A 20 -B 5 'def task_actor|def task_actor_callback|def succeeded|def step\\\\(' /home/lizening/wt-r19-g4-consumer-contract-repair/src/trajectory/trajectory.py /h",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-86a40eff-1de2-41a1-a0f3-e505a20a45af",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\nimport hashlib,json\nroot=Path('/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caa",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-1bbd3713-fee2-4dce-aefa-44a98b7ff33e",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\nimport json,hashlib\nroot=Path('/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caa",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-6f1905f7-f9d3-4c5f-9e41-17e6e0e0d2ef",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"cat > /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/success_axes_clarification.py <<'PY'\n\\\"\\\"\\\"Additive SI-P1 sour",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-25cdbc6d-e1d4-4b96-8962-b6f43e6e8986",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\nfrom datetime import datetime,timezone\nimport hashlib,json,os,subprocess,sys,time\nroot=Path('/home/lizening/research-notes/a",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-8a721cdf-0af3-41bd-824a-ebe6a46ed7f0",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\nimport hashlib,json\nroot=Path('/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caa",
+          "full_command_omitted": true
+        }
+      ]
+    },
+    {
+      "id": "01a171d6-43e4-7132-bed6-dd6450ad7dbb",
+      "status": "completed",
+      "startedAt": 1792911229,
+      "completedAt": 1792913110,
+      "messages": [
+        {
+          "phase": "commentary",
+          "text": "收到 SI-P1。我会先核验任务单 SHA 和固定 11-case 清单，再按任务边界审查目标、隔离与预算证据。不会调用模型、环境或训练，不改历史字节、共享索引，也不派其他 agent；完成后在本线程返回冻结文件、逐 case disposition、缺口和真实执行收据。"
+        },
+        {
+          "phase": "commentary",
+          "text": "任务单、11-case 清单和 P0 最终审查的 SHA 均匹配，根目录、分支和 HEAD 也符合要求。逐案核对中已遇到“第一恢复动作直接终局、SFT suffix 为空”的记录；我会按原始终局证据处理，并将机械目标有效性、模型身份完备性和终局 corroboration 分开判定。"
+        },
+        {
+          "phase": "commentary",
+          "text": "首轮逐案核对显示：11 个 case 的输入时点、原始 ID、完整 map、执行命令及既有 replay 记录均匹配，暂无重索引或非法目标。但 R4 和 R19 K1 的终局原件缺少显式 `won`，目前只能直接证明所记录的 done、reward 和历史成功标签；两例暂列 HOLD。其余9例支持输入—目标来源链，仍不等于训练验收，且历史10例的 weights/tokenizer revision 仍为 UNKNOWN。"
+        },
+        {
+          "phase": "commentary",
+          "text": "逐案报告和公共输入契约已完成。另一个设计限制也已写明：若只用这11条救回记录作候选池，B_pool 的 success-only 与 C 的增益筛选会选中同一组，无法识别筛选条件的增量。本轮不会为此扩查 neutral 样本。现在只做交付哈希和收据封存；结论保持 NOT_READY。"
+        },
+        {
+          "phase": "final_answer",
+          "text": "SI-P1 固定11状态/10任务核验已完成并封存，结论仍为 **NOT_READY，训练合格 N 未建立**。\n\n全部 case 去向：\n\n- **INPUT_TARGET_LINEAGE_SUPPORTED：9行/8任务**  \n  R10：R8-F02、F20、F21、F22、F23；R16：R15-F01、F22、F23、F25。\n- **HOLD_EVIDENCE：2行**  \n  R4:R2-F01 缺恢复终局 `won`；R19 K1:b3ab21b8e193f6adf6ff 两侧终局均缺 `won`。\n- **REINDEX_REQUIRED=0；EXCLUDE_INVALID=0。** 模型身份另列为10例PARTIAL、1例PINNED。\n\n9行来源链支持不等于训练验收。仅用这11个正例，B_pool与C会选中同组，无法识别筛选增量。\n\n| 冻结文件 | SHA256 |\n|---|---|\n| [逐案报告](/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/ELEVEN_TARGET_AUDIT.md) | `c2373e021ec099f24647a1632be00872a57c863bd0e0fe9c0f90f00570fb5a8d` |\n| [完整字段与dispositions](/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_target_audit.json) | `f8fe8141d2c431274082856105a2b8aa81c76b774fe624fe50c5d33bf77ba901` |\n| [公共输入契约](/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/PUBLIC_INPUT_CONTRACT.md) | `4a8e7e89ea540eb647ebd23d3cf2352b55e2e8f553bb844af54fa8927a7f08d2` |\n\n[RECORD与真实收据入口](/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/RECORD.md)保留全部退出记录及探测错误修正；最终审计exit 0。35个已读输入哈希未变。\n\n[完整封存清单](/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/FILE_HASHES.sha256) SHA256：  \n`14189f7752494eee84fdc6adad161957b0afe34b597f68fedce845d4d5976572`\n\n科学85/2da保持干净；新增科学调用0，累计5142/7949不变。等待独立审阅。"
+        }
+      ],
+      "command_summary": [
+        {
+          "id": "exec-9cc544e5-506a-43cf-a512-6650393776fb",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'git --no-optional-locks status --porcelain=v1 --branch'",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-d38a25e7-c008-4eb6-b513-2ebcbafc7803",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'cat /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__SOL__si-p1-protocol-review__caae4c/SOL_RESEARCH_TASK.md'",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-2489f238-5e03-475e-aa18-6b796ade9199",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'sha256sum /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__SOL__si-p1-protocol-review__caae4c/SOL_RESEARCH_TASK.md'",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-7a4d5529-eb78-492c-91d0-98c586575ecb",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'sha256sum /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__SOL__si-p1-protocol-review__caae4c/FIXED_ELEVEN_CASES.json /home/lizening/research-notes/agent",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-a72ce176-57d1-43e1-99c3-553771a198d0",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'git rev-parse HEAD'",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-a255b6f9-e365-42f5-b94c-2859f980b819",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'cat /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__SOL__si-p1-protocol-review__caae4c/FIXED_ELEVEN_CASES.json /home/lizening/research-notes/agent-logs/",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-bbc2de3f-012c-48c5-86dc-dcfe04a12987",
+          "status": "failed",
+          "exit": 2,
+          "command": "/bin/bash -lc \"rg -n 'def sft_p0_prompt|def .*action_map|def .*recent|def .*step|won|reward' /home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/policy.py /home/lizening/wt-r",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-b4b995e8-7176-41aa-96b2-786ffa618f74",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg --files /home/lizening/wt-r19-g4-consumer-contract-repair/src | rg 'sft|alfworld|action|history|indexed' \"",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-e1792c5d-3db5-4946-b9e4-d40711225230",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg -n -A 45 -B 15 'def sft_p0_prompt|def indexed|def .*map|won|def step|reward' /home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/protocol.py /home/lizening/",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-35c350d2-7d93-4772-b813-519b8c05f75b",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'cat /home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/policy.py /home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/environment.py'",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-f2bfd1dc-45d5-457e-bff3-1b76a836cc26",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"cat > /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py <<'PY'\n\\\"\\\"\\\"Actual subprocess receipts for ",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-bd4f9169-541c-453d-8dc0-60406eb9e729",
+          "status": "failed",
+          "exit": 1,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py fixed_case_probe /home/lizening/wt-codex-r1",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-fb4d2d51-183c-4cab-a1ce-3b229ebcf607",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg -n 'python|alfworld|environment' /home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/runtime_manifest",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-3352d9c7-18fc-4874-8508-2e39cd01a188",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'ls /home/lizening/miniconda3/envs'",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-b277b239-becb-431a-b5ce-1df6320e37f2",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg -n 'def .*continue|reward|won|history.append|observation|recent_context|replay' /home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/r3.py /home/lizening/wt-",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-4fee4e96-98c3-4ca2-b8aa-9baf86c5be7c",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\np=Path('/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_audit.py');s",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-dd154a2d-9bb0-4ae2-8ad4-4c2428484506",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py fixed_case_probe_empty_suffix /home/lizenin",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-f9e30ae2-c16d-469e-8e1d-2eeea6e7c47b",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg -n -A 42 -B 10 'def step|won|reward|scores' /home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/alfworld/agents/environment/alfred_t",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-ec29b6c8-f817-45c3-b73a-ce41800eefc3",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg -n '\"'^R|replaykeys|terminal|K1|sourcemeta|source step meta'\"' /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/fi",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-38775fcc-74a2-445b-97e2-6c03d7b2aac1",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg -n -A 35 -B 4 '\"'^    def step|return .*won|scores|rewards'\"' /home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/alfworld/agents/en",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-15c0daf8-6573-4f89-b1b6-21b0bf75497f",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg --files /home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z /home/lizening/Alfworld-Sel",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-07f8c978-b153-44bf-b66e-7d8c2e49c240",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\np=Path('/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_audit.py');s",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-2dbf4c82-92a6-4793-b263-c4b840e6d46c",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py replay_event_probe /home/lizening/wt-codex-",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-1496e423-f233-4995-a2b6-2bd24e08ea11",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg -n -A 26 -B 8 'init_env|request_infos|EnvInfos|reward|won' /home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/alfworld/agents/envir",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-b21b647c-3e18-40b2-8781-ef1a7eb96dd1",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg -n '\"'^from|''^def .*sha|''^def .*prefix|''^def .*recent'\"' /home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/r3.py /home/lizening/wt-r19-g4-consumer-cont",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-ab8fc625-5c70-4c98-83de-d2d4eb795c11",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg -n '\"'^def canonical_sha256|''^def action_map_sha256|''^def .*prefix_payload|''^def .*prefix_signature'\"' /home/lizening/wt-r19-g4-consumer-contract-repair/src\"",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-3891465e-1386-4173-9735-cb3924783715",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg --files /home/lizening/wt-r19-g4-consumer-contract-repair/scripts | rg 'r16|osr|r4|r10' \"",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-a24d4569-d5f4-47b7-80fc-bb1719d252f1",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"rg -n -A 10 '\"'^def canonical_sha256|''^def action_map_sha256'\"' /home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/r3.py /home/lizening/wt-r19-g4-consumer-co",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-afed73a3-4c4a-46a3-8546-b4b6b449b106",
+          "status": "failed",
+          "exit": 2,
+          "command": "/bin/bash -lc \"rg -n 'R16|replay_ledger.jsonl|environment_metadata|recovery_transition|run_sft_continue' /home/lizening/wt-r19-g4-consumer-contract-repair/scripts/run_persistent_re",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-cd4a176e-8107-4cd7-acf9-bb5550697697",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"cat > /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/target_audit_impl.py <<'PY'\n\\\"\\\"\\\"Read fixed existing evidence",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-6c3d0dcc-1378-47e9-a2f4-a06f45309ac4",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py eleven_target_audit_draft /home/lizening/wt",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-63f3a6dc-868f-4d51-aac8-b916b42673bf",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"cat > /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/history_contracts.py <<'PY'\n\\\"\\\"\\\"Static Git-object and instal",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-4a05535c-ce36-48af-aab8-b524333ca816",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py historical_static_contracts /home/lizening/",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-a2b2fa9e-196c-48dd-93c4-68d6c57d5172",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'cat /home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/runtime_manifest.json'",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-37d3163b-11d3-41e8-bfb8-6711a02582ba",
+          "status": "failed",
+          "exit": 1,
+          "command": "/bin/bash -lc \"rg -n -A 18 -B 8 'recovery_policy =|recovery_operator =|SFTP0QwenPolicy|TwoStageRecovery|QwenPolicy\\\\(' /home/lizening/wt-r19-g4-consumer-contract-repair/scripts/run",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-c2606f59-0ad1-40ff-a4a6-5a4833c028ec",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\np=Path('/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/target_audit_impl.p",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-b73c1457-ef4a-4b72-938a-b5d80bd9b6bf",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py eleven_target_audit_final /home/lizening/wt",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-7ef4f034-db21-4a48-8e98-26424d072cb5",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\np=Path('/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_audit.py');s",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-ebb62128-6d15-4f13-b16a-be89976e1d76",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py final_evidence_summary /home/lizening/wt-co",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-f9bd24ba-8de1-464f-939a-9bfcc1506872",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\np=Path('/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/target_audit_impl.p",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-9590850f-03ae-4bc8-baee-445cb38b522a",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py eleven_target_audit_complete /home/lizening",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-eb0c62a8-b8c8-4d3a-a776-434f167ca930",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"cat > /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/deliver_eleven.py <<'PY'\n\\\"\\\"\\\"Write SI-P1 audit prose from al",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-e5c2c5ff-534e-41eb-8c23-c6f32b275e21",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py audit_documents /home/lizening/wt-codex-r18",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-e5991f4c-12d9-4467-8387-0f0011eb1b5a",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py root_final_status /home/lizening/wt-codex-r",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-5c85c1f1-d9a2-4760-97fe-60ff004f8c13",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py root_final_head /home/lizening/wt-codex-r18",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-8c1f6991-57d5-4a5b-a48f-e52a21715199",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py frozen85_final_status /home/lizening/wt-r19",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-cfdbcbb3-49a6-4759-b16c-926a53d9f6f8",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py frozen85_final_head /home/lizening/wt-r19-g",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-e08634df-7687-4771-9c77-6b93310c1299",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py executed2da_final_status /home/lizening/wt-",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-32484e3d-22f4-44f0-8399-3f3b1bebd46b",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py executed2da_final_head /home/lizening/wt-r1",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-046291ad-8a39-4ad6-9025-d7cc27a1daed",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc \"cat > /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/freeze_eleven.py <<'PY'\n\\\"\\\"\\\"Local SI-P1 file hashes/receipts",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-1f1ea15a-a9d2-4067-91e9-4a3e20e92d0d",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/receipt_runner.py finalization /home/lizening/wt-codex-r18c2 ",
+          "full_command_omitted": true
+        },
+        {
+          "id": "exec-7d03838f-e371-48d5-9ce7-b57a2f010325",
+          "status": "completed",
+          "exit": 0,
+          "command": "/bin/bash -lc 'python /home/lizening/research-notes/agent-logs/2026-10-25T065200Z__CODEX__si-p1-eleven-targets__caae4c/eleven_audit.py seal'",
+          "full_command_omitted": true
+        }
+      ]
+    }
+  ]
+}

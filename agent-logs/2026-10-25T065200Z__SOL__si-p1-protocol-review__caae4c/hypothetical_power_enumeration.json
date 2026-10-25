@@ -1,0 +1,1715 @@
+{
+  "schema": "SI_P1_HYPOTHETICAL_EXACT_DESIGN_ENUMERATION_V1",
+  "created_utc": "2026-10-25T06:59:28.117088+00:00",
+  "not_a_scientific_policy_experiment": true,
+  "inputs": "hypothetical n/delta/q, no task outcome files read",
+  "alpha_each_for_planning": 0.025,
+  "analysis_plan": "final two-sided exact McNemar + Holm for two comparisons at family alpha.05; requiring p<=.025 for each is a conservative sufficient planning event",
+  "model_assumptions": [
+    "independent paired task draws with homogeneous joint probabilities or explicitly declared reference task model; fixed frozen training snapshots",
+    "D~Binomial(n,q), wins|D~Binomial(D,(q+delta)/(2q))",
+    "Compatible reference success must lie in [p_loss,1-p_win]; high-q scenarios are not necessarily compatible with an80% baseline"
+  ],
+  "limits": [
+    "Power is for positive-direction p-value criterion only, not practical-effect/harms/data-integrity/full acceptance gates",
+    "Union-bound lower bound uses only two marginal powers; no independence between model comparisons assumed",
+    "No q is estimated from old R19, oracle2/36 or target training cases",
+    "N values are mathematical scenarios, not certified available identities, approved sample counts or budget",
+    "No claim about training-seed variability; exact conditional test is conservative"
+  ],
+  "arithmetic_checks": {
+    "all_wins_6_not_at_025": true,
+    "all_wins_7_reject_at_025": true,
+    "certain_wins_7_power_one": true,
+    "certain_wins_6_power_zero": true,
+    "conditional_mixture_equals_direct_trinomial": true,
+    "null_positive_tail_at_most_alpha_half": true
+  },
+  "small_n_crosscheck": {
+    "mixture": 3.788978018750002e-05,
+    "direct_trinomial": 3.7889780187500016e-05
+  },
+  "rows": [
+    {
+      "n": 60,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.0058900148407702475,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.01520908299151833,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.047886021017225625,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.26666881535373277,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.6262460152093692,
+      "lower_bound_both_statistical_comparisons": 0.25249203041873836,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.8487373198534954,
+      "lower_bound_both_statistical_comparisons": 0.6974746397069909,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.9815656495776458,
+      "lower_bound_both_statistical_comparisons": 0.9631312991552916,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.9919766760699913,
+      "lower_bound_both_statistical_comparisons": 0.9839533521399826,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.017425136107556787,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.02966621887576414,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.05296119800731738,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.12862018827778524,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.3142153805416408,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.49396032940628476,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.7559923995329186,
+      "lower_bound_both_statistical_comparisons": 0.5119847990658373,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.8174318337353623,
+      "lower_bound_both_statistical_comparisons": 0.6348636674707246,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.02320702689413763,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.027820576706309916,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.035404206415900814,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.07400838935412454,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.1567935826000839,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.2465303536269439,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.42493776661464905,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.4846569061557445,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.019784793077382228,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.02330257221512834,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.03146098344980858,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.05658234364601045,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.1083558704811914,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.16511353343898924,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.2856870892752434,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.32876356736188234,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.019025241851397767,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.021385751279130023,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.02530589788081931,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.041039117932408706,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.07120164261982063,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.10378600167869195,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.1725763986558184,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.19770323050044786,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.02969410195488338,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.07659807707961763,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.23398601598516805,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.8762569739799052,
+      "lower_bound_both_statistical_comparisons": 0.7525139479598104,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.9998035209689909,
+      "lower_bound_both_statistical_comparisons": 0.9996070419379819,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.9999999290479813,
+      "lower_bound_both_statistical_comparisons": 0.9999998580959626,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.9999999999999982,
+      "lower_bound_both_statistical_comparisons": 0.9999999999999964,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.9999999999999999,
+      "lower_bound_both_statistical_comparisons": 0.9999999999999998,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.05175658733850101,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.09008234687517035,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.16670799439419215,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.4255250380707129,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.8086575096190177,
+      "lower_bound_both_statistical_comparisons": 0.6173150192380354,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.9502690242945879,
+      "lower_bound_both_statistical_comparisons": 0.9005380485891759,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.9978073053293506,
+      "lower_bound_both_statistical_comparisons": 0.9956146106587012,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.9993308690309479,
+      "lower_bound_both_statistical_comparisons": 0.9986617380618958,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.04932434678231695,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.0624693227862816,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.08668536806337894,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.2093590148557899,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.45996225229967624,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.6654902013206462,
+      "lower_bound_both_statistical_comparisons": 0.33098040264129236,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.8943005246219683,
+      "lower_bound_both_statistical_comparisons": 0.7886010492439366,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.9330343786116152,
+      "lower_bound_both_statistical_comparisons": 0.8660687572232304,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.037453462688831256,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.046535751878608166,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.06722771941260758,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.14299339282768145,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.3081117742980668,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.4707896217872551,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.7248568592782189,
+      "lower_bound_both_statistical_comparisons": 0.4497137185564377,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.7880393782493752,
+      "lower_bound_both_statistical_comparisons": 0.5760787564987504,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.03159705291317966,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.03712351971590895,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.04710922933651964,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.09022303620264417,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.18388740424162414,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.28563274737732786,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.4811105791973517,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.5430170523551328,
+      "lower_bound_both_statistical_comparisons": 0.08603410471026551,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 0.39354859789913943,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 0.6183985415759968,
+      "lower_bound_both_statistical_comparisons": 0.23679708315199366,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 0.8828443845641158,
+      "lower_bound_both_statistical_comparisons": 0.7656887691282317,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 0.9998518875173761,
+      "lower_bound_both_statistical_comparisons": 0.9997037750347522,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 0.99999999999408,
+      "lower_bound_both_statistical_comparisons": 0.9999999999881599,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 1.0,
+      "lower_bound_both_statistical_comparisons": 1.0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 0.9999999999999999,
+      "lower_bound_both_statistical_comparisons": 0.9999999999999998,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 1.0,
+      "lower_bound_both_statistical_comparisons": 1.0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.2240453193457935,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.29722044101657463,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.4253150278610195,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.8098240359558102,
+      "lower_bound_both_statistical_comparisons": 0.6196480719116204,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.9891472903353534,
+      "lower_bound_both_statistical_comparisons": 0.9782945806707068,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.9996164984892749,
+      "lower_bound_both_statistical_comparisons": 0.9992329969785498,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.9999997791221326,
+      "lower_bound_both_statistical_comparisons": 0.9999995582442651,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.9999999862234022,
+      "lower_bound_both_statistical_comparisons": 0.9999999724468045,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.14194763545147154,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.18757362398233368,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.2846897954109215,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.601161179186491,
+      "lower_bound_both_statistical_comparisons": 0.20232235837298207,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.9159046091542338,
+      "lower_bound_both_statistical_comparisons": 0.8318092183084675,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.9872140525322325,
+      "lower_bound_both_statistical_comparisons": 0.974428105064465,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.9998256840026788,
+      "lower_bound_both_statistical_comparisons": 0.9996513680053576,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.9999659218828374,
+      "lower_bound_both_statistical_comparisons": 0.9999318437656748,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.09465674376276453,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.11941468807873022,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.16726725587871957,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.36997666834422194,
+      "lower_bound_both_statistical_comparisons": 0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.7011839535571022,
+      "lower_bound_both_statistical_comparisons": 0.40236790711420434,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.8819802783996531,
+      "lower_bound_both_statistical_comparisons": 0.7639605567993062,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.9866277761485418,
+      "lower_bound_both_statistical_comparisons": 0.9732555522970836,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.9942153614851159,
+      "lower_bound_both_statistical_comparisons": 0.9884307229702318,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    }
+  ],
+  "new_model_environment_training_calls": 0
+}

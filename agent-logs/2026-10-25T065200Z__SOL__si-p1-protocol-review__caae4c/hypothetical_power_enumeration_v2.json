@@ -1,0 +1,1939 @@
+{
+  "schema": "SI_P1_HYPOTHETICAL_EXACT_DESIGN_ENUMERATION_V2",
+  "created_utc": "2026-10-25T07:01:32.398150+00:00",
+  "not_a_scientific_policy_experiment": true,
+  "inputs": "hypothetical n/delta/q, no task outcome files read",
+  "alpha_each_for_planning": 0.025,
+  "analysis_plan": "final two-sided exact McNemar + Holm for two comparisons at family alpha.05; requiring p<=.025 for each is a conservative sufficient planning event",
+  "model_assumptions": [
+    "independent paired task draws with homogeneous joint probabilities or explicitly declared reference task model; fixed frozen training snapshots",
+    "D~Binomial(n,q), wins|D~Binomial(D,(q+delta)/(2q))",
+    "Compatible reference success must lie in [p_loss,1-p_win]; high-q scenarios are not necessarily compatible with an80% baseline"
+  ],
+  "limits": [
+    "Power is for positive-direction p-value criterion only, not practical-effect/harms/data-integrity/full acceptance gates",
+    "For two endpoints with the same hypothetical delta/q, joint Holm event is bounded below by max(0,2*power025-1) and above by power05; this is not actual joint power or the full acceptance power. For distinct endpoints use max(0,p025A+p025B-1), min(p05A,p05B). No comparison independence assumed",
+    "No q is estimated from old R19, oracle2/36 or target training cases",
+    "N values are mathematical scenarios, not certified available identities, approved sample counts or budget",
+    "No claim about training-seed variability; exact conditional test is conservative"
+  ],
+  "arithmetic_checks": {
+    "all_wins_6_not_at_025": true,
+    "all_wins_7_reject_at_025": true,
+    "certain_wins_7_power_one": true,
+    "certain_wins_6_power_zero": true,
+    "conditional_mixture_equals_direct_trinomial": true,
+    "null_positive_tail_at_most_alpha_half": true
+  },
+  "small_n_crosscheck": {
+    "mixture": 3.788978018750002e-05,
+    "direct_trinomial": 3.7889780187500016e-05
+  },
+  "rows": [
+    {
+      "n": 60,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.0058900148407702475,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.019387337053403893,
+      "upper_bound_both_Holm_pvalue_events": 0.019387337053403893,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.01520908299151833,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.0407881095448276,
+      "upper_bound_both_Holm_pvalue_events": 0.0407881095448276,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.047886021017225625,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.09857446287916082,
+      "upper_bound_both_Holm_pvalue_events": 0.09857446287916082,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.26666881535373277,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.3614007882247141,
+      "upper_bound_both_Holm_pvalue_events": 0.3614007882247141,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.6262460152093692,
+      "lower_bound_both_Holm_pvalue_events": 0.25249203041873836,
+      "positive_power_p05": 0.7323743407787812,
+      "upper_bound_both_Holm_pvalue_events": 0.7323743407787812,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.8487373198534954,
+      "lower_bound_both_Holm_pvalue_events": 0.6974746397069909,
+      "positive_power_p05": 0.9005839518950287,
+      "upper_bound_both_Holm_pvalue_events": 0.9005839518950287,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.9815656495776458,
+      "lower_bound_both_Holm_pvalue_events": 0.9631312991552916,
+      "positive_power_p05": 0.9912838543887917,
+      "upper_bound_both_Holm_pvalue_events": 0.9912838543887917,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.05,
+      "p_win": 0.04,
+      "p_loss": 0.010000000000000002,
+      "compatible_reference_success_range": [
+        0.010000000000000002,
+        0.96
+      ],
+      "positive_significant_power_each_comparison": 0.9919766760699913,
+      "lower_bound_both_Holm_pvalue_events": 0.9839533521399826,
+      "positive_power_p05": 0.996492321112448,
+      "upper_bound_both_Holm_pvalue_events": 0.996492321112448,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.017425136107556787,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.038102532062587235,
+      "upper_bound_both_Holm_pvalue_events": 0.038102532062587235,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.02966621887576414,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.0562261891810847,
+      "upper_bound_both_Holm_pvalue_events": 0.0562261891810847,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.05296119800731738,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.08713489365348658,
+      "upper_bound_both_Holm_pvalue_events": 0.08713489365348658,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.12862018827778524,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.19960006363139884,
+      "upper_bound_both_Holm_pvalue_events": 0.19960006363139884,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.3142153805416408,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.4184710237261732,
+      "upper_bound_both_Holm_pvalue_events": 0.4184710237261732,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.49396032940628476,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.6035576425215232,
+      "upper_bound_both_Holm_pvalue_events": 0.6035576425215232,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.7559923995329186,
+      "lower_bound_both_Holm_pvalue_events": 0.5119847990658373,
+      "positive_power_p05": 0.834620576409681,
+      "upper_bound_both_Holm_pvalue_events": 0.834620576409681,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.1,
+      "p_win": 0.065,
+      "p_loss": 0.035,
+      "compatible_reference_success_range": [
+        0.035,
+        0.935
+      ],
+      "positive_significant_power_each_comparison": 0.8174318337353623,
+      "lower_bound_both_Holm_pvalue_events": 0.6348636674707246,
+      "positive_power_p05": 0.8820405005478281,
+      "upper_bound_both_Holm_pvalue_events": 0.8820405005478281,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.02320702689413763,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.04067592406603654,
+      "upper_bound_both_Holm_pvalue_events": 0.04067592406603654,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.027820576706309916,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.050352090948202345,
+      "upper_bound_both_Holm_pvalue_events": 0.050352090948202345,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.035404206415900814,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.06455091852885067,
+      "upper_bound_both_Holm_pvalue_events": 0.06455091852885067,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.07400838935412454,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.12132709359131527,
+      "upper_bound_both_Holm_pvalue_events": 0.12132709359131527,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.1567935826000839,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.231610869942736,
+      "upper_bound_both_Holm_pvalue_events": 0.231610869942736,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.2465303536269439,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.3419372286497972,
+      "upper_bound_both_Holm_pvalue_events": 0.3419372286497972,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.42493776661464905,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.5381311587329027,
+      "upper_bound_both_Holm_pvalue_events": 0.5381311587329027,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.2,
+      "p_win": 0.115,
+      "p_loss": 0.085,
+      "compatible_reference_success_range": [
+        0.085,
+        0.885
+      ],
+      "positive_significant_power_each_comparison": 0.4846569061557445,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.5963000383592962,
+      "upper_bound_both_Holm_pvalue_events": 0.5963000383592962,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.019784793077382228,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.038917328033370564,
+      "upper_bound_both_Holm_pvalue_events": 0.038917328033370564,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.02330257221512834,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.04329392355163217,
+      "upper_bound_both_Holm_pvalue_events": 0.04329392355163217,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.03146098344980858,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.052836492013766445,
+      "upper_bound_both_Holm_pvalue_events": 0.052836492013766445,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.05658234364601045,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.09520663763987365,
+      "upper_bound_both_Holm_pvalue_events": 0.09520663763987365,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.1083558704811914,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.1691261554060619,
+      "upper_bound_both_Holm_pvalue_events": 0.1691261554060619,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.16511353343898924,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.24449295272393956,
+      "upper_bound_both_Holm_pvalue_events": 0.24449295272393956,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.2856870892752434,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.38828809446854096,
+      "upper_bound_both_Holm_pvalue_events": 0.38828809446854096,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.3,
+      "p_win": 0.16499999999999998,
+      "p_loss": 0.135,
+      "compatible_reference_success_range": [
+        0.135,
+        0.835
+      ],
+      "positive_significant_power_each_comparison": 0.32876356736188234,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.43578170038062597,
+      "upper_bound_both_Holm_pvalue_events": 0.43578170038062597,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.019025241851397767,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.03308757599445598,
+      "upper_bound_both_Holm_pvalue_events": 0.03308757599445598,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.021385751279130023,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.03896867225985633,
+      "upper_bound_both_Holm_pvalue_events": 0.03896867225985633,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.02530589788081931,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.047759006957444824,
+      "upper_bound_both_Holm_pvalue_events": 0.047759006957444824,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.041039117932408706,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.07210317902690017,
+      "upper_bound_both_Holm_pvalue_events": 0.07210317902690017,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.07120164261982063,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.1185860936163567,
+      "upper_bound_both_Holm_pvalue_events": 0.1185860936163567,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.10378600167869195,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.1640774573155318,
+      "upper_bound_both_Holm_pvalue_events": 0.1640774573155318,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.1725763986558184,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.25346287487281755,
+      "upper_bound_both_Holm_pvalue_events": 0.25346287487281755,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.03,
+      "true_discordance_q": 0.5,
+      "p_win": 0.265,
+      "p_loss": 0.235,
+      "compatible_reference_success_range": [
+        0.235,
+        0.735
+      ],
+      "positive_significant_power_each_comparison": 0.19770323050044786,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.28488960752077175,
+      "upper_bound_both_Holm_pvalue_events": 0.28488960752077175,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.02969410195488338,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.07871926457668467,
+      "upper_bound_both_Holm_pvalue_events": 0.07871926457668467,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.07659807707961763,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.1650658806494456,
+      "upper_bound_both_Holm_pvalue_events": 0.1650658806494456,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.23398601598516805,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.384000872043859,
+      "upper_bound_both_Holm_pvalue_events": 0.384000872043859,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.8762569739799052,
+      "lower_bound_both_Holm_pvalue_events": 0.7525139479598104,
+      "positive_power_p05": 0.9376575049577048,
+      "upper_bound_both_Holm_pvalue_events": 0.9376575049577048,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.9998035209689909,
+      "lower_bound_both_Holm_pvalue_events": 0.9996070419379819,
+      "positive_power_p05": 0.9999466035484132,
+      "upper_bound_both_Holm_pvalue_events": 0.9999466035484132,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.9999999290479813,
+      "lower_bound_both_Holm_pvalue_events": 0.9999998580959626,
+      "positive_power_p05": 0.9999999869009812,
+      "upper_bound_both_Holm_pvalue_events": 0.9999999869009812,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.9999999999999982,
+      "lower_bound_both_Holm_pvalue_events": 0.9999999999999964,
+      "positive_power_p05": 0.9999999999999998,
+      "upper_bound_both_Holm_pvalue_events": 0.9999999999999998,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.05,
+      "p_win": 0.05,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.95
+      ],
+      "positive_significant_power_each_comparison": 0.9999999999999999,
+      "lower_bound_both_Holm_pvalue_events": 0.9999999999999998,
+      "positive_power_p05": 0.9999999999999999,
+      "upper_bound_both_Holm_pvalue_events": 0.9999999999999999,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.05175658733850101,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.09951601306483074,
+      "upper_bound_both_Holm_pvalue_events": 0.09951601306483074,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.09008234687517035,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.15041698816896906,
+      "upper_bound_both_Holm_pvalue_events": 0.15041698816896906,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.16670799439419215,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.2408429080009479,
+      "upper_bound_both_Holm_pvalue_events": 0.2408429080009479,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.4255250380707129,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.5432919439442935,
+      "upper_bound_both_Holm_pvalue_events": 0.5432919439442935,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.8086575096190177,
+      "lower_bound_both_Holm_pvalue_events": 0.6173150192380354,
+      "positive_power_p05": 0.8739895715005189,
+      "upper_bound_both_Holm_pvalue_events": 0.8739895715005189,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.9502690242945879,
+      "lower_bound_both_Holm_pvalue_events": 0.9005380485891759,
+      "positive_power_p05": 0.9731236138536701,
+      "upper_bound_both_Holm_pvalue_events": 0.9731236138536701,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.9978073053293506,
+      "lower_bound_both_Holm_pvalue_events": 0.9956146106587012,
+      "positive_power_p05": 0.9991164534686046,
+      "upper_bound_both_Holm_pvalue_events": 0.9991164534686046,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.1,
+      "p_win": 0.07500000000000001,
+      "p_loss": 0.025,
+      "compatible_reference_success_range": [
+        0.025,
+        0.925
+      ],
+      "positive_significant_power_each_comparison": 0.9993308690309479,
+      "lower_bound_both_Holm_pvalue_events": 0.9986617380618958,
+      "positive_power_p05": 0.9997570559033878,
+      "upper_bound_both_Holm_pvalue_events": 0.9997570559033878,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.04932434678231695,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.08070433695846074,
+      "upper_bound_both_Holm_pvalue_events": 0.08070433695846074,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.0624693227862816,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.10406530090039424,
+      "upper_bound_both_Holm_pvalue_events": 0.10406530090039424,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.08668536806337894,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.1422506654476882,
+      "upper_bound_both_Holm_pvalue_events": 0.1422506654476882,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.2093590148557899,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.2982451218408678,
+      "upper_bound_both_Holm_pvalue_events": 0.2982451218408678,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.45996225229967624,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.5693056098462156,
+      "upper_bound_both_Holm_pvalue_events": 0.5693056098462156,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.6654902013206462,
+      "lower_bound_both_Holm_pvalue_events": 0.33098040264129236,
+      "positive_power_p05": 0.7600466526080338,
+      "upper_bound_both_Holm_pvalue_events": 0.7600466526080338,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.8943005246219683,
+      "lower_bound_both_Holm_pvalue_events": 0.7886010492439366,
+      "positive_power_p05": 0.9376639917513254,
+      "upper_bound_both_Holm_pvalue_events": 0.9376639917513254,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.2,
+      "p_win": 0.125,
+      "p_loss": 0.07500000000000001,
+      "compatible_reference_success_range": [
+        0.07500000000000001,
+        0.875
+      ],
+      "positive_significant_power_each_comparison": 0.9330343786116152,
+      "lower_bound_both_Holm_pvalue_events": 0.8660687572232304,
+      "positive_power_p05": 0.9625945252384351,
+      "upper_bound_both_Holm_pvalue_events": 0.9625945252384351,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.037453462688831256,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.0688861127585531,
+      "upper_bound_both_Holm_pvalue_events": 0.0688861127585531,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.046535751878608166,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.0803856308546864,
+      "upper_bound_both_Holm_pvalue_events": 0.0803856308546864,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.06722771941260758,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.10491657962900139,
+      "upper_bound_both_Holm_pvalue_events": 0.10491657962900139,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.14299339282768145,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.21435430582655157,
+      "upper_bound_both_Holm_pvalue_events": 0.21435430582655157,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.3081117742980668,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.4117891571622159,
+      "upper_bound_both_Holm_pvalue_events": 0.4117891571622159,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.4707896217872551,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.5826772233413287,
+      "upper_bound_both_Holm_pvalue_events": 0.5826772233413287,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.7248568592782189,
+      "lower_bound_both_Holm_pvalue_events": 0.4497137185564377,
+      "positive_power_p05": 0.8105576355440172,
+      "upper_bound_both_Holm_pvalue_events": 0.8105576355440172,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.3,
+      "p_win": 0.175,
+      "p_loss": 0.125,
+      "compatible_reference_success_range": [
+        0.125,
+        0.825
+      ],
+      "positive_significant_power_each_comparison": 0.7880393782493752,
+      "lower_bound_both_Holm_pvalue_events": 0.5760787564987504,
+      "positive_power_p05": 0.8602873691884751,
+      "upper_bound_both_Holm_pvalue_events": 0.8602873691884751,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.03159705291317966,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.05260055034136219,
+      "upper_bound_both_Holm_pvalue_events": 0.05260055034136219,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.03712351971590895,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.0641393767623173,
+      "upper_bound_both_Holm_pvalue_events": 0.0641393767623173,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.04710922933651964,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.08298383233509177,
+      "upper_bound_both_Holm_pvalue_events": 0.08298383233509177,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.09022303620264417,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.14447102473835668,
+      "upper_bound_both_Holm_pvalue_events": 0.14447102473835668,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.18388740424162414,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.269112105142546,
+      "upper_bound_both_Holm_pvalue_events": 0.269112105142546,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.28563274737732786,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.3884010066145373,
+      "upper_bound_both_Holm_pvalue_events": 0.3884010066145373,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.4811105791973517,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.5922151246236298,
+      "upper_bound_both_Holm_pvalue_events": 0.5922151246236298,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.05,
+      "true_discordance_q": 0.5,
+      "p_win": 0.275,
+      "p_loss": 0.225,
+      "compatible_reference_success_range": [
+        0.225,
+        0.725
+      ],
+      "positive_significant_power_each_comparison": 0.5430170523551328,
+      "lower_bound_both_Holm_pvalue_events": 0.08603410471026551,
+      "positive_power_p05": 0.6516440413521757,
+      "upper_bound_both_Holm_pvalue_events": 0.6516440413521757,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 0.39354859789913943,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.5628341292628734,
+      "upper_bound_both_Holm_pvalue_events": 0.5628341292628734,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 0.6183985415759968,
+      "lower_bound_both_Holm_pvalue_events": 0.23679708315199366,
+      "positive_power_p05": 0.7617000299688894,
+      "upper_bound_both_Holm_pvalue_events": 0.7617000299688894,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 0.8828443845641158,
+      "lower_bound_both_Holm_pvalue_events": 0.7656887691282317,
+      "positive_power_p05": 0.9424231135129661,
+      "upper_bound_both_Holm_pvalue_events": 0.9424231135129661,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 0.9998518875173761,
+      "lower_bound_both_Holm_pvalue_events": 0.9997037750347522,
+      "positive_power_p05": 0.9999612880675373,
+      "upper_bound_both_Holm_pvalue_events": 0.9999612880675373,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 0.99999999999408,
+      "lower_bound_both_Holm_pvalue_events": 0.9999999999881599,
+      "positive_power_p05": 0.9999999999992112,
+      "upper_bound_both_Holm_pvalue_events": 0.9999999999992112,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 1.0,
+      "lower_bound_both_Holm_pvalue_events": 1.0,
+      "positive_power_p05": 1.0,
+      "upper_bound_both_Holm_pvalue_events": 1.0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 0.9999999999999999,
+      "lower_bound_both_Holm_pvalue_events": 0.9999999999999998,
+      "positive_power_p05": 0.9999999999999999,
+      "upper_bound_both_Holm_pvalue_events": 0.9999999999999999,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.1,
+      "p_win": 0.1,
+      "p_loss": 0.0,
+      "compatible_reference_success_range": [
+        0.0,
+        0.9
+      ],
+      "positive_significant_power_each_comparison": 1.0,
+      "lower_bound_both_Holm_pvalue_events": 1.0,
+      "positive_power_p05": 1.0,
+      "upper_bound_both_Holm_pvalue_events": 1.0,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.2240453193457935,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.3075051040998189,
+      "upper_bound_both_Holm_pvalue_events": 0.3075051040998189,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.29722044101657463,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.3994297701052942,
+      "upper_bound_both_Holm_pvalue_events": 0.3994297701052942,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.4253150278610195,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.544441256903928,
+      "upper_bound_both_Holm_pvalue_events": 0.544441256903928,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.8098240359558102,
+      "lower_bound_both_Holm_pvalue_events": 0.6196480719116204,
+      "positive_power_p05": 0.8753004481392728,
+      "upper_bound_both_Holm_pvalue_events": 0.8753004481392728,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.9891472903353534,
+      "lower_bound_both_Holm_pvalue_events": 0.9782945806707068,
+      "positive_power_p05": 0.9949662169568834,
+      "upper_bound_both_Holm_pvalue_events": 0.9949662169568834,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.9996164984892749,
+      "lower_bound_both_Holm_pvalue_events": 0.9992329969785498,
+      "positive_power_p05": 0.9998666472087352,
+      "upper_bound_both_Holm_pvalue_events": 0.9998666472087352,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.9999997791221326,
+      "lower_bound_both_Holm_pvalue_events": 0.9999995582442651,
+      "positive_power_p05": 0.9999999521961603,
+      "upper_bound_both_Holm_pvalue_events": 0.9999999521961603,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.2,
+      "p_win": 0.15000000000000002,
+      "p_loss": 0.05,
+      "compatible_reference_success_range": [
+        0.05,
+        0.85
+      ],
+      "positive_significant_power_each_comparison": 0.9999999862234022,
+      "lower_bound_both_Holm_pvalue_events": 0.9999999724468045,
+      "positive_power_p05": 0.9999999974092612,
+      "upper_bound_both_Holm_pvalue_events": 0.9999999974092612,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.14194763545147154,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.22068429660984817,
+      "upper_bound_both_Holm_pvalue_events": 0.22068429660984817,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.18757362398233368,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.27236600152802953,
+      "upper_bound_both_Holm_pvalue_events": 0.27236600152802953,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.2846897954109215,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.3730455779306321,
+      "upper_bound_both_Holm_pvalue_events": 0.3730455779306321,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.601161179186491,
+      "lower_bound_both_Holm_pvalue_events": 0.20232235837298207,
+      "positive_power_p05": 0.7034022154347321,
+      "upper_bound_both_Holm_pvalue_events": 0.7034022154347321,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.9159046091542338,
+      "lower_bound_both_Holm_pvalue_events": 0.8318092183084675,
+      "positive_power_p05": 0.9513215618431159,
+      "upper_bound_both_Holm_pvalue_events": 0.9513215618431159,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.9872140525322325,
+      "lower_bound_both_Holm_pvalue_events": 0.974428105064465,
+      "positive_power_p05": 0.9940404665638168,
+      "upper_bound_both_Holm_pvalue_events": 0.9940404665638168,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.9998256840026788,
+      "lower_bound_both_Holm_pvalue_events": 0.9996513680053576,
+      "positive_power_p05": 0.9999432300564853,
+      "upper_bound_both_Holm_pvalue_events": 0.9999432300564853,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.3,
+      "p_win": 0.2,
+      "p_loss": 0.09999999999999999,
+      "compatible_reference_success_range": [
+        0.09999999999999999,
+        0.8
+      ],
+      "positive_significant_power_each_comparison": 0.9999659218828374,
+      "lower_bound_both_Holm_pvalue_events": 0.9999318437656748,
+      "positive_power_p05": 0.9999900115473193,
+      "upper_bound_both_Holm_pvalue_events": 0.9999900115473193,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    },
+    {
+      "n": 60,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.09465674376276453,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.14157201381814705,
+      "upper_bound_both_Holm_pvalue_events": 0.14157201381814705,
+      "evaluation_model_generation_cap_if_three_arms_h50": 9000,
+      "evaluation_environment_operation_cap_including_resets": 9180
+    },
+    {
+      "n": 74,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.11941468807873022,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.1809340865371934,
+      "upper_bound_both_Holm_pvalue_events": 0.1809340865371934,
+      "evaluation_model_generation_cap_if_three_arms_h50": 11100,
+      "evaluation_environment_operation_cap_including_resets": 11322
+    },
+    {
+      "n": 100,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.16726725587871957,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.24982792823395783,
+      "upper_bound_both_Holm_pvalue_events": 0.24982792823395783,
+      "evaluation_model_generation_cap_if_three_arms_h50": 15000,
+      "evaluation_environment_operation_cap_including_resets": 15300
+    },
+    {
+      "n": 200,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.36997666834422194,
+      "lower_bound_both_Holm_pvalue_events": 0,
+      "positive_power_p05": 0.4793458675516805,
+      "upper_bound_both_Holm_pvalue_events": 0.4793458675516805,
+      "evaluation_model_generation_cap_if_three_arms_h50": 30000,
+      "evaluation_environment_operation_cap_including_resets": 30600
+    },
+    {
+      "n": 400,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.7011839535571022,
+      "lower_bound_both_Holm_pvalue_events": 0.40236790711420434,
+      "positive_power_p05": 0.7921970692444763,
+      "upper_bound_both_Holm_pvalue_events": 0.7921970692444763,
+      "evaluation_model_generation_cap_if_three_arms_h50": 60000,
+      "evaluation_environment_operation_cap_including_resets": 61200
+    },
+    {
+      "n": 600,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.8819802783996531,
+      "lower_bound_both_Holm_pvalue_events": 0.7639605567993062,
+      "positive_power_p05": 0.9290002401641119,
+      "upper_bound_both_Holm_pvalue_events": 0.9290002401641119,
+      "evaluation_model_generation_cap_if_three_arms_h50": 90000,
+      "evaluation_environment_operation_cap_including_resets": 91800
+    },
+    {
+      "n": 1000,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.9866277761485418,
+      "lower_bound_both_Holm_pvalue_events": 0.9732555522970836,
+      "positive_power_p05": 0.9937276342035164,
+      "upper_bound_both_Holm_pvalue_events": 0.9937276342035164,
+      "evaluation_model_generation_cap_if_three_arms_h50": 150000,
+      "evaluation_environment_operation_cap_including_resets": 153000
+    },
+    {
+      "n": 1141,
+      "true_delta": 0.1,
+      "true_discordance_q": 0.5,
+      "p_win": 0.3,
+      "p_loss": 0.2,
+      "compatible_reference_success_range": [
+        0.2,
+        0.7
+      ],
+      "positive_significant_power_each_comparison": 0.9942153614851159,
+      "lower_bound_both_Holm_pvalue_events": 0.9884307229702318,
+      "positive_power_p05": 0.9975050286473904,
+      "upper_bound_both_Holm_pvalue_events": 0.9975050286473904,
+      "evaluation_model_generation_cap_if_three_arms_h50": 171150,
+      "evaluation_environment_operation_cap_including_resets": 174573
+    }
+  ],
+  "new_model_environment_training_calls": 0
+}

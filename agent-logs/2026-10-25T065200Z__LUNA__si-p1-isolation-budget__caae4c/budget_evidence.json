@@ -1,0 +1,116 @@
+{
+  "future_formula_not_authorization": {
+    "explicit_example_without_extra_calls": {
+      "environment_operations_including_resets": "153E",
+      "generations": "150E"
+    },
+    "fresh_independent_three_arm_action_environment_upper_bound": "A*E*(H+1) + R_extra = 153E + R_extra, assuming one reset per episode, at most one environment action per horizon step, and no replay/probe/validation extras",
+    "fresh_independent_three_arm_action_generation_upper_bound": "A*E*H + C = 150E + C",
+    "new_budget_authorized": false,
+    "reused_prefix_or_branch": "physical acquisition charged once; report logical per-arm source/replay/suffix/action cost separately, never treat reuse as free logical policy cost",
+    "scientific_calls_this_task": 0,
+    "separate_required_buckets": [
+      "source",
+      "stage1",
+      "stage2",
+      "CONTINUE",
+      "recovery",
+      "suffix",
+      "reset",
+      "prefix_replay",
+      "failed_or_incomplete",
+      "validation",
+      "training",
+      "offline_validation",
+      "evaluation"
+    ],
+    "symbols": {
+      "A": 3,
+      "C": "any extra non-action controller generations",
+      "E": "future task episodes, not selected here",
+      "H": 50,
+      "R": "reset calls",
+      "V": "validation/replay physical calls"
+    }
+  },
+  "other_historical_costs": {
+    "SFT_gpu_time_seconds": 27406.3,
+    "SFT_optimizer_steps": 2354,
+    "SFT_padded_input_tokens": 23860000,
+    "other_stage_costs": "UNKNOWN_NOT_ZERO; no complete source-linked physical ledger was available in the reviewed evidence",
+    "per_category_unknowns": {
+      "CONTINUE": "UNKNOWN_NOT_ZERO",
+      "evaluation": "UNKNOWN_NOT_ZERO",
+      "failed_or_incomplete_by_phase": "UNKNOWN_NOT_ZERO",
+      "offline_validation": "UNKNOWN_NOT_ZERO",
+      "prefix_replay_per_arm": "UNKNOWN_NOT_ZERO",
+      "recovery_per_arm": "UNKNOWN_NOT_ZERO",
+      "reset_per_phase": "UNKNOWN_NOT_ZERO",
+      "stage1": "UNKNOWN_NOT_ZERO",
+      "stage2": "UNKNOWN_NOT_ZERO",
+      "suffix_per_arm": "UNKNOWN_NOT_ZERO",
+      "validation": "UNKNOWN_NOT_ZERO"
+    },
+    "qualification": "P0 historic dataset/training audit figures; not included in R19 totals; exact full-project physical ledger and actual unpadded tokens unknown",
+    "training_T_U_effective_tokens_actual_input_tokens_gpu_seconds_by_future_plan": "UNKNOWN; must be measured, not inferred from prompt lengths"
+  },
+  "r19_actual_increment": {
+    "environment_operations_including_resets": 7607,
+    "incomplete_external_operations": 0,
+    "model_generations": 4965,
+    "non_reset_environment_operations": 7273,
+    "resets": 334
+  },
+  "r19_cumulative_including_predecessor": {
+    "environment_operations_including_resets": 7949,
+    "incomplete_external_operations": 0,
+    "model_generations": 5142,
+    "non_reset_environment_operations": 7603,
+    "resets": 346
+  },
+  "r19_independent_validation": {
+    "authoritative_physical_count": "7273 nonreset + 334 reset = 7607 G3 increment; cumulative 7603 + 346 = 7949",
+    "corrected_monitor_wrapper_double_count": 169,
+    "display_correction_path": "/home/lizening/research-notes/agent-logs/2026-10-23T005510Z__SOL__r19-authorized-g3-monitor__2da980f_eea6b8/monitor_display_cost_correction.json",
+    "display_correction_sha256": "d41383c3519df79292d9d5fa2607cb0f2b946e6f463a7fa93931e22e6c885f24",
+    "final_audit_path": "/home/lizening/research-notes/agent-logs/2026-10-23T005510Z__SOL__r19-authorized-g3-monitor__2da980f_eea6b8/final_g3_integrity_audit.json",
+    "final_audit_sha256": "242225209e397674c19b6f88463f7881d2fe151c8570636ccdaa5a28a031ad62",
+    "independent_P0_recount_path": "/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__SOL__self-improvement-phase0__b1c48c/independent_r19_experience_recount.json",
+    "independent_P0_recount_sha256": "fa7e2ee6acf5b34f7c7229e203bd7e384c51a05c6c201494b1ce0772e950a0b9",
+    "original_predecessor": {
+      "environment_operations": 342,
+      "generations": 177,
+      "incomplete_source_unit": "preserved separately as known-failed historical attempt; not zeroed"
+    }
+  },
+  "r19_physical_phase_breakdown": {
+    "environment_operations_including_resets_as_reported_by_phase": {
+      "initial_attempt": 36,
+      "logical_branch": 4869,
+      "path_extension": 133,
+      "replay_gate": 396,
+      "source": 2173
+    },
+    "generations": {
+      "initial_recovery": 78,
+      "path_extension": 133,
+      "source": 2046,
+      "suffix": 2708
+    },
+    "logical_per_arm_costs": "not reconstructed in this task; the physical shared campaign counters are authoritative, and reuse must not be treated as zero logical cost",
+    "phase_label_mapping": "initial_recovery is the recorded phase label; do not silently relabel it as a full stage-1/stage-2 cost without arm-level accounting",
+    "reset_operations_total_only": 334
+  },
+  "scope": "evidence-backed accounting and non-executable formula only; no new resource authorization",
+  "static_code_binding": {
+    "assumption_note": "150E/153E are action-step bounds only under stated one-generation-per-action/no-extra-controller and one-reset assumptions; add C/R_extra and separately account prefix replay, validation, failed units and source acquisition",
+    "executed_source_revision": "2da980f631badc25086d12db60d128ff507d3ae6",
+    "relevant_locations": {
+      "R19_MAX_STEPS=50": 41,
+      "remaining_horizon_enforces_50": 686,
+      "suffix_actions_capped_by_remaining_horizon": 835
+    },
+    "source": "/home/lizening/wt-r19-recovery-duration-v1/src/recovery/r19_duration.py",
+    "source_sha256": "46b181dab920b5faf175ad986108e102f14853a6e10372acb9c4a525aaf797cb"
+  }
+}

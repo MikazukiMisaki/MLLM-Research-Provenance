@@ -1,0 +1,98 @@
+{
+  "schema": "SI_P1_LUNA_ISOLATION_BUDGET_V2",
+  "status": "CORRECTED_EVIDENCE_ONLY__NO_SCIENTIFIC_EXECUTION",
+  "authority": "Additive correction to P1 V1; V1 and its FILE_HASHES remain unchanged.",
+  "correction_feedback": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__SOL__si-p1-protocol-review__caae4c/LUNA_REVIEW_FEEDBACK_V2.md",
+    "sha256": "3941621eba2324d54175d19e1414d1e841312fda11bdeac349ed6eaf9cee4b2b"
+  },
+  "independent_source_identity_join": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__SOL__si-p1-protocol-review__caae4c/independent_source_hash_and_identity_join.json",
+    "sha256": "462a1e723199d76a1ca732c2821832d0cdafe3d3bd01895d0e2b4a27225d942b",
+    "p0_experience_inventory_path": "/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__CODEX__self-experience-feasibility__b1c48c/experience_inventory.json",
+    "p0_experience_inventory_sha256": "1b0b7766d5901894d71f635433b9055223648d07bf5bda4e648c1129403cd8c0",
+    "all_named_mappings_and_source_hashes_match": true,
+    "scope": "Read-only metadata join of full source-file hashes, prefix-to-task mapping, and original row hashes; no outcomes or scientific calls."
+  },
+  "scope_incident": {
+    "classification": "P1 V1 preparation script wrote/refreshed metadata artifacts in its hard-coded P0 ROOT; no scientific raw evidence or scientific code was changed.",
+    "original_p0_files_restored": true,
+    "incident_receipt_path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__SOL__si-p1-protocol-review__caae4c/P0_SCOPE_INCIDENT_AND_RESTORATION.json",
+    "incident_receipt_sha256": "c7947a2249f838948a07b28f6d02c21d02af2055a15e1e1205b068eed898bc35",
+    "changed_or_new_p0_bytes_preserved_in_snapshot": true,
+    "v1_input_binding_caveat": "V1 input hashes that refer to Luna's P0-directory audit outputs describe the transient changed bytes; use the cited incident snapshots for those bytes. V2 source/mapping claims rely on the restored published P0 inventory and the independent join above. No P0 script was rerun."
+  },
+  "cohort_source_proofs": {
+    "total_prefix_rows": 351,
+    "total_unique_task_trial_rows_within_stage_sum": 349,
+    "all_prefix_to_task_mappings_verified": true,
+    "stages": {
+      "R4": {"rows": 24, "unique_tasks": 23, "source_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-feasibility-r4-20260908T080000Z/pairs.jsonl", "full_source_sha256": "6f53ac7434bfb84f68de88d31730ad2206194d77f4aac7c134ce562cd81d2415"},
+      "R10_OSR": {"rows": 48, "unique_tasks": 47, "source_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl", "full_source_sha256": "ef953743d95fea93fb48b43a68b4b1b470aaee910becedfbfe4fd2c10008a76e"},
+      "R16_OSR": {"rows": 60, "unique_tasks": 60, "source_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl", "full_source_sha256": "548d06f7479e33306780d2c3434d1888957f0d4b42da6e4f510d949db310bacf"},
+      "R17_PAR": {"rows": 60, "unique_tasks": 60, "source_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r17-par-20260911T000000Z/par_ledger.jsonl", "full_source_sha256": "ce79cb9f0509d0cb51732fcc482891d7290ee93aa1d81a78ae81a6c071c6ec56"},
+      "R18_C1": {"rows": 60, "unique_tasks": 60, "source_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-r18-c1-20260911T000000Z/fact_text_branches.jsonl", "full_source_sha256": "1f4d5da2e58636afb728aac86a24a484fddc830c46704eedb5a44d7d23f1cfc2"},
+      "R18_C2": {"rows": 60, "unique_tasks": 60, "source_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-r18-c2-formal-aa9fa3c34520941e/card_v2_branches.jsonl", "full_source_sha256": "b44c6e8fb4173f0be06e2f1d94af7bba40e030325f0cecd8f2f56ebc32b7d3e5"},
+      "R19_BRANCHES": {"rows": 39, "unique_tasks": 39, "source_path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/branches.jsonl", "full_source_sha256": "eff9b5e74d3d5daa928cb662dcc59fc3f434f66796b673679d40b374f3c8636f"}
+    }
+  },
+  "fixed_eleven_cases": [
+    {"case_id":"R4:R2-F01","canonical_task_trial":"look_at_obj_in_light-AlarmClock-None-DeskLamp-303/trial_T20190908_144950_175895","source_path":"/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-feasibility-r4-20260908T080000Z/pairs.jsonl","source_file_sha256":"6f53ac7434bfb84f68de88d31730ad2206194d77f4aac7c134ce562cd81d2415","row_sha256":"97fa552daf6bad6e3a827d99ad352a0c19bc7e169403d688a46da17d175de593","verified":true,"split":"train","disposition":"HISTORICAL_DEVELOPMENT_CANDIDATE_ONLY_NOT_NEW_EVALUATION_OR_TRAINING_READY"},
+    {"case_id":"R10_OSR:R8-F02","canonical_task_trial":"pick_two_obj_and_place-Book-None-Bed-314/trial_T20190910_072508_733981","source_path":"/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl","source_file_sha256":"ef953743d95fea93fb48b43a68b4b1b470aaee910becedfbfe4fd2c10008a76e","row_sha256":"bf4a211a8c32b4e12c88e156fb282ec25a438e0dc469e5d9c2ebf5ab1f61507e","verified":true,"split":"train","disposition":"HISTORICAL_DEVELOPMENT_CANDIDATE_ONLY_NOT_NEW_EVALUATION_OR_TRAINING_READY"},
+    {"case_id":"R10_OSR:R8-F20","canonical_task_trial":"look_at_obj_in_light-Book-None-DeskLamp-303/trial_T20190909_085355_202971","source_path":"/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl","source_file_sha256":"ef953743d95fea93fb48b43a68b4b1b470aaee910becedfbfe4fd2c10008a76e","row_sha256":"6e442dcf93d0cd92964e5034d82b4ad403be0ad8e7bb01292879920504808df8","verified":true,"split":"train","disposition":"HISTORICAL_DEVELOPMENT_CANDIDATE_ONLY_NOT_NEW_EVALUATION_OR_TRAINING_READY"},
+    {"case_id":"R10_OSR:R8-F21","canonical_task_trial":"look_at_obj_in_light-Bowl-None-DeskLamp-301/trial_T20190909_150737_210323","source_path":"/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl","source_file_sha256":"ef953743d95fea93fb48b43a68b4b1b470aaee910becedfbfe4fd2c10008a76e","row_sha256":"4c40f2a5b93ee329636de9084c8d608cd228ffce650c484b37b39aac0b5e005b","verified":true,"split":"train","disposition":"HISTORICAL_DEVELOPMENT_CANDIDATE_ONLY_NOT_NEW_EVALUATION_OR_TRAINING_READY"},
+    {"case_id":"R10_OSR:R8-F22","canonical_task_trial":"look_at_obj_in_light-Book-None-DeskLamp-303/trial_T20190909_085406_916808","source_path":"/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl","source_file_sha256":"ef953743d95fea93fb48b43a68b4b1b470aaee910becedfbfe4fd2c10008a76e","row_sha256":"cf202fe3b0726955789a94c6b8f4ca6a77d8c58dbd71f1d7345430bd5eed3961","verified":true,"split":"train","disposition":"HISTORICAL_DEVELOPMENT_CANDIDATE_ONLY_NOT_NEW_EVALUATION_OR_TRAINING_READY"},
+    {"case_id":"R10_OSR:R8-F23","canonical_task_trial":"look_at_obj_in_light-Book-None-DeskLamp-303/trial_T20190909_085406_916808","source_path":"/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/osr_branches.jsonl","source_file_sha256":"ef953743d95fea93fb48b43a68b4b1b470aaee910becedfbfe4fd2c10008a76e","row_sha256":"d8b5e8b3a5d8a08b0f16a2682b5dd28936f88551ad73342a37c15c0e3d79b269","verified":true,"split":"train","disposition":"HISTORICAL_DEVELOPMENT_CANDIDATE_ONLY_NOT_NEW_EVALUATION_OR_TRAINING_READY"},
+    {"case_id":"R16_OSR:R15-F01","canonical_task_trial":"pick_two_obj_and_place-Tomato-None-CounterTop-19/trial_T20190907_144716_566859","source_path":"/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl","source_file_sha256":"548d06f7479e33306780d2c3434d1888957f0d4b42da6e4f510d949db310bacf","row_sha256":"996f31f3f5c5ba433320f5d548a68b42581ba51b9843dd2e3868fbd81eb902ca","verified":true,"split":"train","disposition":"HISTORICAL_DEVELOPMENT_CANDIDATE_ONLY_NOT_NEW_EVALUATION_OR_TRAINING_READY"},
+    {"case_id":"R16_OSR:R15-F22","canonical_task_trial":"pick_heat_then_place_in_recep-Mug-None-Cabinet-22/trial_T20190908_072939_855818","source_path":"/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl","source_file_sha256":"548d06f7479e33306780d2c3434d1888957f0d4b42da6e4f510d949db310bacf","row_sha256":"3437d1634b3f4ad303d95da2ac043230189277623efcda996eeadd1419bbb061","verified":true,"split":"train","disposition":"HISTORICAL_DEVELOPMENT_CANDIDATE_ONLY_NOT_NEW_EVALUATION_OR_TRAINING_READY"},
+    {"case_id":"R16_OSR:R15-F23","canonical_task_trial":"pick_and_place_simple-Watch-None-Shelf-207/trial_T20190908_122255_167374","source_path":"/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl","source_file_sha256":"548d06f7479e33306780d2c3434d1888957f0d4b42da6e4f510d949db310bacf","row_sha256":"bad0b573b5b108d283f0cc7c1ae9a4996c53d646d16631cc3529c7c2ae45c62b","verified":true,"split":"train","disposition":"HISTORICAL_DEVELOPMENT_CANDIDATE_ONLY_NOT_NEW_EVALUATION_OR_TRAINING_READY"},
+    {"case_id":"R16_OSR:R15-F25","canonical_task_trial":"look_at_obj_in_light-Bowl-None-DeskLamp-301/trial_T20190909_150931_522935","source_path":"/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/osr_ledger.jsonl","source_file_sha256":"548d06f7479e33306780d2c3434d1888957f0d4b42da6e4f510d949db310bacf","row_sha256":"9aa206fe866975ff67eccd0f17c7bcda26eb171daaee9759457acea1336f370c","verified":true,"split":"train","disposition":"HISTORICAL_DEVELOPMENT_CANDIDATE_ONLY_NOT_NEW_EVALUATION_OR_TRAINING_READY"},
+    {"case_id":"R19_K1:R19-failure-b3ab21b8e193f6adf6ff","canonical_task_trial":"look_at_obj_in_light-Vase-None-DeskLamp-303/trial_T20190907_150403_049073","source_path":"/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/branches.jsonl","source_file_sha256":"eff9b5e74d3d5daa928cb662dcc59fc3f434f66796b673679d40b374f3c8636f","row_sha256":"15049449b94f7d5bfa85c62fbe626a0705fe04cdcebc3719d345bce5bab434f6","verified":true,"split":"train","disposition":"HISTORICAL_DEVELOPMENT_CANDIDATE_ONLY_NOT_NEW_EVALUATION_OR_TRAINING_READY"}
+  ],
+  "fixed_case_summary": {"rows": 11, "unique_canonical_task_trials": 10, "all_train_split": true, "all_known_use_registered": true, "same_book_identity_prefixes": ["R10_OSR:R8-F22", "R10_OSR:R8-F23"], "source_hashes": "full-file and row hashes both verified for every row", "historical_viewing_absence": "NOT_PROVEN"},
+  "known_use_difference": {
+    "source": "P0 independent file-presence record and frozen V1 metadata results; V1's hard-coded-root incident is disclosed above and those V1 values are not misrepresented as a clean-data certification.",
+    "splits": {
+      "train": {"six_family_game_file_present": 3553, "known_use_difference": 1141, "candidate_id_sha256": "13e403d27a59f25e6ed8ce5677a8d3da2cfd8760360a5c557c2fe297b13174dc"},
+      "valid_seen": {"six_family_game_file_present": 140, "known_use_difference": 0, "candidate_id_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+      "valid_unseen": {"six_family_game_file_present": 134, "known_use_difference": 74, "candidate_id_sha256": "7b7b9a4f2987f1780d73199506d447bf13f878500cbfa228d2d69ed20a1c6ad0"}
+    },
+    "disposition": "Known-registration complement only; not clean/held-out proof, not an executable N. No new schedule generated."
+  },
+  "budget_corrections": {
+    "r19_actual_increment": {"model_generations": 4965, "non_reset_environment_operations": 7273, "resets": 334, "environment_operations_including_resets": 7607, "incomplete_external_operations": 0},
+    "r19_cumulative_including_predecessor": {"model_generations": 5142, "non_reset_environment_operations": 7603, "resets": 346, "environment_operations_including_resets": 7949, "incomplete_external_operations": 0},
+    "training_result": {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/training_result.json",
+      "sha256": "e6a47124200cacba4d1f3eaf97fdf79657d7df04f072a4d5446c2bec677c399e",
+      "optimizer_steps": 2354,
+      "wall_time_seconds": 27406.28269892931,
+      "gpu_device_seconds": "UNKNOWN_NOT_PROVEN_BY_WALL_TIME",
+      "input_tokens_seen": 23860000,
+      "input_token_padding_semantics": "UNKNOWN_FROM_THIS_JSON; retain original metric name input_tokens_seen; do not call it padded tokens",
+      "completion_target_tokens": "not merged into input_tokens_seen",
+      "separate_from_R19_cost": true
+    },
+    "expert_repeat_occurrences": {
+      "before_dedup": 148,
+      "after_dedup": 127,
+      "removed_by_dedup": 21,
+      "rendered_prompt_groups_with_different_action_targets": 110,
+      "interpretation": "post-dedup retained repeat occurrences; no identity/hash error implied"
+    },
+    "future_frozen_minimal_evaluation": {
+      "arms": ["A", "B_pool", "C_student"],
+      "horizon": 50,
+      "extra_controller_probe_replay": false,
+      "C_extra": 0,
+      "R_extra": 0,
+      "generation_upper_bound": "150E",
+      "environment_operation_upper_bound_including_one_reset_per_episode": "153E",
+      "E_selected": false,
+      "execution_or_budget_authorized": false,
+      "additional_operations": "require separately frozen and authorized budget; no implicit overage"
+    }
+  },
+  "new_scientific_calls": {"model": 0, "environment": 0, "training": 0, "replay": 0, "evaluation": 0},
+  "no_project_script_validator_or_test_rerun": true
+}

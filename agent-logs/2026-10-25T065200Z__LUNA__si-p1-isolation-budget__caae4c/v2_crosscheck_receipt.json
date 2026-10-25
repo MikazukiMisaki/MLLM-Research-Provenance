@@ -1,0 +1,13 @@
+{
+  "operation": "stdlib-only read/parse/hash-field cross-check of V2 against Sol's independent metadata join",
+  "argv": [
+    "python",
+    "-c",
+    "import json,pathlib,hashlib; base=pathlib.Path('/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__LUNA__si-p1-isolation-budget__caae4c'); review=pathlib.Path('/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__SOL__si-p1-protocol-review__caae4c'); j=json.loads((review/'independent_source_hash_and_identity_join.json').read_text()); v=json.loads((base/'corrected_isolation_budget_v2.json').read_text()); assert j['all_named_mappings_and_source_hashes_match'] is True; assert sum(x['cohort_rows'] for x in j['stage_proofs'].values())==351; assert len(v['fixed_eleven_cases'])==11; assert all(x['verified'] and x['source_file_sha256'] and x['row_sha256'] for x in v['fixed_eleven_cases']); assert {x['case_id'] for x in v['fixed_eleven_cases']}=={x['case_id'] for x in j['fixed_11_case_proofs']}; assert v['budget_corrections']['training_result']['gpu_device_seconds']=='UNKNOWN_NOT_PROVEN_BY_WALL_TIME'; assert v['budget_corrections']['future_frozen_minimal_evaluation']['C_extra']==0 and v['budget_corrections']['future_frozen_minimal_evaluation']['R_extra']==0; assert v['new_scientific_calls']['model']==0; print('V2_READ_ONLY_CROSSCHECK=PASS; source_rows=351; fixed_cases=11; source_full_hashes=11; rc=0')"
+  ],
+  "cwd": "/home/lizening/wt-codex-r18c2",
+  "returncode": 0,
+  "stdout": "V2_READ_ONLY_CROSSCHECK=PASS; source_rows=351; fixed_cases=11; source_full_hashes=11; rc=0\n",
+  "stderr": "",
+  "scope": "stdlib JSON field consistency only; no scientific code, project validator, analyzer, test, model, environment, training or replay invoked"
+}
