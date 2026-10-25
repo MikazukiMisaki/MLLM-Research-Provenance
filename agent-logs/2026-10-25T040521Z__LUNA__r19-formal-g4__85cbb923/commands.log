@@ -1,0 +1,17 @@
+Formal offline G4 execution — actual actions and results:
+
+1. Rehashed the supplied handoff, clearance, direct-user authorization, exact proposal review, implementation review, argv and environment plan; each matched its stated SHA-256.
+2. Rehashed all 56 files bound by proposal_and_drift_review.json; all matched immediately before launch and all matched again after child exit. The analyzer checkout remained clean at 85cbb92395e5e2420c2adeb1fa0634653e742910 and its live remote ref matched. The original G3 execution checkout remained clean, detached at 2da980f631badc25086d12db60d128ff507d3ae6.
+3. Rechecked the pinned interpreter and 11 package versions, no matching analyzer/R19/ALFWorld process, no GPU compute process, and the exact planned output leaf absent. Durable single-use consumption marker was written and fsync'ed before any analyzer child start.
+4. Started the one approved child through launch_once.py. It loaded the exact argv JSON and environment plan, used subprocess.Popen with argv list, shell=false, cwd=/home/lizening/wt-r19-recovery-duration-v1, env exactly the plan set mapping, and captured raw stdout/stderr.
+5. Actual child PID 805875; start 2026-10-25T04:06:42.867131+00:00; finish 2026-10-25T04:06:53.643141+00:00; actual subprocess.wait returncode=0; not interrupted. Raw stderr is 0 bytes; raw stdout retained unchanged.
+6. Read-only post-run checks confirmed exactly the three authorized report files; report_hashes.json's two producer digests match summary.json and R19_OPPORTUNITY_REPORT.md. All 56 input hashes remained unchanged; both scientific worktrees stayed clean at pinned SHAs. No analyzer rerun was performed.
+7. No G3/G2/preflight/supervisor/model/ALFWorld process was invoked. New generations=0; new environment operations=0. Existing totals 5142 generations / 7949 environment operations, including historical 177/342, remain unchanged. Sol's scientific interpretation/review remains pending.
+
+Exact raw output hashes:
+- R19_OPPORTUNITY_REPORT.md: 92c066ad1c9c7f187430db82ad6285800e4f31005a1fd2933231d30d695df4bc (7,279 bytes).
+- summary.json: 6ff56b7e9bc31c29bc9afd0c3ceea43c4fdf53b2addb29d3ce9f2c5e99b5d3c4 (38,494 bytes).
+- report_hashes.json: b80517ea6f0781edf764fbda2985836bfe2298239c942079269ed09ae8ab6fcd (195 bytes); its two output hashes match the files above.
+- Full post-run verification found all 56 bound inputs unchanged; the persisted pre-execution map SHA256 is 4cd9f247f7121df39d93a622e038b8db9bc4a8de1d72797d177c04d24d0153ae.
+
+The authoritative exact argv, environment, raw hashes, CWD and receipts are in execution_context.json and child_start.json. Raw output files are preserved under analyzer.stdout.raw and analyzer.stderr.raw. No scientific code, original G3 evidence, manifests, protocol, or old readiness file was modified.
