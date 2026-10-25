@@ -1,0 +1,715 @@
+{
+  "operation": "Read pre-existing fields only; no analyzer/validator/detector/policy execution",
+  "summary": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-23T043602Z__LUNA__r19-g4-readiness__85cbb923/future_g4_report/summary.json",
+    "sha256": "6ff56b7e9bc31c29bc9afd0c3ceea43c4fdf53b2addb29d3ce9f2c5e99b5d3c4"
+  },
+  "branches": {
+    "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/branches.jsonl",
+    "sha256": "eff9b5e74d3d5daa928cb662dcc59fc3f434f66796b673679d40b374f3c8636f"
+  },
+  "official_fields": {
+    "primary_n": 36,
+    "attempted_n": 39,
+    "continue_successes_primary": 30,
+    "success_by_k": {
+      "K1": 29,
+      "K2": 30,
+      "K3": 28,
+      "K4": 25,
+      "K5": 24
+    },
+    "stratum_summaries": {
+      "failure": {
+        "K1_successes": 1,
+        "K2_successes": 2,
+        "K3_successes": 2,
+        "K4_successes": 1,
+        "K5_successes": 0,
+        "n": 6
+      },
+      "random_control": {
+        "K1_successes": 14,
+        "K2_successes": 13,
+        "K3_successes": 12,
+        "K4_successes": 12,
+        "K5_successes": 13,
+        "n": 15
+      },
+      "success_control": {
+        "K1_successes": 14,
+        "K2_successes": 15,
+        "K3_successes": 14,
+        "K4_successes": 12,
+        "K5_successes": 11,
+        "n": 15
+      }
+    },
+    "duration_opportunity": {
+      "adjacent_contrasts": {
+        "K2_minus_K1": {
+          "comparison": "one additional recovery action then SFT versus handing off now",
+          "losses": 1,
+          "mean_paired_difference": 0.027777777777777776,
+          "n": 36,
+          "ties": 33,
+          "wins": 2
+        },
+        "K3_minus_K2": {
+          "comparison": "one additional recovery action then SFT versus handing off now",
+          "losses": 2,
+          "mean_paired_difference": -0.05555555555555555,
+          "n": 36,
+          "ties": 34,
+          "wins": 0
+        },
+        "K4_minus_K3": {
+          "comparison": "one additional recovery action then SFT versus handing off now",
+          "losses": 4,
+          "mean_paired_difference": -0.08333333333333333,
+          "n": 36,
+          "ties": 31,
+          "wins": 1
+        },
+        "K5_minus_K4": {
+          "comparison": "one additional recovery action then SFT versus handing off now",
+          "losses": 3,
+          "mean_paired_difference": -0.027777777777777776,
+          "n": 36,
+          "ties": 31,
+          "wins": 2
+        }
+      },
+      "development_selected_fixed_k": 2,
+      "fixed_k_candidates_tied_after_cost": [
+        2
+      ],
+      "fixed_k_candidates_tied_on_success": [
+        2
+      ],
+      "h_success": 0.05555555555555547,
+      "interpretation": "empirical hindsight stopping envelope for tested common recovery paths",
+      "outcome_pattern_frequencies": {
+        "00000": 4,
+        "00001": 1,
+        "01010": 1,
+        "01110": 1,
+        "10000": 1,
+        "11000": 1,
+        "11100": 3,
+        "11101": 1,
+        "11110": 1,
+        "11111": 22
+      },
+      "s_fixed": 0.8333333333333334,
+      "s_oracle": 0.8888888888888888,
+      "states_harmed_by_extra_recovery_vs_k1": 7,
+      "states_helped_by_extra_recovery_vs_k1": 3,
+      "successful_duration_sets": {
+        "R19-failure-0d469302da15668cdf66": [],
+        "R19-failure-4d2993f7fe2478492ff6": [],
+        "R19-failure-64171e0fe05f9e99c96f": [],
+        "R19-failure-79723e267eec3320ed2f": [],
+        "R19-failure-a33d7ca26ecbe46dc4b6": [
+          2,
+          3,
+          4
+        ],
+        "R19-failure-b3ab21b8e193f6adf6ff": [
+          1,
+          2,
+          3
+        ],
+        "R19-random-control-05859806ca56c4b9c655": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-random-control-0cd5ed676700233832c7": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-random-control-2fc89d8a465734caa339": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-random-control-329d2417bbaea38f5511": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-random-control-47bcdcad9c56a38ac146": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-random-control-4d58c67a0a72189681f8": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-random-control-50ae37d13d2dd103d13e": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-random-control-52197b722db208865b48": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-random-control-8ec4fc037229710f8f13": [
+          1
+        ],
+        "R19-random-control-9d989320346ee12ce454": [
+          1,
+          2
+        ],
+        "R19-random-control-be382ea467bfb513fdb7": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-random-control-bf0ed0343dfdde17e5fa": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-random-control-bf448be94724da4562c0": [
+          5
+        ],
+        "R19-random-control-e8d6be1ec3dbe79231ff": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-random-control-ebd8255e6ee2e535a974": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-success-control-1d89ca0de579b365cd33": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-success-control-44e543bac8febb311402": [
+          1,
+          2,
+          3,
+          5
+        ],
+        "R19-success-control-4e4b4ee973ef0b083f58": [
+          1,
+          2,
+          3
+        ],
+        "R19-success-control-58293a302586d8f5b865": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-success-control-76ca5628f70bdaea9d9d": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-success-control-803b720b341906ade8ac": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-success-control-84efdd5bf22d2d94e13e": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-success-control-9ee33251743f45bb194c": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-success-control-a970bede98aadc04cf59": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-success-control-afc6ea00fdfb2368343e": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-success-control-b8d3baa417c821d30701": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "R19-success-control-c6706bb3216d1e563838": [
+          1,
+          2,
+          3
+        ],
+        "R19-success-control-fd2fa170071894c22ade": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "R19-success-control-fe255c4dc92eb6278708": [
+          2,
+          4
+        ],
+        "R19-success-control-fed313fe82c0c417528d": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    "paired_k_gt_1_vs_k1": {
+      "K2_vs_K1": {
+        "both_failure": 5,
+        "both_success": 28,
+        "comparator_successes": 30,
+        "exact_two_sided_p": 1.0,
+        "harm_rate": 0.034482758620689655,
+        "holm_adjusted_p": 1.0,
+        "losses": 1,
+        "mean_paired_difference": 0.027777777777777776,
+        "n": 36,
+        "paired_difference_conservative_95_model_based": [
+          -0.15986620528108386,
+          0.20690759147384352
+        ],
+        "reference_successes": 29,
+        "rescue_rate": 0.2857142857142857,
+        "ties": 33,
+        "wins": 2
+      },
+      "K3_vs_K1": {
+        "both_failure": 6,
+        "both_success": 27,
+        "comparator_successes": 28,
+        "exact_two_sided_p": 1.0,
+        "harm_rate": 0.06896551724137931,
+        "holm_adjusted_p": 1.0,
+        "losses": 2,
+        "mean_paired_difference": -0.027777777777777776,
+        "n": 36,
+        "paired_difference_conservative_95_model_based": [
+          -0.20690759147384352,
+          0.15986620528108386
+        ],
+        "reference_successes": 29,
+        "rescue_rate": 0.14285714285714285,
+        "ties": 33,
+        "wins": 1
+      },
+      "K4_vs_K1": {
+        "both_failure": 5,
+        "both_success": 23,
+        "comparator_successes": 25,
+        "exact_two_sided_p": 0.2890625,
+        "harm_rate": 0.20689655172413793,
+        "holm_adjusted_p": 0.8671875,
+        "losses": 6,
+        "mean_paired_difference": -0.1111111111111111,
+        "n": 36,
+        "paired_difference_conservative_95_model_based": [
+          -0.3466446091857465,
+          0.15270177339381052
+        ],
+        "reference_successes": 29,
+        "rescue_rate": 0.2857142857142857,
+        "ties": 28,
+        "wins": 2
+      },
+      "K5_vs_K1": {
+        "both_failure": 6,
+        "both_success": 23,
+        "comparator_successes": 24,
+        "exact_two_sided_p": 0.125,
+        "harm_rate": 0.20689655172413793,
+        "holm_adjusted_p": 0.5,
+        "losses": 6,
+        "mean_paired_difference": -0.1388888888888889,
+        "n": 36,
+        "paired_difference_conservative_95_model_based": [
+          -0.3509918926491024,
+          0.11000767066440675
+        ],
+        "reference_successes": 29,
+        "rescue_rate": 0.14285714285714285,
+        "ties": 29,
+        "wins": 1
+      }
+    },
+    "paired_positive_k_vs_continue_primary": {
+      "K1_vs_CONTINUE": {
+        "both_failure": 5,
+        "both_success": 28,
+        "comparator_successes": 29,
+        "harm_rate": 0.06666666666666667,
+        "losses": 2,
+        "mean_paired_difference": -0.027777777777777776,
+        "n": 36,
+        "reference_successes": 30,
+        "rescue_rate": 0.16666666666666666,
+        "ties": 33,
+        "wins": 1
+      },
+      "K2_vs_CONTINUE": {
+        "both_failure": 4,
+        "both_success": 28,
+        "comparator_successes": 30,
+        "harm_rate": 0.06666666666666667,
+        "losses": 2,
+        "mean_paired_difference": 0.0,
+        "n": 36,
+        "reference_successes": 30,
+        "rescue_rate": 0.3333333333333333,
+        "ties": 32,
+        "wins": 2
+      },
+      "K3_vs_CONTINUE": {
+        "both_failure": 4,
+        "both_success": 26,
+        "comparator_successes": 28,
+        "harm_rate": 0.13333333333333333,
+        "losses": 4,
+        "mean_paired_difference": -0.05555555555555555,
+        "n": 36,
+        "reference_successes": 30,
+        "rescue_rate": 0.3333333333333333,
+        "ties": 30,
+        "wins": 2
+      },
+      "K4_vs_CONTINUE": {
+        "both_failure": 5,
+        "both_success": 24,
+        "comparator_successes": 25,
+        "harm_rate": 0.2,
+        "losses": 6,
+        "mean_paired_difference": -0.1388888888888889,
+        "n": 36,
+        "reference_successes": 30,
+        "rescue_rate": 0.16666666666666666,
+        "ties": 29,
+        "wins": 1
+      },
+      "K5_vs_CONTINUE": {
+        "both_failure": 6,
+        "both_success": 24,
+        "comparator_successes": 24,
+        "harm_rate": 0.2,
+        "losses": 6,
+        "mean_paired_difference": -0.16666666666666666,
+        "n": 36,
+        "reference_successes": 30,
+        "rescue_rate": 0.0,
+        "ties": 30,
+        "wins": 0
+      }
+    },
+    "logical_cost_by_policy": {
+      "CONTINUE": {
+        "mean_full_branch_cost": {
+          "environment_actions": 11.583333333333334,
+          "generated_tokens": 57.916666666666664,
+          "input_tokens": 7412.305555555556,
+          "model_calls": 11.583333333333334,
+          "total_tokens": 7470.222222222223
+        },
+        "mean_full_branch_total_tokens": 7470.222222222223,
+        "mean_recovery_only_cost": {
+          "environment_actions": null,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "model_calls": null,
+          "total_tokens": null
+        },
+        "n": 36,
+        "success_rate": 0.8333333333333334
+      },
+      "K1": {
+        "mean_full_branch_cost": {
+          "environment_actions": 14.416666666666666,
+          "generated_tokens": 102.08333333333333,
+          "input_tokens": 9676.805555555555,
+          "model_calls": 15.416666666666666,
+          "total_tokens": 9778.888888888889
+        },
+        "mean_full_branch_total_tokens": 9778.888888888889,
+        "mean_recovery_only_cost": {
+          "environment_actions": 1.0,
+          "generated_tokens": 35.0,
+          "input_tokens": 1159.8055555555557,
+          "model_calls": 2.0,
+          "total_tokens": 1194.8055555555557
+        },
+        "mean_recovery_only_total_tokens": 1194.8055555555557,
+        "n": 36,
+        "success_rate": 0.8055555555555556
+      },
+      "K2": {
+        "mean_full_branch_cost": {
+          "environment_actions": 14.75,
+          "generated_tokens": 103.75,
+          "input_tokens": 9750.5,
+          "model_calls": 15.75,
+          "total_tokens": 9854.25
+        },
+        "mean_full_branch_total_tokens": 9854.25,
+        "mean_recovery_only_cost": {
+          "environment_actions": 2.0,
+          "generated_tokens": 40.0,
+          "input_tokens": 1829.7777777777778,
+          "model_calls": 3.0,
+          "total_tokens": 1869.7777777777778
+        },
+        "mean_recovery_only_total_tokens": 1869.7777777777778,
+        "n": 36,
+        "success_rate": 0.8333333333333334
+      },
+      "K3": {
+        "mean_full_branch_cost": {
+          "environment_actions": 17.86111111111111,
+          "generated_tokens": 119.30555555555556,
+          "input_tokens": 11630.361111111111,
+          "model_calls": 18.86111111111111,
+          "total_tokens": 11749.666666666666
+        },
+        "mean_full_branch_total_tokens": 11749.666666666666,
+        "mean_recovery_only_cost": {
+          "environment_actions": 2.9166666666666665,
+          "generated_tokens": 44.583333333333336,
+          "input_tokens": 2461.3888888888887,
+          "model_calls": 3.9166666666666665,
+          "total_tokens": 2505.972222222222
+        },
+        "mean_recovery_only_total_tokens": 2505.972222222222,
+        "n": 36,
+        "success_rate": 0.7777777777777778
+      },
+      "K4": {
+        "mean_full_branch_cost": {
+          "environment_actions": 21.11111111111111,
+          "generated_tokens": 135.55555555555554,
+          "input_tokens": 13378.444444444445,
+          "model_calls": 22.11111111111111,
+          "total_tokens": 13514.0
+        },
+        "mean_full_branch_total_tokens": 13514.0,
+        "mean_recovery_only_cost": {
+          "environment_actions": 3.8055555555555554,
+          "generated_tokens": 49.02777777777778,
+          "input_tokens": 3084.027777777778,
+          "model_calls": 4.805555555555555,
+          "total_tokens": 3133.0555555555557
+        },
+        "mean_recovery_only_total_tokens": 3133.0555555555557,
+        "n": 36,
+        "success_rate": 0.6944444444444444
+      },
+      "K5": {
+        "mean_full_branch_cost": {
+          "environment_actions": 20.555555555555557,
+          "generated_tokens": 132.77777777777777,
+          "input_tokens": 13349.583333333334,
+          "model_calls": 21.555555555555557,
+          "total_tokens": 13482.361111111111
+        },
+        "mean_full_branch_total_tokens": 13482.361111111111,
+        "mean_recovery_only_cost": {
+          "environment_actions": 4.694444444444445,
+          "generated_tokens": 53.47222222222222,
+          "input_tokens": 3706.1111111111113,
+          "model_calls": 5.694444444444445,
+          "total_tokens": 3759.5833333333335
+        },
+        "mean_recovery_only_total_tokens": 3759.5833333333335,
+        "n": 36,
+        "success_rate": 0.6666666666666666
+      }
+    },
+    "public_stopping_diagnostic": {
+      "coverage_only_count": 29,
+      "diagnostic_records": 36,
+      "exact_suffix_mapped_count": 7,
+      "mapped_offline_success_rate": 1.0,
+      "mean_estimated_detector_cpu_nanoseconds": 75310.5,
+      "new_environment_operations": 0,
+      "new_model_calls": 0,
+      "primary_n": 36,
+      "satisfied_handoff_count": 7,
+      "satisfied_handoff_success_rate": 1.0,
+      "satisfied_handoff_successes": 7,
+      "supported_predicate_count": 7,
+      "unsupported_or_ambiguous_count": 29
+    }
+  },
+  "existing_headroom_case_records": [
+    {
+      "prefix_id": "R19-random-control-8ec4fc037229710f8f13",
+      "stratum": "random_control",
+      "task_family": "look_at_obj_in_light",
+      "continue_success": 1,
+      "passive_stopping_estimate": {
+        "branch_mapping_exact": true,
+        "coverage": "UNSUPPORTED",
+        "detector_cpu_nanoseconds": 63475,
+        "estimated_logical_cost": null,
+        "estimated_success": null,
+        "evaluations_through_selected_checkpoint": [
+          {
+            "predicate": null,
+            "reason": "unsupported_or_ambiguous_subgoal",
+            "status": "UNKNOWN",
+            "supporting_transition_ids": []
+          },
+          {
+            "predicate": null,
+            "reason": "unsupported_or_ambiguous_subgoal",
+            "status": "UNKNOWN",
+            "supporting_transition_ids": []
+          },
+          {
+            "predicate": null,
+            "reason": "unsupported_or_ambiguous_subgoal",
+            "status": "UNKNOWN",
+            "supporting_transition_ids": []
+          },
+          {
+            "predicate": null,
+            "reason": "unsupported_or_ambiguous_subgoal",
+            "status": "UNKNOWN",
+            "supporting_transition_ids": []
+          },
+          {
+            "predicate": null,
+            "reason": "unsupported_or_ambiguous_subgoal",
+            "status": "UNKNOWN",
+            "supporting_transition_ids": []
+          }
+        ],
+        "new_environment_operations": 0,
+        "new_model_calls": 0,
+        "predicate": null,
+        "selected_k": 5,
+        "selected_reason": "cap_5",
+        "status": "COVERAGE_ONLY"
+      },
+      "already_measured_outcomes_by_k": {
+        "1": 1,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0
+      }
+    },
+    {
+      "prefix_id": "R19-random-control-bf448be94724da4562c0",
+      "stratum": "random_control",
+      "task_family": "pick_cool_then_place_in_recep",
+      "continue_success": 1,
+      "passive_stopping_estimate": {
+        "branch_mapping_exact": true,
+        "coverage": "UNSUPPORTED",
+        "detector_cpu_nanoseconds": 64453,
+        "estimated_logical_cost": null,
+        "estimated_success": null,
+        "evaluations_through_selected_checkpoint": [
+          {
+            "predicate": null,
+            "reason": "unsupported_or_ambiguous_subgoal",
+            "status": "UNKNOWN",
+            "supporting_transition_ids": []
+          },
+          {
+            "predicate": null,
+            "reason": "unsupported_or_ambiguous_subgoal",
+            "status": "UNKNOWN",
+            "supporting_transition_ids": []
+          },
+          {
+            "predicate": null,
+            "reason": "unsupported_or_ambiguous_subgoal",
+            "status": "UNKNOWN",
+            "supporting_transition_ids": []
+          },
+          {
+            "predicate": null,
+            "reason": "unsupported_or_ambiguous_subgoal",
+            "status": "UNKNOWN",
+            "supporting_transition_ids": []
+          },
+          {
+            "predicate": null,
+            "reason": "unsupported_or_ambiguous_subgoal",
+            "status": "UNKNOWN",
+            "supporting_transition_ids": []
+          }
+        ],
+        "new_environment_operations": 0,
+        "new_model_calls": 0,
+        "predicate": null,
+        "selected_k": 5,
+        "selected_reason": "cap_5",
+        "status": "COVERAGE_ONLY"
+      },
+      "already_measured_outcomes_by_k": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 1
+      }
+    }
+  ]
+}
