@@ -1,0 +1,144 @@
+{
+  "schema_version": "r19_final_offline_G4_independent_acceptance_v1",
+  "reviewer": "Sol",
+  "reviewer_thread": "01a0994c-a209-7600-8a3e-5ff3096ed346",
+  "finalized_at_utc": "2026-10-25T04:15:21.265143+00:00",
+  "G4_EXECUTION_AND_ARTIFACT_ACCEPTANCE": "PASS",
+  "G4_PROVENANCE_AND_ARITHMETIC_REVIEW": "PASS",
+  "formal_G4_completed": true,
+  "analysis_identity": "r19-g4-offline-2026-10-25T040521Z-ebad1a0c",
+  "clearance_id": "ebad1a0cc7374992bd7e982e79c55865",
+  "clearance_status": "CONSUMED_BY_ONE_COMPLETED_OFFLINE_ANALYSIS",
+  "further_analysis_or_science_authorized": false,
+  "actual_analyzer_child_pid": 805875,
+  "authentic_child_returncode": 0,
+  "returncode_source": "subprocess.Popen.wait",
+  "analyzer_source_sha": "85cbb92395e5e2420c2adeb1fa0634653e742910",
+  "executed_G3_source_sha": "2da980f631badc25086d12db60d128ff507d3ae6",
+  "executed_G3_run_id": "260422ac02bd42a8b2929d7ef240526b",
+  "analyzer_invocation_count": 1,
+  "automatic_retry": false,
+  "reviewer_formal_analyzer_invocations": 0,
+  "new_model_environment_G3_G2_preflight_supervisor_calls": 0,
+  "exact_approved_argv_env_cwd_and_clearance_bindings": "PASS",
+  "all_56_input_hashes_pre_post_and_current_match": true,
+  "all_three_original_reports_remote_uploaded_and_verified": true,
+  "operator_final_provenance_commit": "3a98491e7304ba90926df8d8a00f0c3504aeab79",
+  "operator_remote_byte_verified_files": 21,
+  "primary_n": 36,
+  "attempted_n": 39,
+  "source_episodes": 127,
+  "stratum_denominators": {
+    "failure": 6,
+    "success_control": 15,
+    "random_control": 15
+  },
+  "positive_K_successes": {
+    "K1": 29,
+    "K2": 30,
+    "K3": 28,
+    "K4": 25,
+    "K5": 24
+  },
+  "CONTINUE_successes": 30,
+  "per_K_paired_vs_K1": {
+    "K2_vs_K1": {
+      "n": 36,
+      "wins": 2,
+      "losses": 1,
+      "ties": 33,
+      "mean_difference": 0.027777777777777776,
+      "exact_two_sided_p": 1.0,
+      "holm_adjusted_p": 1.0
+    },
+    "K3_vs_K1": {
+      "n": 36,
+      "wins": 1,
+      "losses": 2,
+      "ties": 33,
+      "mean_difference": -0.027777777777777776,
+      "exact_two_sided_p": 1.0,
+      "holm_adjusted_p": 1.0
+    },
+    "K4_vs_K1": {
+      "n": 36,
+      "wins": 2,
+      "losses": 6,
+      "ties": 28,
+      "mean_difference": -0.1111111111111111,
+      "exact_two_sided_p": 0.2890625,
+      "holm_adjusted_p": 0.8671875
+    },
+    "K5_vs_K1": {
+      "n": 36,
+      "wins": 1,
+      "losses": 6,
+      "ties": 29,
+      "mean_difference": -0.1388888888888889,
+      "exact_two_sided_p": 0.125,
+      "holm_adjusted_p": 0.5
+    }
+  },
+  "any_registered_K_vs_K1_significant_after_Holm_0_05": false,
+  "development_selected_fixed_K": 2,
+  "same_sample_fixed_K_is_not_validated_deployment_choice": true,
+  "S_fixed": 0.8333333333333334,
+  "S_oracle": 0.8888888888888888,
+  "H_success_exact_fraction": "2/36",
+  "H_success_percentage_points": 5.555555555555555,
+  "nonconstant_outcome_patterns_states": 10,
+  "states_helped_by_some_extra_recovery_vs_K1": 3,
+  "states_harmed_by_some_extra_recovery_vs_K1": 7,
+  "K2_vs_CONTINUE": {
+    "same_aggregate_success_count": true,
+    "paired_rescues": 2,
+    "paired_harms": 2,
+    "mean_logical_full_branch_tokens_K2": 9854.25,
+    "mean_logical_full_branch_tokens_CONTINUE": 7470.222222222223,
+    "relative_token_increase_K2_over_CONTINUE": 0.31913746430271295
+  },
+  "frozen_protocol_classification": "ADAPTIVE STOPPING OPPORTUNITY",
+  "classification_interpretation": "Empirical hindsight duration/handoff heterogeneity signal on this small enriched TRAIN sample only, not demonstrated adaptive-policy benefit or statistical confirmation of longer recovery.",
+  "fixed_longer_recovery_success_advantage": "NOT_ESTABLISHED",
+  "adaptive_controller_advantage": "NOT_TESTED_NOT_ESTABLISHED",
+  "passive_diagnostic": {
+    "exactly_mapped_supported_cases": 7,
+    "successes_on_mapped_cases": 7,
+    "unsupported_or_coverage_only": 29,
+    "full_cohort_policy_accuracy_claim_permitted": false
+  },
+  "physical_expenditure": {
+    "G3_model_generations": 4965,
+    "G3_nonreset_environment_operations": 7273,
+    "G3_resets": 334,
+    "G3_environment_operations_including_resets": 7607,
+    "cumulative_model_generations": 5142,
+    "cumulative_environment_operations_including_resets": 7949,
+    "cumulative_nonreset_environment_operations": 7603,
+    "cumulative_resets": 346,
+    "incomplete_external_operations": 0,
+    "historical_177_generations_342_operations_included": true,
+    "new_G4_model_generations_environment_operations": 0
+  },
+  "sample_and_interpretation_limits": [
+    "36 eligible rather than target maximum60; failure queue exhausted and only6failure states, no backfill or quota transfer.",
+    "Success/random controls contribute30of36; source continuation baseline is strong by sample construction.",
+    "pick_two_obj_and_place eligible n0; no six-family coverage or heldout/general-accuracy claim.",
+    "K2 is selected on the same cohort. All registered K2..K5vsK1 contrasts have Holm p>=0.5; nonsignificance is not proof of equivalence.",
+    "Oracle envelope uses successful K outcomes in hindsight; no deployed/learned selector and no live adaptive stopping policy was evaluated.",
+    "7/7 passive diagnostic successes apply only to the7mapped supported cases; remaining29 have no exact measured mapping.",
+    "Recorded per-policy logical costs exclude research replay/restoration and differ from total physical expenditure; raw report environment-operation field7273 omits separately recorded334resets."
+  ],
+  "raw_report_sha256": {
+    "summary.json": "6ff56b7e9bc31c29bc9afd0c3ceea43c4fdf53b2addb29d3ce9f2c5e99b5d3c4",
+    "R19_OPPORTUNITY_REPORT.md": "92c066ad1c9c7f187430db82ad6285800e4f31005a1fd2933231d30d695df4bc",
+    "report_hashes.json": "b80517ea6f0781edf764fbda2985836bfe2298239c942079269ed09ae8ab6fcd"
+  },
+  "review_evidence_sha256": {
+    "report_arithmetic_review.json": "6c3586b7e6f746c5d04ca644cb32d7b95d5c62053fc9a8770db978f0dab57a2b",
+    "execution_boundary_review.json": "8f08dbc25c41d04135a45c0822453490a1700d090105c51435d4e3a63447f911",
+    "remote_raw_result_verification.json": "ec925df5c5aeb6eb1cf1c1b4203811f5a2cbec2dde53f45a589868ee06bb8938",
+    "original_56_post_audit_hashes.json": "7d981dc0cd8b7a58b1e2ab44ab9e1e2140954737aa434a910462d6a9b387646e"
+  },
+  "final_action": "STOP: report completed and interpretation bounded; no more inference/analysis/retry/selector/tuning/heldout or sample expansion authorized."
+}

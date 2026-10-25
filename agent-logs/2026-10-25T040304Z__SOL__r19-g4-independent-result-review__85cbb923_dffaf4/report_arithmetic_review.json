@@ -1,0 +1,296 @@
+{
+  "status": "PASS_INDEPENDENT_RAW_REPORT_ARITHMETIC_AND_FROZEN_INPUT_REVIEW",
+  "reviewed_at_utc": "2026-10-25T04:07:19.893276+00:00",
+  "formal_analyzer_invocations_by_reviewer": 0,
+  "independent_stdlib_reconciliation_only": true,
+  "primary_n": 36,
+  "attempted_n": 39,
+  "continue_successes_primary": 30,
+  "success_by_k": {
+    "K1": 29,
+    "K2": 30,
+    "K3": 28,
+    "K4": 25,
+    "K5": 24
+  },
+  "success_rate_by_k": {
+    "K1": 0.8055555555555556,
+    "K2": 0.8333333333333334,
+    "K3": 0.7777777777777778,
+    "K4": 0.6944444444444444,
+    "K5": 0.6666666666666666
+  },
+  "patterns": {
+    "00000": 4,
+    "00001": 1,
+    "01010": 1,
+    "01110": 1,
+    "10000": 1,
+    "11000": 1,
+    "11100": 3,
+    "11101": 1,
+    "11110": 1,
+    "11111": 22
+  },
+  "fixed_rate": 0.8333333333333334,
+  "oracle_rate": 0.8888888888888888,
+  "h_success": 0.05555555555555547,
+  "helped_by_extra_recovery": 3,
+  "harmed_by_extra_recovery": 7,
+  "development_selected_fixed_k": 2,
+  "paired_K_vs_K1": {
+    "K2_vs_K1": {
+      "n": 36,
+      "wins": 2,
+      "losses": 1,
+      "ties": 33,
+      "mean_difference": 0.027777777777777776,
+      "exact_two_sided_p": 1.0,
+      "holm_adjusted_p": 1.0
+    },
+    "K3_vs_K1": {
+      "n": 36,
+      "wins": 1,
+      "losses": 2,
+      "ties": 33,
+      "mean_difference": -0.027777777777777776,
+      "exact_two_sided_p": 1.0,
+      "holm_adjusted_p": 1.0
+    },
+    "K4_vs_K1": {
+      "n": 36,
+      "wins": 2,
+      "losses": 6,
+      "ties": 28,
+      "mean_difference": -0.1111111111111111,
+      "exact_two_sided_p": 0.2890625,
+      "holm_adjusted_p": 0.8671875
+    },
+    "K5_vs_K1": {
+      "n": 36,
+      "wins": 1,
+      "losses": 6,
+      "ties": 29,
+      "mean_difference": -0.1388888888888889,
+      "exact_two_sided_p": 0.125,
+      "holm_adjusted_p": 0.5
+    }
+  },
+  "logical_costs": {
+    "K1": {
+      "successes": 29,
+      "success_rate": 0.8055555555555556,
+      "full_branch": {
+        "input_tokens": 9676.805555555555,
+        "generated_tokens": 102.08333333333333,
+        "total_tokens": 9778.888888888889,
+        "model_calls": 15.416666666666666,
+        "environment_actions": 14.416666666666666
+      },
+      "recovery_only": {
+        "input_tokens": 1159.8055555555557,
+        "generated_tokens": 35.0,
+        "total_tokens": 1194.8055555555557,
+        "model_calls": 2.0,
+        "environment_actions": 1.0
+      }
+    },
+    "K2": {
+      "successes": 30,
+      "success_rate": 0.8333333333333334,
+      "full_branch": {
+        "input_tokens": 9750.5,
+        "generated_tokens": 103.75,
+        "total_tokens": 9854.25,
+        "model_calls": 15.75,
+        "environment_actions": 14.75
+      },
+      "recovery_only": {
+        "input_tokens": 1829.7777777777778,
+        "generated_tokens": 40.0,
+        "total_tokens": 1869.7777777777778,
+        "model_calls": 3.0,
+        "environment_actions": 2.0
+      }
+    },
+    "K3": {
+      "successes": 28,
+      "success_rate": 0.7777777777777778,
+      "full_branch": {
+        "input_tokens": 11630.361111111111,
+        "generated_tokens": 119.30555555555556,
+        "total_tokens": 11749.666666666666,
+        "model_calls": 18.86111111111111,
+        "environment_actions": 17.86111111111111
+      },
+      "recovery_only": {
+        "input_tokens": 2461.3888888888887,
+        "generated_tokens": 44.583333333333336,
+        "total_tokens": 2505.972222222222,
+        "model_calls": 3.9166666666666665,
+        "environment_actions": 2.9166666666666665
+      }
+    },
+    "K4": {
+      "successes": 25,
+      "success_rate": 0.6944444444444444,
+      "full_branch": {
+        "input_tokens": 13378.444444444445,
+        "generated_tokens": 135.55555555555554,
+        "total_tokens": 13514.0,
+        "model_calls": 22.11111111111111,
+        "environment_actions": 21.11111111111111
+      },
+      "recovery_only": {
+        "input_tokens": 3084.027777777778,
+        "generated_tokens": 49.02777777777778,
+        "total_tokens": 3133.0555555555557,
+        "model_calls": 4.805555555555555,
+        "environment_actions": 3.8055555555555554
+      }
+    },
+    "K5": {
+      "successes": 24,
+      "success_rate": 0.6666666666666666,
+      "full_branch": {
+        "input_tokens": 13349.583333333334,
+        "generated_tokens": 132.77777777777777,
+        "total_tokens": 13482.361111111111,
+        "model_calls": 21.555555555555557,
+        "environment_actions": 20.555555555555557
+      },
+      "recovery_only": {
+        "input_tokens": 3706.1111111111113,
+        "generated_tokens": 53.47222222222222,
+        "total_tokens": 3759.5833333333335,
+        "model_calls": 5.694444444444445,
+        "environment_actions": 4.694444444444445
+      }
+    },
+    "CONTINUE": {
+      "successes": 30,
+      "success_rate": 0.8333333333333334,
+      "full_branch": {
+        "input_tokens": 7412.305555555556,
+        "generated_tokens": 57.916666666666664,
+        "total_tokens": 7470.222222222223,
+        "model_calls": 11.583333333333334,
+        "environment_actions": 11.583333333333334
+      }
+    }
+  },
+  "stratum_summaries": {
+    "failure": {
+      "K1_successes": 1,
+      "K2_successes": 2,
+      "K3_successes": 2,
+      "K4_successes": 1,
+      "K5_successes": 0,
+      "n": 6
+    },
+    "random_control": {
+      "K1_successes": 14,
+      "K2_successes": 13,
+      "K3_successes": 12,
+      "K4_successes": 12,
+      "K5_successes": 13,
+      "n": 15
+    },
+    "success_control": {
+      "K1_successes": 14,
+      "K2_successes": 15,
+      "K3_successes": 14,
+      "K4_successes": 12,
+      "K5_successes": 11,
+      "n": 15
+    }
+  },
+  "family_summaries": {
+    "look_at_obj_in_light": {
+      "K1_successes": 4,
+      "K2_successes": 3,
+      "K3_successes": 3,
+      "K4_successes": 1,
+      "K5_successes": 2,
+      "n": 4
+    },
+    "pick_and_place_simple": {
+      "K1_successes": 5,
+      "K2_successes": 6,
+      "K3_successes": 5,
+      "K4_successes": 5,
+      "K5_successes": 4,
+      "n": 6
+    },
+    "pick_clean_then_place_in_recep": {
+      "K1_successes": 4,
+      "K2_successes": 5,
+      "K3_successes": 5,
+      "K4_successes": 5,
+      "K5_successes": 3,
+      "n": 6
+    },
+    "pick_cool_then_place_in_recep": {
+      "K1_successes": 7,
+      "K2_successes": 7,
+      "K3_successes": 6,
+      "K4_successes": 6,
+      "K5_successes": 7,
+      "n": 10
+    },
+    "pick_heat_then_place_in_recep": {
+      "K1_successes": 9,
+      "K2_successes": 9,
+      "K3_successes": 9,
+      "K4_successes": 8,
+      "K5_successes": 8,
+      "n": 10
+    },
+    "pick_two_obj_and_place": {
+      "K1_successes": 0,
+      "K2_successes": 0,
+      "K3_successes": 0,
+      "K4_successes": 0,
+      "K5_successes": 0,
+      "n": 0
+    }
+  },
+  "passive_stopping_diagnostic": {
+    "coverage_only_count": 29,
+    "diagnostic_records": 36,
+    "exact_suffix_mapped_count": 7,
+    "mapped_offline_success_rate": 1.0,
+    "mean_estimated_detector_cpu_nanoseconds": 75310.5,
+    "new_environment_operations": 0,
+    "new_model_calls": 0,
+    "primary_n": 36,
+    "satisfied_handoff_count": 7,
+    "satisfied_handoff_success_rate": 1.0,
+    "satisfied_handoff_successes": 7,
+    "supported_predicate_count": 7,
+    "unsupported_or_ambiguous_count": 29
+  },
+  "report_scientific_classification": "ADAPTIVE STOPPING OPPORTUNITY",
+  "output_sha256": {
+    "summary.json": "6ff56b7e9bc31c29bc9afd0c3ceea43c4fdf53b2addb29d3ce9f2c5e99b5d3c4",
+    "R19_OPPORTUNITY_REPORT.md": "92c066ad1c9c7f187430db82ad6285800e4f31005a1fd2933231d30d695df4bc",
+    "report_hashes.json": "b80517ea6f0781edf764fbda2985836bfe2298239c942079269ed09ae8ab6fcd"
+  },
+  "physical_cost_G3": {
+    "model_generations": 4965,
+    "nonreset_environment_operations": 7273,
+    "resets": 334,
+    "total_environment_operations": 7607
+  },
+  "physical_cost_cumulative_retained": {
+    "model_generations": 5142,
+    "environment_operations_including_resets": 7949
+  },
+  "limitations": [
+    "enrichedTRAINdevelopment36eligible; only6failure states; no general or heldout accuracy inference",
+    "fixedK selected on this same development cohort, not independently validated",
+    "oracle headroom is empirical hindsight; not an implemented or prospectively tested adaptive controller",
+    "logical deployment cost differs from physical research expenditure; all historical failed costs retained",
+    "automatic classification label does not imply statistically established adaptive-policy benefit"
+  ]
+}
