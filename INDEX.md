@@ -75,7 +75,7 @@ Oldest first. UTC is the task-directory timestamp; scientific SHA is the relevan
 | 2026-10-23 04:36:02 | LUNA | R19 G4 read-only readiness proposal | READY_FOR_PROPOSAL_REVIEW; PREPARATION_ONLY; FORMAL_G4_NOT_AUTHORIZED; no analyzer/report/science invocation | 85cbb92395e5e2420c2adeb1fa0634653e742910 (reviewed analyzer; executed G3 remains 2da980f631badc25086d12db60d128ff507d3ae6) | [RECORD.md](agent-logs/2026-10-23T043602Z__LUNA__r19-g4-readiness__85cbb923/RECORD.md) |
 
 | 2026-10-25 03:58:54 | SOL | R19 exact G4 proposal drift review and fresh offline authorization | Proposal/drift PASS; ONE offline G4 GRANTED under new direct user authorization; no retry/model/env/G3; result pending | 85cbb92395e5e2420c2adeb1fa0634653e742910 analyzer; executed G3 remains2da980f | [RECORD.md](agent-logs/2026-10-25T035854Z__SOL__r19-g4-exact-proposal-clearance__85cbb923_fd79db/RECORD.md) |
-| 2026-10-25 04:05:21 | LUNA | R19 single formal offline G4 analysis | ANALYZER_EXIT_0; three raw reports captured; 56 inputs unchanged; pending remote verification and Sol review | analyzer85cbb92395e5e2420c2adeb1fa0634653e742910; executed G3 2da980f631badc25086d12db60d128ff507d3ae6 | [RECORD.md](agent-logs/2026-10-25T040521Z__LUNA__r19-formal-g4__85cbb923/RECORD.md) |
+| 2026-10-25 04:05:21 | LUNA | R19 single formal offline G4 analysis | ANALYZER_EXIT_0; all three raw reports remotely byte-verified; 56 inputs unchanged; Sol independent review pending | analyzer85cbb92395e5e2420c2adeb1fa0634653e742910; executed G3 2da980f631badc25086d12db60d128ff507d3ae6 | [RECORD.md](agent-logs/2026-10-25T040521Z__LUNA__r19-formal-g4__85cbb923/RECORD.md) |
 
 ## Import omissions
 

@@ -1,8 +1,8 @@
 # RECORD — R19 single formal offline G4 invocation
 
 - Agent/task: Luna — execute the one explicitly authorized offline G4 analysis on authentic completed G3 evidence and publish raw result.
-- Start: 2026-10-25 04:05:21 UTC. Analyzer child finished: 2026-10-25 04:06:53 UTC. Provenance upload pending.
-- Status: `ANALYZER_EXIT_0_OUTPUTS_COMPLETE_INPUTS_UNCHANGED; PENDING_UPLOAD_AND_SOL_REVIEW`. Clearance was durably consumed before child start. Exactly one analyzer invocation occurred; never retry.
+- Start: 2026-10-25 04:05:21 UTC. Finish: 2026-10-25 04:10:38 UTC.
+- Status: `ANALYZER_EXIT_0_RAW_OUTPUTS_REMOTE_VERIFIED_PENDING_SOL_INDEPENDENT_REVIEW`. Clearance was durably consumed before child start. Exactly one analyzer invocation occurred; never retry.
 - Clearance: ID `ebad1a0cc7374992bd7e982e79c55865`, raw SHA-256 `b7ae1a925a87cd8b054d7b8eeb95a8d336ee9ed47341d8ef9c8364fa058c27f4`; direct user authorization SHA-256 `cbb39c0330a5b585fbd72628c10ade5376b05a9bc650a9358f2b2e2cbe7e2827`.
 - Scientific inputs: reviewed analyzer source `85cbb92395e5e2420c2adeb1fa0634653e742910`; executed G3 source `2da980f631badc25086d12db60d128ff507d3ae6`; genuine G3 run `260422ac02bd42a8b2929d7ef240526b`, authentic child exit 0.
 - Command/environment: exact proposal argv SHA-256 raw `8f14d99374b06c3e23a9f9d56ec205b1831eb9c03e854bded176d59550abf24d`, canonical `69abc553c35baf28423c0e1eb51a39547e95005f058ba3a87d32e01f32c15c89`; environment SHA-256 raw `a105719e62084913c432a6319775118bcfc35ab3c2801babec04b7c59c62f733`, canonical `fb67e1cd8ab5d78ba8f236322de3970f916fcde5ac1bd3654ada01215ffa0aa4`. CWD is the original execution root. Exact files and hashes are preserved in `execution_context.json` and referenced immutable clearance files.
@@ -14,5 +14,5 @@
 - Science boundary: zero G3/G2/preflight/supervisor/model/environment invocations; no training, heldout, retry, or synthetic evidence. New model generations and environment operations must remain zero. Existing cumulative cost remains 5,142 generations / 7,949 environment operations; original 177/342 retained.
 - Historical note: the previous readiness prose said 15 G3 output files; the exact typed binding is 10 G3 output files + 4 supervisor files, and the original complete launcher archive has 1 member. No old preparation record is edited.
 - Raw execution stdout/stderr and child status/context will be captured unmodified after the single attempt. Preserve partial outputs and real return code on all outcomes.
-- Provenance publication: this task's report files and raw logs/context/exit/consumption evidence plus own additive INDEX/root hash inventory only. No old G3 archive duplication, weights, adapters, model cache, or dataset payload. Non-force push and remote byte verification required.
+- Provenance publication: own task files, the three exact original report files, and additive INDEX/root hash inventory were published without force. Initial result commit `172c051ba53b5e0aec355352a37d767b81690496` was fetched and all 20 intended changed blobs were byte-compared from `origin/main`; detailed receipt is `publication_receipt.json`. No old G3 archive duplication, weights, adapters, model cache, or dataset payload.
 - Final scientific interpretation is reserved for Sol's independent review. Do not infer scientific PASS solely from process exit 0.
