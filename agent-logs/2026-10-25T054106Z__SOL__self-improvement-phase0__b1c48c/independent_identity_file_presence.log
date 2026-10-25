@@ -1,0 +1,59 @@
+{
+  "kind": "directory identity plus game-file existence only; no file payload/outcome read",
+  "candidate_input": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/AVAILABLE_IDENTITY_CANDIDATES.json",
+    "sha256": "ada528e9a9de3bb09aacf5bbfc28320c92e847c88dc475296070cd0a9acb1fc4"
+  },
+  "splits": {
+    "train": {
+      "directory_identities": 6374,
+      "six_family_with_existing_game_file": 3553,
+      "directory_difference_candidates": 3962,
+      "difference_candidate_without_supported_existing_game": 2821,
+      "file_presence_candidate_difference_count": 1141,
+      "candidate_ids_hash": "12475e2952dbd74113a6163dad351c3951b14cb0dcc5438546c2cccd4a4aada0",
+      "family_counts_with_existing_game": {
+        "pick_cool_then_place_in_recep": 533,
+        "pick_heat_then_place_in_recep": 459,
+        "pick_and_place_simple": 790,
+        "pick_two_obj_and_place": 813,
+        "pick_clean_then_place_in_recep": 650,
+        "look_at_obj_in_light": 308
+      }
+    },
+    "valid_seen": {
+      "directory_identities": 251,
+      "six_family_with_existing_game_file": 140,
+      "directory_difference_candidates": 111,
+      "difference_candidate_without_supported_existing_game": 111,
+      "file_presence_candidate_difference_count": 0,
+      "candidate_ids_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "family_counts_with_existing_game": {
+        "pick_cool_then_place_in_recep": 25,
+        "pick_heat_then_place_in_recep": 16,
+        "pick_two_obj_and_place": 24,
+        "look_at_obj_in_light": 13,
+        "pick_clean_then_place_in_recep": 27,
+        "pick_and_place_simple": 35
+      }
+    },
+    "valid_unseen": {
+      "directory_identities": 255,
+      "six_family_with_existing_game_file": 134,
+      "directory_difference_candidates": 195,
+      "difference_candidate_without_supported_existing_game": 121,
+      "file_presence_candidate_difference_count": 74,
+      "candidate_ids_hash": "3de25fc148848a721a688f4154f88dec41d59384f0a642371f36a862c856db2b",
+      "family_counts_with_existing_game": {
+        "pick_two_obj_and_place": 17,
+        "look_at_obj_in_light": 18,
+        "pick_and_place_simple": 24,
+        "pick_heat_then_place_in_recep": 23,
+        "pick_clean_then_place_in_recep": 31,
+        "pick_cool_then_place_in_recep": 21
+      }
+    }
+  },
+  "new_scientific_calls": 0,
+  "interpretation": "Luna enumerated all task/trial directories correctly but many lack ALFWorld game.tw-pddl or lie outside the six families. File existence reduces nominal directory differences; these are still only candidates under an incomplete known-use register, not certified clean heldout, runnable-configuration validation, power, schedule or execution permission."
+}

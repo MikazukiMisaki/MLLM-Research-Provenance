@@ -85,6 +85,13 @@ Oldest first. UTC is the task-directory timestamp; scientific SHA is the relevan
 
 | 2026-10-25 05:32:11 | SOL | Self-improvement evidence alignment and innovation | ADVICE_COMPLETE; expertSFTsuccess supported at report level; autonomous loop not demonstrated; candidate learning design only; noexperiment | analyzer85cbb923 / R19source2da980f unchanged | [RECORD.md](agent-logs/2026-10-25T053211Z__SOL__self-improvement-alignment__e9c877/RECORD.md) |
 
+
+| 2026-10-25 05:41:06 | SOL | Self-improvement phase0 coordination and independent design review | ACCEPT_WITH_CORRECTIONS; DATA_NOT_READY / DRAFT_DESIGN_AVAILABLE; raw recounts; no science;5142/7949unchanged | analyzer85cbb923 / G3source2da980f unchanged | [RECORD.md](agent-logs/2026-10-25T054106Z__SOL__self-improvement-phase0__b1c48c/RECORD.md) |
+
+| 2026-10-25 05:41:06 | CODEX / Sol Research | Existing own-experience feasibility and single-round protocol draft | FINAL_DATA_NOT_READY; DRAFT_V2; 11single-action states/10tasks; no science | analyzer85cbb923 / G3source2da980f unchanged | [RECORD.md](agent-logs/2026-10-25T054106Z__CODEX__self-experience-feasibility__b1c48c/RECORD.md) |
+
+| 2026-10-25 05:41:06 | LUNA | SFT raw evidence and identity metadata audit | PARTIAL_RAW_AUDIT; canonical-hash correction applies; single-arm unseen; candidates not certified; no science | analyzer85cbb923 / G3source2da980f unchanged | [RECORD.md](agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/RECORD.md) |
+
 ## Import omissions
 
 No task directory or large provenance file was omitted. Transient PID/lock files and Python bytecode remain local and are ignored; exact paths, sizes, hashes and reasons are in [excluded-files.json](agent-logs/2026-09-14T061140Z__ASTRA__provenance-repo-initialization__wo8b4ovs/excluded-files.json). No file was deleted.

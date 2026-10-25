@@ -1,0 +1,1161 @@
+# Sprint 2C Paired Recovery Corpus
+
+Status: complete. No selector was implemented or trained.
+
+Recommendation: **C. RECOVERY OPPORTUNITY IS TOO SPARSE FOR CURRENT SELECTOR
+STUDY.** Exactly 2 of 120 preregistered states had positive raw intervention
+value. The two positives came from different episodes and task families, but
+the count does not meet the gate minimum of three for another collection batch
+or eight for selector development.
+
+The corpus was deliberately stratified. Its overall beneficial fraction must
+not be interpreted as the natural on-policy recovery rate.
+
+## Frozen Protocol
+
+- Base: `Qwen/Qwen3-8B`, `indexed_bounded_context_v1`, `k=4`, thinking off,
+  greedy decoding, 32-token budget, indexed admissible actions.
+- Recovery: R2-two-stage-v2 at `1b84f922a39f58c3b6ed2ba31cb29d896486b0d0`.
+- Stage 1: frozen prompt, greedy, 40-token budget.
+- Stage 2: frozen prompt, greedy, 16-token budget, exact bare-ID contract
+  `^A\d{3}$`.
+- One Stage-1 call and one Stage-2 call per recover branch; no retry, repair,
+  fallback, memory, candidate scoring, second intervention, or selector.
+- Exact inference revision:
+  `2242534f86a40f7ff53010fd68eada1a5895a117`.
+
+## H4 Source Pool
+
+The committed schedule contained 200 initial episodes plus one conditional
+100-episode extension. The initial pool produced 21 successes, so the extension
+did not run.
+
+| Measure | Result |
+| --- | ---: |
+| Episodes | 200 |
+| Successes | 21 (10.5%) |
+| Environment-terminal episodes | 194 |
+| Fail-closed H4 selection-failure episodes | 6 |
+| Invalid/inadmissible executions | 0 |
+| Schedule SHA-256 | `1066ab7211afc0e4237023f0c5d1c28d31b558602ec90ad0dc49f06062b08863` |
+| Trajectory SHA-256 | `2ea24e3ff988da75be6529f59cdbd890a9282f77d35baf2c0385eca85c58bcc4` |
+
+All 200 schedule positions, nominal seeds 2000-2199, reset-order positions,
+task IDs, and task families matched the preregistered schedule.
+
+## Frozen Prefixes
+
+Manifest SHA-256:
+`5b3ee62ee1e5cd038ab4f8cd7865378fb1318794511b9505c7c06b3301bf3f2d`.
+
+The manifest contains exactly 120 unique states from 79 episode groups, with a
+maximum of two states per source episode. It covers all six task families and
+early, middle, and late decision positions. The frozen strata are 20 successful
+continuations, 30 past-loop failures, 30 high-uncertainty non-loop failures,
+and 40 random non-loop failures. Entropy was numerically non-degenerate, so the
+predefined uncertainty rule was used without fallback.
+
+## Protocol Results
+
+| Check | Result |
+| --- | ---: |
+| Exact branch reconstructions | 120/120 |
+| Exact continue-branch H4 suffixes | 120/120 |
+| Valid Stage-1 outputs | 117/120 |
+| Incomplete Stage-1 outputs | 3/120 |
+| Stage-1 outputs reaching 40 tokens | 4/120 |
+| Valid Stage-2 bare IDs | 120/120 |
+| Malformed / out-of-range / truncated Stage-2 outputs | 0 / 0 / 0 |
+| ID-to-command mapping failures | 0 |
+| Recovery actions not executed | 3 |
+
+The three unexecuted actions were fail-closed Stage-1 truncations: one at
+`P046` and two clustered in the same source episode at `P061` and `P067`.
+Stage 2 still produced valid mapped IDs, but the joint operator correctly
+withheld execution because Stage 1 was invalid. A fourth Stage-1 output reached
+40 tokens at `P096` but was complete and valid.
+
+The original ignored `report.json` counted the three withheld actions as
+mapping failures. That was a summary-only bug. Raw pair records were not
+modified; recomputation from them gives zero mapping failures. The correction
+is implemented at `1ddb7bff5e95afb07d5af01b5f00b8ee5ee218c1` and recorded in
+the corrected analysis artifact.
+
+## Label Distribution
+
+| Label | Count |
+| --- | ---: |
+| Beneficial (`V_raw=+1`) | 2 |
+| Neutral (`V_raw=0`) | 115 |
+| Harmful (`V_raw=-1`) | 3 |
+| Continue fail / recover success | 2 |
+| Continue success / recover fail | 3 |
+
+Mean `V_raw` was -0.0083. Among 100 continuation failures, two recovered and
+98 remained failures. Among 20 continuation successes, 17 remained successes
+and three were harmed.
+
+## Breakdown
+
+Counts below are beneficial / neutral / harmful.
+
+| Sampling stratum | B / N / H |
+| --- | ---: |
+| Successful continuation | 0 / 17 / 3 |
+| Past-loop failure | 1 / 29 / 0 |
+| High-uncertainty non-loop failure | 1 / 29 / 0 |
+| Random non-loop failure | 0 / 40 / 0 |
+
+| Task family | B / N / H |
+| --- | ---: |
+| Look-at-object-in-light | 1 / 15 / 0 |
+| Pick-and-place | 1 / 20 / 1 |
+| Clean-then-place | 0 / 21 / 1 |
+| Cool-then-place | 0 / 18 / 0 |
+| Heat-then-place | 0 / 20 / 0 |
+| Pick-two-and-place | 0 / 21 / 1 |
+
+| Group | B / N / H |
+| --- | ---: |
+| Early / middle / late | 1/57/3 / 0/38/0 / 1/20/0 |
+| Past loop / non-loop | 1/29/0 / 1/86/3 |
+| Entropy Q1 / Q2 | 0/25/1 / 0/27/1 |
+| Entropy Q3 / Q4 | 1/20/0 / 1/43/1 |
+
+Recovery reduced the recorded downstream loop count in 37 pairs, left it
+unchanged in 66, and increased it in 17. A coarse observation-diversity proxy
+was higher after recovery in 57 pairs, equal in 47, and lower in 16. These are
+behavioral descriptors, not task-success substitutes.
+
+## Recovery Cost
+
+| Cost | Stage 1 | Stage 2 | Combined |
+| --- | ---: | ---: | ---: |
+| Mean input tokens | 517.225 | 648.583 | 1165.808 |
+| Mean generated tokens | 29.767 | 5.000 | 34.767 |
+| Mean latency, seconds | 1.129 | 0.277 | 1.406 sequential |
+
+Across 120 interventions, recovery generated 4,172 tokens and used 168.686
+seconds of sequential model latency. No cost penalty or lambda was selected.
+
+## Qualitative Review
+
+All five non-neutral cases and the preregistered 20-state neutral sample were
+annotated after the run. Diagnoses were judged correct in 20 cases, partial in
+four, and semantically correct but truncated in one. Subgoal-to-action agreement
+was direct in 17, partial in five, and disagreement in three.
+
+Beneficial cases:
+
+- `P050`, seed 2157: diagnosis and subgoal correctly called for using the desk
+  lamp. `use desklamp 1` completed the task immediately and broke the loop.
+- `P033`, seed 2034: the diagnosis correctly identified repeated examination,
+  but the stated sidetable subgoal disagreed with `go to bed 1`. The action was
+  nevertheless causally correct: H4 found the book and completed the task.
+
+Harmful cases:
+
+- `P007`, seed 2061: searching for the second tissuebox before placing the held
+  first tissuebox disrupted a successful ordering and introduced a loop.
+- `P009`, seed 2036: an unsupported bathtub search diverted a successful spray
+  bottle trajectory into handling unrelated objects.
+- `P018`, seed 2070: going to the sink before taking the ladle caused H4 to
+  clean a cup and oscillate instead of completing the successful plan.
+
+The neutral review contained many semantically reasonable searches that
+increased exploration without producing target progress. One notable case,
+`P113`, found and picked up the target dish sponge but still failed to clean and
+place it. The review therefore supports a long-horizon follow-through weakness,
+not merely an action-grounding issue.
+
+## Provenance
+
+- R2-v2 protocol: `1b84f922a39f58c3b6ed2ba31cb29d896486b0d0`
+- R2-v2 development result: `89ecf910d3febcd2c4556f268cff0132b1070ad6`
+- H4 schedule commit: `8fd6c14b3a818e115dbae5e2bff71b00705adaf3`
+- Corpus protocol commit: `80f0237520cc9cbf94357a703d7670d553582c7d`
+- Prefix manifest commit: `761683aad6be88a44f11ea26549a27876a03ce82`
+- Exact inference commit: `2242534f86a40f7ff53010fd68eada1a5895a117`
+- Raw paired JSONL SHA-256:
+  `785ffc5712b97fafc4ee9965e52eacef4bc390f7dfe4e8e227cc3cf38761f831`
+- Original runtime report SHA-256:
+  `cba79ec6664aefed166e66915d97091bfef03d6fac5449dcda5e8ae287f36153`
+- Corrected analysis SHA-256:
+  `4f70a08bec154298d23db99fa0fcf302f088e100375f773de8e8d4b6e74fdf5c`
+- Qualitative annotations SHA-256:
+  `ce30cf8a1a250fc2bb39bd6274975f5790f03de5c37bd49ced52df947af9296a`
+
+Raw H4 trajectories, paired branches, prompts, generations, and detailed
+annotations remain under ignored `artifacts/runtime`.
+# Formal SFT Recovery Feasibility Pilot (R4)
+
+## 1. Executive decision
+
+R4 status: **PASS**. Frozen feasibility decision: **C — sparse recovery signal**.
+The 24-prefix pilot is deliberately stratified; its beneficial rate is a within-pilot feasibility quantity, not an estimate of the natural on-policy recovery probability.
+
+## 2. Provenance
+
+- Pipeline: `sft_recovery_feasibility_r4_v1`
+- Inference commit: `7a01a6107b4bc9c994893220aab078af39fe4fff`
+- R4A commit: `465039c4ad3b0b94a9f999528c6c8b535af08538`; R4A status: PASS
+- R2 prefix manifest SHA-256: `f5683e530c50b14f69b2b99b6cbf6240e4b741dadac184152d2587e2385f6a86`
+- Source schedule SHA-256: `06b8b4adf67f5ac23f2df90781fb8a356cac3e7be75a13bb4e46e98e58e05ddd`
+- SFT adapter SHA-256: `6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11`
+- R4A clarification: `formal R4 authorized: no` only prevented R4A from automatically launching the scientific run; it was not a failed compatibility gate. This instruction explicitly authorized formal R4.
+- Raw branch artifacts remain ignored under `artifacts/runtime/`.
+
+## 3. Scientific run integrity
+
+- Frozen prefixes attempted: 24
+- Exact prefix replays: 24/24
+- Stage-1 calls: 24; Stage-2 calls: 24
+- Recovery actions executed: 24
+- Completed paired outcomes: 24
+- Operational interruptions: 1
+- Completed-branch reruns: 0
+
+## 4. Primary V_raw results
+
+- Beneficial: 1 (0.042)
+- Neutral: 23 (0.958)
+- Harmful: 0 (0.000)
+- Mean V_raw: 0.041667; identity check: 0.041667
+
+Definitions: `R_continue` and `R_recover` are binary terminal-success indicators. `V_raw = R_recover - R_continue`; no cost penalty lambda is applied.
+
+## 5. RecoverySuccess / RecoveryHarm
+
+- RecoverySuccess: 1/13 = 0.077
+- RecoveryHarm: 0/11 = 0.000
+
+## 6. Stratum breakdown
+
+| Stratum | N | Beneficial | Neutral | Harmful |
+|---|---:|---:|---:|---:|
+| failure | 12 | 1 | 11 | 0 |
+| success_control | 6 | 0 | 6 | 0 |
+| random_control | 6 | 0 | 6 | 0 |
+
+## 7. Family breakdown
+
+| Task family | N | Beneficial | Neutral | Harmful | RecoverySuccess among continuation failures |
+|---|---:|---:|---:|---:|---:|
+| `look_at_obj_in_light` | 3 | 1 | 2 | 0 | 1/1 |
+| `pick_and_place_simple` | 3 | 0 | 3 | 0 | 0/1 |
+| `pick_clean_then_place_in_recep` | 3 | 0 | 3 | 0 | 0/0 |
+| `pick_cool_then_place_in_recep` | 2 | 0 | 2 | 0 | 0/0 |
+| `pick_heat_then_place_in_recep` | 2 | 0 | 2 | 0 | 0/0 |
+| `pick_two_obj_and_place` | 11 | 0 | 11 | 0 | 0/11 |
+
+Pick-two summary: 11 prefixes; continuation failures 11; recovered 0; RecoverySuccess denominator is the pick-two continuation-failure count.
+
+## 8. Prefix-mechanism diagnostics
+
+Counts are descriptive and use only the frozen R2 selection reason and manifest milestone status.
+
+### Selection reason
+
+| Reason | N | Beneficial | Neutral | Harmful |
+|---|---:|---:|---:|---:|
+| first two-cycle | 8 | 0 | 8 | 0 |
+| repeated-navigation threshold | 4 | 1 | 3 | 0 |
+
+### Milestone status
+
+| Frozen selection case | N | Beneficial | Neutral | Harmful |
+|---|---:|---:|---:|---:|
+| target_acquired | 10 | 1 | 9 | 0 |
+| target_not_discovered | 2 | 0 | 2 | 0 |
+
+## 9. Recovery operator reliability
+
+- Stage-1 valid: 24/24; invalid: 0/24
+- Diagnosis <=12 words: 24/24; subgoal <=12 words: 24/24
+- Stage-2 valid bare IDs: 24/24
+- Stage-2 malformed IDs: 0; out-of-range IDs: 0; mapping failures: 0
+- Withheld interventions: 0; retries/repair/fallback: 0
+
+## 10. Action disagreement
+
+- Recovery action disagreement: 18/24 = 0.750
+- Among beneficial: 1; neutral: 17; harmful: 0
+The comparison is the mapped recovery command versus the first R3 SFT continuation command from the same prefix.
+
+## 11. Loop / progress diagnostics
+
+- Loop behavior reduced / unchanged / increased: 11 / 10 / 3
+- Public progress improved / unchanged / degraded: 1 / 22 / 1
+Loop metrics are adjacent repeats, strict two-cycles, and repeated receptacle navigation. Progress is a descriptive public milestone comparison and is not a new causal endpoint.
+
+## 12. Cost
+
+- Stage-1 mean input / generated tokens / latency: 524.3 / 30.5 / 1.199s
+- Stage-2 mean input / generated tokens / latency: 663.5 / 5.0 / 0.279s
+- Mean recovery extra generated tokens: 35.5
+- Mean DeltaTokens: -652.0; mean DeltaLatency: -0.020s
+Delta values include input + generated tokens and model-call latency for the full paired branches. They are not converted to V_lambda.
+
+## 13. Historical weak-base context
+
+- Historical weak-base corpus: 2 beneficial / 115 neutral / 3 harmful out of 120.
+- Direct statistical comparison: **no**. It used a different continuation base and different stratified sampling design.
+
+## 14. Per-prefix table
+
+| Prefix | Stratum | Family | Decision | R_continue | First continue action | Recovery ID | Recovery command | R_recover | V_raw | Label | Steps | Termination | DeltaTokens | DeltaLatency |
+|---|---|---|---:|---:|---|---|---|---:|---:|---|---:|---|---:|---:|
+| R2-F01 | failure | `look_at_obj_in_light` | 21 | 0 | `go to shelf 1` | A003 | `go to desk 1` | 1 | +1 | beneficial | 1 | environment_terminal | -14740 | -25.818 |
+| R2-F02 | failure | `pick_two_obj_and_place` | 16 | 0 | `look` | A020 | `open drawer 3` | 0 | +0 | neutral | 33 | environment_terminal | -370 | 0.888 |
+| R2-F03 | failure | `pick_two_obj_and_place` | 33 | 0 | `look` | A001 | `examine watch 1` | 0 | +0 | neutral | 16 | environment_terminal | -460 | 0.762 |
+| R2-F04 | failure | `pick_two_obj_and_place` | 29 | 0 | `look` | A001 | `examine cabinet 8` | 0 | +0 | neutral | 20 | environment_terminal | 1239 | 1.172 |
+| R2-F05 | failure | `pick_two_obj_and_place` | 13 | 0 | `look` | A002 | `go to desk 1` | 0 | +0 | neutral | 36 | environment_terminal | 653 | 1.119 |
+| R2-F06 | failure | `pick_two_obj_and_place` | 27 | 0 | `look` | A001 | `examine sofa 1` | 0 | +0 | neutral | 22 | environment_terminal | -331 | 0.910 |
+| R2-F07 | failure | `pick_two_obj_and_place` | 16 | 0 | `take winebottle 2 from cabinet 1` | A043 | `take winebottle 2 from cabinet 1` | 0 | +0 | neutral | 33 | environment_terminal | -707 | 0.665 |
+| R2-F08 | failure | `pick_two_obj_and_place` | 9 | 0 | `go to stoveburner 2` | A037 | `take pot 3 from shelf 1` | 0 | +0 | neutral | 40 | environment_terminal | -648 | 0.658 |
+| R2-F09 | failure | `pick_and_place_simple` | 7 | 0 | `look` | A008 | `go to shelf 1` | 0 | +0 | neutral | 42 | environment_terminal | -638 | 0.467 |
+| R2-F10 | failure | `pick_two_obj_and_place` | 10 | 0 | `look` | A001 | `go to armchair 1` | 0 | +0 | neutral | 39 | environment_terminal | -840 | 0.283 |
+| R2-F11 | failure | `pick_two_obj_and_place` | 14 | 0 | `look` | A002 | `go to desk 1` | 0 | +0 | neutral | 35 | environment_terminal | 804 | 0.896 |
+| R2-F12 | failure | `pick_two_obj_and_place` | 9 | 0 | `go to shelf 2` | A012 | `go to shelf 1` | 0 | +0 | neutral | 40 | environment_terminal | -558 | 0.684 |
+| R2-S01 | success_control | `pick_and_place_simple` | 3 | 1 | `take toiletpaper 2 from toilet 1` | A018 | `take toiletpaper 2 from toilet 1` | 1 | +0 | neutral | 2 | environment_terminal | -453 | 1.061 |
+| R2-S02 | success_control | `pick_clean_then_place_in_recep` | 15 | 1 | `go to drawer 4` | A025 | `open drawer 2` | 1 | +0 | neutral | 23 | environment_terminal | 4027 | 4.491 |
+| R2-S03 | success_control | `pick_cool_then_place_in_recep` | 4 | 1 | `go to fridge 1` | A029 | `go to sinkbasin 1` | 1 | +0 | neutral | 4 | environment_terminal | 87 | 1.425 |
+| R2-S04 | success_control | `pick_heat_then_place_in_recep` | 7 | 1 | `open fridge 1` | A039 | `open fridge 1` | 1 | +0 | neutral | 6 | environment_terminal | -624 | 0.998 |
+| R2-S05 | success_control | `look_at_obj_in_light` | 4 | 1 | `go to sidetable 3` | A026 | `go to sidetable 1` | 1 | +0 | neutral | 4 | environment_terminal | 22 | 1.612 |
+| R2-S06 | success_control | `pick_clean_then_place_in_recep` | 4 | 1 | `take kettle 3 from stoveburner 3` | A030 | `take kettle 3 from stoveburner 3` | 1 | +0 | neutral | 4 | environment_terminal | -589 | 1.100 |
+| R2-R01 | random_control | `pick_and_place_simple` | 1 | 1 | `go to toilet 1` | A016 | `look` | 1 | +0 | neutral | 6 | environment_terminal | 105 | 1.222 |
+| R2-R02 | random_control | `pick_clean_then_place_in_recep` | 2 | 1 | `go to microwave 1` | A000 | `examine sinkbasin 1` | 1 | +0 | neutral | 8 | environment_terminal | 66 | 1.266 |
+| R2-R03 | random_control | `pick_cool_then_place_in_recep` | 33 | 1 | `go to cabinet 1` | A003 | `go to cabinet 1` | 1 | +0 | neutral | 2 | environment_terminal | -669 | 0.767 |
+| R2-R04 | random_control | `pick_heat_then_place_in_recep` | 2 | 1 | `go to microwave 1` | A000 | `examine sinkbasin 1` | 1 | +0 | neutral | 14 | environment_terminal | 151 | 1.354 |
+| R2-R05 | random_control | `pick_two_obj_and_place` | 7 | 0 | `move winebottle 2 to cabinet 1` | A044 | `move winebottle 2 to cabinet 1` | 0 | +0 | neutral | 42 | environment_terminal | -717 | 0.772 |
+| R2-R06 | random_control | `look_at_obj_in_light` | 2 | 1 | `go to laundryhamper 1` | A015 | `use desklamp 1` | 1 | +0 | neutral | 8 | environment_terminal | -458 | 0.776 |
+
+## 15. Limitations and exact next implication
+
+This is a small, deliberately stratified feasibility pilot. It estimates whether the fixed recovery operator produces heterogeneous within-prefix causal outcomes under the frozen SFT continuation policy; it does not estimate natural intervention frequency, family-level significance, or selector performance.
+
+The formal R4 pilot is complete. No selector, DPO, ORPO, additional recovery examples, or further ALFWorld inference is started by this run.
+
+R4 STATUS:
+PASS
+
+FEASIBILITY DECISION:
+C
+- sparse recovery signal
+# R12 Persistent Recovery Mechanism Audit
+
+R12 is a read-only, model-free audit of the frozen R8/R8.2/R9/R10/R11 records. It does not rerun an environment, replay a prefix, load Qwen, or alter a scientific branch.
+
+## Frozen result verification
+
+- `R_continue`: 22 success / 26 failure.
+- `R_osr`: 25 success / 23 failure.
+- `R_pbr`: 23 success / 25 failure.
+- PersistentWins / Losses / Ties: `1 / 3 / 44`; NetPersistentWins `-2`.
+- The arithmetic was independently recomputed from the per-prefix raw records.
+
+## Discordant cases
+
+- Win: `R8-F16`.
+- Losses: `R8-S04, R8-S11, R8-R07`.
+- The exact identity set matches the frozen R11 result.
+
+## OSR boundary to PBR handoff
+
+OSR_BOUNDARY is the public result after the shared first recovery action. PBR_HANDOFF is the public result after all recorded PBR recovery actions. State equality uses exact observation text, exact admissible-command order, and public progress signatures.
+- Applicable OSR_BOUNDARY → PBR_HANDOFF branches: `47/48`; one branch is fail-closed before any recovery action.
+- Shared first action exact: `47/47` executed branches.
+- Material public-state perturbation: `31/47` applicable handoffs.
+- Same current observation and action map: `17/47` applicable handoffs.
+- Same family progress state: `36/47` applicable handoffs.
+- Mean budget reduction: `1.917` environment slots; distribution `{0: 2, 2: 46}`.
+- Horizon-pressure-plausible branches: `22`.
+
+## Extra recovery actions
+
+- Branches audited: `48`; extra actions: `92`.
+- Pattern counts below are branch counts and may overlap:
+  - exact repeats `20`; repeated examine `17`; navigation repeats `4`; navigation oscillations `4`.
+  - take→move reversals `4`; move→take reversals `2`.
+- Extra actions with new public progress: `7` branches; with no new public progress: `41`.
+
+### Extra-action quality by outcome group
+
+Counts are branches; pattern flags overlap.
+
+| Group | N | New progress | No progress | Exact repeat | Repeated examine | Nav repeat | Nav oscillation | Take→move | Move→take |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| persistent win | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 |
+| persistent loss | 3 | 0 | 3 | 1 | 0 | 0 | 0 | 0 | 0 |
+| success-success tie | 22 | 5 | 17 | 12 | 8 | 2 | 2 | 0 | 0 |
+| failure-failure tie | 22 | 2 | 20 | 7 | 9 | 2 | 2 | 3 | 2 |
+
+## Subgoal staleness
+
+- Status counts: `{'SUBGOAL_ALREADY_SATISFIED_AFTER_STEP1': 9, 'SUBGOAL_STATUS_UNCLEAR': 3, 'SUBGOAL_STILL_RELEVANT_AFTER_STEP1': 36}`.
+- Already-satisfied-after-step-1 cases with loop increase: `4`; with PBR harm: `1`.
+- This is a conservative deterministic annotation, not an oracle semantic judgment.
+
+## Persistent win: R8-F16
+
+- The shared action and the two extra actions are shown in the machine-readable trace. The extra actions rehandled lettuce 1 (take from fridge, then move back) and did not discover, acquire, or place a second lettuce instance during recovery.
+- The second-instance placement occurred later in PBR SFT follow-through, not during the recovery phase. This is a descriptive trajectory fact, not a claim that persistence caused it.
+- The PBR SFT first action and the later suffix differ from OSR; the complete exact trace is in `discordant_prefixes.traces.R8-F16`.
+
+## Persistent losses
+
+| Prefix | Supported descriptive labels |
+|---|---|
+| `R8-S04` | harmful state perturbation |
+| `R8-S11` | context/history perturbation, loop amplification |
+| `R8-R07` | harmful state perturbation, loop amplification |
+
+These labels are deterministic comparisons of the frozen public traces. They are not causal identification of an individual mechanism.
+
+## Complete discordant timelines
+
+### `R8-F16`
+
+- Returns: `R_continue=0`, `R_osr=0`, `R_pbr=1`; task `pick_two_obj_and_place-Lettuce-None-Fridge-6/trial_T20190908_010219_785049`; stratum `failure`.
+- Stage-1 diagnosis/subgoal: "Lettuce not visible on countertop 3 or in inventory" / "Search fridge 1 for lettuce and check inventory".
+- Shared recovery action #1: `go to fridge 1`.
+- OSR_BOUNDARY observation: "You arrive at fridge 1. The fridge 1 is open. In it, you see a bowl 3, a lettuce 1, a pan 2, and a tomato 2."; admissible-map size `41`.
+- PBR_HANDOFF observation: "You move the lettuce 1 to the fridge 1."; admissible-map size `41`; same observation/map/family progress `False/True/False`.
+- Extra recovery actions #2/#3: `['take lettuce 1 from fridge 1', 'move lettuce 1 to fridge 1']`; new-public-progress flags `[False, False]`; exact pattern flags `{'exact_repeat': False, 'repeated_examine': False, 'navigation_repeat': False, 'navigation_oscillation': False, 'take_move_reversal': True, 'move_take_reversal': False}`.
+- Extra actions changed public state: `True`; rehandling delta `1`; loop change `reduced`.
+
+| Phase | Step | Exact mapped command | Public result observation | Reward | Done |
+|---|---:|---|---|---:|---|
+| OSR SFT | 1 | `"look"` | "You are facing the fridge 1. Next to it, you see nothing." | 0.0 | False |
+| OSR SFT | 2 | `"take lettuce 1 from fridge 1"` | "You pick up the lettuce 1 from the fridge 1." | 0.0 | False |
+| OSR SFT | 3 | `"look"` | "You are facing the fridge 1. Next to it, you see nothing." | 0.0 | False |
+| OSR SFT | 4 | `"close fridge 1"` | "You close the fridge 1." | 0.0 | False |
+| OSR SFT | 5 | `"look"` | "You are facing the fridge 1. Next to it, you see nothing." | 0.0 | False |
+| OSR SFT | 6 | `"cool lettuce 1 with fridge 1"` | "You cool the lettuce 1 using the fridge 1." | 0.0 | False |
+| OSR SFT | 7 | `"look"` | "You are facing the fridge 1. Next to it, you see nothing." | 0.0 | False |
+| OSR SFT | 8 | `"cool lettuce 1 with fridge 1"` | "You cool the lettuce 1 using the fridge 1." | 0.0 | False |
+| OSR SFT | 9 | `"look"` | "You are facing the fridge 1. Next to it, you see nothing." | 0.0 | False |
+| OSR SFT | 10 | `"go to sinkbasin 1"` | "You arrive at sinkbasin 1. On the sinkbasin 1, you see a egg 2." | 0.0 | False |
+| OSR SFT | 11 | `"go to fridge 1"` | "You arrive at fridge 1. The fridge 1 is closed." | 0.0 | False |
+| OSR SFT | 12 | `"look"` | "You are facing the fridge 1. Next to it, you see nothing." | 0.0 | False |
+| OSR SFT | 13 | `"go to microwave 1"` | "You arrive at microwave 1. The microwave 1 is closed." | 0.0 | False |
+| OSR SFT | 14 | `"open microwave 1"` | "You open the microwave 1. The microwave 1 is open. In it, you see a apple 2, and a egg 3." | 0.0 | False |
+| OSR SFT | 15 | `"close microwave 1"` | "You close the microwave 1." | 0.0 | False |
+| OSR SFT | 16 | `"go to fridge 1"` | "You arrive at fridge 1. The fridge 1 is closed." | 0.0 | False |
+| OSR SFT | 17 | `"open fridge 1"` | "You open the fridge 1. The fridge 1 is open. In it, you see a bowl 3, a pan 2, and a tomato 2." | 0.0 | False |
+| OSR SFT | 18 | `"close fridge 1"` | "You close the fridge 1." | 0.0 | False |
+| OSR SFT | 19 | `"go to garbagecan 1"` | "You arrive at garbagecan 1. On the garbagecan 1, you see a apple 1." | 0.0 | False |
+| OSR SFT | 20 | `"go to countertop 1"` | "You arrive at countertop 1. On the countertop 1, you see nothing." | 0.0 | False |
+| OSR SFT | 21 | `"go to countertop 2"` | "You arrive at countertop 2. On the countertop 2, you see a butterknife 1, a mug 2, a mug 1, a plate 1, and a spoon 2." | 0.0 | False |
+| OSR SFT | 22 | `"go to countertop 3"` | "You arrive at countertop 3. On the countertop 3, you see a fork 1, a knife 1, a pan 1, a plate 3, a soapbottle 3, a tomato 3, and a tomato 1." | 0.0 | False |
+| OSR SFT | 23 | `"go to countertop 4"` | "You arrive at countertop 4. On the countertop 4, you see a bread 1, a butterknife 3, a dishsponge 3, a lettuce 3, a lettuce 2, a papertowelroll 1, a peppershaker 1, a potato 2, and a spatula 3." | 0.0 | False |
+| OSR SFT | 24 | `"go to fridge 1"` | "You arrive at fridge 1. The fridge 1 is closed." | 0.0 | False |
+| OSR SFT | 25 | `"open fridge 1"` | "You open the fridge 1. The fridge 1 is open. In it, you see a bowl 3, a pan 2, and a tomato 2." | 0.0 | False |
+| OSR SFT | 26 | `"move lettuce 1 to fridge 1"` | "You move the lettuce 1 to the fridge 1." | 0.0 | False |
+| OSR SFT | 27 | `"go to countertop 4"` | "You arrive at countertop 4. On the countertop 4, you see a bread 1, a butterknife 3, a dishsponge 3, a lettuce 3, a lettuce 2, a papertowelroll 1, a peppershaker 1, a potato 2, and a spatula 3." | 0.0 | False |
+| OSR SFT | 28 | `"take lettuce 2 from countertop 4"` | "You pick up the lettuce 2 from the countertop 4." | 0.0 | False |
+| OSR SFT | 29 | `"look"` | "You are facing the countertop 4. Next to it, you see nothing." | 0.0 | False |
+| OSR SFT | 30 | `"go to fridge 1"` | "You arrive at fridge 1. The fridge 1 is open. In it, you see a bowl 3, a lettuce 1, a pan 2, and a tomato 2." | 0.0 | False |
+| OSR SFT | 31 | `"look"` | "You are facing the fridge 1. Next to it, you see nothing." | 0.0 | True |
+| PBR recovery | 2 | `"take lettuce 1 from fridge 1"` | "You pick up the lettuce 1 from the fridge 1." | - | - |
+| PBR recovery | 3 | `"move lettuce 1 to fridge 1"` | "You move the lettuce 1 to the fridge 1." | - | - |
+| PBR SFT | 1 | `"go to countertop 1"` | "You arrive at countertop 1. On the countertop 1, you see nothing." | 0.0 | False |
+| PBR SFT | 2 | `"look"` | "You are facing the countertop 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 3 | `"examine countertop 1"` | "On the countertop 1, you see nothing." | 0.0 | False |
+| PBR SFT | 4 | `"look"` | "You are facing the countertop 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 5 | `"go to sinkbasin 1"` | "You arrive at sinkbasin 1. On the sinkbasin 1, you see a egg 2." | 0.0 | False |
+| PBR SFT | 6 | `"go to countertop 1"` | "You arrive at countertop 1. On the countertop 1, you see nothing." | 0.0 | False |
+| PBR SFT | 7 | `"look"` | "You are facing the countertop 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 8 | `"go to countertop 2"` | "You arrive at countertop 2. On the countertop 2, you see a butterknife 1, a mug 2, a mug 1, a plate 1, and a spoon 2." | 0.0 | False |
+| PBR SFT | 9 | `"go to countertop 3"` | "You arrive at countertop 3. On the countertop 3, you see a fork 1, a knife 1, a pan 1, a plate 3, a soapbottle 3, a tomato 3, and a tomato 1." | 0.0 | False |
+| PBR SFT | 10 | `"go to countertop 4"` | "You arrive at countertop 4. On the countertop 4, you see a bread 1, a butterknife 3, a dishsponge 3, a lettuce 3, a lettuce 2, a papertowelroll 1, a peppershaker 1, a potato 2, and a spatula 3." | 0.0 | False |
+| PBR SFT | 11 | `"take lettuce 3 from countertop 4"` | "You pick up the lettuce 3 from the countertop 4." | 0.0 | False |
+| PBR SFT | 12 | `"go to fridge 1"` | "You arrive at fridge 1. The fridge 1 is open. In it, you see a bowl 3, a lettuce 1, a pan 2, and a tomato 2." | 0.0 | False |
+| PBR SFT | 13 | `"look"` | "You are facing the fridge 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 14 | `"go to cabinet 12"` | "You arrive at cabinet 12. The cabinet 12 is closed." | 0.0 | False |
+| PBR SFT | 15 | `"open cabinet 12"` | "You open the cabinet 12. The cabinet 12 is open. In it, you see nothing." | 0.0 | False |
+| PBR SFT | 16 | `"close cabinet 12"` | "You close the cabinet 12." | 0.0 | False |
+| PBR SFT | 17 | `"go to fridge 1"` | "You arrive at fridge 1. The fridge 1 is open. In it, you see a bowl 3, a lettuce 1, a pan 2, and a tomato 2." | 0.0 | False |
+| PBR SFT | 18 | `"look"` | "You are facing the fridge 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 19 | `"move lettuce 3 to fridge 1"` | "You move the lettuce 3 to the fridge 1." | 1.0 | True |
+
+- SFT comparison: first action OSR/PBR `look` / `go to countertop 1`; first divergence index `1`; later same-index rejoin `True`; lengths `31` / `19`.
+- Horizon evidence: OSR success action index `None`; OSR SFT actions `31`; PBR remaining SFT budget `29`; pressure plausible `True`.
+- Deterministic mechanism labels: `state perturbation, horizon pressure`. Extra-action progress and reversal flags are recorded per step in the JSON trace.
+
+### `R8-S04`
+
+- Returns: `R_continue=1`, `R_osr=1`, `R_pbr=0`; task `pick_clean_then_place_in_recep-Knife-None-DiningTable-15/trial_T20190908_162445_886312`; stratum `success_control`.
+- Stage-1 diagnosis/subgoal: "Drawer 2 closed without retrieving the knife." / "Open drawer 2 to check for the knife.".
+- Shared recovery action #1: `open drawer 2`.
+- OSR_BOUNDARY observation: "You open the drawer 2. The drawer 2 is open. In it, you see a fork 3."; admissible-map size `32`.
+- PBR_HANDOFF observation: "You pick up the fork 3 from the drawer 2."; admissible-map size `33`; same observation/map/family progress `False/False/True`.
+- Extra recovery actions #2/#3: `['examine drawer 2', 'take fork 3 from drawer 2']`; new-public-progress flags `[False, False]`; exact pattern flags `{'exact_repeat': False, 'repeated_examine': False, 'navigation_repeat': False, 'navigation_oscillation': False, 'take_move_reversal': False, 'move_take_reversal': False}`.
+- Extra actions changed public state: `True`; rehandling delta `0`; loop change `unchanged`.
+
+| Phase | Step | Exact mapped command | Public result observation | Reward | Done |
+|---|---:|---|---|---:|---|
+| OSR SFT | 1 | `"close drawer 2"` | "You close the drawer 2." | 0.0 | False |
+| OSR SFT | 2 | `"go to drawer 3"` | "You arrive at drawer 3. The drawer 3 is closed." | 0.0 | False |
+| OSR SFT | 3 | `"open drawer 3"` | "You open the drawer 3. The drawer 3 is open. In it, you see a knife 1, and a peppershaker 1." | 0.0 | False |
+| OSR SFT | 4 | `"take knife 1 from drawer 3"` | "You pick up the knife 1 from the drawer 3." | 0.0 | False |
+| OSR SFT | 5 | `"go to sinkbasin 1"` | "You arrive at sinkbasin 1. On the sinkbasin 1, you see a butterknife 1, and a egg 2." | 0.0 | False |
+| OSR SFT | 6 | `"clean knife 1 with sinkbasin 1"` | "You clean the knife 1 using the sinkbasin 1." | 0.0 | False |
+| OSR SFT | 7 | `"look"` | "You are facing the sinkbasin 1. Next to it, you see nothing." | 0.0 | False |
+| OSR SFT | 8 | `"go to diningtable 1"` | "You arrive at diningtable 1. On the diningtable 1, you see a apple 1, a bread 1, a butterknife 3, a butterknife 2, a knife 3, a knife 2, a lettuce 2, a peppershaker 3, a soapbottle 2, a spoon 3, a spoon 2, and a tomato 1." | 0.0 | False |
+| OSR SFT | 9 | `"move knife 1 to diningtable 1"` | "You move the knife 1 to the diningtable 1." | 1.0 | True |
+| PBR recovery | 2 | `"examine drawer 2"` | "The drawer 2 is open. In it, you see a fork 3." | - | - |
+| PBR recovery | 3 | `"take fork 3 from drawer 2"` | "You pick up the fork 3 from the drawer 2." | - | - |
+| PBR SFT | 1 | `"close drawer 2"` | "You close the drawer 2." | 0.0 | False |
+| PBR SFT | 2 | `"go to drawer 3"` | "You arrive at drawer 3. The drawer 3 is closed." | 0.0 | False |
+| PBR SFT | 3 | `"open drawer 3"` | "You open the drawer 3. The drawer 3 is open. In it, you see a knife 1, and a peppershaker 1." | 0.0 | False |
+| PBR SFT | 4 | `"close drawer 3"` | "You close the drawer 3." | 0.0 | False |
+| PBR SFT | 5 | `"go to diningtable 1"` | "You arrive at diningtable 1. On the diningtable 1, you see a apple 1, a bread 1, a butterknife 3, a butterknife 2, a knife 3, a knife 2, a lettuce 2, a peppershaker 3, a soapbottle 2, a spoon 3, a spoon 2, and a tomato 1." | 0.0 | False |
+| PBR SFT | 6 | `"go to countertop 1"` | "You arrive at countertop 1. On the countertop 1, you see a bowl 1, a dishsponge 3, a dishsponge 1, a fork 1, a mug 2, a plate 1, a saltshaker 1, a spatula 1, and a winebottle 1." | 0.0 | False |
+| PBR SFT | 7 | `"go to countertop 2"` | "You arrive at countertop 2. On the countertop 2, you see a fork 2, a lettuce 1, a soapbottle 1, a spatula 2, and a spoon 1." | 0.0 | False |
+| PBR SFT | 8 | `"go to cabinet 1"` | "You arrive at cabinet 1. On the cabinet 1, you see nothing." | 0.0 | False |
+| PBR SFT | 9 | `"go to cabinet 2"` | "You arrive at cabinet 2. The cabinet 2 is closed." | 0.0 | False |
+| PBR SFT | 10 | `"open cabinet 2"` | "You open the cabinet 2. The cabinet 2 is open. In it, you see nothing." | 0.0 | False |
+| PBR SFT | 11 | `"close cabinet 2"` | "You close the cabinet 2." | 0.0 | False |
+| PBR SFT | 12 | `"go to cabinet 3"` | "You arrive at cabinet 3. The cabinet 3 is closed." | 0.0 | False |
+| PBR SFT | 13 | `"open cabinet 3"` | "You open the cabinet 3. The cabinet 3 is open. In it, you see nothing." | 0.0 | False |
+| PBR SFT | 14 | `"close cabinet 3"` | "You close the cabinet 3." | 0.0 | False |
+| PBR SFT | 15 | `"go to cabinet 4"` | "You arrive at cabinet 4. The cabinet 4 is closed." | 0.0 | False |
+| PBR SFT | 16 | `"open cabinet 4"` | "You open the cabinet 4. The cabinet 4 is open. In it, you see nothing." | 0.0 | False |
+| PBR SFT | 17 | `"close cabinet 4"` | "You close the cabinet 4." | 0.0 | False |
+| PBR SFT | 18 | `"go to cabinet 5"` | "You arrive at cabinet 5. The cabinet 5 is closed." | 0.0 | False |
+| PBR SFT | 19 | `"open cabinet 5"` | "You open the cabinet 5. The cabinet 5 is open. In it, you see nothing." | 0.0 | False |
+| PBR SFT | 20 | `"close cabinet 5"` | "You close the cabinet 5." | 0.0 | False |
+| PBR SFT | 21 | `"go to cabinet 6"` | "You arrive at cabinet 6. On the cabinet 6, you see a kettle 1." | 0.0 | False |
+| PBR SFT | 22 | `"go to cabinet 7"` | "You arrive at cabinet 7. The cabinet 7 is closed." | 0.0 | False |
+| PBR SFT | 23 | `"open cabinet 7"` | "You open the cabinet 7. The cabinet 7 is open. In it, you see nothing." | 0.0 | False |
+| PBR SFT | 24 | `"close cabinet 7"` | "You close the cabinet 7." | 0.0 | False |
+| PBR SFT | 25 | `"go to cabinet 8"` | "You arrive at cabinet 8. The cabinet 8 is closed." | 0.0 | False |
+| PBR SFT | 26 | `"open cabinet 8"` | "You open the cabinet 8. The cabinet 8 is open. In it, you see nothing." | 0.0 | False |
+| PBR SFT | 27 | `"close cabinet 8"` | "You close the cabinet 8." | 0.0 | False |
+| PBR SFT | 28 | `"go to cabinet 9"` | "You arrive at cabinet 9. The cabinet 9 is closed." | 0.0 | False |
+| PBR SFT | 29 | `"open cabinet 9"` | "You open the cabinet 9. The cabinet 9 is open. In it, you see a dishsponge 2." | 0.0 | False |
+| PBR SFT | 30 | `"close cabinet 9"` | "You close the cabinet 9." | 0.0 | False |
+| PBR SFT | 31 | `"go to cabinet 10"` | "You arrive at cabinet 10. On the cabinet 10, you see nothing." | 0.0 | False |
+| PBR SFT | 32 | `"go to cabinet 11"` | "You arrive at cabinet 11. The cabinet 11 is closed." | 0.0 | False |
+| PBR SFT | 33 | `"open cabinet 11"` | "You open the cabinet 11. The cabinet 11 is open. In it, you see a peppershaker 2." | 0.0 | False |
+| PBR SFT | 34 | `"close cabinet 11"` | "You close the cabinet 11." | 0.0 | False |
+| PBR SFT | 35 | `"go to drawer 1"` | "You arrive at drawer 1. The drawer 1 is closed." | 0.0 | False |
+| PBR SFT | 36 | `"open drawer 1"` | "You open the drawer 1. The drawer 1 is open. In it, you see nothing." | 0.0 | False |
+| PBR SFT | 37 | `"close drawer 1"` | "You close the drawer 1." | 0.0 | False |
+| PBR SFT | 38 | `"go to drawer 2"` | "You arrive at drawer 2. The drawer 2 is closed." | 0.0 | False |
+| PBR SFT | 39 | `"open drawer 2"` | "You open the drawer 2. The drawer 2 is open. In it, you see nothing." | 0.0 | True |
+
+- SFT comparison: first action OSR/PBR `close drawer 2` / `close drawer 2`; first divergence index `4`; later same-index rejoin `False`; lengths `9` / `39`.
+- Horizon evidence: OSR success action index `17`; OSR SFT actions `9`; PBR remaining SFT budget `39`; pressure plausible `False`.
+- Deterministic mechanism labels: `harmful state perturbation`. Extra-action progress and reversal flags are recorded per step in the JSON trace.
+
+### `R8-S11`
+
+- Returns: `R_continue=1`, `R_osr=1`, `R_pbr=0`; task `look_at_obj_in_light-Statue-None-DeskLamp-218/trial_T20190909_085308_837993`; stratum `success_control`.
+- Stage-1 diagnosis/subgoal: "Unable to locate statue or desklamp in current view" / "Look around the room to find the statue or desklamp".
+- Shared recovery action #1: `look`.
+- OSR_BOUNDARY observation: "You are facing the sofa 1. Next to it, you see nothing."; admissible-map size `15`.
+- PBR_HANDOFF observation: "You are facing the sofa 1. Next to it, you see nothing."; admissible-map size `15`; same observation/map/family progress `True/True/True`.
+- Extra recovery actions #2/#3: `['look', 'look']`; new-public-progress flags `[False, False]`; exact pattern flags `{'exact_repeat': True, 'repeated_examine': False, 'navigation_repeat': False, 'navigation_oscillation': False, 'take_move_reversal': False, 'move_take_reversal': False}`.
+- Extra actions changed public state: `False`; rehandling delta `0`; loop change `increased`.
+
+| Phase | Step | Exact mapped command | Public result observation | Reward | Done |
+|---|---:|---|---|---:|---|
+| OSR SFT | 1 | `"go to sidetable 1"` | "You arrive at sidetable 1. On the sidetable 1, you see a desklamp 1, a plate 1, and a statue 1." | 0.0 | False |
+| OSR SFT | 2 | `"take statue 1 from sidetable 1"` | "You pick up the statue 1 from the sidetable 1." | 0.0 | False |
+| OSR SFT | 3 | `"use desklamp 1"` | "You turn on the desklamp 1." | 1.0 | True |
+| PBR recovery | 2 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | - | - |
+| PBR recovery | 3 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | - | - |
+| PBR SFT | 1 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 2 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 3 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 4 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 5 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 6 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 7 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 8 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 9 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 10 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 11 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 12 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 13 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 14 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 15 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 16 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 17 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 18 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 19 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 20 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 21 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 22 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 23 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 24 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 25 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 26 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 27 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 28 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 29 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 30 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 31 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 32 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 33 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 34 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 35 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 36 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 37 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 38 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 39 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 40 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 41 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 42 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 43 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | False |
+| PBR SFT | 44 | `"look"` | "You are facing the sofa 1. Next to it, you see nothing." | 0.0 | False |
+| PBR SFT | 45 | `"examine sofa 1"` | "On the sofa 1, you see a pillow 1." | 0.0 | True |
+
+- SFT comparison: first action OSR/PBR `go to sidetable 1` / `examine sofa 1`; first divergence index `1`; later same-index rejoin `False`; lengths `3` / `45`.
+- Horizon evidence: OSR success action index `5`; OSR SFT actions `3`; PBR remaining SFT budget `45`; pressure plausible `False`.
+- Deterministic mechanism labels: `context/history perturbation, loop amplification`. Extra-action progress and reversal flags are recorded per step in the JSON trace.
+
+### `R8-R07`
+
+- Returns: `R_continue=1`, `R_osr=1`, `R_pbr=0`; task `pick_cool_then_place_in_recep-Egg-None-Microwave-18/trial_T20190909_113701_595505`; stratum `random_control`.
+- Stage-1 diagnosis/subgoal: "Microwave is closed and contains a potato, no egg found." / "Find and take a cool egg from the fridge.".
+- Shared recovery action #1: `go to fridge 1`.
+- OSR_BOUNDARY observation: "You arrive at fridge 1. The fridge 1 is closed."; admissible-map size `39`.
+- PBR_HANDOFF observation: "You pick up the apple 1 from the fridge 1."; admissible-map size `42`; same observation/map/family progress `False/False/True`.
+- Extra recovery actions #2/#3: `['open fridge 1', 'take apple 1 from fridge 1']`; new-public-progress flags `[False, False]`; exact pattern flags `{'exact_repeat': False, 'repeated_examine': False, 'navigation_repeat': False, 'navigation_oscillation': False, 'take_move_reversal': False, 'move_take_reversal': False}`.
+- Extra actions changed public state: `True`; rehandling delta `0`; loop change `increased`.
+
+| Phase | Step | Exact mapped command | Public result observation | Reward | Done |
+|---|---:|---|---|---:|---|
+| OSR SFT | 1 | `"open fridge 1"` | "You open the fridge 1. The fridge 1 is open. In it, you see a apple 1, a cup 1, a mug 1, a potato 2, a potato 1, and a tomato 1." | 0.0 | False |
+| OSR SFT | 2 | `"close fridge 1"` | "You close the fridge 1." | 0.0 | False |
+| OSR SFT | 3 | `"go to garbagecan 1"` | "You arrive at garbagecan 1. On the garbagecan 1, you see nothing." | 0.0 | False |
+| OSR SFT | 4 | `"go to diningtable 1"` | "You arrive at diningtable 1. On the diningtable 1, you see a dishsponge 2, a houseplant 1, a kettle 3, a lettuce 2, a lettuce 1, a mug 2, a peppershaker 2, a peppershaker 1, a saltshaker 3, a saltshaker 2, a soapbottle 1, and a spatula 1." | 0.0 | False |
+| OSR SFT | 5 | `"go to countertop 1"` | "You arrive at countertop 1. On the countertop 1, you see a saltshaker 1." | 0.0 | False |
+| OSR SFT | 6 | `"go to countertop 2"` | "You arrive at countertop 2. On the countertop 2, you see a bowl 1, a bread 1, a butterknife 3, a butterknife 1, a cup 3, a egg 1, a papertowelroll 1, a peppershaker 3, and a spoon 1." | 0.0 | False |
+| OSR SFT | 7 | `"take egg 1 from countertop 2"` | "You pick up the egg 1 from the countertop 2." | 0.0 | False |
+| OSR SFT | 8 | `"go to fridge 1"` | "You arrive at fridge 1. The fridge 1 is closed." | 0.0 | False |
+| OSR SFT | 9 | `"cool egg 1 with fridge 1"` | "You cool the egg 1 using the fridge 1." | 0.0 | False |
+| OSR SFT | 10 | `"go to microwave 1"` | "You arrive at microwave 1. The microwave 1 is closed." | 0.0 | False |
+| OSR SFT | 11 | `"open microwave 1"` | "You open the microwave 1. The microwave 1 is open. In it, you see a potato 3." | 0.0 | False |
+| OSR SFT | 12 | `"move egg 1 to microwave 1"` | "You move the egg 1 to the microwave 1." | 1.0 | True |
+| PBR recovery | 2 | `"open fridge 1"` | "You open the fridge 1. The fridge 1 is open. In it, you see a apple 1, a cup 1, a mug 1, a potato 2, a potato 1, and a tomato 1." | - | - |
+| PBR recovery | 3 | `"take apple 1 from fridge 1"` | "You pick up the apple 1 from the fridge 1." | - | - |
+| PBR SFT | 1 | `"close fridge 1"` | "You close the fridge 1." | 0.0 | False |
+| PBR SFT | 2 | `"go to microwave 1"` | "You arrive at microwave 1. The microwave 1 is closed." | 0.0 | False |
+| PBR SFT | 3 | `"open microwave 1"` | "You open the microwave 1. The microwave 1 is open. In it, you see a potato 3." | 0.0 | False |
+| PBR SFT | 4 | `"close microwave 1"` | "You close the microwave 1." | 0.0 | False |
+| PBR SFT | 5 | `"go to diningtable 1"` | "You arrive at diningtable 1. On the diningtable 1, you see a dishsponge 2, a houseplant 1, a kettle 3, a lettuce 2, a lettuce 1, a mug 2, a peppershaker 2, a peppershaker 1, a saltshaker 3, a saltshaker 2, a soapbottle 1, and a spatula 1." | 0.0 | False |
+| PBR SFT | 6 | `"go to garbagecan 1"` | "You arrive at garbagecan 1. On the garbagecan 1, you see nothing." | 0.0 | False |
+| PBR SFT | 7 | `"go to fridge 1"` | "You arrive at fridge 1. The fridge 1 is closed." | 0.0 | False |
+| PBR SFT | 8 | `"open fridge 1"` | "You open the fridge 1. The fridge 1 is open. In it, you see a cup 1, a mug 1, a potato 2, a potato 1, and a tomato 1." | 0.0 | False |
+| PBR SFT | 9 | `"close fridge 1"` | "You close the fridge 1." | 0.0 | False |
+| PBR SFT | 10 | `"go to diningtable 1"` | "You arrive at diningtable 1. On the diningtable 1, you see a dishsponge 2, a houseplant 1, a kettle 3, a lettuce 2, a lettuce 1, a mug 2, a peppershaker 2, a peppershaker 1, a saltshaker 3, a saltshaker 2, a soapbottle 1, and a spatula 1." | 0.0 | False |
+| PBR SFT | 11 | `"go to countertop 1"` | "You arrive at countertop 1. On the countertop 1, you see a saltshaker 1." | 0.0 | False |
+| PBR SFT | 12 | `"go to countertop 2"` | "You arrive at countertop 2. On the countertop 2, you see a bowl 1, a bread 1, a butterknife 3, a butterknife 1, a cup 3, a egg 1, a papertowelroll 1, a peppershaker 3, and a spoon 1." | 0.0 | False |
+| PBR SFT | 13 | `"go to microwave 1"` | "You arrive at microwave 1. The microwave 1 is closed." | 0.0 | False |
+| PBR SFT | 14 | `"open microwave 1"` | "You open the microwave 1. The microwave 1 is open. In it, you see a potato 3." | 0.0 | False |
+| PBR SFT | 15 | `"close microwave 1"` | "You close the microwave 1." | 0.0 | False |
+| PBR SFT | 16 | `"go to garbagecan 1"` | "You arrive at garbagecan 1. On the garbagecan 1, you see nothing." | 0.0 | False |
+| PBR SFT | 17 | `"go to fridge 1"` | "You arrive at fridge 1. The fridge 1 is closed." | 0.0 | False |
+| PBR SFT | 18 | `"open fridge 1"` | "You open the fridge 1. The fridge 1 is open. In it, you see a cup 1, a mug 1, a potato 2, a potato 1, and a tomato 1." | 0.0 | False |
+| PBR SFT | 19 | `"close fridge 1"` | "You close the fridge 1." | 0.0 | False |
+| PBR SFT | 20 | `"go to diningtable 1"` | "You arrive at diningtable 1. On the diningtable 1, you see a dishsponge 2, a houseplant 1, a kettle 3, a lettuce 2, a lettuce 1, a mug 2, a peppershaker 2, a peppershaker 1, a saltshaker 3, a saltshaker 2, a soapbottle 1, and a spatula 1." | 0.0 | False |
+| PBR SFT | 21 | `"go to countertop 1"` | "You arrive at countertop 1. On the countertop 1, you see a saltshaker 1." | 0.0 | False |
+| PBR SFT | 22 | `"go to countertop 2"` | "You arrive at countertop 2. On the countertop 2, you see a bowl 1, a bread 1, a butterknife 3, a butterknife 1, a cup 3, a egg 1, a papertowelroll 1, a peppershaker 3, and a spoon 1." | 0.0 | False |
+| PBR SFT | 23 | `"go to microwave 1"` | "You arrive at microwave 1. The microwave 1 is closed." | 0.0 | False |
+| PBR SFT | 24 | `"open microwave 1"` | "You open the microwave 1. The microwave 1 is open. In it, you see a potato 3." | 0.0 | False |
+| PBR SFT | 25 | `"close microwave 1"` | "You close the microwave 1." | 0.0 | False |
+| PBR SFT | 26 | `"go to garbagecan 1"` | "You arrive at garbagecan 1. On the garbagecan 1, you see nothing." | 0.0 | False |
+| PBR SFT | 27 | `"go to fridge 1"` | "You arrive at fridge 1. The fridge 1 is closed." | 0.0 | False |
+| PBR SFT | 28 | `"open fridge 1"` | "You open the fridge 1. The fridge 1 is open. In it, you see a cup 1, a mug 1, a potato 2, a potato 1, and a tomato 1." | 0.0 | False |
+| PBR SFT | 29 | `"close fridge 1"` | "You close the fridge 1." | 0.0 | False |
+| PBR SFT | 30 | `"go to diningtable 1"` | "You arrive at diningtable 1. On the diningtable 1, you see a dishsponge 2, a houseplant 1, a kettle 3, a lettuce 2, a lettuce 1, a mug 2, a peppershaker 2, a peppershaker 1, a saltshaker 3, a saltshaker 2, a soapbottle 1, and a spatula 1." | 0.0 | False |
+| PBR SFT | 31 | `"go to countertop 1"` | "You arrive at countertop 1. On the countertop 1, you see a saltshaker 1." | 0.0 | False |
+| PBR SFT | 32 | `"go to countertop 2"` | "You arrive at countertop 2. On the countertop 2, you see a bowl 1, a bread 1, a butterknife 3, a butterknife 1, a cup 3, a egg 1, a papertowelroll 1, a peppershaker 3, and a spoon 1." | 0.0 | False |
+| PBR SFT | 33 | `"go to microwave 1"` | "You arrive at microwave 1. The microwave 1 is closed." | 0.0 | False |
+| PBR SFT | 34 | `"open microwave 1"` | "You open the microwave 1. The microwave 1 is open. In it, you see a potato 3." | 0.0 | False |
+| PBR SFT | 35 | `"close microwave 1"` | "You close the microwave 1." | 0.0 | False |
+| PBR SFT | 36 | `"go to garbagecan 1"` | "You arrive at garbagecan 1. On the garbagecan 1, you see nothing." | 0.0 | False |
+| PBR SFT | 37 | `"go to fridge 1"` | "You arrive at fridge 1. The fridge 1 is closed." | 0.0 | False |
+| PBR SFT | 38 | `"open fridge 1"` | "You open the fridge 1. The fridge 1 is open. In it, you see a cup 1, a mug 1, a potato 2, a potato 1, and a tomato 1." | 0.0 | False |
+| PBR SFT | 39 | `"close fridge 1"` | "You close the fridge 1." | 0.0 | False |
+| PBR SFT | 40 | `"go to diningtable 1"` | "You arrive at diningtable 1. On the diningtable 1, you see a dishsponge 2, a houseplant 1, a kettle 3, a lettuce 2, a lettuce 1, a mug 2, a peppershaker 2, a peppershaker 1, a saltshaker 3, a saltshaker 2, a soapbottle 1, and a spatula 1." | 0.0 | False |
+| PBR SFT | 41 | `"go to countertop 1"` | "You arrive at countertop 1. On the countertop 1, you see a saltshaker 1." | 0.0 | False |
+| PBR SFT | 42 | `"go to countertop 2"` | "You arrive at countertop 2. On the countertop 2, you see a bowl 1, a bread 1, a butterknife 3, a butterknife 1, a cup 3, a egg 1, a papertowelroll 1, a peppershaker 3, and a spoon 1." | 0.0 | True |
+
+- SFT comparison: first action OSR/PBR `open fridge 1` / `close fridge 1`; first divergence index `1`; later same-index rejoin `False`; lengths `12` / `42`.
+- Horizon evidence: OSR success action index `17`; OSR SFT actions `12`; PBR remaining SFT budget `42`; pressure plausible `False`.
+- Deterministic mechanism labels: `harmful state perturbation, loop amplification`. Extra-action progress and reversal flags are recorded per step in the JSON trace.
+
+## Ties and loops
+
+- Success-success ties: `22`; loop increased `16`; no new public progress `17`; mean extra actions `1.909`; mean extra local tokens `1279.2`.
+- Success-success ties with state/context perturbation but later recovered: `22`.
+- Failure-failure ties: `22`; loop increased `7`; loop reduced `9`; new public progress `2`; no new public progress `20`.
+- Loop reduced / unchanged / increased: `10 / 13 / 25`. Increase location classification: `{'during_extra_recovery': 18, 'immediately_after_handoff': 6, 'later_continuation': 1}`.
+- Loop-increase rates by group: `{'persistent_win': {'n': 1, 'increased': 0, 'rate': 0.0}, 'persistent_loss': {'n': 3, 'increased': 2, 'rate': 0.6666666666666666}, 'success_success_tie': {'n': 22, 'increased': 16, 'rate': 0.7272727272727273}, 'failure_failure_tie': {'n': 22, 'increased': 7, 'rate': 0.3181818181818182}}`.
+
+## Pick-two audit
+
+- Failure prefixes audited: `16`.
+- Old placed distribution 0/1/2: `{'0': 16, '1': 0, '2': 0}`.
+- Corrected ever-placed distribution 0/1/2: `{'0': 2, '1': 14, '2': 0}`.
+- Corrected currently-placed distribution 0/1/2: `{'0': 3, '1': 13, '2': 0}`.
+- Currently-held distribution 0/1/2: `{'0': 11, '1': 5, '2': 0}`.
+- `second_instance_known`: `4/16`; currently completed: `0/16`.
+- Rehandling: `3` prefixes, `4` events; introduced by extra actions in `4`.
+- Extra-action targeting counts: completed `7`, known unfinished `0`, other target `2`, non-target `2`, receptacle/search `17`, other `0`.
+- Recovery-phase second-instance discoveries / acquisitions / placements / simultaneous completions: `0 / 0 / 1 / 1`.
+- Targeting uses exact public instance tokens and never labels a search as successful using hidden object location.
+
+### Failure-prefix progress table
+
+| Prefix | Target / destination type | Discovered | Acquired ever | Ever placed | Currently placed | Held | Unfinished | 2nd known | 2nd currently complete | Rehandling | Old placed |
+|---|---|---|---|---|---|---|---|---:|---:|---:|---|
+| `R8-F01` | `newspaper / sofa` | `newspaper 1` | `newspaper 1` | `newspaper 1` | `newspaper 1` | `` | `` | False | False | 0 | `` |
+| `R8-F02` | `book / bed` | `book 1, book 2` | `book 1, book 2` | `book 1` | `book 1` | `book 2` | `book 2` | True | False | 0 | `` |
+| `R8-F03` | `pot / shelf` | `pot 2` | `pot 2` | `pot 2` | `pot 2` | `` | `` | False | False | 0 | `` |
+| `R8-F04` | `cellphone / shelf` | `cellphone 1, cellphone 2` | `cellphone 1, cellphone 2` | `cellphone 2` | `cellphone 2` | `cellphone 1` | `cellphone 1` | True | False | 0 | `` |
+| `R8-F05` | `remotecontrol / sofa` | `remotecontrol 1` | `remotecontrol 1` | `remotecontrol 1` | `remotecontrol 1` | `` | `` | False | False | 0 | `` |
+| `R8-F06` | `cloth / toilet` | `cloth 1` | `cloth 1` | `cloth 1` | `cloth 1` | `` | `` | False | False | 0 | `` |
+| `R8-F07` | `soapbottle / cabinet` | `soapbottle 1, soapbottle 3` | `soapbottle 1, soapbottle 3` | `soapbottle 1` | `soapbottle 1` | `soapbottle 3` | `soapbottle 3` | True | False | 2 | `` |
+| `R8-F08` | `soapbottle / toilet` | `soapbottle 1` | `soapbottle 1` | `soapbottle 1` | `soapbottle 1` | `` | `` | False | False | 0 | `` |
+| `R8-F09` | `cellphone / desk` | `` | `` | `` | `` | `` | `` | False | False | 0 | `` |
+| `R8-F10` | `pillow / ottoman` | `pillow 1` | `pillow 1` | `pillow 1` | `pillow 1` | `` | `` | False | False | 0 | `` |
+| `R8-F11` | `keychain / ottoman` | `keychain 1` | `keychain 1` | `keychain 1` | `` | `keychain 1` | `keychain 1` | False | False | 1 | `` |
+| `R8-F12` | `cup / microwave` | `cup 1` | `cup 1` | `cup 1` | `cup 1` | `` | `` | False | False | 0 | `` |
+| `R8-F13` | `cellphone / desk` | `` | `` | `` | `` | `` | `` | False | False | 0 | `` |
+| `R8-F14` | `spraybottle / garbagecan` | `spraybottle 1, spraybottle 2` | `spraybottle 1, spraybottle 2` | `spraybottle 2` | `spraybottle 2` | `spraybottle 1` | `spraybottle 1` | True | False | 0 | `` |
+| `R8-F15` | `soapbottle / cabinet` | `soapbottle 2` | `soapbottle 2` | `soapbottle 2` | `soapbottle 2` | `` | `` | False | False | 1 | `` |
+| `R8-F16` | `lettuce / fridge` | `lettuce 1` | `lettuce 1` | `lettuce 1` | `lettuce 1` | `` | `` | False | False | 0 | `` |
+
+### Pick-two control-prefix audit
+
+The following non-failure pick-two prefixes are included to check that the public extractor generalizes beyond the 16 failure-stratum prefixes.
+
+| Prefix | Stratum | Task | Discovered | Ever placed | Currently placed | Held | 2nd known | 2nd currently complete |
+|---|---|---|---|---|---|---|---:|---:|
+| `R8-S01` | `success_control` | `pick_two_obj_and_place-Ladle-None-Drawer-4/trial_T20190908_154908_741855` | `` | `` | `` | `` | False | False |
+| `R8-R03` | `random_control` | `pick_two_obj_and_place-KeyChain-None-Drawer-317/trial_T20190912_073129_052747` | `keychain 1, keychain 2` | `keychain 1, keychain 2` | `keychain 1, keychain 2` | `` | True | False |
+| `R8-R04` | `random_control` | `pick_two_obj_and_place-Candle-None-Cabinet-403/trial_T20190909_065744_416414` | `candle 4` | `candle 4` | `candle 4` | `` | False | False |
+
+## Mechanism funnel
+
+- Extra steps executed: `92`.
+- Branches with changed public state: `36`.
+- Branches with new task-relevant public progress: `7`.
+- Branches with changed handoff: `46`.
+- Terminal outcome changed: `4`; wins `1`, losses `3`.
+
+## Public-state design implications
+
+The candidate table is descriptive only. All recommended candidates are derivable from public history; unseen object location/identity is explicitly forbidden as an oracle feature. The full table is in the JSON artifact.
+- Strongest observed motivation: `Longer persistence of a frozen local recovery subgoal is not sufficient; the observed R11 branches are consistent with stale-goal behavior, redundant/repeated manipulation, and interference with some otherwise successful trajectories. The evidence motivates testing explicit public task-progress state, but does not establish that mechanism causally.`
+- Support level: **MODERATE**.
+
+## Cost
+
+- Mean local PBR tokens: `2400.708`; mean extra recovery actions: `1.917`; total extra local tokens: `59880`; mean extra local tokens: `1247.5`; mean branch token delta versus OSR: `1738.792`.
+- NetPersistentWins: `-2`. No cost penalty or tuned utility was applied.
+
+## Integrity
+
+- Qwen calls: `0`; ALFWorld executions: `0`; replay calls: `0`; scientific branches rerun: `0`.
+- Frozen R8/R8.2/R9/R10/R11A/R11 artifacts modified: `false`.
+- Held-out tasks consumed: `false`; hidden facts used: `false`.
+
+## Formulae and methods
+
+- `R_continue`, `R_osr`, and `R_pbr` are the frozen binary positive-reward terminal returns. `PersistentWins = N(R_osr=0,R_pbr=1)`, `PersistentLosses = N(R_osr=1,R_pbr=0)`, and `NetPersistentWins = PersistentWins - PersistentLosses`.
+- `OSR_BOUNDARY` is the public transition after shared action 1; `PBR_HANDOFF` is the public transition after all recorded PBR actions. Equality is exact over observation text and ordered admissible maps, with family progress compared separately.
+- `HORIZON_PRESSURE_PLAUSIBLE` is true only when OSR post-boundary SFT actions exceed the PBR remaining SFT budget. It is a slot-count plausibility check, not a causal claim.
+- Loop counts follow the frozen definitions: adjacent repeats, strict A-B-A-B two-cycles, and repeated exact `go to` commands. Pattern flags overlap.
+- Public progress accepts only environment-owned mapped commands with confirming public result text. Pick-two uses exact `(object_type, instance_id)` identity and separates discovered, acquired-ever, ever-placed, currently-placed, currently-held, and rehandling states.
+
+## Scope conclusion
+
+The supported scope is narrow: the tested frozen-subgoal PBR-3 treatment did not improve over OSR-1 on this stratified TRAIN development corpus and met the preregistered negative gate. The mechanism evidence is consistent with stale local subgoals, redundant/repeated actions, context/horizon perturbation, and occasional useful follow-through, but does not show that persistent recovery is universally harmful or that reflection/multi-step reasoning cannot work.
+
+R12 STATUS: PASS
+
+NEXT STEP: STOP.
+# Progress-Aware Recovery R16 OSR-1 Control
+
+R16 freezes only the historical one-step OSR-1 control paired with the exact frozen R15 prefixes and R15-B CONTINUE outcomes. PAR, PBR, H-PROGRESS, held-out evaluation, and R17 were not run.
+
+## Provenance and operator
+
+- R15-B commit: `d1ef841ea9dc7423177fb7647906e2e719f0fbe7`; R15-B summary SHA-256: `e1c93cf811ca2bda8e7d2d9bd41c043e3124c75202badf94ceaa10531acd4431`.
+- R15 manifest/cards/freeze report SHA-256: `6075c77dec07c6256eaf0d44bacb493ddf8e88103c27e7ddbae4fe2973a22231` / `6090c366f5eabbf8055ff25764928d39dc61c07f3745e340752da4b5ee21f70c` / `9e0b56e0e8dd7c9263c75ad71fa89faad05f43c71b3251b9a94ed1fa0ee836c9`.
+- R15-B report/CSV SHA-256: `0f683f14720387fbcb93f144120f023427d6823880843a4799db6a90082cf611` / `3a15c42ce2f89ada3b5032e7bcff09fc92a0c5d60a0ac1ce7fdc0d9dab88d853`.
+- R14 source corpus SHA-256: `49cf94239e13409251c762af6137f303323db7f866ae4a4ae968d84e882e889e`; SFT adapter SHA-256: `6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11`.
+- Recovery: unadapted `Qwen/Qwen3-8B`, historical `two_stage_bounded_recovery_v2`; Stage 1 `two-stage-diagnosis-subgoal-v1` / 40 tokens; Stage 2 `two-stage-subgoal-bare-action-id-v2` / 16 tokens.
+- Historical fail-close semantics were preserved: Stage 2 is still called after invalid Stage 1, invalid Stage 1 withholds recovery action, and no retry/repair/fallback is used.
+- SFT continuation uses the frozen adapter, H4 k=4, thinking=false, greedy decoding, max_new_tokens=16, and the original 50-action horizon.
+
+## Exact replay
+
+- Scheduled/exact: `60/60`; task identity `60/60`; observation `60/60`.
+- Action-map `60/60`; recent-k4 `60/60`; complete-prefix `60/60`; remaining horizon `60/60`.
+- Replay failures: `[]`; model calls during replay: `0`.
+
+## Outcomes
+
+- R_continue: `29/31` successes/failures; R_osr: `31/29` successes/failures.
+- Beneficial/neutral/harmful: `4/54/2`; mean V_osr: `0.033333`.
+- RecoverySuccess: `4/31` = `0.129032`; Wilson 95% `(0.05134201164644764, 0.28852756954385356)`.
+- RecoveryHarm: `2/29` = `0.068966`; Wilson 95% `(0.019120864097994433, 0.21964947595851925)`.
+- Paired W/L/D: `4/2/6`; exact two-sided p `0.687500`; directional OSR>CONTINUE p `0.343750`.
+
+## Strata
+
+| Stratum | N | CONTINUE success | OSR success | Beneficial | Neutral | Harmful |
+|---|---:|---:|---:|---:|---:|---:|
+| failure | 30 | 0 | 4 | 4 | 26 | 0 |
+| success_control | 15 | 15 | 14 | 0 | 14 | 1 |
+| random_control | 15 | 14 | 13 | 0 | 14 | 1 |
+
+## Families
+
+| Family | N | CONTINUE successes | OSR successes | Beneficial | Harmful |
+|---|---:|---:|---:|---:|---:|
+| `pick_and_place_simple` | 8 | 6 | 6 | 1 | 1 |
+| `pick_two_obj_and_place` | 22 | 3 | 4 | 1 | 0 |
+| `pick_clean_then_place_in_recep` | 7 | 6 | 5 | 0 | 1 |
+| `pick_cool_then_place_in_recep` | 7 | 5 | 5 | 0 | 0 |
+| `pick_heat_then_place_in_recep` | 7 | 4 | 5 | 1 | 0 |
+| `look_at_obj_in_light` | 9 | 5 | 6 | 1 | 0 |
+
+## Pick-two failure mechanism descriptives
+
+- N `18`; CONTINUE successes `0`; OSR successes `1`; beneficial/neutral/harmful `1/17/0`.
+- Action on completed target `1`; action on known unfinished target `1`; receptacle/search `15`; rehandling `1`.
+- Exact object and receptacle instance identities were retained in public-only progress descriptors; no hidden state was used.
+
+## OSR operator and action relation
+
+- Stage1 attempted/valid/invalid: `60/57/3`; Stage2 attempted/valid: `60/60`.
+- Stage2 malformed/out-of-range/mapping/other invalid: `0/0/0/0`.
+- Recovery actions executed/withheld: `57/3`; maximum per prefix: `1`; Progress Card model inputs: `0`.
+- Recovery action same/disagreement/withheld vs CONTINUE: `18/39/3`.
+- Disagreement classification (beneficial/neutral/harmful): `4/33/2`.
+
+## Loops
+
+- Reduced/unchanged/increased: `17/35/8`; loop-reduction beneficial: `4`.
+- Indicators are descriptive adjacent repeats, strict two-cycles, and repeated navigation; loop reduction is not equated with recovery.
+
+## Protocol, cost, and integrity
+
+- Resumed SFT decisions/executable/validity: `1226/1226/1.000000`; malformed/out-of-range/mapping/wrong: `0/0/0/0`.
+- Local recovery tokens mean/median: `1199.983` / `1109.000`; latency mean/median: `1.422` / `1.425` seconds.
+- Branch token delta mean/median vs CONTINUE: `517.183` / `578.500`; latency delta mean/median: `0.792` / `0.860` seconds.
+- Branch input/generated/total tokens: `765424` / `8233` / `773657`; total branch latency: `598.829` seconds; wall time: `2299.198` seconds; peak GPU memory: `33473389568` bytes.
+- Recovery model calls: `120`; PAR/PBR calls: `0/0`; held-out/valid_seen/valid_unseen: `0/0/0`.
+- Interruptions: `0`; incomplete retries: `3`; completed reruns: `0`.
+- R15-A and R15-B frozen artifacts remained byte-identical. No Progress Card was supplied to Stage 1, Stage 2, or SFT-P0. H-PROGRESS/R17 was not evaluated.
+
+## R16 STATUS:
+PASS
+
+DECISION:
+A. OSR CONTROL FROZEN
+
+NEXT:
+STOP.
+Do not run PAR, PBR, H-PROGRESS, or R17 without separate authorization.
+# Progress-Aware Recovery R17 PAR-1
+
+R17 evaluates only PAR-1 versus the frozen R16 OSR-1 control on the exact 60 R15 prefixes. PBR, held-out evaluation, training, and R18 were not run.
+
+## Provenance
+
+- R15 manifest/cards SHA-256: `6075c77dec07c6256eaf0d44bacb493ddf8e88103c27e7ddbae4fe2973a22231` / `6090c366f5eabbf8055ff25764928d39dc61c07f3745e340752da4b5ee21f70c`.
+- R15-B summary SHA-256: `e1c93cf811ca2bda8e7d2d9bd41c043e3124c75202badf94ceaa10531acd4431`; R16 report/summary/CSV SHA-256: `05329392357064ee86a537c2e2deeb1991491440d5e33b9e85cabf5162e95455` / `c59345ad1ea1afd5cf7e889b400c798e7911d198f2401fd28939e9b1d79041b9` / `3bd7a00e21319b401e2e9dce0559fddacb840770520d49a43cb0b374f67117df`.
+- Recovery model: unadapted `Qwen/Qwen3-8B` with historical `two_stage_bounded_recovery_v2`; SFT adapter `6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11`.
+
+## Treatment-difference audit
+
+- Static audit: `PASS`; only model-visible difference: `one frozen public_progress_card_v1 block inserted before response boundary in Stage1 and Stage2`.
+- Same recovery model/templates/generation/parsers/fail-close/SFT/horizon: `yes/yes/yes/yes/yes/yes/yes`; audit SHA-256 `455fa2d6771ffd26aefc3fd0198d23b268da3c770a7575b1fcf4f9479bb0fef1`.
+
+## Exact replay
+
+- Scheduled/exact: `60/60`; task identity/observation/action-map/recent-k4/complete-prefix/remaining-horizon: `60/60/60/60/60/60`.
+- Replay failures: `[]`; model calls during replay: `0`.
+
+## Progress Card
+
+- Loaded/exact mappings: `60/60`; regeneration/mutation/hash mismatches: `0/0/0`.
+- Stage1/Stage2/SFT card inputs: `60/60/0`.
+
+## PAR operator
+
+- Stage1 attempted/valid/invalid: `60/58/2`; Stage2 attempted/valid: `60/60`.
+- Stage2 malformed/out-of-range/mapping/other: `0/0/0/0`.
+- Recovery executed/withheld: `58/2`; max actions: `1`; SFT card inputs: `0`.
+
+## Outcomes
+
+- CONTINUE success/failure: `29/31`; OSR: `31/29`; PAR: `33/27`.
+- PAR vs OSR ProgressWin/Tie/Loss: `3/56/1`; NetProgressWins `2`; mean DeltaProgress `0.033333`.
+- Exact two-sided p `0.625000`; directional PAR>OSR p `0.312500`.
+- PAR vs CONTINUE beneficial/neutral/harmful: `5/54/1`; mean V_par `0.066667`.
+
+## Rescue/harm
+
+- N_c0 `31`; OSR/PAR rescues `4/5`; AdditionalRescues `1`; PAR RecoverySuccess `5/31` Wilson `(0.07092519905439934, 0.3263470272497887)`.
+- N_c1 `29`; OSR/PAR harms `2/1`; AdditionalHarms `-1`; PAR RecoveryHarm `1/29` Wilson `(0.006113056614032261, 0.1717589106470025)`.
+
+## Strata PAR vs OSR
+
+- failure: N `30`, CONTINUE/OSR/PAR successes `0/4/5`, W/T/L `2/27/1`.
+- success_control: N `15`, CONTINUE/OSR/PAR successes `15/14/15`, W/T/L `1/14/0`.
+- random_control: N `15`, CONTINUE/OSR/PAR successes `14/13/13`, W/T/L `0/15/0`.
+
+## Pick-two and mechanism
+
+- Pick-two N `18`; CONTINUE/OSR/PAR success `0/1/1`; ProgressWins/Losses `0/0`.
+- Completed-target actions OSR/PAR `1/1`; known-unfinished `1/0`; rehandling `1/1`; receptacle/search `15/14`.
+- Stage1 diagnosis same/changed `15/45`; subgoal same/changed `16/44`.
+- Recovery action same/different/OSR-withheld-PAR-executed/OSR-executed-PAR-withheld/both-withheld: `36/19/3/2/0`.
+
+## Loops and cost
+
+- PAR loops vs OSR reduced/unchanged/increased: `7/45/8`.
+- PAR local recovery tokens mean/median `1365.117/1267.000`; latency `1.476/1.442` s.
+- Token/latency delta PAR-OSR `165.133/0.054` mean; Progress Card token overhead mean/median `164.450/159.500`.
+- Full branch delta PAR-OSR tokens/latency `352.217/0.489`; PAR-CONTINUE `869.400/1.281`.
+
+## Integrity
+
+- Interruptions/incomplete retries/completed reruns: `0/1/0`; PBR calls `0`; training `0`.
+- valid_seen/valid_unseen consumed: `0/0`; R15/R16 frozen artifacts unchanged: `True`.
+
+## GATE
+
+- NetProgressWins `2`; AdditionalRescues `1`; AdditionalHarms `-1`; ordered gate result `C`: insufficient evidence that public progress state improves one-step recovery.
+
+## R17 STATUS:
+PASS
+
+DECISION:
+C
+
+NEXT:
+STOP.
+Do not run PBR, expand the dataset, or modify the protocol.
+# Progress-Aware Recovery R18-C1 FACT-TEXT Development Comparison
+
+**DEVELOPMENT EVIDENCE ONLY / NOT HELD-OUT CONFIRMATION.**
+
+R18-C1 runs only the frozen FACT-TEXT treatment on the exact 60 R15 development prefixes. It does not rerun OSR, CARD-v2, PAR, PBR, training, or held-out tasks.
+
+## Provenance
+
+- R18-B commit: `aee5b6b21708dd7fa9c827453aa3b362e19fde22`; canonical facts SHA: `12dae35e648e32b2208196db13e2ad8e2cc0589d3033b138287b1332227636b6`; FACT-TEXT SHA: `f8316be41ca2cd58e10a58f87d57c727eb7b9d9c79a5d7848e5f3141e3353146`.
+- Treatment manifest SHA: `62dfab3c65dcb05620fb0882c955daf89530a250b51c9887d71d63a874e29f32`; all frozen prior artifacts unchanged: `True`.
+
+## Replay and treatment integrity
+
+- Exact replay: `60/60`; replay model calls: `0`.
+- FACT-TEXT mappings: `60/60`; regeneration/mutations: `0` / `0`.
+- Stage1/Stage2 FACT-TEXT inputs: `60` / `60`; SFT/CARD-v2 inputs: `0` / `0`.
+
+## Operator
+
+- Stage1 attempted/valid/invalid: `60/60/0`.
+- Stage2 attempted/valid: `60/60`; malformed/out-of-range/mapping: `0/0/0`.
+- Recovery executed/withheld: `60/0`; maximum recovery actions: `1`.
+
+## Outcomes
+
+- CONTINUE success/failure: `29/31`.
+- OSR success/failure: `31/29`.
+- FACT-TEXT success/failure: `32/28`.
+
+## Primary information effect
+
+- InfoWins/Ties/Losses: `3/55/2`; NetInfoWins: `1`; mean DeltaInfo: `0.016667`.
+- Discordant D: `5`; exact two-sided p: `1.000000`; directional FACT-TEXT>OSR p: `0.500000`.
+
+## Rescue / harm relative to CONTINUE
+
+- N_c0 `31`; OSR rescues `4`; FACT-TEXT rescues `5`; additional rescues `1`.
+- FACT-TEXT RecoverySuccess: `0.161290`; Wilson 95% `0.070925`–`0.326347`.
+- N_c1 `29`; OSR harms `2`; FACT-TEXT harms `2`; additional harms `0`.
+- FACT-TEXT RecoveryHarm: `0.068966`; Wilson 95% `0.019121`–`0.219649`.
+
+## Strata and family
+
+- `failure`: N=30; CONTINUE/OSR/FACT-TEXT success `0/4/5`; Info W/T/L `2/27/1`.
+- `success_control`: N=15; CONTINUE/OSR/FACT-TEXT success `15/14/15`; Info W/T/L `1/14/0`.
+- `random_control`: N=15; CONTINUE/OSR/FACT-TEXT success `14/13/12`; Info W/T/L `0/14/1`.
+- family `pick_and_place_simple`: N=8; CONTINUE/OSR/FACT-TEXT `6/6/6`; Info W/L `0/0`.
+- family `pick_two_obj_and_place`: N=22; CONTINUE/OSR/FACT-TEXT `3/4/4`; Info W/L `0/0`.
+- family `pick_clean_then_place_in_recep`: N=7; CONTINUE/OSR/FACT-TEXT `6/5/7`; Info W/L `2/0`.
+- family `pick_cool_then_place_in_recep`: N=7; CONTINUE/OSR/FACT-TEXT `5/5/5`; Info W/L `1/1`.
+- family `pick_heat_then_place_in_recep`: N=7; CONTINUE/OSR/FACT-TEXT `4/5/5`; Info W/L `0/0`.
+- family `look_at_obj_in_light`: N=9; CONTINUE/OSR/FACT-TEXT `5/6/5`; Info W/L `0/1`.
+
+## Pick-two failure prefixes
+
+- N `18`; CONTINUE/OSR/FACT-TEXT success `0/1/1`; InfoWins/Losses `0/0`.
+- Count-aware/instance-aware/location-aware: `18/17/3`.
+
+## Mechanism and fact relevance
+
+- Diagnosis changed `54`; subgoal changed `51`.
+- Same/different executed action `34/23`; OSR withheld/FACT executed `3`; OSR executed/FACT withheld `0`; both withheld `0`.
+- Different-action InfoWin/Tie/Loss: `{'InfoWin': 2, 'InfoTie': 19, 'InfoLoss': 2}`.
+- Descriptive changed-action fact relevance: `{'DIRECTLY_RELEVANT': 11, 'POSSIBLY_RELEVANT': 12}`.
+
+## Loops vs OSR
+
+- Reduced/unchanged/increased: `5/43/12`.
+- Loop-change cross-tab with InfoWin/Tie/Loss: `{'reduced': {'InfoTie': 4, 'InfoWin': 1}, 'unchanged': {'InfoTie': 42, 'InfoWin': 1}, 'increased': {'InfoTie': 9, 'InfoLoss': 2, 'InfoWin': 1}}`.
+
+## Cost
+
+- FACT-TEXT local tokens mean/median: `1357.000` / `1256.0`; latency mean/median: `1.460633` / `1.449642` seconds.
+- Local token delta vs OSR mean/median: `157.017` / `153.5`; latency delta mean/median: `0.038841` / `0.026035` seconds.
+- Treatment-text input-token overhead mean/median: `156.967` / `153.5`.
+- Full-branch token delta mean/median: `320.317` / `148.0`; latency delta mean/median: `0.299682` / `0.154638` seconds.
+
+## Integrity and execution boundary
+
+- Interruptions `0`; incomplete retries `0`; completed reruns `0`.
+- New OSR runs: 0; CARD-v2 runs: 0; PAR-v1 reruns: 0; PBR/training/held-out usage: 0/0/0.
+- Recovery model: Qwen/Qwen3-8B unadapted; SFT: Qwen/Qwen3-8B plus frozen adapter; no FACT-TEXT entered SFT prompts.
+
+## Artifact hashes
+
+- `report`: `computed after report`
+- `summary`: `292f0456a353ea00717e80f3d0cab1251ebd6af1985c4ee37eb05815494557d8`
+- `csv`: `193567a709f567bcf03e72ae717dff212d68ddf6cd706f0d76c578d37c38fcb7`
+
+## R18-C1 STATUS:
+PASS
+
+INTERPRETATION:
+Report only what the paired development results support. This milestone does not claim representation benefit.
+
+NEXT:
+STOP.
+# Progress-Aware Recovery R18-C2 CARD-v2 Development Comparison
+
+**DEVELOPMENT EVIDENCE ONLY / NOT HELD-OUT CONFIRMATION.**
+
+R18-C2 evaluates whether structured CARD-v2 improves bounded one-step recovery relative to FACT-TEXT containing identical semantic facts. It runs only the frozen CARD-v2 treatment on the exact 60 R15 development prefixes. It does not rerun OSR, FACT-TEXT, PAR, PBR, training, or held-out tasks.
+
+## Provenance
+
+- R18-B commit: `aee5b6b21708dd7fa9c827453aa3b362e19fde22`; canonical facts SHA: `12dae35e648e32b2208196db13e2ad8e2cc0589d3033b138287b1332227636b6`; CARD-v2 SHA: `3e72367113c5783307dba5e06e8b4cafdab569338251e7164aa14ca463e99fc9`.
+- FACT-TEXT SHA: `f8316be41ca2cd58e10a58f87d57c727eb7b9d9c79a5d7848e5f3141e3353146`; R18-C1 summary SHA: `e2446fc40d885623519a1b9f490e212f65c6626e34f8d6cf23217b956368a7e1`.
+- Treatment manifest SHA: `62dfab3c65dcb05620fb0882c955daf89530a250b51c9887d71d63a874e29f32`; all frozen prior artifacts unchanged: `True`.
+- Exact implementation commit: `aa9fa3c34520941e7e3be00294b111e8254fd65b`.
+
+## Replay and treatment integrity
+
+- Exact replay: `60/60`; replay model calls: `0`.
+- CARD-v2 mappings: `60/60`; regeneration/mutations: `0` / `0`.
+- Stage1/Stage2 CARD-v2 inputs: `60` / `60`; SFT inputs: `0`.
+
+## Operator
+
+- Stage1 attempted/valid/invalid: `60/56/4`.
+- Stage2 attempted/valid: `60/60`; malformed/out-of-range/mapping: `0/0/0`.
+- Recovery executed/withheld: `56/4`; maximum recovery actions: `1`.
+
+## Outcomes
+
+- CONTINUE success/failure: `29/31`.
+- OSR success/failure: `31/29`.
+- FACT-TEXT success/failure: `32/28`.
+- CARD-v2 success/failure: `30/30`.
+
+## Primary representation effect (CARD-v2 vs FACT-TEXT)
+
+- RepWins/Ties/Losses: `0/58/2`; NetRepWins: `-2`; mean DeltaRep: `-0.033333`.
+- Discordant D: `2`; exact two-sided p: `0.500000`; directional CARD-v2>FACT-TEXT p: `1.000000`.
+
+## Secondary progress effect vs OSR (CARD-v2 vs OSR)
+
+- InfoWins/Ties/Losses: `1/57/2`; NetInfoWins: `-1`; mean DeltaInfo: `-0.016667`.
+- Discordant D: `3`; exact two-sided p: `1.000000`; directional CARD-v2>OSR p: `0.875000`.
+
+## Rescue / harm relative to CONTINUE
+
+- N_c0 `31`; OSR rescues `4`; FACT-TEXT rescues `5`; CARD-v2 rescues `3`.
+- Additional rescues vs FACT-TEXT: `-2`; additional rescues vs OSR: `-1`.
+- CARD-v2 RecoverySuccess: `0.096774`; Wilson 95% `0.033464`–`0.249003`.
+- N_c1 `29`; OSR harms `2`; FACT-TEXT harms `2`; CARD-v2 harms `2`.
+- Additional harms vs FACT-TEXT: `0`; additional harms vs OSR: `0`.
+- CARD-v2 RecoveryHarm: `0.068966`; Wilson 95% `0.019121`–`0.219649`.
+
+## Strata and family
+
+- `failure`: N=30; CONTINUE/OSR/FACT-TEXT/CARD-v2 success `0/4/5/3`; Rep W/T/L `0/28/2`; Info W/T/L `0/29/1`.
+- `success_control`: N=15; CONTINUE/OSR/FACT-TEXT/CARD-v2 success `15/14/15/15`; Rep W/T/L `0/15/0`; Info W/T/L `1/14/0`.
+- `random_control`: N=15; CONTINUE/OSR/FACT-TEXT/CARD-v2 success `14/13/12/12`; Rep W/T/L `0/15/0`; Info W/T/L `0/14/1`.
+- family `pick_and_place_simple`: N=8; CONTINUE/OSR/FACT-TEXT/CARD-v2 `6/6/6/6`; Rep W/L `0/0`; Info W/L `0/0`.
+- family `pick_two_obj_and_place`: N=22; CONTINUE/OSR/FACT-TEXT/CARD-v2 `3/4/4/4`; Rep W/L `0/0`; Info W/L `0/0`.
+- family `pick_clean_then_place_in_recep`: N=7; CONTINUE/OSR/FACT-TEXT/CARD-v2 `6/5/7/6`; Rep W/L `0/1`; Info W/L `1/0`.
+- family `pick_cool_then_place_in_recep`: N=7; CONTINUE/OSR/FACT-TEXT/CARD-v2 `5/5/5/4`; Rep W/L `0/1`; Info W/L `0/1`.
+- family `pick_heat_then_place_in_recep`: N=7; CONTINUE/OSR/FACT-TEXT/CARD-v2 `4/5/5/5`; Rep W/L `0/0`; Info W/L `0/0`.
+- family `look_at_obj_in_light`: N=9; CONTINUE/OSR/FACT-TEXT/CARD-v2 `5/6/5/5`; Rep W/L `0/0`; Info W/L `0/1`.
+
+## Pick-two failure prefixes
+
+- N `18`; CONTINUE/OSR/FACT-TEXT/CARD-v2 success `0/1/1/1`; RepWins/Losses `0/0`; InfoWins/Losses `0/0`.
+- Count-aware/instance-aware/location-aware: `18/17/3`.
+
+## Mechanism and fact relevance
+
+- Diagnosis changed vs FACT-TEXT `37`; subgoal changed vs FACT-TEXT `38`.
+- Diagnosis changed vs OSR `51`; subgoal changed vs OSR `46`.
+- Action relations vs FACT-TEXT: `{'different': 18, 'same': 38, 'prior_executed_current_withheld': 4}`.
+- Action relations vs OSR: `{'different': 19, 'same': 35, 'prior_executed_current_withheld': 3, 'both_withheld': 1, 'prior_withheld_current_executed': 2}`.
+- Different-action vs FACT-TEXT RepWin/Tie/Loss: `{'RepWin': 0, 'RepTie': 17, 'RepLoss': 1}`.
+- Different-action vs OSR InfoWin/Tie/Loss: `{'InfoWin': 0, 'InfoTie': 17, 'InfoLoss': 2}`.
+- Descriptive changed-action fact relevance vs FACT-TEXT: `{'POSSIBLY_RELEVANT': 10, 'DIRECTLY_RELEVANT': 8}`.
+- Descriptive changed-action fact relevance vs OSR: `{'POSSIBLY_RELEVANT': 12, 'DIRECTLY_RELEVANT': 7}`.
+
+## Loops
+
+- Loops vs FACT-TEXT reduced/unchanged/increased: `11/46/3`.
+- Loop-change cross-tab with RepWin/Tie/Loss: `{'reduced': {'RepTie': 10, 'RepLoss': 1}, 'unchanged': {'RepTie': 45, 'RepLoss': 1}, 'increased': {'RepTie': 3}}`.
+- Loops vs OSR reduced/unchanged/increased: `7/44/9`.
+- Loop-change cross-tab with InfoWin/Tie/Loss: `{'reduced': {'InfoTie': 6, 'InfoWin': 1}, 'unchanged': {'InfoTie': 44}, 'increased': {'InfoTie': 7, 'InfoLoss': 2}}`.
+
+## Cost
+
+- CARD-v2 local tokens mean/median: `1364.567` / `1263.0`; latency mean/median: `1.459178` / `1.431880` seconds.
+- Local token delta vs FACT-TEXT mean/median: `7.567` / `8.0`; latency delta mean/median: `-0.001455` / `0.001588` seconds.
+- Treatment token overhead vs FACT-TEXT mean/median: `7.283` / `8.0`.
+- Local token delta vs OSR mean/median: `164.583` / `159.0`; latency delta mean/median: `0.037386` / `0.021797` seconds.
+- Treatment token overhead vs OSR mean/median: `164.250` / `159.0`.
+
+## Integrity and execution boundary
+
+- Interruptions `0`; incomplete retries `0`; completed reruns `0`.
+- New OSR runs: 0; FACT-TEXT reruns: 0; PAR-v1 reruns: 0; PBR/training/held-out usage: 0/0/0.
+- Recovery model: Qwen/Qwen3-8B unadapted; SFT: Qwen/Qwen3-8B plus frozen adapter; no CARD-v2 or FACT-TEXT entered SFT prompts.
+
+## Artifact hashes
+
+- `report`: `computed after report`
+- `summary`: `21a07b540b4c17f419477916a0cb69d585c849bcef61c89c54fca8b1da3b2da8`
+- `csv`: `cf4b7f2eb5ae80e1950d9d0fc2e290f0cbc5a4351f38d754f0052f5363c3d7a7`
+
+## R18-C2 STATUS:
+PASS
+
+INTERPRETATION:
+Report only what the paired development results support. This milestone evaluates whether representation structure provides causal recovery benefit over matching facts in unstructured text.
+
+NEXT:
+STOP.

@@ -1,0 +1,378 @@
+{
+  "audit_kind": "bounded read-only identity/consumed-registration metadata inventory; no task payloads or outcomes read",
+  "observed_utc": "2026-10-25T06:01:46.757589+00:00",
+  "repository": {
+    "root": "/home/lizening/wt-codex-r18c2",
+    "branch": "agent/codex-r18c2",
+    "head": "e537f441010077123a307e9d50ea40cf8dad8547"
+  },
+  "identity_rule": {
+    "canonical_task_trial_id": "normalized relative POSIX path task_directory/trial_directory; schedule task_id values use the same slash form",
+    "task_level_exclusion": "if a consumed registration has only task-directory identity, conservatively exclude all trial-directory identities below that task",
+    "prefix_rule": "prefixes are not additional task episodes; count by underlying canonical task/trial once where the mapping is present"
+  },
+  "directory_splits": {
+    "train": {
+      "task_directory_count": 2435,
+      "task_trial_directory_identity_count": 6374,
+      "tasks_without_trial_subdirectories": 0,
+      "known_exact_or_parent_used_excluded_count": 2412,
+      "known_identity_group_intersections_counts": {
+        "expert_train": 1074,
+        "expert_validation": 126,
+        "online_development": 60,
+        "prior_architecture": 0,
+        "prior_recovery_source_pool": 0,
+        "heldout_exclusion_union": 1266,
+        "valid_unseen_consumed_G1": 0,
+        "all_saved_exclusion_registers": 2105,
+        "recovery_register:r6_r7_source_pool_or_sprint2c": 120,
+        "recovery_register:r8_scientific_prefix_or_progress_audit": 120,
+        "recovery_register:r9_continue": 47,
+        "recovery_register:r10_osr": 47,
+        "recovery_register:r11_pbr": 48,
+        "recovery_register:r11a_smoke": 1,
+        "recovery_register:r12_examples_or_mechanism_audit": 47,
+        "recovery_register:previous_recovery_experiment_tasks": 0,
+        "R14_completed_schedule_positions": 180,
+        "R19_completed_source_episodes": 127,
+        "valid_seen_known_excluded": 0
+      },
+      "known_unlisted_candidate_count": 3962,
+      "candidate_status": "KNOWN_SET_DIFFERENCE_ONLY__POLLUTION_UNVERIFIED__NOT_CLEAN_HELDOUT",
+      "directory_inventory_sha256": "5731baf43da2a7bc319035ca8082dbcb95fb7e9ff600597219179b67f1731d09"
+    },
+    "valid_seen": {
+      "task_directory_count": 242,
+      "task_trial_directory_identity_count": 251,
+      "tasks_without_trial_subdirectories": 0,
+      "known_exact_or_parent_used_excluded_count": 140,
+      "known_identity_group_intersections_counts": {
+        "expert_train": 0,
+        "expert_validation": 0,
+        "online_development": 0,
+        "prior_architecture": 101,
+        "prior_recovery_source_pool": 136,
+        "heldout_exclusion_union": 140,
+        "valid_unseen_consumed_G1": 0,
+        "all_saved_exclusion_registers": 140,
+        "recovery_register:r6_r7_source_pool_or_sprint2c": 140,
+        "recovery_register:r8_scientific_prefix_or_progress_audit": 25,
+        "recovery_register:r9_continue": 0,
+        "recovery_register:r10_osr": 0,
+        "recovery_register:r11_pbr": 0,
+        "recovery_register:r11a_smoke": 0,
+        "recovery_register:r12_examples_or_mechanism_audit": 0,
+        "recovery_register:previous_recovery_experiment_tasks": 136,
+        "R14_completed_schedule_positions": 0,
+        "R19_completed_source_episodes": 0,
+        "valid_seen_known_excluded": 140
+      },
+      "known_unlisted_candidate_count": 111,
+      "candidate_status": "KNOWN_SET_DIFFERENCE_ONLY__POLLUTION_UNVERIFIED__NOT_CLEAN_HELDOUT",
+      "directory_inventory_sha256": "c80e5f2faa29f0fdc4ac08148865921de8b93f3571f81e274ea7ad7636b60ab3"
+    },
+    "valid_unseen": {
+      "task_directory_count": 85,
+      "task_trial_directory_identity_count": 255,
+      "tasks_without_trial_subdirectories": 0,
+      "known_exact_or_parent_used_excluded_count": 60,
+      "known_identity_group_intersections_counts": {
+        "expert_train": 0,
+        "expert_validation": 0,
+        "online_development": 0,
+        "prior_architecture": 0,
+        "prior_recovery_source_pool": 0,
+        "heldout_exclusion_union": 0,
+        "valid_unseen_consumed_G1": 60,
+        "all_saved_exclusion_registers": 60,
+        "recovery_register:r6_r7_source_pool_or_sprint2c": 0,
+        "recovery_register:r8_scientific_prefix_or_progress_audit": 0,
+        "recovery_register:r9_continue": 0,
+        "recovery_register:r10_osr": 0,
+        "recovery_register:r11_pbr": 0,
+        "recovery_register:r11a_smoke": 0,
+        "recovery_register:r12_examples_or_mechanism_audit": 0,
+        "recovery_register:previous_recovery_experiment_tasks": 0,
+        "R14_completed_schedule_positions": 0,
+        "R19_completed_source_episodes": 0,
+        "valid_seen_known_excluded": 0
+      },
+      "known_unlisted_candidate_count": 195,
+      "candidate_status": "KNOWN_SET_DIFFERENCE_ONLY__POLLUTION_UNVERIFIED__NOT_CLEAN_HELDOUT",
+      "directory_inventory_sha256": "22ecd380e5753d00fea96f53427e2ba3296333eb9fc81aab77867ac9e4a3132e"
+    }
+  },
+  "candidate_identity_file": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/AVAILABLE_IDENTITY_CANDIDATES.json",
+    "bytes": 789818,
+    "sha256": "ada528e9a9de3bb09aacf5bbfc28320c92e847c88dc475296070cd0a9acb1fc4",
+    "encoding": "compact JSON; per split, identity and SHA-256 of canonical relative task/trial ID"
+  },
+  "directory_identity_overlap": {
+    "train__valid_seen": 0,
+    "train__valid_unseen": 0,
+    "valid_seen__valid_unseen": 0
+  },
+  "candidate_identity_overlap": {
+    "train__valid_seen": 0,
+    "train__valid_unseen": 0,
+    "valid_seen__valid_unseen": 0
+  },
+  "identity_groups": {
+    "expert_train": {
+      "count": 1074,
+      "identity_sha256": "9355e90cd08a068def0e7c349403520154a8f939bd3a97b2afcefc6302987872"
+    },
+    "expert_validation": {
+      "count": 126,
+      "identity_sha256": "2b92cf502410c2900109fa0bd39082722019252d32376e51e2a5a3930ddbfc00"
+    },
+    "online_development": {
+      "count": 60,
+      "identity_sha256": "f5bf76065de4d5d6a944462ac8fe14c0c28c9204ab83d0b9dbc6399aed1014ba"
+    },
+    "prior_architecture": {
+      "count": 101,
+      "identity_sha256": "4a571744e17f25d51e4bcd2dd385844106087fc19edaaef2feb5c059ba288a2f"
+    },
+    "prior_recovery_source_pool": {
+      "count": 136,
+      "identity_sha256": "474ba6996f4fd19069ff34bb3df3cb9c45292e343dc02e3215aa9bfb9db74003"
+    },
+    "heldout_exclusion_union": {
+      "count": 1406,
+      "identity_sha256": "f4f78ee865a67bb54dc488c7a9aadb8810856b9bb2eb2b7576ad56e91adf8bb4"
+    },
+    "valid_unseen_consumed_G1": {
+      "count": 60,
+      "identity_sha256": "aeadfca80d4bdb0dbf59502f447c4298a603f249c302aab8c7f5edec750d40ac"
+    },
+    "all_saved_exclusion_registers": {
+      "count": 2305,
+      "identity_sha256": "bf900eae5254e8dc3ac51fce2deb5d30f3f9a5962a5b3ef63043097900f5f849"
+    },
+    "recovery_register:r6_r7_source_pool_or_sprint2c": {
+      "count": 260,
+      "identity_sha256": "17cf8823062837522719ecb4c46270624a0d0f74ef5084585d8116893d91dfa9"
+    },
+    "recovery_register:r8_scientific_prefix_or_progress_audit": {
+      "count": 145,
+      "identity_sha256": "dc229f14b81c0a23c18ff22ffe745ebea9e67c7ecd5237fec9f33d5115e4dd12"
+    },
+    "recovery_register:r9_continue": {
+      "count": 47,
+      "identity_sha256": "cc8f9dd4724fb7a58ef7c0e85028f51f061ae0284ce2a0aa5154d2664c6fee99"
+    },
+    "recovery_register:r10_osr": {
+      "count": 47,
+      "identity_sha256": "cc8f9dd4724fb7a58ef7c0e85028f51f061ae0284ce2a0aa5154d2664c6fee99"
+    },
+    "recovery_register:r11_pbr": {
+      "count": 48,
+      "identity_sha256": "2b6005b474ee85131d107b2fd0eef98b64a94c21c8e30d1195e67c53961cc6d3"
+    },
+    "recovery_register:r11a_smoke": {
+      "count": 1,
+      "identity_sha256": "0ee253019a34d3b14c0022bfb5aedcbd35de4a87698683e48f36bd703966f37d"
+    },
+    "recovery_register:r12_examples_or_mechanism_audit": {
+      "count": 47,
+      "identity_sha256": "cc8f9dd4724fb7a58ef7c0e85028f51f061ae0284ce2a0aa5154d2664c6fee99"
+    },
+    "recovery_register:previous_recovery_experiment_tasks": {
+      "count": 136,
+      "identity_sha256": "474ba6996f4fd19069ff34bb3df3cb9c45292e343dc02e3215aa9bfb9db74003"
+    },
+    "R14_completed_schedule_positions": {
+      "count": 180,
+      "identity_sha256": "9ffa152e8635a217d958334967a4750757fb34d84e7fd9da44c4223b75fcec16"
+    },
+    "R19_completed_source_episodes": {
+      "count": 127,
+      "identity_sha256": "593f7aacf1146c151616c930e36ca0ead0b1fd3cc4da0f14bf93ec7d631d6a59"
+    },
+    "valid_seen_known_excluded": {
+      "count": 140,
+      "identity_sha256": "ef35bea9156a6c9bc173a60a3753b93df39adfd1b6bbe322e4f085a710ac2358"
+    }
+  },
+  "r4_registration": {
+    "status": "complete",
+    "completed_prefix_id_count": 24,
+    "prefix_ids_sha256": "cbfa84032e7af76073b4465567b593fe9cfd494b97285e1228f2dae9913c8947",
+    "canonical_task_trial_mapping": "not reconstructed from outcome-bearing source records"
+  },
+  "r14_r19_registration": {
+    "R14_completed_source_task_trials": {
+      "count": 180,
+      "sha256": "9ffa152e8635a217d958334967a4750757fb34d84e7fd9da44c4223b75fcec16"
+    },
+    "R15_R16_R17_prefix_registers": {
+      "R15": {
+        "status": "completed",
+        "prefix_id_count": 60,
+        "prefix_ids_sha256": "dad58ce354bd9fa8e4ca77b42725a1b78d1a174da42c5e9a85656b35b2cf178f",
+        "canonical_task_trial_mapping": "not read from outcome-bearing reports in this metadata-only task"
+      },
+      "R16": {
+        "status": "completed",
+        "prefix_id_count": 60,
+        "prefix_ids_sha256": "dad58ce354bd9fa8e4ca77b42725a1b78d1a174da42c5e9a85656b35b2cf178f",
+        "canonical_task_trial_mapping": "not read from outcome-bearing reports in this metadata-only task"
+      },
+      "R17": {
+        "status": "completed",
+        "prefix_id_count": 60,
+        "prefix_ids_sha256": "dad58ce354bd9fa8e4ca77b42725a1b78d1a174da42c5e9a85656b35b2cf178f",
+        "canonical_task_trial_mapping": "not read from outcome-bearing reports in this metadata-only task"
+      },
+      "R18_C1": {
+        "status": "completed",
+        "registered_prefix_count": 60,
+        "heldout_consumption_count": 0,
+        "canonical_task_trial_ids_present_in_manifest": false
+      },
+      "R18_C2": {
+        "status": "completed",
+        "registered_prefix_count": 60,
+        "heldout_consumption_count": 0,
+        "canonical_task_trial_ids_present_in_manifest": false
+      }
+    },
+    "R18_C1_C2_prefix_registers": {
+      "R18_C1": {
+        "status": "completed",
+        "registered_prefix_count": 60,
+        "heldout_consumption_count": 0,
+        "canonical_task_trial_ids_present_in_manifest": false
+      },
+      "R18_C2": {
+        "status": "completed",
+        "registered_prefix_count": 60,
+        "heldout_consumption_count": 0,
+        "canonical_task_trial_ids_present_in_manifest": false
+      }
+    },
+    "R19_completed_source_episode_ids": {
+      "count": 127,
+      "sha256": "593f7aacf1146c151616c930e36ca0ead0b1fd3cc4da0f14bf93ec7d631d6a59"
+    },
+    "R19_other_completed_prefix_or_branch_units_not_added_as_new_source_episodes": 75,
+    "R19_unit_status_count": 385
+  },
+  "planned_but_not_counted_as_consumed": {
+    "sft_recovery_source_schedule_status": "frozen_unexecuted",
+    "persistent_recovery_source_schedule_status": "frozen_unexecuted",
+    "progress_aware_source_schedule_status": "frozen_unexecuted",
+    "reason": "these saved schedules are explicitly frozen_unexecuted; they were not treated as proof of consumption"
+  },
+  "inputs": [
+    {
+      "path": "/home/lizening/wt-codex-r18c2/configs/sft/sft_accepted_task_splits.json",
+      "bytes": 228202,
+      "sha256": "9c374fafdcc7d7db77e878d23e852a0ec55eedcc3886cb0cebe7491d67e564e5",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    },
+    {
+      "path": "/home/lizening/wt-codex-r18c2/configs/sft/sft_task_exclusions.json",
+      "bytes": 22337,
+      "sha256": "fdbe3b1c2d8162fa7c95ff25b57ace1eaf01c1224d42f9f1f447bf7a859541c5",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    },
+    {
+      "path": "/home/lizening/wt-codex-r18c2/configs/evaluation/sft_heldout_exclusions.json",
+      "bytes": 262419,
+      "sha256": "badff9aec90bc21828b8b5ae92eb254c66f50aacc1dfc16bbcbe15e6f038b419",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    },
+    {
+      "path": "/home/lizening/wt-codex-r18c2/configs/evaluation/sft_heldout_valid_seen_schedule.json",
+      "bytes": 1656,
+      "sha256": "f64990096d9782144960bde09681b6b9029e2af803c7479ef394a57254f4dbcc",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    },
+    {
+      "path": "/home/lizening/wt-codex-r18c2/configs/evaluation/sft_heldout_valid_unseen_schedule.json",
+      "bytes": 25544,
+      "sha256": "7ce71ad01bd03ad8a018104f3edacc4310e9a1b5fc6e015d808152f316e4e13e",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    },
+    {
+      "path": "/home/lizening/wt-codex-r18c2/configs/recovery/sft_recovery_source_exclusions.json",
+      "bytes": 318467,
+      "sha256": "6539dab3f852a48710538f8ac9fb3281ce063d150f869e895f6ca062017103f5",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    },
+    {
+      "path": "/home/lizening/wt-codex-r18c2/configs/recovery/persistent_recovery_exclusions.json",
+      "bytes": 330042,
+      "sha256": "f421d3951f155d6f1d00545b5370dd9e826589f4936925d3811d6b1819db6253",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    },
+    {
+      "path": "/home/lizening/wt-codex-r18c2/configs/recovery/progress_aware_source_exclusions.json",
+      "bytes": 5174371,
+      "sha256": "f69d8d80373ed7d836c368de2176080705bd63fc4fed48de92f566dcc711ac2c",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-feasibility-r4-20260908T080000Z/run_manifest.json",
+      "bytes": 2034,
+      "sha256": "3cb7aee16e0900fe6a41a198afa8e53ec2e5ed939fa260ee74a6f3ae23d9e5e4",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    },
+    {
+      "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/unit_registry.json",
+      "bytes": 234642,
+      "sha256": "c3898492c1fe542d60ea7c9f9363f48e352058f2b7ee86c812b54ef4e18f0cc8",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/run_manifest.json",
+      "bytes": 77502,
+      "sha256": "2216eaaec2a268e4f54bc0322098d5d4d080517691dc41a83bddac4715737043",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r15-b-20260910T000000Z/run_manifest.json",
+      "bytes": 2916,
+      "sha256": "0d933ea630063afae2587ee56b6c7803f371508ea272690ae923dc17e7a68016",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/run_manifest.json",
+      "bytes": 3247,
+      "sha256": "1ad1b1e4ab791330789cddeb33e9d07d4793d4e24bc0b76bbda5f008392c1273",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r17-par-20260911T000000Z/run_manifest.json",
+      "bytes": 3307,
+      "sha256": "6a686cfb910d722d51c418cad78cccca012cc0bb78aa63c41f3e0f95a35a4a84",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-r18-c1-20260911T000000Z/run_manifest.json",
+      "bytes": 1170,
+      "sha256": "b3728e5d53fa39f5d5c3457f3601f835db021674a49bb1239059f846d4806c1b",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-r18-c2-formal-aa9fa3c34520941e/run_manifest.json",
+      "bytes": 3571,
+      "sha256": "2090d87d310dc34c97650c63756ec8d6eadab44a4331a56bf86c47796c7d1c7c",
+      "role": "identity/schedule/exclusion/consumed-registration metadata only"
+    }
+  ],
+  "limitations": [
+    "Candidate sets are only the difference between installed task/trial directory names and located consumed/exclusion registrations; global contamination is not disproven, so no candidate is called clean or held out.",
+    "R4 prefix-only IDs and R16/R17 prefix IDs are not mapped to extra canonical task/trial identities from outcome-bearing files in this task.",
+    "R18 C1/C2 run manifests provide prefix counts but no canonical task/trial IDs; exact round-specific mapping remains incomplete.",
+    "R19 127 source_episode identities are counted once; its 36 recovery_path_extension and other prefix/branch units are not added as extra source episodes.",
+    "No new schedule, argv, experiment, heldout authorization, power claim, or scientific permission is created."
+  ],
+  "scope_note": "A broad text search during preparation briefly emitted two already-consumed R16/R17 pair rows including outcome columns. No unconsumed task content was opened or used; those outcome values were not used in this identity analysis. The final audit script reads only directory names and allowlisted metadata/registration JSON.",
+  "scientific_execution": false,
+  "unconsumed_outcomes_read_by_final_audit": 0
+}

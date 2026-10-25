@@ -1,0 +1,2249 @@
+{
+  "SPRINT_MANIFEST": {
+    "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/corpus/sprint2c-paired-20260820T143604Z/run_manifest.json",
+    "bytes": 1672,
+    "sha256": "43d84e78be357e1feeba3aa1055e7e59ebee4c71f23b7f8a798bded3fb4a4953",
+    "keys": [
+      "created_at",
+      "frozen_base_policy",
+      "frozen_recovery",
+      "frozen_recovery_protocol_commit",
+      "git_revision",
+      "model_inference",
+      "pair_count",
+      "record_schema_sha256",
+      "recovery_operator_version",
+      "schema_version",
+      "selected_prefix_manifest_sha256",
+      "selector_training",
+      "source_h4_schedule_sha256",
+      "source_h4_trajectory_sha256",
+      "stage_one_instructions_sha256",
+      "stage_one_prompt_version",
+      "stage_two_instructions_sha256",
+      "stage_two_prompt_version"
+    ],
+    "identity_fields": {
+      "frozen_base_policy.decoding": "greedy",
+      "frozen_base_policy.max_new_tokens": 32,
+      "frozen_base_policy.model_id": "Qwen/Qwen3-8B",
+      "frozen_base_policy.pipeline_version": "indexed_bounded_context_v1",
+      "frozen_base_policy.thinking": false,
+      "frozen_recovery.stage_one_max_new_tokens": 40,
+      "frozen_recovery.stage_two_max_new_tokens": 16,
+      "git_revision": "2242534f86a40f7ff53010fd68eada1a5895a117",
+      "model_inference": true,
+      "recovery_operator_version": "two_stage_bounded_recovery_v2"
+    }
+  },
+  "SPRINT_SOURCE_MANIFEST": {
+    "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/corpus/sprint2c-h4-pool-20260820T124651Z/run_manifest.json",
+    "bytes": 3996,
+    "sha256": "05c834bb76409f3b9d7f9804b965d131228c7980eb0655c1f28d7bd99158efc1",
+    "keys": [
+      "action_selection_mode",
+      "created_at",
+      "environment",
+      "git_revision",
+      "metadata",
+      "model_version",
+      "pipeline_version",
+      "resolved_config",
+      "run_id",
+      "seed_schedule",
+      "split"
+    ],
+    "identity_fields": {
+      "git_revision": "8fd6c14b3a818e115dbae5e2bff71b00705adaf3",
+      "metadata.conditional_extension_executed": false,
+      "model_version": "Qwen/Qwen3-8B",
+      "pipeline_version": "indexed_bounded_context_v1",
+      "resolved_config.collection.conditional_extension_executed": false,
+      "resolved_config.collection.max_steps": 50,
+      "resolved_config.collection.model_config": "configs/model/qwen3_8b_indexed_h4.yaml",
+      "resolved_config.model.enable_thinking": false,
+      "resolved_config.model.generation.max_new_tokens": 32,
+      "resolved_config.model.model_id": "Qwen/Qwen3-8B",
+      "resolved_config.model.pipeline_version": "indexed_bounded_context_v1"
+    }
+  },
+  "R4_MANIFEST": {
+    "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-feasibility-r4-20260908T080000Z/run_manifest.json",
+    "bytes": 2034,
+    "sha256": "3cb7aee16e0900fe6a41a198afa8e53ec2e5ed939fa260ee74a6f3ae23d9e5e4",
+    "keys": [
+      "adapter_sha256",
+      "completed_prefix_ids",
+      "continuation_max_new_tokens",
+      "continuation_pipeline",
+      "created_at",
+      "decoding",
+      "fallback",
+      "git_revision_before_inference",
+      "gpu_memory",
+      "history_window",
+      "horizon",
+      "model",
+      "pipeline_version",
+      "prefix_manifest_sha256",
+      "r2_commit",
+      "r3_results_commit",
+      "r4a_commit",
+      "r4a_formal_authorization_clarification",
+      "recovery_model_loaded",
+      "recovery_pipeline",
+      "recovery_stage_one_max_new_tokens",
+      "recovery_stage_two_max_new_tokens",
+      "repair",
+      "retry",
+      "schema_version",
+      "simultaneous_two_model_load",
+      "source_schedule_sha256",
+      "source_trajectory_sha256",
+      "status",
+      "summary_sha256",
+      "thinking"
+    ],
+    "identity_fields": {
+      "adapter_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+      "continuation_max_new_tokens": 16,
+      "continuation_pipeline": "sft_p0_action_only_v1",
+      "decoding": "greedy",
+      "git_revision_before_inference": "7a01a6107b4bc9c994893220aab078af39fe4fff",
+      "horizon": 50,
+      "model": "Qwen/Qwen3-8B",
+      "pipeline_version": "sft_recovery_feasibility_r4_v1",
+      "recovery_model_loaded": true,
+      "recovery_pipeline": "two_stage_bounded_recovery_v2",
+      "recovery_stage_one_max_new_tokens": 40,
+      "recovery_stage_two_max_new_tokens": 16,
+      "simultaneous_two_model_load": true,
+      "thinking": false
+    }
+  },
+  "R7_MANIFEST": {
+    "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/run_manifest.json",
+    "bytes": 56091,
+    "sha256": "1f8e8572cf7c164e8f90cbb907501ceab29d80cca0120e35c17f8bac245f7454",
+    "keys": [
+      "accepted_episodes",
+      "action_selection_mode",
+      "adapter_sha256",
+      "base_model",
+      "completed_at",
+      "condition",
+      "created_at",
+      "demonstrations",
+      "episodes",
+      "exclusion_manifest_sha256",
+      "fallback",
+      "generation",
+      "git_revision_before_inference",
+      "heldout_split_consumed",
+      "history_context_mode",
+      "history_window",
+      "horizon",
+      "last_completed_schedule_index",
+      "memory",
+      "next_schedule_index",
+      "osr_run",
+      "pbr_run",
+      "pipeline_version",
+      "policy_pipeline",
+      "prefix_selection",
+      "r6_protocol_sha256",
+      "r6_revision",
+      "raw_trajectory_sha256",
+      "recovery",
+      "reflection",
+      "repair",
+      "report_sha256",
+      "resumed_at",
+      "retry",
+      "schedule_positions",
+      "schedule_sha256",
+      "schema_version",
+      "split",
+      "status",
+      "summary_report_sha256",
+      "summary_sha256",
+      "wall_seconds"
+    ],
+    "identity_fields": {
+      "adapter_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+      "base_model": "Qwen/Qwen3-8B",
+      "condition": "persistent_recovery_source_pool_r7",
+      "generation.decoding": "greedy",
+      "generation.max_new_tokens": 16,
+      "generation.model_calls_per_decision": 1,
+      "generation.thinking": false,
+      "git_revision_before_inference": "734c6125288e7be48e1d395f21ba66b67a38f789",
+      "horizon": 50,
+      "pipeline_version": "persistent_recovery_source_pool_r7_v1",
+      "policy_pipeline": "sft_p0_action_only_v1",
+      "r6_revision": "565b76c07871c1aca7161e199ed3d11d60fe50ff"
+    }
+  },
+  "R10_MANIFEST": {
+    "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-osr-control-r10-20260909T000000Z/run_manifest.json",
+    "bytes": 3651,
+    "sha256": "fb096f5672ef22d6f328d75e2b8e47d278338aac54b93c96c135697c718899c8",
+    "keys": [
+      "action_selection_mode",
+      "adapter_sha256",
+      "base_model",
+      "branches_completed",
+      "completed_at",
+      "completed_branch_reruns",
+      "continuation_pipeline",
+      "continue_reruns",
+      "created_at",
+      "fallback",
+      "generation",
+      "git_revision_before_inference",
+      "heldout_split_consumed",
+      "history_context_mode",
+      "history_window",
+      "horizon",
+      "memory",
+      "model_isolation",
+      "model_load",
+      "operator",
+      "pbr_calls",
+      "pbr_outputs",
+      "pbr_recovery_actions",
+      "pipeline_version",
+      "prefix_count",
+      "prefix_order",
+      "progress_overlay_used_for_model_input",
+      "r10_status",
+      "r6_protocol_sha256",
+      "r7_raw_trajectory_sha256",
+      "r7_schedule_sha256",
+      "r8_manifest_sha256",
+      "r8_overlay_sha256",
+      "r9_report_sha256",
+      "r9_summary_sha256",
+      "recovery_adapter_active",
+      "recovery_model",
+      "recovery_operator_version",
+      "repair",
+      "replay_gate",
+      "report_sha256",
+      "retry",
+      "schema_version",
+      "selector_training",
+      "source_split",
+      "status",
+      "summary_sha256",
+      "wall_seconds"
+    ],
+    "identity_fields": {
+      "adapter_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+      "base_model": "Qwen/Qwen3-8B",
+      "continuation_pipeline": "sft_p0_action_only_v1",
+      "generation.decoding": "greedy",
+      "generation.model_calls_per_recovery": 2,
+      "generation.sft_max_new_tokens": 16,
+      "generation.stage1_max_new_tokens": 40,
+      "generation.stage2_max_new_tokens": 16,
+      "generation.thinking": false,
+      "git_revision_before_inference": "8926d8fb10e634489031de3da910c572b50d8d44",
+      "horizon": 50,
+      "model_isolation.distinct_model_objects": true,
+      "model_isolation.recovery_adapter_active": false,
+      "model_isolation.sft_adapter_active": true,
+      "operator": "OSR-1",
+      "pipeline_version": "persistent_recovery_osr_control_r10_v1",
+      "progress_overlay_used_for_model_input": false,
+      "recovery_adapter_active": false,
+      "recovery_model": "Qwen/Qwen3-8B",
+      "recovery_operator_version": "two_stage_bounded_recovery_v2"
+    }
+  },
+  "R11_MANIFEST": {
+    "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-pbr-comparison-r11-20260909T000000Z/run_manifest.json",
+    "bytes": 2948,
+    "sha256": "c0811a04605ab31e9d51ad3cdc8d4b8c9c1dd834ca617859bddf28ea9b507bcb",
+    "keys": [
+      "adapter_sha256",
+      "base_model",
+      "branches_completed",
+      "completed_at",
+      "completed_branch_reruns",
+      "continuation_pipeline",
+      "created_at",
+      "fallback",
+      "generation",
+      "git_revision_before_inference",
+      "heldout_split_consumed",
+      "horizon",
+      "memory",
+      "operational_interruptions",
+      "operator",
+      "pipeline_version",
+      "post_run_metadata_correction_commit",
+      "prefix_count",
+      "prefix_order",
+      "progress_overlay_used_for_model_input",
+      "r10_summary_sha256",
+      "r11a_summary_sha256",
+      "r6_protocol_sha256",
+      "r7_raw_trajectory_sha256",
+      "r7_schedule_sha256",
+      "r8_manifest_sha256",
+      "r8_overlay_sha256",
+      "r9_summary_sha256",
+      "recovery_operator_version",
+      "repair",
+      "replay_gate",
+      "report_sha256",
+      "retry",
+      "schema_version",
+      "selector",
+      "split",
+      "status",
+      "summary_sha256",
+      "wall_seconds"
+    ],
+    "identity_fields": {
+      "adapter_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+      "base_model": "Qwen/Qwen3-8B",
+      "continuation_pipeline": "sft_p0_action_only_v1",
+      "generation.decoding": "greedy",
+      "generation.sft_max_new_tokens": 16,
+      "generation.stage1_max_new_tokens": 40,
+      "generation.stage2_max_new_tokens": 16,
+      "generation.thinking": false,
+      "git_revision_before_inference": "26595a939be9b633dbc5801febce0ec95c6388e2",
+      "horizon": 50,
+      "operator": "PBR-3",
+      "pipeline_version": "persistent_recovery_pbr_comparison_r11_v1",
+      "progress_overlay_used_for_model_input": false,
+      "recovery_operator_version": "two_stage_bounded_recovery_v2"
+    }
+  },
+  "R14_MANIFEST": {
+    "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r14-20260910T000000Z/run_manifest.json",
+    "bytes": 77502,
+    "sha256": "2216eaaec2a268e4f54bc0322098d5d4d080517691dc41a83bddac4715737043",
+    "keys": [
+      "accepted_episodes",
+      "action_selection_mode",
+      "adapter_sha256",
+      "base_model",
+      "canonical_source_corpus_sha256",
+      "capacity_report_sha256",
+      "completed_at",
+      "completed_episode_reruns",
+      "condition",
+      "created_at",
+      "demonstrations",
+      "episodes",
+      "fallback",
+      "generation",
+      "git_revision_before_inference",
+      "heldout_split_consumed",
+      "history_context_mode",
+      "history_window",
+      "horizon",
+      "incomplete_episode_retries",
+      "last_completed_schedule_index",
+      "memory",
+      "next_schedule_index",
+      "operational_interruptions",
+      "pipeline_version",
+      "prefix_selection",
+      "progress_card_model_input",
+      "progress_cards_computed",
+      "r13_exclusions_sha256",
+      "r13_implementation_revision",
+      "r13_protocol_json_sha256",
+      "r13_protocol_report_sha256",
+      "r13_schedule_revision",
+      "r13_schedule_sha256",
+      "raw_trajectory_sha256",
+      "recovery",
+      "recovery_model_calls",
+      "reflection",
+      "repair",
+      "report_sha256",
+      "resumed_at",
+      "retry",
+      "schedule_positions",
+      "schema_version",
+      "split",
+      "status",
+      "summary_report_sha256"
+    ],
+    "identity_fields": {
+      "adapter_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+      "base_model": "Qwen/Qwen3-8B",
+      "condition": "progress_aware_recovery_source_pool_r14",
+      "generation.decoding": "greedy",
+      "generation.max_new_tokens": 16,
+      "generation.model_calls_per_decision": 1,
+      "generation.thinking": false,
+      "git_revision_before_inference": "effc580a2dceb8c08489b3fc4ba4775cd2db1f22",
+      "horizon": 50,
+      "pipeline_version": "progress_aware_r14_sft_p0_source_v1",
+      "progress_card_model_input": false,
+      "r13_implementation_revision": "dc725448c08a8b392193b01a69756163a387c28d",
+      "r13_schedule_revision": "8d678ec938c48b6e067a530f76167539e51a9c33",
+      "recovery_model_calls": 0
+    }
+  },
+  "R16_MANIFEST": {
+    "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r16-osr-20260910T000000Z/run_manifest.json",
+    "bytes": 3247,
+    "sha256": "1ad1b1e4ab791330789cddeb33e9d07d4793d4e24bc0b76bbda5f008392c1273",
+    "keys": [
+      "branches_completed",
+      "completed_at",
+      "completed_branch_reruns",
+      "created_at",
+      "csv_sha256",
+      "frozen_hashes",
+      "git_revision_before_inference",
+      "h_progress_calls",
+      "incomplete_branch_retries",
+      "model_constructed",
+      "model_load",
+      "operational_interruptions",
+      "par_calls",
+      "pbr_calls",
+      "prefix_order",
+      "qwen_calls",
+      "r16_status",
+      "replay_gate",
+      "replay_records",
+      "report_sha256",
+      "schema_version",
+      "status",
+      "summary_sha256",
+      "wall_seconds"
+    ],
+    "identity_fields": {
+      "frozen_hashes.sft_adapter": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+      "git_revision_before_inference": "d1ef841ea9dc7423177fb7647906e2e719f0fbe7",
+      "model_constructed": true,
+      "model_load.distinct_model_objects": true,
+      "model_load.recovery_adapter_active": false,
+      "model_load.sft_adapter_active": true,
+      "replay_gate.model_calls_during_replay": 0,
+      "replay_gate.remaining_horizon_exact": 60
+    }
+  },
+  "R17_MANIFEST": {
+    "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-recovery-r17-par-20260911T000000Z/run_manifest.json",
+    "bytes": 3307,
+    "sha256": "6a686cfb910d722d51c418cad78cccca012cc0bb78aa63c41f3e0f95a35a4a84",
+    "keys": [
+      "branches_completed",
+      "completed_at",
+      "completed_branch_reruns",
+      "created_at",
+      "csv_sha256",
+      "decision",
+      "frozen_hashes",
+      "git_revision_before_inference",
+      "incomplete_branch_retries",
+      "model_constructed",
+      "model_load",
+      "operational_interruptions",
+      "par_calls",
+      "pbr_calls",
+      "prefix_order",
+      "qwen_calls",
+      "r17_status",
+      "replay_gate",
+      "replay_records",
+      "report_sha256",
+      "schema_version",
+      "status",
+      "summary_sha256",
+      "training_runs",
+      "treatment_diff_audit_sha256",
+      "wall_seconds"
+    ],
+    "identity_fields": {
+      "frozen_hashes.sft_adapter": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+      "git_revision_before_inference": "2e1f85d72e791c61dda4792fc35e9fdfa651ef0d",
+      "model_constructed": true,
+      "model_load.distinct_model_objects": true,
+      "model_load.recovery_adapter_active": false,
+      "model_load.recovery_model": "Qwen/Qwen3-8B",
+      "model_load.sft_adapter_active": true,
+      "replay_gate.model_calls_during_replay": 0,
+      "replay_gate.remaining_horizon_exact": 60
+    }
+  },
+  "R18_C1_MANIFEST": {
+    "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-r18-c1-20260911T000000Z/run_manifest.json",
+    "bytes": 1170,
+    "sha256": "b3728e5d53fa39f5d5c3457f3601f835db021674a49bb1239059f846d4806c1b",
+    "keys": [
+      "accepted_branches",
+      "card_v2_runs",
+      "completed_at_seconds",
+      "completed_branch_reruns",
+      "csv_sha256",
+      "fact_text_regeneration_calls",
+      "fallback_used",
+      "git_revision_before_inference",
+      "gpu_memory",
+      "held_out_consumption",
+      "incomplete_branch_retries",
+      "model_calls_during_replay",
+      "model_load_seconds",
+      "operational_interruptions",
+      "osr_runs",
+      "par_runs",
+      "pbr_runs",
+      "prefixes",
+      "r18_b_commit",
+      "replay_exact",
+      "report_sha256",
+      "schema_version",
+      "status",
+      "summary_sha256",
+      "training_runs"
+    ],
+    "identity_fields": {
+      "git_revision_before_inference": "b0db686425ef4a5023a37096dc41ab786629bbba",
+      "model_calls_during_replay": 0,
+      "model_load_seconds": 285.42063396808226
+    }
+  },
+  "R18_C2_MANIFEST": {
+    "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/progress-aware-r18-c2-formal-aa9fa3c34520941e/run_manifest.json",
+    "bytes": 3571,
+    "sha256": "2090d87d310dc34c97650c63756ec8d6eadab44a4331a56bf86c47796c7d1c7c",
+    "keys": [
+      "accepted_branches",
+      "card_v2_regeneration_calls",
+      "completed_at_seconds",
+      "completed_branch_reruns",
+      "csv_sha256",
+      "execution_branch",
+      "fact_text_runs",
+      "fallback_used",
+      "git_revision_before_inference",
+      "gpu_memory",
+      "held_out_consumption",
+      "incomplete_branch_retries",
+      "model_calls_during_replay",
+      "model_load_seconds",
+      "operational_interruptions",
+      "osr_runs",
+      "par_runs",
+      "pbr_runs",
+      "prefixes",
+      "provenance",
+      "r18_b_commit",
+      "replay_exact",
+      "report_sha256",
+      "schema_version",
+      "status",
+      "summary_sha256",
+      "training_runs"
+    ],
+    "identity_fields": {
+      "git_revision_before_inference": "aa9fa3c34520941e7e3be00294b111e8254fd65b",
+      "model_calls_during_replay": 0,
+      "model_load_seconds": 21.764143204083666,
+      "provenance.adapter_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11"
+    }
+  },
+  "R19_RUNTIME": {
+    "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/runtime_manifest.json",
+    "bytes": 5711,
+    "sha256": "306a9e7c2d1b968e2a56e258fcd07aaf7467739460802a2b94c5e20411264916",
+    "keys": [
+      "cudnn_version",
+      "device",
+      "environment",
+      "gpu",
+      "inference",
+      "model_adapter_isolation",
+      "model_files",
+      "packages",
+      "python",
+      "schema_version",
+      "torch_cuda"
+    ],
+    "identity_fields": {
+      "inference.external_model_calls": false,
+      "model_adapter_isolation.actor_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "model_adapter_isolation.distinct_model_objects": true,
+      "model_adapter_isolation.recovery_adapter_active": false,
+      "model_adapter_isolation.recovery_controller.model_config_class": "transformers.models.qwen3.configuration_qwen3.Qwen3Config",
+      "model_adapter_isolation.recovery_controller.model_device": "cuda:0",
+      "model_adapter_isolation.recovery_controller.model_type": "qwen3",
+      "model_adapter_isolation.recovery_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "model_adapter_isolation.sft_adapter_active": true,
+      "model_adapter_isolation.task_actor.model_config_class": "transformers.models.qwen3.configuration_qwen3.Qwen3Config",
+      "model_adapter_isolation.task_actor.model_device": "cuda:0",
+      "model_adapter_isolation.task_actor.model_type": "qwen3",
+      "model_files.adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+      "model_files.adapter_file_sha256.adapter_config.json": "94090ee7ddaf2dd9e6500e43867c3c1c823b9bd02379eabc50c8345d18503d92",
+      "model_files.adapter_file_sha256.adapter_model.safetensors": "5f1fce989bb5d284a5ff8aed06979a11021733b2a6bce4af53ff36286b099c10",
+      "model_files.snapshot_file_sha256.model-00001-of-00005.safetensors": "31d6a825ae35f11fb85b195b4c42c146c051e446433125a215336abdf95cbf5f",
+      "model_files.snapshot_file_sha256.model-00002-of-00005.safetensors": "5991236cea6fe21f3d43cab0f0e84448734fbbe0789816202989f2ddc9d18282",
+      "model_files.snapshot_file_sha256.model-00003-of-00005.safetensors": "c5185c4794be2d8a9784d5753c9922db38df478ce11f9ed0b415b7304d896836",
+      "model_files.snapshot_file_sha256.model-00004-of-00005.safetensors": "b5ee7de71fbf17db3d5704e0c8f2bc7d005ca9e1d7ca2aeb19827b0cfcaa917a",
+      "model_files.snapshot_file_sha256.model-00005-of-00005.safetensors": "20c2d6366ab85c90786ccdd829cd2b9e7d30ef3b2ebbb998280e7e4014b542ff",
+      "model_files.snapshot_file_sha256.model.safetensors.index.json": "f9fdbcb91c23971c13ec5d5f2573d2349e8f61f2f049371ec699281748fdb1bc",
+      "model_files.snapshot_revision": "b968826d9c46dd6066d109eabc6255188de91218"
+    }
+  },
+  "R19_EXECUTION": {
+    "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_manifest.json",
+    "bytes": 21758,
+    "sha256": "b00e8e4eed375532a080da6579940b44bc09089d7917540aea3ca4c227daffa0",
+    "keys": [
+      "adapter_sha256",
+      "baseline_amendment_sha256",
+      "baseline_id",
+      "baseline_manifest_sha256",
+      "branches_sha256",
+      "completed_at_unix_seconds",
+      "entrypoint_repair_authorization_sha256",
+      "environment_action_counts_by_phase",
+      "environment_manifest_sha256",
+      "environment_operation_counts_by_phase",
+      "events_sha256",
+      "evidence_class",
+      "exclusion_manifest_sha256",
+      "execution",
+      "exit_receipt_name",
+      "g2_evidence_carried_forward",
+      "g2_evidence_sha256",
+      "g2_executed_implementation_sha",
+      "g2_review_artifact_sha256",
+      "g2_run_id",
+      "g3_authorization_sha256",
+      "g3_gate_receipt_file_sha256",
+      "g3_launch_implementation_sha",
+      "g3_review_artifact_sha256",
+      "g3_scientific_fingerprint_manifest_sha256",
+      "gate_manifest_sha256",
+      "identity_status",
+      "implementation_sha",
+      "mode",
+      "model_adapter_isolation",
+      "model_call_counts_by_phase",
+      "model_identity_sha256",
+      "new_g2_run_performed",
+      "physical_environment_resets",
+      "physical_expenditure",
+      "pinned_model_revision",
+      "planned_smoke_bounds",
+      "protocol_sha256",
+      "run_context",
+      "run_id",
+      "runtime_expectations_sha256",
+      "runtime_manifest_preload_sha256",
+      "runtime_manifest_sha256",
+      "schedule_episode_count",
+      "schema_version",
+      "source_contract_repair_amendment_sha256",
+      "source_contract_restart_authorization_sha256",
+      "source_manifest_sha256",
+      "source_restart_comparison_sha256",
+      "source_restart_comparison_status",
+      "source_restart_expected_snapshot_sha256",
+      "source_restart_predecessor_output_relative_path",
+      "source_restart_predecessor_run_id",
+      "source_restart_remaining_phase_caps",
+      "source_restart_repeated_generation_count",
+      "source_restart_repeated_reset_count",
+      "source_restart_unit_resolution_event_sha256",
+      "source_schedule_sha256",
+      "started_at_unix_seconds",
+      "status"
+    ],
+    "identity_fields": {
+      "adapter_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+      "model_adapter_isolation.actor_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "model_adapter_isolation.distinct_model_objects": true,
+      "model_adapter_isolation.recovery_adapter_active": false,
+      "model_adapter_isolation.recovery_controller.model_config_class": "transformers.models.qwen3.configuration_qwen3.Qwen3Config",
+      "model_adapter_isolation.recovery_controller.model_device": "cuda:0",
+      "model_adapter_isolation.recovery_controller.model_type": "qwen3",
+      "model_adapter_isolation.recovery_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "model_adapter_isolation.sft_adapter_active": true,
+      "model_adapter_isolation.task_actor.model_config_class": "transformers.models.qwen3.configuration_qwen3.Qwen3Config",
+      "model_adapter_isolation.task_actor.model_device": "cuda:0",
+      "model_adapter_isolation.task_actor.model_type": "qwen3",
+      "model_identity_sha256": "d503f35ae913b137dfff091263bf29c38aa0ade2eea648dc45d7e6cf80da0973",
+      "physical_expenditure.completed_physical_model_generations": 4965,
+      "physical_expenditure.external_paid_model_call_events": 0,
+      "pinned_model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "run_context.model_identity_sha256": "d503f35ae913b137dfff091263bf29c38aa0ade2eea648dc45d7e6cf80da0973",
+      "run_context.pinned_model_revision": "b968826d9c46dd6066d109eabc6255188de91218"
+    }
+  },
+  "SPRINT_PREFIX": {
+    "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/configs/corpus/sprint2c_paired_prefix_manifest.json",
+    "bytes": 388423,
+    "sha256": "5b3ee62ee1e5cd038ab4f8cd7865378fb1318794511b9505c7c06b3301bf3f2d",
+    "keys": [
+      "created_at",
+      "created_from_git_revision",
+      "frozen_recovery_protocol_commit",
+      "prefixes",
+      "schema_version",
+      "selection_protocol",
+      "source"
+    ],
+    "identity_fields": {
+      "created_from_git_revision": "80f0237520cc9cbf94357a703d7670d553582c7d",
+      "selection_protocol.minimum_remaining_horizon": 8,
+      "source.h4_pool_git_revision": "8fd6c14b3a818e115dbae5e2bff71b00705adaf3"
+    },
+    "schema": {
+      "created_at": {
+        "type": "str",
+        "chars": 32,
+        "value": "2026-08-20T14:10:34.958868+00:00"
+      },
+      "created_from_git_revision": {
+        "type": "str",
+        "chars": 40,
+        "value": "80f0237520cc9cbf94357a703d7670d553582c7d"
+      },
+      "frozen_recovery_protocol_commit": {
+        "type": "str",
+        "chars": 40,
+        "value": "1b84f922a39f58c3b6ed2ba31cb29d896486b0d0"
+      },
+      "prefixes": {
+        "length": 120,
+        "first": {
+          "action_count": {
+            "type": "int"
+          },
+          "decision_features": {
+            "type": "dict",
+            "length": 21
+          },
+          "episode_group_id": {
+            "type": "str"
+          },
+          "original_h4_continue_action": {
+            "type": "str"
+          },
+          "original_h4_continue_action_id": {
+            "type": "str"
+          },
+          "prefix_id": {
+            "type": "str"
+          },
+          "prefix_sha256": {
+            "type": "str"
+          },
+          "prefix_step": {
+            "type": "int"
+          },
+          "remaining_horizon": {
+            "type": "int"
+          },
+          "sampling_stratum": {
+            "type": "str"
+          },
+          "schedule_index": {
+            "type": "int"
+          },
+          "seed": {
+            "type": "int"
+          },
+          "selection_rule": {
+            "type": "str"
+          },
+          "stage_bucket": {
+            "type": "str"
+          },
+          "state_fingerprint": {
+            "type": "str"
+          },
+          "task_family": {
+            "type": "str"
+          },
+          "task_goal": {
+            "type": "str"
+          },
+          "task_id": {
+            "type": "str"
+          },
+          "valid_actions": {
+            "type": "list",
+            "length": 13
+          }
+        }
+      },
+      "schema_version": {
+        "type": "str",
+        "chars": 34,
+        "value": "sprint2c_paired_prefix_manifest_v1"
+      },
+      "selection_protocol": {
+        "duplicate_state_hash_excludes_nominal_seed": true,
+        "eligible_candidate_count": 7496,
+        "eligible_loop_failed_candidate_count": 4545,
+        "eligible_non_loop_failed_candidate_count": 2764,
+        "eligible_successful_candidate_count": 187,
+        "entropy_grouping_reference_population": {
+          "type": "str",
+          "chars": 35,
+          "value": null
+        },
+        "entropy_grouping_thresholds": {
+          "q25": {
+            "type": "float"
+          },
+          "q50": {
+            "type": "float"
+          },
+          "q75": {
+            "type": "float"
+          }
+        },
+        "entropy_numerically_degenerate": false,
+        "entropy_quantile_rule": {
+          "type": "str",
+          "chars": 12,
+          "value": null
+        },
+        "excluded_prior_state_count": 25,
+        "future_outcomes_are_stratification_only": true,
+        "group_aware_split_key": {
+          "type": "str",
+          "chars": 16,
+          "value": null
+        },
+        "maximum_prefixes_per_episode": 2,
+        "minimum_action_count": 1,
+        "minimum_remaining_horizon": 8,
+        "neutral_annotation_priority": {
+          "length": 120,
+          "first": {
+            "type": "str"
+          }
+        },
+        "neutral_annotation_rule": {
+          "type": "str",
+          "chars": 96,
+          "value": null
+        },
+        "selection_seed": {
+          "type": "str",
+          "chars": 28,
+          "value": null
+        },
+        "selector_features_path": {
+          "type": "str",
+          "chars": 28,
+          "value": null
+        },
+        "stratum_counts": {
+          "high_uncertainty_non_loop_failed": {
+            "type": "int"
+          },
+          "past_loop_failed": {
+            "type": "int"
+          },
+          "random_non_loop_failed": {
+            "type": "int"
+          },
+          "successful_continuation": {
+            "type": "int"
+          }
+        },
+        "uncertainty_reference_population": {
+          "type": "str",
+          "chars": 51,
+          "value": null
+        },
+        "uncertainty_selection_rule": {
+          "type": "str",
+          "chars": 54,
+          "value": null
+        }
+      },
+      "source": {
+        "h4_pool": {
+          "type": "str",
+          "chars": 58,
+          "value": null
+        },
+        "h4_pool_git_revision": {
+          "type": "str",
+          "chars": 40,
+          "value": null
+        },
+        "h4_run_manifest_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "h4_schedule_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "h4_trajectory_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "prior_recovery_manifests": {
+          "length": 3,
+          "first": {
+            "type": "dict",
+            "length": 2
+          }
+        }
+      }
+    }
+  },
+  "R4_PREFIX": {
+    "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/reports/sft_recovery_prefix_manifest.json",
+    "bytes": 66252,
+    "sha256": "f5683e530c50b14f69b2b99b6cbf6240e4b741dadac184152d2587e2385f6a86",
+    "keys": [
+      "decision_rule",
+      "formulas",
+      "prefixes",
+      "protocol_seed",
+      "protocol_version",
+      "provenance",
+      "schema_version",
+      "selection_audit",
+      "selection_protocol",
+      "status"
+    ],
+    "identity_fields": {
+      "provenance.r0_revision": "cfb4a424646097256ac993ebce61cdf992dc31db",
+      "provenance.r1_inference_revision": "f4ef25782785434909c5edb8f432b3a033f8fe72",
+      "provenance.r1_results_revision": "eb1b65bd924e2d9c27f4bf6d54f335e9f0d45e60",
+      "provenance.selection_git_revision": "5b6e03ffe696d092d4e1d7cd8fe456bcc7811126"
+    },
+    "schema": {
+      "decision_rule": {
+        "A": {
+          "type": "str",
+          "chars": 18,
+          "value": null
+        },
+        "B": {
+          "type": "str",
+          "chars": 20,
+          "value": null
+        },
+        "C": {
+          "type": "str",
+          "chars": 20,
+          "value": null
+        },
+        "D": {
+          "type": "str",
+          "chars": 17,
+          "value": null
+        }
+      },
+      "formulas": {
+        "beneficial": {
+          "type": "str",
+          "chars": 10,
+          "value": null
+        },
+        "beneficial_rate": {
+          "type": "str",
+          "chars": 18,
+          "value": null
+        },
+        "harmful": {
+          "type": "str",
+          "chars": 10,
+          "value": null
+        },
+        "neutral": {
+          "type": "str",
+          "chars": 9,
+          "value": null
+        },
+        "recovery_harm": {
+          "type": "str",
+          "chars": 49,
+          "value": null
+        },
+        "recovery_outcomes_computed_in_r2": false,
+        "recovery_success": {
+          "type": "str",
+          "chars": 49,
+          "value": null
+        },
+        "v_raw": {
+          "type": "str",
+          "chars": 36,
+          "value": null
+        }
+      },
+      "prefixes": {
+        "length": 24,
+        "first": {
+          "admissible_action_count": {
+            "type": "int"
+          },
+          "complete_prefix_sha256": {
+            "type": "str"
+          },
+          "current_indexed_action_map_sha256": {
+            "type": "str"
+          },
+          "current_observation_sha256": {
+            "type": "str"
+          },
+          "episode_length": {
+            "type": "int"
+          },
+          "prefix_id": {
+            "type": "str"
+          },
+          "public_milestone_status": {
+            "type": "dict",
+            "length": 4
+          },
+          "replay_provenance": {
+            "type": "dict",
+            "length": 10
+          },
+          "selected_decision_index": {
+            "type": "int"
+          },
+          "selection_case": {
+            "type": "str"
+          },
+          "selection_hash": {
+            "type": "str"
+          },
+          "selection_reason": {
+            "type": "str"
+          },
+          "source_h4_action": {
+            "type": "str"
+          },
+          "source_h4_action_id": {
+            "type": "str"
+          },
+          "source_schedule_index": {
+            "type": "int"
+          },
+          "source_terminal_outcome": {
+            "type": "dict",
+            "length": 4
+          },
+          "source_trajectory_sha256": {
+            "type": "str"
+          },
+          "stratum": {
+            "type": "str"
+          },
+          "task_family": {
+            "type": "str"
+          },
+          "task_id": {
+            "type": "str"
+          }
+        }
+      },
+      "protocol_seed": {
+        "type": "str",
+        "chars": 35,
+        "value": "sft-recovery-prefix-selection-r2-v1"
+      },
+      "protocol_version": {
+        "type": "str",
+        "chars": 32,
+        "value": "sft_recovery_prefix_selection_v1"
+      },
+      "provenance": {
+        "r0_protocol_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "r0_revision": {
+          "type": "str",
+          "chars": 40,
+          "value": null
+        },
+        "r1_inference_revision": {
+          "type": "str",
+          "chars": 40,
+          "value": null
+        },
+        "r1_results_revision": {
+          "type": "str",
+          "chars": 40,
+          "value": null
+        },
+        "selection_git_revision": {
+          "type": "str",
+          "chars": 40,
+          "value": null
+        },
+        "source_episode_count": 60,
+        "source_pool_trajectory_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "source_schedule_path": {
+          "type": "str",
+          "chars": 50,
+          "value": null
+        },
+        "source_schedule_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "source_split": {
+          "type": "str",
+          "chars": 5,
+          "value": null
+        },
+        "source_trajectory_artifact": {
+          "type": "str",
+          "chars": 92,
+          "value": null
+        },
+        "source_trajectory_count": 60
+      },
+      "schema_version": {
+        "type": "str",
+        "chars": 31,
+        "value": "sft_recovery_prefix_manifest_v1"
+      },
+      "selection_audit": {
+        "failure_episode_hashes": {
+          "length": 13,
+          "first": {
+            "type": "dict",
+            "length": 5
+          }
+        },
+        "random_episode_hashes": {
+          "length": 6,
+          "first": {
+            "type": "dict",
+            "length": 7
+          }
+        },
+        "unselected_failure_episode": {
+          "length": 1,
+          "first": {
+            "type": "dict",
+            "length": 5
+          }
+        }
+      },
+      "selection_protocol": {
+        "failure_episode_rule": {
+          "type": "str",
+          "chars": 68,
+          "value": null
+        },
+        "failure_state_rule": {
+          "type": "str",
+          "chars": 106,
+          "value": null
+        },
+        "hash_serialization": {
+          "type": "str",
+          "chars": 48,
+          "value": null
+        },
+        "inference_performed": false,
+        "maximum_prefixes_per_source_episode": 2,
+        "random_episode_rule": {
+          "type": "str",
+          "chars": 91,
+          "value": null
+        },
+        "random_state_rule": {
+          "type": "str",
+          "chars": 55,
+          "value": null
+        },
+        "replay_performed": false,
+        "success_episode_rule": {
+          "type": "str",
+          "chars": 85,
+          "value": null
+        },
+        "success_state_rule": {
+          "type": "str",
+          "chars": 76,
+          "value": null
+        }
+      },
+      "status": {
+        "type": "str",
+        "chars": 6,
+        "value": "frozen"
+      }
+    }
+  },
+  "R12_PREFIX": {
+    "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/reports/persistent_recovery_prefix_manifest.json",
+    "bytes": 428051,
+    "sha256": "cfb3be3e0e87eec74216068d27530063307ead1698c39481e0b734ebe629f44f",
+    "keys": [
+      "advancement_gate",
+      "artifacts",
+      "condition",
+      "formulas",
+      "inference",
+      "pipeline_version",
+      "prefixes",
+      "schema_version",
+      "selection_audit",
+      "selection_protocol",
+      "selection_revision",
+      "source",
+      "status",
+      "validation"
+    ],
+    "identity_fields": {
+      "condition": "persistent_recovery_prefix_selection_r8",
+      "pipeline_version": "persistent_recovery_comparison_r8_v1",
+      "selection_protocol.horizon": 50,
+      "selection_protocol.minimum_remaining_horizon": 8,
+      "selection_revision": "persistent-recovery-r8-selection-v1",
+      "source.r6_revision": "565b76c07871c1aca7161e199ed3d11d60fe50ff",
+      "source.r7_implementation_revision": "734c6125288e7be48e1d395f21ba66b67a38f789",
+      "source.r7_results_revision": "f4f461747f74fe6d220f096fb1a9859341699a75",
+      "source.r7_source_pool_condition": "persistent_recovery_source_pool_r7_v1",
+      "validation.all_remaining_horizon_at_least_8": true
+    },
+    "schema": {
+      "advancement_gate": {
+        "A_STRONG": {
+          "type": "str",
+          "chars": 150,
+          "value": null
+        },
+        "B_MODERATE": {
+          "type": "str",
+          "chars": 46,
+          "value": null
+        },
+        "C_LITTLE_OR_NO": {
+          "type": "str",
+          "chars": 49,
+          "value": null
+        },
+        "D_NEGATIVE": {
+          "type": "str",
+          "chars": 92,
+          "value": null
+        },
+        "outcomes_computed_in_r8": false
+      },
+      "artifacts": {
+        "raw_source_trajectories_modified": false,
+        "recovery_artifacts_created": false,
+        "source_pool_modified": false
+      },
+      "condition": {
+        "type": "str",
+        "chars": 39,
+        "value": "persistent_recovery_prefix_selection_r8"
+      },
+      "formulas": {
+        "DeltaPersistent_i": {
+          "type": "str",
+          "chars": 17,
+          "value": null
+        },
+        "MeanPersistenceEffect": {
+          "type": "str",
+          "chars": 40,
+          "value": null
+        },
+        "NetPersistentWins": {
+          "type": "str",
+          "chars": 33,
+          "value": null
+        },
+        "PersistentLosses": {
+          "type": "str",
+          "chars": 22,
+          "value": null
+        },
+        "PersistentWins": {
+          "type": "str",
+          "chars": 22,
+          "value": null
+        },
+        "R_continue_i": {
+          "type": "str",
+          "chars": 52,
+          "value": null
+        },
+        "R_osr_i": {
+          "type": "str",
+          "chars": 52,
+          "value": null
+        },
+        "R_pbr_i": {
+          "type": "str",
+          "chars": 67,
+          "value": null
+        },
+        "V_osr_i": {
+          "type": "str",
+          "chars": 22,
+          "value": null
+        },
+        "V_pbr_i": {
+          "type": "str",
+          "chars": 22,
+          "value": null
+        }
+      },
+      "inference": {
+        "alfworld_replay": false,
+        "continue_branches": 0,
+        "osr_branches": 0,
+        "pbr_branches": 0,
+        "performed": false,
+        "qwen_calls": 0
+      },
+      "pipeline_version": {
+        "type": "str",
+        "chars": 36,
+        "value": "persistent_recovery_comparison_r8_v1"
+      },
+      "prefixes": {
+        "length": 48,
+        "first": {
+          "admissible_action_count": {
+            "type": "int"
+          },
+          "complete_public_prefix_sha256": {
+            "type": "str"
+          },
+          "deterministic_episode_hash": {
+            "type": "str"
+          },
+          "expected_current_observation_sha256": {
+            "type": "str"
+          },
+          "expected_indexed_action_map_sha256": {
+            "type": "str"
+          },
+          "expected_recent_k4_context_sha256": {
+            "type": "str"
+          },
+          "failure_family_group": {
+            "type": "str"
+          },
+          "final_completion_status": {
+            "type": "bool"
+          },
+          "first_or_second_failure_prefix": {
+            "type": "str"
+          },
+          "future_information_leakage": {
+            "type": "bool"
+          },
+          "future_outcome_used_only_for_preregistered_stratum": {
+            "type": "bool"
+          },
+          "nominal_seed": {
+            "type": "int"
+          },
+          "nonterminal_pre_action_state": {
+            "type": "bool"
+          },
+          "ordered_mapped_commands_before_prefix": {
+            "type": "list",
+            "length": 18
+          },
+          "original_episode_length": {
+            "type": "int"
+          },
+          "pick_two_instances_acquired": {
+            "type": "list",
+            "length": 1
+          },
+          "pick_two_instances_discovered": {
+            "type": "list",
+            "length": 1
+          },
+          "pick_two_instances_placed": {
+            "type": "list",
+            "length": 0
+          },
+          "prefix_id": {
+            "type": "str"
+          },
+          "public_milestones_at_prefix": {
+            "type": "dict",
+            "length": 7
+          },
+          "r7_source_terminal_outcome": {
+            "type": "dict",
+            "length": 5
+          },
+          "r7_source_trajectory_sha256": {
+            "type": "str"
+          },
+          "remaining_horizon": {
+            "type": "int"
+          },
+          "replay_provenance": {
+            "type": "dict",
+            "length": 14
+          },
+          "reset_order_position": {
+            "type": "int"
+          },
+          "schedule_index": {
+            "type": "int"
+          },
+          "selected_decision_index": {
+            "type": "int"
+          },
+          "selection_inputs_are_public_or_preregistered": {
+            "type": "bool"
+          },
+          "selection_reason": {
+            "type": "str"
+          },
+          "source_episode_success": {
+            "type": "bool"
+          },
+          "source_h4_action": {
+            "type": "str"
+          },
+          "source_h4_action_id": {
+            "type": "str"
+          },
+          "source_schedule_index": {
+            "type": "int"
+          },
+          "source_split": {
+            "type": "str"
+          },
+          "state_selection": {
+            "type": "dict",
+            "length": 4
+          },
+          "stratum": {
+            "type": "str"
+          },
+          "target_acquired": {
+            "type": "bool"
+          },
+          "target_discovered": {
+            "type": "bool"
+          },
+          "task_family": {
+            "type": "str"
+          },
+          "task_goal": {
+            "type": "str"
+          },
+          "task_id": {
+            "type": "str"
+          },
+          "transformation_complete": {
+            "type": "str"
+          }
+        }
+      },
+      "schema_version": {
+        "type": "str",
+        "chars": 38,
+        "value": "persistent_recovery_prefix_manifest_v1"
+      },
+      "selection_audit": {
+        "cross_stratum_overlap_task_ids": {
+          "length": 0,
+          "first": null
+        },
+        "non_pick_two_failure_episode_ranking": {
+          "length": 7,
+          "first": {
+            "type": "dict",
+            "length": 6
+          }
+        },
+        "pick_two_failure_episode_ranking": {
+          "length": 19,
+          "first": {
+            "type": "dict",
+            "length": 6
+          }
+        },
+        "random_control_episode_ranking": {
+          "look_at_obj_in_light": {
+            "type": "list",
+            "length": 20
+          },
+          "pick_and_place_simple": {
+            "type": "list",
+            "length": 20
+          },
+          "pick_clean_then_place_in_recep": {
+            "type": "list",
+            "length": 20
+          },
+          "pick_cool_then_place_in_recep": {
+            "type": "list",
+            "length": 20
+          },
+          "pick_heat_then_place_in_recep": {
+            "type": "list",
+            "length": 20
+          },
+          "pick_two_obj_and_place": {
+            "type": "list",
+            "length": 20
+          }
+        },
+        "second_non_pick_two": {
+          "candidate_rule": {
+            "type": "str"
+          },
+          "ranked_candidates": {
+            "type": "list",
+            "length": 6
+          },
+          "selected_task_id": {
+            "type": "str"
+          }
+        },
+        "source_episode_prefix_counts": {
+          "look_at_obj_in_light-Book-None-DeskLamp-303/trial_T20190909_085355_202971": {
+            "type": "int"
+          },
+          "look_at_obj_in_light-Book-None-DeskLamp-303/trial_T20190909_085406_916808": {
+            "type": "int"
+          },
+          "look_at_obj_in_light-Bowl-None-DeskLamp-301/trial_T20190909_150737_210323": {
+            "type": "int"
+          },
+          "look_at_obj_in_light-Box-None-DeskLamp-218/trial_T20190909_021255_203788": {
+            "type": "int"
+          },
+          "look_at_obj_in_light-KeyChain-None-DeskLamp-309/trial_T20190909_094258_737509": {
+            "type": "int"
+          },
+          "look_at_obj_in_light-Statue-None-DeskLamp-218/trial_T20190909_085308_837993": {
+            "type": "int"
+          },
+          "look_at_obj_in_light-Statue-None-DeskLamp-319/trial_T20190907_035512_450549": {
+            "type": "int"
+          },
+          "pick_and_place_simple-Book-None-Desk-304/trial_T20190908_141341_073879": {
+            "type": "int"
+          },
+          "pick_and_place_simple-CellPhone-None-ArmChair-318/trial_T20190909_120136_895030": {
+            "type": "int"
+          },
+          "pick_and_place_simple-KeyChain-None-ArmChair-214/trial_T20190909_061209_612904": {
+            "type": "int"
+          },
+          "pick_and_place_simple-RemoteControl-None-Ottoman-208/trial_T20190909_100923_960630": {
+            "type": "int"
+          },
+          "pick_and_place_simple-SprayBottle-None-Cabinet-403/trial_T20190908_220946_946277": {
+            "type": "int"
+          },
+          "pick_and_place_simple-Vase-None-CoffeeTable-207/trial_T20190909_091313_185407": {
+            "type": "int"
+          },
+          "pick_clean_then_place_in_recep-Knife-None-DiningTable-15/trial_T20190908_162445_886312": {
+            "type": "int"
+          },
+          "pick_clean_then_place_in_recep-Plate-None-Microwave-7/trial_T20190907_170142_415879": {
+            "type": "int"
+          },
+          "pick_clean_then_place_in_recep-Plate-None-Shelf-1/trial_T20190907_114717_584270": {
+            "type": "int"
+          },
+          "pick_clean_then_place_in_recep-Spoon-None-DiningTable-21/trial_T20190908_064840_139982": {
+            "type": "int"
+          },
+          "pick_cool_then_place_in_recep-Bowl-None-Cabinet-2/trial_T20190907_021137_330453": {
+            "type": "int"
+          },
+          "pick_cool_then_place_in_recep-Bowl-None-DiningTable-4/trial_T20190908_031155_328143": {
+            "type": "int"
+          },
+          "pick_cool_then_place_in_recep-Egg-None-Microwave-18/trial_T20190909_113701_595505": {
+            "type": "int"
+          },
+          "pick_cool_then_place_in_recep-Plate-None-Shelf-7/trial_T20190907_124749_594195": {
+            "type": "int"
+          },
+          "pick_cool_then_place_in_recep-Pot-None-StoveBurner-5/trial_T20190907_153222_495628": {
+            "type": "int"
+          },
+          "pick_cool_then_place_in_recep-WineBottle-None-CounterTop-16/trial_T20190907_165337_245316": {
+            "type": "int"
+          },
+          "pick_heat_then_place_in_recep-Egg-None-SideTable-3/trial_T20190906_204447_269451": {
+            "type": "int"
+          },
+          "pick_heat_then_place_in_recep-Plate-None-CounterTop-13/trial_T20190909_101225_957550": {
+            "type": "int"
+          },
+          "pick_heat_then_place_in_recep-Plate-None-SideTable-28/trial_T20190906_221926_677097": {
+            "type": "int"
+          },
+          "pick_heat_then_place_in_recep-Tomato-None-CounterTop-17/trial_T20190908_223040_461364": {
+            "type": "int"
+          },
+          "pick_heat_then_place_in_recep-Tomato-None-GarbageCan-2/trial_T20190908_111801_490050": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-Book-None-Bed-314/trial_T20190910_072508_733981": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-Candle-None-Cabinet-403/trial_T20190909_065744_416414": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-CellPhone-None-Desk-312/trial_T20190908_122207_451470": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-CellPhone-None-Desk-312/trial_T20190908_122308_202330": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-CellPhone-None-Shelf-320/trial_T20190908_032642_582646": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-Cloth-None-Toilet-417/trial_T20190908_152417_880895": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-Cup-None-Microwave-22/trial_T20190907_205322_779427": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-KeyChain-None-Drawer-317/trial_T20190912_073129_052747": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-KeyChain-None-Ottoman-208/trial_T20190907_232837_149029": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-Ladle-None-Drawer-4/trial_T20190908_154908_741855": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-Lettuce-None-Fridge-6/trial_T20190908_010219_785049": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-Newspaper-None-Sofa-222/trial_T20190908_144619_633437": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-Pillow-None-Ottoman-208/trial_T20190908_091434_545645": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-Pot-None-Shelf-1/trial_T20190908_170636_981445": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-RemoteControl-None-Sofa-201/trial_T20190908_120009_660950": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-SoapBottle-None-Cabinet-414/trial_T20190908_044652_179681": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-SoapBottle-None-Cabinet-414/trial_T20190908_044804_530285": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-SoapBottle-None-Toilet-428/trial_T20190909_070317_650884": {
+            "type": "int"
+          },
+          "pick_two_obj_and_place-SprayBottle-None-GarbageCan-429/trial_T20190909_065859_656834": {
+            "type": "int"
+          }
+        },
+        "success_control_episode_ranking": {
+          "length": 94,
+          "first": {
+            "type": "dict",
+            "length": 7
+          }
+        },
+        "unselected_pick_two_failure_episodes": {
+          "length": 3,
+          "first": {
+            "type": "dict",
+            "length": 6
+          }
+        },
+        "within_failure_duplicate_episode_count": 1
+      },
+      "selection_protocol": {
+        "failure_non_pick_two_target": 8,
+        "failure_pick_two_target": 16,
+        "failure_rule": {
+          "type": "str",
+          "chars": 111,
+          "value": null
+        },
+        "failure_target": 24,
+        "hash_serialization": {
+          "type": "str",
+          "chars": 53,
+          "value": null
+        },
+        "horizon": 50,
+        "maximum_prefixes_per_source_episode": 2,
+        "minimum_remaining_horizon": 8,
+        "no_future_information_as_prefix_input": true,
+        "prefix_state_semantics": {
+          "type": "str",
+          "chars": 81,
+          "value": null
+        },
+        "random_control_target": 12,
+        "random_rule": {
+          "type": "str",
+          "chars": 92,
+          "value": null
+        },
+        "recent_context_window": 4,
+        "replay_or_inference_performed": false,
+        "source_outcome_is_recorded_for_stratum_audit_only": true,
+        "success_control_target": 12,
+        "success_rule": {
+          "type": "str",
+          "chars": 108,
+          "value": null
+        }
+      },
+      "selection_revision": {
+        "type": "str",
+        "chars": 35,
+        "value": "persistent-recovery-r8-selection-v1"
+      },
+      "source": {
+        "r6_protocol_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "r6_revision": {
+          "type": "str",
+          "chars": 40,
+          "value": null
+        },
+        "r7_exclusion_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "r7_failure_prefix_capacity_non_pick_two": 13,
+        "r7_failure_prefix_capacity_pick_two": 36,
+        "r7_failure_prefix_capacity_total": 49,
+        "r7_implementation_revision": {
+          "type": "str",
+          "chars": 40,
+          "value": null
+        },
+        "r7_inference_rerun_for_r8": false,
+        "r7_raw_trajectory_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "r7_results_revision": {
+          "type": "str",
+          "chars": 40,
+          "value": null
+        },
+        "r7_source_failures": 26,
+        "r7_source_pool_condition": {
+          "type": "str",
+          "chars": 37,
+          "value": null
+        },
+        "r7_source_pool_status": {
+          "type": "str",
+          "chars": 16,
+          "value": null
+        },
+        "r7_source_schedule_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "r7_source_successes": 94,
+        "r7_source_trajectory_path": {
+          "type": "str",
+          "chars": 99,
+          "value": null
+        },
+        "source_episode_count": 120,
+        "source_split": {
+          "type": "str",
+          "chars": 5,
+          "value": null
+        },
+        "source_trajectory_hash_rule": {
+          "type": "str",
+          "chars": 56,
+          "value": null
+        }
+      },
+      "status": {
+        "type": "str",
+        "chars": 6,
+        "value": "frozen"
+      },
+      "validation": {
+        "action_map_hashes_present_48_of_48": true,
+        "all_from_frozen_r7_source_pool": true,
+        "all_nonterminal": true,
+        "all_remaining_horizon_at_least_8": true,
+        "exact_12_random_control": true,
+        "exact_12_success_control": true,
+        "exact_16_pick_two_failure": true,
+        "exact_24_failure": true,
+        "exact_48_prefixes": true,
+        "exact_8_non_pick_two_failure": true,
+        "exact_prefix_duplicates": true,
+        "failure_second_prefix_separation_at_least_5": true,
+        "max_prefixes_per_source_at_most_2": true,
+        "no_future_information_leakage": true,
+        "no_inference_performed": true,
+        "no_recovery_artifacts_created": true,
+        "observation_hashes_present_48_of_48": true,
+        "pass": true,
+        "recent_context_hashes_present_48_of_48": true,
+        "replay_provenance_complete_48_of_48": true
+      }
+    }
+  },
+  "R15_PREFIX": {
+    "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/reports/progress_aware_r15_prefix_manifest.json",
+    "bytes": 24790,
+    "sha256": "6075c77dec07c6256eaf0d44bacb493ddf8e88103c27e7ddbae4fe2973a22231",
+    "keys": [
+      "schema_version",
+      "status",
+      "freeze_scope",
+      "provenance",
+      "prefixes",
+      "counts",
+      "failure_reason_counts",
+      "progress_card_artifact",
+      "preview_reproduction_check",
+      "validation",
+      "scientific_execution",
+      "freeze_status"
+    ],
+    "identity_fields": {
+      "counts.minimum_remaining_horizon": 23,
+      "validation.minimum_remaining_horizon_at_least_8": true
+    },
+    "schema": {
+      "schema_version": {
+        "type": "str",
+        "chars": 37,
+        "value": "progress_aware_r15_prefix_manifest_v1"
+      },
+      "status": {
+        "type": "str",
+        "chars": 20,
+        "value": "frozen_pre_inference"
+      },
+      "freeze_scope": {
+        "type": "str",
+        "chars": 72,
+        "value": "R15-A pre-inference scientific freeze; no model or environment execution"
+      },
+      "provenance": {
+        "r13_protocol_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "r13_protocol_json_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "r13_exclusions_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "r13_schedule_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "r14_corpus_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "b_config_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "c_report_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "selector_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "card_module_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "r13_1_c_commit": {
+          "type": "str",
+          "chars": 40,
+          "value": null
+        },
+        "r13_1_c_preview_path": {
+          "type": "str",
+          "chars": 51,
+          "value": null
+        },
+        "r13_1_c_preview_file_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "selection_preview_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "progress_card_artifact_path": {
+          "type": "str",
+          "chars": 46,
+          "value": null
+        }
+      },
+      "prefixes": {
+        "length": 60,
+        "first": {
+          "prefix_id": {
+            "type": "str"
+          },
+          "stratum": {
+            "type": "str"
+          },
+          "task_id": {
+            "type": "str"
+          },
+          "family": {
+            "type": "str"
+          },
+          "schedule_index": {
+            "type": "int"
+          },
+          "selected_decision_index": {
+            "type": "int"
+          },
+          "selection_reason": {
+            "type": "str"
+          },
+          "remaining_horizon": {
+            "type": "int"
+          }
+        }
+      },
+      "counts": {
+        "total": 60,
+        "failure": 30,
+        "success_control": 15,
+        "random_control": 15,
+        "failure_pick_two": 18,
+        "failure_non_pick_two": 12,
+        "unique_prefix_ids": 60,
+        "unique_source_episodes": 60,
+        "failure_distinct_sources": 30,
+        "cross_stratum_overlap": 0,
+        "second_prefix_fallback": 0,
+        "minimum_remaining_horizon": 23
+      },
+      "failure_reason_counts": {
+        "strict_two_cycle": 15,
+        "repeated_navigation": 8,
+        "midpoint": 7
+      },
+      "progress_card_artifact": {
+        "path": {
+          "type": "str",
+          "chars": 46,
+          "value": null
+        },
+        "sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "count": 60,
+        "schema_version": {
+          "type": "str",
+          "chars": 23,
+          "value": null
+        }
+      },
+      "preview_reproduction_check": {
+        "ordered_equality": true,
+        "selection_preview_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "selection_preview_sha256_matches": true,
+        "preview_file_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": null
+        },
+        "preview_file_sha256_matches": true,
+        "r13_1_c_commit": {
+          "type": "str",
+          "chars": 40,
+          "value": null
+        }
+      },
+      "validation": {
+        "total_prefixes_60": true,
+        "strata_30_15_15": true,
+        "failure_18_12": true,
+        "unique_prefix_ids_60": true,
+        "unique_source_episodes_60": true,
+        "cross_stratum_overlap_zero": true,
+        "second_prefix_fallback_zero": true,
+        "minimum_remaining_horizon_at_least_8": true,
+        "cards_one_per_prefix": true,
+        "cards_deterministic_repeated_generation": true,
+        "cards_public_history_only": true,
+        "cards_hidden_oracle_leakage": false,
+        "cards_future_suffix_leakage": false
+      },
+      "scientific_execution": {
+        "qwen_calls": 0,
+        "alfworld_initializations": 0,
+        "alfworld_resets": 0,
+        "alfworld_steps": 0,
+        "replay_calls": 0,
+        "continue_branches": 0,
+        "osr_branches": 0,
+        "par_branches": 0,
+        "pbr_branches": 0
+      },
+      "freeze_status": {
+        "type": "str",
+        "chars": 20,
+        "value": "frozen_pre_inference"
+      }
+    }
+  },
+  "SFT_ACCEPTED_IDENTITIES": {
+    "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/configs/sft/sft_accepted_task_splits.json",
+    "bytes": 228202,
+    "sha256": "9c374fafdcc7d7db77e878d23e852a0ec55eedcc3886cb0cebe7491d67e564e5",
+    "keys": [
+      "extension_dataset_sha256",
+      "extension_manifest_sha256",
+      "identity_rule",
+      "initial_dataset_sha256",
+      "pools",
+      "schema_version",
+      "selection_rule",
+      "selection_seed",
+      "task_targets"
+    ],
+    "identity_fields": {},
+    "schema": {
+      "extension_dataset_sha256": {
+        "type": "str",
+        "chars": 64,
+        "value": "9c580f60e48cb3ad9ba7159318b9ab9bfd61d2e92576c126326adda3e8d2788b"
+      },
+      "extension_manifest_sha256": {
+        "type": "str",
+        "chars": 64,
+        "value": "e22e13ea4122540e816bd48d1751bca0c4cdfe5c0df214c2e63cef561eb256ea"
+      },
+      "identity_rule": {
+        "type": "str",
+        "chars": 22,
+        "value": "exact ALFWorld task_id"
+      },
+      "initial_dataset_sha256": {
+        "type": "str",
+        "chars": 64,
+        "value": "75a244205ab0895ba577805ec4884378b3016d42d90f74edc1cab313c60a4523"
+      },
+      "pools": {
+        "online_evaluation": {
+          "length": 60,
+          "first": {
+            "type": "dict",
+            "length": 4
+          }
+        },
+        "train": {
+          "length": 1074,
+          "first": {
+            "type": "dict",
+            "length": 2
+          }
+        },
+        "validation": {
+          "length": 126,
+          "first": {
+            "type": "dict",
+            "length": 2
+          }
+        }
+      },
+      "schema_version": {
+        "type": "str",
+        "chars": 27,
+        "value": "sft_accepted_task_splits_v1"
+      },
+      "selection_rule": {
+        "type": "str",
+        "chars": 92,
+        "value": "per split/family sha256(44:split:task_id), then task_id; take common successful-task minimum"
+      },
+      "selection_seed": 44,
+      "task_targets": {
+        "train": 179,
+        "validation": 21
+      }
+    }
+  },
+  "PROGRESS_EXCLUSIONS": {
+    "path": "/home/lizening/wt-r19-g4-consumer-contract-repair/configs/recovery/progress_aware_source_exclusions.json",
+    "bytes": 5174371,
+    "sha256": "f69d8d80373ed7d836c368de2176080705bd63fc4fed48de92f566dcc711ac2c",
+    "keys": [
+      "schema_version",
+      "status",
+      "split",
+      "identity_rule",
+      "source_rule",
+      "entries",
+      "excluded_task_ids",
+      "excluded_task_count",
+      "reason_counts",
+      "family_counts",
+      "input_artifact_count"
+    ],
+    "identity_fields": {},
+    "schema": {
+      "schema_version": {
+        "type": "str",
+        "chars": 44,
+        "value": "progress_aware_recovery_source_exclusions_v1"
+      },
+      "status": {
+        "type": "str",
+        "chars": 17,
+        "value": "frozen_unexecuted"
+      },
+      "split": {
+        "type": "str",
+        "chars": 5,
+        "value": "train"
+      },
+      "identity_rule": {
+        "type": "str",
+        "chars": 34,
+        "value": "exact task_id including trial path"
+      },
+      "source_rule": {
+        "type": "str",
+        "chars": 106,
+        "value": "exact IDs found in prior experiment/training artifacts; static ALFWorld metadata alone is not an exclusion"
+      },
+      "entries": {
+        "length": 2305,
+        "first": {
+          "task_id": {
+            "type": "str"
+          },
+          "task_family": {
+            "type": "str"
+          },
+          "reasons": {
+            "type": "list",
+            "length": 5
+          },
+          "source_artifacts": {
+            "type": "list",
+            "length": 6
+          }
+        }
+      },
+      "excluded_task_ids": {
+        "length": 2305,
+        "first": {
+          "type": "str",
+          "chars": 79,
+          "value": null
+        }
+      },
+      "excluded_task_count": 2305,
+      "reason_counts": {
+        "b1_b2_b2d_b2ds_or_base_agent_experiment": 380,
+        "b2d_demonstration_source_tasks": 6,
+        "frozen_demonstration_source_tasks": 6,
+        "g1_or_heldout_task_inventory": 1406,
+        "g1_valid_unseen_evaluation_tasks": 60,
+        "previous_architecture_experiment_tasks": 380,
+        "previous_recovery_experiment_tasks": 136,
+        "prior_phase_ab_architecture_tasks": 101,
+        "prior_recovery_development_and_source_pool_tasks": 136,
+        "r10_osr": 47,
+        "r11_pbr": 48,
+        "r11a_smoke": 1,
+        "r12_examples_or_mechanism_audit": 47,
+        "r1_sft_recovery_source_pool_tasks": 60,
+        "r6_r7_source_pool_or_sprint2c": 260,
+        "r8_scientific_prefix_or_progress_audit": 145,
+        "r9_continue": 47,
+        "repository_experiment_artifact": 1760,
+        "repository_runtime_experiment_artifact": 277,
+        "sft_offline_validation_tasks": 126,
+        "sft_online_development_tasks": 60,
+        "sft_online_train_development_tasks": 60,
+        "sft_p0_training_validation_or_online_train": 2210,
+        "sft_training_tasks": 1074,
+        "sft_validation_tasks": 126
+      },
+      "family_counts": {
+        "look_at_obj_in_light": 292,
+        "pick_and_place_simple": 356,
+        "pick_clean_then_place_in_recep": 326,
+        "pick_cool_then_place_in_recep": 314,
+        "pick_heat_then_place_in_recep": 319,
+        "pick_two_obj_and_place": 698
+      },
+      "input_artifact_count": 321
+    }
+  }
+}

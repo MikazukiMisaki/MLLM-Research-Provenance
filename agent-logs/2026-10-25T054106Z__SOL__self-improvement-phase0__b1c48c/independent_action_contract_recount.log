@@ -1,0 +1,32 @@
+{
+  "kind": "stdlib-only historical explicit action field recount, not semantic re-labeling",
+  "arms": {
+    "base": {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/online_evaluation/base_trajectories.jsonl",
+      "sha256_before": "fe145bed8ea49350198c0c0e458df9e47252632e663dac5a2dfa3f17f3fe7759",
+      "sha256_after": "fe145bed8ea49350198c0c0e458df9e47252632e663dac5a2dfa3f17f3fe7759",
+      "episodes": 60,
+      "recorded_decisions": 2817,
+      "recorded_action_valid_true": 2816,
+      "recorded_action_valid_false": 1,
+      "recorded_parser_status": {
+        "grounded": 2816,
+        "action_format_violation": 1
+      }
+    },
+    "sft": {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/online_evaluation/sft_trajectories.jsonl",
+      "sha256_before": "3509c6d45c6ce8dada1a132b5e9af2a65c898f8565ab06d9714a8a491842b3dc",
+      "sha256_after": "3509c6d45c6ce8dada1a132b5e9af2a65c898f8565ab06d9714a8a491842b3dc",
+      "episodes": 60,
+      "recorded_decisions": 1355,
+      "recorded_action_valid_true": 1355,
+      "recorded_action_valid_false": 0,
+      "recorded_parser_status": {
+        "grounded": 1355
+      }
+    }
+  },
+  "new_scientific_calls": 0,
+  "interpretation": "Only one invalid base decision is recorded; observed 45 paired task gains cannot all be attributed to fixing malformed output. This does not causally isolate planning, imitation, navigation, or other learned skills and does not prove self-improvement."
+}

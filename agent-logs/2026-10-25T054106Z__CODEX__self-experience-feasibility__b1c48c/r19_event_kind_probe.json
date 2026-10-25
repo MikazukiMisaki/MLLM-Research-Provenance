@@ -1,0 +1,1042 @@
+{
+  "counts": {
+    "environment_operation_started": 7607,
+    "environment_operation_completed": 7607,
+    "generation_started": 4965,
+    "generation_completed": 4965,
+    "source_episode_completed": 127,
+    "candidate_queues_frozen": 1,
+    "prefix_attempt_completed": 39,
+    "environment_step_started": 169,
+    "environment_step_completed": 169,
+    "enrollment_frozen": 1,
+    "suffix_order_frozen": 39,
+    "duration_arm_started": 183,
+    "duration_arm_completed": 183,
+    "recovery_path_extension_started": 36,
+    "recovery_path_extension_completed": 36,
+    "passive_stopping_estimated": 36
+  },
+  "samples": {
+    "environment_operation_started": {
+      "identity": {
+        "canonical_trial_id": "pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092",
+        "operation": "source_reset",
+        "schedule_index": 0,
+        "split": "train"
+      },
+      "payload_schema": {
+        "operation": {
+          "type": "str",
+          "chars": 17,
+          "value": "environment_reset"
+        },
+        "seed": 30000
+      }
+    },
+    "environment_operation_completed": {
+      "identity": {
+        "canonical_trial_id": "pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092",
+        "operation": "source_reset",
+        "schedule_index": 0,
+        "split": "train"
+      },
+      "payload_schema": {
+        "operation": {
+          "type": "str",
+          "chars": 17,
+          "value": "environment_reset"
+        },
+        "seed": 30000,
+        "task_id": {
+          "type": "str",
+          "chars": 78,
+          "value": "pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092"
+        },
+        "transition": {
+          "done": false,
+          "observation": {
+            "type": "str",
+            "chars": 243,
+            "value": null
+          },
+          "reset": true,
+          "reward": 0.0,
+          "truncated": false,
+          "valid_actions": {
+            "length": 10,
+            "first": {
+              "type": "str"
+            }
+          }
+        }
+      }
+    },
+    "generation_started": {
+      "identity": {
+        "canonical_trial_id": "pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092",
+        "component": "task_actor",
+        "decision_index": 0,
+        "operation": "source_generation",
+        "schedule_index": 0,
+        "split": "train"
+      },
+      "payload_schema": {}
+    },
+    "generation_completed": {
+      "identity": {
+        "canonical_trial_id": "pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092",
+        "component": "task_actor",
+        "decision_index": 0,
+        "operation": "source_generation",
+        "schedule_index": 0,
+        "split": "train"
+      },
+      "payload_schema": {
+        "evidence": {
+          "action_map": {
+            "A000": {
+              "type": "str"
+            },
+            "A001": {
+              "type": "str"
+            },
+            "A002": {
+              "type": "str"
+            },
+            "A003": {
+              "type": "str"
+            },
+            "A004": {
+              "type": "str"
+            },
+            "A005": {
+              "type": "str"
+            },
+            "A006": {
+              "type": "str"
+            },
+            "A007": {
+              "type": "str"
+            },
+            "A008": {
+              "type": "str"
+            },
+            "A009": {
+              "type": "str"
+            }
+          },
+          "generation": {
+            "do_sample": {
+              "type": "bool"
+            },
+            "generated_tokens": {
+              "type": "int"
+            },
+            "input_tokens": {
+              "type": "int"
+            },
+            "latency_seconds": {
+              "type": "float"
+            },
+            "max_new_tokens": {
+              "type": "int"
+            },
+            "output_complete": {
+              "type": "bool"
+            },
+            "prompt": {
+              "type": "str"
+            },
+            "raw_output": {
+              "type": "str"
+            },
+            "rendered_prompt": {
+              "type": "str"
+            },
+            "rendered_prompt_sha256": {
+              "type": "str"
+            },
+            "thinking": {
+              "type": "bool"
+            },
+            "token_cap_reached": {
+              "type": "bool"
+            },
+            "token_ids": {
+              "type": "list",
+              "length": 5
+            },
+            "token_ids_sha256": {
+              "type": "str"
+            }
+          },
+          "parser_result": {
+            "action": {
+              "type": "str"
+            },
+            "action_id": {
+              "type": "str"
+            },
+            "failure_category": {
+              "type": "NoneType"
+            },
+            "failure_reason": {
+              "type": "NoneType"
+            },
+            "id_to_command": {
+              "type": "dict",
+              "length": 10
+            },
+            "selection_status": {
+              "type": "str"
+            },
+            "valid_actions": {
+              "type": "list",
+              "length": 10
+            }
+          }
+        }
+      }
+    },
+    "source_episode_completed": {
+      "identity": {
+        "canonical_trial_id": "pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092",
+        "schedule_index": 0,
+        "split": "train"
+      },
+      "payload_schema": {
+        "generation_event_ids": {
+          "length": 6,
+          "first": {
+            "type": "str",
+            "chars": 64,
+            "value": null
+          }
+        },
+        "reset_event_id": {
+          "type": "str",
+          "chars": 64,
+          "value": "5a8c49daf6691ebd1bd644e12662bc66894d93153618e9488bce7e4db27f7a31"
+        },
+        "source_game_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": "e393d4f3f521c7ceba7a6201a09884aec0f8941b4c87bcd4d427ea33a717bb99"
+        },
+        "source_restart_comparison_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": "8d3269fccd346da464c990ff4f50bf1e913031fa210eb3feb8c4307ea8777ee9"
+        },
+        "source_traj_data_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": "eb817b82a0b7d4f3d08bebe43a581194f8dc796fb894b17f826c0c1c16ede385"
+        },
+        "trajectory": {
+          "initial_observation": {
+            "type": "str",
+            "chars": 243,
+            "value": null
+          },
+          "metadata": {
+            "max_steps": {
+              "type": "int"
+            },
+            "nominal_seed": {
+              "type": "int"
+            },
+            "reset_order_position": {
+              "type": "int"
+            },
+            "schedule_index": {
+              "type": "int"
+            },
+            "source_game_sha256": {
+              "type": "str"
+            },
+            "source_restart_comparison_sha256": {
+              "type": "str"
+            },
+            "source_traj_data_sha256": {
+              "type": "str"
+            },
+            "split": {
+              "type": "str"
+            },
+            "task_family": {
+              "type": "str"
+            },
+            "termination_reason": {
+              "type": "str"
+            }
+          },
+          "model_version": {
+            "type": "str",
+            "chars": 141,
+            "value": null
+          },
+          "seed": 30000,
+          "steps": {
+            "length": 6,
+            "first": {
+              "type": "dict",
+              "length": 13
+            }
+          },
+          "task": {
+            "family": {
+              "type": "NoneType"
+            },
+            "metadata": {
+              "type": "dict",
+              "length": 1
+            },
+            "split": {
+              "type": "str"
+            },
+            "task_id": {
+              "type": "str"
+            },
+            "text": {
+              "type": "str"
+            }
+          },
+          "trajectory_id": {
+            "type": "str",
+            "chars": 24,
+            "value": null
+          },
+          "truncated": false
+        },
+        "trajectory_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": "fba2a4278c4f1d9640c1c39f527fe3d5e7022ab50af4d353bc017bb31bbead89"
+        },
+        "transition_event_ids": {
+          "length": 6,
+          "first": {
+            "type": "str",
+            "chars": 64,
+            "value": null
+          }
+        }
+      }
+    },
+    "candidate_queues_frozen": {
+      "identity": {
+        "split": "train"
+      },
+      "payload_schema": {
+        "no_quota_transfer": true,
+        "queue_counts": {
+          "failure": 7,
+          "random_control": 30,
+          "success_control": 30
+        },
+        "queue_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": "6daeae9247772cc2e68c766d35dc376ea6aa7f5f850f20ecdc0ae0939c27f5e6"
+        },
+        "queues": {
+          "failure": {
+            "length": 7,
+            "first": {
+              "type": "dict",
+              "length": 13
+            }
+          },
+          "random_control": {
+            "length": 30,
+            "first": {
+              "type": "dict",
+              "length": 13
+            }
+          },
+          "success_control": {
+            "length": 30,
+            "first": {
+              "type": "dict",
+              "length": 13
+            }
+          }
+        }
+      }
+    },
+    "prefix_attempt_completed": {
+      "identity": {
+        "canonical_trial_id": "pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-30/trial_T20190907_220045_510017",
+        "prefix_id": "R19-failure-22984d06767be55e8b1a",
+        "split": "train"
+      },
+      "payload_schema": {
+        "attempt_index": 1,
+        "attempted": true,
+        "eligibility_reason": {
+          "type": "str",
+          "chars": 17,
+          "value": "stage_one_failure"
+        },
+        "eligible_primary": false,
+        "recovery_generation_event_ids": {
+          "length": 2,
+          "first": {
+            "type": "str",
+            "chars": 64,
+            "value": null
+          }
+        },
+        "recovery_transition_event_ids": {
+          "length": 0,
+          "first": null
+        },
+        "replay_evidence": {
+          "action_map_sha256": {
+            "type": "str",
+            "chars": 64,
+            "value": null
+          },
+          "actions_consumed": 23,
+          "decision_index": 23,
+          "history_sha256": {
+            "type": "str",
+            "chars": 64,
+            "value": null
+          },
+          "observation_sha256": {
+            "type": "str",
+            "chars": 64,
+            "value": null
+          },
+          "replay_match": true,
+          "replay_transition_event_ids": {
+            "length": 23,
+            "first": {
+              "type": "str"
+            }
+          },
+          "reset_event_id": {
+            "type": "str",
+            "chars": 64,
+            "value": null
+          }
+        },
+        "source_episode_event_id": {
+          "type": "str",
+          "chars": 64,
+          "value": "6a5f1bef3a6a11dbde34301ed08a060f3c06eb848e5defe77404e78378d5a701"
+        },
+        "stratum": {
+          "type": "str",
+          "chars": 7,
+          "value": "failure"
+        },
+        "task_family": {
+          "type": "str",
+          "chars": 29,
+          "value": "pick_heat_then_place_in_recep"
+        }
+      }
+    },
+    "environment_step_started": {
+      "identity": {
+        "canonical_trial_id": "pick_cool_then_place_in_recep-Pan-None-StoveBurner-27/trial_T20190907_182355_408484",
+        "nominal_seed": 30061,
+        "operation": "recovery_environment_step",
+        "prefix_id": "R19-failure-0d469302da15668cdf66",
+        "split": "train",
+        "stage_two_attempt": 1,
+        "task_id": "pick_cool_then_place_in_recep-Pan-None-StoveBurner-27/trial_T20190907_182355_408484"
+      },
+      "payload_schema": {
+        "action_id": {
+          "type": "str",
+          "chars": 4,
+          "value": "A023"
+        },
+        "action_map": {
+          "A000": {
+            "type": "str",
+            "chars": 16,
+            "value": null
+          },
+          "A001": {
+            "type": "str",
+            "chars": 15,
+            "value": null
+          },
+          "A002": {
+            "type": "str",
+            "chars": 16,
+            "value": null
+          },
+          "A003": {
+            "type": "str",
+            "chars": 16,
+            "value": null
+          },
+          "A004": {
+            "type": "str",
+            "chars": 16,
+            "value": null
+          },
+          "A005": {
+            "type": "str",
+            "chars": 15,
+            "value": null
+          },
+          "A006": {
+            "type": "str",
+            "chars": 15,
+            "value": null
+          },
+          "A007": {
+            "type": "str",
+            "chars": 15,
+            "value": null
+          },
+          "A008": {
+            "type": "str",
+            "chars": 15,
+            "value": null
+          },
+          "A009": {
+            "type": "str",
+            "chars": 15,
+            "value": null
+          },
+          "A010": {
+            "type": "str",
+            "chars": 15,
+            "value": null
+          },
+          "A011": {
+            "type": "str",
+            "chars": 15,
+            "value": null
+          },
+          "A012": {
+            "type": "str",
+            "chars": 15,
+            "value": null
+          },
+          "A013": {
+            "type": "str",
+            "chars": 21,
+            "value": null
+          },
+          "A014": {
+            "type": "str",
+            "chars": 18,
+            "value": null
+          },
+          "A015": {
+            "type": "str",
+            "chars": 18,
+            "value": null
+          },
+          "A016": {
+            "type": "str",
+            "chars": 19,
+            "value": null
+          },
+          "A017": {
+            "type": "str",
+            "chars": 14,
+            "value": null
+          },
+          "A018": {
+            "type": "str",
+            "chars": 14,
+            "value": null
+          },
+          "A019": {
+            "type": "str",
+            "chars": 14,
+            "value": null
+          },
+          "A020": {
+            "type": "str",
+            "chars": 18,
+            "value": null
+          },
+          "A021": {
+            "type": "str",
+            "chars": 17,
+            "value": null
+          },
+          "A022": {
+            "type": "str",
+            "chars": 17,
+            "value": null
+          },
+          "A023": {
+            "type": "str",
+            "chars": 19,
+            "value": null
+          },
+          "A024": {
+            "type": "str",
+            "chars": 19,
+            "value": null
+          },
+          "A025": {
+            "type": "str",
+            "chars": 19,
+            "value": null
+          },
+          "A026": {
+            "type": "str",
+            "chars": 19,
+            "value": null
+          },
+          "A027": {
+            "type": "str",
+            "chars": 15,
+            "value": null
+          },
+          "A028": {
+            "type": "str",
+            "chars": 4,
+            "value": null
+          },
+          "A029": {
+            "type": "str",
+            "chars": 9,
+            "value": null
+          },
+          "A030": {
+            "type": "str",
+            "chars": 4,
+            "value": null
+          },
+          "A031": {
+            "type": "str",
+            "chars": 13,
+            "value": null
+          }
+        },
+        "before_state": {
+          "actions_consumed": 23,
+          "history": {
+            "length": 23,
+            "first": {
+              "type": "list",
+              "length": 2
+            }
+          },
+          "observation": {
+            "type": "str",
+            "chars": 23,
+            "value": null
+          },
+          "valid_actions": {
+            "length": 32,
+            "first": {
+              "type": "str"
+            }
+          }
+        },
+        "command": {
+          "type": "str",
+          "chars": 19,
+          "value": "go to stoveburner 1"
+        }
+      }
+    },
+    "environment_step_completed": {
+      "identity": {
+        "canonical_trial_id": "pick_cool_then_place_in_recep-Pan-None-StoveBurner-27/trial_T20190907_182355_408484",
+        "nominal_seed": 30061,
+        "operation": "recovery_environment_step",
+        "prefix_id": "R19-failure-0d469302da15668cdf66",
+        "split": "train",
+        "stage_two_attempt": 1,
+        "task_id": "pick_cool_then_place_in_recep-Pan-None-StoveBurner-27/trial_T20190907_182355_408484"
+      },
+      "payload_schema": {
+        "action": {
+          "action_id": {
+            "type": "str",
+            "chars": 4,
+            "value": null
+          },
+          "action_map": {
+            "A000": {
+              "type": "str"
+            },
+            "A001": {
+              "type": "str"
+            },
+            "A002": {
+              "type": "str"
+            },
+            "A003": {
+              "type": "str"
+            },
+            "A004": {
+              "type": "str"
+            },
+            "A005": {
+              "type": "str"
+            },
+            "A006": {
+              "type": "str"
+            },
+            "A007": {
+              "type": "str"
+            },
+            "A008": {
+              "type": "str"
+            },
+            "A009": {
+              "type": "str"
+            },
+            "A010": {
+              "type": "str"
+            },
+            "A011": {
+              "type": "str"
+            },
+            "A012": {
+              "type": "str"
+            },
+            "A013": {
+              "type": "str"
+            },
+            "A014": {
+              "type": "str"
+            },
+            "A015": {
+              "type": "str"
+            },
+            "A016": {
+              "type": "str"
+            },
+            "A017": {
+              "type": "str"
+            },
+            "A018": {
+              "type": "str"
+            },
+            "A019": {
+              "type": "str"
+            },
+            "A020": {
+              "type": "str"
+            },
+            "A021": {
+              "type": "str"
+            },
+            "A022": {
+              "type": "str"
+            },
+            "A023": {
+              "type": "str"
+            },
+            "A024": {
+              "type": "str"
+            },
+            "A025": {
+              "type": "str"
+            },
+            "A026": {
+              "type": "str"
+            },
+            "A027": {
+              "type": "str"
+            },
+            "A028": {
+              "type": "str"
+            },
+            "A029": {
+              "type": "str"
+            },
+            "A030": {
+              "type": "str"
+            },
+            "A031": {
+              "type": "str"
+            }
+          },
+          "actions_consumed_before": 23,
+          "command": {
+            "type": "str",
+            "chars": 19,
+            "value": null
+          },
+          "history_before": {
+            "length": 23,
+            "first": {
+              "type": "list",
+              "length": 2
+            }
+          },
+          "observation_before": {
+            "type": "str",
+            "chars": 23,
+            "value": null
+          },
+          "recovery_action_index": 1,
+          "state_before_sha256": {
+            "type": "str",
+            "chars": 64,
+            "value": null
+          },
+          "transition": {
+            "done": {
+              "type": "bool"
+            },
+            "executed_command": {
+              "type": "str"
+            },
+            "observation": {
+              "type": "str"
+            },
+            "r19_environment_operation_event_id": {
+              "type": "str"
+            },
+            "reward": {
+              "type": "float"
+            },
+            "truncated": {
+              "type": "bool"
+            },
+            "valid_actions": {
+              "type": "list",
+              "length": 32
+            }
+          },
+          "valid_actions_before": {
+            "length": 32,
+            "first": {
+              "type": "str"
+            }
+          }
+        }
+      }
+    },
+    "enrollment_frozen": {
+      "identity": {
+        "enrollment_sha256": "9ae916666d895989345c5104671e59e3366a0d87a1a17e4a3e4cf75693459ac1"
+      },
+      "payload_schema": {
+        "additional_stage_two_generations_before_freeze": 0,
+        "attempted_prefix_count": 39,
+        "attempted_prefix_ids": {
+          "length": 39,
+          "first": {
+            "type": "str",
+            "chars": 32,
+            "value": null
+          }
+        },
+        "eligible_by_stratum": {
+          "failure": 6,
+          "random_control": 15,
+          "success_control": 15
+        },
+        "inference_performed": true,
+        "source_queues_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": "6daeae9247772cc2e68c766d35dc376ea6aa7f5f850f20ecdc0ae0939c27f5e6"
+        }
+      }
+    },
+    "suffix_order_frozen": {
+      "identity": {
+        "prefix_id": "R19-failure-22984d06767be55e8b1a"
+      },
+      "payload_schema": {
+        "k_in_generation_prompt": false,
+        "order": {
+          "length": 1,
+          "first": 1
+        },
+        "seed": 19022
+      }
+    },
+    "duration_arm_started": {
+      "identity": {
+        "k": 1,
+        "prefix_id": "R19-failure-22984d06767be55e8b1a"
+      },
+      "payload_schema": {
+        "checkpoint": 0,
+        "checkpoint_state_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": "515792977ffffaf56ac83f74f226a64b64f7b6dccb1878253feee2f7ecff1ff3"
+        },
+        "suffix_order_seed": 19022
+      }
+    },
+    "duration_arm_completed": {
+      "identity": {
+        "k": 1,
+        "prefix_id": "R19-failure-22984d06767be55e8b1a"
+      },
+      "payload_schema": {
+        "checkpoint": 0,
+        "derived_identity_from": null,
+        "derived_source_event_id": null,
+        "evidence_refs": {
+          "recovery_generation_event_ids": {
+            "length": 2,
+            "first": {
+              "type": "str"
+            }
+          },
+          "recovery_transition_event_ids": {
+            "length": 0,
+            "first": null
+          },
+          "suffix_generation_event_ids": {
+            "length": 27,
+            "first": {
+              "type": "str"
+            }
+          },
+          "suffix_transition_event_ids": {
+            "length": 27,
+            "first": {
+              "type": "str"
+            }
+          }
+        },
+        "logical_cost": {
+          "full_branch": {
+            "environment_actions": {
+              "type": "int"
+            },
+            "generated_tokens": {
+              "type": "int"
+            },
+            "input_tokens": {
+              "type": "int"
+            },
+            "latency_seconds_component_sum": {
+              "type": "float"
+            },
+            "model_calls": {
+              "type": "int"
+            },
+            "total_tokens": {
+              "type": "int"
+            }
+          },
+          "recovery_only": {
+            "environment_actions": {
+              "type": "int"
+            },
+            "generated_tokens": {
+              "type": "int"
+            },
+            "input_tokens": {
+              "type": "int"
+            },
+            "latency_seconds_component_sum": {
+              "type": "float"
+            },
+            "model_calls": {
+              "type": "int"
+            },
+            "total_tokens": {
+              "type": "int"
+            }
+          }
+        },
+        "success": 0
+      }
+    },
+    "recovery_path_extension_started": {
+      "identity": {
+        "canonical_trial_id": "pick_cool_then_place_in_recep-Pan-None-StoveBurner-27/trial_T20190907_182355_408484",
+        "prefix_id": "R19-failure-0d469302da15668cdf66",
+        "split": "train"
+      },
+      "payload_schema": {
+        "enrollment_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": "9ae916666d895989345c5104671e59e3366a0d87a1a17e4a3e4cf75693459ac1"
+        },
+        "initial_recovery_action_count": 1,
+        "max_recovery_actions": 5
+      }
+    },
+    "recovery_path_extension_completed": {
+      "identity": {
+        "canonical_trial_id": "pick_cool_then_place_in_recep-Pan-None-StoveBurner-27/trial_T20190907_182355_408484",
+        "prefix_id": "R19-failure-0d469302da15668cdf66",
+        "split": "train"
+      },
+      "payload_schema": {
+        "enrollment_sha256": {
+          "type": "str",
+          "chars": 64,
+          "value": "9ae916666d895989345c5104671e59e3366a0d87a1a17e4a3e4cf75693459ac1"
+        },
+        "recovery_action_count": 5,
+        "stopping_reason": {
+          "type": "str",
+          "chars": 5,
+          "value": "cap_5"
+        },
+        "terminal_checkpoint": null
+      }
+    },
+    "passive_stopping_estimated": {
+      "identity": {
+        "prefix_id": "R19-failure-0d469302da15668cdf66"
+      },
+      "payload_schema": {
+        "branch_mapping_exact": true,
+        "coverage": {
+          "type": "str",
+          "chars": 11,
+          "value": "UNSUPPORTED"
+        },
+        "detector_cpu_nanoseconds": 57321,
+        "estimated_logical_cost": null,
+        "estimated_success": null,
+        "evaluations_through_selected_checkpoint": {
+          "length": 5,
+          "first": {
+            "predicate": {
+              "type": "NoneType"
+            },
+            "reason": {
+              "type": "str"
+            },
+            "status": {
+              "type": "str"
+            },
+            "supporting_transition_ids": {
+              "type": "list",
+              "length": 0
+            }
+          }
+        },
+        "new_environment_operations": 0,
+        "new_model_calls": 0,
+        "predicate": null,
+        "selected_k": 5,
+        "selected_reason": {
+          "type": "str",
+          "chars": 5,
+          "value": "cap_5"
+        },
+        "status": {
+          "type": "str",
+          "chars": 13,
+          "value": "COVERAGE_ONLY"
+        }
+      }
+    }
+  }
+}

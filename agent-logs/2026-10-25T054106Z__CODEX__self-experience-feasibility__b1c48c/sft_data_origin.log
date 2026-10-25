@@ -1,0 +1,333 @@
+# SFT Dataset Audit
+
+## Gate
+
+**PASS.** The frozen SFT-P0 expert dataset satisfies the pre-training audit gate.
+
+## Source and reconstruction
+
+Rows come only from successful hand-coded ALFWorld experts on the `train` split.
+Before every expert action, the collector obtained the environment-owned action
+list, assigned deterministic `A000...` IDs, required one exact command match,
+rendered the public SFT-P0 prompt, and executed the unchanged expert command.
+The prompt contains the goal, current public observation, the last four public
+action/result transitions, and the complete current indexed action map. Expert
+plans and TextWorld facts are never prompt inputs.
+
+The expert may exploit planning behavior stronger than public observation alone
+supports. This dataset is therefore supervised expert-policy imitation and a
+competence bootstrap, not autonomous self-improvement.
+
+## Scale
+
+- Candidate tasks replayed: 1869
+- Candidate experts accepted: 1273
+- Candidate experts rejected: 596 (31.89%)
+- Final balanced tasks: 1200
+- Accepted examples: 20967
+- Train/validation tasks: {'train': 1074, 'validation': 126}
+- Reserved online tasks: 60
+- Tasks per family: {'look_at_obj_in_light': 200, 'pick_and_place_simple': 200, 'pick_clean_then_place_in_recep': 200, 'pick_cool_then_place_in_recep': 200, 'pick_heat_then_place_in_recep': 200, 'pick_two_obj_and_place': 200}
+- Examples per family: {'look_at_obj_in_light': 2490, 'pick_and_place_simple': 2194, 'pick_clean_then_place_in_recep': 3288, 'pick_cool_then_place_in_recep': 3097, 'pick_heat_then_place_in_recep': 3693, 'pick_two_obj_and_place': 6205}
+
+Rejection reasons: `{'trajectory_not_successful': 596}`.
+
+## Integrity
+
+- Exact action-ID round trip: 100.0%
+- Malformed completions: 0
+- Hidden-state prompts: 0
+- Duplicate audit: `{'duplicate_exact_rows_removed': 21, 'duplicate_prompt_hash_occurrences': 148, 'duplicate_task_step_keys': 0, 'duplicate_exact_trajectory_occurrences': 0}`
+- Leakage checks: `{'train_validation_disjoint': True, 'task_step_keys_unique': True, 'accepted_online_evaluation_disjoint': True, 'accepted_exclusion_disjoint': True, 'demonstration_source_disjoint': True, 'balanced_tasks_per_family': True}`
+- Dataset SHA-256: `c547e8f0c5988b29288f2a097169c7859741b7d4f53f222af31f5e2889d516cf`
+- Split manifest SHA-256: `5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56`
+- Accepted split manifest SHA-256: `9c374fafdcc7d7db77e878d23e852a0ec55eedcc3886cb0cebe7491d67e564e5`
+- Exclusion manifest SHA-256: `fdbe3b1c2d8162fa7c95ff25b57ace1eaf01c1224d42f9f1f447bf7a859541c5`
+
+## Token lengths
+
+Actual Qwen3 tokenizer lengths for rendered prompt plus completion/EOS:
+
+- min: 225
+- median: 522
+- p90: 751
+- p95: 840
+- p99: 998
+- max: 1359
+- fit at 2048: 100.000%
+
+The frozen maximum length selected by the preregistered rule is **2048**.
+Training must reject any longer row; truncating the current action block is prohibited.
+
+## Distributions
+
+Action types: `{'clean': 200, 'close': 1822, 'cool': 198, 'examine': 199, 'go': 10335, 'heat': 199, 'help': 68, 'inventory': 101, 'look': 2861, 'move': 1197, 'open': 2172, 'take': 1412, 'use': 203}`.
+
+Target Action IDs: `{'A000': 2322, 'A001': 169, 'A002': 481, 'A003': 592, 'A004': 449, 'A005': 365, 'A006': 415, 'A007': 413, 'A008': 420, 'A009': 401, 'A010': 545, 'A011': 621, 'A012': 658, 'A013': 724, 'A014': 825, 'A015': 714, 'A016': 657, 'A017': 614, 'A018': 630, 'A019': 557, 'A020': 571, 'A021': 435, 'A022': 453, 'A023': 437, 'A024': 417, 'A025': 468, 'A026': 401, 'A027': 356, 'A028': 343, 'A029': 299, 'A030': 424, 'A031': 387, 'A032': 360, 'A033': 356, 'A034': 176, 'A035': 185, 'A036': 279, 'A037': 225, 'A038': 256, 'A039': 250, 'A040': 133, 'A041': 118, 'A042': 211, 'A043': 115, 'A044': 138, 'A045': 73, 'A046': 57, 'A047': 45, 'A048': 43, 'A049': 20, 'A050': 36, 'A051': 7, 'A052': 17, 'A053': 23, 'A054': 76, 'A055': 63, 'A056': 45, 'A057': 43, 'A058': 31, 'A059': 10, 'A060': 9, 'A062': 1, 'A063': 1, 'A068': 2}`.
+# SFT Policy Bootstrap
+
+## Executive decision
+
+**A. SFT ESTABLISHES A COMPETENT BASE.**
+
+The frozen action-only SFT policy solved **48/60 (80.0%)** reserved train-split
+development tasks, compared with **3/60 (5.0%)** for the untrained Qwen3-8B
+under the identical SFT-P0 interface. The matched comparison contains 45
+fail-to-success changes, zero success-to-fail changes, and a net gain of +45.
+All frozen protocol and family-safety gates passed.
+
+**Recommendation: FREEZE SFT AS THE NEW BASE CANDIDATE.** A later, separately
+preregistered phase may collect a fresh paired recovery-value corpus from this
+base. This phase did not implement recovery, DPO, ORPO, PPO/GRPO, or a selector.
+
+## Hypothesis and method
+
+The hypothesis was that Qwen3-8B needed to learn an ALFWorld action policy
+rather than receive more prompt-level state scaffolding. SFT-P0 therefore
+trains action selection only:
+
+- Input: goal, current public observation, the most recent four public
+  action/result transitions, and the complete current environment-owned
+  indexed admissible-action map.
+- Target and inference output: one bare `Axxx` identifier.
+- Execution: strict final-line parsing with `^A\d{3}$`, exact lookup in the
+  current map, and fail-closed behavior.
+- Excluded: demonstrations, reflection, B2DS state, hidden facts, expert plans,
+  memory, recovery, free-form commands, retries, repair, and fallback.
+
+The completion-only supervised objective is
+
+`L_SFT = -(1/N) * sum_t log p_theta(y_t | x, y_<t)`,
+
+where `x` is the public SFT-P0 prompt and `y` is the expert `Axxx` completion.
+Prompt-token labels are masked, so only completion tokens contribute to loss.
+The effective batch size is
+
+`B_eff = B_device * gradient_accumulation * GPUs = 2 * 8 * 1 = 16`.
+
+## Dataset and expert caveat
+
+The dataset was reconstructed from successful hand-coded ALFWorld expert
+trajectories on the `train` split. Before every expert action, the collector
+obtained the current admissible commands, assigned deterministic IDs, required
+one exact match for the expert command, built the public SFT-P0 prompt, and then
+executed the unchanged command. Invalid or unsuccessful candidates failed
+closed; 596 candidate tasks were rejected because the expert trajectory did
+not terminate successfully.
+
+The final balanced dataset contains 1,200 tasks and 20,967 decisions. Training
+uses 1,074 tasks / 18,828 decisions; offline validation uses 126 disjoint tasks
+/ 2,139 decisions; 60 further tasks (10 per family) were reserved for matched
+online development evaluation. Each family contributes exactly 200 accepted
+tasks. The dataset SHA-256 is
+`c547e8f0c5988b29288f2a097169c7859741b7d4f53f222af31f5e2889d516cf`.
+
+The expert planner can be stronger than a policy inferable from public text
+alone. This is supervised expert-policy imitation and a competence bootstrap,
+not autonomous self-improvement. Only the expert action is a target; expert
+plans and hidden TextWorld facts are absent from model inputs.
+
+## Integrity and token audit
+
+- Accepted action-ID round trip: 100%.
+- Malformed completions / hidden-state prompts: 0 / 0.
+- Train-validation, accepted-online, exclusion, and demonstration-source
+  intersections: empty.
+- Exact duplicate rows removed deterministically: 21.
+- Duplicate task-step keys / exact trajectories: 0 / 0.
+- Prompt-hash duplicate occurrences retained: 148; semantic deduplication was
+  not performed.
+- Qwen3 prompt-plus-completion lengths: min 225, median 522, p90 751, p95 840,
+  p99 998, max 1,359.
+- Fit at the frozen 2,048-token maximum: 100%; no action map was truncated.
+
+The complete dataset audit is in `reports/SFT_DATASET_AUDIT.md`. The accepted
+split manifest SHA-256 is
+`9c374fafdcc7d7db77e878d23e852a0ec55eedcc3886cb0cebe7491d67e564e5`.
+
+## Frozen training configuration
+
+| Component | Value |
+|---|---|
+| Base model | `Qwen/Qwen3-8B` |
+| Precision | BF16 LoRA; base weights frozen; no quantization |
+| LoRA | r=32, alpha=64, dropout=0.05, bias=none, all-linear |
+| Optimizer | adamw_torch_fused, learning rate 1e-4, cosine schedule |
+| Training | 2 epochs, batch 2, accumulation 8, effective batch 16 |
+| Regularization | warmup 0.03, weight decay 0, max grad norm 1.0 |
+| Sequence handling | max length 2,048, packing false, completion-only loss |
+| Runtime | gradient checkpointing, use_cache=false, seed/data_seed=42 |
+| Checkpoint rule | lowest offline validation completion loss only |
+
+Installed additions were limited to TRL 0.23.0, PEFT 0.17.1, and datasets
+4.0.0. Existing torch 2.6.0+cu124, transformers 4.56.2, accelerate 1.10.1,
+CUDA, and ALFWorld were not upgraded. The allowed 1x16 OOM fallback was not
+used.
+
+## Training result
+
+The full run completed 2,354 optimizer steps in 27,406.3 seconds (7.61 hours).
+It processed 23,860,000 padded input tokens. All 8,190,735,360 base parameters
+remained frozen; 87,293,952 LoRA parameters were trainable (1.0545% of the
+combined parameter count). Peak allocated GPU memory was 23,665,892,352 bytes.
+
+| Point | Validation loss | Completion-token accuracy |
+|---|---:|---:|
+| Epoch 1 / step 1,177 | 0.077733 | 97.13% |
+| Epoch 2 / step 2,354 | 0.063817 | 97.42% |
+
+Final aggregate training loss was 0.100513. The preregistered validation-loss
+rule selected epoch 2 before online evaluation. The unmerged adapter remains at
+`artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter`
+with SHA-256
+`6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11`.
+
+The exact clean Git revision before model inference and full training was
+`f44ec40b2e12d34cb709b32eca591bae7b39d45d`.
+
+## Offline imitation accuracy
+
+For `N=2,139` task-disjoint expert states, exact accuracy is
+
+`Accuracy = (1/N) * sum_i I[predicted_ID_i = expert_ID_i]`.
+
+| Condition | Exact ID | Exact command | Malformed | Out of range |
+|---|---:|---:|---:|---:|
+| Base SFT-P0 | 709/2,139 (33.15%) | 33.15% | 0 | 1 |
+| SFT LoRA | 1,933/2,139 (90.37%) | 90.37% | 0 | 0 |
+
+Exact command accuracy maps each predicted ID back through the current
+environment-owned map before comparison. The +57.22 percentage-point gain is
+imitation evidence, not by itself environment competence.
+
+## Matched online evaluation
+
+The control and SFT policy ran the same 60 reserved train tasks, schedule
+positions, nominal seeds 7000-7059, 50-step horizon, SFT-P0 prompt, greedy
+decoder, `thinking=false`, 16-token generation budget, strict parser, and
+environment action semantics. Exact task/seed/reset matching was verified.
+
+Success rate is `SR = successes / episodes`. For matched binary outcomes,
+`net gain = N_01 - N_10`, where `N_01` is base-fail/SFT-success and `N_10` is
+base-success/SFT-fail.
+
+| Metric | Base | SFT |
+|---|---:|---:|
+| Success | 3/60 (5.0%) | 48/60 (80.0%) |
+| Mean episode length | 46.95 | 22.58 |
+| Fail -> success | - | 45 |
+| Success -> fail | - | 0 |
+| Net matched success gain | - | +45 |
+
+### Task family success
+
+| Family | Base | SFT | Matched net |
+|---|---:|---:|---:|
+| look_at_obj_in_light | 2/10 | 9/10 | +7 |
+| pick_and_place_simple | 1/10 | 10/10 | +9 |
+| pick_clean_then_place_in_recep | 0/10 | 9/10 | +9 |
+| pick_cool_then_place_in_recep | 0/10 | 9/10 | +9 |
+| pick_heat_then_place_in_recep | 0/10 | 10/10 | +10 |
+| pick_two_obj_and_place | 0/10 | 1/10 | +1 |
+
+No family had a matched success loss. Pick-two remains the dominant residual
+weakness: nine of the twelve SFT failures were partial-progress pick-two tasks.
+The other failures were one search failure, one procedural/light-use failure,
+and one post-transformation placement failure.
+
+## Funnel and behavior
+
+Funnel milestones are derived only from public observations and executed
+actions. Discovery means the target instance appeared in an observation;
+acquisition requires an observed pickup; transformation requires the correct
+clean/cool/heat outcome; final completion requires the task's final placement
+or light-use event.
+
+| Metric (episodes) | Base | SFT | Matched net |
+|---|---:|---:|---:|
+| Target discovered | 16 | 59 | +43 |
+| Target acquired | 16 | 59 | +43 |
+| Correct transformation | 0 | 29 | +29 |
+| Final placement/completion | 14 | 48 | +34 |
+
+An adjacent repeat is `I[a_t = a_(t-1)]`. A strict two-cycle event is counted
+when a four-action window repeats its preceding two-action pair. Repeated
+receptacle navigation is total grounded `go to` events minus unique visited
+receptacles. Off-target manipulation counts grounded `take`, `move`, `heat`,
+`cool`, `clean`, or `use` actions that reference neither the task target nor
+the required light.
+
+| Behavior count | Base | SFT |
+|---|---:|---:|
+| Adjacent repeats | 588 | 1 |
+| Strict two-cycles | 1,504 | 167 |
+| Repeated receptacle navigation | 382 | 103 |
+| Off-target manipulations | 1,039 | 0 |
+
+## Protocol and cost
+
+Executable validity is `executed grounded decisions / total decisions`.
+
+| Metric | Base | SFT |
+|---|---:|---:|
+| Decisions | 2,817 | 1,355 |
+| Executable validity | 99.9645% | 100% |
+| Malformed / out-of-range IDs | 1 / 0 | 0 / 0 |
+| Mapping failures | 0 | 0 |
+| Wrong-command executions | 0 | 0 |
+| Unclassified parser failures | 0 | 0 |
+| Mean input tokens/decision | 574.33 | 546.24 |
+| Mean generated tokens/decision | 5.0004 | 5.0000 |
+| Mean policy latency/decision | 0.2695 s | 0.4266 s |
+
+SFT adds about 0.157 seconds per decision in this sequential run. The first
+cold decision was 7.677 seconds for base and 7.268 seconds for SFT, so this run
+does not show a positive adapter-specific cold-load penalty. Those cold values
+also include base-model loading and are order/cache dependent; they are not an
+isolated LoRA loading benchmark.
+
+## Frozen gate
+
+| Requirement | Threshold | Result | Pass |
+|---|---:|---:|---:|
+| Executable validity | >=98% | 100% SFT | yes |
+| Mapping / wrong-command / unclassified failures | 0 | 0 / 0 / 0 | yes |
+| Net matched successes | >=+8 | +45 | yes |
+| Absolute SFT success | >=18/60 | 48/60 | yes |
+| Maximum family matched loss | <=2 | 0 | yes |
+
+The frozen decision is therefore **A. SFT ESTABLISHES A COMPETENT BASE**.
+
+## Limitations and next step
+
+- This is a train-split development evaluation, not valid-seen or valid-unseen
+  generalization evidence. The 60 tasks are now consumed development tasks and
+  must not be used for tuning or later held-out claims.
+- Behavioral cloning can still suffer covariate shift after self-induced
+  mistakes. The large offline and online gains make category C inappropriate,
+  but they do not eliminate this risk on new distributions.
+- The result is one preregistered LoRA configuration and one deterministic run;
+  no hyperparameter comparison or variance estimate was performed.
+- Pick-two performance is only 1/10 despite task-balanced training and requires
+  analysis before claiming uniformly competent long-horizon control.
+- The online latency comparison was sequential and does not isolate adapter
+  loading from cache and process-order effects.
+
+The SFT adapter should be frozen as the new base candidate. A future protocol
+may first validate it on fresh held-out tasks, then collect a new paired
+recovery corpus and measure `V_raw = R_recover - R_continue`. Preference-pair
+construction and DPO/ORPO should occur only after that fresh value-density
+measurement. None of those later phases began here.
+
+## Provenance
+
+- Protocol: `sft_p0_action_only_v1`
+- Protocol SHA-256: `dd06d08773e9842b2302263429c7a1752e968dcb30d2dd89f185c01ef9605155`
+- Training result SHA-256: `e6a47124200cacba4d1f3eaf97fdf79657d7df04f072a4d5446c2bec677c399e`
+- Offline result SHA-256: `ce3b402c992ed948c681129e8c7b01434eb0409bf24e838eeea2627ad851b59d`
+- Online summary SHA-256: `ba73ac916f9a5895309953ffba857b88569f948ae5d30d2e40a9934e0bccc7b9`
+- Base trajectory SHA-256: `fe145bed8ea49350198c0c0e458df9e47252632e663dac5a2dfa3f17f3fe7759`
+- SFT trajectory SHA-256: `3509c6d45c6ce8dada1a132b5e9af2a65c898f8565ab06d9714a8a491842b3dc`
+
+Raw datasets, trajectories, training logs, checkpoints, and adapter files
+remain ignored under `artifacts/runtime/`. No model weights are tracked.

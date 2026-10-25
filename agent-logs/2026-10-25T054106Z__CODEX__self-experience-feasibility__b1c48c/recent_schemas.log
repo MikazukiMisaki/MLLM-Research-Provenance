@@ -1,0 +1,329 @@
+R14_SOURCE 181317920
+  completed_at 2026-09-10T02:12:31.497582+00:00
+  initial_observation <long text>
+  metadata DICT ['adapter_loaded', 'condition', 'episode_wall_seconds', 'max_steps', 'nominal_seed', 'pipeline_version', 'policy_pipeline', 'r14_canonical_trajectory_sha256', 'reset', 'schedule_index', 'source_game_sha256', 'source_task_sha256', 'source_traj_data_sha256', 'task_family', 'termination_reason']
+    reset DICT ['alfworld_info']
+  model_version Qwen/Qwen3-8B+lora:/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter
+  seed 30000
+  started_at 2026-09-10T02:12:18.368551+00:00
+  steps LIST 8 ['action', 'action_valid', 'done', 'index', 'metadata', 'model_output', 'observation', 'parser_status', 'reasoning', 'result_observation', 'reward', 'timestamp', 'token_statistics', 'valid_actions']
+  task DICT ['family', 'metadata', 'split', 'task_id', 'text']
+    metadata DICT ['game_file']
+  trajectory_id 6da37e2c8722894fa55cedc3
+  truncated False
+R15_CONTINUE 45868962
+  continuation_steps 36
+  continue_return 0.0
+  continue_success False
+  cost DICT ['decisions', 'generated_tokens', 'input_tokens', 'latency_seconds', 'total_tokens']
+  exact_suffix_match True
+  family pick_two_obj_and_place
+  first_action_id A041
+  first_action_id_exact True
+  first_mapped_command look
+  first_mapped_command_exact True
+  first_source_action_id A041
+  first_source_mapped_command look
+  full_mapped_suffix_exact True
+  loop DICT ['adjacent_repeats', 'any_loop', 'repeated_navigation', 'strict_two_cycles']
+  prefix_id R15-F01
+  protocol DICT ['decisions', 'executable_actions', 'executable_validity', 'malformed_ids', 'mapping_failures', 'out_of_range_ids', 'selection_failures', 'unclassified_failures', 'wrong_commands']
+  r_continue 0
+  remaining_horizon 36
+  schedule_index 1
+  selected_decision_index 14
+  source_success False
+  source_terminal_reward 0.0
+  source_termination_reason environment_terminal
+  steps LIST 36 ['action', 'action_executed', 'action_id', 'done', 'environment_metadata', 'failure_category', 'failure_reason', 'global_decision_index', 'latency_seconds', 'mapped_command', 'observation', 'offset', 'parser_status', 'policy_metadata', 'raw_output', 'reward', 'selection_status', 'token_statistics', 'truncated', 'valid_actions']
+  stratum failure
+  task_id pick_two_obj_and_place-Tomato-None-CounterTop-19/trial_T20190907_144716_566859
+  terminal_outcome_exact True
+  termination_reason environment_terminal
+R16_OSR 48207142
+  branch_cost DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'total_tokens']
+  classification beneficial
+  continuation_full DICT ['protocol', 'remaining_episode_length', 'remaining_horizon', 'return', 'steps', 'success', 'terminal', 'termination_reason']
+    protocol DICT ['decisions', 'executable_actions', 'executable_validity', 'malformed_ids', 'mapping_failures', 'out_of_range_ids', 'selection_failures', 'unclassified_failures', 'wrong_commands']
+    steps LIST 12 ['action', 'action_executed', 'action_id', 'done', 'environment_metadata', 'failure_category', 'failure_reason', 'global_decision_index', 'latency_seconds', 'mapped_command', 'observation', 'offset', 'parser_status', 'policy_metadata', 'raw_output', 'resulting_observation', 'resulting_valid_actions', 'reward', 'selection_status', 'token_statistics', 'truncated', 'valid_actions']
+  continue_cost DICT ['decisions', 'generated_tokens', 'input_tokens', 'latency_seconds', 'total_tokens']
+  continue_loop_indicators DICT ['adjacent_repeat_events', 'repeated_navigation_events', 'total_loop_events', 'two_cycle_events']
+  delta_branch_latency_vs_continue -9.717681755428202
+  delta_branch_tokens_vs_continue -16251
+  loop_change reduced
+  loop_deltas DICT ['adjacent_repeat_events', 'repeated_navigation_events', 'total_loop_events', 'two_cycle_events']
+  osr_loop_indicators DICT ['adjacent_repeat_events', 'repeated_navigation_events', 'total_loop_events', 'two_cycle_events']
+  prefix_id R15-F01
+  progress_delta DICT ['action_executed', 'after_observation_sha256', 'before_observation_sha256', 'immediate_new_public_progress', 'new_acquired_instances', 'new_discovered_instances', 'new_ever_placed_instances', 'new_transformation_complete_targets', 'observation_changed', 'rehandling_delta', 'second_instance_currently_completed']
+  protocol DICT ['decisions', 'executable_actions', 'executable_validity', 'malformed_ids', 'mapping_failures', 'out_of_range_ids', 'selection_failures', 'unclassified_failures', 'wrong_commands']
+  r_continue 0
+  r_osr 1
+  recovery_action_count 1
+  recovery_action_disagreement disagreement
+  recovery_action_executed True
+  recovery_action_id A001
+  recovery_action_status executed
+  recovery_cost DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'stage1_generated_tokens', 'stage1_input_tokens', 'stage1_latency_seconds', 'stage2_generated_tokens', 'stage2_input_tokens', 'stage2_latency_seconds', 'total_tokens']
+  recovery_full DICT ['operator_version', 'stage_one', 'stage_one_prompt_version', 'stage_two', 'stage_two_prompt_version']
+    stage_one DICT ['generation', 'parsed']
+    stage_two DICT ['generation', 'parsed']
+  recovery_generation DICT ['stage_one', 'stage_two']
+    stage_one DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'max_new_tokens', 'output_complete', 'prompt_sha256', 'raw_output', 'rendered_prompt_sha256', 'token_cap_reached']
+    stage_two DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'max_new_tokens', 'output_complete', 'prompt_sha256', 'raw_output', 'rendered_prompt_sha256', 'token_cap_reached']
+  recovery_mapped_command go to cabinet 1
+  recovery_transition DICT ['done', 'metadata', 'observation', 'reward', 'truncated', 'valid_actions']
+    metadata DICT ['alfworld_info']
+  remaining_horizon 36
+  replay DICT ['complete_public_prefix_sha256', 'current_indexed_action_map_sha256', 'current_observation_sha256', 'recent_k4_context_sha256', 'remaining_horizon', 'replay_match', 'selected_decision_index']
+  resumed_sft_action_count 12
+  schedule_index 1
+  selected_decision_index 14
+  sft_cost DICT ['decisions', 'generated_tokens', 'input_tokens', 'latency_seconds', 'total_tokens']
+  stage_one_parsed DICT ['diagnosis', 'diagnosis_word_count', 'failure_reason', 'status', 'subgoal', 'subgoal_word_count']
+  stage_one_raw_output Diagnosis: Unable to locate tomatoes; garbagecan 1 is empty.  
+Subgoal: Search cabinets for tomatoes.
+  stage_one_status valid
+  stage_one_valid True
+  stage_two_parsed DICT ['action', 'action_id', 'failure_reason', 'id_to_command', 'status']
+    id_to_command DICT ['A000', 'A001', 'A002', 'A003', 'A004', 'A005', 'A006', 'A007', 'A008', 'A009', 'A010', 'A011', 'A012', 'A013', 'A014', 'A015', 'A016', 'A017', 'A018', 'A019', 'A020', 'A021', 'A022', 'A023', 'A024', 'A025', 'A026', 'A027', 'A028', 'A029', 'A030', 'A031', 'A032', 'A033', 'A034', 'A035', 'A036', 'A037', 'A038', 'A039', 'A040', 'A041']
+  stage_two_raw_output A001
+  stage_two_status selected
+  stratum failure
+  target_relation RECEPTACLE_SEARCH_ACTION
+  task_family pick_two_obj_and_place
+  task_id pick_two_obj_and_place-Tomato-None-CounterTop-19/trial_T20190907_144716_566859
+  terminal_reward 1.0
+  termination_reason environment_terminal
+  v_osr 1
+R17_PAR 48867616
+  action_relation_continue disagreement
+  action_relation_osr different
+  branch_cost DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'total_tokens']
+  card DICT ['card_schema_version', 'card_sha256', 'rendered_card']
+  continuation_full DICT ['protocol', 'remaining_episode_length', 'remaining_horizon', 'return', 'steps', 'success', 'terminal', 'termination_reason']
+    protocol DICT ['decisions', 'executable_actions', 'executable_validity', 'malformed_ids', 'mapping_failures', 'out_of_range_ids', 'selection_failures', 'unclassified_failures', 'wrong_commands']
+    steps LIST 12 ['action', 'action_executed', 'action_id', 'done', 'environment_metadata', 'failure_category', 'failure_reason', 'global_decision_index', 'latency_seconds', 'mapped_command', 'observation', 'offset', 'parser_status', 'policy_metadata', 'raw_output', 'resulting_observation', 'resulting_valid_actions', 'reward', 'selection_status', 'token_statistics', 'truncated', 'valid_actions']
+  continue_cost DICT ['decisions', 'generated_tokens', 'input_tokens', 'latency_seconds', 'total_tokens']
+  continue_loop_indicators DICT ['adjacent_repeat_events', 'repeated_navigation_events', 'total_loop_events', 'two_cycle_events']
+  delta_branch_latency_vs_continue -9.163885681307875
+  delta_branch_latency_vs_osr 0.5537960741203278
+  delta_branch_tokens_vs_continue -16074
+  delta_branch_tokens_vs_osr 177
+  delta_local_recovery_latency_vs_osr 0.268262084107846
+  delta_local_recovery_tokens_vs_osr 181
+  diagnosis_relation changed
+  loop_change_vs_osr unchanged
+  loop_deltas_vs_osr DICT ['adjacent_repeat_events', 'repeated_navigation_events', 'total_loop_events', 'two_cycle_events']
+  osr_loop_indicators DICT ['adjacent_repeat_events', 'repeated_navigation_events', 'total_loop_events', 'two_cycle_events']
+  osr_reference DICT ['r_osr', 'recovery_action_executed', 'recovery_mapped_command', 'stage_one_parsed', 'stage_one_valid', 'stage_two_status']
+    stage_one_parsed DICT ['diagnosis', 'diagnosis_word_count', 'failure_reason', 'status', 'subgoal', 'subgoal_word_count']
+  osr_target_relation RECEPTACLE_SEARCH_ACTION
+  par_generation DICT ['stage_one', 'stage_two']
+    stage_one DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'max_new_tokens', 'output_complete', 'prompt_sha256', 'raw_output', 'rendered_prompt_sha256', 'token_cap_reached']
+    stage_two DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'max_new_tokens', 'output_complete', 'prompt_sha256', 'raw_output', 'rendered_prompt_sha256', 'token_cap_reached']
+  par_loop_indicators DICT ['adjacent_repeat_events', 'repeated_navigation_events', 'total_loop_events', 'two_cycle_events']
+  prefix_id R15-F01
+  progress_card_input_token_overhead 175
+  progress_classification ProgressTie
+  progress_delta DICT ['action_executed', 'after_observation_sha256', 'before_observation_sha256', 'immediate_new_public_progress', 'new_acquired_instances', 'new_discovered_instances', 'new_ever_placed_instances', 'new_transformation_complete_targets', 'observation_changed', 'rehandling_delta', 'second_instance_currently_completed']
+  protocol DICT ['decisions', 'executable_actions', 'executable_validity', 'malformed_ids', 'mapping_failures', 'out_of_range_ids', 'selection_failures', 'unclassified_failures', 'wrong_commands']
+  r_continue 0
+  r_osr 1
+  r_par 1
+  recovery_action_count 1
+  recovery_action_executed True
+  recovery_action_id A031
+  recovery_action_status executed
+  recovery_cost DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'stage1_generated_tokens', 'stage1_input_tokens', 'stage1_latency_seconds', 'stage2_generated_tokens', 'stage2_input_tokens', 'stage2_latency_seconds', 'total_tokens']
+  recovery_full DICT ['operator_version', 'stage_one', 'stage_one_prompt_version', 'stage_two', 'stage_two_prompt_version']
+    stage_one DICT ['generation', 'parsed']
+    stage_two DICT ['generation', 'parsed']
+  recovery_mapped_command go to fridge 1
+  recovery_transition DICT ['done', 'metadata', 'observation', 'reward', 'truncated', 'valid_actions']
+    metadata DICT ['alfworld_info']
+  remaining_horizon 36
+  replay DICT ['complete_public_prefix_sha256', 'current_indexed_action_map_sha256', 'current_observation_sha256', 'recent_k4_context_sha256', 'remaining_horizon', 'replay_match', 'selected_decision_index']
+  resumed_sft_action_count 12
+  schedule_index 1
+  secondary_classification beneficial
+  selected_decision_index 14
+  sft_cost DICT ['decisions', 'generated_tokens', 'input_tokens', 'latency_seconds', 'total_tokens']
+  stage_one_parsed DICT ['diagnosis', 'diagnosis_word_count', 'failure_reason', 'status', 'subgoal', 'subgoal_word_count']
+  stage_one_raw_output Diagnosis: Unable to locate tomatoes; no tomato found in garbagecan 1.
+Subgoal: Go to fridge 1 to search for tomatoes.
+  stage_one_status valid
+  stage_one_valid True
+  stage_two_parsed DICT ['action', 'action_id', 'failure_reason', 'id_to_command', 'status']
+    id_to_command DICT ['A000', 'A001', 'A002', 'A003', 'A004', 'A005', 'A006', 'A007', 'A008', 'A009', 'A010', 'A011', 'A012', 'A013', 'A014', 'A015', 'A016', 'A017', 'A018', 'A019', 'A020', 'A021', 'A022', 'A023', 'A024', 'A025', 'A026', 'A027', 'A028', 'A029', 'A030', 'A031', 'A032', 'A033', 'A034', 'A035', 'A036', 'A037', 'A038', 'A039', 'A040', 'A041']
+  stage_two_raw_output A031
+  stage_two_status selected
+  stratum failure
+  subgoal_relation changed
+  target_relation RECEPTACLE_SEARCH_ACTION
+  task_family pick_two_obj_and_place
+  task_id pick_two_obj_and_place-Tomato-None-CounterTop-19/trial_T20190907_144716_566859
+  terminal_reward 1.0
+  termination_reason environment_terminal
+R18_C1 8191574
+  action_relation_osr_fact different
+  branch_cost DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'total_tokens']
+  continuation DICT ['protocol', 'remaining_episode_length', 'remaining_horizon', 'return', 'steps', 'success', 'terminal', 'termination_reason']
+    protocol DICT ['decisions', 'executable_actions', 'executable_validity', 'malformed_ids', 'mapping_failures', 'out_of_range_ids', 'selection_failures', 'unclassified_failures', 'wrong_commands']
+    steps LIST 24 ['action', 'action_executed', 'action_id', 'done', 'failure_category', 'failure_reason', 'global_decision_index', 'latency_seconds', 'mapped_command', 'observation', 'offset', 'policy_metadata', 'raw_output', 'resulting_observation', 'resulting_valid_actions', 'reward', 'selection_status', 'token_statistics', 'truncated', 'valid_actions']
+  delta_branch_latency_vs_osr 6.753579140291549
+  delta_branch_tokens_vs_osr 9496
+  delta_local_latency_vs_osr 1.0033081809524447
+  delta_local_tokens_vs_osr 180
+  diagnosis Unable to locate tomato; no tomato found in garbagecan 1.
+  diagnosis_same_as_osr False
+  fact_loops DICT ['adjacent_repeat_events', 'repeated_navigation_events', 'total_loop_events', 'two_cycle_events']
+  fact_sha256 8aa4d00701a4918df7a002a250d1bb0ac15a3dec3418b23efeef68f65d7c20a7
+  fact_text <long text>
+  fact_text_sha256 73abd74f2b02b4090716e7cac906617a69cf021f5575fd3f2b2072b3021f0c35
+  info_classification InfoTie
+  loop_change_vs_osr increased
+  osr_loops DICT ['adjacent_repeat_events', 'repeated_navigation_events', 'total_loop_events', 'two_cycle_events']
+  pick_two DICT ['completed_targets', 'current_completion_destination', 'destination_type', 'held_targets', 'known_targets', 'known_unfinished_targets', 'parser_status', 'remaining_required_count', 'required_count', 'required_transformation', 'schema_version', 'target_type', 'transformation_complete_targets']
+  prefix_id R15-F01
+  protocol DICT ['recovery_stage1_attempted', 'recovery_stage2_attempted', 'sft']
+    sft DICT ['decisions', 'executable_actions', 'executable_validity', 'malformed_ids', 'mapping_failures', 'out_of_range_ids', 'selection_failures', 'unclassified_failures', 'wrong_commands']
+  r_continue 0
+  r_fact_text 1
+  r_osr 1
+  recovery DICT ['operator_version', 'stage_one_generation', 'stage_one_parsed', 'stage_one_prompt', 'stage_two_generation', 'stage_two_parsed', 'stage_two_prompt']
+    stage_one_generation DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'max_new_tokens', 'output_complete', 'prompt', 'raw_output', 'rendered_prompt_sha256', 'token_cap_reached', 'token_id_count', 'token_ids_sha256']
+    stage_one_parsed DICT ['diagnosis', 'diagnosis_word_count', 'failure_reason', 'status', 'subgoal', 'subgoal_word_count']
+    stage_two_generation DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'max_new_tokens', 'output_complete', 'prompt', 'raw_output', 'rendered_prompt_sha256', 'token_cap_reached', 'token_id_count', 'token_ids_sha256']
+    stage_two_parsed DICT ['action', 'action_id', 'failure_reason', 'id_to_command', 'status']
+  recovery_action_executed True
+  recovery_action_id A023
+  recovery_action_status executed
+  recovery_cost DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'stage1_generated_tokens', 'stage1_input_tokens', 'stage1_latency_seconds', 'stage2_generated_tokens', 'stage2_input_tokens', 'stage2_latency_seconds', 'total_tokens']
+  recovery_mapped_command go to countertop 1
+  recovery_transition DICT ['done', 'observation', 'reward', 'truncated', 'valid_actions']
+  remaining_horizon 36
+  replay DICT ['checks', 'complete_public_prefix_sha256', 'current_observation_sha256', 'history', 'indexed_action_map_sha256', 'observation', 'prefix_id', 'recent_k4_context', 'recent_k4_context_sha256', 'remaining_horizon', 'schedule_index', 'selected_decision_index', 'task_id', 'transitions', 'valid_actions']
+    checks DICT ['complete_public_prefix_sha256', 'current_observation_sha256', 'indexed_action_map_sha256', 'recent_k4_sha256', 'remaining_horizon', 'selected_decision_index', 'task_identity', 'transitions']
+    recent_k4_context LIST 4 ['action', 'resulting_observation']
+    transitions LIST 14 ['action', 'decision_index', 'done', 'observation', 'reward', 'truncated', 'valid_actions']
+  schedule_index 1
+  selected_decision_index 14
+  sft_cost DICT ['decisions', 'generated_tokens', 'input_tokens', 'latency_seconds', 'total_tokens']
+  stage_one_status valid
+  stage_one_valid True
+  stage_two_status selected
+  stage_two_valid True
+  stratum failure
+  subgoal Search other locations for tomato to collect and place on countertop.
+  subgoal_same_as_osr False
+  task_family pick_two_obj_and_place
+  task_id pick_two_obj_and_place-Tomato-None-CounterTop-19/trial_T20190907_144716_566859
+  terminal_reward 1.0
+  termination_reason environment_terminal
+  treatment_text_input_token_overhead_vs_osr 170
+R18_C2 8339863
+  action_relation_fact_card different
+  action_relation_osr_card different
+  branch_cost DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'total_tokens']
+  card <long text>
+  card_loops DICT ['adjacent_repeat_events', 'repeated_navigation_events', 'total_loop_events', 'two_cycle_events']
+  card_sha256 b877bbd6d3e00f92cbf8ff858a34a7bbf1ee0290487727d7593767e672690378
+  continuation DICT ['protocol', 'remaining_episode_length', 'remaining_horizon', 'return', 'steps', 'success', 'terminal', 'termination_reason']
+    protocol DICT ['decisions', 'executable_actions', 'executable_validity', 'malformed_ids', 'mapping_failures', 'out_of_range_ids', 'selection_failures', 'unclassified_failures', 'wrong_commands']
+    steps LIST 12 ['action', 'action_executed', 'action_id', 'done', 'failure_category', 'failure_reason', 'global_decision_index', 'latency_seconds', 'mapped_command', 'observation', 'offset', 'policy_metadata', 'raw_output', 'resulting_observation', 'resulting_valid_actions', 'reward', 'selection_status', 'token_statistics', 'truncated', 'valid_actions']
+  delta_branch_latency_vs_fact -6.474712644936517
+  delta_branch_latency_vs_osr 0.2788664953550324
+  delta_branch_tokens_vs_fact -9319
+  delta_branch_tokens_vs_osr 177
+  delta_local_latency_vs_fact -0.8182660558959469
+  delta_local_latency_vs_osr 0.18504212505649775
+  delta_local_tokens_vs_fact 1
+  delta_local_tokens_vs_osr 181
+  diagnosis Unable to locate tomatoes; no tomato found in garbagecan 1.
+  diagnosis_same_as_fact False
+  diagnosis_same_as_osr False
+  fact_loops DICT ['adjacent_repeat_events', 'repeated_navigation_events', 'total_loop_events', 'two_cycle_events']
+  fact_sha256 8aa4d00701a4918df7a002a250d1bb0ac15a3dec3418b23efeef68f65d7c20a7
+  fact_text_sha256 73abd74f2b02b4090716e7cac906617a69cf021f5575fd3f2b2072b3021f0c35
+  info_classification InfoTie
+  loop_change_vs_fact reduced
+  loop_change_vs_osr unchanged
+  osr_loops DICT ['adjacent_repeat_events', 'repeated_navigation_events', 'total_loop_events', 'two_cycle_events']
+  pick_two DICT ['completed_targets', 'current_completion_destination', 'destination_type', 'held_targets', 'known_targets', 'known_unfinished_targets', 'parser_status', 'remaining_required_count', 'required_count', 'required_transformation', 'schema_version', 'target_type', 'transformation_complete_targets']
+  prefix_id R15-F01
+  protocol DICT ['recovery_environment_actions', 'recovery_stage1_attempted', 'recovery_stage2_attempted', 'sft']
+    sft DICT ['decisions', 'executable_actions', 'executable_validity', 'malformed_ids', 'mapping_failures', 'out_of_range_ids', 'selection_failures', 'unclassified_failures', 'wrong_commands']
+  provenance DICT ['adapter_sha256', 'frozen_hashes', 'implementation_commit', 'r18_b_commit']
+    frozen_hashes DICT ['r14_corpus', 'r14_schedule', 'r15_b_summary', 'r15_cards', 'r15_manifest', 'r16_summary', 'r17_csv', 'r17_report', 'r17_summary', 'r18_a_field_csv', 'r18_a_json', 'r18_a_prefix_csv', 'r18_a_report', 'r18_b_card', 'r18_b_facts', 'r18_b_manifest', 'r18_b_protocol', 'r18_b_report', 'r18_b_text', 'r18_b_validation', 'r18_c1_pairs', 'r18_c1_report', 'r18_c1_summary']
+  r_card_v2 1
+  r_continue 0
+  r_fact_text 1
+  r_osr 1
+  recovery DICT ['environment_actions', 'operator_version', 'stage_one_generation', 'stage_one_parsed', 'stage_one_prompt', 'stage_two_generation', 'stage_two_parsed', 'stage_two_prompt']
+    environment_actions LIST 1 ['action_id', 'command', 'transition']
+    stage_one_generation DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'max_new_tokens', 'output_complete', 'prompt', 'raw_output', 'rendered_prompt_sha256', 'token_cap_reached', 'token_id_count', 'token_ids_sha256']
+    stage_one_parsed DICT ['diagnosis', 'diagnosis_word_count', 'failure_reason', 'status', 'subgoal', 'subgoal_word_count']
+    stage_two_generation DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'max_new_tokens', 'output_complete', 'prompt', 'raw_output', 'rendered_prompt_sha256', 'token_cap_reached', 'token_id_count', 'token_ids_sha256']
+    stage_two_parsed DICT ['action', 'action_id', 'failure_reason', 'id_to_command', 'status']
+  recovery_action_executed True
+  recovery_action_id A031
+  recovery_action_status executed
+  recovery_cost DICT ['generated_tokens', 'input_tokens', 'latency_seconds', 'stage1_generated_tokens', 'stage1_input_tokens', 'stage1_latency_seconds', 'stage2_generated_tokens', 'stage2_input_tokens', 'stage2_latency_seconds', 'total_tokens']
+  recovery_mapped_command go to fridge 1
+  recovery_transition DICT ['done', 'observation', 'reward', 'truncated', 'valid_actions']
+  remaining_horizon 36
+  replay DICT ['checks', 'complete_public_prefix_sha256', 'current_observation_sha256', 'history', 'indexed_action_map_sha256', 'observation', 'prefix_id', 'recent_k4_context', 'recent_k4_context_sha256', 'remaining_horizon', 'replay_pass', 'schedule_index', 'selected_decision_index', 'task_id', 'transitions', 'valid_actions']
+    checks DICT ['complete_public_prefix_sha256', 'current_observation_sha256', 'indexed_action_map_sha256', 'recent_k4_sha256', 'remaining_horizon', 'selected_decision_index', 'task_identity', 'transitions']
+    recent_k4_context LIST 4 ['action', 'resulting_observation']
+    transitions LIST 14 ['action', 'decision_index', 'done', 'observation', 'reward', 'truncated', 'valid_actions']
+  representation_classification RepTie
+  schedule_index 1
+  selected_decision_index 14
+  sft_cost DICT ['decisions', 'generated_tokens', 'input_tokens', 'latency_seconds', 'total_tokens']
+  stage_one_status valid
+  stage_one_valid True
+  stage_two_status selected
+  stage_two_valid True
+  stratum failure
+  subgoal Go to fridge 1 to search for tomatoes.
+  subgoal_same_as_fact False
+  subgoal_same_as_osr False
+  task_family pick_two_obj_and_place
+  task_id pick_two_obj_and_place-Tomato-None-CounterTop-19/trial_T20190907_144716_566859
+  terminal_reward 1.0
+  termination_reason environment_terminal
+  treatment_token_overhead_vs_fact 5
+  treatment_token_overhead_vs_osr 175
+R19_BRANCHES 1482426
+  attempted True
+  canonical_trial_id pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-30/trial_T20190907_220045_510017
+  continue_logical_cost DICT ['full_branch', 'recovery_only']
+    full_branch DICT ['environment_actions', 'generated_tokens', 'input_tokens', 'latency_seconds_component_sum', 'model_calls', 'total_tokens']
+    recovery_only DICT ['environment_actions', 'generated_tokens', 'input_tokens', 'latency_seconds_component_sum', 'model_calls', 'total_tokens']
+  continue_success 0
+  decision_index 23
+  eligibility_reason stage_one_failure
+  eligible_primary False
+  enrollment_sha256 9ae916666d895989345c5104671e59e3366a0d87a1a17e4a3e4cf75693459ac1
+  evidence_refs DICT ['continue', 'k_arms', 'prefix_attempt_event_id', 'source_episode_event_id']
+    continue DICT ['generation_event_ids', 'transition_event_ids']
+    k_arms DICT ['1']
+  k_results DICT ['1']
+    1 DICT ['arm_event_id', 'checkpoint', 'derived_evidence_from_checkpoint', 'derived_identity_from', 'derived_source_event_id', 'evidence_refs', 'k', 'logical_cost', 'recovery_environment_actions', 'replay_evidence', 'sft_action_cap', 'sft_environment_actions', 'sft_terminal', 'sft_termination_reason', 'stage_two_attempts_charged', 'stopping_reason', 'success', 'terminal', 'terminal_evidence_checkpoint']
+  nominal_seed 30003
+  prefix_id R19-failure-22984d06767be55e8b1a
+  source_schedule_index 3
+  stratum failure
+  task_family pick_heat_then_place_in_recep
+  trajectory_sha256 64f3f0893e829cbd795d35032d8234d1a1382fa72733611a442c3cbaa8d841e2
+R19_SOURCE 19726633
+  initial_observation <long text>
+  metadata DICT ['max_steps', 'nominal_seed', 'r19_source_event_refs', 'reset_order_position', 'schedule_index', 'source_game_sha256', 'source_restart_comparison_sha256', 'source_traj_data_sha256', 'source_trajectory_sha256', 'split', 'task_family', 'termination_reason']
+    r19_source_event_refs DICT ['generation_event_ids', 'reset_event_id', 'source_episode_event_id', 'transition_event_ids']
+  model_version Qwen/Qwen3-8B+lora:/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter
+  seed 30000
+  steps LIST 6 ['action', 'action_valid', 'done', 'index', 'metadata', 'model_output', 'observation', 'parser_status', 'result_observation', 'reward', 'timestamp', 'token_statistics', 'valid_actions']
+  task DICT ['family', 'metadata', 'split', 'task_id', 'text']
+    metadata DICT ['game_file']
+  trajectory_id aea7c51203026ec5ec1fdb57
+  truncated False

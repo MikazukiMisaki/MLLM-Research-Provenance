@@ -1,0 +1,6 @@
+{
+  "message": "重要独立复核纠正（请在冻结前处理，不必等待前条队列）：你草稿将SFT protocol split/exclusion SHA判CONTRADICTED，但我直接读取当前JSON发现原声明是canonical SHA，sort_keys=True,separators=(',',':'),ensure_ascii=False：sft_task_splits canonical=e6695359f2e6b53b74c54e9d9712b1f8bc8534487d85b659151c71eb1441e25d；exclusions canonical=8e0d04d315a16d4fd28ef04bf9bf92212ebc98bbba8a10dfe0e3acb2b9fbf798，均精确匹配protocol。scripts/build_sft_protocol_assets.py:49及139/140使用sha256_value，独立核对其定义即可。raw bytes5347/fdbe不同是序列化，不是已证实binding缺失。请保留原始草稿命令receipt，最终报告分别列raw/canonical与代码定义，不制造新问题/不修改历史文件。其他历史runtime缺失判断仍单独审核。",
+  "returncode": 0,
+  "stdout": "Queued message 01a1719d-63e2-7eb2-9363-2193bd5f6ba7 for thread 01a09fcb-ab5f-7b83-9acf-91026145b764.\n",
+  "stderr": ""
+}

@@ -1,0 +1,185 @@
+# Progress-Aware Recovery R18-B v2 Treatment Freeze
+
+**DEVELOPMENT ONLY / NOT HELD-OUT CONFIRMATION.**
+
+This is a pre-inference construction and validation milestone. It uses only the already consumed R14 source corpus and the frozen R15 public prefixes. It does not reinterpret R17 and does not run a model or ALFWorld.
+
+## Frozen provenance
+
+- Branch: `codex/progress-aware-recovery`; R18-A commit: `1144e6b15740edab4b7083a705db27f55deeea5c`.
+- R18-A Phase-A SHA-256: `11c514a8fdbc0aad62b1b0d6c33ea131baf258bf0f3ab08422da27ae387ab719`.
+- All frozen R14/R15/R16/R17/R18-A inputs verified unchanged: `True`.
+
+## V2 semantic validation
+
+- Prefixes/fields: `60` / `660`.
+- Exact / justified unknown / not applicable: `353` / `259` / `48`.
+- Unjustified unknown / incorrect / partial / ambiguous: `0` / `0` / `0` / `0`.
+- Coverage failures: `0`; repeated-generation equality: `True`.
+
+## Gap correction
+
+- Corrected exactly the R18-A grammar and instance-bookkeeping gaps: examine, put-some, transformation-some target parsing; examine known/held/unfinished instances; and transformation-some known/unfinished instances.
+- Gap groups corrected: `8`; unresolved: `0`; new semantic assumptions: `0`.
+- The v1 module and all R15/R17 artifacts remain untouched.
+
+## Pick-two epistemic safety
+
+- Failure prefixes: `18`; count-aware `18`; instance-aware `17`; location-aware `3`.
+- Unjustified newly inferred instances/locations: `0` / `0`.
+- A remaining count never creates an unobserved second instance or location; empty known-unfinished targets remain empty when public evidence is absent.
+
+## Canonical facts and matched renderings
+
+- Canonical fact objects: `60`; deterministic: `True`; outcome-independent: `True`; hidden/future leakage: `False`.
+- CARD-v2 / FACT-TEXT renderings: `60` / `60`; semantic equivalence: `60`; mismatches: `0`.
+- CARD-v2 mean/median tokens: `82.083` / `79.5`; FACT-TEXT mean/median: `78.083` / `75.5`; mean paired difference: `-4.000`.
+
+## Future development comparison (frozen, not run)
+
+- Information effect: FACT-TEXT vs historical OSR using exact `two_stage_bounded_recovery_v2`.
+- Representation effect: CARD-v2 vs FACT-TEXT with identical canonical facts; CARD-v2 vs OSR is secondary only.
+- Protocol frozen: `True`; inference run: `False`.
+- Future metrics are preregistered without an R18-B efficacy threshold.
+
+## Prompt-diff audit
+
+- OSR vs FACT-TEXT isolated insertion: `True`; FACT-TEXT vs CARD-v2 semantic equality: `True`.
+- Stage1/Stage2 treatment mapping: `True` / `True`; SFT treatment inputs: `True`.
+
+## Length characterization
+
+- CARD-v2 characters/words/lines mean: `351.333` / `30.233` / `13.000`.
+- FACT-TEXT characters/words/lines mean: `389.333` / `60.233` / `11.000`.
+- Token counts used a local tokenizer only (`Qwen/Qwen3-8B`); model loaded: `False`; generation: `False`.
+
+## Scientific execution
+
+- Qwen generation: `0`; ALFWorld initialization/resets/steps: `0/0/0`; replay: `0`; OSR/FACT-TEXT/CARD-v2/PAR/PBR runs: `0/0/0/0/0`; training: `0`; held-out usage: `0`.
+
+## Artifact hashes
+
+- `report`: `computed after report`
+- `canonical_facts`: `12dae35e648e32b2208196db13e2ad8e2cc0589d3033b138287b1332227636b6`
+- `card_v2`: `3e72367113c5783307dba5e06e8b4cafdab569338251e7164aa14ca463e99fc9`
+- `fact_text`: `f8316be41ca2cd58e10a58f87d57c727eb7b9d9c79a5d7848e5f3141e3353146`
+- `manifest`: `62dfab3c65dcb05620fb0882c955daf89530a250b51c9887d71d63a874e29f32`
+- `validation`: `a8ce9807c89188b0d92c294e3217a132b376a37dfd04a894f31025fcdb8a0764`
+- `protocol`: `8f79f526c32ec90e7712729734d8cf8c11cddbfdd7bf30842170d6fe229ede30`
+
+## R18-B STATUS:
+PASS
+
+DECISION:
+A. V2 MATCHED TREATMENTS FROZEN
+
+NEXT:
+STOP.
+# R19 frozen protocol: recovery-control duration opportunity pilot
+
+- **Protocol version:** `r19_recovery_duration_v1`
+- **Frozen:** 2026-10-22 UTC, before R19 inference
+- **Scientific base:** `4f5c2e18e0dfdf48e9471fcba0a3ee715be3ca3b`
+- **Task branch:** `codex/r19-recovery-duration-v1`
+**Status:** frozen for implementation review; no R19 scientific inference has been authorized before G1/G2.
+
+## Question and scope
+
+Measure the downstream success and cost consequences of handing control from one fixed recovery controller to one frozen task actor after K=1, 2, 3, 4, or 5 recovery-controlled environment actions. This is a duration and handoff-opportunity study. K counts environment actions, not reflection tokens or Stage-1 calls. It does not estimate a pure effect of extra thinking or establish that the recovery controller is a stronger expert.
+
+The task actor is Qwen3-8B with the existing frozen SFT-P0 adapter. The recovery controller is the same Qwen3-8B without an adapter, using the existing two-stage recovery prompts and strict Action-ID parser. Neither policy is trained, updated, or selected during R19. There is no additional model or environment.
+
+### Dated, R19-only scope exception
+
+As of 2026-10-22, this branch authorizes one temporary recovery episode per branch, with a maximum of five recovery-controlled environment actions, and a passive offline public-state stopping diagnostic. This exception applies only to R19 and only within its G0–G4 gates and hard caps. It does not remove the repository's restrictions on learned selectors, reflection loops, DPO/ORPO, memory, PPO/GRPO, additional environments, held-out use, or changes to historical results. The prior historical `STOP` decisions remain historical decisions.
+
+## Historical basis and source-level reconciliation
+
+R11/PBR-3 already matched the Stage-1 output and the first Stage-2 action to OSR-1, reporting exact first-action agreement (48/48 Stage-1 validity, 47/47 valid diagnosis and subgoal, and 47/47 mapped first actions among executable cases). R19 extends that controlled persistence comparison with the full K=1..5 handoff surface, checkpoint-resolved outcomes, two cost ledgers, and a passive stopping-opportunity diagnostic. It does not claim to introduce shared first-action comparison.
+
+The accepted source fixes a 50-environment-action episode horizon and an SFT-P0 history window of four transitions. Recovery Stage 1 permits 40 new tokens; Stage 2 permits 16; SFT-P0 continuation permits 16. All use greedy decoding with thinking disabled. Stage 1 runs once at the original prefix. The existing bare Action-ID Stage-2 prompt/parser is reused at every recovery state, with the same diagnosis and subgoal and the updated observation, recent history, and current admissible-action ordering. The assigned K is never included in a prompt. Recovery receives no FACT-TEXT/CARD block. SFT receives only its original public task/state/history/action-map interface.
+
+Historical failure semantics are retained: the old operator requests one Stage-2 generation even after invalid Stage 1, but executes no action in that case. A malformed, truncated, out-of-range, or unmappable later Stage-2 output ends recovery without repair or retry and hands off to SFT if the environment remains nonterminal. A no-op command that is actually executed consumes one environment action. A parser failure without an environment call consumes none. Terminal state ends the episode immediately.
+
+The source code names `Qwen/Qwen3-8B` but does not pass a `revision` argument to `from_pretrained`. At protocol freeze, the local Hugging Face cache resolved `main` to snapshot `b968826d9c46dd6066d109eabc6255188de91218`. The historical R18 runtime record does not prove that this was its resolved revision. R19 therefore pins this observed snapshot for both model and tokenizer and requires the preflight/reviewer to accept the discrepancy before inference; no network update or silent revision substitution is allowed. The frozen adapter directory was independently hashed with the repository's `directory_sha256` implementation as `6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11`, matching the inherited value.
+
+## Treatments and common recovery path
+
+For original prefix i, let p_i be the number of already consumed environment actions and H_i=50-p_i. Require H_i>=5 at candidate selection; verify this indexing with boundary tests. `CONTINUE` uses the frozen source-actor suffix from the original prefix only if exact identity checks establish the same task, actor, prompts, current observation, history, action ordering, and original horizon. This is reused source evidence, not a new comparator run. If it cannot be verified, stop before substituting or rerunning it.
+
+For each attempted prefix, generate Stage 1 once, then one canonical Stage-2 recovery path. Store a checkpoint after every executed recovery action. Do not branch from an earlier SFT suffix. After initial attempts and eligibility are frozen, extend only eligible common paths up to five actions, without observing any alternate SFT-suffix outcome. A terminal transition or first later Stage-2 validity failure ends the path. For each K, replay from the original reset and recorded source actions, then the shared recovery commands through checkpoint `min(K, executed actions)`, then run the frozen SFT actor from that state. Preserve game/trial identity, seed, environment counter, full public history, observation, action ordering, and action-ID mapping. Unexpected replay disagreement is a blocker, never a replacement sample.
+
+For a K-action endpoint, SFT receives at most `H_i - actual_recovery_actions` environment actions. Do not reset the horizon at handoff. Zero remaining SFT actions is valid and reported. If later K values reach the same terminal or forced-handoff checkpoint, record derived evidence aliases with explicit source event IDs; retain each policy's own logical generation cost. A K=2 policy that did not request an invalid third generation must not be charged for it, even if K>=3 aliases the same later SFT suffix.
+
+## Population, source selection, and enrollment
+
+This is a TRAIN-development pilot only. Never use `valid_seen`, `valid_unseen`, reserved confirmation tasks, or held-out tasks. Canonical identity is the exact game/trial identity; changing the random seed does not make a reused task fresh. Before source inference, create an exclusion audit over all available prior source schedules, SFT training/task manifests, R8/R15 development episodes, previous audits, and reserved confirmation identities. Report unavailable historical inventories explicitly. If exact SFT training overlap cannot be established, do not call the pilot training-disjoint or unseen; G1 must decide whether the documented development-only inventory is sufficient.
+
+Select up to 30 eligible TRAIN game/trial identities from each of the six existing ALFWorld families, with no borrowing across families. Rank by SHA-256 of the frozen R19 selection domain, split, family, and canonical identity; break ties by identity; interleave families by rank. Nominal seed is `30000 + schedule_index`. Record source game and trajectory-data hashes, inventory counts, exclusions, selected identities, family counts, and the final schedule hash before source inference. Availability-driven smaller counts must be fixed before inference.
+
+Run the frozen SFT-P0 source policy once per scheduled task, up to the original 50-action horizon. Using the existing R8 selector functions without changing their cycle, repeated-navigation, and fallback definitions, require only the prespecified H_i>=5 constraint. Freeze disjoint candidate queues targeting up to 60 failure-oriented, 30 success-control, and 30 random-control episodes. Select failure and success-control queues first. Select random-control episodes from remaining distinct episodes. Queue ranking domains, tie-breaking, and order are in the machine-readable protocol. Source outcomes may define these descriptive sampling strata, but cannot enter prompts, stopping features, or recovery-action selection.
+
+Process the frozen queues in order, without quota transfer, until the stratum targets of 30/15/15 eligible states are reached, a queue is exhausted, or 120 initial attempts are used. Eligibility requires an executed first recovery action, a nonterminal resulting state, H_i>=5 before that action, and verified exact replay. Eligibility never depends on goal satisfiability, known target location, later K outcomes, or whether recovery helped. Retain invalid initial attempts and first-action terminal cases as ineligible attempts, with K1 outcome and costs. Freeze both the full attempted-prefix cohort and the primary eligible cohort before requesting any additional Stage-2 generation.
+
+## Finite caps and conservative execution bound
+
+| Resource | Frozen maximum |
+|---|---:|
+| Previously consumed development prefixes in live smoke | 2 prefixes / 2 tasks |
+| Smoke branches | K1 and K3, two executions each per prefix; at most 8 branch executions |
+| Fresh TRAIN source episodes | 180 |
+| Initial recovery attempts | 120 |
+| Eligible post-first-action prefixes | 60 |
+| Recovery actions per policy branch | 5 |
+| Recovery episodes per branch | 1 |
+| Training, held-out tasks, external paid model calls | 0 / 0 / 0 |
+
+Preselected smoke cases are `R8-F16` and `R8-S04`, both previously consumed development cases. They exercise a recorded recovery win and a recorded recovery loss. For each case, run direct K1 and K3 branches twice at most. Compare prompts/raw generation token IDs, mapped commands, transitions, adapter isolation, SFT handoff, and replay identity. Compare K1 to frozen OSR-1 semantics. Never use future confirmation cases.
+
+Conservative maximum model-generation calls, including the two repeat executions per smoke decision: source SFT 9,000; initial Stage-1/Stage-2 calls 240; additional Stage-2 calls for 60 eligible paths 240; all K1 and K2..K5 SFT suffixes 17,100; live smoke 408; total 26,988. The suffix bound is 60 ineligible K1 suffixes at 50 calls plus 60 eligible sets with at most 49+48+47+46+45 calls. Actual calls are lower when the original prefix has already consumed actions or a branch terminates/fails early.
+
+Conservative environment-operation bound: source collection 9,000; smoke 400; model-free replay gate for 120 prefixes 5,400; initial attempt replay plus first recovery action 5,520; replay plus four further recovery actions for 60 eligible paths 2,940; replay and execution of 360 logical K branches 18,000; total 41,260. Replay commands are physical environment operations and are recorded separately from policy environment actions. The bound includes no unplanned repetition. Do not extend any cap after observing outcomes.
+
+## Endpoints and statistics
+
+All outcomes are binary: success means the frozen environment reaches `done` with positive terminal reward. For each primary paired contrast K2..K5 versus K1, report N, both-success, both-failure, wins, losses, ties, mean paired difference, exact two-sided discordant-pair binomial p, and Holm-adjusted p across the four prespecified contrasts. If W+L=0, p=1. Never treat five correlated endpoints as independent samples or call p>0.05 equivalence.
+
+Report the conservative model-based paired-difference interval from separate 97.5% Clopper-Pearson intervals for W/N and L/N: `[lower_W-upper_L, upper_W-lower_L]`, clipped to [-1,1]. Cross-check the exact-test examples (4,2)->0.6875, (3,2)->1, (0,2)->0.5, (0,0)->1 against installed SciPy. Report family/stratum summaries descriptively with denominators. The enriched development sample is not a general ALFWorld accuracy estimate.
+
+For positive-K versus CONTINUE and positive-K versus K1, report both-success, both-failure, wins, losses, ties, rescue rate `wins / reference failures`, harm rate `losses / reference successes`, mean difference, and `NA` for zero denominators. Keep duration-induced loss versus K1 separate from harm versus CONTINUE.
+
+Define `S_fixed=max_K mean_i R_i(K)`, `S_oracle=mean_i max_K R_i(K)`, and `H_success=S_oracle-S_fixed`. Call this only the empirical hindsight stopping envelope for these common paths. Report all five-bit outcome-pattern frequencies, per-state sets of successful durations, states helped/harmed by added recovery, and adjacent contrasts `R_i(j+1)-R_i(j)` (one more recovery action then SFT versus handing off now). Do not present the oracle envelope as a controller or population ceiling. Select a development fixed K by highest success, then lowest mean full-branch logical tokens, then smaller K; report all candidates tied at each criterion.
+
+## Passive public stopping diagnostic
+
+Before duration outcomes, freeze a deterministic detector over the original subgoal and public observations/actions through checkpoint j only. It returns `SATISFIED`, `NOT_SATISFIED`, or `UNKNOWN`, plus typed predicate and exact supporting transition IDs. Unsupported or ambiguous language is UNKNOWN. Do not paraphrase the subgoal, ask a model to judge it, use expert plans, or add model calls. Require current truth: a later public action that undoes placement or possession invalidates an earlier satisfaction event. Lack of new progress is not evidence of useless navigation.
+
+The only offline rule is: after each executed recovery action j>=1, hand off if SATISFIED; otherwise continue, subject to common terminal/validity stops and cap 5; at K=5 hand off. Use an already measured suffix only when causal mapping is exact. Include estimated detector computation in logical cost and label the result an offline policy estimate. If mapping is not exact, report detector coverage only. Mutation tests alter future observations, rewards, and stopping labels and must leave earlier decisions unchanged. No new planner, live controller, or “no progress” stopping rule is authorized.
+
+## Two cost ledgers and durable evidence
+
+Actual research expenditure records every physically executed source, smoke, recovery, replay, suffix, retry, and diagnostic call/operation exactly once. Logical policy cost estimates one deployment from the original prefix: positive-K branches include the shared Stage 1, every generation the assigned policy requests including invalid attempts, executed recovery actions, and that branch's SFT suffix. Never divide Stage-1/first-action cost among K arms; never charge K1 for future path generations; never charge ordinary deployment for simulator restoration.
+
+For recovery-only and full-branch logical cost, report input tokens, generated tokens, total tokens, model calls, and environment actions separately. Report success versus full-branch tokens and recovery-only tokens, a success-cost Pareto table, and matched-success comparisons before any scalar utility. Record synchronized per-generation latency; shared-call sums are labeled component estimates, not measured independent deployment latency. Do not claim latency speedup. Report cost per additional net success only for positive net gain.
+
+Persist each generation and environment transition with raw output, token IDs or their lossless evidence, parser result, action map, transition, hash, identity, and authentic process exit code. Use append-only event records with fsync and atomic state/manifest writes. A common-repository lock and durable identity registry enforce one writer. Completed units are reused. A crash after an external action with no durable completion record marks the unit INDETERMINATE and blocks that unit; no blind rerun. Conflicting nested evidence fails closed. Report-only mode must not load a model, reset/step an environment, replay, or generate a branch.
+
+## Gates and launch commands
+
+G0 is repository/inventory/protected-hash inspection, this frozen protocol, additive implementation, and synthetic tests. G1 is independent review of the exact implementation SHA and this protocol SHA. G2 is the bounded smoke above. G3 is the single capped TRAIN pilot, using the same reviewed/smoke-tested code commit and the frozen schedule/exclusion hashes. G4 is offline evidence reconciliation and reporting. Any behavior-affecting change after G1 requires a new review and affected smoke checks before fresh inference. If independent review is unavailable, stop at G0 as `READY_FOR_REVIEW`; if required local evidence or G2 fails, stop as `BLOCKED` and record the cause. No status is fabricated.
+
+Model-free G0 commands implemented by this branch:
+
+```text
+python scripts/run_r19_recovery_duration.py validate --protocol configs/experiments/r19_recovery_duration_v1.json
+python scripts/run_r19_recovery_duration.py preflight --protocol configs/experiments/r19_recovery_duration_v1.json --data-root PATH --history-root PATH --protected-root PATH --output PATH
+python scripts/run_r19_recovery_duration.py verify-protected --root PATH --manifest PATH
+python -m pytest -q tests/test_r19_recovery_duration.py
+python scripts/analyze_r19_recovery_duration.py --protocol configs/experiments/r19_recovery_duration_v1.json --events PATH --branches PATH --output PATH
+```
+
+The following implementation-status statement is historical context from the time this protocol document was first frozen; it is not a current branch-status attestation. At that time, the `pilot` subcommand was a gate-check placeholder only: even if receipt validation succeeded, it reported `pilot_driver_status=NOT_IMPLEMENTED` and performed no inference. It was deliberately not an execution path, and G3 had not been launched. A complete runtime driver and G2 smoke harness were implementation blockers at that time; no G0/G1/G2 status could be claimed solely because of that placeholder. Current implementation and gate status must be established from the exact-commit review and task evidence. Runtime paths must come from ignored local config or CLI and must never be committed.
+
+## Interpretation and stop rule
+
+Execution integrity and hypothesis support are separate. Answer whether K1 matched historical semantics; source/attempt/enrollment counts and exclusions; help and harm; hindsight success headroom; matched-success logical cost savings; family/stratum concentration; public subgoal coverage and predictive value; and limitations from small enriched development samples and nondeterminism. Use only `NO OBSERVED SUCCESS HEADROOM`, `FIXED DURATION CANDIDATE`, `ADAPTIVE STOPPING OPPORTUNITY`, or `INCONCLUSIVE` where supported. Do not train a selector, enlarge N/K, tune prompts, or run held-out/confirmation evaluation. The final action is STOP.

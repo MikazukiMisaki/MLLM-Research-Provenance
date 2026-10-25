@@ -1,0 +1,113 @@
+{
+  "source_path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/branches.jsonl",
+  "bytes": 1482426,
+  "sha256_before": "eff9b5e74d3d5daa928cb662dcc59fc3f434f66796b673679d40b374f3c8636f",
+  "sha256_after": "eff9b5e74d3d5daa928cb662dcc59fc3f434f66796b673679d40b374f3c8636f",
+  "all_branch_rows": 39,
+  "eligible_rows": 36,
+  "eligible_unique_trials": 36,
+  "eligible_unique_trajectory_hashes": 36,
+  "strata": {
+    "failure": 6,
+    "success_control": 15,
+    "random_control": 15
+  },
+  "fixed_k_vs_continue": {
+    "1": {
+      "both_fail": 5,
+      "rescue": 1,
+      "both_success": 28,
+      "harm": 2
+    },
+    "2": {
+      "both_fail": 4,
+      "rescue": 2,
+      "both_success": 28,
+      "harm": 2
+    },
+    "3": {
+      "both_fail": 4,
+      "rescue": 2,
+      "both_success": 26,
+      "harm": 4
+    },
+    "4": {
+      "both_fail": 5,
+      "rescue": 1,
+      "both_success": 24,
+      "harm": 6
+    },
+    "5": {
+      "both_fail": 6,
+      "both_success": 24,
+      "harm": 6
+    }
+  },
+  "rescue_candidates_by_k": {
+    "1": [
+      {
+        "prefix_id": "R19-failure-b3ab21b8e193f6adf6ff",
+        "canonical_trial_id": "look_at_obj_in_light-Vase-None-DeskLamp-303/trial_T20190907_150403_049073",
+        "source_schedule_index": 9,
+        "decision_index": 31,
+        "stratum": "failure",
+        "task_family": "look_at_obj_in_light"
+      }
+    ],
+    "2": [
+      {
+        "prefix_id": "R19-failure-a33d7ca26ecbe46dc4b6",
+        "canonical_trial_id": "pick_clean_then_place_in_recep-Ladle-None-Drawer-30/trial_T20190907_194033_752745",
+        "source_schedule_index": 124,
+        "decision_index": 23,
+        "stratum": "failure",
+        "task_family": "pick_clean_then_place_in_recep"
+      },
+      {
+        "prefix_id": "R19-failure-b3ab21b8e193f6adf6ff",
+        "canonical_trial_id": "look_at_obj_in_light-Vase-None-DeskLamp-303/trial_T20190907_150403_049073",
+        "source_schedule_index": 9,
+        "decision_index": 31,
+        "stratum": "failure",
+        "task_family": "look_at_obj_in_light"
+      }
+    ],
+    "3": [
+      {
+        "prefix_id": "R19-failure-a33d7ca26ecbe46dc4b6",
+        "canonical_trial_id": "pick_clean_then_place_in_recep-Ladle-None-Drawer-30/trial_T20190907_194033_752745",
+        "source_schedule_index": 124,
+        "decision_index": 23,
+        "stratum": "failure",
+        "task_family": "pick_clean_then_place_in_recep"
+      },
+      {
+        "prefix_id": "R19-failure-b3ab21b8e193f6adf6ff",
+        "canonical_trial_id": "look_at_obj_in_light-Vase-None-DeskLamp-303/trial_T20190907_150403_049073",
+        "source_schedule_index": 9,
+        "decision_index": 31,
+        "stratum": "failure",
+        "task_family": "look_at_obj_in_light"
+      }
+    ],
+    "4": [
+      {
+        "prefix_id": "R19-failure-a33d7ca26ecbe46dc4b6",
+        "canonical_trial_id": "pick_clean_then_place_in_recep-Ladle-None-Drawer-30/trial_T20190907_194033_752745",
+        "source_schedule_index": 124,
+        "decision_index": 23,
+        "stratum": "failure",
+        "task_family": "pick_clean_then_place_in_recep"
+      }
+    ],
+    "5": []
+  },
+  "eligible_prefixes_rescued_by_any_k": 2,
+  "unique_trials_rescued_by_any_k": 2,
+  "limits": [
+    "Historical paired outcome inventory only; K arms are dependent and cannot be counted as independent learning examples",
+    "Recovery targets may come from adapter-off base controller; later SFT suffix actor is a different policy. Preserve segment identities.",
+    "Does not prove training utility or independent new-task transfer"
+  ],
+  "new_scientific_calls": 0
+}

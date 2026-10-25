@@ -1,0 +1,47 @@
+{
+  "audit_kind": "read-only stdlib canonical-JSON binding verification; no project imports or execution",
+  "observed_utc": "2026-10-25T05:55:45.845399+00:00",
+  "protocol": {
+    "path": "/home/lizening/wt-codex-r18c2/configs/sft/sft_training_protocol.json",
+    "raw_sha256": "dd06d08773e9842b2302263429c7a1752e968dcb30d2dd89f185c01ef9605155",
+    "canonicalization": "json.dumps(value, sort_keys=True, separators=(\",\", \":\"), ensure_ascii=True).encode(utf-8), then SHA-256"
+  },
+  "manifests": {
+    "split": {
+      "path": "/home/lizening/wt-codex-r18c2/configs/sft/sft_task_splits.json",
+      "raw_sha256": "5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56",
+      "canonical_sha256_ensure_ascii_true": "e6695359f2e6b53b74c54e9d9712b1f8bc8534487d85b659151c71eb1441e25d",
+      "canonical_sha256_ensure_ascii_false": "e6695359f2e6b53b74c54e9d9712b1f8bc8534487d85b659151c71eb1441e25d",
+      "protocol_declared_canonical_sha256": "e6695359f2e6b53b74c54e9d9712b1f8bc8534487d85b659151c71eb1441e25d",
+      "both_canonical_forms_match_protocol": true,
+      "canonical_forms_equal": true
+    },
+    "exclusion": {
+      "path": "/home/lizening/wt-codex-r18c2/configs/sft/sft_task_exclusions.json",
+      "raw_sha256": "fdbe3b1c2d8162fa7c95ff25b57ace1eaf01c1224d42f9f1f447bf7a859541c5",
+      "canonical_sha256_ensure_ascii_true": "8e0d04d315a16d4fd28ef04bf9bf92212ebc98bbba8a10dfe0e3acb2b9fbf798",
+      "canonical_sha256_ensure_ascii_false": "8e0d04d315a16d4fd28ef04bf9bf92212ebc98bbba8a10dfe0e3acb2b9fbf798",
+      "protocol_declared_canonical_sha256": "8e0d04d315a16d4fd28ef04bf9bf92212ebc98bbba8a10dfe0e3acb2b9fbf798",
+      "both_canonical_forms_match_protocol": true,
+      "canonical_forms_equal": true
+    }
+  },
+  "relevant_code": {
+    "canonical_hash_definition": {
+      "path": "/home/lizening/wt-codex-r18c2/src/sft/protocol.py",
+      "raw_sha256": "cb9a8ee23d1208064348810ef3580773ba14403bfaac6a4e7f4a43c5540178a8"
+    },
+    "asset_builder": {
+      "path": "/home/lizening/wt-codex-r18c2/scripts/build_sft_protocol_assets.py",
+      "raw_sha256": "e2789aa5aebe0b734ca1849f6450cc120525de833ed308e3cc91bdf6b5b70af4"
+    }
+  },
+  "overall_match": true,
+  "interpretation": "Raw file hashes differ from protocol declarations because the files are pretty-printed; both canonical serializations produce the protocol-declared values. The saved-record mismatch claim based on comparing raw file SHA to canonical object SHA is withdrawn.",
+  "limits": [
+    "This verifies current saved objects against the saved protocol's canonical digest fields.",
+    "It does not itself prove which file bytes a historical training process loaded; historical runtime and launch evidence must be assessed separately.",
+    "No project analyzer/validator, model, tokenizer, environment, training, replay, or tests were run."
+  ],
+  "scientific_execution": false
+}

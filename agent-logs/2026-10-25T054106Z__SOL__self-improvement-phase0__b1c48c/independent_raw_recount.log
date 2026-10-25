@@ -1,0 +1,253 @@
+{
+  "audit_kind": "independent stdlib-only historical-record recount; not model/env/policy execution",
+  "observed_utc": "2026-10-25T05:52:51.987787+00:00",
+  "inputs": {
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_training_protocol.json": {
+      "bytes": 2380,
+      "sha256_before": "dd06d08773e9842b2302263429c7a1752e968dcb30d2dd89f185c01ef9605155",
+      "sha256_after": "dd06d08773e9842b2302263429c7a1752e968dcb30d2dd89f185c01ef9605155",
+      "unchanged": true
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_splits.json": {
+      "bytes": 524844,
+      "sha256_before": "5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56",
+      "sha256_after": "5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56",
+      "unchanged": true
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_exclusions.json": {
+      "bytes": 22337,
+      "sha256_before": "fdbe3b1c2d8162fa7c95ff25b57ace1eaf01c1224d42f9f1f447bf7a859541c5",
+      "sha256_after": "fdbe3b1c2d8162fa7c95ff25b57ace1eaf01c1224d42f9f1f447bf7a859541c5",
+      "unchanged": true
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_dataset_schema.json": {
+      "bytes": 782,
+      "sha256_before": "dd1c34b26607160a0810cf6a399bce88e2c5665b722d3642ecfb320c27773d8f",
+      "sha256_after": "dd1c34b26607160a0810cf6a399bce88e2c5665b722d3642ecfb320c27773d8f",
+      "unchanged": true
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/online_evaluation/base_trajectories.jsonl": {
+      "bytes": 119081834,
+      "sha256_before": "fe145bed8ea49350198c0c0e458df9e47252632e663dac5a2dfa3f17f3fe7759",
+      "sha256_after": "fe145bed8ea49350198c0c0e458df9e47252632e663dac5a2dfa3f17f3fe7759",
+      "unchanged": true
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/online_evaluation/sft_trajectories.jsonl": {
+      "bytes": 56635776,
+      "sha256_before": "3509c6d45c6ce8dada1a132b5e9af2a65c898f8565ab06d9714a8a491842b3dc",
+      "sha256_after": "3509c6d45c6ce8dada1a132b5e9af2a65c898f8565ab06d9714a8a491842b3dc",
+      "unchanged": true
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/sft_expert_dataset_balanced.jsonl": {
+      "bytes": 116622803,
+      "sha256_before": "c547e8f0c5988b29288f2a097169c7859741b7d4f53f222af31f5e2889d516cf",
+      "sha256_after": "c547e8f0c5988b29288f2a097169c7859741b7d4f53f222af31f5e2889d516cf",
+      "unchanged": true
+    }
+  },
+  "canonical_bindings": {
+    "split_manifest_sha256": {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_splits.json",
+      "declared": "e6695359f2e6b53b74c54e9d9712b1f8bc8534487d85b659151c71eb1441e25d",
+      "raw_sha256": "5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56",
+      "canonical_sha256": "e6695359f2e6b53b74c54e9d9712b1f8bc8534487d85b659151c71eb1441e25d",
+      "canonical_matches": true,
+      "definition": "src/sft/protocol.py canonical_json ensure_ascii=True, sorted compact JSON; build_sft_protocol_assets.py uses sha256_value"
+    },
+    "exclusion_manifest_sha256": {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_exclusions.json",
+      "declared": "8e0d04d315a16d4fd28ef04bf9bf92212ebc98bbba8a10dfe0e3acb2b9fbf798",
+      "raw_sha256": "fdbe3b1c2d8162fa7c95ff25b57ace1eaf01c1224d42f9f1f447bf7a859541c5",
+      "canonical_sha256": "8e0d04d315a16d4fd28ef04bf9bf92212ebc98bbba8a10dfe0e3acb2b9fbf798",
+      "canonical_matches": true,
+      "definition": "src/sft/protocol.py canonical_json ensure_ascii=True, sorted compact JSON; build_sft_protocol_assets.py uses sha256_value"
+    },
+    "schema_sha256": {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_dataset_schema.json",
+      "declared": "950012456d02f4261fed5b84fe4c00a86d288c04735ae52b4c32bb595662d2a2",
+      "raw_sha256": "dd1c34b26607160a0810cf6a399bce88e2c5665b722d3642ecfb320c27773d8f",
+      "canonical_sha256": "950012456d02f4261fed5b84fe4c00a86d288c04735ae52b4c32bb595662d2a2",
+      "canonical_matches": true,
+      "definition": "src/sft/protocol.py canonical_json ensure_ascii=True, sorted compact JSON; build_sft_protocol_assets.py uses sha256_value"
+    }
+  },
+  "bootstrap": {
+    "arms": {
+      "base": {
+        "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/online_evaluation/base_trajectories.jsonl",
+        "rows": 60,
+        "unique_tasks": 60,
+        "successes": 3,
+        "any_vs_last_success_disagreements": 0,
+        "families": {
+          "look_at_obj_in_light": 10,
+          "pick_cool_then_place_in_recep": 10,
+          "pick_and_place_simple": 10,
+          "pick_heat_then_place_in_recep": 10,
+          "pick_two_obj_and_place": 10,
+          "pick_clean_then_place_in_recep": 10
+        }
+      },
+      "sft": {
+        "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/online_evaluation/sft_trajectories.jsonl",
+        "rows": 60,
+        "unique_tasks": 60,
+        "successes": 48,
+        "any_vs_last_success_disagreements": 0,
+        "families": {
+          "look_at_obj_in_light": 10,
+          "pick_cool_then_place_in_recep": 10,
+          "pick_and_place_simple": 10,
+          "pick_heat_then_place_in_recep": 10,
+          "pick_two_obj_and_place": 10,
+          "pick_clean_then_place_in_recep": 10
+        }
+      }
+    },
+    "paired_identities": 60,
+    "pair_counts": {
+      "win": 45,
+      "tie": 15
+    },
+    "pair_metadata_mismatches": {},
+    "limit": "Record-level agreement; absent contemporaneous launch/runtime receipts is not remedied by these matching fields."
+  },
+  "dataset_prompt_target_audit": {
+    "retained_prompt_repeat_occurrences": 127,
+    "repeated_groups": 110,
+    "conflicting_target_groups": 110,
+    "conflicting_rows": 237,
+    "within_one_task_groups": 107,
+    "cross_task_groups": 3,
+    "within_one_trajectory_groups": 107,
+    "conflicting_rows_by_family": {
+      "look_at_obj_in_light": 2,
+      "pick_and_place_simple": 2,
+      "pick_clean_then_place_in_recep": 2,
+      "pick_cool_then_place_in_recep": 2,
+      "pick_two_obj_and_place": 229
+    },
+    "examples": [
+      {
+        "prompt_sha256": "028ed411de9781caaa7ce82efba54b7244322100706ff8ed09b5248bf567c55e",
+        "rows": [
+          {
+            "task_id": "pick_two_obj_and_place-SprayBottle-None-Cabinet-407/trial_T20190907_144653_660815",
+            "step_index": 14,
+            "family": "pick_two_obj_and_place",
+            "split": "train",
+            "target_action_id": "A007",
+            "target_command": "go to countertop 1",
+            "trajectory_sha256": "b21423026cafb153aada6afaa2d8aa65a558b3140e3ccac1e13159626c6d2c36"
+          },
+          {
+            "task_id": "pick_two_obj_and_place-SprayBottle-None-Cabinet-407/trial_T20190907_144653_660815",
+            "step_index": 25,
+            "family": "pick_two_obj_and_place",
+            "split": "train",
+            "target_action_id": "A010",
+            "target_command": "go to sinkbasin 1",
+            "trajectory_sha256": "b21423026cafb153aada6afaa2d8aa65a558b3140e3ccac1e13159626c6d2c36"
+          },
+          {
+            "task_id": "pick_two_obj_and_place-SprayBottle-None-Cabinet-407/trial_T20190907_144653_660815",
+            "step_index": 33,
+            "family": "pick_two_obj_and_place",
+            "split": "train",
+            "target_action_id": "A003",
+            "target_command": "go to bathtubbasin 1",
+            "trajectory_sha256": "b21423026cafb153aada6afaa2d8aa65a558b3140e3ccac1e13159626c6d2c36"
+          },
+          {
+            "task_id": "pick_two_obj_and_place-SprayBottle-None-Cabinet-407/trial_T20190907_144653_660815",
+            "step_index": 41,
+            "family": "pick_two_obj_and_place",
+            "split": "train",
+            "target_action_id": "A011",
+            "target_command": "go to sinkbasin 2",
+            "trajectory_sha256": "b21423026cafb153aada6afaa2d8aa65a558b3140e3ccac1e13159626c6d2c36"
+          }
+        ]
+      },
+      {
+        "prompt_sha256": "03dc7d7533841aa9d0fd05e0fa052913936de9a7494a623d68ca4cdc1a80da78",
+        "rows": [
+          {
+            "task_id": "pick_two_obj_and_place-CellPhone-None-Dresser-327/trial_T20190908_042553_191155",
+            "step_index": 40,
+            "family": "pick_two_obj_and_place",
+            "split": "train",
+            "target_action_id": "A014",
+            "target_command": "go to shelf 2",
+            "trajectory_sha256": "a634de581db92a1115b2d06b4e1bb7f60cd5962278fcb90ec71ad4f6ee270562"
+          },
+          {
+            "task_id": "pick_two_obj_and_place-CellPhone-None-Dresser-327/trial_T20190908_042553_191155",
+            "step_index": 48,
+            "family": "pick_two_obj_and_place",
+            "split": "train",
+            "target_action_id": "A022",
+            "target_command": "move cellphone 2 to dresser 1",
+            "trajectory_sha256": "a634de581db92a1115b2d06b4e1bb7f60cd5962278fcb90ec71ad4f6ee270562"
+          }
+        ]
+      },
+      {
+        "prompt_sha256": "0649dda4495fa358ceae44b6aebfc4ad6259f12ade46110b54de3e61b5004892",
+        "rows": [
+          {
+            "task_id": "pick_two_obj_and_place-Book-None-Bed-316/trial_T20190909_035400_112966",
+            "step_index": 28,
+            "family": "pick_two_obj_and_place",
+            "split": "train",
+            "target_action_id": "A006",
+            "target_command": "go to shelf 1",
+            "trajectory_sha256": "d7279ece29a4f6f4ac112df62bc85ac76ac863abac4e69da030163e1b714e681"
+          },
+          {
+            "task_id": "pick_two_obj_and_place-Book-None-Bed-316/trial_T20190909_035400_112966",
+            "step_index": 36,
+            "family": "pick_two_obj_and_place",
+            "split": "train",
+            "target_action_id": "A011",
+            "target_command": "move book 1 to bed 1",
+            "trajectory_sha256": "d7279ece29a4f6f4ac112df62bc85ac76ac863abac4e69da030163e1b714e681"
+          }
+        ]
+      },
+      {
+        "prompt_sha256": "06f3c01d8fe89c1abb32b8462149a3aace2bfa71eddf67cf0bcca3a2e7d72c5b",
+        "rows": [
+          {
+            "task_id": "pick_two_obj_and_place-Watch-None-Dresser-205/trial_T20190907_182257_096741",
+            "step_index": 15,
+            "family": "pick_two_obj_and_place",
+            "split": "train",
+            "target_action_id": "A003",
+            "target_command": "go to armchair 2",
+            "trajectory_sha256": "615b84450158ffc4e54ce564e5ab5ae3d2ad57bee438b655d17be7029d9b9791"
+          },
+          {
+            "task_id": "pick_two_obj_and_place-Watch-None-Dresser-205/trial_T20190907_182257_096741",
+            "step_index": 18,
+            "family": "pick_two_obj_and_place",
+            "split": "train",
+            "target_action_id": "A008",
+            "target_command": "go to drawer 4",
+            "trajectory_sha256": "615b84450158ffc4e54ce564e5ab5ae3d2ad57bee438b655d17be7029d9b9791"
+          }
+        ]
+      }
+    ],
+    "historical_counter_explanation": {
+      "before_exact_dedup_reported": 148,
+      "exact_duplicates_removed_reported": 21,
+      "retained_repeat_occurrences": 127,
+      "arithmetic_reconciles": true,
+      "code_reference": "src/sft/dataset.py:270 deduplicate_exact_rows increments prompt_counts before skipping exact duplicate rows",
+      "interpretation": "different stages of counting; no demonstrated report inconsistency"
+    },
+    "interpretation": "Identical observable prompts with different recorded expert targets; legality/hash consistency audited separately. Could reflect valid alternative actions or bounded observation aliasing; not proof of wrong labels, global insufficiency, or pick-two failure cause."
+  },
+  "new_science_calls": 0
+}

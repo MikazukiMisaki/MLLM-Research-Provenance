@@ -1,0 +1,27 @@
+SI-P0-LUNA-b1c48c — read-only command record
+
+Task file SHA verification
+  Command: sha256sum /home/lizening/research-notes/agent-logs/2026-10-25T054106Z__SOL__self-improvement-phase0__b1c48c/LUNA_TASK.md
+  Exit: 0
+  Observed SHA256: 9f93c9d1eec2fd44ef50f9528c87aaf2f2df449f35ae569a113d1943bceb1f29
+
+Review-tree identity and status
+  Commands: git rev-parse --show-toplevel; git branch --show-current; git rev-parse HEAD; git status --short (cwd /home/lizening/wt-codex-r18c2)
+  Exit: 0
+  Output: root=/home/lizening/wt-codex-r18c2; branch=agent/codex-r18c2; HEAD=e537f441010077123a307e9d50ea40cf8dad8547; status empty.
+
+Initial interpreter lookup
+  Command attempted: /usr/bin/python3 /home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/audit_sft_raw.py
+  Exit: 127
+  Stderr: /bin/bash: line 1: /usr/bin/python3: No such file or directory
+  Effect: script did not start; no project/science side effect. The available interpreter was then resolved to /home/lizening/miniconda3/bin/python3.
+
+Final reproducible stdlib audit
+  Driver command: /home/lizening/miniconda3/bin/python3 /home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/run_audit.py
+  Child command is the exact argv in audit_subprocess_receipt.json; cwd=/home/lizening/wt-codex-r18c2.
+  Child PID=810850; child exit=0; start=2026-10-25T05:53:10.738526+00:00; finish=2026-10-25T05:53:15.389212+00:00.
+  Python executable=/home/lizening/miniconda3/bin/python3. stdout/stderr SHA and full output are preserved in audit_subprocess_receipt.json.
+  Reads only completed report/config/JSONL and train-split source files. No project package/import, runtime, model, environment, training, replay, evaluator, validator, tests or network access.
+
+Other read-only inspection
+  Used rg/find/sed/cat/sha256sum and small inline stdlib readers to locate report/source artifacts, inspect schema fields, and cross-check recorded raw-file hashes. No scientific source or evidence was written. These exploratory shell calls were not individually wrapped as subprocess receipts; the durable exact audit run and its actual return code are recorded above.

@@ -1,0 +1,3387 @@
+{
+  "schema_version": "sft_raw_evidence_audit_v1",
+  "status": "PARTIAL_RAW_EVIDENCE_AUDIT",
+  "worktree": {
+    "path": "/home/lizening/wt-codex-r18c2",
+    "branch": "agent/codex-r18c2",
+    "head": "e537f441010077123a307e9d50ea40cf8dad8547",
+    "clean_at_start": true
+  },
+  "scope": {
+    "execution": "none",
+    "project_analyzer_validator_pytest": "not_run",
+    "model_environment_training": "not_run",
+    "project_runtime_import": "not_run",
+    "stdlib_only": true,
+    "source_dataset_rows_streamed": 20967,
+    "unrun_task_outcomes_opened": false
+  },
+  "inputs": [
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/reports/SFT_POLICY_BOOTSTRAP.md",
+      "role": "versioned report or aggregate summary",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 11989,
+      "sha256": "d245ebf12b513bdb575137b4f036e9269666caf78349d476571b807b4bc8e61f"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/reports/SFT_DATASET_AUDIT.md",
+      "role": "versioned report or aggregate summary",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 3971,
+      "sha256": "4f72c4bf45765c7461ecd59821ef13b204568052a63cca31fd9afa233baeb137"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/reports/SFT_VALID_UNSEEN_EVALUATION.md",
+      "role": "versioned report or aggregate summary",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 3371,
+      "sha256": "78d8bfdd468225a6ba28f809fc9466147a817427a929133e61c58a4cf1aaad69"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/reports/SFT_HELDOUT_GENERALIZATION_PROTOCOL.md",
+      "role": "versioned report or aggregate summary",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 5661,
+      "sha256": "13bf4ce24d8c96cba681748f10d5bec26a094d126f77fc79e085216c453db553"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/reports/sft_policy_bootstrap_summary.json",
+      "role": "versioned report or aggregate summary",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 5395,
+      "sha256": "455eff6aa9d65ad3ade56fb0b257893e993d139075b21b2efca4d87eabfcf767"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/reports/sft_dataset_summary.json",
+      "role": "versioned report or aggregate summary",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 4368,
+      "sha256": "3c6157a2ec8ea637c3a7c10d032adf967712bbdb9c04a855e257a136a7af081e"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/reports/sft_valid_unseen_summary.json",
+      "role": "versioned report or aggregate summary",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 3676,
+      "sha256": "24c9ce106a43e4842129dcbe2a3f2898b8dfb8251226c05fa055a2fb50dc5d4e"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/reports/sft_heldout_generalization_protocol.json",
+      "role": "frozen protocol/configuration/schedule/exclusion input",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 2938,
+      "sha256": "ff13d918f7769a4e6bf84fe341aa77519e52e982884447db78b0e302d79408ad"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_run_config.json",
+      "role": "frozen protocol/configuration/schedule/exclusion input",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 1803,
+      "sha256": "15e2db7522e78b98fd9fcfc9f08537108b54353128c986043b8f2e947567a2ec"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_training_protocol.json",
+      "role": "frozen protocol/configuration/schedule/exclusion input",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 2380,
+      "sha256": "dd06d08773e9842b2302263429c7a1752e968dcb30d2dd89f185c01ef9605155"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_splits.json",
+      "role": "frozen protocol/configuration/schedule/exclusion input",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 524844,
+      "sha256": "5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_accepted_task_splits.json",
+      "role": "frozen protocol/configuration/schedule/exclusion input",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 228202,
+      "sha256": "9c374fafdcc7d7db77e878d23e852a0ec55eedcc3886cb0cebe7491d67e564e5"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_exclusions.json",
+      "role": "frozen protocol/configuration/schedule/exclusion input",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 22337,
+      "sha256": "fdbe3b1c2d8162fa7c95ff25b57ace1eaf01c1224d42f9f1f447bf7a859541c5"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/evaluation/sft_heldout_generalization_protocol.json",
+      "role": "frozen protocol/configuration/schedule/exclusion input",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 4476,
+      "sha256": "ec87debe05a7719e2fab1c04530e81356663bb1d74203be939e22b771d2b9a8a"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_dataset_schema.json",
+      "role": "frozen protocol/configuration/schedule/exclusion input",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 782,
+      "sha256": "dd1c34b26607160a0810cf6a399bce88e2c5665b722d3642ecfb320c27773d8f"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_pick_two_balance_extension.json",
+      "role": "frozen protocol/configuration/schedule/exclusion input",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 191062,
+      "sha256": "e22e13ea4122540e816bd48d1751bca0c4cdfe5c0df214c2e63cef561eb256ea"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/evaluation/sft_heldout_valid_unseen_schedule.json",
+      "role": "frozen protocol/configuration/schedule/exclusion input",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 25544,
+      "sha256": "7ce71ad01bd03ad8a018104f3edacc4310e9a1b5fc6e015d808152f316e4e13e"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/evaluation/sft_heldout_exclusions.json",
+      "role": "frozen protocol/configuration/schedule/exclusion input",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 262419,
+      "sha256": "badff9aec90bc21828b8b5ae92eb254c66f50aacc1dfc16bbcbe15e6f038b419"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/sft_expert_dataset_balanced.jsonl",
+      "role": "hand-coded expert-derived SFT dataset JSONL",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 116622803,
+      "sha256": "c547e8f0c5988b29288f2a097169c7859741b7d4f53f222af31f5e2889d516cf"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/sft_expert_dataset.jsonl",
+      "role": "hand-coded expert-derived SFT dataset JSONL",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 100750569,
+      "sha256": "75a244205ab0895ba577805ec4884378b3016d42d90f74edc1cab313c60a4523"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/sft_pick_two_extension.jsonl",
+      "role": "frozen protocol/configuration/schedule/exclusion input",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 21416035,
+      "sha256": "9c580f60e48cb3ad9ba7159318b9ab9bfd61d2e92576c126326adda3e8d2788b"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/offline_evaluation.json",
+      "role": "frozen protocol/configuration/schedule/exclusion input",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 767,
+      "sha256": "ce3b402c992ed948c681129e8c7b01434eb0409bf24e838eeea2627ad851b59d"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/online_evaluation/base_trajectories.jsonl",
+      "role": "original per-episode actor/environment trajectory evidence",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 119081834,
+      "sha256": "fe145bed8ea49350198c0c0e458df9e47252632e663dac5a2dfa3f17f3fe7759"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/online_evaluation/sft_trajectories.jsonl",
+      "role": "original per-episode actor/environment trajectory evidence",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 56635776,
+      "sha256": "3509c6d45c6ce8dada1a132b5e9af2a65c898f8565ab06d9714a8a491842b3dc"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/online_evaluation/summary.json",
+      "role": "versioned report or aggregate summary",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 5031,
+      "sha256": "ba73ac916f9a5895309953ffba857b88569f948ae5d30d2e40a9934e0bccc7b9"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/training_result.json",
+      "role": "training receipt/checkpoint-selection state",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 98826,
+      "sha256": "e6a47124200cacba4d1f3eaf97fdf79657d7df04f072a4d5446c2bec677c399e"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/checkpoints/checkpoint-2354/trainer_state.json",
+      "role": "training receipt/checkpoint-selection state",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 97569,
+      "sha256": "fe725cc8b9fd30c137f6cbb67fbfb5c195316f075c6017a953a70a24ecdbd3d2"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/checkpoints/checkpoint-1177/trainer_state.json",
+      "role": "training receipt/checkpoint-selection state",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 48793,
+      "sha256": "b645b502381e81c24e90cd21defc231b8a50c2b6c1c22e2e6dd35635755eb592"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/adapter_config.json",
+      "role": "adapter metadata/weight bytes; weights not loaded",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 925,
+      "sha256": "94090ee7ddaf2dd9e6500e43867c3c1c823b9bd02379eabc50c8345d18503d92"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/adapter_model.safetensors",
+      "role": "adapter metadata/weight bytes; weights not loaded",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 349243752,
+      "sha256": "5f1fce989bb5d284a5ff8aed06979a11021733b2a6bce4af53ff36286b099c10"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-valid-unseen-g1-20260829T031028Z/run_manifest.json",
+      "role": "frozen protocol/configuration/schedule/exclusion input",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 1234,
+      "sha256": "2688277c62ed488255754643d1d744748441de975babe9c1eac1680496d06552"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-valid-unseen-g1-20260829T031028Z/summary.json",
+      "role": "versioned report or aggregate summary",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 3676,
+      "sha256": "24c9ce106a43e4842129dcbe2a3f2898b8dfb8251226c05fa055a2fb50dc5d4e"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-valid-unseen-g1-20260829T031028Z/trajectories.jsonl",
+      "role": "original per-episode actor/environment trajectory evidence",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 9483344,
+      "sha256": "aaf6c90fc686eebb8efffd1ef80ef702677426dadbe127d8ca6a6013bc692f8e"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-source-pool-r1-20260908T042933Z/trajectories.jsonl",
+      "role": "original per-episode actor/environment trajectory evidence",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 61086377,
+      "sha256": "8a23c081e06d2f741fba9a5e0f7c3f15c7f73a696b74173748399f3785c6c59f"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+      "role": "original per-episode actor/environment trajectory evidence",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 120987905,
+      "sha256": "780603bf96fc5ae5abdd4f588f76c7187dd191feabdb9a230e1e1c9c78eddac8"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-replay-continue-r3-20260908T055308Z/continue_branches.jsonl",
+      "role": "original per-episode actor/environment trajectory evidence",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 19397967,
+      "sha256": "eba101c0e8d6a894879548dc79aa93042d2a5e11b4659277fc1a5c3dd1bf0c13"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl",
+      "role": "original per-episode actor/environment trajectory evidence",
+      "historical_identity_source": "path+content SHA; cross-referenced to declared historical report/config values; current runtime was not substituted",
+      "status": "OBSERVED",
+      "status_detail": "present and hashed",
+      "bytes": 34703287,
+      "sha256": "b04ea7cbea1ddd5818a2875e6a806b468e6db03afed09cfeaa792f8a05af2e99"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/online_evaluation/run_manifest.json",
+      "status": "MISSING",
+      "status_detail": "not located in enumerated SFT artifacts",
+      "bytes": null,
+      "sha256": null,
+      "role": "contemporaneous bootstrap evaluation launch/runtime receipt",
+      "historical_identity_source": "searched specified SFT artifact directory; no file present"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/runtime_manifest.json",
+      "status": "MISSING",
+      "status_detail": "not located in enumerated SFT artifacts",
+      "bytes": null,
+      "sha256": null,
+      "role": "contemporaneous training runtime/base/tokenizer identity receipt",
+      "historical_identity_source": "no such raw receipt located; adapter_config revision is null"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/rejected_candidate_episode_records.jsonl",
+      "status": "MISSING",
+      "status_detail": "not located in enumerated SFT artifacts",
+      "bytes": null,
+      "sha256": null,
+      "role": "per-candidate raw records for 596 rejected expert trajectories",
+      "historical_identity_source": "aggregate count/reason exists in report; per-candidate raw file not located"
+    }
+  ],
+  "bootstrap": {
+    "base": {
+      "n": 60,
+      "unique_task_ids": 60,
+      "successes": 3,
+      "families": {
+        "look_at_obj_in_light": 10,
+        "pick_and_place_simple": 10,
+        "pick_clean_then_place_in_recep": 10,
+        "pick_cool_then_place_in_recep": 10,
+        "pick_heat_then_place_in_recep": 10,
+        "pick_two_obj_and_place": 10
+      },
+      "seeds": [
+        7000,
+        7001,
+        7002,
+        7003,
+        7004,
+        7005,
+        7006,
+        7007,
+        7008,
+        7009,
+        7010,
+        7011,
+        7012,
+        7013,
+        7014,
+        7015,
+        7016,
+        7017,
+        7018,
+        7019,
+        7020,
+        7021,
+        7022,
+        7023,
+        7024,
+        7025,
+        7026,
+        7027,
+        7028,
+        7029,
+        7030,
+        7031,
+        7032,
+        7033,
+        7034,
+        7035,
+        7036,
+        7037,
+        7038,
+        7039,
+        7040,
+        7041,
+        7042,
+        7043,
+        7044,
+        7045,
+        7046,
+        7047,
+        7048,
+        7049,
+        7050,
+        7051,
+        7052,
+        7053,
+        7054,
+        7055,
+        7056,
+        7057,
+        7058,
+        7059
+      ],
+      "schedule_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ],
+      "truncated": 1,
+      "incomplete_or_nonterminal": 1,
+      "selection_failure_episodes": 1
+    },
+    "sft": {
+      "n": 60,
+      "unique_task_ids": 60,
+      "successes": 48,
+      "families": {
+        "look_at_obj_in_light": 10,
+        "pick_and_place_simple": 10,
+        "pick_clean_then_place_in_recep": 10,
+        "pick_cool_then_place_in_recep": 10,
+        "pick_heat_then_place_in_recep": 10,
+        "pick_two_obj_and_place": 10
+      },
+      "seeds": [
+        7000,
+        7001,
+        7002,
+        7003,
+        7004,
+        7005,
+        7006,
+        7007,
+        7008,
+        7009,
+        7010,
+        7011,
+        7012,
+        7013,
+        7014,
+        7015,
+        7016,
+        7017,
+        7018,
+        7019,
+        7020,
+        7021,
+        7022,
+        7023,
+        7024,
+        7025,
+        7026,
+        7027,
+        7028,
+        7029,
+        7030,
+        7031,
+        7032,
+        7033,
+        7034,
+        7035,
+        7036,
+        7037,
+        7038,
+        7039,
+        7040,
+        7041,
+        7042,
+        7043,
+        7044,
+        7045,
+        7046,
+        7047,
+        7048,
+        7049,
+        7050,
+        7051,
+        7052,
+        7053,
+        7054,
+        7055,
+        7056,
+        7057,
+        7058,
+        7059
+      ],
+      "schedule_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ],
+      "truncated": 0,
+      "incomplete_or_nonterminal": 0,
+      "selection_failure_episodes": 0
+    },
+    "pair_counts": {
+      "wins_base_fail_sft_success": 45,
+      "losses_base_success_sft_fail": 0,
+      "ties": 15,
+      "pair_rows": 60
+    },
+    "pair_mismatch_count": 0,
+    "pair_rows": [
+      {
+        "task_id": "look_at_obj_in_light-AlarmClock-None-DeskLamp-304/trial_T20190907_170557_255365",
+        "family": "look_at_obj_in_light",
+        "base_seed": 7028,
+        "sft_seed": 7028,
+        "base_schedule_index": 28,
+        "sft_schedule_index": 28,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 6,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-Book-None-DeskLamp-306/trial_T20190908_035303_350876",
+        "family": "look_at_obj_in_light",
+        "base_seed": 7041,
+        "sft_seed": 7041,
+        "base_schedule_index": 41,
+        "sft_schedule_index": 41,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": true,
+        "sft_success": true,
+        "base_terminal_won": true,
+        "sft_terminal_won": true,
+        "base_steps": 7,
+        "sft_steps": 21,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-CellPhone-None-DeskLamp-320/trial_T20190908_093231_036941",
+        "family": "look_at_obj_in_light",
+        "base_seed": 7016,
+        "sft_seed": 7016,
+        "base_schedule_index": 16,
+        "sft_schedule_index": 16,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": null,
+        "sft_terminal_won": true,
+        "base_steps": 1,
+        "sft_steps": 5,
+        "base_termination": "selection_failure",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-Laptop-None-DeskLamp-309/trial_T20190907_185744_816357",
+        "family": "look_at_obj_in_light",
+        "base_seed": 7054,
+        "sft_seed": 7054,
+        "base_schedule_index": 54,
+        "sft_schedule_index": 54,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 6,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-Mug-None-DeskLamp-323/trial_T20190907_041032_086791",
+        "family": "look_at_obj_in_light",
+        "base_seed": 7043,
+        "sft_seed": 7043,
+        "base_schedule_index": 43,
+        "sft_schedule_index": 43,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 48,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-Pillow-None-DeskLamp-306/trial_T20190909_075108_837635",
+        "family": "look_at_obj_in_light",
+        "base_seed": 7019,
+        "sft_seed": 7019,
+        "base_schedule_index": 19,
+        "sft_schedule_index": 19,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 24,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-Statue-None-DeskLamp-218/trial_T20190909_085249_636757",
+        "family": "look_at_obj_in_light",
+        "base_seed": 7013,
+        "sft_seed": 7013,
+        "base_schedule_index": 13,
+        "sft_schedule_index": 13,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": true,
+        "sft_success": true,
+        "base_terminal_won": true,
+        "sft_terminal_won": true,
+        "base_steps": 4,
+        "sft_steps": 5,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-Statue-None-DeskLamp-319/trial_T20190907_035546_167548",
+        "family": "look_at_obj_in_light",
+        "base_seed": 7017,
+        "sft_seed": 7017,
+        "base_schedule_index": 17,
+        "sft_schedule_index": 17,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 13,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-Watch-None-DeskLamp-301/trial_T20190909_151158_623013",
+        "family": "look_at_obj_in_light",
+        "base_seed": 7000,
+        "sft_seed": 7000,
+        "base_schedule_index": 0,
+        "sft_schedule_index": 0,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": false,
+        "base_terminal_won": false,
+        "sft_terminal_won": false,
+        "base_steps": 50,
+        "sft_steps": 50,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-Watch-None-DeskLamp-301/trial_T20190909_151235_229025",
+        "family": "look_at_obj_in_light",
+        "base_seed": 7001,
+        "sft_seed": 7001,
+        "base_schedule_index": 1,
+        "sft_schedule_index": 1,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 50,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_and_place_simple-AlarmClock-None-Desk-307/trial_T20190907_072329_828593",
+        "family": "pick_and_place_simple",
+        "base_seed": 7055,
+        "sft_seed": 7055,
+        "base_schedule_index": 55,
+        "sft_schedule_index": 55,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 5,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_and_place_simple-AlarmClock-None-Desk-314/trial_T20190908_185924_234584",
+        "family": "pick_and_place_simple",
+        "base_seed": 7044,
+        "sft_seed": 7044,
+        "base_schedule_index": 44,
+        "sft_schedule_index": 44,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 5,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_and_place_simple-CellPhone-None-Bed-313/trial_T20190907_092221_700361",
+        "family": "pick_and_place_simple",
+        "base_seed": 7020,
+        "sft_seed": 7020,
+        "base_schedule_index": 20,
+        "sft_schedule_index": 20,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 26,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_and_place_simple-Glassbottle-None-DiningTable-23/trial_T20190908_071053_270408",
+        "family": "pick_and_place_simple",
+        "base_seed": 7003,
+        "sft_seed": 7003,
+        "base_schedule_index": 3,
+        "sft_schedule_index": 3,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 10,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_and_place_simple-Newspaper-None-GarbageCan-214/trial_T20190907_181235_772324",
+        "family": "pick_and_place_simple",
+        "base_seed": 7037,
+        "sft_seed": 7037,
+        "base_schedule_index": 37,
+        "sft_schedule_index": 37,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 5,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_and_place_simple-Newspaper-None-Sofa-211/trial_T20190906_175004_203092",
+        "family": "pick_and_place_simple",
+        "base_seed": 7007,
+        "sft_seed": 7007,
+        "base_schedule_index": 7,
+        "sft_schedule_index": 7,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 19,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_and_place_simple-Pencil-None-Dresser-330/trial_T20190909_071051_120393",
+        "family": "pick_and_place_simple",
+        "base_seed": 7018,
+        "sft_seed": 7018,
+        "base_schedule_index": 18,
+        "sft_schedule_index": 18,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 5,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_and_place_simple-SprayBottle-None-Toilet-411/trial_T20190909_110956_758459",
+        "family": "pick_and_place_simple",
+        "base_seed": 7010,
+        "sft_seed": 7010,
+        "base_schedule_index": 10,
+        "sft_schedule_index": 10,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 19,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_and_place_simple-TissueBox-None-SideTable-229/trial_T20190908_114112_465371",
+        "family": "pick_and_place_simple",
+        "base_seed": 7040,
+        "sft_seed": 7040,
+        "base_schedule_index": 40,
+        "sft_schedule_index": 40,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 22,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-421/trial_T20190906_182507_445544",
+        "family": "pick_and_place_simple",
+        "base_seed": 7048,
+        "sft_seed": 7048,
+        "base_schedule_index": 48,
+        "sft_schedule_index": 48,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": true,
+        "sft_success": true,
+        "base_terminal_won": true,
+        "sft_terminal_won": true,
+        "base_steps": 5,
+        "sft_steps": 6,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Apple-None-DiningTable-4/trial_T20190908_104413_450768",
+        "family": "pick_clean_then_place_in_recep",
+        "base_seed": 7042,
+        "sft_seed": 7042,
+        "base_schedule_index": 42,
+        "sft_schedule_index": 42,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 10,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Bowl-None-Fridge-4/trial_T20190909_023801_140154",
+        "family": "pick_clean_then_place_in_recep",
+        "base_seed": 7024,
+        "sft_seed": 7024,
+        "base_schedule_index": 24,
+        "sft_schedule_index": 24,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": false,
+        "base_terminal_won": false,
+        "sft_terminal_won": false,
+        "base_steps": 50,
+        "sft_steps": 50,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Cloth-None-Toilet-415/trial_T20190909_022258_647350",
+        "family": "pick_clean_then_place_in_recep",
+        "base_seed": 7039,
+        "sft_seed": 7039,
+        "base_schedule_index": 39,
+        "sft_schedule_index": 39,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 12,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Egg-None-CounterTop-30/trial_T20190907_113341_603440",
+        "family": "pick_clean_then_place_in_recep",
+        "base_seed": 7030,
+        "sft_seed": 7030,
+        "base_schedule_index": 30,
+        "sft_schedule_index": 30,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 10,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Knife-None-Drawer-22/trial_T20190907_224827_746945",
+        "family": "pick_clean_then_place_in_recep",
+        "base_seed": 7027,
+        "sft_seed": 7027,
+        "base_schedule_index": 27,
+        "sft_schedule_index": 27,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 16,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Lettuce-None-CounterTop-30/trial_T20190909_033228_803068",
+        "family": "pick_clean_then_place_in_recep",
+        "base_seed": 7050,
+        "sft_seed": 7050,
+        "base_schedule_index": 50,
+        "sft_schedule_index": 50,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 11,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Potato-None-DiningTable-4/trial_T20190909_113957_013325",
+        "family": "pick_clean_then_place_in_recep",
+        "base_seed": 7032,
+        "sft_seed": 7032,
+        "base_schedule_index": 32,
+        "sft_schedule_index": 32,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 14,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-SoapBar-None-Cabinet-422/trial_T20190908_123321_281332",
+        "family": "pick_clean_then_place_in_recep",
+        "base_seed": 7047,
+        "sft_seed": 7047,
+        "base_schedule_index": 47,
+        "sft_schedule_index": 47,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 8,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Tomato-None-Fridge-18/trial_T20190909_045817_847048",
+        "family": "pick_clean_then_place_in_recep",
+        "base_seed": 7053,
+        "sft_seed": 7053,
+        "base_schedule_index": 53,
+        "sft_schedule_index": 53,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 12,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Tomato-None-SideTable-21/trial_T20190907_165032_703898",
+        "family": "pick_clean_then_place_in_recep",
+        "base_seed": 7057,
+        "sft_seed": 7057,
+        "base_schedule_index": 57,
+        "sft_schedule_index": 57,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 12,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Apple-None-Microwave-22/trial_T20190908_000241_664330",
+        "family": "pick_cool_then_place_in_recep",
+        "base_seed": 7038,
+        "sft_seed": 7038,
+        "base_schedule_index": 38,
+        "sft_schedule_index": 38,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 16,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Cup-None-DiningTable-4/trial_T20190909_065136_839164",
+        "family": "pick_cool_then_place_in_recep",
+        "base_seed": 7046,
+        "sft_seed": 7046,
+        "base_schedule_index": 46,
+        "sft_schedule_index": 46,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 25,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-19/trial_T20190907_161939_351495",
+        "family": "pick_cool_then_place_in_recep",
+        "base_seed": 7059,
+        "sft_seed": 7059,
+        "base_schedule_index": 59,
+        "sft_schedule_index": 59,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 15,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Pan-None-CounterTop-12/trial_T20190908_062417_287639",
+        "family": "pick_cool_then_place_in_recep",
+        "base_seed": 7012,
+        "sft_seed": 7012,
+        "base_schedule_index": 12,
+        "sft_schedule_index": 12,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 8,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Plate-None-Cabinet-27/trial_T20190906_173250_466409",
+        "family": "pick_cool_then_place_in_recep",
+        "base_seed": 7002,
+        "sft_seed": 7002,
+        "base_schedule_index": 2,
+        "sft_schedule_index": 2,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": false,
+        "base_terminal_won": false,
+        "sft_terminal_won": false,
+        "base_steps": 50,
+        "sft_steps": 50,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Plate-None-Microwave-7/trial_T20190909_130503_412416",
+        "family": "pick_cool_then_place_in_recep",
+        "base_seed": 7035,
+        "sft_seed": 7035,
+        "base_schedule_index": 35,
+        "sft_schedule_index": 35,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 36,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Pot-None-Cabinet-1/trial_T20190908_184335_961034",
+        "family": "pick_cool_then_place_in_recep",
+        "base_seed": 7045,
+        "sft_seed": 7045,
+        "base_schedule_index": 45,
+        "sft_schedule_index": 45,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 25,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Potato-None-DiningTable-19/trial_T20190908_010036_401629",
+        "family": "pick_cool_then_place_in_recep",
+        "base_seed": 7022,
+        "sft_seed": 7022,
+        "base_schedule_index": 22,
+        "sft_schedule_index": 22,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 16,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Tomato-None-CounterTop-7/trial_T20190906_185127_887683",
+        "family": "pick_cool_then_place_in_recep",
+        "base_seed": 7029,
+        "sft_seed": 7029,
+        "base_schedule_index": 29,
+        "sft_schedule_index": 29,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 15,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Tomato-None-Microwave-6/trial_T20190908_082136_704823",
+        "family": "pick_cool_then_place_in_recep",
+        "base_seed": 7006,
+        "sft_seed": 7006,
+        "base_schedule_index": 6,
+        "sft_schedule_index": 6,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 18,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Apple-None-Fridge-6/trial_T20190908_153716_620298",
+        "family": "pick_heat_then_place_in_recep",
+        "base_seed": 7008,
+        "sft_seed": 7008,
+        "base_schedule_index": 8,
+        "sft_schedule_index": 8,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 18,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Bread-None-Fridge-15/trial_T20190906_215325_042307",
+        "family": "pick_heat_then_place_in_recep",
+        "base_seed": 7015,
+        "sft_seed": 7015,
+        "base_schedule_index": 15,
+        "sft_schedule_index": 15,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 13,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Cup-None-Cabinet-28/trial_T20190909_062858_196741",
+        "family": "pick_heat_then_place_in_recep",
+        "base_seed": 7049,
+        "sft_seed": 7049,
+        "base_schedule_index": 49,
+        "sft_schedule_index": 49,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 21,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Egg-None-DiningTable-15/trial_T20190908_042125_390836",
+        "family": "pick_heat_then_place_in_recep",
+        "base_seed": 7004,
+        "sft_seed": 7004,
+        "base_schedule_index": 4,
+        "sft_schedule_index": 4,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 11,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Egg-None-GarbageCan-11/trial_T20190908_220000_908386",
+        "family": "pick_heat_then_place_in_recep",
+        "base_seed": 7056,
+        "sft_seed": 7056,
+        "base_schedule_index": 56,
+        "sft_schedule_index": 56,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 15,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Mug-None-Cabinet-19/trial_T20190907_152639_710593",
+        "family": "pick_heat_then_place_in_recep",
+        "base_seed": 7051,
+        "sft_seed": 7051,
+        "base_schedule_index": 51,
+        "sft_schedule_index": 51,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 25,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Potato-None-GarbageCan-3/trial_T20190908_121849_346541",
+        "family": "pick_heat_then_place_in_recep",
+        "base_seed": 7026,
+        "sft_seed": 7026,
+        "base_schedule_index": 26,
+        "sft_schedule_index": 26,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 7,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Potato-None-SideTable-3/trial_T20190909_050408_729839",
+        "family": "pick_heat_then_place_in_recep",
+        "base_seed": 7034,
+        "sft_seed": 7034,
+        "base_schedule_index": 34,
+        "sft_schedule_index": 34,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 7,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Tomato-None-Fridge-24/trial_T20190908_033652_416415",
+        "family": "pick_heat_then_place_in_recep",
+        "base_seed": 7031,
+        "sft_seed": 7031,
+        "base_schedule_index": 31,
+        "sft_schedule_index": 31,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 12,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Tomato-None-Fridge-7/trial_T20190909_022805_528384",
+        "family": "pick_heat_then_place_in_recep",
+        "base_seed": 7021,
+        "sft_seed": 7021,
+        "base_schedule_index": 21,
+        "sft_schedule_index": 21,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 14,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-CellPhone-None-Bed-309/trial_T20190910_144311_654244",
+        "family": "pick_two_obj_and_place",
+        "base_seed": 7011,
+        "sft_seed": 7011,
+        "base_schedule_index": 11,
+        "sft_schedule_index": 11,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": false,
+        "base_terminal_won": false,
+        "sft_terminal_won": false,
+        "base_steps": 50,
+        "sft_steps": 50,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-Cup-None-CounterTop-4/trial_T20190908_095215_349573",
+        "family": "pick_two_obj_and_place",
+        "base_seed": 7009,
+        "sft_seed": 7009,
+        "base_schedule_index": 9,
+        "sft_schedule_index": 9,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": false,
+        "base_terminal_won": false,
+        "sft_terminal_won": false,
+        "base_steps": 50,
+        "sft_steps": 50,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-Cup-None-Shelf-1/trial_T20190908_015321_582840",
+        "family": "pick_two_obj_and_place",
+        "base_seed": 7014,
+        "sft_seed": 7014,
+        "base_schedule_index": 14,
+        "sft_schedule_index": 14,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": false,
+        "base_terminal_won": false,
+        "sft_terminal_won": false,
+        "base_steps": 50,
+        "sft_steps": 50,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-KeyChain-None-Dresser-318/trial_T20190910_122758_510336",
+        "family": "pick_two_obj_and_place",
+        "base_seed": 7036,
+        "sft_seed": 7036,
+        "base_schedule_index": 36,
+        "sft_schedule_index": 36,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": false,
+        "base_terminal_won": false,
+        "sft_terminal_won": false,
+        "base_steps": 50,
+        "sft_steps": 50,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-Pillow-None-ArmChair-321/trial_T20190907_121714_804185",
+        "family": "pick_two_obj_and_place",
+        "base_seed": 7058,
+        "sft_seed": 7058,
+        "base_schedule_index": 58,
+        "sft_schedule_index": 58,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": false,
+        "base_terminal_won": false,
+        "sft_terminal_won": false,
+        "base_steps": 50,
+        "sft_steps": 50,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-SaltShaker-None-Cabinet-3/trial_T20190908_102210_822954",
+        "family": "pick_two_obj_and_place",
+        "base_seed": 7033,
+        "sft_seed": 7033,
+        "base_schedule_index": 33,
+        "sft_schedule_index": 33,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": true,
+        "base_terminal_won": false,
+        "sft_terminal_won": true,
+        "base_steps": 50,
+        "sft_steps": 33,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-SaltShaker-None-Drawer-12/trial_T20190907_175317_697442",
+        "family": "pick_two_obj_and_place",
+        "base_seed": 7005,
+        "sft_seed": 7005,
+        "base_schedule_index": 5,
+        "sft_schedule_index": 5,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": false,
+        "base_terminal_won": false,
+        "sft_terminal_won": false,
+        "base_steps": 50,
+        "sft_steps": 50,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-SprayBottle-None-CounterTop-410/trial_T20190908_161608_081694",
+        "family": "pick_two_obj_and_place",
+        "base_seed": 7023,
+        "sft_seed": 7023,
+        "base_schedule_index": 23,
+        "sft_schedule_index": 23,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": false,
+        "base_terminal_won": false,
+        "sft_terminal_won": false,
+        "base_steps": 50,
+        "sft_steps": 50,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-SprayBottle-None-GarbageCan-423/trial_T20190909_013120_095952",
+        "family": "pick_two_obj_and_place",
+        "base_seed": 7052,
+        "sft_seed": 7052,
+        "base_schedule_index": 52,
+        "sft_schedule_index": 52,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": false,
+        "base_terminal_won": false,
+        "sft_terminal_won": false,
+        "base_steps": 50,
+        "sft_steps": 50,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-ToiletPaper-None-Drawer-410/trial_T20190908_111346_211082",
+        "family": "pick_two_obj_and_place",
+        "base_seed": 7025,
+        "sft_seed": 7025,
+        "base_schedule_index": 25,
+        "sft_schedule_index": 25,
+        "base_pipeline_version": "sft_p0_action_only_v1",
+        "sft_pipeline_version": "sft_p0_action_only_v1",
+        "base_action_modes": [
+          "indexed_admissible"
+        ],
+        "sft_action_modes": [
+          "indexed_admissible"
+        ],
+        "base_success": false,
+        "sft_success": false,
+        "base_terminal_won": false,
+        "sft_terminal_won": false,
+        "base_steps": 50,
+        "sft_steps": 50,
+        "base_termination": "environment_terminal",
+        "sft_termination": "environment_terminal",
+        "pair_mismatch_fields": []
+      }
+    ],
+    "reported_base_sft_successes": [
+      3,
+      48
+    ],
+    "raw_matches_reported": [
+      true,
+      true
+    ],
+    "success_definition": "terminal environment metadata alfworld_info.won is exactly true on final recorded step; generic done/terminal alone is not success"
+  },
+  "dataset": {
+    "raw_stream_audit_balanced": {
+      "rows": 20967,
+      "split_rows": {
+        "train": 18828,
+        "validation": 2139
+      },
+      "source_split_rows": {
+        "train": 20967
+      },
+      "unique_tasks": 1200,
+      "task_counts_by_split": {
+        "train": 1074,
+        "validation": 126
+      },
+      "family_unique_task_counts": {
+        "train/look_at_obj_in_light": 179,
+        "train/pick_and_place_simple": 179,
+        "train/pick_clean_then_place_in_recep": 179,
+        "train/pick_cool_then_place_in_recep": 179,
+        "train/pick_heat_then_place_in_recep": 179,
+        "train/pick_two_obj_and_place": 179,
+        "validation/look_at_obj_in_light": 21,
+        "validation/pick_and_place_simple": 21,
+        "validation/pick_clean_then_place_in_recep": 21,
+        "validation/pick_cool_then_place_in_recep": 21,
+        "validation/pick_heat_then_place_in_recep": 21,
+        "validation/pick_two_obj_and_place": 21
+      },
+      "tasks_with_multiple_dataset_splits": 0,
+      "duplicate_task_step_keys_in_balanced_file": 0,
+      "distinct_source_traj_data_sha256": 1200,
+      "source_traj_hash_missing_rows": 0,
+      "distinct_expert_trajectory_sha256": 1200,
+      "expert_trajectory_hash_missing_rows": 0,
+      "terminal_task_success_row_counts": {
+        "True": 20967
+      },
+      "target_action_counts": {
+        "A000": 2322,
+        "A001": 169,
+        "A002": 481,
+        "A003": 592,
+        "A004": 449,
+        "A005": 365,
+        "A006": 415,
+        "A007": 413,
+        "A008": 420,
+        "A009": 401,
+        "A010": 545,
+        "A011": 621,
+        "A012": 658,
+        "A013": 724,
+        "A014": 825,
+        "A015": 714,
+        "A016": 657,
+        "A017": 614,
+        "A018": 630,
+        "A019": 557,
+        "A020": 571,
+        "A021": 435,
+        "A022": 453,
+        "A023": 437,
+        "A024": 417,
+        "A025": 468,
+        "A026": 401,
+        "A027": 356,
+        "A028": 343,
+        "A029": 299,
+        "A030": 424,
+        "A031": 387,
+        "A032": 360,
+        "A033": 356,
+        "A034": 176,
+        "A035": 185,
+        "A036": 279,
+        "A037": 225,
+        "A038": 256,
+        "A039": 250,
+        "A040": 133,
+        "A041": 118,
+        "A042": 211,
+        "A043": 115,
+        "A044": 138,
+        "A045": 73,
+        "A046": 57,
+        "A047": 45,
+        "A048": 43,
+        "A049": 20,
+        "A050": 36,
+        "A051": 7,
+        "A052": 17,
+        "A053": 23,
+        "A054": 76,
+        "A055": 63,
+        "A056": 45,
+        "A057": 43,
+        "A058": 31,
+        "A059": 10,
+        "A060": 9,
+        "A062": 1,
+        "A063": 1,
+        "A068": 2
+      }
+    },
+    "raw_stream_audit_prebalance": {
+      "initial_rows": 17588,
+      "initial_unique_tasks": 1140,
+      "initial_rows_by_split": {
+        "train": 15720,
+        "validation": 1868
+      },
+      "initial_duplicate_task_step_keys": 0,
+      "extension_rows": 4339,
+      "extension_unique_tasks": 133,
+      "extension_rows_by_split": {
+        "train": 3903,
+        "validation": 436
+      },
+      "extension_duplicate_task_step_keys": 0,
+      "initial_extension_task_overlap": 0,
+      "candidate_union_unique_tasks": 1273,
+      "final_balanced_task_intersection_initial": 1068,
+      "final_balanced_task_intersection_extension": 132,
+      "candidate_union_not_in_final_balanced": 73,
+      "final_balanced_not_in_candidate_union": 0
+    },
+    "source_file_raw_hash_checks": {
+      "candidate_task_count": 1273,
+      "traj_data_present": 1273,
+      "game_file_present": 1273,
+      "both_hash_match": 1273,
+      "tasks_with_conflicting_expected_source_hash_pairs": 0,
+      "mismatches": []
+    },
+    "reported_summary": {
+      "accepted_task_count": 1200,
+      "accepted_example_count": 20967,
+      "tasks_per_split": {
+        "train": 1074,
+        "validation": 126
+      },
+      "examples_per_split": {
+        "train": 18828,
+        "validation": 2139
+      },
+      "candidate_replay_task_count": 1869,
+      "candidate_accepted_task_count": 1273,
+      "candidate_rejected_task_count": 596,
+      "duplicate_counts": {
+        "duplicate_exact_rows_removed": 21,
+        "duplicate_exact_trajectory_occurrences": 0,
+        "duplicate_prompt_hash_occurrences": 148,
+        "duplicate_task_step_keys": 0
+      },
+      "leakage_checks": {
+        "accepted_exclusion_disjoint": true,
+        "accepted_online_evaluation_disjoint": true,
+        "balanced_tasks_per_family": true,
+        "demonstration_source_disjoint": true,
+        "task_step_keys_unique": true,
+        "train_validation_disjoint": true
+      },
+      "dataset_sha256": "c547e8f0c5988b29288f2a097169c7859741b7d4f53f222af31f5e2889d516cf",
+      "split_manifest_sha256": "5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56",
+      "accepted_split_manifest_sha256": "9c374fafdcc7d7db77e878d23e852a0ec55eedcc3886cb0cebe7491d67e564e5",
+      "exclusion_manifest_sha256": "fdbe3b1c2d8162fa7c95ff25b57ace1eaf01c1224d42f9f1f447bf7a859541c5"
+    },
+    "train_result_summary_sha256": "e6a47124200cacba4d1f3eaf97fdf79657d7df04f072a4d5446c2bec677c399e",
+    "accepted_dataset_id_overlap_with_bootstrap_online": 0,
+    "accepted_dataset_id_overlap_with_valid_unseen": 0,
+    "training_protocol_manifest_binding": {
+      "protocol_declared_split_manifest_sha256": "e6695359f2e6b53b74c54e9d9712b1f8bc8534487d85b659151c71eb1441e25d",
+      "current_sft_task_splits_file_sha256": "5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56",
+      "protocol_declared_exclusion_sha256": "8e0d04d315a16d4fd28ef04bf9bf92212ebc98bbba8a10dfe0e3acb2b9fbf798",
+      "current_sft_task_exclusions_file_sha256": "fdbe3b1c2d8162fa7c95ff25b57ace1eaf01c1224d42f9f1f447bf7a859541c5",
+      "split_hash_matches_current_file": false,
+      "exclusion_hash_matches_current_file": false,
+      "classification": "CONTRADICTED_CURRENT_BINDING"
+    }
+  },
+  "valid_unseen": {
+    "raw": {
+      "n": 60,
+      "unique_task_ids": 60,
+      "successes": 49,
+      "families": {
+        "look_at_obj_in_light": 10,
+        "pick_and_place_simple": 10,
+        "pick_clean_then_place_in_recep": 10,
+        "pick_cool_then_place_in_recep": 10,
+        "pick_heat_then_place_in_recep": 10,
+        "pick_two_obj_and_place": 10
+      },
+      "seeds": [
+        9000,
+        9001,
+        9002,
+        9003,
+        9004,
+        9005,
+        9006,
+        9007,
+        9008,
+        9009,
+        9010,
+        9011,
+        9012,
+        9013,
+        9014,
+        9015,
+        9016,
+        9017,
+        9018,
+        9019,
+        9020,
+        9021,
+        9022,
+        9023,
+        9024,
+        9025,
+        9026,
+        9027,
+        9028,
+        9029,
+        9030,
+        9031,
+        9032,
+        9033,
+        9034,
+        9035,
+        9036,
+        9037,
+        9038,
+        9039,
+        9040,
+        9041,
+        9042,
+        9043,
+        9044,
+        9045,
+        9046,
+        9047,
+        9048,
+        9049,
+        9050,
+        9051,
+        9052,
+        9053,
+        9054,
+        9055,
+        9056,
+        9057,
+        9058,
+        9059
+      ],
+      "schedule_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ],
+      "truncated": 0,
+      "incomplete_or_nonterminal": 0,
+      "selection_failure_episodes": 0
+    },
+    "frozen_schedule_count": 60,
+    "raw_schedule_join_count": 60,
+    "identity_overlap_with_sft_development": 0,
+    "schedule_case_rows": [
+      {
+        "task_id": "look_at_obj_in_light-AlarmClock-None-DeskLamp-308/trial_T20190908_222917_366542",
+        "family": "look_at_obj_in_light",
+        "nominal_seed": 9048,
+        "schedule_index": 48,
+        "success": true,
+        "terminal_won": true,
+        "steps": 26,
+        "mismatches": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-AlarmClock-None-DeskLamp-308/trial_T20190908_222951_616606",
+        "family": "look_at_obj_in_light",
+        "nominal_seed": 9042,
+        "schedule_index": 42,
+        "success": true,
+        "terminal_won": true,
+        "steps": 24,
+        "mismatches": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-Book-None-DeskLamp-308/trial_T20190908_020029_636862",
+        "family": "look_at_obj_in_light",
+        "nominal_seed": 9000,
+        "schedule_index": 0,
+        "success": true,
+        "terminal_won": true,
+        "steps": 29,
+        "mismatches": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-Book-None-DeskLamp-308/trial_T20190908_144951_587345",
+        "family": "look_at_obj_in_light",
+        "nominal_seed": 9018,
+        "schedule_index": 18,
+        "success": true,
+        "terminal_won": true,
+        "steps": 27,
+        "mismatches": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-Bowl-None-DeskLamp-308/trial_T20190907_133935_066606",
+        "family": "look_at_obj_in_light",
+        "nominal_seed": 9024,
+        "schedule_index": 24,
+        "success": true,
+        "terminal_won": true,
+        "steps": 33,
+        "mismatches": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-Bowl-None-DeskLamp-308/trial_T20190907_133953_562557",
+        "family": "look_at_obj_in_light",
+        "nominal_seed": 9006,
+        "schedule_index": 6,
+        "success": true,
+        "terminal_won": true,
+        "steps": 6,
+        "mismatches": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-CD-None-DeskLamp-308/trial_T20190908_141942_810052",
+        "family": "look_at_obj_in_light",
+        "nominal_seed": 9054,
+        "schedule_index": 54,
+        "success": true,
+        "terminal_won": true,
+        "steps": 30,
+        "mismatches": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-CD-None-DeskLamp-308/trial_T20190908_142046_281296",
+        "family": "look_at_obj_in_light",
+        "nominal_seed": 9036,
+        "schedule_index": 36,
+        "success": true,
+        "terminal_won": true,
+        "steps": 28,
+        "mismatches": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-Mug-None-DeskLamp-308/trial_T20190908_201444_037645",
+        "family": "look_at_obj_in_light",
+        "nominal_seed": 9030,
+        "schedule_index": 30,
+        "success": true,
+        "terminal_won": true,
+        "steps": 6,
+        "mismatches": []
+      },
+      {
+        "task_id": "look_at_obj_in_light-Pencil-None-DeskLamp-308/trial_T20190908_220656_510400",
+        "family": "look_at_obj_in_light",
+        "nominal_seed": 9012,
+        "schedule_index": 12,
+        "success": true,
+        "terminal_won": true,
+        "steps": 6,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_and_place_simple-Mug-None-Desk-308/trial_T20190909_203041_433487",
+        "family": "pick_and_place_simple",
+        "nominal_seed": 9037,
+        "schedule_index": 37,
+        "success": true,
+        "terminal_won": true,
+        "steps": 5,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_and_place_simple-Pencil-None-Shelf-308/trial_T20190908_121952_610012",
+        "family": "pick_and_place_simple",
+        "nominal_seed": 9013,
+        "schedule_index": 13,
+        "success": true,
+        "terminal_won": true,
+        "steps": 26,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_and_place_simple-PepperShaker-None-Drawer-10/trial_T20190918_154326_823501",
+        "family": "pick_and_place_simple",
+        "nominal_seed": 9049,
+        "schedule_index": 49,
+        "success": true,
+        "terminal_won": true,
+        "steps": 7,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_and_place_simple-SaltShaker-None-Cabinet-10/trial_T20190906_191429_743650",
+        "family": "pick_and_place_simple",
+        "nominal_seed": 9055,
+        "schedule_index": 55,
+        "success": true,
+        "terminal_won": true,
+        "steps": 6,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_and_place_simple-SaltShaker-None-Cabinet-10/trial_T20190906_191445_723170",
+        "family": "pick_and_place_simple",
+        "nominal_seed": 9001,
+        "schedule_index": 1,
+        "success": true,
+        "terminal_won": true,
+        "steps": 5,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_and_place_simple-SaltShaker-None-Cabinet-10/trial_T20190906_191501_563086",
+        "family": "pick_and_place_simple",
+        "nominal_seed": 9043,
+        "schedule_index": 43,
+        "success": true,
+        "terminal_won": true,
+        "steps": 10,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_and_place_simple-SoapBottle-None-Toilet-424/trial_T20190907_004321_405868",
+        "family": "pick_and_place_simple",
+        "nominal_seed": 9019,
+        "schedule_index": 19,
+        "success": true,
+        "terminal_won": true,
+        "steps": 7,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_and_place_simple-Vase-None-Safe-219/trial_T20190908_205221_748352",
+        "family": "pick_and_place_simple",
+        "nominal_seed": 9007,
+        "schedule_index": 7,
+        "success": true,
+        "terminal_won": true,
+        "steps": 27,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_and_place_simple-Watch-None-Safe-219/trial_T20190907_074524_006355",
+        "family": "pick_and_place_simple",
+        "nominal_seed": 9031,
+        "schedule_index": 31,
+        "success": true,
+        "terminal_won": true,
+        "steps": 26,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_and_place_simple-Watch-None-Safe-219/trial_T20190907_074556_124850",
+        "family": "pick_and_place_simple",
+        "nominal_seed": 9025,
+        "schedule_index": 25,
+        "success": true,
+        "terminal_won": true,
+        "steps": 26,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Bowl-None-Cabinet-10/trial_T20190909_061130_844814",
+        "family": "pick_clean_then_place_in_recep",
+        "nominal_seed": 9056,
+        "schedule_index": 56,
+        "success": true,
+        "terminal_won": true,
+        "steps": 34,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Bowl-None-Cabinet-10/trial_T20190909_061158_110530",
+        "family": "pick_clean_then_place_in_recep",
+        "nominal_seed": 9014,
+        "schedule_index": 14,
+        "success": false,
+        "terminal_won": false,
+        "steps": 50,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Cloth-None-Cabinet-424/trial_T20190908_022436_073995",
+        "family": "pick_clean_then_place_in_recep",
+        "nominal_seed": 9032,
+        "schedule_index": 32,
+        "success": true,
+        "terminal_won": true,
+        "steps": 18,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Cloth-None-CounterTop-424/trial_T20190908_100632_546757",
+        "family": "pick_clean_then_place_in_recep",
+        "nominal_seed": 9002,
+        "schedule_index": 2,
+        "success": true,
+        "terminal_won": true,
+        "steps": 11,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Knife-None-CounterTop-10/trial_T20190909_110531_148235",
+        "family": "pick_clean_then_place_in_recep",
+        "nominal_seed": 9044,
+        "schedule_index": 44,
+        "success": true,
+        "terminal_won": true,
+        "steps": 19,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Pan-None-CounterTop-10/trial_T20190908_032434_013084",
+        "family": "pick_clean_then_place_in_recep",
+        "nominal_seed": 9008,
+        "schedule_index": 8,
+        "success": true,
+        "terminal_won": true,
+        "steps": 9,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Plate-None-CounterTop-10/trial_T20190908_213533_897289",
+        "family": "pick_clean_then_place_in_recep",
+        "nominal_seed": 9026,
+        "schedule_index": 26,
+        "success": true,
+        "terminal_won": true,
+        "steps": 22,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-SoapBar-None-CounterTop-424/trial_T20190907_074106_050405",
+        "family": "pick_clean_then_place_in_recep",
+        "nominal_seed": 9050,
+        "schedule_index": 50,
+        "success": true,
+        "terminal_won": true,
+        "steps": 7,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-SoapBar-None-CounterTop-424/trial_T20190907_074124_966890",
+        "family": "pick_clean_then_place_in_recep",
+        "nominal_seed": 9020,
+        "schedule_index": 20,
+        "success": true,
+        "terminal_won": true,
+        "steps": 7,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_clean_then_place_in_recep-Spatula-None-Drawer-10/trial_T20190907_080730_211959",
+        "family": "pick_clean_then_place_in_recep",
+        "nominal_seed": 9038,
+        "schedule_index": 38,
+        "success": true,
+        "terminal_won": true,
+        "steps": 20,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Bread-None-CounterTop-10/trial_T20190908_091835_825830",
+        "family": "pick_cool_then_place_in_recep",
+        "nominal_seed": 9039,
+        "schedule_index": 39,
+        "success": true,
+        "terminal_won": true,
+        "steps": 16,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Lettuce-None-CounterTop-10/trial_T20190909_174840_771703",
+        "family": "pick_cool_then_place_in_recep",
+        "nominal_seed": 9003,
+        "schedule_index": 3,
+        "success": true,
+        "terminal_won": true,
+        "steps": 13,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Mug-None-Cabinet-10/trial_T20190909_121559_082363",
+        "family": "pick_cool_then_place_in_recep",
+        "nominal_seed": 9021,
+        "schedule_index": 21,
+        "success": true,
+        "terminal_won": true,
+        "steps": 32,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Mug-None-Cabinet-10/trial_T20190909_121635_622676",
+        "family": "pick_cool_then_place_in_recep",
+        "nominal_seed": 9015,
+        "schedule_index": 15,
+        "success": true,
+        "terminal_won": true,
+        "steps": 32,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-10/trial_T20190907_183715_299073",
+        "family": "pick_cool_then_place_in_recep",
+        "nominal_seed": 9009,
+        "schedule_index": 9,
+        "success": true,
+        "terminal_won": true,
+        "steps": 32,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-10/trial_T20190907_183853_958104",
+        "family": "pick_cool_then_place_in_recep",
+        "nominal_seed": 9051,
+        "schedule_index": 51,
+        "success": true,
+        "terminal_won": true,
+        "steps": 30,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Pan-None-CounterTop-10/trial_T20190908_114656_768805",
+        "family": "pick_cool_then_place_in_recep",
+        "nominal_seed": 9027,
+        "schedule_index": 27,
+        "success": true,
+        "terminal_won": true,
+        "steps": 9,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Potato-None-Microwave-10/trial_T20190907_033157_424297",
+        "family": "pick_cool_then_place_in_recep",
+        "nominal_seed": 9057,
+        "schedule_index": 57,
+        "success": true,
+        "terminal_won": true,
+        "steps": 16,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Potato-None-Microwave-10/trial_T20190907_033306_962974",
+        "family": "pick_cool_then_place_in_recep",
+        "nominal_seed": 9033,
+        "schedule_index": 33,
+        "success": true,
+        "terminal_won": true,
+        "steps": 8,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_cool_then_place_in_recep-Tomato-None-Microwave-10/trial_T20190909_102608_318800",
+        "family": "pick_cool_then_place_in_recep",
+        "nominal_seed": 9045,
+        "schedule_index": 45,
+        "success": true,
+        "terminal_won": true,
+        "steps": 12,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Apple-None-Fridge-10/trial_T20190906_182435_622538",
+        "family": "pick_heat_then_place_in_recep",
+        "nominal_seed": 9028,
+        "schedule_index": 28,
+        "success": true,
+        "terminal_won": true,
+        "steps": 8,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Apple-None-GarbageCan-10/trial_T20190908_145050_918567",
+        "family": "pick_heat_then_place_in_recep",
+        "nominal_seed": 9022,
+        "schedule_index": 22,
+        "success": true,
+        "terminal_won": true,
+        "steps": 11,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Apple-None-GarbageCan-10/trial_T20190908_145143_820541",
+        "family": "pick_heat_then_place_in_recep",
+        "nominal_seed": 9004,
+        "schedule_index": 4,
+        "success": true,
+        "terminal_won": true,
+        "steps": 7,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Apple-None-GarbageCan-10/trial_T20190908_145356_918528",
+        "family": "pick_heat_then_place_in_recep",
+        "nominal_seed": 9016,
+        "schedule_index": 16,
+        "success": true,
+        "terminal_won": true,
+        "steps": 11,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Cup-None-Cabinet-10/trial_T20190907_083507_594820",
+        "family": "pick_heat_then_place_in_recep",
+        "nominal_seed": 9010,
+        "schedule_index": 10,
+        "success": true,
+        "terminal_won": true,
+        "steps": 22,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Egg-None-GarbageCan-10/trial_T20190908_113432_673307",
+        "family": "pick_heat_then_place_in_recep",
+        "nominal_seed": 9046,
+        "schedule_index": 46,
+        "success": true,
+        "terminal_won": true,
+        "steps": 17,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Egg-None-GarbageCan-10/trial_T20190908_113523_123938",
+        "family": "pick_heat_then_place_in_recep",
+        "nominal_seed": 9034,
+        "schedule_index": 34,
+        "success": true,
+        "terminal_won": true,
+        "steps": 11,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Mug-None-Cabinet-10/trial_T20190909_021100_341887",
+        "family": "pick_heat_then_place_in_recep",
+        "nominal_seed": 9058,
+        "schedule_index": 58,
+        "success": true,
+        "terminal_won": true,
+        "steps": 32,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-10/trial_T20190907_171806_406231",
+        "family": "pick_heat_then_place_in_recep",
+        "nominal_seed": 9040,
+        "schedule_index": 40,
+        "success": true,
+        "terminal_won": true,
+        "steps": 30,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-10/trial_T20190907_171850_960211",
+        "family": "pick_heat_then_place_in_recep",
+        "nominal_seed": 9052,
+        "schedule_index": 52,
+        "success": true,
+        "terminal_won": true,
+        "steps": 32,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-CD-None-Safe-308/trial_T20190907_050942_897916",
+        "family": "pick_two_obj_and_place",
+        "nominal_seed": 9029,
+        "schedule_index": 29,
+        "success": false,
+        "terminal_won": false,
+        "steps": 50,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-CD-None-Safe-308/trial_T20190907_051013_060265",
+        "family": "pick_two_obj_and_place",
+        "nominal_seed": 9011,
+        "schedule_index": 11,
+        "success": false,
+        "terminal_won": false,
+        "steps": 50,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-KeyChain-None-Safe-219/trial_T20190909_012027_782483",
+        "family": "pick_two_obj_and_place",
+        "nominal_seed": 9023,
+        "schedule_index": 23,
+        "success": false,
+        "terminal_won": false,
+        "steps": 50,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-PepperShaker-None-Drawer-10/trial_T20190908_010306_215435",
+        "family": "pick_two_obj_and_place",
+        "nominal_seed": 9053,
+        "schedule_index": 53,
+        "success": false,
+        "terminal_won": false,
+        "steps": 50,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-PepperShaker-None-Drawer-10/trial_T20190912_221016_460197",
+        "family": "pick_two_obj_and_place",
+        "nominal_seed": 9017,
+        "schedule_index": 17,
+        "success": false,
+        "terminal_won": false,
+        "steps": 50,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-Pillow-None-Sofa-219/trial_T20190907_163240_345855",
+        "family": "pick_two_obj_and_place",
+        "nominal_seed": 9035,
+        "schedule_index": 35,
+        "success": false,
+        "terminal_won": false,
+        "steps": 50,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-SoapBar-None-Cabinet-424/trial_T20190909_081720_491733",
+        "family": "pick_two_obj_and_place",
+        "nominal_seed": 9041,
+        "schedule_index": 41,
+        "success": false,
+        "terminal_won": false,
+        "steps": 50,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-SoapBar-None-GarbageCan-424/trial_T20190909_064053_839817",
+        "family": "pick_two_obj_and_place",
+        "nominal_seed": 9059,
+        "schedule_index": 59,
+        "success": false,
+        "terminal_won": false,
+        "steps": 50,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-SoapBar-None-GarbageCan-424/trial_T20190909_064309_357168",
+        "family": "pick_two_obj_and_place",
+        "nominal_seed": 9005,
+        "schedule_index": 5,
+        "success": false,
+        "terminal_won": false,
+        "steps": 50,
+        "mismatches": []
+      },
+      {
+        "task_id": "pick_two_obj_and_place-ToiletPaper-None-Cabinet-424/trial_T20190906_202926_527010",
+        "family": "pick_two_obj_and_place",
+        "nominal_seed": 9047,
+        "schedule_index": 47,
+        "success": false,
+        "terminal_won": false,
+        "steps": 50,
+        "mismatches": []
+      }
+    ],
+    "raw_matches_reported_successes": true,
+    "reported_summary_successes": 49,
+    "valid_seen_consumed_identity_count_in_exclusion_categories": 140,
+    "valid_seen_consumed_ids": [
+      "look_at_obj_in_light-AlarmClock-None-DeskLamp-323/trial_T20190909_044715_250790",
+      "look_at_obj_in_light-Bowl-None-DeskLamp-301/trial_T20190909_150719_492274",
+      "look_at_obj_in_light-Bowl-None-DeskLamp-316/trial_T20190908_230702_962704",
+      "look_at_obj_in_light-Box-None-DeskLamp-205/trial_T20190907_074425_330493",
+      "look_at_obj_in_light-CD-None-DeskLamp-302/trial_T20190907_154618_526741",
+      "look_at_obj_in_light-CD-None-DeskLamp-314/trial_T20190907_114323_767231",
+      "look_at_obj_in_light-CD-None-DeskLamp-320/trial_T20190907_224451_655673",
+      "look_at_obj_in_light-KeyChain-None-DeskLamp-327/trial_T20190906_202601_548273",
+      "look_at_obj_in_light-Laptop-None-DeskLamp-328/trial_T20190908_201550_622420",
+      "look_at_obj_in_light-Pillow-None-DeskLamp-302/trial_T20190909_150916_682139",
+      "look_at_obj_in_light-Pillow-None-DeskLamp-323/trial_T20190908_053153_077977",
+      "look_at_obj_in_light-Statue-None-DeskLamp-216/trial_T20190909_193045_208933",
+      "look_at_obj_in_light-Vase-None-DeskLamp-303/trial_T20190907_150418_457594",
+      "pick_and_place_simple-Book-None-SideTable-329/trial_T20190908_050633_745514",
+      "pick_and_place_simple-Book-None-Sofa-229/trial_T20190907_042856_259139",
+      "pick_and_place_simple-Bowl-None-CoffeeTable-201/trial_T20190907_171639_045329",
+      "pick_and_place_simple-Box-None-Dresser-224/trial_T20190907_164104_229696",
+      "pick_and_place_simple-Candle-None-Cart-401/trial_T20190909_081908_677973",
+      "pick_and_place_simple-Candle-None-Toilet-407/trial_T20190909_055248_059513",
+      "pick_and_place_simple-Candle-None-Toilet-429/trial_T20190908_052232_887934",
+      "pick_and_place_simple-CellPhone-None-ArmChair-318/trial_T20190909_120047_968274",
+      "pick_and_place_simple-CellPhone-None-Bed-324/trial_T20190907_233817_198528",
+      "pick_and_place_simple-CreditCard-None-ArmChair-201/trial_T20190908_124340_258012",
+      "pick_and_place_simple-CreditCard-None-Drawer-227/trial_T20190909_010644_297017",
+      "pick_and_place_simple-Egg-None-Microwave-4/trial_T20190906_234406_356490",
+      "pick_and_place_simple-Knife-None-SideTable-3/trial_T20190918_184236_557252",
+      "pick_and_place_simple-Mug-None-Dresser-311/trial_T20190909_152837_739016",
+      "pick_and_place_simple-Mug-None-SideTable-329/trial_T20190909_032318_169393",
+      "pick_and_place_simple-Mug-None-SideTable-329/trial_T20190909_032340_274147",
+      "pick_and_place_simple-Newspaper-None-Sofa-224/trial_T20190909_111324_949106",
+      "pick_and_place_simple-Pencil-None-Desk-310/trial_T20190909_113054_894334",
+      "pick_and_place_simple-Pencil-None-Dresser-330/trial_T20190909_071128_012892",
+      "pick_and_place_simple-RemoteControl-None-ArmChair-230/trial_T20190909_021000_274398",
+      "pick_and_place_simple-RemoteControl-None-Sofa-207/trial_T20190909_153609_373481",
+      "pick_and_place_simple-SoapBar-None-Cart-401/trial_T20190907_054906_608944",
+      "pick_and_place_simple-SoapBottle-None-Cabinet-414/trial_T20190908_110131_524518",
+      "pick_and_place_simple-SoapBottle-None-CounterTop-417/trial_T20190910_112922_368384",
+      "pick_and_place_simple-SprayBottle-None-Cabinet-413/trial_T20190907_114931_692464",
+      "pick_and_place_simple-SprayBottle-None-GarbageCan-409/trial_T20190908_054742_818364",
+      "pick_and_place_simple-SprayBottle-None-Toilet-415/trial_T20190909_075955_678702",
+      "pick_and_place_simple-SprayBottle-None-Toilet-418/trial_T20190906_190942_706186",
+      "pick_and_place_simple-TissueBox-None-Toilet-426/trial_T20190910_155319_795672",
+      "pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-406/trial_T20190908_122858_883968",
+      "pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-415/trial_T20190908_050518_595510",
+      "pick_and_place_simple-Tomato-None-Microwave-13/trial_T20190908_124829_632660",
+      "pick_and_place_simple-Vase-None-CoffeeTable-207/trial_T20190909_091246_807206",
+      "pick_and_place_simple-Watch-None-SideTable-222/trial_T20190909_051813_197569",
+      "pick_and_place_simple-WineBottle-None-Shelf-7/trial_T20190907_200154_378982",
+      "pick_clean_then_place_in_recep-ButterKnife-None-CounterTop-8/trial_T20190909_105559_983897",
+      "pick_clean_then_place_in_recep-ButterKnife-None-DiningTable-16/trial_T20190909_114508_617301",
+      "pick_clean_then_place_in_recep-ButterKnife-None-Drawer-2/trial_T20190908_121728_511866",
+      "pick_clean_then_place_in_recep-ButterKnife-None-Drawer-30/trial_T20190908_052007_212776",
+      "pick_clean_then_place_in_recep-ButterKnife-None-Drawer-8/trial_T20190909_124425_112757",
+      "pick_clean_then_place_in_recep-Cloth-None-Cabinet-405/trial_T20190907_080903_889497",
+      "pick_clean_then_place_in_recep-Cloth-None-Drawer-423/trial_T20190908_140701_251653",
+      "pick_clean_then_place_in_recep-DishSponge-None-Cart-401/trial_T20190907_024634_972453",
+      "pick_clean_then_place_in_recep-DishSponge-None-CounterTop-403/trial_T20190908_144357_621068",
+      "pick_clean_then_place_in_recep-Fork-None-CounterTop-23/trial_T20190908_233922_171295",
+      "pick_clean_then_place_in_recep-Fork-None-Drawer-8/trial_T20190908_132152_999725",
+      "pick_clean_then_place_in_recep-Ladle-None-CounterTop-14/trial_T20190909_113844_191747",
+      "pick_clean_then_place_in_recep-Ladle-None-CounterTop-8/trial_T20190909_121908_219603",
+      "pick_clean_then_place_in_recep-Ladle-None-DiningTable-16/trial_T20190909_183724_205399",
+      "pick_clean_then_place_in_recep-Ladle-None-DiningTable-27/trial_T20190911_131350_027076",
+      "pick_clean_then_place_in_recep-Ladle-None-DiningTable-4/trial_T20190909_164840_568811",
+      "pick_clean_then_place_in_recep-Lettuce-None-CounterTop-16/trial_T20190909_051630_092360",
+      "pick_clean_then_place_in_recep-Lettuce-None-Fridge-19/trial_T20190908_100138_446072",
+      "pick_clean_then_place_in_recep-Mug-None-CoffeeMachine-26/trial_T20190907_233056_022802",
+      "pick_clean_then_place_in_recep-Plate-None-CounterTop-19/trial_T20190908_212725_836398",
+      "pick_clean_then_place_in_recep-Plate-None-Fridge-5/trial_T20190909_112854_740612",
+      "pick_clean_then_place_in_recep-SoapBar-None-Cabinet-402/trial_T20190908_055221_984342",
+      "pick_clean_then_place_in_recep-SoapBar-None-Drawer-423/trial_T20190906_202340_749336",
+      "pick_clean_then_place_in_recep-SoapBar-None-Toilet-410/trial_T20190906_201106_979461",
+      "pick_clean_then_place_in_recep-SoapBar-None-Toilet-428/trial_T20190907_041436_588106",
+      "pick_clean_then_place_in_recep-Spatula-None-DiningTable-4/trial_T20190909_002804_564168",
+      "pick_clean_then_place_in_recep-Tomato-None-CounterTop-25/trial_T20190909_012550_586494",
+      "pick_cool_then_place_in_recep-Apple-None-CounterTop-14/trial_T20190909_044933_815840",
+      "pick_cool_then_place_in_recep-Apple-None-GarbageCan-2/trial_T20190906_195943_081289",
+      "pick_cool_then_place_in_recep-Apple-None-Microwave-19/trial_T20190906_210937_878489",
+      "pick_cool_then_place_in_recep-Apple-None-Microwave-5/trial_T20190908_150807_823817",
+      "pick_cool_then_place_in_recep-Bowl-None-Cabinet-20/trial_T20190909_112912_154874",
+      "pick_cool_then_place_in_recep-Bread-None-CounterTop-7/trial_T20190909_045605_307949",
+      "pick_cool_then_place_in_recep-Cup-None-Microwave-17/trial_T20190906_192817_654400",
+      "pick_cool_then_place_in_recep-Cup-None-SideTable-21/trial_T20190906_192823_237997",
+      "pick_cool_then_place_in_recep-Egg-None-Microwave-24/trial_T20190908_234112_645480",
+      "pick_cool_then_place_in_recep-Lettuce-None-CounterTop-1/trial_T20190908_042713_075616",
+      "pick_cool_then_place_in_recep-Lettuce-None-CounterTop-11/trial_T20190908_222555_651605",
+      "pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-16/trial_T20190908_184242_348366",
+      "pick_cool_then_place_in_recep-Pan-None-DiningTable-7/trial_T20190908_232648_241836",
+      "pick_cool_then_place_in_recep-Pan-None-StoveBurner-18/trial_T20190906_181023_216915",
+      "pick_cool_then_place_in_recep-Pan-None-StoveBurner-23/trial_T20190906_215856_374127",
+      "pick_cool_then_place_in_recep-Plate-None-Cabinet-27/trial_T20190906_173120_350651",
+      "pick_cool_then_place_in_recep-Plate-None-Cabinet-7/trial_T20190907_231206_512424",
+      "pick_cool_then_place_in_recep-Plate-None-CounterTop-1/trial_T20190906_205324_559361",
+      "pick_cool_then_place_in_recep-Pot-None-DiningTable-21/trial_T20190909_004531_429065",
+      "pick_cool_then_place_in_recep-Tomato-None-CounterTop-12/trial_T20190909_063754_216554",
+      "pick_cool_then_place_in_recep-Tomato-None-CounterTop-12/trial_T20190909_063844_274181",
+      "pick_cool_then_place_in_recep-Tomato-None-GarbageCan-6/trial_T20190909_082934_483899",
+      "pick_cool_then_place_in_recep-Tomato-None-Microwave-13/trial_T20190910_173916_331859",
+      "pick_cool_then_place_in_recep-Tomato-None-Microwave-18/trial_T20190909_012524_159092",
+      "pick_cool_then_place_in_recep-WineBottle-None-DiningTable-17/trial_T20190908_024426_412044",
+      "pick_heat_then_place_in_recep-Apple-None-DiningTable-26/trial_T20190907_060234_011675",
+      "pick_heat_then_place_in_recep-Cup-None-Cabinet-22/trial_T20190907_173251_960848",
+      "pick_heat_then_place_in_recep-Egg-None-CounterTop-2/trial_T20190908_122951_021026",
+      "pick_heat_then_place_in_recep-Egg-None-Fridge-14/trial_T20190909_091314_636733",
+      "pick_heat_then_place_in_recep-Mug-None-Cabinet-26/trial_T20190909_062333_424779",
+      "pick_heat_then_place_in_recep-Mug-None-Cabinet-3/trial_T20190909_014639_335717",
+      "pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-1/trial_T20190907_222640_487432",
+      "pick_heat_then_place_in_recep-Mug-None-SideTable-21/trial_T20190909_090729_088825",
+      "pick_heat_then_place_in_recep-Plate-None-Cabinet-1/trial_T20190908_070946_578973",
+      "pick_heat_then_place_in_recep-Plate-None-DiningTable-28/trial_T20190908_001247_096796",
+      "pick_heat_then_place_in_recep-Potato-None-Fridge-11/trial_T20190909_011341_436523",
+      "pick_heat_then_place_in_recep-Potato-None-Fridge-12/trial_T20190908_014451_271080",
+      "pick_heat_then_place_in_recep-Tomato-None-DiningTable-16/trial_T20190907_201243_698086",
+      "pick_heat_then_place_in_recep-Tomato-None-Fridge-15/trial_T20190909_020200_054379",
+      "pick_heat_then_place_in_recep-Tomato-None-Fridge-23/trial_T20190909_082320_103350",
+      "pick_heat_then_place_in_recep-Tomato-None-Fridge-24/trial_T20190908_033721_967359",
+      "pick_two_obj_and_place-AlarmClock-None-Dresser-305/trial_T20190907_165826_194855",
+      "pick_two_obj_and_place-Book-None-Desk-302/trial_T20190906_181233_363875",
+      "pick_two_obj_and_place-Book-None-Desk-313/trial_T20190908_125930_920681",
+      "pick_two_obj_and_place-Box-None-CoffeeTable-213/trial_T20190906_200927_069627",
+      "pick_two_obj_and_place-CD-None-Drawer-304/trial_T20190907_230232_832893",
+      "pick_two_obj_and_place-CreditCard-None-Dresser-311/trial_T20190907_201917_045715",
+      "pick_two_obj_and_place-CreditCard-None-Safe-323/trial_T20190907_001129_214240",
+      "pick_two_obj_and_place-Glassbottle-None-Shelf-1/trial_T20190907_122204_941737",
+      "pick_two_obj_and_place-Knife-None-Drawer-18/trial_T20190907_065232_689984",
+      "pick_two_obj_and_place-Newspaper-None-Drawer-224/trial_T20190911_101248_326533",
+      "pick_two_obj_and_place-Pan-None-CounterTop-14/trial_T20190907_012519_974044",
+      "pick_two_obj_and_place-RemoteControl-None-Ottoman-203/trial_T20190906_182952_858723",
+      "pick_two_obj_and_place-SoapBar-None-GarbageCan-418/trial_T20190909_055538_380023",
+      "pick_two_obj_and_place-SoapBar-None-GarbageCan-418/trial_T20190909_055649_717880",
+      "pick_two_obj_and_place-Spatula-None-Drawer-13/trial_T20190908_183331_203888",
+      "pick_two_obj_and_place-SprayBottle-None-Cabinet-407/trial_T20190907_144556_144188",
+      "pick_two_obj_and_place-SprayBottle-None-GarbageCan-419/trial_T20190908_164236_518264",
+      "pick_two_obj_and_place-SprayBottle-None-Toilet-402/trial_T20190910_222914_814642",
+      "pick_two_obj_and_place-SprayBottle-None-Toilet-429/trial_T20190907_033843_707544",
+      "pick_two_obj_and_place-TissueBox-None-Toilet-426/trial_T20190909_044602_338962",
+      "pick_two_obj_and_place-ToiletPaper-None-Drawer-423/trial_T20190907_111251_461099",
+      "pick_two_obj_and_place-ToiletPaper-None-Toilet-408/trial_T20190909_080302_174780",
+      "pick_two_obj_and_place-Vase-None-Desk-204/trial_T20190906_181531_703961",
+      "pick_two_obj_and_place-Watch-None-Dresser-205/trial_T20190907_182211_592010"
+    ],
+    "base_arm_status": "no base arm is present in the located valid_unseen G1 artifact directory; this is a one-arm evaluation"
+  },
+  "training_identity": {
+    "training_result": {
+      "base_model": "Qwen/Qwen3-8B",
+      "adapter_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+      "adapter_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+      "best_checkpoint": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/checkpoints/checkpoint-2354",
+      "best_metric": 0.06381697952747345,
+      "optimizer_steps": 2354,
+      "training_loss": 0.10051338446145354,
+      "wall_time_seconds": 27406.28269892931,
+      "dependencies": {
+        "accelerate": "1.10.1",
+        "datasets": "4.0.0",
+        "peft": "0.17.1",
+        "torch": "2.6.0+cu124",
+        "transformers": "4.56.2",
+        "trl": "0.23.0"
+      },
+      "schema_version": "sft_training_result_v1"
+    },
+    "checkpoint_state": {
+      "best_model_checkpoint": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/checkpoints/checkpoint-2354",
+      "best_metric": 0.06381697952747345,
+      "best_global_step": 2354,
+      "global_step": 2354
+    },
+    "run_config_pretraining_git_revision": "59a843429a1015b0638737336bd45edc4f15e2c6",
+    "training_result_revision_recorded_in_bootstrap": "e6a47124200cacba4d1f3eaf97fdf79657d7df04f072a4d5446c2bec677c399e",
+    "current_adapter_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+    "current_adapter_model_file_sha256": "5f1fce989bb5d284a5ff8aed06979a11021733b2a6bce4af53ff36286b099c10",
+    "base_model_revision": null,
+    "tokenizer_revision": null,
+    "historical_runtime_receipt": null,
+    "adapter_config_revision": null,
+    "interpretation": "checkpoint selection and current adapter bytes can be verified against raw training_result/trainer_state; historical base weight/tokenizer commit and exact loaded runtime snapshot lack a contemporaneous receipt; current cache/artifact presence cannot fill that gap"
+  },
+  "findings": [
+    {
+      "status": "OBSERVED",
+      "claim": "Raw bootstrap trajectories contain 60 unique identities per arm, 10 per family; all 60 pairs match task id, split, family, nominal seed, schedule index, reset-order position, horizon, initial observation hash, and reset hash; raw success is 3/60 vs 48/60, with 45 wins, 0 losses, 15 ties.",
+      "scope": "episode records and matching fields, not hidden launch/runtime state"
+    },
+    {
+      "status": "OBSERVED",
+      "claim": "The final base-arm CellPhone episode has one row but termination_reason=selection_failure, only one recorded step, truncated=true, and no terminal won value. It is a recorded failed/invalid episode, not a missing identity; it is not evidence of an unrecorded retry.",
+      "scope": "raw trajectory only"
+    },
+    {
+      "status": "OBSERVED",
+      "claim": "Valid-unseen raw 60 episode rows join one-to-one to all 60 frozen schedule identities; 49 terminal wins, 10 per family, no overlap with the SFT train-development identities or the 1200 accepted dataset tasks.",
+      "scope": "valid_unseen frozen schedule and completed raw rows"
+    },
+    {
+      "status": "OBSERVED",
+      "claim": "The balanced dataset contains 1200 unique tasks/20967 rows; its source train traj_data.json and game.tw-pddl hashes match the raw data files for all 1273 accepted-candidate task IDs across initial and pick-two extension files.",
+      "scope": "source file identity/hash only; planner authorship is supported by contemporaneous report labeling, not independently reconstructible from missing rejected-run logs"
+    },
+    {
+      "status": "MISSING",
+      "claim": "Contemporaneous SFT base-model/tokenizer revision and full loaded runtime identity receipt are unavailable; adapter_config.revision is null.",
+      "scope": "cannot prove historical base/tokenizer bytes from current cache"
+    },
+    {
+      "status": "MISSING",
+      "claim": "A bootstrap online-evaluation launch/run manifest and per-candidate raw records for the 596 rejected trajectories were not located in the enumerated artifact tree.",
+      "scope": "report-level aggregate cannot establish hidden attempts or candidate-by-candidate disposition"
+    },
+    {
+      "status": "CONTRADICTED",
+      "claim": "The versioned sft_training_protocol.json declares split manifest e6695359... and exclusion manifest 8e0d04d3..., while the corresponding currently preserved sft_task_splits.json and sft_task_exclusions.json byte hashes are 53471633... and fdbe3b1c... respectively; the files do not satisfy those declared hashes.",
+      "scope": "byte-level current-source binding mismatch; does not by itself establish what files were actually loaded during historical training, and earlier manifest versions were not found"
+    }
+  ],
+  "provenance_gaps": [
+    "No full model-load/runtime receipt or preserved base/tokenizer revision found among the specified raw SFT artifacts; adapter_config.revision is null.",
+    "No per-run launch/supervisor receipt found beside bootstrap online trajectories in the enumerated artifact tree; single observed record per schedule identity does not prove there were no discarded/retried attempts.",
+    "Raw valid_unseen trajectories and exact 60-row schedule are present; no same-schedule base arm exists, so 49/60 is a one-arm descriptive result, not a causal SFT gain.",
+    "Expert task-level outcomes include only accepted dataset rows; 596 rejected-candidate outcomes are summarized by count/reason but underlying per-candidate raw evidence was not found in listed artifacts."
+  ],
+  "self_improvement_interpretation": {
+    "source": "hand-coded successful expert trajectories, not actor-generated self-sampling",
+    "autonomous_self_improvement_proven": false,
+    "strongest_supported_claim": "SFT-P0 expert-policy imitation is associated with a large matched improvement on the same 60 consumed train-development episodes, conditional on historical model identity claims; source audit confirms expert labels, not self-generated experience.",
+    "cannot_claim": [
+      "autonomous self-improvement",
+      "49/60 valid_unseen improvement over base",
+      "causal held-out advantage",
+      "verified exact historical base/tokenizer runtime revision"
+    ],
+    "paper_main_table_risk": "The 48/60 matched development result is a potentially important main-table competence-bootstrap result, but primary reporting should disclose expert imitation and missing historical base/tokenizer/runtime binding; valid_unseen 49/60 should be clearly single-arm descriptive and must not support a paired improvement claim."
+  },
+  "trajectory_entrypoints": [
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/online_evaluation/base_trajectories.jsonl",
+      "role": "consumed train-development base arm; 60 raw episodes"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/online_evaluation/sft_trajectories.jsonl",
+      "role": "consumed train-development SFT arm; 60 raw episodes"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-valid-unseen-g1-20260829T031028Z/trajectories.jsonl",
+      "role": "completed valid_unseen single-arm 60 episode history"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-source-pool-r1-20260908T042933Z/trajectories.jsonl",
+      "role": "later self-policy source-pool trajectories; entrypoint only, no selection/relabeling"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl",
+      "role": "later R7 self-policy source trajectories; entrypoint only"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-recovery-replay-continue-r3-20260908T055308Z/continue_branches.jsonl",
+      "role": "R3 continuation branches; entrypoint only"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl",
+      "role": "R9 continuation branches; entrypoint only"
+    },
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/persistent-recovery-pbr-comparison-r11-20260909T000000Z",
+      "role": "R11 recovery comparison artifact directory; inspect its existing run manifest/summary before any future sampling"
+    }
+  ],
+  "r19_cost_boundary": {
+    "campaign_total_generations": 5142,
+    "campaign_total_environment_operations_including_resets": 7949,
+    "historical_predecessor_generations": 177,
+    "historical_predecessor_operations": 342,
+    "historical_sft_training_cost_included": false
+  }
+}

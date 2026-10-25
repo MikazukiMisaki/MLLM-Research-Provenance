@@ -1,0 +1,67 @@
+[
+  {
+    "id": "01a165de-c75e-7120-abc9-fa74cde1f17f",
+    "status": {
+      "type": "idle"
+    },
+    "turns": [
+      {
+        "status": "completed",
+        "completedAt": 1792909420,
+        "finalMessages": [
+          "已收口，最终结论为 **DATA_FEASIBILITY=NOT_READY；合格训练 N 尚未建立**。\n\n31 条历史 rescue 折叠为15个任务，R19另有2个被任意K救回的任务；这些仅是候选审计索引。V2以同池 success-only 的 **B_pool** 作为机制对照，明确 C>B_source 不能单独归因筛选机制；adapter-off目标与SFT suffix分开，subgoal/card不能移植给P0。\n\n| 冻结文件 | SHA256 |\n|---|---|\n| [最终可行性决定](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__CODEX__self-experience-feasibility__b1c48c/SI_P0_FINAL_FEASIBILITY_DECISION.md) | `b50908ab0599c774dbf74f2fd05bb72a824e4f363ec7e06aeef1c15834173621` |\n| [DRAFT V2](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__CODEX__self-experience-feasibility__b1c48c/MINIMAL_SELF_IMPROVEMENT_PROTOCOL_DRAFT_V2.md) | `d008522ee5790a5a39c66714761ed668a2de3cdbe0526bd472960a7a3980dc9e` |\n\n[证据记录](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__CODEX__self-experience-feasibility__b1c48c/FINAL_REVIEW_RECORD.json)及真实 exit 0 收据已保存。此前85个封存文件未改；新增科学调用0，累计5142/7949不变。本轮结束，等待协调方整合。"
+        ]
+      },
+      {
+        "status": "completed",
+        "completedAt": 1792909189,
+        "finalMessages": [
+          "已完成只读补充，原 **80 个冻结文件未改**。\n\n- `148−21=127` 符合去重计数约定，不是数据不一致。\n- 110 组多目标不能直接判错；动作多解与有界输入歧义仍需区分，具体原因 **NOT_PROVEN**。\n- 原前缀上的救回价值不能直接推出训练后的学习收益。\n\n[补充文件](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__CODEX__self-experience-feasibility__b1c48c/ADDENDUM_EXPERT_TARGET_AMBIGUITY.md) SHA256：\n`75acfdbe50d11c3fbab57f5451a38759925daa0b32b9cc46ea718eba31b9d1bb`\n\n[来源与不可变性记录](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__CODEX__self-experience-feasibility__b1c48c/ADDENDUM_RECORD.json)、[真实退出收据（exit 0）](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__CODEX__self-experience-feasibility__b1c48c/ADDENDUM_COMMAND.receipt.json) 已保留。\n\n未重读训练 JSONL、重建或修复数据。新增科学调用 **0**，累计仍 **5142/7949**。"
+        ]
+      },
+      {
+        "status": "completed",
+        "completedAt": 1792908935,
+        "finalMessages": [
+          "SI-P0 已完成并冻结，供独立审阅。\n\n结论：**READY_FOR_PROTOCOL_DESIGN；训练数据仍 NOT_READY；新科学执行 NO_GO。** 既有单步救回仅 **11 个状态、10 个任务**，不能支撑学习增益或效能样本量承诺。\n\n| 冻结文件 | SHA256 |\n|---|---|\n| [可学习性审计](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__CODEX__self-experience-feasibility__b1c48c/SELF_EXPERIENCE_FEASIBILITY.md) | `59982056769090f6aa62ee22761bcc076cf17525a7d6a4a06d039b8589e848f5` |\n| [经验索引](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__CODEX__self-experience-feasibility__b1c48c/experience_inventory.json) | `1b0b7766d5901894d71f635433b9055223648d07bf5bda4e648c1129403cd8c0` |\n| [一轮不可执行草案](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__CODEX__self-experience-feasibility__b1c48c/MINIMAL_SELF_IMPROVEMENT_PROTOCOL_DRAFT.md) | `11d3d6577dcefb2afc31f63334b6351b14f55303e46c5904019090617b8b2bbd` |\n| [创新对照](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__CODEX__self-experience-feasibility__b1c48c/INNOVATION_COMPARISON.md) | `c246e0352c3fb9807d92398019fe36b72b90cd6773f0e5c6999ee41a1f8bfa4b` |\n\n[RECORD 与真实退出记录](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__CODEX__self-experience-feasibility__b1c48c/RECORD.md)完整保留来源、缺口和草稿修正。**62 个原件哈希核对未变**。\n\n[完整文件哈希清单](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__CODEX__self-experience-feasibility__b1c48c/FILE_HASHES.sha256) SHA256：\n`d7f60e2bfc293a88f6131c3f91af20980bae28caf3211f9f64b8ddd21b3cb0cb`\n\n85/2da 科学树保持干净；新增科学调用 **0**，累计仍 **5142/7949**。未 commit、push、修改共享索引或派 agent。等待协调方审阅。"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "01a09fcb-ab5f-7b83-9acf-91026145b764",
+    "status": {
+      "type": "idle"
+    },
+    "turns": [
+      {
+        "status": "completed",
+        "completedAt": 1792908150,
+        "finalMessages": [
+          "SI-P0 identity metadata补充已冻结，仅新增于 Luna 自有目录；没有修改旧报告、共享索引或科学树，也未生成 schedule、执行科学任务或读取未消费任务结果。\n\n目录身份盘点结果：\n\n| Split | task/trial identities | 已知登记/排除匹配 | 差集候选* |\n|---|---:|---:|---:|\n| train | 6,374 | 2,412 | 3,962 |\n| valid_seen | 251 | 140 | 111 |\n| valid_unseen | 255 | 60 | 195 |\n\n\\*差集只表示当前已知登记的差集，污染状态未证实；不代表 clean held-out，也不授权后续采集或评估。原 140 个 valid_seen 和 60 个 valid_unseen 仍按已使用处理。R19 按 127 个 source episode 计数；36 个 recovery extension 和其他 prefix/branch units 未重复计为新 episode。R4、R16–R18 的部分 prefix 到 task/trial 身份映射无法仅凭允许的登记元数据闭合，已列明限制。\n\n报告：[AVAILABLE_IDENTITY_AUDIT.md](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/AVAILABLE_IDENTITY_AUDIT.md)，SHA-256 `aa807e1f02338328adce68e7f5dfff4104730781b53c164cca2690de03d35a51`。\n\n机器记录：[AVAILABLE_IDENTITY_AUDIT.json](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/AVAILABLE_IDENTITY_AUDIT.json)，SHA-256 `73285bad417346ea1eed1659bdd0392e11b4a39e101140823c22e1cf77c47a51`。候选 ID/hash 清单：[AVAILABLE_IDENTITY_CANDIDATES.json](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/AVAILABLE_IDENTITY_CANDIDATES.json)，SHA-256 `ada528e9a9de3bb09aacf5bbfc28320c92e847c88dc475296070cd0a9acb1fc4`。执行收据和哈希清单均已生成并校验通过。\n\n范围说明：准备阶段的一次宽泛文本搜索意外打印了两条**已消费**的 R16/R17 结果行，其中含 outcome 列；没有打开未消费结果，这些值也未用于本次盘点。该偏差已如实写入报告和收据。"
+        ]
+      },
+      {
+        "status": "completed",
+        "completedAt": 1792907771,
+        "finalMessages": [
+          "已核实并更正：旧草稿把 raw file SHA 与 canonical object SHA 作比较，因而误报 split/exclusion 绑定冲突。当前两个 manifest 的 canonical SHA **都与 protocol 声明完全一致**；前一增补中关于该绑定限制的结论现由新记录明确撤回。旧报告、原草稿及命令收据均未改写，原哈希清单校验通过。\n\n| 文件 | Raw SHA-256 | Canonical SHA-256（项目规则） | Protocol 声明 |\n|---|---|---|---|\n| `sft_task_splits.json` | `5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56` | `e6695359f2e6b53b74c54e9d9712b1f8bc8534487d85b659151c71eb1441e25d` | 匹配 |\n| `sft_task_exclusions.json` | `fdbe3b1c2d8162fa7c95ff25b57ace1eaf01c1224d42f9f1f447bf7a859541c5` | `8e0d04d315a16d4fd28ef04bf9bf92212ebc98bbba8a10dfe0e3acb2b9fbf798` | 匹配 |\n\n项目 `sha256_value` 使用 `json.dumps(..., sort_keys=True, separators=(\",\", \":\"))` 后计算 SHA-256；raw SHA 不同是文件格式化序列化造成的。历史训练实际加载了哪些文件，仍须由独立 runtime 证据确认；这次哈希核验不补造该证据，也不改变其他历史 runtime 缺失判断。\n\n更正记录：[SI_P0_PROTOCOL_HASH_CORRECTION_ADDENDUM.md](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/SI_P0_PROTOCOL_HASH_CORRECTION_ADDENDUM.md)，SHA-256 `1cfd0fa3e994a4f4748305f7b2f8fb01b5e2ef8e4ed2fea3774d2746509b192b`。\n\n机器核验：[protocol_canonical_binding_check.json](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/protocol_canonical_binding_check.json)，SHA-256 `26222e8a3f7be3745497c6d62c6589a54feb109f4089fd3d5aa4ec4d0dbb1834`；只读检查退出码为 0。补充哈希清单：[PROTOCOL_CORRECTION_HASHES.sha256](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/PROTOCOL_CORRECTION_HASHES.sha256)，SHA-256 `48338d864290128289783c1d903ad0bbbba24f99cb15e0885a476a318440fe9a`。"
+        ]
+      },
+      {
+        "status": "completed",
+        "completedAt": 1792907720,
+        "finalMessages": [
+          "已完成只读补充核对。计数阶段解释了原审计中的差异：生产代码在 exact 去重前累计 prompt 重复数，因此 summary 的 **148** 是去重前计数；移除 **21** 条 exact 重复后，最终 JSONL 中是 **127** 次重复 occurrence。我的独立重算与 Sol 的检查一致：20,967 行、110 个重复 prompt 组，且这 110 组都有不同动作目标；字段、prompt hash 和动作映射错误均为 0。\n\n补充记录：[SI-P0_EXPERT_PROMPT_COUNT_ADDENDUM.md](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/SI_P0_EXPERT_PROMPT_COUNT_ADDENDUM.md)，SHA-256 `f1c23d1ad6da8eadb6392122bf7b616e3704ff9494fc760bda73df86a6dc1d1e`。\n\n机器重算结果：[prompt_occurrence_recount.json](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/prompt_occurrence_recount.json)，SHA-256 `62aab04c09a1bbe221f06c34ee1345c686bb3ab76adc49d6575cbfa45bc68cf8`。补充文件哈希清单：[ADDENDUM_HASHES.sha256](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/ADDENDUM_HASHES.sha256)，SHA-256 `32b5072dc609bb9b356c07429b59a22ad68624e7586d057e76833b8ad9d21932`；清单校验通过，原 SI-P0 哈希清单也逐项通过。\n\n原报告与 JSON 未改写。历史 split/exclusion 绑定限制仍未解决：旧 protocol 声明的哈希与当前保存的 manifest 不一致，现有证据不能证明历史运行实际加载了哪一版。未运行模型、环境、训练或科学分析；没有产生科学执行许可。"
+        ]
+      },
+      {
+        "status": "completed",
+        "completedAt": 1792907624,
+        "finalMessages": [
+          "SI-P0 只读审计已完成，状态为 `PARTIAL_RAW_EVIDENCE_AUDIT`。任务单 SHA 已核验；指定审阅树起始与结束时均为干净的 `agent/codex-r18c2` / `e537f441010077123a307e9d50ea40cf8dad8547`。\n\n主要观察结果：开发集原始轨迹逐项核对为 base **3/60**、SFT **48/60**，配对 **45 胜、0 负、15 平**，任务、seed、reset、horizon 和动作接口记录一致。valid_unseen 原始轨迹与冻结日程 **60/60** 对应，重数为 **49/60**；它只有 SFT 单臂，不能支持相对 base 的提升结论。数据来源核验确认最终语料是专家模仿数据，不是 agent 自采样；1,273 个 accepted-candidate 任务的原始 train 源文件哈希全部吻合。\n\n保留的缺口包括：历史 base/tokenizer 精确 revision 与运行时收据缺失；596 个 rejected candidate 没有逐案原始记录；训练协议声明的 split/exclusion 哈希与当前保存文件不一致，详见报告。**未运行模型、环境、训练、回放、项目 analyzer/validator 或测试；未改科学树、共享索引或原始证据，也未提交或上传。**\n\n核心交付及 SHA-256：\n\n- [审计报告](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/SFT_RAW_EVIDENCE_AUDIT.md)：`fab38e3b0631779e1e73d5154aa264eb341d826bbef96be9ee4a438aacc72cc9`\n- [机器可读逐项审计与 60 案核验](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/sft_raw_evidence_audit.json)：`7001e94646f4b32dfd0e980976d3782bc0af3ef07870f7e9b88af3e19613069e`\n- [原始文件清单](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/raw_artifact_inventory.json)：`acfc5e946d7c38a8c815c5dbe998c8ab06e152b48ceb83d053562948bd2b77bd`\n- [自身轨迹入口清单](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/OWN_TRAJECTORY_ENTRYPOINTS.md)：`a76e5f5745f9d6015c20ba6e20e83f893ddb4619c534026bc0943b049799404a`\n- [文件哈希清单](/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__LUNA__sft-raw-evidence-audit__b1c48c/FILE_HASHES.sha256)：`df1c3569b5bef36d893b774dd293942d269c3cac917dd288c989d6284f5f4e61`\n\n所有交付留在任务单指定的 Luna 私有目录，哈希清单校验通过，等待 Sol 独立验收。"
+        ]
+      }
+    ]
+  }
+]

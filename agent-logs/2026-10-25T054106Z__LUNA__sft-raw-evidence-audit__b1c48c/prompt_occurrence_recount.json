@@ -1,0 +1,67 @@
+{
+  "audit_kind": "independent stdlib-only recount of the already-saved final expert JSONL; no project imports or execution",
+  "observed_utc": "2026-10-25T05:54:43.116397+00:00",
+  "source_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/sft_expert_dataset_balanced.jsonl",
+  "source_bytes": 116622803,
+  "source_sha256_before": "c547e8f0c5988b29288f2a097169c7859741b7d4f53f222af31f5e2889d516cf",
+  "source_sha256_after": "c547e8f0c5988b29288f2a097169c7859741b7d4f53f222af31f5e2889d516cf",
+  "source_unchanged_during_recount": true,
+  "source_sha256_matches_summary": true,
+  "row_count": 20967,
+  "rows_per_split": {
+    "train": 18828,
+    "validation": 2139
+  },
+  "task_ids_per_split": {
+    "train": 1074,
+    "validation": 126
+  },
+  "final_file_prompt_accounting": {
+    "repeated_prompt_groups": 110,
+    "repeated_prompt_occurrences": 127,
+    "groups_with_multiple_action_id_or_command_targets": 110,
+    "cross_split_prompt_groups": 0,
+    "exact_triplet_duplicate_occurrences_in_final_file": 0
+  },
+  "producer_summary_accounting": {
+    "duplicate_prompt_hash_occurrences": 148,
+    "duplicate_exact_rows_removed": 21,
+    "arithmetic_reconciliation": 127,
+    "final_file_prompt_occurrences": 127,
+    "arithmetic_matches_final_file": true,
+    "accepted_example_count": 20967
+  },
+  "field_errors": {},
+  "source_code": {
+    "path": "/home/lizening/wt-codex-r18c2/src/sft/dataset.py",
+    "sha256": "26f01b4e9c51165ca049e9afaf8ea6d012369097051373150b2646ae826edcaa",
+    "counter_stage": "deduplicate_exact_rows increments prompt_counts before checking exact_hash and before continuing past an exact duplicate (current lines 274-286)",
+    "summary_stage": "dataset_summary receives deduplicated rows but carries duplicate_counts computed by deduplicate_exact_rows"
+  },
+  "producer_summary": {
+    "path": "/home/lizening/wt-codex-r18c2/reports/sft_dataset_summary.json",
+    "sha256": "3c6157a2ec8ea637c3a7c10d032adf967712bbdb9c04a855e257a136a7af081e",
+    "split_manifest_sha256": "5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56",
+    "exclusion_manifest_sha256": "fdbe3b1c2d8162fa7c95ff25b57ace1eaf01c1224d42f9f1f447bf7a859541c5"
+  },
+  "independent_sol_check": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T054106Z__SOL__self-improvement-phase0__b1c48c/independent_expert_dataset_check.json",
+    "sha256": "8c2b381d7ae6e0b30c66911683531a71a450271a0dddd5f39629c8ab25a1650b",
+    "rows": 20967,
+    "retained_repeated_prompt_occurrences": 127,
+    "repeated_prompt_groups": 110,
+    "prompt_groups_with_conflicting_targets": 110,
+    "field_errors": {}
+  },
+  "interpretation": [
+    "The producer's 148 prompt-hash occurrences are counted over accepted_rows before exact-row suppression; the count is retained in duplicate_counts and later reported alongside the deduplicated output.",
+    "The saved final JSONL independently contains 127 repeated prompt occurrences; 148 - 21 exact-row removals equals 127, matching the source-code accounting convention and the independent Sol recount.",
+    "The 110 prompt groups with differing action targets are genuine label multiplicity in the saved rendered-prompt representation, not a hash/map integrity error by itself.",
+    "This does not establish whether each differing expert action is behaviorally interchangeable or whether the prompt omits relevant state."
+  ],
+  "limits": [
+    "No dataset reconstruction, tokenizer/model/environment, project analyzer/validator, pytest, training, or policy replay was run.",
+    "Historical split/exclusion binding limitation from the original SI-P0 audit remains unresolved; current saved manifests do not prove which historical manifest bytes were used at original generation time."
+  ],
+  "new_scientific_calls": 0
+}
