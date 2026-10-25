@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-c",
+    "import sys,json,importlib.metadata as m;print(json.dumps({'executable':sys.executable,'python':sys.version,'packages':{n:m.version(n) for n in ['PyYAML','accelerate','alfworld','huggingface-hub','numpy','peft','safetensors','textworld','tokenizers','torch','transformers']}}))"
+  ],
+  "actual_subprocess_returncode": 0,
+  "cwd": "/home/lizening/wt-r19-recovery-duration-v1",
+  "effective_environment": {
+    "ALFWORLD_CONFIG_PATH": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml",
+    "ALFWORLD_DATA": "/home/lizening/alfworld_data",
+    "CONDA_PREFIX": "/home/lizening/miniconda3",
+    "HF_HUB_CACHE": "/home/lizening/.cache/huggingface/hub",
+    "HF_HUB_OFFLINE": "1",
+    "HOME": "/home/lizening",
+    "PATH": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin:/home/lizening/miniconda3/bin:/usr/local/bin:/usr/bin:/bin",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "stdout": "{\"executable\": \"/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python\", \"python\": \"3.10.20 (main, Jun 11 2026, 15:17:37) [GCC 14.3.0]\", \"packages\": {\"PyYAML\": \"6.0.2\", \"accelerate\": \"1.10.1\", \"alfworld\": \"0.4.2\", \"huggingface-hub\": \"0.36.2\", \"numpy\": \"1.26.4\", \"peft\": \"0.17.1\", \"safetensors\": \"0.8.0\", \"textworld\": \"1.7.0\", \"tokenizers\": \"0.22.2\", \"torch\": \"2.6.0+cu124\", \"transformers\": \"4.56.2\"}}\n",
+  "stderr": "",
+  "python_and_all_11_package_versions_match_original_runtime": true,
+  "model_environment_imports_or_calls": 0
+}
