@@ -1,0 +1,108 @@
+# SI-E2 Luna local-only file inventory
+
+This directory has not been staged, committed, or pushed. All listed artifacts remain local pending root review. The inventory contains paths, byte sizes, SHA256s, and coarse file class only; it does not print prompts, task bodies, trajectory action text, model weights, token IDs, or raw payload content.
+
+`FILE_HASHES.sha256` covers every task artifact except itself. `LOCAL_ONLY_FILES.md` is excluded from its own rows to avoid self-reference but is covered by `FILE_HASHES.sha256`.
+
+| Path | Bytes | SHA256 | Class / note |
+|---|---:|---|---|
+| `COMMAND_RECEIPT_INDEX.json` | 2655 | `e7b33e9754d25ddd48e0e695a188b6ac61ff94dacaeb8b82115bec37ec851b01` | bound metadata/evidence; may contain machine-local paths |
+| `ENVIRONMENT_PACKAGES.json` | 2350 | `248f2a956dcf234e5831b4ca58c1c0db22956aa04829c07bafbf79dfce41d6a8` | bound metadata/evidence; may contain machine-local paths |
+| `FIRST_SOURCE_REPLAY_CANDIDATE.json` | 22484 | `230bc1dbaa6a390cfe3e3a2db2e0a4c2ca3b5de96a23257f9a5e20ec9971eeec` | bound metadata/evidence; may contain machine-local paths |
+| `FIRST_SOURCE_REPLAY_CANDIDATE_V2.json` | 22484 | `230bc1dbaa6a390cfe3e3a2db2e0a4c2ca3b5de96a23257f9a5e20ec9971eeec` | bound metadata/evidence; may contain machine-local paths |
+| `FIRST_SOURCE_REPLAY_CANDIDATE_V3.json` | 23734 | `efa830ba97e364e9d80ebda88f95ba05ce64c52a5204cf3f7fb524c880228a97` | bound metadata/evidence; may contain machine-local paths |
+| `GPU_PROCESS_VISIBILITY_CLARIFICATION.md` | 1391 | `63d0c6c8e613d92c072b7256d8121ecc90576364daf0ab740cbeb56dfeba7988` | local readiness/record/clarification |
+| `MODULE_ORIGINS.json` | 2066 | `1b2e72473b26ff8850058642c9ed4118534b3eacf83604d4ed1e80650fe4383b` | bound metadata/evidence; may contain machine-local paths |
+| `PROBE_PROPOSAL_PREPARATION_ONLY.json` | 3724 | `000cff7a18a18cdd3ce0a25c6628fb40a27347e46d064278425c0b0769ee5b84` | bound metadata/evidence; may contain machine-local paths |
+| `READ_ONLY_READINESS.md` | 8542 | `7d9ab05571bf277ae67d6f404a26e555da6f9e296ecda07de39c95495de38a25` | local readiness/record/clarification |
+| `RECORD.md` | 6331 | `9dd27be04c36cde437a04e93d9e5af383d63fb9e7884961789f99234a4e97e6b` | local readiness/record/clarification |
+| `REPLAY_INPUT_HASHES.json` | 1856 | `6b9f4f35551b25365994760f4c90260ed6b1f92870790bb2f3653030936b14c5` | bound metadata/evidence; may contain machine-local paths |
+| `STATIC_WEIGHT_HEADER_SUMMARY.json` | 2760 | `0e67495f155bf71a3b05caf014b657390c8d4c39af5e8ec9d7f62b66f1561b8a` | bound metadata/evidence; may contain machine-local paths |
+| `capture_environment_packages.py` | 2285 | `0a97b22d35719517ed774c9cda858b64de1aa786b3354aecb8a5685daa77f719` | local read-only capture/inspection helper |
+| `capture_gpu_pid_owner.py` | 1792 | `5ecbf28a6aa2222749fa96eab39648b22070448459a17760b1150e8db1b92b25` | local read-only capture/inspection helper |
+| `capture_gpu_status.py` | 2081 | `89b36ffa6f551eb40f91c0a4c04e087154f92cae7644ef4736ad2dc5992e2c56` | local read-only capture/inspection helper |
+| `capture_module_origins.py` | 2658 | `b12e264c4109bca8650cfd74073a2d993df91e6416d750e608b2440fe2add43d` | local read-only capture/inspection helper |
+| `capture_readonly.py` | 3939 | `42038059da74f028e9959f19a1e82962661757e558437d7dfcf0e71b6b27d1a9` | local read-only capture/inspection helper |
+| `capture_replay_inputs.py` | 1814 | `0840ae7fb756c78dda7baec39559e631f83442e40439d0e170c75db3b314d483` | local read-only capture/inspection helper |
+| `capture_runtime_hashes.py` | 1707 | `4f5104b714d634b47221df9a85fab5907db8d4ef7b28580c2c9323165093e307` | local read-only capture/inspection helper |
+| `capture_safetensors_headers.py` | 2113 | `5b5667349ecf963f8bca31d09e665fc1c3e6b51c463e3c509dab94684b0a0474` | local read-only capture/inspection helper |
+| `capture_source_candidate.py` | 2067 | `7d92c93670f25a9b73d465ab0de45f6f14264fcb9bbc752481ac9d99c12073a6` | local read-only capture/inspection helper |
+| `capture_state_and_absence.py` | 2606 | `aa8ad414948b95fa0f127088b73b7d5bcc18597b9febd2fd34bb571ffda9e446` | local read-only capture/inspection helper |
+| `environment_packages_receipt.json` | 1418 | `21edd3f3956819fbf2df92980f43944008c345b175f86b97e2ee17bf6021153d` | bound metadata/evidence; may contain machine-local paths |
+| `finalize_inventory.py` | 2268 | `48a978691e6f98d923242bc226c7dd5737abf8eb4edf4477ccf714474fb48383` | local read-only capture/inspection helper |
+| `gpu_pid_owner_receipts.json` | 2854 | `e82ab180eb1e48dedaa4027d9e485b8117334b02c1de81e41ac7956b8544f5d7` | actual command receipt with argv/cwd/timing/return code/hash |
+| `gpu_status_receipts.json` | 3763 | `4efa72901b949354ffb50f0f5c9103a5383a5fde6c4b8a297e033bd453eb1a7c` | actual command receipt with argv/cwd/timing/return code/hash |
+| `hash_replay_inputs.py` | 1342 | `d540c1fdabd82e35760481a51656d4792fe50fb6e53daa552aa973be181534e2` | local read-only capture/inspection helper |
+| `hash_runtime_inputs.py` | 3010 | `f22fd5003202b4de5f5498dafaf5bf43d7e4962e8989b67d31a5c37920f1efb4` | local read-only capture/inspection helper |
+| `host_inspection_receipts.json` | 12501 | `9812021701dadf7be8ceb21ee8376c388b40b602a977f8304e46e31c856c7018` | actual command receipt with argv/cwd/timing/return code/hash |
+| `input_bindings.json` | 8875 | `3d2ad27d384a8c96427547094015f7c118f5a4272d034537275e15df79a4d8cc` | bound metadata/evidence; may contain machine-local paths |
+| `inspect_first_source.py` | 9034 | `a3e731ab210f44a145818ceba7f35012c530c3daa76b733a0eb7a685535cad26` | local read-only capture/inspection helper |
+| `inspect_safetensors_headers.py` | 2111 | `40077ce6e23f82cc65fabee674b88d79231fe2ece2b7ce151cac88d7e6b13d21` | local read-only capture/inspection helper |
+| `module_origins_receipt.json` | 1683 | `e76d3a7aefb19bc538e0ab045c612d63527be4273a3969a714ed46e646bd1131` | bound metadata/evidence; may contain machine-local paths |
+| `raw/a995_head.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/a995_head.stdout.bin` | 41 | `3c328aea7152d46228d4b5def27ec7cafd7a110ec799c465b801c0ae4473bc0c` | raw captured stdout/stderr; local host paths/status only |
+| `raw/a995_object.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/a995_object.stdout.bin` | 7 | `50836eee574ecff79dea3b4fd40673d7d000f7a5f177d8a6a3000b59c78383b8` | raw captured stdout/stderr; local host paths/status only |
+| `raw/a995_remote.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/a995_remote.stdout.bin` | 41 | `3c328aea7152d46228d4b5def27ec7cafd7a110ec799c465b801c0ae4473bc0c` | raw captured stdout/stderr; local host paths/status only |
+| `raw/a995_status.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/a995_status.stdout.bin` | 80 | `c5bcea72f6d3b18e2515bff83d95c138e580d416bf4ce59b7c565df616e8d108` | raw captured stdout/stderr; local host paths/status only |
+| `raw/cpu_inventory.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/cpu_inventory.stdout.bin` | 2898 | `5a4b1d3ad7d70f9f7ddd1b0aa3850932aa003e572c1ed324e4be693d14c9b583` | raw captured stdout/stderr; local host paths/status only |
+| `raw/disk_relevant_paths.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/disk_relevant_paths.stdout.bin` | 496 | `5907b13682a35c4f6733a87ca6007c0c5e3593634d8fa140cb4b35b6b110d00c` | raw captured stdout/stderr; local host paths/status only |
+| `raw/environment_packages.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/environment_packages.stdout.bin` | 1988 | `7f240a2e40253f459d14b139ccdb09693b646294c3ae3a9ee8d548514dd223ff` | raw captured stdout/stderr; local host paths/status only |
+| `raw/g3_tree_inventory.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/g3_tree_inventory.stdout.bin` | 301 | `d49c863c45befc4510601aeac002a0b24a6a76f7854379156e7a1734022389a7` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_compute_processes.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_compute_processes.stdout.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_default_display.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_default_display.stdout.bin` | 1686 | `42f539d4ec413a50178450127ffdbb2b707c682c60ff693133e995e16971daf7` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_full_status.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_full_status.stdout.bin` | 10131 | `fed1a225f2741ccbfeef61a5bf20de06475556f0b177f83e055e07b4794d6d94` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_inventory.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_inventory.stdout.bin` | 125 | `2c948cd4b35e1f07ffdcc09fced0f20a28b99f672d9a1d7ed68946ec5d93bde7` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_mig_compute.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_mig_compute.stdout.bin` | 35 | `8a8bf1f374cb21100aabe3e9150a920d55ddb785b218ef2547e15c249ec6888f` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_mig_mode_query.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_mig_mode_query.stdout.bin` | 13 | `c7185f296f2a45f6ae15986363e1c886a23d75e9c3a5b608e7a58fb9d4523bc7` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_pid_cgroup.stderr.bin` | 50 | `e4014883dd9fb3193ae47b45031b60b4383194dfb03ef0bf0f1f2724c8d70a00` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_pid_cgroup.stdout.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_pid_ps.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_pid_ps.stdout.bin` | 70 | `85880389054a3452a4b1e1b0427ad840a3f0d39595410796d3a8cd1e392c2579` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_pid_status.stderr.bin` | 63 | `4bef603a370efa505711283b096aa7d136fb4d85e89227847de863ceb79e8774` | raw captured stdout/stderr; local host paths/status only |
+| `raw/gpu_pid_status.stdout.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/module_origins.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/module_origins.stdout.bin` | 1790 | `caced61adeb051f000a25d64d8e2eb0b41397462225d3f5c5f85fa7ebf106d80` | raw captured stdout/stderr; local host paths/status only |
+| `raw/pinned_package_probe.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/pinned_package_probe.stdout.bin` | 1512 | `2014de1656e4192c5ed8c4702601898a6b6eea246bedcdf16f222ba4c9ae1dd7` | raw captured stdout/stderr; local host paths/status only |
+| `raw/project_head.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/project_head.stdout.bin` | 41 | `02a86d461065506cf59a55a47cbf4baa0249bcadc55ff3d638e7ee3353640c71` | raw captured stdout/stderr; local host paths/status only |
+| `raw/project_status.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/project_status.stdout.bin` | 72 | `8b355e414cf751f61f3702e11a28906074a8071c48e234bfc5032a464ef3c658` | raw captured stdout/stderr; local host paths/status only |
+| `raw/project_worktrees.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/project_worktrees.stdout.bin` | 2010 | `9b2868596b3295ee54d3e7c85541aa349c791e83fb0b7739763b04855dc5e16c` | raw captured stdout/stderr; local host paths/status only |
+| `raw/ram_inventory.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/ram_inventory.stdout.bin` | 209 | `3c98ef250e9507dee94248ca8a6f554de5c36740ae90c91897d835122f730ce1` | raw captured stdout/stderr; local host paths/status only |
+| `raw/replay_input_hashes.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/replay_input_hashes.stdout.bin` | 1540 | `fb3fbc60c8ca84b084c10457087b81fc0062731b853ee7af838647f42b3b83bf` | raw captured stdout/stderr; local host paths/status only |
+| `raw/runtime_hashes.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/runtime_hashes.stdout.bin` | 15221 | `4819c6a3c988b09990638212fde5598ab2bc703171a727a7c314f61a88f74098` | raw captured stdout/stderr; local host paths/status only |
+| `raw/safetensors_header.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/safetensors_header.stdout.bin` | 2288 | `1754b95b0b8a8c6055136d811fc86bb586bb11640ee584290e879f15f27a9e08` | raw captured stdout/stderr; local host paths/status only |
+| `raw/scheduler_binary_presence.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/scheduler_binary_presence.stdout.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/source_candidate.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/source_candidate.stdout.bin` | 15172 | `c8ef35d47188fe60f89afece435734195309296cf5d8acd7802210c6121ec91e` | raw captured stdout/stderr; local host paths/status only |
+| `raw/source_candidate_v2.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/source_candidate_v2.stdout.bin` | 15172 | `c8ef35d47188fe60f89afece435734195309296cf5d8acd7802210c6121ec91e` | raw captured stdout/stderr; local host paths/status only |
+| `raw/source_candidate_v3.stderr.bin` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | raw captured stdout/stderr; local host paths/status only |
+| `raw/source_candidate_v3.stdout.bin` | 16217 | `d73f2f2428422f97bfa63f1011b3313ef60e26e5f70ae26b7c7b8d0226366e71` | raw captured stdout/stderr; local host paths/status only |
+| `replay_input_hashes_receipt.json` | 1058 | `374e9ca11bd7a7479ee78a4afa55ddc043cdcf7debf59fff2d804352d1cbc8c3` | bound metadata/evidence; may contain machine-local paths |
+| `runtime_hashes_receipt.json` | 1047 | `6973d476e979e9f1a398b15eac08592f305e3a5bc22a03ccef3fd37407d7d3f5` | bound metadata/evidence; may contain machine-local paths |
+| `safetensors_header_receipt.json` | 1059 | `66fb1a54b8ed19c7433643f9cc14bb3511604d591510145f130627fe0f71858b` | bound metadata/evidence; may contain machine-local paths |
+| `source_candidate_receipt.json` | 1055 | `707fef48f6fc4f2b43b9eb0a15bd0643661aeec10a06a4dc3b2af8bf77ab35e0` | bound metadata/evidence; may contain machine-local paths |
+| `source_candidate_v2_receipt.json` | 1060 | `6fd3e76493a81e967026b0d1ddd74facf8c209167d39d35d62dc35e46a16d6f3` | bound metadata/evidence; may contain machine-local paths |
+| `source_candidate_v3_receipt.json` | 1061 | `b1b3fdb15bbe8aa8509e618b0a878a7325b495baa7404fa067b3ce70a04cba43` | bound metadata/evidence; may contain machine-local paths |
+| `state_absence_receipts.json` | 3883 | `3f8b6767f4c9aba6f67c10018ab4d3d4f17c2ac18ebde9b5eff06f86243ecfed` | actual command receipt with argv/cwd/timing/return code/hash |

@@ -1,0 +1,393 @@
+................................FFFFFFF....FFFFF............F.....       [100%]
+=================================== FAILURES ===================================
+____ test_actual_peft_base_context_restores_names_enabled_and_trainability _____
+
+parts = (Permit(authorization={'schema': 'SI_E2_AUTHORIZATION_V1', 'purpose': 'ENGINEERING_DIAGNOSTIC_ONLY', 'scope_sha256': '...Ledger object at 0x7fe13299e380>, <self_improvement.si_p3.runtime_backend.LocalInference object at 0x7fdfce082680>, [])
+
+    def test_actual_peft_base_context_restores_names_enabled_and_trainability(parts):
+        p,ledger,b,calls=parts
+        before=adapter_state(b.model)
+        assert before['model']['trainable_params']==0
+        for phase,cap,mode in [('source',16,'P0'),('stage_one',40,'BASE'),('stage_two',16,'BASE'),('suffix',16,'P0')]:
+>           value=b.generate(phase,b.prepare('engineering public input'),cap,mode)
+
+tests/test_si_p3_runtime_backend.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_p3/runtime_backend.py:135: in prepare
+    require(set(encoded) == {"input_ids", "attention_mask"}, "tokenizer tensor keys")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, reason = 'tokenizer tensor keys'
+
+    def require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise ContractError(reason)
+E           self_improvement.si_p3.contract.ContractError: tokenizer tensor keys
+
+src/self_improvement/si_p3/contract.py:43: ContractError
+___________ test_real_tiny_cpu_generate_returns_frozen_raw_contract ____________
+
+tmp_path = PosixPath('/tmp/si-e2-codex-draft-focused-v1-4c82/test_real_tiny_cpu_generate_re0')
+
+    def test_real_tiny_cpu_generate_returns_frozen_raw_contract(tmp_path):
+        p=permit(tmp_path);p.output.mkdir();ledger=EngineeringLedger(p.output/'events.jsonl',p)
+        tok,model,torch=tiny_components()
+        b=LocalInference(tok,model,torch,ledger,lambda:{'software':True},software_fixture=True)
+>       value=b.generate('source',b.prepare('look'),16,'P0')
+
+tests/test_si_p3_runtime_backend.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_p3/runtime_backend.py:135: in prepare
+    require(set(encoded) == {"input_ids", "attention_mask"}, "tokenizer tensor keys")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, reason = 'tokenizer tensor keys'
+
+    def require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise ContractError(reason)
+E           self_improvement.si_p3.contract.ContractError: tokenizer tensor keys
+
+src/self_improvement/si_p3/contract.py:43: ContractError
+_ test_actual_peft_exception_restores_grad_flags_and_retains_full_open_reservation _
+
+parts = (Permit(authorization={'schema': 'SI_E2_AUTHORIZATION_V1', 'purpose': 'ENGINEERING_DIAGNOSTIC_ONLY', 'scope_sha256': '...Ledger object at 0x7fdfc4ecc460>, <self_improvement.si_p3.runtime_backend.LocalInference object at 0x7fdfc4ecd780>, [])
+
+    def test_actual_peft_exception_restores_grad_flags_and_retains_full_open_reservation(parts):
+        _,ledger,b,calls=parts
+>       b.generate('source',b.prepare('public input'),16,'P0')
+
+tests/test_si_p3_runtime_backend.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_p3/runtime_backend.py:135: in prepare
+    require(set(encoded) == {"input_ids", "attention_mask"}, "tokenizer tensor keys")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, reason = 'tokenizer tensor keys'
+
+    def require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise ContractError(reason)
+E           self_improvement.si_p3.contract.ContractError: tokenizer tensor keys
+
+src/self_improvement/si_p3/contract.py:43: ContractError
+_ test_actual_sent_tensor_drift_rejected_before_external_reservation[input_ids] _
+
+parts = (Permit(authorization={'schema': 'SI_E2_AUTHORIZATION_V1', 'purpose': 'ENGINEERING_DIAGNOSTIC_ONLY', 'scope_sha256': '...Ledger object at 0x7fdfc4dbc490>, <self_improvement.si_p3.runtime_backend.LocalInference object at 0x7fdfc4dbd360>, [])
+which = 'input_ids'
+
+    @pytest.mark.parametrize('which',['input_ids','attention_mask'])
+    def test_actual_sent_tensor_drift_rejected_before_external_reservation(parts,which):
+        _,ledger,b,calls=parts
+        tok=b.tokenizer
+        class Drift:
+            eos_token_id=tok.eos_token_id
+            def apply_chat_template(self,*a,**k):return tok.apply_chat_template(*a,**k)
+            def decode(self,*a,**k):return tok.decode(*a,**k)
+            def __call__(self,*a,**k):
+                value=tok(*a,**k)
+                if k.get('return_tensors')=='pt':value[which][0,-1]=0 if which=='attention_mask' else 4
+                return value
+        b.tokenizer=Drift()
+>       with pytest.raises(ContractError,match='sent full'):b.generate('source',b.prepare('public input'),16,'P0')
+
+tests/test_si_p3_runtime_backend.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_p3/runtime_backend.py:135: in prepare
+    require(set(encoded) == {"input_ids", "attention_mask"}, "tokenizer tensor keys")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, reason = 'tokenizer tensor keys'
+
+    def require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise ContractError(reason)
+E           self_improvement.si_p3.contract.ContractError: tokenizer tensor keys
+
+src/self_improvement/si_p3/contract.py:43: ContractError
+
+During handling of the above exception, another exception occurred:
+
+parts = (Permit(authorization={'schema': 'SI_E2_AUTHORIZATION_V1', 'purpose': 'ENGINEERING_DIAGNOSTIC_ONLY', 'scope_sha256': '...Ledger object at 0x7fdfc4dbc490>, <self_improvement.si_p3.runtime_backend.LocalInference object at 0x7fdfc4dbd360>, [])
+which = 'input_ids'
+
+    @pytest.mark.parametrize('which',['input_ids','attention_mask'])
+    def test_actual_sent_tensor_drift_rejected_before_external_reservation(parts,which):
+        _,ledger,b,calls=parts
+        tok=b.tokenizer
+        class Drift:
+            eos_token_id=tok.eos_token_id
+            def apply_chat_template(self,*a,**k):return tok.apply_chat_template(*a,**k)
+            def decode(self,*a,**k):return tok.decode(*a,**k)
+            def __call__(self,*a,**k):
+                value=tok(*a,**k)
+                if k.get('return_tensors')=='pt':value[which][0,-1]=0 if which=='attention_mask' else 4
+                return value
+        b.tokenizer=Drift()
+>       with pytest.raises(ContractError,match='sent full'):b.generate('source',b.prepare('public input'),16,'P0')
+E       AssertionError: Regex pattern did not match.
+E        Regex: 'sent full'
+E        Input: 'tokenizer tensor keys'
+
+tests/test_si_p3_runtime_backend.py:74: AssertionError
+_ test_actual_sent_tensor_drift_rejected_before_external_reservation[attention_mask] _
+
+parts = (Permit(authorization={'schema': 'SI_E2_AUTHORIZATION_V1', 'purpose': 'ENGINEERING_DIAGNOSTIC_ONLY', 'scope_sha256': '...Ledger object at 0x7fdfc4ee5750>, <self_improvement.si_p3.runtime_backend.LocalInference object at 0x7fdfc4ee7fa0>, [])
+which = 'attention_mask'
+
+    @pytest.mark.parametrize('which',['input_ids','attention_mask'])
+    def test_actual_sent_tensor_drift_rejected_before_external_reservation(parts,which):
+        _,ledger,b,calls=parts
+        tok=b.tokenizer
+        class Drift:
+            eos_token_id=tok.eos_token_id
+            def apply_chat_template(self,*a,**k):return tok.apply_chat_template(*a,**k)
+            def decode(self,*a,**k):return tok.decode(*a,**k)
+            def __call__(self,*a,**k):
+                value=tok(*a,**k)
+                if k.get('return_tensors')=='pt':value[which][0,-1]=0 if which=='attention_mask' else 4
+                return value
+        b.tokenizer=Drift()
+>       with pytest.raises(ContractError,match='sent full'):b.generate('source',b.prepare('public input'),16,'P0')
+
+tests/test_si_p3_runtime_backend.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_p3/runtime_backend.py:135: in prepare
+    require(set(encoded) == {"input_ids", "attention_mask"}, "tokenizer tensor keys")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, reason = 'tokenizer tensor keys'
+
+    def require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise ContractError(reason)
+E           self_improvement.si_p3.contract.ContractError: tokenizer tensor keys
+
+src/self_improvement/si_p3/contract.py:43: ContractError
+
+During handling of the above exception, another exception occurred:
+
+parts = (Permit(authorization={'schema': 'SI_E2_AUTHORIZATION_V1', 'purpose': 'ENGINEERING_DIAGNOSTIC_ONLY', 'scope_sha256': '...Ledger object at 0x7fdfc4ee5750>, <self_improvement.si_p3.runtime_backend.LocalInference object at 0x7fdfc4ee7fa0>, [])
+which = 'attention_mask'
+
+    @pytest.mark.parametrize('which',['input_ids','attention_mask'])
+    def test_actual_sent_tensor_drift_rejected_before_external_reservation(parts,which):
+        _,ledger,b,calls=parts
+        tok=b.tokenizer
+        class Drift:
+            eos_token_id=tok.eos_token_id
+            def apply_chat_template(self,*a,**k):return tok.apply_chat_template(*a,**k)
+            def decode(self,*a,**k):return tok.decode(*a,**k)
+            def __call__(self,*a,**k):
+                value=tok(*a,**k)
+                if k.get('return_tensors')=='pt':value[which][0,-1]=0 if which=='attention_mask' else 4
+                return value
+        b.tokenizer=Drift()
+>       with pytest.raises(ContractError,match='sent full'):b.generate('source',b.prepare('public input'),16,'P0')
+E       AssertionError: Regex pattern did not match.
+E        Regex: 'sent full'
+E        Input: 'tokenizer tensor keys'
+
+tests/test_si_p3_runtime_backend.py:74: AssertionError
+_______ test_caller_prepared_drift_rejected_before_external_reservation ________
+
+parts = (Permit(authorization={'schema': 'SI_E2_AUTHORIZATION_V1', 'purpose': 'ENGINEERING_DIAGNOSTIC_ONLY', 'scope_sha256': '...Ledger object at 0x7fdfc4ecdb40>, <self_improvement.si_p3.runtime_backend.LocalInference object at 0x7fdfc4ece0e0>, [])
+
+    def test_caller_prepared_drift_rejected_before_external_reservation(parts):
+        _,ledger,b,calls=parts
+>       prepared=b.prepare('public input')
+
+tests/test_si_p3_runtime_backend.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_p3/runtime_backend.py:135: in prepare
+    require(set(encoded) == {"input_ids", "attention_mask"}, "tokenizer tensor keys")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, reason = 'tokenizer tensor keys'
+
+    def require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise ContractError(reason)
+E           self_improvement.si_p3.contract.ContractError: tokenizer tensor keys
+
+src/self_improvement/si_p3/contract.py:43: ContractError
+_____ test_adapter_switch_failure_rejects_before_generate_and_reservation ______
+
+parts = (Permit(authorization={'schema': 'SI_E2_AUTHORIZATION_V1', 'purpose': 'ENGINEERING_DIAGNOSTIC_ONLY', 'scope_sha256': '...Ledger object at 0x7fdfc4ee63b0>, <self_improvement.si_p3.runtime_backend.LocalInference object at 0x7fdfc4ee5180>, [])
+
+    def test_adapter_switch_failure_rejects_before_generate_and_reservation(parts):
+        _,ledger,b,calls=parts
+>       b.generate('source',b.prepare('public input'),16,'P0')
+
+tests/test_si_p3_runtime_backend.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_p3/runtime_backend.py:135: in prepare
+    require(set(encoded) == {"input_ids", "attention_mask"}, "tokenizer tensor keys")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, reason = 'tokenizer tensor keys'
+
+    def require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise ContractError(reason)
+E           self_improvement.si_p3.contract.ContractError: tokenizer tensor keys
+
+src/self_improvement/si_p3/contract.py:43: ContractError
+_________________ test_duplicate_phase_cannot_make_second_call _________________
+
+parts = (Permit(authorization={'schema': 'SI_E2_AUTHORIZATION_V1', 'purpose': 'ENGINEERING_DIAGNOSTIC_ONLY', 'scope_sha256': '...Ledger object at 0x7fdfc4de8850>, <self_improvement.si_p3.runtime_backend.LocalInference object at 0x7fdfc4dea9e0>, [])
+
+    def test_duplicate_phase_cannot_make_second_call(parts):
+        _,ledger,b,calls=parts
+>       b.generate('source',b.prepare('public input'),16,'P0')
+
+tests/test_si_p3_runtime_backend.py:105: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_p3/runtime_backend.py:135: in prepare
+    require(set(encoded) == {"input_ids", "attention_mask"}, "tokenizer tensor keys")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, reason = 'tokenizer tensor keys'
+
+    def require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise ContractError(reason)
+E           self_improvement.si_p3.contract.ContractError: tokenizer tensor keys
+
+src/self_improvement/si_p3/contract.py:43: ContractError
+____ test_full_chain_rehash_does_not_hide_cost_or_tensor_tamper[raw_input] _____
+
+parts = (Permit(authorization={'schema': 'SI_E2_AUTHORIZATION_V1', 'purpose': 'ENGINEERING_DIAGNOSTIC_ONLY', 'scope_sha256': '...Ledger object at 0x7fdfc4ecda50>, <self_improvement.si_p3.runtime_backend.LocalInference object at 0x7fdfc4ecf400>, [])
+attack = 'raw_input'
+
+    @pytest.mark.parametrize('attack',['raw_input','sent_mask','reservation','summary_zero'])
+    def test_full_chain_rehash_does_not_hide_cost_or_tensor_tamper(parts,attack):
+>       _,ledger,b,_=parts;b.generate('source',b.prepare('public input'),16,'P0')
+
+tests/test_si_p3_runtime_backend.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_p3/runtime_backend.py:135: in prepare
+    require(set(encoded) == {"input_ids", "attention_mask"}, "tokenizer tensor keys")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, reason = 'tokenizer tensor keys'
+
+    def require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise ContractError(reason)
+E           self_improvement.si_p3.contract.ContractError: tokenizer tensor keys
+
+src/self_improvement/si_p3/contract.py:43: ContractError
+____ test_full_chain_rehash_does_not_hide_cost_or_tensor_tamper[sent_mask] _____
+
+parts = (Permit(authorization={'schema': 'SI_E2_AUTHORIZATION_V1', 'purpose': 'ENGINEERING_DIAGNOSTIC_ONLY', 'scope_sha256': '...Ledger object at 0x7fdfc4dd5b40>, <self_improvement.si_p3.runtime_backend.LocalInference object at 0x7fdfc4dd7c10>, [])
+attack = 'sent_mask'
+
+    @pytest.mark.parametrize('attack',['raw_input','sent_mask','reservation','summary_zero'])
+    def test_full_chain_rehash_does_not_hide_cost_or_tensor_tamper(parts,attack):
+>       _,ledger,b,_=parts;b.generate('source',b.prepare('public input'),16,'P0')
+
+tests/test_si_p3_runtime_backend.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_p3/runtime_backend.py:135: in prepare
+    require(set(encoded) == {"input_ids", "attention_mask"}, "tokenizer tensor keys")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, reason = 'tokenizer tensor keys'
+
+    def require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise ContractError(reason)
+E           self_improvement.si_p3.contract.ContractError: tokenizer tensor keys
+
+src/self_improvement/si_p3/contract.py:43: ContractError
+___ test_full_chain_rehash_does_not_hide_cost_or_tensor_tamper[reservation] ____
+
+parts = (Permit(authorization={'schema': 'SI_E2_AUTHORIZATION_V1', 'purpose': 'ENGINEERING_DIAGNOSTIC_ONLY', 'scope_sha256': '...Ledger object at 0x7fdfc4ee6d10>, <self_improvement.si_p3.runtime_backend.LocalInference object at 0x7fdfc4ee71c0>, [])
+attack = 'reservation'
+
+    @pytest.mark.parametrize('attack',['raw_input','sent_mask','reservation','summary_zero'])
+    def test_full_chain_rehash_does_not_hide_cost_or_tensor_tamper(parts,attack):
+>       _,ledger,b,_=parts;b.generate('source',b.prepare('public input'),16,'P0')
+
+tests/test_si_p3_runtime_backend.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_p3/runtime_backend.py:135: in prepare
+    require(set(encoded) == {"input_ids", "attention_mask"}, "tokenizer tensor keys")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, reason = 'tokenizer tensor keys'
+
+    def require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise ContractError(reason)
+E           self_improvement.si_p3.contract.ContractError: tokenizer tensor keys
+
+src/self_improvement/si_p3/contract.py:43: ContractError
+___ test_full_chain_rehash_does_not_hide_cost_or_tensor_tamper[summary_zero] ___
+
+parts = (Permit(authorization={'schema': 'SI_E2_AUTHORIZATION_V1', 'purpose': 'ENGINEERING_DIAGNOSTIC_ONLY', 'scope_sha256': '...Ledger object at 0x7fdfc4dbfcd0>, <self_improvement.si_p3.runtime_backend.LocalInference object at 0x7fdfc4dbfdc0>, [])
+attack = 'summary_zero'
+
+    @pytest.mark.parametrize('attack',['raw_input','sent_mask','reservation','summary_zero'])
+    def test_full_chain_rehash_does_not_hide_cost_or_tensor_tamper(parts,attack):
+>       _,ledger,b,_=parts;b.generate('source',b.prepare('public input'),16,'P0')
+
+tests/test_si_p3_runtime_backend.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_p3/runtime_backend.py:135: in prepare
+    require(set(encoded) == {"input_ids", "attention_mask"}, "tokenizer tensor keys")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, reason = 'tokenizer tensor keys'
+
+    def require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise ContractError(reason)
+E           self_improvement.si_p3.contract.ContractError: tokenizer tensor keys
+
+src/self_improvement/si_p3/contract.py:43: ContractError
+____ test_nonempty_production_diagnostic_to_report_independent_four_phases _____
+
+tmp_path = PosixPath('/tmp/si-e2-codex-draft-focused-v1-4c82/test_nonempty_production_diagn0')
+
+    def test_nonempty_production_diagnostic_to_report_independent_four_phases(tmp_path):
+        p=permit(tmp_path);p.output.mkdir();e=simple_evidence()
+        factory,instances,_=environment_factory(tmp_path,e)
+        edges=[]
+        def load(permit,ledger):
+            ledger.reserve('model-load','model_load')
+            tok,model,torch=tiny_components();calls=raw_generate_edge(model,torch);edges.append(calls)
+            backend=LocalInference(tok,model,torch,ledger,lambda:{'software':True},software_fixture=True)
+            ledger.complete('model-load',{'software_tiny_cpu_model':True});return backend
+        report=run_diagnostic(p,software_fixture=True,software_loader=load,software_environment_factory=factory,software_replay=e)
+>       assert report['status']=='ENGINEERING_BOUNDARY_OBSERVED_NOT_SCIENTIFIC_ACCEPTANCE',report['error']
+E       AssertionError: {'exception': 'ContractError', 'message': 'tokenizer tensor keys'}
+E       assert 'TECHNICAL_STOP_NO_RETRY' == 'ENGINEERING_...IC_ACCEPTANCE'
+E         
+E         - ENGINEERING_BOUNDARY_OBSERVED_NOT_SCIENTIFIC_ACCEPTANCE
+E         + TECHNICAL_STOP_NO_RETRY
+
+tests/test_si_p3_runtime_diagnostic.py:26: AssertionError
+=============================== warnings summary ===============================
+tests/test_si_p3_runtime_backend.py: 16 warnings
+tests/test_si_p3_runtime_diagnostic.py: 1 warning
+  /home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/peft/tuners/lora/layer.py:2174: UserWarning: fan_in_fan_out is set to False but the target module is `Conv1D`. Setting fan_in_fan_out to True.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/lizening/research-notes/agent-logs/2026-10-25T124118Z__CODEX__si-e2-runtime-adaptation__sie2_4c82/draft_focused_v1.xml -
+=========================== short test summary info ============================
+FAILED tests/test_si_p3_runtime_backend.py::test_actual_peft_base_context_restores_names_enabled_and_trainability
+FAILED tests/test_si_p3_runtime_backend.py::test_real_tiny_cpu_generate_returns_frozen_raw_contract
+FAILED tests/test_si_p3_runtime_backend.py::test_actual_peft_exception_restores_grad_flags_and_retains_full_open_reservation
+FAILED tests/test_si_p3_runtime_backend.py::test_actual_sent_tensor_drift_rejected_before_external_reservation[input_ids]
+FAILED tests/test_si_p3_runtime_backend.py::test_actual_sent_tensor_drift_rejected_before_external_reservation[attention_mask]
+FAILED tests/test_si_p3_runtime_backend.py::test_caller_prepared_drift_rejected_before_external_reservation
+FAILED tests/test_si_p3_runtime_backend.py::test_adapter_switch_failure_rejects_before_generate_and_reservation
+FAILED tests/test_si_p3_runtime_backend.py::test_duplicate_phase_cannot_make_second_call
+FAILED tests/test_si_p3_runtime_backend.py::test_full_chain_rehash_does_not_hide_cost_or_tensor_tamper[raw_input]
+FAILED tests/test_si_p3_runtime_backend.py::test_full_chain_rehash_does_not_hide_cost_or_tensor_tamper[sent_mask]
+FAILED tests/test_si_p3_runtime_backend.py::test_full_chain_rehash_does_not_hide_cost_or_tensor_tamper[reservation]
+FAILED tests/test_si_p3_runtime_backend.py::test_full_chain_rehash_does_not_hide_cost_or_tensor_tamper[summary_zero]
+FAILED tests/test_si_p3_runtime_diagnostic.py::test_nonempty_production_diagnostic_to_report_independent_four_phases

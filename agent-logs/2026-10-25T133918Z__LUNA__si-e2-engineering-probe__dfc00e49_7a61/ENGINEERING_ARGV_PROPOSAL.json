@@ -1,0 +1,27 @@
+{
+  "schema": "SI_E2_EXACT_ARGV_PROPOSAL_V1",
+  "status": "PREPARATION_ONLY_NOT_RUNNABLE",
+  "cwd": "/home/lizening/wt-si-p3-runtime-adaptation",
+  "source_sha": "dfc00e49d1ef4d48453d2331507429f8a0c7bbc5",
+  "argv_with_pending_root_authorization_sha": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "/home/lizening/wt-si-p3-runtime-adaptation/scripts/run_si_p3_engineering_probe.py",
+    "--authorization",
+    "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/engineering_authorization.json",
+    "--authorization-sha256",
+    "PENDING_ROOT_AUTHORIZATION_RAW_SHA256",
+    "--proposal",
+    "/home/lizening/research-notes/agent-logs/2026-10-25T133918Z__LUNA__si-e2-engineering-probe__dfc00e49_7a61/SI_E2_PROPOSAL.json"
+  ],
+  "authorization_sha256": null,
+  "output_path": "/home/lizening/research-notes/agent-logs/2026-10-25T133918Z__LUNA__si-e2-engineering-probe__dfc00e49_7a61/engineering_run",
+  "output_path_absent_at_capture": true,
+  "authorization_path_absent_at_capture": true,
+  "absence_and_clean_source_receipt": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T133918Z__LUNA__si-e2-engineering-probe__dfc00e49_7a61/final_proposal_state_receipt.json",
+    "sha256": "1676ad0c5c92068ef9373137d9fed8dc26860b14f5cea924c70df74ca4c78b8a"
+  },
+  "launch_allowed": false,
+  "reason": "The root has not issued the authorization bytes/SHA or engineering release; argv must not be invoked or reconstructed into a runnable shell command."
+}

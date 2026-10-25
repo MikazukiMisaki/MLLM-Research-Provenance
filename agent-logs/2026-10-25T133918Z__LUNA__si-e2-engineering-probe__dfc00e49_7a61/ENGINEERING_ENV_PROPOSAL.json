@@ -1,0 +1,40 @@
+{
+  "schema": "SI_E2_EXACT_ENV_PROPOSAL_V1",
+  "status": "PREPARATION_ONLY_NOT_RELEASED",
+  "inherit_environment": false,
+  "set": {
+    "PATH": "/usr/bin:/bin",
+    "HOME": "/home/lizening",
+    "USER": "lizening",
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "LD_LIBRARY_PATH": "/usr/local/cuda/lib64:/usr/local/cuda/lib64:",
+    "CUDA_VISIBLE_DEVICES": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "HF_DATASETS_OFFLINE": "1",
+    "TOKENIZERS_PARALLELISM": "false",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "ALFWORLD_DATA": "/home/lizening/alfworld_data/json_2.1.1/train"
+  },
+  "unset": [
+    "PYTHONPATH",
+    "PYTHONHOME",
+    "VIRTUAL_ENV",
+    "LD_PRELOAD",
+    "CUDA_DEVICE_ORDER",
+    "HF_TOKEN",
+    "HUGGING_FACE_HUB_TOKEN",
+    "HF_HOME",
+    "TRANSFORMERS_CACHE",
+    "ALFWORLD_CONFIG_PATH"
+  ],
+  "rationale": {
+    "path": "Reduced to /usr/bin:/bin; verified nvidia-smi resolves to /usr/bin/nvidia-smi. Python and reviewed script are absolute paths.",
+    "cuda_library_path": "Preserves the observed CUDA library path exactly; no model/context was loaded to validate runtime linkage.",
+    "alfworld": "ALFWORLD_DATA retains original configured TRAIN root for YAML expansion; reviewed factory must apply task-directory-only effective discovery before constructor entry.",
+    "credentials": "No token/credential values are read or passed; all hub token variables are explicitly unset.",
+    "future_child": "The reviewed supervisor derives a child environment by dropping Python overrides/LD_PRELOAD/CUDA_DEVICE_ORDER and sets offline/tokenizer/CUDA flags. Exact future process environment still requires root review and authorization."
+  },
+  "current_execution_authorized": false
+}

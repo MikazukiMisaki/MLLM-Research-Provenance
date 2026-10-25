@@ -1,0 +1,76 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "ps",
+        "-p",
+        "5364",
+        "-o",
+        "pid,ppid,user,lstart,etime,comm"
+      ],
+      "cwd": "/",
+      "ended_utc": "2026-10-25T12:45:44.844405+00:00",
+      "monotonic_elapsed_seconds": 0.005521864,
+      "name": "gpu_pid_ps",
+      "returncode": 1,
+      "started_utc": "2026-10-25T12:45:44.838854+00:00",
+      "stderr": {
+        "bytes": 0,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/gpu_pid_ps.stderr.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 70,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/gpu_pid_ps.stdout.bin",
+        "sha256": "85880389054a3452a4b1e1b0427ad840a3f0d39595410796d3a8cd1e392c2579"
+      }
+    },
+    {
+      "argv": [
+        "bash",
+        "-c",
+        "awk '/^(Name|State|Pid|PPid|Uid|Gid|Threads):/{print}' /proc/5364/status"
+      ],
+      "cwd": "/",
+      "ended_utc": "2026-10-25T12:45:44.849451+00:00",
+      "monotonic_elapsed_seconds": 0.004808725,
+      "name": "gpu_pid_status",
+      "returncode": 2,
+      "started_utc": "2026-10-25T12:45:44.844651+00:00",
+      "stderr": {
+        "bytes": 63,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/gpu_pid_status.stderr.bin",
+        "sha256": "4bef603a370efa505711283b096aa7d136fb4d85e89227847de863ceb79e8774"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/gpu_pid_status.stdout.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "cat",
+        "/proc/5364/cgroup"
+      ],
+      "cwd": "/",
+      "ended_utc": "2026-10-25T12:45:44.852018+00:00",
+      "monotonic_elapsed_seconds": 0.002388432,
+      "name": "gpu_pid_cgroup",
+      "returncode": 1,
+      "started_utc": "2026-10-25T12:45:44.849638+00:00",
+      "stderr": {
+        "bytes": 50,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/gpu_pid_cgroup.stderr.bin",
+        "sha256": "e4014883dd9fb3193ae47b45031b60b4383194dfb03ef0bf0f1f2724c8d70a00"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/gpu_pid_cgroup.stdout.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "schema": "SI_E2_GPU_PID_OWNER_CAPTURE_V1",
+  "source_pid": "5364"
+}

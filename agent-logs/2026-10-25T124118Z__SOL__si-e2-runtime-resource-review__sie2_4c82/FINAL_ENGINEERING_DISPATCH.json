@@ -1,0 +1,43 @@
+{
+  "schema": "SI_E2_ROOT_FINAL_ENGINEERING_DISPATCH_V1",
+  "UTC": "2026-10-25T14:06:32.412716+00:00",
+  "status": "RELEASED_ENGINEERING_ONLY",
+  "source_SHA": "dfc00e49d1ef4d48453d2331507429f8a0c7bbc5",
+  "maximum_engineering_invocations": 1,
+  "automatic_retry": false,
+  "science_authorized": false,
+  "wrapper_path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/execute_reviewed_engineering_probe.py",
+  "wrapper_sha256": "06ef35837f5e0d52a111cdb4c9ea797c1dc46cf0eebcc98a31fdc8e1f68ae879",
+  "invocation_path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/approved_engineering_invocation.json",
+  "invocation_sha256": "f336b78a6aa3b24759ae492db9868576488e67c90c00cd93cd00eb7351f25b17",
+  "authorization_sha256": "f7334f8b3a5d8707f5226998e362d207ee429e7a296a772e9f0a216320c0882e",
+  "critic_review": "No demonstrated unrelated-kill route. Partial worker marker JSON is treated as not yet complete; no PID is authorized by a partial marker. All ownership checks remain strict.",
+  "wrapper_compile": "PASS",
+  "model_free_input_verification": "PASS",
+  "argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/execute_reviewed_engineering_probe.py",
+    "--invocation",
+    "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/approved_engineering_invocation.json",
+    "--sha256",
+    "f336b78a6aa3b24759ae492db9868576488e67c90c00cd93cd00eb7351f25b17"
+  ],
+  "ceilings": {
+    "seconds": 1800,
+    "device_hours": 0.5,
+    "generations": 4,
+    "generated_tokens": 88,
+    "input_tokens": 32768,
+    "per_call_input": 8192,
+    "resets": 2,
+    "steps": 12
+  },
+  "not_authorized": [
+    "new96 acquisition",
+    "student training",
+    "student evaluation",
+    "reserved96/48/600 task bodies",
+    "old G2/G3/G4 reruns"
+  ]
+}

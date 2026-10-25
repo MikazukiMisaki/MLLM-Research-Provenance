@@ -1,0 +1,2478 @@
+diff --git a/configs/self_improvement/si_e2_authorization_schema_v1.json b/configs/self_improvement/si_e2_authorization_schema_v1.json
+new file mode 100644
+index 0000000..9dd1b37
+--- /dev/null
++++ b/configs/self_improvement/si_e2_authorization_schema_v1.json
+@@ -0,0 +1,119 @@
++{
++  "$schema": "https://json-schema.org/draft/2020-12/schema",
++  "title": "SI-E2 authority shape only; this schema issues no release",
++  "type": "object",
++  "additionalProperties": false,
++  "required": [
++    "schema",
++    "purpose",
++    "scope_sha256",
++    "authorization_id",
++    "issuer",
++    "status",
++    "source_sha",
++    "proposal_sha256",
++    "output_path",
++    "gpu_uuid",
++    "not_before_utc",
++    "expires_utc",
++    "ceilings",
++    "science_authorized"
++  ],
++  "properties": {
++    "schema": {
++      "const": "SI_E2_AUTHORIZATION_V1"
++    },
++    "purpose": {
++      "const": "ENGINEERING_DIAGNOSTIC_ONLY"
++    },
++    "scope_sha256": {
++      "const": "7d4f554095e96f55bf97a286dbcbdc3851f9a34b8036c5ac72d048b15564f85d"
++    },
++    "authorization_id": {
++      "type": "string",
++      "pattern": "^[0-9a-f]{32}$"
++    },
++    "issuer": {
++      "const": "Sol Designer"
++    },
++    "status": {
++      "const": "RELEASED_ENGINEERING_ONLY"
++    },
++    "source_sha": {
++      "type": "string",
++      "pattern": "^[0-9a-f]{40}$"
++    },
++    "proposal_sha256": {
++      "type": "string",
++      "pattern": "^[0-9a-f]{64}$"
++    },
++    "output_path": {
++      "type": "string"
++    },
++    "gpu_uuid": {
++      "type": "string",
++      "pattern": "^GPU-[0-9a-fA-F-]{8,}$"
++    },
++    "not_before_utc": {
++      "type": "string",
++      "format": "date-time"
++    },
++    "expires_utc": {
++      "type": "string",
++      "format": "date-time"
++    },
++    "ceilings": {
++      "type": "object",
++      "required": [
++        "seconds",
++        "device_hours",
++        "generations",
++        "generated_tokens",
++        "input_tokens",
++        "per_call_input",
++        "resets",
++        "steps"
++      ],
++      "additionalProperties": false,
++      "properties": {
++        "seconds": {
++          "type": "number",
++          "exclusiveMinimum": 0,
++          "maximum": 1800
++        },
++        "device_hours": {
++          "type": "number",
++          "exclusiveMinimum": 0,
++          "maximum": 0.5
++        },
++        "generations": {
++          "const": 4
++        },
++        "generated_tokens": {
++          "const": 88
++        },
++        "input_tokens": {
++          "type": "integer",
++          "exclusiveMinimum": 0,
++          "maximum": 32768
++        },
++        "per_call_input": {
++          "type": "integer",
++          "exclusiveMinimum": 0,
++          "maximum": 8192
++        },
++        "resets": {
++          "const": 2
++        },
++        "steps": {
++          "type": "integer",
++          "exclusiveMinimum": 0,
++          "maximum": 100
++        }
++      }
++    },
++    "science_authorized": {
++      "const": false
++    }
++  }
++}
+diff --git a/configs/self_improvement/si_e2_proposal_schema_v1.json b/configs/self_improvement/si_e2_proposal_schema_v1.json
+new file mode 100644
+index 0000000..28aa2f0
+--- /dev/null
++++ b/configs/self_improvement/si_e2_proposal_schema_v1.json
+@@ -0,0 +1,346 @@
++{
++  "$schema": "https://json-schema.org/draft/2020-12/schema",
++  "title": "SI-E2 immutable input proposal; not a release",
++  "type": "object",
++  "additionalProperties": false,
++  "required": [
++    "schema",
++    "purpose",
++    "model",
++    "environment",
++    "interpreter",
++    "packages",
++    "synthetic_prompts_sha256"
++  ],
++  "properties": {
++    "schema": {
++      "const": "SI_E2_PROPOSAL_V1"
++    },
++    "purpose": {
++      "const": "ENGINEERING_DIAGNOSTIC_ONLY"
++    },
++    "model": {
++      "type": "object",
++      "required": [
++        "base_snapshot",
++        "adapter_path"
++      ],
++      "additionalProperties": false,
++      "properties": {
++        "base_snapshot": {
++          "type": "string"
++        },
++        "adapter_path": {
++          "type": "string"
++        }
++      }
++    },
++    "environment": {
++      "type": "object",
++      "required": [
++        "trajectory",
++        "events",
++        "config",
++        "game",
++        "traj_data",
++        "data_root",
++        "trajectory_sha256",
++        "events_sha256",
++        "config_sha256",
++        "game_sha256",
++        "traj_data_sha256",
++        "logic_files"
++      ],
++      "additionalProperties": false,
++      "properties": {
++        "trajectory": {
++          "type": "string"
++        },
++        "events": {
++          "type": "string"
++        },
++        "config": {
++          "type": "string"
++        },
++        "game": {
++          "type": "string"
++        },
++        "traj_data": {
++          "type": "string"
++        },
++        "data_root": {
++          "type": "string"
++        },
++        "trajectory_sha256": {
++          "type": "string",
++          "pattern": "^[0-9a-f]{64}$"
++        },
++        "events_sha256": {
++          "type": "string",
++          "pattern": "^[0-9a-f]{64}$"
++        },
++        "config_sha256": {
++          "type": "string",
++          "pattern": "^[0-9a-f]{64}$"
++        },
++        "game_sha256": {
++          "type": "string",
++          "pattern": "^[0-9a-f]{64}$"
++        },
++        "traj_data_sha256": {
++          "type": "string",
++          "pattern": "^[0-9a-f]{64}$"
++        },
++        "logic_files": {
++          "type": "object",
++          "required": [
++            "domain",
++            "grammar"
++          ],
++          "additionalProperties": false,
++          "properties": {
++            "domain": {
++              "type": "object",
++              "additionalProperties": false,
++              "required": [
++                "path",
++                "sha256"
++              ],
++              "properties": {
++                "path": {
++                  "type": "string"
++                },
++                "sha256": {
++                  "type": "string",
++                  "pattern": "^[0-9a-f]{64}$"
++                }
++              }
++            },
++            "grammar": {
++              "type": "object",
++              "additionalProperties": false,
++              "required": [
++                "path",
++                "sha256"
++              ],
++              "properties": {
++                "path": {
++                  "type": "string"
++                },
++                "sha256": {
++                  "type": "string",
++                  "pattern": "^[0-9a-f]{64}$"
++                }
++              }
++            }
++          }
++        }
++      }
++    },
++    "interpreter": {
++      "type": "object",
++      "additionalProperties": false,
++      "required": [
++        "path",
++        "sha256"
++      ],
++      "properties": {
++        "path": {
++          "type": "string"
++        },
++        "sha256": {
++          "type": "string",
++          "pattern": "^[0-9a-f]{64}$"
++        }
++      }
++    },
++    "packages": {
++      "type": "object",
++      "required": [
++        "torch",
++        "transformers",
++        "peft",
++        "alfworld",
++        "textworld",
++        "yaml",
++        "alfworld.agents.environment.alfred_tw_env",
++        "textworld.gym"
++      ],
++      "additionalProperties": false,
++      "properties": {
++        "torch": {
++          "type": "object",
++          "additionalProperties": false,
++          "required": [
++            "path",
++            "sha256",
++            "version"
++          ],
++          "properties": {
++            "path": {
++              "type": "string"
++            },
++            "sha256": {
++              "type": "string",
++              "pattern": "^[0-9a-f]{64}$"
++            },
++            "version": {
++              "type": "string"
++            }
++          }
++        },
++        "transformers": {
++          "type": "object",
++          "additionalProperties": false,
++          "required": [
++            "path",
++            "sha256",
++            "version"
++          ],
++          "properties": {
++            "path": {
++              "type": "string"
++            },
++            "sha256": {
++              "type": "string",
++              "pattern": "^[0-9a-f]{64}$"
++            },
++            "version": {
++              "type": "string"
++            }
++          }
++        },
++        "peft": {
++          "type": "object",
++          "additionalProperties": false,
++          "required": [
++            "path",
++            "sha256",
++            "version"
++          ],
++          "properties": {
++            "path": {
++              "type": "string"
++            },
++            "sha256": {
++              "type": "string",
++              "pattern": "^[0-9a-f]{64}$"
++            },
++            "version": {
++              "type": "string"
++            }
++          }
++        },
++        "alfworld": {
++          "type": "object",
++          "additionalProperties": false,
++          "required": [
++            "path",
++            "sha256",
++            "version"
++          ],
++          "properties": {
++            "path": {
++              "type": "string"
++            },
++            "sha256": {
++              "type": "string",
++              "pattern": "^[0-9a-f]{64}$"
++            },
++            "version": {
++              "type": "string"
++            }
++          }
++        },
++        "textworld": {
++          "type": "object",
++          "additionalProperties": false,
++          "required": [
++            "path",
++            "sha256",
++            "version"
++          ],
++          "properties": {
++            "path": {
++              "type": "string"
++            },
++            "sha256": {
++              "type": "string",
++              "pattern": "^[0-9a-f]{64}$"
++            },
++            "version": {
++              "type": "string"
++            }
++          }
++        },
++        "yaml": {
++          "type": "object",
++          "additionalProperties": false,
++          "required": [
++            "path",
++            "sha256",
++            "version"
++          ],
++          "properties": {
++            "path": {
++              "type": "string"
++            },
++            "sha256": {
++              "type": "string",
++              "pattern": "^[0-9a-f]{64}$"
++            },
++            "version": {
++              "type": "string"
++            }
++          }
++        },
++        "alfworld.agents.environment.alfred_tw_env": {
++          "type": "object",
++          "additionalProperties": false,
++          "required": [
++            "path",
++            "sha256",
++            "version"
++          ],
++          "properties": {
++            "path": {
++              "type": "string"
++            },
++            "sha256": {
++              "type": "string",
++              "pattern": "^[0-9a-f]{64}$"
++            },
++            "version": {
++              "type": "string"
++            }
++          }
++        },
++        "textworld.gym": {
++          "type": "object",
++          "additionalProperties": false,
++          "required": [
++            "path",
++            "sha256",
++            "version"
++          ],
++          "properties": {
++            "path": {
++              "type": "string"
++            },
++            "sha256": {
++              "type": "string",
++              "pattern": "^[0-9a-f]{64}$"
++            },
++            "version": {
++              "type": "string"
++            }
++          }
++        }
++      }
++    },
++    "synthetic_prompts_sha256": {
++      "type": "string",
++      "pattern": "^[0-9a-f]{64}$"
++    }
++  }
++}
+diff --git a/docs/si_p3_runtime_engineering_v1.md b/docs/si_p3_runtime_engineering_v1.md
+new file mode 100644
+index 0000000..fd53c5d
+--- /dev/null
++++ b/docs/si_p3_runtime_engineering_v1.md
+@@ -0,0 +1,132 @@
++# SI-E2 runtime boundary engineering contract
++
++Status: ENGINEERING IMPLEMENTATION ONLY. No release is included. Acquisition96, training,
++evaluation, historical reruns and scientific launch remain NOT_GRANTED. The original
++a995 collector, synthetic journal gates, prompts, parsers, scientific budgets, frozen
++training recipe and all previous methods are unchanged. This package does not make
++that collector accept engineering or live evidence, and does not implement a real
++collection or training driver.
++
++## Distinct engineering path
++
++1. The supervisor authenticates externally issued authorization **raw bytes** against
++   the SHA supplied in the independently approved command. It checks the exact clean
++   Git revision, proposal byte hash, unique canonical output identity, one GPU UUID,
++   UTC window, fixed diagnostic shape and ceilings. An `issuer` string is not a
++   signature: the expected authorization SHA must be supplied by the coordinator's
++   separate immutable release, never inferred from an author-created JSON file.
++2. Offline base files are checked against the unchanged committed R19 identity
++   manifest. P0 directory bytes must match the frozen P0 hash. The historical YAML,
++   game, traj_data, source JSONL and original ledger are hash-bound; effective domain
++   and grammar file contents are separately checked. The known runtime modules in
++   the proposal must match actual loaded paths, hashes and public module versions.
++   `version` is the module public __version__ (empty if absent), matching the root
++   binding artifact; installed distribution versions are separately recorded. An
++   absent public version is never invented from a different source.
++3. A fresh-session child uses the exact isolated interpreter/script. Supervisor PID,
++   command, source, authorization and output markers are cross-checked; a parent-death
++   signal closes the normal orphan route. The external monotonic deadline includes
++   loading and blocking generation/environment callbacks. Cleanup kills its own
++   process group and observed descendants (PID/start tick/UID checked), including
++   children that create another session, then reaps them. Existing graphics/compute
++   processes are never killed. Authentic return code, surviving descendants, timing
++   and missing child reports are persisted; a killed child report is not fabricated.
++4. Before full model allocation, a one-byte CUDA context checks actual UUID and
++   observable own NVML compute PID. Unknown PID namespaces/ownership stop cheaply.
++   Exactly one visible A40 is required; foreign compute on it is rejected. Actual
++   base parameters must stay BF16, no CPU/disk offload or quantization. PEFT's default
++   F32 LoRA behavior is preserved. Actual Qwen3 local config and `sdpa` implementation
++   are asserted and recorded rather than inferred from a default.
++5. The unchanged Qwen loader supplies the local tokenizer/base, and the frozen P0 is
++   loaded with `PeftModel.from_pretrained(..., is_trainable=False)`. P0 calls observe
++   enabled layers. BASE calls use the real `disable_adapter()` context. Both model
++   and every layer must have consistent enabled flags, active `default` name and no
++   merged adapters. Original gradient flags are explicitly restored on normal and
++   exceptional exits: installed PEFT otherwise re-enables LoRA trainability. This is
++   inference restoration, not an optimizer step or a dtype conversion.
++6. All four prompts are fixed by `engineering_prompts()` and their digest is in the
++   proposal before execution: source16, Stage1 40, Stage2 16, suffix16. Stage2 uses a
++   predeclared **synthetic** diagnosis/subgoal. Actual Stage1 text never changes it.
++   This exercises independent runtime modes, not a causal teacher branch. Frozen v2
++   parsers and P0 decisions report invalid/incomplete text honestly; no retries,
++   fallback, action tuning or semantic-success requirement occurs. No generated
++   command is executed in the environment.
++7. Full rendered input IDs and attention masks are compared against the exact
++   tensors passed to `generate`, before the external-generation reservation. The
++   strict old `Generation.raw` keys stay unchanged; supplemental tensor/state proof
++   is separate. Greedy/no-thinking/score/token/EOS semantics remain frozen. All four
++   known input lengths/caps are checked upfront, with per-call ceilings enforced again.
++8. Environment exercise uses only the first predetermined completed G3 TRAIN source,
++   canonical hash `fba2a4278c4f1d9640c1c39f527fe3d5e7022ab50af4d353bc017bb31bbead89`,
++   executed at2da. The original reset/transition receipt references supply after-maps;
++   trajectory `valid_actions` is a before-map. Saved game/traj hashes cross-match row
++   metadata and the completion event. Two FRESH one-game instances use the same
++   TextWorld pool seed. This avoids treating reset(seed) as reseeding an already
++   advanced TextWorld RNG. The six saved commands imply a proposal cap of2 resets /
++   12 steps. Goal, task, observation, reward, done, truncation and map **order** all
++   match. Missing terminal maps remain null evidence and cause a strict mismatch,
++   never become an invented empty map. A nonterminal reference cannot establish
++   terminal behavior and cannot trigger outcome search.
++9. The new factory restricts effective dataset.data_path to the authenticated task
++   directory BEFORE ALFWorld construction, and uses a no-scan one-game subclass.
++   Original YAML bytes, domain randomization, expert type, wrappers and action
++   semantics are unchanged. The intentional discovery restriction is recorded.
++   The old exact-task helper is not repaired or invoked here: its constructor scans
++   global TRAIN before overwriting game_files and would open reserved task bodies.
++10. An independent engineering ledger fsyncs starts/completions and raw evidence.
++    Cost reconstruction sums actual completed calls plus full conservative open/failed
++    reservations, and rejects altered summaries or input/tensor proof even with a
++    rewritten hash chain. Environment construct/close counts remain separate from
++    resets/actions. Incomplete operations are not task failures and are never retried.
++
++## Proposal and command for independent review
++
++Schemas: `configs/self_improvement/si_e2_proposal_schema_v1.json` and
++`si_e2_authorization_schema_v1.json`. Runtime checks add semantic constraints to
++these declarative wire schemas; no external JSON-schema package is required.
++
++The proposal carries ONLY explicit local runtime paths and hashes: base snapshot,
++P0, original completed source JSONL/ledger, YAML/game/traj_data, data root, domain/
++grammar, interpreter bytes, eight fixed module origins/versions and fixed-prompt
++set digest. It carries no collection schedule, new task payload, generated action,
++training recipe, quantization option or policy threshold. Machine-specific values
++belong in runtime arguments or ignored configs/local, never in a scientific commit.
++
++The coordinator must first review the frozen source and then approve the exact
++proposal, authorization bytes, interpreter, argv, environment, UUID and fresh output.
++The following is a **non-executable template**, not permission or a ready command:
++
++```text
++CUDA_VISIBLE_DEVICES=<one approved GPU UUID> HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
++  <pinned-python> -I <reviewed-checkout>/scripts/run_si_p3_engineering_probe.py \
++  --authorization <independently released authorization JSON> \
++  --authorization-sha256 <externally released SHA256 of those exact bytes> \
++  --proposal <immutable proposal JSON>
++```
++
++The authorization binds the final source SHA (not a995 or an old clearance), proposal
++raw SHA, UUID, fresh output path, UTC window and ceilings. Maxima1800 seconds /0.5
++allocated device-hours /4 generations /88 output /32768 input /8192 per input /
++2 resets /100 steps can only tighten; the known six-step replay should use12 steps.
++Fixed four-call/output/reset worst cases must fit before construction. An output
++identity is consumed even by a failed or killed attempt; no overwrite/retry occurs.
++No valid authorization is shipped. No engineering runtime probe has been run by
++the developer. Luna must propose concrete immutable inputs for a later root release.
++
++## Verification and limits
++
++Software tests use real tiny CPU PEFT state, a real small CPU generate case, explicit
++raw generation/TextWorld edges, original prompt/parsers and real ledger/consumer.
++A nonempty four-phase/two-replay path reaches the report. Negative tests cover
++wrong authority/SHA/UUID/ownership/origins, input tensors/masks, adapter switching,
++unknown reservations and cost tamper; actual subprocess tests cover exit failure,
++path reuse and worker/descendant deadlines. Fixtures are explicitly synthetic;
++software supervisor receipts count ZERO actual allocated GPUs.
++
++Until independently observed: actual8B/P0 load/adapter state, installed environment
++behavior, terminal-map availability, PID visibility, peak GPU memory/latency and
++GPU completion are NOT_VERIFIED. No memory estimate establishes BF16 training fit,
++optimizer/activation peak or96-source completion. New B/C experience/exposure,
++learning effects, efficacy and any statistical reporter remain unimplemented or
++unobserved. No independent engineering PASS, scientific PASS or launch authority
++belongs to the developer.
+diff --git a/scripts/run_si_p3_engineering_probe.py b/scripts/run_si_p3_engineering_probe.py
+new file mode 100644
+index 0000000..4af5d33
+--- /dev/null
++++ b/scripts/run_si_p3_engineering_probe.py
+@@ -0,0 +1,65 @@
++#!/usr/bin/env python3
++"""Fail-closed SI-E2 diagnostic. No default release, inputs, devices or output."""
++from __future__ import annotations
++
++import argparse
++import json
++import os
++from pathlib import Path
++import sys
++from datetime import datetime, timezone
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT / "src"))
++
++from self_improvement.si_p3.contract import require
++from self_improvement.si_p3.runtime_gate import authenticate, inspect_gpu, utc, verify_artifacts
++from self_improvement.si_p3.runtime_ledger import fresh_json
++
++
++def main(argv: list[str] | None = None) -> int:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--authorization", type=Path, required=True)
++    parser.add_argument("--authorization-sha256", required=True)
++    parser.add_argument("--proposal", type=Path, required=True)
++    parser.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
++    args = parser.parse_args(argv)
++    try:
++        require(sys.flags.isolated == 1, "entrypoint requires python -I")
++        permit = authenticate(ROOT, args.authorization, args.authorization_sha256, args.proposal, worker=args.worker)
++        artifact_receipt = verify_artifacts(permit)
++        # No backend/ALFWorld construction has occurred above this gate.
++        resource = inspect_gpu(permit.gpu_uuid, allowed_pids=set())
++        if args.worker:
++            from self_improvement.si_p3.runtime_diagnostic import run_diagnostic
++            fresh_json(permit.output / "worker_gate.json", {"artifacts": artifact_receipt, "resource_before_load": resource})
++            report = run_diagnostic(permit)
++            return 0 if report["status"] == "ENGINEERING_BOUNDARY_OBSERVED_NOT_SCIENTIFIC_ACCEPTANCE" else 1
++        from self_improvement.si_p3.runtime_supervisor import supervise
++        remaining = (utc(permit.authorization["expires_utc"]) - datetime.now(timezone.utc)).total_seconds()
++        seconds = min(permit.ceilings["seconds"], permit.ceilings["device_hours"] * 3600, remaining)
++        require(seconds > 0, "release expired before launch")
++        command = [sys.executable, "-I", str(Path(__file__).resolve()), "--worker", "--authorization",
++            str(args.authorization.resolve()), "--authorization-sha256", args.authorization_sha256,
++            "--proposal", str(args.proposal.resolve())]
++        environment = {k:v for k,v in os.environ.items() if k not in ("PYTHONPATH", "PYTHONHOME", "LD_PRELOAD", "CUDA_DEVICE_ORDER")}
++        environment.update(HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1", TOKENIZERS_PARALLELISM="false",
++                           PYTHONDONTWRITEBYTECODE="1", CUDA_VISIBLE_DEVICES=permit.gpu_uuid)
++        context = {"source_sha": permit.authorization["source_sha"], "authorization_sha256": permit.authorization_sha256,
++            "proposal_sha256": permit.proposal_sha256, "gpu_uuid": permit.gpu_uuid, "evidence_class": "engineering_diagnostic",
++            "artifact_precheck": artifact_receipt, "resource_precheck": resource, "supervisor_argv": list(sys.orig_argv)}
++        receipt = supervise(command, permit.output, context=context, seconds=seconds, environment=environment)
++        try:
++            fresh_json(permit.output / "resource_after.json", inspect_gpu(permit.gpu_uuid, allowed_pids=set()))
++        except Exception as error:
++            fresh_json(permit.output / "resource_after_error.json", {"exception": type(error).__name__, "message": str(error)})
++            return 1
++        return 0 if receipt["authentic_returncode"] == 0 and not receipt["deadline_triggered"] and not receipt["members_after_cleanup"] and receipt["within_time_cap"] else 1
++    except Exception as error:
++        print(json.dumps({"status": "REJECTED_OR_TECHNICAL_STOP", "exception": type(error).__name__, "message": str(error),
++            "resource_evidence": getattr(error, "resource_evidence", None)}), file=sys.stderr)
++        return 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/src/self_improvement/si_p3/runtime_backend.py b/src/self_improvement/si_p3/runtime_backend.py
+new file mode 100644
+index 0000000..99cb52b
+--- /dev/null
++++ b/src/self_improvement/si_p3/runtime_backend.py
+@@ -0,0 +1,239 @@
++"""Offline single-device P0/base inference with actual PEFT and tensor evidence."""
++from __future__ import annotations
++
++from contextlib import nullcontext
++from dataclasses import asdict, dataclass
++from pathlib import Path
++from typing import Any, Callable, Mapping
++import json
++import time
++import importlib.metadata
++
++from .contract import Generation, P0_SHA256, Prepared, require, text_hash
++from .runtime_gate import Permit, file_hash, inspect_gpu
++from .runtime_ledger import EngineeringLedger
++
++
++@dataclass(frozen=True)
++class PreparedTensors:
++    prepared: Prepared
++    attention_mask: tuple[int, ...]
++
++    def to_dict(self) -> dict[str, Any]:
++        return self.prepared.to_dict() | {"attention_mask": list(self.attention_mask)}
++
++
++def module_origin(module: Any) -> dict[str, str]:
++    path = Path(module.__file__).resolve()
++    return {"path": str(path), "sha256": file_hash(path), "version": str(getattr(module, "__version__", ""))}
++
++
++def installed_distribution_versions() -> dict[str, str | None]:
++    """Supplement module attributes, whose absence must not be invented as a version."""
++    result = {}
++    for name in ("torch", "transformers", "peft", "alfworld", "textworld", "PyYAML"):
++        try: result[name] = importlib.metadata.version(name)
++        except importlib.metadata.PackageNotFoundError: result[name] = None
++    return result
++
++
++def adapter_state(model: Any) -> dict[str, Any]:
++    """Names alone are insufficient: disable_adapter retains active names."""
++    return {"model": asdict(model.get_model_status()),
++            "layers": [asdict(value) for value in model.get_layer_status()]}
++
++
++def verify_adapter_state(state: Mapping[str, Any], *, enabled: bool) -> None:
++    summary, layers = state["model"], state["layers"]
++    require(bool(layers) and summary["num_adapter_layers"] == len(layers), "PEFT adapter layer count")
++    for row in [summary, *layers]:
++        require(row["enabled"] is enabled and row["active_adapters"] == ["default"] and
++                row["merged_adapters"] == [] and row["available_adapters"] == ["default"],
++                "PEFT enabled/name/merged state mismatch")
++    require(summary["trainable_params"] == 0, "inference adapter must be frozen")
++
++
++class LocalInference:
++    """The real loader is entered only inside the separately authorized worker.
++
++    Software fixtures inject a tiny frozen PEFT model and generation boundary;
++    they never exercise this real loader or claim an 8B state observation.
++    """
++    def __init__(self, tokenizer: Any, model: Any, torch: Any, ledger: EngineeringLedger,
++                 resource_check: Callable[[], Any], *, software_fixture: bool = False) -> None:
++        self.tokenizer, self.model, self.torch = tokenizer, model, torch
++        self.ledger, self.resource_check = ledger, resource_check
++        self.software_fixture = software_fixture
++        if software_fixture:
++            require(str(model.device) == "cpu" and sum(p.numel() for p in model.parameters()) <= 1_000_000,
++                    "software boundary requires tiny CPU model")
++        else:
++            require(str(model.device) == "cuda:0" and all(str(p.device) == "cuda:0" for p in model.parameters()),
++                    "one CUDA device, no CPU/disk offload")
++            require(not getattr(model, "is_loaded_in_4bit", False) and not getattr(model, "is_loaded_in_8bit", False),
++                    "quantization forbidden")
++            # PEFT's default F32 LoRA autocast is intentional; do not cast it away.
++            for name, param in model.named_parameters():
++                if param.is_floating_point():
++                    allowed = (torch.bfloat16, torch.float32) if "lora_" in name else (torch.bfloat16,)
++                    require(param.dtype in allowed, "frozen base dtype/default PEFT dtype")
++        require(all(not p.requires_grad for p in model.parameters()), "inference only, no trainable parameters")
++        verify_adapter_state(adapter_state(model), enabled=True)
++        model.eval()
++        eos = tokenizer.eos_token_id
++        self.eos_ids = (eos,) if type(eos) is int else tuple(eos or ())
++        require(bool(self.eos_ids), "EOS IDs")
++
++    @classmethod
++    def load(cls, permit: Permit, ledger: EngineeringLedger) -> LocalInference:
++        ledger.reserve("model-load", "model_load")
++        try:
++            import torch
++            import transformers
++            import peft
++            import models.qwen as qwen
++            from models.policy import GenerationOptions
++            from models.qwen import QwenPolicy, QwenPolicyConfig
++            for name, module in (("torch", torch), ("transformers", transformers), ("peft", peft)):
++                require(module_origin(module) == permit.proposal["packages"][name], "package origin/version: " + name)
++            from .runtime_gate import PHASES, engineering_prompts
++            pretokenizer = transformers.AutoTokenizer.from_pretrained(permit.proposal["model"]["base_snapshot"],
++                local_files_only=True, trust_remote_code=False)
++            known_inputs = []
++            for prompt in engineering_prompts().values():
++                rendered = pretokenizer.apply_chat_template([{"role": "user", "content": prompt}], tokenize=False,
++                    add_generation_prompt=True, enable_thinking=False)
++                known_inputs.append(len(pretokenizer(rendered, add_special_tokens=True)["input_ids"]))
++            require(max(known_inputs) <= permit.ceilings["per_call_input"] and
++                    sum(known_inputs) <= permit.ceilings["input_tokens"] and
++                    permit.ceilings["generations"] >= 4 and permit.ceilings["generated_tokens"] >= sum(x[1] for x in PHASES),
++                    "four fixed prepared-input/output ceilings before GPU allocation")
++            require(torch.cuda.is_available() and torch.cuda.device_count() == 1, "one visible CUDA device")
++            check = lambda: inspect_gpu(permit.gpu_uuid, allowed_pids={__import__("os").getpid()}, require_owned_context=True)
++            # Resolve namespace/ownership cheaply, before allocating the 8B weights.
++            torch.cuda.init()
++            require(str(getattr(torch.cuda.get_device_properties(0), "uuid", "")) == permit.gpu_uuid,
++                    "actual CUDA device UUID differs or is unobservable")
++            context_probe = torch.empty(1, dtype=torch.uint8, device="cuda:0")
++            ledger.append("resource", {"point": "one_byte_context_before_weights", "observed": check()})
++            del context_probe
++            backend = QwenPolicy(QwenPolicyConfig(model_id=permit.proposal["model"]["base_snapshot"],
++                device="cuda:0", dtype="bfloat16", local_files_only=True, trust_remote_code=False,
++                enable_thinking=False, generation=GenerationOptions(max_new_tokens=16, do_sample=False)))
++            tokenizer, base, _ = backend._load()
++            model = peft.PeftModel.from_pretrained(base, permit.proposal["model"]["adapter_path"],
++                is_trainable=False, local_files_only=True)
++            for p in model.parameters(): p.requires_grad_(False)
++            actual_config = {"model_type": model.config.model_type,
++                "attention_implementation": str(getattr(model.config, "_attn_implementation", "")),
++                "name_or_path": str(model.config._name_or_path),
++                "config_file_sha256": file_hash(Path(permit.proposal["model"]["base_snapshot"]) / "config.json"),
++                "hidden_size": model.config.hidden_size, "num_hidden_layers": model.config.num_hidden_layers,
++                "hf_device_map": getattr(model, "hf_device_map", {})}
++            require(actual_config["model_type"] == "qwen3" and actual_config["attention_implementation"] == "sdpa" and
++                    Path(actual_config["name_or_path"]).resolve() == Path(permit.proposal["model"]["base_snapshot"]).resolve(),
++                    "effective Qwen3/config/sdpa identity")
++            require(all(value in (0, "cuda:0") for value in actual_config["hf_device_map"].values()), "no CPU/disk offload map")
++            require(str(getattr(torch.cuda.get_device_properties(0), "uuid", "")) == permit.gpu_uuid,
++                    "actual CUDA device UUID differs or is unobservable")
++            result = cls(tokenizer, model, torch, ledger, check)
++            ledger.complete("model-load", {"origins": {m.__name__: module_origin(m) for m in (torch, transformers, peft, qwen)},
++                "adapter_state": adapter_state(model), "distribution_versions": installed_distribution_versions(), "effective_model_config": actual_config, "device": str(model.device),
++                "parameter_dtypes": sorted({str(p.dtype) for p in model.parameters()}),
++                "gpu": check(), "memory_allocated": torch.cuda.memory_allocated(),
++                "memory_reserved": torch.cuda.memory_reserved(), "max_memory_allocated": torch.cuda.max_memory_allocated()})
++            return result
++        except BaseException as error:
++            ledger.failed("model-load", error)
++            raise
++
++    def prepare(self, prompt: str) -> PreparedTensors:
++        rendered = self.tokenizer.apply_chat_template([{"role": "user", "content": prompt}],
++            tokenize=False, add_generation_prompt=True, enable_thinking=False)
++        encoded = self.tokenizer(text=rendered, add_special_tokens=True)
++        require(set(encoded) == {"input_ids", "attention_mask"}, "tokenizer tensor keys")
++        ids, mask = encoded["input_ids"], encoded["attention_mask"]
++        require(type(ids) is list and bool(ids) and all(type(i) is int and i >= 0 for i in ids) and
++                mask == [1] * len(ids), "full unpadded tokenizer IDs/mask")
++        return PreparedTensors(Prepared(prompt, rendered, tuple(ids)), tuple(mask))
++
++    def generate(self, phase: str, prepared: PreparedTensors, cap: int, mode: str) -> Generation:
++        from .runtime_gate import PHASES
++        require((phase, cap, mode) in PHASES, "fixed phase/cap/mode")
++        self.model.eval()
++        # Re-render and re-tokenize before reservation; stale/caller-forged Prepared is rejected.
++        require(self.prepare(prepared.prepared.prompt) == prepared, "prepared-token drift")
++        encoded = self.tokenizer(text=prepared.prepared.rendered_prompt, add_special_tokens=True, return_tensors="pt")
++        require(set(encoded) == {"input_ids", "attention_mask"}, "generate tensor keys")
++        inputs = {name: value.to(self.model.device) for name, value in encoded.items()}
++        require(all(value.ndim == 2 and value.shape[0] == 1 for value in inputs.values()), "one exact tensor row")
++        sent = prepared.prepared.to_dict() | {"input_ids": inputs["input_ids"][0].tolist(),
++                                            "attention_mask": inputs["attention_mask"][0].tolist()}
++        require(sent == prepared.to_dict(), "prepared/sent full input IDs and mask mismatch")
++        before = adapter_state(self.model)
++        verify_adapter_state(before, enabled=True)
++        self.resource_check()
++        unit = "generation-" + phase
++        started = False
++        raw = None
++        original_grad = {name: p.requires_grad for name, p in self.model.named_parameters()}
++        def restore_grad() -> None:
++            require(set(original_grad) == {name for name, _ in self.model.named_parameters()}, "parameter identity changed")
++            for name, parameter in self.model.named_parameters(): parameter.requires_grad_(original_grad[name])
++        try:
++            context = self.model.disable_adapter() if mode == "BASE" else nullcontext()
++            with context:
++                during = adapter_state(self.model)
++                verify_adapter_state(during, enabled=mode == "P0")
++                # No external-generation reservation until tensors AND actual PEFT state agree.
++                self.ledger.reserve(unit, "generation", phase=phase, prepared=prepared.to_dict())
++                started = True
++                self.ledger.append("adapter_state", {"phase": phase, "point": "during", "state": during})
++                if not self.software_fixture: self.torch.cuda.synchronize()
++                at = time.perf_counter()
++                with self.torch.no_grad():
++                    generated = self.model.generate(**inputs, max_new_tokens=cap, do_sample=False,
++                        return_dict_in_generate=True, output_scores=True)
++                if not self.software_fixture: self.torch.cuda.synchronize()
++                elapsed = time.perf_counter() - at
++                # Detect a bad generate boundary mutating its arguments or adapter state.
++                require(inputs["input_ids"][0].tolist() == sent["input_ids"] and
++                        inputs["attention_mask"][0].tolist() == sent["attention_mask"], "input tensors mutated during generate")
++                verify_adapter_state(adapter_state(self.model), enabled=mode == "P0")
++                sequence = generated.sequences[0].tolist()
++                require(sequence[:len(sent["input_ids"])] == sent["input_ids"], "generated input prefix changed")
++                tokens = sequence[len(sent["input_ids"]):]
++                require(len(generated.scores or ()) == len(tokens), "scores/token count")
++                reached = len(tokens) == cap
++                raw = {"prompt": prepared.prepared.prompt, "rendered_prompt": prepared.prepared.rendered_prompt,
++                       "rendered_prompt_sha256": text_hash(prepared.prepared.rendered_prompt),
++                       "raw_output": self.tokenizer.decode(tokens, skip_special_tokens=True).strip(),
++                       "token_ids": tokens, "token_ids_sha256": text_hash(json.dumps(tokens,separators=(",", ":"))),
++                       "input_tokens": len(sent["input_ids"]), "generated_tokens": len(tokens),
++                       "latency_seconds": elapsed, "output_complete": not reached or bool(tokens and tokens[-1] in self.eos_ids),
++                       "token_cap_reached": reached, "max_new_tokens": cap, "do_sample": False, "thinking": False,
++                       "adapter_mode": mode, "adapter_sha256": P0_SHA256 if mode == "P0" else None}
++                value = Generation.from_raw(raw, prepared.prepared, cap, mode, self.eos_ids)
++            # Installed PEFT re-enables LoRA grads on context exit; restore original inference flags.
++            restore_grad()
++            after = adapter_state(self.model)
++            verify_adapter_state(after, enabled=True)
++            require(after == before, "adapter restoration mismatch")
++            self.ledger.complete(unit, {"raw": dict(value.raw), "tensor_proof": {"prepared": prepared.to_dict(), "sent": sent},
++                "adapter_states": {"before": before, "during": during, "after": after}, "resource": self.resource_check(),
++                "memory": {"software_no_gpu": True} if self.software_fixture else {
++                    "allocated": self.torch.cuda.memory_allocated(), "reserved": self.torch.cuda.memory_reserved(),
++                    "peak_allocated_since_context": self.torch.cuda.max_memory_allocated(),
++                    "peak_reserved_since_context": self.torch.cuda.max_memory_reserved()}})
++            return value
++        except BaseException as error:
++            if started and not self.ledger.units[unit].get("finished"):
++                self.ledger.failed(unit, error)
++            raise
++        finally:
++            restore_grad()
++            restored = adapter_state(self.model)
++            self.ledger.append("adapter_state", {"phase": phase, "point": "after_or_exception", "state": restored,
++                "raw_received_before_failure": raw})
++            verify_adapter_state(restored, enabled=True)
++            require(restored == before, "adapter exception restoration mismatch")
+diff --git a/src/self_improvement/si_p3/runtime_diagnostic.py b/src/self_improvement/si_p3/runtime_diagnostic.py
+new file mode 100644
+index 0000000..fba3abe
+--- /dev/null
++++ b/src/self_improvement/si_p3/runtime_diagnostic.py
+@@ -0,0 +1,103 @@
++"""One engineering-only boundary exercise. This never invokes the Collector."""
++from __future__ import annotations
++
++import importlib
++import json
++import os
++from pathlib import Path
++from typing import Any, Callable
++
++from .collector import parse_generation
++from .contract import PublicState, digest, require
++from .runtime_backend import LocalInference, module_origin, installed_distribution_versions
++from .runtime_environment import ReadIsolatedEnvironment, ReplayEvidence, historical_replay, replay_twice, bind_original_game_path
++from .runtime_gate import PACKAGE_NAMES, PHASES, Permit, engineering_prompts, file_hash
++from .runtime_ledger import EngineeringLedger, fresh_json, validate_report
++
++
++def verify_packages(permit: Permit) -> dict[str, Any]:
++    expected = permit.proposal["packages"]
++    for binding in expected.values():
++        require(file_hash(Path(binding["path"])) == binding["sha256"], "package input bytes changed")
++    observed = {}
++    for name in PACKAGE_NAMES:
++        module = importlib.import_module(name)
++        observed[name] = module_origin(module)
++        require(observed[name] == expected[name], "actual runtime package origin/version: " + name)
++    return {"module_origins": observed, "distribution_versions": installed_distribution_versions()}
++
++
++def run_diagnostic(permit: Permit, *, software_fixture: bool = False,
++                   software_loader: Callable[..., LocalInference] | None = None,
++                   software_environment_factory: Callable[[], Any] | None = None,
++                   software_replay: ReplayEvidence | None = None) -> dict[str, Any]:
++    """Explicit fixtures substitute only model/env edges; never exposed as a CLI bypass."""
++    require(software_fixture or (software_loader is None and software_environment_factory is None and software_replay is None),
++            "software injection forbidden in real diagnostic")
++    require(permit.authorization["purpose"] == "ENGINEERING_DIAGNOSTIC_ONLY" and
++            permit.authorization["science_authorized"] is False, "no science")
++    ledger = EngineeringLedger(permit.output / "engineering_events.jsonl", permit,
++        evidence_class="synthetic_software_fixture" if software_fixture else "engineering_diagnostic")
++    if not software_fixture:
++        allocation = json.loads((permit.output / "launch_context.json").read_bytes())["allocation_started_monotonic"]
++        require(allocation <= ledger.started_at, "supervisor allocation clock")
++        ledger.started_at = allocation
++    status = "ENGINEERING_BOUNDARY_OBSERVED_NOT_SCIENTIFIC_ACCEPTANCE"
++    results: dict[str, Any] = {}; error = None
++    try:
++        prompts = engineering_prompts()
++        require(digest(prompts) == permit.proposal["synthetic_prompts_sha256"], "fixed prompts changed")
++        if software_fixture:
++            require(software_loader is not None and software_environment_factory is not None and software_replay is not None,
++                    "complete explicit software edges")
++            replay, env_factory = software_replay, software_environment_factory
++            loader = software_loader
++            results["runtime_packages"] = "SOFTWARE_FIXTURE_NOT_REAL_RUNTIME_ORIGINS"
++        else:
++            env = permit.proposal["environment"]
++            replay = historical_replay(Path(env["trajectory"]).read_bytes(), Path(env["events"]).read_bytes())
++            row = json.loads(Path(env["trajectory"]).read_bytes().splitlines()[0])
++            bind_original_game_path(env, row, replay)
++            game = Path(env["game"])
++            from env.alfworld import AlfWorldConfig
++            def env_factory() -> ReadIsolatedEnvironment:
++                return ReadIsolatedEnvironment(AlfWorldConfig(Path(env["config"]), split="train",
++                    data_path=Path(env["data_root"])), game=game, pool_seed=replay.seed)
++            results["runtime_packages"] = verify_packages(permit)
++            loader = LocalInference.load
++        require(len(replay.commands) * 2 <= permit.ceilings["steps"] and 2 <= permit.ceilings["resets"],
++                "frozen historical replay budget before external calls")
++        backend = loader(permit, ledger)
++        state = PublicState("pick_and_place_simple-Engineering-None-Table-0/trial_engineering", "pick_and_place_simple",
++            "Move the engineering fixture object to the table", "Engineering fixture only. You see a table and a fixture object.",
++            ("look", "inventory"))
++        prepared = {phase: backend.prepare(prompt) for phase, prompt in prompts.items()}
++        # Reserve all four known inputs/output caps in a feasibility check before the first generation.
++        require(all(len(value.prepared.input_ids) <= permit.ceilings["per_call_input"] for value in prepared.values()) and
++                sum(len(value.prepared.input_ids) for value in prepared.values()) <= permit.ceilings["input_tokens"] and
++                sum(cap for _,cap,_ in PHASES) <= permit.ceilings["generated_tokens"] and permit.ceilings["generations"] >= 4,
++                "fixed four-call total input/output/count ceiling")
++        results["generations"] = []
++        for phase, cap, mode in PHASES:
++            generation = backend.generate(phase, prepared[phase], cap, mode)
++            results["generations"].append({"phase": phase, "raw": dict(generation.raw),
++                "parsed": parse_generation(phase, generation, state)})
++        # Outputs do not alter prompts or become environment commands, including invalid/incomplete outputs.
++        results["environment"] = replay_twice(replay, env_factory, ledger)
++    except BaseException as exc:
++        status = "TECHNICAL_STOP_NO_RETRY"
++        error = {"exception": type(exc).__name__, "message": str(exc)}
++        ledger.append("driver_failed", error)
++    finally:
++        report = {"schema": "SI_E2_ENGINEERING_REPORT_V1", "purpose": "ENGINEERING_DIAGNOSTIC_ONLY",
++            "evidence_class": "synthetic_software_fixture" if software_fixture else "engineering_diagnostic",
++            "science_authorized": False, "source_sha": permit.authorization["source_sha"],
++            "authorization_sha256": permit.authorization_sha256, "proposal_sha256": permit.proposal_sha256,
++            "status": status, "error": error, "results": results, "cost": ledger.snapshot(),
++            "historical_science_unchanged": {"generations": 5142, "environment_operations": 7949},
++            "limits": ["not a causal teacher branch", "Collector remains synthetic-only", "no acquisition/train/eval driver",
++                       "GPU observations do not establish training fit or acquisition completion"]}
++        validate_report(report, ledger.events)
++        fresh_json(permit.output / "engineering_report.json", report)
++        ledger.close()
++    return report
+diff --git a/src/self_improvement/si_p3/runtime_environment.py b/src/self_improvement/si_p3/runtime_environment.py
+new file mode 100644
+index 0000000..42de6a4
+--- /dev/null
++++ b/src/self_improvement/si_p3/runtime_environment.py
+@@ -0,0 +1,213 @@
++"""Read-isolated, two-fresh-instance replay of the first completed R19 source."""
++from __future__ import annotations
++
++import copy
++import json
++import os
++from dataclasses import dataclass
++from pathlib import Path
++from typing import Any, Callable, Mapping
++
++from env.alfworld import AlfWorldConfig, AlfWorldTextEnvironment, _expand_environment
++from models.action_parser import action_id_mapping
++from recovery.r19_duration import sha256_json
++
++from .contract import require
++from .runtime_gate import Permit
++from .runtime_ledger import EngineeringLedger
++
++HISTORICAL_SOURCE_SHA = "fba2a4278c4f1d9640c1c39f527fe3d5e7022ab50af4d353bc017bb31bbead89"
++HISTORICAL_RUN = "260422ac02bd42a8b2929d7ef240526b"
++HISTORICAL_CODE = "2da980f631badc25086d12db60d128ff507d3ae6"
++ISOLATION_RULING = "READ_ISOLATION_SCOPE_RULING.md; effective dataset.data_path restricted before construction"
++
++
++@dataclass(frozen=True)
++class ReplayEvidence:
++    task_id: str
++    family: str
++    seed: int
++    states: tuple[Mapping[str, Any], ...]
++    commands: tuple[str, ...]
++
++
++def source_hash(row: Mapping[str, Any]) -> str:
++    document = copy.deepcopy(row)
++    for name in ("source_trajectory_sha256", "r19_source_event_refs"):
++        document["metadata"].pop(name, None)
++    for step in document["steps"]:
++        for name in ("r19_generation_event_id", "r19_transition_event_id"):
++            step["metadata"].pop(name, None)
++    return sha256_json(document)
++
++
++def historical_replay(trajectory_bytes: bytes, events_bytes: bytes, *, expected_source_sha: str = HISTORICAL_SOURCE_SHA,
++                      software_fixture: bool = False) -> ReplayEvidence:
++    """Parse original production wire records. Never reconstruct an absent after-map."""
++    require(software_fixture or expected_source_sha == HISTORICAL_SOURCE_SHA, "fixed first source; no outcome search")
++    row = json.loads(trajectory_bytes.splitlines()[0])
++    meta = row["metadata"]
++    require(meta["schedule_index"] == 0 and meta["split"] == row["task"]["split"] == "train" and
++            source_hash(row) == expected_source_sha == meta["source_trajectory_sha256"], "authentic first completed source")
++    events = [json.loads(line) for line in events_bytes.splitlines() if line]
++    index = {event["event_id"]: event for event in events}
++    require(len(index) == len(events), "duplicate historical event")
++    refs = meta["r19_source_event_refs"]
++    source = index[refs["source_episode_event_id"]]
++    require(source["kind"] == "source_episode_completed" and source["payload"]["trajectory_sha256"] == expected_source_sha,
++            "source completion receipt")
++    if not software_fixture:
++        require(source["run_id"] == HISTORICAL_RUN and source["implementation_sha"] == HISTORICAL_CODE and
++                source["evidence_class"] == "live", "original completed G3 context")
++    require(source["payload"]["source_game_sha256"] == meta["source_game_sha256"] and
++            source["payload"]["source_traj_data_sha256"] == meta["source_traj_data_sha256"], "source/game byte identity")
++    task = row["task"]
++    def state(transition: Mapping[str, Any]) -> dict[str, Any]:
++        require(set(transition) >= {"observation", "valid_actions", "done", "reward", "truncated"} and
++                type(transition["valid_actions"]) is list, "saved full ordered after-map required")
++        return {"task_id": task["task_id"], "family": meta["task_family"], "goal": task["text"],
++                **{key: transition[key] for key in ("observation", "valid_actions", "done", "reward", "truncated")}}
++    reset = index[refs["reset_event_id"]]
++    require(reset["kind"] == "environment_operation_completed" and reset["payload"]["operation"] == "environment_reset" and
++            reset["payload"]["task_id"] == task["task_id"] and reset["payload"]["seed"] == row["seed"], "saved reset receipt")
++    states = [state(reset["payload"]["transition"])]; commands = []
++    require(states[0]["observation"] == row["initial_observation"], "initial observation")
++    require(len(refs["transition_event_ids"]) == len(row["steps"]) and 0 < len(row["steps"]) <= 50,
++            "complete executed source steps")
++    for i, (step, ref) in enumerate(zip(row["steps"], refs["transition_event_ids"])):
++        event = index[ref]; p = event["payload"]
++        before = states[-1]
++        require(event["kind"] == "environment_operation_completed" and step["index"] == i and
++                step["action_valid"] is True and step["metadata"]["r19_transition_event_id"] == ref and
++                step["observation"] == before["observation"] and step["valid_actions"] == before["valid_actions"] and
++                not before["done"] and not before["truncated"], "source step/before state")
++        require(p["command"] == step["action"] == p["transition"]["executed_command"] and
++                p["action_map"] == action_id_mapping(tuple(before["valid_actions"])) and
++                p["action_map"].get(p["action_id"]) == step["action"], "source command/ID/map")
++        require(p["before_state"]["observation"] == before["observation"] and
++                p["before_state"]["valid_actions"] == before["valid_actions"], "receipt before-state binding")
++        after = state(p["transition"])
++        require(after["observation"] == step["result_observation"] and after["done"] == step["done"] and
++                after["reward"] == step["reward"] and
++                after["truncated"] == step["metadata"]["transition_truncated"], "trajectory/receipt after state")
++        states.append(after); commands.append(step["action"])
++    return ReplayEvidence(task["task_id"], meta["task_family"], row["seed"], tuple(states), tuple(commands))
++
++
++class ReadIsolatedEnvironment(AlfWorldTextEnvironment):
++    """Old normalization, fresh TextWorld seed, and no global dataset discovery."""
++    def __init__(self, config: AlfWorldConfig, *, game: Path, pool_seed: int,
++                 factory_boundary: Any = None) -> None:
++        require(config.split == "train" and game.name == "game.tw-pddl", "exact historical TRAIN game")
++        super().__init__(config)
++        self.game, self.pool_seed, self.factory_boundary = game, pool_seed, factory_boundary
++        self.isolation: dict[str, Any] = {}
++        self.previous_data_environment = os.environ.get("ALFWORLD_DATA")
++
++    def _get_environment(self) -> Any:
++        if self._environment is not None: return self._environment
++        import yaml
++        if self._config.data_path is not None: os.environ["ALFWORLD_DATA"] = str(self._config.data_path)
++        configuration = _expand_environment(yaml.safe_load(self._config.config_path.read_text()))
++        # Apply BEFORE __init__: stock AlfredTWEnv otherwise opens all TRAIN bodies.
++        configuration = copy.deepcopy(configuration)
++        configuration["dataset"]["data_path"] = str(self.game.parent)
++        self.isolation = {"original_config_unchanged": True, "effective_dataset_data_path": str(self.game.parent),
++                          "exact_game": str(self.game), "pool_seed": self.pool_seed,
++                          "discovery": "explicit_no_scan_subclass", "scope": ISOLATION_RULING}
++        if self._config.data_path is not None: os.environ["ALFWORLD_DATA"] = str(self._config.data_path)
++        if self.factory_boundary is None:
++            from alfworld.agents.environment.alfred_tw_env import AlfredTWEnv
++            target = str(self.game)
++            class OneHistoricalGame(AlfredTWEnv):
++                def collect_game_files(self, verbose: bool = False) -> None:
++                    self.game_files = [target]
++                    self.num_games = 1
++            factory = OneHistoricalGame(configuration, train_eval="train")
++        else:
++            # Only explicit software edge substitution; never exposed by the real CLI.
++            factory = self.factory_boundary(configuration, train_eval="train")
++        require(factory.game_files == [str(self.game)], "factory discovered a foreign task")
++        factory.num_games = 1
++        environment = factory.init_env(batch_size=1)
++        self._environment = environment  # Retain even if seed fails, so cleanup can close it.
++        environment.seed(self.pool_seed)
++        return environment
++
++    def initialize(self) -> Mapping[str, Any]:
++        self._get_environment()
++        return self.isolation
++
++    def close(self) -> None:
++        if self._environment is not None:
++            self._environment.close()
++            self._environment = None
++        if self.previous_data_environment is None: os.environ.pop("ALFWORLD_DATA", None)
++        else: os.environ["ALFWORLD_DATA"] = self.previous_data_environment
++
++
++def observed_public(value: Any, evidence: ReplayEvidence, *, reset: bool) -> dict[str, Any]:
++    if reset:
++        require(value.task.task_id == evidence.task_id and value.task.split == "train" and
++                value.task.family in (None, evidence.family), "exact task reset identity")
++    return {"task_id": evidence.task_id, "family": evidence.family,
++            "goal": value.task.text if reset else evidence.states[0]["goal"],
++            "observation": value.observation,
++            "valid_actions": list(value.valid_actions) if value.valid_actions is not None else None,
++            "done": False if reset else value.done, "reward": 0.0 if reset else value.reward,
++            "truncated": False if reset else value.truncated}
++
++
++def replay_twice(evidence: ReplayEvidence, factory: Callable[[], ReadIsolatedEnvironment],
++                 ledger: EngineeringLedger) -> dict[str, Any]:
++    """Two new one-game instances, not repeated reset on an advanced TextWorld RNG."""
++    observed = []
++    instances = []
++    for attempt in range(2):
++        env = factory()
++        require(all(env is not old for old in instances), "replay requires fresh environment instance")
++        instances.append(env)
++        def perform(kind: str, index: int, call: Callable[[], Any], convert: Callable[[Any], Any]) -> Any:
++            unit = f"env-{attempt}-{kind}-{index}"
++            ledger.reserve(unit, kind)
++            try:
++                value = call(); data = convert(value)
++                ledger.complete(unit, data)
++                return data
++            except BaseException as error:
++                if not ledger.units[unit].get("finished"): ledger.failed(unit, error)
++                raise
++        try:
++            perform("env_construct", 0, env.initialize, lambda value: dict(value))
++            first = perform("reset", 0, lambda: env.reset(seed=evidence.seed),
++                            lambda value: observed_public(value, evidence, reset=True))
++            require(first == evidence.states[0], "historical reset public-state/map drift")
++            states = [first]
++            for i, command in enumerate(evidence.commands):
++                require(not states[-1]["done"] and not states[-1]["truncated"] and
++                        states[-1]["valid_actions"] is not None and command in states[-1]["valid_actions"],
++                        "saved command unavailable or terminal")
++                after = perform("step", i, lambda command=command: env.step(command),
++                                lambda value: observed_public(value, evidence, reset=False))
++                # None remains None in the recorded receipt. It is never fabricated as ().
++                require(after == evidence.states[i + 1], "historical transition/map/terminal drift")
++                states.append(after)
++            observed.append(states)
++        finally:
++            perform("env_close", 0, env.close, lambda _: {"closed": True})
++    require(observed[0] == observed[1], "fresh replay mismatch")
++    return {"replays": 2, "steps_each": len(evidence.commands), "repeated_public_states_equal": True,
++            "terminal_observed": bool(observed[-1][-1]["done"]),
++            "terminal_map_observed": observed[-1][-1]["valid_actions"] is not None if observed[-1][-1]["done"] else None,
++            "not_terminal_means": "terminal-map behavior NOT_OBSERVED; no outcome search",
++            "states": observed, "generated_commands_executed": 0}
++
++
++def bind_original_game_path(environment: Mapping[str, Any], row: Mapping[str, Any], evidence: ReplayEvidence) -> None:
++    game = Path(environment["game"])
++    original = Path(row["task"]["metadata"]["game_file"])
++    require(original.is_absolute() and game.resolve() == original.resolve(), "original historical game path; no copies/staging")
++    require("/".join(game.parts[-3:-1]) == evidence.task_id and game.is_relative_to(Path(environment["data_root"])),
++            "canonical historical game identity/data root")
++    require(row["metadata"]["source_game_sha256"] == environment["game_sha256"] and
++            row["metadata"]["source_traj_data_sha256"] == environment["traj_data_sha256"], "game hashes must match original source")
+diff --git a/src/self_improvement/si_p3/runtime_gate.py b/src/self_improvement/si_p3/runtime_gate.py
+new file mode 100644
+index 0000000..195982e
+--- /dev/null
++++ b/src/self_improvement/si_p3/runtime_gate.py
+@@ -0,0 +1,262 @@
++"""SI-E2 engineering authority. No acquisition, training or evaluation release."""
++from __future__ import annotations
++
++import csv
++import hashlib
++import io
++import json
++import math
++import os
++import re
++import subprocess
++from dataclasses import dataclass
++from datetime import datetime, timezone
++from pathlib import Path
++from typing import Any, Mapping
++
++from .contract import ContractError, P0_SHA256, SNAPSHOT, canonical, digest, integer, require
++
++SCOPE_SHA256 = "7d4f554095e96f55bf97a286dbcbdc3851f9a34b8036c5ac72d048b15564f85d"
++PARENT_SHA = "a995d4c3c5f7d31a2cf1fd0afc4bfa4bd72ee3a3"
++PURPOSE = "ENGINEERING_DIAGNOSTIC_ONLY"
++PHASES = (("source", 16, "P0"), ("stage_one", 40, "BASE"),
++          ("stage_two", 16, "BASE"), ("suffix", 16, "P0"))
++PACKAGE_NAMES = ("torch", "transformers", "peft", "alfworld", "textworld", "yaml",
++                 "alfworld.agents.environment.alfred_tw_env", "textworld.gym")
++
++MAXIMA = {"seconds": 1800, "device_hours": 0.5, "generations": 4,
++          "generated_tokens": 88, "input_tokens": 32768, "per_call_input": 8192,
++          "resets": 2, "steps": 100}
++
++
++def file_hash(path: Path) -> str:
++    h = hashlib.sha256()
++    with Path(path).open("rb") as handle:
++        for block in iter(lambda: handle.read(1024 * 1024), b""):
++            h.update(block)
++    return h.hexdigest()
++
++
++def read_bound(path: Path, expected: str) -> bytes:
++    require(type(expected) is str and re.fullmatch("[0-9a-f]{64}", expected) is not None, "expected SHA256")
++    data = Path(path).read_bytes()
++    require(hashlib.sha256(data).hexdigest() == expected, "input bytes changed: " + str(path))
++    return data
++
++
++def utc(value: str) -> datetime:
++    require(type(value) is str and value.endswith("Z"), "UTC timestamp must end in Z")
++    return datetime.fromisoformat(value[:-1] + "+00:00")
++
++
++@dataclass(frozen=True)
++class Permit:
++    authorization: Mapping[str, Any]
++    proposal: Mapping[str, Any]
++    authorization_sha256: str
++    proposal_sha256: str
++    repository: Path
++
++    @property
++    def ceilings(self) -> Mapping[str, float]:
++        return self.authorization["ceilings"]
++
++    @property
++    def output(self) -> Path:
++        return Path(self.authorization["output_path"])
++
++    @property
++    def gpu_uuid(self) -> str:
++        return self.authorization["gpu_uuid"]
++
++
++def validate_documents(authorization: Mapping[str, Any], proposal: Mapping[str, Any], *,
++                       proposal_sha256: str, source_sha: str, clean: bool,
++                       visible_devices: str, now: datetime) -> None:
++    """Pure validation, also used by software fixtures; creates no runtime objects."""
++    required = {"schema", "purpose", "scope_sha256", "authorization_id", "issuer", "status",
++                "source_sha", "proposal_sha256", "output_path", "gpu_uuid", "not_before_utc",
++                "expires_utc", "ceilings", "science_authorized"}
++    require(set(authorization) == required, "authorization fields")
++    a = authorization
++    require(a["schema"] == "SI_E2_AUTHORIZATION_V1" and a["purpose"] == PURPOSE and
++            a["scope_sha256"] == SCOPE_SHA256 and a["issuer"] == "Sol Designer" and
++            a["status"] == "RELEASED_ENGINEERING_ONLY" and a["science_authorized"] is False,
++            "engineering release absent; science is forbidden")
++    require(type(a["authorization_id"]) is str and re.fullmatch("[0-9a-f]{32}", a["authorization_id"]) is not None,
++            "unique authorization identity")
++    require(re.fullmatch("[0-9a-f]{40}", source_sha) is not None and a["source_sha"] == source_sha and clean,
++            "exact source SHA and clean gate")
++    require(a["proposal_sha256"] == proposal_sha256, "proposal hash binding")
++    require(type(a["gpu_uuid"]) is str and re.fullmatch(r"GPU-[0-9a-fA-F-]{8,}", a["gpu_uuid"]) is not None and
++            visible_devices == a["gpu_uuid"], "one GPU UUID must be visible")
++    require(utc(a["not_before_utc"]) <= now < utc(a["expires_utc"]), "release time window")
++    require(set(a["ceilings"]) == set(MAXIMA), "ceiling fields")
++    for key, maximum in MAXIMA.items():
++        value = a["ceilings"][key]
++        require(type(value) in (int, float) and math.isfinite(value) and 0 < value <= maximum,
++                "ceiling may only tighten: " + key)
++        if key not in ("seconds", "device_hours"):
++            require(type(value) is int, "integer ceiling: " + key)
++    require(a["ceilings"]["generations"] == 4 and a["ceilings"]["generated_tokens"] == 88 and
++            a["ceilings"]["resets"] == 2, "fixed diagnostic worst-case calls/output/resets must fit before construction")
++    output = Path(a["output_path"])
++    require(output.is_absolute() and str(output) == str(output.resolve()) and output.name not in ("", ".", ".."),
++            "canonical absolute unique output")
++    require(set(proposal) == {"schema", "purpose", "model", "environment", "interpreter", "packages", "synthetic_prompts_sha256"} and
++            proposal["schema"] == "SI_E2_PROPOSAL_V1" and proposal["purpose"] == PURPOSE, "proposal fields/purpose")
++    require(proposal["synthetic_prompts_sha256"] == digest(engineering_prompts()), "four fixed synthetic prompts")
++    require(set(proposal["model"]) == {"base_snapshot", "adapter_path"}, "model paths only; no recipe overrides")
++    require(set(proposal["environment"]) == {"trajectory", "trajectory_sha256", "events", "events_sha256",
++            "config", "config_sha256", "game", "game_sha256", "traj_data", "traj_data_sha256", "data_root", "logic_files"},
++            "exact historical environment input fields")
++    require(set(proposal["interpreter"]) == {"path", "sha256"} and
++            set(proposal["packages"]) == set(PACKAGE_NAMES), "interpreter/package origin bindings")
++    require(set(proposal["environment"]["logic_files"]) == {"domain", "grammar"}, "domain/grammar bindings")
++    for row in proposal["packages"].values():
++        require(set(row) == {"path", "sha256", "version"}, "package receipt fields")
++    for path in [*proposal["model"].values(), *(proposal["environment"][k] for k in
++                 ("trajectory", "events", "config", "game", "traj_data", "data_root")), proposal["interpreter"]["path"]]:
++        require(type(path) is str and Path(path).is_absolute(), "explicit local runtime path")
++
++
++def git_state(repository: Path) -> tuple[str, bool]:
++    def run(*args: str) -> str:
++        return subprocess.check_output(["git", "-C", str(repository), *args], text=True).strip()
++    return run("rev-parse", "HEAD"), not bool(run("status", "--porcelain", "--untracked-files=all"))
++
++
++def authenticate(repository: Path, authorization_path: Path, authorization_sha256: str,
++                 proposal_path: Path, *, worker: bool = False) -> Permit:
++    authorization = json.loads(read_bound(authorization_path, authorization_sha256))
++    proposal_bytes = read_bound(proposal_path, authorization["proposal_sha256"])
++    proposal = json.loads(proposal_bytes)
++    source_sha, clean = git_state(repository)
++    validate_documents(authorization, proposal, proposal_sha256=hashlib.sha256(proposal_bytes).hexdigest(),
++                       source_sha=source_sha, clean=clean,
++                       visible_devices=os.environ.get("CUDA_VISIBLE_DEVICES", ""), now=datetime.now(timezone.utc))
++    require(os.environ.get("HF_HUB_OFFLINE") == "1" and os.environ.get("TRANSFORMERS_OFFLINE") == "1",
++            "offline environment required")
++    import sys
++    interpreter = proposal["interpreter"]
++    require(Path(sys.executable).resolve() == Path(interpreter["path"]).resolve() and
++            file_hash(Path(sys.executable)) == interpreter["sha256"], "pinned interpreter bytes")
++    output = Path(authorization["output_path"])
++    if worker:
++        marker = json.loads((output / "launch_context.json").read_bytes())
++        # The hidden worker must be a fresh-session child of this exact -I supervisor.
++        parent_cmdline = Path(f"/proc/{os.getppid()}/cmdline").read_bytes().split(b"\0")
++        parent_argv = [arg.decode() for arg in parent_cmdline if arg]
++        require(parent_argv == marker["supervisor_argv"] and len(parent_argv) >= 3 and parent_argv[1] == "-I" and
++                Path(parent_argv[2]).resolve() == repository / "scripts/run_si_p3_engineering_probe.py" and
++                "--worker" not in parent_argv and os.getsid(0) == os.getpid(), "direct/foreign worker supervisor")
++        import ctypes, signal
++        libc = ctypes.CDLL(None, use_errno=True)
++        require(libc.prctl(1, signal.SIGKILL, 0, 0, 0) == 0, "worker parent-death signal unavailable")
++        require(marker["authorization_sha256"] == authorization_sha256 and marker["supervisor_pid"] == os.getppid() and
++                marker["source_sha"] == source_sha, "worker must belong to authenticated supervisor")
++    else:
++        require(not output.exists() and not output.is_symlink(), "output exists; no retry or overwrite")
++    return Permit(authorization, proposal, authorization_sha256, authorization["proposal_sha256"], repository)
++
++
++def verify_artifacts(permit: Permit) -> dict[str, Any]:
++    """Verify the committed R19 byte identities, not caller-authored model labels."""
++    frozen = json.loads((permit.repository / "configs/experiments/r19_model_identity_manifest.json").read_bytes())
++    identity = frozen["currently_observed_candidate_not_historical_proof"]
++    require(identity["huggingface_snapshot_revision"] == SNAPSHOT, "frozen snapshot")
++    base = Path(permit.proposal["model"]["base_snapshot"])
++    require(base.name == SNAPSHOT and base.is_dir(), "exact cached snapshot directory")
++    observed = {}
++    for row in identity["snapshot_files"]:
++        name = row["name"]
++        require(Path(name).name == name, "safe model file name")
++        path = base / name
++        expected = row.get("content_sha256", row.get("sha256"))
++        require(path.is_file() and path.stat().st_size == row["bytes"] and file_hash(path) == expected,
++                "frozen base bytes: " + name)
++        observed[name] = expected
++    from sft.training import directory_sha256
++    adapter = Path(permit.proposal["model"]["adapter_path"])
++    require(directory_sha256(adapter) == P0_SHA256, "frozen P0 directory bytes")
++    env = permit.proposal["environment"]
++    for key in ("trajectory", "events", "config", "game", "traj_data"):
++        require(file_hash(Path(env[key])) == env[key + "_sha256"], "historical input drift: " + key)
++    require(Path(env["game"]).name == "game.tw-pddl" and Path(env["traj_data"]).name == "traj_data.json" and
++            Path(env["game"]).parent == Path(env["traj_data"]).parent, "one exact saved game/traj pair")
++    verify_logic(env)
++    return {"snapshot": SNAPSHOT, "snapshot_files": observed, "adapter_sha256": P0_SHA256,
++            "environment_inputs": {key: env[key + "_sha256"] for key in ("trajectory", "events", "config", "game", "traj_data")}}
++
++
++def inspect_gpu(gpu_uuid: str, *, allowed_pids: set[int], require_owned_context: bool = False) -> dict[str, Any]:
++    """Read actual NVIDIA ownership; never allocate a CUDA context."""
++    def query(option: str) -> str:
++        return subprocess.check_output(["nvidia-smi", option, "--format=csv,noheader,nounits"], text=True, timeout=10)
++    gpu_raw = query("--query-gpu=uuid,name,memory.total,memory.used")
++    process_raw = query("--query-compute-apps=gpu_uuid,pid,process_name,used_gpu_memory")
++    devices = list(csv.reader(io.StringIO(gpu_raw), skipinitialspace=True))
++    rows = list(csv.reader(io.StringIO(process_raw), skipinitialspace=True))
++    evidence = {"gpu_raw": gpu_raw, "process_raw": process_raw, "checked_pid": os.getpid()}
++    try:
++        validate_gpu_rows(devices, rows, gpu_uuid=gpu_uuid, allowed_pids=allowed_pids)
++        if require_owned_context:
++            require(any(len(row) == 4 and row[0] == gpu_uuid and int(row[1]) in allowed_pids for row in rows),
++                    "cannot prove own NVML compute PID before model allocation")
++    except ContractError as error:
++        error.resource_evidence = evidence
++        raise
++    return evidence
++
++
++def validate_gpu_rows(devices: list[list[str]], processes: list[list[str]], *, gpu_uuid: str,
++                      allowed_pids: set[int]) -> None:
++    bound = [row for row in devices if len(row) == 4 and row[0] == gpu_uuid]
++    require(len(bound) == 1 and "A40" in bound[0][1], "bound GPU must be one visible A40")
++    for row in processes:
++        require(len(row) == 4 and row[1].isdigit(), "unreadable GPU ownership")
++        pid = int(row[1])
++        if row[0] == gpu_uuid:
++            require(pid in allowed_pids, "foreign GPU process")
++            try: owner = Path(f"/proc/{pid}").stat().st_uid
++            except (FileNotFoundError, PermissionError):
++                require(False, "cannot prove GPU PID ownership in this namespace")
++            require(owner == os.getuid(), "foreign GPU process UID")
++        elif pid in allowed_pids:
++            require(False, "owned process on foreign GPU")
++
++
++def engineering_prompts() -> dict[str, str]:
++    """Predeclared independent phase exercise, never a causal teacher branch."""
++    from .contract import PublicState, projection, request
++    from recovery.two_stage_v2 import stage_one_prompt, stage_two_prompt
++    state = PublicState("pick_and_place_simple-Engineering-None-Table-0/trial_engineering",
++                        "pick_and_place_simple", "Move the engineering fixture object to the table",
++                        "Engineering fixture only. You see a table and a fixture object.",
++                        ("look", "inventory"))
++    req = request(state, [])
++    actor = projection(state, [])["public_prompt"]
++    return {"source": actor, "stage_one": stage_one_prompt(req),
++            "stage_two": stage_two_prompt(req, diagnosis="The engineering fixture has not moved yet.",
++                subgoal="Inspect the fixture state.", stage_one_valid=True), "suffix": actor}
++
++
++def verify_logic(environment: Mapping[str, Any]) -> dict[str, Any]:
++    """Bind effective domain/grammar contents, keeping original YAML bytes intact."""
++    import yaml
++    from env.alfworld import _expand_environment
++    previous = os.environ.get("ALFWORLD_DATA")
++    try:
++        os.environ["ALFWORLD_DATA"] = environment["data_root"]
++        config = _expand_environment(yaml.safe_load(Path(environment["config"]).read_text()))
++    finally:
++        if previous is None: os.environ.pop("ALFWORLD_DATA", None)
++        else: os.environ["ALFWORLD_DATA"] = previous
++    result = {}
++    for name in ("domain", "grammar"):
++        binding = environment["logic_files"][name]
++        require(set(binding) == {"path", "sha256"} and Path(binding["path"]).is_absolute(), "logic binding fields")
++        require(Path(config["logic"][name]).resolve() == Path(binding["path"]).resolve() and
++                file_hash(Path(binding["path"])) == binding["sha256"], "effective logic path/bytes: " + name)
++        result[name] = dict(binding)
++    return result
+diff --git a/src/self_improvement/si_p3/runtime_ledger.py b/src/self_improvement/si_p3/runtime_ledger.py
+new file mode 100644
+index 0000000..f18dc88
+--- /dev/null
++++ b/src/self_improvement/si_p3/runtime_ledger.py
+@@ -0,0 +1,169 @@
++"""Distinct engineering ledger; the SI-P3 synthetic journal gate is unchanged."""
++from __future__ import annotations
++
++import json
++import math
++import os
++import time
++from collections import Counter
++from pathlib import Path
++from typing import Any, Callable, Mapping
++
++from .contract import canonical, digest, integer, require
++from .runtime_gate import PHASES, Permit
++
++KINDS = ("model_load", "env_construct", "reset", "step", "env_close", "generation")
++
++
++def fresh_json(path: Path, value: Any) -> None:
++    with Path(path).open("x", encoding="utf-8") as handle:
++        handle.write(canonical(value) + "\n")
++        handle.flush()
++        os.fsync(handle.fileno())
++
++
++class EngineeringLedger:
++    def __init__(self, path: Path, permit: Permit, *, clock: Callable[[], float] = time.monotonic,
++                 evidence_class: str = "engineering_diagnostic") -> None:
++        require(evidence_class in ("engineering_diagnostic", "synthetic_software_fixture"), "explicit engineering/software evidence")
++        self.permit, self.clock, self.started_at = permit, clock, clock()
++        self.handle = Path(path).open("x", encoding="utf-8")
++        self.events: list[dict[str, Any]] = []
++        self.units: dict[str, dict[str, Any]] = {}
++        self.stopped = False
++        self.append("engineering_opened", {"authorization_sha256": permit.authorization_sha256,
++            "proposal_sha256": permit.proposal_sha256, "purpose": "ENGINEERING_DIAGNOSTIC_ONLY",
++            "science_authorized": False, "evidence_class": evidence_class})
++
++    def append(self, kind: str, payload: Mapping[str, Any]) -> str:
++        body = {"sequence": len(self.events), "previous": self.events[-1]["event_id"] if self.events else None,
++                "kind": kind, "payload": json.loads(canonical(payload))}
++        row = body | {"event_id": digest(body)}
++        self.handle.write(canonical(row) + "\n"); self.handle.flush(); os.fsync(self.handle.fileno())
++        self.events.append(row)
++        return row["event_id"]
++
++    def elapsed(self) -> float:
++        value = self.clock() - self.started_at
++        require(math.isfinite(value) and value >= 0, "monotonic ownership clock")
++        require(value <= min(self.permit.ceilings["seconds"], self.permit.ceilings["device_hours"] * 3600),
++                "engineering allocated-device time cap")
++        return value
++
++    def reserve(self, unit: str, kind: str, *, phase: str | None = None,
++                prepared: Mapping[str, Any] | None = None) -> None:
++        require(kind in KINDS and unit not in self.units and (not self.stopped or kind == "env_close"),
++                "duplicate/retry/stopped external call")
++        self.elapsed()
++        current = reconstruct(self.events)
++        input_tokens = output_cap = 0
++        if kind == "generation":
++            n = current["reserved_or_spent"].get("generations", 0)
++            require(n < len(PHASES) and PHASES[n][0] == phase, "four fixed phases; no repeat")
++            require(prepared is not None and set(prepared) == {"prompt", "rendered_prompt", "input_ids", "attention_mask"},
++                    "full prepared tensor reservation")
++            ids, mask = prepared["input_ids"], prepared["attention_mask"]
++            require(type(ids) is list and bool(ids) and all(integer(i) for i in ids) and
++                    type(mask) is list and len(mask) == len(ids) and all(type(i) is int and i == 1 for i in mask),
++                    "unbatched unpadded full input IDs/mask")
++            input_tokens, output_cap = len(ids), PHASES[n][1]
++            require(input_tokens <= self.permit.ceilings["per_call_input"], "per-call exact input cap")
++        amounts = {"generations": int(kind == "generation"), "generated_tokens": output_cap,
++                   "input_tokens": input_tokens, "resets": int(kind == "reset"), "steps": int(kind == "step")}
++        for key, amount in amounts.items():
++            require(current["reserved_or_spent"].get(key, 0) + amount <= self.permit.ceilings[key], "pre-call ceiling: " + key)
++        if kind in ("model_load", "env_construct", "env_close"):
++            maximum = 1 if kind == "model_load" else 2
++            require(sum(x["kind"] == kind for x in self.units.values()) < maximum, "construction/close cap")
++        payload = {"unit": unit, "kind": kind, "phase": phase, "reservation": amounts, "prepared": prepared}
++        self.units[unit] = payload
++        self.append("external_started", payload)
++
++    def complete(self, unit: str, data: Mapping[str, Any]) -> None:
++        require(unit in self.units and not self.units[unit].get("finished"), "completion without unique start")
++        self.append("external_completed", {"unit": unit, "data": data})
++        self.units[unit]["finished"] = True
++        reconstruct(self.events)  # Validate cost/tensor receipts, not a caller summary.
++        self.elapsed()
++
++    def failed(self, unit: str, error: BaseException) -> None:
++        self.stopped = True
++        self.append("external_failed", {"unit": unit, "exception": type(error).__name__, "message": str(error),
++            "resource_evidence": getattr(error, "resource_evidence", None)})
++
++    def snapshot(self) -> dict[str, Any]:
++        return reconstruct(self.events)
++
++    def close(self) -> None:
++        self.handle.close()
++
++
++def reconstruct(events: list[dict[str, Any]]) -> dict[str, Any]:
++    """Actual completed cost plus conservative incomplete reservations, hash-independent."""
++    started: dict[str, Any] = {}; complete: dict[str, Any] = {}; failed: set[str] = set()
++    previous = None
++    for i, row in enumerate(events):
++        body = {k: v for k, v in row.items() if k != "event_id"}
++        require(set(row) == {"sequence", "previous", "kind", "payload", "event_id"} and row["sequence"] == i and
++                row["previous"] == previous and row["event_id"] == digest(body), "engineering journal chain")
++        previous = row["event_id"]
++        p = row["payload"]
++        if row["kind"] == "external_started":
++            u = p["unit"]
++            require(u not in started and p["kind"] in KINDS, "unique external unit")
++            started[u] = p
++        elif row["kind"] in ("external_completed", "external_failed"):
++            u = p["unit"]
++            require(u in started and u not in complete and u not in failed, "single terminal external receipt")
++            if row["kind"] == "external_completed": complete[u] = p["data"]
++            else: failed.add(u)
++        else:
++            require(row["kind"] in ("engineering_opened", "adapter_state", "resource", "driver_failed"), "engineering event kind")
++    completed = Counter(); reserved = Counter()
++    for unit, start in started.items():
++        amounts = dict(start["reservation"])
++        require(set(amounts) == {"generations", "generated_tokens", "input_tokens", "resets", "steps"} and
++                all(integer(v) for v in amounts.values()), "reservation counters")
++        kind = start["kind"]
++        require(amounts["generations"] == int(kind == "generation") and amounts["resets"] == int(kind == "reset") and
++                amounts["steps"] == int(kind == "step"), "reservation kind binding")
++        if kind == "generation":
++            phase = [x for x in PHASES if x[0] == start["phase"]]
++            prepared = start["prepared"]
++            require(set(prepared) == {"prompt", "rendered_prompt", "input_ids", "attention_mask"} and
++                    type(prepared["input_ids"]) is list and bool(prepared["input_ids"]) and
++                    all(integer(i) for i in prepared["input_ids"]) and
++                    prepared["attention_mask"] == [1] * len(prepared["input_ids"]), "stored full prepared IDs/mask")
++            require(len(phase) == 1 and amounts["generated_tokens"] == phase[0][1] and
++                    amounts["input_tokens"] == len(start["prepared"]["input_ids"]), "reservation input/phase binding")
++        else:
++            require(amounts["input_tokens"] == amounts["generated_tokens"] == 0, "non-generation token debit")
++        if unit in complete:
++            if kind == "generation":
++                data = complete[unit]; raw = data["raw"]
++                require(data["tensor_proof"]["prepared"] == start["prepared"] == data["tensor_proof"]["sent"], "sent tensor identity")
++                require(raw["input_tokens"] == amounts["input_tokens"] and raw["generated_tokens"] == len(raw["token_ids"]) and
++                        integer(raw["generated_tokens"], 1) and raw["generated_tokens"] <= amounts["generated_tokens"], "actual token debit")
++                amounts["generated_tokens"] = raw["generated_tokens"]
++            completed.update(amounts)
++        reserved.update(amounts)
++    return {"completed": dict(completed), "reserved_or_spent": dict(reserved),
++            "open_units": sorted(set(started) - set(complete)), "failed_units": sorted(failed),
++            "external_started": len(started), "external_completed": len(complete),
++            "environment_constructs": sum(x["kind"] == "env_construct" for x in started.values()),
++            "environment_closes": sum(x["kind"] == "env_close" for x in started.values()),
++            "interpretation": "engineering only; incomplete calls retain full reservations; no science"}
++
++
++def validate_report(report: Mapping[str, Any], events: list[dict[str, Any]]) -> dict[str, Any]:
++    require(report["purpose"] == "ENGINEERING_DIAGNOSTIC_ONLY" and report["science_authorized"] is False,
++            "engineering report identity")
++    observed = reconstruct(events)
++    require(report["cost"] == observed, "summary cost mismatch with actual + incomplete reservations")
++    if report["status"] == "ENGINEERING_BOUNDARY_OBSERVED_NOT_SCIENTIFIC_ACCEPTANCE":
++        require(not observed["open_units"] and not observed["failed_units"] and
++                observed["completed"].get("generations") == 4 and observed["completed"].get("resets") == 2 and
++                observed["environment_constructs"] == observed["environment_closes"] == 2, "incomplete diagnostic cannot be complete")
++    else:
++        require(report["status"] == "TECHNICAL_STOP_NO_RETRY", "report status")
++    return observed
+diff --git a/src/self_improvement/si_p3/runtime_supervisor.py b/src/self_improvement/si_p3/runtime_supervisor.py
+new file mode 100644
+index 0000000..d248139
+--- /dev/null
++++ b/src/self_improvement/si_p3/runtime_supervisor.py
+@@ -0,0 +1,125 @@
++"""External POSIX deadline and authentic exit, including descendant cleanup."""
++from __future__ import annotations
++
++import ctypes
++import errno
++import os
++from pathlib import Path
++import signal
++import subprocess
++import time
++from typing import Any, Mapping, Sequence
++
++from .contract import require
++from .runtime_ledger import fresh_json
++
++
++def group_members(pgid: int) -> list[int]:
++    found = []
++    for path in Path("/proc").iterdir():
++        if not path.name.isdigit(): continue
++        try:
++            stat = (path / "stat").read_text().rsplit(")", 1)[1].split()
++            if int(stat[2]) == pgid: found.append(int(path.name))
++        except (FileNotFoundError, PermissionError, ProcessLookupError): pass
++    return sorted(found)
++
++
++
++def process_table() -> dict[int, tuple[int, int, int]]:
++    """PPID, start tick and UID bind descendants even if they create a new session."""
++    result = {}
++    for path in Path("/proc").iterdir():
++        if not path.name.isdigit(): continue
++        try:
++            stat = (path / "stat").read_text().rsplit(")", 1)[1].split()
++            result[int(path.name)] = (int(stat[1]), int(stat[19]), path.stat().st_uid)
++        except (FileNotFoundError, PermissionError, ProcessLookupError): pass
++    return result
++
++
++def descendants(parent: int, table: Mapping[int, tuple[int, int, int]]) -> dict[int, tuple[int, int, int]]:
++    found = {}; frontier = {parent}
++    while frontier:
++        children = {pid for pid, value in table.items() if value[0] in frontier and pid not in found}
++        found.update({pid: table[pid] for pid in children}); frontier = children
++    return found
++
++
++def kill_identities(identities: Mapping[int, tuple[int, int, int]]) -> None:
++    current = process_table()
++    for pid, identity in identities.items():
++        if pid in current and current[pid][1:] == identity[1:] and identity[2] == os.getuid():
++            try: os.kill(pid, signal.SIGKILL)
++            except ProcessLookupError: pass
++
++def supervise(command: Sequence[str], output: Path, *, context: Mapping[str, Any],
++              seconds: float, environment: Mapping[str, str]) -> dict[str, Any]:
++    require(seconds > 0 and seconds <= 1800 and not output.exists() and not output.is_symlink(), "fresh bounded supervisor output")
++    output.mkdir(parents=False, exist_ok=False)
++    start = time.monotonic()
++    baseline_children = {pid for pid,value in process_table().items() if value[0] == os.getpid()}
++    # Reap orphaned same-group grandchildren on Linux after their parent is killed.
++    libc = ctypes.CDLL(None, use_errno=True)
++    old_subreaper = ctypes.c_int()
++    require(libc.prctl(37, ctypes.byref(old_subreaper), 0, 0, 0) == 0, "cannot read subreaper state")
++    require(libc.prctl(36, 1, 0, 0, 0) == 0, "Linux child subreaper unavailable")
++    evidence_class = context["evidence_class"]
++    require(evidence_class in ("engineering_diagnostic", "synthetic_software_fixture"), "supervisor evidence class")
++    devices = int(evidence_class == "engineering_diagnostic")
++    launch = dict(context) | {"supervisor_pid": os.getpid(), "argv": list(command),
++                              "allocated_devices": devices, "deadline_seconds": seconds, "allocation_started_monotonic": start}
++    fresh_json(output / "launch_context.json", launch)
++    known_descendants: dict[int, tuple[int, int, int]] = {}
++    process = None; timed_out = False; failure = None; members = []; code = None
++    # Reserve cleanup time inside the full allocation ceiling.
++    callback_deadline = max(0.001, seconds - min(2.0, seconds / 10))
++    try:
++        with (output / "worker.stdout").open("xb") as stdout, (output / "worker.stderr").open("xb") as stderr:
++            process = subprocess.Popen(list(command), stdout=stdout, stderr=stderr,
++                env=dict(environment), start_new_session=True)
++            fresh_json(output / "worker_start.json", {"pid": process.pid, "pgid": process.pid,
++                "argv": list(command), "authorization_sha256": context["authorization_sha256"]})
++            try:
++                code = process.wait(timeout=max(0.001, callback_deadline - (time.monotonic() - start)))
++            except subprocess.TimeoutExpired:
++                timed_out = True
++    except BaseException as error:
++        failure = {"exception": type(error).__name__, "message": str(error)}
++    finally:
++        if process is not None:
++            members = group_members(process.pid)
++            known_descendants.update(descendants(process.pid, process_table()))
++            try: os.killpg(process.pid, signal.SIGKILL)
++            except ProcessLookupError: pass
++            kill_identities(known_descendants)
++            code = process.wait()
++            # Bounded cleanup; record any surviving group rather than claiming it disappeared.
++            until = min(start + seconds, time.monotonic() + 1.0)
++            while time.monotonic() < until:
++                table = process_table()
++                # Newly orphaned sessions are adopted by this dedicated subreaper.
++                known_descendants.update({pid:value for pid,value in table.items()
++                    if value[0] == os.getpid() and pid not in baseline_children and pid != process.pid})
++                kill_identities(known_descendants)
++                for pid in known_descendants:
++                    try: os.waitpid(pid, os.WNOHANG)
++                    except ChildProcessError: pass
++                table = process_table()
++                alive = [pid for pid,value in known_descendants.items() if pid in table and table[pid][1:] == value[1:]]
++                if not group_members(process.pid) and not alive: break
++                time.sleep(0.01)
++        table = process_table()
++        remaining = sorted(set(group_members(process.pid) if process is not None else []) |
++            {pid for pid,value in known_descendants.items() if pid in table and table[pid][1:] == value[1:]})
++        elapsed = time.monotonic() - start
++        receipt = {"schema": "SI_E2_SUPERVISOR_EXIT_V1", "authorization_sha256": context["authorization_sha256"],
++            "source_sha": context["source_sha"], "evidence_class": context["evidence_class"],
++            "authentic_returncode": code, "deadline_triggered": timed_out, "spawn_or_supervisor_error": failure,
++            "members_before_cleanup": members, "descendants_observed": sorted(known_descendants), "members_after_cleanup": remaining,
++            "elapsed_seconds": elapsed, "allocated_devices": devices, "allocated_device_hours": devices * elapsed / 3600,
++            "within_time_cap": elapsed <= seconds, "child_report_present": (output / "engineering_report.json").is_file(),
++            "retry_authorized": False, "science_authorized": False}
++        require(libc.prctl(36, old_subreaper.value, 0, 0, 0) == 0, "cannot restore subreaper state")
++        fresh_json(output / "supervisor_exit.json", receipt)
++    return receipt
+diff --git a/tests/si_e2_support.py b/tests/si_e2_support.py
+new file mode 100644
+index 0000000..d57332f
+--- /dev/null
++++ b/tests/si_e2_support.py
+@@ -0,0 +1,121 @@
++"""Explicit software edges only: tiny CPU PEFT, raw generation and TextWorld I/O."""
++from __future__ import annotations
++import json
++import os
++from pathlib import Path
++from types import SimpleNamespace
++from datetime import datetime, timezone
++
++from self_improvement.si_p3.contract import canonical, digest
++from self_improvement.si_p3.runtime_gate import MAXIMA, PACKAGE_NAMES, PURPOSE, SCOPE_SHA256, Permit, engineering_prompts
++from self_improvement.si_p3.runtime_backend import LocalInference
++from self_improvement.si_p3.runtime_environment import ReplayEvidence
++
++GPU = "GPU-12345678-abcd-abcd-abcd-123456789abc"
++CODE = "a" * 40
++
++
++def documents(tmp_path):
++    model = {"base_snapshot": str(tmp_path/"base"), "adapter_path": str(tmp_path/"adapter")}
++    environment = {key: str(tmp_path/key) for key in ("trajectory", "events", "config", "game", "traj_data", "data_root")}
++    environment.update({key+"_sha256": "b"*64 for key in ("trajectory", "events", "config", "game", "traj_data")})
++    environment['logic_files'] = {key:{'path':str(tmp_path/key),'sha256':'c'*64} for key in ('domain','grammar')}
++    proposal = {"schema":"SI_E2_PROPOSAL_V1", "purpose":PURPOSE, "model":model, "environment":environment,
++        "interpreter":{"path":str(Path(__import__('sys').executable).resolve()),"sha256":"d"*64},
++        "packages":{name:{"path":str(tmp_path/(name+'.py')),"sha256":"e"*64,"version":"software-fixture"} for name in PACKAGE_NAMES},
++        "synthetic_prompts_sha256":digest(engineering_prompts())}
++    auth = {"schema":"SI_E2_AUTHORIZATION_V1", "purpose":PURPOSE, "scope_sha256":SCOPE_SHA256,
++        "authorization_id":"1"*32, "issuer":"Sol Designer", "status":"RELEASED_ENGINEERING_ONLY",
++        "source_sha":CODE, "proposal_sha256":digest(proposal), "output_path":str((tmp_path/'output').resolve()),
++        "gpu_uuid":GPU, "not_before_utc":"2026-01-01T00:00:00Z", "expires_utc":"2027-01-01T00:00:00Z",
++        "ceilings":dict(MAXIMA), "science_authorized":False}
++    return auth,proposal
++
++
++def permit(tmp_path):
++    auth,proposal=documents(tmp_path)
++    return Permit(auth,proposal,digest(auth),digest(proposal),Path(__file__).resolve().parents[1])
++
++
++def tiny_components():
++    import torch
++    from tokenizers import Tokenizer
++    from tokenizers.models import WordLevel
++    from tokenizers.pre_tokenizers import Whitespace
++    from transformers import PreTrainedTokenizerFast, GPT2Config, GPT2LMHeadModel
++    from peft import LoraConfig, get_peft_model
++    vocab={"<unk>":0,"<eos>":1,"<pad>":2,"A001":3,"A000":4,"look":5,"inventory":6}
++    tok=Tokenizer(WordLevel(vocab,unk_token="<unk>"));tok.pre_tokenizer=Whitespace()
++    tokenizer=PreTrainedTokenizerFast(tokenizer_object=tok,unk_token="<unk>",eos_token="<eos>",pad_token="<pad>")
++    tokenizer.model_input_names=["input_ids","attention_mask"]
++    tokenizer.chat_template="{% for message in messages %}{{ message['content'] }}{% endfor %}"
++    model=get_peft_model(GPT2LMHeadModel(GPT2Config(vocab_size=len(vocab),n_layer=1,n_head=1,n_embd=8,n_positions=2048,
++        eos_token_id=1,pad_token_id=2)),LoraConfig(r=2,lora_alpha=2,target_modules=['c_attn'],task_type='CAUSAL_LM'))
++    for p in model.parameters():p.requires_grad_(False)
++    model.eval()
++    return tokenizer,model,torch
++
++
++def raw_generate_edge(model,torch,*,fail=False):
++    calls=[]
++    def generate(**kwargs):
++        from self_improvement.si_p3.runtime_backend import adapter_state
++        calls.append({'input_ids':kwargs['input_ids'].clone(),'attention_mask':kwargs['attention_mask'].clone(),
++                      'adapter':adapter_state(model),'options':{k:v for k,v in kwargs.items() if k not in ('input_ids','attention_mask')}})
++        if fail:raise RuntimeError('synthetic generation boundary failure')
++        ids=torch.tensor([[3,1]],dtype=torch.long)
++        return SimpleNamespace(sequences=torch.cat([kwargs['input_ids'],ids],dim=1),scores=(None,None))
++    model.generate=generate
++    return calls
++
++
++def simple_evidence():
++    task='pick_and_place_simple-Fixture-None-Table-0/trial_fixture'
++    before={'task_id':task,'family':'pick_and_place_simple','goal':'Fixture goal','observation':'Your task is to: Fixture goal.',
++            'valid_actions':['look','inventory'],'done':False,'reward':0.0,'truncated':False}
++    after=before|{'observation':'Fixture terminal','valid_actions':[],'done':True,'reward':1.0}
++    return ReplayEvidence(task,'pick_and_place_simple',42,(before,after),('look',))
++
++
++class FakeTextWorld:
++    def __init__(self,evidence,game,*,missing_terminal=False,drift=False):
++        self.evidence,self.game=evidence,game
++        self.missing_terminal,self.drift=missing_terminal,drift
++        self.position=0;self.seeds=[];self.closed=False
++    def seed(self,value):self.seeds.append(value)
++    def reset(self):
++        self.position=0;s=self.evidence.states[0]
++        return [s['observation']],{'admissible_commands':[s['valid_actions']], 'extra.gamefile':[str(self.game)]}
++    def step(self,actions):
++        assert actions==[self.evidence.commands[self.position]]
++        self.position+=1;s=self.evidence.states[self.position]
++        info={} if self.missing_terminal and s['done'] else {'admissible_commands':[s['valid_actions']]}
++        return [s['observation']+(' drift' if self.drift else '')],[s['reward']],[s['done']],info
++    def close(self):self.closed=True
++
++
++def environment_factory(tmp_path,evidence,*,missing_terminal=False,drift=False):
++    from env.alfworld import AlfWorldConfig
++    from self_improvement.si_p3.runtime_environment import ReadIsolatedEnvironment
++    taskdir=tmp_path/'train'/evidence.task_id;taskdir.mkdir(parents=True)
++    game=taskdir/'game.tw-pddl';game.write_text('software game')
++    (taskdir/'traj_data.json').write_text('{}')
++    config=tmp_path/'config.yaml';config.write_text('dataset:\n  data_path: '+str(tmp_path/'train')+'\n')
++    siblings=tmp_path/'train'/'reserved_sibling';siblings.mkdir()
++    sentinel=siblings/'traj_data.json';sentinel.write_text('MUST_NOT_OPEN')
++    constructed=[]
++    class Factory:
++        def __init__(self,configuration,train_eval):
++            assert train_eval=='train' and Path(configuration['dataset']['data_path'])==taskdir
++            # Simulate the real constructor's eager discovery; wrong restriction reaches sentinel.
++            for p in Path(configuration['dataset']['data_path']).rglob('traj_data.json'):
++                assert p!=sentinel
++                p.read_bytes()
++            self.game_files=[str(game)];self.num_games=1
++            self.tw=FakeTextWorld(evidence,game,missing_terminal=missing_terminal,drift=drift)
++            constructed.append(self.tw)
++        def init_env(self,batch_size):assert batch_size==1;return self.tw
++    def factory():
++        return ReadIsolatedEnvironment(AlfWorldConfig(config,split='train',data_path=tmp_path),
++            game=game,pool_seed=evidence.seed,factory_boundary=Factory)
++    return factory,constructed,sentinel
+diff --git a/tests/test_si_p3_runtime_backend.py b/tests/test_si_p3_runtime_backend.py
+new file mode 100644
+index 0000000..4c036d8
+--- /dev/null
++++ b/tests/test_si_p3_runtime_backend.py
+@@ -0,0 +1,157 @@
++"""Real tiny PEFT state, explicit raw generation edge, real ledger and parser."""
++import copy
++from contextlib import contextmanager
++from dataclasses import replace
++import json
++
++import pytest
++from self_improvement.si_p3.contract import ContractError,Prepared,digest
++from self_improvement.si_p3.runtime_backend import LocalInference,PreparedTensors,adapter_state,verify_adapter_state
++from self_improvement.si_p3.runtime_ledger import EngineeringLedger,reconstruct,validate_report
++from si_e2_support import permit,tiny_components,raw_generate_edge
++
++
++@pytest.fixture
++def parts(tmp_path):
++    p=permit(tmp_path);p.output.mkdir()
++    ledger=EngineeringLedger(p.output/'events.jsonl',p,evidence_class='synthetic_software_fixture')
++    tok,model,torch=tiny_components()
++    calls=raw_generate_edge(model,torch)
++    backend=LocalInference(tok,model,torch,ledger,lambda:{'software':True},software_fixture=True)
++    yield p,ledger,backend,calls
++    ledger.close()
++
++
++def test_actual_peft_base_context_restores_names_enabled_and_trainability(parts):
++    p,ledger,b,calls=parts
++    before=adapter_state(b.model)
++    assert before['model']['trainable_params']==0
++    for phase,cap,mode in [('source',16,'P0'),('stage_one',40,'BASE'),('stage_two',16,'BASE'),('suffix',16,'P0')]:
++        value=b.generate(phase,b.prepare('engineering public input'),cap,mode)
++        assert value.raw['raw_output']=='A001' and value.raw['adapter_mode']==mode
++        assert adapter_state(b.model)==before
++    assert [c['adapter']['model']['enabled'] for c in calls]==[True,False,False,True]
++    assert all(c['adapter']['model']['active_adapters']==['default'] for c in calls)
++    assert ledger.snapshot()['completed']['generations']==4 and ledger.snapshot()['completed']['generated_tokens']==8
++    assert all(c['options']['do_sample'] is False and c['options']['output_scores'] is True for c in calls)
++
++
++def test_real_tiny_cpu_generate_returns_frozen_raw_contract(tmp_path):
++    p=permit(tmp_path);p.output.mkdir();ledger=EngineeringLedger(p.output/'events.jsonl',p,evidence_class='synthetic_software_fixture')
++    tok,model,torch=tiny_components()
++    b=LocalInference(tok,model,torch,ledger,lambda:{'software':True},software_fixture=True)
++    value=b.generate('source',b.prepare('look'),16,'P0')
++    assert 1<=value.raw['generated_tokens']<=16 and value.raw['input_tokens']==1
++    assert ledger.snapshot()['open_units']==[]
++    ledger.close()
++
++
++def test_actual_peft_exception_restores_grad_flags_and_retains_full_open_reservation(parts):
++    _,ledger,b,calls=parts
++    b.generate('source',b.prepare('public input'),16,'P0')
++    before=adapter_state(b.model)
++    raw_generate_edge(b.model,b.torch,fail=True)
++    with pytest.raises(RuntimeError,match='synthetic generation'):b.generate('stage_one',b.prepare('public input'),40,'BASE')
++    assert adapter_state(b.model)==before
++    assert ledger.snapshot()['open_units']==['generation-stage_one']
++    assert ledger.snapshot()['reserved_or_spent']['generated_tokens']==42
++    assert ledger.snapshot()['completed']['generated_tokens']==2
++
++
++@pytest.mark.parametrize('which',['input_ids','attention_mask'])
++def test_actual_sent_tensor_drift_rejected_before_external_reservation(parts,which):
++    _,ledger,b,calls=parts
++    tok=b.tokenizer
++    class Drift:
++        eos_token_id=tok.eos_token_id
++        def apply_chat_template(self,*a,**k):return tok.apply_chat_template(*a,**k)
++        def decode(self,*a,**k):return tok.decode(*a,**k)
++        def __call__(self,*a,**k):
++            value=tok(*a,**k)
++            if k.get('return_tensors')=='pt':value[which][0,-1]=0 if which=='attention_mask' else 4
++            return value
++    b.tokenizer=Drift()
++    with pytest.raises(ContractError,match='sent full'):b.generate('source',b.prepare('public input'),16,'P0')
++    assert not calls and ledger.snapshot()['external_started']==0
++
++
++def test_caller_prepared_drift_rejected_before_external_reservation(parts):
++    _,ledger,b,calls=parts
++    prepared=b.prepare('public input')
++    forged=replace(prepared,prepared=replace(prepared.prepared,input_ids=(4,)))
++    with pytest.raises(ContractError,match='prepared-token'):b.generate('source',forged,16,'P0')
++    assert not calls and ledger.snapshot()['external_started']==0
++
++
++def test_adapter_switch_failure_rejects_before_generate_and_reservation(parts):
++    _,ledger,b,calls=parts
++    b.generate('source',b.prepare('public input'),16,'P0')
++    @contextmanager
++    def broken():yield
++    b.model.disable_adapter=broken
++    with pytest.raises(ContractError,match='PEFT enabled'):b.generate('stage_one',b.prepare('public input'),40,'BASE')
++    assert len(calls)==1 and ledger.snapshot()['completed']['generations']==1
++
++
++@pytest.mark.parametrize('phase,cap,mode',[('source',40,'P0'),('source',16,'BASE'),('stage_one',16,'BASE'),('unknown',16,'P0')])
++def test_phase_cap_mode_contract_before_edges(parts,phase,cap,mode):
++    _,ledger,b,calls=parts
++    with pytest.raises(ContractError):b.generate(phase,b.prepare('public input'),cap,mode)
++    assert not calls and ledger.snapshot()['external_started']==0
++
++
++def test_duplicate_phase_cannot_make_second_call(parts):
++    _,ledger,b,calls=parts
++    b.generate('source',b.prepare('public input'),16,'P0')
++    with pytest.raises(ContractError):b.generate('source',b.prepare('public input'),16,'P0')
++    assert len(calls)==1
++
++
++def rehash(events):
++    previous=None
++    for i,row in enumerate(events):
++        row['sequence']=i;row['previous']=previous
++        row['event_id']=digest({k:v for k,v in row.items() if k!='event_id'});previous=row['event_id']
++
++
++@pytest.mark.parametrize('attack',['raw_input','sent_mask','reservation','summary_zero'])
++def test_full_chain_rehash_does_not_hide_cost_or_tensor_tamper(parts,attack):
++    _,ledger,b,_=parts;b.generate('source',b.prepare('public input'),16,'P0')
++    events=copy.deepcopy(ledger.events)
++    if attack=='summary_zero':
++        report={'purpose':'ENGINEERING_DIAGNOSTIC_ONLY','science_authorized':False,'status':'TECHNICAL_STOP_NO_RETRY','cost':copy.deepcopy(ledger.snapshot())}
++        for counters in ('completed','reserved_or_spent'):
++            report['cost'][counters]={key:0 for key in report['cost'][counters]}
++        with pytest.raises(ContractError,match='summary cost'):validate_report(report,events)
++        return
++    if attack=='reservation':next(x for x in events if x['kind']=='external_started')['payload']['reservation']['input_tokens']=0
++    else:
++        data=next(x for x in events if x['kind']=='external_completed')['payload']['data']
++        if attack=='raw_input':data['raw']['input_tokens']=0
++        else:data['tensor_proof']['sent']['attention_mask'][-1]=0
++    rehash(events)
++    with pytest.raises(ContractError):reconstruct(events)
++
++
++@pytest.mark.parametrize('attack',['enabled','names','merged','count','trainable'])
++def test_actual_peft_state_validation_rejects_inconsistent_receipts(parts,attack):
++    _,_,b,_=parts;state=copy.deepcopy(adapter_state(b.model))
++    if attack=='enabled':state['layers'][0]['enabled']='irregular'
++    elif attack=='names':state['layers'][0]['active_adapters']=['other']
++    elif attack=='merged':state['layers'][0]['merged_adapters']=['default']
++    elif attack=='count':state['model']['num_adapter_layers']+=1
++    else:state['model']['trainable_params']=1
++    with pytest.raises(ContractError):verify_adapter_state(state,enabled=True)
++
++
++@pytest.mark.parametrize('limit',['per_call_input','input_tokens'])
++def test_exact_input_limits_reject_before_generation_reservation(parts,limit):
++    p,ledger,b,calls=parts
++    if limit=='per_call_input':p.authorization['ceilings'][limit]=1
++    else:
++        b.generate('source',b.prepare('public input'),16,'P0')
++        p.authorization['ceilings'][limit]=3
++    expected=len(calls)
++    phase,cap,mode=('source',16,'P0') if limit=='per_call_input' else ('stage_one',40,'BASE')
++    with pytest.raises(ContractError):b.generate(phase,b.prepare('public input'),cap,mode)
++    assert len(calls)==expected and ledger.snapshot()['external_started']==expected
+diff --git a/tests/test_si_p3_runtime_diagnostic.py b/tests/test_si_p3_runtime_diagnostic.py
+new file mode 100644
+index 0000000..a30a931
+--- /dev/null
++++ b/tests/test_si_p3_runtime_diagnostic.py
+@@ -0,0 +1,73 @@
++"""Nonempty production diagnostic with fake I/O, plus actual subprocess cleanup."""
++import json
++import os
++from pathlib import Path
++import sys
++
++import pytest
++from self_improvement.si_p3.contract import ContractError
++from self_improvement.si_p3.runtime_diagnostic import run_diagnostic
++from self_improvement.si_p3.runtime_backend import LocalInference
++from self_improvement.si_p3.runtime_ledger import EngineeringLedger,validate_report
++from self_improvement.si_p3.runtime_supervisor import supervise
++from si_e2_support import permit,tiny_components,raw_generate_edge,simple_evidence,environment_factory
++
++
++def test_nonempty_production_diagnostic_to_report_independent_four_phases(tmp_path):
++    p=permit(tmp_path);p.output.mkdir();e=simple_evidence()
++    factory,instances,_=environment_factory(tmp_path,e)
++    edges=[]
++    def load(permit,ledger):
++        ledger.reserve('model-load','model_load')
++        tok,model,torch=tiny_components();calls=raw_generate_edge(model,torch);edges.append(calls)
++        backend=LocalInference(tok,model,torch,ledger,lambda:{'software':True},software_fixture=True)
++        ledger.complete('model-load',{'software_tiny_cpu_model':True});return backend
++    report=run_diagnostic(p,software_fixture=True,software_loader=load,software_environment_factory=factory,software_replay=e)
++    assert report['status']=='ENGINEERING_BOUNDARY_OBSERVED_NOT_SCIENTIFIC_ACCEPTANCE',report['error']
++    assert report['evidence_class']=='synthetic_software_fixture' and len(edges[0])==4
++    assert report['results']['generations'][1]['parsed']['status']!='valid'  # observed invalid Stage1 never triggers tuning/retry/fabricated diagnosis
++    assert report['results']['generations'][2]['raw']['prompt'] in __import__('self_improvement.si_p3.runtime_gate',fromlist=['engineering_prompts']).engineering_prompts().values()
++    assert report['results']['environment']['generated_commands_executed']==0
++    assert [x['phase'] for x in report['results']['generations']]==['source','stage_one','stage_two','suffix']
++    events=[json.loads(line) for line in (p.output/'engineering_events.jsonl').read_text().splitlines()]
++    assert validate_report(report,events)['completed']['generations']==4
++    assert len(instances)==2
++
++
++def test_known_replay_budget_rejects_before_loading_or_environment(tmp_path):
++    p=permit(tmp_path);p.output.mkdir();p.authorization['ceilings']['steps']=1
++    calls=[]
++    def forbidden(*a):calls.append(a);raise AssertionError('side effect')
++    report=run_diagnostic(p,software_fixture=True,software_loader=forbidden,software_environment_factory=forbidden,software_replay=simple_evidence())
++    assert report['status']=='TECHNICAL_STOP_NO_RETRY' and not calls
++    assert report['cost']['external_started']==0
++
++
++def test_real_diagnostic_rejects_software_injection_before_output(tmp_path):
++    p=permit(tmp_path)
++    with pytest.raises(ContractError,match='software injection'):run_diagnostic(p,software_loader=lambda *_:None)
++    assert not p.output.exists()
++
++
++@pytest.mark.parametrize('code',[0,7])
++def test_authentic_subprocess_exit_and_create_exclusive(tmp_path,code):
++    output=tmp_path/'probe'
++    ctx={'authorization_sha256':'software-only','source_sha':'software-only','evidence_class':'synthetic_software_fixture'}
++    r=supervise([sys.executable,'-c',f'print("software subprocess");raise SystemExit({code})'],output,
++                context=ctx,seconds=5,environment=dict(os.environ,CUDA_VISIBLE_DEVICES=''))
++    assert r['authentic_returncode']==code and not r['deadline_triggered'] and not r['members_after_cleanup']
++    assert (output/'worker.stdout').read_text().strip()=='software subprocess'
++    with pytest.raises(ContractError,match='fresh'):supervise([sys.executable,'-c','pass'],output,context=ctx,seconds=5,environment=os.environ)
++
++
++@pytest.mark.parametrize("escape_session",[False,True])
++def test_external_deadline_kills_worker_and_descendant_with_raw_exit(tmp_path,escape_session):
++    output=tmp_path/'deadline';childfile=tmp_path/'grandchild.pid'
++    program='import subprocess,sys,time; p=subprocess.Popen([sys.executable,"-c","import time;time.sleep(60)"],start_new_session='+str(escape_session)+');open(sys.argv[1],"w").write(str(p.pid));time.sleep(60)'
++    ctx={'authorization_sha256':'software-only','source_sha':'software-only','evidence_class':'synthetic_software_fixture'}
++    r=supervise([sys.executable,'-c',program,str(childfile)],output,context=ctx,seconds=1.5,
++                environment=dict(os.environ,CUDA_VISIBLE_DEVICES=''))
++    assert r['deadline_triggered'] and r['authentic_returncode']==-9 and r['members_after_cleanup']==[]
++    assert not Path('/proc/'+childfile.read_text()).exists()
++    assert json.loads((output/'supervisor_exit.json').read_text())==r
++    assert not r['child_report_present'] and r['retry_authorized'] is False
+diff --git a/tests/test_si_p3_runtime_environment.py b/tests/test_si_p3_runtime_environment.py
+new file mode 100644
+index 0000000..4cf101a
+--- /dev/null
++++ b/tests/test_si_p3_runtime_environment.py
+@@ -0,0 +1,108 @@
++"""Normalized production environment with only the TextWorld edge replaced."""
++import copy
++import json
++from pathlib import Path
++from types import SimpleNamespace
++
++import pytest
++from self_improvement.si_p3.contract import ContractError,canonical
++from self_improvement.si_p3.runtime_environment import (historical_replay,source_hash,replay_twice,
++                                                       ReadIsolatedEnvironment)
++from self_improvement.si_p3.runtime_ledger import EngineeringLedger
++from si_e2_support import permit,simple_evidence,environment_factory,FakeTextWorld
++
++
++def source_wire():
++    e=simple_evidence();before,after=e.states
++    meta={'schedule_index':0,'split':'train','task_family':e.family,'source_game_sha256':'g'*64,
++          'source_traj_data_sha256':'t'*64}
++    step={'index':0,'observation':before['observation'],'valid_actions':before['valid_actions'],'action_valid':True,
++          'action':'look','result_observation':after['observation'],'done':True,'reward':1.0,
++          'metadata':{'transition_truncated':False,'r19_transition_event_id':'step'}}
++    row={'task':{'task_id':e.task_id,'text':before['goal'],'split':'train'},'seed':42,'steps':[step],
++         'initial_observation':before['observation'],'metadata':meta}
++    h=source_hash(row);meta.update(source_trajectory_sha256=h,r19_source_event_refs={
++        'source_episode_event_id':'source','reset_event_id':'reset','transition_event_ids':['step']})
++    reset={'event_id':'reset','kind':'environment_operation_completed','payload':{'operation':'environment_reset',
++        'task_id':e.task_id,'seed':42,'transition':dict(before)}}
++    transition={'event_id':'step','kind':'environment_operation_completed','payload':{'command':'look','action_id':'A000',
++        'action_map':{'A000':'look','A001':'inventory'},'before_state':dict(before),
++        'transition':dict(after)|{'executed_command':'look'}}}
++    source={'event_id':'source','kind':'source_episode_completed','payload':{'trajectory_sha256':h,
++        'source_game_sha256':'g'*64,'source_traj_data_sha256':'t'*64}}
++    return row,[reset,transition,source],h
++
++
++def test_original_r19_source_wire_after_map_comes_from_transition_receipt():
++    row,events,h=source_wire()
++    e=historical_replay(canonical(row).encode(),b'\n'.join(canonical(x).encode() for x in events),
++                        expected_source_sha=h,software_fixture=True)
++    assert e==simple_evidence() and e.states[-1]['valid_actions']==[]
++
++
++@pytest.mark.parametrize('attack',['absent_map','wrong_order','wrong_command','wrong_game','no_completion','wrong_index','wrong_done'])
++def test_source_wire_negative_bindings(attack):
++    row,events,h=source_wire()
++    if attack=='absent_map':events[1]['payload']['transition'].pop('valid_actions')
++    elif attack=='wrong_order':events[1]['payload']['before_state']['valid_actions'].reverse()
++    elif attack=='wrong_command':events[1]['payload']['command']='inventory'
++    elif attack=='wrong_game':events[2]['payload']['source_game_sha256']='x'*64
++    elif attack=='no_completion':events[2]['kind']='source_episode_started'
++    elif attack=='wrong_index':row['metadata']['schedule_index']=1
++    elif attack=='wrong_done':events[1]['payload']['transition']['done']=False
++    with pytest.raises((ContractError,KeyError)):
++        historical_replay(canonical(row).encode(),b'\n'.join(canonical(x).encode() for x in events),expected_source_sha=h,software_fixture=True)
++
++
++def test_read_isolation_and_two_fresh_seeded_replays(tmp_path):
++    p=permit(tmp_path);p.output.mkdir();ledger=EngineeringLedger(p.output/'events.jsonl',p,evidence_class='synthetic_software_fixture')
++    e=simple_evidence();factory,instances,sentinel=environment_factory(tmp_path,e)
++    result=replay_twice(e,factory,ledger)
++    assert result['repeated_public_states_equal'] and result['terminal_map_observed']
++    assert len(instances)==2 and instances[0] is not instances[1]
++    assert all(x.seeds==[42] and x.closed for x in instances)
++    assert sentinel.read_text()=='MUST_NOT_OPEN'
++    assert ledger.snapshot()['completed']['resets']==2 and ledger.snapshot()['completed']['steps']==2
++    ledger.close()
++
++
++def test_production_no_scan_subclass_sets_game_list_before_constructor_returns(tmp_path,monkeypatch):
++    e=simple_evidence();factory,_,sentinel=environment_factory(tmp_path,e)
++    env=factory();env.factory_boundary=None
++    class ParentBoundary:
++        def __init__(self,config,train_eval):
++            assert Path(config['dataset']['data_path'])==env.game.parent
++            self.collect_game_files(verbose=True)
++            assert self.game_files==[str(env.game)] and self.num_games==1
++        def collect_game_files(self,verbose=False):raise AssertionError('global scan executed')
++        def init_env(self,batch_size):return FakeTextWorld(e,env.game)
++    import sys
++    monkeypatch.setitem(sys.modules,'alfworld.agents.environment.alfred_tw_env',SimpleNamespace(AlfredTWEnv=ParentBoundary))
++    isolation=env.initialize();assert isolation['discovery']=='explicit_no_scan_subclass'
++    assert env.reset(seed=e.seed).task.task_id==e.task_id
++    env.close();assert sentinel.exists()
++
++
++@pytest.mark.parametrize('fault',['missing_terminal','drift'])
++def test_terminal_missing_map_is_recorded_not_coerced_and_stops(tmp_path,fault):
++    p=permit(tmp_path);p.output.mkdir();ledger=EngineeringLedger(p.output/'events.jsonl',p,evidence_class='synthetic_software_fixture')
++    factory,instances,_=environment_factory(tmp_path,simple_evidence(),missing_terminal=fault=='missing_terminal',drift=fault=='drift')
++    with pytest.raises(ContractError,match='transition/map/terminal drift'):replay_twice(simple_evidence(),factory,ledger)
++    assert len(instances)==1 and instances[0].closed
++    data=next(x['payload']['data'] for x in ledger.events if x['kind']=='external_completed' and 'valid_actions' in x['payload']['data'] and x['payload']['data']['done'])
++    if fault=='missing_terminal':assert data['valid_actions'] is None
++    assert ledger.snapshot()['completed']['steps']==1
++    ledger.close()
++
++
++@pytest.mark.parametrize('attack',['copy','hash','identity'])
++def test_original_game_path_and_saved_hash_binding_rejects_staging(tmp_path,attack):
++    from self_improvement.si_p3.runtime_environment import bind_original_game_path
++    e=simple_evidence();game=tmp_path/e.task_id/'game.tw-pddl'
++    row={'task':{'metadata':{'game_file':str(game)}},'metadata':{'source_game_sha256':'g','source_traj_data_sha256':'t'}}
++    env={'game':str(game),'data_root':str(tmp_path),'game_sha256':'g','traj_data_sha256':'t'}
++    bind_original_game_path(env,row,e)
++    if attack=='copy':row['task']['metadata']['game_file']=str(tmp_path/'different'/e.task_id/'game.tw-pddl')
++    elif attack=='hash':env['game_sha256']='altered'
++    else:env['game']=str(tmp_path/'wrong-id'/'trial'/'game.tw-pddl');row['task']['metadata']['game_file']=env['game']
++    with pytest.raises(ContractError):bind_original_game_path(env,row,e)
+diff --git a/tests/test_si_p3_runtime_gate.py b/tests/test_si_p3_runtime_gate.py
+new file mode 100644
+index 0000000..95551f9
+--- /dev/null
++++ b/tests/test_si_p3_runtime_gate.py
+@@ -0,0 +1,156 @@
++"""Authorization/resource/entrypoint checks stop before any real edge."""
++import copy
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++from datetime import datetime,timezone
++
++import pytest
++from self_improvement.si_p3.contract import ContractError,digest
++from self_improvement.si_p3.runtime_gate import (validate_documents,validate_gpu_rows,read_bound,verify_logic)
++from si_e2_support import CODE,GPU,documents
++
++
++def check(auth,proposal,**overrides):
++    kwargs=dict(proposal_sha256=digest(proposal),source_sha=CODE,clean=True,visible_devices=GPU,
++                now=datetime(2026,10,25,tzinfo=timezone.utc));kwargs.update(overrides)
++    validate_documents(auth,proposal,**kwargs)
++
++
++def test_fixed_engineering_authorization_shape(tmp_path):
++    a,p=documents(tmp_path);check(a,p)
++
++
++@pytest.mark.parametrize('attack',['absent','malformed','science','training','acquisition','eval','sha','dirty','gpu','foreign_visible',
++                                   'expired','future','proposal','count','output','input','time','device_hours','bool','scope','prompts','extra'])
++def test_authority_negative_before_edges(tmp_path,attack):
++    a,p=documents(tmp_path);overrides={}
++    if attack=='absent':a={}
++    elif attack=='malformed':a['schema']='other'
++    elif attack=='science':a['science_authorized']=True
++    elif attack in ('training','acquisition','eval'):a['purpose']=attack
++    elif attack=='sha':a['source_sha']='f'*40
++    elif attack=='dirty':overrides['clean']=False
++    elif attack=='gpu':a['gpu_uuid']='0'
++    elif attack=='foreign_visible':overrides['visible_devices']=GPU+',other'
++    elif attack=='expired':a['expires_utc']='2020-01-01T00:00:00Z'
++    elif attack=='future':a['not_before_utc']='2027-01-01T00:00:00Z'
++    elif attack=='proposal':a['proposal_sha256']='0'*64
++    elif attack in ('count','output','input','time','device_hours','bool'):
++        key={'count':'generations','output':'generated_tokens','input':'input_tokens','time':'seconds','device_hours':'device_hours','bool':'generations'}[attack]
++        a['ceilings'][key]=True if attack=='bool' else a['ceilings'][key]+1
++    elif attack=='scope':a['scope_sha256']='0'*64
++    elif attack=='prompts':p['synthetic_prompts_sha256']='0'*64;a['proposal_sha256']=digest(p)
++    elif attack=='extra':p['train']=True;a['proposal_sha256']=digest(p)
++    with pytest.raises((ContractError,KeyError,TypeError,ValueError)):check(a,p,**overrides)
++
++
++def test_input_hash_tamper_fails_before_import(tmp_path):
++    path=tmp_path/'binding';path.write_bytes(b'changed')
++    with pytest.raises(ContractError,match='input bytes changed'):read_bound(path,'0'*64)
++
++
++@pytest.mark.parametrize('attack',['foreign_process','foreign_device','wrong_uuid','wrong_model','no_device'])
++def test_gpu_ownership_and_uuid_fail_closed(attack):
++    pid=os.getpid();gpus=[[GPU,'NVIDIA A40','46068','0']];processes=[]
++    if attack=='foreign_process':processes=[[GPU,'999999999','foreign','1024']]
++    elif attack=='foreign_device':processes=[['GPU-other',str(pid),'own','1024']]
++    elif attack=='wrong_uuid':gpus[0][0]='GPU-other'
++    elif attack=='wrong_model':gpus[0][1]='NVIDIA other'
++    elif attack=='no_device':gpus=[]
++    with pytest.raises(ContractError):validate_gpu_rows(gpus,processes,gpu_uuid=GPU,allowed_pids={pid})
++
++
++def test_owned_compute_row_uses_actual_local_proc_uid():
++    pid=os.getpid();validate_gpu_rows([[GPU,'NVIDIA A40','46068','1']],[[GPU,str(pid),'software','1']],gpu_uuid=GPU,allowed_pids={pid})
++
++
++def test_logic_content_drift_rejects_even_when_yaml_same(tmp_path):
++    from self_improvement.si_p3.runtime_gate import file_hash
++    domain=tmp_path/'domain.pddl';grammar=tmp_path/'grammar.twl2';domain.write_text('domain');grammar.write_text('grammar')
++    config=tmp_path/'config.yaml';config.write_text('logic:\n  domain: '+str(domain)+'\n  grammar: '+str(grammar)+'\n')
++    env={'data_root':str(tmp_path),'config':str(config),'logic_files':{name:{'path':str(path),'sha256':file_hash(path)} for name,path in [('domain',domain),('grammar',grammar)]}}
++    assert verify_logic(env)['domain']['sha256']==file_hash(domain)
++    domain.write_text('altered')
++    with pytest.raises(ContractError,match='logic'):verify_logic(env)
++
++
++def test_absent_authority_cli_is_no_runtime_subprocess(tmp_path):
++    script=Path(__file__).resolve().parents[1]/'scripts/run_si_p3_engineering_probe.py'
++    r=subprocess.run([sys.executable,'-I',str(script)],capture_output=True,text=True,env=dict(os.environ,CUDA_VISIBLE_DEVICES=''))
++    assert r.returncode==2 and '--authorization' in r.stderr and not list(tmp_path.iterdir())
++
++
++def test_bound_gpu_with_no_observable_owned_compute_stops_cheaply(monkeypatch,tmp_path):
++    from self_improvement.si_p3.runtime_gate import inspect_gpu
++    def metadata(argv,**kwargs):
++        return GPU+', NVIDIA A40, 46068, 0\n' if '--query-gpu=' in argv[1] else ''
++    monkeypatch.setattr(subprocess,'check_output',metadata)
++    with pytest.raises(ContractError,match='own NVML') as caught:
++        inspect_gpu(GPU,allowed_pids={os.getpid()},require_owned_context=True)
++    expected={'gpu_raw':GPU+', NVIDIA A40, 46068, 0\n','process_raw':'','checked_pid':os.getpid()}
++    assert caught.value.resource_evidence==expected
++    from self_improvement.si_p3.runtime_ledger import EngineeringLedger
++    from si_e2_support import permit
++    p=permit(tmp_path);p.output.mkdir()
++    ledger=EngineeringLedger(p.output/'events.jsonl',p,evidence_class='synthetic_software_fixture')
++    ledger.reserve('model-load','model_load');ledger.failed('model-load',caught.value)
++    assert ledger.events[-1]['payload']['resource_evidence']==expected
++    assert ledger.snapshot()['open_units']==['model-load']
++    ledger.close()
++
++
++def test_malformed_bound_authority_cli_has_no_runtime_side_effects(tmp_path):
++    import hashlib
++    script=Path(__file__).resolve().parents[1]/'scripts/run_si_p3_engineering_probe.py'
++    authorization=tmp_path/'software_only_malformed_authorization.json';authorization.write_text('{}')
++    proposal=tmp_path/'software_only_proposal.json';proposal.write_text('{}')
++    r=subprocess.run([sys.executable,'-I',str(script),'--authorization',str(authorization),
++        '--authorization-sha256',hashlib.sha256(authorization.read_bytes()).hexdigest(),'--proposal',str(proposal)],
++        capture_output=True,text=True,env=dict(os.environ,CUDA_VISIBLE_DEVICES=''))
++    assert r.returncode==1 and 'REJECTED_OR_TECHNICAL_STOP' in r.stderr
++    assert sorted(p.name for p in tmp_path.iterdir())==sorted([authorization.name,proposal.name])
++
++
++@pytest.mark.parametrize('attack',['bad_snapshot','output_reuse'])
++def test_actual_cli_clean_or_dirty_gate_before_any_backend_or_environment(tmp_path,attack):
++    import hashlib
++    from self_improvement.si_p3.contract import canonical
++    from self_improvement.si_p3.runtime_gate import git_state,file_hash
++    root=Path(__file__).resolve().parents[1]
++    a,p=documents(tmp_path)
++    head,clean=git_state(root);a['source_sha']=head
++    p['interpreter']['sha256']=file_hash(Path(sys.executable))
++    a['proposal_sha256']=digest(p)
++    # A deliberately unusable synthetic UUID/base path: this is NEVER a root release.
++    (tmp_path/'NOT_A_RELEASE.txt').write_text('Negative software authorization fixture; no live authority or valid model input.')
++    authorization=tmp_path/'synthetic_authority_fixture.json';authorization.write_text(canonical(a))
++    proposal=tmp_path/'synthetic_input_fixture.json';proposal.write_text(canonical(p))
++    if attack=='output_reuse':Path(a['output_path']).mkdir()
++    r=subprocess.run([sys.executable,'-I',str(root/'scripts/run_si_p3_engineering_probe.py'),
++        '--authorization',str(authorization),'--authorization-sha256',hashlib.sha256(authorization.read_bytes()).hexdigest(),
++        '--proposal',str(proposal)],capture_output=True,text=True,
++        env=dict(os.environ,CUDA_VISIBLE_DEVICES=GPU,HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1'))
++    (tmp_path/'actual_child.stdout').write_text(r.stdout);(tmp_path/'actual_child.stderr').write_text(r.stderr)
++    (tmp_path/'actual_child_returncode.json').write_text(json.dumps({'returncode':r.returncode,'source_sha':head,'observed_clean':clean,
++        'evidence_class':'synthetic_negative_cli_fixture','real_model_env_calls':0}))
++    assert r.returncode==1
++    expected='exact source SHA and clean gate' if not clean else ('output exists' if attack=='output_reuse' else 'exact cached snapshot directory')
++    assert expected in r.stderr
++    assert not (Path(a['output_path'])/'engineering_events.jsonl').exists()
++
++
++@pytest.mark.parametrize('attack',['bytes','actual_origin'])
++def test_module_bytes_and_actual_import_origin_reject_before_loader(tmp_path,attack):
++    from self_improvement.si_p3.runtime_diagnostic import verify_packages
++    from self_improvement.si_p3.runtime_gate import file_hash
++    from si_e2_support import permit
++    bound=permit(tmp_path)
++    for name,binding in bound.proposal['packages'].items():
++        path=Path(binding['path']);path.write_text('software fixture for '+name)
++        binding['sha256']=file_hash(path)
++    if attack=='bytes':Path(bound.proposal['packages']['peft']['path']).write_text('changed')
++    expected='package input bytes' if attack=='bytes' else 'actual runtime package origin/version: torch'
++    with pytest.raises(ContractError,match=expected):verify_packages(bound)

@@ -1,0 +1,58 @@
+{
+  "schema": "SI_E2_PURE_CUDA_IDENTITY_OBSERVATION_V1",
+  "UTC": "2026-10-25T14:16:55.753083+00:00",
+  "expected_uuid": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+  "pid": 837631,
+  "ppid": 837630,
+  "uid": 2000,
+  "science_authorized": false,
+  "model_loads": 0,
+  "generations": 0,
+  "environment_calls": 0,
+  "automatic_retry": false,
+  "cuda_init_entered": true,
+  "one_byte_allocation_completed": false,
+  "namespace": {
+    "status": "Name:\tpython\nUmask:\t0022\nState:\tR (running)\nTgid:\t837631\nNgid:\t0\nPid:\t837631\nPPid:\t837630\nTracerPid:\t0\nUid:\t2000\t2000\t2000\t2000\nGid:\t2000\t2000\t2000\t2000\nFDSize:\t64\nGroups:\t2000 \nNStgid:\t837631\nNSpid:\t837631\nNSpgid:\t837631\nNSsid:\t837631\nVmPeak:\t   23260 kB\nVmSize:\t   23212 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   15168 kB\nVmRSS:\t   15168 kB\nRssAnon:\t    6008 kB\nRssFile:\t    9160 kB\nRssShmem:\t       0 kB\nVmData:\t    6412 kB\nVmStk:\t     132 kB\nVmExe:\t    2416 kB\nVmLib:\t    5540 kB\nVmPTE:\t      84 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t1\nSigQ:\t0/513720\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001004\nSigCgt:\t0000000000000002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSpeculation_Store_Bypass:\tthread force mitigated\nCpus_allowed:\tffffffff,ffffffff\nCpus_allowed_list:\t0-63\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000003\nMems_allowed_list:\t0-1\nvoluntary_ctxt_switches:\t0\nnonvoluntary_ctxt_switches:\t1\n",
+    "cgroup": "12:memory:/docker/acc28b43e0d216214f1b2c9fecb4500a7db008296433a55b6e7836bcabe5f80f\n11:devices:/docker/acc28b43e0d216214f1b2c9fecb4500a7db008296433a55b6e7836bcabe5f80f\n10:blkio:/docker/acc28b43e0d216214f1b2c9fecb4500a7db008296433a55b6e7836bcabe5f80f\n9:freezer:/docker/acc28b43e0d216214f1b2c9fecb4500a7db008296433a55b6e7836bcabe5f80f\n8:perf_event:/docker/acc28b43e0d216214f1b2c9fecb4500a7db008296433a55b6e7836bcabe5f80f\n7:cpuset:/docker/acc28b43e0d216214f1b2c9fecb4500a7db008296433a55b6e7836bcabe5f80f\n6:pids:/docker/acc28b43e0d216214f1b2c9fecb4500a7db008296433a55b6e7836bcabe5f80f\n5:rdma:/docker/acc28b43e0d216214f1b2c9fecb4500a7db008296433a55b6e7836bcabe5f80f\n4:net_cls,net_prio:/docker/acc28b43e0d216214f1b2c9fecb4500a7db008296433a55b6e7836bcabe5f80f\n3:hugetlb:/docker/acc28b43e0d216214f1b2c9fecb4500a7db008296433a55b6e7836bcabe5f80f\n2:cpu,cpuacct:/docker/acc28b43e0d216214f1b2c9fecb4500a7db008296433a55b6e7836bcabe5f80f\n1:name=systemd:/docker/acc28b43e0d216214f1b2c9fecb4500a7db008296433a55b6e7836bcabe5f80f\n0::/docker/acc28b43e0d216214f1b2c9fecb4500a7db008296433a55b6e7836bcabe5f80f\n"
+  },
+  "nspid_namespace_link": "pid:[4026534077]",
+  "GPU_before": {
+    "argv": [
+      "/usr/bin/nvidia-smi",
+      "--id=GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+      "--query-gpu=uuid,name,memory.used,memory.free",
+      "--format=csv,noheader,nounits"
+    ],
+    "returncode": 0,
+    "stdout": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a, NVIDIA A40, 14, 45390\n",
+    "stderr": ""
+  },
+  "compute_before": {
+    "argv": [
+      "/usr/bin/nvidia-smi",
+      "--query-compute-apps=gpu_uuid,pid,process_name,used_gpu_memory",
+      "--format=csv,noheader,nounits"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "torch": {
+    "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/torch/__init__.py",
+    "sha256": "5a190666c3853aa236c4d48ed64e2d4bbcd23bd32c21e64c0867646a6852e43f",
+    "version": "2.6.0+cu124"
+  },
+  "CUDA_VISIBLE_DEVICES": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+  "cuda_available": true,
+  "device_count": 1,
+  "device_properties_repr": "_CudaDeviceProperties(name='NVIDIA A40', major=8, minor=6, total_memory=45403MB, multi_processor_count=84, uuid=b08bc603-ebdb-787d-b5b6-ec796ea3022a, L2_cache_size=6MB)",
+  "uuid": {
+    "present": true,
+    "type_module": "torch._C",
+    "type_name": "_CUuuid",
+    "repr": "<torch._C._CUuuid object at 0x7f2c225c3370>",
+    "str": "b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+    "direct_str_matches_expected": false
+  }
+}

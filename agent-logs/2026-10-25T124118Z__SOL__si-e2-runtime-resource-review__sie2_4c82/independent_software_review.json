@@ -1,0 +1,96 @@
+{
+  "schema": "SI_E2_ROOT_INDEPENDENT_SOFTWARE_REVIEW_V1",
+  "reviewed_utc": "2026-10-25T13:44:42.543066+00:00",
+  "source_SHA": "dfc00e49d1ef4d48453d2331507429f8a0c7bbc5",
+  "base_SHA": "a995d4c3c5f7d31a2cf1fd0afc4bfa4bd72ee3a3",
+  "IMPLEMENTATION_REVIEW": "PASS_SOFTWARE_AND_STATIC_ONLY",
+  "actual_engineering_probe": "NOT_RUN_NOT_YET_RELEASED",
+  "remote_candidate_ref": "NOT_YET_OBSERVED_AT_LAST_QUERY",
+  "developer_frozen_handoff": "PENDING_RECEIPT",
+  "complete_delta": {
+    "added_files": 15,
+    "old_files_modified": 0,
+    "server_paths_scan": "PASS"
+  },
+  "source_treatment_semantics_changed": false,
+  "existing_scientific_execution_behavior_changed": false,
+  "new_engineering_runtime_behavior_added": true,
+  "science_authorized": false,
+  "independent_tests": {
+    "passed": 883,
+    "failed": 3,
+    "errors": 77,
+    "authentic_subprocess_returncode": 1,
+    "new_tests_all_passed": 83,
+    "failure_error_ids_equal_base": true,
+    "new_failure_error_ids": 0,
+    "missing_baseline_ids": 0,
+    "compile_and_source_diff_check": "PASS"
+  },
+  "independent_frozen_raw_differentials": {
+    "comparisons": 12,
+    "real_cached_tokenizer": true,
+    "tiny_CPU_PEFT_models": 3,
+    "EOS_variants": [
+      "short_EOS",
+      "cap_no_EOS",
+      "EOS_at_cap"
+    ],
+    "full_input_ID_mask_equality": true,
+    "real_8B_model_generations": 0,
+    "optimizer_steps": 0
+  },
+  "corrected_root_harness_attempt": {
+    "first_actual_exit": 2,
+    "collection_errors": 10,
+    "cause": "missing deliberate checkout/src software binding exposed old editable package",
+    "raw_attempt_retained": true,
+    "matching_baseline_method_rerun": "PASS_NO_REGRESSIONS"
+  },
+  "static_critic_exact_SHA": "NO_NEW_BLOCKING_FINDING; complete15file delta read independently",
+  "before_release_conditions": [
+    "Developer final exact-SHA freeze/handoff and live remote ref equality.",
+    "Concrete immutable Luna proposal/argv/environment/output identity independently reviewed.",
+    "Root engineering-only external authorization raw hash, no old clearance reuse.",
+    "Actual own CUDA/NVML PID proof before full8B allocation; unknown/foreign compute fails closed."
+  ],
+  "not_proven": [
+    "actual8B/P0 load",
+    "real adapter modes",
+    "real terminal replay map",
+    "inference memory/latency",
+    "training fit",
+    "96pool acquisition",
+    "learning efficacy"
+  ],
+  "evidence": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/independent_source_freeze.json",
+      "sha256": "21379d317bccd55793cc316cad5c15a8dff2dbb0146a92513aebbfe427f77b6f"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/independent_regression_comparison_pinned_source.json",
+      "sha256": "a3b042936f0fc1f466a244c7e6db445bc37f86d0c8739721310d95fd1fd13d4f"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/independent_frozen_generation_differential.json",
+      "sha256": "8c9d8bbdb0581befcb85f4f93d08de8a87e2489998813979b51009390f7a4f1f"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/independent_frozen_input_bytes.json",
+      "sha256": "f0a935f29e9ff4eb7b72b8de07d996df87447eb9a1c9ede6812100fc244c3894"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/independent_pinned_package_bindings.json",
+      "sha256": "2f1e7aaa8ea10a527182d37d1535770377674c79313b3b66788df5483c3c84af"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/LUNA_READ_ONLY_INDEPENDENT_REVIEW.json",
+      "sha256": "e50b5a08839d47a03fac4142c39d6514bbf96b3ac205655fe6d0f713cae70574"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/INDEPENDENT_HARNESS_CORRECTION.md",
+      "sha256": "24e600aac9170b06b84ad0e9c179bdffd92b4fa6890c569bffe9ded7bdda5c92"
+    }
+  ]
+}

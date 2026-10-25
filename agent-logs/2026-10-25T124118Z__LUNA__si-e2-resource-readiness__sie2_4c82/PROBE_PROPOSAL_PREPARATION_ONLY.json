@@ -1,0 +1,81 @@
+{
+  "schema": "SI_E2_CONDITIONAL_ENGINEERING_PROBE_PLACEHOLDER_V1",
+  "status": "PREPARATION_ONLY_NOT_RUNNABLE_NOT_RELEASED",
+  "base_scope_sha256": "7d4f554095e96f55bf97a286dbcbdc3851f9a34b8036c5ac72d048b15564f85d",
+  "code": {
+    "candidate_worktree": "/home/lizening/wt-si-p3-runtime-adaptation",
+    "candidate_sha": null,
+    "sol_cli_frozen": false,
+    "independent_exact_sha_review_sha256": null,
+    "reason_pending": "Sol implementation is not frozen; no command or code identity may be inferred."
+  },
+  "authority": {
+    "probe_authorization": "NOT_GRANTED",
+    "root_release": "NOT_GRANTED",
+    "old_r19_clearance_reuse": false,
+    "argv": null,
+    "environment": null,
+    "supervisor_argv": null,
+    "pool_seed": null,
+    "no_runnable_gate_or_launcher_created": true
+  },
+  "limits_if_later_separately_released": {
+    "probe_count": 1,
+    "gpu_count": 1,
+    "gpu_uuid_to_bind": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+    "deadline_seconds": 1800,
+    "allocated_gpu_hours_max": 0.5,
+    "model_calls_max": 4,
+    "phases_and_output_token_caps": {
+      "source": 16,
+      "stage_one": 40,
+      "stage_two": 16,
+      "suffix": 16
+    },
+    "total_output_tokens_max": 88,
+    "input_tokens_per_call_max": 8192,
+    "total_input_tokens_max": 32768,
+    "prompt_scope": "fixed synthetic public prompt/state only",
+    "generated_action_execution_in_environment": false,
+    "environment_resets_max": 2,
+    "environment_physical_steps_max": 100,
+    "proposed_replay": {
+      "instances": 2,
+      "each_instance_fresh": true,
+      "reset_seed_each": 30000,
+      "saved_steps_each": 6,
+      "same_pool_seed_required": true,
+      "pool_seed": null,
+      "pool_seed_status": "PENDING_FROZEN_SOL_CLI"
+    },
+    "training_optimizer_adapter_save_acquisition_evaluation_retry": false
+  },
+  "identities": {
+    "source_replay_candidate_sha256": "efa830ba97e364e9d80ebda88f95ba05ce64c52a5204cf3f7fb524c880228a97",
+    "future_output_path": "/home/lizening/wt-si-p3-runtime-adaptation/artifacts/runtime/si_e2_luna_probe_a995d4c_20261025T124118Z",
+    "future_output_path_absent_at_capture": true,
+    "future_record_path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/engineering_probe_supervisor",
+    "future_record_path_absent_at_capture": true,
+    "fresh_path_recheck_required_after_release": true
+  },
+  "mandatory_preallocation_stops": [
+    "No future worker may allocate 8B weights until its own CUDA-context/NVML PID mapping is proven against the bound GPU UUID.",
+    "If graphics PID ownership or the worker's CUDA/NVML process identity remains unresolved, stop before allocation.",
+    "If a foreign compute process appears, stop; do not kill or displace it.",
+    "Recheck source SHA, code/review/authorization bindings, output/record absence, GPU UUID, and frozen input hashes immediately before any future released invocation.",
+    "The exact-task ALFWorld discovery path must be restricted to the authenticated historical task directory before constructor scanning, while the source YAML remains byte-identical.",
+    "Any token/call/deadline/reset/step cap, path, source snapshot, or provenance mismatch fails closed with no retry."
+  ],
+  "cost_accounting": {
+    "historical_science_generations": 5142,
+    "historical_science_environment_operations_including_resets": 7949,
+    "historical_177_342_already_included": true,
+    "current_task_science_increments": {
+      "generations": 0,
+      "environment_operations": 0,
+      "resets": 0
+    },
+    "future_engineering_calls_must_be_separately_accounted": true,
+    "gpu_hour_formula": "sum(allocated device count × monotonic allocated seconds / 3600)"
+  }
+}

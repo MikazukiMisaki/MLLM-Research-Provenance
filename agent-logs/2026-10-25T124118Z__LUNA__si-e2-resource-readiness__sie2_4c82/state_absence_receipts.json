@@ -1,0 +1,110 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "-C",
+        "/home/lizening/wt-si-p3-engineering-contracts",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/",
+      "ended_utc": "2026-10-25T12:52:54.851066+00:00",
+      "monotonic_elapsed_seconds": 0.00443344,
+      "name": "a995_head",
+      "returncode": 0,
+      "started_utc": "2026-10-25T12:52:54.846611+00:00",
+      "stderr": {
+        "bytes": 0,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/a995_head.stderr.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 41,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/a995_head.stdout.bin",
+        "sha256": "3c328aea7152d46228d4b5def27ec7cafd7a110ec799c465b801c0ae4473bc0c"
+      }
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "/home/lizening/wt-si-p3-engineering-contracts",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "cwd": "/",
+      "ended_utc": "2026-10-25T12:52:54.858570+00:00",
+      "monotonic_elapsed_seconds": 0.007188087,
+      "name": "a995_status",
+      "returncode": 0,
+      "started_utc": "2026-10-25T12:52:54.851391+00:00",
+      "stderr": {
+        "bytes": 0,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/a995_status.stderr.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 80,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/a995_status.stdout.bin",
+        "sha256": "c5bcea72f6d3b18e2515bff83d95c138e580d416bf4ce59b7c565df616e8d108"
+      }
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "/home/lizening/wt-si-p3-engineering-contracts",
+        "rev-parse",
+        "@{upstream}"
+      ],
+      "cwd": "/",
+      "ended_utc": "2026-10-25T12:52:54.863445+00:00",
+      "monotonic_elapsed_seconds": 0.004590781,
+      "name": "a995_remote",
+      "returncode": 0,
+      "started_utc": "2026-10-25T12:52:54.858859+00:00",
+      "stderr": {
+        "bytes": 0,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/a995_remote.stderr.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 41,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/a995_remote.stdout.bin",
+        "sha256": "3c328aea7152d46228d4b5def27ec7cafd7a110ec799c465b801c0ae4473bc0c"
+      }
+    }
+  ],
+  "path_checks": {
+    "future_output_candidate": {
+      "exists": false,
+      "is_dir": false,
+      "path": "/home/lizening/wt-si-p3-runtime-adaptation/artifacts/runtime/si_e2_luna_probe_a995d4c_20261025T124118Z"
+    },
+    "future_record_candidate": {
+      "exists": false,
+      "is_dir": false,
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/engineering_probe_supervisor"
+    },
+    "host_gpu_pid_5364_proc": {
+      "exists": false,
+      "is_dir": false,
+      "path": "/proc/5364"
+    },
+    "namespace_pid1": {
+      "error": "PermissionError: [Errno 13] Permission denied: '/proc/1/ns/pid'",
+      "exists": "UNOBSERVABLE",
+      "is_dir": "UNOBSERVABLE",
+      "path": "/proc/1/ns/pid"
+    },
+    "namespace_self": {
+      "exists": true,
+      "is_dir": false,
+      "link_target": "pid:[4026534077]",
+      "path": "/proc/self/ns/pid"
+    }
+  },
+  "schema": "SI_E2_BASELINE_AND_ABSENCE_CHECK_V1"
+}

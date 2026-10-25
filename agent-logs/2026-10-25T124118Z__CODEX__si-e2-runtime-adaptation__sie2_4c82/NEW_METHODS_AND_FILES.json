@@ -1,0 +1,892 @@
+{
+  "source_sha": "dfc00e49d1ef4d48453d2331507429f8a0c7bbc5",
+  "parent_sha": "a995d4c3c5f7d31a2cf1fd0afc4bfa4bd72ee3a3",
+  "new_files": [
+    {
+      "path": "configs/self_improvement/si_e2_authorization_schema_v1.json",
+      "sha256": "5124f2a97c58d199a3b528c007f563e08e288b6b3d47454388577a2217b67760",
+      "bytes": 2586
+    },
+    {
+      "path": "configs/self_improvement/si_e2_proposal_schema_v1.json",
+      "sha256": "f80fe51051da7f28bd0099cd0b9e66c3841b5c04e2faf5420eed7b10795a5317",
+      "bytes": 7975
+    },
+    {
+      "path": "docs/si_p3_runtime_engineering_v1.md",
+      "sha256": "8c1378e6a9dcb487b90e06afbeff0a0ee58e9b477277252510bda688be20ef10",
+      "bytes": 9319
+    },
+    {
+      "path": "scripts/run_si_p3_engineering_probe.py",
+      "sha256": "c7393991186aa4260cbbd4ff3ec47bdd17af7e544ca62db2b018dca275cca7b5",
+      "bytes": 3975,
+      "definitions": [
+        {
+          "name": "main",
+          "kind": "FunctionDef",
+          "line": 20,
+          "ast_sha256": "2ddeba227d26330c43464221382fb29e7ee1b3d62807024de8a34465f91b70be"
+        }
+      ]
+    },
+    {
+      "path": "src/self_improvement/si_p3/runtime_backend.py",
+      "sha256": "0f3d7bd41125db54db7ece5b9dce4bc0218cd80ff8372a10f615b8e309057afb",
+      "bytes": 15705,
+      "definitions": [
+        {
+          "name": "PreparedTensors",
+          "kind": "ClassDef",
+          "line": 18,
+          "ast_sha256": "4e1e85ebd961ff12cba09a63f46e40c379bf858b2b529fb0577a2fc795bc515e"
+        },
+        {
+          "name": "module_origin",
+          "kind": "FunctionDef",
+          "line": 26,
+          "ast_sha256": "eb0ddd417cddfac0851e7d282c618c6f951d06a1c40baead1453777ebe69173d"
+        },
+        {
+          "name": "installed_distribution_versions",
+          "kind": "FunctionDef",
+          "line": 31,
+          "ast_sha256": "489cac566e36b274186bad46332f94c36f160ddd1b8510c8fb243f3ac0f72e11"
+        },
+        {
+          "name": "adapter_state",
+          "kind": "FunctionDef",
+          "line": 40,
+          "ast_sha256": "5e9509cb801c5fb13615b298f42fe1d9831570b5ad9f3e7fb49d6335504f6083"
+        },
+        {
+          "name": "verify_adapter_state",
+          "kind": "FunctionDef",
+          "line": 46,
+          "ast_sha256": "c323c779fca71e6a78e83c6e66cb976d35bd7898a3a229a70ba180667edef76d"
+        },
+        {
+          "name": "LocalInference",
+          "kind": "ClassDef",
+          "line": 56,
+          "ast_sha256": "7811070e39ea601a954b4d6b1044bc0aab9769d1e468a1681bbf6b92d670eab0"
+        },
+        {
+          "name": "to_dict",
+          "kind": "FunctionDef",
+          "line": 22,
+          "ast_sha256": "04a76addc0b95372a8f10a08577dec87487b6dffd715c8ce94c454cd7eb70ef3"
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "line": 62,
+          "ast_sha256": "20dc478e442e7a05ede19543914ccb0432210d58e10013754462b4bbe54c8c8f"
+        },
+        {
+          "name": "load",
+          "kind": "FunctionDef",
+          "line": 88,
+          "ast_sha256": "6fc9e897fa9c16b745339e8093aeaa117bdb7574c07f768d5dee61a16fd73779"
+        },
+        {
+          "name": "prepare",
+          "kind": "FunctionDef",
+          "line": 150,
+          "ast_sha256": "c24f5137013396cc9cc885b8fa25ffe82fdd301db1876953a433c19029cfa112"
+        },
+        {
+          "name": "generate",
+          "kind": "FunctionDef",
+          "line": 160,
+          "ast_sha256": "92a0499f9369749ec3c7e9269a15c5ce08f84f16f250a1c1888a0bdc10ed4778"
+        },
+        {
+          "name": "restore_grad",
+          "kind": "FunctionDef",
+          "line": 180,
+          "ast_sha256": "5f99f0d04595089673708d7682d19d22e9a32d77b3ae1f8b699fbf104abcf1e7"
+        }
+      ]
+    },
+    {
+      "path": "src/self_improvement/si_p3/runtime_diagnostic.py",
+      "sha256": "afc09080491fe08bfabdd836cdbaa9a214c9e1751c70c69d21ead5c1371991f8",
+      "bytes": 6753,
+      "definitions": [
+        {
+          "name": "verify_packages",
+          "kind": "FunctionDef",
+          "line": 18,
+          "ast_sha256": "e86dd8bd2a27e60d96771b92d3aee19502caeb6dd3f31c1d267d57a34b293069"
+        },
+        {
+          "name": "run_diagnostic",
+          "kind": "FunctionDef",
+          "line": 30,
+          "ast_sha256": "e86a4c16f58e6b30d7647699885c0c639d14cc311529f5e9496154e007e853a7"
+        },
+        {
+          "name": "env_factory",
+          "kind": "FunctionDef",
+          "line": 63,
+          "ast_sha256": "d7183721bbdcc0cf87cc8d2e4d84a9aea40ef3b14bd5f4690530c16b9acddb42"
+        }
+      ]
+    },
+    {
+      "path": "src/self_improvement/si_p3/runtime_environment.py",
+      "sha256": "d563f8235c8890f98375932089bd6abbf9cfcb1a1e7478f9e069b1ac6a2e590d",
+      "bytes": 12770,
+      "definitions": [
+        {
+          "name": "ReplayEvidence",
+          "kind": "ClassDef",
+          "line": 26,
+          "ast_sha256": "a29a566cb0ab382e925bd7ad2dd033b0ccf762c97085fd32558b03418b61476b"
+        },
+        {
+          "name": "source_hash",
+          "kind": "FunctionDef",
+          "line": 34,
+          "ast_sha256": "67b15323cbb6d2e2b5d432e908ae53299f8ced012c267ad83098dcafc55d74ab"
+        },
+        {
+          "name": "historical_replay",
+          "kind": "FunctionDef",
+          "line": 44,
+          "ast_sha256": "f66fd55a6083301313dbdcf0a6e9579ac9d19ed76e76dd7989c14d5dbb0930c9"
+        },
+        {
+          "name": "ReadIsolatedEnvironment",
+          "kind": "ClassDef",
+          "line": 97,
+          "ast_sha256": "9ce3909fc18072d2a64e66bee19d63d7709158060022c52d640200db5a53e378"
+        },
+        {
+          "name": "observed_public",
+          "kind": "FunctionDef",
+          "line": 149,
+          "ast_sha256": "aa4b8499865dcafa7cac1749e76046e70105b8fa914e8ba257e7ef577d2c271e"
+        },
+        {
+          "name": "replay_twice",
+          "kind": "FunctionDef",
+          "line": 161,
+          "ast_sha256": "6d3db225dd38a254da0f122cc5666f39d52dfe378c365f25878bd753a16164ac"
+        },
+        {
+          "name": "bind_original_game_path",
+          "kind": "FunctionDef",
+          "line": 206,
+          "ast_sha256": "37c5a116299d26d38375f9d5af3ce7254bf52ffd27eeb680f68e724d45619f2d"
+        },
+        {
+          "name": "state",
+          "kind": "FunctionDef",
+          "line": 65,
+          "ast_sha256": "f4548568fa27ac878fff0a42d82b719f9657a738aa8bf4bca365de7f62b25c02"
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "line": 99,
+          "ast_sha256": "b2d47e75ca9621cbe2177f4bf55ee97272b3329cc332949036a74999c8fed55e"
+        },
+        {
+          "name": "_get_environment",
+          "kind": "FunctionDef",
+          "line": 107,
+          "ast_sha256": "5f5f8813f4280eeb6f8c32411fc65540e4105abcc858e9fb9dc0650d18f64ec1"
+        },
+        {
+          "name": "initialize",
+          "kind": "FunctionDef",
+          "line": 137,
+          "ast_sha256": "9727f37de1ac63d9d0096c01ee8e1e54259c6d10e331532757b00f6830731161"
+        },
+        {
+          "name": "close",
+          "kind": "FunctionDef",
+          "line": 141,
+          "ast_sha256": "4196497e018890cde0a1e7682816c14cd7051d5fdaee358573346e0a6a2d66f2"
+        },
+        {
+          "name": "perform",
+          "kind": "FunctionDef",
+          "line": 170,
+          "ast_sha256": "c8d9457da482d66a13ed73c452344abf8ecea1c6e6dcf8def472059ed8105bfc"
+        },
+        {
+          "name": "OneHistoricalGame",
+          "kind": "ClassDef",
+          "line": 122,
+          "ast_sha256": "a8d04ca587391137a1f060e75df058e6c4a511a94cfdbc497a0e6446ab293abb"
+        },
+        {
+          "name": "collect_game_files",
+          "kind": "FunctionDef",
+          "line": 123,
+          "ast_sha256": "3f4b60251908d7029b5952f696b1b8fd5eb584bb4e9611093f918b6b89f8a770"
+        }
+      ]
+    },
+    {
+      "path": "src/self_improvement/si_p3/runtime_gate.py",
+      "sha256": "da9ef92150e4310faab3eccd32d1d40a34e78f1f106aa34820a78d66ffb50c95",
+      "bytes": 14890,
+      "definitions": [
+        {
+          "name": "file_hash",
+          "kind": "FunctionDef",
+          "line": 32,
+          "ast_sha256": "6255e2d5a05757c0233719ebf22ee10bd6c4f1887a09fef88a310156acbe907c"
+        },
+        {
+          "name": "read_bound",
+          "kind": "FunctionDef",
+          "line": 40,
+          "ast_sha256": "f0834a7e686391a7154a8e66d0798063b0801adaa88afb2c1c892a04b7e3da3a"
+        },
+        {
+          "name": "utc",
+          "kind": "FunctionDef",
+          "line": 47,
+          "ast_sha256": "47ed2ac89c08b66106a3f0634d9f132a40eb8d56a03fdac5e87c7fffba3e6af7"
+        },
+        {
+          "name": "Permit",
+          "kind": "ClassDef",
+          "line": 53,
+          "ast_sha256": "08a789c9502706197f38d55d25ed553c5be4a940a2d5263c56ec551c6fcd2217"
+        },
+        {
+          "name": "validate_documents",
+          "kind": "FunctionDef",
+          "line": 73,
+          "ast_sha256": "3a5bf887854501fe95e704514f56c6a0e70a5ffad691d07e2b60218926af2894"
+        },
+        {
+          "name": "git_state",
+          "kind": "FunctionDef",
+          "line": 123,
+          "ast_sha256": "5340f39c752cc21ca2dc45ba0754da2ab932ce5bc14c87238087594e3abd1341"
+        },
+        {
+          "name": "authenticate",
+          "kind": "FunctionDef",
+          "line": 129,
+          "ast_sha256": "e77a479ed4905b238e887135733e207dbd42de3fb65432cc86dca65455097120"
+        },
+        {
+          "name": "verify_artifacts",
+          "kind": "FunctionDef",
+          "line": 163,
+          "ast_sha256": "f08c955521cf9da0a060b32cbd3403b2184aa65045a669e1bd74e0edac2e3c03"
+        },
+        {
+          "name": "inspect_gpu",
+          "kind": "FunctionDef",
+          "line": 192,
+          "ast_sha256": "ff0890a634aed08771b5ceadf18763724ae60939cad49c713186e851e7c1956f"
+        },
+        {
+          "name": "validate_gpu_rows",
+          "kind": "FunctionDef",
+          "line": 212,
+          "ast_sha256": "aae8df6a6994227142bf357f670f89b760c7db977e99db46d7939632ac48a0a7"
+        },
+        {
+          "name": "engineering_prompts",
+          "kind": "FunctionDef",
+          "line": 229,
+          "ast_sha256": "159467c5b4f4488d7d345040cc7742161af4582d83f52c921d400622101cda18"
+        },
+        {
+          "name": "verify_logic",
+          "kind": "FunctionDef",
+          "line": 244,
+          "ast_sha256": "90c8667d6f4db5b93e6fc2ea845537223d836fd77725cc06caa9cb2c817ba98c"
+        },
+        {
+          "name": "ceilings",
+          "kind": "FunctionDef",
+          "line": 61,
+          "ast_sha256": "79b7d03922683b9b4a6712baffbe8ba8c5500ce6ee48faece42e566bc6e0d798"
+        },
+        {
+          "name": "output",
+          "kind": "FunctionDef",
+          "line": 65,
+          "ast_sha256": "3db271e584e5b656060a907c5758cc119056cb25afbcf1bae8c29f6047227eef"
+        },
+        {
+          "name": "gpu_uuid",
+          "kind": "FunctionDef",
+          "line": 69,
+          "ast_sha256": "9f7cbd46f60e7ffa842718c9210562eb7f489c38674d47cad0d1ec27297ee3c7"
+        },
+        {
+          "name": "run",
+          "kind": "FunctionDef",
+          "line": 124,
+          "ast_sha256": "3503fa3ac0f5be062b455ed0a7ba85cec757639956e77a7b71c23e3805c92301"
+        },
+        {
+          "name": "query",
+          "kind": "FunctionDef",
+          "line": 194,
+          "ast_sha256": "a44c289dec614f2f63546b81ea731859c30028237823ce60154a0c8d10b9cdf4"
+        }
+      ]
+    },
+    {
+      "path": "src/self_improvement/si_p3/runtime_ledger.py",
+      "sha256": "727df0b86b7a0cb0da22ea0348b09aa462a1c040835436ba8753e061fe997622",
+      "bytes": 10097,
+      "definitions": [
+        {
+          "name": "fresh_json",
+          "kind": "FunctionDef",
+          "line": 18,
+          "ast_sha256": "078eb76a53ed0d14227e1ba4a971499171544f341a284d0e10b4487973dc2898"
+        },
+        {
+          "name": "EngineeringLedger",
+          "kind": "ClassDef",
+          "line": 25,
+          "ast_sha256": "0e0e48701ba27b054d56e6fe265e17d1c1ddd7b1674eaa63bc5a15d8ad6fdc24"
+        },
+        {
+          "name": "reconstruct",
+          "kind": "FunctionDef",
+          "line": 101,
+          "ast_sha256": "001a5ea0e82f0777b8e1078fa55a98879799c01dae35ea47800a5117d78571af"
+        },
+        {
+          "name": "validate_report",
+          "kind": "FunctionDef",
+          "line": 158,
+          "ast_sha256": "cf197d4732a44758460e8616a46ea0732edd9171e3e0a7efdb63fc698997158e"
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "line": 26,
+          "ast_sha256": "205301abf5d321d111e8f448c1bde1652c178ea4874fac82e2ca53d94ca19f7c"
+        },
+        {
+          "name": "append",
+          "kind": "FunctionDef",
+          "line": 38,
+          "ast_sha256": "ee12f6decda971fdcc5e59b00fe78576a92365f848fa6d533096075ded6bbe41"
+        },
+        {
+          "name": "elapsed",
+          "kind": "FunctionDef",
+          "line": 46,
+          "ast_sha256": "5a9bb6fc7bc8a9ee28be6ea64a6929b3c7becb6a680e7accddbf23c02a1617b5"
+        },
+        {
+          "name": "reserve",
+          "kind": "FunctionDef",
+          "line": 53,
+          "ast_sha256": "ab210bb93cc1c456a994f745e749402373a5f40a72f490800b398fec50cf9eba"
+        },
+        {
+          "name": "complete",
+          "kind": "FunctionDef",
+          "line": 82,
+          "ast_sha256": "2827beaa5fdae0a78dbd9aaf29bd44bf596c7f812cc55c2cbe336fbec0dce237"
+        },
+        {
+          "name": "failed",
+          "kind": "FunctionDef",
+          "line": 89,
+          "ast_sha256": "e304ca65a91c5948c64927582b2202772f0983f0706f49036029ef6508783433"
+        },
+        {
+          "name": "snapshot",
+          "kind": "FunctionDef",
+          "line": 94,
+          "ast_sha256": "3008fdfac500f677515d80320115a355b6f82620b54ceb3b6e90574b86eeade5"
+        },
+        {
+          "name": "close",
+          "kind": "FunctionDef",
+          "line": 97,
+          "ast_sha256": "9fd1c919d4a55bcd0202ad8e2904113921d2f7315c4bb107cc761953c1395d11"
+        }
+      ]
+    },
+    {
+      "path": "src/self_improvement/si_p3/runtime_supervisor.py",
+      "sha256": "bfe86a6c09dfc697f770406f8e1ea7bd969a681311401e689e3b74cd6b97b657",
+      "bytes": 6876,
+      "definitions": [
+        {
+          "name": "group_members",
+          "kind": "FunctionDef",
+          "line": 17,
+          "ast_sha256": "efbffb684971d85eda7e14b6f5753cc22e21c85d2a73959da57423a5c210d234"
+        },
+        {
+          "name": "process_table",
+          "kind": "FunctionDef",
+          "line": 29,
+          "ast_sha256": "d0519b6c266cf0d5f5849b000a249c6e6a0bb7eeca809da2e152af117463fb46"
+        },
+        {
+          "name": "descendants",
+          "kind": "FunctionDef",
+          "line": 41,
+          "ast_sha256": "7f5a051be68d1cbc477e6a5b6ba375e6e9a24d1315344b4fad2710f5c0d68df5"
+        },
+        {
+          "name": "kill_identities",
+          "kind": "FunctionDef",
+          "line": 49,
+          "ast_sha256": "9858b07370279817c7cc5f8927c87c183e30bac5d5a0219a89c7e91927f5e322"
+        },
+        {
+          "name": "supervise",
+          "kind": "FunctionDef",
+          "line": 56,
+          "ast_sha256": "4e26badfab07c7db7d2cc52c92b7f14683431e107b429107661cf208ae16a0b8"
+        }
+      ]
+    },
+    {
+      "path": "tests/si_e2_support.py",
+      "sha256": "226dfce3b5b9be38bb3c72a3b9f56b5bf209cf83a1593f806bfe32fc4ee6181e",
+      "bytes": 6917,
+      "definitions": [
+        {
+          "name": "documents",
+          "kind": "FunctionDef",
+          "line": 18,
+          "ast_sha256": "51f3420d7841b770201b189dc04a5df11daca1361e73663221d40869ac3c0e13"
+        },
+        {
+          "name": "permit",
+          "kind": "FunctionDef",
+          "line": 35,
+          "ast_sha256": "a254b444d77ad7f53373de67729f44b5b04a103cd7726b71d8e9c520ade7c0ab"
+        },
+        {
+          "name": "tiny_components",
+          "kind": "FunctionDef",
+          "line": 40,
+          "ast_sha256": "a82ef29d19574a1272abdabb5845483e9cfc69f8b8a6c4949411f046ac610550"
+        },
+        {
+          "name": "raw_generate_edge",
+          "kind": "FunctionDef",
+          "line": 59,
+          "ast_sha256": "0002b735668279f339dfcc6a7cdfce19bf455352dd555fa7c2769af119770b8d"
+        },
+        {
+          "name": "simple_evidence",
+          "kind": "FunctionDef",
+          "line": 72,
+          "ast_sha256": "0d2ac8da423d125f201ccfdc6a8d6dd4fb885a57c399c0e18e65cc344d15421b"
+        },
+        {
+          "name": "FakeTextWorld",
+          "kind": "ClassDef",
+          "line": 80,
+          "ast_sha256": "0198267dfad44037cf89579d6d3493b12b182326ad70efa0548f4c79305e59b1"
+        },
+        {
+          "name": "environment_factory",
+          "kind": "FunctionDef",
+          "line": 97,
+          "ast_sha256": "b3218f160209055aa51d1a6c2858f779e2d6f3fbe90f717468e34ed34b9257b0"
+        },
+        {
+          "name": "generate",
+          "kind": "FunctionDef",
+          "line": 61,
+          "ast_sha256": "8e41af12e93cd04bc598c0452c86990933c334aba174ee78ed6900020a4343b7"
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "line": 81,
+          "ast_sha256": "a51b8dc985d17465bb19df2e2965f7541ac43e7352fbf8fb65a73da751c8a73f"
+        },
+        {
+          "name": "seed",
+          "kind": "FunctionDef",
+          "line": 85,
+          "ast_sha256": "0ff19fbcb23ab08a73fb81bd262e6f8485112a82acc3385d27c6c0792ca6706f"
+        },
+        {
+          "name": "reset",
+          "kind": "FunctionDef",
+          "line": 86,
+          "ast_sha256": "a76290ae6b5d01373c02edf52418ae4a0653574bf3ab94ca4f2af8a114548333"
+        },
+        {
+          "name": "step",
+          "kind": "FunctionDef",
+          "line": 89,
+          "ast_sha256": "811c66a3939f59e415ff9c2175740dad0957d8cac45c0472b7493f976e47ba30"
+        },
+        {
+          "name": "close",
+          "kind": "FunctionDef",
+          "line": 94,
+          "ast_sha256": "09d76c71ae668e2e0082c01b6ac3546e4bed7cf4b0935c0f1b33ebed8c39c4ff"
+        },
+        {
+          "name": "Factory",
+          "kind": "ClassDef",
+          "line": 107,
+          "ast_sha256": "229f0d716107a62edd3c272726f20177df1cd11c057b879f01c71a71e2709e5a"
+        },
+        {
+          "name": "factory",
+          "kind": "FunctionDef",
+          "line": 118,
+          "ast_sha256": "e11bb8457fb27c0c8058a8a64e156162daab3be4c87f7d857f2984d32e29f868"
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "line": 108,
+          "ast_sha256": "c36f940dd83665a15abb8c5404fc0c7553bf833d859a49d1f34a4055b3b5a7c2"
+        },
+        {
+          "name": "init_env",
+          "kind": "FunctionDef",
+          "line": 117,
+          "ast_sha256": "8a8311bfb1a560cf16ecfb92f52e2687aa5e4dc9888516b19ef885cc0f2f1c5b"
+        }
+      ]
+    },
+    {
+      "path": "tests/test_si_p3_runtime_backend.py",
+      "sha256": "7fced5ebd1752b4b0d076cbc6a8920d5eb19fd647d22ffff61e457b1eecf429a",
+      "bytes": 7999,
+      "definitions": [
+        {
+          "name": "parts",
+          "kind": "FunctionDef",
+          "line": 15,
+          "ast_sha256": "dcd81a000113a4802b5e6aa7836e195b277659e01efbf37a39217ab317a461ed"
+        },
+        {
+          "name": "test_actual_peft_base_context_restores_names_enabled_and_trainability",
+          "kind": "FunctionDef",
+          "line": 25,
+          "ast_sha256": "80fbae68928c720c10ecab5ef40f34bdf1c02feea216cb9bd3ba119edd216858"
+        },
+        {
+          "name": "test_real_tiny_cpu_generate_returns_frozen_raw_contract",
+          "kind": "FunctionDef",
+          "line": 39,
+          "ast_sha256": "bbe5e93564ae2ace938883bcc280f2f092a8a8a327473f5e0868712e4dd59cd0"
+        },
+        {
+          "name": "test_actual_peft_exception_restores_grad_flags_and_retains_full_open_reservation",
+          "kind": "FunctionDef",
+          "line": 49,
+          "ast_sha256": "3660b76a76734c7ecf1ec8c9d49a008a91cf054f08504efd622ddf62c5c67158"
+        },
+        {
+          "name": "test_actual_sent_tensor_drift_rejected_before_external_reservation",
+          "kind": "FunctionDef",
+          "line": 62,
+          "ast_sha256": "7fea1164f4494d92b1a24748717715a8543821bdca980cd031d36c0d38c798c8"
+        },
+        {
+          "name": "test_caller_prepared_drift_rejected_before_external_reservation",
+          "kind": "FunctionDef",
+          "line": 78,
+          "ast_sha256": "25b3d53b263dfc70df3923fca2fbdf53d127ced5a58151d0e8562b1e86ce86df"
+        },
+        {
+          "name": "test_adapter_switch_failure_rejects_before_generate_and_reservation",
+          "kind": "FunctionDef",
+          "line": 86,
+          "ast_sha256": "c5e8ce1e2cbcd19405ed998f3c13267e2a141550d2c6e4129015f9d52b532079"
+        },
+        {
+          "name": "test_phase_cap_mode_contract_before_edges",
+          "kind": "FunctionDef",
+          "line": 97,
+          "ast_sha256": "463be14a1098ddbaa1df11cb3b9b64f0391370c6feab041ac48114b35da042d2"
+        },
+        {
+          "name": "test_duplicate_phase_cannot_make_second_call",
+          "kind": "FunctionDef",
+          "line": 103,
+          "ast_sha256": "26c6ac29f1554af2d571e3eb12a14839fbd10ec1a76b48437755cfe8d9e2b5ec"
+        },
+        {
+          "name": "rehash",
+          "kind": "FunctionDef",
+          "line": 110,
+          "ast_sha256": "63552faf00b05b26ae24c40b12c13f50078d6bbc5b349e1247b34e6a98373f1a"
+        },
+        {
+          "name": "test_full_chain_rehash_does_not_hide_cost_or_tensor_tamper",
+          "kind": "FunctionDef",
+          "line": 118,
+          "ast_sha256": "e198242eaf32e22f51a7ebdbc8a8f4210daa9c5b67ecb74e5e8c24da92f94bb0"
+        },
+        {
+          "name": "test_actual_peft_state_validation_rejects_inconsistent_receipts",
+          "kind": "FunctionDef",
+          "line": 137,
+          "ast_sha256": "5db4bd94ce156a16c279ce73fc2870622c13b2dad10072d7f453d44ce0d12c75"
+        },
+        {
+          "name": "test_exact_input_limits_reject_before_generation_reservation",
+          "kind": "FunctionDef",
+          "line": 148,
+          "ast_sha256": "534bdb15375604392e6d9297806b8e1a26e7286c50ed616635277d74ed42dc88"
+        },
+        {
+          "name": "Drift",
+          "kind": "ClassDef",
+          "line": 65,
+          "ast_sha256": "2e13758b3e23342978848c6a8c106d464ac0073da0d27904834835ad31c1bcb5"
+        },
+        {
+          "name": "broken",
+          "kind": "FunctionDef",
+          "line": 90,
+          "ast_sha256": "ef55dffb18ca67a6827efaebfe0a7cad6ff6e95d999eb2274a45f82d3e17b9a9"
+        },
+        {
+          "name": "apply_chat_template",
+          "kind": "FunctionDef",
+          "line": 67,
+          "ast_sha256": "18042e9accacf4756f40a750f35ebe39c91856f98a810a15e9b9029647a881ca"
+        },
+        {
+          "name": "decode",
+          "kind": "FunctionDef",
+          "line": 68,
+          "ast_sha256": "395b6e98afaae71656ad6de06c7c34a576e2d09633eb072f7ed8bbe3d109a241"
+        },
+        {
+          "name": "__call__",
+          "kind": "FunctionDef",
+          "line": 69,
+          "ast_sha256": "a7c43e79c0146f0de47d96cf902d1404574cf82cb0f6a46c610d34221c76aaa6"
+        }
+      ]
+    },
+    {
+      "path": "tests/test_si_p3_runtime_diagnostic.py",
+      "sha256": "52db9dd8fb39529fe1b1dde7ac57f22674497238e8ee8a3e3f48bbe0a6e25b84",
+      "bytes": 4813,
+      "definitions": [
+        {
+          "name": "test_nonempty_production_diagnostic_to_report_independent_four_phases",
+          "kind": "FunctionDef",
+          "line": 16,
+          "ast_sha256": "6d81c32b9070241b74776378a6686f39d71d3e4fcf767ab495592bc0042936d5"
+        },
+        {
+          "name": "test_known_replay_budget_rejects_before_loading_or_environment",
+          "kind": "FunctionDef",
+          "line": 37,
+          "ast_sha256": "0a9bd76ea1f5ef98f87c537b3788d0db12737c4dba31b057ab919fd07efe09fc"
+        },
+        {
+          "name": "test_real_diagnostic_rejects_software_injection_before_output",
+          "kind": "FunctionDef",
+          "line": 46,
+          "ast_sha256": "1accb4b3a9f757f2576b6c2900317565051af240580380530bfb8b8ebcfaaf01"
+        },
+        {
+          "name": "test_authentic_subprocess_exit_and_create_exclusive",
+          "kind": "FunctionDef",
+          "line": 53,
+          "ast_sha256": "ffe59d7b62a9c2725990cbec6ef7c69c0f1bc5e794e07c449570685c47388502"
+        },
+        {
+          "name": "test_external_deadline_kills_worker_and_descendant_with_raw_exit",
+          "kind": "FunctionDef",
+          "line": 64,
+          "ast_sha256": "5eda6fba9662978b2770a3163f52c8c7a2577ada1b7190a9c64fe913ed32fc2d"
+        },
+        {
+          "name": "load",
+          "kind": "FunctionDef",
+          "line": 20,
+          "ast_sha256": "4742cfdf0b92004e377ef4413b193520847396671589301801778a01f36dd189"
+        },
+        {
+          "name": "forbidden",
+          "kind": "FunctionDef",
+          "line": 40,
+          "ast_sha256": "740f46b9fa105a80e3dc08cc979623411e044b481186a19354595082595aa65f"
+        }
+      ]
+    },
+    {
+      "path": "tests/test_si_p3_runtime_environment.py",
+      "sha256": "1fd5e3f30c195e23993e2bc7725a2d3fc4ee993e40470df3afe80b3fbcc15b68",
+      "bytes": 6936,
+      "definitions": [
+        {
+          "name": "source_wire",
+          "kind": "FunctionDef",
+          "line": 15,
+          "ast_sha256": "173f755b3ad2932bbf0708da5091d012843f0bb2fccaeb3ea21ae53e7a220bda"
+        },
+        {
+          "name": "test_original_r19_source_wire_after_map_comes_from_transition_receipt",
+          "kind": "FunctionDef",
+          "line": 36,
+          "ast_sha256": "ca13e9e8b9ce3391bfeaf882507487332a99205dec57e72b24f5713bdf5ae029"
+        },
+        {
+          "name": "test_source_wire_negative_bindings",
+          "kind": "FunctionDef",
+          "line": 44,
+          "ast_sha256": "d62f56992ebf77f4e2da2dc8ebd613ab17feda664e3042112063ffb2e5fdecec"
+        },
+        {
+          "name": "test_read_isolation_and_two_fresh_seeded_replays",
+          "kind": "FunctionDef",
+          "line": 57,
+          "ast_sha256": "84b4a4cf0c4c4eebc042fc08fb1621be2a2bf50171f9f7b90f8e44f57b6a8e40"
+        },
+        {
+          "name": "test_production_no_scan_subclass_sets_game_list_before_constructor_returns",
+          "kind": "FunctionDef",
+          "line": 69,
+          "ast_sha256": "1a980ae318c392c9920d9b0f337084791a7017bb1c838600e4974d22d8557568"
+        },
+        {
+          "name": "test_terminal_missing_map_is_recorded_not_coerced_and_stops",
+          "kind": "FunctionDef",
+          "line": 87,
+          "ast_sha256": "da942377d7c2babf8fa1a54b02b4b790fc194975be0e085659bb5f0e2481bcd8"
+        },
+        {
+          "name": "test_original_game_path_and_saved_hash_binding_rejects_staging",
+          "kind": "FunctionDef",
+          "line": 99,
+          "ast_sha256": "88a55ab48f0e2ae90c8ad37f222c871cf9055d374260dd82924254115fca2b01"
+        },
+        {
+          "name": "ParentBoundary",
+          "kind": "ClassDef",
+          "line": 72,
+          "ast_sha256": "2a6acb6a397c12d95d4b9bf7fd843402adcf010b7c8e468ab6b6d020b90a1c74"
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "line": 73,
+          "ast_sha256": "9b85bc8d9d0632fe05dc238b92e4968ff4894332982462753476b326ee1f63ad"
+        },
+        {
+          "name": "collect_game_files",
+          "kind": "FunctionDef",
+          "line": 77,
+          "ast_sha256": "2af6edc7121b21203788017f1d0a47d733b9b3fa47e7ef8eee19596e765dd642"
+        },
+        {
+          "name": "init_env",
+          "kind": "FunctionDef",
+          "line": 78,
+          "ast_sha256": "52fee4856603650bb40e84a822370962307f2767f11001c932fc47a0f420da0f"
+        }
+      ]
+    },
+    {
+      "path": "tests/test_si_p3_runtime_gate.py",
+      "sha256": "0c0b09a3256934f4ea6b366f024abf524af419e22fadfbbde9a83c589aba52b8",
+      "bytes": 9343,
+      "definitions": [
+        {
+          "name": "check",
+          "kind": "FunctionDef",
+          "line": 16,
+          "ast_sha256": "b8476b8d19aa918683f988a68f9f145db2b96e1fdd9e2bb9d942e98285543384"
+        },
+        {
+          "name": "test_fixed_engineering_authorization_shape",
+          "kind": "FunctionDef",
+          "line": 22,
+          "ast_sha256": "14b13d43a37ce16f7f13e06b35403ccb66dc94fdc95d8097bc0c3fbc550e01db"
+        },
+        {
+          "name": "test_authority_negative_before_edges",
+          "kind": "FunctionDef",
+          "line": 28,
+          "ast_sha256": "8628b37b68c17089d822c1f215e495ea78bc636de351bbc0f12eb9680397f590"
+        },
+        {
+          "name": "test_input_hash_tamper_fails_before_import",
+          "kind": "FunctionDef",
+          "line": 50,
+          "ast_sha256": "290c4b357d906937557d0a766ead1515e70c253b3f823e8beaf7ea9eeaac6ec6"
+        },
+        {
+          "name": "test_gpu_ownership_and_uuid_fail_closed",
+          "kind": "FunctionDef",
+          "line": 56,
+          "ast_sha256": "2eb580ba377addae03937fd02f0909f7e06daae85c2381ec5d3da694e7092526"
+        },
+        {
+          "name": "test_owned_compute_row_uses_actual_local_proc_uid",
+          "kind": "FunctionDef",
+          "line": 66,
+          "ast_sha256": "8727265b8c24c1b24587d7e5efadb4ef5ccfdfa9f585f52805719da4c3ff2173"
+        },
+        {
+          "name": "test_logic_content_drift_rejects_even_when_yaml_same",
+          "kind": "FunctionDef",
+          "line": 70,
+          "ast_sha256": "d5815a01632bb2ac3d194bcdcbdf4d67675c880bc759ed2d4df0e4deb9da964d"
+        },
+        {
+          "name": "test_absent_authority_cli_is_no_runtime_subprocess",
+          "kind": "FunctionDef",
+          "line": 80,
+          "ast_sha256": "fb8ffea5488b4700fea6704f8d524abb550f1b73e4fb02371250b855a8be97cf"
+        },
+        {
+          "name": "test_bound_gpu_with_no_observable_owned_compute_stops_cheaply",
+          "kind": "FunctionDef",
+          "line": 86,
+          "ast_sha256": "df04f062b3c01ea5e061e3131dbdb1cd1441ac16649dd1b6e4ed84c89f7a7e8b"
+        },
+        {
+          "name": "test_malformed_bound_authority_cli_has_no_runtime_side_effects",
+          "kind": "FunctionDef",
+          "line": 105,
+          "ast_sha256": "58ab63319c0f82c9915d1439bde59cdfe17459fc0a37d1d356e9c6ddbe43c7c9"
+        },
+        {
+          "name": "test_actual_cli_clean_or_dirty_gate_before_any_backend_or_environment",
+          "kind": "FunctionDef",
+          "line": 118,
+          "ast_sha256": "56c2d699d36dee9084561248e683401c5ec20f2e55c223c87d167db57084f6fd"
+        },
+        {
+          "name": "test_module_bytes_and_actual_import_origin_reject_before_loader",
+          "kind": "FunctionDef",
+          "line": 146,
+          "ast_sha256": "dfb7724efcf64bf5192e48400e58f64435116e837e3f436a614faad7cdd22cca"
+        },
+        {
+          "name": "metadata",
+          "kind": "FunctionDef",
+          "line": 88,
+          "ast_sha256": "84b6636b1a1917fc0d980983ad9088fcfd63febaf294271eb9e15b9ba8f747f2"
+        }
+      ]
+    }
+  ],
+  "old_method_changes": []
+}

@@ -1,0 +1,635 @@
+{
+  "fixed_replay_design": {
+    "actions_per_replay": 6,
+    "bounded_environment_ceiling": {
+      "max_physical_action_steps": 100,
+      "max_resets": 2
+    },
+    "full_public_maps_and_transitions": "Compare every ordered public field/map/transition. Missing terminal action map remains missing and is reported; never coerce to an empty action list.",
+    "lifecycle": "Two fresh one-game environment instances, one reset per instance; same reviewed pool_seed in both; never reuse/reset one instance as if it were freshly constructed.",
+    "model_generated_action_execution": "FORBIDDEN",
+    "number_of_instances": 2,
+    "pool_seed": "PENDING_FROZEN_SOL_CLI_AND_INDEPENDENT_REVIEW",
+    "release_status": "NOT_RELEASED; no instance constructed and no reset/step performed",
+    "reset_seed_for_each_instance": 30000,
+    "total_resets": 2,
+    "total_saved_action_steps": 12
+  },
+  "original_action_map_evidence": {
+    "first_saved_step_map_facts": [
+      {
+        "count": 10,
+        "is_missing_or_null": false,
+        "path": "$.valid_actions",
+        "sha256": "7f3e765d83014d0f142be6c5a9e3b2afb8b079affb0ee0ac9fd64c44a80dd3a7",
+        "value_type": "list"
+      }
+    ],
+    "last_saved_step_map_facts": [
+      {
+        "count": 12,
+        "is_missing_or_null": false,
+        "path": "$.valid_actions",
+        "sha256": "15fd1cad8a141e7acb51ca7389788599c650ed187e8857004e206e25bc80fe6f",
+        "value_type": "list"
+      }
+    ],
+    "last_transition_event_map_facts": [
+      {
+        "count": 12,
+        "is_missing_or_null": false,
+        "path": "$.action_map",
+        "sha256": "12440f1360750a0e5c1162a76c7eebd968435fc06b966fd9f0e491468d8fe503",
+        "value_type": "dict"
+      },
+      {
+        "count": 12,
+        "is_missing_or_null": false,
+        "path": "$.before_state.valid_actions",
+        "sha256": "15fd1cad8a141e7acb51ca7389788599c650ed187e8857004e206e25bc80fe6f",
+        "value_type": "list"
+      },
+      {
+        "count": 12,
+        "is_missing_or_null": false,
+        "path": "$.transition.valid_actions",
+        "sha256": "8287df5501d00af5065fc688dab3b7c2000bc5f59c7e1a3e0b46260352caff1a",
+        "value_type": "list"
+      }
+    ],
+    "missing_terminal_action_map_policy": "Preserve missing as missing; do not coerce to empty list/map.",
+    "reset_event_map_facts": [
+      {
+        "count": 10,
+        "is_missing_or_null": false,
+        "path": "$.transition.valid_actions",
+        "sha256": "7f3e765d83014d0f142be6c5a9e3b2afb8b079affb0ee0ac9fd64c44a80dd3a7",
+        "value_type": "list"
+      }
+    ]
+  },
+  "original_g3_integrity": {
+    "current_output_file_hashes_equal_independent_final_audit": true,
+    "current_supervisor_file_hashes_equal_independent_final_audit": true,
+    "historical_science_cumulative_environment_operations_including_resets": 7949,
+    "historical_science_cumulative_generations": 5142,
+    "independent_final_decision": "/home/lizening/research-notes/agent-logs/2026-10-23T005510Z__SOL__r19-authorized-g3-monitor__2da980f_eea6b8/INDEPENDENT_G3_FINAL_DECISION.json",
+    "output_files_verified": 10,
+    "supervisor_files_verified": 4,
+    "this_audit_scientific_increments": {
+      "environment_operations": 0,
+      "generations": 0,
+      "resets": 0
+    }
+  },
+  "original_run_id": "260422ac02bd42a8b2929d7ef240526b",
+  "replay_inputs": {
+    "active_historical_alfworld_config": {
+      "bytes": 661,
+      "path": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml",
+      "sha256": "e90f93eb4604a473b6eb4a259a19ef1ca3c296bba1771ba70a1c9b0edbc99700"
+    },
+    "base_a40_config": {
+      "bytes": 7826,
+      "path": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/alfworld_base_a40.yaml",
+      "sha256": "5f990a11cb77ade0f7b9f5c88a5d36fc8180d762c0711ab0c5ab3719c89432a8"
+    },
+    "domain_file": {
+      "bytes": 17202,
+      "path": "/home/lizening/alfworld_data/logic/alfred.pddl",
+      "sha256": "f1473041ed01da514de1f87adfd7ef0804862361f83ccf63c75e43633b0eb280"
+    },
+    "first_source_snapshot_comparison": {
+      "comparison_before_first_environment_action": true,
+      "environment_actions_executed_before_comparison": 0,
+      "expected_snapshot_sha256": "d85d870bfddbad4eb62116d3d5de54a4b7fd4f250634af1c1ed89958e4c400b8",
+      "observed_snapshot_sha256": "d85d870bfddbad4eb62116d3d5de54a4b7fd4f250634af1c1ed89958e4c400b8",
+      "status": "PASS"
+    },
+    "g3_environment_manifest_alfworld_config_sha256": "e90f93eb4604a473b6eb4a259a19ef1ca3c296bba1771ba70a1c9b0edbc99700",
+    "grammar_file": {
+      "bytes": 13263,
+      "path": "/home/lizening/alfworld_data/logic/alfred.twl2",
+      "sha256": "c5b22f0f73309a7fd7c8e5b71de42ad4803b60766ab4a51cc2feb34162be036b"
+    },
+    "saved_game_file": {
+      "bytes": 58949,
+      "path": "/home/lizening/alfworld_data/json_2.1.1/train/pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092/game.tw-pddl",
+      "sha256": "e393d4f3f521c7ceba7a6201a09884aec0f8941b4c87bcd4d427ea33a717bb99"
+    }
+  },
+  "schema": "SI_E2_FIRST_SOURCE_REPLAY_CANDIDATE_V1",
+  "selection_rule": "First JSONL record in the original source_trajectories file; no outcome-based search or substitution.",
+  "source_record": {
+    "canonical_task_id": "pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092",
+    "family": "pick_and_place_simple",
+    "line_bytes": 35486,
+    "line_sha256": "465bff755ba34c18acca299470cd7c3a40455cb395df3e6fe43eee99119a7c73",
+    "max_steps": 50,
+    "nominal_seed": 30000,
+    "recorded_termination_reason": "environment_terminal",
+    "registry_match": {
+      "schedule_index": 0,
+      "status": "completed",
+      "unit_hash": "7d9da2ea723b4e93b76804e8c552a7f06aaf23e53559c5e54ddd19310e6d7689"
+    },
+    "saved_action_command_count": 6,
+    "saved_action_sequence_sha256": "928f5291b68f02c4c7e7340febd885ac7c3057b2ce795b4f43ab3d6a3de9cc4b",
+    "schedule_index": 0,
+    "seed": 30000,
+    "source_event_refs": {
+      "all_refs_found_in_original_live_ledger": true,
+      "event_ids": {
+        "generation_event_ids": [
+          "9d35a2ae4dc885623b26ea962670aa4f3019fcedc00f81af234fdbd79c4e754f",
+          "76e7339bb51f6b83271fdad0c501bfa8f702119c65ee38a65b1ed4549c641ca1",
+          "b35a5f4bba2c83e791577b1854f03d025d1d362506cfe283bdd0adb820888dcd",
+          "4feaa12c7219fcefa7ff80d04da6d30e5e180bb7aa9a2865097d36c417bd0cb8",
+          "758c198fe9203d7344b2ec1a56b2663a5b56657fda649756b8a0c38c5c5cc03e",
+          "636bc3d36604accf6b0149179c98a1f24351b99e9dec87486a8271560fdf12e4"
+        ],
+        "reset_event_id": "5a8c49daf6691ebd1bd644e12662bc66894d93153618e9488bce7e4db27f7a31",
+        "source_episode_event_id": "5b33aa201afd47ea08eed919d04d341376c5c4dd8c1c75f6c8d4f2f1dd9657cb",
+        "transition_event_ids": [
+          "1ea5a22b8e17db14c06c32771e666fe643dfc60b870c60938bf41cd10ba57cba",
+          "0c26efe64990c54841fd3add0e3e5e8f21f09b2c2a473b1332f41079d0527f06",
+          "1c05a907fad6a89579acb90ee5da7bcae582b98c87c949a58440925501b81d62",
+          "f56543b41e4052d537e8c4b97e56b34801a14618fa6936bd6681ef2d6f314490",
+          "8ceb6a3a26294dfe21534f22538761063a8fb409201d7ebfbec7d2e8a5cf15e9",
+          "d1dcb78957dc68c9d55cff94464c4e4b1020871a13673afb18ff4bd943baaca3"
+        ]
+      },
+      "generation_count": 6,
+      "matched_events": [
+        {
+          "action_map_facts": [
+            {
+              "count": 10,
+              "is_missing_or_null": false,
+              "path": "$.transition.valid_actions",
+              "sha256": "7f3e765d83014d0f142be6c5a9e3b2afb8b079affb0ee0ac9fd64c44a80dd3a7",
+              "value_type": "list"
+            }
+          ],
+          "evidence_class": "live",
+          "kind": "environment_operation_completed",
+          "payload_keys": [
+            "operation",
+            "seed",
+            "task_id",
+            "transition"
+          ],
+          "run_id": "260422ac02bd42a8b2929d7ef240526b",
+          "sequence": 2
+        },
+        {
+          "action_map_facts": [
+            {
+              "count": 10,
+              "is_missing_or_null": false,
+              "path": "$.evidence.action_map",
+              "sha256": "c5610294c9a8f0bac208e4b7d8d80da99eea3dcd80732940d3702ec7ab760d1c",
+              "value_type": "dict"
+            },
+            {
+              "count": 10,
+              "is_missing_or_null": false,
+              "path": "$.evidence.parser_result.valid_actions",
+              "sha256": "7f3e765d83014d0f142be6c5a9e3b2afb8b079affb0ee0ac9fd64c44a80dd3a7",
+              "value_type": "list"
+            }
+          ],
+          "evidence_class": "live",
+          "kind": "generation_completed",
+          "payload_keys": [
+            "evidence"
+          ],
+          "run_id": "260422ac02bd42a8b2929d7ef240526b",
+          "sequence": 4
+        },
+        {
+          "action_map_facts": [
+            {
+              "count": 10,
+              "is_missing_or_null": false,
+              "path": "$.action_map",
+              "sha256": "c5610294c9a8f0bac208e4b7d8d80da99eea3dcd80732940d3702ec7ab760d1c",
+              "value_type": "dict"
+            },
+            {
+              "count": 10,
+              "is_missing_or_null": false,
+              "path": "$.before_state.valid_actions",
+              "sha256": "7f3e765d83014d0f142be6c5a9e3b2afb8b079affb0ee0ac9fd64c44a80dd3a7",
+              "value_type": "list"
+            },
+            {
+              "count": 10,
+              "is_missing_or_null": false,
+              "path": "$.transition.valid_actions",
+              "sha256": "7f3e765d83014d0f142be6c5a9e3b2afb8b079affb0ee0ac9fd64c44a80dd3a7",
+              "value_type": "list"
+            }
+          ],
+          "evidence_class": "live",
+          "kind": "environment_operation_completed",
+          "payload_keys": [
+            "action_id",
+            "action_map",
+            "before_state",
+            "command",
+            "operation",
+            "transition"
+          ],
+          "run_id": "260422ac02bd42a8b2929d7ef240526b",
+          "sequence": 6
+        },
+        {
+          "action_map_facts": [
+            {
+              "count": 10,
+              "is_missing_or_null": false,
+              "path": "$.evidence.action_map",
+              "sha256": "c5610294c9a8f0bac208e4b7d8d80da99eea3dcd80732940d3702ec7ab760d1c",
+              "value_type": "dict"
+            },
+            {
+              "count": 10,
+              "is_missing_or_null": false,
+              "path": "$.evidence.parser_result.valid_actions",
+              "sha256": "7f3e765d83014d0f142be6c5a9e3b2afb8b079affb0ee0ac9fd64c44a80dd3a7",
+              "value_type": "list"
+            }
+          ],
+          "evidence_class": "live",
+          "kind": "generation_completed",
+          "payload_keys": [
+            "evidence"
+          ],
+          "run_id": "260422ac02bd42a8b2929d7ef240526b",
+          "sequence": 8
+        },
+        {
+          "action_map_facts": [
+            {
+              "count": 10,
+              "is_missing_or_null": false,
+              "path": "$.action_map",
+              "sha256": "c5610294c9a8f0bac208e4b7d8d80da99eea3dcd80732940d3702ec7ab760d1c",
+              "value_type": "dict"
+            },
+            {
+              "count": 10,
+              "is_missing_or_null": false,
+              "path": "$.before_state.valid_actions",
+              "sha256": "7f3e765d83014d0f142be6c5a9e3b2afb8b079affb0ee0ac9fd64c44a80dd3a7",
+              "value_type": "list"
+            },
+            {
+              "count": 13,
+              "is_missing_or_null": false,
+              "path": "$.transition.valid_actions",
+              "sha256": "31f6e7daf6966e1bde54aac71ab6c510d644bafb770b6fda80184ae48dbdc58b",
+              "value_type": "list"
+            }
+          ],
+          "evidence_class": "live",
+          "kind": "environment_operation_completed",
+          "payload_keys": [
+            "action_id",
+            "action_map",
+            "before_state",
+            "command",
+            "operation",
+            "transition"
+          ],
+          "run_id": "260422ac02bd42a8b2929d7ef240526b",
+          "sequence": 10
+        },
+        {
+          "action_map_facts": [
+            {
+              "count": 13,
+              "is_missing_or_null": false,
+              "path": "$.evidence.action_map",
+              "sha256": "5d971912eb476a5988dc3881b3e3458139d80ce2d058373a953c0310dab82ac1",
+              "value_type": "dict"
+            },
+            {
+              "count": 13,
+              "is_missing_or_null": false,
+              "path": "$.evidence.parser_result.valid_actions",
+              "sha256": "31f6e7daf6966e1bde54aac71ab6c510d644bafb770b6fda80184ae48dbdc58b",
+              "value_type": "list"
+            }
+          ],
+          "evidence_class": "live",
+          "kind": "generation_completed",
+          "payload_keys": [
+            "evidence"
+          ],
+          "run_id": "260422ac02bd42a8b2929d7ef240526b",
+          "sequence": 12
+        },
+        {
+          "action_map_facts": [
+            {
+              "count": 13,
+              "is_missing_or_null": false,
+              "path": "$.action_map",
+              "sha256": "5d971912eb476a5988dc3881b3e3458139d80ce2d058373a953c0310dab82ac1",
+              "value_type": "dict"
+            },
+            {
+              "count": 13,
+              "is_missing_or_null": false,
+              "path": "$.before_state.valid_actions",
+              "sha256": "31f6e7daf6966e1bde54aac71ab6c510d644bafb770b6fda80184ae48dbdc58b",
+              "value_type": "list"
+            },
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.transition.valid_actions",
+              "sha256": "d0fd6bc4fbb00fc253c3a517136b181e51b6b573236e675c10c384e041e23219",
+              "value_type": "list"
+            }
+          ],
+          "evidence_class": "live",
+          "kind": "environment_operation_completed",
+          "payload_keys": [
+            "action_id",
+            "action_map",
+            "before_state",
+            "command",
+            "operation",
+            "transition"
+          ],
+          "run_id": "260422ac02bd42a8b2929d7ef240526b",
+          "sequence": 14
+        },
+        {
+          "action_map_facts": [
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.evidence.action_map",
+              "sha256": "a0c02a20484545197fe1399bcb2704f9820cf6d9a88c863a513bd57992ac520f",
+              "value_type": "dict"
+            },
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.evidence.parser_result.valid_actions",
+              "sha256": "d0fd6bc4fbb00fc253c3a517136b181e51b6b573236e675c10c384e041e23219",
+              "value_type": "list"
+            }
+          ],
+          "evidence_class": "live",
+          "kind": "generation_completed",
+          "payload_keys": [
+            "evidence"
+          ],
+          "run_id": "260422ac02bd42a8b2929d7ef240526b",
+          "sequence": 16
+        },
+        {
+          "action_map_facts": [
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.action_map",
+              "sha256": "a0c02a20484545197fe1399bcb2704f9820cf6d9a88c863a513bd57992ac520f",
+              "value_type": "dict"
+            },
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.before_state.valid_actions",
+              "sha256": "d0fd6bc4fbb00fc253c3a517136b181e51b6b573236e675c10c384e041e23219",
+              "value_type": "list"
+            },
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.transition.valid_actions",
+              "sha256": "b61db1a89bc672e3b68538a082306e5dc5a48f95d9b40849b6ec8abfd907b1df",
+              "value_type": "list"
+            }
+          ],
+          "evidence_class": "live",
+          "kind": "environment_operation_completed",
+          "payload_keys": [
+            "action_id",
+            "action_map",
+            "before_state",
+            "command",
+            "operation",
+            "transition"
+          ],
+          "run_id": "260422ac02bd42a8b2929d7ef240526b",
+          "sequence": 18
+        },
+        {
+          "action_map_facts": [
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.evidence.action_map",
+              "sha256": "38818ade8566c45509a2e7632a5c08022bf67cbebc88a74e9a05afe778fab8a7",
+              "value_type": "dict"
+            },
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.evidence.parser_result.valid_actions",
+              "sha256": "b61db1a89bc672e3b68538a082306e5dc5a48f95d9b40849b6ec8abfd907b1df",
+              "value_type": "list"
+            }
+          ],
+          "evidence_class": "live",
+          "kind": "generation_completed",
+          "payload_keys": [
+            "evidence"
+          ],
+          "run_id": "260422ac02bd42a8b2929d7ef240526b",
+          "sequence": 20
+        },
+        {
+          "action_map_facts": [
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.action_map",
+              "sha256": "38818ade8566c45509a2e7632a5c08022bf67cbebc88a74e9a05afe778fab8a7",
+              "value_type": "dict"
+            },
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.before_state.valid_actions",
+              "sha256": "b61db1a89bc672e3b68538a082306e5dc5a48f95d9b40849b6ec8abfd907b1df",
+              "value_type": "list"
+            },
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.transition.valid_actions",
+              "sha256": "15fd1cad8a141e7acb51ca7389788599c650ed187e8857004e206e25bc80fe6f",
+              "value_type": "list"
+            }
+          ],
+          "evidence_class": "live",
+          "kind": "environment_operation_completed",
+          "payload_keys": [
+            "action_id",
+            "action_map",
+            "before_state",
+            "command",
+            "operation",
+            "transition"
+          ],
+          "run_id": "260422ac02bd42a8b2929d7ef240526b",
+          "sequence": 22
+        },
+        {
+          "action_map_facts": [
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.evidence.action_map",
+              "sha256": "12440f1360750a0e5c1162a76c7eebd968435fc06b966fd9f0e491468d8fe503",
+              "value_type": "dict"
+            },
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.evidence.parser_result.valid_actions",
+              "sha256": "15fd1cad8a141e7acb51ca7389788599c650ed187e8857004e206e25bc80fe6f",
+              "value_type": "list"
+            }
+          ],
+          "evidence_class": "live",
+          "kind": "generation_completed",
+          "payload_keys": [
+            "evidence"
+          ],
+          "run_id": "260422ac02bd42a8b2929d7ef240526b",
+          "sequence": 24
+        },
+        {
+          "action_map_facts": [
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.action_map",
+              "sha256": "12440f1360750a0e5c1162a76c7eebd968435fc06b966fd9f0e491468d8fe503",
+              "value_type": "dict"
+            },
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.before_state.valid_actions",
+              "sha256": "15fd1cad8a141e7acb51ca7389788599c650ed187e8857004e206e25bc80fe6f",
+              "value_type": "list"
+            },
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.transition.valid_actions",
+              "sha256": "8287df5501d00af5065fc688dab3b7c2000bc5f59c7e1a3e0b46260352caff1a",
+              "value_type": "list"
+            }
+          ],
+          "evidence_class": "live",
+          "kind": "environment_operation_completed",
+          "payload_keys": [
+            "action_id",
+            "action_map",
+            "before_state",
+            "command",
+            "operation",
+            "transition"
+          ],
+          "run_id": "260422ac02bd42a8b2929d7ef240526b",
+          "sequence": 26
+        },
+        {
+          "action_map_facts": [
+            {
+              "count": 10,
+              "is_missing_or_null": false,
+              "path": "$.trajectory.steps[0].valid_actions",
+              "sha256": "7f3e765d83014d0f142be6c5a9e3b2afb8b079affb0ee0ac9fd64c44a80dd3a7",
+              "value_type": "list"
+            },
+            {
+              "count": 10,
+              "is_missing_or_null": false,
+              "path": "$.trajectory.steps[1].valid_actions",
+              "sha256": "7f3e765d83014d0f142be6c5a9e3b2afb8b079affb0ee0ac9fd64c44a80dd3a7",
+              "value_type": "list"
+            },
+            {
+              "count": 13,
+              "is_missing_or_null": false,
+              "path": "$.trajectory.steps[2].valid_actions",
+              "sha256": "31f6e7daf6966e1bde54aac71ab6c510d644bafb770b6fda80184ae48dbdc58b",
+              "value_type": "list"
+            },
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.trajectory.steps[3].valid_actions",
+              "sha256": "d0fd6bc4fbb00fc253c3a517136b181e51b6b573236e675c10c384e041e23219",
+              "value_type": "list"
+            },
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.trajectory.steps[4].valid_actions",
+              "sha256": "b61db1a89bc672e3b68538a082306e5dc5a48f95d9b40849b6ec8abfd907b1df",
+              "value_type": "list"
+            },
+            {
+              "count": 12,
+              "is_missing_or_null": false,
+              "path": "$.trajectory.steps[5].valid_actions",
+              "sha256": "15fd1cad8a141e7acb51ca7389788599c650ed187e8857004e206e25bc80fe6f",
+              "value_type": "list"
+            }
+          ],
+          "evidence_class": "live",
+          "kind": "source_episode_completed",
+          "payload_keys": [
+            "generation_event_ids",
+            "reset_event_id",
+            "source_game_sha256",
+            "source_restart_comparison_sha256",
+            "source_traj_data_sha256",
+            "trajectory",
+            "trajectory_sha256",
+            "transition_event_ids"
+          ],
+          "run_id": "260422ac02bd42a8b2929d7ef240526b",
+          "sequence": 27
+        }
+      ],
+      "reset_count": 1,
+      "source_episode_count": 1,
+      "transition_count": 6
+    },
+    "source_trajectory_sha256_claim_in_record": "fba2a4278c4f1d9640c1c39f527fe3d5e7022ab50af4d353bc017bb31bbead89",
+    "split": "train",
+    "terminal_map_behavior_on_replay": "NOT_OBSERVED_PENDING_ENGINEERING_RELEASE",
+    "trajectory_data_sha256_claim_in_record": "eb817b82a0b7d4f3d08bebe43a581194f8dc796fb894b17f826c0c1c16ede385",
+    "trajectory_file": {
+      "bytes": 19726633,
+      "path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_trajectories.jsonl",
+      "sha256": "c6f37a7da28e326c70818524c79c17bbd85a286754c111f17db07cbe151a4f1c"
+    },
+    "trajectory_id": "aea7c51203026ec5ec1fdb57",
+    "truncated": false
+  },
+  "status": "PREPARATION_ONLY_NO_ENVIRONMENT_CALLS"
+}

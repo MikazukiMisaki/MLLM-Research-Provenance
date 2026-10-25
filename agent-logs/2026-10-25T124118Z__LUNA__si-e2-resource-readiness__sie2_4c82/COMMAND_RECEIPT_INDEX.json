@@ -1,0 +1,24 @@
+{
+  "schema": "SI_E2_READ_ONLY_COMMAND_RECEIPT_INDEX_V1",
+  "scope": "All listed subprocesses were read-only metadata, identity, or hashing checks. Raw stdout/stderr and exact argv/cwd/environment/times/return codes are preserved in the referenced receipt files.",
+  "receipts": [
+    {"path":"host_inspection_receipts.json","sha256":"9812021701dadf7be8ceb21ee8376c388b40b602a977f8304e46e31c856c7018","returncodes":{"gpu_inventory":0,"gpu_compute_processes":0,"gpu_mig_compute":2,"ram_inventory":0,"cpu_inventory":0,"disk_relevant_paths":0,"project_head":0,"project_status":0,"project_worktrees":0,"a995_object":0,"g3_tree_inventory":0,"pinned_package_probe":0}},
+    {"path":"gpu_status_receipts.json","sha256":"4efa72901b949354ffb50f0f5c9103a5383a5fde6c4b8a297e033bd453eb1a7c","returncodes":{"gpu_default_display":0,"gpu_mig_mode_query":0,"gpu_full_status":0,"scheduler_binary_presence":0}},
+    {"path":"gpu_pid_owner_receipts.json","sha256":"e82ab180eb1e48dedaa4027d9e485b8117334b02c1de81e41ac7956b8544f5d7","returncodes":{"gpu_pid_ps":1,"gpu_pid_status":2,"gpu_pid_cgroup":1},"interpretation":"PID 5364 unresolved in this process view; do not infer a different execution namespace."},
+    {"path":"runtime_hashes_receipt.json","sha256":"6973d476e979e9f1a398b15eac08592f305e3a5bc22a03ccef3fd37407d7d3f5","returncode":0},
+    {"path":"source_candidate_v3_receipt.json","sha256":"b1b3fdb15bbe8aa8509e618b0a878a7325b495baa7404fa067b3ce70a04cba43","returncode":0},
+    {"path":"safetensors_header_receipt.json","sha256":"66fb1a54b8ed19c7433643f9cc14bb3511604d591510145f130627fe0f71858b","returncode":0},
+    {"path":"replay_input_hashes_receipt.json","sha256":"374e9ca11bd7a7479ee78a4afa55ddc043cdcf7debf59fff2d804352d1cbc8c3","returncode":0},
+    {"path":"environment_packages_receipt.json","sha256":"21edd3f3956819fbf2df92980f43944008c345b175f86b97e2ee17bf6021153d","returncode":0,"method":"distribution metadata only"},
+    {"path":"module_origins_receipt.json","sha256":"e76d3a7aefb19bc538e0ab045c612d63527be4273a3969a714ed46e646bd1131","returncode":0,"method":"pinned Python -I importlib.util.find_spec; no runtime package imports"},
+    {"path":"state_absence_receipts.json","sha256":"3f8b6767f4c9aba6f67c10018ab4d3d4f17c2ac18ebde9b5eff06f86243ecfed","returncodes":{"a995_head":0,"a995_status":0,"a995_remote":0}}
+  ],
+  "retained_non_authoritative_attempts": [
+    "FIRST_SOURCE_REPLAY_CANDIDATE.json",
+    "FIRST_SOURCE_REPLAY_CANDIDATE_V2.json",
+    "source_candidate_receipt.json",
+    "source_candidate_v2_receipt.json"
+  ],
+  "authoritative_source_candidate": "FIRST_SOURCE_REPLAY_CANDIDATE_V3.json",
+  "no_overwrite_or_science_calls": true
+}

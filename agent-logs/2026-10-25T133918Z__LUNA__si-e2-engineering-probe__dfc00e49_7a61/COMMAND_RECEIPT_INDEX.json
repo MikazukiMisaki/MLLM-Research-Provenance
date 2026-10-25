@@ -1,0 +1,18 @@
+{
+  "schema": "SI_E2_COMMAND_RECEIPT_INDEX_V1",
+  "status": "PREPARATION_ONLY_NO_EXECUTION_AUTHORITY",
+  "receipts": [
+    {"receipt": "prompt_digest_receipt.json", "stdout": "raw/prompt_digest.stdout.bin", "stderr": "raw/prompt_digest.stderr.bin", "returncode": 0, "scope": "fixed synthetic prompt digest/length only; no model/runtime imports"},
+    {"receipt": "proposal_input_hashes_receipt.json", "stdout": "raw/proposal_input_hashes.stdout.bin", "stderr": "raw/proposal_input_hashes.stderr.bin", "returncode": 0, "scope": "pinned-interpreter hashing of bound input/runtime files; no task-row parsing"},
+    {"receipt": "safe_environment_receipt.json", "stdout": "raw/safe_environment.stdout.bin", "stderr": "raw/safe_environment.stderr.bin", "returncode": 0, "scope": "allowlisted environment values only; no credentials"},
+    {"receipt": "final_proposal_state_receipt.json", "stdout": "raw/final_proposal_state.stdout.bin", "stderr": "raw/final_proposal_state.stderr.bin", "returncode": 0, "scope": "candidate HEAD/status and authorization/output absence"},
+    {"receipt": "final_proposal_state_receipt.json", "stdout": "raw/final_candidate_head.stdout.bin", "stderr": "raw/final_candidate_head.stderr.bin", "returncode": 0, "scope": "candidate exact HEAD"},
+    {"receipt": "final_proposal_state_receipt.json", "stdout": "raw/final_candidate_status.stdout.bin", "stderr": "raw/final_candidate_status.stderr.bin", "returncode": 0, "scope": "candidate clean status"},
+    {"receipt": "proposal_finalization_receipt.json", "stdout": "raw/finalize_proposal.stdout.bin", "stderr": "raw/finalize_proposal.stderr.bin", "returncode": 0, "scope": "proposal raw/canonical hashes; no execution"},
+    {"receipt": "final_consistency_receipt.json", "stdout": "raw/final_consistency.stdout.bin", "stderr": "raw/final_consistency.stderr.bin", "returncode": 1, "scope": "initial stdlib assertion used wrong receipt field; no project code/scientific call"},
+    {"receipt": "final_consistency_attempt02_receipt.json", "stdout": "raw/final_consistency_attempt02.stdout.bin", "stderr": "raw/final_consistency_attempt02.stderr.bin", "returncode": 0, "scope": "corrected stdlib proposal linkage/absence/receipt consistency"}
+  ],
+  "scientific_or_runtime_invocations": 0,
+  "project_validators_or_test_suites": 0,
+  "model_environment_training_or_supervisor_calls": 0
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "SI_E2_ROOT_INDEPENDENT_CUDA_IDENTITY_REVIEW_V1",
+  "UTC": "2026-10-25T14:20:27.122664+00:00",
+  "raw_UUID_identity": "PASS_SAME_COMPLETE_UUID_BYTES_DIFFERENT_WIRE_PREFIX",
+  "torch_UUID_type": "torch._C._CUuuid",
+  "torch_UUID_value": "b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+  "NVML_UUID_value": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+  "source_compatibility_finding": "runtime_backend.py115/137 directly compares str(_CUuuid) without GPU- to NVML GPU-prefixed UUID. Observed installed wire deterministically rejected before weights.",
+  "local_pid": 837631,
+  "NVML_compute_pid": 3082604,
+  "GPU_PROCESS_OWNERSHIP": "UNPROVEN",
+  "unknown_compute_PID_must_not_be_whitelisted": true,
+  "namespace_evidence": "/proc/self/status lists NSpid837631 only; docker cgroup/pid namespace link preserved. No trusted host/local PID mapping saved.",
+  "root_cause_scope": [
+    "Confirmed UUID representation mismatch",
+    "Independent unresolved host/local process identity binding"
+  ],
+  "diagnostic_returncode": 1,
+  "diagnostic_elapsed_seconds": 2.5714923590421677,
+  "diagnostic_within60seconds": true,
+  "diagnostic_explicit_tensor_bytes": 1,
+  "actual_cuda_allocator_bytes": {
+    "allocated": 512,
+    "reserved": 2097152,
+    "max_allocated": 512
+  },
+  "model_weights_loaded": 0,
+  "generations": 0,
+  "environment_calls": 0,
+  "remaining_process": null,
+  "science_cumulative_unchanged": {
+    "generations": 5142,
+    "reset_inclusive_operations": 7949
+  },
+  "conservative_diagnostic_interval_device_hours": 0.0007143034330672688,
+  "original_probe_plus_diagnostic_allocated_interval_upper_bound_device_hours": 0.007338507264697303,
+  "runtime_or_science_ready": false,
+  "new_probe_authorization": "NOT_GRANTED",
+  "minimal_followup": "Strict UUID wire compatibility and preassertion raw evidence persistence, no PID guard weakening. Trusted execution-context mapping must be independently proven before8B.",
+  "evidence": {
+    "identity_run/identity_observation.json": {
+      "sha256": "b30bec7d674a273d08b55bf90da12d8be4ec6ddf493686cccb4322369778e982",
+      "bytes": 5605
+    },
+    "identity_run/launcher_receipt.json": {
+      "sha256": "a5128544443bea758f31efb7d70d28cca69d4012f7ab081e27045e0e4af51a4c",
+      "bytes": 1379
+    },
+    "identity_run/pre_allocation_identity.json": {
+      "sha256": "41712d0516832fc48ddaadccee66a9e93ad48d4c0fa744ec5b5eb5c171824335",
+      "bytes": 4500
+    },
+    "identity_run/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "identity_run/stdout.log": {
+      "sha256": "8a635707b8dd06558607284a268e4aee3ecad4802d0ef21a43596aec7a2a1c2f",
+      "bytes": 247
+    }
+  }
+}

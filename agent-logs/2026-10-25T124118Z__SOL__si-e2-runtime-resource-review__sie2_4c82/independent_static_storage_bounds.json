@@ -1,0 +1,65 @@
+{
+  "schema": "SI_E2_STATIC_STORAGE_BOUND_V1",
+  "evidence_class": "read_only_safetensors_headers_not_a_model_load",
+  "base": {
+    "files": [
+      {
+        "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00001-of-00005.safetensors",
+        "bytes": 3996250744,
+        "header_sha256": "6bdb68896eda49efd265b0df316ad724323422a7610e58a5edf21f5d623e7793",
+        "tensors": 81
+      },
+      {
+        "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00002-of-00005.safetensors",
+        "bytes": 3993160032,
+        "header_sha256": "8df6151776ca7d2dcec1342abd3fcc1e7aa08d0c9b627a22e7a2519cf416b3ef",
+        "tensors": 114
+      },
+      {
+        "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00003-of-00005.safetensors",
+        "bytes": 3959604768,
+        "header_sha256": "6c4a3683cf3afd075332170fd022d9e4bf27fc6f95758c49b43e2e3ea2c06334",
+        "tensors": 111
+      },
+      {
+        "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00004-of-00005.safetensors",
+        "bytes": 3187841392,
+        "header_sha256": "2a85e6ae9dc47a682b9849476a5ae5093bf8621a9a8d5001bb7c3f3f6407ec4d",
+        "tensors": 92
+      },
+      {
+        "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00005-of-00005.safetensors",
+        "bytes": 1244659840,
+        "header_sha256": "4b8ab67d9f64fe383fe112b841373e3fbe4b3fc37d9491e544067c5978b20134",
+        "tensors": 1
+      }
+    ],
+    "parameters_by_dtype": {
+      "BF16": 8190735360
+    },
+    "total_parameters": 8190735360,
+    "tensor_storage_bytes": 16381470720
+  },
+  "P0": {
+    "files": [
+      {
+        "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/adapter_model.safetensors",
+        "bytes": 349243752,
+        "header_sha256": "cebc56389f040f5e8381515ae96a069cdc2453f155dfc26221e0a4fe6b27e223",
+        "tensors": 504
+      }
+    ],
+    "parameters_by_dtype": {
+      "F32": 87293952
+    },
+    "total_parameters": 87293952,
+    "tensor_storage_bytes": 349175808
+  },
+  "metadata_sha256": {
+    "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/config.json": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+    "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/adapter_config.json": "94090ee7ddaf2dd9e6500e43867c3c1c823b9bd02379eabc50c8345d18503d92"
+  },
+  "future_training_FP32_LoRA_weight_grad_Adam_moments_lower_bound_bytes": 1396703232,
+  "interpretation": "Static tensor storage/parameter counts only; no activations, KV/workspace, temporary load copies, runtime overhead or measured optimizer state. Not a training-fit claim.",
+  "no_model_env_training_imports": true
+}

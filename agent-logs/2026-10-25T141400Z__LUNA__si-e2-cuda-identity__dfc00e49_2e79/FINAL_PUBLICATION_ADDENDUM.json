@@ -1,0 +1,52 @@
+{
+  "schema": "SI_E2_CUDA_IDENTITY_FINAL_PUBLICATION_ADDENDUM_V1",
+  "append_only": true,
+  "publication_status": "LOCAL_ONLY_PENDING_ROOT_SELECTION",
+  "publication_owner": "Root; no staging, commit, push, or shared-index changes by Luna",
+  "task_status": "COMPLETE_IDENTITY_RAW_OBSERVED_OWNERSHIP_UNPROVEN",
+  "observation": {
+    "start_utc": "2026-10-25T14:16:55.668584Z",
+    "finish_utc": "2026-10-25T14:16:58.339688Z",
+    "launcher_returncode": 1,
+    "within_60_seconds": true,
+    "one_byte_tensor_completed": true,
+    "torch_allocated_bytes": 512,
+    "torch_reserved_bytes": 2097152,
+    "model_loads": 0,
+    "generations": 0,
+    "environment_calls": 0,
+    "ownership": "UNPROVEN"
+  },
+  "source_context_sha": "dfc00e49d1ef4d48453d2331507429f8a0c7bbc5",
+  "preserved_frozen_publication": {
+    "manifest_path": "FINAL_PUBLICATION_MANIFEST.json",
+    "manifest_sha256": "dcd0263314df71dd8a184c21bcf65e895e84b701ef82fc1e0854fdf996901c86",
+    "inventory_path": "FILE_HASHES.sha256",
+    "inventory_sha256": "6a09085f7cf34fbbd9ab9456b063981e0ac519d1309df6646ab87a87f58fabac",
+    "identity_record_path": "ENGINEERING_IDENTITY_RECORD.md",
+    "identity_record_sha256": "64ccec685dadbe204a9baa02e170803a22ff6303ed88b31c14bca5b74fab742c"
+  },
+  "new_entrypoint": {
+    "path": "RECORD.md",
+    "bytes": 2515,
+    "sha256": "7fd2d4fb0019adddb3373ad4f220cbe2e475e1b84a7287fd43e777e5d06d7eb0"
+  },
+  "original_inventory_policy": "All previously frozen inventory/manifest bytes remain unchanged. This addendum is the additive binding for RECORD.md and is not inserted into the frozen inventory.",
+  "selected_evidence_paths_for_root_review": [
+    "RECORD.md",
+    "ENGINEERING_IDENTITY_RECORD.md",
+    "FINAL_READONLY_CONTEXT.json",
+    "identity_run/pre_allocation_identity.json",
+    "identity_run/identity_observation.json",
+    "identity_run/launcher_receipt.json",
+    "identity_run/stdout.log",
+    "identity_run/stderr.log",
+    "launcher.stdout.bin",
+    "launcher.stderr.bin",
+    "INVOCATION_RECEIPT.json",
+    "FINAL_PUBLICATION_MANIFEST.json",
+    "FILE_HASHES.sha256",
+    "FINAL_PUBLICATION_ADDENDUM.json"
+  ],
+  "safety_note": "Raw identity artifacts include local process IDs, namespace/cgroup details, and local paths; root review is required before publication. No weights, cache payload, task body, or dataset content are included. This addendum does not claim external publication."
+}

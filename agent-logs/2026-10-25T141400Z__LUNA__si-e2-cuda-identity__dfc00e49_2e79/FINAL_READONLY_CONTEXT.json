@@ -1,0 +1,56 @@
+{
+  "capability_conclusion": "No trusted host PID mapping was established from this execution context. NSpid visibility and a denied /proc/1/ns/pid read are not a host-PID correlation; the NVML PID remains unmapped and ownership UNPROVEN.",
+  "end_utc": "2026-10-25T14:20:55.754268+00:00",
+  "known_processes": {
+    "diagnostic_pid": {
+      "pid": 837631,
+      "visible_in_current_procfs": false
+    },
+    "launcher_parent_pid": {
+      "pid": 837630,
+      "visible_in_current_procfs": false
+    },
+    "nvml_reported_pid": {
+      "pid": 3082604,
+      "visible_in_current_procfs": false
+    }
+  },
+  "methods": [
+    "stdlib",
+    "/proc presence/status/namespace links only"
+  ],
+  "no_nvidia_smi_or_cuda_or_model_or_environment_calls": true,
+  "pid1_pid_namespace": {
+    "error": "[Errno 13] Permission denied: '/proc/1/ns/pid'",
+    "error_type": "PermissionError",
+    "path": "/proc/1/ns/pid",
+    "readable": false
+  },
+  "pid1_status": {
+    "path": "/proc/1/status",
+    "readable": true,
+    "selected_lines": [
+      "Name:\tentrypoint.sh",
+      "Pid:\t1",
+      "PPid:\t0",
+      "NSpid:\t1"
+    ]
+  },
+  "schema": "SI_E2_IDENTITY_FINAL_READONLY_CONTEXT_V1",
+  "self_pid_namespace": {
+    "path": "/proc/self/ns/pid",
+    "readable": true,
+    "target": "pid:[4026534077]"
+  },
+  "self_status": {
+    "path": "/proc/self/status",
+    "readable": true,
+    "selected_lines": [
+      "Name:\tpython",
+      "Pid:\t838091",
+      "PPid:\t720131",
+      "NSpid:\t838091"
+    ]
+  },
+  "start_utc": "2026-10-25T14:20:55.754174+00:00"
+}

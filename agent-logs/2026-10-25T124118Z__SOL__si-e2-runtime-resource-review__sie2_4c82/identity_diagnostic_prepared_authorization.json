@@ -1,0 +1,53 @@
+{
+  "schema": "SI_E2_PURE_IDENTITY_AUTHORIZATION_V1",
+  "authorization_id": "289f3152baf34b738b1d6d8b7defb9a6",
+  "issuer": "Sol Designer",
+  "status": "PREPARED_PENDING_INDEPENDENT_SCRIPT_REVIEW",
+  "purpose": "PURE_CUDA_IDENTITY_ONLY",
+  "created_utc": "2026-10-25T14:13:57.443496+00:00",
+  "expires_utc": "2026-10-25T14:43:57.443496+00:00",
+  "source_SHA_context": "dfc00e49d1ef4d48453d2331507429f8a0c7bbc5",
+  "script_path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/cuda_identity_diagnostic.py",
+  "script_sha256": "b91e298cbd1b39ca85e73ddaba59d8555a2198c25e36cdff45b88accf01e427a",
+  "launcher_path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/launch_cuda_identity_diagnostic.py",
+  "launcher_sha256": "d2b78eed90dab8c5068a20b9ba6863d7d6f15504ecd21f5f78c290acb00509f5",
+  "argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/cuda_identity_diagnostic.py"
+  ],
+  "environment": {
+    "ALFWORLD_DATA": "/home/lizening/alfworld_data",
+    "CUDA_VISIBLE_DEVICES": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+    "HF_DATASETS_OFFLINE": "1",
+    "HF_HUB_OFFLINE": "1",
+    "HOME": "/home/lizening",
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "LD_LIBRARY_PATH": "/usr/local/cuda/lib64:/usr/local/cuda/lib64:",
+    "PATH": "/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TOKENIZERS_PARALLELISM": "false",
+    "TRANSFORMERS_OFFLINE": "1",
+    "USER": "lizening"
+  },
+  "output_directory": "/home/lizening/research-notes/agent-logs/2026-10-25T141400Z__LUNA__si-e2-cuda-identity__dfc00e49_2e79/identity_run",
+  "seconds_cap": 60,
+  "allocated_devices_cap": 1,
+  "device_hours_cap": 0.016666666666666666,
+  "maximum_explicit_tensor_bytes": 1,
+  "maximum_invocations": 1,
+  "automatic_retry": false,
+  "model_loads_cap": 0,
+  "generations_cap": 0,
+  "environment_calls_cap": 0,
+  "science_authorized": false,
+  "preceding_failed_engineering_auth_consumed": true,
+  "original_probe_must_not_be_rerun": true,
+  "conditions": [
+    "No foreign compute prior to CUDA init",
+    "Raw UUID type/repr and NVML identity persisted",
+    "Own compute row absent means ownership UNPROVEN, never waived",
+    "No weights/model/world libraries or dataset inputs are opened"
+  ]
+}

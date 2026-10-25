@@ -1,0 +1,19 @@
+# SI-E2 pure CUDA identity observation — execution record
+
+**Scope:** one separately authorized pure identity observation; not a retry of the stopped engineering probe. No source code, model weights, generation, environment calls, science, or shared publication files were touched.
+
+- Authorization: `ecfc34b7559de6cdc70f3283c3fc5459cb63637c3b115ecd2e9be6a67265473f`; diagnostic: `bc780fcb14d94baa3172fef32753af87ef1ba53fd39c77f7f2190d7efdce309f`; launcher: `b7123f84f06f85ac85247708d19fd82c4deca3303e5650d1092979a9bd5aabbc`.
+- Exact launcher argv: `["/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python","-I","/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/launch_cuda_identity_diagnostic.py","/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/identity_diagnostic_authorization.json","ecfc34b7559de6cdc70f3283c3fc5459cb63637c3b115ecd2e9be6a67265473f"]`.
+- Start/end UTC: `2026-10-25T14:16:55.668584Z` / `2026-10-25T14:16:58.339688Z`; wrapper PID `837630`; launcher return code `1`; elapsed `2.671080s`.
+- Raw launcher stdout/stderr are retained as `launcher.stdout.bin` and `launcher.stderr.bin`; the released launcher owns `identity_run/` and its exact child environment.
+- Outcome from observation: `IDENTITY_RAW_OBSERVED_OWNERSHIP_UNPROVEN`. Before the explicit tensor, `torch.cuda.init()` completed and the raw CUDA property UUID was type `torch._C._CUuuid`, repr `<torch._C._CUuuid object at 0x7f2c225c3370>`, string `b08bc603-ebdb-787d-b5b6-ec796ea3022a`; direct comparison against `GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a` was false. The value matches the UUID suffix without the `GPU-` prefix, but no normalization is treated as an ownership proof.
+- The single explicit one-byte CUDA tensor allocation completed (`torch.cuda.memory_allocated=512` bytes; reserved `2,097,152` bytes). Post-allocation `nvidia-smi` showed a compute row for host PID `3082604`, process `[Not Found]`, 262 MiB; it was not this observed process PID `837631`. Consequently ownership remains `UNPROVEN`, as required. Device-wide memory read 14 MiB before and 284 MiB after; these observations are not attributable to the task.
+- `model_loads=0`, `generations=0`, `environment_calls=0`; no weights or world libraries were opened. The diagnostic itself exited 1 because ownership could not be established. The launcher completed in 2.571492s, within its 60-second cap, with no deadline stop or retry.
+- Original engineering execution directory was not modified. Its sole authorized invocation remains consumed and its `TECHNICAL_STOP_NO_RETRY` evidence remains unchanged.
+- No model load/generation/environment calls; no retry. This record does not grant further execution authority.
+
+## Final read-only context check and publication boundary
+
+After the diagnostic exited, `/proc` confirmed that launcher PID `837630`, diagnostic PID `837631`, and NVML-reported PID `3082604` were all absent from the current process namespace. The optional namespace inspection found current-process `NSpid` with a single visible value and `/proc/1/status` as `entrypoint.sh` PID 1; reading `/proc/1/ns/pid` returned `PermissionError`. No trusted host PID mapping is available from this context, so the NVML PID remains unmapped and ownership remains `UNPROVEN`.
+
+`FINAL_READONLY_CONTEXT.json` records this check. `FINAL_PUBLICATION_MANIFEST.json` inventories the raw identity evidence and marks it for root review; it does not represent an upload. `FILE_HASHES.sha256` is the final task inventory. `PRE_FINAL_FILE_HASHES.sha256` preserves the initial 11-row inventory and its checksum; that historical inventory's record row (`c8598bc2…`) is expected to differ now because this final addendum was appended to this record. The other ten initial rows remain byte-identical. No shared index, staging, commit, or push was performed; root retains publication ownership.

@@ -1,0 +1,34 @@
+{
+  "argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "-c",
+    "import json,sys\nsys.path.insert(0,\"/home/lizening/wt-si-p3-runtime-adaptation/src\")\nfrom self_improvement.si_p3.runtime_gate import engineering_prompts\nfrom self_improvement.si_p3.contract import digest\nprompts=engineering_prompts()\nassert set(prompts)=={\"source\",\"stage_one\",\"stage_two\",\"suffix\"}\nassert \"torch\" not in sys.modules and \"alfworld\" not in sys.modules and \"textworld\" not in sys.modules\nprint(json.dumps({\"sha256\":digest(prompts),\"keys\":sorted(prompts),\"lengths_utf8\":{k:len(v.encode(\"utf-8\")) for k,v in prompts.items()},\"torch_imported\":False,\"alfworld_imported\":False,\"textworld_imported\":False},sort_keys=True))"
+  ],
+  "cwd": "/home/lizening/wt-si-p3-runtime-adaptation",
+  "ended_utc": "2026-10-25T13:42:24.270666+00:00",
+  "environment_allowlist": [
+    "HOME",
+    "LANG",
+    "LC_ALL",
+    "LD_LIBRARY_PATH",
+    "PATH",
+    "PYTHONNOUSERSITE",
+    "USER"
+  ],
+  "forbidden_overrides_unset": true,
+  "monotonic_elapsed_seconds": 0.081422376,
+  "returncode": 0,
+  "schema": "SI_E2_PROMPT_DIGEST_RECEIPT_V1",
+  "started_utc": "2026-10-25T13:42:24.189257+00:00",
+  "stderr": {
+    "bytes": 0,
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T133918Z__LUNA__si-e2-engineering-probe__dfc00e49_7a61/raw/prompt_digest.stderr.bin",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 301,
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T133918Z__LUNA__si-e2-engineering-probe__dfc00e49_7a61/raw/prompt_digest.stdout.bin",
+    "sha256": "bcbeefa45bbb9a9888617f1e673394f13641187be788c1927abae0ea6d63517f"
+  }
+}

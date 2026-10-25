@@ -1,0 +1,125 @@
+
+==================================== ERRORS ====================================
+_____________ ERROR collecting tests/test_r19_entrypoint_repair.py _____________
+ImportError while importing test module '/tmp/si-e2-independent-review-dfc00e49/tests/test_r19_entrypoint_repair.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_r19_entrypoint_repair.py:12: in <module>
+    from scripts.launch_r19_supervised import supervise
+scripts/launch_r19_supervised.py:23: in <module>
+    from recovery.r19_duration import atomic_write_json, canonical_json, sha256_file  # noqa: E402
+E   ModuleNotFoundError: No module named 'recovery.r19_duration'
+_____________ ERROR collecting tests/test_r19_g3_authorization.py ______________
+ImportError while importing test module '/tmp/si-e2-independent-review-dfc00e49/tests/test_r19_g3_authorization.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_r19_g3_authorization.py:11: in <module>
+    import scripts.run_r19_recovery_duration as legacy_driver
+scripts/run_r19_recovery_duration.py:23: in <module>
+    from recovery.r19_duration import (  # noqa: E402
+E   ModuleNotFoundError: No module named 'recovery.r19_duration'
+___________ ERROR collecting tests/test_r19_g4_consumer_contracts.py ___________
+ImportError while importing test module '/tmp/si-e2-independent-review-dfc00e49/tests/test_r19_g4_consumer_contracts.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_r19_g4_consumer_contracts.py:18: in <module>
+    from recovery.r19_duration import EvidenceIntegrityError, sha256_file, sha256_json
+E   ModuleNotFoundError: No module named 'recovery.r19_duration'
+_____________ ERROR collecting tests/test_r19_recovery_duration.py _____________
+ImportError while importing test module '/tmp/si-e2-independent-review-dfc00e49/tests/test_r19_recovery_duration.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_r19_recovery_duration.py:14: in <module>
+    from recovery.r19_duration import (
+E   ModuleNotFoundError: No module named 'recovery.r19_duration'
+______________ ERROR collecting tests/test_r19_source_contract.py ______________
+ImportError while importing test module '/tmp/si-e2-independent-review-dfc00e49/tests/test_r19_source_contract.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_r19_source_contract.py:9: in <module>
+    from scripts import run_r19_experiment as runner
+scripts/run_r19_experiment.py:31: in <module>
+    from recovery.r19_duration import (  # noqa: E402
+E   ModuleNotFoundError: No module named 'recovery.r19_duration'
+______________ ERROR collecting tests/test_r19_source_pipeline.py ______________
+ImportError while importing test module '/tmp/si-e2-independent-review-dfc00e49/tests/test_r19_source_pipeline.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_r19_source_pipeline.py:21: in <module>
+    from recovery.r19_duration import (
+E   ModuleNotFoundError: No module named 'recovery.r19_duration'
+_____________ ERROR collecting tests/test_si_p3_runtime_backend.py _____________
+ImportError while importing test module '/tmp/si-e2-independent-review-dfc00e49/tests/test_si_p3_runtime_backend.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_si_p3_runtime_backend.py:11: in <module>
+    from si_e2_support import permit,tiny_components,raw_generate_edge
+tests/si_e2_support.py:12: in <module>
+    from self_improvement.si_p3.runtime_environment import ReplayEvidence
+src/self_improvement/si_p3/runtime_environment.py:13: in <module>
+    from recovery.r19_duration import sha256_json
+E   ModuleNotFoundError: No module named 'recovery.r19_duration'
+___________ ERROR collecting tests/test_si_p3_runtime_diagnostic.py ____________
+ImportError while importing test module '/tmp/si-e2-independent-review-dfc00e49/tests/test_si_p3_runtime_diagnostic.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_si_p3_runtime_diagnostic.py:9: in <module>
+    from self_improvement.si_p3.runtime_diagnostic import run_diagnostic
+src/self_improvement/si_p3/runtime_diagnostic.py:13: in <module>
+    from .runtime_environment import ReadIsolatedEnvironment, ReplayEvidence, historical_replay, replay_twice, bind_original_game_path
+src/self_improvement/si_p3/runtime_environment.py:13: in <module>
+    from recovery.r19_duration import sha256_json
+E   ModuleNotFoundError: No module named 'recovery.r19_duration'
+___________ ERROR collecting tests/test_si_p3_runtime_environment.py ___________
+ImportError while importing test module '/tmp/si-e2-independent-review-dfc00e49/tests/test_si_p3_runtime_environment.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_si_p3_runtime_environment.py:9: in <module>
+    from self_improvement.si_p3.runtime_environment import (historical_replay,source_hash,replay_twice,
+src/self_improvement/si_p3/runtime_environment.py:13: in <module>
+    from recovery.r19_duration import sha256_json
+E   ModuleNotFoundError: No module named 'recovery.r19_duration'
+______________ ERROR collecting tests/test_si_p3_runtime_gate.py _______________
+ImportError while importing test module '/tmp/si-e2-independent-review-dfc00e49/tests/test_si_p3_runtime_gate.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_si_p3_runtime_gate.py:13: in <module>
+    from si_e2_support import CODE,GPU,documents
+tests/si_e2_support.py:12: in <module>
+    from self_improvement.si_p3.runtime_environment import ReplayEvidence
+src/self_improvement/si_p3/runtime_environment.py:13: in <module>
+    from recovery.r19_duration import sha256_json
+E   ModuleNotFoundError: No module named 'recovery.r19_duration'
+- generated xml file: /home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/independent_software/candidate_full.xml -
+=========================== short test summary info ============================
+ERROR tests/test_r19_entrypoint_repair.py
+ERROR tests/test_r19_g3_authorization.py
+ERROR tests/test_r19_g4_consumer_contracts.py
+ERROR tests/test_r19_recovery_duration.py
+ERROR tests/test_r19_source_contract.py
+ERROR tests/test_r19_source_pipeline.py
+ERROR tests/test_si_p3_runtime_backend.py
+ERROR tests/test_si_p3_runtime_diagnostic.py
+ERROR tests/test_si_p3_runtime_environment.py
+ERROR tests/test_si_p3_runtime_gate.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 10 errors during collection !!!!!!!!!!!!!!!!!!!

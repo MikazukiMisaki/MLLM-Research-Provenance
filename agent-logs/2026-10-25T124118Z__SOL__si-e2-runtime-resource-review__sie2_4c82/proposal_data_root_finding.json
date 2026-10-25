@@ -1,0 +1,22 @@
+{
+  "schema": "SI_E2_ROOT_PROPOSAL_DATA_ROOT_FINDING_V1",
+  "observed_utc": "2026-10-25T13:46:58.971253+00:00",
+  "status": "CORRECTION_REQUIRED_BEFORE_RELEASE_NO_RUN",
+  "proposal_path": "/home/lizening/research-notes/agent-logs/2026-10-25T133918Z__LUNA__si-e2-engineering-probe__dfc00e49_7a61/SI_E2_PROPOSAL.json",
+  "proposal_sha256": "a58922e58363c0177d3500fb962307761d1e41d0022c9587dc70e464719aaa9a",
+  "env_path": "/home/lizening/research-notes/agent-logs/2026-10-25T133918Z__LUNA__si-e2-engineering-probe__dfc00e49_7a61/ENGINEERING_ENV_PROPOSAL.json",
+  "env_sha256": "7646ce168e58bbd37c1bf73ebb91e840feaf6c19089d1581081bf5573099dbc0",
+  "authentic_old_context": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-23T005510Z__SOL__r19-authorized-g3-monitor__2da980f_eea6b8/launch_context_observed.json",
+    "sha256": "399137330d5dfaccdd8734f7c39b219cfd7040808649e6090af8c9b733af39ac",
+    "ALFWORLD_DATA": "/home/lizening/alfworld_data"
+  },
+  "incorrect_conflation": "YAML dataset.data_path TRAIN subdirectory is not ALFWORLD_DATA root",
+  "required_values": {
+    "environment.data_root": "/home/lizening/alfworld_data",
+    "environment_set.ALFWORLD_DATA": "/home/lizening/alfworld_data"
+  },
+  "effective_discovery_restriction": "Only new ReadIsolatedEnvironment effective dataset.data_path is restricted to single historical task; original YAML/data root remain unchanged",
+  "source_change_required": false,
+  "no_model_env_or_supervisor_started": true
+}

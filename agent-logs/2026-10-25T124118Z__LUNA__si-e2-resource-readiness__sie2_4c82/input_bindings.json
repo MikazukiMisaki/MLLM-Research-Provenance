@@ -1,0 +1,148 @@
+{
+  "schema": "SI_E2_LUNA_READ_ONLY_INPUT_BINDINGS_V1",
+  "status": "BOUND_FOR_PREPARATION_ONLY_NOT_EXECUTABLE",
+  "task_boundary": {
+    "engineering_scope_path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/ENGINEERING_SCOPE.md",
+    "engineering_scope_sha256": "7d4f554095e96f55bf97a286dbcbdc3851f9a34b8036c5ac72d048b15564f85d",
+    "read_isolation_ruling_path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/READ_ISOLATION_SCOPE_RULING.md",
+    "read_isolation_ruling_sha256": "2eeadc19a1faaf49c71a6dfbd00f4e27665df5554f6a272770bb4aed9b9b61b1",
+    "no_model_environment_or_science_calls": true,
+    "new_task_pool_bodies_opened": false
+  },
+  "scientific_checkouts": {
+    "historical_import_checkout": {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project",
+      "head": "4f5c2e18e0dfdf48e9471fcba0a3ee715be3ca3b",
+      "branch": "codex/progress-aware-recovery"
+    },
+    "engineering_base_checkout": {
+      "path": "/home/lizening/wt-si-p3-engineering-contracts",
+      "head": "a995d4c3c5f7d31a2cf1fd0afc4bfa4bd72ee3a3",
+      "branch": "codex/si-p3-engineering-contracts",
+      "captured_status": "clean",
+      "receipt": "state_absence_receipts.json"
+    },
+    "future_candidate_checkout": {
+      "path": "/home/lizening/wt-si-p3-runtime-adaptation",
+      "status": "ABSENT_AT_CAPTURE; Sol candidate not frozen",
+      "implementation_sha": null,
+      "independent_review_sha256": null
+    }
+  },
+  "historical_g3_binding": {
+    "run_id": "260422ac02bd42a8b2929d7ef240526b",
+    "executed_source_sha": "2da980f631badc25086d12db60d128ff507d3ae6",
+    "exit_code": 0,
+    "independent_final_decision_path": "/home/lizening/research-notes/agent-logs/2026-10-23T005510Z__SOL__r19-authorized-g3-monitor__2da980f_eea6b8/INDEPENDENT_G3_FINAL_DECISION.json",
+    "independent_final_decision_sha256": "0bbf036b2d3c63d916ce4a1625c130bbe8b5eba3a42f2543843669d0262ccf9c",
+    "cumulative_science_cost": {
+      "generations": 5142,
+      "environment_operations_including_resets": 7949,
+      "prior_177_generation_342_operation_accounting_already_included": true
+    },
+    "all_original_output_and_supervisor_file_hashes_match_independent_audit": true,
+    "output_hash_receipt": "runtime_hashes_receipt.json",
+    "output_hash_receipt_sha256": "6973d476e979e9f1a398b15eac08592f305e3a5bc22a03ccef3fd37407d7d3f5"
+  },
+  "model_and_adapter_metadata_only": {
+    "cached_base": {
+      "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "file_count": 12,
+      "total_file_bytes": 16397431693,
+      "file_hash_inventory": "raw/runtime_hashes.stdout.bin"
+    },
+    "p0_final_adapter": {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+      "file_count": 11,
+      "total_file_bytes": 365138109,
+      "file_hash_inventory": "raw/runtime_hashes.stdout.bin"
+    },
+    "static_safetensors_headers": {
+      "path": "STATIC_WEIGHT_HEADER_SUMMARY.json",
+      "sha256": "0e67495f155bf71a3b05caf014b657390c8d4c39af5e8ec9d7f62b66f1561b8a",
+      "method": "header bytes only; no tensors/model load"
+    }
+  },
+  "interpreter_and_package_origins": {
+    "interpreter": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "version": "3.10.20",
+    "package_versions_and_distribution_origins": {
+      "path": "ENVIRONMENT_PACKAGES.json",
+      "sha256": "248f2a956dcf234e5831b4ca58c1c0db22956aa04829c07bafbf79dfce41d6a8"
+    },
+    "interpreter_resolved_module_origins": {
+      "path": "MODULE_ORIGINS.json",
+      "sha256": "1b2e72473b26ff8850058642c9ed4118534b3eacf83604d4ed1e80650fe4383b",
+      "method": "pinned interpreter importlib.util.find_spec under -I; runtime libraries were not imported"
+    },
+    "module_origin_receipt": {
+      "path": "module_origins_receipt.json",
+      "sha256": "e76d3a7aefb19bc538e0ab045c612d63527be4273a3969a714ed46e646bd1131",
+      "returncode": 0
+    }
+  },
+  "historical_replay_candidate": {
+    "candidate_metadata_path": "FIRST_SOURCE_REPLAY_CANDIDATE_V3.json",
+    "candidate_metadata_sha256": "efa830ba97e364e9d80ebda88f95ba05ce64c52a5204cf3f7fb524c880228a97",
+    "source_file": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_trajectories.jsonl",
+    "source_file_bytes": 19726633,
+    "source_file_sha256": "c6f37a7da28e326c70818524c79c17bbd85a286754c111f17db07cbe151a4f1c",
+    "selection": "first JSONL record, schedule index 0, no outcome search",
+    "task_id": "pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092",
+    "trajectory_id": "aea7c51203026ec5ec1fdb57",
+    "source_record_line_bytes": 35486,
+    "source_record_line_sha256": "465bff755ba34c18acca299470cd7c3a40455cb395df3e6fe43eee99119a7c73",
+    "seed": 30000,
+    "saved_action_count": 6,
+    "saved_action_sequence_sha256": "928f5291b68f02c4c7e7340febd885ac7c3057b2ce795b4f43ab3d6a3de9cc4b",
+    "registry_unit_hash": "7d9da2ea723b4e93b76804e8c552a7f06aaf23e53559c5e54ddd19310e6d7689",
+    "registry_status": "completed",
+    "historical_termination": "environment_terminal",
+    "before_first_action_snapshot": "PASS",
+    "terminal_map_replay_behavior": "NOT_OBSERVED",
+    "replay_input_hashes_path": "REPLAY_INPUT_HASHES.json",
+    "replay_input_hashes_sha256": "fb3fbc60c8ca84b084c10457087b81fc0062731b853ee7af838647f42b3b83bf",
+    "replay_design": "two fresh one-game instances, each reset once at seed 30000 and replay the same six saved actions; same pool_seed pending frozen CLI; 2 resets / 12 steps total",
+    "release_status": "NOT_RELEASED; no environment construction/reset/step"
+  },
+  "replay_files": [
+    {"path": "/home/lizening/alfworld_data/json_2.1.1/train/pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092/game.tw-pddl", "bytes": 58949, "sha256": "e393d4f3f521c7ceba7a6201a09884aec0f8941b4c87bcd4d427ea33a717bb99"},
+    {"path": "/home/lizening/alfworld_data/json_2.1.1/train/pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092/traj_data.json", "bytes": 46962, "sha256": "eb817b82a0b7d4f3d08bebe43a581194f8dc796fb894b17f826c0c1c16ede385"},
+    {"path": "/home/lizening/alfworld_data/logic/alfred.pddl", "bytes": 17202, "sha256": "f1473041ed01da514de1f87adfd7ef0804862361f83ccf63c75e43633b0eb280"},
+    {"path": "/home/lizening/alfworld_data/logic/alfred.twl2", "bytes": 13263, "sha256": "c5b22f0f73309a7fd7c8e5b71de42ad4803b60766ab4a51cc2feb34162be036b"},
+    {"path": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml", "bytes": 661, "sha256": "e90f93eb4604a473b6eb4a259a19ef1ca3c296bba1771ba70a1c9b0edbc99700"},
+    {"path": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/alfworld_base_a40.yaml", "bytes": 7826, "sha256": "5f990a11cb77ade0f7b9f5c88a5d36fc8180d762c0711ab0c5ab3719c89432a8"}
+  ],
+  "raw_g3_bindings": {
+    "output_files": 10,
+    "supervisor_files": 4,
+    "execution_events_sha256": "05e1d443ff304eaa25d08b92a4e19d204a6c93a4f46bbe50aefef3271f211762",
+    "source_trajectories_sha256": "c6f37a7da28e326c70818524c79c17bbd85a286754c111f17db07cbe151a4f1c",
+    "unit_registry_sha256": "c3898492c1fe542d60ea7c9f9363f48e352058f2b7ee86c812b54ef4e18f0cc8",
+    "source_restart_comparison_sha256": "8d3269fccd346da464c990ff4f50bf1e913031fa210eb3feb8c4307ea8777ee9",
+    "runtime_manifest_v2_sha256": "306a9e7c2d1b968e2a56e258fcd07aaf7467739460802a2b94c5e20411264916",
+    "runtime_manifest_preload_sha256": "6395e65abf266ba5f6a0834023b1da5c3799550b124a75db4d819cf613ee3312",
+    "current_hashes_match_independent_final_audit": true
+  },
+  "resource_snapshot": {
+    "capture_receipts": [
+      {"path": "host_inspection_receipts.json", "sha256": "9812021701dadf7be8ceb21ee8376c388b40b602a977f8304e46e31c856c7018"},
+      {"path": "gpu_status_receipts.json", "sha256": "4efa72901b949354ffb50f0f5c9103a5383a5fde6c4b8a297e033bd453eb1a7c"},
+      {"path": "gpu_pid_owner_receipts.json", "sha256": "e82ab180eb1e48dedaa4027d9e485b8117334b02c1de81e41ac7956b8544f5d7"},
+      {"path": "state_absence_receipts.json", "sha256": "3f8b6767f4c9aba6f67c10018ab4d3d4f17c2ac18ebde9b5eff06f86243ecfed"}
+    ],
+    "graphics_pid_owner": "UNRESOLVED; no claim of different execution namespace or GPU exclusivity",
+    "point_in_time_foreign_compute_process_query": "empty",
+    "actual_cuda_context_or_model_load": false,
+    "probe_release": "NOT_GRANTED"
+  },
+  "actual_incremental_calls_in_this_task": {
+    "model_loads": 0,
+    "generations": 0,
+    "training_runs": 0,
+    "environment_constructions": 0,
+    "resets": 0,
+    "steps": 0
+  }
+}

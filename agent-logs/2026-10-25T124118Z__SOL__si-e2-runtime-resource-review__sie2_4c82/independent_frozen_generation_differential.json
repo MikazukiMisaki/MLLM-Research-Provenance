@@ -1,0 +1,124 @@
+{
+  "schema": "SI_E2_ROOT_FROZEN_RAW_GENERATION_DIFFERENTIAL_V1",
+  "source_sha": "dfc00e49d1ef4d48453d2331507429f8a0c7bbc5",
+  "cases": [
+    {
+      "case": "short_EOS",
+      "phase": "source",
+      "frozen_raw_field_equality": "PASS_EXCEPT_LATENCY_AND_ADDED_MODE_ATTESTATION",
+      "same_full_actual_input_ids_and_attention_mask": true,
+      "generated_tokens": 5,
+      "output_complete": true,
+      "token_cap_reached": false
+    },
+    {
+      "case": "short_EOS",
+      "phase": "stage_one",
+      "frozen_raw_field_equality": "PASS_EXCEPT_LATENCY_AND_ADDED_MODE_ATTESTATION",
+      "same_full_actual_input_ids_and_attention_mask": true,
+      "generated_tokens": 5,
+      "output_complete": true,
+      "token_cap_reached": false
+    },
+    {
+      "case": "short_EOS",
+      "phase": "stage_two",
+      "frozen_raw_field_equality": "PASS_EXCEPT_LATENCY_AND_ADDED_MODE_ATTESTATION",
+      "same_full_actual_input_ids_and_attention_mask": true,
+      "generated_tokens": 5,
+      "output_complete": true,
+      "token_cap_reached": false
+    },
+    {
+      "case": "short_EOS",
+      "phase": "suffix",
+      "frozen_raw_field_equality": "PASS_EXCEPT_LATENCY_AND_ADDED_MODE_ATTESTATION",
+      "same_full_actual_input_ids_and_attention_mask": true,
+      "generated_tokens": 5,
+      "output_complete": true,
+      "token_cap_reached": false
+    },
+    {
+      "case": "cap_no_EOS",
+      "phase": "source",
+      "frozen_raw_field_equality": "PASS_EXCEPT_LATENCY_AND_ADDED_MODE_ATTESTATION",
+      "same_full_actual_input_ids_and_attention_mask": true,
+      "generated_tokens": 16,
+      "output_complete": false,
+      "token_cap_reached": true
+    },
+    {
+      "case": "cap_no_EOS",
+      "phase": "stage_one",
+      "frozen_raw_field_equality": "PASS_EXCEPT_LATENCY_AND_ADDED_MODE_ATTESTATION",
+      "same_full_actual_input_ids_and_attention_mask": true,
+      "generated_tokens": 40,
+      "output_complete": false,
+      "token_cap_reached": true
+    },
+    {
+      "case": "cap_no_EOS",
+      "phase": "stage_two",
+      "frozen_raw_field_equality": "PASS_EXCEPT_LATENCY_AND_ADDED_MODE_ATTESTATION",
+      "same_full_actual_input_ids_and_attention_mask": true,
+      "generated_tokens": 16,
+      "output_complete": false,
+      "token_cap_reached": true
+    },
+    {
+      "case": "cap_no_EOS",
+      "phase": "suffix",
+      "frozen_raw_field_equality": "PASS_EXCEPT_LATENCY_AND_ADDED_MODE_ATTESTATION",
+      "same_full_actual_input_ids_and_attention_mask": true,
+      "generated_tokens": 16,
+      "output_complete": false,
+      "token_cap_reached": true
+    },
+    {
+      "case": "EOS_at_cap",
+      "phase": "source",
+      "frozen_raw_field_equality": "PASS_EXCEPT_LATENCY_AND_ADDED_MODE_ATTESTATION",
+      "same_full_actual_input_ids_and_attention_mask": true,
+      "generated_tokens": 16,
+      "output_complete": true,
+      "token_cap_reached": true
+    },
+    {
+      "case": "EOS_at_cap",
+      "phase": "stage_one",
+      "frozen_raw_field_equality": "PASS_EXCEPT_LATENCY_AND_ADDED_MODE_ATTESTATION",
+      "same_full_actual_input_ids_and_attention_mask": true,
+      "generated_tokens": 40,
+      "output_complete": true,
+      "token_cap_reached": true
+    },
+    {
+      "case": "EOS_at_cap",
+      "phase": "stage_two",
+      "frozen_raw_field_equality": "PASS_EXCEPT_LATENCY_AND_ADDED_MODE_ATTESTATION",
+      "same_full_actual_input_ids_and_attention_mask": true,
+      "generated_tokens": 16,
+      "output_complete": true,
+      "token_cap_reached": true
+    },
+    {
+      "case": "EOS_at_cap",
+      "phase": "suffix",
+      "frozen_raw_field_equality": "PASS_EXCEPT_LATENCY_AND_ADDED_MODE_ATTESTATION",
+      "same_full_actual_input_ids_and_attention_mask": true,
+      "generated_tokens": 16,
+      "output_complete": true,
+      "token_cap_reached": true
+    }
+  ],
+  "real_cached_tokenizer": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218",
+  "tiny_CPU_PEFT_models": 3,
+  "synthetic_generation_edge_calls": 24,
+  "real_8B_generations": 0,
+  "real_model_loads": 0,
+  "environment_calls": 0,
+  "optimizer_steps": 0,
+  "torch_cuda_initialized": false,
+  "raw_fixture_location": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/independent_probe_fixtures",
+  "raw_fixture_publication": "LOCAL_ONLY; compact comparison is published"
+}

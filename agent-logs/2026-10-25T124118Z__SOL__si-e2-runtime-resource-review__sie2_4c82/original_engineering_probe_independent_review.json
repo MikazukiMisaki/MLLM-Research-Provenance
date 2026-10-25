@@ -1,0 +1,65 @@
+{
+  "schema": "SI_E2_ROOT_ORIGINAL_ENGINEERING_PROBE_REVIEW_V1",
+  "UTC": "2026-10-25T14:15:09.610351+00:00",
+  "source_SHA": "dfc00e49d1ef4d48453d2331507429f8a0c7bbc5",
+  "IMPLEMENTATION_REVIEW": "PASS_ENGINEERING_STATIC_SOFTWARE_ONLY",
+  "REAL_RUNTIME_ACCEPTANCE": "BLOCKED",
+  "original_engineering_invocation_consumed": true,
+  "authentic_returncode": 1,
+  "status": "TECHNICAL_STOP_NO_RETRY",
+  "known_trigger": {
+    "exception": "ContractError",
+    "message": "actual CUDA device UUID differs or is unobservable"
+  },
+  "location": "src/self_improvement/si_p3/runtime_backend.py:115 (first UUID assertion, before resource event/weights)",
+  "cuda_init_executed": true,
+  "explicit_one_byte_tensor_reached": false,
+  "actual8B_or_P0_weights_loaded": false,
+  "generations": 0,
+  "environment_construct_reset_step": 0,
+  "cuda_ownership_proven": false,
+  "actual_torch_uuid_value_type_repr": "NOT_SAVED; cannot distinguish wrong device, unavailable attribute, or representation mismatch",
+  "monitor_samples": 38,
+  "sampled_global_memory_MiB": [
+    14,
+    17
+  ],
+  "sampled_memory_is_not_inference_or_training_peak": true,
+  "allocated_device_hours": 0.006624203831630034,
+  "model_load_failed_open_unit_retained": true,
+  "all_original_bytes_preserved": true,
+  "science_cumulative_unchanged": {
+    "generations": 5142,
+    "reset_inclusive_operations": 7949
+  },
+  "forbidden_next_actions": [
+    "rerun consumed probe authorization",
+    "ignore UUID or PID guard",
+    "load model for diagnosis",
+    "claim real-runtime PASS"
+  ],
+  "next_minimal_action": "Separate fresh-identity pure CUDA UUID/PID diagnostic; no model or world; independently reviewed scripts and distinct cap/authorization required",
+  "independent_critic": "Read-only saved-evidence review agrees; actual uuid not saved, no own computePID proof; no CUDA/NVML calls by critic",
+  "evidence": {
+    "engineering_run/supervisor_exit.json": {
+      "sha256": "0c7a4598d43a0fe993ca5e941edf9aa99104e0b4a8aa4ad46c1f8cda06ab701b",
+      "bytes": 600
+    },
+    "engineering_run/engineering_events.jsonl": {
+      "sha256": "cbe32c033032c3ee42b0d412795e3cb675b784dacf7372fe9b1591473e48edef",
+      "bytes": 1443
+    },
+    "engineering_run/engineering_report.json": {
+      "sha256": "f5f1d255eaf018d1ec0fab058c8a1d375f9e9cd165db6dc0f6d2a132a7ba8769",
+      "bytes": 3145
+    },
+    "launcher_receipt.json": {
+      "sha256": "fd84800f1baefc672a5d6d1a0cc34dd85a8464bc7dbe20593f3e0524e6039c80",
+      "bytes": 1493
+    },
+    "gpu_monitor.jsonl": {
+      "sha256": "181f015e69d7bb0c474cfe8c8b24555f3ba158aa2f823e72affd2349ed763d8b",
+      "bytes": 29543
+    }
+  }
+}

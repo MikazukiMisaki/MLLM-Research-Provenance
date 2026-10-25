@@ -1,0 +1,80 @@
+{
+  "source_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "evidence_class": "synthetic_software_fixture",
+  "status": "ENGINEERING_BOUNDARY_OBSERVED_NOT_SCIENTIFIC_ACCEPTANCE",
+  "cost": {
+    "completed": {
+      "generated_tokens": 8,
+      "generations": 4,
+      "input_tokens": 521,
+      "resets": 2,
+      "steps": 2
+    },
+    "environment_closes": 2,
+    "environment_constructs": 2,
+    "external_completed": 13,
+    "external_started": 13,
+    "failed_units": [],
+    "interpretation": "engineering only; incomplete calls retain full reservations; no science",
+    "open_units": [],
+    "reserved_or_spent": {
+      "generated_tokens": 8,
+      "generations": 4,
+      "input_tokens": 521,
+      "resets": 2,
+      "steps": 2
+    }
+  },
+  "limits": [
+    "not a causal teacher branch",
+    "Collector remains synthetic-only",
+    "no acquisition/train/eval driver",
+    "GPU observations do not establish training fit or acquisition completion"
+  ],
+  "generation_observations": [
+    {
+      "phase": "source",
+      "parser_status": "selected",
+      "generated_tokens": 2,
+      "adapter_mode": "P0"
+    },
+    {
+      "phase": "stage_one",
+      "parser_status": "malformed_stage_one",
+      "generated_tokens": 2,
+      "adapter_mode": "BASE"
+    },
+    {
+      "phase": "stage_two",
+      "parser_status": "selected",
+      "generated_tokens": 2,
+      "adapter_mode": "BASE"
+    },
+    {
+      "phase": "suffix",
+      "parser_status": "selected",
+      "generated_tokens": 2,
+      "adapter_mode": "P0"
+    }
+  ],
+  "environment": {
+    "generated_commands_executed": 0,
+    "not_terminal_means": "terminal-map behavior NOT_OBSERVED; no outcome search",
+    "repeated_public_states_equal": true,
+    "replays": 2,
+    "steps_each": 1,
+    "terminal_map_observed": true,
+    "terminal_observed": true
+  },
+  "local_raw_fixture_files": [
+    {
+      "path": "/tmp/si-e2-codex-frozen-focused-4c82/test_nonempty_production_diagn0/output/engineering_events.jsonl",
+      "sha256": "16239dd7f8213e020f4c3d41af54a530de4fb0ffc8e0666b604442ea83528c0a"
+    },
+    {
+      "path": "/tmp/si-e2-codex-frozen-focused-4c82/test_nonempty_production_diagn0/output/engineering_report.json",
+      "sha256": "f9e31a32c9b9bc1aba33b68b7c046fb5a2cbbc08c7ede6565b425735156ae99e"
+    }
+  ],
+  "not_for_publication": "raw token/tensor fixture files stay local; compact bindings only"
+}

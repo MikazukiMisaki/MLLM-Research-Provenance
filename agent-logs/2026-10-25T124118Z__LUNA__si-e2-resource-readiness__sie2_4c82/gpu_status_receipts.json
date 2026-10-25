@@ -1,0 +1,94 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "nvidia-smi"
+      ],
+      "cwd": "/",
+      "ended_utc": "2026-10-25T12:45:31.763384+00:00",
+      "monotonic_elapsed_seconds": 0.40321957,
+      "name": "gpu_default_display",
+      "returncode": 0,
+      "started_utc": "2026-10-25T12:45:31.360175+00:00",
+      "stderr": {
+        "bytes": 0,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/gpu_default_display.stderr.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 1686,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/gpu_default_display.stdout.bin",
+        "sha256": "42f539d4ec413a50178450127ffdbb2b707c682c60ff693133e995e16971daf7"
+      }
+    },
+    {
+      "argv": [
+        "nvidia-smi",
+        "--query-gpu=mig.mode.current,mig.mode.pending",
+        "--format=csv,noheader"
+      ],
+      "cwd": "/",
+      "ended_utc": "2026-10-25T12:45:31.790140+00:00",
+      "monotonic_elapsed_seconds": 0.026158566,
+      "name": "gpu_mig_mode_query",
+      "returncode": 0,
+      "started_utc": "2026-10-25T12:45:31.763999+00:00",
+      "stderr": {
+        "bytes": 0,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/gpu_mig_mode_query.stderr.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 13,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/gpu_mig_mode_query.stdout.bin",
+        "sha256": "c7185f296f2a45f6ae15986363e1c886a23d75e9c3a5b608e7a58fb9d4523bc7"
+      }
+    },
+    {
+      "argv": [
+        "nvidia-smi",
+        "-q"
+      ],
+      "cwd": "/",
+      "ended_utc": "2026-10-25T12:45:31.966036+00:00",
+      "monotonic_elapsed_seconds": 0.175435311,
+      "name": "gpu_full_status",
+      "returncode": 0,
+      "started_utc": "2026-10-25T12:45:31.790622+00:00",
+      "stderr": {
+        "bytes": 0,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/gpu_full_status.stderr.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 10131,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/gpu_full_status.stdout.bin",
+        "sha256": "fed1a225f2741ccbfeef61a5bf20de06475556f0b177f83e055e07b4794d6d94"
+      }
+    },
+    {
+      "argv": [
+        "bash",
+        "-lc",
+        "for x in squeue scontrol qstat; do command -v \"$x\" || true; done"
+      ],
+      "cwd": "/",
+      "ended_utc": "2026-10-25T12:45:31.973980+00:00",
+      "monotonic_elapsed_seconds": 0.007393119,
+      "name": "scheduler_binary_presence",
+      "returncode": 0,
+      "started_utc": "2026-10-25T12:45:31.966600+00:00",
+      "stderr": {
+        "bytes": 0,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/scheduler_binary_presence.stderr.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/scheduler_binary_presence.stdout.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "schema": "SI_E2_GPU_STATUS_CAPTURE_V1"
+}

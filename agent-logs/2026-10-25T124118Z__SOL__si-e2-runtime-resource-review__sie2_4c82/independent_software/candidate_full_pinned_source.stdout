@@ -1,0 +1,2029 @@
+........................................................................ [  7%]
+........................................................................ [ 14%]
+....................................EE.EEEEF..........EEEEEEEEEEEEEEEEEE [ 22%]
+EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE...F............... [ 29%]
+................................F....................................... [ 37%]
+........................................................................ [ 44%]
+........................................................................ [ 52%]
+........................................................................ [ 59%]
+........................................................................ [ 67%]
+........................................................................ [ 74%]
+........................................................................ [ 82%]
+........................................................................ [ 89%]
+........................................................................ [ 97%]
+...........................                                              [100%]
+==================================== ERRORS ====================================
+________ ERROR at setup of test_frozen_provenance_and_result_arithmetic ________
+
+    @pytest.fixture(scope="module")
+    def audit() -> dict:
+        """Run only the model-free audit derivation once for this test module."""
+>       return _make_audit()
+
+tests/test_persistent_recovery_r12.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/audit_persistent_recovery_r12.py:593: in _make_audit
+    manifest, r9, r10, r11, source = _load_records()
+scripts/audit_persistent_recovery_r12.py:544: in _load_records
+    r9 = {record["prefix_id"]: record for record in read_jsonl(R9_RAW)}
+scripts/audit_persistent_recovery_r12.py:91: in read_jsonl
+    for line in path.read_text(encoding="utf-8").splitlines()
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl'
+
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1119: FileNotFoundError
+___________ ERROR at setup of test_discordant_ids_and_tie_partition ____________
+
+    @pytest.fixture(scope="module")
+    def audit() -> dict:
+        """Run only the model-free audit derivation once for this test module."""
+>       return _make_audit()
+
+tests/test_persistent_recovery_r12.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/audit_persistent_recovery_r12.py:593: in _make_audit
+    manifest, r9, r10, r11, source = _load_records()
+scripts/audit_persistent_recovery_r12.py:544: in _load_records
+    r9 = {record["prefix_id"]: record for record in read_jsonl(R9_RAW)}
+scripts/audit_persistent_recovery_r12.py:91: in read_jsonl
+    for line in path.read_text(encoding="utf-8").splitlines()
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl'
+
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1119: FileNotFoundError
+__________ ERROR at setup of test_handoff_context_and_horizon_metrics __________
+
+    @pytest.fixture(scope="module")
+    def audit() -> dict:
+        """Run only the model-free audit derivation once for this test module."""
+>       return _make_audit()
+
+tests/test_persistent_recovery_r12.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/audit_persistent_recovery_r12.py:593: in _make_audit
+    manifest, r9, r10, r11, source = _load_records()
+scripts/audit_persistent_recovery_r12.py:544: in _load_records
+    r9 = {record["prefix_id"]: record for record in read_jsonl(R9_RAW)}
+scripts/audit_persistent_recovery_r12.py:91: in read_jsonl
+    for line in path.read_text(encoding="utf-8").splitlines()
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl'
+
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1119: FileNotFoundError
+_______ ERROR at setup of test_subgoal_staleness_rule_and_frozen_counts ________
+
+    @pytest.fixture(scope="module")
+    def audit() -> dict:
+        """Run only the model-free audit derivation once for this test module."""
+>       return _make_audit()
+
+tests/test_persistent_recovery_r12.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/audit_persistent_recovery_r12.py:593: in _make_audit
+    manifest, r9, r10, r11, source = _load_records()
+scripts/audit_persistent_recovery_r12.py:544: in _load_records
+    r9 = {record["prefix_id"]: record for record in read_jsonl(R9_RAW)}
+scripts/audit_persistent_recovery_r12.py:91: in read_jsonl
+    for line in path.read_text(encoding="utf-8").splitlines()
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl'
+
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1119: FileNotFoundError
+_ ERROR at setup of test_pick_two_public_progress_and_exact_instance_identity __
+
+    @pytest.fixture(scope="module")
+    def audit() -> dict:
+        """Run only the model-free audit derivation once for this test module."""
+>       return _make_audit()
+
+tests/test_persistent_recovery_r12.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/audit_persistent_recovery_r12.py:593: in _make_audit
+    manifest, r9, r10, r11, source = _load_records()
+scripts/audit_persistent_recovery_r12.py:544: in _load_records
+    r9 = {record["prefix_id"]: record for record in read_jsonl(R9_RAW)}
+scripts/audit_persistent_recovery_r12.py:91: in read_jsonl
+    for line in path.read_text(encoding="utf-8").splitlines()
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl'
+
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1119: FileNotFoundError
+___________ ERROR at setup of test_control_pick_two_audit_is_present ___________
+
+    @pytest.fixture(scope="module")
+    def audit() -> dict:
+        """Run only the model-free audit derivation once for this test module."""
+>       return _make_audit()
+
+tests/test_persistent_recovery_r12.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/audit_persistent_recovery_r12.py:593: in _make_audit
+    manifest, r9, r10, r11, source = _load_records()
+scripts/audit_persistent_recovery_r12.py:544: in _load_records
+    r9 = {record["prefix_id"]: record for record in read_jsonl(R9_RAW)}
+scripts/audit_persistent_recovery_r12.py:91: in read_jsonl
+    for line in path.read_text(encoding="utf-8").splitlines()
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl'
+
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1119: FileNotFoundError
+_ ERROR at setup of test_real_parser_failure_continues_and_persists[malformed_stage_one] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_real_parser_failure_continues_and_persists[truncated_stage_one] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_real_parser_failure_continues_and_persists[diagnosis_too_long] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_real_parser_failure_continues_and_persists[subgoal_too_long] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_real_parser_failure_continues_and_persists[truncated_stage_two] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_real_continuation_and_terminal_semantics[sft_terminal] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+___ ERROR at setup of test_real_continuation_and_terminal_semantics[horizon] ___
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_real_continuation_and_terminal_semantics[sft_failure] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_real_continuation_and_terminal_semantics[recovery_terminal] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_real_continuation_and_terminal_semantics[recovery_terminal_failure] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[empty generation] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[raw output] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[parsed diagnosis] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[wrong prompt] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[malformed executed] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[invented status] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[missing trace] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[trace twice] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[transition list] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[terminal reward] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[termination reason] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[empty success] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[continuation protocol] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[missing nested decisions] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[missing nested loops] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[wrong comparator] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[wrong relation] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[wrong derived cost] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[wrong cost delta] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[wrong generation limit] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_corrupt_result_fails_during_reconciliation[nonfinite latency] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_______ ERROR at setup of test_withheld_recovery_rejects_any_transition ________
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_nested_conflicts_never_select_a_winner[generation-jsonl] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_nested_conflicts_never_select_a_winner[generation-cross-source] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_nested_conflicts_never_select_a_winner[continuation-jsonl] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_nested_conflicts_never_select_a_winner[continuation-cross-source] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_nested_conflicts_never_select_a_winner[replay-jsonl] __
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_nested_conflicts_never_select_a_winner[replay-cross-source] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+__ ERROR at setup of test_nested_conflicts_never_select_a_winner[cost-jsonl] ___
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_nested_conflicts_never_select_a_winner[cost-cross-source] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+__________ ERROR at setup of test_identical_full_records_deduplicate ___________
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_ledger_conflicts_fail_closed[branch_file-branches/wrong.json] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_______ ERROR at setup of test_ledger_conflicts_fail_closed[position-2] ________
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_____ ERROR at setup of test_ledger_conflicts_fail_closed[status-unknown] ______
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_ledger_conflicts_fail_closed[record_sha256-0000000000000000000000000000000000000000000000000000000000000000] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+____ ERROR at setup of test_jsonl_only_completion_remains_sixty_executions _____
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_real_overlapping_entry_paths_execute_only_sixty[False] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_real_overlapping_entry_paths_execute_only_sixty[True] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+______ ERROR at setup of test_lock_survives_exceptions_and_process_death _______
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_execution_journal_detects_actual_completed_then_started _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_______ ERROR at setup of test_global_lock_is_shared_by_linked_worktrees _______
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+____________ ERROR at setup of test_changed_real_head_cannot_resume ____________
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+______ ERROR at setup of test_unignored_output_rejected_before_execution _______
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_____ ERROR at setup of test_orphaned_report_staging_does_not_block_resume _____
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_manifest_provenance_required_before_resume[missing_r18_b_commit] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_manifest_provenance_required_before_resume[wrong_schema] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_manifest_provenance_required_before_resume[wrong_commit] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_manifest_provenance_required_before_resume[missing_provenance] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_manifest_provenance_required_before_resume[missing_model_isolation] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_manifest_provenance_required_before_resume[wrong_model_isolation] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_late_crash_reconstructs_reports_without_scientific_calls[report] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_late_crash_reconstructs_reports_without_scientific_calls[completed_manifest] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+__ ERROR at setup of test_completed_run_rejects_fresh_output_and_same_output ___
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+____ ERROR at setup of test_real_guard_rejects_unrelated_changes[untracked] ____
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+____ ERROR at setup of test_real_guard_rejects_unrelated_changes[modified] _____
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_____ ERROR at setup of test_real_guard_rejects_unrelated_changes[rename] ______
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_output_paths_fail_before_execution[/tmp/outside-workspace] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_output_paths_fail_before_execution[scripts/forbidden] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+____ ERROR at setup of test_output_paths_fail_before_execution[../outside] _____
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_actual_sft_continuation_rejects_both_treatment_leaks[card] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+_ ERROR at setup of test_actual_sft_continuation_rejects_both_treatment_leaks[fact] _
+
+    @pytest.fixture(scope="module")
+    def frozen_inputs():
+>       return runner._load_inputs(), runner._verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+=================================== FAILURES ===================================
+_ test_public_source_excludes_hidden_facts_and_frozen_manifest_is_not_written __
+
+    def test_public_source_excludes_hidden_facts_and_frozen_manifest_is_not_written() -> None:
+>       source = json.loads(R7_RAW.read_text(encoding="utf-8").splitlines()[0])
+
+tests/test_persistent_recovery_r12.py:170: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl'
+
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1119: FileNotFoundError
+___________________ test_frozen_hashes_and_r18_c1_provenance ___________________
+
+    def test_frozen_hashes_and_r18_c1_provenance():
+>       actual = _verify_frozen_files()
+
+tests/test_progress_aware_card_v2_r18_c2.py:678: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _verify_frozen_files() -> dict[str, str]:
+        actual: dict[str, str] = {}
+        for name, (path, expected) in FROZEN_HASHES.items():
+            if not path.is_file():
+                raise RuntimeError(f"missing frozen artifact: {path}")
+            value = sha256_file(path)
+            actual[name] = value
+            if not _hash_matches(value, expected):
+                raise RuntimeError(f"frozen hash mismatch {name}: {value} not in {expected}")
+        if not ADAPTER.is_dir() or directory_sha256(ADAPTER) != ADAPTER_SHA256:
+>           raise RuntimeError("frozen SFT adapter hash mismatch")
+E           RuntimeError: frozen SFT adapter hash mismatch
+
+scripts/run_progress_aware_card_v2_r18_c2.py:290: RuntimeError
+__________ test_frozen_phase_artifact_is_hashable_and_self_describing __________
+
+    def test_frozen_phase_artifact_is_hashable_and_self_describing() -> None:
+        phase_path = ROOT / "artifacts/runtime/validation/progress-aware-r18-a-semantic/phase_a_freeze.json"
+>       digest = hashlib.sha256(phase_path.read_bytes()).hexdigest()
+
+tests/test_progress_card_semantic_audit_r18_a.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1126: in read_bytes
+    with self.open(mode='rb') as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/progress-aware-r18-a-semantic/phase_a_freeze.json')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/tmp/si-e2-independent-review-dfc00e49/artifacts/runtime/validation/progress-aware-r18-a-semantic/phase_a_freeze.json'
+
+/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1119: FileNotFoundError
+=============================== warnings summary ===============================
+tests/test_si_p3_learning.py::test_genuine_CPU_PEFT_warmstart_fresh_optimizer_final18_and_roundtrip
+  /home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/peft/utils/save_and_load.py:286: UserWarning: Could not find a config file in  - will assume that the vocabulary was not modified.
+    warnings.warn(
+
+tests/test_si_p3_runtime_backend.py: 23 warnings
+tests/test_si_p3_runtime_diagnostic.py: 1 warning
+  /home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/peft/tuners/lora/layer.py:2174: UserWarning: fan_in_fan_out is set to False but the target module is `Conv1D`. Setting fan_in_fan_out to True.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/lizening/research-notes/agent-logs/2026-10-25T124118Z__SOL__si-e2-runtime-resource-review__sie2_4c82/independent_software/candidate_full_pinned_source.xml -
+=========================== short test summary info ============================
+FAILED tests/test_persistent_recovery_r12.py::test_public_source_excludes_hidden_facts_and_frozen_manifest_is_not_written
+FAILED tests/test_progress_aware_card_v2_r18_c2.py::test_frozen_hashes_and_r18_c1_provenance
+FAILED tests/test_progress_card_semantic_audit_r18_a.py::test_frozen_phase_artifact_is_hashable_and_self_describing
+ERROR tests/test_persistent_recovery_r12.py::test_frozen_provenance_and_result_arithmetic
+ERROR tests/test_persistent_recovery_r12.py::test_discordant_ids_and_tie_partition
+ERROR tests/test_persistent_recovery_r12.py::test_handoff_context_and_horizon_metrics
+ERROR tests/test_persistent_recovery_r12.py::test_subgoal_staleness_rule_and_frozen_counts
+ERROR tests/test_persistent_recovery_r12.py::test_pick_two_public_progress_and_exact_instance_identity
+ERROR tests/test_persistent_recovery_r12.py::test_control_pick_two_audit_is_present
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_real_parser_failure_continues_and_persists[malformed_stage_one]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_real_parser_failure_continues_and_persists[truncated_stage_one]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_real_parser_failure_continues_and_persists[diagnosis_too_long]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_real_parser_failure_continues_and_persists[subgoal_too_long]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_real_parser_failure_continues_and_persists[truncated_stage_two]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_real_continuation_and_terminal_semantics[sft_terminal]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_real_continuation_and_terminal_semantics[horizon]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_real_continuation_and_terminal_semantics[sft_failure]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_real_continuation_and_terminal_semantics[recovery_terminal]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_real_continuation_and_terminal_semantics[recovery_terminal_failure]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[empty generation]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[raw output]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[parsed diagnosis]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong prompt]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[malformed executed]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[invented status]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[missing trace]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[trace twice]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[transition list]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[terminal reward]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[termination reason]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[empty success]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[continuation protocol]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[missing nested decisions]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[missing nested loops]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong comparator]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong relation]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong derived cost]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong cost delta]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong generation limit]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[nonfinite latency]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_withheld_recovery_rejects_any_transition
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[generation-jsonl]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[generation-cross-source]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[continuation-jsonl]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[continuation-cross-source]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[replay-jsonl]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[replay-cross-source]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[cost-jsonl]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[cost-cross-source]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_identical_full_records_deduplicate
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_ledger_conflicts_fail_closed[branch_file-branches/wrong.json]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_ledger_conflicts_fail_closed[position-2]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_ledger_conflicts_fail_closed[status-unknown]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_ledger_conflicts_fail_closed[record_sha256-0000000000000000000000000000000000000000000000000000000000000000]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_jsonl_only_completion_remains_sixty_executions
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_real_overlapping_entry_paths_execute_only_sixty[False]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_real_overlapping_entry_paths_execute_only_sixty[True]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_lock_survives_exceptions_and_process_death
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_execution_journal_detects_actual_completed_then_started
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_global_lock_is_shared_by_linked_worktrees
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_changed_real_head_cannot_resume
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_unignored_output_rejected_before_execution
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_orphaned_report_staging_does_not_block_resume
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[missing_r18_b_commit]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[wrong_schema]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[wrong_commit]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[missing_provenance]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[missing_model_isolation]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[wrong_model_isolation]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_late_crash_reconstructs_reports_without_scientific_calls[report]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_late_crash_reconstructs_reports_without_scientific_calls[completed_manifest]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_completed_run_rejects_fresh_output_and_same_output
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_real_guard_rejects_unrelated_changes[untracked]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_real_guard_rejects_unrelated_changes[modified]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_real_guard_rejects_unrelated_changes[rename]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_output_paths_fail_before_execution[/tmp/outside-workspace]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_output_paths_fail_before_execution[scripts/forbidden]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_output_paths_fail_before_execution[../outside]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_actual_sft_continuation_rejects_both_treatment_leaks[card]
+ERROR tests/test_progress_aware_card_v2_r18_c2.py::test_actual_sft_continuation_rejects_both_treatment_leaks[fact]

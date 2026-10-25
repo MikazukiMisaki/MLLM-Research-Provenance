@@ -1,0 +1,33 @@
+{
+  "argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "-c",
+    "import importlib.util,json,sys\nmodules={\"torch\":\"torch\",\"transformers\":\"transformers\",\"peft\":\"peft\",\"alfworld\":\"alfworld\",\"textworld\":\"textworld\",\"PyYAML\":\"yaml\"}\nout={\"python_executable\":sys.executable,\"python_version\":sys.version,\"modules\":{}}\nfor key,name in modules.items():\n spec=importlib.util.find_spec(name)\n out[\"modules\"][key]={\"module_name\":name,\"origin\":None if spec is None else spec.origin,\"search_locations\":None if spec is None or spec.submodule_search_locations is None else list(spec.submodule_search_locations)}\nprint(json.dumps(out,sort_keys=True))"
+  ],
+  "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+  "ended_utc": "2026-10-25T13:02:13.849940+00:00",
+  "environment_allowlist": [
+    "HOME",
+    "LANG",
+    "LC_ALL",
+    "PATH",
+    "PYTHONNOUSERSITE",
+    "USER"
+  ],
+  "monotonic_elapsed_seconds": 0.032402731,
+  "pythonpath_unset": true,
+  "returncode": 0,
+  "schema": "SI_E2_MODULE_ORIGINS_CAPTURE_V1",
+  "started_utc": "2026-10-25T13:02:13.817533+00:00",
+  "stderr": {
+    "bytes": 0,
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/module_origins.stderr.bin",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 1790,
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T124118Z__LUNA__si-e2-resource-readiness__sie2_4c82/raw/module_origins.stdout.bin",
+    "sha256": "caced61adeb051f000a25d64d8e2eb0b41397462225d3f5c5f85fa7ebf106d80"
+  }
+}

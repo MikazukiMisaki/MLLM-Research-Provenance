@@ -1,0 +1,40 @@
+{
+  "current_execution_authorized": false,
+  "inherit_environment": false,
+  "rationale": {
+    "alfworld": "ALFWORLD_DATA retains the authentic original G3 root /home/lizening/alfworld_data; the YAML dataset.data_path remains its TRAIN subdirectory. Only the new reviewed ReadIsolatedEnvironment effective discovery path narrows to the single historical task, before constructor entry.",
+    "credentials": "No token/credential values are read or passed; all hub token variables are explicitly unset.",
+    "cuda_library_path": "Preserves the observed CUDA library path exactly; no model/context was loaded to validate runtime linkage.",
+    "future_child": "The reviewed supervisor derives a child environment by dropping Python overrides/LD_PRELOAD/CUDA_DEVICE_ORDER and sets offline/tokenizer/CUDA flags. Exact future process environment still requires root review and authorization.",
+    "path": "Reduced to /usr/bin:/bin; verified nvidia-smi resolves to /usr/bin/nvidia-smi. Python and reviewed script are absolute paths."
+  },
+  "schema": "SI_E2_EXACT_ENV_PROPOSAL_V1",
+  "set": {
+    "ALFWORLD_DATA": "/home/lizening/alfworld_data",
+    "CUDA_VISIBLE_DEVICES": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+    "HF_DATASETS_OFFLINE": "1",
+    "HF_HUB_OFFLINE": "1",
+    "HOME": "/home/lizening",
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "LD_LIBRARY_PATH": "/usr/local/cuda/lib64:/usr/local/cuda/lib64:",
+    "PATH": "/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TOKENIZERS_PARALLELISM": "false",
+    "TRANSFORMERS_OFFLINE": "1",
+    "USER": "lizening"
+  },
+  "status": "PREPARATION_ONLY_NOT_RELEASED",
+  "unset": [
+    "PYTHONPATH",
+    "PYTHONHOME",
+    "VIRTUAL_ENV",
+    "LD_PRELOAD",
+    "CUDA_DEVICE_ORDER",
+    "HF_TOKEN",
+    "HUGGING_FACE_HUB_TOKEN",
+    "HF_HOME",
+    "TRANSFORMERS_CACHE",
+    "ALFWORLD_CONFIG_PATH"
+  ]
+}
