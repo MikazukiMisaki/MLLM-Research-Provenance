@@ -1,0 +1,302 @@
+"""Frozen BF16 LoRA training and offline imitation evaluation."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import math
+import time
+import gc
+from pathlib import Path
+from typing import Any, Sequence
+
+from models.protocol_stability import parse_p2_selection
+
+from .dataset import load_jsonl
+from .masking import tokenize_prompt_completion
+
+
+def directory_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    for file_path in sorted(item for item in path.rglob("*") if item.is_file()):
+        digest.update(str(file_path.relative_to(path)).encode())
+        with file_path.open("rb") as handle:
+            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+                digest.update(chunk)
+    return digest.hexdigest()
+
+
+def dependency_versions() -> dict[str, str]:
+    import accelerate
+    import datasets
+    import peft
+    import torch
+    import transformers
+    import trl
+
+    return {
+        "torch": torch.__version__,
+        "transformers": transformers.__version__,
+        "accelerate": accelerate.__version__,
+        "trl": trl.__version__,
+        "peft": peft.__version__,
+        "datasets": datasets.__version__,
+    }
+
+
+def train_lora(
+    *,
+    dataset_path: Path,
+    run_config: dict[str, Any],
+    output_dir: Path,
+    smoke: bool,
+) -> dict[str, Any]:
+    """Train exactly the frozen LoRA config, with a bounded smoke override."""
+    import torch
+    from datasets import Dataset
+    from peft import LoraConfig, TaskType
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+    from trl import SFTConfig, SFTTrainer
+
+    if output_dir.exists():
+        raise ValueError(f"refusing to overwrite training output: {output_dir}")
+    output_dir.mkdir(parents=True)
+    model_id = run_config["base_model"]
+    max_length = int(run_config["max_length"])
+    tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+    rows = load_jsonl(dataset_path, split="train")
+    validation_rows = load_jsonl(dataset_path, split="validation")
+    for row in rows + validation_rows:
+        tokenize_prompt_completion(
+            tokenizer, row["prompt"], row["completion"], max_length=max_length
+        )
+    if smoke:
+        rows = sorted(rows, key=lambda row: (row["task_family"], row["task_id"], row["step_index"]))[:32]
+        validation_rows = validation_rows[:16]
+    train_dataset = Dataset.from_list(
+        [{"prompt": row["prompt"], "completion": row["completion"]} for row in rows]
+    )
+    eval_dataset = Dataset.from_list(
+        [{"prompt": row["prompt"], "completion": row["completion"]} for row in validation_rows]
+    )
+    torch.cuda.reset_peak_memory_stats()
+    started = time.monotonic()
+    model = AutoModelForCausalLM.from_pretrained(
+        model_id,
+        torch_dtype=torch.bfloat16,
+        trust_remote_code=True,
+        low_cpu_mem_usage=True,
+    )
+    model.config.use_cache = False
+    base_parameter_count = sum(parameter.numel() for parameter in model.parameters())
+    if any(parameter.requires_grad is False for parameter in model.parameters()):
+        raise RuntimeError("fresh base model unexpectedly contains frozen parameters")
+    lora = run_config["lora"]
+    peft_config = LoraConfig(
+        r=int(lora["r"]),
+        lora_alpha=int(lora["lora_alpha"]),
+        lora_dropout=float(lora["lora_dropout"]),
+        bias=str(lora["bias"]),
+        target_modules=str(lora["target_modules"]),
+        task_type=TaskType.CAUSAL_LM,
+    )
+    training = run_config["training"]
+    training_args = SFTConfig(
+        output_dir=str(output_dir / "checkpoints"),
+        overwrite_output_dir=False,
+        do_train=True,
+        do_eval=True,
+        eval_strategy="no" if smoke else "epoch",
+        save_strategy="no" if smoke else "epoch",
+        load_best_model_at_end=False if smoke else True,
+        metric_for_best_model=None if smoke else "eval_loss",
+        greater_is_better=None if smoke else False,
+        save_total_limit=2,
+        max_steps=8 if smoke else -1,
+        learning_rate=float(training["learning_rate"]),
+        num_train_epochs=float(training["num_train_epochs"]),
+        per_device_train_batch_size=int(training["per_device_train_batch_size"]),
+        per_device_eval_batch_size=2,
+        gradient_accumulation_steps=int(training["gradient_accumulation_steps"]),
+        warmup_ratio=float(training["warmup_ratio"]),
+        lr_scheduler_type=str(training["lr_scheduler_type"]),
+        weight_decay=float(training["weight_decay"]),
+        max_grad_norm=float(training["max_grad_norm"]),
+        gradient_checkpointing=bool(training["gradient_checkpointing"]),
+        gradient_checkpointing_kwargs={"use_reentrant": False},
+        bf16=bool(training["bf16"]),
+        fp16=bool(training["fp16"]),
+        optim=str(training["optim"]),
+        seed=int(training["seed"]),
+        data_seed=int(training["data_seed"]),
+        packing=bool(training["packing"]),
+        completion_only_loss=bool(training["completion_only_loss"]),
+        report_to=[],
+        max_length=max_length,
+        logging_steps=1 if smoke else 10,
+        include_num_input_tokens_seen=True,
+    )
+    trainer = SFTTrainer(
+        model=model,
+        args=training_args,
+        train_dataset=train_dataset,
+        eval_dataset=eval_dataset,
+        processing_class=tokenizer,
+        peft_config=peft_config,
+    )
+    trainable = sum(
+        parameter.numel() for parameter in trainer.model.parameters() if parameter.requires_grad
+    )
+    frozen = sum(
+        parameter.numel() for parameter in trainer.model.parameters() if not parameter.requires_grad
+    )
+    non_lora_trainable = [
+        name
+        for name, parameter in trainer.model.named_parameters()
+        if parameter.requires_grad and "lora_" not in name
+    ]
+    if trainable <= 0 or non_lora_trainable:
+        raise RuntimeError(f"LoRA freeze invariant failed: {non_lora_trainable[:5]}")
+    train_result = trainer.train()
+    if not math.isfinite(float(train_result.training_loss)):
+        raise RuntimeError("training loss is not finite")
+    final_dir = output_dir / "final_adapter"
+    trainer.save_model(str(final_dir))
+    tokenizer.save_pretrained(final_dir)
+    eval_metrics = trainer.evaluate()
+    optimizer_steps = int(trainer.state.global_step)
+    best_metric = trainer.state.best_metric
+    best_checkpoint = trainer.state.best_model_checkpoint
+    input_tokens_seen = int(trainer.state.num_input_tokens_seen)
+    log_history = list(trainer.state.log_history)
+    adapter_hash = directory_sha256(final_dir)
+    del trainer
+    del model
+    gc.collect()
+    torch.cuda.empty_cache()
+    if smoke:
+        from peft import PeftModel
+
+        reload_base = AutoModelForCausalLM.from_pretrained(
+            model_id, torch_dtype=torch.bfloat16, trust_remote_code=True,
+            low_cpu_mem_usage=True,
+        )
+        reload_model = PeftModel.from_pretrained(reload_base, final_dir)
+        if reload_model is None:
+            raise RuntimeError("saved adapter did not reload")
+        del reload_model
+        del reload_base
+        gc.collect()
+        torch.cuda.empty_cache()
+    elapsed = time.monotonic() - started
+    result = {
+        "schema_version": "sft_training_result_v1",
+        "smoke": smoke,
+        "base_model": model_id,
+        "base_parameter_count": base_parameter_count,
+        "trainable_parameter_count": trainable,
+        "frozen_parameter_count": frozen,
+        "trainable_fraction": trainable / (trainable + frozen),
+        "base_parameters_frozen": not non_lora_trainable,
+        "train_examples": len(rows),
+        "validation_examples": len(validation_rows),
+        "optimizer_steps": optimizer_steps,
+        "training_loss": float(train_result.training_loss),
+        "best_metric": best_metric,
+        "best_checkpoint": best_checkpoint,
+        "evaluation": eval_metrics,
+        "wall_time_seconds": elapsed,
+        "peak_gpu_memory_bytes": int(torch.cuda.max_memory_allocated()),
+        "input_tokens_seen": input_tokens_seen,
+        "adapter_path": str(final_dir),
+        "adapter_sha256": adapter_hash,
+        "dependencies": dependency_versions(),
+        "log_history": log_history,
+    }
+    (output_dir / "training_result.json").write_text(
+        json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    return result
+
+
+def evaluate_offline(
+    *,
+    dataset_path: Path,
+    adapter_path: Path,
+    base_model: str,
+    max_new_tokens: int = 16,
+    batch_size: int = 8,
+) -> dict[str, Any]:
+    """Compare base and selected LoRA on task-disjoint expert states."""
+    import torch
+    from peft import PeftModel
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    rows = load_jsonl(dataset_path, split="validation")
+    tokenizer = AutoTokenizer.from_pretrained(base_model, trust_remote_code=True)
+    tokenizer.padding_side = "left"
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+    model = AutoModelForCausalLM.from_pretrained(
+        base_model, torch_dtype=torch.bfloat16, trust_remote_code=True,
+        low_cpu_mem_usage=True, device_map="cuda",
+    ).eval()
+    base = _generate_offline(model, tokenizer, rows, max_new_tokens, batch_size)
+    adapted = PeftModel.from_pretrained(model, adapter_path).eval()
+    sft = _generate_offline(adapted, tokenizer, rows, max_new_tokens, batch_size)
+    return {
+        "schema_version": "sft_offline_evaluation_v1",
+        "task_count": len({row["task_id"] for row in rows}),
+        "example_count": len(rows),
+        "base": _offline_metrics(rows, base),
+        "sft": _offline_metrics(rows, sft),
+    }
+
+
+def _generate_offline(
+    model: Any, tokenizer: Any, rows: Sequence[dict[str, Any]], max_new_tokens: int, batch_size: int
+) -> list[str]:
+    import torch
+
+    outputs = []
+    for start in range(0, len(rows), batch_size):
+        batch = rows[start : start + batch_size]
+        tokens = tokenizer(
+            [row["prompt"] for row in batch], return_tensors="pt", padding=True
+        )
+        tokens = {key: value.to(model.device) for key, value in tokens.items()}
+        with torch.no_grad():
+            generated = model.generate(
+                **tokens,
+                max_new_tokens=max_new_tokens,
+                do_sample=False,
+                pad_token_id=tokenizer.pad_token_id,
+            )
+        for index, sequence in enumerate(generated):
+            continuation = sequence[tokens["input_ids"].shape[1] :]
+            outputs.append(tokenizer.decode(continuation, skip_special_tokens=True).strip())
+    return outputs
+
+
+def _offline_metrics(rows: Sequence[dict[str, Any]], outputs: Sequence[str]) -> dict[str, Any]:
+    exact_ids = exact_commands = malformed = out_of_range = 0
+    for row, output in zip(rows, outputs):
+        valid_actions = tuple(row["indexed_action_map"].values())
+        parsed = parse_p2_selection(output, valid_actions, reflection_required=False)
+        exact_ids += parsed.action_id == row["target_action_id"]
+        exact_commands += parsed.action == row["target_command"]
+        malformed += parsed.selection_status == "action_format_violation"
+        out_of_range += parsed.selection_status == "action_out_of_range"
+    total = len(rows)
+    return {
+        "exact_action_id_count": exact_ids,
+        "exact_action_id_accuracy": exact_ids / total,
+        "exact_target_command_count": exact_commands,
+        "exact_target_command_accuracy": exact_commands / total,
+        "malformed_output_count": malformed,
+        "malformed_output_rate": malformed / total,
+        "out_of_range_count": out_of_range,
+        "out_of_range_rate": out_of_range / total,
+    }

@@ -1,0 +1,26 @@
+        "recent_unique_action_count",
+        "current_observation_repeats_recent",
+        "current_observation",
+        "task_goal",
+        "recent_transition_text",
+        "entropy_quantile",
+    }
+)
+
+
+def sha256_file(path: Path) -> str:
+    """Return the SHA-256 digest of one immutable artifact."""
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def task_family_from_id(task_id: str) -> str:
+    """Recover the canonical ALFWorld task-family prefix."""
+    family = task_id.split("-", 1)[0]
+    if family not in TASK_FAMILIES:
+        raise ValueError(f"unknown ALFWorld task family: {family}")
+    return family
+
+
+def validate_pool_schedule(schedule: dict[str, Any]) -> None:
+    """Validate the initial and conditional extension reset schedule."""
+    if schedule.get("schema_version") != "sprint2c_h4_pool_schedule_v1":

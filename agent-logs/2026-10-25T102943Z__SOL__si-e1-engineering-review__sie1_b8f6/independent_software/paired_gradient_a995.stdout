@@ -1,0 +1,48 @@
+{
+  "status": "PASS_INDEPENDENT_HETEROGENEOUS_TOKEN_GRADIENT_AND_RESERVATION_PROBES",
+  "paired_microbatches": 144,
+  "updates_in_exposure_schedule": 18,
+  "first_update_examples": 16,
+  "short_long_rows": [
+    8,
+    8
+  ],
+  "short_long_target_tokens": [
+    2,
+    6
+  ],
+  "first_update_loss_denominator": 64,
+  "expected_loss": 1.2130075659799042,
+  "observed_loss": 1.2130075693130493,
+  "gradient_matches_single_concatenated_reference": true,
+  "global_total_preserving_slot_swap_rejected": true,
+  "unknown_output_retains_16_token_reservation_not_actual_zero": {
+    "reserved_or_spent": {
+      "generations": 2,
+      "environment_operations": 0,
+      "generated_tokens": 32,
+      "input_tokens": 16384
+    },
+    "completed": {
+      "generations": 1,
+      "environment_operations": 0,
+      "generated_tokens": 16,
+      "input_tokens": 8192
+    },
+    "open_units": [
+      "unknown"
+    ],
+    "allocated_devices": 0,
+    "device_hours": 0.0,
+    "cost_interpretation": "synthetic software receipts; no scientific expenditure"
+  },
+  "input_16M_exact_boundary_and_overflow": true,
+  "activity": {
+    "tiny_CPU_model_objects": 2,
+    "actual_toy_optimizer_updates": 1,
+    "actual_8B_P0_models": 0,
+    "ALFWorld_calls": 0,
+    "scientific_training": 0
+  },
+  "limit": "Explicit token/logit fixtures, not actual tokenizer or admissible training data; genuine PEFT roundtrip checked separately in full suite."
+}

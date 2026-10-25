@@ -1,0 +1,398 @@
+"""Completion-only tokenization helpers mirroring TRL 0.23 prompt-completion logic."""
+
+from __future__ import annotations
+
+from typing import Any
+
+
+def tokenize_prompt_completion(
+    tokenizer: Any, prompt: str, completion: str, *, max_length: int
+) -> dict[str, list[int]]:
+    """Tokenize without truncation and activate labels only after the prompt."""
+    eos = tokenizer.eos_token or ""
+    supervised_completion = completion
+    if eos and not supervised_completion.endswith(eos):
+        supervised_completion += eos
+    prompt_ids = tokenizer(text=prompt, add_special_tokens=True)["input_ids"]
+    full_ids = tokenizer(
+        text=prompt + supervised_completion, add_special_tokens=True
+    )["input_ids"]
+    if full_ids[: len(prompt_ids)] != prompt_ids:
+        raise ValueError("prompt tokenization is not a prefix of prompt+completion")
+    if len(full_ids) > max_length:
+        raise ValueError("example exceeds frozen max_length; truncation is prohibited")
+    labels = [-100] * len(prompt_ids) + full_ids[len(prompt_ids) :]
+    if not labels or all(value == -100 for value in labels):
+        raise ValueError("completion has no active labels")
+    return {
+        "input_ids": full_ids,
+        "attention_mask": [1] * len(full_ids),
+        "labels": labels,
+        "completion_mask": [0] * len(prompt_ids) + [1] * (len(full_ids) - len(prompt_ids)),
+    }
+
+
+def tokenizer_length(tokenizer: Any, prompt: str, completion: str) -> int:
+    eos = tokenizer.eos_token or ""
+    suffix = completion if not eos or completion.endswith(eos) else completion + eos
+    return len(tokenizer(text=prompt + suffix, add_special_tokens=True)["input_ids"])
+"""Frozen public-state action-only interface for the first SFT experiment."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import re
+from collections import Counter, defaultdict
+from pathlib import Path
+from typing import Any, Iterable, Sequence
+
+from models.action_parser import action_id_mapping
+from models.policy import ActionRequest
+from recovery.corpus import TASK_FAMILIES, task_family_from_id
+
+
+SFT_P0_SCHEMA = "sft_policy_example_v1"
+SFT_P0_PIPELINE = "sft_p0_action_only_v1"
+SPLIT_SCHEMA = "sft_task_split_manifest_v1"
+EXCLUSION_SCHEMA = "sft_task_exclusion_manifest_v1"
+HISTORY_WINDOW = 4
+ACTION_ID_PATTERN = re.compile(r"^A\d{3}$")
+FORBIDDEN_PROMPT_MARKERS = (
+    "extra.expert_plan",
+    "policy_commands",
+    "hidden textworld",
+    "hidden state:",
+    "world facts:",
+    "goal-state reflection",
+    "demonstration:",
+    "recovery diagnosis",
+)
+
+
+class DatasetInvariantError(ValueError):
+    """Raised when an SFT example cannot be accepted without repair."""
+
+
+def canonical_json(value: Any) -> str:
+    """Render stable compact JSON for hashes and deterministic assets."""
+    return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
+
+
+def sha256_value(value: Any) -> str:
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def sft_p0_prompt(request: ActionRequest, *, history_window: int = HISTORY_WINDOW) -> str:
+    """Render only the goal, public observation, bounded history, and action map."""
+    if history_window != HISTORY_WINDOW:
+        raise ValueError("SFT-P0 freezes history_window=4")
+    mapping = action_id_mapping(request.valid_actions or ())
+    if not mapping:
+        raise DatasetInvariantError("current admissible-action mapping is empty")
+    action_block = "\n".join(
+        f"[{action_id}] {command}" for action_id, command in mapping.items()
+    )
+    start = max(0, len(request.history) - history_window)
+    transitions = []
+    for index in range(start, len(request.history)):
+        result = (
+            request.history[index + 1][0]
+            if index + 1 < len(request.history)
+            else request.observation
+        )
+        transitions.append(
+            f"Action: {request.history[index][1]}\nResult: {result}"
+        )
+    transition_text = "\n\n".join(transitions) if transitions else "(none)"
+    return (
+        "You are an ALFWorld household agent. Select exactly one next action.\n"
+        "Return exactly one bare action ID in the form Axyz. Do not output a "
+        "label, command, explanation, reasoning, or <think> tags.\n\n"
+        f"Task goal:\n{request.task.text}\n\n"
+        f"Current observation:\n{request.observation}\n\n"
+        f"Recent action/result transitions (last {history_window}):\n"
+        f"{transition_text}\n\n"
+        f"Indexed admissible actions:\n{action_block}\n\n"
+        "Your response:"
+    )
+
+
+def exact_expert_action_id(
+    expert_command: str, valid_actions: Sequence[str] | None
+) -> tuple[str, dict[str, str]]:
+    """Return the unique current ID for an exact expert command or reject it."""
+    if not valid_actions:
+        raise DatasetInvariantError("current admissible-action mapping is empty")
+    matches = [index for index, command in enumerate(valid_actions) if command == expert_command]
+    if not matches:
+        raise DatasetInvariantError("expert_command_absent")
+    if len(matches) != 1:
+        raise DatasetInvariantError("expert_command_ambiguous")
+    mapping = action_id_mapping(tuple(valid_actions))
+    action_id = f"A{matches[0]:03d}"
+    if mapping.get(action_id) != expert_command:
+        raise DatasetInvariantError("action_mapping_round_trip_failure")
+    return action_id, mapping
+
+
+def validate_public_prompt(prompt: str, action_map: dict[str, str]) -> None:
+    if not prompt.strip():
+        raise DatasetInvariantError("empty_prompt")
+    lowered = prompt.lower()
+    for marker in FORBIDDEN_PROMPT_MARKERS:
+        if marker in lowered:
+            raise DatasetInvariantError(f"forbidden_prompt_marker:{marker}")
+    expected = "\n".join(f"[{key}] {value}" for key, value in action_map.items())
+    if f"Indexed admissible actions:\n{expected}" not in prompt:
+        raise DatasetInvariantError("current_action_block_missing_or_changed")
+
+
+def validate_example(row: dict[str, Any]) -> None:
+    """Fail closed on every invariant required by the dataset audit gate."""
+    required = {
+        "schema_version",
+        "task_id",
+        "task_family",
+        "source_split",
+        "trajectory_id",
+        "step_index",
+        "goal",
+        "observation",
+        "prompt",
+        "completion",
+        "target_action_id",
+        "target_command",
+        "action_count",
+        "indexed_action_map",
+        "indexed_action_map_sha256",
+        "prompt_sha256",
+        "trajectory_sha256",
+        "tokenizer_length",
+        "terminal_task_success",
+    }
+    missing = required - set(row)
+    if missing:
+        raise DatasetInvariantError(f"missing_fields:{','.join(sorted(missing))}")
+    if row["schema_version"] != SFT_P0_SCHEMA or row["source_split"] != "train":
+        raise DatasetInvariantError("source_or_schema_invalid")
+    if not row["task_id"] or not row["goal"] or not row["observation"]:
+        raise DatasetInvariantError("missing_public_state")
+    if task_family_from_id(row["task_id"]) != row["task_family"]:
+        raise DatasetInvariantError("task_family_mismatch")
+    completion = row["completion"]
+    if not isinstance(completion, str) or ACTION_ID_PATTERN.fullmatch(completion) is None:
+        raise DatasetInvariantError("malformed_completion")
+    if completion != row["target_action_id"]:
+        raise DatasetInvariantError("completion_target_mismatch")
+    mapping = row["indexed_action_map"]
+    if not isinstance(mapping, dict) or not mapping:
+        raise DatasetInvariantError("current_action_map_missing")
+    if mapping.get(completion) != row["target_command"]:
+        raise DatasetInvariantError("action_mapping_round_trip_failure")
+    if row["action_count"] != len(mapping):
+        raise DatasetInvariantError("action_count_mismatch")
+    if row["indexed_action_map_sha256"] != sha256_value(mapping):
+        raise DatasetInvariantError("action_map_hash_mismatch")
+    if row["prompt_sha256"] != hashlib.sha256(row["prompt"].encode()).hexdigest():
+        raise DatasetInvariantError("prompt_hash_mismatch")
+    if not isinstance(row["tokenizer_length"], int) or row["tokenizer_length"] < 1:
+        raise DatasetInvariantError("tokenizer_length_invalid")
+    if row["terminal_task_success"] is not True:
+        raise DatasetInvariantError("trajectory_not_successful")
+    validate_public_prompt(row["prompt"], mapping)
+
+
+def deterministic_task_splits(
+    task_ids: Iterable[str],
+    excluded_task_ids: set[str],
+    *,
+    train_per_family: int = 200,
+    validation_per_family: int = 25,
+    online_per_family: int = 10,
+    seed: int = 42,
+) -> dict[str, Any]:
+    """Allocate exact task IDs by family with deterministic hash ordering."""
+    by_family: dict[str, list[str]] = defaultdict(list)
+    for task_id in sorted(set(task_ids) - excluded_task_ids):
+        by_family[task_family_from_id(task_id)].append(task_id)
+    pools: dict[str, list[dict[str, str]]] = {
+        "train": [],
+        "validation": [],
+        "online_evaluation": [],
+    }
+    required = train_per_family + validation_per_family + online_per_family
+    for family in TASK_FAMILIES:
+        ranked = sorted(
+            by_family[family],
+            key=lambda task_id: (
+                hashlib.sha256(f"{seed}:{task_id}".encode()).hexdigest(),
+                task_id,
+            ),
+        )
+        if len(ranked) < online_per_family + validation_per_family:
+            raise DatasetInvariantError(f"insufficient_tasks:{family}:{len(ranked)}")
+        online = ranked[:online_per_family]
+        validation = ranked[online_per_family : online_per_family + validation_per_family]
+        train = ranked[
+            online_per_family + validation_per_family :
+            min(required, len(ranked))
+        ]
+        if len(train) < train_per_family:
+            # The protocol permits balanced down-scaling when the source pool is small.
+            train_per_family = len(train)
+        for split, values in (
+            ("online_evaluation", online),
+            ("validation", validation),
+            ("train", train),
+        ):
+            pools[split].extend(
+                {"task_id": task_id, "task_family": family} for task_id in values
+            )
+    minimum_train = min(
+        Counter(item["task_family"] for item in pools["train"]).values(), default=0
+    )
+    pools["train"] = [
+        item
+        for family in TASK_FAMILIES
+        for item in [x for x in pools["train"] if x["task_family"] == family][
+            :minimum_train
+        ]
+    ]
+    manifest = {
+        "schema_version": SPLIT_SCHEMA,
+        "identity_rule": "exact ALFWorld task_id",
+        "source_split": "train",
+        "seed": seed,
+        "selection_rule": "sha256(seed:task_id), then task_id; online, validation, train",
+        "history_window": HISTORY_WINDOW,
+        "pools": pools,
+    }
+    validate_task_splits(manifest, excluded_task_ids)
+    return manifest
+
+
+def validate_task_splits(manifest: dict[str, Any], excluded_task_ids: set[str]) -> None:
+    pools = manifest.get("pools", {})
+    ids = {
+        name: [str(item["task_id"]) for item in pools.get(name, [])]
+        for name in ("train", "validation", "online_evaluation")
+    }
+    for name, values in ids.items():
+        if len(values) != len(set(values)):
+            raise DatasetInvariantError(f"duplicate_task_in_split:{name}")
+        if set(values) & excluded_task_ids:
+            raise DatasetInvariantError(f"excluded_task_leakage:{name}")
+    names = list(ids)
+    for index, left in enumerate(names):
+        for right in names[index + 1 :]:
+            if set(ids[left]) & set(ids[right]):
+                raise DatasetInvariantError(f"task_split_leakage:{left}:{right}")
+    online_counts = Counter(
+        task_family_from_id(task_id) for task_id in ids["online_evaluation"]
+    )
+    if any(online_counts[family] != 10 for family in TASK_FAMILIES):
+        raise DatasetInvariantError("online_evaluation_must_have_ten_tasks_per_family")
+    for name in ("train", "validation"):
+        counts = Counter(task_family_from_id(task_id) for task_id in ids[name])
+        if len(set(counts.values())) != 1 or set(counts) != set(TASK_FAMILIES):
+            raise DatasetInvariantError(f"family_imbalance:{name}")
+
+
+def action_type(command: str) -> str:
+    return command.split(maxsplit=1)[0].lower() if command.strip() else "empty"
+
+
+def percentile(values: Sequence[int], fraction: float) -> int:
+    if not values:
+        raise ValueError("percentile requires values")
+    ordered = sorted(values)
+    index = max(0, min(len(ordered) - 1, int((len(ordered) - 1) * fraction + 0.999999)))
+    return ordered[index]
+"""Environment contracts shared by collection and evaluation."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Any, Protocol, runtime_checkable
+
+
+@dataclass(frozen=True)
+class Task:
+    """A stable description of one environment task."""
+
+    task_id: str
+    text: str
+    split: str
+    family: str | None = None
+    metadata: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
+class ResetResult:
+    """Initial state returned when an environment episode starts."""
+
+    observation: str
+    task: Task
+    valid_actions: tuple[str, ...] | None
+    metadata: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
+class Transition:
+    """One normalized environment transition."""
+
+    observation: str
+    reward: float
+    done: bool
+    truncated: bool
+    valid_actions: tuple[str, ...] | None
+    metadata: dict[str, Any] = field(default_factory=dict)
+
+
+@runtime_checkable
+class InteractiveEnvironment(Protocol):
+    """Contract implemented by ALFWorld and future environment adapters."""
+
+    def reset(self, *, seed: int | None = None) -> ResetResult:
+        """Start an episode and return the normalized initial state."""
+
+    def step(self, action: str) -> Transition:
+        """Apply an action and return a normalized transition."""
+
+    def get_task(self) -> Task:
+        """Return the task associated with the active episode."""
+
+    def get_valid_actions(self) -> tuple[str, ...] | None:
+        """Return currently admissible actions, if the environment exposes them."""
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alfworld-self-improvement"
+version = "0.1.0"
+description = "Modular research framework for self-improving language models in ALFWorld."
+requires-python = ">=3.9"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "ALFWorld Research"}]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+baseline = ["PyYAML>=6"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

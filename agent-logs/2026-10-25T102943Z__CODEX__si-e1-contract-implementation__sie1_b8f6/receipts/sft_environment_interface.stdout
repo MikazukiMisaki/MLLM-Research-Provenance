@@ -1,0 +1,53 @@
+"""Exact frozen ALFWorld task pools for SFT evaluation."""
+
+from __future__ import annotations
+
+import os
+from pathlib import Path
+from typing import Any, Sequence
+
+from env.alfworld import AlfWorldConfig, AlfWorldTextEnvironment, _expand_environment
+
+
+class ExactTaskPoolEnvironment(AlfWorldTextEnvironment):
+    """Use the standard adapter with one explicit, deterministically seeded pool."""
+
+    def __init__(
+        self,
+        config: AlfWorldConfig,
+        *,
+        game_files: Sequence[Path],
+        pool_seed: int,
+    ) -> None:
+        if config.split not in {"train", "valid_seen", "valid_unseen"}:
+            raise ValueError("exact task pool requires a supported ALFWorld split")
+        if not game_files or len(game_files) != len(set(game_files)):
+            raise ValueError("exact task pool must be nonempty and unique")
+        super().__init__(config)
+        self._game_files = tuple(Path(path) for path in game_files)
+        self._pool_seed = pool_seed
+
+    def _get_environment(self) -> Any:
+        if self._environment is not None:
+            return self._environment
+        import yaml
+        from alfworld.agents.environment.alfred_tw_env import AlfredTWEnv
+
+        if self._config.data_path is not None:
+            os.environ["ALFWORLD_DATA"] = str(self._config.data_path)
+        configuration = _expand_environment(
+            yaml.safe_load(self._config.config_path.read_text(encoding="utf-8"))
+        )
+        factory = AlfredTWEnv(configuration, train_eval=self._alfworld_split())
+        factory.game_files = [str(path) for path in self._game_files]
+        factory.num_games = len(self._game_files)
+        environment = factory.init_env(batch_size=1)
+        environment.seed(self._pool_seed)
+        self._environment = environment
+        return environment
+
+
+    def close(self) -> None:
+        if self._environment is not None and hasattr(self._environment, "close"):
+            self._environment.close()
+        self._environment = None

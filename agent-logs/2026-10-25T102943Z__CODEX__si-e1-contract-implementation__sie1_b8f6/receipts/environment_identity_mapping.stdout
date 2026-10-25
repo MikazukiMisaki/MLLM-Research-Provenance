@@ -1,0 +1,114 @@
+"""ALFWorld text-environment adapter.
+
+The adapter imports ALFWorld only when it is instantiated, keeping schema and
+analysis utilities usable on machines without the simulator installed.
+"""
+
+from __future__ import annotations
+
+import os
+import random
+import re
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+from .base import ResetResult, Task, Transition
+
+_TASK_PATTERN = re.compile(r"Your task is to:\s*(.+?)(?:\n|$)", re.IGNORECASE)
+
+
+@dataclass(frozen=True)
+class AlfWorldConfig:
+    """Configuration required to create one ALFWorld text adapter."""
+
+    config_path: Path
+    split: str = "valid_seen"
+    batch_size: int = 1
+    data_path: Path | None = None
+
+
+class AlfWorldTextEnvironment:
+    """Normalize AlfredTWEnv to the project environment contract."""
+
+    def __init__(self, config: AlfWorldConfig) -> None:
+        if config.batch_size != 1:
+            raise ValueError("the baseline adapter supports batch_size=1 only")
+        self._config = config
+        self._environment: Any | None = None
+        self._task: Task | None = None
+        self._valid_actions: tuple[str, ...] | None = None
+
+    def reset(self, *, seed: int | None = None) -> ResetResult:
+        """Reset ALFWorld and normalize its first observation and task metadata."""
+        self._seed(seed)
+        environment = self._get_environment()
+        observations, info = environment.reset()
+        observation = self._first(observations)
+        info_dict = self._info_dict(info)
+        self._valid_actions = self._valid_actions_from_info(info_dict)
+        self._task = self._task_from(observation, info_dict)
+        return ResetResult(
+            observation=observation,
+            task=self._task,
+            valid_actions=self._valid_actions,
+            metadata={"alfworld_info": info_dict},
+        )
+
+    def step(self, action: str) -> Transition:
+    @classmethod
+    def _valid_actions_from_info(cls, info: dict[str, Any]) -> tuple[str, ...] | None:
+        actions = info.get("admissible_commands")
+        if actions is None:
+            return None
+        first = cls._first(actions)
+        if not isinstance(first, (list, tuple)):
+            return None
+        return tuple(str(action) for action in first)
+
+    def _task_from(self, observation: str, info: dict[str, Any]) -> Task:
+        match = _TASK_PATTERN.search(observation)
+        task_text = match.group(1).strip().rstrip(".") if match else observation.strip()
+        game_file = self._game_file_from_info(info)
+        task_id = self._task_id_from_game_file(game_file) if game_file else f"{self._config.split}:{task_text}"
+        return Task(
+            task_id=task_id,
+            text=task_text,
+            split=self._config.split,
+            metadata={"game_file": game_file} if game_file else {},
+        )
+
+    @classmethod
+    def _game_file_from_info(cls, info: dict[str, Any]) -> str | None:
+        """Extract ALFWorld's game path across released info-dict variants."""
+        direct = info.get("extra.gamefile")
+        if direct is not None:
+            value = cls._first(direct)
+            return str(value) if value else None
+        extra = info.get("extra_game_info", {})
+        if isinstance(extra, dict):
+            value = extra.get("game_file")
+            return str(value) if value else None
+        return None
+
+    @staticmethod
+    def _task_id_from_game_file(game_file: str) -> str:
+        """Build a readable, unique ALFWorld task ID from its game path."""
+        path = Path(game_file)
+        if path.stem != "game":
+            return path.stem
+        return "/".join(path.parts[-3:-1])
+
+    @staticmethod
+    def _seed(seed: int | None) -> None:
+        if seed is None:
+            return
+        random.seed(seed)
+        try:
+            import numpy
+
+            numpy.random.seed(seed)
+        except ImportError:
+            pass
+        try:
+            import torch

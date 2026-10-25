@@ -1,0 +1,234 @@
+{
+  "status": "PASS_FROZEN_PARSER_AND_REAL_METADATA_INTERFACE_ONLY",
+  "scientific_sha": "a995d4c3c5f7d31a2cf1fd0afc4bfa4bd72ee3a3",
+  "parser_differentials": 30,
+  "cases": [
+    {
+      "phase": "stage_two",
+      "raw": "A001",
+      "complete": true,
+      "status": "selected"
+    },
+    {
+      "phase": "stage_two",
+      "raw": "A001",
+      "complete": false,
+      "status": "truncated_stage_two"
+    },
+    {
+      "phase": "stage_two",
+      "raw": "Action-ID: A001",
+      "complete": true,
+      "status": "malformed_id"
+    },
+    {
+      "phase": "stage_two",
+      "raw": "Action-ID: A001",
+      "complete": false,
+      "status": "truncated_stage_two"
+    },
+    {
+      "phase": "stage_two",
+      "raw": "A999",
+      "complete": true,
+      "status": "out_of_range_id"
+    },
+    {
+      "phase": "stage_two",
+      "raw": "A999",
+      "complete": false,
+      "status": "truncated_stage_two"
+    },
+    {
+      "phase": "stage_two",
+      "raw": "A001\nexplanation",
+      "complete": true,
+      "status": "malformed_id"
+    },
+    {
+      "phase": "stage_two",
+      "raw": "A001\nexplanation",
+      "complete": false,
+      "status": "truncated_stage_two"
+    },
+    {
+      "phase": "stage_two",
+      "raw": "",
+      "complete": true,
+      "status": "malformed_id"
+    },
+    {
+      "phase": "stage_two",
+      "raw": "",
+      "complete": false,
+      "status": "truncated_stage_two"
+    },
+    {
+      "phase": "source",
+      "raw": "A000",
+      "complete": true,
+      "status": "selected"
+    },
+    {
+      "phase": "source",
+      "raw": "A000",
+      "complete": false,
+      "status": "selected"
+    },
+    {
+      "phase": "source",
+      "raw": "Action-ID: A000",
+      "complete": true,
+      "status": "action_format_violation"
+    },
+    {
+      "phase": "source",
+      "raw": "Action-ID: A000",
+      "complete": false,
+      "status": "action_format_violation"
+    },
+    {
+      "phase": "source",
+      "raw": "A999",
+      "complete": true,
+      "status": "action_out_of_range"
+    },
+    {
+      "phase": "source",
+      "raw": "A999",
+      "complete": false,
+      "status": "action_out_of_range"
+    },
+    {
+      "phase": "source",
+      "raw": "A000\nexplanation",
+      "complete": true,
+      "status": "action_format_violation"
+    },
+    {
+      "phase": "source",
+      "raw": "A000\nexplanation",
+      "complete": false,
+      "status": "action_format_violation"
+    },
+    {
+      "phase": "source",
+      "raw": "",
+      "complete": true,
+      "status": "action_format_violation"
+    },
+    {
+      "phase": "source",
+      "raw": "",
+      "complete": false,
+      "status": "action_format_violation"
+    },
+    {
+      "phase": "suffix",
+      "raw": "A000",
+      "complete": true,
+      "status": "selected"
+    },
+    {
+      "phase": "suffix",
+      "raw": "A000",
+      "complete": false,
+      "status": "selected"
+    },
+    {
+      "phase": "suffix",
+      "raw": "Action-ID: A000",
+      "complete": true,
+      "status": "action_format_violation"
+    },
+    {
+      "phase": "suffix",
+      "raw": "Action-ID: A000",
+      "complete": false,
+      "status": "action_format_violation"
+    },
+    {
+      "phase": "suffix",
+      "raw": "A999",
+      "complete": true,
+      "status": "action_out_of_range"
+    },
+    {
+      "phase": "suffix",
+      "raw": "A999",
+      "complete": false,
+      "status": "action_out_of_range"
+    },
+    {
+      "phase": "suffix",
+      "raw": "A000\nexplanation",
+      "complete": true,
+      "status": "action_format_violation"
+    },
+    {
+      "phase": "suffix",
+      "raw": "A000\nexplanation",
+      "complete": false,
+      "status": "action_format_violation"
+    },
+    {
+      "phase": "suffix",
+      "raw": "",
+      "complete": true,
+      "status": "action_format_violation"
+    },
+    {
+      "phase": "suffix",
+      "raw": "",
+      "complete": false,
+      "status": "action_format_violation"
+    }
+  ],
+  "stage_two_prompt_exact_v2_both_stage1_validities": true,
+  "actual_canonical_id_set96_preserved": true,
+  "cut_matrix": {
+    "pick_and_place_simple": {
+      "5": 9,
+      "10": 9,
+      "15": 9,
+      "20": 8
+    },
+    "pick_clean_then_place_in_recep": {
+      "5": 7,
+      "10": 6,
+      "15": 6,
+      "20": 7
+    },
+    "pick_cool_then_place_in_recep": {
+      "5": 4,
+      "10": 4,
+      "15": 4,
+      "20": 4
+    },
+    "pick_heat_then_place_in_recep": {
+      "5": 2,
+      "10": 3,
+      "15": 2,
+      "20": 2
+    },
+    "pick_two_obj_and_place": {
+      "5": 2,
+      "10": 2,
+      "15": 3,
+      "20": 3
+    }
+  },
+  "software_metadata_plan_hash": "0941897ab5581e539fb1b018ee90e9474ec3240a32ffd5cbaf6dd58ed0d39306",
+  "seed42_used_only_in_memory_metadata_probe_not_formal_schedule": true,
+  "metadata_negatives_rejected": [
+    "extra_outcome",
+    "duplicate_identity",
+    "quota_transfer",
+    "same_family_D48_substitution",
+    "modified_bytes",
+    "historical_hash_override",
+    "cutoff_swap_same_matrix_and_total"
+  ],
+  "exact_historical_reservation_binder_and_each_identity_cutoff": true,
+  "limit": "Metadata software proof only. No model, tokenizer, environment or task payload; no actual schedule/launch released."
+}

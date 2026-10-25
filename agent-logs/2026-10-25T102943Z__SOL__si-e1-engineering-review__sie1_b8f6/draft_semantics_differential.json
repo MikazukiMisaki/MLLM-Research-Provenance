@@ -1,0 +1,36 @@
+{
+  "classification": "DRAFT_DIFFERENTIAL_ONLY_NOT_EXACT_SHA_REVIEW",
+  "before_after_file_sha256": {
+    "/home/lizening/wt-si-p3-engineering-contracts/src/self_improvement/si_p3/collector.py": "b213cf2a1945e0ca1c0d0965f550a3986eaf35568ab460a89888a6975c2168a2",
+    "/home/lizening/wt-si-p3-engineering-contracts/src/self_improvement/si_p3/audit.py": "2e4afd4b2c9b296cf723b6c5e598b5d6afcc8892085bd4d03c0b076a46faf9b2"
+  },
+  "teacher_prompt_exactly_frozen_v2": false,
+  "cases": [
+    {
+      "case": "teacher_A001",
+      "frozen_status": "selected",
+      "draft_status": "malformed_id",
+      "equal": false
+    },
+    {
+      "case": "teacher_Action-ID: A001",
+      "frozen_status": "malformed_id",
+      "draft_status": "selected",
+      "equal": false
+    },
+    {
+      "case": "source_valid_bare_EOS_incomplete",
+      "frozen_status": "selected",
+      "draft_status": "truncated_actor",
+      "equal": false
+    },
+    {
+      "case": "suffix_valid_bare_EOS_incomplete",
+      "frozen_status": "selected",
+      "draft_status": "truncated_actor",
+      "equal": false
+    }
+  ],
+  "confirmed_current_draft_treatment_drift": true,
+  "activity": "No model, tokenizer, environment, training or new task payload; only metadata/dataclass/parser calls"
+}

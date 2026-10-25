@@ -1,0 +1,45 @@
+{
+  "schema": "SI_E1_S120_INDEPENDENT_CLOSURE_ADDENDUM_V1",
+  "status": "S120_FIXED_BACKGROUND_MANIFEST_INDEPENDENTLY_CORROBORATED",
+  "scope": "Existing background S120 only; no new data, collection, model, training, or runtime claim.",
+  "frozen_luna_manifest": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__LUNA__si-e1-token-runtime-audit__sie1_b8f6/S_BACKGROUND_MANIFEST.json",
+    "sha256": "6d4e8a937d05f91a2d49f76af2fc812d2b566e93e6a8acf38c56fe7ff832aec4",
+    "selected_task_count": 120
+  },
+  "independent_actual_returncode_receipt": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/independent_token_mask_check.json",
+    "sha256": "69fa5adadb72c7e43f1bdcb76842207102075def874b998e7ef96215df2e30e7",
+    "status": "PASS_EXISTING_S120_TOKENIZATION_AND_CPU_MASK_ONLY",
+    "actual_returncode": 0,
+    "independent_selection_matches_all_120_luna_rows": true,
+    "base_and_adapter_tokenization_identical_for_all_120": true
+  },
+  "local_read_only_crosscheck": {
+    "receipt_compact_row_count": 120,
+    "unique_task_ids": 120,
+    "ordered_task_id_and_full_prompt_target_lengths_match_luna_manifest": true,
+    "mismatch_count": 0,
+    "base_full_input_tokens": 64922,
+    "base_prompt_tokens": 64322,
+    "base_target_plus_eos_tokens": 600,
+    "target_length_set": [5],
+    "independent_all_120_masks_checked": true,
+    "independent_cpu_collator_cases": [
+      "configured PAD",
+      "forced PAD == EOS"
+    ],
+    "independent_shifted_loss_tokens_per_case": 600,
+    "over_2048_rejected": true
+  },
+  "interpretation_limits": {
+    "closes_only": "The fixed compact S120 background identity manifest and existing tokenizer/mask evidence.",
+    "future_B_C_exposure": "NOT_OBSERVED",
+    "new_collector": false,
+    "Qwen3_8B_model_load_or_generation": false,
+    "training": false,
+    "ALFWorld_construction_reset_step": false,
+    "actual_runtime_or_preflight_readiness": false,
+    "repeated_scientific_calls_by_Luna": false
+  }
+}

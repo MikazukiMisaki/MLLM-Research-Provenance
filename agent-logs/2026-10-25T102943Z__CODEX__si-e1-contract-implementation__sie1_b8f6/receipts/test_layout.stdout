@@ -1,0 +1,1162 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alfworld-self-improvement"
+version = "0.1.0"
+description = "Modular research framework for self-improving language models in ALFWorld."
+requires-python = ">=3.9"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "ALFWorld Research"}]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+baseline = ["PyYAML>=6"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+"""Production R19 integration with synthetic generation/environment edges only.
+
+These fixtures are software evidence, never scientific runs or live G4 evidence.
+"""
+from collections import Counter
+import copy
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+from types import SimpleNamespace
+
+import pytest
+
+from env.base import ResetResult, Task, Transition
+from models.action_parser import action_id_mapping
+from models.policy import ActionRequest
+from models.protocol_stability import parse_p2_selection
+from recovery.r19_duration import (
+    DurableEventJournal, EvidenceIntegrityError, IndeterminateUnitError,
+    UnitRegistry, build_r19_source_schedule, sha256_json,
+)
+from recovery.two_stage import parse_stage_one_output, stage_one_prompt
+from recovery.two_stage_v2 import parse_bare_stage_two_output, stage_two_prompt
+from scripts import analyze_r19_recovery_duration as analyzer
+from scripts import run_r19_experiment as runner
+from sft.protocol import sft_p0_prompt
+
+ROOT = Path(__file__).resolve().parents[1]
+ACTIONS = ('look', 'go to garbagecan 1')
+
+
+def generation(prompt, raw, cap=16):
+    # Synthetic token evidence; no tokenizer/model is loaded by these tests.
+    ids = [ord(raw[index]) for index in range(0, len(raw), 4)]
+    return {
+        'prompt': prompt, 'rendered_prompt': prompt,
+        'rendered_prompt_sha256': hashlib.sha256(prompt.encode()).hexdigest(),
+        'raw_output': raw, 'token_ids': ids,
+        'token_ids_sha256': hashlib.sha256(json.dumps(ids, separators=(',', ':')).encode()).hexdigest(),
+        'input_tokens': 100, 'generated_tokens': len(ids), 'latency_seconds': 0.0,
+        'output_complete': True, 'token_cap_reached': False,
+        'max_new_tokens': cap, 'do_sample': False, 'thinking': False,
+    }
+
+
+class SyntheticEnvironment:
+    def __init__(self, task_id, seed, *, terminal_after=100, fail_step=False):
+        self.task = Task(task_id=task_id, text='put a pencil in garbagecan',
+                         split='train', family='pick_and_place_simple')
+        self.seed = seed
+        self.terminal_after = terminal_after
+        self.fail_step = fail_step
+        self.actions = []
+        self.resets = 0
+        self.closed = False
+        self.before_step = None
+
+    def reset(self, *, seed):
+        assert seed == self.seed
+        self.resets += 1
+        return ResetResult('state 0', self.task, ACTIONS)
+
+    def step(self, command):
+        if self.before_step:
+            self.before_step()
+        if self.fail_step:
+            raise RuntimeError('synthetic interruption after environment start')
+        assert command in ACTIONS
+        self.actions.append(command)
+        done = len(self.actions) == self.terminal_after
+        return Transition(f'state {len(self.actions)}', float(done), done, False, ACTIONS)
+
+    def close(self):
+        self.closed = True
+
+
+def source_schedule(count=1):
+    return build_r19_source_schedule([
+        {'canonical_trial_id': f'pick_and_place_simple-Pencil-None-GarbageCan-{i}/trial_SYNTHETIC_R19',
+         'task_family': 'pick_and_place_simple',
+         'source_game_sha256': '1' * 64, 'source_traj_data_sha256': '2' * 64}
+        for i in range(count)
+    ], set())
+
+
+def restart_snapshot(episode):
+    task = SyntheticEnvironment(episode['canonical_trial_id'], episode['nominal_seed']).task
+    prompt = sft_p0_prompt(ActionRequest(task, 'state 0', (), ACTIONS))
+    parsed = parse_p2_selection('A000', ACTIONS, reflection_required=False)
+    mapping = action_id_mapping(ACTIONS)
+    return runner._source_restart_snapshot(
+        canonical_trial_id=task.task_id, schedule_index=0, seed=episode['nominal_seed'],
+        observation='state 0', valid_actions=ACTIONS, prompt=prompt,
+        generation=generation(prompt, 'A000'),
+        parser_result={'selection_status': parsed.selection_status, 'action_id': parsed.action_id,
+                       'action': parsed.action, 'valid_actions': list(ACTIONS)},
+        action_map=mapping,
+    )
+
+
+def runtime_fixture(tmp_path, monkeypatch, *, restart=False, count=1, terminal_after=100):
+    output = tmp_path / 'synthetic-output'
+    output.mkdir()
+    schedule = source_schedule(count)
+    runtime = object.__new__(runner.LiveR19Runtime)
+    runtime.mode = 'pilot'
+    runtime.actor_backend = object()
+    runtime.recovery_backend = object()
+    runtime.actor = SimpleNamespace(model_version='synthetic-software-only')
+    runtime.model_call_counts = Counter()
+    runtime.environment_operation_counts = Counter()
+    runtime.environment_step_counts = Counter()
+    runtime.environment_reset_count = 0
+    runtime.recovery_prefix_actions_by_task = {}
+    runtime.active_attempt_envs = {}
+    runtime.suffix_envs = {}
+    runtime.common_path_envs = []
+    runtime.parse_stage_one_output = parse_stage_one_output
+    runtime.stage_one_prompt = stage_one_prompt
+    runtime.parse_bare_stage_two_output = parse_bare_stage_two_output
+    runtime.stage_two_prompt = stage_two_prompt
+    runtime.journal = DurableEventJournal(
+        output / 'execution_events.jsonl', run_id='synthetic-production-pipeline',
+        protocol_sha256=runner.sha256_file(ROOT / 'configs/experiments/r19_recovery_duration_v1.json'),
+        code_sha='b' * 40, evidence_class='synthetic')
+    registry = UnitRegistry(output / 'unit_registry.json')
+    runtime.sink, pending = runner._install_unit_registry_sink(runtime.journal, registry)
+    envs = []
+
+    def new_environment(task_id, seed, split):
+        assert split == 'train'
+        env = SyntheticEnvironment(task_id, seed, terminal_after=terminal_after)
+        if restart:
+            def assert_compared_before_action():
+                comparison = json.loads((output / 'source_restart_comparison.json').read_text())
+                assert comparison['status'] == 'PASS'
+                assert comparison['observed_snapshot'] == comparison['expected_snapshot']
+                assert comparison['comparison_before_first_environment_action'] is True
+                assert comparison['environment_actions_executed_before_comparison'] == 0
+            env.before_step = assert_compared_before_action
+        envs.append(env)
+        return env
+
+    runtime.new_environment = new_environment
+
+    def generate(backend, prompt, cap):
+        assert backend in (runtime.actor_backend, runtime.recovery_backend)
+        raw = 'Diagnosis: Immediate issue\nSubgoal: take pencil 1 from desk 1' if cap == 40 else 'A000'
+        return generation(prompt, raw, cap)
+
+    monkeypatch.setattr(runner, '_generate_exact', generate)
+    if restart:
+        runtime.source_restart_expected_snapshot = restart_snapshot(schedule['episodes'][0])
+        runtime.source_restart_predecessor_run_id = 'synthetic-preserved-predecessor'
+        runtime.source_restart_comparison_consumed = False
+    return runtime, registry, schedule, output, envs, pending
+
+
+def read_events(output):
+    return [json.loads(line) for line in (output / 'execution_events.jsonl').read_text().splitlines()]
+
+
+def comparison_arguments(runtime, output):
+    return {
+        'execution_manifest': {
+            'source_restart_comparison_sha256': runner.sha256_file(output / 'source_restart_comparison.json'),
+            'source_restart_comparison_status': 'PASS',
+            'source_restart_predecessor_run_id': runtime.source_restart_predecessor_run_id,
+            'source_restart_repeated_generation_count': 1,
+            'source_restart_repeated_reset_count': 1,
+        },
+        'events': read_events(output),
+        'predecessor_run_id': runtime.source_restart_predecessor_run_id,
+        'expected_snapshot': runtime.source_restart_expected_snapshot,
+        'expected_snapshot_sha256': sha256_json(runtime.source_restart_expected_snapshot),
+        'comparison_path': str(output / 'source_restart_comparison.json'),
+    }
+
+
+def test_restart_two_consecutive_sources_and_duplicate_zero_before_new_operations(tmp_path, monkeypatch):
+    runtime, registry, schedule, output, envs, _ = runtime_fixture(
+        tmp_path, monkeypatch, restart=True, count=2, terminal_after=2)
+    rows = runtime.run_source_episodes(schedule, output, registry, {})
+    events = read_events(output)
+    physical = analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
+    assert len(rows) == 2 and all(len(env.actions) == 2 for env in envs)
+    assert physical['completed_physical_model_generations'] == 4
+    assert physical['physical_environment_resets'] == 2
+    assert physical['physical_environment_operations'] == 4
+    assert all(unit['status'] == 'completed' for unit in registry.document['units'].values())
+    comparison = (output / 'source_restart_comparison.json').read_bytes()
+    assert json.loads(comparison)['schedule_index'] == 0
+    assert runtime.source_restart_comparison_consumed is True
+    assert 'source_restart_comparison_sha256' in rows[0]['metadata']
+    assert 'source_restart_comparison_sha256' not in rows[1]['metadata']
+    args = comparison_arguments(runtime, output)
+    args['comparison_path'] = Path(args['comparison_path'])
+    assert analyzer.validate_source_restart_comparison(**args)['compared_before_first_action'] is True
+    assert analyzer.validate_live_source_schedule(
+        schedule, {'schema_version': 'r19_exclusion_manifest_v1', 'status': 'frozen_before_inference',
+                   'excluded_task_trial_ids': []}, events, [], physical)['completed_source_episodes'] == 2
+    before = (runtime.model_call_counts.copy(), runtime.environment_operation_counts.copy(), len(events))
+    duplicate_env = SyntheticEnvironment(schedule['episodes'][0]['canonical_trial_id'], 30000)
+    with pytest.raises(EvidenceIntegrityError, match='only once'):
+        runtime._collect_one_source(duplicate_env, schedule['episodes'][0], output, {})
+    assert duplicate_env.resets == 0 and not duplicate_env.actions
+    assert before == (runtime.model_call_counts, runtime.environment_operation_counts, len(read_events(output)))
+    assert (output / 'source_restart_comparison.json').read_bytes() == comparison
+    for row in rows:
+        assert runner._trajectory_sha256(row) == row['metadata']['source_trajectory_sha256']
+
+
+@pytest.mark.parametrize('category,field,value', [
+    ('initial_state', 'observation_sha256', '0' * 64),
+    ('initial_state', 'valid_actions_sha256', '0' * 64),
+    ('prompt_and_generation', 'prompt_sha256', '0' * 64),
+    ('prompt_and_generation', 'rendered_prompt_sha256', '0' * 64),
+    ('prompt_and_generation', 'raw_output_sha256', '0' * 64),
+    ('prompt_and_generation', 'token_ids_sha256', '0' * 64),
+    ('prompt_and_generation', 'input_tokens', 101),
+    ('prompt_and_generation', 'generated_tokens', 999),
+    ('prompt_and_generation', 'max_new_tokens', 17),
+    ('prompt_and_generation', 'do_sample', True),
+    ('prompt_and_generation', 'thinking', True),
+    ('prompt_and_generation', 'output_complete', False),
+    ('prompt_and_generation', 'token_cap_reached', True),
+    ('parser_and_action', 'selection_status', 'invalid'),
+    ('parser_and_action', 'action_id', 'A001'),
+    ('parser_and_action', 'action_sha256', '0' * 64),
+    ('parser_and_action', 'action_map_sha256', '0' * 64),
+])
+def test_restart_each_snapshot_category_stops_before_action(tmp_path, monkeypatch, category, field, value):
+    runtime, registry, schedule, output, envs, _ = runtime_fixture(tmp_path, monkeypatch, restart=True)
+    runtime.source_restart_expected_snapshot[category][field] = value
+    with pytest.raises(EvidenceIntegrityError, match='before any environment action'):
+        runtime.run_source_episodes(schedule, output, registry, {})
+    physical = analyzer.validate_event_ledger(read_events(output), expected_evidence_class='synthetic')
+    assert physical['completed_physical_model_generations'] == physical['physical_environment_resets'] == 1
+    assert physical['physical_environment_operations'] == 0 and not envs[0].actions
+    assert not (output / 'source_trajectories.jsonl').exists()
+    assert all(unit['status'] == 'in_progress' for unit in registry.document['units'].values())
+    assert json.loads((output / 'source_restart_comparison.json').read_text())['status'] == 'MISMATCH_STOP'
+
+
+def test_clean_fresh_comparator_nonempty_success_and_tampering(tmp_path, monkeypatch):
+    runtime, registry, schedule, output, _, _ = runtime_fixture(
+        tmp_path, monkeypatch, restart=True, terminal_after=2)
+    runtime.run_source_episodes(schedule, output, registry, {})
+    args = comparison_arguments(runtime, output)
+    fixture = tmp_path / 'comparator-input.json'
+    fixture.write_text(json.dumps(args))
+    script = '''import json,runpy,sys
+from pathlib import Path
+ns=runpy.run_path(sys.argv[1])
+args=json.loads(Path(sys.argv[2]).read_text())
+args['comparison_path']=Path(args['comparison_path'])
+print(json.dumps(ns['validate_source_restart_comparison'](**args)))
+'''
+    clean = dict(os.environ)
+    for key in ('PYTHONPATH', 'PYTHONHOME', 'VIRTUAL_ENV'):
+        clean.pop(key, None)
+    command = [sys.executable, '-c', script, str(ROOT / 'scripts/analyze_r19_recovery_duration.py'), str(fixture)]
+    result = subprocess.run(command, cwd=tmp_path, env=clean, text=True, capture_output=True)
+    assert result.returncode == 0, result.stderr
+    assert json.loads(result.stdout)['status'] == 'PASS_FIRST_SOURCE_RESTART_COMPARISON_AND_EPISODE_BINDING'
+    bad = copy.deepcopy(args)
+    bad['events'][3]['payload']['evidence']['generation']['raw_output'] = 'A001'
+    fixture.write_text(json.dumps(bad))
+    rejected = subprocess.run(command, cwd=tmp_path, env=clean, text=True, capture_output=True)
+    assert rejected.returncode != 0 and 'EvidenceIntegrityError' in rejected.stderr
+
+
+@pytest.mark.parametrize('suffix_case', ['horizon', 'terminal', 'invalid'])
+def test_production_pipeline_nonempty_branch_evidence_and_report(tmp_path, monkeypatch, suffix_case):
+    runtime, registry, schedule, output, _, pending = runtime_fixture(
+        tmp_path, monkeypatch, restart=True,
+        terminal_after=50 if suffix_case == 'terminal' else 100)
+    original_generation = runner._generate_exact
+    if suffix_case == 'invalid':
+        def generate(backend, prompt, cap):
+            if backend is runtime.actor_backend and runtime.model_call_counts['suffix']:
+                return generation(prompt, 'invalid', cap)
+            return original_generation(backend, prompt, cap)
+        monkeypatch.setattr(runner, '_generate_exact', generate)
+    execution = runner._run_frozen_pilot(
+        runtime=runtime, schedule=schedule, output_path=output, registry=registry,
+        sink=runtime.sink, pending_attempts=pending)
+    runtime.close_remaining_environments()
+    events = read_events(output)
+    physical = analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
+    branches = [json.loads(line) for line in (output / 'branches.jsonl').read_text().splitlines()]
+    assert execution['formal_branch_count'] == 1
+    evidence = analyzer.validate_branch_evidence(branches, events, return_operation_ids=True)
+    assert evidence['validated_k_arms'] == 5
+    assert analyzer.validate_live_source_schedule(
+        schedule, {'schema_version': 'r19_exclusion_manifest_v1', 'status': 'frozen_before_inference',
+                   'excluded_task_trial_ids': []}, events, evidence['_operation_event_ids'], physical)[
+                       'completed_source_episodes'] == 1
+    comparison = comparison_arguments(runtime, output)
+    comparison['comparison_path'] = Path(comparison['comparison_path'])
+    analyzer.validate_source_restart_comparison(**comparison)
+    assert physical['completed_physical_model_generations'] == sum(runtime.model_call_counts.values())
+    assert physical['physical_environment_operations'] + physical['physical_environment_resets'] == sum(
+        runtime.environment_operation_counts.values())
+    assert runtime.environment_step_counts['initial_attempt'] == 1
+    assert runtime.environment_step_counts['path_extension'] == 4
+    assert runtime.model_call_counts['initial_recovery'] == 2
+    assert runtime.model_call_counts['path_extension'] == 4
+    assert all(unit['status'] == 'completed' for unit in registry.document['units'].values())
+    for k, arm in branches[0]['k_results'].items():
+        assert arm['logical_cost']['recovery_only']['model_calls'] == 1 + int(k)
+        assert arm['logical_cost']['recovery_only']['environment_actions'] == int(k)
+        assert arm['logical_cost']['full_branch']['environment_actions'] <= 50 - branches[0]['decision_index']
+        assert arm['success'] == int(suffix_case == 'terminal')
+        if suffix_case == 'invalid':
+            assert arm['sft_termination_reason'] == 'selection_failure'
+            assert arm['sft_environment_actions'] == 0
+    clean = dict(os.environ)
+    for key in ('PYTHONPATH', 'PYTHONHOME', 'VIRTUAL_ENV'):
+        clean.pop(key, None)
+    command = [sys.executable, str(ROOT / 'scripts/analyze_r19_recovery_duration.py'),
+               '--protocol', str(ROOT / 'configs/experiments/r19_recovery_duration_v1.json'),
+               '--events', str(output / 'execution_events.jsonl'),
+               '--branches', str(output / 'branches.jsonl'), '--output', str(tmp_path / 'report'),
+               '--evidence-class', 'synthetic', '--allow-synthetic']
+    result = subprocess.run(command, cwd=tmp_path, env=clean, text=True, capture_output=True)
+    (tmp_path / 'analyzer_cli_result.json').write_text(json.dumps({
+        'argv': command, 'exit_code': result.returncode, 'exit_code_source': 'subprocess.returncode',
+        'stdout': result.stdout, 'stderr': result.stderr, 'class': 'synthetic_only'}, indent=2))
+    assert result.returncode == 0, result.stderr
+    assert (tmp_path / 'report/summary.json').is_file()
+    assert (tmp_path / 'report/R19_OPPORTUNITY_REPORT.md').is_file()
+    assert (tmp_path / 'report/report_hashes.json').is_file()
+    assert 'not certified for synthetic evidence' in (tmp_path / 'report/R19_OPPORTUNITY_REPORT.md').read_text()
+
+
+@pytest.mark.parametrize('raw', ['', 'invalid', 'A999', 'look'])
+def test_source_invalid_outputs_charge_generation_without_action(tmp_path, monkeypatch, raw):
+    runtime, registry, schedule, output, envs, _ = runtime_fixture(tmp_path, monkeypatch)
+    monkeypatch.setattr(runner, '_generate_exact', lambda _backend, prompt, cap: generation(prompt, raw, cap))
+    rows = runtime.run_source_episodes(schedule, output, registry, {})
+    physical = analyzer.validate_event_ledger(read_events(output), expected_evidence_class='synthetic')
+    assert physical['completed_physical_model_generations'] == 1
+    assert physical['physical_environment_resets'] == 1
+    assert physical['physical_environment_operations'] == 0
+    assert not envs[0].actions
+    assert rows[0]['metadata']['termination_reason'] == 'selection_failure'
+    assert rows[0]['steps'][0]['action_valid'] is False
+
+
+@pytest.mark.parametrize('boundary', ['before_source_event', 'after_source_event', 'after_trajectory_append'])
+def test_source_persistence_interruption_preserves_incomplete_unit(tmp_path, monkeypatch, boundary):
+    runtime, registry, schedule, output, _, _ = runtime_fixture(tmp_path, monkeypatch, terminal_after=2)
+    original_sink = runtime.sink
+    original_append = runner.append_jsonl_fsync
+
+    def sink(kind, identity, payload):
+        if kind == 'source_episode_completed' and boundary == 'before_source_event':
+            raise RuntimeError('synthetic persistence interruption')
+        event = original_sink(kind, identity, payload)
+        if kind == 'source_episode_completed' and boundary == 'after_source_event':
+            raise RuntimeError('synthetic persistence interruption')
+        return event
+
+    def append(path, row):
+        original_append(path, row)
+        if boundary == 'after_trajectory_append':
+            raise RuntimeError('synthetic persistence interruption')
+
+    runtime.sink = sink
+    monkeypatch.setattr(runner, 'append_jsonl_fsync', append)
+    with pytest.raises(RuntimeError, match='synthetic persistence interruption'):
+        runtime.run_source_episodes(schedule, output, registry, {})
+    events = read_events(output)
+    physical = analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
+    assert physical['completed_physical_model_generations'] == 2
+    assert physical['physical_environment_operations'] == 2
+    assert sum(event['kind'] == 'source_episode_completed' for event in events) == (
+        0 if boundary == 'before_source_event' else 1)
+    assert all(unit['status'] == 'in_progress' for unit in registry.document['units'].values())
+    assert (output / 'source_trajectories.jsonl').exists() == (boundary == 'after_trajectory_append')
+    unit = next(iter(registry.document['units'].values()))
+    with pytest.raises(IndeterminateUnitError):
+        registry.begin(unit['identity'])
+    assert runtime.model_call_counts['source'] == 2
+    assert all(unit['status'] == 'indeterminate' for unit in registry.document['units'].values())
+
+
+@pytest.mark.parametrize('edge', ['generation', 'environment'])
+def test_unreceipted_external_edge_blocks_journal_resume_and_unit_retry(tmp_path, monkeypatch, edge):
+    runtime, registry, schedule, output, _, _ = runtime_fixture(tmp_path, monkeypatch)
+    if edge == 'generation':
+        def fail_generation(*_args):
+            raise RuntimeError('synthetic generation interruption')
+        monkeypatch.setattr(runner, '_generate_exact', fail_generation)
+    else:
+        factory = runtime.new_environment
+        def fail_environment(*args):
+            env = factory(*args)
+            env.fail_step = True
+            return env
+        runtime.new_environment = fail_environment
+    with pytest.raises(RuntimeError, match='synthetic .*interruption'):
+        runtime.run_source_episodes(schedule, output, registry, {})
+    events = read_events(output)
+    assert not any(event['kind'] == 'source_episode_completed' for event in events)
+    with pytest.raises(EvidenceIntegrityError, match='indeterminate'):
+        analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
+    with pytest.raises(IndeterminateUnitError, match='without a durable completion'):
+        DurableEventJournal(output / 'execution_events.jsonl', run_id=runtime.journal.run_id,
+            protocol_sha256=runtime.journal.protocol_sha256, code_sha=runtime.journal.code_sha,
+            evidence_class='synthetic')
+    unit = next(iter(registry.document['units'].values()))
+    with pytest.raises(IndeterminateUnitError):
+        registry.begin(unit['identity'])
+    assert not (output / 'source_trajectories.jsonl').exists()
+
+
+def test_restart_budget_phase_constants_and_prior_expenditure_are_unchanged(tmp_path, monkeypatch):
+    runtime, _, _, _, _, _ = runtime_fixture(tmp_path, monkeypatch)
+    authorization = json.loads(runner.R19_B1_G3_SOURCE_CONTRACT_RESTART_AUTHORIZATION.read_text())
+    assert authorization['restart']['cumulative_start'] == {
+        'model_generations': 177, 'environment_operations_including_resets': 342}
+    caps = authorization['restart']['remaining_phase_caps']
+    assert caps == {
+        'model_calls': {'source': 8999, 'initial_recovery': 240, 'path_extension': 240, 'suffix': 17100},
+        'environment_operations': {'source': 8999, 'replay_gate': 5400, 'initial_attempt': 5520,
+                                   'path_extension': 2940, 'logical_branch': 18000}}
+    runtime.phase_model_call_caps = caps['model_calls']
+    runtime.phase_environment_operation_caps = caps['environment_operations']
+    for category, identity in [
+        ('source', {'component': 'task_actor'}),
+        ('initial_recovery', {'component': 'stage1'}),
+        ('path_extension', {'component': 'stage2', 'stage_two_attempt': 2}),
+        ('suffix', {'component': 'sft'}),
+    ]:
+        runtime.model_call_counts = Counter({category: caps['model_calls'][category] - 1})
+        runtime._reserve_model_call(identity)
+        with pytest.raises(EvidenceIntegrityError, match='cap'):
+            runtime._reserve_model_call(identity)
+    for category, identity, reset in [
+        ('source', {'operation': 'source_reset'}, True),
+        ('replay_gate', {'operation': 'prefix_replay_reset'}, True),
+        ('initial_attempt', {'operation': 'recovery_environment_operation', 'recovery_action_index': 1}, False),
+        ('path_extension', {'operation': 'recovery_environment_operation', 'recovery_action_index': 2}, False),
+        ('logical_branch', {'operation': 'branch_replay_reset'}, True),
+    ]:
+        runtime.environment_operation_counts = Counter({category: caps['environment_operations'][category] - 1})
+        runtime._reserve_environment_operation(identity, is_reset=reset)
+        with pytest.raises(EvidenceIntegrityError, match='cap'):
+            runtime._reserve_environment_operation(identity, is_reset=reset)
+    frozen = authorization['frozen_science']
+    assert frozen['campaign_generation_cap'] == 26988
+    assert frozen['campaign_environment_operation_cap'] == 41260
+
+
+@pytest.mark.parametrize('mismatch', ['reset', 'transition'])
+def test_production_source_replay_mismatch_stops_without_retry(tmp_path, monkeypatch, mismatch):
+    runtime, registry, schedule, output, _, _ = runtime_fixture(tmp_path, monkeypatch, terminal_after=6)
+    rows = runtime.run_source_episodes(schedule, output, registry, {})
+    before = runtime.environment_operation_counts.copy()
+    factory = runtime.new_environment
+
+    def wrong_environment(*args):
+        env = factory(*args)
+        if mismatch == 'reset':
+            original_reset = env.reset
+            def reset(*, seed):
+                value = original_reset(seed=seed)
+                return ResetResult('wrong reset observation', value.task, value.valid_actions)
+            env.reset = reset
+        else:
+            original_step = env.step
+            def step(command):
+                value = original_step(command)
+                return Transition('wrong replay observation', value.reward, value.done,
+                                  value.truncated, value.valid_actions)
+            env.step = step
+        return env
+
+    runtime.new_environment = wrong_environment
+    with pytest.raises(EvidenceIntegrityError, match='replay'):
+        runtime._replay_source_prefix(rows[0], 2, 'synthetic-mismatched-prefix')
+    assert runtime.environment_operation_counts['replay_gate'] - before['replay_gate'] == (
+        1 if mismatch == 'reset' else 2)
+    assert not runtime.active_attempt_envs and not runtime.suffix_envs
+    assert not any(e['kind'] == 'prefix_attempt_completed' for e in read_events(output))
+
+
+def test_source_comparison_receipt_tamper_and_wrong_checkout_origin_rejected(tmp_path, monkeypatch):
+    runtime, registry, schedule, output, _, _ = runtime_fixture(
+        tmp_path, monkeypatch, restart=True, terminal_after=2)
+    runtime.run_source_episodes(schedule, output, registry, {})
+    args = comparison_arguments(runtime, output)
+    args['comparison_path'] = Path(args['comparison_path'])
+    original = args['comparison_path'].read_bytes()
+    comparison = json.loads(original)
+    comparison['comparison_before_first_environment_action'] = False
+    args['comparison_path'].write_text(json.dumps(comparison))
+    with pytest.raises(EvidenceIntegrityError, match='exact pre-action'):
+        analyzer.validate_source_restart_comparison(**args)
+    args['comparison_path'].write_bytes(original)
+    fake = SimpleNamespace(__file__=str(tmp_path / 'other-checkout/scripts/run_r19_experiment.py'))
+    monkeypatch.setitem(sys.modules, 'scripts.run_r19_experiment', fake)
+    import scripts
+    monkeypatch.setattr(scripts, 'run_r19_experiment', fake)
+    with pytest.raises(EvidenceIntegrityError, match='outside the analyzed checkout'):
+        analyzer.validate_source_restart_comparison(**args)
+
+
+def stopped_pipeline(tmp_path, monkeypatch, *, stop='invalid_later'):
+    runtime, registry, schedule, output, _, pending = runtime_fixture(
+        tmp_path, monkeypatch, restart=True,
+        terminal_after=6 if stop == 'terminal_later' else 100)
+    stage_two_calls = 0
+
+    def generate(backend, prompt, cap):
+        nonlocal stage_two_calls
+        if cap == 40:
+            raw = 'Diagnosis: Immediate issue\nSubgoal: take pencil 1 from desk 1'
+        elif backend is runtime.recovery_backend:
+            stage_two_calls += 1
+            raw = 'invalid' if stop == 'invalid_later' and stage_two_calls == 2 else 'A000'
+        else:
+            raw = 'A000'
+        return generation(prompt, raw, cap)
+
+    monkeypatch.setattr(runner, '_generate_exact', generate)
+    execution = runner._run_frozen_pilot(
+        runtime=runtime, schedule=schedule, output_path=output, registry=registry,
+        sink=runtime.sink, pending_attempts=pending)
+    runtime.close_remaining_environments()
+    events = read_events(output)
+    branches = [json.loads(line) for line in (output / 'branches.jsonl').read_text().splitlines()]
+    physical = analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
+    validated = analyzer.validate_branch_evidence(branches, events, return_operation_ids=True)
+    assert validated['validated_k_arms'] == 5
+    assert analyzer.validate_live_source_schedule(
+        schedule, {'schema_version': 'r19_exclusion_manifest_v1', 'status': 'frozen_before_inference',
+                   'excluded_task_trial_ids': []}, events, validated['_operation_event_ids'], physical)[
+                       'completed_source_episodes'] == 1
+    assert physical['completed_physical_model_generations'] == sum(runtime.model_call_counts.values())
+    assert physical['physical_environment_operations'] + physical['physical_environment_resets'] == sum(
+        runtime.environment_operation_counts.values())
+    return runtime, output, events, branches, physical
+
+
+@pytest.mark.parametrize('stop', ['invalid_later', 'terminal_later'])
+def test_stopped_common_paths_authenticate_aliases_and_per_k_costs(tmp_path, monkeypatch, stop):
+    runtime, output, events, branches, physical = stopped_pipeline(tmp_path, monkeypatch, stop=stop)
+    arms = branches[0]['k_results']
+    order = next(event['payload']['order'] for event in events if event['kind'] == 'suffix_order_frozen')
+    assert order == [2, 5, 4, 1, 3]
+    if stop == 'invalid_later':
+        assert arms['1']['derived_identity_from'] == 2
+        assert arms['1']['logical_cost']['recovery_only']['model_calls'] == 2
+        for k in ('2', '3', '4', '5'):
+            assert arms[k]['logical_cost']['recovery_only']['model_calls'] == 3
+        measured = [arm for arm in arms.values() if arm['derived_identity_from'] is None]
+        assert len(measured) == 1
+        suffix_ids = measured[0]['evidence_refs']['suffix_generation_event_ids']
+        assert runtime.model_call_counts['suffix'] == len(suffix_ids)
+        assert all(arm['evidence_refs']['suffix_generation_event_ids'] == suffix_ids for arm in arms.values())
+        assert runtime.environment_step_counts['initial_attempt'] == 1
+        assert runtime.environment_step_counts['path_extension'] == 0
+    else:
+        assert arms['4']['derived_identity_from'] == 5
+        assert arms['3']['derived_identity_from'] == 5
+        assert arms['5']['terminal'] is True
+        assert not arms['5']['evidence_refs'].get('suffix_generation_event_ids')
+        assert arms['5']['replay_evidence'] is None
+        assert runtime.environment_step_counts['initial_attempt'] == 1
+        assert runtime.environment_step_counts['path_extension'] == 2
+    operations = [event for event in events if event['kind'] == 'environment_operation_completed'
+                  and event['identity'].get('operation') == 'recovery_environment_operation']
+    assert [event['identity']['recovery_action_index'] for event in operations] == list(range(1, len(operations) + 1))
+    clean = dict(os.environ)
+    for name in ('PYTHONPATH', 'PYTHONHOME', 'VIRTUAL_ENV'):
+        clean.pop(name, None)
+    command = [sys.executable, str(ROOT / 'scripts/analyze_r19_recovery_duration.py'),
+               '--protocol', str(ROOT / 'configs/experiments/r19_recovery_duration_v1.json'),
+               '--events', str(output / 'execution_events.jsonl'), '--branches', str(output / 'branches.jsonl'),
+               '--output', str(tmp_path / 'report'), '--evidence-class', 'synthetic', '--allow-synthetic']
+    result = subprocess.run(command, cwd=tmp_path, env=clean, text=True, capture_output=True)
+    (tmp_path / 'alias_cli_result.json').write_text(json.dumps({
+        'argv': command, 'exit_code': result.returncode, 'exit_code_source': 'subprocess.returncode',
+        'stdout': result.stdout, 'stderr': result.stderr, 'class': 'synthetic_only'}, indent=2))
+    assert result.returncode == 0, result.stderr
+    summary = json.loads((tmp_path / 'report/summary.json').read_text())
+    assert summary['physical_research_expenditure']['evidence_class'] == 'synthetic'
+    assert summary['physical_research_expenditure']['completed_physical_model_generations'] == physical['completed_physical_model_generations']
+
+
+@pytest.fixture(scope='module')
+def alias_bundle(tmp_path_factory):
+    with pytest.MonkeyPatch.context() as monkeypatch:
+        _, _, events, branches, _ = stopped_pipeline(tmp_path_factory.mktemp('synthetic-alias-negative'), monkeypatch)
+    return events, branches
+
+
+def synchronize_arm_claim(branches, events, k, field, value):
+    """Mutate both synthetic materializations so semantic checks, not row mismatch, reject."""
+    row = branches[0]
+    arm = row['k_results'][str(k)]
+    arm[field] = value
+    event = next(event for event in events if event['event_id'] == arm['arm_event_id'])
+    if field in event['payload']:
+        event['payload'][field] = copy.deepcopy(value)
+    if field == 'evidence_refs':
+        row['evidence_refs']['k_arms'][str(k)]['operations'] = copy.deepcopy(value)
+
+
+@pytest.mark.parametrize('mutation', [
+    'future', 'self', 'cycle', 'missing', 'wrong_source_k', 'wrong_source_event',
+    'wrong_prefix', 'wrong_run', 'wrong_task', 'checkpoint', 'state', 'horizon',
+    'swapped_suffix', 'success', 'terminal', 'termination_reason', 'cost', 'recovery_refs',
+    'order', 'seed',
+])
+def test_alias_semantic_tampering_rejected_by_real_branch_validator(alias_bundle, mutation):
+    events, branches = copy.deepcopy(alias_bundle)
+    arms = branches[0]['k_results']
+    source_event = next(event for event in events if event['event_id'] == arms['2']['arm_event_id'])
+    if mutation in {'future', 'self', 'missing', 'wrong_source_k'}:
+        k = {'future': 3, 'self': 1, 'missing': 99, 'wrong_source_k': 5}[mutation]
+        synchronize_arm_claim(branches, events, 1, 'derived_identity_from', k)
+        synchronize_arm_claim(branches, events, 1, 'derived_source_event_id',
+                              arms[str(k)]['arm_event_id'] if str(k) in arms and mutation != 'wrong_source_k'
+                              else (arms['2']['arm_event_id'] if mutation == 'wrong_source_k' else 'missing-event'))
+    elif mutation == 'cycle':
+        synchronize_arm_claim(branches, events, 2, 'derived_identity_from', 1)
+        synchronize_arm_claim(branches, events, 2, 'derived_source_event_id', arms['1']['arm_event_id'])
+    elif mutation == 'wrong_source_event':
+        synchronize_arm_claim(branches, events, 1, 'derived_source_event_id', 'missing-event')
+    elif mutation in {'wrong_prefix', 'wrong_task'}:
+        source_event['identity']['prefix_id' if mutation == 'wrong_prefix' else 'canonical_trial_id'] = 'wrong'
+    elif mutation == 'wrong_run':
+        source_event['run_id'] = 'another-synthetic-run'
+    elif mutation in {'checkpoint', 'horizon', 'success', 'terminal', 'termination_reason'}:
+        field = {'horizon': 'sft_action_cap', 'termination_reason': 'sft_termination_reason'}.get(mutation, mutation)
+        synchronize_arm_claim(branches, events, 1, field,
+                              True if mutation == 'terminal' else 'forged' if mutation == 'termination_reason' else 99)
+    elif mutation == 'state':
+        start = next(event for event in events if event['kind'] == 'duration_arm_started' and event['identity']['k'] == 1)
+        start['payload']['checkpoint_state_sha256'] = '0' * 64
+    elif mutation == 'swapped_suffix':
+        refs = copy.deepcopy(arms['1']['evidence_refs'])
+        refs['suffix_generation_event_ids'] = refs['suffix_generation_event_ids'][::-1]
+        synchronize_arm_claim(branches, events, 1, 'evidence_refs', refs)
+    elif mutation == 'cost':
+        cost = copy.deepcopy(arms['1']['logical_cost'])
+        cost['full_branch']['model_calls'] += 1
+        synchronize_arm_claim(branches, events, 1, 'logical_cost', cost)
+    elif mutation == 'recovery_refs':
+        synchronize_arm_claim(branches, events, 1, 'stage_two_attempts_charged', 2)
+        synchronize_arm_claim(branches, events, 1, 'evidence_refs', copy.deepcopy(arms['2']['evidence_refs']))
+        synchronize_arm_claim(branches, events, 1, 'logical_cost', copy.deepcopy(arms['2']['logical_cost']))
+    else:
+        order_event = next(event for event in events if event['kind'] == 'suffix_order_frozen')
+        if mutation == 'order':
+            order_event['payload']['order'] = [1, 2, 3, 4, 5]
+        else:
+            order_event['payload']['seed'] = 1
+    with pytest.raises(EvidenceIntegrityError):
+        analyzer.validate_branch_evidence(branches, events)
+
+
+def test_recovery_physical_index_must_match_scheduler_action(alias_bundle):
+    events, branches = copy.deepcopy(alias_bundle)
+    scheduler = next(event for event in events if event['kind'] == 'environment_step_completed')
+    operation_id = scheduler['payload']['action']['transition']['r19_environment_operation_event_id']
+    operation = next(event for event in events if event['event_id'] == operation_id)
+    operation['identity']['recovery_action_index'] = 2
+    with pytest.raises(EvidenceIntegrityError, match='scheduler recovery transition conflicts'):
+        analyzer.validate_branch_evidence(branches, events)
+
+
+@pytest.mark.parametrize('field', ['action_id', 'action_map'])
+def test_replay_receipt_map_tampering_is_rejected(alias_bundle, field):
+    events, _ = copy.deepcopy(alias_bundle)
+    event = next(event for event in events if event['kind'] == 'environment_operation_completed'
+                 and event['identity'].get('operation') == 'replay_environment_step')
+    assert event['payload']['action_map'][event['payload']['action_id']] == event['payload']['command']
+    start = next(value for value in events if value['kind'] == 'environment_operation_started'
+                 and value['identity'] == event['identity'])
+    for value in (start, event):
+        value['payload'][field] = 'A999' if field == 'action_id' else {'A000': 'wrong command'}
+    # Authenticate the mutated software fixture so the actual map check is reached.
+    previous = '0' * 64
+    for value in events:
+        value['payload_sha256'] = sha256_json(value['payload'])
+        value['previous_event_sha256'] = previous
+        value['event_id'] = sha256_json([
+            value['run_id'], value['sequence'], value['kind'], value['identity'], value['payload_sha256'],
+            previous, value['evidence_class'], value['run_context']])
+        previous = value['event_id']
+    with pytest.raises(EvidenceIntegrityError, match='contemporaneous admissible-action map'):
+        analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
+
+
+@pytest.mark.parametrize('field,value', [('sft_terminal', True), ('sft_termination_reason', 'forged'), ('success', 1)])
+def test_forging_all_shared_suffix_claims_does_not_bypass_raw_evidence(alias_bundle, field, value):
+    events, branches = copy.deepcopy(alias_bundle)
+    for k in range(1, 6):
+        synchronize_arm_claim(branches, events, k, field, value)
+    with pytest.raises(EvidenceIntegrityError):
+        analyzer.validate_branch_evidence(branches, events)
+
+
+def test_every_produced_replay_receipt_retains_exact_action_map_binding(alias_bundle):
+    events, _ = alias_bundle
+    replay = [event for event in events if event['kind'] == 'environment_operation_completed'
+              and event['identity'].get('operation') in {'replay_environment_step', 'branch_replay_environment_step'}]
+    assert {event['identity']['operation'] for event in replay} == {
+        'replay_environment_step', 'branch_replay_environment_step'}
+    for event in replay:
+        payload = event['payload']
+        assert payload['action_map'] == action_id_mapping(tuple(payload['before_state']['valid_actions']))
+        assert payload['action_map'][payload['action_id']] == payload['command']
+
+
+@pytest.mark.parametrize('initial_stop', ['stage_one_invalid', 'first_action_terminal'])
+def test_ineligible_initial_attempt_still_produces_valid_k1_evidence(tmp_path, monkeypatch, initial_stop):
+    runtime, registry, schedule, output, _, pending = runtime_fixture(
+        tmp_path, monkeypatch, restart=True,
+        terminal_after=2 if initial_stop == 'first_action_terminal' else 6)
+    original_generate = runner._generate_exact
+    if initial_stop == 'stage_one_invalid':
+        def invalid_stage_one(backend, prompt, cap):
+            if cap == 40:
+                return generation(prompt, 'malformed diagnosis', cap)
+            return original_generate(backend, prompt, cap)
+        monkeypatch.setattr(runner, '_generate_exact', invalid_stage_one)
+    runner._run_frozen_pilot(runtime=runtime, schedule=schedule, output_path=output,
+        registry=registry, sink=runtime.sink, pending_attempts=pending)
+    runtime.close_remaining_environments()
+    events = read_events(output)
+    branches = [json.loads(line) for line in (output / 'branches.jsonl').read_text().splitlines()]
+    assert branches[0]['eligible_primary'] is False
+    assert set(branches[0]['k_results']) == {'1'}
+    assert runtime.model_call_counts['initial_recovery'] == 2
+    assert runtime.model_call_counts['path_extension'] == 0
+    assert runtime.environment_step_counts['initial_attempt'] == int(initial_stop == 'first_action_terminal')
+    physical = analyzer.validate_event_ledger(events, expected_evidence_class='synthetic')
+    assert analyzer.validate_branch_evidence(branches, events)['validated_k_arms'] == 1
+    assert physical['completed_physical_model_generations'] == sum(runtime.model_call_counts.values())
+"""Deterministic ALFWorld expert replay and SFT dataset audit utilities."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import re
+from collections import Counter, defaultdict
+from pathlib import Path
+from statistics import mean, median
+from typing import Any, Iterable, Sequence
+
+from env.alfworld import _expand_environment
+from env.base import Task
+from models.policy import ActionRequest
+from recovery.corpus import TASK_FAMILIES, task_family_from_id
+
+from .masking import tokenizer_length
+from .protocol import (
+    DatasetInvariantError,
+    SFT_P0_SCHEMA,
+    action_type,
+    exact_expert_action_id,
+    percentile,
+    sft_p0_prompt,
+    sha256_file,
+    sha256_value,
+    validate_example,
+)
+
+
+_TASK_PATTERN = re.compile(r"Your task is to:\s*(.+?)(?:\n|$)", re.IGNORECASE)
+
+
+def task_id_from_game_file(game_file: str | Path) -> str:
+    path = Path(game_file)
+    if path.name != "game.tw-pddl":
+        raise DatasetInvariantError("unexpected_game_filename")
+    return "/".join(path.parts[-3:-1])
+
+
+def enumerate_train_games(data_root: Path) -> list[dict[str, Any]]:
+    """Enumerate exactly the solvable six-family TextWorld train games."""
+    root = data_root / "json_2.1.1" / "train"
+    records = []
+    for game_file in sorted(root.glob("**/game.tw-pddl")):
+        if "movable" in str(game_file) or "Sliced" in str(game_file):
+            continue
+        trajectory_file = game_file.parent / "traj_data.json"
+        if not trajectory_file.exists():
+            continue
+        game = json.loads(game_file.read_text(encoding="utf-8"))
+        trajectory = json.loads(trajectory_file.read_text(encoding="utf-8"))
+        family = trajectory.get("task_type")
+        if not game.get("solvable") or family not in TASK_FAMILIES:
+            continue
+        records.append(
+            {
+                "task_id": task_id_from_game_file(game_file),
+                "task_family": family,
+                "source_game_sha256": sha256_file(game_file),
+                "source_traj_data_sha256": sha256_file(trajectory_file),
+            }
+        )
+    return records
+
+
+def resolve_manifest_game_files(
+    manifest: dict[str, Any], data_root: Path, splits: Sequence[str]
+) -> list[Path]:
+    root = data_root / "json_2.1.1" / "train"
+    values = []
+    for split in splits:
+        for item in manifest["pools"][split]:
+            path = root / item["task_id"] / "game.tw-pddl"
+            if not path.exists():
+                raise DatasetInvariantError(f"missing_game_file:{item['task_id']}")
+            values.append(path)
+    return values
+
+
+def collect_expert_dataset(
+    *,
+    split_manifest: dict[str, Any],
+    data_root: Path,
+    config_path: Path,
+    tokenizer: Any,
+    output_path: Path,
+    selected_splits: Sequence[str] = ("train", "validation"),
+    max_expert_steps: int = 50,
+    seed: int = 42,
+) -> dict[str, Any]:
+    """Replay successful experts and write accepted prompt-completion rows."""
+    import yaml
+    from alfworld.agents.environment.alfred_tw_env import AlfredTWEnv
+
+    game_files = resolve_manifest_game_files(split_manifest, data_root, selected_splits)
+    split_by_task = {
+        item["task_id"]: split
+        for split in selected_splits
+        for item in split_manifest["pools"][split]
+    }
+    source_by_task = {
+        record["task_id"]: record for record in enumerate_train_games(data_root)
+    }
+    configuration = _expand_environment(
+        yaml.safe_load(config_path.read_text(encoding="utf-8"))
+    )
+    environment_factory = AlfredTWEnv(configuration, train_eval="train")
+    environment_factory.game_files = [str(path) for path in game_files]
+    environment_factory.num_games = len(game_files)
+    environment = environment_factory.init_env(batch_size=1)
+    environment.seed(seed)
+
+    accepted_rows: list[dict[str, Any]] = []
+    accepted_tasks: list[dict[str, Any]] = []
+    rejections: Counter[str] = Counter()
+    seen_tasks: set[str] = set()
+    for collection_index in range(len(game_files)):
+        observations, info = environment.reset()
+        game_file = str(_first(info.get("extra.gamefile")))
+        task_id = task_id_from_game_file(game_file)
+        if task_id not in split_by_task or task_id in seen_tasks:
+            raise DatasetInvariantError(f"unexpected_or_duplicate_reset:{task_id}")
+        seen_tasks.add(task_id)
+        family = task_family_from_id(task_id)
+        source = source_by_task[task_id]
+        observation = str(_first(observations))
+        goal_match = _TASK_PATTERN.search(observation)
+        goal = goal_match.group(1).strip().rstrip(".") if goal_match else ""
+        history: list[tuple[str, str]] = []
+        provisional: list[dict[str, Any]] = []
+        trajectory_transitions: list[dict[str, Any]] = []
+        rejection: str | None = None
+        terminal_success = False
+        terminal_reward = 0.0
+        try:
+            for step_index in range(max_expert_steps):
+                valid_actions = tuple(str(value) for value in _first(info.get("admissible_commands")) or ())
+                plan = _first(info.get("extra.expert_plan"))
+                expert_command = str(plan[0]) if isinstance(plan, (list, tuple)) and plan else ""
+                action_id, mapping = exact_expert_action_id(expert_command, valid_actions)
+                request = ActionRequest(
+                    task=Task(task_id=task_id, text=goal, split="train"),
+                    observation=observation,
+                    history=tuple(history),
+                    valid_actions=valid_actions,
+                )
+                public_prompt = sft_p0_prompt(request)
+                rendered_prompt = render_training_prompt(tokenizer, public_prompt)
+                row = {
+                    "schema_version": SFT_P0_SCHEMA,
+                    "dataset_split": split_by_task[task_id],
+                    "task_id": task_id,
+                    "task_family": family,
+                    "source_split": "train",
+                    "trajectory_id": "pending",
+                    "source_game_sha256": source["source_game_sha256"],
+                    "source_traj_data_sha256": source["source_traj_data_sha256"],
+                    "collection_index": collection_index,
+                    "step_index": step_index,
+                    "goal": goal,
+                    "observation": observation,
+                    "recent_history": [
+                        {"observation": item[0], "action": item[1]}
+                        for item in history[-4:]
+                    ],
+                    "public_prompt": public_prompt,
+                    "prompt": rendered_prompt,
+                    "completion": action_id,
+                    "target_action_id": action_id,
+                    "target_command": expert_command,
+                    "action_count": len(mapping),
+                    "indexed_action_map": mapping,
+                    "indexed_action_map_sha256": sha256_value(mapping),
+                    "prompt_sha256": hashlib.sha256(rendered_prompt.encode()).hexdigest(),
+                    "trajectory_sha256": "pending",
+                    "tokenizer_length": tokenizer_length(tokenizer, rendered_prompt, action_id),
+                    "terminal_task_success": False,
+                }
+                next_observations, rewards, dones, info = environment.step([expert_command])
+                next_observation = str(_first(next_observations))
+                terminal_reward = float(_first(rewards))
+                done = bool(_first(dones))
+                trajectory_transitions.append(
+                    {
+                        "step_index": step_index,
+                        "pre_action_observation": observation,
+                        "action": expert_command,
+                        "result_observation": next_observation,
+                        "reward": terminal_reward,
+                        "done": done,
+                    }
+                )
+                provisional.append(row)
+                history.append((observation, expert_command))
+                observation = next_observation
+                if done:
+                    terminal_success = terminal_reward > 0
+                    break
+            if not terminal_success:
+                rejection = "trajectory_not_successful"
+        except Exception as error:
+            rejection = _rejection_reason(error)
+
+        if rejection is not None:
+            rejections[rejection] += 1
+            continue
+        trajectory_sha = sha256_value(
+            {"task_id": task_id, "transitions": trajectory_transitions}
+        )
+        trajectory_id = f"sft-expert-{trajectory_sha[:20]}"
+        for row in provisional:
+            row["trajectory_id"] = trajectory_id
+            row["trajectory_sha256"] = trajectory_sha
+            row["terminal_task_success"] = True
+            validate_example(row)
+        accepted_rows.extend(provisional)
+        accepted_tasks.append(
+            {
+                "task_id": task_id,
+                "task_family": family,
+                "dataset_split": split_by_task[task_id],
+                "trajectory_id": trajectory_id,
+                "trajectory_sha256": trajectory_sha,
+                "expert_steps": len(provisional),
+                "terminal_reward": terminal_reward,
+            }
+        )
+    environment.close()
+    if seen_tasks != set(split_by_task):
+        raise DatasetInvariantError("not_all_manifest_tasks_were_reset")
+
+    deduplicated, duplicate_counts = deduplicate_exact_rows(accepted_rows)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with output_path.open("w", encoding="utf-8") as handle:
+        for row in deduplicated:
+            handle.write(json.dumps(row, ensure_ascii=True, sort_keys=True) + "\n")
+    return dataset_summary(
+        deduplicated,
+        accepted_tasks,
+        rejections,
+        duplicate_counts,
+        output_path=output_path,
+        requested_task_count=len(split_by_task),
+    )
+
+
+def render_training_prompt(tokenizer: Any, public_prompt: str) -> str:
+    if not hasattr(tokenizer, "apply_chat_template"):
+        raise DatasetInvariantError("tokenizer_missing_chat_template")
+    return tokenizer.apply_chat_template(
+        [{"role": "user", "content": public_prompt}],
+        tokenize=False,
+        add_generation_prompt=True,
+        enable_thinking=False,
+    )
+
+
+def deduplicate_exact_rows(
+    rows: Iterable[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], dict[str, int]]:
+    accepted = []
+    exact_seen: set[str] = set()
+    prompt_counts: Counter[str] = Counter()
+    task_step_counts: Counter[tuple[str, int]] = Counter()
+    for row in sorted(
+        rows,
+        key=lambda item: (
+            item["dataset_split"], item["task_id"], item["step_index"]
+        ),
+    ):
+        prompt_counts[row["prompt_sha256"]] += 1
+        task_step_counts[(row["task_id"], row["step_index"])] += 1
+        exact_hash = sha256_value(
+            {
+                "prompt": row["prompt"],
+                "completion": row["completion"],
+                "target_command": row["target_command"],
+            }
+        )
+        if exact_hash in exact_seen:
+            continue
+        exact_seen.add(exact_hash)
+        accepted.append(row)
+    return accepted, {
+        "duplicate_exact_rows_removed": len(list(rows)) - len(accepted)
+        if isinstance(rows, Sequence)
+        else 0,
+        "duplicate_prompt_hash_occurrences": sum(value - 1 for value in prompt_counts.values() if value > 1),
+        "duplicate_task_step_keys": sum(value - 1 for value in task_step_counts.values() if value > 1),
+    }
+
+
+def dataset_summary(
+    rows: Sequence[dict[str, Any]],
+    accepted_tasks: Sequence[dict[str, Any]],
+    rejections: Counter[str],
+    duplicate_counts: dict[str, int],
+    *,
+    output_path: Path,
+    requested_task_count: int,
+) -> dict[str, Any]:
+    for row in rows:
+        validate_example(row)
+    lengths = [int(row["tokenizer_length"]) for row in rows]
+    task_lengths: dict[str, list[int]] = defaultdict(list)
+    for task in accepted_tasks:
+        task_lengths[task["task_family"]].append(int(task["expert_steps"]))
+    task_ids_by_split = {
+        split: {task["task_id"] for task in accepted_tasks if task["dataset_split"] == split}
+        for split in ("train", "validation")
+    }
+    if task_ids_by_split["train"] & task_ids_by_split["validation"]:
+        raise DatasetInvariantError("accepted_task_leakage")
+    trajectory_counts = Counter(task["trajectory_sha256"] for task in accepted_tasks)
+    return {
+        "schema_version": "sft_dataset_summary_v1",
+        "dataset_path": str(output_path),
+        "dataset_sha256": sha256_file(output_path),
+        "requested_task_count": requested_task_count,
+        "accepted_task_count": len(accepted_tasks),
+        "rejected_task_count": sum(rejections.values()),
+        "rejection_reasons": dict(sorted(rejections.items())),
+        "accepted_example_count": len(rows),
+        "tasks_per_split": {
+            split: len(values) for split, values in task_ids_by_split.items()
+        },
+        "tasks_per_family": dict(sorted(Counter(task["task_family"] for task in accepted_tasks).items())),
+        "examples_per_split": dict(sorted(Counter(row["dataset_split"] for row in rows).items())),
+        "examples_per_family": dict(sorted(Counter(row["task_family"] for row in rows).items())),
+        "trajectory_length_by_family": {
+            family: {
+                "mean": mean(task_lengths[family]),
+                "median": median(task_lengths[family]),
+            }
+            for family in TASK_FAMILIES
+            if task_lengths[family]
+        },
+        "action_type_distribution": dict(sorted(Counter(action_type(row["target_command"]) for row in rows).items())),
+        "target_action_id_distribution": dict(sorted(Counter(row["target_action_id"] for row in rows).items())),
+        "token_lengths": {
+            "min": min(lengths),
+            "p50": percentile(lengths, 0.50),
+            "p90": percentile(lengths, 0.90),
+            "p95": percentile(lengths, 0.95),
+            "p99": percentile(lengths, 0.99),
+            "max": max(lengths),
+            "fit_2048_rate": sum(value <= 2048 for value in lengths) / len(lengths),
+            "fit_3072_rate": sum(value <= 3072 for value in lengths) / len(lengths),
+            "fit_4096_rate": sum(value <= 4096 for value in lengths) / len(lengths),
+        },
+        "mapping_round_trip_success_rate": 1.0,
+        "malformed_completion_count": 0,
+        "hidden_state_prompt_count": 0,
+        "duplicate_counts": {
+            **duplicate_counts,
+            "duplicate_exact_trajectory_occurrences": sum(
+                value - 1 for value in trajectory_counts.values() if value > 1
+            ),
+        },
+        "leakage_checks": {
+            "train_validation_disjoint": True,
+            "task_step_keys_unique": duplicate_counts["duplicate_task_step_keys"] == 0,
+        },
+    }
+
+
+def load_jsonl(path: Path, *, split: str | None = None) -> list[dict[str, Any]]:
+    rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line]
+    return [row for row in rows if split is None or row["dataset_split"] == split]
+
+
+def _first(value: Any) -> Any:
+    return value[0] if isinstance(value, (list, tuple)) else value
+
+
+def _rejection_reason(error: Exception) -> str:
+    message = str(error)
+    known = (
+        "expert_command_absent",
+        "expert_command_ambiguous",
+        "action_mapping_round_trip_failure",
+    )
+    for reason in known:
+        if reason in message:
+            return reason
+    if "Timeout" in message:
+        return "expert_timeout"
+    return f"expert_runtime_error:{type(error).__name__}"

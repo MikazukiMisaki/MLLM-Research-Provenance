@@ -1,0 +1,976 @@
+"""Strict SFT-P0 inference policy for base and LoRA-adapted Qwen3."""
+
+from __future__ import annotations
+
+from typing import Any
+
+from models.action_parser import action_id_mapping
+from models.policy import ActionDecision, ActionPolicy, ActionRequest, GenerationOptions
+from models.protocol_stability import parse_p2_selection
+from models.qwen import QwenPolicy
+
+from .protocol import SFT_P0_PIPELINE, sft_p0_prompt
+
+
+class SFTP0QwenPolicy(ActionPolicy):
+    """Generate one bare ID and execute only its current environment mapping."""
+
+    def __init__(
+        self,
+        backend: QwenPolicy,
+        *,
+        generation: GenerationOptions,
+        adapter_path: str | None = None,
+    ) -> None:
+        if generation.do_sample:
+            raise ValueError("SFT-P0 requires greedy decoding")
+        self._backend = backend
+        self._generation = generation
+        self._adapter_path = adapter_path
+        self._adapter_loaded = False
+
+    @property
+    def model_version(self) -> str:
+        return (
+            f"{self._backend.model_version}+lora:{self._adapter_path}"
+            if self._adapter_path
+            else self._backend.model_version
+        )
+
+    def _load(self) -> tuple[Any, Any, Any]:
+        tokenizer, model, torch = self._backend._load()
+        if self._adapter_path and not self._adapter_loaded:
+            from peft import PeftModel
+
+            model = PeftModel.from_pretrained(model, self._adapter_path)
+            model.eval()
+            self._backend._model = model
+            self._adapter_loaded = True
+        return tokenizer, model, torch
+
+    def act(self, request: ActionRequest) -> ActionDecision:
+        tokenizer, model, torch = self._load()
+        prompt = sft_p0_prompt(request)
+        rendered = tokenizer.apply_chat_template(
+            [{"role": "user", "content": prompt}],
+            tokenize=False,
+            add_generation_prompt=True,
+            enable_thinking=False,
+        )
+        inputs = tokenizer(rendered, return_tensors="pt")
+        inputs = {name: value.to(model.device) for name, value in inputs.items()}
+        with torch.no_grad():
+            generated = model.generate(
+                **inputs,
+                max_new_tokens=self._generation.max_new_tokens,
+                do_sample=False,
+                return_dict_in_generate=True,
+                output_scores=True,
+            )
+        input_tokens = int(inputs["input_ids"].shape[1])
+        generated_ids = generated.sequences[0][input_tokens:]
+        raw_output = tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
+        parsed = parse_p2_selection(
+            raw_output, request.valid_actions, reflection_required=False
+        )
+        mapping = action_id_mapping(request.valid_actions or ())
+        stats = self._backend._token_statistics(
+            generated, torch, input_tokens=input_tokens
+        )
+        return ActionDecision(
+            action=parsed.action,
+            raw_output=raw_output,
+            parser_status="grounded" if parsed.selection_status == "selected" else parsed.selection_status,
+            model_version=self.model_version,
+            token_statistics=stats,
+            metadata={
+                "prompt": prompt,
+                "rendered_prompt_sha256": __import__("hashlib").sha256(rendered.encode()).hexdigest(),
+                "prompt_version": "sft-p0-action-only-v1",
+                "pipeline_version": SFT_P0_PIPELINE,
+                "adapter_path": self._adapter_path,
+                "generation": {
+                    "max_new_tokens": self._generation.max_new_tokens,
+                    "do_sample": False,
+                    "enable_thinking": False,
+                    "history_window": 4,
+                    "action_selection_mode": "indexed_admissible",
+                },
+                "action_selection_mode": "indexed_admissible",
+                "action_selection": {
+                    "action_selection_mode": "indexed_admissible",
+                    "raw_model_output": raw_output,
+                    "parsed_action_id": parsed.action_id,
+                    "selected_index": parsed.selected_index,
+                    "mapped_environment_command": parsed.action or None,
+                    "id_to_command": mapping,
+                    "selection_status": parsed.selection_status,
+                    "failure_category": parsed.action_failure_category,
+                    "failure_reason": parsed.action_failure_reason,
+                },
+                "parser": {
+                    "candidate": parsed.action_id,
+                    "invalid_reason": parsed.action_failure_reason,
+                },
+            },
+        )
+"""Policy contracts and generation records for interactive language agents."""
+
+from __future__ import annotations
+
+from dataclasses import asdict, dataclass, field
+from typing import Any, Protocol
+
+from env.base import Task
+
+
+@dataclass(frozen=True)
+class GenerationOptions:
+    """Decoding settings recorded with every baseline decision."""
+
+    max_new_tokens: int = 64
+    do_sample: bool = False
+    temperature: float | None = None
+    top_p: float | None = None
+
+
+@dataclass(frozen=True)
+class TokenStatistics:
+    """Optional token-level statistics returned by a model backend."""
+
+    generated_tokens: int
+    mean_token_log_probability: float | None = None
+    mean_token_entropy: float | None = None
+    input_tokens: int | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        """Return a JSON-serializable representation."""
+        return asdict(self)
+
+
+@dataclass(frozen=True)
+class ActionRequest:
+    """All policy-visible information for one action decision."""
+
+    task: Task
+    observation: str
+    history: tuple[tuple[str, str], ...]
+    valid_actions: tuple[str, ...] | None
+
+
+@dataclass(frozen=True)
+class ActionDecision:
+    """Parsed action plus raw generation and optional model diagnostics."""
+
+    action: str
+    raw_output: str
+    parser_status: str
+    model_version: str
+    token_statistics: TokenStatistics | None = None
+    reasoning: str | None = None
+    metadata: dict[str, Any] = field(default_factory=dict)
+
+
+class ActionPolicy(Protocol):
+    """Select one action without interacting with the environment or filesystem."""
+
+    @property
+    def model_version(self) -> str:
+        """Return the immutable base model or checkpoint identifier."""
+
+    def act(self, request: ActionRequest) -> ActionDecision:
+        """Return a parsed action and its generation record."""
+"""Strict parsing and grounding helpers for textual environment actions."""
+
+from __future__ import annotations
+
+import re
+from dataclasses import dataclass
+
+_ACTION_PREFIX = re.compile(r"^\s*(?:action|command)\s*:\s*", re.IGNORECASE)
+_THOUGHT_PREFIX = re.compile(r"^\s*(?:thought|reasoning)\s*:\s*", re.IGNORECASE)
+_ACTION_ID_LINE = re.compile(r"^Action-ID:\s*(A\d{3})$")
+_ACTION_ID_ANYWHERE = re.compile(r"Action-ID:\s*(A\d{3})")
+
+
+@dataclass(frozen=True)
+class ParsedAction:
+    """A parsed action plus enough context to audit a rejection."""
+
+    action: str
+    status: str
+    reasoning: str | None = None
+    candidate: str | None = None
+    invalid_reason: str | None = None
+
+
+@dataclass(frozen=True)
+class ParsedActionId:
+    """Strict indexed-selection result mapped to an environment-owned command."""
+
+    action: str
+    action_id: str | None
+    selected_index: int | None
+    status: str
+    invalid_reason: str | None = None
+
+
+def normalize_action(action: str) -> str:
+    """Canonicalize harmless formatting differences without changing meaning."""
+    return " ".join(action.strip().strip("'\"").split()).casefold()
+
+
+def is_valid_action(action: str, valid_actions: tuple[str, ...] | None) -> bool | None:
+    """Check admissible-command membership using the same normalization as parsing."""
+    if valid_actions is None:
+        return None
+    return bool(action) and normalize_action(action) in {
+        normalize_action(valid_action) for valid_action in valid_actions
+    }
+
+
+def parse_action(output: str, valid_actions: tuple[str, ...] | None = None) -> ParsedAction:
+    """Accept an explicit command or a single bare admissible command.
+
+    The parser deliberately never extracts an action merely because it appears
+    inside reasoning. A malformed response produces an empty action rather
+    than an invented fallback command.
+    """
+    lines = [line.strip() for line in output.splitlines() if line.strip()]
+    reasoning = next(
+        (_THOUGHT_PREFIX.sub("", line).strip() for line in lines if _THOUGHT_PREFIX.match(line)),
+        None,
+    )
+    explicit = [
+        _ACTION_PREFIX.sub("", line).strip(" '\"")
+        for line in lines
+        if _ACTION_PREFIX.match(line)
+    ]
+    bare = [
+        line.strip(" '\"")
+        for line in lines
+        if not _THOUGHT_PREFIX.match(line) and not _ACTION_PREFIX.match(line)
+    ]
+    candidates = explicit if explicit else bare if len(bare) == 1 else []
+    if not candidates:
+        return ParsedAction("", "missing_action", reasoning, invalid_reason="no explicit action")
+
+    candidate = candidates[0]
+    if not candidate:
+        return ParsedAction("", "empty_action", reasoning, candidate, "empty action value")
+    if valid_actions is None:
+        return ParsedAction(candidate, "unvalidated", reasoning, candidate)
+
+    canonical_actions = {normalize_action(action): action for action in valid_actions}
+    canonical = canonical_actions.get(normalize_action(candidate))
+    if canonical is None:
+        return ParsedAction("", "not_admissible", reasoning, candidate, "not in valid actions")
+    return ParsedAction(canonical, "grounded", reasoning, candidate)
+
+
+def action_id_mapping(valid_actions: tuple[str, ...]) -> dict[str, str]:
+    """Assign stable ephemeral IDs while preserving environment action order."""
+    if len(valid_actions) > 1000:
+        raise ValueError("indexed action selection supports at most 1000 actions")
+    return {f"A{index:03d}": action for index, action in enumerate(valid_actions)}
+
+
+def parse_action_id(output: str, valid_actions: tuple[str, ...] | None) -> ParsedActionId:
+    """Parse exactly one ``Action-ID: Axyz`` line without repair or fallback."""
+    if valid_actions is None or not valid_actions:
+        return ParsedActionId(
+            "", None, None, "malformed_id", "no admissible actions available"
+        )
+
+    lines = [line.strip() for line in output.splitlines() if line.strip()]
+    embedded_ids = _ACTION_ID_ANYWHERE.findall(output)
+    if len(embedded_ids) > 1:
+        return ParsedActionId(
+            "", None, None, "ambiguous_id", "multiple action IDs"
+        )
+    if len(lines) != 1:
+        return ParsedActionId(
+            "", None, None, "malformed_id", "expected exactly one output line"
+        )
+
+    match = _ACTION_ID_LINE.fullmatch(lines[0])
+    if match is None:
+        return ParsedActionId(
+            "", None, None, "malformed_id", "expected exactly Action-ID: Axyz"
+        )
+
+    action_id = match.group(1)
+    selected_index = int(action_id[1:])
+    mapping = action_id_mapping(valid_actions)
+    action = mapping.get(action_id)
+    if action is None:
+        return ParsedActionId(
+            "",
+            action_id,
+            selected_index,
+            "out_of_range_id",
+            "action ID is outside the admissible-action range",
+        )
+    return ParsedActionId(action, action_id, selected_index, "selected")
+"""Deterministic public-evidence state tracking for the Phase B B3 agent."""
+
+from __future__ import annotations
+
+import re
+from dataclasses import asdict, dataclass, field
+from typing import Any
+
+from env.base import Task
+
+from .action_parser import action_id_mapping
+from .policy import ActionDecision, ActionPolicy, ActionRequest, GenerationOptions
+from .protocol_stability import parse_p2_selection, protocol_stability_prompt
+from .qwen import QwenPolicy
+
+
+B3_PIPELINE = "indexed_bounded_context_reflection_public_state_v1"
+MAX_RENDERED_OBJECT_LOCATIONS = 16
+MAX_RENDERED_RECEPTACLES = 16
+
+_ENTITY = r"[a-z][a-z]*(?: [a-z][a-z]*)* \d+"
+_GO = re.compile(rf"^go to (?P<location>{_ENTITY})$", re.IGNORECASE)
+_TAKE = re.compile(
+    rf"^take (?P<object>{_ENTITY}) from (?P<receptacle>{_ENTITY})$", re.IGNORECASE
+)
+_MOVE = re.compile(
+    rf"^move (?P<object>{_ENTITY}) to (?P<receptacle>{_ENTITY})$", re.IGNORECASE
+)
+_OPEN_CLOSE = re.compile(
+    rf"^(?P<verb>open|close) (?P<receptacle>{_ENTITY})$", re.IGNORECASE
+)
+_TRANSFORM = re.compile(
+    rf"^(?P<verb>heat|cool|clean) (?P<object>{_ENTITY}) with (?P<tool>{_ENTITY})$",
+    re.IGNORECASE,
+)
+_ARRIVE_RESULT = re.compile(rf"You arrive at (?P<location>{_ENTITY})\.", re.IGNORECASE)
+_TAKE_RESULT = re.compile(
+    rf"You pick up the (?P<object>{_ENTITY}) from the (?P<receptacle>{_ENTITY})\.",
+    re.IGNORECASE,
+)
+_MOVE_RESULT = re.compile(
+    rf"You move the (?P<object>{_ENTITY}) to the (?P<receptacle>{_ENTITY})\.",
+    re.IGNORECASE,
+)
+_OPEN_RESULT = re.compile(
+    rf"You open the (?P<receptacle>{_ENTITY})\.", re.IGNORECASE
+)
+_CLOSE_RESULT = re.compile(
+    rf"You close the (?P<receptacle>{_ENTITY})\.", re.IGNORECASE
+)
+_TRANSFORM_RESULT = re.compile(
+    rf"You (?P<verb>heat|cool|clean) the (?P<object>{_ENTITY}) using the (?P<tool>{_ENTITY})\.",
+    re.IGNORECASE,
+)
+_SURFACE_CONTENTS = re.compile(
+    rf"On the (?P<receptacle>{_ENTITY}), you see (?P<contents>[^.]+)\.",
+    re.IGNORECASE,
+)
+_OPEN_CONTENTS = re.compile(
+    rf"The (?P<receptacle>{_ENTITY}) is open\. In it, you see (?P<contents>[^.]+)\.",
+    re.IGNORECASE,
+)
+_CLOSED_STATE = re.compile(
+    rf"The (?P<receptacle>{_ENTITY}) is closed\.", re.IGNORECASE
+)
+_NUMBERED_ENTITY = re.compile(rf"\b(?:a|an) (?P<entity>{_ENTITY})\b", re.IGNORECASE)
+
+
+@dataclass(frozen=True)
+class ConfirmedFact:
+    """One public fact with its latest confirming transition provenance."""
+
+    value: str | bool
+    confirmation_status: str
+    source_step: int
+
+
+@dataclass
+class ReceptacleFacts:
+    """Publicly observed state for one receptacle or location."""
+
+    observed: ConfirmedFact | None = None
+    open: ConfirmedFact | None = None
+    searched: ConfirmedFact | None = None
+
+
+@dataclass(frozen=True)
+class GoalEntities:
+    """Entities explicitly named by the public task specification."""
+
+    target_type: str
+    destination_type: str
+    required_transformation: str | None
+    required_count: int
+
+
+@dataclass
+class PublicStateTracker:
+    """Maintain persistent state from issued actions and returned observations."""
+
+    task: Task
+    current_location: ConfirmedFact | None = None
+    inventory: dict[str, ConfirmedFact] = field(default_factory=dict)
+    object_locations: dict[str, ConfirmedFact] = field(default_factory=dict)
+    receptacles: dict[str, ReceptacleFacts] = field(default_factory=dict)
+    transformations: dict[str, dict[str, ConfirmedFact]] = field(default_factory=dict)
+    progress: dict[str, ConfirmedFact] = field(default_factory=dict)
+    update_count: int = 0
+    contradiction_count: int = 0
+    parse_update_failure_count: int = 0
+    processed_transitions: int = 0
+
+    def __post_init__(self) -> None:
+        self.goal = goal_entities(self.task)
+
+    def observe_initial(self, observation: str) -> None:
+        """Record public entities visible before any issued action."""
+        for entity in _entities_in_text(observation):
+            self._mark_receptacle_observed(entity, -1)
+        self._refresh_progress(-1)
+
+    def sync(self, request: ActionRequest) -> None:
+        """Apply each newly completed public transition exactly once."""
+        while self.processed_transitions < len(request.history):
+            index = self.processed_transitions
+            action = request.history[index][1]
+            result = (
+                request.history[index + 1][0]
+                if index + 1 < len(request.history)
+                else request.observation
+            )
+            self.update(action, result, source_step=index)
+            self.processed_transitions += 1
+
+    def update(self, action: str, observation: str, *, source_step: int) -> None:
+        """Update only facts confirmed by the public post-action observation."""
+        normalized_action = " ".join(action.strip().casefold().split())
+        self._ingest_observation(observation, source_step)
+
+        if normalized_action == "inventory":
+            self._update_inventory_from_observation(observation, source_step)
+            self._refresh_progress(source_step)
+            return
+
+        match = _GO.fullmatch(normalized_action)
+        if match:
+            expected = match.group("location")
+            result = _ARRIVE_RESULT.search(observation)
+            if result and result.group("location").casefold() == expected:
+                self._set_current_location(expected, source_step)
+                self._mark_receptacle_observed(expected, source_step)
+            else:
+                self._record_unparsed_success(observation)
+            self._refresh_progress(source_step)
+            return
+
+        match = _TAKE.fullmatch(normalized_action)
+        if match:
+            result = _TAKE_RESULT.search(observation)
+            if result and self._same_action_entities(match, result, "object", "receptacle"):
+                object_name = match.group("object")
+                receptacle = match.group("receptacle")
+                self._set_current_location(receptacle, source_step)
+                self._confirm_inventory_add(object_name, source_step)
+                self._set_object_location(object_name, "inventory", source_step)
+            else:
+                self._record_unparsed_success(observation)
+            self._refresh_progress(source_step)
+            return
+
+        match = _MOVE.fullmatch(normalized_action)
+        if match:
+            result = _MOVE_RESULT.search(observation)
+            if result and self._same_action_entities(match, result, "object", "receptacle"):
+                object_name = match.group("object")
+                destination = match.group("receptacle")
+                self._set_current_location(destination, source_step)
+                self._confirm_inventory_remove(object_name)
+                self._set_object_location(object_name, destination, source_step)
+                self._mark_receptacle_observed(destination, source_step)
+                if self._is_target(object_name) and self._is_destination(destination):
+                    self._set_progress("final_placement_confirmed", True, source_step)
+            else:
+                self._record_unparsed_success(observation)
+            self._refresh_progress(source_step)
+            return
+
+        match = _OPEN_CLOSE.fullmatch(normalized_action)
+        if match:
+            verb = match.group("verb").casefold()
+            receptacle = match.group("receptacle")
+            result_pattern = _OPEN_RESULT if verb == "open" else _CLOSE_RESULT
+            result = result_pattern.search(observation)
+            if result and result.group("receptacle").casefold() == receptacle:
+                self._set_current_location(receptacle, source_step)
+                self._set_receptacle_open(receptacle, verb == "open", source_step)
+                self._mark_receptacle_observed(receptacle, source_step)
+            else:
+                self._record_unparsed_success(observation)
+            self._refresh_progress(source_step)
+            return
+
+        match = _TRANSFORM.fullmatch(normalized_action)
+        if match:
+            result = _TRANSFORM_RESULT.search(observation)
+            if result and self._same_action_entities(match, result, "verb", "object", "tool"):
+                verb = match.group("verb").casefold()
+                object_name = match.group("object")
+                self._set_current_location(match.group("tool"), source_step)
+                self._set_transformation(object_name, verb, source_step)
+            else:
+                self._record_unparsed_success(observation)
+            self._refresh_progress(source_step)
+            return
+
+        self._refresh_progress(source_step)
+
+    def render(self) -> str:
+        """Render a compact fixed-order state block without recommendations."""
+        inventory = ", ".join(sorted(self.inventory)) or "none confirmed"
+        object_rows = [
+            f"{name} -> {fact.value}"
+            for name, fact in sorted(self.object_locations.items())
+            if fact.value != "inventory"
+        ]
+        object_text = _bounded_rows(object_rows, MAX_RENDERED_OBJECT_LOCATIONS)
+        receptacle_rows = []
+        for name, facts in sorted(self.receptacles.items()):
+            state = []
+            if facts.observed is not None:
+                state.append("observed")
+            if facts.open is not None:
+                state.append("open" if facts.open.value is True else "closed")
+            if facts.searched is not None and facts.searched.value is True:
+                state.append("searched")
+            receptacle_rows.append(f"{name} ({', '.join(state)})")
+        transformation_rows = [
+            f"{object_name}: {', '.join(sorted(kinds))}"
+            for object_name, kinds in sorted(self.transformations.items())
+        ]
+        progress_rows = [
+            name.replace("_", " ")
+            for name, fact in sorted(self.progress.items())
+            if fact.value is True
+        ]
+        unknown = self.unknown_items()
+        return (
+            "[PUBLIC STATE]\n"
+            f"Current location: {self.current_location.value if self.current_location else 'unknown'}\n"
+            f"Inventory: {inventory}\n"
+            f"Known object locations: {object_text}\n"
+            "Observed/searched receptacles: "
+            f"{_bounded_rows(receptacle_rows, MAX_RENDERED_RECEPTACLES)}\n"
+            f"Observed transformations: {'; '.join(transformation_rows) or 'none confirmed'}\n"
+            f"Task progress: {', '.join(progress_rows) or 'none confirmed'}\n"
+            f"Unknown/unconfirmed: {', '.join(unknown) or 'none'}"
+        )
+
+    def unknown_items(self) -> list[str]:
+        """Return stable labels for goal-relevant facts not publicly confirmed."""
+        unknown = []
+        if self.current_location is None:
+            unknown.append("current location")
+        if not any(self._is_target(name) for name in self.object_locations):
+            unknown.append("target location")
+        if self.goal.required_transformation and not any(
+            self.goal.required_transformation in kinds
+            for name, kinds in self.transformations.items()
+            if self._is_target(name)
+        ):
+            unknown.append(f"target {self.goal.required_transformation} state")
+        if "destination_interaction_confirmed" not in self.progress:
+            unknown.append("destination interaction")
+        if "final_placement_confirmed" not in self.progress:
+            unknown.append("final placement")
+        return unknown
+
+    def snapshot(self) -> dict[str, Any]:
+        """Return complete fact and provenance state for trajectory auditing."""
+        return {
+            "schema_version": "deterministic_public_state_v1",
+            "goal": asdict(self.goal),
+            "current_location": _fact_dict(self.current_location),
+            "inventory": {name: asdict(fact) for name, fact in sorted(self.inventory.items())},
+            "object_locations": {
+                name: asdict(fact) for name, fact in sorted(self.object_locations.items())
+            },
+            "receptacles": {
+                name: {
+                    "observed": _fact_dict(facts.observed),
+                    "open": _fact_dict(facts.open),
+                    "searched": _fact_dict(facts.searched),
+                }
+                for name, facts in sorted(self.receptacles.items())
+            },
+            "transformations": {
+                name: {kind: asdict(fact) for kind, fact in sorted(kinds.items())}
+                for name, kinds in sorted(self.transformations.items())
+            },
+            "progress": {name: asdict(fact) for name, fact in sorted(self.progress.items())},
+            "unknown": self.unknown_items(),
+            "metrics": {
+                "update_count": self.update_count,
+                "unknown_state_count": len(self.unknown_items()),
+                "contradiction_count": self.contradiction_count,
+                "parse_update_failure_count": self.parse_update_failure_count,
+                "processed_transitions": self.processed_transitions,
+            },
+        }
+
+    def _ingest_observation(self, observation: str, source_step: int) -> None:
+        arrival = _ARRIVE_RESULT.search(observation)
+        if arrival:
+            self._mark_receptacle_observed(arrival.group("location").casefold(), source_step)
+        closed = _CLOSED_STATE.search(observation)
+        if closed:
+            self._set_receptacle_open(closed.group("receptacle").casefold(), False, source_step)
+        for pattern in (_SURFACE_CONTENTS, _OPEN_CONTENTS):
+            match = pattern.search(observation)
+            if not match:
+                continue
+            receptacle = match.group("receptacle").casefold()
+            self._set_current_location(receptacle, source_step)
+            self._mark_receptacle_observed(receptacle, source_step)
+            self._set_receptacle_searched(receptacle, source_step)
+            if pattern is _OPEN_CONTENTS:
+                self._set_receptacle_open(receptacle, True, source_step)
+            for entity in _entities_in_text(match.group("contents")):
+                self._set_object_location(entity, receptacle, source_step)
+
+    def _update_inventory_from_observation(self, observation: str, source_step: int) -> None:
+        if "You are not carrying anything." in observation:
+            if self.inventory:
+                self.update_count += len(self.inventory)
+            self.inventory.clear()
+            return
+        if "You are carrying:" not in observation:
+            self._record_unparsed_success(observation)
+            return
+        names = set(_entities_in_text(observation.split("You are carrying:", 1)[1]))
+        if set(self.inventory) != names:
+            self.update_count += len(set(self.inventory).symmetric_difference(names))
+        self.inventory = {
+            name: ConfirmedFact("present", "confirmed", source_step)
+            for name in sorted(names)
+        }
+        for name in names:
+            self._set_object_location(name, "inventory", source_step)
+
+    def _set_current_location(self, value: str, source_step: int) -> None:
+        if self.current_location is None or self.current_location.value != value:
+            self.update_count += 1
+        self.current_location = ConfirmedFact(value, "confirmed", source_step)
+        if self._is_destination(value):
+            self._set_progress("destination_interaction_confirmed", True, source_step)
+
+    def _confirm_inventory_add(self, name: str, source_step: int) -> None:
+        if name not in self.inventory:
+            self.update_count += 1
+        self.inventory[name] = ConfirmedFact("present", "confirmed", source_step)
+
+    def _confirm_inventory_remove(self, name: str) -> None:
+        if name in self.inventory:
+            del self.inventory[name]
+            self.update_count += 1
+
+    def _set_object_location(self, name: str, location: str, source_step: int) -> None:
+        existing = self.object_locations.get(name)
+        if existing is None or existing.value != location:
+            self.update_count += 1
+        self.object_locations[name] = ConfirmedFact(location, "confirmed", source_step)
+
+    def _mark_receptacle_observed(self, name: str, source_step: int) -> None:
+        facts = self.receptacles.setdefault(name, ReceptacleFacts())
+        if facts.observed is None:
+            self.update_count += 1
+        facts.observed = ConfirmedFact(True, "confirmed", source_step)
+
+    def _set_receptacle_open(self, name: str, value: bool, source_step: int) -> None:
+        facts = self.receptacles.setdefault(name, ReceptacleFacts())
+        if facts.open is None or facts.open.value != value:
+            self.update_count += 1
+        facts.open = ConfirmedFact(value, "confirmed", source_step)
+
+    def _set_receptacle_searched(self, name: str, source_step: int) -> None:
+        facts = self.receptacles.setdefault(name, ReceptacleFacts())
+        if facts.searched is None:
+            self.update_count += 1
+        facts.searched = ConfirmedFact(True, "confirmed", source_step)
+
+    def _set_transformation(self, name: str, kind: str, source_step: int) -> None:
+        kinds = self.transformations.setdefault(name, {})
+        if kind not in kinds:
+            self.update_count += 1
+        kinds[kind] = ConfirmedFact(True, "confirmed", source_step)
+
+    def _set_progress(self, name: str, value: bool, source_step: int) -> None:
+        existing = self.progress.get(name)
+        if existing is None or existing.value != value:
+            self.update_count += 1
+        self.progress[name] = ConfirmedFact(value, "confirmed", source_step)
+
+    def _refresh_progress(self, source_step: int) -> None:
+        target_names = [name for name in self.object_locations if self._is_target(name)]
+        if target_names:
+            self._set_progress("target_discovered", True, source_step)
+        held_targets = [name for name in self.inventory if self._is_target(name)]
+        if len(held_targets) >= min(1, self.goal.required_count):
+            self._set_progress("target_acquired", True, source_step)
+        required = self.goal.required_transformation
+        if required and any(
+            required in self.transformations.get(name, {}) for name in target_names
+        ):
+            self._set_progress("required_transformation_confirmed", True, source_step)
+
+    def _is_target(self, entity: str) -> bool:
+        return _entity_type(entity) == self.goal.target_type
+
+    def _is_destination(self, entity: str) -> bool:
+        return _entity_type(entity) == self.goal.destination_type
+
+    def _record_unparsed_success(self, observation: str) -> None:
+        if not _looks_like_failed_action(observation):
+            self.parse_update_failure_count += 1
+
+    @staticmethod
+    def _same_action_entities(
+        action_match: re.Match[str], result_match: re.Match[str], *fields: str
+    ) -> bool:
+        return all(
+            action_match.group(field).casefold() == result_match.group(field).casefold()
+            for field in fields
+        )
+
+
+class PublicStateQwenPolicy(ActionPolicy):
+    """B3 policy: frozen B2 prompt plus deterministic public state."""
+
+    def __init__(self, backend: QwenPolicy, *, generation: GenerationOptions) -> None:
+        if generation.do_sample:
+            raise ValueError("B3 requires greedy decoding")
+        self._backend = backend
+        self._generation = generation
+        self._tracker: PublicStateTracker | None = None
+        self._task_id: str | None = None
+        self._has_acted = False
+
+    @property
+    def model_version(self) -> str:
+        return self._backend.model_version
+
+    def act(self, request: ActionRequest) -> ActionDecision:
+        """Synchronize public state, generate once, and use frozen P2 parsing."""
+        new_episode = (
+            self._tracker is None
+            or self._task_id != request.task.task_id
+            or (not request.history and self._has_acted)
+        )
+        if new_episode:
+            self._tracker = PublicStateTracker(request.task)
+            self._tracker.observe_initial(request.observation)
+            self._task_id = request.task.task_id
+            self._has_acted = False
+        assert self._tracker is not None
+        self._tracker.sync(request)
+        state_text = self._tracker.render()
+        state_snapshot = self._tracker.snapshot()
+        prompt = public_state_prompt(request, state_text)
+        tokenizer, model, torch = self._backend._load()
+        messages = [{"role": "user", "content": prompt}]
+        if hasattr(tokenizer, "apply_chat_template"):
+            rendered = tokenizer.apply_chat_template(
+                messages,
+                tokenize=False,
+                add_generation_prompt=True,
+                enable_thinking=False,
+            )
+        else:
+            rendered = prompt
+        inputs = tokenizer(rendered, return_tensors="pt")
+        inputs = {name: value.to(model.device) for name, value in inputs.items()}
+        with torch.no_grad():
+            generated = model.generate(
+                **inputs,
+                max_new_tokens=self._generation.max_new_tokens,
+                do_sample=False,
+                return_dict_in_generate=True,
+                output_scores=True,
+            )
+        input_tokens = inputs["input_ids"].shape[1]
+        generated_ids = generated.sequences[0][input_tokens:]
+        raw_output = tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
+        token_statistics = self._backend._token_statistics(
+            generated, torch, input_tokens=input_tokens
+        )
+        parsed = parse_p2_selection(
+            raw_output, request.valid_actions, reflection_required=True
+        )
+        mapping = action_id_mapping(request.valid_actions or ())
+        decision = ActionDecision(
+            action=parsed.action,
+            raw_output=raw_output,
+            parser_status=(
+                "grounded" if parsed.selection_status == "selected" else parsed.selection_status
+            ),
+            reasoning=parsed.reflection,
+            model_version=self.model_version,
+            token_statistics=token_statistics,
+            metadata={
+                "prompt": prompt,
+                "prompt_version": "base-agent-phase-b-b3-public-state-v1",
+                "pipeline_version": B3_PIPELINE,
+                "phase_b_condition": "B3",
+                "public_state": {
+                    "rendered": state_text,
+                    "snapshot": state_snapshot,
+                },
+                "reflection": {
+                    "required": True,
+                    "text": parsed.reflection,
+                    "word_count": parsed.reflection_word_count,
+                    "max_words": 20,
+                    "format_valid": parsed.reflection_format_valid,
+                    "format_violation": bool(parsed.reflection_violations),
+                    "violations": list(parsed.reflection_violations),
+                },
+                "generation": {
+                    "max_new_tokens": self._generation.max_new_tokens,
+                    "do_sample": False,
+                    "temperature": None,
+                    "top_p": None,
+                    "enable_thinking": False,
+                    "action_selection_mode": "indexed_admissible",
+                    "history_context_mode": "bounded_recent_state_plus_public_state",
+                    "history_window": 4,
+                },
+                "action_selection_mode": "indexed_admissible",
+                "action_selection": {
+                    "action_selection_mode": "indexed_admissible",
+                    "raw_model_output": raw_output,
+                    "parsed_action_id": parsed.action_id,
+                    "selected_index": parsed.selected_index,
+                    "mapped_environment_command": parsed.action or None,
+                    "id_to_command": mapping,
+                    "selection_status": parsed.selection_status,
+                    "failure_category": parsed.action_failure_category,
+                    "failure_reason": parsed.action_failure_reason,
+                },
+                "parser": {
+                    "candidate": parsed.action_id,
+                    "invalid_reason": parsed.action_failure_reason,
+                },
+            },
+        )
+        self._has_acted = True
+        return decision
+
+
+def public_state_prompt(request: ActionRequest, rendered_state: str) -> str:
+    """Insert state into the frozen B2 prompt without altering its P2 contract."""
+    base = protocol_stability_prompt(request, reflection=True, history_window=4)
+    marker = "\nIndexed valid actions:"
+    if base.count(marker) != 1:
+        raise RuntimeError("frozen B2 prompt insertion marker changed")
+    return base.replace(marker, f"\n{rendered_state}\n{marker}", 1)
+
+
+def goal_entities(task: Task) -> GoalEntities:
+    """Parse entities explicitly encoded in the public ALFWorld task identity."""
+    stem = task.task_id.split("/", 1)[0]
+    parts = stem.split("-")
+    if len(parts) < 4:
+        raise ValueError(f"cannot parse public task identity: {task.task_id}")
+    family = parts[0]
+    transformation = next(
+        (kind for kind in ("clean", "heat", "cool") if f"_{kind}_" in family),
+        None,
+    )
+    return GoalEntities(
+        target_type=_camel_to_type(parts[1]),
+        destination_type=_camel_to_type(parts[3]),
+        required_transformation=transformation,
+        required_count=2 if family == "pick_two_obj_and_place" else 1,
+    )
+
+
+def _camel_to_type(value: str) -> str:
+    return re.sub(r"(?<!^)(?=[A-Z])", " ", value).casefold().replace(" ", "")
+
+
+def _entity_type(value: str) -> str:
+    return re.sub(r"\s+\d+$", "", value.casefold()).replace(" ", "")
+
+
+def _entities_in_text(text: str) -> list[str]:
+    return [match.group("entity").casefold() for match in _NUMBERED_ENTITY.finditer(text)]
+
+
+def _looks_like_failed_action(observation: str) -> bool:
+    lowered = observation.casefold()
+    return any(
+        phrase in lowered
+        for phrase in (
+            "nothing happens",
+            "you can't",
+            "you cannot",
+            "not possible",
+            "is not open",
+            "don't see",
+        )
+    )
+
+
+def _bounded_rows(rows: list[str], maximum: int) -> str:
+    if not rows:
+        return "none confirmed"
+    shown = rows[:maximum]
+    if len(rows) > maximum:
+        shown.append(f"(+{len(rows) - maximum} more confirmed)")
+    return "; ".join(shown)
+
+
+def _fact_dict(fact: ConfirmedFact | None) -> dict[str, Any] | None:
+    return asdict(fact) if fact is not None else None
+"""Completion-only tokenization helpers mirroring TRL 0.23 prompt-completion logic."""
+
+from __future__ import annotations
+
+from typing import Any
+
+
+def tokenize_prompt_completion(
+    tokenizer: Any, prompt: str, completion: str, *, max_length: int
+) -> dict[str, list[int]]:
+    """Tokenize without truncation and activate labels only after the prompt."""
+    eos = tokenizer.eos_token or ""
+    supervised_completion = completion
+    if eos and not supervised_completion.endswith(eos):
+        supervised_completion += eos
+    prompt_ids = tokenizer(text=prompt, add_special_tokens=True)["input_ids"]
+    full_ids = tokenizer(
+        text=prompt + supervised_completion, add_special_tokens=True
+    )["input_ids"]
+    if full_ids[: len(prompt_ids)] != prompt_ids:
+        raise ValueError("prompt tokenization is not a prefix of prompt+completion")
+    if len(full_ids) > max_length:
+        raise ValueError("example exceeds frozen max_length; truncation is prohibited")
+    labels = [-100] * len(prompt_ids) + full_ids[len(prompt_ids) :]
+    if not labels or all(value == -100 for value in labels):
+        raise ValueError("completion has no active labels")
+    return {
+        "input_ids": full_ids,
+        "attention_mask": [1] * len(full_ids),
+        "labels": labels,
+        "completion_mask": [0] * len(prompt_ids) + [1] * (len(full_ids) - len(prompt_ids)),
+    }
+
+
+def tokenizer_length(tokenizer: Any, prompt: str, completion: str) -> int:
+    eos = tokenizer.eos_token or ""
+    suffix = completion if not eos or completion.endswith(eos) else completion + eos
+    return len(tokenizer(text=prompt + suffix, add_special_tokens=True)["input_ids"])

@@ -1,0 +1,257 @@
+{
+  "actual_generate_calls": 0,
+  "actual_model_loads": 0,
+  "actual_source_collection": 0,
+  "actual_training_runs": 0,
+  "alfworld_constructions_resets_steps": 0,
+  "collator_cpu_audit": {
+    "batches": {
+      "configured_pad": {
+        "attention_padding_is_zero": true,
+        "example_lengths": [
+          506,
+          398
+        ],
+        "pad_id_equals_eos_id": false,
+        "pad_label_is_minus_100": true,
+        "padded_slots": 108,
+        "prompt_labels_are_masked": true,
+        "real_eos_remains_supervised": true,
+        "shape": [
+          2,
+          506
+        ],
+        "supervised_labels_after_causal_shift": [
+          5,
+          5
+        ],
+        "tensor_device": "cpu"
+      },
+      "forced_pad_equals_eos": {
+        "attention_padding_is_zero": true,
+        "example_lengths": [
+          506,
+          398
+        ],
+        "pad_id_equals_eos_id": true,
+        "pad_label_is_minus_100": true,
+        "padded_slots": 108,
+        "prompt_labels_are_masked": true,
+        "real_eos_remains_supervised": true,
+        "shape": [
+          2,
+          506
+        ],
+        "supervised_labels_after_causal_shift": [
+          5,
+          5
+        ],
+        "tensor_device": "cpu"
+      }
+    },
+    "calls": 2,
+    "status": "PASS"
+  },
+  "future_B_C_new_pool_lengths": "NOT_OBSERVED",
+  "future_paired_exposure_gate": "NOT_EVALUABLE_WITHOUT_FUTURE_B_C_POOL; no pass claim",
+  "input_encoding_calls": {
+    "p0_final_adapter": 240,
+    "snapshot": 245
+  },
+  "negative_software_checks": {
+    "malformed_bare_id": {
+      "reason": "DatasetInvariantError",
+      "rejected": true
+    },
+    "overlength": {
+      "above_2048": true,
+      "reason": "example exceeds frozen max_length; truncation is prohibited",
+      "rejected": true,
+      "synthetic_prompt_tokens": 25002
+    },
+    "would_truncate": {
+      "reason": "example exceeds frozen max_length; truncation is prohibited",
+      "rejected": true
+    }
+  },
+  "p0_public_template_render_calls": {
+    "p0_final_adapter": 120,
+    "snapshot": 120
+  },
+  "planned_future_144_examples_x_2_epochs_x_2048_padded_slot_ceiling_per_arm": 589824,
+  "planned_future_maximum_sequence_length": 2048,
+  "planned_future_padded_slots_observed": false,
+  "schema": "SI_E1_TOKENIZER_MASK_AUDIT_V1",
+  "snapshot_vs_adapter_comparison": {
+    "full_token_length_differences": 0,
+    "prompt_token_length_differences": 0,
+    "same_effective_chat_template_sha256": true,
+    "same_tokenizer_class": true,
+    "same_vocab_size": true,
+    "selected_rows_compared": 120,
+    "supervised_token_length_differences": 0,
+    "token_id_sequence_digest_differences": 0,
+    "tokenizer_file_bytes": {
+      "added_tokens.json": {
+        "p0_final_adapter": "c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680",
+        "same_sha256": false,
+        "snapshot": null
+      },
+      "chat_template.jinja": {
+        "p0_final_adapter": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+        "same_sha256": false,
+        "snapshot": null
+      },
+      "merges.txt": {
+        "p0_final_adapter": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "same_sha256": true,
+        "snapshot": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+      },
+      "special_tokens_map.json": {
+        "p0_final_adapter": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd",
+        "same_sha256": false,
+        "snapshot": null
+      },
+      "tokenizer.json": {
+        "p0_final_adapter": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "same_sha256": true,
+        "snapshot": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+      },
+      "tokenizer_config.json": {
+        "p0_final_adapter": "443bfa629eb16387a12edbf92a76f6a6f10b2af3b53d87ba1550adfcf45f7fa0",
+        "same_sha256": false,
+        "snapshot": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+      },
+      "vocab.json": {
+        "p0_final_adapter": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+        "same_sha256": true,
+        "snapshot": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    }
+  },
+  "status": "AUDIT_ONLY_NOT_RUNTIME_OR_TRAINING_READINESS",
+  "template_render_matches_stored_prompt": {
+    "p0_final_adapter": {
+      "matches_stored": 120
+    },
+    "snapshot": {
+      "matches_stored": 120
+    }
+  },
+  "token_accounting": {
+    "p0_final_adapter": {
+      "causal_shift_loss_bearing_tokens_one_pass": 600,
+      "conditional_S120_two_epoch_nonpad_full_input_exposure_per_arm": 129844,
+      "conditional_S120_two_epoch_supervised_target_exposure_per_arm": 1200,
+      "generation_tokens": "NOT_APPLICABLE_FOR_S120_LABEL_ROWS; no generations executed and source row does not establish generated-token count",
+      "nonpad_full_input_tokens_one_pass_prompt_plus_target": 64922,
+      "nonpad_prompt_input_tokens_one_pass": 64322,
+      "selected_rows_with_actual_token_lengths": 120,
+      "supervised_target_tokens_including_eos_one_pass": 600
+    },
+    "snapshot": {
+      "causal_shift_loss_bearing_tokens_one_pass": 600,
+      "conditional_S120_two_epoch_nonpad_full_input_exposure_per_arm": 129844,
+      "conditional_S120_two_epoch_supervised_target_exposure_per_arm": 1200,
+      "generation_tokens": "NOT_APPLICABLE_FOR_S120_LABEL_ROWS; no generations executed and source row does not establish generated-token count",
+      "nonpad_full_input_tokens_one_pass_prompt_plus_target": 64922,
+      "nonpad_prompt_input_tokens_one_pass": 64322,
+      "selected_rows_with_actual_token_lengths": 120,
+      "supervised_target_tokens_including_eos_one_pass": 600
+    }
+  },
+  "tokenizer_load_count": 2,
+  "tokenizer_loads": [
+    {
+      "class": "transformers.models.qwen2.tokenization_qwen2_fast.Qwen2TokenizerFast",
+      "load_seconds_monotonic": 0.333541591,
+      "local_files_only": true,
+      "name": "snapshot",
+      "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218",
+      "trust_remote_code": false
+    },
+    {
+      "class": "transformers.models.qwen2.tokenization_qwen2_fast.Qwen2TokenizerFast",
+      "load_seconds_monotonic": 0.338752434,
+      "local_files_only": true,
+      "name": "p0_final_adapter",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+      "trust_remote_code": false
+    }
+  ],
+  "tokenizer_summaries": {
+    "p0_final_adapter": {
+      "chat_template_bytes": 4168,
+      "chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+      "class": "transformers.models.qwen2.tokenization_qwen2_fast.Qwen2TokenizerFast",
+      "eos_pad_same_id": false,
+      "eos_pad_same_string": false,
+      "eos_token": "<|im_end|>",
+      "pad_token": "<|endoftext|>",
+      "vocab_size": 151669
+    },
+    "snapshot": {
+      "chat_template_bytes": 4168,
+      "chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+      "class": "transformers.models.qwen2.tokenization_qwen2_fast.Qwen2TokenizerFast",
+      "eos_pad_same_id": false,
+      "eos_pad_same_string": false,
+      "eos_token": "<|im_end|>",
+      "pad_token": "<|endoftext|>",
+      "vocab_size": 151669
+    }
+  },
+  "whole_task_activity_across_captured_attempts": {
+    "actual_alfworld_constructions_resets_steps": 0,
+    "actual_generation_calls": 0,
+    "actual_model_loads": 0,
+    "actual_training_runs": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "returncode": 1,
+        "selected_rows": 0,
+        "status": "FAILED_BEFORE_TOKENIZER_LOAD",
+        "tokenizer_loads": 0,
+        "worker_stderr_sha256": "60a060be5ba7c72238cb197a5ff45d6b5d89d02edd64e7885f16afc1e6caf11c",
+        "worker_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "attempt": 2,
+        "returncode": 0,
+        "selected_rows": 120,
+        "status": "S120_COMPACT_MANIFEST_COMPLETE",
+        "tokenizer_loads": 2,
+        "worker_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "worker_stdout_sha256": "8e060308c3fb265c4db297f897f651e673adbc7e6e1d9b06f51771e29771d2c2"
+      },
+      {
+        "attempt": 3,
+        "returncode": 0,
+        "selected_rows": 120,
+        "status": "S120_COMPACT_MANIFEST_COMPLETE",
+        "tokenizer_loads": 2,
+        "worker_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "worker_stdout_sha256": "655dbbc98509f7141c52f4f9db95d892f162eb265693a3a762bd5b9f818e9412"
+      }
+    ],
+    "chat_template_renders_by_tokenizer": {
+      "p0_final_adapter": 240,
+      "snapshot": 240
+    },
+    "collator_calls": 4,
+    "count_basis": "successful worker summaries were parsed from exact captured stdout; failed first attempt traceback establishes it stopped before transformers/AutoTokenizer imports; row encoding counts are 120 selected rows per tokenizer per successful worker; collator code path executes configured-pad and forced-PAD=EOS batches per successful worker.",
+    "cpu_toy_or_collator_invocations": 4,
+    "failed_worker_attempts": 1,
+    "selected_row_encodings_by_tokenizer": {
+      "p0_final_adapter": 240,
+      "snapshot": 240
+    },
+    "successful_worker_attempts": 2,
+    "tokenizer_function_calls": {
+      "p0_final_adapter": 480,
+      "snapshot": 489
+    },
+    "tokenizer_loads": 4
+  }
+}

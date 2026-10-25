@@ -1,0 +1,58 @@
+{
+  "schema": "SI_E1_BINDINGS_SOURCE_SCOPE_ADDENDUM_V1",
+  "status": "CLARIFICATION_ONLY_NO_REENCODING",
+  "parent_bindings": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__LUNA__si-e1-token-runtime-audit__sie1_b8f6/input_bindings.json",
+    "sha256": "30f6facfb11850a13f4fa0233f9a837addd5b187bcefd9c67ad475d81dea2a05"
+  },
+  "actual_execution_checkout": {
+    "path": "/home/lizening/Alfworld-Self-Improvement-Project",
+    "head": "4f5c2e18e0dfdf48e9471fcba0a3ee715be3ca3b",
+    "branch": "codex/progress-aware-recovery",
+    "clean_at_recorded_inspection": true,
+    "statement": "The audit imported from this authoritative old checkout. Its HEAD is 4f5c2e18..., not 85cbb923.... Commit 85cbb923... was separately verified to exist as a Git commit object; it was not checked out for this audit."
+  },
+  "actual_python_module_origins": {
+    "basis": "Captured by the successful worker inside the exact pinned Python subprocess; paths are also recorded in input_bindings.json/python_path_policy/module_origins.",
+    "modules": {
+      "env.base": "/home/lizening/Alfworld-Self-Improvement-Project/src/env/base.py",
+      "models.policy": "/home/lizening/Alfworld-Self-Improvement-Project/src/models/policy.py",
+      "recovery.corpus": "/home/lizening/Alfworld-Self-Improvement-Project/src/recovery/corpus.py",
+      "sft.masking": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/masking.py",
+      "sft.protocol": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/protocol.py"
+    },
+    "other_exact85_compared_files_not_claimed_as_direct_worker_imports": [
+      "src/models/action_parser.py",
+      "src/sft/dataset.py",
+      "src/sft/training.py"
+    ]
+  },
+  "independent_exact85_byte_equivalence": {
+    "evidence_path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/independent_luna_helper_equivalence.json",
+    "evidence_sha256": "9061c15404c0753e7c997f09cd8677fd0450f120effb8b3c9f982da5ae4a9eb9",
+    "reviewed_base": "85cbb92395e5e2420c2adeb1fa0634653e742910",
+    "result": "all_equal",
+    "exact_file_scope": {
+      "src/sft/protocol.py": "cb9a8ee23d1208064348810ef3580773ba14403bfaac6a4e7f4a43c5540178a8",
+      "src/sft/masking.py": "c788038d0af1ee4f3a8a2ac8f48da0d9b0cda6c7bfe9d673248a87f5788df1a8",
+      "src/sft/dataset.py": "26f01b4e9c51165ca049e9afaf8ea6d012369097051373150b2646ae826edcaa",
+      "src/sft/training.py": "0c722ca6ff17aa50da6fb294b632619f65f99936ce41e61ec0dab6288c7b584e",
+      "src/models/action_parser.py": "0a1c668d590980d1d8cdd4104a2b3c9aa851037fc238a2c73c45b57ab4432fbe",
+      "src/models/policy.py": "afbb9544e2ea0c2aa73d3f7dcfbf7e366f1daf6eb95fd4e89fefe0c913dda469",
+      "src/env/base.py": "a3ae633aa79c8f80a70629fd398b880ea9c1807e7c219717b98e518b12496abb",
+      "src/recovery/corpus.py": "14d8ee0f4059f43e76cd94f6511f4ad1e40b4c97377e9bce987d48b59e66a6a1"
+    },
+    "interpretation": "The eight named source files in the actual imported checkout are byte-identical to those files at exact commit 85cbb923.... This is a file-scoped helper equivalence only; it does not make the whole checkout HEAD equal to 85cbb923..., and does not establish collector, model, environment, or runtime equivalence/readiness."
+  },
+  "audit_boundary": {
+    "classification": "TOKENIZER_AND_MASK_SOFTWARE_AUDIT_ONLY",
+    "new_collector": false,
+    "qwen3_8b_model_load": false,
+    "neural_generation": false,
+    "training": false,
+    "alfworld_construction_reset_step": false,
+    "runtime_or_preflight_readiness_claim": false,
+    "no_reencoding_after_independent_comparison": true,
+    "original_attempt_receipts_preserved": true
+  }
+}

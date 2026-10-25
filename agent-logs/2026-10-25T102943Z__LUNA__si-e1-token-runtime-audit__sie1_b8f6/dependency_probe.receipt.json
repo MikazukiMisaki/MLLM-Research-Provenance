@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "-c",
+    "import importlib.metadata as m,json,pathlib,sys; names=['torch', 'transformers', 'tokenizers', 'trl', 'peft', 'accelerate', 'datasets', 'safetensors', 'huggingface_hub', 'numpy', 'PyYAML']; out={}; \nfor n in names:\n try:\n  d=m.distribution(n); out[n]={\"version\":d.version,\"distribution_name\":d.metadata.get(\"Name\"),\"origin\":str(pathlib.Path(d.locate_file(\"\")).resolve())}\n except m.PackageNotFoundError: out[n]={\"version\":None,\"origin\":None}\nprint(json.dumps({\"python\":sys.version,\"packages\":out},sort_keys=True))"
+  ],
+  "cwd": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__LUNA__si-e1-token-runtime-audit__sie1_b8f6",
+  "ended_utc": "2026-10-25T10:41:39.662811+00:00",
+  "offline": true,
+  "removed_python_environment_vars": [],
+  "returncode": 0,
+  "started_utc": "2026-10-25T10:41:39.562698+00:00",
+  "stderr": "",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout": "{\"packages\": {\"PyYAML\": {\"distribution_name\": \"PyYAML\", \"origin\": \"/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages\", \"version\": \"6.0.2\"}, \"accelerate\": {\"distribution_name\": \"accelerate\", \"origin\": \"/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages\", \"version\": \"1.10.1\"}, \"datasets\": {\"distribution_name\": \"datasets\", \"origin\": \"/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages\", \"version\": \"4.0.0\"}, \"huggingface_hub\": {\"distribution_name\": \"huggingface_hub\", \"origin\": \"/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages\", \"version\": \"0.36.2\"}, \"numpy\": {\"distribution_name\": \"numpy\", \"origin\": \"/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages\", \"version\": \"1.26.4\"}, \"peft\": {\"distribution_name\": \"peft\", \"origin\": \"/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages\", \"version\": \"0.17.1\"}, \"safetensors\": {\"distribution_name\": \"safetensors\", \"origin\": \"/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages\", \"version\": \"0.8.0\"}, \"tokenizers\": {\"distribution_name\": \"tokenizers\", \"origin\": \"/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages\", \"version\": \"0.22.2\"}, \"torch\": {\"distribution_name\": \"torch\", \"origin\": \"/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages\", \"version\": \"2.6.0+cu124\"}, \"transformers\": {\"distribution_name\": \"transformers\", \"origin\": \"/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages\", \"version\": \"4.56.2\"}, \"trl\": {\"distribution_name\": \"trl\", \"origin\": \"/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages\", \"version\": \"0.23.0\"}}, \"python\": \"3.10.20 (main, Jun 11 2026, 15:17:37) [GCC 14.3.0]\"}\n",
+  "stdout_sha256": "cd1a20a5f4655b452712f0e2188cad6f0e37b434f7a2c48594267191fb9db50a"
+}

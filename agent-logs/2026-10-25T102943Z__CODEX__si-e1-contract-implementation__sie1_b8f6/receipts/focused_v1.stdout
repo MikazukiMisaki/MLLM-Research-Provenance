@@ -1,0 +1,125 @@
+.............................FFF.............................            [100%]
+=================================== FAILURES ===================================
+_____ test_early_invalid_terminal_NA_and_EOS_semantics[invalid_stage_one] ______
+
+tmp_path = PosixPath('/tmp/pytest-of-lizening/pytest-235/test_early_invalid_terminal_NA3')
+state_kind = 'invalid_stage_one'
+
+    @pytest.mark.parametrize("state_kind", ["early", "empty", "teacher_terminal", "invalid_stage_one", "invalid_stage_two", "truncated_stage_one"])
+    def test_early_invalid_terminal_NA_and_EOS_semantics(tmp_path,state_kind):
+        first = synthetic_plan()[0].task_id
+        def options(slot,phase):
+            return {state_kind:True} if slot.task_id==first and state_kind in ("early","empty","teacher_terminal") else {}
+        def mutate(raw,boundary):
+            is_target = f"synthetic task {first.rsplit('/',1)[-1]}." in raw["prompt"] and first.split('/')[0] in raw["prompt"]
+            phase1=raw["max_new_tokens"]==40
+            phase2=raw["prompt"].startswith("Select the one currently available action")
+            if is_target and ((state_kind=="invalid_stage_one" and phase1) or (state_kind=="invalid_stage_two" and phase2)):
+                ids=boundary.tokenizer("bad")["input_ids"]+[1]
+                raw.update(raw_output="bad",token_ids=ids,generated_tokens=len(ids),token_ids_sha256=hashlib.sha256(json.dumps(ids,separators=(',',':')).encode()).hexdigest(),token_cap_reached=False)
+            if is_target and state_kind=="truncated_stage_one" and phase1:
+                ids=raw["token_ids"][:-1]+[boundary.tokenizer.token(" ")]
+                raw.update(token_ids=ids,token_ids_sha256=hashlib.sha256(json.dumps(ids,separators=(',',':')).encode()).hexdigest(),output_complete=False)
+            return raw
+        run,events,tok,_,envs=collect_synthetic(tmp_path/state_kind,mutate=mutate,env_options=options)
+        assert run["status"]=="COMPLETE"
+        row=run["slots"][0]
+        audit_run(run,events,tok)
+        if state_kind in ("early","empty"):
+            assert row["disposition"]=="NO_ELIGIBLE_STATE" and row["YT"] is None and row["branch"] is None
+        elif state_kind=="teacher_terminal":
+            assert row["YT"]==1 and row["branch"]["suffix"]["generations"]==[]
+        else:
+>           assert row["disposition"]=="INVALID_TEACHER" and row["YT"] is None
+E           AssertionError: assert ('PAIRED' == 'INVALID_TEACHER'
+E             
+E             - INVALID_TEACHER
+E             + PAIRED)
+
+tests/test_si_p3_collector.py:197: AssertionError
+_____ test_early_invalid_terminal_NA_and_EOS_semantics[invalid_stage_two] ______
+
+tmp_path = PosixPath('/tmp/pytest-of-lizening/pytest-235/test_early_invalid_terminal_NA4')
+state_kind = 'invalid_stage_two'
+
+    @pytest.mark.parametrize("state_kind", ["early", "empty", "teacher_terminal", "invalid_stage_one", "invalid_stage_two", "truncated_stage_one"])
+    def test_early_invalid_terminal_NA_and_EOS_semantics(tmp_path,state_kind):
+        first = synthetic_plan()[0].task_id
+        def options(slot,phase):
+            return {state_kind:True} if slot.task_id==first and state_kind in ("early","empty","teacher_terminal") else {}
+        def mutate(raw,boundary):
+            is_target = f"synthetic task {first.rsplit('/',1)[-1]}." in raw["prompt"] and first.split('/')[0] in raw["prompt"]
+            phase1=raw["max_new_tokens"]==40
+            phase2=raw["prompt"].startswith("Select the one currently available action")
+            if is_target and ((state_kind=="invalid_stage_one" and phase1) or (state_kind=="invalid_stage_two" and phase2)):
+                ids=boundary.tokenizer("bad")["input_ids"]+[1]
+                raw.update(raw_output="bad",token_ids=ids,generated_tokens=len(ids),token_ids_sha256=hashlib.sha256(json.dumps(ids,separators=(',',':')).encode()).hexdigest(),token_cap_reached=False)
+            if is_target and state_kind=="truncated_stage_one" and phase1:
+                ids=raw["token_ids"][:-1]+[boundary.tokenizer.token(" ")]
+                raw.update(token_ids=ids,token_ids_sha256=hashlib.sha256(json.dumps(ids,separators=(',',':')).encode()).hexdigest(),output_complete=False)
+            return raw
+        run,events,tok,_,envs=collect_synthetic(tmp_path/state_kind,mutate=mutate,env_options=options)
+        assert run["status"]=="COMPLETE"
+        row=run["slots"][0]
+        audit_run(run,events,tok)
+        if state_kind in ("early","empty"):
+            assert row["disposition"]=="NO_ELIGIBLE_STATE" and row["YT"] is None and row["branch"] is None
+        elif state_kind=="teacher_terminal":
+            assert row["YT"]==1 and row["branch"]["suffix"]["generations"]==[]
+        else:
+>           assert row["disposition"]=="INVALID_TEACHER" and row["YT"] is None
+E           AssertionError: assert ('PAIRED' == 'INVALID_TEACHER'
+E             
+E             - INVALID_TEACHER
+E             + PAIRED)
+
+tests/test_si_p3_collector.py:197: AssertionError
+____ test_early_invalid_terminal_NA_and_EOS_semantics[truncated_stage_one] _____
+
+tmp_path = PosixPath('/tmp/pytest-of-lizening/pytest-235/test_early_invalid_terminal_NA5')
+state_kind = 'truncated_stage_one'
+
+    @pytest.mark.parametrize("state_kind", ["early", "empty", "teacher_terminal", "invalid_stage_one", "invalid_stage_two", "truncated_stage_one"])
+    def test_early_invalid_terminal_NA_and_EOS_semantics(tmp_path,state_kind):
+        first = synthetic_plan()[0].task_id
+        def options(slot,phase):
+            return {state_kind:True} if slot.task_id==first and state_kind in ("early","empty","teacher_terminal") else {}
+        def mutate(raw,boundary):
+            is_target = f"synthetic task {first.rsplit('/',1)[-1]}." in raw["prompt"] and first.split('/')[0] in raw["prompt"]
+            phase1=raw["max_new_tokens"]==40
+            phase2=raw["prompt"].startswith("Select the one currently available action")
+            if is_target and ((state_kind=="invalid_stage_one" and phase1) or (state_kind=="invalid_stage_two" and phase2)):
+                ids=boundary.tokenizer("bad")["input_ids"]+[1]
+                raw.update(raw_output="bad",token_ids=ids,generated_tokens=len(ids),token_ids_sha256=hashlib.sha256(json.dumps(ids,separators=(',',':')).encode()).hexdigest(),token_cap_reached=False)
+            if is_target and state_kind=="truncated_stage_one" and phase1:
+                ids=raw["token_ids"][:-1]+[boundary.tokenizer.token(" ")]
+                raw.update(token_ids=ids,token_ids_sha256=hashlib.sha256(json.dumps(ids,separators=(',',':')).encode()).hexdigest(),output_complete=False)
+            return raw
+        run,events,tok,_,envs=collect_synthetic(tmp_path/state_kind,mutate=mutate,env_options=options)
+        assert run["status"]=="COMPLETE"
+        row=run["slots"][0]
+        audit_run(run,events,tok)
+        if state_kind in ("early","empty"):
+            assert row["disposition"]=="NO_ELIGIBLE_STATE" and row["YT"] is None and row["branch"] is None
+        elif state_kind=="teacher_terminal":
+            assert row["YT"]==1 and row["branch"]["suffix"]["generations"]==[]
+        else:
+>           assert row["disposition"]=="INVALID_TEACHER" and row["YT"] is None
+E           AssertionError: assert ('PAIRED' == 'INVALID_TEACHER'
+E             
+E             - INVALID_TEACHER
+E             + PAIRED)
+
+tests/test_si_p3_collector.py:197: AssertionError
+=============================== warnings summary ===============================
+tests/test_si_p3_learning.py::test_genuine_CPU_PEFT_warmstart_fresh_optimizer_final18_and_roundtrip
+  /home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/peft/utils/save_and_load.py:286: UserWarning: Could not find a config file in  - will assume that the vocabulary was not modified.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/lizening/research-notes/agent-logs/2026-10-25T102943Z__CODEX__si-e1-contract-implementation__sie1_b8f6/focused_v1.xml -
+=========================== short test summary info ============================
+FAILED tests/test_si_p3_collector.py::test_early_invalid_terminal_NA_and_EOS_semantics[invalid_stage_one]
+FAILED tests/test_si_p3_collector.py::test_early_invalid_terminal_NA_and_EOS_semantics[invalid_stage_two]
+FAILED tests/test_si_p3_collector.py::test_early_invalid_terminal_NA_and_EOS_semantics[truncated_stage_one]
+3 failed, 58 passed, 1 warning in 87.74s (0:01:27)

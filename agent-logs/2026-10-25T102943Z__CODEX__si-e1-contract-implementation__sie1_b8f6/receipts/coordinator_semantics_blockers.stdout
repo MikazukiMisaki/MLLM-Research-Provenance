@@ -1,0 +1,9 @@
+# SI-E1 preliminary treatment-contract blockers
+
+This is a read-only review of the in-progress implementation, not an exact-SHA FAIL or PASS. Files may change before the candidate freezes. Re-check the final committed bytes independently. Do not change old frozen methods.
+
+1. **Teacher Stage 2 must be frozen R19 bare-ID v2.** Frozen `scripts/run_r19_experiment.py` uses `recovery.two_stage_v2.stage_two_prompt` and `parse_bare_stage_two_output`. Draft `src/self_improvement/si_p3/collector.py` and `audit.py` import the labeled v1 prompt/parser from `recovery.two_stage`; `tests/si_p3_support.py::RawBoundary` supplies `Action-ID: A001`. This positive fixture validates a different treatment. Use the unchanged v2 production prompt/parser throughout collector, consumer and integration fixtures. Test the new prompt equals the actual R19 v2 prompt for the same request, bare A001 selects, labeled Action-ID output is rejected, and incomplete teacher output still fails closed.
+
+2. **P0 source/suffix decision must not acquire a new EOS completeness gate.** Frozen `LiveR19Runtime.actor_generation` calls `parse_p2_selection(raw_output, ..., reflection_required=False)` independently of `output_complete`. Draft `parse_generation` returns `truncated_actor` before parsing a valid bare ID when the producer flags EOS-incomplete. This contradicts STATIC_CONTRACT_RISK_ADJUDICATION.md. Retain raw completion/cap flags and strict producer accounting, but preserve the frozen P0 decision. Add a valid bare-ID cap/incomplete direct differential test and an actual collector source/suffix test proving the action executes. Teacher completeness remains strict as before.
+
+These are minimal repairs within the existing assignment's unchanged-prompt/decoding/P0-treatment boundary; no new user approval or scientific execution is required. No recovery redesign, old method edit, model/env call or protocol-budget change is authorized.

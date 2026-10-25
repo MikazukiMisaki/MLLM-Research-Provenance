@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python",
+    "-c",
+    "import json,hashlib;from pathlib import Path;p=Path(\"configs/sft/sft_accepted_task_splits.json\"); b=p.read_bytes();v=json.loads(b);print(\"sha256\",hashlib.sha256(b).hexdigest());print(\"keys\",list(v));print({k:type(x).__name__ for k,x in v.items()}); print({k:len(x) for k,x in v.get(\"pools\",{}).items()});print({k:(len(x) if isinstance(x,list) else x) for k,x in v.items() if k!=\"pools\"})"
+  ],
+  "cwd": "/home/lizening/wt-si-p3-engineering-contracts",
+  "started_utc": "2026-10-25T10:54:37.587486+00:00",
+  "elapsed_monotonic_seconds": 0.04314622934907675,
+  "returncode": 0,
+  "stdout": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__CODEX__si-e1-contract-implementation__sie1_b8f6/receipts/background_manifest_shape.stdout",
+  "stderr": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__CODEX__si-e1-contract-implementation__sie1_b8f6/receipts/background_manifest_shape.stderr"
+}

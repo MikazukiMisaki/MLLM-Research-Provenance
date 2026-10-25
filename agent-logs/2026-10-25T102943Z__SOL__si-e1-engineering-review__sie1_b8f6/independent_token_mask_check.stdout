@@ -1,0 +1,93 @@
+{
+  "status": "PASS_EXISTING_S120_TOKENIZATION_AND_CPU_MASK_ONLY",
+  "independent_selection_matches_all_120_luna_rows": true,
+  "base_and_adapter_tokenization_identical_for_all_120": true,
+  "production_modules": {
+    "masking": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/masking.py",
+    "dataset": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/dataset.py"
+  },
+  "accounting": {
+    "tokenizers_loaded": 2,
+    "selected_rows_encoded_per_tokenizer": 120,
+    "successful_encoding_api_calls": 480,
+    "overlength_negative_encoding_calls": 4,
+    "cpu_collator_calls": 4,
+    "actual_8b_or_P0_model_objects": 0,
+    "scientific_generations": 0,
+    "alfworld_construct_reset_step": 0,
+    "training_runs": 0
+  },
+  "future_new_B_C_data_and_exposure": "NOT_OBSERVED; no acquisition/train/runtime PASS"
+}
+{
+  "snapshot": {
+    "rows": 120,
+    "nonpad_full_tokens": 64922,
+    "nonpad_prompt_tokens": 64322,
+    "target_plus_eos_tokens": 600,
+    "target_length_set": [
+      5
+    ],
+    "all_120_masks_checked": true,
+    "collations": [
+      {
+        "pad_id": 151643,
+        "pad_equals_eos": false,
+        "shifted_loss_tokens": 600,
+        "shape": [
+          120,
+          876
+        ],
+        "padding_positions": 40198,
+        "pass": true
+      },
+      {
+        "pad_id": 151645,
+        "pad_equals_eos": true,
+        "shifted_loss_tokens": 600,
+        "shape": [
+          120,
+          876
+        ],
+        "padding_positions": 40198,
+        "pass": true
+      }
+    ],
+    "would_truncate_rejected": "example exceeds frozen max_length; truncation is prohibited"
+  },
+  "p0_final_adapter": {
+    "rows": 120,
+    "nonpad_full_tokens": 64922,
+    "nonpad_prompt_tokens": 64322,
+    "target_plus_eos_tokens": 600,
+    "target_length_set": [
+      5
+    ],
+    "all_120_masks_checked": true,
+    "collations": [
+      {
+        "pad_id": 151643,
+        "pad_equals_eos": false,
+        "shifted_loss_tokens": 600,
+        "shape": [
+          120,
+          876
+        ],
+        "padding_positions": 40198,
+        "pass": true
+      },
+      {
+        "pad_id": 151645,
+        "pad_equals_eos": true,
+        "shifted_loss_tokens": 600,
+        "shape": [
+          120,
+          876
+        ],
+        "padding_positions": 40198,
+        "pass": true
+      }
+    ],
+    "would_truncate_rejected": "example exceeds frozen max_length; truncation is prohibited"
+  }
+}

@@ -1,0 +1,1792 @@
+{
+  "status": "PASS_EXISTING_S120_TOKENIZATION_AND_CPU_MASK_ONLY",
+  "independent_selection_matches_all_120_luna_rows": true,
+  "base_and_adapter_tokenization_identical_for_all_120": true,
+  "input_bindings": {
+    "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/sft_expert_dataset_balanced.jsonl": "c547e8f0c5988b29288f2a097169c7859741b7d4f53f222af31f5e2889d516cf",
+    "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/independent_S_background_metadata.json": "04d2c565d1cc277e58358fe5d2346dc3512d518a42623f5fcffe281654dd2562",
+    "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__LUNA__si-e1-token-runtime-audit__sie1_b8f6/S_BACKGROUND_MANIFEST.json": "6d4e8a937d05f91a2d49f76af2fc812d2b566e93e6a8acf38c56fe7ff832aec4"
+  },
+  "production_modules": {
+    "masking": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/masking.py",
+    "dataset": "/home/lizening/wt-r19-g4-consumer-contract-repair/src/sft/dataset.py"
+  },
+  "result": {
+    "snapshot": {
+      "rows": 120,
+      "nonpad_full_tokens": 64922,
+      "nonpad_prompt_tokens": 64322,
+      "target_plus_eos_tokens": 600,
+      "target_length_set": [
+        5
+      ],
+      "all_120_masks_checked": true,
+      "collations": [
+        {
+          "pad_id": 151643,
+          "pad_equals_eos": false,
+          "shifted_loss_tokens": 600,
+          "shape": [
+            120,
+            876
+          ],
+          "padding_positions": 40198,
+          "pass": true
+        },
+        {
+          "pad_id": 151645,
+          "pad_equals_eos": true,
+          "shifted_loss_tokens": 600,
+          "shape": [
+            120,
+            876
+          ],
+          "padding_positions": 40198,
+          "pass": true
+        }
+      ],
+      "would_truncate_rejected": "example exceeds frozen max_length; truncation is prohibited",
+      "tokenizer_files": {
+        "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+      },
+      "compact_rows": [
+        {
+          "task_id": "pick_and_place_simple-CD-None-Shelf-326/trial_T20190910_060853_032012",
+          "full": 506,
+          "prompt": 501,
+          "target": 5,
+          "input_ids_sha256": "cf1418552e85870d9e65c91677502cb84c96cf52df924266cfff96edc5f66694"
+        },
+        {
+          "task_id": "pick_and_place_simple-Book-None-Desk-310/trial_T20190909_121806_908997",
+          "full": 398,
+          "prompt": 393,
+          "target": 5,
+          "input_ids_sha256": "4f1932f8d8ccae98657443d1758fb386734a486215d5023fe150bcba1fb47747"
+        },
+        {
+          "task_id": "pick_and_place_simple-KeyChain-None-Drawer-208/trial_T20190909_013444_420195",
+          "full": 407,
+          "prompt": 402,
+          "target": 5,
+          "input_ids_sha256": "20463e54a7ca10687b07ade74eaf068a8313525ffa26a6c7436e0242cf682eb5"
+        },
+        {
+          "task_id": "pick_and_place_simple-CellPhone-None-Bed-306/trial_T20190909_012707_174038",
+          "full": 338,
+          "prompt": 333,
+          "target": 5,
+          "input_ids_sha256": "2b3734d28b374c358355259cbfe462588ebc403c391697a7a8804f52969beb41"
+        },
+        {
+          "task_id": "pick_and_place_simple-Newspaper-None-Ottoman-210/trial_T20190907_144808_904739",
+          "full": 417,
+          "prompt": 412,
+          "target": 5,
+          "input_ids_sha256": "b752319d32fc7d0d09b30a6561d371c40ed9d98908dbee90bba8e7e50838a914"
+        },
+        {
+          "task_id": "pick_and_place_simple-ButterKnife-None-Drawer-8/trial_T20190907_142645_859732",
+          "full": 701,
+          "prompt": 696,
+          "target": 5,
+          "input_ids_sha256": "1596a760d5744054450c8c2ccdc1f16d343e2c0900648f42806e576ceb7f6f33"
+        },
+        {
+          "task_id": "pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-420/trial_T20190908_155546_250341",
+          "full": 460,
+          "prompt": 455,
+          "target": 5,
+          "input_ids_sha256": "a842cdc50efc5cb6dc463324dc11b74770de478c6bb8267808d9f893313c54a4"
+        },
+        {
+          "task_id": "pick_and_place_simple-SprayBottle-None-GarbageCan-415/trial_T20190907_070419_171501",
+          "full": 456,
+          "prompt": 451,
+          "target": 5,
+          "input_ids_sha256": "5868e55d83bac10abf9f58c3f17138ced23c545689263d9d8919202f6a45c81e"
+        },
+        {
+          "task_id": "pick_and_place_simple-Candle-None-CounterTop-411/trial_T20190906_200853_771692",
+          "full": 468,
+          "prompt": 463,
+          "target": 5,
+          "input_ids_sha256": "ada51dcbf63cd9011007f2133d802572e2e7b42e24e2ac3bad56b704bc8aedba"
+        },
+        {
+          "task_id": "pick_and_place_simple-KeyChain-None-Dresser-317/trial_T20190910_184933_511149",
+          "full": 464,
+          "prompt": 459,
+          "target": 5,
+          "input_ids_sha256": "ff5b1692c079c0f9d15dcb4a7db671fd88f2687c017231e8277a6f82fee53f91"
+        },
+        {
+          "task_id": "pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-423/trial_T20190908_022416_998587",
+          "full": 554,
+          "prompt": 549,
+          "target": 5,
+          "input_ids_sha256": "937c74fe3a558534c5fe666cfd402d734cabf2dad988ee6791e8ef273fe84de2"
+        },
+        {
+          "task_id": "pick_and_place_simple-Laptop-None-Bed-302/trial_T20190908_112436_878411",
+          "full": 575,
+          "prompt": 570,
+          "target": 5,
+          "input_ids_sha256": "c48489e2090ddeb2ef70cf3486c34e7cd7bca9293512dbf6eaa2aee9e2ff8798"
+        },
+        {
+          "task_id": "pick_and_place_simple-Vase-None-SideTable-209/trial_T20190909_053401_266687",
+          "full": 454,
+          "prompt": 449,
+          "target": 5,
+          "input_ids_sha256": "d319b3490e3e4449b455286553badd07f469e735bdf2eec91bcf18921ca1af08"
+        },
+        {
+          "task_id": "pick_and_place_simple-RemoteControl-None-Dresser-311/trial_T20190907_154740_977701",
+          "full": 361,
+          "prompt": 356,
+          "target": 5,
+          "input_ids_sha256": "9ee194a2f71b39a2c486e5780cd07f396a7e14c748c9587c8b1b7c3124282e26"
+        },
+        {
+          "task_id": "pick_and_place_simple-RemoteControl-None-ArmChair-230/trial_T20190909_020906_064567",
+          "full": 354,
+          "prompt": 349,
+          "target": 5,
+          "input_ids_sha256": "658497be93b1753bc81c6a2611515a124a222f3cc20320a6adb03966631d5cb3"
+        },
+        {
+          "task_id": "pick_and_place_simple-RemoteControl-None-ArmChair-207/trial_T20190908_140615_941385",
+          "full": 488,
+          "prompt": 483,
+          "target": 5,
+          "input_ids_sha256": "6445bb12f234e2b1f99c8570c33fe434ed9ba63a8f1585f41ea38bc5614ac280"
+        },
+        {
+          "task_id": "pick_and_place_simple-Pencil-None-Desk-309/trial_T20190918_231048_923335",
+          "full": 408,
+          "prompt": 403,
+          "target": 5,
+          "input_ids_sha256": "d18900111f70a746b41a5bcd8fc87a84fef39f6ae6269e1cd355b56ebb7dbf92"
+        },
+        {
+          "task_id": "pick_and_place_simple-Pen-None-SideTable-329/trial_T20190907_133455_179363",
+          "full": 427,
+          "prompt": 422,
+          "target": 5,
+          "input_ids_sha256": "2dea9c83958798400ae4ae94e56964354fbbacfbd343f7ac149e36b98ebf8738"
+        },
+        {
+          "task_id": "pick_and_place_simple-Watch-None-CoffeeTable-201/trial_T20190908_124509_296941",
+          "full": 393,
+          "prompt": 388,
+          "target": 5,
+          "input_ids_sha256": "230593be38c43544dd9d95aa01e9978dce57333b3862848f2a6f64a925257368"
+        },
+        {
+          "task_id": "pick_and_place_simple-Book-None-ArmChair-229/trial_T20190906_203051_143723",
+          "full": 424,
+          "prompt": 419,
+          "target": 5,
+          "input_ids_sha256": "ef326367585eb7a908ab7f4f8b87cb8f617fb419fddfbf917ac962db823cacd7"
+        },
+        {
+          "task_id": "pick_and_place_simple-Bowl-None-Fridge-6/trial_T20190906_230933_751794",
+          "full": 677,
+          "prompt": 672,
+          "target": 5,
+          "input_ids_sha256": "9f2129d7b63f87bcce6556058239f468f45083c5233b2478b8f3b5298d1ee6f9"
+        },
+        {
+          "task_id": "pick_and_place_simple-Pillow-None-ArmChair-321/trial_T20190908_104920_763828",
+          "full": 294,
+          "prompt": 289,
+          "target": 5,
+          "input_ids_sha256": "c5149aadef9df149b88dfaf6235addc75e4e2f3a5be0b8ef939f321eee5d2e94"
+        },
+        {
+          "task_id": "pick_and_place_simple-Cloth-None-Cart-401/trial_T20190909_054535_981513",
+          "full": 443,
+          "prompt": 438,
+          "target": 5,
+          "input_ids_sha256": "dd2f876fd4af3851a10cbabc2668e7f87d77ad4746d7330fa97adcc8fa4cb42f"
+        },
+        {
+          "task_id": "pick_and_place_simple-CellPhone-None-Desk-305/trial_T20190907_230951_698317",
+          "full": 529,
+          "prompt": 524,
+          "target": 5,
+          "input_ids_sha256": "842cc7acc8b7c94ceb7db9a517883ef075adb9922a50b9ee095e3ed7496f6bd7"
+        },
+        {
+          "task_id": "pick_and_place_simple-DishSponge-None-Cabinet-5/trial_T20190906_192916_142208",
+          "full": 611,
+          "prompt": 606,
+          "target": 5,
+          "input_ids_sha256": "a13b736bded865eed1d542840b35649d524a9b44dd24d2cb4e2feba6f77a1a57"
+        },
+        {
+          "task_id": "pick_and_place_simple-Newspaper-None-Sofa-211/trial_T20190906_175021_859979",
+          "full": 458,
+          "prompt": 453,
+          "target": 5,
+          "input_ids_sha256": "35567b4651f411f2dab8cf02b154dafb959ca4171ad5f25f0fe9ce6046bf7614"
+        },
+        {
+          "task_id": "pick_and_place_simple-CreditCard-None-Drawer-227/trial_T20190918_215750_186147",
+          "full": 638,
+          "prompt": 633,
+          "target": 5,
+          "input_ids_sha256": "a37022e598e1863fbe1590e75cd53cf0bb84266e2e6ae5576bf04a08ee500dee"
+        },
+        {
+          "task_id": "pick_and_place_simple-AlarmClock-None-Shelf-310/trial_T20190907_151357_096210",
+          "full": 277,
+          "prompt": 272,
+          "target": 5,
+          "input_ids_sha256": "6d8a595273395e36a1e4458ae5eaad4ff570ca307095fba54ffebaabacb040e5"
+        },
+        {
+          "task_id": "pick_and_place_simple-SprayBottle-None-CounterTop-427/trial_T20190908_232532_117315",
+          "full": 473,
+          "prompt": 468,
+          "target": 5,
+          "input_ids_sha256": "ac3b8d2ea90e7f304882f277cfddfacf9dfb1e1dc8fe0ad3f41d9eee1123ff28"
+        },
+        {
+          "task_id": "pick_and_place_simple-SaltShaker-None-DiningTable-26/trial_T20190907_113736_672101",
+          "full": 750,
+          "prompt": 745,
+          "target": 5,
+          "input_ids_sha256": "60aafb99c47d30453a009932a869e4115027581d05d50f09ef492a5199a6da1e"
+        },
+        {
+          "task_id": "pick_and_place_simple-Book-None-Desk-313/trial_T20190909_140547_719284",
+          "full": 347,
+          "prompt": 342,
+          "target": 5,
+          "input_ids_sha256": "705ef1dcf585b6b0f5c1b79001d97f13e386c5e721fdf13ef90e6fa0f75213cb"
+        },
+        {
+          "task_id": "pick_and_place_simple-SprayBottle-None-Toilet-422/trial_T20190909_124904_818536",
+          "full": 457,
+          "prompt": 452,
+          "target": 5,
+          "input_ids_sha256": "7a602659981bf782ec098da263bd31da7bed1179738fbcb97240135b1cb2b960"
+        },
+        {
+          "task_id": "pick_and_place_simple-SprayBottle-None-Cabinet-403/trial_T20190908_221042_476220",
+          "full": 526,
+          "prompt": 521,
+          "target": 5,
+          "input_ids_sha256": "35740a898d49813cffe0041304a5e57b762f6b628a3278cc110db36a472ac111"
+        },
+        {
+          "task_id": "pick_and_place_simple-CD-None-Shelf-310/trial_T20190908_130024_429688",
+          "full": 384,
+          "prompt": 379,
+          "target": 5,
+          "input_ids_sha256": "a8c0a924d04eb40f6499ea623ea664f75b0aa92c64457aa5bec7b66929314e66"
+        },
+        {
+          "task_id": "pick_and_place_simple-ToiletPaper-None-GarbageCan-403/trial_T20190907_034528_884833",
+          "full": 413,
+          "prompt": 408,
+          "target": 5,
+          "input_ids_sha256": "62534e99b54ef089fc978b72fdda0da5b3115f8c98b94e145b3780cf37511388"
+        },
+        {
+          "task_id": "pick_and_place_simple-Book-None-ArmChair-229/trial_T20190906_203105_670913",
+          "full": 373,
+          "prompt": 368,
+          "target": 5,
+          "input_ids_sha256": "c458c463ed456bedfe066a151a141bd23da5145e17c11c2940d62563f7188c1c"
+        },
+        {
+          "task_id": "pick_and_place_simple-Egg-None-Microwave-4/trial_T20190906_234424_765112",
+          "full": 600,
+          "prompt": 595,
+          "target": 5,
+          "input_ids_sha256": "7fc27265a9647941d6948ce057176a0edb72e98dd4d5da4ddbdb830891ff3e67"
+        },
+        {
+          "task_id": "pick_and_place_simple-SoapBottle-None-GarbageCan-417/trial_T20190909_120149_080996",
+          "full": 302,
+          "prompt": 297,
+          "target": 5,
+          "input_ids_sha256": "6f877c3c8ebb0a63751a948599cb5b6ca2d056ad78c9e80d8b121eb2289be0e5"
+        },
+        {
+          "task_id": "pick_and_place_simple-RemoteControl-None-Ottoman-208/trial_T20190909_100908_040512",
+          "full": 473,
+          "prompt": 468,
+          "target": 5,
+          "input_ids_sha256": "3c7e518a14716eaa5bc2d12f752bfd06b2bb7b588ad22f959af9c1da42d28667"
+        },
+        {
+          "task_id": "pick_and_place_simple-Candle-None-SideTable-420/trial_T20190907_025706_872961",
+          "full": 279,
+          "prompt": 274,
+          "target": 5,
+          "input_ids_sha256": "55ccf78ba4a335a4f1b65dfee93f17465d81ae8f5be3068e677f47d260867b40"
+        },
+        {
+          "task_id": "pick_and_place_simple-Box-None-ArmChair-212/trial_T20190908_032818_426471",
+          "full": 368,
+          "prompt": 363,
+          "target": 5,
+          "input_ids_sha256": "4916fc74e798eb25669c095d0ef9390c52599832b727f6c4a27e3ec68cfbe0e3"
+        },
+        {
+          "task_id": "pick_and_place_simple-KeyChain-None-SideTable-330/trial_T20190908_132834_404830",
+          "full": 562,
+          "prompt": 557,
+          "target": 5,
+          "input_ids_sha256": "03f3a106ad96f652830f3ca629443eab413b68f9e67926eb48004d9c330788cf"
+        },
+        {
+          "task_id": "pick_and_place_simple-Pencil-None-Desk-302/trial_T20190908_032836_462632",
+          "full": 398,
+          "prompt": 393,
+          "target": 5,
+          "input_ids_sha256": "19b97f8038ce44f40bc9d8d7fcccf55ace089832bc5de0a111ecbd6039b5dacd"
+        },
+        {
+          "task_id": "pick_and_place_simple-HandTowel-None-Toilet-420/trial_T20190908_120224_333615",
+          "full": 411,
+          "prompt": 406,
+          "target": 5,
+          "input_ids_sha256": "1173645795153579175b3487fd0fc99a2d78aa2c6778062029e626f42ea761f8"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Tomato-None-GarbageCan-15/trial_T20190908_190007_238896",
+          "full": 556,
+          "prompt": 551,
+          "target": 5,
+          "input_ids_sha256": "86b24fff8d364ea299fb8969684079470c8b06d4e66a56fe55a61aacd201ec1c"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-SoapBar-None-Cabinet-422/trial_T20190909_170408_931882",
+          "full": 483,
+          "prompt": 478,
+          "target": 5,
+          "input_ids_sha256": "470478620d774a4d985d6103ff0856d938b3142124e0eeef4db668ca5f128a56"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Pot-None-StoveBurner-4/trial_T20190907_151406_550745",
+          "full": 525,
+          "prompt": 520,
+          "target": 5,
+          "input_ids_sha256": "3fc7fc2e4fb62ceacca1bd6e03cc346725344977f59514e22536dca56405546e"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-SoapBar-None-Cabinet-422/trial_T20190909_170330_111958",
+          "full": 516,
+          "prompt": 511,
+          "target": 5,
+          "input_ids_sha256": "224a7ffee57b1ab7009e4ede7dedf37cd66da7d64f6cc12aff023c3a38325842"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Tomato-None-Microwave-12/trial_T20190906_220713_803388",
+          "full": 769,
+          "prompt": 764,
+          "target": 5,
+          "input_ids_sha256": "dd9d048df71ce55df00e5f9fce60b74c8664a3cf48706c89fa8fc3013d11185d"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Apple-None-Fridge-24/trial_T20190907_210711_329362",
+          "full": 731,
+          "prompt": 726,
+          "target": 5,
+          "input_ids_sha256": "7ceb66223d45c26acfc1b279d25a0344c36b9f0c77e3a75637f2e3e074ba4c35"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Spoon-None-Drawer-8/trial_T20190907_151947_378545",
+          "full": 686,
+          "prompt": 681,
+          "target": 5,
+          "input_ids_sha256": "fc36f9ab2afba8dd56c821dec1f9bd458e21afb4b90d811c676437597837b295"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Kettle-None-Cabinet-11/trial_T20190908_063358_779789",
+          "full": 645,
+          "prompt": 640,
+          "target": 5,
+          "input_ids_sha256": "3f44bc35ae05f9e2f6739fc94057f06308e47d73cdb65eabf758a3030d2fc705"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Apple-None-DiningTable-21/trial_T20190907_210609_700272",
+          "full": 393,
+          "prompt": 388,
+          "target": 5,
+          "input_ids_sha256": "d7e9c6d0249cd9734a217e1b92e1bb2c0e54775a22c4d055142cfb26f14e5598"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Knife-None-Drawer-11/trial_T20190908_182855_044669",
+          "full": 567,
+          "prompt": 562,
+          "target": 5,
+          "input_ids_sha256": "4e0cc595830e0f8818881e3cd4493aeb76585c7972d05a5fd5671c2cf3ef7753"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Spatula-None-DiningTable-23/trial_T20190909_103345_050416",
+          "full": 552,
+          "prompt": 547,
+          "target": 5,
+          "input_ids_sha256": "db18190197a57205e77447458c92ca51c559b6af4962a1b27e66c19101e0cfd1"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Spoon-None-Drawer-24/trial_T20190908_232429_973315",
+          "full": 783,
+          "prompt": 778,
+          "target": 5,
+          "input_ids_sha256": "6cc73a710e1777d84a13f8aed0415b6764ed19123c77815d64e7fb94fc41c004"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-DishSponge-None-CounterTop-427/trial_T20190909_010925_036448",
+          "full": 467,
+          "prompt": 462,
+          "target": 5,
+          "input_ids_sha256": "e9279c982b323cf6ed415674edab70b3d9451d51fa751e88a528026bd28800da"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Egg-None-DiningTable-23/trial_T20190908_083753_379941",
+          "full": 677,
+          "prompt": 672,
+          "target": 5,
+          "input_ids_sha256": "7e1ed1491f57ce6f8d70ac7cd5747bcec215a1f223c7a519d0116de15161ba71"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Cloth-None-Toilet-411/trial_T20190908_070040_227185",
+          "full": 326,
+          "prompt": 321,
+          "target": 5,
+          "input_ids_sha256": "cb02bfa42ae25534566406d88b7a796a4c11b579be90884eb38c17785684a5d8"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Cup-None-Microwave-14/trial_T20190907_120831_000940",
+          "full": 517,
+          "prompt": 512,
+          "target": 5,
+          "input_ids_sha256": "b3a1d23c3e6f0319fbc0747a3d49fb707c4c7a7c1346953e1600b9001bb92709"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-SoapBar-None-GarbageCan-420/trial_T20190906_201023_015139",
+          "full": 454,
+          "prompt": 449,
+          "target": 5,
+          "input_ids_sha256": "b7312458828c7dbe675adaa5c356b6be295d805ba10627f908e6619afe43a8f9"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Mug-None-CoffeeMachine-15/trial_T20190909_111533_304885",
+          "full": 618,
+          "prompt": 613,
+          "target": 5,
+          "input_ids_sha256": "071f55f7b57fe00009e5c00156438eb90226a2a8c7081084d490c347c3341f2f"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Cup-None-Microwave-14/trial_T20190907_120854_419532",
+          "full": 528,
+          "prompt": 523,
+          "target": 5,
+          "input_ids_sha256": "9adace027a5b27a6c49a0a601396f6af979fdce018e881ad1bbf097f5b074fd3"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Pot-None-StoveBurner-26/trial_T20190907_210547_711059",
+          "full": 473,
+          "prompt": 468,
+          "target": 5,
+          "input_ids_sha256": "9f24f3645cb258cc7495006129b0e371a0be068ac3c5d75821bc9cdf7678a775"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Lettuce-None-Fridge-4/trial_T20190907_163644_382139",
+          "full": 567,
+          "prompt": 562,
+          "target": 5,
+          "input_ids_sha256": "2bc9e40426be6f0ef5596b45ec4085d4b671edc28b9ed60be004fd286f366dbe"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Kettle-None-StoveBurner-3/trial_T20190907_054206_228086",
+          "full": 694,
+          "prompt": 689,
+          "target": 5,
+          "input_ids_sha256": "252f73de525c3639dee807635edc279d183db6b55a224a9cf9bc3ead8e24c785"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Bowl-None-Shelf-7/trial_T20190908_152915_959135",
+          "full": 629,
+          "prompt": 624,
+          "target": 5,
+          "input_ids_sha256": "6e5db7a407827382b69b4eea3ba098d7d66566f27bd69d10f266954b595d119a"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Egg-None-DiningTable-24/trial_T20190907_185422_664403",
+          "full": 699,
+          "prompt": 694,
+          "target": 5,
+          "input_ids_sha256": "f6fad248fbca843619a77fa477182f52009d6626b2c020b584d89f6dafd7a9de"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Kettle-None-StoveBurner-30/trial_T20190906_200703_494083",
+          "full": 791,
+          "prompt": 786,
+          "target": 5,
+          "input_ids_sha256": "4a44f7c2a243ff095cfe2482ff7cee32e76d15e5e19ed076029314c657cb78eb"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-SoapBar-None-Toilet-422/trial_T20190908_204626_280695",
+          "full": 528,
+          "prompt": 523,
+          "target": 5,
+          "input_ids_sha256": "58de4b7dc3ec3857a95e14531fbb135b12e8fbb3e078ad44c3fac034665535d1"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Spatula-None-DiningTable-19/trial_T20190909_081214_166116",
+          "full": 861,
+          "prompt": 856,
+          "target": 5,
+          "input_ids_sha256": "f167d555b5da25b8eee81a833bebf9874a06a51ca593bc6b25f4eea596d6fdc0"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Kettle-None-DiningTable-18/trial_T20190908_085532_288859",
+          "full": 834,
+          "prompt": 829,
+          "target": 5,
+          "input_ids_sha256": "6f7cf069097859821a045e40877ce7adf07ad2fc05a0686139a6f2ab0deb3803"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Mug-None-CoffeeMachine-11/trial_T20190909_100519_428325",
+          "full": 619,
+          "prompt": 614,
+          "target": 5,
+          "input_ids_sha256": "be5b6165b4b48922d2a1eb1fd7269b5f79c0164e7d722e38efc9023dce961eed"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Plate-None-Shelf-7/trial_T20190908_225938_152284",
+          "full": 779,
+          "prompt": 774,
+          "target": 5,
+          "input_ids_sha256": "c508b8ba9d417118ba5506ee3f97a4d979289951813d32c18adbc6608c57b2dd"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-SoapBar-None-CounterTop-416/trial_T20190909_090331_330612",
+          "full": 370,
+          "prompt": 365,
+          "target": 5,
+          "input_ids_sha256": "a0cfb1f39d833e62cfb09dabefe6fcdf91135932cbb47f5198ca7a7dcec9752b"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Plate-None-Shelf-1/trial_T20190907_114616_377252",
+          "full": 717,
+          "prompt": 712,
+          "target": 5,
+          "input_ids_sha256": "fb1bd7f192c1b3777f5e56bdd992f8dc1f0105df93afa2bd82f1db1066539d01"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Cup-None-Shelf-1/trial_T20190907_181520_113143",
+          "full": 639,
+          "prompt": 634,
+          "target": 5,
+          "input_ids_sha256": "d2c83d373aa35b955899260fa84f39948fcc4a3f24cc9cedc02e8bc252a9d03d"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Pot-None-StoveBurner-25/trial_T20190906_234716_068806",
+          "full": 660,
+          "prompt": 655,
+          "target": 5,
+          "input_ids_sha256": "f506107f5a06a64b65d984a6963e33137534a071cad5567831169b60ca325173"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Pan-None-StoveBurner-15/trial_T20190907_121853_258663",
+          "full": 606,
+          "prompt": 601,
+          "target": 5,
+          "input_ids_sha256": "bc1c3361a749ca48ebc7aec40a1489a3e3aeaa9227ab80b282d29dd5f41d7610"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Lettuce-None-CounterTop-22/trial_T20190908_084527_001326",
+          "full": 741,
+          "prompt": 736,
+          "target": 5,
+          "input_ids_sha256": "1a25e5aeb0678da41abfd3d956947c384f0b0297e935ce3a8afa7f0a9d310eeb"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Bowl-None-Cabinet-20/trial_T20190909_113003_883447",
+          "full": 607,
+          "prompt": 602,
+          "target": 5,
+          "input_ids_sha256": "4187ebff2e204709a5317c3d8c3a90df5856f6966ba51d5d869612c4ce61f667"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Pan-None-DiningTable-7/trial_T20190908_233004_004856",
+          "full": 658,
+          "prompt": 653,
+          "target": 5,
+          "input_ids_sha256": "e564a1972e48da30447b8b73dac67493af256506b2259a8157c252e40dc4c39f"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Pot-None-DiningTable-23/trial_T20190909_061357_391676",
+          "full": 595,
+          "prompt": 590,
+          "target": 5,
+          "input_ids_sha256": "be34c8788ab8028824324bf76915468536a6ac2e769cbe2fe1edc25b8596569e"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-21/trial_T20190908_034155_073328",
+          "full": 502,
+          "prompt": 497,
+          "target": 5,
+          "input_ids_sha256": "33ad7757e5ea0d0bee78311de0e2f67b47eeb4c5a117227f1b132a62a0902321"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Lettuce-None-GarbageCan-16/trial_T20190909_014736_101510",
+          "full": 876,
+          "prompt": 871,
+          "target": 5,
+          "input_ids_sha256": "53917dea498f609d0d9684d3ef3d8348a7705915fa406dc540eeef066be3b959"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Bread-None-DiningTable-7/trial_T20190907_191053_355058",
+          "full": 611,
+          "prompt": 606,
+          "target": 5,
+          "input_ids_sha256": "746fac633b6f6350a257ba5ee3220c0fab63a3f78fcd55c15337bda1224b0d44"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Tomato-None-GarbageCan-15/trial_T20190907_082830_133707",
+          "full": 789,
+          "prompt": 784,
+          "target": 5,
+          "input_ids_sha256": "d2b0c647ad406eed07f04024ec4e5e6066ef734f07c8be2398e495bfae043fa3"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Lettuce-None-GarbageCan-27/trial_T20190908_135456_808479",
+          "full": 677,
+          "prompt": 672,
+          "target": 5,
+          "input_ids_sha256": "2aa4ec9f639c572536fc9149a27e31e38ce19d9ec85d780dfff29dc8aec922ec"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Pan-None-StoveBurner-20/trial_T20190907_014638_097425",
+          "full": 593,
+          "prompt": 588,
+          "target": 5,
+          "input_ids_sha256": "aff323b07d6c7b78a2f4fb1235d3868c21bcf10bc21c367ba29254fc9fa965f5"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Pan-None-CounterTop-7/trial_T20190909_072932_500452",
+          "full": 579,
+          "prompt": 574,
+          "target": 5,
+          "input_ids_sha256": "24591bb2855b0e0d2ea271e5b870e081bc71de4a4731ef92d1db13c4151c5f66"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-1/trial_T20190907_100909_634204",
+          "full": 701,
+          "prompt": 696,
+          "target": 5,
+          "input_ids_sha256": "8b962e58f5c907b6af39f5735eb7f605528376ff335107990064da4d4cd4f57e"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-6/trial_T20190906_204003_012007",
+          "full": 617,
+          "prompt": 612,
+          "target": 5,
+          "input_ids_sha256": "ed5fbc213e99f4e04fe1c29f7e1e6a5afb64ed552b7ad25e70621de273f27638"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Egg-None-Microwave-6/trial_T20190909_030243_781342",
+          "full": 617,
+          "prompt": 612,
+          "target": 5,
+          "input_ids_sha256": "ae72249a1ee42d7355b1b8b82dfcb9c8e923a8e74db0aeac8b5beec06a7eb76f"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-5/trial_T20190907_013225_891350",
+          "full": 637,
+          "prompt": 632,
+          "target": 5,
+          "input_ids_sha256": "343e8a2324caa4eecc3b971c447bee63d301304c22011c16afe2b0cade12ea1f"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Pot-None-StoveBurner-4/trial_T20190906_190656_137258",
+          "full": 535,
+          "prompt": 530,
+          "target": 5,
+          "input_ids_sha256": "015e2654ba4992afb081b5a1076111902d52721c2a214025eb2dc4936209f1df"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Apple-None-Microwave-23/trial_T20190908_051157_836345",
+          "full": 664,
+          "prompt": 659,
+          "target": 5,
+          "input_ids_sha256": "ee8c78748c9abcd8e45bddd1754f6826026e7e51dc1ce9a0691b58949ebc1c8b"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Potato-None-CounterTop-19/trial_T20190909_152158_373637",
+          "full": 693,
+          "prompt": 688,
+          "target": 5,
+          "input_ids_sha256": "db5a587024b6d5caa299ff9b93d3326eb85f7c1fcdb777635ada5d5c3a637522"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Egg-None-SideTable-28/trial_T20190908_115607_419115",
+          "full": 553,
+          "prompt": 548,
+          "target": 5,
+          "input_ids_sha256": "b0825c7738c721ba2300c144caca139ead4983729cb5d4034b171a692f0a91a9"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Egg-None-SideTable-21/trial_T20190907_045010_383014",
+          "full": 537,
+          "prompt": 532,
+          "target": 5,
+          "input_ids_sha256": "c34284522247d365c2f9a7c725e55c9ea35eb27461f0104d2c66959cd62a09c8"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-24/trial_T20190907_144720_997810",
+          "full": 698,
+          "prompt": 693,
+          "target": 5,
+          "input_ids_sha256": "b640dec967171593b217ce1e99cfbe42554f5177475231351c6c03a505a5e1ab"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Tomato-None-Fridge-25/trial_T20190909_103009_910205",
+          "full": 619,
+          "prompt": 614,
+          "target": 5,
+          "input_ids_sha256": "810ae944ca11c2f4cfd40f1d6b293d547d0089042c1f12891cb734f5256f0b2b"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Cup-None-Cabinet-12/trial_T20190907_210848_644854",
+          "full": 656,
+          "prompt": 651,
+          "target": 5,
+          "input_ids_sha256": "4f46bdc6205949932e9f4dba566d8ae892bfcb29e0d6d6dbfd805a83b30f7ea1"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Cup-None-Cabinet-3/trial_T20190908_233045_285903",
+          "full": 647,
+          "prompt": 642,
+          "target": 5,
+          "input_ids_sha256": "ea57ee445e75d021445cb61d3ffec0015a7a441113a0e24538107cabe0b82c64"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Cup-None-Cabinet-28/trial_T20190909_052944_317093",
+          "full": 619,
+          "prompt": 614,
+          "target": 5,
+          "input_ids_sha256": "572997410cd24f4f8503028c0172fcc658c8d14c90666875bf5758d455285c24"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Apple-None-Fridge-25/trial_T20190908_050921_727654",
+          "full": 593,
+          "prompt": 588,
+          "target": 5,
+          "input_ids_sha256": "b605f2a0c8f87b42f6642ce8184abb078e0fd40b09a38301e4899bd1f48df105"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Cup-None-SideTable-28/trial_T20190907_165203_052598",
+          "full": 521,
+          "prompt": 516,
+          "target": 5,
+          "input_ids_sha256": "8318b047f8fa436c5ad23e4f40a16b38fb12eeac7ca34c33723f2f63ca0c70a4"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Cup-None-Cabinet-1/trial_T20190909_091033_436380",
+          "full": 657,
+          "prompt": 652,
+          "target": 5,
+          "input_ids_sha256": "8249e0e65e55f9d3d5f8139d8189d5d906db895ceba58aa386b3761173707266"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-RemoteControl-None-Sofa-228/trial_T20190908_130719_888576",
+          "full": 391,
+          "prompt": 386,
+          "target": 5,
+          "input_ids_sha256": "2e9339130001da76add949f26cc356e0d4205f1b8bd771aa5432bc1419b3812e"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-RemoteControl-None-ArmChair-209/trial_T20190909_081354_457269",
+          "full": 389,
+          "prompt": 384,
+          "target": 5,
+          "input_ids_sha256": "1aa026d4b5d1d131b7d60f978ce9c942ef47e16c329c610c1765f834d327ec44"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-AlarmClock-None-Dresser-305/trial_T20190907_165731_066415",
+          "full": 462,
+          "prompt": 457,
+          "target": 5,
+          "input_ids_sha256": "ded54895fe6f4d4012d491b9f2721efb019717d30c79d6aad7f3ebd9fccf50a8"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-Watch-None-Dresser-205/trial_T20190907_182257_096741",
+          "full": 433,
+          "prompt": 428,
+          "target": 5,
+          "input_ids_sha256": "e85b3166caa24165027fff8e5e56a32c1f922db928e98a2fafb09d5125006533"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-Vase-None-CoffeeTable-214/trial_T20190910_173131_869766",
+          "full": 432,
+          "prompt": 427,
+          "target": 5,
+          "input_ids_sha256": "c23b35d8c2e65cfdb6d4be6748db2071cac80cfd1fce471c6433836be6c16002"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-Candle-None-Cabinet-402/trial_T20190909_084818_682608",
+          "full": 534,
+          "prompt": 529,
+          "target": 5,
+          "input_ids_sha256": "3e4daffc9b3dc4149f4f634c304913a06e5505a11d0b73d25b6d4c7c25a89bb6"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-Pencil-None-Desk-314/trial_T20190907_045011_990789",
+          "full": 504,
+          "prompt": 499,
+          "target": 5,
+          "input_ids_sha256": "d9ea124d78333093c69a5d0eaf2d30d2c4522830cff85be0abe8faaffbc1ef74"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-CellPhone-None-Shelf-320/trial_T20190908_113058_584290",
+          "full": 373,
+          "prompt": 368,
+          "target": 5,
+          "input_ids_sha256": "a238ceee6b657205b63db40760b3368d26980ca2f1787047789778efde4c4aec"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-CreditCard-None-ArmChair-206/trial_T20190909_020952_108591",
+          "full": 539,
+          "prompt": 534,
+          "target": 5,
+          "input_ids_sha256": "8d80cc7f9e842715af7dccd6f38005331b2dfee4f4bc2089d3181ffc89eefcb0"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-RemoteControl-None-ArmChair-217/trial_T20190909_120033_039874",
+          "full": 393,
+          "prompt": 388,
+          "target": 5,
+          "input_ids_sha256": "ba3e0cbbfdd189d7b4607e57d65eae2cab18c80f95237b19286e03aaa8b6cc39"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-CreditCard-None-Sofa-207/trial_T20190909_090035_107554",
+          "full": 446,
+          "prompt": 441,
+          "target": 5,
+          "input_ids_sha256": "43d0aff3105a29158e011342028a1fc65983b0be92ce396930ef0f2c3d8dddbf"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-SprayBottle-None-CounterTop-411/trial_T20190909_045033_783510",
+          "full": 511,
+          "prompt": 506,
+          "target": 5,
+          "input_ids_sha256": "287e9636261129650145c6dd1979204dea1ff733e1a98ef88bdb3ff80793e1fc"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-Candle-None-Shelf-429/trial_T20190909_075128_271977",
+          "full": 368,
+          "prompt": 363,
+          "target": 5,
+          "input_ids_sha256": "b9eb57dcbe002f134d05618feaacbd2782aa4038c506be14036e51a207b455b9"
+        }
+      ]
+    },
+    "p0_final_adapter": {
+      "rows": 120,
+      "nonpad_full_tokens": 64922,
+      "nonpad_prompt_tokens": 64322,
+      "target_plus_eos_tokens": 600,
+      "target_length_set": [
+        5
+      ],
+      "all_120_masks_checked": true,
+      "collations": [
+        {
+          "pad_id": 151643,
+          "pad_equals_eos": false,
+          "shifted_loss_tokens": 600,
+          "shape": [
+            120,
+            876
+          ],
+          "padding_positions": 40198,
+          "pass": true
+        },
+        {
+          "pad_id": 151645,
+          "pad_equals_eos": true,
+          "shifted_loss_tokens": 600,
+          "shape": [
+            120,
+            876
+          ],
+          "padding_positions": 40198,
+          "pass": true
+        }
+      ],
+      "would_truncate_rejected": "example exceeds frozen max_length; truncation is prohibited",
+      "tokenizer_files": {
+        "special_tokens_map.json": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd",
+        "tokenizer_config.json": "443bfa629eb16387a12edbf92a76f6a6f10b2af3b53d87ba1550adfcf45f7fa0",
+        "chat_template.jinja": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+      },
+      "compact_rows": [
+        {
+          "task_id": "pick_and_place_simple-CD-None-Shelf-326/trial_T20190910_060853_032012",
+          "full": 506,
+          "prompt": 501,
+          "target": 5,
+          "input_ids_sha256": "cf1418552e85870d9e65c91677502cb84c96cf52df924266cfff96edc5f66694"
+        },
+        {
+          "task_id": "pick_and_place_simple-Book-None-Desk-310/trial_T20190909_121806_908997",
+          "full": 398,
+          "prompt": 393,
+          "target": 5,
+          "input_ids_sha256": "4f1932f8d8ccae98657443d1758fb386734a486215d5023fe150bcba1fb47747"
+        },
+        {
+          "task_id": "pick_and_place_simple-KeyChain-None-Drawer-208/trial_T20190909_013444_420195",
+          "full": 407,
+          "prompt": 402,
+          "target": 5,
+          "input_ids_sha256": "20463e54a7ca10687b07ade74eaf068a8313525ffa26a6c7436e0242cf682eb5"
+        },
+        {
+          "task_id": "pick_and_place_simple-CellPhone-None-Bed-306/trial_T20190909_012707_174038",
+          "full": 338,
+          "prompt": 333,
+          "target": 5,
+          "input_ids_sha256": "2b3734d28b374c358355259cbfe462588ebc403c391697a7a8804f52969beb41"
+        },
+        {
+          "task_id": "pick_and_place_simple-Newspaper-None-Ottoman-210/trial_T20190907_144808_904739",
+          "full": 417,
+          "prompt": 412,
+          "target": 5,
+          "input_ids_sha256": "b752319d32fc7d0d09b30a6561d371c40ed9d98908dbee90bba8e7e50838a914"
+        },
+        {
+          "task_id": "pick_and_place_simple-ButterKnife-None-Drawer-8/trial_T20190907_142645_859732",
+          "full": 701,
+          "prompt": 696,
+          "target": 5,
+          "input_ids_sha256": "1596a760d5744054450c8c2ccdc1f16d343e2c0900648f42806e576ceb7f6f33"
+        },
+        {
+          "task_id": "pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-420/trial_T20190908_155546_250341",
+          "full": 460,
+          "prompt": 455,
+          "target": 5,
+          "input_ids_sha256": "a842cdc50efc5cb6dc463324dc11b74770de478c6bb8267808d9f893313c54a4"
+        },
+        {
+          "task_id": "pick_and_place_simple-SprayBottle-None-GarbageCan-415/trial_T20190907_070419_171501",
+          "full": 456,
+          "prompt": 451,
+          "target": 5,
+          "input_ids_sha256": "5868e55d83bac10abf9f58c3f17138ced23c545689263d9d8919202f6a45c81e"
+        },
+        {
+          "task_id": "pick_and_place_simple-Candle-None-CounterTop-411/trial_T20190906_200853_771692",
+          "full": 468,
+          "prompt": 463,
+          "target": 5,
+          "input_ids_sha256": "ada51dcbf63cd9011007f2133d802572e2e7b42e24e2ac3bad56b704bc8aedba"
+        },
+        {
+          "task_id": "pick_and_place_simple-KeyChain-None-Dresser-317/trial_T20190910_184933_511149",
+          "full": 464,
+          "prompt": 459,
+          "target": 5,
+          "input_ids_sha256": "ff5b1692c079c0f9d15dcb4a7db671fd88f2687c017231e8277a6f82fee53f91"
+        },
+        {
+          "task_id": "pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-423/trial_T20190908_022416_998587",
+          "full": 554,
+          "prompt": 549,
+          "target": 5,
+          "input_ids_sha256": "937c74fe3a558534c5fe666cfd402d734cabf2dad988ee6791e8ef273fe84de2"
+        },
+        {
+          "task_id": "pick_and_place_simple-Laptop-None-Bed-302/trial_T20190908_112436_878411",
+          "full": 575,
+          "prompt": 570,
+          "target": 5,
+          "input_ids_sha256": "c48489e2090ddeb2ef70cf3486c34e7cd7bca9293512dbf6eaa2aee9e2ff8798"
+        },
+        {
+          "task_id": "pick_and_place_simple-Vase-None-SideTable-209/trial_T20190909_053401_266687",
+          "full": 454,
+          "prompt": 449,
+          "target": 5,
+          "input_ids_sha256": "d319b3490e3e4449b455286553badd07f469e735bdf2eec91bcf18921ca1af08"
+        },
+        {
+          "task_id": "pick_and_place_simple-RemoteControl-None-Dresser-311/trial_T20190907_154740_977701",
+          "full": 361,
+          "prompt": 356,
+          "target": 5,
+          "input_ids_sha256": "9ee194a2f71b39a2c486e5780cd07f396a7e14c748c9587c8b1b7c3124282e26"
+        },
+        {
+          "task_id": "pick_and_place_simple-RemoteControl-None-ArmChair-230/trial_T20190909_020906_064567",
+          "full": 354,
+          "prompt": 349,
+          "target": 5,
+          "input_ids_sha256": "658497be93b1753bc81c6a2611515a124a222f3cc20320a6adb03966631d5cb3"
+        },
+        {
+          "task_id": "pick_and_place_simple-RemoteControl-None-ArmChair-207/trial_T20190908_140615_941385",
+          "full": 488,
+          "prompt": 483,
+          "target": 5,
+          "input_ids_sha256": "6445bb12f234e2b1f99c8570c33fe434ed9ba63a8f1585f41ea38bc5614ac280"
+        },
+        {
+          "task_id": "pick_and_place_simple-Pencil-None-Desk-309/trial_T20190918_231048_923335",
+          "full": 408,
+          "prompt": 403,
+          "target": 5,
+          "input_ids_sha256": "d18900111f70a746b41a5bcd8fc87a84fef39f6ae6269e1cd355b56ebb7dbf92"
+        },
+        {
+          "task_id": "pick_and_place_simple-Pen-None-SideTable-329/trial_T20190907_133455_179363",
+          "full": 427,
+          "prompt": 422,
+          "target": 5,
+          "input_ids_sha256": "2dea9c83958798400ae4ae94e56964354fbbacfbd343f7ac149e36b98ebf8738"
+        },
+        {
+          "task_id": "pick_and_place_simple-Watch-None-CoffeeTable-201/trial_T20190908_124509_296941",
+          "full": 393,
+          "prompt": 388,
+          "target": 5,
+          "input_ids_sha256": "230593be38c43544dd9d95aa01e9978dce57333b3862848f2a6f64a925257368"
+        },
+        {
+          "task_id": "pick_and_place_simple-Book-None-ArmChair-229/trial_T20190906_203051_143723",
+          "full": 424,
+          "prompt": 419,
+          "target": 5,
+          "input_ids_sha256": "ef326367585eb7a908ab7f4f8b87cb8f617fb419fddfbf917ac962db823cacd7"
+        },
+        {
+          "task_id": "pick_and_place_simple-Bowl-None-Fridge-6/trial_T20190906_230933_751794",
+          "full": 677,
+          "prompt": 672,
+          "target": 5,
+          "input_ids_sha256": "9f2129d7b63f87bcce6556058239f468f45083c5233b2478b8f3b5298d1ee6f9"
+        },
+        {
+          "task_id": "pick_and_place_simple-Pillow-None-ArmChair-321/trial_T20190908_104920_763828",
+          "full": 294,
+          "prompt": 289,
+          "target": 5,
+          "input_ids_sha256": "c5149aadef9df149b88dfaf6235addc75e4e2f3a5be0b8ef939f321eee5d2e94"
+        },
+        {
+          "task_id": "pick_and_place_simple-Cloth-None-Cart-401/trial_T20190909_054535_981513",
+          "full": 443,
+          "prompt": 438,
+          "target": 5,
+          "input_ids_sha256": "dd2f876fd4af3851a10cbabc2668e7f87d77ad4746d7330fa97adcc8fa4cb42f"
+        },
+        {
+          "task_id": "pick_and_place_simple-CellPhone-None-Desk-305/trial_T20190907_230951_698317",
+          "full": 529,
+          "prompt": 524,
+          "target": 5,
+          "input_ids_sha256": "842cc7acc8b7c94ceb7db9a517883ef075adb9922a50b9ee095e3ed7496f6bd7"
+        },
+        {
+          "task_id": "pick_and_place_simple-DishSponge-None-Cabinet-5/trial_T20190906_192916_142208",
+          "full": 611,
+          "prompt": 606,
+          "target": 5,
+          "input_ids_sha256": "a13b736bded865eed1d542840b35649d524a9b44dd24d2cb4e2feba6f77a1a57"
+        },
+        {
+          "task_id": "pick_and_place_simple-Newspaper-None-Sofa-211/trial_T20190906_175021_859979",
+          "full": 458,
+          "prompt": 453,
+          "target": 5,
+          "input_ids_sha256": "35567b4651f411f2dab8cf02b154dafb959ca4171ad5f25f0fe9ce6046bf7614"
+        },
+        {
+          "task_id": "pick_and_place_simple-CreditCard-None-Drawer-227/trial_T20190918_215750_186147",
+          "full": 638,
+          "prompt": 633,
+          "target": 5,
+          "input_ids_sha256": "a37022e598e1863fbe1590e75cd53cf0bb84266e2e6ae5576bf04a08ee500dee"
+        },
+        {
+          "task_id": "pick_and_place_simple-AlarmClock-None-Shelf-310/trial_T20190907_151357_096210",
+          "full": 277,
+          "prompt": 272,
+          "target": 5,
+          "input_ids_sha256": "6d8a595273395e36a1e4458ae5eaad4ff570ca307095fba54ffebaabacb040e5"
+        },
+        {
+          "task_id": "pick_and_place_simple-SprayBottle-None-CounterTop-427/trial_T20190908_232532_117315",
+          "full": 473,
+          "prompt": 468,
+          "target": 5,
+          "input_ids_sha256": "ac3b8d2ea90e7f304882f277cfddfacf9dfb1e1dc8fe0ad3f41d9eee1123ff28"
+        },
+        {
+          "task_id": "pick_and_place_simple-SaltShaker-None-DiningTable-26/trial_T20190907_113736_672101",
+          "full": 750,
+          "prompt": 745,
+          "target": 5,
+          "input_ids_sha256": "60aafb99c47d30453a009932a869e4115027581d05d50f09ef492a5199a6da1e"
+        },
+        {
+          "task_id": "pick_and_place_simple-Book-None-Desk-313/trial_T20190909_140547_719284",
+          "full": 347,
+          "prompt": 342,
+          "target": 5,
+          "input_ids_sha256": "705ef1dcf585b6b0f5c1b79001d97f13e386c5e721fdf13ef90e6fa0f75213cb"
+        },
+        {
+          "task_id": "pick_and_place_simple-SprayBottle-None-Toilet-422/trial_T20190909_124904_818536",
+          "full": 457,
+          "prompt": 452,
+          "target": 5,
+          "input_ids_sha256": "7a602659981bf782ec098da263bd31da7bed1179738fbcb97240135b1cb2b960"
+        },
+        {
+          "task_id": "pick_and_place_simple-SprayBottle-None-Cabinet-403/trial_T20190908_221042_476220",
+          "full": 526,
+          "prompt": 521,
+          "target": 5,
+          "input_ids_sha256": "35740a898d49813cffe0041304a5e57b762f6b628a3278cc110db36a472ac111"
+        },
+        {
+          "task_id": "pick_and_place_simple-CD-None-Shelf-310/trial_T20190908_130024_429688",
+          "full": 384,
+          "prompt": 379,
+          "target": 5,
+          "input_ids_sha256": "a8c0a924d04eb40f6499ea623ea664f75b0aa92c64457aa5bec7b66929314e66"
+        },
+        {
+          "task_id": "pick_and_place_simple-ToiletPaper-None-GarbageCan-403/trial_T20190907_034528_884833",
+          "full": 413,
+          "prompt": 408,
+          "target": 5,
+          "input_ids_sha256": "62534e99b54ef089fc978b72fdda0da5b3115f8c98b94e145b3780cf37511388"
+        },
+        {
+          "task_id": "pick_and_place_simple-Book-None-ArmChair-229/trial_T20190906_203105_670913",
+          "full": 373,
+          "prompt": 368,
+          "target": 5,
+          "input_ids_sha256": "c458c463ed456bedfe066a151a141bd23da5145e17c11c2940d62563f7188c1c"
+        },
+        {
+          "task_id": "pick_and_place_simple-Egg-None-Microwave-4/trial_T20190906_234424_765112",
+          "full": 600,
+          "prompt": 595,
+          "target": 5,
+          "input_ids_sha256": "7fc27265a9647941d6948ce057176a0edb72e98dd4d5da4ddbdb830891ff3e67"
+        },
+        {
+          "task_id": "pick_and_place_simple-SoapBottle-None-GarbageCan-417/trial_T20190909_120149_080996",
+          "full": 302,
+          "prompt": 297,
+          "target": 5,
+          "input_ids_sha256": "6f877c3c8ebb0a63751a948599cb5b6ca2d056ad78c9e80d8b121eb2289be0e5"
+        },
+        {
+          "task_id": "pick_and_place_simple-RemoteControl-None-Ottoman-208/trial_T20190909_100908_040512",
+          "full": 473,
+          "prompt": 468,
+          "target": 5,
+          "input_ids_sha256": "3c7e518a14716eaa5bc2d12f752bfd06b2bb7b588ad22f959af9c1da42d28667"
+        },
+        {
+          "task_id": "pick_and_place_simple-Candle-None-SideTable-420/trial_T20190907_025706_872961",
+          "full": 279,
+          "prompt": 274,
+          "target": 5,
+          "input_ids_sha256": "55ccf78ba4a335a4f1b65dfee93f17465d81ae8f5be3068e677f47d260867b40"
+        },
+        {
+          "task_id": "pick_and_place_simple-Box-None-ArmChair-212/trial_T20190908_032818_426471",
+          "full": 368,
+          "prompt": 363,
+          "target": 5,
+          "input_ids_sha256": "4916fc74e798eb25669c095d0ef9390c52599832b727f6c4a27e3ec68cfbe0e3"
+        },
+        {
+          "task_id": "pick_and_place_simple-KeyChain-None-SideTable-330/trial_T20190908_132834_404830",
+          "full": 562,
+          "prompt": 557,
+          "target": 5,
+          "input_ids_sha256": "03f3a106ad96f652830f3ca629443eab413b68f9e67926eb48004d9c330788cf"
+        },
+        {
+          "task_id": "pick_and_place_simple-Pencil-None-Desk-302/trial_T20190908_032836_462632",
+          "full": 398,
+          "prompt": 393,
+          "target": 5,
+          "input_ids_sha256": "19b97f8038ce44f40bc9d8d7fcccf55ace089832bc5de0a111ecbd6039b5dacd"
+        },
+        {
+          "task_id": "pick_and_place_simple-HandTowel-None-Toilet-420/trial_T20190908_120224_333615",
+          "full": 411,
+          "prompt": 406,
+          "target": 5,
+          "input_ids_sha256": "1173645795153579175b3487fd0fc99a2d78aa2c6778062029e626f42ea761f8"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Tomato-None-GarbageCan-15/trial_T20190908_190007_238896",
+          "full": 556,
+          "prompt": 551,
+          "target": 5,
+          "input_ids_sha256": "86b24fff8d364ea299fb8969684079470c8b06d4e66a56fe55a61aacd201ec1c"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-SoapBar-None-Cabinet-422/trial_T20190909_170408_931882",
+          "full": 483,
+          "prompt": 478,
+          "target": 5,
+          "input_ids_sha256": "470478620d774a4d985d6103ff0856d938b3142124e0eeef4db668ca5f128a56"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Pot-None-StoveBurner-4/trial_T20190907_151406_550745",
+          "full": 525,
+          "prompt": 520,
+          "target": 5,
+          "input_ids_sha256": "3fc7fc2e4fb62ceacca1bd6e03cc346725344977f59514e22536dca56405546e"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-SoapBar-None-Cabinet-422/trial_T20190909_170330_111958",
+          "full": 516,
+          "prompt": 511,
+          "target": 5,
+          "input_ids_sha256": "224a7ffee57b1ab7009e4ede7dedf37cd66da7d64f6cc12aff023c3a38325842"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Tomato-None-Microwave-12/trial_T20190906_220713_803388",
+          "full": 769,
+          "prompt": 764,
+          "target": 5,
+          "input_ids_sha256": "dd9d048df71ce55df00e5f9fce60b74c8664a3cf48706c89fa8fc3013d11185d"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Apple-None-Fridge-24/trial_T20190907_210711_329362",
+          "full": 731,
+          "prompt": 726,
+          "target": 5,
+          "input_ids_sha256": "7ceb66223d45c26acfc1b279d25a0344c36b9f0c77e3a75637f2e3e074ba4c35"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Spoon-None-Drawer-8/trial_T20190907_151947_378545",
+          "full": 686,
+          "prompt": 681,
+          "target": 5,
+          "input_ids_sha256": "fc36f9ab2afba8dd56c821dec1f9bd458e21afb4b90d811c676437597837b295"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Kettle-None-Cabinet-11/trial_T20190908_063358_779789",
+          "full": 645,
+          "prompt": 640,
+          "target": 5,
+          "input_ids_sha256": "3f44bc35ae05f9e2f6739fc94057f06308e47d73cdb65eabf758a3030d2fc705"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Apple-None-DiningTable-21/trial_T20190907_210609_700272",
+          "full": 393,
+          "prompt": 388,
+          "target": 5,
+          "input_ids_sha256": "d7e9c6d0249cd9734a217e1b92e1bb2c0e54775a22c4d055142cfb26f14e5598"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Knife-None-Drawer-11/trial_T20190908_182855_044669",
+          "full": 567,
+          "prompt": 562,
+          "target": 5,
+          "input_ids_sha256": "4e0cc595830e0f8818881e3cd4493aeb76585c7972d05a5fd5671c2cf3ef7753"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Spatula-None-DiningTable-23/trial_T20190909_103345_050416",
+          "full": 552,
+          "prompt": 547,
+          "target": 5,
+          "input_ids_sha256": "db18190197a57205e77447458c92ca51c559b6af4962a1b27e66c19101e0cfd1"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Spoon-None-Drawer-24/trial_T20190908_232429_973315",
+          "full": 783,
+          "prompt": 778,
+          "target": 5,
+          "input_ids_sha256": "6cc73a710e1777d84a13f8aed0415b6764ed19123c77815d64e7fb94fc41c004"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-DishSponge-None-CounterTop-427/trial_T20190909_010925_036448",
+          "full": 467,
+          "prompt": 462,
+          "target": 5,
+          "input_ids_sha256": "e9279c982b323cf6ed415674edab70b3d9451d51fa751e88a528026bd28800da"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Egg-None-DiningTable-23/trial_T20190908_083753_379941",
+          "full": 677,
+          "prompt": 672,
+          "target": 5,
+          "input_ids_sha256": "7e1ed1491f57ce6f8d70ac7cd5747bcec215a1f223c7a519d0116de15161ba71"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Cloth-None-Toilet-411/trial_T20190908_070040_227185",
+          "full": 326,
+          "prompt": 321,
+          "target": 5,
+          "input_ids_sha256": "cb02bfa42ae25534566406d88b7a796a4c11b579be90884eb38c17785684a5d8"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Cup-None-Microwave-14/trial_T20190907_120831_000940",
+          "full": 517,
+          "prompt": 512,
+          "target": 5,
+          "input_ids_sha256": "b3a1d23c3e6f0319fbc0747a3d49fb707c4c7a7c1346953e1600b9001bb92709"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-SoapBar-None-GarbageCan-420/trial_T20190906_201023_015139",
+          "full": 454,
+          "prompt": 449,
+          "target": 5,
+          "input_ids_sha256": "b7312458828c7dbe675adaa5c356b6be295d805ba10627f908e6619afe43a8f9"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Mug-None-CoffeeMachine-15/trial_T20190909_111533_304885",
+          "full": 618,
+          "prompt": 613,
+          "target": 5,
+          "input_ids_sha256": "071f55f7b57fe00009e5c00156438eb90226a2a8c7081084d490c347c3341f2f"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Cup-None-Microwave-14/trial_T20190907_120854_419532",
+          "full": 528,
+          "prompt": 523,
+          "target": 5,
+          "input_ids_sha256": "9adace027a5b27a6c49a0a601396f6af979fdce018e881ad1bbf097f5b074fd3"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Pot-None-StoveBurner-26/trial_T20190907_210547_711059",
+          "full": 473,
+          "prompt": 468,
+          "target": 5,
+          "input_ids_sha256": "9f24f3645cb258cc7495006129b0e371a0be068ac3c5d75821bc9cdf7678a775"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Lettuce-None-Fridge-4/trial_T20190907_163644_382139",
+          "full": 567,
+          "prompt": 562,
+          "target": 5,
+          "input_ids_sha256": "2bc9e40426be6f0ef5596b45ec4085d4b671edc28b9ed60be004fd286f366dbe"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Kettle-None-StoveBurner-3/trial_T20190907_054206_228086",
+          "full": 694,
+          "prompt": 689,
+          "target": 5,
+          "input_ids_sha256": "252f73de525c3639dee807635edc279d183db6b55a224a9cf9bc3ead8e24c785"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Bowl-None-Shelf-7/trial_T20190908_152915_959135",
+          "full": 629,
+          "prompt": 624,
+          "target": 5,
+          "input_ids_sha256": "6e5db7a407827382b69b4eea3ba098d7d66566f27bd69d10f266954b595d119a"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Egg-None-DiningTable-24/trial_T20190907_185422_664403",
+          "full": 699,
+          "prompt": 694,
+          "target": 5,
+          "input_ids_sha256": "f6fad248fbca843619a77fa477182f52009d6626b2c020b584d89f6dafd7a9de"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Kettle-None-StoveBurner-30/trial_T20190906_200703_494083",
+          "full": 791,
+          "prompt": 786,
+          "target": 5,
+          "input_ids_sha256": "4a44f7c2a243ff095cfe2482ff7cee32e76d15e5e19ed076029314c657cb78eb"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-SoapBar-None-Toilet-422/trial_T20190908_204626_280695",
+          "full": 528,
+          "prompt": 523,
+          "target": 5,
+          "input_ids_sha256": "58de4b7dc3ec3857a95e14531fbb135b12e8fbb3e078ad44c3fac034665535d1"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Spatula-None-DiningTable-19/trial_T20190909_081214_166116",
+          "full": 861,
+          "prompt": 856,
+          "target": 5,
+          "input_ids_sha256": "f167d555b5da25b8eee81a833bebf9874a06a51ca593bc6b25f4eea596d6fdc0"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Kettle-None-DiningTable-18/trial_T20190908_085532_288859",
+          "full": 834,
+          "prompt": 829,
+          "target": 5,
+          "input_ids_sha256": "6f7cf069097859821a045e40877ce7adf07ad2fc05a0686139a6f2ab0deb3803"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Mug-None-CoffeeMachine-11/trial_T20190909_100519_428325",
+          "full": 619,
+          "prompt": 614,
+          "target": 5,
+          "input_ids_sha256": "be5b6165b4b48922d2a1eb1fd7269b5f79c0164e7d722e38efc9023dce961eed"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Plate-None-Shelf-7/trial_T20190908_225938_152284",
+          "full": 779,
+          "prompt": 774,
+          "target": 5,
+          "input_ids_sha256": "c508b8ba9d417118ba5506ee3f97a4d979289951813d32c18adbc6608c57b2dd"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-SoapBar-None-CounterTop-416/trial_T20190909_090331_330612",
+          "full": 370,
+          "prompt": 365,
+          "target": 5,
+          "input_ids_sha256": "a0cfb1f39d833e62cfb09dabefe6fcdf91135932cbb47f5198ca7a7dcec9752b"
+        },
+        {
+          "task_id": "pick_clean_then_place_in_recep-Plate-None-Shelf-1/trial_T20190907_114616_377252",
+          "full": 717,
+          "prompt": 712,
+          "target": 5,
+          "input_ids_sha256": "fb1bd7f192c1b3777f5e56bdd992f8dc1f0105df93afa2bd82f1db1066539d01"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Cup-None-Shelf-1/trial_T20190907_181520_113143",
+          "full": 639,
+          "prompt": 634,
+          "target": 5,
+          "input_ids_sha256": "d2c83d373aa35b955899260fa84f39948fcc4a3f24cc9cedc02e8bc252a9d03d"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Pot-None-StoveBurner-25/trial_T20190906_234716_068806",
+          "full": 660,
+          "prompt": 655,
+          "target": 5,
+          "input_ids_sha256": "f506107f5a06a64b65d984a6963e33137534a071cad5567831169b60ca325173"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Pan-None-StoveBurner-15/trial_T20190907_121853_258663",
+          "full": 606,
+          "prompt": 601,
+          "target": 5,
+          "input_ids_sha256": "bc1c3361a749ca48ebc7aec40a1489a3e3aeaa9227ab80b282d29dd5f41d7610"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Lettuce-None-CounterTop-22/trial_T20190908_084527_001326",
+          "full": 741,
+          "prompt": 736,
+          "target": 5,
+          "input_ids_sha256": "1a25e5aeb0678da41abfd3d956947c384f0b0297e935ce3a8afa7f0a9d310eeb"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Bowl-None-Cabinet-20/trial_T20190909_113003_883447",
+          "full": 607,
+          "prompt": 602,
+          "target": 5,
+          "input_ids_sha256": "4187ebff2e204709a5317c3d8c3a90df5856f6966ba51d5d869612c4ce61f667"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Pan-None-DiningTable-7/trial_T20190908_233004_004856",
+          "full": 658,
+          "prompt": 653,
+          "target": 5,
+          "input_ids_sha256": "e564a1972e48da30447b8b73dac67493af256506b2259a8157c252e40dc4c39f"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Pot-None-DiningTable-23/trial_T20190909_061357_391676",
+          "full": 595,
+          "prompt": 590,
+          "target": 5,
+          "input_ids_sha256": "be34c8788ab8028824324bf76915468536a6ac2e769cbe2fe1edc25b8596569e"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-21/trial_T20190908_034155_073328",
+          "full": 502,
+          "prompt": 497,
+          "target": 5,
+          "input_ids_sha256": "33ad7757e5ea0d0bee78311de0e2f67b47eeb4c5a117227f1b132a62a0902321"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Lettuce-None-GarbageCan-16/trial_T20190909_014736_101510",
+          "full": 876,
+          "prompt": 871,
+          "target": 5,
+          "input_ids_sha256": "53917dea498f609d0d9684d3ef3d8348a7705915fa406dc540eeef066be3b959"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Bread-None-DiningTable-7/trial_T20190907_191053_355058",
+          "full": 611,
+          "prompt": 606,
+          "target": 5,
+          "input_ids_sha256": "746fac633b6f6350a257ba5ee3220c0fab63a3f78fcd55c15337bda1224b0d44"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Tomato-None-GarbageCan-15/trial_T20190907_082830_133707",
+          "full": 789,
+          "prompt": 784,
+          "target": 5,
+          "input_ids_sha256": "d2b0c647ad406eed07f04024ec4e5e6066ef734f07c8be2398e495bfae043fa3"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Lettuce-None-GarbageCan-27/trial_T20190908_135456_808479",
+          "full": 677,
+          "prompt": 672,
+          "target": 5,
+          "input_ids_sha256": "2aa4ec9f639c572536fc9149a27e31e38ce19d9ec85d780dfff29dc8aec922ec"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Pan-None-StoveBurner-20/trial_T20190907_014638_097425",
+          "full": 593,
+          "prompt": 588,
+          "target": 5,
+          "input_ids_sha256": "aff323b07d6c7b78a2f4fb1235d3868c21bcf10bc21c367ba29254fc9fa965f5"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Pan-None-CounterTop-7/trial_T20190909_072932_500452",
+          "full": 579,
+          "prompt": 574,
+          "target": 5,
+          "input_ids_sha256": "24591bb2855b0e0d2ea271e5b870e081bc71de4a4731ef92d1db13c4151c5f66"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-1/trial_T20190907_100909_634204",
+          "full": 701,
+          "prompt": 696,
+          "target": 5,
+          "input_ids_sha256": "8b962e58f5c907b6af39f5735eb7f605528376ff335107990064da4d4cd4f57e"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-6/trial_T20190906_204003_012007",
+          "full": 617,
+          "prompt": 612,
+          "target": 5,
+          "input_ids_sha256": "ed5fbc213e99f4e04fe1c29f7e1e6a5afb64ed552b7ad25e70621de273f27638"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Egg-None-Microwave-6/trial_T20190909_030243_781342",
+          "full": 617,
+          "prompt": 612,
+          "target": 5,
+          "input_ids_sha256": "ae72249a1ee42d7355b1b8b82dfcb9c8e923a8e74db0aeac8b5beec06a7eb76f"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-5/trial_T20190907_013225_891350",
+          "full": 637,
+          "prompt": 632,
+          "target": 5,
+          "input_ids_sha256": "343e8a2324caa4eecc3b971c447bee63d301304c22011c16afe2b0cade12ea1f"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Pot-None-StoveBurner-4/trial_T20190906_190656_137258",
+          "full": 535,
+          "prompt": 530,
+          "target": 5,
+          "input_ids_sha256": "015e2654ba4992afb081b5a1076111902d52721c2a214025eb2dc4936209f1df"
+        },
+        {
+          "task_id": "pick_cool_then_place_in_recep-Apple-None-Microwave-23/trial_T20190908_051157_836345",
+          "full": 664,
+          "prompt": 659,
+          "target": 5,
+          "input_ids_sha256": "ee8c78748c9abcd8e45bddd1754f6826026e7e51dc1ce9a0691b58949ebc1c8b"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Potato-None-CounterTop-19/trial_T20190909_152158_373637",
+          "full": 693,
+          "prompt": 688,
+          "target": 5,
+          "input_ids_sha256": "db5a587024b6d5caa299ff9b93d3326eb85f7c1fcdb777635ada5d5c3a637522"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Egg-None-SideTable-28/trial_T20190908_115607_419115",
+          "full": 553,
+          "prompt": 548,
+          "target": 5,
+          "input_ids_sha256": "b0825c7738c721ba2300c144caca139ead4983729cb5d4034b171a692f0a91a9"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Egg-None-SideTable-21/trial_T20190907_045010_383014",
+          "full": 537,
+          "prompt": 532,
+          "target": 5,
+          "input_ids_sha256": "c34284522247d365c2f9a7c725e55c9ea35eb27461f0104d2c66959cd62a09c8"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-24/trial_T20190907_144720_997810",
+          "full": 698,
+          "prompt": 693,
+          "target": 5,
+          "input_ids_sha256": "b640dec967171593b217ce1e99cfbe42554f5177475231351c6c03a505a5e1ab"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Tomato-None-Fridge-25/trial_T20190909_103009_910205",
+          "full": 619,
+          "prompt": 614,
+          "target": 5,
+          "input_ids_sha256": "810ae944ca11c2f4cfd40f1d6b293d547d0089042c1f12891cb734f5256f0b2b"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Cup-None-Cabinet-12/trial_T20190907_210848_644854",
+          "full": 656,
+          "prompt": 651,
+          "target": 5,
+          "input_ids_sha256": "4f46bdc6205949932e9f4dba566d8ae892bfcb29e0d6d6dbfd805a83b30f7ea1"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Cup-None-Cabinet-3/trial_T20190908_233045_285903",
+          "full": 647,
+          "prompt": 642,
+          "target": 5,
+          "input_ids_sha256": "ea57ee445e75d021445cb61d3ffec0015a7a441113a0e24538107cabe0b82c64"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Cup-None-Cabinet-28/trial_T20190909_052944_317093",
+          "full": 619,
+          "prompt": 614,
+          "target": 5,
+          "input_ids_sha256": "572997410cd24f4f8503028c0172fcc658c8d14c90666875bf5758d455285c24"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Apple-None-Fridge-25/trial_T20190908_050921_727654",
+          "full": 593,
+          "prompt": 588,
+          "target": 5,
+          "input_ids_sha256": "b605f2a0c8f87b42f6642ce8184abb078e0fd40b09a38301e4899bd1f48df105"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Cup-None-SideTable-28/trial_T20190907_165203_052598",
+          "full": 521,
+          "prompt": 516,
+          "target": 5,
+          "input_ids_sha256": "8318b047f8fa436c5ad23e4f40a16b38fb12eeac7ca34c33723f2f63ca0c70a4"
+        },
+        {
+          "task_id": "pick_heat_then_place_in_recep-Cup-None-Cabinet-1/trial_T20190909_091033_436380",
+          "full": 657,
+          "prompt": 652,
+          "target": 5,
+          "input_ids_sha256": "8249e0e65e55f9d3d5f8139d8189d5d906db895ceba58aa386b3761173707266"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-RemoteControl-None-Sofa-228/trial_T20190908_130719_888576",
+          "full": 391,
+          "prompt": 386,
+          "target": 5,
+          "input_ids_sha256": "2e9339130001da76add949f26cc356e0d4205f1b8bd771aa5432bc1419b3812e"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-RemoteControl-None-ArmChair-209/trial_T20190909_081354_457269",
+          "full": 389,
+          "prompt": 384,
+          "target": 5,
+          "input_ids_sha256": "1aa026d4b5d1d131b7d60f978ce9c942ef47e16c329c610c1765f834d327ec44"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-AlarmClock-None-Dresser-305/trial_T20190907_165731_066415",
+          "full": 462,
+          "prompt": 457,
+          "target": 5,
+          "input_ids_sha256": "ded54895fe6f4d4012d491b9f2721efb019717d30c79d6aad7f3ebd9fccf50a8"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-Watch-None-Dresser-205/trial_T20190907_182257_096741",
+          "full": 433,
+          "prompt": 428,
+          "target": 5,
+          "input_ids_sha256": "e85b3166caa24165027fff8e5e56a32c1f922db928e98a2fafb09d5125006533"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-Vase-None-CoffeeTable-214/trial_T20190910_173131_869766",
+          "full": 432,
+          "prompt": 427,
+          "target": 5,
+          "input_ids_sha256": "c23b35d8c2e65cfdb6d4be6748db2071cac80cfd1fce471c6433836be6c16002"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-Candle-None-Cabinet-402/trial_T20190909_084818_682608",
+          "full": 534,
+          "prompt": 529,
+          "target": 5,
+          "input_ids_sha256": "3e4daffc9b3dc4149f4f634c304913a06e5505a11d0b73d25b6d4c7c25a89bb6"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-Pencil-None-Desk-314/trial_T20190907_045011_990789",
+          "full": 504,
+          "prompt": 499,
+          "target": 5,
+          "input_ids_sha256": "d9ea124d78333093c69a5d0eaf2d30d2c4522830cff85be0abe8faaffbc1ef74"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-CellPhone-None-Shelf-320/trial_T20190908_113058_584290",
+          "full": 373,
+          "prompt": 368,
+          "target": 5,
+          "input_ids_sha256": "a238ceee6b657205b63db40760b3368d26980ca2f1787047789778efde4c4aec"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-CreditCard-None-ArmChair-206/trial_T20190909_020952_108591",
+          "full": 539,
+          "prompt": 534,
+          "target": 5,
+          "input_ids_sha256": "8d80cc7f9e842715af7dccd6f38005331b2dfee4f4bc2089d3181ffc89eefcb0"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-RemoteControl-None-ArmChair-217/trial_T20190909_120033_039874",
+          "full": 393,
+          "prompt": 388,
+          "target": 5,
+          "input_ids_sha256": "ba3e0cbbfdd189d7b4607e57d65eae2cab18c80f95237b19286e03aaa8b6cc39"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-CreditCard-None-Sofa-207/trial_T20190909_090035_107554",
+          "full": 446,
+          "prompt": 441,
+          "target": 5,
+          "input_ids_sha256": "43d0aff3105a29158e011342028a1fc65983b0be92ce396930ef0f2c3d8dddbf"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-SprayBottle-None-CounterTop-411/trial_T20190909_045033_783510",
+          "full": 511,
+          "prompt": 506,
+          "target": 5,
+          "input_ids_sha256": "287e9636261129650145c6dd1979204dea1ff733e1a98ef88bdb3ff80793e1fc"
+        },
+        {
+          "task_id": "pick_two_obj_and_place-Candle-None-Shelf-429/trial_T20190909_075128_271977",
+          "full": 368,
+          "prompt": 363,
+          "target": 5,
+          "input_ids_sha256": "b9eb57dcbe002f134d05618feaacbd2782aa4038c506be14036e51a207b455b9"
+        }
+      ]
+    }
+  },
+  "accounting": {
+    "tokenizers_loaded": 2,
+    "selected_rows_encoded_per_tokenizer": 120,
+    "successful_encoding_api_calls": 480,
+    "overlength_negative_encoding_calls": 4,
+    "cpu_collator_calls": 4,
+    "actual_8b_or_P0_model_objects": 0,
+    "scientific_generations": 0,
+    "alfworld_construct_reset_step": 0,
+    "training_runs": 0
+  },
+  "future_new_B_C_data_and_exposure": "NOT_OBSERVED; no acquisition/train/runtime PASS"
+}

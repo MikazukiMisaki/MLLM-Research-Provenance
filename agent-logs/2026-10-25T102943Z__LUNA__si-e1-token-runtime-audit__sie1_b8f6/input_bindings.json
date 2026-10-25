@@ -1,0 +1,1088 @@
+{
+  "cache_policy": {
+    "HF_DATASETS_OFFLINE": "1",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "local_files_only": true,
+    "network_downloads_authorized": false,
+    "trust_remote_code": false
+  },
+  "collator_origin": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/trl/trainer/sft_trainer.py",
+  "expected_adapter_tree_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+  "git_read_only_receipts": {
+    "project": {
+      "base85_object": {
+        "argv": [
+          "git",
+          "-C",
+          "/home/lizening/Alfworld-Self-Improvement-Project",
+          "cat-file",
+          "-t",
+          "85cbb92395e5e2420c2adeb1fa0634653e742910"
+        ],
+        "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "commit\n"
+      },
+      "branch_status": {
+        "argv": [
+          "git",
+          "-C",
+          "/home/lizening/Alfworld-Self-Improvement-Project",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "## codex/progress-aware-recovery...origin/codex/progress-aware-recovery\n"
+      },
+      "g3_object": {
+        "argv": [
+          "git",
+          "-C",
+          "/home/lizening/Alfworld-Self-Improvement-Project",
+          "cat-file",
+          "-t",
+          "2da980f631badc25086d12db60d128ff507d3ae6"
+        ],
+        "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "commit\n"
+      },
+      "head": {
+        "argv": [
+          "git",
+          "-C",
+          "/home/lizening/Alfworld-Self-Improvement-Project",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/home/lizening/Alfworld-Self-Improvement-Project",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "4f5c2e18e0dfdf48e9471fcba0a3ee715be3ca3b\n"
+      }
+    },
+    "provenance": {
+      "branch_status": {
+        "argv": [
+          "git",
+          "-C",
+          "/home/lizening/research-notes",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "cwd": "/home/lizening/research-notes",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "## main...origin/main\n?? agent-logs/2026-10-22T072356Z__ASTRA__r19-b1-g2__a7d913c4/supervisor/\n?? agent-logs/2026-10-22T091640Z__CODEX__r19-b1-replay-repair__92aae1d/supervisor_raw/\n?? agent-logs/2026-10-22T105439Z__CODEX__r19-b1-g3-launch__ef2328f/review_raw/\n?? agent-logs/2026-10-22T105439Z__CODEX__r19-b1-g3-launch__ef2328f/supervisor_raw/\n?? agent-logs/2026-10-22T231628Z__CODEX__r19-source-contract-review-fixes__implementation/evidence/alias_reproduction/\n?? agent-logs/2026-10-22T231628Z__CODEX__r19-source-contract-review-fixes__implementation/evidence/callback_new_prefix_18/\n?? agent-logs/2026-10-22T231628Z__CODEX__r19-source-contract-review-fixes__implementation/evidence/callback_new_prefix_8/\n?? agent-logs/2026-10-22T231628Z__CODEX__r19-source-contract-review-fixes__implementation/evidence/callback_old_prefix_18/\n?? agent-logs/2026-10-22T231628Z__CODEX__r19-source-contract-review-fixes__implementation/evidence/callback_old_prefix_8/\n?? agent-logs/2026-10-22T231628Z__CODEX__r19-source-contract-review-fixes__implementation/evidence/focused_artifacts/\n?? agent-logs/2026-10-22T231628Z__CODEX__r19-source-contract-review-fixes__implementation/evidence/pipeline_replay_failure/\n?? agent-logs/2026-10-22T231628Z__CODEX__r19-source-contract-review-fixes__implementation/evidence/shared_callback_comparison.json\n?? agent-logs/2026-10-22T232008Z__SOL__r19-additional-contract-scope__677223/synthetic-output/\n?? agent-logs/2026-10-22T232351Z__SOL__r19-alias-validator-scope__535726/synthetic-output/\n?? agent-logs/2026-10-22T234140Z__SOL__r19-exact-sha-independent-review__2da980f_198732/evidence/callback_new_prefix_18/\n?? agent-logs/2026-10-22T234140Z__SOL__r19-exact-sha-independent-review__2da980f_198732/evidence/callback_new_prefix_8/\n?? agent-logs/2026-10-22T234140Z__SOL__r19-exact-sha-independent-review__2da980f_198732/evidence/callback_old_prefix_18/\n?? agent-logs/2026-10-22T234140Z__SOL__r19-exact-sha-independent-review__2da980f_198732/evidence/callback_old_prefix_8/\n?? agent-logs/2026-10-22T234140Z__SOL__r19-exact-sha-independent-review__2da980f_198732/evidence/shared_callback_comparison.json\n?? agent-logs/2026-10-22T234140Z__SOL__r19-exact-sha-independent-review__2da980f_198732/local-focused-fixtures/\n?? agent-logs/2026-10-22T234140Z__SOL__r19-exact-sha-independent-review__2da980f_198732/local-full-fixtures/\n?? agent-logs/2026-10-22T234140Z__SOL__r19-exact-sha-independent-review__2da980f_198732/local-independent-invalid_later_aliases/\n?? agent-logs/2026-10-22T234140Z__SOL__r19-exact-sha-independent-review__2da980f_198732/local-independent-valid_full_paths/\n?? agent-logs/2026-10-23T005510Z__SOL__r19-authorized-g3-monitor__2da980f_eea6b8/continuation_state.json\n?? agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/FILE_HASHES.sha256\n?? agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/handoff_dispatch_receipt.json\n?? agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/raw_baseline_full/\n?? agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/raw_contracts_first/\n?? agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/raw_contracts_second/\n?? agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/raw_final_focused/\n?? agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/raw_final_full/\n?? agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/raw_focused_draft/\n?? agent-logs/2026-10-23T035448Z__CODEX__r19-g4-c01-c02__implementation/raw_prefreeze_contracts/\n?? agent-logs/2026-10-25T102943Z__CODEX__si-e1-contract-implementation__sie1_b8f6/\n?? agent-logs/2026-10-25T102943Z__LUNA__si-e1-token-runtime-audit__sie1_b8f6/\n?? agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/\n"
+      },
+      "head": {
+        "argv": [
+          "git",
+          "-C",
+          "/home/lizening/research-notes",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/home/lizening/research-notes",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "1962a074a67d6a485feaa7c3b3e01cddc465c1f8\n"
+      },
+      "remote_main": {
+        "argv": [
+          "git",
+          "-C",
+          "/home/lizening/research-notes",
+          "ls-remote",
+          "origin",
+          "refs/heads/main"
+        ],
+        "cwd": "/home/lizening/research-notes",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "1962a074a67d6a485feaa7c3b3e01cddc465c1f8\trefs/heads/main\n"
+      }
+    }
+  },
+  "inputs_after": {
+    "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218": {
+      "exists": true,
+      "file_count": 12,
+      "files": [
+        {
+          "bytes": 728,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/config.json",
+          "relative_path": "config.json",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/d46195ac87f837ad233d02b2f80f148bf7c005e0",
+          "sha256": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+          "symlink_target": "../../blobs/d46195ac87f837ad233d02b2f80f148bf7c005e0"
+        },
+        {
+          "bytes": 239,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/generation_config.json",
+          "relative_path": "generation_config.json",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/20a8a9156fc8c3f25295ca067f61fdf120d517c5",
+          "sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+          "symlink_target": "../../blobs/20a8a9156fc8c3f25295ca067f61fdf120d517c5"
+        },
+        {
+          "bytes": 1671853,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/merges.txt",
+          "relative_path": "merges.txt",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/31349551d90c7606f325fe0f11bbb8bd5fa0d7c7",
+          "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "symlink_target": "../../blobs/31349551d90c7606f325fe0f11bbb8bd5fa0d7c7"
+        },
+        {
+          "bytes": 3996250744,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00001-of-00005.safetensors",
+          "relative_path": "model-00001-of-00005.safetensors",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/31d6a825ae35f11fb85b195b4c42c146c051e446433125a215336abdf95cbf5f",
+          "sha256": "31d6a825ae35f11fb85b195b4c42c146c051e446433125a215336abdf95cbf5f",
+          "symlink_target": "../../blobs/31d6a825ae35f11fb85b195b4c42c146c051e446433125a215336abdf95cbf5f"
+        },
+        {
+          "bytes": 3993160032,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00002-of-00005.safetensors",
+          "relative_path": "model-00002-of-00005.safetensors",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/5991236cea6fe21f3d43cab0f0e84448734fbbe0789816202989f2ddc9d18282",
+          "sha256": "5991236cea6fe21f3d43cab0f0e84448734fbbe0789816202989f2ddc9d18282",
+          "symlink_target": "../../blobs/5991236cea6fe21f3d43cab0f0e84448734fbbe0789816202989f2ddc9d18282"
+        },
+        {
+          "bytes": 3959604768,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00003-of-00005.safetensors",
+          "relative_path": "model-00003-of-00005.safetensors",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/c5185c4794be2d8a9784d5753c9922db38df478ce11f9ed0b415b7304d896836",
+          "sha256": "c5185c4794be2d8a9784d5753c9922db38df478ce11f9ed0b415b7304d896836",
+          "symlink_target": "../../blobs/c5185c4794be2d8a9784d5753c9922db38df478ce11f9ed0b415b7304d896836"
+        },
+        {
+          "bytes": 3187841392,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00004-of-00005.safetensors",
+          "relative_path": "model-00004-of-00005.safetensors",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/b5ee7de71fbf17db3d5704e0c8f2bc7d005ca9e1d7ca2aeb19827b0cfcaa917a",
+          "sha256": "b5ee7de71fbf17db3d5704e0c8f2bc7d005ca9e1d7ca2aeb19827b0cfcaa917a",
+          "symlink_target": "../../blobs/b5ee7de71fbf17db3d5704e0c8f2bc7d005ca9e1d7ca2aeb19827b0cfcaa917a"
+        },
+        {
+          "bytes": 1244659840,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00005-of-00005.safetensors",
+          "relative_path": "model-00005-of-00005.safetensors",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/20c2d6366ab85c90786ccdd829cd2b9e7d30ef3b2ebbb998280e7e4014b542ff",
+          "sha256": "20c2d6366ab85c90786ccdd829cd2b9e7d30ef3b2ebbb998280e7e4014b542ff",
+          "symlink_target": "../../blobs/20c2d6366ab85c90786ccdd829cd2b9e7d30ef3b2ebbb998280e7e4014b542ff"
+        },
+        {
+          "bytes": 32878,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model.safetensors.index.json",
+          "relative_path": "model.safetensors.index.json",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/2b85c00f1b118961cd7a477e2bba0fe197a4ce1a",
+          "sha256": "f9fdbcb91c23971c13ec5d5f2573d2349e8f61f2f049371ec699281748fdb1bc",
+          "symlink_target": "../../blobs/2b85c00f1b118961cd7a477e2bba0fe197a4ce1a"
+        },
+        {
+          "bytes": 11422654,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/tokenizer.json",
+          "relative_path": "tokenizer.json",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "symlink_target": "../../blobs/aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+        },
+        {
+          "bytes": 9732,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/tokenizer_config.json",
+          "relative_path": "tokenizer_config.json",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/417d038a63fa3de29cfde265caedae14d1a58d92",
+          "sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+          "symlink_target": "../../blobs/417d038a63fa3de29cfde265caedae14d1a58d92"
+        },
+        {
+          "bytes": 2776833,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/vocab.json",
+          "relative_path": "vocab.json",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/4783fe10ac3adce15ac8f358ef5462739852c569",
+          "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "symlink_target": "../../blobs/4783fe10ac3adce15ac8f358ef5462739852c569"
+        }
+      ],
+      "is_symlink": false,
+      "kind": "directory",
+      "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218",
+      "production_directory_sha256": "0ec94e78a49090fcf7f31b23e33f594fce508f83a9ed9e52c48eff321e8c4a9c",
+      "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter": {
+      "exists": true,
+      "file_count": 11,
+      "files": [
+        {
+          "bytes": 5192,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/README.md",
+          "relative_path": "README.md",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/README.md",
+          "sha256": "8a2a2f2e3cd5f305c1748b24b3083a63275e073239b1a0416b079d595d08c171",
+          "symlink_target": null
+        },
+        {
+          "bytes": 925,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/adapter_config.json",
+          "relative_path": "adapter_config.json",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/adapter_config.json",
+          "sha256": "94090ee7ddaf2dd9e6500e43867c3c1c823b9bd02379eabc50c8345d18503d92",
+          "symlink_target": null
+        },
+        {
+          "bytes": 349243752,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/adapter_model.safetensors",
+          "relative_path": "adapter_model.safetensors",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/adapter_model.safetensors",
+          "sha256": "5f1fce989bb5d284a5ff8aed06979a11021733b2a6bce4af53ff36286b099c10",
+          "symlink_target": null
+        },
+        {
+          "bytes": 707,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/added_tokens.json",
+          "relative_path": "added_tokens.json",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/added_tokens.json",
+          "sha256": "c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680",
+          "symlink_target": null
+        },
+        {
+          "bytes": 4168,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/chat_template.jinja",
+          "relative_path": "chat_template.jinja",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/chat_template.jinja",
+          "sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+          "symlink_target": null
+        },
+        {
+          "bytes": 1671853,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/merges.txt",
+          "relative_path": "merges.txt",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/merges.txt",
+          "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "symlink_target": null
+        },
+        {
+          "bytes": 613,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/special_tokens_map.json",
+          "relative_path": "special_tokens_map.json",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/special_tokens_map.json",
+          "sha256": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd",
+          "symlink_target": null
+        },
+        {
+          "bytes": 11422654,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/tokenizer.json",
+          "relative_path": "tokenizer.json",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/tokenizer.json",
+          "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "symlink_target": null
+        },
+        {
+          "bytes": 5404,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/tokenizer_config.json",
+          "relative_path": "tokenizer_config.json",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/tokenizer_config.json",
+          "sha256": "443bfa629eb16387a12edbf92a76f6a6f10b2af3b53d87ba1550adfcf45f7fa0",
+          "symlink_target": null
+        },
+        {
+          "bytes": 6008,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/training_args.bin",
+          "relative_path": "training_args.bin",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/training_args.bin",
+          "sha256": "cfe5411534a1907bef451f29ee31091801ead8c7129e2672c9d13452866d2fdc",
+          "symlink_target": null
+        },
+        {
+          "bytes": 2776833,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/vocab.json",
+          "relative_path": "vocab.json",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/vocab.json",
+          "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "symlink_target": null
+        }
+      ],
+      "is_symlink": false,
+      "kind": "directory",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+      "production_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/sft_expert_dataset_balanced.jsonl": {
+      "bytes": 116622803,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/sft_expert_dataset_balanced.jsonl",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/sft_expert_dataset_balanced.jsonl",
+      "sha256": "c547e8f0c5988b29288f2a097169c7859741b7d4f53f222af31f5e2889d516cf"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/model/qwen3_8b.yaml": {
+      "bytes": 414,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/model/qwen3_8b.yaml",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/model/qwen3_8b.yaml",
+      "sha256": "121222e82cee136a251f20fdd5a67c3ed93e824cc859a9bd496ec010094adfed"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_dataset_schema.json": {
+      "bytes": 782,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_dataset_schema.json",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_dataset_schema.json",
+      "sha256": "dd1c34b26607160a0810cf6a399bce88e2c5665b722d3642ecfb320c27773d8f"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_run_config.json": {
+      "bytes": 1803,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_run_config.json",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_run_config.json",
+      "sha256": "15e2db7522e78b98fd9fcfc9f08537108b54353128c986043b8f2e947567a2ec"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_exclusions.json": {
+      "bytes": 22337,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_exclusions.json",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_exclusions.json",
+      "sha256": "fdbe3b1c2d8162fa7c95ff25b57ace1eaf01c1224d42f9f1f447bf7a859541c5"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_splits.json": {
+      "bytes": 524844,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_splits.json",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_splits.json",
+      "sha256": "5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_training_protocol.json": {
+      "bytes": 2380,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_training_protocol.json",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_training_protocol.json",
+      "sha256": "dd06d08773e9842b2302263429c7a1752e968dcb30d2dd89f185c01ef9605155"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/env/base.py": {
+      "bytes": 1577,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/env/base.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/env/base.py",
+      "sha256": "a3ae633aa79c8f80a70629fd398b880ea9c1807e7c219717b98e518b12496abb"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/models/action_parser.py": {
+      "bytes": 4918,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/models/action_parser.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/models/action_parser.py",
+      "sha256": "0a1c668d590980d1d8cdd4104a2b3c9aa851037fc238a2c73c45b57ab4432fbe"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/models/policy.py": {
+      "bytes": 1824,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/models/policy.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/models/policy.py",
+      "sha256": "afbb9544e2ea0c2aa73d3f7dcfbf7e366f1daf6eb95fd4e89fefe0c913dda469"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/recovery/corpus.py": {
+      "bytes": 24140,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/recovery/corpus.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/recovery/corpus.py",
+      "sha256": "14d8ee0f4059f43e76cd94f6511f4ad1e40b4c97377e9bce987d48b59e66a6a1"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/dataset.py": {
+      "bytes": 15760,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/dataset.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/dataset.py",
+      "sha256": "26f01b4e9c51165ca049e9afaf8ea6d012369097051373150b2646ae826edcaa"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/masking.py": {
+      "bytes": 1664,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/masking.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/masking.py",
+      "sha256": "c788038d0af1ee4f3a8a2ac8f48da0d9b0cda6c7bfe9d673248a87f5788df1a8"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/protocol.py": {
+      "bytes": 11229,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/protocol.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/protocol.py",
+      "sha256": "cb9a8ee23d1208064348810ef3580773ba14403bfaac6a4e7f4a43c5540178a8"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/training.py": {
+      "bytes": 11777,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/training.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/training.py",
+      "sha256": "0c722ca6ff17aa50da6fb294b632619f65f99936ce41e61ec0dab6288c7b584e"
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__LUNA__si-p1-isolation-budget__caae4c/KNOWN_USE_IDENTITIES.json": {
+      "bytes": 601295,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__LUNA__si-p1-isolation-budget__caae4c/KNOWN_USE_IDENTITIES.json",
+      "resolved_path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__LUNA__si-p1-isolation-budget__caae4c/KNOWN_USE_IDENTITIES.json",
+      "sha256": "98580db9a8322c52c87d6f30dcb75858b00f3b0ec6d3494a4a87923504ddca60"
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/ADOPTED_METADATA_RESERVATIONS.json": {
+      "bytes": 457882,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/ADOPTED_METADATA_RESERVATIONS.json",
+      "resolved_path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/ADOPTED_METADATA_RESERVATIONS.json",
+      "sha256": "6ce8a32a2345b59ecdef9c28c3a341e9c0801b8105f79895f9b2cb9545a4937e"
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/MINIMAL_CONTROLLED_EXPERIENCE_PROTOCOL.md": {
+      "bytes": 13341,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/MINIMAL_CONTROLLED_EXPERIENCE_PROTOCOL.md",
+      "resolved_path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/MINIMAL_CONTROLLED_EXPERIENCE_PROTOCOL.md",
+      "sha256": "2d5ddfddc4c18072fa1b431d9c1e8e0688e1dd180511e49cdfb8112fb90d7d6e"
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/phase3_independent_review.json": {
+      "bytes": 11067,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/phase3_independent_review.json",
+      "resolved_path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/phase3_independent_review.json",
+      "sha256": "2c29a244b279d4637b0e0572a3f139fe806848de8225d362d005feac45845483"
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/COMMON_ENGINEERING_CONTRACT.md": {
+      "bytes": 5596,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/COMMON_ENGINEERING_CONTRACT.md",
+      "resolved_path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/COMMON_ENGINEERING_CONTRACT.md",
+      "sha256": "60954ed798aad589fe4df43fcb90d703eddbce6ed005f9c12a81607bb1cf569f"
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/LUNA_TASK.md": {
+      "bytes": 3313,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/LUNA_TASK.md",
+      "resolved_path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/LUNA_TASK.md",
+      "sha256": "fdc68838e0f4b6a7e0d0e6c7028cf1801b61def518db3aec53e7bea91753d637"
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/START_STATE.json": {
+      "bytes": 1454,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/START_STATE.json",
+      "resolved_path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/START_STATE.json",
+      "sha256": "6311fba5524f4aa3f71ef25c7e021c57685e05ffca55cdd287ec311ba37e861c"
+    }
+  },
+  "inputs_before": {
+    "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218": {
+      "exists": true,
+      "file_count": 12,
+      "files": [
+        {
+          "bytes": 728,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/config.json",
+          "relative_path": "config.json",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/d46195ac87f837ad233d02b2f80f148bf7c005e0",
+          "sha256": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+          "symlink_target": "../../blobs/d46195ac87f837ad233d02b2f80f148bf7c005e0"
+        },
+        {
+          "bytes": 239,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/generation_config.json",
+          "relative_path": "generation_config.json",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/20a8a9156fc8c3f25295ca067f61fdf120d517c5",
+          "sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+          "symlink_target": "../../blobs/20a8a9156fc8c3f25295ca067f61fdf120d517c5"
+        },
+        {
+          "bytes": 1671853,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/merges.txt",
+          "relative_path": "merges.txt",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/31349551d90c7606f325fe0f11bbb8bd5fa0d7c7",
+          "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "symlink_target": "../../blobs/31349551d90c7606f325fe0f11bbb8bd5fa0d7c7"
+        },
+        {
+          "bytes": 3996250744,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00001-of-00005.safetensors",
+          "relative_path": "model-00001-of-00005.safetensors",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/31d6a825ae35f11fb85b195b4c42c146c051e446433125a215336abdf95cbf5f",
+          "sha256": "31d6a825ae35f11fb85b195b4c42c146c051e446433125a215336abdf95cbf5f",
+          "symlink_target": "../../blobs/31d6a825ae35f11fb85b195b4c42c146c051e446433125a215336abdf95cbf5f"
+        },
+        {
+          "bytes": 3993160032,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00002-of-00005.safetensors",
+          "relative_path": "model-00002-of-00005.safetensors",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/5991236cea6fe21f3d43cab0f0e84448734fbbe0789816202989f2ddc9d18282",
+          "sha256": "5991236cea6fe21f3d43cab0f0e84448734fbbe0789816202989f2ddc9d18282",
+          "symlink_target": "../../blobs/5991236cea6fe21f3d43cab0f0e84448734fbbe0789816202989f2ddc9d18282"
+        },
+        {
+          "bytes": 3959604768,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00003-of-00005.safetensors",
+          "relative_path": "model-00003-of-00005.safetensors",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/c5185c4794be2d8a9784d5753c9922db38df478ce11f9ed0b415b7304d896836",
+          "sha256": "c5185c4794be2d8a9784d5753c9922db38df478ce11f9ed0b415b7304d896836",
+          "symlink_target": "../../blobs/c5185c4794be2d8a9784d5753c9922db38df478ce11f9ed0b415b7304d896836"
+        },
+        {
+          "bytes": 3187841392,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00004-of-00005.safetensors",
+          "relative_path": "model-00004-of-00005.safetensors",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/b5ee7de71fbf17db3d5704e0c8f2bc7d005ca9e1d7ca2aeb19827b0cfcaa917a",
+          "sha256": "b5ee7de71fbf17db3d5704e0c8f2bc7d005ca9e1d7ca2aeb19827b0cfcaa917a",
+          "symlink_target": "../../blobs/b5ee7de71fbf17db3d5704e0c8f2bc7d005ca9e1d7ca2aeb19827b0cfcaa917a"
+        },
+        {
+          "bytes": 1244659840,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00005-of-00005.safetensors",
+          "relative_path": "model-00005-of-00005.safetensors",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/20c2d6366ab85c90786ccdd829cd2b9e7d30ef3b2ebbb998280e7e4014b542ff",
+          "sha256": "20c2d6366ab85c90786ccdd829cd2b9e7d30ef3b2ebbb998280e7e4014b542ff",
+          "symlink_target": "../../blobs/20c2d6366ab85c90786ccdd829cd2b9e7d30ef3b2ebbb998280e7e4014b542ff"
+        },
+        {
+          "bytes": 32878,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model.safetensors.index.json",
+          "relative_path": "model.safetensors.index.json",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/2b85c00f1b118961cd7a477e2bba0fe197a4ce1a",
+          "sha256": "f9fdbcb91c23971c13ec5d5f2573d2349e8f61f2f049371ec699281748fdb1bc",
+          "symlink_target": "../../blobs/2b85c00f1b118961cd7a477e2bba0fe197a4ce1a"
+        },
+        {
+          "bytes": 11422654,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/tokenizer.json",
+          "relative_path": "tokenizer.json",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "symlink_target": "../../blobs/aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+        },
+        {
+          "bytes": 9732,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/tokenizer_config.json",
+          "relative_path": "tokenizer_config.json",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/417d038a63fa3de29cfde265caedae14d1a58d92",
+          "sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+          "symlink_target": "../../blobs/417d038a63fa3de29cfde265caedae14d1a58d92"
+        },
+        {
+          "bytes": 2776833,
+          "is_symlink": true,
+          "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/vocab.json",
+          "relative_path": "vocab.json",
+          "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/blobs/4783fe10ac3adce15ac8f358ef5462739852c569",
+          "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "symlink_target": "../../blobs/4783fe10ac3adce15ac8f358ef5462739852c569"
+        }
+      ],
+      "is_symlink": false,
+      "kind": "directory",
+      "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218",
+      "production_directory_sha256": "0ec94e78a49090fcf7f31b23e33f594fce508f83a9ed9e52c48eff321e8c4a9c",
+      "resolved_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter": {
+      "exists": true,
+      "file_count": 11,
+      "files": [
+        {
+          "bytes": 5192,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/README.md",
+          "relative_path": "README.md",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/README.md",
+          "sha256": "8a2a2f2e3cd5f305c1748b24b3083a63275e073239b1a0416b079d595d08c171",
+          "symlink_target": null
+        },
+        {
+          "bytes": 925,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/adapter_config.json",
+          "relative_path": "adapter_config.json",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/adapter_config.json",
+          "sha256": "94090ee7ddaf2dd9e6500e43867c3c1c823b9bd02379eabc50c8345d18503d92",
+          "symlink_target": null
+        },
+        {
+          "bytes": 349243752,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/adapter_model.safetensors",
+          "relative_path": "adapter_model.safetensors",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/adapter_model.safetensors",
+          "sha256": "5f1fce989bb5d284a5ff8aed06979a11021733b2a6bce4af53ff36286b099c10",
+          "symlink_target": null
+        },
+        {
+          "bytes": 707,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/added_tokens.json",
+          "relative_path": "added_tokens.json",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/added_tokens.json",
+          "sha256": "c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680",
+          "symlink_target": null
+        },
+        {
+          "bytes": 4168,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/chat_template.jinja",
+          "relative_path": "chat_template.jinja",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/chat_template.jinja",
+          "sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+          "symlink_target": null
+        },
+        {
+          "bytes": 1671853,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/merges.txt",
+          "relative_path": "merges.txt",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/merges.txt",
+          "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "symlink_target": null
+        },
+        {
+          "bytes": 613,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/special_tokens_map.json",
+          "relative_path": "special_tokens_map.json",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/special_tokens_map.json",
+          "sha256": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd",
+          "symlink_target": null
+        },
+        {
+          "bytes": 11422654,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/tokenizer.json",
+          "relative_path": "tokenizer.json",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/tokenizer.json",
+          "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "symlink_target": null
+        },
+        {
+          "bytes": 5404,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/tokenizer_config.json",
+          "relative_path": "tokenizer_config.json",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/tokenizer_config.json",
+          "sha256": "443bfa629eb16387a12edbf92a76f6a6f10b2af3b53d87ba1550adfcf45f7fa0",
+          "symlink_target": null
+        },
+        {
+          "bytes": 6008,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/training_args.bin",
+          "relative_path": "training_args.bin",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/training_args.bin",
+          "sha256": "cfe5411534a1907bef451f29ee31091801ead8c7129e2672c9d13452866d2fdc",
+          "symlink_target": null
+        },
+        {
+          "bytes": 2776833,
+          "is_symlink": false,
+          "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/vocab.json",
+          "relative_path": "vocab.json",
+          "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/vocab.json",
+          "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "symlink_target": null
+        }
+      ],
+      "is_symlink": false,
+      "kind": "directory",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+      "production_directory_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/sft_expert_dataset_balanced.jsonl": {
+      "bytes": 116622803,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/sft_expert_dataset_balanced.jsonl",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/sft_expert_dataset_balanced.jsonl",
+      "sha256": "c547e8f0c5988b29288f2a097169c7859741b7d4f53f222af31f5e2889d516cf"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/model/qwen3_8b.yaml": {
+      "bytes": 414,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/model/qwen3_8b.yaml",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/model/qwen3_8b.yaml",
+      "sha256": "121222e82cee136a251f20fdd5a67c3ed93e824cc859a9bd496ec010094adfed"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_dataset_schema.json": {
+      "bytes": 782,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_dataset_schema.json",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_dataset_schema.json",
+      "sha256": "dd1c34b26607160a0810cf6a399bce88e2c5665b722d3642ecfb320c27773d8f"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_run_config.json": {
+      "bytes": 1803,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_run_config.json",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_run_config.json",
+      "sha256": "15e2db7522e78b98fd9fcfc9f08537108b54353128c986043b8f2e947567a2ec"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_exclusions.json": {
+      "bytes": 22337,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_exclusions.json",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_exclusions.json",
+      "sha256": "fdbe3b1c2d8162fa7c95ff25b57ace1eaf01c1224d42f9f1f447bf7a859541c5"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_splits.json": {
+      "bytes": 524844,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_splits.json",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_splits.json",
+      "sha256": "5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_training_protocol.json": {
+      "bytes": 2380,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_training_protocol.json",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_training_protocol.json",
+      "sha256": "dd06d08773e9842b2302263429c7a1752e968dcb30d2dd89f185c01ef9605155"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/env/base.py": {
+      "bytes": 1577,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/env/base.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/env/base.py",
+      "sha256": "a3ae633aa79c8f80a70629fd398b880ea9c1807e7c219717b98e518b12496abb"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/models/action_parser.py": {
+      "bytes": 4918,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/models/action_parser.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/models/action_parser.py",
+      "sha256": "0a1c668d590980d1d8cdd4104a2b3c9aa851037fc238a2c73c45b57ab4432fbe"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/models/policy.py": {
+      "bytes": 1824,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/models/policy.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/models/policy.py",
+      "sha256": "afbb9544e2ea0c2aa73d3f7dcfbf7e366f1daf6eb95fd4e89fefe0c913dda469"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/recovery/corpus.py": {
+      "bytes": 24140,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/recovery/corpus.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/recovery/corpus.py",
+      "sha256": "14d8ee0f4059f43e76cd94f6511f4ad1e40b4c97377e9bce987d48b59e66a6a1"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/dataset.py": {
+      "bytes": 15760,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/dataset.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/dataset.py",
+      "sha256": "26f01b4e9c51165ca049e9afaf8ea6d012369097051373150b2646ae826edcaa"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/masking.py": {
+      "bytes": 1664,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/masking.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/masking.py",
+      "sha256": "c788038d0af1ee4f3a8a2ac8f48da0d9b0cda6c7bfe9d673248a87f5788df1a8"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/protocol.py": {
+      "bytes": 11229,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/protocol.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/protocol.py",
+      "sha256": "cb9a8ee23d1208064348810ef3580773ba14403bfaac6a4e7f4a43c5540178a8"
+    },
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/training.py": {
+      "bytes": 11777,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/training.py",
+      "resolved_path": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/training.py",
+      "sha256": "0c722ca6ff17aa50da6fb294b632619f65f99936ce41e61ec0dab6288c7b584e"
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__LUNA__si-p1-isolation-budget__caae4c/KNOWN_USE_IDENTITIES.json": {
+      "bytes": 601295,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__LUNA__si-p1-isolation-budget__caae4c/KNOWN_USE_IDENTITIES.json",
+      "resolved_path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__LUNA__si-p1-isolation-budget__caae4c/KNOWN_USE_IDENTITIES.json",
+      "sha256": "98580db9a8322c52c87d6f30dcb75858b00f3b0ec6d3494a4a87923504ddca60"
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/ADOPTED_METADATA_RESERVATIONS.json": {
+      "bytes": 457882,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/ADOPTED_METADATA_RESERVATIONS.json",
+      "resolved_path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/ADOPTED_METADATA_RESERVATIONS.json",
+      "sha256": "6ce8a32a2345b59ecdef9c28c3a341e9c0801b8105f79895f9b2cb9545a4937e"
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/MINIMAL_CONTROLLED_EXPERIENCE_PROTOCOL.md": {
+      "bytes": 13341,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/MINIMAL_CONTROLLED_EXPERIENCE_PROTOCOL.md",
+      "resolved_path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/MINIMAL_CONTROLLED_EXPERIENCE_PROTOCOL.md",
+      "sha256": "2d5ddfddc4c18072fa1b431d9c1e8e0688e1dd180511e49cdfb8112fb90d7d6e"
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/phase3_independent_review.json": {
+      "bytes": 11067,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/phase3_independent_review.json",
+      "resolved_path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/phase3_independent_review.json",
+      "sha256": "2c29a244b279d4637b0e0572a3f139fe806848de8225d362d005feac45845483"
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/COMMON_ENGINEERING_CONTRACT.md": {
+      "bytes": 5596,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/COMMON_ENGINEERING_CONTRACT.md",
+      "resolved_path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/COMMON_ENGINEERING_CONTRACT.md",
+      "sha256": "60954ed798aad589fe4df43fcb90d703eddbce6ed005f9c12a81607bb1cf569f"
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/LUNA_TASK.md": {
+      "bytes": 3313,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/LUNA_TASK.md",
+      "resolved_path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/LUNA_TASK.md",
+      "sha256": "fdc68838e0f4b6a7e0d0e6c7028cf1801b61def518db3aec53e7bea91753d637"
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/START_STATE.json": {
+      "bytes": 1454,
+      "exists": true,
+      "is_symlink": false,
+      "kind": "file",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/START_STATE.json",
+      "resolved_path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/START_STATE.json",
+      "sha256": "6311fba5524f4aa3f71ef25c7e021c57685e05ffca55cdd287ec311ba37e861c"
+    }
+  },
+  "package_origins": {
+    "PyYAML": {
+      "distribution_name": "PyYAML",
+      "origin": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages",
+      "version": "6.0.2"
+    },
+    "accelerate": {
+      "distribution_name": "accelerate",
+      "origin": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages",
+      "version": "1.10.1"
+    },
+    "datasets": {
+      "distribution_name": "datasets",
+      "origin": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages",
+      "version": "4.0.0"
+    },
+    "huggingface_hub": {
+      "distribution_name": "huggingface_hub",
+      "origin": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages",
+      "version": "0.36.2"
+    },
+    "numpy": {
+      "distribution_name": "numpy",
+      "origin": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages",
+      "version": "1.26.4"
+    },
+    "peft": {
+      "distribution_name": "peft",
+      "origin": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages",
+      "version": "0.17.1"
+    },
+    "safetensors": {
+      "distribution_name": "safetensors",
+      "origin": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages",
+      "version": "0.8.0"
+    },
+    "tokenizers": {
+      "distribution_name": "tokenizers",
+      "origin": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages",
+      "version": "0.22.2"
+    },
+    "torch": {
+      "distribution_name": "torch",
+      "origin": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages",
+      "version": "2.6.0+cu124"
+    },
+    "transformers": {
+      "distribution_name": "transformers",
+      "origin": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages",
+      "version": "4.56.2"
+    },
+    "trl": {
+      "distribution_name": "trl",
+      "origin": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages",
+      "version": "0.23.0"
+    }
+  },
+  "package_origins_probe_receipt": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__LUNA__si-e1-token-runtime-audit__sie1_b8f6/dependency_probe.receipt.json",
+  "package_origins_python": "3.10.20 (main, Jun 11 2026, 15:17:37) [GCC 14.3.0]",
+  "package_versions": {
+    "PyYAML": "6.0.2",
+    "accelerate": "1.10.1",
+    "datasets": "4.0.0",
+    "huggingface_hub": "0.36.2",
+    "numpy": "1.26.4",
+    "peft": "0.17.1",
+    "safetensors": "0.8.0",
+    "tokenizers": "0.22.2",
+    "torch": "2.6.0+cu124",
+    "transformers": "4.56.2",
+    "trl": "0.23.0"
+  },
+  "platform": "Linux-5.4.0-139-generic-x86_64-with-glibc2.35",
+  "python": "3.10.20 (main, Jun 11 2026, 15:17:37) [GCC 14.3.0]",
+  "python_path_policy": {
+    "PYTHONHOME": "unset",
+    "PYTHONPATH": "unset",
+    "explicit_project_src_sys_path": "/home/lizening/Alfworld-Self-Improvement-Project/src",
+    "isolated_mode": true,
+    "module_origins": {
+      "env.base": "/home/lizening/Alfworld-Self-Improvement-Project/src/env/base.py",
+      "models.policy": "/home/lizening/Alfworld-Self-Improvement-Project/src/models/policy.py",
+      "recovery.corpus": "/home/lizening/Alfworld-Self-Improvement-Project/src/recovery/corpus.py",
+      "sft.masking": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/masking.py",
+      "sft.protocol": "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/protocol.py"
+    }
+  },
+  "schema": "SI_E1_READ_ONLY_INPUT_BINDINGS_V1",
+  "snapshot_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "status": "BEFORE_AFTER_IDENTICAL",
+  "unchanged": {
+    "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/sft-policy-bootstrap/sft_expert_dataset_balanced.jsonl": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/model/qwen3_8b.yaml": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_dataset_schema.json": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_run_config.json": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_exclusions.json": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_task_splits.json": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/configs/sft/sft_training_protocol.json": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/env/base.py": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/models/action_parser.py": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/models/policy.py": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/recovery/corpus.py": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/dataset.py": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/masking.py": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/protocol.py": true,
+    "/home/lizening/Alfworld-Self-Improvement-Project/src/sft/training.py": true,
+    "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__LUNA__si-p1-isolation-budget__caae4c/KNOWN_USE_IDENTITIES.json": true,
+    "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/ADOPTED_METADATA_RESERVATIONS.json": true,
+    "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/MINIMAL_CONTROLLED_EXPERIENCE_PROTOCOL.md": true,
+    "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/phase3_independent_review.json": true,
+    "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/COMMON_ENGINEERING_CONTRACT.md": true,
+    "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/LUNA_TASK.md": true,
+    "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__SOL__si-e1-engineering-review__sie1_b8f6/START_STATE.json": true
+  }
+}

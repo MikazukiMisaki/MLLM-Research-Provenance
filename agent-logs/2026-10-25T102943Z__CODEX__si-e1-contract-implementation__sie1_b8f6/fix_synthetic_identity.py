@@ -1,0 +1,8 @@
+from pathlib import Path
+OWN=Path(__file__).resolve().parent
+assert OWN==Path('/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__CODEX__si-e1-contract-implementation__sie1_b8f6')
+ROOT=Path('/home/lizening/wt-si-p3-engineering-contracts')
+f=ROOT/'src/self_improvement/si_p3/contract.py';s=f.read_text();s=s.replace('from recovery.two_stage import GenerationRecord','from recovery.two_stage import GenerationRecord\nfrom recovery.corpus import task_family_from_id');s=s.replace('require(self.family in FAMILIES and self.task_id.startswith(self.family + "/"), "slot canonical family")','require(self.family in FAMILIES and task_family_from_id(self.task_id) == self.family, "slot canonical family")');s=s.replace('require(bool(self.task_id.split("/", 1)[1]) and ".." not in self.task_id.split("/"), "slot canonical identity")','require(len(self.task_id.split("/")) == 2 and all(self.task_id.split("/")) and ".." not in self.task_id.split("/"), "slot canonical identity")');f.write_text(s)
+f=ROOT/'src/self_improvement/si_p3/data.py';s=f.read_text().replace('from models.policy import ActionRequest','from models.policy import ActionRequest\nfrom recovery.corpus import task_family_from_id');s=s.replace('task_id.startswith(family + "/")','task_family_from_id(task_id) == family');s=s.replace('x["task_id"].startswith(x["family"] + "/")','task_family_from_id(x["task_id"]) == x["family"]');f.write_text(s)
+f=ROOT/'tests/si_p3_support.py';s=f.read_text().replace('f"{family}/synthetic-{i:03d}"','f"{family}-synthetic-{i:03d}/trial-{i:03d}"').replace('f"{family}/background-{i:03d}"','f"{family}-background-{i:03d}/trial-{i:03d}"');f.write_text(s)
+print('Corrected only new canonical identity checks to reuse frozen task_family_from_id; no historical validator changed.')

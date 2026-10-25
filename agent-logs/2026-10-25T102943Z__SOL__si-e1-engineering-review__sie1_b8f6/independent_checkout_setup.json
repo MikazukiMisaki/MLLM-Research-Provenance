@@ -1,0 +1,70 @@
+{
+  "observed_utc": "2026-10-25T11:19:20.439920+00:00",
+  "candidate": "a995d4c3c5f7d31a2cf1fd0afc4bfa4bd72ee3a3",
+  "author_final_handoff_and_remote": "PENDING; no PASS issued",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "show",
+        "--no-patch",
+        "--format=%H%n%P%n%s",
+        "a995d4c3c5f7d31a2cf1fd0afc4bfa4bd72ee3a3"
+      ],
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "returncode": 0,
+      "stdout": "a995d4c3c5f7d31a2cf1fd0afc4bfa4bd72ee3a3\n85cbb92395e5e2420c2adeb1fa0634653e742910\nAdd gated SI-P3 collection and continuation engineering contracts\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--name-status",
+        "85cbb92395e5e2420c2adeb1fa0634653e742910",
+        "a995d4c3c5f7d31a2cf1fd0afc4bfa4bd72ee3a3"
+      ],
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "returncode": 0,
+      "stdout": "A\tconfigs/self_improvement/si_p3_data_schema_v1.json\nA\tconfigs/self_improvement/si_p3_engineering_schema_v1.json\nA\tconfigs/self_improvement/si_p3_engineering_v1.json\nA\tdocs/si_p3_engineering_v1.md\nA\tsrc/self_improvement/__init__.py\nA\tsrc/self_improvement/si_p3/__init__.py\nA\tsrc/self_improvement/si_p3/audit.py\nA\tsrc/self_improvement/si_p3/collector.py\nA\tsrc/self_improvement/si_p3/continuation.py\nA\tsrc/self_improvement/si_p3/contract.py\nA\tsrc/self_improvement/si_p3/data.py\nA\tsrc/self_improvement/si_p3/evidence.py\nA\tsrc/self_improvement/si_p3/reservations.py\nA\ttests/si_p3_support.py\nA\ttests/test_si_p3_collector.py\nA\ttests/test_si_p3_learning.py\nA\ttests/test_si_p3_reservations.py\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "worktree",
+        "add",
+        "--detach",
+        "/tmp/si-e1-independent-review-a995d4c3",
+        "a995d4c3c5f7d31a2cf1fd0afc4bfa4bd72ee3a3"
+      ],
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "returncode": 0,
+      "stdout": "Preparing worktree (detached HEAD a995d4c)\nHEAD is now at a995d4c Add gated SI-P3 collection and continuation engineering contracts\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/si-e1-independent-review-a995d4c3",
+      "returncode": 0,
+      "stdout": "a995d4c3c5f7d31a2cf1fd0afc4bfa4bd72ee3a3\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "cwd": "/tmp/si-e1-independent-review-a995d4c3",
+      "returncode": 0,
+      "stdout": "## HEAD (no branch)\n",
+      "stderr": ""
+    }
+  ]
+}

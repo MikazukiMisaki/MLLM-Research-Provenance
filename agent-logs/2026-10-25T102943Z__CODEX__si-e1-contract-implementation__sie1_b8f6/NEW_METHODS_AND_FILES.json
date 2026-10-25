@@ -1,0 +1,1463 @@
+{
+  "frozen_sha": "a995d4c3c5f7d31a2cf1fd0afc4bfa4bd72ee3a3",
+  "base_sha": "85cbb92395e5e2420c2adeb1fa0634653e742910",
+  "all_old_methods_changed": [],
+  "only_added_files": {
+    "configs/self_improvement/si_p3_data_schema_v1.json": {
+      "sha256": "12a6625ba5c96073223d39c4f2829844d170d1b083a1e6928c6cdeed0143a8af",
+      "bytes": 9275
+    },
+    "configs/self_improvement/si_p3_engineering_schema_v1.json": {
+      "sha256": "acbdffead05ae3eeb4c36f5f7ebde67d974af948fc128b030b8788a85a5654fd",
+      "bytes": 2962
+    },
+    "configs/self_improvement/si_p3_engineering_v1.json": {
+      "sha256": "098954c5688cfd4893b3961837ce3178bddf8a04e60f8c3cd19228c1712314d8",
+      "bytes": 6203
+    },
+    "docs/si_p3_engineering_v1.md": {
+      "sha256": "a96e9016eefbdb82c65ac7cf6422e45bcba2bd210930456585da0f68aeb1dbf8",
+      "bytes": 10337
+    },
+    "src/self_improvement/__init__.py": {
+      "sha256": "84ba2265d10e0d1bec7c1ea8da5ef4d7e6ee2d1272a04ad63bb1b2f00ca8b272",
+      "bytes": 75
+    },
+    "src/self_improvement/si_p3/__init__.py": {
+      "sha256": "16d722a95f36a7d6a36dcce9757b940b4310960eab7f990e32bf61dc2cbb87be",
+      "bytes": 78
+    },
+    "src/self_improvement/si_p3/audit.py": {
+      "sha256": "632d51c9c8cab411726894bc3482ff82f30b08087d5d142fd3b1db2944c8e124",
+      "bytes": 16169
+    },
+    "src/self_improvement/si_p3/collector.py": {
+      "sha256": "1c3604131004487f0b139b26c2891c62cf932f21edec160c32f86493c1993269",
+      "bytes": 17753
+    },
+    "src/self_improvement/si_p3/continuation.py": {
+      "sha256": "bdcc2d8284eaf77a0a8cf31e4f701a3c6dfcefd5e8ebe2b03a62641aef3bce33",
+      "bytes": 9962
+    },
+    "src/self_improvement/si_p3/contract.py": {
+      "sha256": "2d7b05d5c230cb45c2ad90c7507c11a5c76ce52f7335548c46a48d78e8842239",
+      "bytes": 10685
+    },
+    "src/self_improvement/si_p3/data.py": {
+      "sha256": "f2521f992c0926b77aae492feb2629d656d346ccb7d8d2ada41c69e6d841b016",
+      "bytes": 18248
+    },
+    "src/self_improvement/si_p3/evidence.py": {
+      "sha256": "8c56b0bc0a4cc39fa9182821eb7d0c9bb2b5e2eec3358e48c018398d7fbcd9e1",
+      "bytes": 14081
+    },
+    "src/self_improvement/si_p3/reservations.py": {
+      "sha256": "94a6f0b161475db5a39dc6971b1769b2da93bf6b23b9aed38f511eaeab16bace",
+      "bytes": 2819
+    },
+    "tests/si_p3_support.py": {
+      "sha256": "2d93932d6cff76680f17e0544ce698e94873ebb028056b428d28ceadf2ccbd98",
+      "bytes": 9466
+    },
+    "tests/test_si_p3_collector.py": {
+      "sha256": "2a879b38d45fd8eb238ab38bb5db8e9db63f2f8f6058c8532f86a272217d5a7b",
+      "bytes": 26574
+    },
+    "tests/test_si_p3_learning.py": {
+      "sha256": "c4264d1cff5afe11f7d10b7c36a1021a2c24b24eac7594894d24cb487bff9a0d",
+      "bytes": 11870
+    },
+    "tests/test_si_p3_reservations.py": {
+      "sha256": "fcf10bdbae89308eedd2ff3a4dabab3b36c4897397b85b7013a7ad8e756ca30b",
+      "bytes": 2521
+    }
+  },
+  "definitions": [
+    {
+      "file": "src/self_improvement/si_p3/audit.py",
+      "name": "IntegrityAudit",
+      "kind": "ClassDef",
+      "line": 20,
+      "AST_sha256": "fb8b539f4cc07ac2c953fb0d76b0a2dd7c5fac5f878aea63519732e091413c48"
+    },
+    {
+      "file": "src/self_improvement/si_p3/audit.py",
+      "name": "IntegrityAudit.__init__",
+      "kind": "FunctionDef",
+      "line": 21,
+      "AST_sha256": "a1471652ff33c9821e5c32e07fb9ddbfd57419f4d535cfad23c05d32e20ab6ab"
+    },
+    {
+      "file": "src/self_improvement/si_p3/audit.py",
+      "name": "IntegrityAudit.receipt",
+      "kind": "FunctionDef",
+      "line": 30,
+      "AST_sha256": "eec7e28a75d8f6a0c6eb117841cec8764916addb0b4ebc7718f84567cf9e2540"
+    },
+    {
+      "file": "src/self_improvement/si_p3/audit.py",
+      "name": "IntegrityAudit.reset",
+      "kind": "FunctionDef",
+      "line": 52,
+      "AST_sha256": "7f6c69dff4bc2ffdce573ddbfec0496fe9b125272b1e80d9ab3dd3ecbf508bd6"
+    },
+    {
+      "file": "src/self_improvement/si_p3/audit.py",
+      "name": "IntegrityAudit.generation",
+      "kind": "FunctionDef",
+      "line": 61,
+      "AST_sha256": "fea50358dfc8fe4511d9b3ae1d3e422f2a5b796e6f9bff2c0b29a0de32071094"
+    },
+    {
+      "file": "src/self_improvement/si_p3/audit.py",
+      "name": "IntegrityAudit.step",
+      "kind": "FunctionDef",
+      "line": 77,
+      "AST_sha256": "66ee94d698fe61df98b3ce57c06e57e81dff5264b9895510cbb7bcc3b456ff61"
+    },
+    {
+      "file": "src/self_improvement/si_p3/audit.py",
+      "name": "IntegrityAudit.rollout",
+      "kind": "FunctionDef",
+      "line": 94,
+      "AST_sha256": "dd43a350c4514426e6c6a9d95065134c4e71c3cfdc95bc7c82745b1eb6e742e6"
+    },
+    {
+      "file": "src/self_improvement/si_p3/audit.py",
+      "name": "IntegrityAudit.slot",
+      "kind": "FunctionDef",
+      "line": 125,
+      "AST_sha256": "1efdc7477816948910687ae7088751f7e7b88bf51e76659763a2ca8f0c5dd4d6"
+    },
+    {
+      "file": "src/self_improvement/si_p3/audit.py",
+      "name": "IntegrityAudit.validate",
+      "kind": "FunctionDef",
+      "line": 172,
+      "AST_sha256": "bad65487e5ceeb7c403b520f79864cc7ccde57a57ff23864a82fdde7fc227f8b"
+    },
+    {
+      "file": "src/self_improvement/si_p3/audit.py",
+      "name": "audit_run",
+      "kind": "FunctionDef",
+      "line": 209,
+      "AST_sha256": "62298253bb16d04eb1420c4ced2e65ca38ee5bfaa4999bb78a5308207759cbe0"
+    },
+    {
+      "file": "src/self_improvement/si_p3/audit.py",
+      "name": "logical_costs",
+      "kind": "FunctionDef",
+      "line": 214,
+      "AST_sha256": "b656abe2f840d95b68b53a0586e766102c1a252e9807e3221aaacca8937b048a"
+    },
+    {
+      "file": "src/self_improvement/si_p3/audit.py",
+      "name": "logical_costs.cost",
+      "kind": "FunctionDef",
+      "line": 216,
+      "AST_sha256": "59fd784e53f512b0a1e132215db258c62d01c7c92053857557af3cef8035d68e"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "RawProducer",
+      "kind": "ClassDef",
+      "line": 26,
+      "AST_sha256": "9110610213ce9e02366fbd2700bd8761fd6781f255c7f8b37a255b4feed7e03a"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "RawProducer.__call__",
+      "kind": "FunctionDef",
+      "line": 27,
+      "AST_sha256": "59cbd225638d50410fd95e6643fc41ff4a7155215abab6343cb17ec849f779b8"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "ProducerAdapter",
+      "kind": "ClassDef",
+      "line": 30,
+      "AST_sha256": "cff8af61e8b5b6ea71cab2f03776662afec7d80150188106ca36852dd90d563f"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "ProducerAdapter.__init__",
+      "kind": "FunctionDef",
+      "line": 37,
+      "AST_sha256": "bc7a62641bcc5fa1ef2e8b4a600661c603b516f80c623298256c8453bcbae2ee"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "ProducerAdapter.prepare",
+      "kind": "FunctionDef",
+      "line": 44,
+      "AST_sha256": "65a83601af3136ba53878cf9362f2d4a1b0c2ad4dd3b6838659d1edd96b4f057"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "ProducerAdapter.generate",
+      "kind": "FunctionDef",
+      "line": 52,
+      "AST_sha256": "200f50680c1e1965549c90bc9329c5a5dd15dbc679312b640ff3571a271e46e9"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "Ports",
+      "kind": "ClassDef",
+      "line": 66,
+      "AST_sha256": "ca54f5bd2a20011199232928c019f095752f5803e58598027ca9f9de8e03e48c"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "EnvironmentAdapter",
+      "kind": "ClassDef",
+      "line": 72,
+      "AST_sha256": "b0eb24828c9a961edbd1693c9dd3bed052c81bf965c3848b94f4bac556aec3df"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "EnvironmentAdapter.__init__",
+      "kind": "FunctionDef",
+      "line": 74,
+      "AST_sha256": "78699edf16fd76188da6571b2fd1e8dd7d4c30aa0acad0725e309b55669b5ab4"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "EnvironmentAdapter.reset",
+      "kind": "FunctionDef",
+      "line": 79,
+      "AST_sha256": "2a7a009f7aeb7aa29add88f9d12a079705fb69d74e5aeefd1b80b9d43f4b95ff"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "EnvironmentAdapter.step",
+      "kind": "FunctionDef",
+      "line": 89,
+      "AST_sha256": "4b44bad1dc1df10fdf1bbef8bf770367f7d90b20a22ef960474b22ad78e2395f"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "EnvironmentAdapter.close",
+      "kind": "FunctionDef",
+      "line": 98,
+      "AST_sha256": "08499548988ced72b34e9b45c96092231f931576abe0e520b9d9a99327f36275"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "parse_generation",
+      "kind": "FunctionDef",
+      "line": 106,
+      "AST_sha256": "9d332c71889d399c962e7638a0a490cc4369c7fa4124d5adf3fddf13f831ce7d"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "Collector",
+      "kind": "ClassDef",
+      "line": 120,
+      "AST_sha256": "8e3890ca9d69deab4302c4575b71e666f14f6d63cdcb8f309ad1c678c3f7771e"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "Collector.__init__",
+      "kind": "FunctionDef",
+      "line": 121,
+      "AST_sha256": "c7061a87368ae6ce481f8ce9e500223c72323a34c7608b739f14a393925817e0"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "Collector._identity",
+      "kind": "FunctionDef",
+      "line": 135,
+      "AST_sha256": "6ea9f5e100d1fd7ad7371e7ed21251d48186c63ecdb80e6f7254dad779767858"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "Collector._call",
+      "kind": "FunctionDef",
+      "line": 138,
+      "AST_sha256": "da0c0d937c7233e1b9424ba9c694e26671c38657720aa6743d0597a07a07a64d"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "Collector._data",
+      "kind": "FunctionDef",
+      "line": 155,
+      "AST_sha256": "c74bd3084471aef8b09061c235a9d90812fcdfdc7dc25da3ed92bcbe1ffe45ed"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "Collector._new_environment",
+      "kind": "FunctionDef",
+      "line": 159,
+      "AST_sha256": "3e9d1ac97d10e24008de3ac3c60f10a81d49a826be150ed6110a58cd7c0878ff"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "Collector._generate",
+      "kind": "FunctionDef",
+      "line": 170,
+      "AST_sha256": "15dd7dd014398017b677bb175ff94914a633a35644c6e7167535a25f94b56d86"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "Collector._generate.generate",
+      "kind": "FunctionDef",
+      "line": 177,
+      "AST_sha256": "1e541d406c1af62a3c4de464d9eac69e00da5dc4dccf27ccea09a796d8e1b62e"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "Collector._step",
+      "kind": "FunctionDef",
+      "line": 186,
+      "AST_sha256": "0bf95724e97d91b02f988070aedd7cd7b46842750145c3d4876a7762969d1a6f"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "Collector._rollout",
+      "kind": "FunctionDef",
+      "line": 197,
+      "AST_sha256": "4c4e694943cd0f8e5f93f64f4ce7ec002f92222dddbe0195686eadf408449bd7"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "Collector._collect",
+      "kind": "FunctionDef",
+      "line": 223,
+      "AST_sha256": "e541f4b4de20e3700d026c52a74de43d75820d5aac218ac61d9d91cae6dc197e"
+    },
+    {
+      "file": "src/self_improvement/si_p3/collector.py",
+      "name": "Collector.run",
+      "kind": "FunctionDef",
+      "line": 281,
+      "AST_sha256": "1c3c7bab8416d46f9ebe3e56ce8ca530db0a94237eb7d6343b6f8d48839b42d4"
+    },
+    {
+      "file": "src/self_improvement/si_p3/continuation.py",
+      "name": "validate_recipe",
+      "kind": "FunctionDef",
+      "line": 34,
+      "AST_sha256": "aa738f74b3bc8a413958da50dab61f05b1444e99ac1977104c81425dd8025c0b"
+    },
+    {
+      "file": "src/self_improvement/si_p3/continuation.py",
+      "name": "require_cpu_toy",
+      "kind": "FunctionDef",
+      "line": 39,
+      "AST_sha256": "bfc583cf8e98cec7675886b3dc3bcbe1390e099c68b2de777e5a9e21f792822a"
+    },
+    {
+      "file": "src/self_improvement/si_p3/continuation.py",
+      "name": "parameter_fingerprint",
+      "kind": "FunctionDef",
+      "line": 49,
+      "AST_sha256": "8137365de3c3a063320b9f55364782b87ddeb9f71b561cd7f346a978df8c5598"
+    },
+    {
+      "file": "src/self_improvement/si_p3/continuation.py",
+      "name": "lora_only",
+      "kind": "FunctionDef",
+      "line": 62,
+      "AST_sha256": "653265fe0a1c04f058b51d3959d1791cf1e981187cfe510b64563baae3b0bbde"
+    },
+    {
+      "file": "src/self_improvement/si_p3/continuation.py",
+      "name": "load_p0_continuation",
+      "kind": "FunctionDef",
+      "line": 72,
+      "AST_sha256": "484e16a51a0a4a38c89ac5c34b5f20a97eca80fe6c87d1db8db1168707a05339"
+    },
+    {
+      "file": "src/self_improvement/si_p3/continuation.py",
+      "name": "Final18Controller",
+      "kind": "ClassDef",
+      "line": 94,
+      "AST_sha256": "5bdcab30186af1474293d93739f04e0b7435500e1335fe374b9f9b317e42c866"
+    },
+    {
+      "file": "src/self_improvement/si_p3/continuation.py",
+      "name": "Final18Controller.__init__",
+      "kind": "FunctionDef",
+      "line": 101,
+      "AST_sha256": "5a844c48cd296f8c4e25317678f1c0e39b1c9ba94f269f8be65017c8556c03fd"
+    },
+    {
+      "file": "src/self_improvement/si_p3/continuation.py",
+      "name": "Final18Controller.__init__.multiplier",
+      "kind": "FunctionDef",
+      "line": 119,
+      "AST_sha256": "055580711b35124b53a67e89ec166d4916115273e0f0c95e322f3c7e681edb99"
+    },
+    {
+      "file": "src/self_improvement/si_p3/continuation.py",
+      "name": "Final18Controller.consume",
+      "kind": "FunctionDef",
+      "line": 135,
+      "AST_sha256": "045684a9b57ec46ee51fcd84b76240b4c4bd76b03b4c3f17b198a9840f744430"
+    },
+    {
+      "file": "src/self_improvement/si_p3/continuation.py",
+      "name": "Final18Controller.finish",
+      "kind": "FunctionDef",
+      "line": 165,
+      "AST_sha256": "b0dcc04f85c8d8734d10b5e96ec82181bc29a71ffaf10b59fc2a0d788898d57d"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "ContractError",
+      "kind": "ClassDef",
+      "line": 37,
+      "AST_sha256": "30efdfd865f213779adef19ee271c8932920441125f0e41d4bc534fb572c7b51"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "require",
+      "kind": "FunctionDef",
+      "line": 41,
+      "AST_sha256": "d3f78f20b4bd6f747ea6a7bc2a9f76adae2b0c838b9976a78f3df7339b731dce"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "canonical",
+      "kind": "FunctionDef",
+      "line": 46,
+      "AST_sha256": "3abcd0faa3183b5695ad86c3ee5ebced74c44e90672fa2abed7a25606e4852a5"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "digest",
+      "kind": "FunctionDef",
+      "line": 50,
+      "AST_sha256": "6c45f03f6922cfdf307b9b8d2698680ad966df7945d9aba0545b1618e2b274c6"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "text_hash",
+      "kind": "FunctionDef",
+      "line": 54,
+      "AST_sha256": "a9e6033308df3cf6211f1f4ec03450dbdf8cd575813fa4700ccf6f5ebe670b26"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "rank",
+      "kind": "FunctionDef",
+      "line": 58,
+      "AST_sha256": "17a5c9b5edf9b5ae7183c248adb524f2dadb4eef5796d8ba1a0d08a2c361b477"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "integer",
+      "kind": "FunctionDef",
+      "line": 62,
+      "AST_sha256": "58b2be782a1514490482b6d7f8a230c2c0e218f5a0028d8fe16d50855a8db64d"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "software_only",
+      "kind": "FunctionDef",
+      "line": 66,
+      "AST_sha256": "b1728ebc14d008944476cc69efeb1714e28f303c16648048fca3abaad5b20810"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "Slot",
+      "kind": "ClassDef",
+      "line": 71,
+      "AST_sha256": "45cfd5c71dd1c460f4ffb9a961a8c7703fde026c98b1d4af2391f0ff1ae2398d"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "Slot.__post_init__",
+      "kind": "FunctionDef",
+      "line": 77,
+      "AST_sha256": "962820829d4851cd6faf92c3d4fa10c781028464963018eb6a92b9df8e64b980"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "Slot.key",
+      "kind": "FunctionDef",
+      "line": 83,
+      "AST_sha256": "338d50d32781e39a79ae7efdfb25c6413f7fb6205dcb7ba1e5ba9e454701fa8e"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "cut_matrix",
+      "kind": "FunctionDef",
+      "line": 87,
+      "AST_sha256": "fc47e02435763e23cabda40760c625cecbb4d69394f63744d01666d96d3c74e8"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "freeze_plan",
+      "kind": "FunctionDef",
+      "line": 99,
+      "AST_sha256": "9a07de85faf55bfdefaaedbfaa85efebd8ede50b0cf48d65c87dbf145eb3e5b7"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "plan_hash",
+      "kind": "FunctionDef",
+      "line": 117,
+      "AST_sha256": "7dbd3d5f3c072c3d60679ad3fdbf0d75388a3dcac1cc3a02b8e52e7bd70085d7"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "PublicState",
+      "kind": "ClassDef",
+      "line": 124,
+      "AST_sha256": "1efd9017530ef90f426d61d742e2c79f90a7214228494afaf43ea9e5a7e0c436"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "PublicState.__post_init__",
+      "kind": "FunctionDef",
+      "line": 134,
+      "AST_sha256": "1040e714afd93779c3250b9c9453f5facadcb6ef61ea2ca121a37dc2971ed30d"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "PublicState.to_dict",
+      "kind": "FunctionDef",
+      "line": 144,
+      "AST_sha256": "9214d9c59cfcbff318b034d33ded5ae63863becb5116d0e03c0ca219a5419cb0"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "PublicState.from_dict",
+      "kind": "FunctionDef",
+      "line": 148,
+      "AST_sha256": "068d27fa1d58d8acc9f9be37a5e20e16700fbe2590e78ffb5e3b1961744258df"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "PublicState.ended",
+      "kind": "FunctionDef",
+      "line": 154,
+      "AST_sha256": "5525b405e0e4328c6bf5f7cf82e6c5b6ccf3a44fd8c946d8c43c62d707994311"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "request",
+      "kind": "FunctionDef",
+      "line": 158,
+      "AST_sha256": "1421139ed993259a935cff3e18d1f8ddb43eee3c218dedd1dd81a2c588d48c99"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "projection",
+      "kind": "FunctionDef",
+      "line": 163,
+      "AST_sha256": "40b37380bb1643cad2cd30e154e13d35ae11d1e432edc8a2a2fb2c56bc36d584"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "Prepared",
+      "kind": "ClassDef",
+      "line": 177,
+      "AST_sha256": "2305144d19d537826094ea6bb99b5006407926f68ef95800d10b7948b0641a7d"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "Prepared.to_dict",
+      "kind": "FunctionDef",
+      "line": 182,
+      "AST_sha256": "d319f8ff93733ca1b988f38beda4f98fce9156ea2968607b4b1036094cfb043b"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "Generation",
+      "kind": "ClassDef",
+      "line": 188,
+      "AST_sha256": "ec57d1f5ec4cfc2832b9631f2ee0bf2beaffaa55202e37971fbd25f60d525bdd"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "Generation.from_raw",
+      "kind": "FunctionDef",
+      "line": 193,
+      "AST_sha256": "7b88e7d3254649a600811fc297938a48a6cbc68ad8c60f0f22e5fea86be0459e"
+    },
+    {
+      "file": "src/self_improvement/si_p3/contract.py",
+      "name": "Generation.record",
+      "kind": "FunctionDef",
+      "line": 220,
+      "AST_sha256": "37c286ecb79763c2caba6a1e9782d55610b8151b42edc64127f17c1f9d2171b4"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "Example",
+      "kind": "ClassDef",
+      "line": 29,
+      "AST_sha256": "a67b50e0b66689d4ae75fefeec87ae0cf9a7e9cb4196e3a2b6bc484b4f55dc5d"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "Example.loss_tokens",
+      "kind": "FunctionDef",
+      "line": 43,
+      "AST_sha256": "4af3511aa842e555ffed1aae8e3c2f316b4238f01f8579ef36446613fb01764e"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "Example.exact_key",
+      "kind": "FunctionDef",
+      "line": 48,
+      "AST_sha256": "4801a490e2470192d11dbe017f144f8d8c6fe0d033de6ff9cb5a054d63f2f7ca"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "Example.to_dict",
+      "kind": "FunctionDef",
+      "line": 51,
+      "AST_sha256": "10e6fe1a43e30aaa34fd525641239dd5c0d50d9da154f7caadc6317178de21c9"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "encode_example",
+      "kind": "FunctionDef",
+      "line": 55,
+      "AST_sha256": "cdb8d32a0b2b2034b4386198f6fc34acc22c5959a5df6fea8839a3a8b6c9dd3b"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "Candidate",
+      "kind": "ClassDef",
+      "line": 73,
+      "AST_sha256": "69502794e82ea17928bbea50d80d020611279ffa83891b3daff4d4363fec210f"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "Pool",
+      "kind": "ClassDef",
+      "line": 81,
+      "AST_sha256": "5749c8d7df437996fe6573dada8cc4ac26f9dced17e7f122f04c94618a1799cb"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "build_pool",
+      "kind": "FunctionDef",
+      "line": 87,
+      "AST_sha256": "0b6761c65ce107b532fe3c7c03da30ae20f5d4629673510224f5100204c1d07f"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "_background_public",
+      "kind": "FunctionDef",
+      "line": 130,
+      "AST_sha256": "a2818ec12cab8dddc02ebb86c3ffda90103563dc435adf92b61b1ec2a9cc393b"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "validate_background_identities",
+      "kind": "FunctionDef",
+      "line": 145,
+      "AST_sha256": "ea42179e6964d091beecf3258c0c6fd5663cd8163c4b2dd46effdc6801e5bc66"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "select_background",
+      "kind": "FunctionDef",
+      "line": 155,
+      "AST_sha256": "864942837d998589baa4ddfb9db80189d2ea8cf67828b8f510d93f3eca384025"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "Adoption",
+      "kind": "ClassDef",
+      "line": 198,
+      "AST_sha256": "e817d40e2145b15ecfb4850ec0671c954f8a2b6eda974e3d81f6813f07708829"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "_candidate_rank",
+      "kind": "FunctionDef",
+      "line": 205,
+      "AST_sha256": "cc50f48ef223cb08c533d525e412654821fdd5b169270c4ad2a68edec6099d3b"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "adopt_once",
+      "kind": "FunctionDef",
+      "line": 210,
+      "AST_sha256": "7cac50e9a23439b51ee696687840c922f63bbc394a64b27d3a8a5bb3e8ccbb28"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "CompletionCollator",
+      "kind": "ClassDef",
+      "line": 254,
+      "AST_sha256": "53a30a04a67b7d2c7857c55691f7311ef7287e5f0f294ab3bfd6413dce5f06e7"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "CompletionCollator.__init__",
+      "kind": "FunctionDef",
+      "line": 255,
+      "AST_sha256": "676cd249fbf4d63befc50376eb03540db69c9cf7b594c3d3df55978f76dc8943"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "CompletionCollator.__call__",
+      "kind": "FunctionDef",
+      "line": 259,
+      "AST_sha256": "a91c3607492675690ca0c14f31c6ef4bf448bd8941021f02cc10318f55fa60c4"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "paired_slots",
+      "kind": "FunctionDef",
+      "line": 277,
+      "AST_sha256": "a3629bc4d5477ea1939b1d5ee74e4529b279a8a162d4bed4a4f087f853a3368d"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "fixed_schedule",
+      "kind": "FunctionDef",
+      "line": 285,
+      "AST_sha256": "ce477b410f5a37e76d76d2b11a6ddcdc8a8f30d3521636370ee0c1e5cad86778"
+    },
+    {
+      "file": "src/self_improvement/si_p3/data.py",
+      "name": "audit_exposure",
+      "kind": "FunctionDef",
+      "line": 295,
+      "AST_sha256": "09610d3bbd9a6b01e9dae591b5dba23241760454ffbfea2e59e26c0279f79e82"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "Journal",
+      "kind": "ClassDef",
+      "line": 17,
+      "AST_sha256": "ec5b51f93e61608160f77887762f7678224fb12c13a11d35082598bc6ff5b607"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "Journal.__init__",
+      "kind": "FunctionDef",
+      "line": 19,
+      "AST_sha256": "e94df3ae1f41da1cad2f48df616ecfb9624bc2c0b6274c54643ae8f3fb825e9f"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "Journal.append",
+      "kind": "FunctionDef",
+      "line": 29,
+      "AST_sha256": "35e9ee0fa60cdd74fbaa6f88973a6976287f41d0dd7c99cfbb23608d8b6c2cfb"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "Journal.close",
+      "kind": "FunctionDef",
+      "line": 39,
+      "AST_sha256": "894e906671233fa2141dd3ffeae32b33d1f7b5eddb6e494f1cc1ceba22f7a75d"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "validate_journal",
+      "kind": "FunctionDef",
+      "line": 43,
+      "AST_sha256": "a4c95c5669297931f67ffbca5cdbb93585d78526ffe7c64584533ce3aba5150c"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "UnitRegistry",
+      "kind": "ClassDef",
+      "line": 79,
+      "AST_sha256": "065d4f7b783f1106f45ce4e87783a33b339242ed40cc7d387e150d0e024521dd"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "UnitRegistry.__init__",
+      "kind": "FunctionDef",
+      "line": 81,
+      "AST_sha256": "2f7de88d4f5de832b8eeb4662bdaf92231f4dc0e944bf7c56d1ae14063db5698"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "UnitRegistry._slot",
+      "kind": "FunctionDef",
+      "line": 88,
+      "AST_sha256": "83d1fbaf4d201e894d4dce8dd32af4d8d96e1ca38300b8bf336df7a483ebe59f"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "UnitRegistry.start",
+      "kind": "FunctionDef",
+      "line": 109,
+      "AST_sha256": "c34633389733f39bead1d940aaa7b3ae72170d981025f30f834a709b33958ce3"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "UnitRegistry._data_contract",
+      "kind": "FunctionDef",
+      "line": 118,
+      "AST_sha256": "1d6d26930fe24211b6e02ea4f138631612a5f2ab5187b3ce98abba8d295e7cb1"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "UnitRegistry.finish",
+      "kind": "FunctionDef",
+      "line": 157,
+      "AST_sha256": "8744e39540909e2f12bbbc0a00fef842287c485e3f6b113ca3862827787a8685"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "Caps",
+      "kind": "ClassDef",
+      "line": 176,
+      "AST_sha256": "e680306114d5ec3f23b96725cc4236a1e0c0456eb99403c310680f9647ed22c5"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "Caps.__post_init__",
+      "kind": "FunctionDef",
+      "line": 184,
+      "AST_sha256": "cd7aea2db4d2a58c4a549a7150f01c3757be78ada04ccf3482b79afd0365930b"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "Budget",
+      "kind": "ClassDef",
+      "line": 191,
+      "AST_sha256": "db67355bd871c29040bc076480e9c0b8f1b806d852478ed5430e90a35e158209"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "Budget.__init__",
+      "kind": "FunctionDef",
+      "line": 193,
+      "AST_sha256": "0a32c8c1fe1e28cd9d9c97e1c67e70c11e64f648e304bcc1d9e636686ec99b0f"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "Budget.check_time",
+      "kind": "FunctionDef",
+      "line": 204,
+      "AST_sha256": "bbb90ea731d4ed222e746d8d9b40387bf648019b4d56719a0ed4ddfd00af7d23"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "Budget.reserve",
+      "kind": "FunctionDef",
+      "line": 215,
+      "AST_sha256": "492cade22e1e84207d1155e8ef36805c9c7872c2a88a8de6f10e084dce748b70"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "Budget.complete",
+      "kind": "FunctionDef",
+      "line": 232,
+      "AST_sha256": "34a1f49d73d41cf30c30a7ef7c9b08827c6e9e7f259af53075224981dac2c118"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "Budget.stop",
+      "kind": "FunctionDef",
+      "line": 240,
+      "AST_sha256": "a0ab3c9b8f7f4db0b7b54c6209fe3211cd051e69ffca18acf49b17537c72fc1b"
+    },
+    {
+      "file": "src/self_improvement/si_p3/evidence.py",
+      "name": "Budget.snapshot",
+      "kind": "FunctionDef",
+      "line": 243,
+      "AST_sha256": "8a77f7aa70a396baa600f14ebdc32e140e206f8ff8795cfaf28c6fea56cb6387"
+    },
+    {
+      "file": "src/self_improvement/si_p3/reservations.py",
+      "name": "bind_reservations",
+      "kind": "FunctionDef",
+      "line": 20,
+      "AST_sha256": "ded1216eef0126602fd24eafbe4775ba6630eff7a498b39ccc02a6b601bf0e41"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "SyntheticTokenizer",
+      "kind": "ClassDef",
+      "line": 16,
+      "AST_sha256": "aa93d0e15be08161b531e90437133e2b9fc6cb5a478c260528a814ace8cda032"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "SyntheticTokenizer.__init__",
+      "kind": "FunctionDef",
+      "line": 22,
+      "AST_sha256": "4864a17e5bbe9ee633013335780084801bfbe992ef70951c122b7fdefb706e6f"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "SyntheticTokenizer.token",
+      "kind": "FunctionDef",
+      "line": 26,
+      "AST_sha256": "9b09c56207006e9eb8056f8bae2edd8eec5715e83e28ddf53b1ab0a96cea8c01"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "SyntheticTokenizer.__call__",
+      "kind": "FunctionDef",
+      "line": 33,
+      "AST_sha256": "5bb8de5a6cb10ba7386ccd5e6ba01a8fbffbcd2b6e32989382963b2dc9622b3b"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "SyntheticTokenizer.decode",
+      "kind": "FunctionDef",
+      "line": 37,
+      "AST_sha256": "250065f08dd7d3dbd66f7845f2bc2391c645543213f45eed2788524a5ee93aa0"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "SyntheticTokenizer.apply_chat_template",
+      "kind": "FunctionDef",
+      "line": 40,
+      "AST_sha256": "d98535d677e8d5a31484cb221dffb59f2ee00de6627620c054c52cbc915e5fa3"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "RawBoundary",
+      "kind": "ClassDef",
+      "line": 46,
+      "AST_sha256": "48e32651b093509970f8e221d3be9354d8d6a7193af1cde73c9e9d27649c16eb"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "RawBoundary.__init__",
+      "kind": "FunctionDef",
+      "line": 47,
+      "AST_sha256": "c004e08e3d10306bc4dc0a6917a1bd92e18f7165c7630cbc9722ad1799023169"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "RawBoundary.__call__",
+      "kind": "FunctionDef",
+      "line": 51,
+      "AST_sha256": "dba526da6f2849e74705d9f1d19ee0947ce96ff97ac23c05b2720a96c15b55d2"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "SyntheticEnvironment",
+      "kind": "ClassDef",
+      "line": 76,
+      "AST_sha256": "e1463e7f9a49f4b9d0426e54bbb6ed6fa7d78f5a2ccc49163bdb67218802d954"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "SyntheticEnvironment.__init__",
+      "kind": "FunctionDef",
+      "line": 77,
+      "AST_sha256": "a38de5595027f4ef9d69b2e8c0610b3dcfc0b08b4bb9372b3c80a20fe444b7b5"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "SyntheticEnvironment._observation",
+      "kind": "FunctionDef",
+      "line": 89,
+      "AST_sha256": "1aa618bd039ec9e730eae5f093fd53f83369f3f74b1d3608ef4c8c1a4ee59a73"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "SyntheticEnvironment._actions",
+      "kind": "FunctionDef",
+      "line": 92,
+      "AST_sha256": "1aee92c024895a85e9c3ed7992ac9c124d7c1aad6d0e24ab5f32e41511303706"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "SyntheticEnvironment.reset",
+      "kind": "FunctionDef",
+      "line": 95,
+      "AST_sha256": "4df5b0986fa97bdfef1a10e0f87fe314fe53b96afe3060710a7c1cb97c930ed4"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "SyntheticEnvironment.step",
+      "kind": "FunctionDef",
+      "line": 102,
+      "AST_sha256": "989c9628190d17bd45005e2ed591308ba3f29709d09f9c93962c26af35dd62e9"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "SyntheticEnvironment.close",
+      "kind": "FunctionDef",
+      "line": 113,
+      "AST_sha256": "520c9ba356918617427c5c4b9e795958d43a3c601b004025f19ccdf8640218c7"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "synthetic_plan",
+      "kind": "FunctionDef",
+      "line": 117,
+      "AST_sha256": "c5ef321b8841a423fc95d71d06af0c6db422b0bc0dcbeddeded100dd85e51cbd"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "collect_synthetic",
+      "kind": "FunctionDef",
+      "line": 122,
+      "AST_sha256": "2e61ad7d0ee508d3e608284cc314a123f07e8c6d799c273694a27038a549399d"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "collect_synthetic.factory",
+      "kind": "FunctionDef",
+      "line": 129,
+      "AST_sha256": "c5941e6fe111ad0ed1c8589a0dba50bff0b1edd7bcf2db87292c4a2d8538f3fb"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "synthetic_background",
+      "kind": "FunctionDef",
+      "line": 142,
+      "AST_sha256": "d63b6c49defbb7ace0b72ed3e6e39d9d36fd742b886891f9fc1fe731a343b271"
+    },
+    {
+      "file": "tests/si_p3_support.py",
+      "name": "rehash",
+      "kind": "FunctionDef",
+      "line": 172,
+      "AST_sha256": "4c4ffd93b25aa817f35331264982517f52d4b6aacd855bab4248b808d2731bfb"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "complete",
+      "kind": "FunctionDef",
+      "line": 19,
+      "AST_sha256": "02308154ecc3a409ed2f1cf7c3d17564a459d5fe9ae6ee3ece039527372dc5d8"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_versioned_contract_and_frozen_boundaries",
+      "kind": "FunctionDef",
+      "line": 23,
+      "AST_sha256": "4b8319f55906523b7ccda6a0050474eafd7e5cf04a35229c3d048c103f3a67f7"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_all96_plan_is_outcome_blind_balanced_and_fixed",
+      "kind": "FunctionDef",
+      "line": 36,
+      "AST_sha256": "b166ae73f81663fc7c0828218156206493f5391799f335bf0aeb61c24eda0e41"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_no_plan_outcome_fields_replacement_or_quota_transfer",
+      "kind": "FunctionDef",
+      "line": 55,
+      "AST_sha256": "d526d0f67a12fc1fc8e5e89e4b0f8890c2ca294f56139c44cba2afd906fbb949"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_production_nonempty_source_replay_teacher_suffix_integrity",
+      "kind": "FunctionDef",
+      "line": 64,
+      "AST_sha256": "5ad5609d9b023d9dbc23159e6a1257bb5b9316f8c24e0df9df598e6a526a4cdc"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_reference_only_continue_and_inplace_P0_restore",
+      "kind": "FunctionDef",
+      "line": 81,
+      "AST_sha256": "1feb68cc11bcdaa00127c3ee44bc2cc4ffa568f65cf7930f79c21d7e83b28bdf"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_tampered_receipt_mapping_label_or_future_input_is_rejected",
+      "kind": "FunctionDef",
+      "line": 99,
+      "AST_sha256": "efe43ab485dba77915c6003ff217e60aaf7ad063556d641dfb5d6faebf7eba54"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_coherent_rehash_does_not_hide_missing_ActionID_receipt",
+      "kind": "FunctionDef",
+      "line": 121,
+      "AST_sha256": "77e46c433cf8bdf0dd119c3cf615138b78280ce239bd909d9ceda455f1db2edc"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_journal_and_registry_refuse_existing_unit_or_output",
+      "kind": "FunctionDef",
+      "line": 131,
+      "AST_sha256": "0225d5233b7d81cdb3329d61a4af9196ced4ecfd22e46db65091c8f9db8f21cb"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_live_gate_rejects_before_any_boundary",
+      "kind": "FunctionDef",
+      "line": 145,
+      "AST_sha256": "156e782fecf219bf58dde80efdc03da7fceb5c55d4bc16969cf00c6ec64943c2"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_live_gate_rejects_before_any_boundary.Forbidden",
+      "kind": "ClassDef",
+      "line": 146,
+      "AST_sha256": "2585bdff5c7e4163f351d5c5b2a728a3f349350e1bc071dd8b78ca441b283281"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_live_gate_rejects_before_any_boundary.Forbidden.__getattr__",
+      "kind": "FunctionDef",
+      "line": 147,
+      "AST_sha256": "4bce9b3e2433e7b346e612e5b74d54a73f106f986f1caf281942c24ebf310c7b"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_technical_failure_stops_all_later_slots_without_retry",
+      "kind": "FunctionDef",
+      "line": 154,
+      "AST_sha256": "0de31954af0db35c01953f147ca85a871bf0a27a0118f025ca80efc701ed06d4"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_technical_failure_stops_all_later_slots_without_retry.mutate",
+      "kind": "FunctionDef",
+      "line": 156,
+      "AST_sha256": "4fcd198a2d24b178e686929b6bfa0673441fe686b104b16be24b949b39be3dd0"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_early_invalid_terminal_NA_and_EOS_semantics",
+      "kind": "FunctionDef",
+      "line": 176,
+      "AST_sha256": "7aa496a2360c05ebd9e86b322199ec505fac066cf568a5391d87f41998e5a5d6"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_early_invalid_terminal_NA_and_EOS_semantics.options",
+      "kind": "FunctionDef",
+      "line": 178,
+      "AST_sha256": "f1384429ce95cda95c6f6b58593790d1e92eebf9f7e437c998a14a8cbee5c219"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_early_invalid_terminal_NA_and_EOS_semantics.mutate",
+      "kind": "FunctionDef",
+      "line": 180,
+      "AST_sha256": "d280f47971671654dee9fb94b7d67df5f0502b38ec044838962e5d83dc3bc281"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_budgets_reserve_before_call_and_cannot_widen",
+      "kind": "FunctionDef",
+      "line": 205,
+      "AST_sha256": "e30ec3d08bdbafd1b13df44e3a53882bc074fc135bc1073f4ebf6a76124f88c7"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_GPUallocation_times_monotonic_and_clock_reversal",
+      "kind": "FunctionDef",
+      "line": 219,
+      "AST_sha256": "49786c8a1ce7c65d5f75ef1a460dc1dc29e6ebb2c6be9c91982831dc7b66d636"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_public_state_whitelist_rejects_hidden_fields",
+      "kind": "FunctionDef",
+      "line": 228,
+      "AST_sha256": "8465c4d2967418441f3759250c5d1574bea72e9b6db244ae93f0b13f5c8d4e1d"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "_coherent_semantic_tamper",
+      "kind": "FunctionDef",
+      "line": 234,
+      "AST_sha256": "45b940a92b8a0d7ad3984b5e6922eb7dbf879414bed663f10a17136ae5dd616b"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "_coherent_semantic_tamper.rebound",
+      "kind": "FunctionDef",
+      "line": 239,
+      "AST_sha256": "8692abe3b90b525ec35d96f66140ec9ad01f600697830af5835cb9007e9ffff1"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_semantic_integrity_survives_complete_attacker_rehash",
+      "kind": "FunctionDef",
+      "line": 264,
+      "AST_sha256": "7b32cda69d531dec007485ab58c9824747c8bbcfdc2c684f022de9a684ec9709"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_semantic_integrity_survives_complete_attacker_rehash.change",
+      "kind": "FunctionDef",
+      "line": 265,
+      "AST_sha256": "5eef91bb6eec0791a9957cc5a807f5a9297d645827a235c0d515bc3f093ffd64"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_harm_and_both_failure_stay_in_common_Q_denominator",
+      "kind": "FunctionDef",
+      "line": 283,
+      "AST_sha256": "6c60fd5fd627ab19f9018235f3247176e0c0d0fc539ac4bf8776029bd22ea1ff"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_model_port_and_collector_default_disabled",
+      "kind": "FunctionDef",
+      "line": 298,
+      "AST_sha256": "d2940844efd39d4288f2296b9d57c777f1109335b84d16dc220d926b7f9b8bff"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_model_port_and_collector_default_disabled.Forbidden",
+      "kind": "ClassDef",
+      "line": 299,
+      "AST_sha256": "2a6338a5713fe2dec29e9bfa95c5bc3a93b272886107c62ce5a65b99f8f86fdb"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_model_port_and_collector_default_disabled.Forbidden.__getattr__",
+      "kind": "FunctionDef",
+      "line": 300,
+      "AST_sha256": "fbf3a611538afd975bc4e2abefa071670e95950dd6c46fd1c9d3cc0a5a2e4a47"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_logical_CONTINUE_references_do_not_debit_physical_cost",
+      "kind": "FunctionDef",
+      "line": 307,
+      "AST_sha256": "683ae243aeb114d84d2b6e1eafa6e8e104abd4d1beb18c4506b11063bc487042"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_actual_normalized_P0_reset_family_None_is_derived_from_canonical_ID",
+      "kind": "FunctionDef",
+      "line": 320,
+      "AST_sha256": "912456a73ee1dbfd62bd67580e12a5b7e33290acf6092840c7d4f4c1c504fdee"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_actual_normalized_P0_reset_family_None_is_derived_from_canonical_ID.Boundary",
+      "kind": "ClassDef",
+      "line": 324,
+      "AST_sha256": "d931fa2349112dd5c0486482db36a0de504a6a7729b039afd073483a7b0faa06"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_actual_normalized_P0_reset_family_None_is_derived_from_canonical_ID.Boundary.reset",
+      "kind": "FunctionDef",
+      "line": 325,
+      "AST_sha256": "37d7dc3686a9bf6561d6bef2f2dda1712e67f768089de8d8bdc8797d93d71961"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_actual_normalized_P0_reset_family_None_is_derived_from_canonical_ID.Boundary.step",
+      "kind": "FunctionDef",
+      "line": 326,
+      "AST_sha256": "617c6c5bb058901ef7b4700daeaa3c217aad52c40ac84bb17b36887058901c71"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_missing_nonterminal_map_and_conflicting_family_fail_closed",
+      "kind": "FunctionDef",
+      "line": 334,
+      "AST_sha256": "4a3925e3bbc90ad3372af87ffcebe1ac1e26eb72b3988bfee91254ebdb6f82c5"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_missing_nonterminal_map_and_conflicting_family_fail_closed.Boundary",
+      "kind": "ClassDef",
+      "line": 338,
+      "AST_sha256": "54671a159d329a37f1ec996f32173cb1b4dad7845eb7a5f19b66b4db6afc628a"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_missing_nonterminal_map_and_conflicting_family_fail_closed.Boundary.reset",
+      "kind": "FunctionDef",
+      "line": 339,
+      "AST_sha256": "df463e67979ae680c92cd88586a295b1f681153778c1882cd4197ca12ed75e13"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_missing_nonterminal_map_and_conflicting_family_fail_closed.Boundary.step",
+      "kind": "FunctionDef",
+      "line": 340,
+      "AST_sha256": "6db6eab61587b3fe566ffb35c804aa7462d6640c61296a3188bd619cc611aa00"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_missing_nonterminal_map_and_conflicting_family_fail_closed.Conflict",
+      "kind": "ClassDef",
+      "line": 343,
+      "AST_sha256": "1f8b280ee818c3479d6d98c1032028ef93a69b59654da710129cbb045ced84ac"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_missing_nonterminal_map_and_conflicting_family_fail_closed.Conflict.reset",
+      "kind": "FunctionDef",
+      "line": 344,
+      "AST_sha256": "176061eda560282486b7ae318a00bdd4e6ea299b38aea7083197e5a977741230"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_registry_rejects_bad_completion_online_before_journal_append",
+      "kind": "FunctionDef",
+      "line": 350,
+      "AST_sha256": "f8a822d59fc650eb5edcc96a62f2dd917a06b763eea3e77bbea55333e6d4805c"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_registry_rejects_bad_completion_online_before_journal_append.create",
+      "kind": "FunctionDef",
+      "line": 352,
+      "AST_sha256": "54e4d015b0426be763f1a7eeed332c7d738c8027b21cad7f18357d9429d1989f"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_new_P0_decision_equals_actual_frozen_actor_generation_for_cap_incomplete",
+      "kind": "FunctionDef",
+      "line": 377,
+      "AST_sha256": "7cda8766a8d7888801955251c14bca823e42c2c507ef1327e61adac969e329b3"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_new_P0_decision_equals_actual_frozen_actor_generation_for_cap_incomplete.incomplete",
+      "kind": "FunctionDef",
+      "line": 386,
+      "AST_sha256": "641fbd5590b3766028e402996c6d3b9b1e6e5319dd3c2dc3122da53a60dcc621"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_teacher_v2_prompt_and_parser_differential",
+      "kind": "FunctionDef",
+      "line": 409,
+      "AST_sha256": "4922c8fd9e0e8d9cc51060dce50b5d9c42048d73039591ec542270bfa888aae1"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_source_and_suffix_execute_valid_bare_ID_even_if_cap_incomplete",
+      "kind": "FunctionDef",
+      "line": 428,
+      "AST_sha256": "83051132cf3f348ce9fa3d92a4461cb72ae23b51592d217e44082eb2c778cd1e"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_source_and_suffix_execute_valid_bare_ID_even_if_cap_incomplete.mutate",
+      "kind": "FunctionDef",
+      "line": 429,
+      "AST_sha256": "4ff1440bf71e466c7cb6948893bc873e96eaefd4e9b4647c12c6c1bb28e714e2"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_actual_collector_uses_v2_teacher_bare_and_strict_completion",
+      "kind": "FunctionDef",
+      "line": 446,
+      "AST_sha256": "5b4fc431dbe8d652f847caf303eeb50e58652dedacfad36ece6dba4286a80a94"
+    },
+    {
+      "file": "tests/test_si_p3_collector.py",
+      "name": "test_actual_collector_uses_v2_teacher_bare_and_strict_completion.mutate",
+      "kind": "FunctionDef",
+      "line": 448,
+      "AST_sha256": "53b4e0fa76561a21e313b3cdd997adaea06d104843c3b027f5fde90e4b8140f6"
+    },
+    {
+      "file": "tests/test_si_p3_learning.py",
+      "name": "pipeline",
+      "kind": "FunctionDef",
+      "line": 21,
+      "AST_sha256": "eea600cd59d37f8772b41885c387ec47bd3fea5fd94c07954ae6350657acffb3"
+    },
+    {
+      "file": "tests/test_si_p3_learning.py",
+      "name": "test_nonempty_multifamily_production_quality_adoption_and_exposure",
+      "kind": "FunctionDef",
+      "line": 32,
+      "AST_sha256": "d7bf7bf2e0e0ce0875ef072d53ddc8f77ff52e450ce91a4cecf03c6e87c260de"
+    },
+    {
+      "file": "tests/test_si_p3_learning.py",
+      "name": "test_actual_collator_preserves_EOS_when_PAD_equals_EOS",
+      "kind": "FunctionDef",
+      "line": 48,
+      "AST_sha256": "cb05a6ca57ef2ea686314abc38ba66087a935cacd253dc1424c97996f6a9cd00"
+    },
+    {
+      "file": "tests/test_si_p3_learning.py",
+      "name": "test_S_hash_rules_are_fixed_and_do_not_replace_bad_selected_task",
+      "kind": "FunctionDef",
+      "line": 59,
+      "AST_sha256": "b46ebcbe636228dbb638267278d20ebc874bbafb9cb95c29d16af46020c5e99a"
+    },
+    {
+      "file": "tests/test_si_p3_learning.py",
+      "name": "test_common_quality_and_fixed_draw_guards_do_not_redraw",
+      "kind": "FunctionDef",
+      "line": 76,
+      "AST_sha256": "efba3cdbd68900e990da8aeee0dcdc30176997238d05eaf93e11f8576793ee1b"
+    },
+    {
+      "file": "tests/test_si_p3_learning.py",
+      "name": "test_paired_exposure_guards_reject_mask_order_dose_or_resource_tamper",
+      "kind": "FunctionDef",
+      "line": 96,
+      "AST_sha256": "df109a0a946e6e58f345ad76ee6f0d277e7f29bbadda106555cbb357bc49a9bc"
+    },
+    {
+      "file": "tests/test_si_p3_learning.py",
+      "name": "test_recipe_rejects_search_fresh_lora_and_extra_training",
+      "kind": "FunctionDef",
+      "line": 112,
+      "AST_sha256": "3e64f273ab8c561f370985a014182ccf4f63a67247efc2b8fa19ba6d5faef85e"
+    },
+    {
+      "file": "tests/test_si_p3_learning.py",
+      "name": "test_genuine_CPU_PEFT_warmstart_fresh_optimizer_final18_and_roundtrip",
+      "kind": "FunctionDef",
+      "line": 117,
+      "AST_sha256": "6ae6e6c1727ec11988586ccd1304b71918075a08b62a7de9c7d530b953fd7408"
+    },
+    {
+      "file": "tests/test_si_p3_learning.py",
+      "name": "test_background_complete_historical_metadata_anchor_rejects_subset",
+      "kind": "FunctionDef",
+      "line": 168,
+      "AST_sha256": "ffd6518a1575e66a8929e8ba7a8f87a669267134ec07c25b5d1a1838ce457b11"
+    },
+    {
+      "file": "tests/test_si_p3_learning.py",
+      "name": "test_fixed_B_selected_neutral_exact_boundary_without_redraw",
+      "kind": "FunctionDef",
+      "line": 181,
+      "AST_sha256": "af85686ac43de53388301ad9b107222290fd101c025cb8838da95b3976b17b9b"
+    },
+    {
+      "file": "tests/test_si_p3_learning.py",
+      "name": "test_cumulative_prompt_ratio_rejects_consistently_encoded_new_inputs",
+      "kind": "FunctionDef",
+      "line": 195,
+      "AST_sha256": "4ae555851539d3c13533ec1314eb34277329411b27674381467b37582f3b4e94"
+    },
+    {
+      "file": "tests/test_si_p3_reservations.py",
+      "name": "fixture_bytes",
+      "kind": "FunctionDef",
+      "line": 11,
+      "AST_sha256": "5685b0404c3d90e1a880f38812615c39d75cc5d09bcc98aabe7700dfa26f9281"
+    },
+    {
+      "file": "tests/test_si_p3_reservations.py",
+      "name": "test_explicit_synthetic_reservation_binding_and_caller_seeds",
+      "kind": "FunctionDef",
+      "line": 21,
+      "AST_sha256": "fce7a011a776237dad2dd9dc5a7be8cee40b38366251fb7b3803b6b8176e26b8"
+    },
+    {
+      "file": "tests/test_si_p3_reservations.py",
+      "name": "test_same_family_D48_substitution_cannot_pass_same_quotas",
+      "kind": "FunctionDef",
+      "line": 27,
+      "AST_sha256": "c82ef81d731676a368a2435ef4ebc4f8481ce6226872d320949e3d48c2021c6c"
+    },
+    {
+      "file": "tests/test_si_p3_reservations.py",
+      "name": "test_historical_expected_digest_is_frozen_not_self_reported",
+      "kind": "FunctionDef",
+      "line": 35,
+      "AST_sha256": "6803b3f260e4bcc3a2b7ca59b753ccd70fdd3516363f95360e0c65c6f73bc524"
+    }
+  ]
+}

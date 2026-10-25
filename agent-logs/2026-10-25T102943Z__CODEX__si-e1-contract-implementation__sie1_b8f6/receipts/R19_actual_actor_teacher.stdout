@@ -1,0 +1,220 @@
+    def actor_generation(
+        self, cursor: RecoveryCursor, *, component: str,
+        identity: Mapping[str, Any],
+    ) -> tuple[dict[str, Any], dict[str, Any], str]:
+        from models.action_parser import action_id_mapping
+        from models.policy import ActionRequest
+        from models.protocol_stability import parse_p2_selection
+        from sft.protocol import sft_p0_prompt
+
+        request = ActionRequest(cursor.task, cursor.observation, cursor.history, cursor.valid_actions)
+        prompt = sft_p0_prompt(request)
+        generation_identity = dict(identity)
+        generation_identity["component"] = component
+        # Source provenance must retain the operation required by G4.
+        # Preserve the already-tested suffix event contract unchanged.
+        if component == "task_actor":
+            if generation_identity.get("operation") != "source_generation":
+                raise EvidenceIntegrityError(
+                    "source actor generation requires source_generation identity"
+                )
+        else:
+            generation_identity["operation"] = "task_actor_generation"
+        self._reserve_model_call(generation_identity)
+        self.sink("generation_started", generation_identity, {})
+        generation = _generate_exact(self.actor_backend, prompt, 16)
+        parsed = parse_p2_selection(generation["raw_output"], cursor.valid_actions, reflection_required=False)
+        mapping = action_id_mapping(cursor.valid_actions)
+        selection = {
+            "action_selection_mode": "indexed_admissible",
+            "raw_model_output": generation["raw_output"],
+            "parsed_action_id": parsed.action_id,
+            "selected_index": parsed.selected_index,
+            "mapped_environment_command": parsed.action or None,
+            "id_to_command": mapping,
+            "selection_status": parsed.selection_status,
+            "failure_category": parsed.action_failure_category,
+            "failure_reason": parsed.action_failure_reason,
+        }
+        parser_result = {
+            "selection_status": parsed.selection_status,
+            "action_id": parsed.action_id,
+            "action": parsed.action,
+            "failure_category": parsed.action_failure_category,
+            "failure_reason": parsed.action_failure_reason,
+            "valid_actions": list(cursor.valid_actions),
+            "id_to_command": mapping,
+        }
+        event = self.sink("generation_completed", generation_identity, {
+            "evidence": {"generation": generation, "parser_result": parser_result,
+                         "action_map": mapping},
+        })
+        return generation, {"prompt": prompt, "selection": selection, "parser_result": parser_result,
+                           "action": parsed.action, "action_id": parsed.action_id,
+                           "status": parsed.selection_status, "component": component}, str(event["event_id"])
+
+    def run_source_episodes(
+        self, schedule: Mapping[str, Any], output: Path,
+        registry: UnitRegistry, unit_ids: dict[str, str],
+    ) -> list[dict[str, Any]]:
+        rows: list[dict[str, Any]] = []
+        source_path = output / "source_trajectories.jsonl"
+        if source_path.exists():
+            raise FileExistsError("source trajectory artifact already exists; no source unit is regenerated")
+        for episode in schedule["episodes"]:
+            task_id = str(episode["canonical_trial_id"])
+            unit_id = registry.begin({"unit": "source_episode", "canonical_trial_id": task_id,
+                                      "schedule_index": int(episode["schedule_index"])})
+            if unit_id == "REUSE_COMPLETED":
+                raise IndeterminateUnitError("completed source unit cannot be silently rerun or omitted")
+            unit_ids[task_id] = unit_id
+            env = self.new_environment(task_id, int(episode["nominal_seed"]), "train")
+            try:
+                row = self._collect_one_source(env, episode, output, unit_ids)
+                registry.complete(unit_id, {
+                    "source_trajectory_sha256": row["metadata"]["source_trajectory_sha256"],
+                    "source_episode_event_id": row["metadata"]["r19_source_event_refs"]["source_episode_event_id"],
+                })
+                rows.append(row)
+            finally:
+                env.close()
+        return rows
+
+    def _collect_one_source(
+        self, env: Any, episode: Mapping[str, Any], output: Path,
+        unit_ids: dict[str, str],
+    ) -> dict[str, Any]:
+        from models.action_parser import action_id_mapping
+
+        task_id = str(episode["canonical_trial_id"])
+        index = int(episode["schedule_index"])
+        seed = int(episode["nominal_seed"])
+        restart_expected = getattr(self, "source_restart_expected_snapshot", None)
+        restart_predecessor_run_id = getattr(self, "source_restart_predecessor_run_id", None)
+        restart_comparison_consumed = bool(getattr(self, "source_restart_comparison_consumed", False))
+        if restart_expected is not None:
+            if not restart_comparison_consumed and (
+                index != 0 or task_id != restart_expected.get("canonical_trial_id")
+                or seed != int(restart_expected.get("seed", -1))
+            ):
+                raise EvidenceIntegrityError("source restart comparator is not bound to exactly the first scheduled source episode")
+            if restart_comparison_consumed and index == 0:
+                raise EvidenceIntegrityError("first source episode restart comparison may occur only once")
+        reset, reset_event_id = self.record_reset(
+            env, {"split": "train", "canonical_trial_id": task_id,
+                  "schedule_index": index, "operation": "source_reset"}, seed,
+        )
+        if reset.task.task_id != task_id or reset.task.split != "train":
+            raise EvidenceIntegrityError("R19 source reset returned a different task or split")
+        observation = str(reset.observation)
+        valid_actions = tuple(reset.valid_actions or ())
+        history: list[tuple[str, str]] = []
+        steps: list[dict[str, Any]] = []
+        generation_ids: list[str] = []
+        transition_ids: list[str] = []
+        terminal = False
+        decision_failure = False
+        for step_index in range(50):
+            from models.policy import ActionRequest
+            from models.action_parser import action_id_mapping
+            from models.protocol_stability import parse_p2_selection
+            from sft.protocol import sft_p0_prompt
+
+            request = ActionRequest(reset.task, observation, tuple(history), valid_actions)
+            prompt = sft_p0_prompt(request)
+            cursor_for_source = RecoveryCursor(
+                task=reset.task, task_id=task_id, canonical_trial_id=task_id,
+                nominal_seed=seed, observation=observation,
+                valid_actions=valid_actions, history=tuple(history),
+                actions_consumed=step_index,
+            )
+            generation_identity = {
+                "canonical_trial_id": task_id, "split": "train",
+                "schedule_index": index, "decision_index": step_index,
+                "operation": "source_generation",
+            }
+            generation, parsed, generation_id = self.actor_generation(
+                cursor_for_source, component="task_actor", identity=generation_identity,
+            )
+            mapping = action_id_mapping(valid_actions)
+            generation_ids.append(generation_id)
+            if restart_expected is not None and index == 0 and step_index == 0:
+                observed_snapshot = _source_restart_snapshot(
+                    canonical_trial_id=task_id, schedule_index=index, seed=seed,
+                    observation=observation, valid_actions=valid_actions,
+                )
+                transition_ids.append(transition_id)
+                env_actions += 1
+                current = RecoveryCursor(
+                    task=current.task, task_id=current.task_id,
+                    canonical_trial_id=current.canonical_trial_id,
+                    nominal_seed=current.nominal_seed,
+                    observation=str(transition.observation),
+                    valid_actions=tuple(map(str, transition.valid_actions or ())),
+                    history=(*current.history, (current.observation, str(parsed["action"]))),
+                    actions_consumed=current.actions_consumed + 1,
+                )
+                terminal = bool(transition.done or transition.truncated)
+                if terminal:
+                    success = int(bool(transition.done and float(transition.reward) > 0))
+                    reason = "environment_terminal" if transition.done else "environment_truncated"
+                    break
+            return {
+                "success": success, "generations": generations,
+                "environment_actions": env_actions, "terminal": terminal,
+                "termination_reason": reason, "prompts": prompts,
+                "evidence_refs": {
+                    "suffix_generation_event_ids": generation_ids,
+                    "suffix_transition_event_ids": transition_ids,
+                },
+            }
+        finally:
+            env.close()
+
+    def replay_smoke_prefix(
+        self, protocol_prefix: Mapping[str, Any], r8_prefix: Mapping[str, Any],
+        prefix_id: str, *, checkpoint_k: int | None = None,
+    ) -> tuple[Any, Any, RecoveryCursor, dict[str, Any]]:
+        """Replay an already-consumed R8 public action prefix, checking its frozen state."""
+        from models.action_parser import action_id_mapping
+
+        task_id = str(r8_prefix["task_id"])
+        seed = int(protocol_prefix["nominal_seed"])
+        decision_index = int(r8_prefix["selected_decision_index"])
+        replay = r8_prefix["replay_provenance"]
+        actions = list(replay["actions_before_decision"])
+        expected_seed = int(r8_prefix["nominal_seed"])
+        expected_horizon = 50 - decision_index
+        preflight_mismatches = {}
+        if seed != expected_seed:
+            preflight_mismatches["seed"] = {"expected": expected_seed, "observed": seed}
+        if len(actions) != decision_index:
+            preflight_mismatches["action_count"] = {
+                "expected": decision_index, "observed": len(actions),
+            }
+        observed_horizon = int(r8_prefix["remaining_horizon"])
+        if observed_horizon != expected_horizon:
+            preflight_mismatches["remaining_horizon"] = {
+                "expected": expected_horizon, "observed": observed_horizon,
+            }
+        if preflight_mismatches:
+            self.sink("smoke_prefix_replay_validation_failed", {
+                "prefix_id": prefix_id, "canonical_trial_id": task_id,
+                "split": "train",
+                **({"k": int(checkpoint_k)} if checkpoint_k is not None else {}),
+            }, {
+                "stage": "pre_environment_identity",
+                "replay_match": False,
+                "mismatches": preflight_mismatches,
+                "decision_index": decision_index,
+                "actions_before_decision": actions,
+                "supporting_event_ids": [],
+            })
+            raise EvidenceIntegrityError("frozen R8 smoke prefix identity/indexing is inconsistent")
+        env = self.new_environment(task_id, seed, "train")
+        reset, reset_event_id = self.record_reset(env, {
+            "prefix_id": prefix_id, "canonical_trial_id": task_id,
+            "split": "train", "operation": "smoke_prefix_reset",
+            **({"k": int(checkpoint_k)} if checkpoint_k is not None else {}),
+        }, seed)
+        if reset.task.task_id != task_id or reset.task.split != "train":

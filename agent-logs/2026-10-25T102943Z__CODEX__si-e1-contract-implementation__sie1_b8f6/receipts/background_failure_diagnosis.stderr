@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/home/lizening/wt-si-p3-engineering-contracts/src/self_improvement/si_p3/data.py", line 130, in _background_public
+    validate_example(dict(row))
+  File "/home/lizening/wt-si-p3-engineering-contracts/src/sft/protocol.py", line 151, in validate_example
+    if task_family_from_id(row["task_id"]) != row["task_family"]:
+  File "/home/lizening/wt-si-p3-engineering-contracts/src/recovery/corpus.py", line 74, in task_family_from_id
+    raise ValueError(f"unknown ALFWorld task family: {family}")
+ValueError: unknown ALFWorld task family: pick_and_place_simple/background

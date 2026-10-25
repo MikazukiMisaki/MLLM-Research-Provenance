@@ -1,0 +1,96 @@
+                and path.stat().st_size != int(adapter["file_bytes"][name])
+            )
+            or sha256_file(path) != str(expected)
+        ):
+            raise EvidenceIntegrityError(f"approved adapter file is changed or missing: {name}")
+    return {
+        "snapshot_revision": revision,
+        "snapshot_file_sha256": observed,
+        "adapter_directory_sha256": adapter_sha,
+        "adapter_file_sha256": dict(adapter_files),
+    }
+
+
+def _generate_exact(backend: Any, prompt: str, max_new_tokens: int) -> dict[str, Any]:
+    """Generate once with exact token evidence and synchronized latency."""
+    tokenizer, model, torch = backend._load()
+    model.eval()
+    messages = [{"role": "user", "content": prompt}]
+    if hasattr(tokenizer, "apply_chat_template"):
+        rendered_prompt = tokenizer.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True, enable_thinking=False,
+        )
+    else:
+        rendered_prompt = prompt
+    inputs = tokenizer(rendered_prompt, return_tensors="pt")
+    inputs = {name: value.to(model.device) for name, value in inputs.items()}
+    if torch.cuda.is_available() and str(getattr(model, "device", "")).startswith("cuda"):
+        torch.cuda.synchronize()
+    started = time.perf_counter()
+    with torch.no_grad():
+        generated = model.generate(
+            **inputs, max_new_tokens=max_new_tokens, do_sample=False,
+            return_dict_in_generate=True, output_scores=True,
+        )
+    if torch.cuda.is_available() and str(getattr(model, "device", "")).startswith("cuda"):
+        torch.cuda.synchronize()
+    latency = time.perf_counter() - started
+    input_tokens = int(inputs["input_ids"].shape[1])
+    generated_ids = generated.sequences[0][input_tokens:]
+    token_ids = [int(value) for value in generated_ids.tolist()]
+    scores = generated.scores or ()
+    generated_tokens = len(token_ids)
+    eos_ids = tokenizer.eos_token_id
+    if isinstance(eos_ids, int):
+        eos_ids = [eos_ids]
+    token_cap_reached = len(scores) >= max_new_tokens
+    complete = not token_cap_reached or bool(token_ids and token_ids[-1] in set(eos_ids or ()))
+    return {
+        "prompt": prompt,
+        "rendered_prompt": rendered_prompt,
+        "rendered_prompt_sha256": _sha_text(rendered_prompt),
+        "raw_output": tokenizer.decode(generated_ids, skip_special_tokens=True).strip(),
+        "token_ids": token_ids,
+        "token_ids_sha256": _sha_text(json.dumps(token_ids, separators=(",", ":"))),
+        "input_tokens": input_tokens,
+        "generated_tokens": generated_tokens,
+        "latency_seconds": latency,
+        "output_complete": complete,
+        "token_cap_reached": token_cap_reached,
+        "max_new_tokens": max_new_tokens,
+        "do_sample": False,
+        "thinking": False,
+    }
+
+
+def _generation_record(value: Mapping[str, Any]) -> Any:
+    from models.policy import TokenStatistics
+    from recovery.two_stage import GenerationRecord
+
+    return GenerationRecord(
+        prompt=str(value["prompt"]), raw_output=str(value["raw_output"]),
+        token_statistics=TokenStatistics(
+            generated_tokens=int(value["generated_tokens"]),
+            input_tokens=int(value["input_tokens"]),
+        ), latency_seconds=float(value["latency_seconds"]),
+        output_complete=bool(value["output_complete"]),
+        token_cap_reached=bool(value["token_cap_reached"]),
+        max_new_tokens=int(value["max_new_tokens"]),
+    )
+
+
+def _active_adapter_names(model: Any) -> list[str]:
+    """Return [] for a plain Transformers model before consulting its PEFT hook."""
+    if not bool(getattr(model, "peft_config", {})):
+        return []
+    active = getattr(model, "active_adapters", ())
+    if callable(active):
+        active = active()
+    if isinstance(active, str):
+        return [active]
+    return sorted(str(item) for item in (active or ()))
+
+
+class LiveR19Runtime:
+    """Same model adapters and schedulers for pilot and old-development smoke."""
+

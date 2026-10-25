@@ -1,0 +1,63 @@
+{
+  "created_utc": "2026-10-25T10:30:15.428411+00:00",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "worktree",
+        "list",
+        "--porcelain"
+      ],
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "returncode": 0,
+      "stdout": "worktree /home/lizening/Alfworld-Self-Improvement-Project\nHEAD 4f5c2e18e0dfdf48e9471fcba0a3ee715be3ca3b\nbranch refs/heads/codex/progress-aware-recovery\n\nworktree /home/lizening/wt-antigravity-r18c2\nHEAD 10a33ca43eacd821a8f7e7f72fab4dd2ac96250e\nbranch refs/heads/agent/antigravity-r18c2\n\nworktree /home/lizening/wt-codex-r18c2\nHEAD e537f441010077123a307e9d50ea40cf8dad8547\nbranch refs/heads/agent/codex-r18c2\n\nworktree /home/lizening/wt-gemini-r18c2-verify\nHEAD 5ebb7ff9a7b50b035e6871735bdfe3fa9d88ff39\ndetached\n\nworktree /home/lizening/wt-r19-g4-consumer-baseline\nHEAD 2da980f631badc25086d12db60d128ff507d3ae6\ndetached\n\nworktree /home/lizening/wt-r19-g4-consumer-contract-repair\nHEAD 85cbb92395e5e2420c2adeb1fa0634653e742910\nbranch refs/heads/codex/r19-g4-consumer-contract-repair\n\nworktree /home/lizening/wt-r19-recovery-duration-v1\nHEAD 2da980f631badc25086d12db60d128ff507d3ae6\ndetached\n\nworktree /home/lizening/wt-r19-source-contract-review-fixes\nHEAD 2da980f631badc25086d12db60d128ff507d3ae6\nbranch refs/heads/codex/r19-source-contract-review-fixes\n\nworktree /home/lizening/wt-review-r18c2\nHEAD 10a33ca43eacd821a8f7e7f72fab4dd2ac96250e\ndetached\n\nworktree /tmp/r19-g4-independent-baseline-2da980f\nHEAD 2da980f631badc25086d12db60d128ff507d3ae6\ndetached\n\nworktree /tmp/r19-g4-independent-review-85cbb923\nHEAD 85cbb92395e5e2420c2adeb1fa0634653e742910\ndetached\n\nworktree /tmp/r19-independent-review-2da980f\nHEAD 2da980f631badc25086d12db60d128ff507d3ae6\ndetached\n\nworktree /tmp/r19-review-baseline-ef2328f\nHEAD ef2328f06256054a6b71c6dc4bdc74dab3a1d3d9\ndetached\n\nworktree /tmp/r19-source-review-51ec074\nHEAD 51ec074cec6c2c2a7b1ecd64e0da33bc446a7e54\ndetached\n\nworktree /tmp/r19-source-review-da7d348\nHEAD da7d348ffd3677d619dd31357e1e1e3cca28c9ec\ndetached\n\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "show-ref",
+        "--verify",
+        "refs/heads/codex/si-p3-engineering-contracts"
+      ],
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "returncode": 128,
+      "stdout": "",
+      "stderr": "fatal: 'refs/heads/codex/si-p3-engineering-contracts' - not a valid ref\n"
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "--branch"
+      ],
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "returncode": 0,
+      "stdout": "## agent/codex-r18c2...origin/agent/codex-r18c2\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "remote",
+        "-v"
+      ],
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "returncode": 0,
+      "stdout": "origin\tgit@github.com:MikazukiMisaki/Alfworld-Self-Improvement-Project.git (fetch)\norigin\tgit@github.com:MikazukiMisaki/Alfworld-Self-Improvement-Project.git (push)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "85cbb92395e5e2420c2adeb1fa0634653e742910"
+      ],
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "returncode": 0,
+      "stdout": "85cbb92395e5e2420c2adeb1fa0634653e742910\n",
+      "stderr": ""
+    }
+  ]
+}

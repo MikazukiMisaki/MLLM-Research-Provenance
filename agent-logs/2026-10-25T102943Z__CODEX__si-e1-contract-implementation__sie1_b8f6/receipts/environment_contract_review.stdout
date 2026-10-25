@@ -1,0 +1,71 @@
+58:    def step(self, action: str) -> Transition:
+59-        """Apply one text action to ALFWorld."""
+60-        if self._environment is None:
+61-            raise RuntimeError("reset() must be called before step()")
+62-        observations, rewards, dones, info = self._environment.step([action])
+63-        info_dict = self._info_dict(info)
+64-        self._valid_actions = self._valid_actions_from_info(info_dict)
+65-        return Transition(
+66-            observation=self._first(observations),
+67-            reward=float(self._first(rewards)),
+68-            done=bool(self._first(dones)),
+69-            truncated=False,
+70-            valid_actions=self._valid_actions,
+71-            metadata={"alfworld_info": info_dict},
+72-        )
+73-
+74-    def get_task(self) -> Task:
+75-        """Return the active task after reset."""
+76-        if self._task is None:
+77-            raise RuntimeError("reset() must be called before get_task()")
+78-        return self._task
+79-
+80:    def get_valid_actions(self) -> tuple[str, ...] | None:
+81-        """Return commands from the most recent ALFWorld info object."""
+82-        return self._valid_actions
+83-
+84-    def _get_environment(self) -> Any:
+85-        if self._environment is not None:
+86-            return self._environment
+87-        try:
+88-            import yaml
+89-            from alfworld.agents.environment.alfred_tw_env import AlfredTWEnv
+90-        except ImportError as error:
+91-            raise RuntimeError(
+92-                "ALFWorld collection requires PyYAML and the alfworld package. "
+93-                "Install the ALFWorld runtime before running the script."
+94-            ) from error
+95-        if self._config.data_path is not None:
+96-            os.environ["ALFWORLD_DATA"] = str(self._config.data_path)
+97-        with self._config.config_path.open("r", encoding="utf-8") as handle:
+98-            configuration = _expand_environment(yaml.safe_load(handle))
+99-        self._environment = AlfredTWEnv(configuration, train_eval=self._alfworld_split())
+100-        self._environment = self._environment.init_env(batch_size=self._config.batch_size)
+101-        return self._environment
+102-
+103-    @staticmethod
+104-    def _first(value: Any) -> Any:
+105-        return value[0] if isinstance(value, (list, tuple)) else value
+106-
+107-    @staticmethod
+108-    def _info_dict(info: Any) -> dict[str, Any]:
+109-        if not isinstance(info, dict):
+110-            return {"raw_info": repr(info)}
+111-        return {str(key): _json_safe_metadata(value) for key, value in info.items()}
+112-
+113-    def _alfworld_split(self) -> str:
+114-        """Translate the public baseline split name to ALFWorld's API value."""
+115-        splits = {
+116-            "train": "train",
+117-            "valid_seen": "eval_in_distribution",
+118-            "valid_unseen": "eval_out_of_distribution",
+119-        }
+120-        try:
+121-            return splits[self._config.split]
+122-        except KeyError as error:
+123-            raise ValueError(
+124-                "split must be one of train, valid_seen, or valid_unseen"
+125-            ) from error
+126-
+127-    @classmethod
+128-    def _valid_actions_from_info(cls, info: dict[str, Any]) -> tuple[str, ...] | None:
