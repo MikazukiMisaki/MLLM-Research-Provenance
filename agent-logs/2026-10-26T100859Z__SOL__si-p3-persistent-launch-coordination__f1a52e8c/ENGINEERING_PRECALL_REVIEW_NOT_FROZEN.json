@@ -1,0 +1,32 @@
+{
+  "schema": "SI_S01_ENGINEERING_PRECALL_STATIC_REVIEW_V1",
+  "status": "NOT_FROZEN_DRAFT_FEEDBACK_NOT_FINAL_ACCEPTANCE",
+  "worktree": "/home/lizening/wt-si-s01-engineering-adapter",
+  "base_sha": "d7a82acb510157ab7ba5439d790816c5c948439f",
+  "review_method": "Independent critic plus root personally re-read actual relevant draft lines; no project imports or probes executed",
+  "snapshot_hashes": {
+    "engineering_evidence.py": "3f56ce2fb272a4cd863d889393efc45b36991225072da484d8ebbd600cfa2f91",
+    "engineering_runtime.py": "6c0677edadf2a10cabab41b12a7c4b6116fa1fece2fb5ea4e2e194bab304989b",
+    "runtime_core.py": "74e5f0cfc26e4dd06945579a4174545a0aaf14a15b810e08206f39b575d06d1f"
+  },
+  "findings": [
+    {
+      "id": "ENG-PC01",
+      "scope": "Engineering producer boundary, not a claim the default run retries",
+      "trigger": "Within one legitimately reserved generation unit, call the production EngineeringProducer.generate twice; current repeat check occurs at generation_returned after second model.generate.",
+      "required_software_edge_count": 1,
+      "fix": "Consume one actual call capability before the model boundary; bind exact prepared IDs/mask/prompt/render to the durably reserved prepared data. Reject substituted larger preparation before external call."
+    },
+    {
+      "id": "ENG-PC02",
+      "trigger": "Generation reservation at fake monotonic599s, resource-before returns at601s; current core still enters model.generate and only checks deadline after return.",
+      "required_software_edge_count": 0,
+      "fix": "Engineering-only pre-call absolute deadline guard at actual generation boundary after preparation/resource/CUDA synchronization; optional defaultNone core hook preserves source behavior."
+    }
+  ],
+  "reference_certificate_limit": "Root must independently join concrete proposal whole-file path/digest to certificate content and known05e1.../c6f37... hashes. Fixed nine-slice manifest and raw slice hashes already authenticate consumed content. Do not misclassify as replaceable task/predecessor.",
+  "actual_tests_executed": 0,
+  "real_runtime_calls": 0,
+  "launch_clearance": "NOT_GRANTED",
+  "created_utc": "2026-10-26 12:59:16 UTC"
+}

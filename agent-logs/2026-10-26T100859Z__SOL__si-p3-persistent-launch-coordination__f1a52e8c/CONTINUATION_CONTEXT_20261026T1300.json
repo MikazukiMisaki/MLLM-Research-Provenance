@@ -1,0 +1,82 @@
+{
+  "schema": "SI_S01_GOAL_CONTINUATION_CHECKPOINT_V1",
+  "at": {
+    "current_time": "2026-10-26 13:00:20 UTC"
+  },
+  "goal_status": "ACTIVE_PROGRESS_NOT_COMPLETE",
+  "historical_science": {
+    "generations": 5142,
+    "reset_inclusive_operations": 7949
+  },
+  "scientific_experiment_started": false,
+  "reviewer": {
+    "cwd": "/home/lizening/wt-codex-r18c2",
+    "branch": "agent/codex-r18c2",
+    "head": "e537f441010077123a307e9d50ea40cf8dad8547",
+    "clean": true
+  },
+  "source": {
+    "sha": "d7a82acb510157ab7ba5439d790816c5c948439f",
+    "branch": "codex/si-p3-source-only-v2",
+    "worktree": "/home/lizening/wt-si-p3-source-only-v2",
+    "review_directory": "/home/lizening/research-notes/agent-logs/2026-10-26T121444Z__SOL__si-s01-independent-exact-review__d7a82acb_c9ec89",
+    "decision": "PASS_SOURCE_ONLY_SOFTWARE",
+    "full_counts": "1116collected/1036passed/3failed/77errors,83newpasses,noID_phase_type_or_priorpass_regression",
+    "review_sha256": "0e878105b523afef4af18d130f6a60dacccd127c27e6f580723cf625ce2e385d",
+    "machine_review_sha256": "d587db54f268d2ace2305868f4b7c1c4f3a89ada5bbb2d8af65a4138edb19663"
+  },
+  "provenance": {
+    "main": "277502a72d3f7a91cd4020e58fec19da5f4029e0",
+    "local_origin_live_remote_equal": true,
+    "selected_git_objects_verified": 447,
+    "inventory_verified": 3088,
+    "post_push_receipt": "/tmp/si-s01-third-checkpoint-post-push-receipt.json"
+  },
+  "engineering": {
+    "owner": "Sol Research",
+    "thread": "01a165de-c75e-7120-abc9-fa74cde1f17f",
+    "host": "remote-ssh-discovered:sdxsrv03",
+    "active_turn": "01a17826-ddcd-73e0-9828-356e6c949fd8",
+    "wait_cursor": "a9b9b627-e6e2-498e-978f-27e6adbaff06:35",
+    "worktree": "/home/lizening/wt-si-s01-engineering-adapter",
+    "branch": "codex/si-s01-engineering-adapter",
+    "base_sha": "d7a82acb510157ab7ba5439d790816c5c948439f",
+    "status": "IN_PROGRESS_DIRTY_NEW_ADAPTER_NO_FROZEN_SHA",
+    "record_directory": "/home/lizening/research-notes/agent-logs/2026-10-26T122023Z__CODEX__si-s01-engineering-adapter__d7a82ac",
+    "task_sha256": "525d271b38a8ecd2248c653291679a1c8fd37ceaec05b4dbf3b575932a7e103b",
+    "proposal_revision2_sha256": "fe974f732ca03d96718c679facaf1201aa78a364c2f3251690c461f28acf189f",
+    "coupled_addendum_sha256": "2c03660bf71a08cfdad524ba1215abc9aff1c957552412f87d019947a39f6ded",
+    "required_precall_fixes": "ENG-PC01 single actual call capability + durable prepared binding; ENG-PC02 immediate-before-generation deadline guard. Native message delivered during active job; no probes executed.",
+    "actual_calls_authorized": false
+  },
+  "Astra": {
+    "status": "STATIC_SCOPE_ACCEPTED_WITH_FIRST_INPUT_ACTION_JOIN",
+    "directory": "/home/lizening/research-notes/agent-logs/2026-10-26T123800Z__ASTRA__engineering-runtime-scope-review__62a20cb9",
+    "hash_entries_verified": 7,
+    "decision_sha256": "be5ab51dc6601e583bb9002de04b96275c5d56f2f7f0d45e899fc086c93082c4",
+    "published": false
+  },
+  "Luna": {
+    "status": "BOUNDED_OLD_INPUT_COMPLETE_STANDBY_NO_EXECUTION",
+    "thread": "01a09fcb-ab5f-7b83-9acf-91026145b764",
+    "history_manifest": "/home/lizening/research-notes/agent-logs/2026-10-26T110000Z__LUNA__si-s01-input-readiness__f1a52e8c/FIRST_SOURCE_EVENT_BINDINGS_V2.json",
+    "manifest_sha256": "c361ba0c9d9276eb7dc20c31d0428f51db3f1a9fdd7fccfa23db5edc4f64eb38",
+    "root_selected_slice_verification_passed": true
+  },
+  "external_capability": {
+    "forwarded_agent_socket": "MISSING",
+    "path": "/home/lizening/.codex/app-server-control/forwarded-ssh-agent.sock",
+    "host_pid_mapping": "UNPROVEN",
+    "public_desktop_handoff": "FAILED_BEFORE_TRANSFER_PAGINATED_CHAT_UNSUPPORTED",
+    "unused_fork": "01a177f1-fbaf-7120-835e-681760f5157b_ARCHIVED_WITH_DRAFT_UNTOUCHED",
+    "new_sdxsrv03_SSH_attempts": 0,
+    "new_CUDA_model_env_science_calls": 0
+  },
+  "next": [
+    "Wait on actual engineering active handle; timeouts are not terminal and must not cancel/restart it.",
+    "Freeze actual new adapter SHA, independent full regression+core parity+genuine bounded historical reader, verify no source-semantic drift; do not carry d7 software PASS automatically to future SHA.",
+    "Publish Astra scope and new root coupled/precall/field-availability/dispatch records only with selected manifests; new engineering WIP currently excluded.",
+    "Once all meaningful independent preparation is complete, if actual external host route still missing and at impasse after repeated goal turns, set blocked honestly rather than loop. Not currently blocked because actual developer progress continues.",
+    "Only trusted route+exact reviewed concrete fresh engineering release may run one bounded oldsource engineering check; then review and genuine source zero-science preflight/fresh single launch clearance. Goal completes only upon genuine authorized new A96 scientific start."
+  ]
+}
