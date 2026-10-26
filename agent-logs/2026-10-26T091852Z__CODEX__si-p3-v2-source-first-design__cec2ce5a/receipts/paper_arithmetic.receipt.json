@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/home/lizening/miniconda3/bin/python",
+    "-I",
+    "-c",
+    "import json\nN=96;H=50;D2=5*N;D1=1200\nsource=N*H;teacher=2*N\nsuffix1=N*(H-1)-D1;suffix2=N*(H-1)-D2\nout={'mode':'PAPER_ARITHMETIC_ONLY_NOT_EXECUTABLE_PROTOCOL_OR_GATE','v1':{'source_generations':source,'teacher_generations':teacher,'suffix_generations':suffix1,'total_generations':source+teacher+suffix1,'replay_actions':D1,'resets':2*N,'environment_operations':source+D1+N+suffix1+2*N,'generated_tokens':16*(source+suffix1)+56*N},'v2':{'source_generations':source,'teacher_generations':teacher,'suffix_generations':suffix2,'total_generations':source+teacher+suffix2,'replay_actions':D2,'resets':2*N,'environment_operations':source+D2+N+suffix2+2*N,'generated_tokens':16*(source+suffix2)+56*N},'source_only':{'generations':source,'environment_operations':source+N,'generated_tokens':16*source},'unspent_branch_stage_upper_bound_if_source_futility':{'generations':teacher+suffix2,'environment_operations':D2+N+suffix2+N,'generated_tokens':56*N+16*suffix2},'input_per_call_envelope':8192*(source+teacher+suffix2),'input_aggregate_cap':16000000,'device_hours_cap':4,'future_training_or_evaluation_budget_authorized':False}\nprint(json.dumps(out,indent=2))\n"
+  ],
+  "started_utc": "2026-10-26T09:22:58.052288+00:00",
+  "elapsed_seconds": 0.03154542203992605,
+  "authentic_returncode": 0,
+  "scope": "stdlib arithmetic only; not a scientific/test/validator/gate execution",
+  "stdout_sha256": "ec4cb3c09732c86410b50eb078d6f0319429f0ee3d2fbd9e91e974e72f59c6e9",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

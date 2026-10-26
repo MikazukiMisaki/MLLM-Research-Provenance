@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/home/lizening/miniconda3/bin/python",
+    "-I",
+    "-c",
+    "from pathlib import Path\nimport hashlib,json,subprocess\nroot=Path('/home/lizening/research-notes/agent-logs/2026-10-26T091852Z__CODEX__si-p3-v2-source-first-design__cec2ce5a')\nfiles=[]\nfor name in ('INPUT_BINDINGS_BEFORE.json','SUPPLEMENTAL_COST_BINDINGS.json'):\n for row in json.loads((root/name).read_text())['files']:\n  p=Path(row['path']);actual=hashlib.sha256(p.read_bytes()).hexdigest()\n  if actual!=row['sha256']:raise SystemExit('immutable input drift: '+str(p))\n  files.append(dict(row,after_sha256=actual,matches=True))\nstates=[]\nfor dirname,expected in [('wt-si-e2-cuda-uuid-compat','844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd'),('wt-codex-r18c2','e537f441010077123a307e9d50ea40cf8dad8547'),('wt-r19-g4-consumer-contract-repair','85cbb92395e5e2420c2adeb1fa0634653e742910'),('wt-r19-recovery-duration-v1','2da980f631badc25086d12db60d128ff507d3ae6')]:\n p=Path('/home/lizening')/dirname\n head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=p,text=True).strip()\n status=subprocess.check_output(['git','status','--porcelain=v1'],cwd=p,text=True)\n if head!=expected:raise SystemExit('HEAD changed: '+str(p))\n if dirname in ('wt-si-e2-cuda-uuid-compat','wt-codex-r18c2') and status:raise SystemExit('source root dirty: '+str(p))\n states.append({'path':str(p),'HEAD':head,'status':status,'read_only':True})\nprint(json.dumps({'schema':'SI_P3_V2_DESIGN_POST_READ_BINDING_V1','all_input_hashes_unchanged':True,'bound_file_count':len(files),'files':files,'frozen_worktree_states':states,'project_module_imports':0,'tokenizer_model_cuda_env_ssh_tests_policy_replay_scientific_calls':0},indent=2))\n"
+  ],
+  "started_utc": "2026-10-26T09:34:17.844644+00:00",
+  "elapsed_seconds": 0.09503008611500263,
+  "authentic_returncode": 0,
+  "scope": "stdlib file hashes plus read-only local Git metadata; no project validators/tests/runtime",
+  "stdout_sha256": "ef7963d612559445c9abd9bb4e50f2b4af0bb0d48d4c825a5bfb92c2602aa0ce",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

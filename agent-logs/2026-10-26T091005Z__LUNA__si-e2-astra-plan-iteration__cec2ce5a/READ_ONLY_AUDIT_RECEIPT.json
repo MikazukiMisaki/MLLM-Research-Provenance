@@ -1,0 +1,37 @@
+{
+  "schema": "LUNA_SI_E2_P3_V2_READONLY_AUDIT_RECEIPT_V1",
+  "method": "pinned system Python standard-library JSON parsing, SHA-256, set intersections, and family-prefix counting; no project imports",
+  "commands": [
+    {
+      "argv_description": ["python3", "-I", "-c", "stdlib JSON metadata inspection"],
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "return_code": 0,
+      "observed": "Input JSON structures and identity-manifest schemas inspected; one exploratory print expression raised KeyError while trying to slice a dictionary as a list. No files were changed; subsequent read-only inspection used the correct mapping form."
+    },
+    {
+      "argv_description": ["python3", "-I", "-c", "exploratory registry display using dict slicing"],
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "return_code": "not captured in the wrapper output; Python traceback confirms command failure",
+      "observed": "KeyError from attempting a list slice on registered_identity_members mapping; read-only only, no files changed. This is retained as an unsuccessful inspection attempt, not a scientific or validator failure."
+    },
+    {
+      "argv_description": ["python3", "-I", "-c", "corrected registry mapping and family/partition metadata inspection"],
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "return_code": 0,
+      "observed": "Registry keys/counts, adopted partition counts/quotas, and E1 recorded cross-overlap metadata displayed."
+    },
+    {
+      "argv_description": ["python3", "-I", "-c", "stdlib identity-set join, family counts, and SHA-256"],
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "return_code": 0,
+      "observed": "R19=127, success-index=120, A96=96, S120=120, known-use union=2612, P2 rows=171/169 unique; all listed direct identity intersections in COHORT_COMPARABILITY.md reproduced."
+    },
+    {
+      "argv_description": ["sha256sum", "task, coordinator, Astra brief, v2 draft, identity manifests, prior context record"],
+      "cwd": "/home/lizening/wt-codex-r18c2",
+      "return_code": 0,
+      "observed": "Hashes recorded in INPUT_BINDINGS.json."
+    }
+  ],
+  "caveat": "This receipt summarizes actual tool invocations/results but is not a byte-for-byte shell transcript. The application tool transcript is the raw command/output record."
+}
