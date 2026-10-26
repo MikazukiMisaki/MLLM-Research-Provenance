@@ -1,0 +1,12 @@
+{
+  "prompt": "初步静态review（未冻结，不是最终exactSHA结论）发现一个需在冻结前闭合的原任务要求：当前si_s01/gate.py authenticate的authorization exactfields只有software review/proposal/env/argv等，无真实positivepreflight receipt或独立launch-clearance绑定；preflight/live都接受status RELEASED_SOURCE_ONLY +maximum_launches1。同一预检授权因此在得到真实预检结果/独立clearance前就能通过live gate。原任务明确真实正向preflight后才fresh independentclearance。请在当前实现内闭合：预检permit本身不得授予live能力；live必须另验具体独立clearance，绑定实际preflight收据/输入与source/proposal/env/plan、唯一liveargv/output和maxlaunch1；未预检、预检失败、hash/上下文不符或旧clearance都在任何外部边界前拒绝。无需再问用户批准（用户已持续授权root统筹），只是落实阶段门禁，实际授权文件仍由root后续准备，当前软件测试用explicitfixture。架构你选最小清晰方式，保留0science preflight并避免hash自引用；别让PREFLIGHT_ONLY文件兼具live授权。可先完成初始正负测试后一起封存，开发中文件可能已变更则以当前为准。",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"threadId\":\"01a165de-c75e-7120-abc9-fa74cde1f17f\"}"
+      }
+    ],
+    "isError": false
+  }
+}

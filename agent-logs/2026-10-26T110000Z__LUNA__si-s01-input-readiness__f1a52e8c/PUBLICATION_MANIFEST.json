@@ -1,0 +1,15 @@
+{
+  "schema": "LUNA_SI_S01_INPUT_READINESS_PUBLICATION_MANIFEST_V1",
+  "status": "PREPARATION_ONLY_NOT_READY_FOR_LAUNCH",
+  "source_SHA": "PENDING_FROZEN_EXACT_SHA",
+  "no_runtime_or_science_release": true,
+  "allowlist": [
+    {"path": "INPUT_HASH_READINESS.json", "bytes": 136019, "sha256": "faeba6e7b31a4b33c0cdfd612f3a625584eb52ff4e00e41fc9e6c04caeb6979b", "classification": "identity and input byte-hash metadata; no payload contents"},
+    {"path": "CAPTURE_COMMAND_RECEIPT.json", "bytes": 1195, "sha256": "aa546952fd1b55ac46aa2a38c5e59f8fe7c67418579dc40e3801f690f5b11b18", "classification": "actual command stdout/exit and pinned interpreter version receipt"},
+    {"path": "capture_input_readiness.py", "bytes": 15539, "sha256": "9a306620b3f99fffa31ad55410f235f92235f53fad77335c19cc82745ca8c283", "classification": "stdlib-only read/hash capture utility; no project imports"},
+    {"path": "RECORD.md", "bytes": 4272, "sha256": "f5c9876375daff91be3243e720d37294117ee50f6df32c2b77a27b1807c9e322", "classification": "task record and scope/status"}
+  ],
+  "excluded_payloads": ["A96 game.tw-pddl bytes", "A96 traj_data.json bytes", "model weights", "adapter weights", "model cache contents", "D48/E600 task payloads", "credentials"],
+  "integrity_inventory": "FILE_HASHES.sha256 hashes the allowlisted files and this manifest; it intentionally does not hash itself.",
+  "no_shared_index_inventory_or_git_mutation": true
+}

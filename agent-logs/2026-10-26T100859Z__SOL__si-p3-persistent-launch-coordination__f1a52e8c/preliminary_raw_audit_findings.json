@@ -1,0 +1,32 @@
+{
+  "status": "PRELIMINARY_NOT_FROZEN",
+  "scope": "Static interface review only; no production execution; final exact-SHA review pending",
+  "observed_hashes": {
+    "collector": "e3a6ef2a78b04edf51f7afc2baa06aee49da3a2dc5305e6805ff01a7db28ef17",
+    "audit": "e10e5cc45ec278ebb4e81a894156c1651c17e46b200a0690a51e15be2cca49f4"
+  },
+  "first": {
+    "prompt": "独立初步静态review补充3个具体同scope路径（不是冻结PASS/FAIL；未执行真实调用），请用软件fixtures重现并在冻结前闭合：1) Collector._collect factory已返回env但initialize抛异常时finally仍记录env_close完成；audit仅env_construct成功才设c.construct，随后c.construct is notNone条件拒绝该合法cleanup，无法产出TECHNICAL_STOP/INCOMPLETE报告。应保留failed/open构造与已执行cleanup、不伪造construct成功，允许审计这条真实partial路径。2) step50后nonterminal且map空，collector维持原P0 reason=horizon，但auditor当前empty_map优先于lensteps50而拒绝。保留冻结P0停止优先级，把producer/consumer约定对齐；不能为validator改P0科学语义。3) auditor目前steps<5时允许placeholder anchor，却不要求source已正常停止，后续步骤/source_closed不再检验：可在reset后提前写空anchor、继续>=5合法动作、重封hashchain，最终E被误计外产生falsefutility。请确保placeholder仅对应正常已停止且<5动作的source，>=5必须有真实S5及时anchor；有完整重算hash的负向fixture。源文件当前collectorSHA317? 以你当前代码为准；root刚读的gate上一SHA596ff8...已另报phaseclearance问题。以上均是原任务约定内修正，不加新架构/真实运行。",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"threadId\":\"01a165de-c75e-7120-abc9-fa74cde1f17f\"}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "second": {
+    "prompt": "补充同一未冻结快照的独立审计绑定问题（不涉及新科学语义）：audit.py当前header核验只比live_binding，未把header.run_id/header.ceilings/allocated_devices/allocation_started_monotonic与外部authorization+真实supervisor context精确绑定。当前实际执行传devices=1，未观察执行绕过；但独立重构可接受allocated_devices=0并报device_hours=0，或一致改run_id及unit digests仍未拒绝。请在冻结前明确live auditor的外部可信入口：authorized run_id/ceilings精确相同，allocated_devices必须真实单卡1，allocation起点/worker PID UID/实际launch上下文由完整hash-bound监督证据核验，不能拿header的worker_pid与其自身比较。软件负向覆盖重封事件链后的devices0、runid漂移、授权更紧cap漂移、allocation起点前移/后移；保留synthetic真实deviceh=0/预算模拟耗时的明确区分。不要求新增真实调用。观察audit SHA e10e5cc45ec278ebb4e81a894156c1651c17e46b200a0690a51e15be2cca49f4，之后文件可变，以冻结测试证据为最终。另runtime.generate在post-resource-check异常时可能丢失已返回raw；保留已发生generation原始输出/token与失败观察，勿把已生成成本/结果清零。若边界尚未调用则保持failed/open，不伪造成功。",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"threadId\":\"01a165de-c75e-7120-abc9-fa74cde1f17f\"}"
+        }
+      ],
+      "isError": false
+    }
+  }
+}

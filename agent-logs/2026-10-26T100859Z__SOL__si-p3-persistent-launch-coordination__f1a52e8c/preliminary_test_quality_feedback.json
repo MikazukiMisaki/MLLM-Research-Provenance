@@ -1,0 +1,51 @@
+{
+  "status": "PRELIMINARY_NOT_FROZEN",
+  "dispatch": {
+    "prompt": "补充一次必要测试质量反馈，scope仍原最小软件验证（代码在修，无新科学授权）：当前snapshot_late只把sequence+=1，先被read_events序号拒绝，并未测S5时序；rewrite也仅更新event refs，trajectory/seal digest未闭合，可能因旧引用拒绝掩盖目标守卫。请关键语义篡改fixture重封所有event/trajectory/seal引用，先独立断言hashchain/引用有效，再要求目标错误reason。另当前fixtures只走基础Producer，尚没走新LiveProducer._raw桥；请用明确synthetic model.generate/env/resource边界调用该生产桥（连续source、sent tensor/mask、PEFT层disabled、post-check异常raw留存），不能只靠旧LocalInference桥测试。新桥不需真实tokenizer/模型/CUDA。已有fixture能构造完整96×H50，建议正向断言精确4800gen/4896env/76800out和下一预留不触raw；可用fake clock/gpu0明确软件预算，保留实际deviceh0。其余F1-F5当前在修无需重复状态汇报；冻结后root再独立测。预检零计数除常量返回外，最好有软件sentinel证明runtime构造/外部入口未触达；按最小实际可测方式，不增加真实边界或大型框架。",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"threadId\":\"01a165de-c75e-7120-abc9-fa74cde1f17f\"}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "live_audit_dispatch": {
+    "prompt": "补充同一未冻结快照的独立审计绑定问题（不涉及新科学语义）：audit.py当前header核验只比live_binding，未把header.run_id/header.ceilings/allocated_devices/allocation_started_monotonic与外部authorization+真实supervisor context精确绑定。当前实际执行传devices=1，未观察执行绕过；但独立重构可接受allocated_devices=0并报device_hours=0，或一致改run_id及unit digests仍未拒绝。请在冻结前明确live auditor的外部可信入口：authorized run_id/ceilings精确相同，allocated_devices必须真实单卡1，allocation起点/worker PID UID/实际launch上下文由完整hash-bound监督证据核验，不能拿header的worker_pid与其自身比较。软件负向覆盖重封事件链后的devices0、runid漂移、授权更紧cap漂移、allocation起点前移/后移；保留synthetic真实deviceh=0/预算模拟耗时的明确区分。不要求新增真实调用。观察audit SHA e10e5cc45ec278ebb4e81a894156c1651c17e46b200a0690a51e15be2cca49f4，之后文件可变，以冻结测试证据为最终。另runtime.generate在post-resource-check异常时可能丢失已返回raw；保留已发生generation原始输出/token与失败观察，勿把已生成成本/结果清零。若边界尚未调用则保持failed/open，不伪造成功。",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"threadId\":\"01a165de-c75e-7120-abc9-fa74cde1f17f\"}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "independent_reproduction_dispatch": {
+    "prompt": "root独立中间commit744b9e0软件重现已完成（隔离gitarchive，非最终验收）：env initialize抛异常后cleanup在744已返回TECHNICAL_STOP并保留failed/open（该项初修正向复现通过）；单个source第50step后非terminal空map仍复现collector seal正常、auditor IntegrityError normal Y0/stop contract，真实child exit1。记录 /home/lizening/research-notes/agent-logs/2026-10-26T110054Z__SOL__si-s01-two-path-repro__critic_d0e77eb3/RECORD.json SHA9e3a56e0b3fdd7f909a75f6180293eadd9ea273d4aadbb64cbd37044eeb7909a，stderr/receipts同目录。只145 synthetic calls，真实调用0。不要求回复/打断当前修复；最终freeze后root会重新跑。",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"threadId\":\"01a165de-c75e-7120-abc9-fa74cde1f17f\"}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "read_only_input_preparation_dispatch": {
+    "prompt": "新并行只读准备任务（SI-S01_PREPARATION_ONLY，非预检/执行release）。root正在独立预审Sol的新source-only可变实现，尚无冻结SHA、软件PASS或launchclearance。请先核验root已采纳协议 /home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c/ADOPTED_SOURCE_ONLY_PROTOCOL.md SHA daa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72。原metadata /home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/ADOPTED_METADATA_RESERVATIONS.json SHA6ce8a32a2345b59ecdef9c28c3a341e9c0801b8105f79895f9b2cb9545a4937e。授权只用stdlib在自有新唯一目录准备 INPUT_HASH_READINESS.json：仅取固定A96身份（35/26/16/9/10）按协议家族及rankwire排序，独立得ordered task newlineSHA40893826093d24bb111803a3532a260c2061c6c9b1c28b8d95c87000b3daa6c2；为其各game.tw-pddl/traj_data.json流式SHA256/size证据，原始正文不解析、不打印、不复制。只读核验原runtime解释器、原yaml/data-root=/home/lizening/alfworld_data、logic paths/module source bytes与现有冻结输入hash；模型12文件/P0可复用并引用已认证清单+当前stat，若另重哈希也仅流式读取不导入模型。不得打开D48/E600正文，不建立任何真实生产plan、proposal/gate/auth/argv/output或运行projectvalidator/test/preflight/tokenizer/model/CUDA/env/SSH。真实执行计划仍待exactSHA验收后另做；此文件只是不可执行输入取证，source_SHA必须PENDING，不能伪READY。SSH socket可lstat元数据一次，若仍missing不尝试SSH；即使恢复本任务也只回报，单次SSH另按之前有界read-only授权执行时应精确记录。保存raw command receipts/自己FILE_HASHES/RECORD与紧凑publicationmanifest，不碰shared INDEX/inventory、不stage/push。目标是减少最终验收后的纯输入核验等待，现有原件均不改。完成把真实路径/hash/异常回报本线程。",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"threadId\":\"01a09fcb-ab5f-7b83-9acf-91026145b764\"}"
+        }
+      ],
+      "isError": false
+    }
+  }
+}

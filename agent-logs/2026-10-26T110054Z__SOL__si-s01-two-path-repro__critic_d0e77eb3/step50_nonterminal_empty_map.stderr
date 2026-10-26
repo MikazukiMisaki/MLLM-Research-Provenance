@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/lizening/research-notes/agent-logs/2026-10-26T110054Z__SOL__si-s01-two-path-repro__critic_d0e77eb3/reproduce.py", line 65, in <module>
+    report=audit(output/'source_events.jsonl',output/'source_trajectories.jsonl',p,loaded)
+  File "/tmp/si-s01-repro-744b9e0d-f3cnbvqf/src/self_improvement/si_s01/audit.py", line 112, in audit
+    insist(reason is not None and saved['disposition']=='NORMAL_SOURCE' and saved['termination']==reason and saved['end_state']==state.to_dict() and type(saved['Y0']) is int and saved['Y0']==int(state.done and state.reward>0),'normal Y0/stop contract')
+  File "/tmp/si-s01-repro-744b9e0d-f3cnbvqf/src/self_improvement/si_s01/contract.py", line 26, in insist
+    if not condition: raise IntegrityError(message)
+self_improvement.si_s01.contract.IntegrityError: normal Y0/stop contract

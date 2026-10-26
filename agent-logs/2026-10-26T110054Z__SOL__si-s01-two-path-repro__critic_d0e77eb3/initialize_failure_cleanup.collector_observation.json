@@ -1,0 +1,39 @@
+{
+  "status": "PRELIMINARY_REPRODUCTION_ONLY",
+  "case": "initialize_failure_cleanup",
+  "collector_stop": {
+    "kind": "TECHNICAL_STOP",
+    "exception": "OSError",
+    "message": "synthetic initialization I/O failure after acquiring closable fixture object"
+  },
+  "slot_count": 96,
+  "normal_sources": 0,
+  "first_row_Y0": null,
+  "first_row_termination": null,
+  "first_row_end_state": null,
+  "source_seals": 0,
+  "synthetic_raw_generations": 0,
+  "environment_fixture_calls": [
+    {
+      "initialize": 1,
+      "resets": 0,
+      "close": 1,
+      "closed": true
+    }
+  ],
+  "terminal_units": [
+    {
+      "event": "unit_failed",
+      "operation": "env_construct",
+      "failure": "synthetic initialization I/O failure after acquiring closable fixture object"
+    },
+    {
+      "event": "unit_completed",
+      "operation": "env_close",
+      "failure": null
+    }
+  ],
+  "forbidden_import_attempts": [],
+  "scientific_generations": 0,
+  "scientific_environment_operations": 0
+}

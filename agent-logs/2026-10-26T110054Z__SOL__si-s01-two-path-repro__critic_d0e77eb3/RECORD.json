@@ -1,0 +1,67 @@
+{
+  "status": "PRELIMINARY_REPRODUCTION_ONLY",
+  "target_sha": "744b9e0def23e6c01d116e3b3aae0aa1f78d674a",
+  "target_parent": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+  "author_final_candidate_reviewed": false,
+  "later_author_fixes_possible": true,
+  "provenance_directory": "/home/lizening/research-notes/agent-logs/2026-10-26T110054Z__SOL__si-s01-two-path-repro__critic_d0e77eb3",
+  "isolated_archive_directory": "/tmp/si-s01-repro-744b9e0d-f3cnbvqf",
+  "scope": "Only initialize failure cleanup and step50 nonterminal empty map; synthetic tokenizer/raw generation/environment I/O; real archived Collector/Ledger/parser/audit.",
+  "inputs_unchanged": true,
+  "cases": [
+    {
+      "case": "initialize_failure_cleanup",
+      "authentic_returncode": 0,
+      "synthetic_started_units": {
+        "model_load": 1,
+        "env_construct": 1,
+        "env_close": 1
+      },
+      "synthetic_completed_units": {
+        "model_load": 1,
+        "env_close": 1
+      },
+      "normal_sources": 0,
+      "synthetic_raw_generation_calls": 0,
+      "forbidden_import_attempts": [],
+      "outcome": "INITIALIZATION_CLEANUP_PATH_ACCEPTED_AS_TECHNICAL_STOP",
+      "audit_status": "TECHNICAL_STOP",
+      "failed_units": [
+        "9dbbd7fa3ca8d716b2df8767b7b8890920e70c824e2bfe685f64b957902a0cb6"
+      ],
+      "open_units": [
+        "9dbbd7fa3ca8d716b2df8767b7b8890920e70c824e2bfe685f64b957902a0cb6"
+      ]
+    },
+    {
+      "case": "step50_nonterminal_empty_map",
+      "authentic_returncode": 1,
+      "synthetic_started_units": {
+        "model_load": 1,
+        "env_construct": 96,
+        "reset": 96,
+        "generation": 145,
+        "step": 145,
+        "env_close": 96
+      },
+      "synthetic_completed_units": {
+        "model_load": 1,
+        "env_construct": 96,
+        "reset": 96,
+        "generation": 145,
+        "step": 145,
+        "env_close": 96
+      },
+      "normal_sources": 96,
+      "synthetic_raw_generation_calls": 145,
+      "forbidden_import_attempts": [],
+      "outcome": "STEP50_EMPTY_MAP_CLOSURE_MISMATCH_REPRODUCED",
+      "collector_termination": "horizon",
+      "actual_audit_exception": "self_improvement.si_s01.contract.IntegrityError: normal Y0/stop contract"
+    }
+  ],
+  "scientific_generations": 0,
+  "scientific_environment_operations": 0,
+  "real_model_tokenizer_CUDA_ALFWorld_project_preflight_SSH_executed": false,
+  "synthetic_raw_generation_calls_total": 145
+}
