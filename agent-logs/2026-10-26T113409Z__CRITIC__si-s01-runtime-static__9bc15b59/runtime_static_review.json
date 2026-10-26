@@ -1,0 +1,92 @@
+{
+  "schema": "SI_S01_INDEPENDENT_RUNTIME_STATIC_REVIEW_V1",
+  "reviewer": "si_e2_runtime_critic",
+  "source_sha": "9bc15b593ec6144915762a2fb1b172e063fe2c48",
+  "base_sha": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+  "review_scope": "complete immutable git-show delta; emphasis runtime/gate/supervisor/entrypoint",
+  "decision": "STATIC_REVIEW_WITH_TWO_RELIABILITY_FINDINGS_NO_LAUNCH_CLEARANCE",
+  "findings": [
+    {
+      "id": "RT-01",
+      "severity": "P2",
+      "category": "bounded_supervision_and_failure_evidence",
+      "file": "src/self_improvement/si_s01/supervisor.py",
+      "line": 58,
+      "trigger": "After callback deadline or another failure, worker termination/reaping does not complete promptly after SIGKILL (e.g. an uninterruptible external/kernel call).",
+      "evidence": "finally kills the group and then executes process.wait() with no timeout before reaching bounded descendant cleanup or authentic supervisor_exit.json write.",
+      "impact": "Supervision and exit-evidence persistence can wait beyond the four-hour allocation deadline indefinitely. Actual device release cannot be guaranteed by userspace, so surviving processes must be reported honestly.",
+      "minimal_change": "Wait/reap only within the remaining absolute allocation deadline; on timeout preserve authentic_returncode=null, actual elapsed time and surviving owned identities, emit failure receipt and never claim completion/retry.",
+      "verification_needed": "Software process boundary that does not reap promptly; verify supervisor returns a non-success receipt within a bounded deadline without fabricated returncode.",
+      "runtime_reproduction": "NOT_RUN_STATIC_FINDING_ONLY"
+    },
+    {
+      "id": "RT-02",
+      "severity": "P2",
+      "category": "one_shot_startup_reliability",
+      "file": "src/self_improvement/si_s01/gate.py",
+      "line": 122,
+      "related_files": [
+        {
+          "path": "src/self_improvement/si_s01/supervisor.py",
+          "line": 43
+        },
+        {
+          "path": "src/self_improvement/si_s01/evidence.py",
+          "line": 13
+        }
+      ],
+      "trigger": "Worker observes worker_start.json after exclusive open creates the file but before parent write/flush completes.",
+      "evidence": "The existing two-second poll waits only for existence; the next read/json.loads occurs once. fresh_json opens the final pathname before writing and fsync.",
+      "impact": "A healthy once-only launch may be consumed by an empty/partial marker parse failure before model loading. This fails closed; it is not an unauthorized launch bypass.",
+      "minimal_change": "Publish the completed worker marker atomically without overwrite, or wait for complete valid bytes inside the existing bounded marker wait while preserving all PID/UID/tick/hash checks.",
+      "verification_needed": "Software delayed/partial marker publication case; valid eventual marker succeeds, malformed final marker still fails before runtime.",
+      "runtime_reproduction": "NOT_RUN_STATIC_FINDING_ONLY"
+    }
+  ],
+  "prior_F1": "Preflight-only authorization is separated from live capability; live now requires an externally hash-bound independent clearance and matching positive zero-science preflight plus execution exit0/argv/bindings.",
+  "prior_F5": "Live auditor now requires external authority and hashed supervisor/worker context; run/plan/caps/device/start/worker/source fields are compared to independent context rather than header self-assertion. External hashes must come from genuine supervising execution receipts.",
+  "frozen_guards": {
+    "src/self_improvement/si_p3/runtime_gate.py": {
+      "base_blob": "195982ec968aab14ee3189762938c42f7333da5d",
+      "target_blob": "195982ec968aab14ee3189762938c42f7333da5d",
+      "identical": true
+    },
+    "src/self_improvement/si_p3/runtime_backend.py": {
+      "base_blob": "232461e6ac87eb602bb7e3e253aab41624b618d2",
+      "target_blob": "232461e6ac87eb602bb7e3e253aab41624b618d2",
+      "identical": true
+    },
+    "src/self_improvement/si_p3/runtime_environment.py": {
+      "base_blob": "42de6a4fef9d4a4a3e5debc761001adbe183030f",
+      "target_blob": "42de6a4fef9d4a4a3e5debc761001adbe183030f",
+      "identical": true
+    },
+    "src/self_improvement/si_p3/collector.py": {
+      "base_blob": "ae78e447d0ed44aea99ca745939fe3dfdad2a10b",
+      "target_blob": "ae78e447d0ed44aea99ca745939fe3dfdad2a10b",
+      "identical": true
+    }
+  },
+  "other_checks": [
+    "Full UUID and exact NVML PID/UID checks remain before 8B allocation. Unproven host/local mapping is an execution NO_GO, not a software defect or waived condition.",
+    "Only P0 source generation is wired; no BASE/teacher/replay/independent suffix/training/evaluation entrypoint is added.",
+    "Prepared IDs/masks, PEFT enabled/default/unmerged/frozen state and returned raw-generation boundary are recorded; later resource failure retains failed/open conservative reservations.",
+    "New real environments use the unchanged no-global-scan one-game bridge, fresh instance/pool42 and one reset42.",
+    "Exclusive adjacent durable launch claim and existing output checks prevent same output identity retry.",
+    "Live CLI monotonic start precedes authentication, loading, waiting and auditing; authoritative complete allocation duration is supervisor_exit, not the earlier journal-close duration."
+  ],
+  "execution_conditions": [
+    "Independent overall exact-SHA review/tests and adjudication of these findings remain root-owned.",
+    "Genuine host/device/process ownership and separately budgeted P0 engineering verification remain required.",
+    "Real positive production preflight, its authentic process receipt and a concrete independent clearance have not been performed or granted by this review."
+  ],
+  "activity": {
+    "project_imports": 0,
+    "tests": 0,
+    "runtime_preflight": 0,
+    "CUDA_NVML_model_tokenizer_ALFWorld_SSH_or_science_calls": 0,
+    "scientific_source_edits": 0,
+    "shared_INDEX_inventory_stage_push": 0
+  },
+  "finished_utc": "2026-10-26T11:35:51.724302+00:00"
+}

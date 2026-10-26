@@ -1,0 +1,32 @@
+{
+  "schema": "bounded_first_source_event_binding_command_receipts_v1",
+  "scope": "Read only the already identified first trajectory row and the event-journal prefix through its fixed referenced reset, six transitions, source_episode_completed, and first generation event. No unrelated source episode was selected.",
+  "attempts": [
+    {
+      "argv": ["python", "capture_first_source_event_bindings.py"],
+      "purpose": "Initial bounded capture; corrected the event header sequence assumption after observing that the journal starts at sequence 1.",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "required event refs not found in scanned prefix: 9/9",
+      "evidence_written": false
+    },
+    {
+      "argv": ["python", "capture_first_source_event_bindings.py"],
+      "purpose": "Intermediate successful capture before adding event-to-embedded-trajectory structural-difference detail; preserved as superseded V1.",
+      "returncode": 0,
+      "stdout": "{\"all_references_found\":true,\"bytes_scanned\":149225,\"embedded_trajectory_equals_first_row\":false,\"event_count\":9,\"lines_scanned\":27,\"report_path\":\"/home/lizening/research-notes/agent-logs/2026-10-26T110000Z__LUNA__si-s01-input-readiness__f1a52e8c/FIRST_SOURCE_EVENT_BINDINGS.json\",\"report_sha256\":\"6b6c1fa6f548fb9b338a6002095523e912d6e24140918d56086de816dae88b8b\"}",
+      "stderr": "",
+      "evidence_written": true,
+      "superseded_by": "FIRST_SOURCE_EVENT_BINDINGS_V2.json"
+    },
+    {
+      "argv": ["python", "capture_first_source_event_bindings.py"],
+      "purpose": "Final bounded capture, with actual sequence-1 header and safe identity extraction.",
+      "returncode": 0,
+      "stdout": "{\"all_references_found\":true,\"bytes_scanned\":149225,\"embedded_trajectory_equals_first_row\":false,\"event_count\":9,\"lines_scanned\":27,\"report_path\":\"/home/lizening/research-notes/agent-logs/2026-10-26T110000Z__LUNA__si-s01-input-readiness__f1a52e8c/FIRST_SOURCE_EVENT_BINDINGS_V2.json\",\"report_sha256\":\"c361ba0c9d9276eb7dc20c31d0428f51db3f1a9fdd7fccfa23db5edc4f64eb38\"}",
+      "stderr": "",
+      "evidence_written": true
+    }
+  ],
+  "payload_safety": "Receipts contain no prompt, generated text, action/command, observation/state, or token values."
+}

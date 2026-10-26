@@ -1,0 +1,1833 @@
+diff --git a/docs/si_s01_source_only_v2.md b/docs/si_s01_source_only_v2.md
+new file mode 100644
+index 0000000..0e3ae9d
+--- /dev/null
++++ b/docs/si_s01_source_only_v2.md
+@@ -0,0 +1,35 @@
++# SI-S01 source-only implementation contract
++
++This new namespace implements the separately adopted source-only protocol daa1d787… on top of frozen844; it grants no launch clearance. The developer runs software tests only. Old SI-E1/E2/R19 methods, synthetic gates and budgets stay unchanged.
++
++Metadata binding authenticates the original A96 reservation digest, actual five-field row schema, full task/trial identities and five-family counts. All slots have reset42/pool42/d5, original family/hash order and H50. No real-task manifest/argv is included. Synthetic fixtures have a distinct digest and evidence class; they cannot execute --live.
++
++The chain is gate → own supervised worker → new per-task/decision producer → frozen P0 parser → source collector → fsynced unit/trajectory/S5 receipts → independent raw auditor → source-only JSON/Markdown report. Only source/P0 generation and source construct/reset/step/close are admitted. Ordinary source steps after d5 stay source; there is no separate suffix, teacher, replay, train or eval driver.
++
++The real backend reuses frozen token, PEFT and UUID/ownership assertions, not the old four-call LocalInference/ledger orchestration. It verifies actual artifact/module bytes, every enabled/default/unmerged/frozen P0 layer before/during/after, complete prepared/sent IDs+mask and raw generation metadata. The one-byte context and strict own NVML PID/UID proof precede8B weights. The existing unproven host/local PID mapping remains a runtime blocker and is never normalized by this implementation.
++
++Each task uses a fresh one-game TextWorld bridge, pool42 and one reset42; only its selected game/traj files are available to discovery. The fifth actual step is followed immediately by an anchor event, before any sixth generation or source close. A valid S5 plus sixth parser-stop remains eligible. Source Y0 is sealed independently and cannot be erased by later cleanup/run failure; unexecuted YT always NA. Full96 seal precedes E/F/S necessary bounds; incomplete stages make no structural prediction.
++
++Physical unit IDs bind run/task/phase/index/kind. Load/construct/close are separately recorded with zero reset/step debit. Reset+step alone count toward4896; source generations4800/output76800/input16M/per-call8192/time4allocated-device-hours are cumulative independent caps with pre-call full reservations and unknown failed units retained. Synthetic simulated device-time is explicitly not real GPU expenditure. The independent auditor reconstructs from raw events/trajectory, not collector summaries; prior science5142/7949 remains a separate citation.
++
++The production CLI requires Python-I, exact clean source/review/proposal hashes, original metadata, runtime inputs, isolated exact environment and unique output. Preflight-only performs static binding without tokenizer/model/env construction, units or source output, and is not clearance. The two reviewed argv lists contain one literal @AUTHORIZATION_SHA256@ only as the hash-argument value; this avoids a self-referential authorization hash. At validation that slot alone is replaced by the externally supplied trusted root digest, giving exact actual argv. No other normalization is permitted. Root supplies the independent review file (SI_S01_INDEPENDENT_REVIEW_V1 / PASS_SOURCE_ONLY_SOFTWARE) and fresh authorization; developer-created software review fixtures are not real acceptance.
++
++--live creates an exclusive durable adjacent launch claim before output/worker launch; it is never removed after failure. A direct worker must belong to the exact fresh-session isolated supervisor. The separate source supervisor admits at most14400seconds, reserves cleanup time, retains authentic exit/stdout/stderr, and cleans owned descendants using unchanged low-level helpers; old1800s supervisor is untouched. Allocation begins at live CLI entry, including validation/loading/waiting/cleanup. Authorization expiry can only tighten the deadline. No automatic retry or old authorization reuse exists.
++
++No teacher quality, recovery success, training recipe or learning effect is reported. Structural NO_GO and NOT_FUTILE are source supply results only. All real runtime feasibility and launch prerequisites require new exact-SHA independent review and separate root clearance. Source-only implementation cannot close a missing host namespace/ownership capability.
++
++## Separate phase authority and externally anchored audit
++
++The base authorization is PREFLIGHT_ONLY and cannot authorize --live. A successful static preflight creates a fresh, separate zero-science receipt outside source output. Live additionally needs an externally hash-bound independent SI_S01_LAUNCH_CLEARANCE_V1, bound to that exact receipt, an authentic exit0 preflight-execution receipt, source/proposal/plan/env/caps/run/UID/output, expiry, one launch and exact full argv. Its own hash has a separate single @CLEARANCE_SHA256@ argv slot, avoiding self-reference. Failed/missing preflight, mismatched context and old or missing clearance are rejected before any runtime boundary. These real files are supplied later by root; explicit software fixtures are not real clearance.
++
++The supervisor hashes launch_context before spawning and passes its hash to the authenticated worker, then records kernel PID/UID/start identity in worker_start. Live raw audit requires those external file hashes, exact authorization plan/run/caps, real allocated_devices1, the same allocation start and external worker identity. It cannot accept a header's self-asserted PID or device count. Independent offline review must obtain those hashes from the supervising execution receipts. Synthetic budget simulations may use device1 for clock tests but still report real GPU expenditure0.
++
++A returned generation is fsynced before post-resource/PEFT guards. A later failure retains raw/tokens plus the failed/open conservative reservation; observed returned boundaries are separate from completed validated units and never hidden as zero work. Normal P0 stop priority is preserved: terminal/truncated wins, full50-action nonterminal completion is horizon even if the last map is empty. An unavailable-placeholder anchor is legal only after a normal stop before5 actual actions; every source with5 or more actions requires the timely actual S5 marker.
++
++## Bounded cleanup, complete marker publication and cost endpoint
++
++Every worker wait uses the remaining absolute allocation deadline, including the post-SIGKILL reap. An unestablished exit stays null with the observed worker identity, reaping error and incomplete cleanup; elapsed time and survivors remain recorded. SIGKILL alone does not prove exit or GPU release.
++
++worker_start.json is durably written to a same-directory temporary file and published by an exclusive atomic hard link, then the directory is fsynced. The worker cannot observe a partial final marker, and publication never overwrites an existing marker. All PID/UID/start-tick/parent/context hash checks remain unchanged.
++
++Source report hours end at collector_run_closed. They are an explicitly marked stage lower bound and exclude later audit, reporting and supervisor cleanup. Only the authentic supervisor_exit allocated_device_hours is the final allocation-cost authority; the overlapping values must not be added. A source report alone supplies no final resource total or release proof.
+diff --git a/scripts/run_si_s01_source_only.py b/scripts/run_si_s01_source_only.py
+new file mode 100644
+index 0000000..0182465
+--- /dev/null
++++ b/scripts/run_si_s01_source_only.py
+@@ -0,0 +1,45 @@
++#!/usr/bin/env python3
++"""SI-S01 source-only. No default runtime, input, output, release or automatic retry."""
++from __future__ import annotations
++import argparse,json,os,sys,time
++from pathlib import Path
++from datetime import datetime,timezone
++ROOT=Path(__file__).resolve().parents[1]
++sys.path.insert(0,str(ROOT/'src'))
++from self_improvement.si_s01.contract import insist
++from self_improvement.si_s01.gate import authenticate,complete_preflight,source_binding
++
++def main(argv=None):
++    entered=time.monotonic()
++    parser=argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--authorization',type=Path,required=True);parser.add_argument('--authorization-sha256',required=True)
++    parser.add_argument('--proposal',type=Path,required=True)
++    modes=parser.add_mutually_exclusive_group(required=True)
++    modes.add_argument('--preflight-only',action='store_true');modes.add_argument('--live',action='store_true');modes.add_argument('--worker',action='store_true',help=argparse.SUPPRESS)
++    parser.add_argument('--clearance',type=Path);parser.add_argument('--clearance-sha256')
++    parser.add_argument('--launch-context-sha256',help=argparse.SUPPRESS)
++    args=parser.parse_args(argv)
++    try:
++        insist(sys.flags.isolated==1,'requires isolated python -I')
++        mode='preflight' if args.preflight_only else 'worker' if args.worker else 'live'
++        permit=authenticate(ROOT,args.authorization,args.authorization_sha256,args.proposal,
++            invocation=list(sys.orig_argv),mode=mode,worker=args.worker,clearance_path=args.clearance,clearance_sha256=args.clearance_sha256,launch_context_sha256=args.launch_context_sha256)
++        if args.preflight_only:
++            complete_preflight(permit)
++            print(json.dumps(dict(permit.artifact_receipt)|{'status':'STATIC_PREFLIGHT_ONLY_NOT_CLEARANCE','evidence_class':permit.plan.evidence_class,'science_output_exists':permit.output.exists()}));return 0
++        if args.worker:
++            from self_improvement.si_s01.runtime import run_worker
++            return run_worker(permit)
++        from self_improvement.si_s01.supervisor import supervise_source
++        from self_improvement.si_p3.runtime_gate import utc
++        remaining=(min(utc(permit.authorization['expires_utc']),utc(permit.clearance['expires_utc']))-datetime.now(timezone.utc)).total_seconds()
++        seconds=min(permit.ceilings['device_hours']*3600,remaining)
++        command=[sys.executable,'-I',str(Path(__file__).resolve()),'--worker','--authorization',str(args.authorization.resolve()),'--authorization-sha256',args.authorization_sha256,'--proposal',str(args.proposal.resolve()),'--clearance',str(args.clearance.resolve()),'--clearance-sha256',args.clearance_sha256]
++        context={'source_sha':permit.authorization['source_sha'],'authorization_sha256':permit.authorization_sha256,
++                 'proposal_sha256':permit.proposal_sha256,'evidence_class':permit.plan.evidence_class,'plan_sha256':permit.plan.sha256,
++                 'supervisor_argv':list(sys.orig_argv),'allocation_started_monotonic':entered,'source_binding':source_binding(permit),'clearance_sha256':permit.clearance_sha256}
++        receipt=supervise_source(command,permit.output,context=context,seconds=seconds,environment=permit.authorization['environment'])
++        return 0 if receipt['authentic_returncode']==0 and receipt['within_time_cap'] and not receipt['deadline_triggered'] and not receipt['members_after_cleanup'] else 1
++    except Exception as error:
++        print(json.dumps({'status':'REJECTED_OR_SOURCE_TECHNICAL_STOP','exception':type(error).__name__,'message':str(error),'resource_evidence':getattr(error,'resource_evidence',None)}),file=sys.stderr);return 1
++if __name__=='__main__':raise SystemExit(main())
+diff --git a/src/self_improvement/si_s01/__init__.py b/src/self_improvement/si_s01/__init__.py
+new file mode 100644
+index 0000000..0b41242
+--- /dev/null
++++ b/src/self_improvement/si_s01/__init__.py
+@@ -0,0 +1 @@
++"""SI-S01 source-only acquisition; no implicit execution release."""
+diff --git a/src/self_improvement/si_s01/audit.py b/src/self_improvement/si_s01/audit.py
+new file mode 100644
+index 0000000..2a0fcbb
+--- /dev/null
++++ b/src/self_improvement/si_s01/audit.py
+@@ -0,0 +1,171 @@
++"""Independent raw event/trajectory reconstruction; never calls a collector or model."""
++from __future__ import annotations
++from collections import Counter
++from pathlib import Path
++import json,math
++from models.action_parser import action_id_mapping
++from self_improvement.si_p3.collector import parse_generation
++from self_improvement.si_p3.runtime_backend import verify_adapter_state
++from .contract import *
++from .evidence import read_events,fresh_json
++
++
++def audit(events_path:Path,trajectory_path:Path,expected_plan:Plan,encoder=None,*,authority=None)->dict:
++    events=read_events(events_path);index={r['event_id']:r for r in events};header=events[0]['payload']
++    plan=restore_plan(header['plan']);insist(plan==expected_plan and header['plan_sha256']==plan.sha256 and header['schema']==VERSION and header['protocol_sha256']==PROTOCOL_SHA256,'expected authenticated plan/header')
++    if authority is not None:
++        from .gate import verified_context,source_binding
++        insist(plan==authority.plan and header['plan_sha256']==source_binding(authority)['plan_sha256'],'external authorized plan mismatch')
++        insist(authority.context_evidence is not None,'external supervisor context required')
++        launch,worker=verified_context(authority,authority.context_evidence)
++        insist(header['run_id']==authority.authorization['run_id'] and header['ceilings']==dict(authority.authorization['ceilings']) and header['allocated_devices']==1 and header['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external run/caps/device/allocation binding')
++        insist(header['live_binding']=={'authorization_sha256':authority.authorization_sha256,'proposal_sha256':authority.proposal_sha256,'source_sha':authority.authorization['source_sha'],'packages':dict(authority.proposal['packages']),'gpu_uuid':authority.gpu_uuid,'worker_pid':worker['pid'],'worker_uid':worker['uid'],'clearance_sha256':authority.clearance_sha256},'external worker/source identity binding')
++    elif plan.evidence_class=='live_source_only':insist(False,'live independent audit lacks external authority/context')
++    else:insist(header['live_binding'] is None,'synthetic cannot claim live binding')
++    ceilings=limits(header['ceilings']);run_id=header['run_id']
++    insist(type(run_id) is str and len(run_id)==32 and all(c in '0123456789abcdef' for c in run_id),'run identity')
++    rows=[json.loads(line) for line in trajectory_path.read_text().splitlines()]
++    insist(len(rows)==96 and [r['slot'] for r in rows]==[asdict_slot(s) for s in plan.slots],'complete96 disposition order')
++    rowmap={r['slot_key']:r for r in rows};slotmap={s.key:s for s in plan.slots}
++    for s in plan.slots:
++        row=rowmap[s.key];insist(row['YT'] is None and row['teacher_status']=='TEACHER_NOT_AUTHORIZED_SOURCE_ONLY','unmeasured teacher must remain NA')
++    ctx={s.key:{'slot':s,'construct':None,'construct_started':False,'reset':None,'generations':[],'steps':[],'history':[],'state':None,'pending':None,'invalid':False,'anchor':None,'closed':False,'env_closed':False} for s in plan.slots}
++    units={};active=None;completed=Counter(generations=0,environment_operations=0,generated_tokens=0,input_tokens=0)
++    reserved=Counter(completed);components=Counter();normal=[];sealed=False;stopped=None;last_slot=-1;model=None;failed=False;returned={}
++    for row in events[1:]:
++        p=row['payload'];kind=row['kind']
++        if kind=='unit_started':
++            insist(active is None and not sealed,'overlapping or post-seal external calls')
++            identity=p['identity'];insist(set(identity)=={'slot','task_id','phase','index','kind'},'unit identity fields');source_only(identity['phase'])
++            operation=identity['kind'];insist(operation in KINDS and type(identity['index']) is int and identity['index']>=0,'operation/index')
++            unit=p['unit'];insist(unit==digest([run_id,identity]) and unit not in units,'wrong/cross-run/duplicate unit')
++            if failed or stopped:insist(operation=='env_close','external call after stop')
++            slot=slotmap.get(identity['slot'])
++            if operation=='model_load':
++                insist(identity['slot'] is None and identity['task_id'] is None and identity['index']==0 and model is None and not units,'one initial model load')
++            else:
++                insist(slot is not None and identity['task_id']==slot.task_id and model is not None,'foreign slot/task or unloaded producer')
++                pos=plan.slots.index(slot);insist(pos>=last_slot,'task order changed');last_slot=pos
++                insist(not ctx[slot.key]['closed'] or operation=='env_close','source closed twice/operation after Y0')
++                if operation=='env_construct':
++                    insist(not ctx[slot.key]['construct_started'],'repeated construct');ctx[slot.key]['construct_started']=True
++            generation=operation=='generation';prepared=p['prepared']
++            if generation:
++                insist(prepared is not None and set(prepared)=={'prompt','rendered_prompt','input_ids','attention_mask'} and type(prepared['input_ids']) is list and bool(prepared['input_ids']) and all(type(i) is int and i>=0 for i in prepared['input_ids']) and prepared['attention_mask']==[1]*len(prepared['input_ids']),'full prepared IDs/mask')
++            else:insist(prepared is None,'non-generation prepared')
++            debit={'generations':int(generation),'environment_operations':int(operation in ('reset','step')),'generated_tokens':16 if generation else 0,'input_tokens':len(prepared['input_ids']) if generation else 0}
++            insist(p['reservation']==debit and debit['input_tokens']<=ceilings['per_call_input'],'pre-call reservation forgery')
++            reserved.update(debit)
++            insist(all(reserved[k]<=ceilings[k] for k in reserved),'pre-call cap exceeded')
++            units[unit]={'start':row,'finished':False,'failed':False};active=unit
++        elif kind in ('unit_completed','unit_failed'):
++            unit=p['unit'];insist(active==unit and unit in units and not units[unit]['finished'] and not units[unit]['failed'],'orphan/repeated completion')
++            start=units[unit]['start'];identity=start['payload']['identity']
++            insist(p['identity']==identity and p['started_event']==start['event_id'],'completion start/identity drift')
++            active=None;operation=identity['kind'];slot=slotmap.get(identity['slot']);c=ctx.get(identity['slot'])
++            if kind=='unit_failed':units[unit]['failed']=True;failed=True;continue
++            units[unit]['finished']=True;data=p['data'];components[operation]+=1
++            actual=0
++            if operation=='model_load':
++                insist(data=={'mode':'P0','adapter_sha256':P0_SHA256,'evidence_class':plan.evidence_class},'model mode identity');model=row['event_id']
++            elif operation=='env_construct':
++                insist(c['construct'] is None and identity['index']==0 and data['pool_seed']==42,'fresh one-game initialized pool');c['construct']=row['event_id']
++                if plan.evidence_class=='live_source_only':insist(data['package_origins']=={k:authority.proposal['packages'][k] for k in ('alfworld','alfworld.agents.environment.alfred_tw_env','textworld','textworld.gym','yaml')},'actual environment origin proof')
++            elif operation=='reset':
++                insist(c['construct'] and c['reset'] is None and identity['index']==0 and set(data)=={'seed','pool_seed','reset_ordinal','state'} and data['seed']==data['pool_seed']==42 and data['reset_ordinal']==0,'one seed42/pool42 reset')
++                state=PublicState.from_dict(data['state']);insist((state.task_id,state.family)==(slot.task_id,slot.family) and not state.ended and state.reward==0,'reset task/state');c['reset']=row['event_id'];c['state']=state
++            elif operation=='generation':
++                state=c['state'];insist(state is not None and not state.ended and bool(state.valid_actions) and not c['invalid'] and c['pending'] is None and identity['index']==len(c['steps'])<50,'generation order/state/index')
++                insist(set(data)=={'state','prepared','raw','eos_ids','parsed','runtime'} and data['state']==state.to_dict() and data['prepared']==start['payload']['prepared'],'raw generation envelope')
++                public=projection(state,c['history']);prepared=data['prepared']
++                insist(prepared['prompt']==public['public_prompt'],'future/diagnostic/non-public prompt')
++                insist(encoder is not None and encoder.prepare(public['public_prompt']).to_dict()==prepared,'independent full tokenization binding')
++                value=Generation.from_raw(data['raw'],Prepared(prepared['prompt'],prepared['rendered_prompt'],tuple(prepared['input_ids'])),16,'P0',tuple(data['eos_ids']))
++                insist(encoder.decode(value.raw['token_ids'])==value.raw['raw_output'],'raw output decode')
++                parsed=parse_generation('source',value,state);insist(parsed==data['parsed'],'P0 parser binding')
++                if plan.evidence_class=='live_source_only':
++                    proof=data['runtime'];insist(proof['tensor_proof']=={'prepared':prepared,'sent':prepared},'actual prepared/sent tensor proof')
++                    for point in ('before','during','after'):verify_adapter_state(proof['adapter_states'][point],enabled=True)
++                    insist(proof['adapter_states']['before']==proof['adapter_states']['after'],'adapter restoration')
++                else:insist(data['runtime']=={'synthetic_software_fixture':True},'explicit software boundary')
++                c['generations'].append(row['event_id']);c['invalid']=parsed['status']!='selected';c['pending']=None if c['invalid'] else (row['event_id'],parsed)
++                actual=value.raw['generated_tokens']
++            elif operation=='step':
++                state=c['state'];insist(c['pending'] is not None and identity['index']==len(c['steps'])<50 and not state.ended,'step without selected current action')
++                generated,parsed=c['pending'];mapping=action_id_mapping(state.valid_actions)
++                insist(set(data)=={'before','after','action_id','command','action_map','generation_event'} and data['before']==state.to_dict() and data['generation_event']==generated and data['action_map']==mapping and data['action_id']==parsed['action_id'] and data['command']==parsed['command'] and mapping.get(data['action_id'])==data['command'],'Action-ID/map/command/reference binding')
++                after=PublicState.from_dict(data['after']);insist((after.task_id,after.family,after.goal)==(state.task_id,state.family,state.goal),'transition public identity')
++                c['history'].append((state.observation,data['command']));c['state']=after;c['steps'].append(row['event_id']);c['pending']=None
++            elif operation=='env_close':
++                insist(c['construct_started'] and not c['env_closed'] and data=={'closed':True} and identity['index']==0,'unique environment close');c['env_closed']=True
++            debit=dict(start['payload']['reservation']);reserved['generated_tokens']-=debit['generated_tokens']-actual;completed.update(debit|{'generated_tokens':actual})
++        elif kind=='runtime_evidence':
++            insist(active==p['unit'] and active in units,'orphan runtime observation')
++            if p['kind']=='generation_returned':
++                insist(units[active]['start']['payload']['identity']['kind']=='generation' and active not in returned and p['data']['generation_returned'] is True and p['data']['prepared']==units[active]['start']['payload']['prepared'],'returned raw source boundary')
++                returned[active]=p['data']
++            if plan.evidence_class=='live_source_only' and p['kind']=='model_loaded':
++                observed=p['data'];insist(observed['origins']=={k:authority.proposal['packages'][k] for k in ('torch','transformers','peft')},'actual model origin proof')
++                verify_adapter_state(observed['adapter_state'],enabled=True)
++        elif kind=='anchor_sealed':
++            c=ctx[p['slot_key']];insist(c['anchor'] is None and not c['closed'],'duplicate/late anchor')
++            if len(c['steps'])>=5:
++                insist(len(c['steps'])==5 and p['after_step_event']==c['steps'][4] and row['sequence']==index[c['steps'][4]]['sequence']+1,'S5 absent/late after future generation')
++                state=c['state'];usable=not state.ended and bool(state.valid_actions)
++                insist(p=={'slot_key':c['slot'].key,'after_step_event':c['steps'][4],'state':state.to_dict(),'history':[list(x) for x in c['history'][-4:]],'projection':projection(state,c['history']) if usable else None,'usable':usable},'S5 full causal checkpoint')
++            else:
++                insist(c['state'] is not None and c['pending'] is None and (c['state'].ended or not c['state'].valid_actions or c['invalid']),'premature placeholder before normal source stop')
++                insist(p=={'slot_key':c['slot'].key,'after_step_event':None,'state':None,'history':None,'projection':None,'usable':False},'unreachable checkpoint')
++            c['anchor']=row['event_id']
++        elif kind=='source_closed':
++            c=ctx[p['slot_key']];saved=rowmap[p['slot_key']];state=c['state'];insist(state is not None and not c['closed'] and c['anchor'] is not None and c['pending'] is None,'incomplete source closure')
++            reason=('terminal' if state.done else 'truncated') if state.ended else 'horizon' if len(c['steps'])==50 else 'empty_map' if not state.valid_actions else 'invalid_actor' if c['invalid'] else None
++            insist(reason is not None and (index[c['anchor']]['payload']['after_step_event'] is None)==(len(c['steps'])<5) and saved['disposition']=='NORMAL_SOURCE' and saved['termination']==reason and saved['end_state']==state.to_dict() and type(saved['Y0']) is int and saved['Y0']==int(state.done and state.reward>0),'normal Y0/stop contract')
++            insist(saved['source']=={k:c[k] for k in ('construct','reset','generations','steps')} and saved['anchor_event']==c['anchor'] and p['trajectory_sha256']==digest(saved),'source refs/trajectory hash')
++            c['closed']=True;normal.append(digest(saved))
++        elif kind=='slot_incomplete':
++            saved=rowmap[p['slot_key']];insist(saved['disposition']=='NOT_NORMAL_SOURCE' and saved['Y0'] is None and p['trajectory_sha256']==digest(saved),'technical/incomplete must not be failure')
++        elif kind=='sources_sealed':
++            insist(not sealed and stopped is None and not failed and active is None and len(normal)==96 and all(c['closed'] and c['env_closed'] for c in ctx.values()) and p=={'source_hashes':normal,'plan_sha256':plan.sha256},'source seal before96/after failure');sealed=True
++        elif kind=='run_stopped':insist(not sealed and stopped is None,'stop after complete seal/repeated stop');stopped=p
++        elif kind=='run_closed':insist(row is events[-1] and p['source_count']==len(normal) and p['stop']==stopped,'run closure')
++        else:insist(False,'unexpected source event')
++    insist(events[-1]['kind']=='run_closed' and active is None,'incomplete raw stream')
++    insist((sealed and stopped is None) or (not sealed and stopped is not None),'full vs incomplete stage')
++    open_units=sorted(u for u,d in units.items() if not d['finished']);failed_units=sorted(u for u,d in units.items() if d['failed'])
++    hours=header['allocated_devices']*(events[-1]['monotonic']-header['allocation_started_monotonic'])/3600
++    insist(math.isfinite(hours) and hours>=0 and (not sealed or hours<=ceilings['device_hours']),'allocation time cap')
++    upper=None;status=stopped['kind'] if stopped else 'SOURCE_UPPER_BOUNDS_NOT_FUTILE'
++    if sealed:
++        E=Counter();F=Counter();S=Counter()
++        for key,c in ctx.items():
++            if index[c['anchor']]['payload']['usable']:
++                f=c['slot'].family;E[f]+=1
++                (F if rowmap[key]['Y0']==0 else S)[f]+=1
++        upper={'E':sum(E.values()),'F':sum(F.values()),'S':sum(S.values()),'by_family':{f:{'E':E[f],'F':F[f],'S':S[f]} for f in FAMILIES}}
++        futile=sum(E.values())<72 or sum(F.values())<24 or sum(S.values())<24 or any(E[f]<Q_MIN[f] or F[f]<ADOPTION_QUOTAS[f] or S[f]<ADOPTION_QUOTAS[f] for f in FAMILIES)
++        if futile:status='COMPLETE_SOURCE96_STRUCTURAL_NO_GO'
++    return {'schema':VERSION,'status':status,'evidence_class':plan.evidence_class,'plan_sha256':plan.sha256,'protocol_sha256':PROTOCOL_SHA256,
++        'normal_sources':len(normal),'source_phase_sealed':sealed,'upper_bounds':upper,'teacher_status':'TEACHER_NOT_AUTHORIZED_SOURCE_ONLY','all_YT':None,
++        'physical':{'completed':dict(completed),'reserved_or_spent':dict(reserved),'open_units':open_units,'failed_units':failed_units,'components':dict(components),'observed_returned_generation_boundaries':len(returned),'observed_returned_tokens':sum(len(r['raw']['token_ids']) for r in returned.values() if isinstance(r.get('raw'),dict) and isinstance(r['raw'].get('token_ids'),list))},
++        'allocation_budget_device_hours':hours,'real_device_hours':hours if plan.evidence_class=='live_source_only' else 0,
++        'allocation_cost_measurement':{'endpoint':'collector_run_closed','endpoint_event_id':events[-1]['event_id'],
++            'scope':'STAGE_LOWER_BOUND_NOT_FINAL_ALLOCATED_COST','hours_fields':['allocation_budget_device_hours','real_device_hours'],
++            'excluded_later_intervals':['independent_audit','report_write','worker_exit','supervisor_cleanup'],
++            'final_authority':{'artifact':'supervisor_exit.json','schema':'SI_S01_SUPERVISOR_EXIT_V1','field':'allocated_device_hours','requires':'AUTHENTIC_SUPERVISOR_EXECUTION_RECEIPT'},
++            'final_allocated_device_hours':None,'aggregation':'DO_NOT_ADD_STAGE_HOURS_TO_SAME_ALLOCATION_SUPERVISOR_TOTAL'},
++        'historical_science_unchanged':{'generations':5142,'environment_operations':7949},'science_acceptance':'NOT_LEARNING_OR_TEACHER_ACCEPTANCE','raw_final_event':events[-1]['event_id']}
++
++def asdict_slot(slot):
++    from dataclasses import asdict
++    return asdict(slot)
++
++def write_report(output:Path,report:dict)->None:
++    fresh_json(output/'source_report.json',report)
++    with (output/'SOURCE_REPORT.md').open('x',encoding='utf-8') as f:
++        f.write('# SI-S01 source-only report\n\n'+report['status']+'\n\n'+
++            'Evidence: '+report['evidence_class']+'; normal sources: '+str(report['normal_sources'])+' / 96.\n\n'+
++            'YT remains NA. No teacher, training or evaluation is authorized. Necessary upper bounds do not establish recipe or learning efficacy.\n\n'+
++            'Upper bounds: '+json.dumps(report['upper_bounds'],ensure_ascii=False)+'\n\n'+
++            'Allocated hours here stop at collector_run_closed and are a stage lower bound, not the final allocation total. The authentic supervisor_exit.json allocated_device_hours is the final authority; do not add these overlapping intervals.\n\n'+
++            'Physical cost: '+json.dumps(report['physical'],ensure_ascii=False)+'\n')
+diff --git a/src/self_improvement/si_s01/collector.py b/src/self_improvement/si_s01/collector.py
+new file mode 100644
+index 0000000..6080b98
+--- /dev/null
++++ b/src/self_improvement/si_s01/collector.py
+@@ -0,0 +1,137 @@
++"""Source-only production orchestration. External generation/environment I/O are ports."""
++from __future__ import annotations
++from dataclasses import asdict
++from pathlib import Path
++from typing import Any,Callable,Mapping
++import os,time
++from models.action_parser import action_id_mapping
++from self_improvement.si_p3.collector import parse_generation
++from .contract import *
++from .evidence import Journal,Ledger
++
++class Producer:
++    def __init__(self,tokenizer:Any,raw:Callable[...,Mapping[str,Any]],*,evidence_class:str):
++        insist(evidence_class in MODES,'producer mode');self.tokenizer,self.raw,self.evidence_class=tokenizer,raw,evidence_class
++        eos=tokenizer.eos_token_id;self.eos_ids=(eos,) if type(eos) is int else tuple(eos or ())
++        insist(bool(self.eos_ids),'EOS identity')
++    def prepare(self,prompt:str)->PreparedTensors:
++        rendered=self.tokenizer.apply_chat_template([{'role':'user','content':prompt}],tokenize=False,add_generation_prompt=True,enable_thinking=False)
++        encoded=self.tokenizer(text=rendered,add_special_tokens=True)
++        insist(set(encoded)=={'input_ids','attention_mask'} and encoded['attention_mask']==[1]*len(encoded['input_ids']),'full tokenizer keys/mask')
++        return PreparedTensors(Prepared(prompt,rendered,tuple(encoded['input_ids'])),tuple(encoded['attention_mask']))
++    def decode(self,ids):return self.tokenizer.decode(ids,skip_special_tokens=True).strip()
++    def generate(self,prepared:PreparedTensors,slot:Slot,index:int,*,phase:str='source',adapter_mode:str='P0'):
++        source_only(phase,adapter_mode)
++        insist(self.prepare(prepared.prepared.prompt)==prepared,'prepared drift')
++        received=self.raw(prepared,slot,index)
++        try:
++            result=dict(received)
++            insist(set(result)=={'raw','runtime'},'typed raw result')
++            value=Generation.from_raw(result['raw'],prepared.prepared,16,'P0',self.eos_ids)
++            insist(self.decode(value.raw['token_ids'])==value.raw['raw_output'],'raw decode mismatch')
++            return {'raw':dict(value.raw),'runtime':result['runtime']}
++        except BaseException as error:
++            error.raw_evidence={'prepared':prepared.to_dict(),'received':received if isinstance(received,Mapping) else repr(received)}
++            raise
++
++class Collector:
++    def __init__(self,plan:Plan,loader:Callable[[Ledger],Any],environment_factory:Callable[[Slot],Any],output:Path,*,
++                 run_id:str,ceilings:Mapping[str,Any]=LIMITS,devices:int=0,started_at:float|None=None,
++                 clock:Callable[[],float]=time.monotonic,live_permit:Any=None):
++        insist(plan.evidence_class!='live_source_only' or (live_permit is not None and live_permit.plan==plan and live_permit.output==output),'live source requires authenticated matching permit')
++        insist(not output.exists() or (live_permit is not None and (output/'launch_context.json').is_file()),'fresh source output')
++        if not output.exists():output.mkdir()
++        self.plan,self.output,self.factory,self.loader=plan,output,environment_factory,loader
++        self.run_id=run_id;self.journal=Journal(output/'source_events.jsonl',{'schema':VERSION,'protocol_sha256':PROTOCOL_SHA256,
++            'plan':plan.to_dict(),'plan_sha256':plan.sha256,'run_id':run_id,'ceilings':limits(ceilings),'allocated_devices':devices,
++            'allocation_started_monotonic':clock() if started_at is None else started_at,
++            'live_binding':{'authorization_sha256':live_permit.authorization_sha256,'proposal_sha256':live_permit.proposal_sha256,'source_sha':live_permit.authorization['source_sha'],'packages':dict(live_permit.proposal['packages']),'gpu_uuid':live_permit.gpu_uuid,'worker_pid':os.getpid(),'worker_uid':os.getuid(),'clearance_sha256':live_permit.clearance_sha256} if live_permit is not None else None},clock=clock)
++        self.ledger=Ledger(self.journal,plan,run_id,ceilings=ceilings,allocated_devices=devices,started_at=started_at,clock=clock)
++        self.trajectory=(output/'source_trajectories.jsonl').open('x',encoding='utf-8');self.rows=[];self.ran=False;self.environments=[]
++    def _write(self,row,normal:bool):
++        self.trajectory.write(canonical(row)+'\n');self.trajectory.flush();os.fsync(self.trajectory.fileno())
++        self.journal.append('source_closed' if normal else 'slot_incomplete',{'slot_key':row['slot_key'],'trajectory_sha256':digest(row)})
++        self.rows.append(row)
++    def _collect(self,slot:Slot,producer:Producer)->dict[str,Any]:
++        refs={'construct':None,'reset':None,'generations':[],'steps':[]};self.partial=refs
++        env=None;normal=False;anchor=None;history=[];state=None
++        try:
++            def construct():
++                nonlocal env
++                env=self.factory(slot)
++                insist(env.evidence_class==self.plan.evidence_class and all(env is not previous for previous in self.environments),'environment mode/reused instance')
++                self.environments.append(env)
++                initialized=dict(env.initialize());insist(initialized['pool_seed']==42,'actual pool seed42');return initialized
++            refs['construct']=self.ledger.call(slot,'env_construct',0,construct)
++            def reset():
++                value=env.reset(seed=42);wire=value.to_dict() if isinstance(value,PublicState) else value
++                state=PublicState.from_dict(wire)
++                insist((state.task_id,state.family)==(slot.task_id,slot.family) and not state.ended and state.reward==0,'reset identity/state')
++                return {'seed':42,'pool_seed':42,'reset_ordinal':0,'state':wire}
++            refs['reset']=self.ledger.call(slot,'reset',0,reset)
++            state=PublicState.from_dict(self.ledger.data(refs['reset'])['state'])
++            reason='horizon'
++            for index in range(50):
++                if state.ended:reason='terminal' if state.done else 'truncated';break
++                if not state.valid_actions:reason='empty_map';break
++                public=projection(state,history);prepared=producer.prepare(public['public_prompt'])
++                def generate():
++                    result=producer.generate(prepared,slot,index,phase='source',adapter_mode='P0')
++                    if not self.ledger.units[self.ledger.active].get('return_event'):
++                        self.ledger.runtime('generation_returned',{'generation_returned':True,'prepared':prepared.to_dict(),'raw':result['raw']})
++                    value=Generation.from_raw(result['raw'],prepared.prepared,16,'P0',producer.eos_ids)
++                    return {'state':state.to_dict(),'prepared':prepared.to_dict(),'raw':dict(value.raw),
++                            'eos_ids':list(producer.eos_ids),'parsed':parse_generation('source',value,state),'runtime':result['runtime']}
++                generated=self.ledger.call(slot,'generation',index,generate,prepared=prepared.to_dict());refs['generations'].append(generated)
++                parsed=self.ledger.data(generated)['parsed']
++                if parsed['status']!='selected':reason='invalid_actor';break
++                before=state;mapping=action_id_mapping(before.valid_actions)
++                insist(mapping.get(parsed['action_id'])==parsed['command'],'Action-ID/full map binding')
++                def step():
++                    value=env.step(parsed['command']);after=PublicState.from_dict(value.to_dict() if isinstance(value,PublicState) else value)
++                    insist((after.task_id,after.family,after.goal)==(before.task_id,before.family,before.goal),'transition identity')
++                    return {'before':before.to_dict(),'after':after.to_dict(),'action_id':parsed['action_id'],'command':parsed['command'],
++                            'action_map':mapping,'generation_event':generated}
++                stepped=self.ledger.call(slot,'step',index,step);refs['steps'].append(stepped)
++                state=PublicState.from_dict(self.ledger.data(stepped)['after']);history.append((before.observation,parsed['command']))
++                if len(refs['steps'])==5:
++                    usable=not state.ended and bool(state.valid_actions)
++                    anchor=self.journal.append('anchor_sealed',{'slot_key':slot.key,'after_step_event':stepped,'state':state.to_dict(),
++                        'history':[list(x) for x in history[-4:]],'projection':projection(state,history) if usable else None,'usable':usable})
++            if state.ended:reason='terminal' if state.done else 'truncated'
++            if anchor is None:
++                anchor=self.journal.append('anchor_sealed',{'slot_key':slot.key,'after_step_event':None,'state':None,
++                    'history':None,'projection':None,'usable':False})
++            row={'slot':asdict(slot),'slot_key':slot.key,'source':refs,'anchor_event':anchor,'end_state':state.to_dict(),
++                 'termination':reason,'Y0':int(state.done and state.reward>0),'YT':None,'teacher_status':'TEACHER_NOT_AUTHORIZED_SOURCE_ONLY','disposition':'NORMAL_SOURCE'}
++            self._write(row,True);normal=True
++            return row
++        finally:
++            if env is not None:
++                self.ledger.call(slot,'env_close',0,lambda:(env.close() or {'closed':True}))
++    def run(self):
++        insist(not self.ran,'source run cannot retry');self.ran=True;producer=None;stop=None;self.partial={}
++        try:
++            box={}
++            def load():
++                box['producer']=self.loader(self.ledger)
++                insist(box['producer'].evidence_class==self.plan.evidence_class,'producer mode mismatch')
++                return {'mode':'P0','adapter_sha256':P0_SHA256,'evidence_class':self.plan.evidence_class}
++            self.ledger.call(None,'model_load',0,load);producer=box['producer']
++            for slot in self.plan.slots:self._collect(slot,producer)
++            self.ledger.check_time();insist(all(u['finished'] for u in self.ledger.units.values()),'unclosed source units')
++            self.journal.append('sources_sealed',{'source_hashes':[digest(r) for r in self.rows],'plan_sha256':self.plan.sha256})
++        except BaseException as error:
++            self.ledger.stopped=True
++            stop={'kind':'BUDGET_STOP' if isinstance(error,BudgetStop) else 'INTEGRITY_STOP' if isinstance(error,ContractError) else 'TECHNICAL_STOP',
++                  'exception':type(error).__name__,'message':str(error)}
++            self.journal.append('run_stopped',stop)
++            done={r['slot_key'] for r in self.rows}
++            for slot in self.plan.slots:
++                if slot.key not in done:
++                    self._write({'slot':asdict(slot),'slot_key':slot.key,'Y0':None,'YT':None,
++                        'teacher_status':'TEACHER_NOT_AUTHORIZED_SOURCE_ONLY','disposition':'NOT_NORMAL_SOURCE'},False)
++        finally:
++            self.trajectory.close();self.journal.append('run_closed',{'source_count':sum(r['disposition']=='NORMAL_SOURCE' for r in self.rows),'stop':stop})
++            self.journal.close()
++        return producer,stop
+diff --git a/src/self_improvement/si_s01/contract.py b/src/self_improvement/si_s01/contract.py
+new file mode 100644
+index 0000000..37816b0
+--- /dev/null
++++ b/src/self_improvement/si_s01/contract.py
+@@ -0,0 +1,91 @@
++"""Frozen source-only protocol, metadata-only plan and strict typed boundaries."""
++from __future__ import annotations
++from dataclasses import asdict, dataclass
++import hashlib
++import json
++from typing import Any, Mapping
++from self_improvement.si_p3.contract import (PublicState, Prepared, Generation, ContractError,
++    require, canonical, digest, rank, FAMILIES, SOURCE_QUOTAS, Q_MIN, ADOPTION_QUOTAS,
++    P0_SHA256, SNAPSHOT, projection)
++from self_improvement.si_p3.runtime_backend import PreparedTensors
++from recovery.corpus import task_family_from_id
++
++VERSION = "si_s01_source_only_v2"
++PROTOCOL_SHA256 = "daa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72"
++TASK_SHA256 = "5fd913a8d980f8e3eba551e3d377221c691033c090bb5a3a9af3b3ce7845263c"
++METADATA_SHA256 = "6ce8a32a2345b59ecdef9c28c3a341e9c0801b8105f79895f9b2cb9545a4937e"
++LIMITS = {"generations":4800, "environment_operations":4896, "generated_tokens":76800,
++          "input_tokens":16000000, "per_call_input":8192, "device_hours":4.0}
++MODES = ("synthetic_software_fixture", "live_source_only")
++KINDS = {"model_load", "env_construct", "reset", "generation", "step", "env_close"}
++
++class IntegrityError(ContractError): pass
++class BudgetStop(ContractError): pass
++
++def insist(condition: bool, message: str) -> None:
++    if not condition: raise IntegrityError(message)
++
++def source_only(phase: str, mode: str = "P0") -> None:
++    insist(phase == "source" and mode == "P0", "source-only: teacher/replay/suffix/train/eval/BASE forbidden")
++
++def limits(value: Mapping[str, Any]) -> dict[str, Any]:
++    insist(set(value)==set(LIMITS), "exact source-only limits")
++    for key, upper in LIMITS.items():
++        v=value[key]
++        insist(type(v) in ((int,float) if key=='device_hours' else (int,)) and 0<v<=upper, "limits may only tighten: "+key)
++    return dict(value)
++
++@dataclass(frozen=True)
++class Slot:
++    task_id: str
++    family: str
++    seed: int = 42
++    pool_seed: int = 42
++    cutoff: int = 5
++    def __post_init__(self):
++        insist(self.family in FAMILIES and task_family_from_id(self.task_id)==self.family, "canonical family")
++        insist(len(self.task_id.split('/'))==2 and all(self.task_id.split('/')) and '..' not in self.task_id.split('/'), "canonical task/trial")
++        insist(type(self.seed) is int and self.seed==42 and type(self.pool_seed) is int and self.pool_seed==42 and type(self.cutoff) is int and self.cutoff==5, "fixed42/42/d5")
++    @property
++    def key(self): return digest([VERSION,asdict(self)])
++
++@dataclass(frozen=True)
++class Plan:
++    slots: tuple[Slot,...]
++    metadata_sha256: str
++    evidence_class: str
++    def __post_init__(self):
++        insist(self.evidence_class in MODES, "explicit evidence class")
++        insist(len(self.slots)==96 and len({s.task_id for s in self.slots})==96, "all96 unique slots")
++        ordered=[]
++        for f in FAMILIES:
++            rows=[s for s in self.slots if s.family==f]
++            insist(len(rows)==SOURCE_QUOTAS[f], "source family quota")
++            ordered.extend(sorted(rows,key=lambda s:(rank('SI-P3-prefix-v1',f,s.task_id),s.task_id)))
++        insist(tuple(ordered)==self.slots, "frozen family/hash order")
++        insist(self.evidence_class!='live_source_only' or self.metadata_sha256==METADATA_SHA256, "live original reservation bytes")
++    def to_dict(self): return {"schema":VERSION,"protocol_sha256":PROTOCOL_SHA256,"metadata_sha256":self.metadata_sha256,
++                               "evidence_class":self.evidence_class,"slots":[asdict(s) for s in self.slots]}
++    @property
++    def sha256(self): return digest(self.to_dict())
++
++def bind_plan(metadata: bytes, *, evidence_class: str, synthetic_sha256: str|None=None) -> Plan:
++    insist(type(metadata) is bytes and evidence_class in MODES, "metadata bytes/mode")
++    observed=hashlib.sha256(metadata).hexdigest()
++    if evidence_class=='live_source_only':
++        insist(synthetic_sha256 is None and observed==METADATA_SHA256, "exact original A96 metadata; no override")
++    else: insist(type(synthetic_sha256) is str and observed==synthetic_sha256, "explicit synthetic metadata digest")
++    doc=json.loads(metadata)
++    insist(doc['status']=='ADOPTED_DESIGN_METADATA_ONLY_NOT_EXECUTABLE_NOT_AUTHORIZED' and doc['no_schedule_indices_seeds_cutoffs_or_argv_per_identity'] is True, "original metadata schema")
++    rows=doc['rows'];insist(type(rows) is list and len({r['identity'] for r in rows})==len(rows), "unique metadata identities")
++    selected=[r for r in rows if r['partition']=='acquisition_feasibility_96']
++    insist(all(set(r)=={'identity','family','partition','identity_sha256','partition_rank_sha256'} for r in selected), "no outcome/seed/order fields in source metadata")
++    slots=[]
++    for f in FAMILIES:
++        group=sorted((r for r in selected if r['family']==f),key=lambda r:(rank('SI-P3-prefix-v1',f,r['identity']),r['identity']))
++        slots.extend(Slot(r['identity'],f) for r in group)
++    return Plan(tuple(slots),observed,evidence_class)
++
++def restore_plan(doc: Mapping[str,Any]) -> Plan:
++    insist(set(doc)=={'schema','protocol_sha256','metadata_sha256','evidence_class','slots'} and doc['schema']==VERSION and doc['protocol_sha256']==PROTOCOL_SHA256,"plan header")
++    return Plan(tuple(Slot(**s) for s in doc['slots']),doc['metadata_sha256'],doc['evidence_class'])
+diff --git a/src/self_improvement/si_s01/evidence.py b/src/self_improvement/si_s01/evidence.py
+new file mode 100644
+index 0000000..1e76395
+--- /dev/null
++++ b/src/self_improvement/si_s01/evidence.py
+@@ -0,0 +1,113 @@
++"""Per-physical-unit source ledger. Construct/load/close are not reset/step."""
++from __future__ import annotations
++from collections import Counter
++from pathlib import Path
++from typing import Any,Callable,Mapping
++import json,math,os,time
++from .contract import *
++
++EVENTS={'run_opened','unit_started','unit_completed','unit_failed','anchor_sealed','source_closed',
++        'slot_incomplete','sources_sealed','run_stopped','run_closed','runtime_evidence'}
++
++def fresh_json(path: Path, value: Any) -> None:
++    with Path(path).open('x',encoding='utf-8') as f:
++        f.write(canonical(value)+'\n');f.flush();os.fsync(f.fileno())
++
++def atomic_fresh_json(path: Path, value: Any) -> None:
++    """Publish durable complete JSON atomically, preserving exclusive no-overwrite."""
++    import tempfile
++    path = Path(path)
++    descriptor, staging = tempfile.mkstemp(prefix='.' + path.name + '.', suffix='.tmp', dir=path.parent)
++    try:
++        with os.fdopen(descriptor, 'w', encoding='utf-8') as handle:
++            handle.write(canonical(value) + '\n')
++            handle.flush()
++            os.fsync(handle.fileno())
++        # Same-directory hard-link publication is atomic and fails if path exists.
++        os.link(staging, path)
++        directory = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
++        try:
++            os.fsync(directory)
++        finally:
++            os.close(directory)
++    finally:
++        Path(staging).unlink(missing_ok=True)
++
++class Journal:
++    def __init__(self,path:Path,header:Mapping[str,Any],*,clock:Callable[[],float]=time.monotonic):
++        self.path=Path(path);self.handle=self.path.open('x',encoding='utf-8');self.events=[];self.clock=clock
++        self.append('run_opened',header)
++    def append(self,kind:str,payload:Mapping[str,Any])->str:
++        insist(kind in EVENTS,'unknown source event')
++        row={'sequence':len(self.events),'previous':self.events[-1]['event_id'] if self.events else None,
++             'kind':kind,'payload':json.loads(canonical(payload)),'monotonic':self.clock()}
++        row['event_id']=digest(row)
++        self.handle.write(canonical(row)+'\n');self.handle.flush();os.fsync(self.handle.fileno());self.events.append(row)
++        return row['event_id']
++    def close(self):self.handle.close()
++
++def read_events(path:Path)->list[dict[str,Any]]:
++    rows=[json.loads(line) for line in path.read_text().splitlines()]
++    previous=None;last=-float('inf')
++    for i,row in enumerate(rows):
++        insist(set(row)=={'sequence','previous','kind','payload','event_id','monotonic'} and row['kind'] in EVENTS,'event shape/kind')
++        insist(row['sequence']==i and row['previous']==previous and row['event_id']==digest({k:v for k,v in row.items() if k!='event_id'}),'event hash chain')
++        insist(type(row['monotonic']) in (int,float) and math.isfinite(row['monotonic']) and row['monotonic']>=last,'journal monotonic order');last=row['monotonic']
++        previous=row['event_id']
++    insist(bool(rows) and rows[0]['kind']=='run_opened','source header')
++    return rows
++
++class Ledger:
++    def __init__(self,journal:Journal,plan:Plan,run_id:str,*,ceilings:Mapping[str,Any]=LIMITS,
++                 allocated_devices:int=0,started_at:float|None=None,clock:Callable[[],float]=time.monotonic):
++        self.journal,self.plan,self.run_id=journal,plan,run_id;self.ceilings=limits(ceilings)
++        insist(type(allocated_devices) is int and allocated_devices in ((1,) if plan.evidence_class=='live_source_only' else (0,1)),'allocated device count/mode')
++        self.devices=allocated_devices;self.clock=clock;self.started_at=clock() if started_at is None else started_at
++        self.last=self.started_at;self.used=Counter(generations=0,environment_operations=0,generated_tokens=0,input_tokens=0)
++        self.completed=Counter();self.units={};self.stopped=False;self.active=None
++    def check_time(self):
++        now=self.clock();insist(math.isfinite(now) and now>=self.last,'monotonic allocation clock');self.last=now
++        if self.devices*(now-self.started_at)/3600>self.ceilings['device_hours']:
++            self.stopped=True;raise BudgetStop('allocated-device time cap')
++    def call(self,slot:Slot|None,kind:str,index:int,function:Callable[[],Mapping[str,Any]],*,phase:str='source',
++             prepared:Mapping[str,Any]|None=None)->str:
++        source_only(phase);insist(kind in KINDS and type(index) is int and ((kind in ('generation','step') and 0<=index<50) or (kind not in ('generation','step') and index==0)),'source operation kind/index')
++        if kind!='env_close':
++            insist(not self.stopped,'run stopped');self.check_time()
++        insist((slot in self.plan.slots if slot is not None else kind=='model_load'),'foreign task/slot')
++        identity={'slot':slot.key if slot else None,'task_id':slot.task_id if slot else None,'phase':phase,'index':index,'kind':kind}
++        unit=digest([self.run_id,identity]);insist(unit not in self.units,'duplicate physical unit/no retry')
++        generation=kind=='generation'
++        if generation:
++            insist(prepared is not None and set(prepared)=={'prompt','rendered_prompt','input_ids','attention_mask'},'full prepared tensor proof')
++            ids=prepared['input_ids'];insist(type(ids) is list and bool(ids) and all(type(i) is int and i>=0 for i in ids) and prepared['attention_mask']==[1]*len(ids),'prepared IDs/mask')
++        else:insist(prepared is None,'non-generation input debit')
++        debit={'generations':int(generation),'environment_operations':int(kind in ('reset','step')),
++               'generated_tokens':16 if generation else 0,'input_tokens':len(prepared['input_ids']) if generation else 0}
++        if debit['input_tokens']>self.ceilings['per_call_input']:self.stopped=True;raise BudgetStop('per-call input cap')
++        if any(self.used[k]+v>self.ceilings[k] for k,v in debit.items()):self.stopped=True;raise BudgetStop('pre-call cumulative budget cap')
++        started=self.journal.append('unit_started',{'unit':unit,'identity':identity,'reservation':debit,'prepared':prepared})
++        self.units[unit]={'identity':identity,'started_event':started,'reservation':debit,'finished':False}
++        self.used.update(debit);self.active=unit
++        try:
++            data=dict(function())
++            actual=data['raw']['generated_tokens'] if generation else 0
++            insist(type(actual) is int and 0<=actual<=debit['generated_tokens'],'actual output debit')
++            result=self.journal.append('unit_completed',{'unit':unit,'identity':identity,'started_event':started,'data':data})
++            self.units[unit]['finished']=True;self.used['generated_tokens']-=debit['generated_tokens']-actual
++            self.completed.update(debit|{'generated_tokens':actual});self.check_time()
++            return result
++        except BaseException as error:
++            if not self.units[unit]['finished']:
++                self.journal.append('unit_failed',{'unit':unit,'identity':identity,'started_event':started,'data':{'exception':type(error).__name__,'message':str(error),'raw_evidence':getattr(error,'raw_evidence',None),'resource_evidence':getattr(error,'resource_evidence',None)}})
++            self.stopped=True;raise
++        finally:self.active=None
++    def data(self,event:str)->dict[str,Any]:
++        row=next(r for r in self.journal.events if r['event_id']==event)
++        insist(row['kind']=='unit_completed','completed receipt required');return row['payload']['data']
++    def runtime(self,kind:str,data:Mapping[str,Any]):
++        insist(self.active is not None,'runtime evidence without active source unit')
++        if kind=='generation_returned':
++            unit=self.units[self.active];insist(unit['identity']['kind']=='generation' and 'return_event' not in unit,'generation return boundary identity')
++            unit['return_event']=True
++        self.journal.append('runtime_evidence',{'unit':self.active,'kind':kind,'data':dict(data)})
+diff --git a/src/self_improvement/si_s01/gate.py b/src/self_improvement/si_s01/gate.py
+new file mode 100644
+index 0000000..f77d410
+--- /dev/null
++++ b/src/self_improvement/si_s01/gate.py
+@@ -0,0 +1,192 @@
++"""No-default-release gate. Preflight is static, writes nothing, constructs no runtime."""
++from __future__ import annotations
++from dataclasses import dataclass,replace
++from datetime import datetime,timezone
++from pathlib import Path
++from typing import Any,Mapping
++import hashlib,json,os,re,sys
++from .contract import *
++from self_improvement.si_p3.runtime_gate import git_state,file_hash,utc,PACKAGE_NAMES
++
++@dataclass(frozen=True)
++class Permit:
++    authorization:Mapping[str,Any]
++    proposal:Mapping[str,Any]
++    plan:Plan
++    repository:Path
++    authorization_sha256:str
++    proposal_sha256:str
++    artifact_receipt:Any=None
++    clearance:Any=None
++    clearance_sha256:str|None=None
++    context_evidence:Any=None
++    @property
++    def output(self):return Path(self.authorization['output_path'])
++    @property
++    def gpu_uuid(self):return self.authorization['gpu_uuid']
++    @property
++    def ceilings(self):return self.authorization['ceilings']
++    @property
++    def claim_path(self):return self.output.parent/(self.output.name+'.launch_claim.json')
++
++def bound(path:str|Path,sha:str)->bytes:
++    p=Path(path);insist(p.is_absolute() and p.is_file(),'explicit input file')
++    b=p.read_bytes();insist(hashlib.sha256(b).hexdigest()==sha,'input hash drift: '+str(p));return b
++
++def artifacts(permit:Permit)->dict:
++    """Executed on the production chain before importing a tokenizer/model/environment."""
++    p=permit.proposal;mode=permit.plan.evidence_class
++    for item in [p['interpreter'],*p['packages'].values(),p['environment']['config'],*p['environment']['logic_files'].values()]:
++        bound(item['path'],item['sha256'])
++    insist(Path(sys.executable).resolve()==Path(p['interpreter']['path']).resolve(),'pinned interpreter')
++    games=p['environment']['games'];insist([r['task_id'] for r in games]==[s.task_id for s in permit.plan.slots],'exact A96 game order')
++    for row,slot in zip(games,permit.plan.slots):
++        insist(set(row)=={'task_id','game','game_sha256','traj_data','traj_data_sha256'},'game manifest fields')
++        game=Path(row['game']);traj=Path(row['traj_data'])
++        insist(game.name=='game.tw-pddl' and traj.name=='traj_data.json' and game.parent==traj.parent and '/'.join(game.parent.parts[-2:])==slot.task_id,'exact game/task/trial')
++        bound(game,row['game_sha256']);bound(traj,row['traj_data_sha256'])
++    model=p['model']
++    if mode=='live_source_only':
++        frozen=json.loads((permit.repository/'configs/experiments/r19_model_identity_manifest.json').read_bytes())['currently_observed_candidate_not_historical_proof']
++        insist(frozen['huggingface_snapshot_revision']==SNAPSHOT and Path(model['base_snapshot']).name==SNAPSHOT,'frozen snapshot')
++        for row in frozen['snapshot_files']:
++            name=row['name'];insist(Path(name).name==name,'model leaf name')
++            path=Path(model['base_snapshot'])/name
++            insist(path.stat().st_size==row['bytes'],'model file size')
++            bound(path,row.get('content_sha256',row.get('sha256')))
++        from sft.training import directory_sha256
++        insist(directory_sha256(Path(model['adapter_path']))==P0_SHA256,'original P0 bytes')
++        from self_improvement.si_p3.runtime_gate import verify_logic
++        env=p['environment']
++        verify_logic({'config':env['config']['path'],'data_root':env['data_root'],'logic_files':env['logic_files']})
++    else:
++        # No live bypass: this alternative is admitted only for an explicit software permit.
++        for item in model['synthetic_files']:bound(item['path'],item['sha256'])
++    return {'status':'STATIC_INPUT_BYTES_BOUND_NOT_RUNTIME_READY','plan_sha256':permit.plan.sha256,
++            'model_objects':0,'generations':0,'CUDA_initializations':0,'environment_constructs':0,'resets':0,'steps':0,'units':0,'fresh_sources':0}
++
++def authenticate(repository:Path,authorization_path:Path,authorization_sha256:str,proposal_path:Path,*,
++                 invocation:list[str],mode:str,worker:bool=False,clearance_path:Path|None=None,clearance_sha256:str|None=None,launch_context_sha256:str|None=None)->Permit:
++    insist(mode in ('preflight','live','worker'),'explicit entry mode')
++    a=json.loads(bound(authorization_path,authorization_sha256));proposal_bytes=bound(proposal_path,a['proposal_sha256']);p=json.loads(proposal_bytes)
++    fields={'schema','purpose','protocol_sha256','task_sha256','source_sha','review','proposal_sha256','authorization_id','run_id',
++            'evidence_class','status','preflight_receipt_path','execution_uid','output_path','gpu_uuid','ceilings','not_before_utc','expires_utc','environment','launch_argv','preflight_argv','maximum_launches','forbidden_non_source'}
++    insist(set(a)==fields and a['schema']=='SI_S01_AUTHORIZATION_V1' and a['purpose']=='SOURCE_ONLY_A96' and a['protocol_sha256']==PROTOCOL_SHA256 and a['task_sha256']==TASK_SHA256,'new source-only scope; old authorization forbidden')
++    insist(a['status']=='PREFLIGHT_ONLY' and type(a['maximum_launches']) is int and a['maximum_launches']==1 and a['forbidden_non_source'] is True,'preflight-only permit; no live capability')
++    insist(a['evidence_class'] in MODES and re.fullmatch('[0-9a-f]{32}',a['authorization_id']) and re.fullmatch('[0-9a-f]{32}',a['run_id']),'authorization/run identity')
++    sha,clean=git_state(repository);insist(clean and sha==a['source_sha'],'clean exact source SHA')
++    limits(a['ceilings']);now=datetime.now(timezone.utc);insist(utc(a['not_before_utc'])<=now<utc(a['expires_utc']),'authorization UTC window')
++    review=json.loads(bound(a['review']['path'],a['review']['sha256']))
++    insist(review=={'schema':'SI_S01_INDEPENDENT_REVIEW_V1','source_sha':sha,'protocol_sha256':PROTOCOL_SHA256,'decision':'PASS_SOURCE_ONLY_SOFTWARE','reviewer_role':'INDEPENDENT_ROOT'},'independent exact-SHA review')
++    insist(set(p)=={'schema','metadata','interpreter','packages','model','environment'} and p['schema']=='SI_S01_PROPOSAL_V1','source proposal fields')
++    insist(set(p['packages'])==set(PACKAGE_NAMES),'bound runtime module set')
++    for binding in p['packages'].values():insist(set(binding)=={'path','sha256','version'},'module path/hash/version')
++    insist(set(p['metadata'])=={'path','sha256'} and set(p['interpreter'])=={'path','sha256'},'input binding fields')
++    metadata=bound(p['metadata']['path'],p['metadata']['sha256'])
++    plan=bind_plan(metadata,evidence_class=a['evidence_class'],synthetic_sha256=p['metadata']['sha256'] if a['evidence_class']=='synthetic_software_fixture' else None)
++    insist(set(p['environment'])=={'config','data_root','logic_files','games'} and set(p['environment']['logic_files'])=={'domain','grammar'},'source environment fields')
++    insist(set(p['model'])==({'base_snapshot','adapter_path'} if a['evidence_class']=='live_source_only' else {'base_snapshot','adapter_path','synthetic_files'}),'model fields/mode')
++    insist(dict(os.environ)==a['environment'],'exact noninherited environment')
++    insist(not any(k in os.environ for k in ('PYTHONPATH','PYTHONHOME','LD_PRELOAD')) and os.environ.get('PYTHONDONTWRITEBYTECODE')=='1' and os.environ.get('HF_HUB_OFFLINE')=='1' and os.environ.get('TRANSFORMERS_OFFLINE')=='1','clean offline interpreter environment')
++    insist(re.fullmatch(r'GPU-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}',a['gpu_uuid']) is not None,'full GPU UUID')
++    insist(os.environ.get('CUDA_VISIBLE_DEVICES')==(a['gpu_uuid'] if a['evidence_class']=='live_source_only' else ''),'device visibility/mode')
++    for key in ('preflight_argv','launch_argv'):
++        insist(type(a[key]) is list and a[key].count('@AUTHORIZATION_SHA256@')==1 and a[key][a[key].index('--authorization-sha256')+1]=='@AUTHORIZATION_SHA256@','single authorization hash argv slot')
++    render=lambda seq:[authorization_sha256 if v=='@AUTHORIZATION_SHA256@' else v for v in seq]
++    expected=render(a['preflight_argv'] if mode=='preflight' else a['launch_argv'])
++    insist(len(a['launch_argv'])>=4 and a['launch_argv'][1]=='-I' and Path(a['launch_argv'][2]).resolve()==repository/'scripts/run_si_s01_source_only.py' and '--live' in a['launch_argv'] and '--preflight-only' in a['preflight_argv'],'isolated pinned entrypoint/flags')
++    if mode=='preflight':insist(invocation==expected and clearance_path is None and clearance_sha256 is None,'exact reviewed preflight argv/no live capability')
++    else:
++        insist(a['evidence_class']=='live_source_only','synthetic cannot launch as real science')
++    output=Path(a['output_path']);insist(output.is_absolute() and str(output)==str(output.resolve()) and not output.is_symlink(),'canonical output')
++    permit=Permit(a,p,plan,repository,authorization_sha256,hashlib.sha256(proposal_bytes).hexdigest())
++    insist(type(a['execution_uid']) is int and a['execution_uid']==os.getuid(),'authorized execution UID')
++    receipt_path=Path(a['preflight_receipt_path'])
++    insist(receipt_path.is_absolute() and str(receipt_path)==str(receipt_path.resolve()) and receipt_path!=output and not receipt_path.is_relative_to(output),'separate preflight receipt path')
++    if mode=='preflight':
++        insist(not output.exists() and not permit.claim_path.exists() and not permit.claim_path.is_symlink() and not receipt_path.exists(),'consumed authorization/output/preflight receipt; no overwrite')
++    else:
++        insist(clearance_path is not None and clearance_sha256 is not None,'fresh independent launch clearance required')
++        c=check_clearance(permit,clearance_path,clearance_sha256)
++        live_argv=render_clearance_argv(c,clearance_sha256)
++        if worker:
++            insist(invocation[-2:]==['--launch-context-sha256',launch_context_sha256] and invocation[:-2]==['--worker' if x=='--live' else x for x in live_argv],'exact supervised worker argv')
++            marker_path=output/'launch_context.json'
++            marker=json.loads(bound(marker_path,launch_context_sha256))
++            parent=[x.decode() for x in Path('/proc/'+str(os.getppid())+'/cmdline').read_bytes().split(b'\0') if x]
++            insist(parent==live_argv and marker['supervisor_pid']==os.getppid() and os.getsid(0)==os.getpid(),'authenticated supervisor worker')
++            import time,ctypes,signal
++            started=output/'worker_start.json'
++            until=time.monotonic()+2
++            while not started.exists() and time.monotonic()<until:time.sleep(.01)
++            worker_bytes=started.read_bytes();w=json.loads(worker_bytes)
++            insist(w['pid']==os.getpid() and w['uid']==os.getuid() and w['argv']==invocation and w['start_tick']==int(Path('/proc/self/stat').read_text().rsplit(')',1)[1].split()[19]) and w['launch_context_sha256']==launch_context_sha256,'actual worker PID/UID')
++            insist(ctypes.CDLL(None,use_errno=True).prctl(1,signal.SIGKILL,0,0,0)==0,'parent-death signal')
++            context={'launch_path':str(marker_path),'launch_sha256':launch_context_sha256,'worker_path':str(started),'worker_sha256':hashlib.sha256(worker_bytes).hexdigest()}
++            permit=replace(permit,context_evidence=context)
++        else:
++            insist(invocation==live_argv and not output.exists() and not permit.claim_path.exists() and not permit.claim_path.is_symlink(),'exact cleared argv/fresh one-shot output')
++        permit=replace(permit,clearance=c,clearance_sha256=clearance_sha256)
++    if worker:verified_context(permit,permit.context_evidence)
++    return replace(permit,artifact_receipt=artifacts(permit))
++
++
++ZERO={'model_objects':0,'generations':0,'CUDA_initializations':0,'environment_constructs':0,'resets':0,'steps':0,'units':0,'fresh_sources':0}
++
++def source_binding(permit:Permit)->dict:
++    a=permit.authorization
++    return {'authorization_sha256':permit.authorization_sha256,'source_sha':a['source_sha'],'protocol_sha256':PROTOCOL_SHA256,
++            'proposal_sha256':permit.proposal_sha256,'plan_sha256':permit.plan.sha256,'environment_sha256':digest(a['environment']),
++            'ceilings':dict(a['ceilings']),'run_id':a['run_id'],'execution_uid':a['execution_uid'],'output_path':a['output_path'],
++            'evidence_class':permit.plan.evidence_class}
++
++def complete_preflight(permit:Permit)->dict:
++    """Only called by --preflight-only after static authentication; never source output."""
++    from .evidence import fresh_json
++    import uuid
++    a=permit.authorization
++    argv=[permit.authorization_sha256 if x=='@AUTHORIZATION_SHA256@' else x for x in a['preflight_argv']]
++    value={'schema':'SI_S01_PREFLIGHT_RECEIPT_V1','status':'STATIC_PREFLIGHT_0SCIENCE_PASS','binding':source_binding(permit),
++           'counters':ZERO,'argv_sha256':digest(argv),'receipt_id':uuid.uuid4().hex,
++           'finished_utc':datetime.now(timezone.utc).isoformat().replace('+00:00','Z')}
++    fresh_json(Path(a['preflight_receipt_path']),value)
++    return value
++
++def render_clearance_argv(clearance:Mapping[str,Any],sha:str)->list[str]:
++    argv=clearance['live_argv']
++    insist(type(argv) is list and argv.count('@CLEARANCE_SHA256@')==1 and argv[argv.index('--clearance-sha256')+1]=='@CLEARANCE_SHA256@','one clearance hash argv slot')
++    return [sha if x=='@CLEARANCE_SHA256@' else x for x in argv]
++
++def check_clearance(permit:Permit,path:Path,sha:str)->dict:
++    c=json.loads(bound(path,sha));a=permit.authorization
++    insist(set(c)=={'schema','status','issuer','binding','preflight','preflight_execution','live_argv','clearance_id','maximum_launches','not_before_utc','expires_utc'},'launch clearance fields')
++    insist(c['schema']=='SI_S01_LAUNCH_CLEARANCE_V1' and c['status']=='CLEARED_ONE_SOURCE_ONLY_LAUNCH' and c['issuer']=='INDEPENDENT_ROOT' and type(c['maximum_launches']) is int and c['maximum_launches']==1 and re.fullmatch('[0-9a-f]{32}',c['clearance_id']),'fresh independent source-only clearance')
++    insist(c['binding']==source_binding(permit),'clearance source/proposal/plan/env/caps/run/output binding')
++    now=datetime.now(timezone.utc);insist(utc(c['not_before_utc'])<=now<utc(c['expires_utc'])<=utc(a['expires_utc']),'clearance UTC window')
++    insist(c['preflight']['path']==a['preflight_receipt_path'],'the actual prescribed preflight receipt')
++    pre=json.loads(bound(c['preflight']['path'],c['preflight']['sha256']))
++    expected_argv=[permit.authorization_sha256 if x=='@AUTHORIZATION_SHA256@' else x for x in a['preflight_argv']]
++    insist(set(pre)=={'schema','status','binding','counters','argv_sha256','receipt_id','finished_utc'} and pre['schema']=='SI_S01_PREFLIGHT_RECEIPT_V1' and pre['status']=='STATIC_PREFLIGHT_0SCIENCE_PASS' and pre['binding']==source_binding(permit) and pre['counters']==ZERO and all(type(v) is int and v==0 for v in pre['counters'].values()) and pre['argv_sha256']==digest(expected_argv),'positive zero-science preflight exact context')
++    insist(utc(a['not_before_utc'])<=utc(pre['finished_utc'])<=utc(c['not_before_utc']),'preflight must precede independent clearance')
++    execution=json.loads(bound(c['preflight_execution']['path'],c['preflight_execution']['sha256']))
++    insist(execution['schema']=='SI_S01_PREFLIGHT_EXECUTION_V1' and type(execution['authentic_returncode']) is int and execution['authentic_returncode']==0 and execution['argv']==expected_argv and execution['binding']==source_binding(permit) and execution['preflight_receipt_sha256']==c['preflight']['sha256'],'authentic successful preflight execution receipt')
++    actual=render_clearance_argv(c,sha)
++    insist(actual[actual.index('--clearance')+1]==str(path.resolve()),'exact clearance file path argv')
++    stripped=[];i=0
++    while i<len(actual):
++        if actual[i] in ('--clearance','--clearance-sha256'):i+=2
++        else:stripped.append(actual[i]);i+=1
++    base=[permit.authorization_sha256 if x=='@AUTHORIZATION_SHA256@' else x for x in a['launch_argv']]
++    insist(stripped==base,'unique live argv bound to preflight permit')
++    return c
++
++
++def verified_context(permit:Permit,context:Mapping[str,Any])->tuple[dict,dict]:
++    """The hashes are supplied by the supervising process/independent execution receipt."""
++    launch=json.loads(bound(context['launch_path'],context['launch_sha256']))
++    worker=json.loads(bound(context['worker_path'],context['worker_sha256']))
++    a=permit.authorization
++    insist(launch['source_binding']==source_binding(permit) and launch['clearance_sha256']==permit.clearance_sha256 and launch['allocated_devices']==1,'supervisor source/clearance/device binding')
++    insist(worker['authorization_sha256']==permit.authorization_sha256 and worker['launch_context_sha256']==context['launch_sha256'] and worker['uid']==a['execution_uid'] and worker['pid']>0,'worker external PID/UID binding')
++    insist(type(launch['allocation_started_monotonic']) in (int,float) and launch['allocation_started_monotonic']<=worker['started_monotonic'],'supervisor allocation start')
++    return launch,worker
+diff --git a/src/self_improvement/si_s01/runtime.py b/src/self_improvement/si_s01/runtime.py
+new file mode 100644
+index 0000000..0784832
+--- /dev/null
++++ b/src/self_improvement/si_s01/runtime.py
+@@ -0,0 +1,142 @@
++"""Actual source-only P0/TextWorld wiring. Imported only after a live worker gate."""
++from __future__ import annotations
++from pathlib import Path
++from typing import Any
++import json,os,time
++from .contract import *
++from .collector import Producer
++from .gate import Permit,artifacts
++from .evidence import Ledger
++from self_improvement.si_p3.runtime_backend import (adapter_state,verify_adapter_state,module_origin,verify_cuda_uuid)
++from self_improvement.si_p3.runtime_gate import inspect_gpu
++
++class RuntimeSink:
++    def __init__(self,ledger:Ledger):self.ledger=ledger
++    def append(self,kind,data):self.ledger.runtime(kind,data)
++
++class LiveProducer(Producer):
++    @classmethod
++    def load(cls,permit:Permit,ledger:Ledger):
++        insist(permit.plan.evidence_class=='live_source_only','no synthetic live loader')
++        ledger.runtime('artifact_recheck',artifacts(permit))
++        import torch,transformers,peft
++        from models.qwen import QwenPolicy,QwenPolicyConfig
++        from models.policy import GenerationOptions
++        for name,module in [('torch',torch),('transformers',transformers),('peft',peft)]:
++            insist(module_origin(module)==permit.proposal['packages'][name],'actual module origin/version: '+name)
++        insist(torch.cuda.is_available() and torch.cuda.device_count()==1,'one visible CUDA device')
++        torch.cuda.init()
++        verify_cuda_uuid(torch,RuntimeSink(ledger),permit.gpu_uuid,point='source_before_context_probe')
++        probe=torch.empty(1,dtype=torch.uint8,device='cuda:0')
++        ledger.runtime('one_byte_before_weights',inspect_gpu(permit.gpu_uuid,allowed_pids={os.getpid()},require_owned_context=True));del probe
++        configured=QwenPolicy(QwenPolicyConfig(model_id=permit.proposal['model']['base_snapshot'],device='cuda:0',dtype='bfloat16',local_files_only=True,trust_remote_code=False,enable_thinking=False,generation=GenerationOptions(max_new_tokens=16,do_sample=False)))
++        tokenizer,base,_=configured._load()
++        model=peft.PeftModel.from_pretrained(base,permit.proposal['model']['adapter_path'],is_trainable=False,local_files_only=True)
++        for parameter in model.parameters():parameter.requires_grad_(False)
++        insist(str(model.device)=='cuda:0' and all(str(p.device)=='cuda:0' for p in model.parameters()),'one CUDA device no offload')
++        insist(not getattr(model,'is_loaded_in_4bit',False) and not getattr(model,'is_loaded_in_8bit',False),'no quantization')
++        for name,p in model.named_parameters():
++            if p.is_floating_point():insist(p.dtype in ((torch.bfloat16,torch.float32) if 'lora_' in name else (torch.bfloat16,)),'frozen base/PEFT dtypes')
++        insist(model.config.model_type=='qwen3' and getattr(model.config,'_attn_implementation','')=='sdpa' and Path(model.config._name_or_path).resolve()==Path(permit.proposal['model']['base_snapshot']).resolve(),'effective frozen Qwen3/SDPA config')
++        insist(all(v in (0,'cuda:0') for v in getattr(model,'hf_device_map',{}).values()),'no offload map')
++        model.eval();verify_adapter_state(adapter_state(model),enabled=True)
++        verify_cuda_uuid(torch,RuntimeSink(ledger),permit.gpu_uuid,point='source_after_load')
++        result=cls(tokenizer,lambda *_:None,evidence_class='live_source_only')
++        result.torch,result.model,result.permit,result.ledger=torch,model,permit,ledger;result.raw=result._raw
++        ledger.runtime('model_loaded',{'origins':{name:module_origin(m) for name,m in [('torch',torch),('transformers',transformers),('peft',peft)]},'adapter_state':adapter_state(model),'resource':result.resource()})
++        return result
++    def resource(self):return inspect_gpu(self.permit.gpu_uuid,allowed_pids={os.getpid()},require_owned_context=True)
++    def _raw(self,prepared:PreparedTensors,slot:Slot,index:int):
++        source_only('source','P0')
++        active=self.ledger.active;insist(active in self.ledger.units,'source generation without pre-reserved task unit')
++        identity=self.ledger.units[active]['identity']
++        insist(identity=={'slot':slot.key,'task_id':slot.task_id,'phase':'source','index':index,'kind':'generation'},'task/decision source identity')
++        insist(self.prepare(prepared.prepared.prompt)==prepared,'prepared drift before actual generation')
++        self.model.eval();insist(all(not p.requires_grad for p in self.model.parameters()),'frozen inference')
++        before=adapter_state(self.model);verify_adapter_state(before,enabled=True)
++        encoded=self.tokenizer(text=prepared.prepared.rendered_prompt,add_special_tokens=True,return_tensors='pt')
++        insist(set(encoded)=={'input_ids','attention_mask'},'actual tensor keys')
++        inputs={k:v.to(self.model.device) for k,v in encoded.items()}
++        insist(all(v.ndim==2 and v.shape[0]==1 for v in inputs.values()),'single full row')
++        sent=prepared.prepared.to_dict()|{'input_ids':inputs['input_ids'][0].tolist(),'attention_mask':inputs['attention_mask'][0].tolist()}
++        insist(sent==prepared.to_dict(),'actual input IDs/mask')
++        during=adapter_state(self.model);verify_adapter_state(during,enabled=True)
++        self.ledger.runtime('resource_before_generation',self.resource())
++        generated=None;returned=None
++        try:
++            self.torch.cuda.synchronize();at=time.perf_counter()
++            with self.torch.no_grad():
++                generated=self.model.generate(**inputs,max_new_tokens=16,do_sample=False,return_dict_in_generate=True,output_scores=True)
++            self.torch.cuda.synchronize();elapsed=time.perf_counter()-at
++            seq=generated.sequences[0].tolist();tokens=seq[len(sent['input_ids']):];reached=len(tokens)==16
++            raw={'prompt':prepared.prepared.prompt,'rendered_prompt':prepared.prepared.rendered_prompt,
++                 'rendered_prompt_sha256':hash_text(prepared.prepared.rendered_prompt),'raw_output':self.decode(tokens),
++                 'token_ids':tokens,'token_ids_sha256':hash_text(json.dumps(tokens,separators=(',',':'))),
++                 'input_tokens':len(sent['input_ids']),'generated_tokens':len(tokens),'latency_seconds':elapsed,
++                 'output_complete':not reached or bool(tokens and tokens[-1] in self.eos_ids),'token_cap_reached':reached,
++                 'max_new_tokens':16,'do_sample':False,'thinking':False,'adapter_mode':'P0','adapter_sha256':P0_SHA256}
++            returned={'generation_returned':True,'prepared':prepared.to_dict(),'raw':raw,'observed_sequence':seq}
++            self.ledger.runtime('generation_returned',returned)
++            insist(seq[:len(sent['input_ids'])]==sent['input_ids'] and len(generated.scores or ())==len(tokens),'generated prefix/scores')
++            after=adapter_state(self.model);verify_adapter_state(after,enabled=True)
++            insist(before==after and all(not p.requires_grad for p in self.model.parameters()),'P0 remains enabled/default/unmerged/frozen')
++            insist(inputs['input_ids'][0].tolist()==sent['input_ids'] and inputs['attention_mask'][0].tolist()==sent['attention_mask'],'generate mutated input')
++            proof={'tensor_proof':{'prepared':prepared.to_dict(),'sent':sent},'adapter_states':{'before':before,'during':during,'after':after},'resource_after':self.resource()}
++            return {'raw':raw,'runtime':proof}
++        except BaseException as error:
++            if generated is not None:
++                if returned is None:
++                    returned={'generation_returned':True,'prepared':prepared.to_dict(),'raw':None,'observation_error':{'exception':type(error).__name__,'message':str(error)}}
++                    try:returned['observed_sequence']=generated.sequences[0].tolist()
++                    except Exception as capture_error:returned['capture_error']=str(capture_error)
++                if not self.ledger.units[active].get('return_event'):self.ledger.runtime('generation_returned',returned)
++                error.raw_evidence=returned
++            raise
++
++def hash_text(text):
++    from self_improvement.si_p3.contract import text_hash
++    return text_hash(text)
++
++class LiveEnvironment:
++    evidence_class='live_source_only'
++    def __init__(self,permit:Permit,slot:Slot):
++        insist(slot in permit.plan.slots,'unplanned real task')
++        self.permit,self.slot,self.started,self.env=permit,slot,False,None
++    def initialize(self):
++        import importlib
++        origins={}
++        for name in ('alfworld','alfworld.agents.environment.alfred_tw_env','textworld','textworld.gym','yaml'):
++            module=importlib.import_module(name);origins[name]=module_origin(module)
++            insist(origins[name]==self.permit.proposal['packages'][name],'actual environment module origin/version: '+name)
++        from env.alfworld import AlfWorldConfig
++        from self_improvement.si_p3.runtime_environment import ReadIsolatedEnvironment
++        from .gate import bound
++        row=next(r for r in self.permit.proposal['environment']['games'] if r['task_id']==self.slot.task_id)
++        bound(row['game'],row['game_sha256']);bound(row['traj_data'],row['traj_data_sha256'])
++        env=self.permit.proposal['environment']
++        self.env=ReadIsolatedEnvironment(AlfWorldConfig(Path(env['config']['path']),split='train',data_path=Path(env['data_root'])),game=Path(row['game']),pool_seed=42)
++        return dict(self.env.initialize())|{'package_origins':origins}
++    def reset(self,*,seed):
++        insist(seed==42 and not self.started and self.env is not None,'one initial source reset42')
++        self.started=True;value=self.env.reset(seed=42)
++        insist(value.valid_actions is not None and value.task.task_id==self.slot.task_id and value.task.split=='train' and value.task.family in (None,self.slot.family),'exact task/reset/map')
++        self.goal=value.task.text
++        return PublicState(self.slot.task_id,self.slot.family,self.goal,value.observation,tuple(value.valid_actions))
++    def step(self,command):
++        insist(self.started,'step before reset');value=self.env.step(command)
++        insist(value.valid_actions is not None,'missing full transition map')
++        return PublicState(self.slot.task_id,self.slot.family,self.goal,value.observation,tuple(value.valid_actions),value.done,value.reward,value.truncated)
++    def close(self):
++        if self.env is not None:self.env.close()
++        return {'closed':True}
++
++def run_worker(permit:Permit):
++    from .collector import Collector
++    from .audit import audit,write_report
++    context=json.loads((permit.output/'launch_context.json').read_bytes())
++    collector=Collector(permit.plan,lambda ledger:LiveProducer.load(permit,ledger),lambda slot:LiveEnvironment(permit,slot),permit.output,
++        run_id=permit.authorization['run_id'],ceilings=permit.ceilings,devices=1,started_at=context['allocation_started_monotonic'],live_permit=permit)
++    producer,stop=collector.run()
++    report=audit(permit.output/'source_events.jsonl',permit.output/'source_trajectories.jsonl',permit.plan,producer,authority=permit)
++    write_report(permit.output,report)
++    return 0 if report['source_phase_sealed'] else 1
+diff --git a/src/self_improvement/si_s01/supervisor.py b/src/self_improvement/si_s01/supervisor.py
+new file mode 100644
+index 0000000..362d4c2
+--- /dev/null
++++ b/src/self_improvement/si_s01/supervisor.py
+@@ -0,0 +1,98 @@
++"""Independent up-to-four-hour source supervisor; old SI-E2 1800s gate is frozen."""
++from __future__ import annotations
++import ctypes,os,signal,subprocess,time
++from pathlib import Path
++from typing import Mapping,Any,Sequence
++from self_improvement.si_p3.runtime_supervisor import group_members,process_table,descendants,kill_identities
++from .contract import require
++from .evidence import fresh_json,atomic_fresh_json
++
++def supervise_source(command: Sequence[str], output: Path, *, context: Mapping[str, Any],
++              seconds: float, environment: Mapping[str, str]) -> dict[str, Any]:
++    require(seconds > 0 and seconds <= 14400 and not output.exists() and not output.is_symlink(), "fresh bounded supervisor output")
++    claim=output.parent/(output.name+'.launch_claim.json')
++    fresh_json(claim,{'authorization_sha256':context['authorization_sha256'],'source_sha':context['source_sha'],'maximum_launches':1,'retry_authorized':False})
++    output.mkdir(parents=False, exist_ok=False)
++    start = context.get('allocation_started_monotonic',time.monotonic())
++    require(start<=time.monotonic()<start+seconds,'allocation deadline before spawn')
++    baseline_children = {pid for pid,value in process_table().items() if value[0] == os.getpid()}
++    # Reap orphaned same-group grandchildren on Linux after their parent is killed.
++    libc = ctypes.CDLL(None, use_errno=True)
++    old_subreaper = ctypes.c_int()
++    require(libc.prctl(37, ctypes.byref(old_subreaper), 0, 0, 0) == 0, "cannot read subreaper state")
++    require(libc.prctl(36, 1, 0, 0, 0) == 0, "Linux child subreaper unavailable")
++    evidence_class = context["evidence_class"]
++    require(evidence_class in ("live_source_only", "synthetic_software_fixture"), "supervisor evidence class")
++    devices = int(evidence_class == "live_source_only")
++    launch = dict(context) | {"supervisor_pid": os.getpid(), "argv": list(command),
++                              "allocated_devices": devices, "deadline_seconds": seconds, "allocation_started_monotonic": start}
++    command_template=list(command)+['--launch-context-sha256','@LAUNCH_CONTEXT_SHA256@'] if evidence_class=='live_source_only' else list(command)
++    launch['argv']=command_template
++    fresh_json(output / "launch_context.json", launch)
++    import hashlib
++    launch_sha=hashlib.sha256((output/'launch_context.json').read_bytes()).hexdigest()
++    command=[launch_sha if x=='@LAUNCH_CONTEXT_SHA256@' else x for x in command_template]
++    known_descendants: dict[int, tuple[int, int, int]] = {}
++    process = None; timed_out = False; failure = None; members = []; code = None
++    reaping_error = None; worker_identity = None; deadline = start + seconds
++    # Reserve cleanup time inside the full allocation ceiling.
++    callback_deadline = max(0.001, seconds - min(2.0, seconds / 10))
++    try:
++        with (output / "worker.stdout").open("xb") as stdout, (output / "worker.stderr").open("xb") as stderr:
++            process = subprocess.Popen(list(command), stdout=stdout, stderr=stderr,
++                env=dict(environment), start_new_session=True)
++            worker_identity = process_table().get(process.pid)
++            atomic_fresh_json(output / "worker_start.json", {"pid": process.pid, "pgid": process.pid,
++                "argv": list(command), "authorization_sha256": context["authorization_sha256"], "uid":os.getuid(), "started_monotonic":time.monotonic(), "launch_context_sha256":launch_sha, "start_tick":worker_identity[1] if worker_identity is not None else None})
++            try:
++                code = process.wait(timeout=max(0.0, min(deadline, start + callback_deadline) - time.monotonic()))
++            except subprocess.TimeoutExpired:
++                timed_out = True
++    except BaseException as error:
++        failure = {"exception": type(error).__name__, "message": str(error)}
++    finally:
++        if process is not None:
++            members = group_members(process.pid)
++            known_descendants.update(descendants(process.pid, process_table()))
++            try: os.killpg(process.pid, signal.SIGKILL)
++            except ProcessLookupError: pass
++            kill_identities(known_descendants)
++            if code is None:
++                try:
++                    code = process.wait(timeout=max(0.0, deadline - time.monotonic()))
++                except subprocess.TimeoutExpired:
++                    # SIGKILL does not establish that an uninterruptible process exited.
++                    code = None
++                    reaping_error = {'exception': 'TimeoutExpired', 'message': 'worker exit not established before absolute allocation deadline'}
++            # Bounded cleanup; record any surviving group rather than claiming it disappeared.
++            until = min(deadline, time.monotonic() + 1.0)
++            while time.monotonic() < until:
++                table = process_table()
++                # Newly orphaned sessions are adopted by this dedicated subreaper.
++                known_descendants.update({pid:value for pid,value in table.items()
++                    if value[0] == os.getpid() and pid not in baseline_children and pid != process.pid})
++                kill_identities(known_descendants)
++                for pid in known_descendants:
++                    try: os.waitpid(pid, os.WNOHANG)
++                    except ChildProcessError: pass
++                table = process_table()
++                alive = [pid for pid,value in known_descendants.items() if pid in table and table[pid][1:] == value[1:]]
++                if not group_members(process.pid) and not alive: break
++                time.sleep(0.01)
++        table = process_table()
++        remaining = sorted(set(group_members(process.pid) if process is not None else []) |
++            {pid for pid,value in known_descendants.items() if pid in table and table[pid][1:] == value[1:]})
++        elapsed = time.monotonic() - start
++        receipt = {"schema": "SI_S01_SUPERVISOR_EXIT_V1", "authorization_sha256": context["authorization_sha256"],
++            "source_sha": context["source_sha"], "evidence_class": context["evidence_class"],
++            "authentic_returncode": code, "deadline_triggered": timed_out, "spawn_or_supervisor_error": failure,
++            "reaping_error": reaping_error, "cleanup_established": code is not None and not remaining,
++            "unreaped_worker_identity": {'pid': process.pid, 'start_tick': worker_identity[1] if worker_identity else None, 'uid': worker_identity[2] if worker_identity else None} if process is not None and code is None else None,
++            "execution_status": 'EXIT_RECORDED' if code is not None and not remaining and failure is None else 'SUPERVISOR_INCOMPLETE',
++            "members_before_cleanup": members, "descendants_observed": sorted(known_descendants), "members_after_cleanup": remaining,
++            "elapsed_seconds": elapsed, "allocated_devices": devices, "allocated_device_hours": devices * elapsed / 3600,
++            "within_time_cap": elapsed <= seconds, "child_report_present": (output / "source_report.json").is_file(),
++            "launch_context_sha256":launch_sha, "worker_start_sha256":hashlib.sha256((output/"worker_start.json").read_bytes()).hexdigest() if (output/"worker_start.json").is_file() else None, "retry_authorized": False, "science_authorized": evidence_class == "live_source_only", "scope": "source_only_no_teacher_training_evaluation"}
++        require(libc.prctl(36, old_subreaper.value, 0, 0, 0) == 0, "cannot restore subreaper state")
++        fresh_json(output / "supervisor_exit.json", receipt)
++    return receipt
+diff --git a/tests/si_s01_support.py b/tests/si_s01_support.py
+new file mode 100644
+index 0000000..6d73b6b
+--- /dev/null
++++ b/tests/si_s01_support.py
+@@ -0,0 +1,191 @@
++"""Explicit synthetic identities, tokenizer/raw model and normalized environment only."""
++from pathlib import Path
++from datetime import datetime,timezone,timedelta
++import hashlib,json,os,subprocess,sys
++from self_improvement.si_s01.contract import *
++from self_improvement.si_s01.collector import Producer,Collector
++from self_improvement.si_s01.audit import audit,write_report
++
++class Tokenizer:
++    eos_token_id=1
++    def apply_chat_template(self,messages,**kwargs):return '<user>'+messages[0]['content']+'<assistant>'
++    def __call__(self,text,**kwargs):return {'input_ids':[ord(x) for x in text],'attention_mask':[1]*len(text)}
++    def decode(self,ids,**kwargs):return ''.join(chr(x) for x in ids if x!=1)
++
++def metadata():
++    rows=[]
++    for family,count in SOURCE_QUOTAS.items():
++        for i in range(count):
++            identity=f'{family}-Fixture-None-Table-{i}/trial_fixture_{i}'
++            rows.append({'identity':identity,'family':family,'partition':'acquisition_feasibility_96',
++                         'identity_sha256':hashlib.sha256(identity.encode()).hexdigest(),'partition_rank_sha256':'a'*64})
++    return canonical({'status':'ADOPTED_DESIGN_METADATA_ONLY_NOT_EXECUTABLE_NOT_AUTHORIZED','no_schedule_indices_seeds_cutoffs_or_argv_per_identity':True,'rows':rows}).encode()
++
++def plan():
++    raw=metadata();return bind_plan(raw,evidence_class='synthetic_software_fixture',synthetic_sha256=hashlib.sha256(raw).hexdigest())
++
++class FakeEnv:
++    evidence_class='synthetic_software_fixture'
++    def __init__(self,slot,options):self.slot,self.options,self.i,self.resets,self.closed=slot,options,0,0,False
++    def initialize(self):return {'pool_seed':42,'discovery':'explicit_synthetic_one_game'}
++    def state(self):
++        end=self.i==self.options.get('done_at',7)
++        trunc=self.i==self.options.get('truncated_at',-1)
++        commands=() if self.i==self.options.get('empty_at',-1) else ('look',)
++        return PublicState(self.slot.task_id,self.slot.family,'Inspect the synthetic fixture',f'Synthetic room step {self.i}',commands,end,1.0 if end else 0.0,trunc)
++    def reset(self,*,seed):
++        assert seed==42 and self.resets==0;self.resets+=1;return self.state()
++    def step(self,command):
++        assert command=='look'
++        if self.i==self.options.get('technical_at',-1):raise RuntimeError('synthetic environment boundary failure')
++        self.i+=1
++        value=self.state()
++        if self.i==self.options.get('missing_map_at',-1):return value.to_dict()|{'valid_actions':None}
++        return value
++    def close(self):self.closed=True
++
++def run_fixture(output,*,options=None,ceilings=None,clock=None,devices=0,authority=None):
++    p=plan();seen={};options=options or {};tok=Tokenizer();calls=[]
++    def choice(slot):
++        num=int(slot.task_id.rsplit('_',1)[-1]);return {'invalid_at':5} if num%2==0 else {}
++    def settings(slot):return choice(slot)|options.get(slot.task_id,options.get('*',{}))
++    def raw(prepared,slot,index):
++        config=settings(slot);text='bad' if index==config.get('invalid_at',-1) else 'A000'
++        tokens=[ord(x) for x in text]+[1]
++        if config.get('incomplete') and text=='A000':tokens=[ord(x) for x in text]+[32]*12
++        reached=len(tokens)==16
++        value={'prompt':prepared.prepared.prompt,'rendered_prompt':prepared.prepared.rendered_prompt,
++            'rendered_prompt_sha256':hashlib.sha256(prepared.prepared.rendered_prompt.encode()).hexdigest(),
++            'raw_output':text,'token_ids':tokens,'token_ids_sha256':hashlib.sha256(json.dumps(tokens,separators=(',',':')).encode()).hexdigest(),
++            'input_tokens':len(prepared.prepared.input_ids),'generated_tokens':len(tokens),'latency_seconds':0.0,
++            'output_complete':not reached or tokens[-1]==1,'token_cap_reached':reached,'max_new_tokens':16,
++            'do_sample':False,'thinking':False,'adapter_mode':'P0','adapter_sha256':P0_SHA256}
++        calls.append((slot.key,index));return {'raw':value,'runtime':{'synthetic_software_fixture':True}}
++    producer=Producer(tok,raw,evidence_class=p.evidence_class)
++    def factory(slot):
++        env=FakeEnv(slot,settings(slot));seen[slot.key]=env;return env
++    collector=Collector(p,lambda ledger:producer,factory,output,run_id=authority.authorization['run_id'] if authority else '1'*32,ceilings=ceilings or (authority.ceilings if authority else LIMITS),devices=devices,live_permit=authority,started_at=json.loads(Path(authority.context_evidence['launch_path']).read_text())['allocation_started_monotonic'] if authority else None,**({'clock':clock} if clock else {}))
++    _,stop=collector.run();report=audit(output/'source_events.jsonl',output/'source_trajectories.jsonl',p,producer,authority=authority);write_report(output,report)
++    return p,report,collector,producer,calls,seen
++
++def gate_fixture(tmp,repository):
++    p=plan();raw=metadata();mp=tmp/'metadata.json';mp.write_bytes(raw)
++    def bind(path):return {'path':str(path.resolve()),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
++    packages={}
++    from self_improvement.si_p3.runtime_gate import PACKAGE_NAMES
++    for name in PACKAGE_NAMES:
++        path=tmp/(name.replace('.','_')+'.py');path.write_text('# synthetic package marker; MUST NOT IMPORT\n')
++        packages[name]=bind(path)|{'version':'synthetic'}
++    config=tmp/'config.yaml';config.write_text('synthetic metadata only\n')
++    domain=tmp/'domain';domain.write_text('synthetic');grammar=tmp/'grammar';grammar.write_text('synthetic')
++    games=[]
++    for slot in p.slots:
++        d=tmp/'train'/slot.task_id;d.mkdir(parents=True)
++        game=d/'game.tw-pddl';game.write_text('synthetic game, no real task')
++        traj=d/'traj_data.json';traj.write_text('{}')
++        games.append({'task_id':slot.task_id,'game':str(game),'game_sha256':bind(game)['sha256'],'traj_data':str(traj),'traj_data_sha256':bind(traj)['sha256']})
++    fake=tmp/'fake_weights';fake.write_text('synthetic no model')
++    proposal={'schema':'SI_S01_PROPOSAL_V1','metadata':bind(mp),'interpreter':bind(Path(sys.executable)),
++        'packages':packages,'model':{'base_snapshot':str(tmp/'base'),'adapter_path':str(tmp/'adapter'),'synthetic_files':[bind(fake)]},
++        'environment':{'config':bind(config),'data_root':str(tmp),'logic_files':{'domain':bind(domain),'grammar':bind(grammar)},'games':games}}
++    proposal_path=tmp/'proposal.json';proposal_path.write_text(canonical(proposal))
++    sha=subprocess.check_output(['git','rev-parse','HEAD'],cwd=repository,text=True).strip()
++    review={'schema':'SI_S01_INDEPENDENT_REVIEW_V1','source_sha':sha,'protocol_sha256':PROTOCOL_SHA256,'decision':'PASS_SOURCE_ONLY_SOFTWARE','reviewer_role':'INDEPENDENT_ROOT'}
++    review_path=tmp/'review.json';review_path.write_text(canonical(review))
++    auth_path=tmp/'auth.json'
++    argv=[sys.executable,'-I',str(repository/'scripts/run_si_s01_source_only.py'),'--live','--authorization',str(auth_path),'--authorization-sha256','@AUTHORIZATION_SHA256@','--proposal',str(proposal_path)]
++    now=datetime.now(timezone.utc)
++    auth={'schema':'SI_S01_AUTHORIZATION_V1','purpose':'SOURCE_ONLY_A96','protocol_sha256':PROTOCOL_SHA256,'task_sha256':TASK_SHA256,'source_sha':sha,'review':bind(review_path),'proposal_sha256':bind(proposal_path)['sha256'],
++        'authorization_id':'2'*32,'run_id':'3'*32,'evidence_class':p.evidence_class,'status':'PREFLIGHT_ONLY','preflight_receipt_path':str(tmp/'preflight_receipt.json'),'execution_uid':os.getuid(),'output_path':str(tmp/'science_output'),
++        'gpu_uuid':'GPU-12345678-abcd-abcd-abcd-123456789abc','ceilings':LIMITS,'not_before_utc':(now-timedelta(minutes=1)).isoformat().replace('+00:00','Z'),'expires_utc':(now+timedelta(hours=1)).isoformat().replace('+00:00','Z'),
++        'environment':{'PATH':str(Path(sys.executable).parent)+':/usr/bin:/bin','LANG':'C.UTF-8','LC_ALL':'C.UTF-8','CUDA_VISIBLE_DEVICES':'','PYTHONDONTWRITEBYTECODE':'1','HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1','TOKENIZERS_PARALLELISM':'false'},
++        'launch_argv':argv,'preflight_argv':['--preflight-only' if a=='--live' else a for a in argv],'maximum_launches':1,'forbidden_non_source':True}
++    def save():
++        auth_path.write_text(canonical(auth));digest_auth=bind(auth_path)['sha256']
++        return [digest_auth if x=='@AUTHORIZATION_SHA256@' else x for x in auth['preflight_argv']]
++    return auth,proposal,auth_path,proposal_path,save
++
++
++def reseal_bundle(output,transform):
++    """Rebuild every event/unit/trajectory/seal reference, independently of business checks."""
++    ep=output/'source_events.jsonl';tp=output/'source_trajectories.jsonl'
++    events=[json.loads(x) for x in ep.read_text().splitlines()];trajectories=[json.loads(x) for x in tp.read_text().splitlines()]
++    transform(events,trajectories)
++    mapping={};units={};unit_identities={};previous=None;by_slot={r['slot_key']:r for r in trajectories};closed=[]
++    run_id=events[0]['payload']['run_id'];base=events[0]['monotonic']
++    def remap(x):
++        if isinstance(x,str):return mapping.get(x,units.get(x,x))
++        if isinstance(x,list):return [remap(v) for v in x]
++        if isinstance(x,dict):return {k:remap(v) for k,v in x.items()}
++        return x
++    for i,event in enumerate(events):
++        old=event['event_id'];payload=remap(event['payload'])
++        if event['kind']=='unit_started':
++            original_unit=event['payload']['unit'];new_unit=digest([run_id,payload['identity']]);units[original_unit]=new_unit;payload['unit']=new_unit;unit_identities[new_unit]=payload['identity']
++        elif event['kind'] in ('unit_completed','unit_failed'):payload['identity']=unit_identities[payload['unit']]
++        elif event['kind'] in ('source_closed','slot_incomplete'):
++            row=remap(by_slot[payload['slot_key']]);by_slot[payload['slot_key']]=row;payload['trajectory_sha256']=digest(row)
++            if event['kind']=='source_closed':closed.append(digest(row))
++        elif event['kind']=='sources_sealed':
++            # Retain a deliberately deleted source hash, but refresh all existing hashes.
++            payload['source_hashes']=closed[:len(payload['source_hashes'])]
++        event.update(sequence=i,previous=previous,payload=payload,monotonic=base+i*.0001)
++        event['event_id']=digest({k:v for k,v in event.items() if k!='event_id'});mapping[old]=event['event_id'];previous=event['event_id']
++    updated=[by_slot[r['slot_key']] for r in trajectories]
++    ep.write_text(''.join(canonical(r)+'\n' for r in events));tp.write_text(''.join(canonical(r)+'\n' for r in updated))
++    assert_reference_consistency(output)
++
++
++def assert_reference_consistency(output):
++    from self_improvement.si_s01.evidence import read_events
++    events=read_events(output/'source_events.jsonl');idx={e['event_id']:e for e in events};units={}
++    trajectories=[json.loads(x) for x in (output/'source_trajectories.jsonl').read_text().splitlines()];by_slot={r['slot_key']:r for r in trajectories}
++    hashes={digest(r) for r in trajectories}
++    for row in events:
++        p=row['payload']
++        if row['kind']=='unit_started':
++            assert p['unit']==digest([events[0]['payload']['run_id'],p['identity']]);units[p['unit']]=row
++        elif row['kind'] in ('unit_completed','unit_failed'):
++            assert p['started_event']==units[p['unit']]['event_id'] and p['identity']==units[p['unit']]['payload']['identity']
++            if row['kind']=='unit_completed' and p['identity']['kind']=='step':assert p['data']['generation_event'] in idx
++        elif row['kind'] in ('source_closed','slot_incomplete'):assert p['trajectory_sha256']==digest(by_slot[p['slot_key']])
++        elif row['kind']=='sources_sealed':assert all(x in hashes for x in p['source_hashes'])
++    for row in trajectories:
++        if row['disposition']=='NORMAL_SOURCE':
++            for kind in ('construct','reset'):assert row['source'][kind] in idx
++            for kind in ('steps','generations'):assert all(x in idx for x in row['source'][kind])
++            assert row['anchor_event'] in idx
++    return events,trajectories
++
++
++def fixture_permit(tmp,repository,auth,proposal,auth_path,proposal_path):
++    from self_improvement.si_s01.gate import Permit
++    return Permit(auth,proposal,plan(),repository,hashlib.sha256(auth_path.read_bytes()).hexdigest(),hashlib.sha256(proposal_path.read_bytes()).hexdigest())
++
++def clearance_fixture(tmp,permit,actual_preflight_argv,returncode):
++    from self_improvement.si_s01.gate import source_binding
++    a=permit.authorization;pre=Path(a['preflight_receipt_path'])
++    def bind(path):return {'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
++    execution=tmp/'preflight_execution.json'
++    execution.write_text(canonical({'schema':'SI_S01_PREFLIGHT_EXECUTION_V1','authentic_returncode':returncode,
++        'argv':actual_preflight_argv,'binding':source_binding(permit),'preflight_receipt_sha256':bind(pre)['sha256']}))
++    path=tmp/'clearance.json'
++    base=[permit.authorization_sha256 if v=='@AUTHORIZATION_SHA256@' else v for v in a['launch_argv']]
++    c={'schema':'SI_S01_LAUNCH_CLEARANCE_V1','status':'CLEARED_ONE_SOURCE_ONLY_LAUNCH','issuer':'INDEPENDENT_ROOT',
++       'binding':source_binding(permit),'preflight':bind(pre),'preflight_execution':bind(execution),
++       'live_argv':base+['--clearance',str(path),'--clearance-sha256','@CLEARANCE_SHA256@'],
++       'clearance_id':'4'*32,'maximum_launches':1,'not_before_utc':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),'expires_utc':a['expires_utc']}
++    def save():path.write_text(canonical(c));return hashlib.sha256(path.read_bytes()).hexdigest()
++    return c,path,save
++
++
++def context_fixture(tmp,permit):
++    from dataclasses import replace
++    from self_improvement.si_s01.gate import source_binding
++    import time
++    launch=tmp/'supervisor_context.json';worker=tmp/'worker_context.json'
++    l={'source_binding':source_binding(permit),'clearance_sha256':'5'*64,'allocated_devices':1,'allocation_started_monotonic':time.monotonic()}
++    launch.write_text(canonical(l));launch_sha=hashlib.sha256(launch.read_bytes()).hexdigest()
++    w={'pid':os.getpid(),'uid':os.getuid(),'authorization_sha256':permit.authorization_sha256,'launch_context_sha256':launch_sha,'started_monotonic':time.monotonic()}
++    worker.write_text(canonical(w))
++    return replace(permit,clearance_sha256='5'*64,context_evidence={'launch_path':str(launch),'launch_sha256':launch_sha,'worker_path':str(worker),'worker_sha256':hashlib.sha256(worker.read_bytes()).hexdigest()})
+diff --git a/tests/test_si_s01_gate.py b/tests/test_si_s01_gate.py
+new file mode 100644
+index 0000000..a613f7d
+--- /dev/null
++++ b/tests/test_si_s01_gate.py
+@@ -0,0 +1,109 @@
++"""Actual isolated CLI software-fixture preflight, no runtime construction."""
++import json,subprocess,sys
++from pathlib import Path
++import pytest
++from si_s01_support import gate_fixture
++from self_improvement.si_s01.contract import canonical,digest
++
++REPO=Path(__file__).resolve().parents[1]
++
++def child(tmp,auth,argv):
++    result=subprocess.run(argv,cwd=REPO,env=auth['environment'],capture_output=True,timeout=30)
++    (tmp/'child.stdout').write_bytes(result.stdout);(tmp/'child.stderr').write_bytes(result.stderr)
++    (tmp/'child_receipt.json').write_text(json.dumps({'argv':argv,'authentic_returncode':result.returncode,'kind':'EXPLICIT_SOFTWARE_FIXTURE_PRODUCTION_CLI_NOT_OFFICIAL_PREFLIGHT'}))
++    return result
++
++
++def test_software_fixture_actual_cli_preflight_has_zero_science_side_effects(tmp_path):
++    a,p,ap,pp,save=gate_fixture(tmp_path,REPO);result=child(tmp_path,a,save())
++    assert result.returncode==0,result.stderr.decode()
++    row=json.loads(result.stdout)
++    for name in ('model_objects','generations','CUDA_initializations','environment_constructs','resets','steps','units','fresh_sources'):assert row[name]==0
++    assert row['evidence_class']=='synthetic_software_fixture' and row['status']=='STATIC_PREFLIGHT_ONLY_NOT_CLEARANCE'
++    assert not Path(a['output_path']).exists() and not Path(a['output_path']+'.launch_claim.json').exists()
++
++
++@pytest.mark.parametrize('attack',['wrong_sha','old_authorization','old_output','consumed','wrong_review','origin_bytes','game_bytes','argv','env','teacher_purpose','extra_teacher','bad_limits','mode_spoof'])
++def test_cli_gate_negatives_before_any_runtime_or_source_output(tmp_path,attack):
++    a,p,ap,pp,save=gate_fixture(tmp_path,REPO)
++    if attack=='wrong_sha':a['source_sha']='0'*40
++    elif attack=='old_authorization':a['schema']='SI_E2_AUTHORIZATION_V1'
++    elif attack=='old_output':Path(a['output_path']).mkdir()
++    elif attack=='consumed':Path(a['output_path']+'.launch_claim.json').write_text('prior consumed')
++    elif attack=='wrong_review':Path(a['review']['path']).write_text('{}')
++    elif attack=='origin_bytes':Path(p['packages']['torch']['path']).write_text('tampered')
++    elif attack=='game_bytes':Path(p['environment']['games'][0]['game']).write_text('tampered')
++    elif attack=='argv':a['preflight_argv'].append('--extra')
++    elif attack=='env':a['environment']['PYTHONPATH']='untrusted'
++    elif attack=='teacher_purpose':a['purpose']='TEACHER'
++    elif attack=='extra_teacher':a['teacher_generations']=1
++    elif attack=='bad_limits':a['ceilings']=dict(a['ceilings'],generations=4801)
++    argv=save()
++    if attack=='argv':argv=argv[:-1] # actual invocation differs from bound argv
++    if attack=='mode_spoof':argv=['--live' if x=='--preflight-only' else x for x in argv]
++    result=child(tmp_path,a,argv)
++    assert result.returncode!=0
++    if attack!='old_output':assert not Path(a['output_path']).exists()
++
++
++@pytest.mark.parametrize('attack',[None,'missing_preflight','failed_preflight','failed_execution','wrong_source','wrong_plan','wrong_env','wrong_output','old_clearance','max_launch2','wrong_argv'])
++def test_independent_clearance_binds_actual_positive_preflight_and_context(tmp_path,attack):
++    from si_s01_support import fixture_permit,clearance_fixture
++    from self_improvement.si_s01.gate import check_clearance
++    from self_improvement.si_s01.contract import ContractError
++    import hashlib
++    a,p,ap,pp,save=gate_fixture(tmp_path,REPO);argv=save();result=child(tmp_path,a,argv)
++    assert result.returncode==0,result.stderr.decode()
++    permit=fixture_permit(tmp_path,REPO,a,p,ap,pp);c,path,save_c=clearance_fixture(tmp_path,permit,argv,result.returncode)
++    if attack=='missing_preflight':Path(c['preflight']['path']).unlink()
++    elif attack=='failed_preflight':
++        fp=Path(c['preflight']['path']);v=json.loads(fp.read_text());v['status']='FAILED';fp.write_text(canonical(v));c['preflight']['sha256']=hashlib.sha256(fp.read_bytes()).hexdigest()
++    elif attack=='failed_execution':
++        fp=Path(c['preflight_execution']['path']);v=json.loads(fp.read_text());v['authentic_returncode']=1;fp.write_text(canonical(v));c['preflight_execution']['sha256']=hashlib.sha256(fp.read_bytes()).hexdigest()
++    elif attack in ('wrong_source','wrong_plan','wrong_env'):c['binding'][{'wrong_source':'source_sha','wrong_plan':'plan_sha256','wrong_env':'environment_sha256'}[attack]]='0'*64
++    elif attack=='wrong_output':c['binding']['output_path']=str(tmp_path/'different')
++    elif attack=='old_clearance':c['schema']='SI_E2_AUTHORIZATION_V1'
++    elif attack=='max_launch2':c['maximum_launches']=2
++    elif attack=='wrong_argv':c['live_argv'].append('--teacher')
++    sha=save_c()
++    if attack is None:assert check_clearance(permit,path,sha)['binding']['plan_sha256']==permit.plan.sha256
++    else:
++        with pytest.raises(ContractError):check_clearance(permit,path,sha)
++    assert not permit.output.exists()
++
++
++def test_preflight_receipt_is_not_a_launch_clearance(tmp_path):
++    from si_s01_support import fixture_permit
++    from self_improvement.si_s01.gate import check_clearance
++    from self_improvement.si_s01.contract import ContractError
++    import hashlib
++    a,p,ap,pp,save=gate_fixture(tmp_path,REPO);argv=save();result=child(tmp_path,a,argv);assert result.returncode==0
++    permit=fixture_permit(tmp_path,REPO,a,p,ap,pp);path=Path(a['preflight_receipt_path'])
++    with pytest.raises(ContractError,match='launch clearance fields'):check_clearance(permit,path,hashlib.sha256(path.read_bytes()).hexdigest())
++
++
++
++def test_preflight_software_sentinels_block_all_runtime_constructors(tmp_path):
++    a,p,ap,pp,save=gate_fixture(tmp_path,REPO);argv=save()
++    wrapper=r"""
++import sys,runpy,importlib.abc,json
++from pathlib import Path
++repo=Path(sys.argv[1]);actual=json.loads(sys.argv[2]);sys.path.insert(0,str(repo/'src'))
++class NoNeuralImports(importlib.abc.MetaPathFinder):
++ def find_spec(self,fullname,path=None,target=None):
++  if fullname.split('.')[0] in ('torch','transformers','peft','alfworld','textworld'):
++   raise AssertionError('preflight touched forbidden runtime import '+fullname)
++sys.meta_path.insert(0,NoNeuralImports())
++from self_improvement.si_s01.collector import Collector,Producer
++from self_improvement.si_s01.evidence import Journal,Ledger
++from self_improvement.si_s01.runtime import LiveProducer,LiveEnvironment
++def forbidden(*args,**kwargs):raise AssertionError('preflight constructed a source/runtime object')
++for cls in (Collector,Producer,Journal,Ledger,LiveEnvironment):cls.__init__=forbidden
++LiveProducer.load=classmethod(forbidden)
++sys.orig_argv=actual;sys.argv=actual[2:]
++runpy.run_path(str(repo/'scripts/run_si_s01_source_only.py'),run_name='__main__')
++"""
++    cmd=[sys.executable,'-I','-c',wrapper,str(REPO),json.dumps(argv)]
++    result=child(tmp_path,a,cmd)
++    assert result.returncode==0,result.stderr.decode()
++    assert not Path(a['output_path']).exists() and Path(a['preflight_receipt_path']).is_file()
+diff --git a/tests/test_si_s01_runtime_bridge.py b/tests/test_si_s01_runtime_bridge.py
+new file mode 100644
+index 0000000..3b8351c
+--- /dev/null
++++ b/tests/test_si_s01_runtime_bridge.py
+@@ -0,0 +1,103 @@
++"""New LiveProducer._raw production bridge; model.generate/CUDA/resource are explicit fakes."""
++from contextlib import nullcontext
++from dataclasses import dataclass
++from types import SimpleNamespace
++import pytest
++from self_improvement.si_s01.contract import *
++from self_improvement.si_s01.collector import Producer
++from self_improvement.si_s01.runtime import LiveProducer
++from self_improvement.si_s01.evidence import Journal,Ledger,read_events
++from si_s01_support import plan,Tokenizer
++
++class Row:
++    def __init__(self,values):self.values=values
++    def tolist(self):return list(self.values)
++class Tensor:
++    ndim=2
++    def __init__(self,values):self.values=list(values);self.shape=(1,len(values))
++    def to(self,device):return self
++    def __getitem__(self,index):assert index==0;return Row(self.values)
++@dataclass
++class Status:
++    enabled:bool=True
++    active_adapters:list=None
++    merged_adapters:list=None
++    available_adapters:list=None
++    num_adapter_layers:int=1
++    trainable_params:int=0
++
++@pytest.fixture
++def bridge(tmp_path):
++    p=plan();out=tmp_path/'events.jsonl';journal=Journal(out,{'kind':'explicit bridge component software fixture'})
++    ledger=Ledger(journal,p,'1'*32);calls=[]
++    class Tok(Tokenizer):
++        drift=None
++        def __call__(self,text,**kwargs):
++            values=super().__call__(text,**kwargs)
++            if kwargs.get('return_tensors')=='pt':
++                if self.drift:values[self.drift][-1]=0
++                return {k:Tensor(v) for k,v in values.items()}
++            return values
++    tokenizer=Tok()
++    class Model:
++        device='cuda:0';enabled=True
++        def parameters(self):return [SimpleNamespace(requires_grad=False)]
++        def eval(self):pass
++        def get_model_status(self):return Status(self.enabled,['default'],[],['default'])
++        def get_layer_status(self):return [self.get_model_status()]
++        def generate(self,**kwargs):
++            calls.append(kwargs)
++            assert kwargs['max_new_tokens']==16 and kwargs['do_sample'] is False
++            seq=kwargs['input_ids'][0].tolist()+[65,48,48,48,1]
++            return SimpleNamespace(sequences=Tensor(seq),scores=(None,)*5)
++    producer=LiveProducer(tokenizer,lambda *_:None,evidence_class=p.evidence_class)
++    producer.model=Model();producer.torch=SimpleNamespace(cuda=SimpleNamespace(synchronize=lambda:None),no_grad=lambda:nullcontext())
++    producer.ledger=ledger;producer.raw=producer._raw;producer.resource=lambda:{'explicit_software_resource':True}
++    yield p,producer,ledger,journal,calls,out
++    journal.close()
++
++
++def generate(p,b,l,slot_index=0):
++    prepared=b.prepare('synthetic public source input')
++    return l.call(p.slots[slot_index],'generation',0,lambda:b.generate(prepared,p.slots[slot_index],0),prepared=prepared.to_dict())
++
++
++def test_new_bridge_consecutive_sources_have_distinct_decision_units_and_full_proof(bridge):
++    p,b,l,j,calls,out=bridge
++    a=generate(p,b,l,0);c=generate(p,b,l,1)
++    assert len(calls)==2 and a!=c and len(l.units)==2
++    for event in (a,c):
++        data=l.data(event);assert data['runtime']['tensor_proof']['prepared']==data['runtime']['tensor_proof']['sent']
++        assert data['raw']['adapter_mode']=='P0'
++        assert all(data['runtime']['adapter_states'][x]['layers'][0]['enabled'] is True for x in ('before','during','after'))
++    assert l.used['generations']==2 and l.used['generated_tokens']==10
++
++
++@pytest.mark.parametrize('tensor',['input_ids','attention_mask'])
++def test_new_bridge_sent_tensor_mask_drift_stops_before_model_generate(bridge,tensor):
++    p,b,l,j,calls,out=bridge;b.tokenizer.drift=tensor
++    with pytest.raises(ContractError,match='actual input IDs/mask'):generate(p,b,l)
++    assert calls==[] and l.used['generated_tokens']==16
++    assert not any(r['kind']=='runtime_evidence' and r['payload']['kind']=='generation_returned' for r in j.events)
++
++
++def test_new_bridge_rejects_disabled_real_layer_status_before_generate(bridge):
++    p,b,l,j,calls,out=bridge;b.model.enabled=False
++    with pytest.raises(ContractError,match='PEFT enabled'):generate(p,b,l)
++    assert calls==[]
++
++
++def test_new_bridge_post_resource_failure_keeps_returned_raw_tokens_and_unknown_reservation(bridge):
++    p,b,l,j,calls,out=bridge;n=[0]
++    def resource():
++        n[0]+=1
++        if n[0]==2:
++            error=ContractError('synthetic post-resource ownership failure');error.resource_evidence={'unmapped_pid':'explicit software observation'};raise error
++        return {'explicit_software_resource':True}
++    b.resource=resource
++    with pytest.raises(ContractError,match='post-resource'):generate(p,b,l)
++    events=read_events(out);returned=next(e for e in events if e['kind']=='runtime_evidence' and e['payload']['kind']=='generation_returned')
++    failed=events[-1]['payload']['data']
++    assert len(calls)==1 and returned['payload']['data']['raw']['token_ids']==[65,48,48,48,1]
++    assert failed['raw_evidence']['raw']['generated_tokens']==5 and failed['resource_evidence']['unmapped_pid']
++    assert l.used['generations']==1 and l.used['generated_tokens']==16 and not next(iter(l.units.values()))['finished']
+diff --git a/tests/test_si_s01_runtime_reliability.py b/tests/test_si_s01_runtime_reliability.py
+new file mode 100644
+index 0000000..3322793
+--- /dev/null
++++ b/tests/test_si_s01_runtime_reliability.py
+@@ -0,0 +1,99 @@
++"""RT01/02/03 software process/filesystem edges; no real runtime or GPU."""
++import json
++from pathlib import Path
++from threading import Event,Thread
++from types import SimpleNamespace
++import pytest
++from self_improvement.si_s01 import evidence,supervisor
++from self_improvement.si_s01.audit import audit
++from si_s01_support import run_fixture
++
++
++def test_post_kill_wait_uses_remaining_absolute_time_and_unknown_exit_stays_unknown(tmp_path,monkeypatch):
++    now=[100.0];waits=[];pid=987654321
++    class UnreapedProcess:
++        def __init__(self,*args,**kwargs):
++            self.pid=pid
++            assert kwargs['env']['CUDA_VISIBLE_DEVICES']==''
++        def wait(self,*,timeout):
++            waits.append(timeout)
++            now[0]=100.95 if len(waits)==1 else 101.2
++            raise supervisor.subprocess.TimeoutExpired('explicit software unreap edge',timeout)
++    monkeypatch.setattr(supervisor.time,'monotonic',lambda:now[0])
++    monkeypatch.setattr(supervisor.subprocess,'Popen',UnreapedProcess)
++    monkeypatch.setattr(supervisor.ctypes,'CDLL',lambda *a,**k:SimpleNamespace(prctl=lambda *a:0))
++    monkeypatch.setattr(supervisor,'process_table',lambda:{pid:(supervisor.os.getpid(),991,supervisor.os.getuid())})
++    monkeypatch.setattr(supervisor,'group_members',lambda pgid:[pid])
++    monkeypatch.setattr(supervisor,'descendants',lambda *a:{})
++    monkeypatch.setattr(supervisor,'kill_identities',lambda *a:None)
++    monkeypatch.setattr(supervisor.os,'killpg',lambda *a:None)
++    r=supervisor.supervise_source(['explicit-software-child'],tmp_path/'run',context={
++        'authorization_sha256':'a'*64,'source_sha':'b'*40,'evidence_class':'synthetic_software_fixture',
++        'allocation_started_monotonic':100.0},seconds=1,environment={'CUDA_VISIBLE_DEVICES':''})
++    assert len(waits)==2 and waits[0]==pytest.approx(.9) and waits[1]==pytest.approx(.05)
++    assert r['authentic_returncode'] is None and r['reaping_error']['exception']=='TimeoutExpired'
++    assert not r['cleanup_established'] and r['execution_status']=='SUPERVISOR_INCOMPLETE'
++    assert r['unreaped_worker_identity']=={'pid':pid,'start_tick':991,'uid':supervisor.os.getuid()}
++    assert r['members_after_cleanup']==[pid] and r['elapsed_seconds']==pytest.approx(1.2)
++    assert not r['within_time_cap'] and r['allocated_device_hours']==0 and not r['retry_authorized']
++    assert json.loads((tmp_path/'run/supervisor_exit.json').read_text())==r
++
++
++def test_worker_marker_partial_write_is_never_published_as_final_json(tmp_path,monkeypatch):
++    marker=tmp_path/'worker_start.json';value={'pid':123,'uid':456,'start_tick':789,'argv':['explicit software']}
++    partial=Event();release=Event();errors=[];fdopen=evidence.os.fdopen
++    class PausedWrite:
++        def __init__(self,handle):self.handle=handle
++        def __enter__(self):return self
++        def __exit__(self,*args):return self.handle.__exit__(*args)
++        def write(self,text):
++            split=len(text)//2;self.handle.write(text[:split]);self.handle.flush();partial.set()
++            assert release.wait(3),'software interleaving release deadline'
++            self.handle.write(text[split:]);return len(text)
++        def flush(self):return self.handle.flush()
++        def fileno(self):return self.handle.fileno()
++    monkeypatch.setattr(evidence.os,'fdopen',lambda *a,**k:PausedWrite(fdopen(*a,**k)))
++    def writer():
++        try:evidence.atomic_fresh_json(marker,value)
++        except BaseException as error:errors.append(error)
++    thread=Thread(target=writer);thread.start()
++    try:
++        assert partial.wait(3) and not marker.exists()
++        temporary=list(tmp_path.glob('.worker_start.json.*.tmp'));assert len(temporary)==1
++        with pytest.raises(json.JSONDecodeError):json.loads(temporary[0].read_text())
++        # The unchanged worker's exists/read sequence has no final marker to consume yet.
++        assert not marker.exists()
++    finally:
++        release.set();thread.join(timeout=3)
++    assert not thread.is_alive() and errors==[] and json.loads(marker.read_text())==value
++    assert not list(tmp_path.glob('.worker_start.json.*.tmp'))
++
++
++def test_atomic_marker_publication_cannot_overwrite_file_or_symlink(tmp_path):
++    marker=tmp_path/'worker_start.json';marker.write_text('{"original":true}')
++    before=marker.read_bytes()
++    with pytest.raises(FileExistsError):evidence.atomic_fresh_json(marker,{'replacement':True})
++    assert marker.read_bytes()==before
++    link=tmp_path/'link.json';link.symlink_to(marker)
++    with pytest.raises(FileExistsError):evidence.atomic_fresh_json(link,{'replacement':True})
++    assert link.is_symlink() and marker.read_bytes()==before
++    assert not list(tmp_path.glob('.*.tmp'))
++
++
++def test_source_report_hours_are_explicit_through_run_closed_lower_bound(tmp_path):
++    class Clock:
++        now=0.0
++        def __call__(self):self.now+=.01;return self.now
++    clock=Clock()
++    p,r,_,producer,_,_=run_fixture(tmp_path/'run',options={'*':{'empty_at':0}},clock=clock,devices=1)
++    stage_hours=r['allocation_budget_device_hours'];assert stage_hours>0 and r['real_device_hours']==0
++    clock.now+=3600
++    again=audit(tmp_path/'run/source_events.jsonl',tmp_path/'run/source_trajectories.jsonl',p,producer)
++    assert again['allocation_budget_device_hours']==stage_hours
++    scope=r['allocation_cost_measurement']
++    assert scope['endpoint']=='collector_run_closed' and scope['endpoint_event_id']==r['raw_final_event']
++    assert scope['scope']=='STAGE_LOWER_BOUND_NOT_FINAL_ALLOCATED_COST' and scope['final_allocated_device_hours'] is None
++    assert scope['final_authority']=={'artifact':'supervisor_exit.json','schema':'SI_S01_SUPERVISOR_EXIT_V1','field':'allocated_device_hours','requires':'AUTHENTIC_SUPERVISOR_EXECUTION_RECEIPT'}
++    assert scope['aggregation']=='DO_NOT_ADD_STAGE_HOURS_TO_SAME_ALLOCATION_SUPERVISOR_TOTAL'
++    text=(tmp_path/'run/SOURCE_REPORT.md').read_text()
++    assert 'stage lower bound' in text and 'do not add these overlapping intervals' in text
+diff --git a/tests/test_si_s01_source_only.py b/tests/test_si_s01_source_only.py
+new file mode 100644
+index 0000000..342a93a
+--- /dev/null
++++ b/tests/test_si_s01_source_only.py
+@@ -0,0 +1,189 @@
++"""Nonempty96/five-family production fixtures; only external model/env boundaries fake."""
++import copy,json
++from pathlib import Path
++import pytest
++from self_improvement.si_s01.contract import *
++from self_improvement.si_s01.evidence import read_events
++from self_improvement.si_s01.audit import audit
++from si_s01_support import run_fixture,plan,metadata
++
++
++def rewrite(path,mutate):
++    rows=[json.loads(s) for s in path.read_text().splitlines()];mutate(rows)
++    refs={};previous=None
++    def replace(value):
++        if isinstance(value,str):return refs.get(value,value)
++        if isinstance(value,list):return [replace(x) for x in value]
++        if isinstance(value,dict):return {k:replace(v) for k,v in value.items()}
++        return value
++    for row in rows:
++        old=row['event_id'];row['payload']=replace(row['payload']);row['previous']=previous
++        row['event_id']=digest({k:v for k,v in row.items() if k!='event_id'});refs[old]=row['event_id'];previous=row['event_id']
++    path.write_text(''.join(canonical(r)+'\n' for r in rows))
++
++
++def test_all96_five_family_production_source_seal_and_not_futile(tmp_path):
++    p,r,c,producer,calls,envs=run_fixture(tmp_path/'run')
++    assert r['status']=='SOURCE_UPPER_BOUNDS_NOT_FUTILE' and r['normal_sources']==96
++    assert r['upper_bounds']['E']==96 and all(r['upper_bounds']['by_family'][f]['F']>=ADOPTION_QUOTAS[f] for f in FAMILIES)
++    assert r['physical']['components']['reset']==96 and r['physical']['components']['env_construct']==96 and r['physical']['components']['env_close']==96
++    assert r['physical']['completed']['environment_operations']==96+r['physical']['components']['step']
++    assert len(calls)==r['physical']['completed']['generations'] and all(e.closed and e.resets==1 for e in envs.values())
++    assert all(row['YT'] is None for row in c.rows)
++    assert (tmp_path/'run/source_report.json').is_file() and (tmp_path/'run/SOURCE_REPORT.md').is_file()
++
++
++def test_complete_source_structural_no_go_is_not_teacher_failure(tmp_path):
++    _,r,c,_,_,_=run_fixture(tmp_path/'run',options={'*':{'invalid_at':-1}})
++    assert r['source_phase_sealed'] and r['status']=='COMPLETE_SOURCE96_STRUCTURAL_NO_GO'
++    assert r['upper_bounds']['F']==0 and all(row['YT'] is None and row['Y0']==1 for row in c.rows)
++
++
++@pytest.mark.parametrize('config',[{'done_at':5,'invalid_at':-1},{'truncated_at':5,'invalid_at':-1},{'empty_at':5,'invalid_at':-1},{'done_at':2,'invalid_at':-1},{'empty_at':0}])
++def test_terminal_truncated_empty_and_early_stop_not_eligible(tmp_path,config):
++    _,r,_,_,_,_=run_fixture(tmp_path/'run',options={'*':config})
++    assert r['source_phase_sealed'] and r['upper_bounds']['E']==0
++
++
++def test_fifth_action_then_sixth_parser_failure_is_eligible(tmp_path):
++    _,r,c,_,_,_=run_fixture(tmp_path/'run',options={'*':{'invalid_at':5}})
++    assert r['upper_bounds']['E']==96 and r['upper_bounds']['F']==96
++    assert all(len(row['source']['steps'])==5 and len(row['source']['generations'])==6 and row['Y0']==0 for row in c.rows)
++
++
++def test_family_failure_floor_is_separate_from_global_counts(tmp_path):
++    p=plan();opts={s.task_id:{'invalid_at':-1} for s in p.slots if s.family==FAMILIES[3]}
++    _,r,_,_,_,_=run_fixture(tmp_path/'run',options=opts)
++    assert r['upper_bounds']['F']>=24 and r['upper_bounds']['S']>=24 and r['upper_bounds']['E']==96
++    assert r['status']=='COMPLETE_SOURCE96_STRUCTURAL_NO_GO' and r['upper_bounds']['by_family'][FAMILIES[3]]['F']==0
++
++
++@pytest.mark.parametrize('kind',['technical','missing_map','budget'])
++def test_partial_stops_keep_prior_y0_and_no_structural_claim(tmp_path,kind):
++    p=plan();opts={p.slots[1].task_id:{'technical_at':0 if kind=='technical' else -1,'missing_map_at':1 if kind=='missing_map' else -1}}
++    ceiling=LIMITS|{'generations':8} if kind=='budget' else None
++    _,r,c,_,_,_=run_fixture(tmp_path/'run',options=opts,ceilings=ceiling)
++    assert not r['source_phase_sealed'] and r['upper_bounds'] is None and r['normal_sources']>=1
++    assert c.rows[0]['Y0'] in (0,1) and all(row['Y0'] is None for row in c.rows if row['disposition']!='NORMAL_SOURCE')
++    assert r['status'] in ('TECHNICAL_STOP','INTEGRITY_STOP','BUDGET_STOP')
++    if kind!='budget':assert r['physical']['failed_units'] and r['physical']['open_units']
++
++
++@pytest.mark.parametrize('role',['stage_one','stage_two','teacher','replay','suffix','train','eval'])
++def test_forbidden_non_source_requests_before_raw_calls(tmp_path,role):
++    p,_,_,producer,calls,_=run_fixture(tmp_path/'run');before=len(calls)
++    with pytest.raises(ContractError):producer.generate(producer.prepare('public'),p.slots[0],0,phase=role)
++    assert len(calls)==before
++
++
++def test_p0_valid_id_eos_incomplete_is_not_rejected(tmp_path):
++    _,r,c,_,_,_=run_fixture(tmp_path/'run',options={'*':{'incomplete':True,'invalid_at':-1}})
++    assert r['normal_sources']==96 and all(row['Y0']==1 for row in c.rows)
++
++
++@pytest.mark.parametrize('attack,reason',[
++    ('snapshot_late','S5 absent/late'),('placeholder_early','premature placeholder'),('missing_map','action list wire type'),
++    ('wrong_y0','normal Y0/stop'),('seed','one seed42'),('map','Action-ID/map/command'),
++    ('reference','Action-ID/map/command'),('phase','source-only'),('reservation','pre-call reservation'),
++    ('origin','explicit software boundary'),('source_seal95','source seal before96')])
++def test_independent_auditor_targeted_semantics_after_full_reference_reseal(tmp_path,attack,reason):
++    from si_s01_support import reseal_bundle,assert_reference_consistency
++    p,_,_,producer,_,_=run_fixture(tmp_path/'run');output=tmp_path/'run'
++    def mutate(events,trajectories):
++        if attack in ('snapshot_late','placeholder_early'):
++            marker=next(r for r in events if r['kind']=='anchor_sealed');events.remove(marker)
++            if attack=='placeholder_early':
++                marker['payload']={'slot_key':marker['payload']['slot_key'],'after_step_event':None,'state':None,'history':None,'projection':None,'usable':False}
++                after=next(i for i,r in enumerate(events) if r['kind']=='unit_completed' and r['payload']['identity']['kind']=='reset')
++            else:
++                fifth=next(i for i,r in enumerate(events) if r['event_id']==marker['payload']['after_step_event'])
++                after=next(i for i in range(fifth+1,len(events)) if events[i]['kind']=='unit_completed' and events[i]['payload']['identity']['kind']=='generation')
++            events.insert(after+1,marker);return
++        if attack=='wrong_y0':trajectories[0]['Y0']=1-trajectories[0]['Y0'];return
++        if attack=='source_seal95':next(r for r in events if r['kind']=='sources_sealed')['payload']['source_hashes'].pop();return
++        if attack=='reference':
++            generation=next(r['event_id'] for r in events if r['kind']=='unit_completed' and r['payload']['identity']['kind']=='generation')
++            slot=trajectories[1]['slot_key']
++            next(r for r in events if r['kind']=='unit_completed' and r['payload']['identity']['kind']=='step' and r['payload']['identity']['slot']==slot)['payload']['data']['generation_event']=generation;return
++        for row in events:
++            if row['kind']=='unit_started' and attack=='phase':row['payload']['identity']['phase']='suffix';return
++            if row['kind']=='unit_started' and row['payload']['identity']['kind']=='generation' and attack=='reservation':row['payload']['reservation']['input_tokens']=0;return
++            if row['kind']!='unit_completed':continue
++            operation=row['payload']['identity']['kind'];data=row['payload']['data']
++            if operation=='reset' and attack=='seed':data['seed']=43;return
++            if operation=='step' and attack=='map':data['action_map']['A000']='wrong command';return
++            if operation=='step' and attack=='missing_map':data['after']['valid_actions']=None;return
++            if operation=='generation' and attack=='origin':data['runtime']={'synthetic_software_fixture':False};return
++    reseal_bundle(output,mutate)
++    assert_reference_consistency(output) # Pass hash/unit/trajectory/seal refs before business validation.
++    with pytest.raises(ContractError,match=reason):audit(output/'source_events.jsonl',output/'source_trajectories.jsonl',p,producer)
++
++
++def test_step50_nonterminal_empty_map_preserves_frozen_horizon_priority(tmp_path):
++    p=plan();opts={'*':{'done_at':2,'invalid_at':-1},p.slots[0].task_id:{'done_at':99,'empty_at':50,'invalid_at':-1}}
++    _,r,c,_,_,_=run_fixture(tmp_path/'run',options=opts)
++    assert r['source_phase_sealed'] and c.rows[0]['termination']=='horizon' and len(c.rows[0]['source']['steps'])==50
++
++
++def test_failed_construct_cleanup_is_real_but_construct_stays_failed_open(tmp_path):
++    from self_improvement.si_s01.collector import Collector,Producer
++    from si_s01_support import Tokenizer,FakeEnv
++    p=plan();closed=[]
++    class Broken(FakeEnv):
++        def initialize(self):raise RuntimeError('synthetic init failure')
++        def close(self):closed.append(self.slot.key)
++    producer=Producer(Tokenizer(),lambda *_:None,evidence_class=p.evidence_class)
++    c=Collector(p,lambda _:producer,lambda s:Broken(s,{}),tmp_path/'run',run_id='1'*32);c.run()
++    r=audit(tmp_path/'run/source_events.jsonl',tmp_path/'run/source_trajectories.jsonl',p,producer)
++    assert r['status']=='TECHNICAL_STOP' and r['normal_sources']==0 and len(closed)==1
++    assert r['physical']['components']['env_close']==1 and r['physical']['failed_units'] and r['physical']['open_units']
++
++
++def test_full_horizon_exact_caps_and_next_reservation_cannot_touch_raw(tmp_path):
++    p,r,c,producer,calls,_=run_fixture(tmp_path/'run',options={'*':{'done_at':99,'invalid_at':-1,'incomplete':True}})
++    assert r['source_phase_sealed'] and r['physical']['completed']=={'generations':4800,'environment_operations':4896,'generated_tokens':76800,'input_tokens':r['physical']['completed']['input_tokens']}
++    before=len(calls)
++    with pytest.raises(ContractError):c.ledger.call(p.slots[0],'generation',50,lambda:producer.generate(producer.prepare('forbidden extra'),p.slots[0],50),prepared=producer.prepare('forbidden extra').to_dict())
++    assert len(calls)==before and r['real_device_hours']==0
++
++
++def test_fixed_plan_seed_order_and_live_metadata_no_override():
++    p=plan();assert len(p.slots)==96 and all(s.seed==s.pool_seed==42 and s.cutoff==5 for s in p.slots)
++    with pytest.raises(ContractError):Plan(tuple(reversed(p.slots)),p.metadata_sha256,p.evidence_class)
++    with pytest.raises(ContractError):Slot(p.slots[0].task_id,p.slots[0].family,seed=43)
++    with pytest.raises(ContractError):bind_plan(metadata(),evidence_class='live_source_only',synthetic_sha256=p.metadata_sha256)
++
++
++def test_simulated_allocation_clock_does_not_reset_at_source_boundaries(tmp_path):
++    class Clock:
++        def __init__(self):self.now=0.0
++        def __call__(self):self.now+=.01;return self.now
++    _,r,_,_,_,_=run_fixture(tmp_path/'run',ceilings=LIMITS|{'device_hours':.001},clock=Clock(),devices=1)
++    assert r['status']=='BUDGET_STOP' and not r['source_phase_sealed']
++    assert r['allocation_budget_device_hours']>.001 and r['real_device_hours']==0
++
++
++@pytest.mark.parametrize('attack',['devices0','run_id','loosened_cap','allocation_earlier','allocation_later','worker_pid','metadata','evidence_class'])
++def test_resealed_header_must_match_external_supervisor_and_authority(tmp_path,attack):
++    from si_s01_support import gate_fixture,fixture_permit,context_fixture,reseal_bundle,assert_reference_consistency
++    repo=Path(__file__).resolve().parents[1]
++    a,p,ap,pp,save=gate_fixture(tmp_path,repo);a['ceilings']=LIMITS|{'generations':800};save()
++    permit=context_fixture(tmp_path,fixture_permit(tmp_path,repo,a,p,ap,pp))
++    plan_value,r,_,producer,_,_=run_fixture(permit.output,authority=permit,devices=1)
++    assert r['source_phase_sealed'] and r['real_device_hours']==0
++    def mutate(events,trajectories):
++        h=events[0]['payload']
++        if attack=='devices0':h['allocated_devices']=0
++        elif attack=='run_id':h['run_id']='9'*32
++        elif attack=='loosened_cap':h['ceilings']['generations']=4800
++        elif attack=='worker_pid':h['live_binding']['worker_pid']+=100000
++        elif attack in ('metadata','evidence_class'):
++            h['plan']['metadata_sha256']='9'*64 if attack=='metadata' else METADATA_SHA256
++            if attack=='evidence_class':h['plan']['evidence_class']='live_source_only'
++            h['plan_sha256']=restore_plan(h['plan']).sha256
++            next(r for r in events if r['kind']=='sources_sealed')['payload']['plan_sha256']=h['plan_sha256']
++        else:h['allocation_started_monotonic']+=100 if attack=='allocation_later' else -100
++    reseal_bundle(permit.output,mutate);assert_reference_consistency(permit.output)
++    expected=restore_plan(read_events(permit.output/'source_events.jsonl')[0]['payload']['plan']) if attack in ('metadata','evidence_class') else plan_value
++    with pytest.raises(ContractError,match='external (run|worker|authorized)'):
++        audit(permit.output/'source_events.jsonl',permit.output/'source_trajectories.jsonl',expected,producer,authority=permit)
+diff --git a/tests/test_si_s01_supervisor.py b/tests/test_si_s01_supervisor.py
+new file mode 100644
+index 0000000..9651757
+--- /dev/null
++++ b/tests/test_si_s01_supervisor.py
+@@ -0,0 +1,21 @@
++"""Real subprocess exit/deadline receipts, entirely software-only and GPU0."""
++from pathlib import Path
++import json,os,sys
++import pytest
++from self_improvement.si_s01.supervisor import supervise_source
++from self_improvement.si_s01.contract import ContractError
++
++@pytest.mark.parametrize('code',[0,7])
++def test_authentic_exit_and_own_four_hour_ceiling_without_waiting(tmp_path,code):
++    output=tmp_path/'run'
++    context={'authorization_sha256':'a'*64,'source_sha':'b'*40,'evidence_class':'synthetic_software_fixture'}
++    result=supervise_source([sys.executable,'-I','-c',f'raise SystemExit({code})'],output,context=context,seconds=14400,environment={'PATH':os.defpath,'CUDA_VISIBLE_DEVICES':''})
++    assert result['authentic_returncode']==code and not result['deadline_triggered'] and result['allocated_device_hours']==0
++    assert not result['science_authorized'] and result['members_after_cleanup']==[]
++    # Same authorized output/claim cannot be consumed twice.
++    with pytest.raises((ContractError,FileExistsError)):supervise_source([sys.executable,'-I','-c','pass'],output,context=context,seconds=2,environment={})
++
++
++def test_deadline_terminates_real_child_and_preserves_nonzero_exit(tmp_path):
++    result=supervise_source([sys.executable,'-I','-c','import time;time.sleep(20)'],tmp_path/'deadline',context={'authorization_sha256':'a'*64,'source_sha':'b'*40,'evidence_class':'synthetic_software_fixture'},seconds=.5,environment={'PATH':os.defpath,'CUDA_VISIBLE_DEVICES':''})
++    assert result['deadline_triggered'] and result['authentic_returncode']!=0 and not result['members_after_cleanup']

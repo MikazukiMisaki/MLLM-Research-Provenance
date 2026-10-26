@@ -1,0 +1,101 @@
+{
+  "schema": "si_s01_engineering_adapter_feasibility_v1",
+  "status": "FEASIBILITY_ONLY_NOT_EXECUTABLE",
+  "source_pass": false,
+  "execution_authorized": false,
+  "start_utc": "2026-10-26T11:02:00Z",
+  "finish_utc": "2026-10-26T11:58:55Z",
+  "reviewed_commit": "9bc15b593ec6144915762a2fb1b172e063fe2c48",
+  "reviewed_commit_repository": "/home/lizening/wt-si-e2-cuda-uuid-compat",
+  "observed_worktree_head": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+  "worktree_head_is_reviewed_commit": false,
+  "inspection_mode": "git_object_static_reads_only_no_project_imports_or_tests",
+  "historical_source": {
+    "trajectory_path": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_trajectories.jsonl",
+    "full_trajectory_sha256_reference": "c6f37a7da28e326c70818524c79c17bbd85a286754c111f17db07cbe151a4f1c",
+    "full_trajectory_rehashed": false,
+    "captured_first_line_bytes_including_newline": 35486,
+    "captured_first_line_sha256": "465bff755ba34c18acca299470cd7c3a40455cb395df3e6fe43eee99119a7c73",
+    "task_id": "pick_and_place_simple-Pencil-None-GarbageCan-316/trial_T20190907_165839_449092",
+    "task_id_sha256": "7a05bf94153d050578cfd5c5d3d5b2b8fe5b20e6981e16311c65bc016572cccb",
+    "split": "train",
+    "nominal_seed": 30000,
+    "schedule_index": 0,
+    "saved_action_count": 6,
+    "reset_event": {
+      "event_ledger_sequence": 2,
+      "event_id": "5a8c49daf6691ebd1bd644e12662bc66894d93153618e9488bce7e4db27f7a31",
+      "raw_line_bytes": 3425,
+      "raw_line_sha256": "c7c44a37a4717dfdd1241dff06ced3a7a19aace35e96cb8383301a77fa93b80f"
+    },
+    "internal_textworld_pool_seed_recorded": false,
+    "game_rng_counter_recorded": false,
+    "exact_internal_rng_replay_claim_supported": false
+  },
+  "api_findings": {
+    "available_producer": "LocalInference",
+    "live_producer_api_present": false,
+    "live_environment_api_present": false,
+    "local_inference_gate_generations": 4,
+    "local_inference_gate_output_tokens": 88,
+    "local_inference_fixed_synthetic_prompt_count": 4,
+    "a96_collector_requires_synthetic_evidence": true,
+    "a96_plan_is_live_authority": false,
+    "existing_replay_twice_resets": 2,
+    "existing_replay_twice_actions": 12,
+    "existing_replay_twice_total_env_operations": 14,
+    "strict_target_env_operation_cap": 7,
+    "existing_ledger_enforces_combined_env_operation_cap": false,
+    "full_artifact_verifier_within_first_row_only_scope": false
+  },
+  "strict_target_limits": {
+    "wall_seconds": 600,
+    "model_loads": 1,
+    "generations": 1,
+    "generated_tokens": 16,
+    "input_tokens": 8192,
+    "context_probe_bytes": 1,
+    "environment_constructions": 1,
+    "resets": 1,
+    "saved_actions": 6,
+    "combined_reset_and_action_operations": 7,
+    "automatic_retry": false
+  },
+  "minimum_adapter_components": [
+    "distinct non-A96 fail-closed engineering permit/run identity",
+    "single-prompt inference route reusing existing model/device/PEFT/tensor guards",
+    "single-pass one-reset six-action replay path",
+    "combined physical environment-operation ledger cap",
+    "raw receipts, hashes, PID/device ownership and post-run integrity evidence"
+  ],
+  "unresolved_blockers": [
+    "no LiveProducer/_raw API in reviewed immutable source",
+    "current authenticated local inference path requires 4 generations/88 output tokens",
+    "A96 collector is synthetic-only and cannot authorize historical source",
+    "current replay_twice performs 14 environment operations, above target 7",
+    "current event ledger does not prove internal TextWorld pool seed or game RNG counter",
+    "current ledger lacks a combined reset-plus-action cap",
+    "strict trusted PID-to-device ownership must remain independently proven"
+  ],
+  "calls_made": {
+    "model": 0,
+    "tokenizer": 0,
+    "cuda": 0,
+    "alfworld": 0,
+    "project_validator": 0,
+    "tests": 0,
+    "preflight": 0,
+    "supervisor": 0,
+    "scientific_execution": 0,
+    "ssh": 0
+  },
+  "evidence_files": [
+    "STATIC_API_RECEIPT.json",
+    "STATIC_SOURCE_COMMAND_RECEIPT.json",
+    "HISTORICAL_FIRST_SOURCE_FIELDS.json",
+    "HISTORICAL_CAPTURE_COMMAND_RECEIPT.json",
+    "HISTORICAL_FIRST_SOURCE_FIELDS_V2.json",
+    "HISTORICAL_CAPTURE_V2_COMMAND_RECEIPT.json",
+    "HISTORICAL_SUMMARY_INSPECTION_ATTEMPT.json"
+  ]
+}

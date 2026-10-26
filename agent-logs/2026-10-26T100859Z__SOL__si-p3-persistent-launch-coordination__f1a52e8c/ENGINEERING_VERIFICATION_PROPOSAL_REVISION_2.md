@@ -1,0 +1,11 @@
+# SI-S01 bounded engineering observation — proposal revision2
+
+PREPARATION/DESIGN ONLY; no authorization, preflight or invocation. This addendum supersedes the original9ce41773 engineering proposal only on lawful engineering scope and historical comparison semantics; original bytes remain.
+
+The exactd7 source implementation exists and independently passes software review. Its actual LiveProducer and A96 Permit live in si_s01, not old si_p3. A separate engineering wrapper sharing the actual guarded production core is required; no fake A96 plan/permit/context may be used. Implementation scope is ENGINEERING_ADAPTER_IMPLEMENTATION_TASK.md.
+
+Use the single consumed G3 first source, nominalseed30000,1originalfirstprompt generation,1oldtask reset+6savedactions. Internal historical TextWorld pool seed/RNG counter are unrecorded. Choose pool42 for this engineering check and explicitly label it not reconstructed. Compare saved public observation/maps/Action-ID/commands/transitions only; no internal-state/exact-RNG replay claim even if all match. Read only bound first trajectory line and its reset/6transition/source-complete/firstgeneration receipts. New token tensor prepared-versus-sent equality must be observed; historical fields missing in raw evidence remain unrecorded. Public output/parser mismatch stops without replacement/reset retry.
+
+Hard combined scope:1model/tokenizer load,1explicit1byte context probe,1generation/max16output/8192input,1environmentconstruct,1reset+6steps=7operations,1close,600totalallocatedseconds. Authentic final supervisor interval is cost authority, not collector stage. Count all engineering calls/time separately as nonzero, preserve5142/7949 historical scientific ledger and future A96 budget.
+
+Actual execution still requires independently accepted exact implementation, trusted host/GPU process ownership, unchanged frozen artifacts, concrete immutable argv/env/run/absentoutput/proposal and one new root-issued engineering authorization. The old consumed engineering/G3 releases and source software PASS are not execution authority. No teacher, A96 sampling, training/evaluation, automatic retry or second engineering invocation is allowed by this proposal.

@@ -1,0 +1,63 @@
+{
+  "status": "EXACT_D7A_SOFTWARE_COMPARISON_ONLY_NOT_FINAL_ACCEPTANCE",
+  "prior_label": "exact9bc",
+  "prior_sha": "9bc15b593ec6144915762a2fb1b172e063fe2c48",
+  "candidate_sha": "d7a82acb510157ab7ba5439d790816c5c948439f",
+  "prior_ID_sets_path": "/home/lizening/research-notes/agent-logs/2026-10-26T112856Z__SOL__si-s01-independent-9bc15b59-suite__critic_9f246a5f/CANDIDATE_ID_SETS.json",
+  "prior_ID_sets_sha256": "843c20a4b788f0d5321f8cdbf4d18446108a6dd46423f4dee79aacee83948b38",
+  "prior_counts": {
+    "collected": 1112,
+    "passed": 1032,
+    "failed": 3,
+    "errors": 77,
+    "skipped": 0,
+    "collection_errors": 0
+  },
+  "candidate_counts": {
+    "collected": 1116,
+    "passed": 1036,
+    "failed": 3,
+    "errors": 77,
+    "skipped": 0,
+    "collection_errors": 0
+  },
+  "comparison_key_fields": [
+    "nodeid",
+    "phase",
+    "exception_type"
+  ],
+  "prior_problem_key_count": 80,
+  "candidate_problem_key_count": 80,
+  "NEW_failure_or_error_keys": [],
+  "resolved_prior_problem_keys": [],
+  "problem_keys_identical": true,
+  "strict_no_NEW_failure_ID_phase_type": true,
+  "prior_collection_missing_ids": [],
+  "added_test_ids": [
+    "tests/test_si_s01_runtime_reliability.py::test_post_kill_wait_uses_remaining_absolute_time_and_unknown_exit_stays_unknown",
+    "tests/test_si_s01_runtime_reliability.py::test_worker_marker_partial_write_is_never_published_as_final_json",
+    "tests/test_si_s01_runtime_reliability.py::test_atomic_marker_publication_cannot_overwrite_file_or_symlink",
+    "tests/test_si_s01_runtime_reliability.py::test_source_report_hours_are_explicit_through_run_closed_lower_bound"
+  ],
+  "added_test_count": 4,
+  "added_test_module_counts": {
+    "tests/test_si_s01_runtime_reliability.py": 4
+  },
+  "added_ids_not_passed": [],
+  "all_added_test_ids_passed": true,
+  "prior_node_order_preserved": true,
+  "collect_and_full_node_order_equal": true,
+  "same_runner_bytes_and_environment_verified": true,
+  "source_unchanged_and_clean": true,
+  "project_origins_unchanged": true,
+  "project_origins_in_isolated_worktree": true,
+  "legacy_module_content_hashes_equal_to_prior": true,
+  "torch_cuda_initialized_after_suite": false,
+  "diff_check_returncode": 0,
+  "py_compile_returncode": 0,
+  "prior_passed_ID_count": 1032,
+  "candidate_passed_ID_count": 1036,
+  "prior_passed_IDs_not_passed": [],
+  "prior_passed_IDs_newly_skipped": [],
+  "no_passed_ID_regressions": true
+}

@@ -1,0 +1,85 @@
+{
+  "status": "INDEPENDENT_BASE844_SOFTWARE_BASELINE_CAPTURED_NOT_CANDIDATE_ACCEPTANCE",
+  "target_sha": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+  "worktree": "/tmp/si-s01-baseline-844cc4b7-k7mq2ek7/checkout",
+  "provenance_directory": "/home/lizening/research-notes/agent-logs/2026-10-26T111621Z__SOL__si-s01-independent-base844-suite__critic_1f34d86d",
+  "counts": {
+    "collected": 1033,
+    "passed": 953,
+    "failed": 3,
+    "errors": 77,
+    "skipped": 0,
+    "collection_errors": 0
+  },
+  "collection_returncode": 0,
+  "full_pytest_returncode": 1,
+  "full_elapsed_seconds": 185.68149280827492,
+  "source_unchanged_and_clean": true,
+  "project_module_origins_unchanged_and_inside_detached_worktree": true,
+  "torch_imported_after_suite": true,
+  "torch_cuda_initialized_after_suite": false,
+  "missing_or_mismatched_historical_dependencies": [
+    {
+      "classification": "error",
+      "exception_type": "builtins.FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/tmp/si-s01-baseline-844cc4b7-k7mq2ek7/checkout/artifacts/runtime/validation/persistent-recovery-replay-continue-r9-20260909T033000Z/continue_branches.jsonl'",
+      "count": 6
+    },
+    {
+      "classification": "failure",
+      "exception_type": "builtins.FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/tmp/si-s01-baseline-844cc4b7-k7mq2ek7/checkout/artifacts/runtime/validation/persistent-recovery-source-pool-r7-20260909T000000Z/trajectories.jsonl'",
+      "count": 1
+    },
+    {
+      "classification": "error",
+      "exception_type": "builtins.RuntimeError",
+      "message": "frozen SFT adapter hash mismatch",
+      "count": 71
+    },
+    {
+      "classification": "failure",
+      "exception_type": "builtins.RuntimeError",
+      "message": "frozen SFT adapter hash mismatch",
+      "count": 1
+    },
+    {
+      "classification": "failure",
+      "exception_type": "builtins.FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/tmp/si-s01-baseline-844cc4b7-k7mq2ek7/checkout/artifacts/runtime/validation/progress-aware-r18-a-semantic/phase_a_freeze.json'",
+      "count": 1
+    }
+  ],
+  "historical_inputs_or_local_configs_copied": false,
+  "source_or_test_fixes_applied": false,
+  "author_reported_counts_equal": true,
+  "author_ID_type_reference_not_provided": true,
+  "do_not_infer_same_IDs_from_equal_counts": true,
+  "CPU_toy_fixture_activity": "Existing tiny CPU PEFT/model/tokenizer software tests ran; no claim of zero software activity or real P0/8B validation.",
+  "scope": "Default full tests path, no filters/deselections; no real production preflight/live/SSH/model/environment entrypoint invoked. Synthetic negative CLI/supervisor fixtures permitted.",
+  "comparison_contract": {
+    "runner": "baseline_runner.py",
+    "interpreter": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "isolated_flag": true,
+    "path_order": [
+      "<WORKTREE>/src",
+      "<WORKTREE>/tests",
+      "<WORKTREE>"
+    ],
+    "environment": "execution_environment.json",
+    "same_runner_and_environment_required_for_candidate": true
+  },
+  "principal_artifacts": [
+    "BASELINE_ID_SETS.json",
+    "full.collection_ids.json",
+    "full.reports.json",
+    "baseline.junit.xml",
+    "full.stdout",
+    "full.stderr",
+    "full.receipt.json",
+    "full.origins.before.json",
+    "full.origins.after.json",
+    "execution_summary.json",
+    "SAFETY_REVIEW.json"
+  ]
+}

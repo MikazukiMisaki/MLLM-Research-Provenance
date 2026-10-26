@@ -1,0 +1,127 @@
+{
+  "schema": "SI_S01_INCREMENTAL_RUNTIME_STATIC_REVIEW_V1",
+  "reviewer": "si_e2_runtime_critic",
+  "source_sha": "d7a82acb510157ab7ba5439d790816c5c948439f",
+  "direct_parent_sha": "9bc15b593ec6144915762a2fb1b172e063fe2c48",
+  "scope": "Complete immutable five-file incremental delta; no imports or execution of project/runtime/test code",
+  "decision": "INCREMENTAL_STATIC_PASS_RT01_RT02_RT03_WITH_EXECUTION_CONDITIONS",
+  "new_must_fix_production_findings": [],
+  "closure": {
+    "RT01": {
+      "status": "CLOSED_IN_STATIC_CODE",
+      "evidence": "Initial and post-kill worker waits now use nonnegative remaining absolute deadline. A missing exit stays null; reaping_error, unreaped PID/start_tick/UID, survivors and actual elapsed/within_time_cap are retained. No SIGKILL-to-success inference."
+    },
+    "RT02": {
+      "status": "CLOSED_IN_STATIC_CODE",
+      "evidence": "Only worker_start marker changes to same-directory mkstemp, full file write/flush/fsync, exclusive atomic hard-link publication and directory fsync. Existing destinations fail rather than overwrite; prior gate checks are byte-identical."
+    },
+    "RT03": {
+      "status": "CLOSED_IN_STATIC_CODE",
+      "evidence": "Source JSON and rendered Markdown explicitly label journal-close hours as a stage lower bound excluding audit/report/exit/cleanup, leave final total null and cite authentic supervisor_exit allocated_device_hours. Overlapping intervals must not be added."
+    }
+  },
+  "test_static_assessment": [
+    {
+      "name": "test_post_kill_wait_uses_remaining_absolute_time_and_unknown_exit_stays_unknown",
+      "target_coverage": "Calls real supervise_source deadline/receipt logic with a software unreaped-process boundary, clock advances beyond deadline, and requires remaining .9/.05 timeout calls plus null returncode/survivor/incomplete receipt. An unbounded wait regression cannot satisfy fake wait signature.",
+      "limits": "Popen, clock, prctl and process-discovery/kill helpers are replaced to model a nonexistent owned PID. This does NOT independently establish real ownership, process cleanup, kernel behavior or GPU release; no core source authorization/clearance guard is asserted passed by this test."
+    },
+    {
+      "name": "test_worker_marker_partial_write_is_never_published_as_final_json",
+      "target_coverage": "Actual thread interleaving pauses the fdopen filesystem edge after a flushed half-JSON. Real atomic_fresh_json must keep final marker absent until complete; actual link and fsync publication remain production operations."
+    },
+    {
+      "name": "test_atomic_marker_publication_cannot_overwrite_file_or_symlink",
+      "target_coverage": "Real filesystem file/symlink destinations remain byte-identical; exclusive publication raises and temp files are removed."
+    },
+    {
+      "name": "test_source_report_hours_are_explicit_through_run_closed_lower_bound",
+      "target_coverage": "Real production synthetic fixture/audit/rendered report retains fixed journal endpoint even after the software clock advances; asserts lower-bound/authority/null-final/do-not-add semantics. Auditor and renderer are not mocked."
+    }
+  ],
+  "unchanged_guard_blobs": {
+    "src/self_improvement/si_s01/gate.py": {
+      "base_blob": "f77d41096d96cc37ce26872cd6c3046b38427b9a",
+      "target_blob": "f77d41096d96cc37ce26872cd6c3046b38427b9a",
+      "identical": true
+    },
+    "src/self_improvement/si_s01/runtime.py": {
+      "base_blob": "0784832033bea7b89fd719824fbb21ec16017019",
+      "target_blob": "0784832033bea7b89fd719824fbb21ec16017019",
+      "identical": true
+    },
+    "scripts/run_si_s01_source_only.py": {
+      "base_blob": "01824652cf80eb924df5ff1a6fee1b773563f09d",
+      "target_blob": "01824652cf80eb924df5ff1a6fee1b773563f09d",
+      "identical": true
+    },
+    "src/self_improvement/si_p3/runtime_gate.py": {
+      "base_blob": "195982ec968aab14ee3189762938c42f7333da5d",
+      "target_blob": "195982ec968aab14ee3189762938c42f7333da5d",
+      "identical": true
+    },
+    "src/self_improvement/si_p3/runtime_backend.py": {
+      "base_blob": "232461e6ac87eb602bb7e3e253aab41624b618d2",
+      "target_blob": "232461e6ac87eb602bb7e3e253aab41624b618d2",
+      "identical": true
+    },
+    "src/self_improvement/si_p3/runtime_environment.py": {
+      "base_blob": "42de6a4fef9d4a4a3e5debc761001adbe183030f",
+      "target_blob": "42de6a4fef9d4a4a3e5debc761001adbe183030f",
+      "identical": true
+    }
+  },
+  "changed_file_bindings": [
+    {
+      "path": "docs/si_s01_source_only_v2.md",
+      "blob": "0e3ae9dfa4d5afaeee00ed4152df8b443489fc55",
+      "sha256": "c085523d7f67897aa81acf4bfb7b889589b6fcb990a8224b6832be018fee639c",
+      "bytes": 7375,
+      "lines": 35
+    },
+    {
+      "path": "src/self_improvement/si_s01/audit.py",
+      "blob": "2a0fcbb2dc40a6b8d04d9531b6e6713495a05d63",
+      "sha256": "9e29731041245282dc9243a381222fab5fc2e6d95c94d688edfa5c59b913bea8",
+      "bytes": 18992,
+      "lines": 171
+    },
+    {
+      "path": "src/self_improvement/si_s01/evidence.py",
+      "blob": "1e76395d45387076bddd05914ffaab98f85eb389",
+      "sha256": "4048468a1666d23547f0d48cfcd42d20edd526893498a0d91e7434ad3cb5a1f0",
+      "bytes": 7896,
+      "lines": 113
+    },
+    {
+      "path": "src/self_improvement/si_s01/supervisor.py",
+      "blob": "362d4c288c21391b31dee8c760ec6dc340c66f42",
+      "sha256": "3d08c02774f7115c0ebb3b224df52be576ae4c8a2e40fe767e3993b02b07da91",
+      "bytes": 7529,
+      "lines": 98
+    },
+    {
+      "path": "tests/test_si_s01_runtime_reliability.py",
+      "blob": "3322793de0134c808e922d1e5c6727df89fb9367",
+      "sha256": "87f36da6f960d52f6881da374112629be13eb9fff9a40a1c66d9edac2a6d15ae",
+      "bytes": 5966,
+      "lines": 99
+    }
+  ],
+  "conditions": [
+    "Overall final exact-SHA acceptance and actually executed full/focused software tests remain root-owned; this reviewer did not execute tests.",
+    "Final completed status requires the authentic supervisor receipt and its error/deadline/cleanup/survivor/timing fields; CLI returncode alone is insufficient.",
+    "Hardware host/NVML-to-container PID ownership and actual P0 resource proof remain unestablished separate execution NO_GO conditions; no guard or requirement is waived.",
+    "No genuine production preflight, clearance, live execution or scientific acceptance is granted here."
+  ],
+  "activity": {
+    "Git_and_static_file_reads_only": true,
+    "project_imports": 0,
+    "tests": 0,
+    "CUDA_NVML_model_tokenizer_ALFWorld_SSH_preflight_live_calls": 0,
+    "scientific_source_edits": 0,
+    "shared_INDEX_inventory_stage_push": 0
+  },
+  "record_created_utc": "2026-10-26T12:05:59.532711+00:00",
+  "review_start_wall_clock": "NOT_CAPTURED_NO_TIMESTAMP_INVENTED"
+}

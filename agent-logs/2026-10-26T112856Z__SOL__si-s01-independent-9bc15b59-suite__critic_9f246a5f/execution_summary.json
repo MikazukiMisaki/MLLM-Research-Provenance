@@ -1,0 +1,71 @@
+{
+  "status": "EXACT_9BC_SOFTWARE_EVIDENCE_NOT_FINAL_ACCEPTANCE",
+  "target_sha": "9bc15b593ec6144915762a2fb1b172e063fe2c48",
+  "baseline_sha": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+  "worktree": "/tmp/si-s01-candidate-9bc15b59-_wbk1wta/checkout",
+  "provenance_directory": "/home/lizening/research-notes/agent-logs/2026-10-26T112856Z__SOL__si-s01-independent-9bc15b59-suite__critic_9f246a5f",
+  "source_before": {
+    "sha": "9bc15b593ec6144915762a2fb1b172e063fe2c48",
+    "status": "",
+    "tree": "7ce2dbefee165d47138cca20ccef08f64ec7475b"
+  },
+  "source_after": {
+    "sha": "9bc15b593ec6144915762a2fb1b172e063fe2c48",
+    "status": "",
+    "tree": "7ce2dbefee165d47138cca20ccef08f64ec7475b"
+  },
+  "source_unchanged_and_clean": true,
+  "receipts": {
+    "collect": {
+      "argv": [
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+        "-I",
+        "/home/lizening/research-notes/agent-logs/2026-10-26T112856Z__SOL__si-s01-independent-9bc15b59-suite__critic_9f246a5f/baseline_runner.py",
+        "/tmp/si-s01-candidate-9bc15b59-_wbk1wta/checkout",
+        "/home/lizening/research-notes/agent-logs/2026-10-26T112856Z__SOL__si-s01-independent-9bc15b59-suite__critic_9f246a5f",
+        "collect"
+      ],
+      "cwd": "/tmp/si-s01-candidate-9bc15b59-_wbk1wta/checkout",
+      "authentic_returncode": 0,
+      "elapsed_seconds": 2.3843086920678616,
+      "stdout_bytes": 2728,
+      "stderr_bytes": 0
+    },
+    "full": {
+      "argv": [
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+        "-I",
+        "/home/lizening/research-notes/agent-logs/2026-10-26T112856Z__SOL__si-s01-independent-9bc15b59-suite__critic_9f246a5f/baseline_runner.py",
+        "/tmp/si-s01-candidate-9bc15b59-_wbk1wta/checkout",
+        "/home/lizening/research-notes/agent-logs/2026-10-26T112856Z__SOL__si-s01-independent-9bc15b59-suite__critic_9f246a5f",
+        "full"
+      ],
+      "cwd": "/tmp/si-s01-candidate-9bc15b59-_wbk1wta/checkout",
+      "authentic_returncode": 1,
+      "elapsed_seconds": 458.5827567372471,
+      "stdout_bytes": 105435,
+      "stderr_bytes": 0
+    }
+  },
+  "diff_check_returncode": 0,
+  "py_compile_returncode": 0,
+  "new_python_files_compiled": [
+    "scripts/run_si_s01_source_only.py",
+    "src/self_improvement/si_s01/__init__.py",
+    "src/self_improvement/si_s01/audit.py",
+    "src/self_improvement/si_s01/collector.py",
+    "src/self_improvement/si_s01/contract.py",
+    "src/self_improvement/si_s01/evidence.py",
+    "src/self_improvement/si_s01/gate.py",
+    "src/self_improvement/si_s01/runtime.py",
+    "src/self_improvement/si_s01/supervisor.py",
+    "tests/si_s01_support.py",
+    "tests/test_si_s01_gate.py",
+    "tests/test_si_s01_runtime_bridge.py",
+    "tests/test_si_s01_source_only.py",
+    "tests/test_si_s01_supervisor.py"
+  ],
+  "baseline_runner_sha256": "f1ae81f68f3ea75e65976c2726fa75be665684072482f84fdb61b5da570cb1ba",
+  "historical_inputs_copied": false,
+  "author_or_root_checkout_modified": false
+}

@@ -1,0 +1,15 @@
+# SI-S01 independent exact-SHA review
+
+**CHANGES_REQUIRED — exact9bc15b593ec6144915762a2fb1b172e063fe2c48. No launch clearance.**
+
+The complete delta from844cc4b contains15 new files and changes no old tracked source/test file. The adopted A96/P0/source-only protocol maps correctly: fixed identity/family/order/seed42/pool42/d5/H50, zero teacher, complete96 seal, normal Y0 versus technicalNA, strict cost reservations and E/F/S necessary-condition interpretation. Old R19/G4/SI-E1/E2 code and strict GPU guards remain unchanged. This statement concerns conformance to the newly adopted trial, not identity with the old R19 schedule.
+
+Independent pinned full suite:1112 collected,1032 passed,3 failed,77 errors, authentic exit1. The exact80 nodeID+phase+exception-type keys match independent base844, with no new keys or missing baseline IDs;79 added tests all pass. diff-check and14 added Python compilations returned0, with clean exact source and stable import origins. Existing tiny CPU software toys ran; no production8B/tokenizer/CUDA/ALFWorld/train/eval was invoked. The known baseline missing artifacts are not repaired or treated as new source-only failures.
+
+Independent literal oracle:7/7 full96 software cases match totals, family counts and statuses. These are672 synthetic sources using actual production producer/collector/parser/journal/ledger/auditor/report and fake external model/environment edges. They do not measure real source supply or learning. Root separately reran the original two-path reproducer on9bc: initialization/cleanup produces truthful TECHNICAL_STOP; step50 empty-map now closes96 normal sources with frozen horizon priority. Both authentic subprocesses returned0.
+
+A separate pure real-metadata binding check, with neural/environment imports blocked, confirms96 fixed identities/order and42/42/d5. It produced only a reference plan hash41ae5f2ae999e5682e7207084282b74fa053287391654ac30c2acabbcb5170b3; it created no runnable production plan, authorization or source unit.
+
+Two required P2 reliability repairs remain: supervisor.py58 must not wait indefinitely after kill; gate.py119–122 must not read a partially published worker-start marker. The source report must also label its device-hour endpoint honestly: collector run_closed is before later audit/report/cleanup, while the authentic supervisor exit is the final allocation-cost authority. Exact paths, triggers and narrow authorized edits are in BOUNDED_RUNTIME_FIX_RULING.md. These are concrete static paths; no real kernel hang or real failed scientific launch is claimed.
+
+The author has received the minimal ruling and is repairing these new-namespace boundaries while preserving the original9bc evidence. This review is immutable for9bc; a replacement SHA needs separate acceptance. Actual host/PID ownership, genuine P0 resource verification, positive production preflight and a new independent concrete clearance remain unproven/not run. Historical5142 generations/7949 reset-inclusive operations are unchanged. Synthetic reports do not authorize teacher, training, evaluation or scientific launch.

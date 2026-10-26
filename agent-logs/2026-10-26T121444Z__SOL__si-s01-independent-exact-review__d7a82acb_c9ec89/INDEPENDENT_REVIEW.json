@@ -1,0 +1,169 @@
+{
+  "schema": "SI_S01_ROOT_EXACT_REVIEW_V2",
+  "reviewer_role": "INDEPENDENT_ROOT",
+  "started_utc": "2026-10-26T12:14:44.109701+00:00",
+  "finished_utc": "2026-10-26T12:14:46.224502+00:00",
+  "target_sha": "d7a82acb510157ab7ba5439d790816c5c948439f",
+  "direct_parent_sha": "9bc15b593ec6144915762a2fb1b172e063fe2c48",
+  "base_sha": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+  "IMPLEMENTATION_REVIEW": "PASS_SOURCE_ONLY_SOFTWARE",
+  "independent_review_method": "Prior complete 15-file source review plus personally inspected entire five-file immutable incremental delta; independent fresh exact-target full suite; independent static runtime closure; authentic developer handoff and live Git ref checked separately.",
+  "regression": {
+    "candidate_sha": "d7a82acb510157ab7ba5439d790816c5c948439f",
+    "status": "EXACT_D7A_SOFTWARE_COMPARISON_ONLY_NOT_FINAL_ACCEPTANCE",
+    "counts": {
+      "collected": 1116,
+      "passed": 1036,
+      "failed": 3,
+      "errors": 77,
+      "skipped": 0,
+      "collection_errors": 0
+    },
+    "comparisons": {
+      "base844": {
+        "prior_sha": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+        "prior_problem_key_count": 80,
+        "candidate_problem_key_count": 80,
+        "strict_no_NEW_failure_ID_phase_type": true,
+        "problem_keys_identical": true,
+        "NEW_failure_or_error_keys": [],
+        "resolved_prior_problem_keys": [],
+        "prior_collection_missing_ids": [],
+        "added_test_count": 83,
+        "all_added_test_ids_passed": true,
+        "same_runner_bytes_and_environment_verified": true,
+        "prior_passed_ID_count": 953,
+        "candidate_passed_ID_count": 1036,
+        "prior_passed_IDs_not_passed": [],
+        "prior_passed_IDs_newly_skipped": [],
+        "no_passed_ID_regressions": true
+      },
+      "exact9bc": {
+        "prior_sha": "9bc15b593ec6144915762a2fb1b172e063fe2c48",
+        "prior_problem_key_count": 80,
+        "candidate_problem_key_count": 80,
+        "strict_no_NEW_failure_ID_phase_type": true,
+        "problem_keys_identical": true,
+        "NEW_failure_or_error_keys": [],
+        "resolved_prior_problem_keys": [],
+        "prior_collection_missing_ids": [],
+        "added_test_count": 4,
+        "all_added_test_ids_passed": true,
+        "same_runner_bytes_and_environment_verified": true,
+        "prior_passed_ID_count": 1032,
+        "candidate_passed_ID_count": 1036,
+        "prior_passed_IDs_not_passed": [],
+        "prior_passed_IDs_newly_skipped": [],
+        "no_passed_ID_regressions": true
+      }
+    }
+  },
+  "full_suite_authentic_returncode": 1,
+  "historical_failure_policy": "Known 3 failures/77 errors are present on independently tested base844, exact9bc, exactd7 with identical IDs/phase/type; no repaired historical artifacts or scope widening.",
+  "prior_tracked_entries": 543,
+  "prior_tracked_entries_unchanged": true,
+  "new_files_added": 16,
+  "new_related_tests_passed": 83,
+  "source_treatment_semantics_changed_relative_to_adopted_protocol": false,
+  "scientific_execution_behavior_changed": true,
+  "execution_behavior_scope": "Adds separately gated A96 source-only runtime; old R19/G4/SI-E1/SI-E2 tracked behavior unchanged.",
+  "offline_evidence_validation_behavior_changed": true,
+  "frozen_schedule_protocol_exclusions": "MATCH_FIXED_A96_35_26_16_9_10_SEED42_POOL42_D5_H50_NO_HELDOUT_TEACHER_TRAIN_EVAL",
+  "budget": "4800 generations / 4896 reset-inclusive envops / 76800 generated tokens / 16M input / 8192 per-call / 4 allocated device-hours; tighten-only; failures retain physical reservations.",
+  "RT01": "CLOSED_BOUNDED_ABSOLUTE_DEADLINE_UNKNOWN_EXIT_NULL",
+  "RT02": "CLOSED_ATOMIC_EXCLUSIVE_DURABLE_WORKER_MARKER",
+  "RT03": "CLOSED_STAGE_LOWER_BOUND_FINAL_SUPERVISOR_AUTHORITY_DO_NOT_ADD",
+  "first_source_episode_integration": "NONEMPTY_REAL_PRODUCTION_FUNCTIONS_WITH_SYNTHETIC_MODEL_ENV_EDGES_ONLY",
+  "statistical_vector_evidence": {
+    "status": "7_OF_7_LITERAL_ORACLE_MATCH_AT_EXACT_PARENT_9BC",
+    "synthetic_sources": 672,
+    "carried_forward_by_inspected_incremental_scope": true,
+    "executed_again_on_d7": false,
+    "reason": "Collector/contract/runtime/gate unchanged; auditor predicate statements unchanged; only reporting fields/helper/supervisor/new reliability tests changed."
+  },
+  "actual_original_metadata_binding": "Pure bind_plan at parent9bc matched 96/order/42/42/d5; contract unchanged in d7. No real executable plan created.",
+  "G2_CARRY_FORWARD": "AUTHENTIC_HISTORICAL_ONLY_UNCHANGED_NOT_RERUN_NOT_NEW_TRIAL_EXECUTION_PROOF",
+  "known_failed_G3_unit": "OLD_RAW_REGISTRY_MANIFEST_DISPOSITION_AND_COST_PRESERVED_NO_RETRY_OR_RECLASSIFICATION",
+  "historical_scientific_cost_unchanged": {
+    "generations": 5142,
+    "reset_inclusive_environment_operations": 7949
+  },
+  "engineering_first_source_restart_comparison": "NOT_RUN; historical internal TextWorld pool/RNG counter not recorded. Any engineering replay must state observed state/map/command compatibility only.",
+  "actual_runtime": "NOT_PROVEN_HOST_TO_LOCAL_GPU_PID_MAPPING_MISSING",
+  "positive_production_preflight": "NOT_RUN",
+  "launch_clearance": "NOT_GRANTED",
+  "scientific_experiment_started": false,
+  "future_sha_covered": false,
+  "conditions": [
+    "This PASS applies only to exact d7 and adopted source-only software, never teacher/training/evaluation or future code.",
+    "Engineering one-historical-source adapter needs distinct legitimate authorization/scope; fake A96 Plan/Permit or manual ledger state is forbidden.",
+    "Trusted host/GPU process ownership and actual frozen P0 compatibility must be established without weakening guards.",
+    "No A96 model/environment execution before authentic zero-science preflight, independent exact-proposal review and fresh single-launch clearance.",
+    "Final source completion requires authentic supervisor status/returncode/errors/deadline/cleanup/survivor/timing fields and raw-auditor result; CLI rc0 alone is insufficient.",
+    "Source report hours end at collector_run_closed and are lower bounds; authentic supervisor_exit allocated_device_hours is final total and intervals must not be added.",
+    "On technical/budget/integrity or snapshot failure stop without retry, topup/replacement/new seed; preserve raw evidence and all costs."
+  ],
+  "activity": "Independent full pytest includes tiny CPU model/training fixtures and synthetic edges. Zero production 8B/cache tokenizer/CUDA/ALFWorld/training/evaluation/SSH-server/preflight/science calls.",
+  "evidence": {
+    "protocol": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c/ADOPTED_SOURCE_ONLY_PROTOCOL.md",
+      "bytes": 6310,
+      "sha256": "daa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72"
+    },
+    "implementation_task": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c/SOURCE_ONLY_IMPLEMENTATION_TASK.md",
+      "bytes": 5184,
+      "sha256": "5fd913a8d980f8e3eba551e3d377221c691033c090bb5a3a9af3b3ce7845263c"
+    },
+    "developer_handoff": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T102514Z__CODEX__si-s01-source-only-implementation__f1a52e8c/HANDOFF.md",
+      "bytes": 7449,
+      "sha256": "de91c341cbe312f1fb158ff51b2b469d12cc96ab7b6fb6b3f749e15ab7bd4602"
+    },
+    "developer_publication_manifest": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T102514Z__CODEX__si-s01-source-only-implementation__f1a52e8c/PUBLICATION_MANIFEST.json",
+      "bytes": 72659,
+      "sha256": "3b14c027fb95bd23a9e4acc7c8b5bb3f4393e26c1153a69b177e9dc1bd0c9eaa"
+    },
+    "independent_full_comparison": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T120408Z__SOL__si-s01-independent-d7a82acb-suite__critic_70e20660/COMPARISON_SUMMARY.json",
+      "bytes": 1715,
+      "sha256": "b704c8d422b873adbf42e5f0f51dc3f752af1eadb42de67c2e57e78bcb6ed812"
+    },
+    "independent_full_execution": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T120408Z__SOL__si-s01-independent-d7a82acb-suite__critic_70e20660/full.receipt.json",
+      "bytes": 612,
+      "sha256": "4eb2baf54eadda0fe252972a765b2c1478f2542d8c7b3ead8aa00a579fed646b"
+    },
+    "independent_original_passing_comparison": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T120408Z__SOL__si-s01-independent-d7a82acb-suite__critic_70e20660/PASS_REGRESSION_COMPARISON.json",
+      "bytes": 637,
+      "sha256": "006093c4d1f9a45adc979fbfbdc2fd381dd791efe95999820e9f84225a704a76"
+    },
+    "independent_runtime_closure": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T120559Z__CRITIC__si-s01-runtime-incremental__d7a82acb/incremental_runtime_static_review.json",
+      "bytes": 6736,
+      "sha256": "48b0fb2085d46b18084964808a6202f16c0d0677c67ff7497cfc3d64473456a5"
+    },
+    "prior_exact_review": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T112925Z__SOL__si-s01-independent-exact-review__9bc15b5_ffbdae/INDEPENDENT_REVIEW.json",
+      "bytes": 5296,
+      "sha256": "13549c66d76ca773914afa7c589ac80120a0bba0dd38208a837db48de168b871"
+    },
+    "independent_base_ids": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T111621Z__SOL__si-s01-independent-base844-suite__critic_1f34d86d/BASELINE_ID_SETS.json",
+      "bytes": 161490,
+      "sha256": "7f6c762e6c02bc144d371102cd4dd9acb5e1dddc8c1ec7898ec0124f95911499"
+    },
+    "independent_literal_vectors": {
+      "path": "/home/lizening/research-notes/agent-logs/20261026T111709Z__CRITIC__si-s01-independent-efs-vectors__b3acdd/EFS_ACCEPTANCE_VECTORS.json",
+      "bytes": 17951,
+      "sha256": "e6f7a7ccb12264c92a46c31c1b60856df151b447e40b03edd9db7edaacf35402"
+    },
+    "actual_seven_vectors_parent": {
+      "path": "/home/lizening/research-notes/agent-logs/20261026T113105Z__CRITIC__si-s01-exact9bc-vector-evidence__da832e/SUMMARY.json",
+      "bytes": 1197,
+      "sha256": "0adf90b144800906336063c1404f6e4910756843c03c122eff9d1f59ad458015"
+    }
+  }
+}

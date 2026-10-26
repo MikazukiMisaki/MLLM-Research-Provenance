@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "-c",
+    "from pathlib import Path;import py_compile;out=Path('/tmp/si-s01-compile-v2');out.mkdir(exist_ok=False);paths=list(Path('src/self_improvement/si_s01').glob('*.py'))+[Path('scripts/run_si_s01_source_only.py')]+list(Path('tests').glob('*si_s01*.py'));[(py_compile.compile(str(p),cfile=str(out/(p.name+'.pyc')),doraise=True)) for p in paths];print('Compiled',len(paths),'files into explicit software temp directory')"
+  ],
+  "authentic_returncode": 0,
+  "elapsed_seconds": 0.05589930061250925,
+  "scope": "standard-library py_compile only; not imports/runtime"
+}

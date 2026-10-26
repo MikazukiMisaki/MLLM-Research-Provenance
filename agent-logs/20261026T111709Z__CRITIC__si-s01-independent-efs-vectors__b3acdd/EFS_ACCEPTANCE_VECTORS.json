@@ -1,0 +1,604 @@
+{
+  "schema": "SI_S01_INDEPENDENT_LITERAL_EFS_VECTORS_V1",
+  "status": "DESIGN_VECTORS_ONLY_NOT_SOFTWARE_PASS_NOT_RUNTIME_AUTHORIZATION",
+  "generated_utc": "2026-10-26T11:19:26.477158+00:00",
+  "authority": {
+    "protocol_path": "/home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c/ADOPTED_SOURCE_ONLY_PROTOCOL.md",
+    "sha256_before": "daa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72",
+    "sha256_after": "daa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72"
+  },
+  "independence": {
+    "project_imports": false,
+    "production_threshold_constants_used": false,
+    "project_runtime_model_env_tokenizer_cuda_tests_network_calls": 0,
+    "new_real_task_bodies_or_results_read": false,
+    "future_real_schedule": false
+  },
+  "literal_protocol": {
+    "family_order": [
+      "pick_and_place_simple",
+      "pick_clean_then_place_in_recep",
+      "pick_cool_then_place_in_recep",
+      "pick_heat_then_place_in_recep",
+      "pick_two_obj_and_place"
+    ],
+    "N": [
+      35,
+      26,
+      16,
+      9,
+      10
+    ],
+    "E_family_floor": [
+      22,
+      17,
+      10,
+      6,
+      7
+    ],
+    "F_family_floor": [
+      9,
+      6,
+      4,
+      2,
+      3
+    ],
+    "S_family_floor": [
+      9,
+      6,
+      4,
+      2,
+      3
+    ],
+    "total_E_floor": 72,
+    "total_F_floor": 24,
+    "total_S_floor": 24
+  },
+  "slot_index_convention": "For each family, character j in slot_modes_by_family_local_index is family-local index j (zero based) in the synthetic Plan order. No real identity or seed is supplied.",
+  "mode_specification": {
+    "N": {
+      "name": "noneligible_normal_success_action1",
+      "source_normal": true,
+      "Y0": 1,
+      "E": false,
+      "generation_attempts": 1,
+      "executed_actions": 1,
+      "terminal_after_action": 1,
+      "terminal_reward": 1,
+      "anchor": "NO_ELIGIBLE_STATE; normal terminal before action5",
+      "state_after_action1": {
+        "done": true,
+        "truncated": false,
+        "valid_actions": []
+      }
+    },
+    "S": {
+      "name": "eligible_normal_success_action6",
+      "source_normal": true,
+      "Y0": 1,
+      "E": true,
+      "generation_attempts": 6,
+      "executed_actions": 6,
+      "terminal_after_action": 6,
+      "terminal_reward": 1,
+      "state_after_action5": {
+        "done": false,
+        "truncated": false,
+        "reward": 0,
+        "valid_actions_nonempty": true
+      },
+      "anchor": "Seal the real after-action5 state before generation6; action5 itself must not terminate",
+      "state_after_action6": {
+        "done": true,
+        "truncated": false,
+        "valid_actions": []
+      }
+    },
+    "F": {
+      "name": "eligible_normal_actor_parse_failure_attempt6",
+      "source_normal": true,
+      "Y0": 0,
+      "E": true,
+      "generation_attempts": 6,
+      "executed_actions": 5,
+      "terminal_after_action": null,
+      "terminal_reward": 0,
+      "state_after_action5": {
+        "done": false,
+        "truncated": false,
+        "reward": 0,
+        "valid_actions_nonempty": true
+      },
+      "anchor": "Seal after-action5 before attempt6; retain this valid S5 after parse failure",
+      "attempt6": "A complete Generation envelope decoded to text rejected by the real frozen P0 parser; execute no sixth action",
+      "source_termination": "invalid_actor (normal fail-closed, not a callback exception)"
+    }
+  },
+  "essential_qualifications": [
+    "S5 must be alive after action5. Mode S terminates at action6, never at action5.",
+    "Each completed case has exactly96 normal sources; normal parse failure is Y0=0, not technical NA.",
+    "Every teacher outcome remains NA; NOT_FUTILE is only a necessary source upper-bound result.",
+    "Family F/S floors each sum to24, so Ftotal23 or Stotal23 cannot avoid at least one family deficit.",
+    "Expected violation names are explanatory independent-oracle fields; production need not expose these names.",
+    "Use production parser/collector/journal/auditor, replacing only the external synthetic model/environment boundaries. Never mock the auditor or force parser results.",
+    "Token counts, prompt bodies, rendered inputs, task identities and hardware timing are not fabricated by these vectors."
+  ],
+  "cases": [
+    {
+      "id": "01_exact_E72_F24",
+      "slot_modes_by_family_local_index": {
+        "pick_and_place_simple": "FFFFFFFFFSSSSSSSSSSSSSSSSNNNNNNNNNN",
+        "pick_clean_then_place_in_recep": "FFFFFFSSSSSSSSSSSSSNNNNNNN",
+        "pick_cool_then_place_in_recep": "FFFFSSSSSSSSNNNN",
+        "pick_heat_then_place_in_recep": "FFSSSSSSN",
+        "pick_two_obj_and_place": "FFFSSSSSNN"
+      },
+      "expected": {
+        "status": "SOURCE_UPPER_BOUNDS_NOT_FUTILE",
+        "normal_sources": 96,
+        "source_phase_sealed": true,
+        "YT_for_every_slot": null,
+        "teacher_status": "TEACHER_NOT_AUTHORIZED_SOURCE_ONLY",
+        "source_Y0": {
+          "successes": 72,
+          "failures": 24
+        },
+        "upper_bounds": {
+          "E": 72,
+          "F": 24,
+          "S": 48,
+          "by_family": {
+            "pick_and_place_simple": {
+              "E": 25,
+              "F": 9,
+              "S": 16
+            },
+            "pick_clean_then_place_in_recep": {
+              "E": 19,
+              "F": 6,
+              "S": 13
+            },
+            "pick_cool_then_place_in_recep": {
+              "E": 12,
+              "F": 4,
+              "S": 8
+            },
+            "pick_heat_then_place_in_recep": {
+              "E": 8,
+              "F": 2,
+              "S": 6
+            },
+            "pick_two_obj_and_place": {
+              "E": 8,
+              "F": 3,
+              "S": 5
+            }
+          }
+        },
+        "violations_for_explanation_only": [],
+        "synthetic_boundary_calls": {
+          "model_load": 1,
+          "env_construct": 96,
+          "reset": 96,
+          "generation": 456,
+          "step": 432,
+          "env_close": 96,
+          "environment_operations": 528,
+          "teacher_generation": 0,
+          "branch_reset": 0,
+          "replay_step": 0
+        }
+      }
+    },
+    {
+      "id": "02_E_total71_only",
+      "slot_modes_by_family_local_index": {
+        "pick_and_place_simple": "FFFFFFFFFSSSSSSSSSSSSSSSNNNNNNNNNNN",
+        "pick_clean_then_place_in_recep": "FFFFFFSSSSSSSSSSSSSNNNNNNN",
+        "pick_cool_then_place_in_recep": "FFFFSSSSSSSSNNNN",
+        "pick_heat_then_place_in_recep": "FFSSSSSSN",
+        "pick_two_obj_and_place": "FFFSSSSSNN"
+      },
+      "expected": {
+        "status": "COMPLETE_SOURCE96_STRUCTURAL_NO_GO",
+        "normal_sources": 96,
+        "source_phase_sealed": true,
+        "YT_for_every_slot": null,
+        "teacher_status": "TEACHER_NOT_AUTHORIZED_SOURCE_ONLY",
+        "source_Y0": {
+          "successes": 72,
+          "failures": 24
+        },
+        "upper_bounds": {
+          "E": 71,
+          "F": 24,
+          "S": 47,
+          "by_family": {
+            "pick_and_place_simple": {
+              "E": 24,
+              "F": 9,
+              "S": 15
+            },
+            "pick_clean_then_place_in_recep": {
+              "E": 19,
+              "F": 6,
+              "S": 13
+            },
+            "pick_cool_then_place_in_recep": {
+              "E": 12,
+              "F": 4,
+              "S": 8
+            },
+            "pick_heat_then_place_in_recep": {
+              "E": 8,
+              "F": 2,
+              "S": 6
+            },
+            "pick_two_obj_and_place": {
+              "E": 8,
+              "F": 3,
+              "S": 5
+            }
+          }
+        },
+        "violations_for_explanation_only": [
+          "E_total_below_72"
+        ],
+        "synthetic_boundary_calls": {
+          "model_load": 1,
+          "env_construct": 96,
+          "reset": 96,
+          "generation": 451,
+          "step": 427,
+          "env_close": 96,
+          "environment_operations": 523,
+          "teacher_generation": 0,
+          "branch_reset": 0,
+          "replay_step": 0
+        }
+      }
+    },
+    {
+      "id": "03_F_total23_with_necessary_family_deficit",
+      "slot_modes_by_family_local_index": {
+        "pick_and_place_simple": "FFFFFFFFSSSSSSSSSSSSSSSSSNNNNNNNNNN",
+        "pick_clean_then_place_in_recep": "FFFFFFSSSSSSSSSSSSSNNNNNNN",
+        "pick_cool_then_place_in_recep": "FFFFSSSSSSSSNNNN",
+        "pick_heat_then_place_in_recep": "FFSSSSSSN",
+        "pick_two_obj_and_place": "FFFSSSSSNN"
+      },
+      "expected": {
+        "status": "COMPLETE_SOURCE96_STRUCTURAL_NO_GO",
+        "normal_sources": 96,
+        "source_phase_sealed": true,
+        "YT_for_every_slot": null,
+        "teacher_status": "TEACHER_NOT_AUTHORIZED_SOURCE_ONLY",
+        "source_Y0": {
+          "successes": 73,
+          "failures": 23
+        },
+        "upper_bounds": {
+          "E": 72,
+          "F": 23,
+          "S": 49,
+          "by_family": {
+            "pick_and_place_simple": {
+              "E": 25,
+              "F": 8,
+              "S": 17
+            },
+            "pick_clean_then_place_in_recep": {
+              "E": 19,
+              "F": 6,
+              "S": 13
+            },
+            "pick_cool_then_place_in_recep": {
+              "E": 12,
+              "F": 4,
+              "S": 8
+            },
+            "pick_heat_then_place_in_recep": {
+              "E": 8,
+              "F": 2,
+              "S": 6
+            },
+            "pick_two_obj_and_place": {
+              "E": 8,
+              "F": 3,
+              "S": 5
+            }
+          }
+        },
+        "violations_for_explanation_only": [
+          "F_total_below_24",
+          "F_family:pick_and_place_simple"
+        ],
+        "synthetic_boundary_calls": {
+          "model_load": 1,
+          "env_construct": 96,
+          "reset": 96,
+          "generation": 456,
+          "step": 433,
+          "env_close": 96,
+          "environment_operations": 529,
+          "teacher_generation": 0,
+          "branch_reset": 0,
+          "replay_step": 0
+        }
+      }
+    },
+    {
+      "id": "04_S_total23_with_necessary_family_deficit",
+      "slot_modes_by_family_local_index": {
+        "pick_and_place_simple": "FFFFFFFFFFFFFFFFFSSSSSSSSNNNNNNNNNN",
+        "pick_clean_then_place_in_recep": "FFFFFFFFFFFFFSSSSSSNNNNNNN",
+        "pick_cool_then_place_in_recep": "FFFFFFFFSSSSNNNN",
+        "pick_heat_then_place_in_recep": "FFFFFFSSN",
+        "pick_two_obj_and_place": "FFFFFSSSNN"
+      },
+      "expected": {
+        "status": "COMPLETE_SOURCE96_STRUCTURAL_NO_GO",
+        "normal_sources": 96,
+        "source_phase_sealed": true,
+        "YT_for_every_slot": null,
+        "teacher_status": "TEACHER_NOT_AUTHORIZED_SOURCE_ONLY",
+        "source_Y0": {
+          "successes": 47,
+          "failures": 49
+        },
+        "upper_bounds": {
+          "E": 72,
+          "F": 49,
+          "S": 23,
+          "by_family": {
+            "pick_and_place_simple": {
+              "E": 25,
+              "F": 17,
+              "S": 8
+            },
+            "pick_clean_then_place_in_recep": {
+              "E": 19,
+              "F": 13,
+              "S": 6
+            },
+            "pick_cool_then_place_in_recep": {
+              "E": 12,
+              "F": 8,
+              "S": 4
+            },
+            "pick_heat_then_place_in_recep": {
+              "E": 8,
+              "F": 6,
+              "S": 2
+            },
+            "pick_two_obj_and_place": {
+              "E": 8,
+              "F": 5,
+              "S": 3
+            }
+          }
+        },
+        "violations_for_explanation_only": [
+          "S_total_below_24",
+          "S_family:pick_and_place_simple"
+        ],
+        "synthetic_boundary_calls": {
+          "model_load": 1,
+          "env_construct": 96,
+          "reset": 96,
+          "generation": 456,
+          "step": 407,
+          "env_close": 96,
+          "environment_operations": 503,
+          "teacher_generation": 0,
+          "branch_reset": 0,
+          "replay_step": 0
+        }
+      }
+    },
+    {
+      "id": "05_only_E_family_deficit",
+      "slot_modes_by_family_local_index": {
+        "pick_and_place_simple": "FFFFFFFFFSSSSSSSSSSSSNNNNNNNNNNNNNN",
+        "pick_clean_then_place_in_recep": "FFFFFFSSSSSSSSSSSSSSSSNNNN",
+        "pick_cool_then_place_in_recep": "FFFFSSSSSSSSNNNN",
+        "pick_heat_then_place_in_recep": "FFSSSSSSN",
+        "pick_two_obj_and_place": "FFFSSSSSSN"
+      },
+      "expected": {
+        "status": "COMPLETE_SOURCE96_STRUCTURAL_NO_GO",
+        "normal_sources": 96,
+        "source_phase_sealed": true,
+        "YT_for_every_slot": null,
+        "teacher_status": "TEACHER_NOT_AUTHORIZED_SOURCE_ONLY",
+        "source_Y0": {
+          "successes": 72,
+          "failures": 24
+        },
+        "upper_bounds": {
+          "E": 72,
+          "F": 24,
+          "S": 48,
+          "by_family": {
+            "pick_and_place_simple": {
+              "E": 21,
+              "F": 9,
+              "S": 12
+            },
+            "pick_clean_then_place_in_recep": {
+              "E": 22,
+              "F": 6,
+              "S": 16
+            },
+            "pick_cool_then_place_in_recep": {
+              "E": 12,
+              "F": 4,
+              "S": 8
+            },
+            "pick_heat_then_place_in_recep": {
+              "E": 8,
+              "F": 2,
+              "S": 6
+            },
+            "pick_two_obj_and_place": {
+              "E": 9,
+              "F": 3,
+              "S": 6
+            }
+          }
+        },
+        "violations_for_explanation_only": [
+          "E_family:pick_and_place_simple"
+        ],
+        "synthetic_boundary_calls": {
+          "model_load": 1,
+          "env_construct": 96,
+          "reset": 96,
+          "generation": 456,
+          "step": 432,
+          "env_close": 96,
+          "environment_operations": 528,
+          "teacher_generation": 0,
+          "branch_reset": 0,
+          "replay_step": 0
+        }
+      }
+    },
+    {
+      "id": "06_only_F_family_deficit_total24",
+      "slot_modes_by_family_local_index": {
+        "pick_and_place_simple": "FFFFFFFFSSSSSSSSSSSSSSSSSNNNNNNNNNN",
+        "pick_clean_then_place_in_recep": "FFFFFFFSSSSSSSSSSSSNNNNNNN",
+        "pick_cool_then_place_in_recep": "FFFFSSSSSSSSNNNN",
+        "pick_heat_then_place_in_recep": "FFSSSSSSN",
+        "pick_two_obj_and_place": "FFFSSSSSNN"
+      },
+      "expected": {
+        "status": "COMPLETE_SOURCE96_STRUCTURAL_NO_GO",
+        "normal_sources": 96,
+        "source_phase_sealed": true,
+        "YT_for_every_slot": null,
+        "teacher_status": "TEACHER_NOT_AUTHORIZED_SOURCE_ONLY",
+        "source_Y0": {
+          "successes": 72,
+          "failures": 24
+        },
+        "upper_bounds": {
+          "E": 72,
+          "F": 24,
+          "S": 48,
+          "by_family": {
+            "pick_and_place_simple": {
+              "E": 25,
+              "F": 8,
+              "S": 17
+            },
+            "pick_clean_then_place_in_recep": {
+              "E": 19,
+              "F": 7,
+              "S": 12
+            },
+            "pick_cool_then_place_in_recep": {
+              "E": 12,
+              "F": 4,
+              "S": 8
+            },
+            "pick_heat_then_place_in_recep": {
+              "E": 8,
+              "F": 2,
+              "S": 6
+            },
+            "pick_two_obj_and_place": {
+              "E": 8,
+              "F": 3,
+              "S": 5
+            }
+          }
+        },
+        "violations_for_explanation_only": [
+          "F_family:pick_and_place_simple"
+        ],
+        "synthetic_boundary_calls": {
+          "model_load": 1,
+          "env_construct": 96,
+          "reset": 96,
+          "generation": 456,
+          "step": 432,
+          "env_close": 96,
+          "environment_operations": 528,
+          "teacher_generation": 0,
+          "branch_reset": 0,
+          "replay_step": 0
+        }
+      }
+    },
+    {
+      "id": "07_only_S_family_deficit_total24",
+      "slot_modes_by_family_local_index": {
+        "pick_and_place_simple": "FFFFFFFFFFFFFFFFFSSSSSSSSNNNNNNNNNN",
+        "pick_clean_then_place_in_recep": "FFFFFFFFFFFFSSSSSSSNNNNNNN",
+        "pick_cool_then_place_in_recep": "FFFFFFFFSSSSNNNN",
+        "pick_heat_then_place_in_recep": "FFFFFFSSN",
+        "pick_two_obj_and_place": "FFFFFSSSNN"
+      },
+      "expected": {
+        "status": "COMPLETE_SOURCE96_STRUCTURAL_NO_GO",
+        "normal_sources": 96,
+        "source_phase_sealed": true,
+        "YT_for_every_slot": null,
+        "teacher_status": "TEACHER_NOT_AUTHORIZED_SOURCE_ONLY",
+        "source_Y0": {
+          "successes": 48,
+          "failures": 48
+        },
+        "upper_bounds": {
+          "E": 72,
+          "F": 48,
+          "S": 24,
+          "by_family": {
+            "pick_and_place_simple": {
+              "E": 25,
+              "F": 17,
+              "S": 8
+            },
+            "pick_clean_then_place_in_recep": {
+              "E": 19,
+              "F": 12,
+              "S": 7
+            },
+            "pick_cool_then_place_in_recep": {
+              "E": 12,
+              "F": 8,
+              "S": 4
+            },
+            "pick_heat_then_place_in_recep": {
+              "E": 8,
+              "F": 6,
+              "S": 2
+            },
+            "pick_two_obj_and_place": {
+              "E": 8,
+              "F": 5,
+              "S": 3
+            }
+          }
+        },
+        "violations_for_explanation_only": [
+          "S_family:pick_and_place_simple"
+        ],
+        "synthetic_boundary_calls": {
+          "model_load": 1,
+          "env_construct": 96,
+          "reset": 96,
+          "generation": 456,
+          "step": 408,
+          "env_close": 96,
+          "environment_operations": 504,
+          "teacher_generation": 0,
+          "branch_reset": 0,
+          "replay_step": 0
+        }
+      }
+    }
+  ]
+}

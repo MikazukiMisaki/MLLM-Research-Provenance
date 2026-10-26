@@ -1,0 +1,237 @@
+diff --git a/docs/si_s01_source_only_v2.md b/docs/si_s01_source_only_v2.md
+index 1e22de2..0e3ae9d 100644
+--- a/docs/si_s01_source_only_v2.md
++++ b/docs/si_s01_source_only_v2.md
+@@ -25,3 +25,11 @@ The base authorization is PREFLIGHT_ONLY and cannot authorize --live. A successf
+ The supervisor hashes launch_context before spawning and passes its hash to the authenticated worker, then records kernel PID/UID/start identity in worker_start. Live raw audit requires those external file hashes, exact authorization plan/run/caps, real allocated_devices1, the same allocation start and external worker identity. It cannot accept a header's self-asserted PID or device count. Independent offline review must obtain those hashes from the supervising execution receipts. Synthetic budget simulations may use device1 for clock tests but still report real GPU expenditure0.
+ 
+ A returned generation is fsynced before post-resource/PEFT guards. A later failure retains raw/tokens plus the failed/open conservative reservation; observed returned boundaries are separate from completed validated units and never hidden as zero work. Normal P0 stop priority is preserved: terminal/truncated wins, full50-action nonterminal completion is horizon even if the last map is empty. An unavailable-placeholder anchor is legal only after a normal stop before5 actual actions; every source with5 or more actions requires the timely actual S5 marker.
++
++## Bounded cleanup, complete marker publication and cost endpoint
++
++Every worker wait uses the remaining absolute allocation deadline, including the post-SIGKILL reap. An unestablished exit stays null with the observed worker identity, reaping error and incomplete cleanup; elapsed time and survivors remain recorded. SIGKILL alone does not prove exit or GPU release.
++
++worker_start.json is durably written to a same-directory temporary file and published by an exclusive atomic hard link, then the directory is fsynced. The worker cannot observe a partial final marker, and publication never overwrites an existing marker. All PID/UID/start-tick/parent/context hash checks remain unchanged.
++
++Source report hours end at collector_run_closed. They are an explicitly marked stage lower bound and exclude later audit, reporting and supervisor cleanup. Only the authentic supervisor_exit allocated_device_hours is the final allocation-cost authority; the overlapping values must not be added. A source report alone supplies no final resource total or release proof.
+diff --git a/src/self_improvement/si_s01/audit.py b/src/self_improvement/si_s01/audit.py
+index 31aec30..2a0fcbb 100644
+--- a/src/self_improvement/si_s01/audit.py
++++ b/src/self_improvement/si_s01/audit.py
+@@ -149,6 +149,11 @@ def audit(events_path:Path,trajectory_path:Path,expected_plan:Plan,encoder=None,
+         'normal_sources':len(normal),'source_phase_sealed':sealed,'upper_bounds':upper,'teacher_status':'TEACHER_NOT_AUTHORIZED_SOURCE_ONLY','all_YT':None,
+         'physical':{'completed':dict(completed),'reserved_or_spent':dict(reserved),'open_units':open_units,'failed_units':failed_units,'components':dict(components),'observed_returned_generation_boundaries':len(returned),'observed_returned_tokens':sum(len(r['raw']['token_ids']) for r in returned.values() if isinstance(r.get('raw'),dict) and isinstance(r['raw'].get('token_ids'),list))},
+         'allocation_budget_device_hours':hours,'real_device_hours':hours if plan.evidence_class=='live_source_only' else 0,
++        'allocation_cost_measurement':{'endpoint':'collector_run_closed','endpoint_event_id':events[-1]['event_id'],
++            'scope':'STAGE_LOWER_BOUND_NOT_FINAL_ALLOCATED_COST','hours_fields':['allocation_budget_device_hours','real_device_hours'],
++            'excluded_later_intervals':['independent_audit','report_write','worker_exit','supervisor_cleanup'],
++            'final_authority':{'artifact':'supervisor_exit.json','schema':'SI_S01_SUPERVISOR_EXIT_V1','field':'allocated_device_hours','requires':'AUTHENTIC_SUPERVISOR_EXECUTION_RECEIPT'},
++            'final_allocated_device_hours':None,'aggregation':'DO_NOT_ADD_STAGE_HOURS_TO_SAME_ALLOCATION_SUPERVISOR_TOTAL'},
+         'historical_science_unchanged':{'generations':5142,'environment_operations':7949},'science_acceptance':'NOT_LEARNING_OR_TEACHER_ACCEPTANCE','raw_final_event':events[-1]['event_id']}
+ 
+ def asdict_slot(slot):
+@@ -162,4 +167,5 @@ def write_report(output:Path,report:dict)->None:
+             'Evidence: '+report['evidence_class']+'; normal sources: '+str(report['normal_sources'])+' / 96.\n\n'+
+             'YT remains NA. No teacher, training or evaluation is authorized. Necessary upper bounds do not establish recipe or learning efficacy.\n\n'+
+             'Upper bounds: '+json.dumps(report['upper_bounds'],ensure_ascii=False)+'\n\n'+
++            'Allocated hours here stop at collector_run_closed and are a stage lower bound, not the final allocation total. The authentic supervisor_exit.json allocated_device_hours is the final authority; do not add these overlapping intervals.\n\n'+
+             'Physical cost: '+json.dumps(report['physical'],ensure_ascii=False)+'\n')
+diff --git a/src/self_improvement/si_s01/evidence.py b/src/self_improvement/si_s01/evidence.py
+index 6c95416..1e76395 100644
+--- a/src/self_improvement/si_s01/evidence.py
++++ b/src/self_improvement/si_s01/evidence.py
+@@ -13,6 +13,26 @@ def fresh_json(path: Path, value: Any) -> None:
+     with Path(path).open('x',encoding='utf-8') as f:
+         f.write(canonical(value)+'\n');f.flush();os.fsync(f.fileno())
+ 
++def atomic_fresh_json(path: Path, value: Any) -> None:
++    """Publish durable complete JSON atomically, preserving exclusive no-overwrite."""
++    import tempfile
++    path = Path(path)
++    descriptor, staging = tempfile.mkstemp(prefix='.' + path.name + '.', suffix='.tmp', dir=path.parent)
++    try:
++        with os.fdopen(descriptor, 'w', encoding='utf-8') as handle:
++            handle.write(canonical(value) + '\n')
++            handle.flush()
++            os.fsync(handle.fileno())
++        # Same-directory hard-link publication is atomic and fails if path exists.
++        os.link(staging, path)
++        directory = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
++        try:
++            os.fsync(directory)
++        finally:
++            os.close(directory)
++    finally:
++        Path(staging).unlink(missing_ok=True)
++
+ class Journal:
+     def __init__(self,path:Path,header:Mapping[str,Any],*,clock:Callable[[],float]=time.monotonic):
+         self.path=Path(path);self.handle=self.path.open('x',encoding='utf-8');self.events=[];self.clock=clock
+diff --git a/src/self_improvement/si_s01/supervisor.py b/src/self_improvement/si_s01/supervisor.py
+index c73456a..362d4c2 100644
+--- a/src/self_improvement/si_s01/supervisor.py
++++ b/src/self_improvement/si_s01/supervisor.py
+@@ -5,7 +5,7 @@ from pathlib import Path
+ from typing import Mapping,Any,Sequence
+ from self_improvement.si_p3.runtime_supervisor import group_members,process_table,descendants,kill_identities
+ from .contract import require
+-from .evidence import fresh_json
++from .evidence import fresh_json,atomic_fresh_json
+ 
+ def supervise_source(command: Sequence[str], output: Path, *, context: Mapping[str, Any],
+               seconds: float, environment: Mapping[str, str]) -> dict[str, Any]:
+@@ -34,16 +34,18 @@ def supervise_source(command: Sequence[str], output: Path, *, context: Mapping[s
+     command=[launch_sha if x=='@LAUNCH_CONTEXT_SHA256@' else x for x in command_template]
+     known_descendants: dict[int, tuple[int, int, int]] = {}
+     process = None; timed_out = False; failure = None; members = []; code = None
++    reaping_error = None; worker_identity = None; deadline = start + seconds
+     # Reserve cleanup time inside the full allocation ceiling.
+     callback_deadline = max(0.001, seconds - min(2.0, seconds / 10))
+     try:
+         with (output / "worker.stdout").open("xb") as stdout, (output / "worker.stderr").open("xb") as stderr:
+             process = subprocess.Popen(list(command), stdout=stdout, stderr=stderr,
+                 env=dict(environment), start_new_session=True)
+-            fresh_json(output / "worker_start.json", {"pid": process.pid, "pgid": process.pid,
+-                "argv": list(command), "authorization_sha256": context["authorization_sha256"], "uid":os.getuid(), "started_monotonic":time.monotonic(), "launch_context_sha256":launch_sha, "start_tick":process_table().get(process.pid,(None,None,None))[1]})
++            worker_identity = process_table().get(process.pid)
++            atomic_fresh_json(output / "worker_start.json", {"pid": process.pid, "pgid": process.pid,
++                "argv": list(command), "authorization_sha256": context["authorization_sha256"], "uid":os.getuid(), "started_monotonic":time.monotonic(), "launch_context_sha256":launch_sha, "start_tick":worker_identity[1] if worker_identity is not None else None})
+             try:
+-                code = process.wait(timeout=max(0.001, callback_deadline - (time.monotonic() - start)))
++                code = process.wait(timeout=max(0.0, min(deadline, start + callback_deadline) - time.monotonic()))
+             except subprocess.TimeoutExpired:
+                 timed_out = True
+     except BaseException as error:
+@@ -55,9 +57,15 @@ def supervise_source(command: Sequence[str], output: Path, *, context: Mapping[s
+             try: os.killpg(process.pid, signal.SIGKILL)
+             except ProcessLookupError: pass
+             kill_identities(known_descendants)
+-            code = process.wait()
++            if code is None:
++                try:
++                    code = process.wait(timeout=max(0.0, deadline - time.monotonic()))
++                except subprocess.TimeoutExpired:
++                    # SIGKILL does not establish that an uninterruptible process exited.
++                    code = None
++                    reaping_error = {'exception': 'TimeoutExpired', 'message': 'worker exit not established before absolute allocation deadline'}
+             # Bounded cleanup; record any surviving group rather than claiming it disappeared.
+-            until = min(start + seconds, time.monotonic() + 1.0)
++            until = min(deadline, time.monotonic() + 1.0)
+             while time.monotonic() < until:
+                 table = process_table()
+                 # Newly orphaned sessions are adopted by this dedicated subreaper.
+@@ -78,6 +86,9 @@ def supervise_source(command: Sequence[str], output: Path, *, context: Mapping[s
+         receipt = {"schema": "SI_S01_SUPERVISOR_EXIT_V1", "authorization_sha256": context["authorization_sha256"],
+             "source_sha": context["source_sha"], "evidence_class": context["evidence_class"],
+             "authentic_returncode": code, "deadline_triggered": timed_out, "spawn_or_supervisor_error": failure,
++            "reaping_error": reaping_error, "cleanup_established": code is not None and not remaining,
++            "unreaped_worker_identity": {'pid': process.pid, 'start_tick': worker_identity[1] if worker_identity else None, 'uid': worker_identity[2] if worker_identity else None} if process is not None and code is None else None,
++            "execution_status": 'EXIT_RECORDED' if code is not None and not remaining and failure is None else 'SUPERVISOR_INCOMPLETE',
+             "members_before_cleanup": members, "descendants_observed": sorted(known_descendants), "members_after_cleanup": remaining,
+             "elapsed_seconds": elapsed, "allocated_devices": devices, "allocated_device_hours": devices * elapsed / 3600,
+             "within_time_cap": elapsed <= seconds, "child_report_present": (output / "source_report.json").is_file(),
+diff --git a/tests/test_si_s01_runtime_reliability.py b/tests/test_si_s01_runtime_reliability.py
+new file mode 100644
+index 0000000..3322793
+--- /dev/null
++++ b/tests/test_si_s01_runtime_reliability.py
+@@ -0,0 +1,99 @@
++"""RT01/02/03 software process/filesystem edges; no real runtime or GPU."""
++import json
++from pathlib import Path
++from threading import Event,Thread
++from types import SimpleNamespace
++import pytest
++from self_improvement.si_s01 import evidence,supervisor
++from self_improvement.si_s01.audit import audit
++from si_s01_support import run_fixture
++
++
++def test_post_kill_wait_uses_remaining_absolute_time_and_unknown_exit_stays_unknown(tmp_path,monkeypatch):
++    now=[100.0];waits=[];pid=987654321
++    class UnreapedProcess:
++        def __init__(self,*args,**kwargs):
++            self.pid=pid
++            assert kwargs['env']['CUDA_VISIBLE_DEVICES']==''
++        def wait(self,*,timeout):
++            waits.append(timeout)
++            now[0]=100.95 if len(waits)==1 else 101.2
++            raise supervisor.subprocess.TimeoutExpired('explicit software unreap edge',timeout)
++    monkeypatch.setattr(supervisor.time,'monotonic',lambda:now[0])
++    monkeypatch.setattr(supervisor.subprocess,'Popen',UnreapedProcess)
++    monkeypatch.setattr(supervisor.ctypes,'CDLL',lambda *a,**k:SimpleNamespace(prctl=lambda *a:0))
++    monkeypatch.setattr(supervisor,'process_table',lambda:{pid:(supervisor.os.getpid(),991,supervisor.os.getuid())})
++    monkeypatch.setattr(supervisor,'group_members',lambda pgid:[pid])
++    monkeypatch.setattr(supervisor,'descendants',lambda *a:{})
++    monkeypatch.setattr(supervisor,'kill_identities',lambda *a:None)
++    monkeypatch.setattr(supervisor.os,'killpg',lambda *a:None)
++    r=supervisor.supervise_source(['explicit-software-child'],tmp_path/'run',context={
++        'authorization_sha256':'a'*64,'source_sha':'b'*40,'evidence_class':'synthetic_software_fixture',
++        'allocation_started_monotonic':100.0},seconds=1,environment={'CUDA_VISIBLE_DEVICES':''})
++    assert len(waits)==2 and waits[0]==pytest.approx(.9) and waits[1]==pytest.approx(.05)
++    assert r['authentic_returncode'] is None and r['reaping_error']['exception']=='TimeoutExpired'
++    assert not r['cleanup_established'] and r['execution_status']=='SUPERVISOR_INCOMPLETE'
++    assert r['unreaped_worker_identity']=={'pid':pid,'start_tick':991,'uid':supervisor.os.getuid()}
++    assert r['members_after_cleanup']==[pid] and r['elapsed_seconds']==pytest.approx(1.2)
++    assert not r['within_time_cap'] and r['allocated_device_hours']==0 and not r['retry_authorized']
++    assert json.loads((tmp_path/'run/supervisor_exit.json').read_text())==r
++
++
++def test_worker_marker_partial_write_is_never_published_as_final_json(tmp_path,monkeypatch):
++    marker=tmp_path/'worker_start.json';value={'pid':123,'uid':456,'start_tick':789,'argv':['explicit software']}
++    partial=Event();release=Event();errors=[];fdopen=evidence.os.fdopen
++    class PausedWrite:
++        def __init__(self,handle):self.handle=handle
++        def __enter__(self):return self
++        def __exit__(self,*args):return self.handle.__exit__(*args)
++        def write(self,text):
++            split=len(text)//2;self.handle.write(text[:split]);self.handle.flush();partial.set()
++            assert release.wait(3),'software interleaving release deadline'
++            self.handle.write(text[split:]);return len(text)
++        def flush(self):return self.handle.flush()
++        def fileno(self):return self.handle.fileno()
++    monkeypatch.setattr(evidence.os,'fdopen',lambda *a,**k:PausedWrite(fdopen(*a,**k)))
++    def writer():
++        try:evidence.atomic_fresh_json(marker,value)
++        except BaseException as error:errors.append(error)
++    thread=Thread(target=writer);thread.start()
++    try:
++        assert partial.wait(3) and not marker.exists()
++        temporary=list(tmp_path.glob('.worker_start.json.*.tmp'));assert len(temporary)==1
++        with pytest.raises(json.JSONDecodeError):json.loads(temporary[0].read_text())
++        # The unchanged worker's exists/read sequence has no final marker to consume yet.
++        assert not marker.exists()
++    finally:
++        release.set();thread.join(timeout=3)
++    assert not thread.is_alive() and errors==[] and json.loads(marker.read_text())==value
++    assert not list(tmp_path.glob('.worker_start.json.*.tmp'))
++
++
++def test_atomic_marker_publication_cannot_overwrite_file_or_symlink(tmp_path):
++    marker=tmp_path/'worker_start.json';marker.write_text('{"original":true}')
++    before=marker.read_bytes()
++    with pytest.raises(FileExistsError):evidence.atomic_fresh_json(marker,{'replacement':True})
++    assert marker.read_bytes()==before
++    link=tmp_path/'link.json';link.symlink_to(marker)
++    with pytest.raises(FileExistsError):evidence.atomic_fresh_json(link,{'replacement':True})
++    assert link.is_symlink() and marker.read_bytes()==before
++    assert not list(tmp_path.glob('.*.tmp'))
++
++
++def test_source_report_hours_are_explicit_through_run_closed_lower_bound(tmp_path):
++    class Clock:
++        now=0.0
++        def __call__(self):self.now+=.01;return self.now
++    clock=Clock()
++    p,r,_,producer,_,_=run_fixture(tmp_path/'run',options={'*':{'empty_at':0}},clock=clock,devices=1)
++    stage_hours=r['allocation_budget_device_hours'];assert stage_hours>0 and r['real_device_hours']==0
++    clock.now+=3600
++    again=audit(tmp_path/'run/source_events.jsonl',tmp_path/'run/source_trajectories.jsonl',p,producer)
++    assert again['allocation_budget_device_hours']==stage_hours
++    scope=r['allocation_cost_measurement']
++    assert scope['endpoint']=='collector_run_closed' and scope['endpoint_event_id']==r['raw_final_event']
++    assert scope['scope']=='STAGE_LOWER_BOUND_NOT_FINAL_ALLOCATED_COST' and scope['final_allocated_device_hours'] is None
++    assert scope['final_authority']=={'artifact':'supervisor_exit.json','schema':'SI_S01_SUPERVISOR_EXIT_V1','field':'allocated_device_hours','requires':'AUTHENTIC_SUPERVISOR_EXECUTION_RECEIPT'}
++    assert scope['aggregation']=='DO_NOT_ADD_STAGE_HOURS_TO_SAME_ALLOCATION_SUPERVISOR_TOTAL'
++    text=(tmp_path/'run/SOURCE_REPORT.md').read_text()
++    assert 'stage lower bound' in text and 'do not add these overlapping intervals' in text

@@ -1,0 +1,18 @@
+F................................................                        [100%]
+=================================== FAILURES ===================================
+___ test_software_fixture_actual_cli_preflight_has_zero_science_side_effects ___
+
+tmp_path = PosixPath('/tmp/si-s01-draft_v1/test_software_fixture_actual_c0')
+
+    def test_software_fixture_actual_cli_preflight_has_zero_science_side_effects(tmp_path):
+        a,p,ap,pp,save=gate_fixture(tmp_path,REPO);result=child(tmp_path,a,save())
+>       assert result.returncode==0,result.stderr.decode()
+E       AssertionError: {"status": "REJECTED_OR_SOURCE_TECHNICAL_STOP", "exception": "ContractError", "message": "UTC timestamp must end in Z", "resource_evidence": null}
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python', '-I', '/home/lizening/wt-si-...TECHNICAL_STOP", "exception": "ContractError", "message": "UTC timestamp must end in Z", "resource_evidence": null}\n').returncode
+
+tests/test_si_s01_gate.py:19: AssertionError
+- generated xml file: /home/lizening/research-notes/agent-logs/2026-10-26T102514Z__CODEX__si-s01-source-only-implementation__f1a52e8c/draft_v1.xml -
+=========================== short test summary info ============================
+FAILED tests/test_si_s01_gate.py::test_software_fixture_actual_cli_preflight_has_zero_science_side_effects

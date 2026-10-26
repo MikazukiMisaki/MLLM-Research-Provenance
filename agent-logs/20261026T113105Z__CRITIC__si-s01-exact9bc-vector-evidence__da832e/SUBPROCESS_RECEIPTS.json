@@ -1,0 +1,33 @@
+{
+  "label": "AUTHENTIC_EXEC_COMMAND_SUBPROCESS_RECEIPTS",
+  "exact_commit": "9bc15b593ec6144915762a2fb1b172e063fe2c48",
+  "command": "env -i PATH=/home/lizening/miniconda3/envs/alfworld-self-improve/bin:/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 CUDA_VISIBLE_DEVICES= HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false /usr/bin/timeout --signal=TERM --kill-after=10s 300 '/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python' -I -B '/home/lizening/research-notes/agent-logs/20261026T113105Z__CRITIC__si-s01-exact9bc-vector-evidence__da832e/run_independent_vectors.py' --source '/tmp/si-s01-independent-9bc15b59-da832e/source' --archive '/tmp/si-s01-independent-9bc15b59-da832e/source-9bc15b59.tar' --oracle '/home/lizening/research-notes/agent-logs/20261026T111709Z__CRITIC__si-s01-independent-efs-vectors__b3acdd/EFS_ACCEPTANCE_VECTORS.json' --runs '/tmp/si-s01-independent-9bc15b59-da832e/runs' --own '/home/lizening/research-notes/agent-logs/20261026T113105Z__CRITIC__si-s01-exact9bc-vector-evidence__da832e' > '/home/lizening/research-notes/agent-logs/20261026T113105Z__CRITIC__si-s01-exact9bc-vector-evidence__da832e/software_vectors.stdout.log' 2> '/home/lizening/research-notes/agent-logs/20261026T113105Z__CRITIC__si-s01-exact9bc-vector-evidence__da832e/software_vectors.stderr.log'",
+  "workdir": "/tmp/si-s01-independent-9bc15b59-da832e",
+  "login": false,
+  "archive_creation_result": {
+    "chunk_id": "7e42d0",
+    "wall_time_seconds": 0.324961379,
+    "exit_code": 0,
+    "original_token_count": 0,
+    "output": ""
+  },
+  "initial_exec_result": {
+    "chunk_id": "d6dfc4",
+    "wall_time_seconds": 1.001446612,
+    "session_id": 90263,
+    "original_token_count": 0,
+    "output": ""
+  },
+  "final_poll_result": {
+    "chunk_id": "90cd42",
+    "wall_time_seconds": 0.000031218,
+    "exit_code": 0,
+    "original_token_count": 0,
+    "output": ""
+  },
+  "authentic_subprocess_returncode": 0,
+  "stdout_path": "/home/lizening/research-notes/agent-logs/20261026T113105Z__CRITIC__si-s01-exact9bc-vector-evidence__da832e/software_vectors.stdout.log",
+  "stderr_path": "/home/lizening/research-notes/agent-logs/20261026T113105Z__CRITIC__si-s01-exact9bc-vector-evidence__da832e/software_vectors.stderr.log",
+  "receipt_captured_utc": "2026-10-26 11:38:35 UTC",
+  "clock_note": "Tool wall_time_seconds values describe their transport waits; the seven-case loop monotonic duration is separately reported by the real harness."
+}

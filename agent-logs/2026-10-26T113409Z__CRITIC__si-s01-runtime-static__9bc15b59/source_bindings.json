@@ -1,0 +1,446 @@
+{
+  "source_sha": "9bc15b593ec6144915762a2fb1b172e063fe2c48",
+  "base_sha": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+  "reviewer": "si_e2_runtime_critic",
+  "record_created_utc": "2026-10-26T11:34:09.500804+00:00",
+  "review_started_wall_clock": "NOT_CAPTURED_NO_TIMESTAMP_INVENTED",
+  "inputs": {
+    "/home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c/ADOPTED_SOURCE_ONLY_PROTOCOL.md": {
+      "sha256": "daa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72",
+      "bytes": 6310
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c/SOURCE_ONLY_IMPLEMENTATION_TASK.md": {
+      "sha256": "5fd913a8d980f8e3eba551e3d377221c691033c090bb5a3a9af3b3ce7845263c",
+      "bytes": 5184
+    },
+    "/home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c/INDEPENDENT_PREFREEZE_REVIEW.md": {
+      "sha256": "76c3584af4f303234c20e3b23d339e20f755082e3b70da7eca7c6445ccf530d7",
+      "bytes": 4468
+    }
+  },
+  "complete_delta_files": [
+    {
+      "path": "docs/si_s01_source_only_v2.md",
+      "git_blob": "1e22de262c1fe0609923526eb417a16f7e4e7048",
+      "sha256": "ef81a003ec5ae309bd7091152a534c3f2d5bd21bffdcfa33acedf13e9f65e7c5",
+      "bytes": 6314,
+      "lines": 27
+    },
+    {
+      "path": "scripts/run_si_s01_source_only.py",
+      "git_blob": "01824652cf80eb924df5ff1a6fee1b773563f09d",
+      "sha256": "ebe82f46afb873534d2750591b5f14003f867224d65ce4efe74041b050e46dbb",
+      "bytes": 3750,
+      "lines": 45
+    },
+    {
+      "path": "src/self_improvement/si_s01/__init__.py",
+      "git_blob": "0b41242214f3947ba355e8be26895970ed4827b5",
+      "sha256": "e6308110fdeff4f7adf204bf5ffe8abc3ce5d4b3961892ab9e0397e456062c11",
+      "bytes": 69,
+      "lines": 1
+    },
+    {
+      "path": "src/self_improvement/si_s01/audit.py",
+      "git_blob": "31aec30e85e2cdc502cd62bc835db2721bdf0aef",
+      "sha256": "9e3637b009016bcc39d69b88d454818cc9d310412f60938194ffffe132433468",
+      "bytes": 18061,
+      "lines": 165
+    },
+    {
+      "path": "src/self_improvement/si_s01/collector.py",
+      "git_blob": "6080b98b0628e24d27caa8358ee823bfebdc2607",
+      "sha256": "02c6a0fe8a213885bf46801847d517f1ee564f97de7c026762af8a92f401ca6a",
+      "bytes": 10966,
+      "lines": 137
+    },
+    {
+      "path": "src/self_improvement/si_s01/contract.py",
+      "git_blob": "37816b0d4688768e059526f9250e29b72b6c0efd",
+      "sha256": "43350414e313273eb9747e879c70e24c90a044562e509a4bfff20fd26104d507",
+      "bytes": 5300,
+      "lines": 91
+    },
+    {
+      "path": "src/self_improvement/si_s01/evidence.py",
+      "git_blob": "6c954166acd9f7342eaf52a51888c59cd604de2a",
+      "sha256": "d85882513e41d62e99a5fd51b3acb39311a52dfb20ce17523926eb9555e9239a",
+      "bytes": 7075,
+      "lines": 93
+    },
+    {
+      "path": "src/self_improvement/si_s01/gate.py",
+      "git_blob": "f77d41096d96cc37ce26872cd6c3046b38427b9a",
+      "sha256": "cde29b94d87070a117825cc1ec80aec23f098ee14550690b5e820d3fe15ea6a8",
+      "bytes": 16794,
+      "lines": 192
+    },
+    {
+      "path": "src/self_improvement/si_s01/runtime.py",
+      "git_blob": "0784832033bea7b89fd719824fbb21ec16017019",
+      "sha256": "e33f96daf677480c81f71fb4c9d04e9e30050e9084cb285cff5e5600629da3e6",
+      "bytes": 11037,
+      "lines": 142
+    },
+    {
+      "path": "src/self_improvement/si_s01/supervisor.py",
+      "git_blob": "c73456a9d617867d40dce56135f8a695cf846a9b",
+      "sha256": "acaca0a0002fd241d9f13a975beee2d3144687cddea2d8df2cdbbca3d2335550",
+      "bytes": 6463,
+      "lines": 87
+    },
+    {
+      "path": "tests/si_s01_support.py",
+      "git_blob": "6d73b6b4bc8b451491767b817d556350ff7dd93c",
+      "sha256": "a344c0258f3f418c3f649e28efcc44f0fc2b627b7f63846bb480f67a083be5f6",
+      "bytes": 14453,
+      "lines": 191
+    },
+    {
+      "path": "tests/test_si_s01_gate.py",
+      "git_blob": "a613f7db1b5f5b52136ccad750c27fc375cf6ab6",
+      "sha256": "94c12c478131ef5764af64b91f96d6aceeae02c25804ab55e3c390b799b36e09",
+      "bytes": 6951,
+      "lines": 109
+    },
+    {
+      "path": "tests/test_si_s01_runtime_bridge.py",
+      "git_blob": "3b8351c6b7e73e5df2a314dd69a6b844e48e38f2",
+      "sha256": "f71fb3e7cf8bacb1217cbc9c0ead9160664ae20d81019c0342b255eacd952ea4",
+      "bytes": 5106,
+      "lines": 103
+    },
+    {
+      "path": "tests/test_si_s01_source_only.py",
+      "git_blob": "342a93af05645a0a9c590666ad16220eeb34bdc2",
+      "sha256": "d6c8a922f81fc023e74c62a688bc5736bea3b7849790f702e0bbebc11668cbeb",
+      "bytes": 13104,
+      "lines": 189
+    },
+    {
+      "path": "tests/test_si_s01_supervisor.py",
+      "git_blob": "96517572946593e3f542646893c0db149e78da07",
+      "sha256": "5bc4a6b4dca577fa032ecb1fe160026dbdaa5f0415939d8fc99e8cc7badac0f9",
+      "bytes": 1601,
+      "lines": 21
+    }
+  ],
+  "finding_source_excerpts": {
+    "src/self_improvement/si_s01/supervisor.py": [
+      {
+        "line": 49,
+        "text": "    except BaseException as error:"
+      },
+      {
+        "line": 50,
+        "text": "        failure = {\"exception\": type(error).__name__, \"message\": str(error)}"
+      },
+      {
+        "line": 51,
+        "text": "    finally:"
+      },
+      {
+        "line": 52,
+        "text": "        if process is not None:"
+      },
+      {
+        "line": 53,
+        "text": "            members = group_members(process.pid)"
+      },
+      {
+        "line": 54,
+        "text": "            known_descendants.update(descendants(process.pid, process_table()))"
+      },
+      {
+        "line": 55,
+        "text": "            try: os.killpg(process.pid, signal.SIGKILL)"
+      },
+      {
+        "line": 56,
+        "text": "            except ProcessLookupError: pass"
+      },
+      {
+        "line": 57,
+        "text": "            kill_identities(known_descendants)"
+      },
+      {
+        "line": 58,
+        "text": "            code = process.wait()"
+      },
+      {
+        "line": 59,
+        "text": "            # Bounded cleanup; record any surviving group rather than claiming it disappeared."
+      },
+      {
+        "line": 60,
+        "text": "            until = min(start + seconds, time.monotonic() + 1.0)"
+      },
+      {
+        "line": 61,
+        "text": "            while time.monotonic() < until:"
+      },
+      {
+        "line": 62,
+        "text": "                table = process_table()"
+      },
+      {
+        "line": 63,
+        "text": "                # Newly orphaned sessions are adopted by this dedicated subreaper."
+      },
+      {
+        "line": 64,
+        "text": "                known_descendants.update({pid:value for pid,value in table.items()"
+      },
+      {
+        "line": 65,
+        "text": "                    if value[0] == os.getpid() and pid not in baseline_children and pid != process.pid})"
+      },
+      {
+        "line": 66,
+        "text": "                kill_identities(known_descendants)"
+      },
+      {
+        "line": 67,
+        "text": "                for pid in known_descendants:"
+      },
+      {
+        "line": 68,
+        "text": "                    try: os.waitpid(pid, os.WNOHANG)"
+      },
+      {
+        "line": 69,
+        "text": "                    except ChildProcessError: pass"
+      },
+      {
+        "line": 70,
+        "text": "                table = process_table()"
+      },
+      {
+        "line": 71,
+        "text": "                alive = [pid for pid,value in known_descendants.items() if pid in table and table[pid][1:] == value[1:]]"
+      },
+      {
+        "line": 72,
+        "text": "                if not group_members(process.pid) and not alive: break"
+      },
+      {
+        "line": 73,
+        "text": "                time.sleep(0.01)"
+      },
+      {
+        "line": 74,
+        "text": "        table = process_table()"
+      },
+      {
+        "line": 75,
+        "text": "        remaining = sorted(set(group_members(process.pid) if process is not None else []) |"
+      },
+      {
+        "line": 76,
+        "text": "            {pid for pid,value in known_descendants.items() if pid in table and table[pid][1:] == value[1:]})"
+      },
+      {
+        "line": 77,
+        "text": "        elapsed = time.monotonic() - start"
+      },
+      {
+        "line": 78,
+        "text": "        receipt = {\"schema\": \"SI_S01_SUPERVISOR_EXIT_V1\", \"authorization_sha256\": context[\"authorization_sha256\"],"
+      },
+      {
+        "line": 79,
+        "text": "            \"source_sha\": context[\"source_sha\"], \"evidence_class\": context[\"evidence_class\"],"
+      },
+      {
+        "line": 80,
+        "text": "            \"authentic_returncode\": code, \"deadline_triggered\": timed_out, \"spawn_or_supervisor_error\": failure,"
+      },
+      {
+        "line": 81,
+        "text": "            \"members_before_cleanup\": members, \"descendants_observed\": sorted(known_descendants), \"members_after_cleanup\": remaining,"
+      },
+      {
+        "line": 82,
+        "text": "            \"elapsed_seconds\": elapsed, \"allocated_devices\": devices, \"allocated_device_hours\": devices * elapsed / 3600,"
+      },
+      {
+        "line": 83,
+        "text": "            \"within_time_cap\": elapsed <= seconds, \"child_report_present\": (output / \"source_report.json\").is_file(),"
+      },
+      {
+        "line": 84,
+        "text": "            \"launch_context_sha256\":launch_sha, \"worker_start_sha256\":hashlib.sha256((output/\"worker_start.json\").read_bytes()).hexdigest() if (output/\"worker_start.json\").is_file() else None, \"retry_authorized\": False, \"science_authorized\": evidence_class == \"live_source_only\", \"scope\": \"source_only_no_teacher_training_evaluation\"}"
+      },
+      {
+        "line": 85,
+        "text": "        require(libc.prctl(36, old_subreaper.value, 0, 0, 0) == 0, \"cannot restore subreaper state\")"
+      },
+      {
+        "line": 86,
+        "text": "        fresh_json(output / \"supervisor_exit.json\", receipt)"
+      },
+      {
+        "line": 87,
+        "text": "    return receipt"
+      }
+    ],
+    "src/self_improvement/si_s01/gate.py": [
+      {
+        "line": 112,
+        "text": "        if worker:"
+      },
+      {
+        "line": 113,
+        "text": "            insist(invocation[-2:]==['--launch-context-sha256',launch_context_sha256] and invocation[:-2]==['--worker' if x=='--live' else x for x in live_argv],'exact supervised worker argv')"
+      },
+      {
+        "line": 114,
+        "text": "            marker_path=output/'launch_context.json'"
+      },
+      {
+        "line": 115,
+        "text": "            marker=json.loads(bound(marker_path,launch_context_sha256))"
+      },
+      {
+        "line": 116,
+        "text": "            parent=[x.decode() for x in Path('/proc/'+str(os.getppid())+'/cmdline').read_bytes().split(b'\\0') if x]"
+      },
+      {
+        "line": 117,
+        "text": "            insist(parent==live_argv and marker['supervisor_pid']==os.getppid() and os.getsid(0)==os.getpid(),'authenticated supervisor worker')"
+      },
+      {
+        "line": 118,
+        "text": "            import time,ctypes,signal"
+      },
+      {
+        "line": 119,
+        "text": "            started=output/'worker_start.json'"
+      },
+      {
+        "line": 120,
+        "text": "            until=time.monotonic()+2"
+      },
+      {
+        "line": 121,
+        "text": "            while not started.exists() and time.monotonic()<until:time.sleep(.01)"
+      },
+      {
+        "line": 122,
+        "text": "            worker_bytes=started.read_bytes();w=json.loads(worker_bytes)"
+      },
+      {
+        "line": 123,
+        "text": "            insist(w['pid']==os.getpid() and w['uid']==os.getuid() and w['argv']==invocation and w['start_tick']==int(Path('/proc/self/stat').read_text().rsplit(')',1)[1].split()[19]) and w['launch_context_sha256']==launch_context_sha256,'actual worker PID/UID')"
+      },
+      {
+        "line": 124,
+        "text": "            insist(ctypes.CDLL(None,use_errno=True).prctl(1,signal.SIGKILL,0,0,0)==0,'parent-death signal')"
+      },
+      {
+        "line": 125,
+        "text": "            context={'launch_path':str(marker_path),'launch_sha256':launch_context_sha256,'worker_path':str(started),'worker_sha256':hashlib.sha256(worker_bytes).hexdigest()}"
+      },
+      {
+        "line": 126,
+        "text": "            permit=replace(permit,context_evidence=context)"
+      },
+      {
+        "line": 127,
+        "text": "        else:"
+      },
+      {
+        "line": 128,
+        "text": "            insist(invocation==live_argv and not output.exists() and not permit.claim_path.exists() and not permit.claim_path.is_symlink(),'exact cleared argv/fresh one-shot output')"
+      },
+      {
+        "line": 129,
+        "text": "        permit=replace(permit,clearance=c,clearance_sha256=clearance_sha256)"
+      },
+      {
+        "line": 130,
+        "text": "    if worker:verified_context(permit,permit.context_evidence)"
+      },
+      {
+        "line": 131,
+        "text": "    return replace(permit,artifact_receipt=artifacts(permit))"
+      },
+      {
+        "line": 132,
+        "text": ""
+      },
+      {
+        "line": 133,
+        "text": ""
+      },
+      {
+        "line": 134,
+        "text": "ZERO={'model_objects':0,'generations':0,'CUDA_initializations':0,'environment_constructs':0,'resets':0,'steps':0,'units':0,'fresh_sources':0}"
+      },
+      {
+        "line": 135,
+        "text": ""
+      },
+      {
+        "line": 136,
+        "text": "def source_binding(permit:Permit)->dict:"
+      },
+      {
+        "line": 137,
+        "text": "    a=permit.authorization"
+      },
+      {
+        "line": 138,
+        "text": "    return {'authorization_sha256':permit.authorization_sha256,'source_sha':a['source_sha'],'protocol_sha256':PROTOCOL_SHA256,"
+      },
+      {
+        "line": 139,
+        "text": "            'proposal_sha256':permit.proposal_sha256,'plan_sha256':permit.plan.sha256,'environment_sha256':digest(a['environment']),"
+      },
+      {
+        "line": 140,
+        "text": "            'ceilings':dict(a['ceilings']),'run_id':a['run_id'],'execution_uid':a['execution_uid'],'output_path':a['output_path'],"
+      }
+    ],
+    "src/self_improvement/si_s01/evidence.py": [
+      {
+        "line": 10,
+        "text": "        'slot_incomplete','sources_sealed','run_stopped','run_closed','runtime_evidence'}"
+      },
+      {
+        "line": 11,
+        "text": ""
+      },
+      {
+        "line": 12,
+        "text": "def fresh_json(path: Path, value: Any) -> None:"
+      },
+      {
+        "line": 13,
+        "text": "    with Path(path).open('x',encoding='utf-8') as f:"
+      },
+      {
+        "line": 14,
+        "text": "        f.write(canonical(value)+'\\n');f.flush();os.fsync(f.fileno())"
+      },
+      {
+        "line": 15,
+        "text": ""
+      },
+      {
+        "line": 16,
+        "text": "class Journal:"
+      },
+      {
+        "line": 17,
+        "text": "    def __init__(self,path:Path,header:Mapping[str,Any],*,clock:Callable[[],float]=time.monotonic):"
+      }
+    ]
+  },
+  "activity": {
+    "git_show_and_static_text_only": true,
+    "source_imports": 0,
+    "tests": 0,
+    "CUDA_NVML_model_tokenizer_ALFWorld_SSH_preflight_live_calls": 0
+  }
+}
