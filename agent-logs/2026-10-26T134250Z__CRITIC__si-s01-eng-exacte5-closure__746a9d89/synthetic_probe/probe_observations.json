@@ -1,0 +1,106 @@
+{
+  "status": "EXPECTED_CLOSURE_OBSERVATIONS_SOFTWARE_ONLY",
+  "exact_sha": "e5f09c05824cb61cb35ccbbf4e189b04e8829cea",
+  "script_sha256": "05a5d3e2fe896e92b03b013d9a0de389dd80d0a78204b2b25c7a237fdb650af9",
+  "source_before": {
+    "sha": "e5f09c05824cb61cb35ccbbf4e189b04e8829cea",
+    "tree": "a20f1ed21007711539a7f0a33c0944d5cf533057",
+    "status": "",
+    "branch": "HEAD"
+  },
+  "source_after": {
+    "sha": "e5f09c05824cb61cb35ccbbf4e189b04e8829cea",
+    "tree": "a20f1ed21007711539a7f0a33c0944d5cf533057",
+    "status": "",
+    "branch": "HEAD"
+  },
+  "origins": {
+    "self_improvement.si_s01.engineering_evidence": {
+      "path": "/tmp/si-s01-eng-exacte5-_7gmbuak/checkout/src/self_improvement/si_s01/engineering_evidence.py",
+      "sha256": "b6657bbf88d3c27c456d1269b1099ab0c0a25fb8326d4a8be6399f56536019d5"
+    },
+    "self_improvement.si_s01.engineering_runtime": {
+      "path": "/tmp/si-s01-eng-exacte5-_7gmbuak/checkout/src/self_improvement/si_s01/engineering_runtime.py",
+      "sha256": "68ab269d985df46ffa22594684bf41131ceff40be9246583101f3d2361696238"
+    },
+    "self_improvement.si_s01.runtime_core": {
+      "path": "/tmp/si-s01-eng-exacte5-_7gmbuak/checkout/src/self_improvement/si_s01/runtime_core.py",
+      "sha256": "58f0266f2e34a6b5061038b493ddc4bd7d9c282b74a636bbdfa8bf8a45b0b3e0"
+    },
+    "self_improvement.si_s01.engineering_audit": {
+      "path": "/tmp/si-s01-eng-exacte5-_7gmbuak/checkout/src/self_improvement/si_s01/engineering_audit.py",
+      "sha256": "69b631fd939b8b01c95ed253ad7508d36bb6262f1f144c79c864a7437b126197"
+    },
+    "si_s01_engineering_support": {
+      "path": "/tmp/si-s01-eng-exacte5-_7gmbuak/checkout/tests/si_s01_engineering_support.py",
+      "sha256": "8c0485dd0eac61fc976e0d2c5b5459a6b254d10eb183e0d79be6a7c08b45ee9c"
+    }
+  },
+  "science_authorized": false,
+  "real_model_environment_or_device_calls": false,
+  "scope": "ENG-PC01/PC02/A01 only; no scientific or launch acceptance",
+  "observations": [
+    {
+      "case": "pc01_second_invocation",
+      "expected_raw_model_counter": 1,
+      "raw_model_counter": 1,
+      "rejection": {
+        "exception_type": "self_improvement.si_s01.contract.IntegrityError",
+        "message": "engineering one actual generation invocation already consumed"
+      }
+    },
+    {
+      "case": "pc01_mutated_caller_prepared",
+      "expected_raw_model_counter": 0,
+      "raw_model_counter": 0,
+      "rejection": {
+        "exception_type": "self_improvement.si_s01.contract.IntegrityError",
+        "message": "actual engineering prepared tensors must equal reserved unit"
+      },
+      "durable_prepared_equals_original_reservation": true,
+      "reserved_input_tokens": 46
+    },
+    {
+      "case": "pc02_deadline_after_resource",
+      "expected_raw_model_counter": 0,
+      "raw_model_counter": 0,
+      "fake_clock_seconds": 601.0,
+      "rejection": {
+        "exception_type": "self_improvement.si_s01.contract.BudgetStop",
+        "message": "engineering absolute600-second allocation budget"
+      },
+      "no_close_edge_after_budget": true
+    },
+    {
+      "case": "pc02_deadline_after_synchronize",
+      "expected_raw_model_counter": 0,
+      "raw_model_counter": 0,
+      "fake_clock_seconds": 601.0,
+      "rejection": {
+        "exception_type": "self_improvement.si_s01.contract.BudgetStop",
+        "message": "engineering absolute600-second allocation budget"
+      },
+      "no_close_edge_after_budget": true
+    },
+    {
+      "case": "a01_raw_latency",
+      "rejection": {
+        "exception_type": "self_improvement.si_s01.contract.IntegrityError",
+        "message": "engineering durable returned raw/prepared conflicts with completed generation"
+      },
+      "coherent_chain_and_start_refs_accepted": true,
+      "audit_added_external_calls": false,
+      "mutant_journal_sha256": "41163c3408f7cad76da2d9ef4ed95168de9bcc9a8d57a975985d2ca8bd7b7265"
+    },
+    {
+      "case": "a01_sequence_prefix",
+      "rejection": {
+        "exception_type": "self_improvement.si_s01.contract.IntegrityError",
+        "message": "engineering observed sequence conflicts with prepared prefix/output tokens"
+      },
+      "coherent_chain_and_start_refs_accepted": true,
+      "audit_added_external_calls": false,
+      "mutant_journal_sha256": "5bee659e7373ef57d1776df5284746ab1a656d713f107f7872b64b1dd10405bb"
+    }
+  ]
+}

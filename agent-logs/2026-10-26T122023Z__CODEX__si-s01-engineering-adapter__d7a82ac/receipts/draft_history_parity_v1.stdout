@@ -1,0 +1,71 @@
+........F.........                                                       [100%]
+=================================== FAILURES ===================================
+_ test_semantic_old_wire_tamper_rejected_after_all_selected_hashes_refs_resealed[before_map-complete receipt before-state] _
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_history_parity_v1/test_semantic_old_wire_tamper_1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f9e766663b0>
+attack = 'before_map', reason = 'complete receipt before-state'
+
+    @pytest.mark.parametrize('attack,reason',[('after_map','saved full ordered after-map'),('before_map','complete receipt before-state'),('action_id','historical Action-ID'),('parser','historical parser'),('prompt','historical causal P0'),('embedded','embedded source body')])
+    def test_semantic_old_wire_tamper_rejected_after_all_selected_hashes_refs_resealed(tmp_path,monkeypatch,attack,reason):
+        f=fixture_setup(tmp_path,monkeypatch)
+        def change(row,events):
+            transitions=[e for e in events if e['kind']=='environment_operation_completed' and e['payload']['operation']=='sft_environment_step']
+            first=next(e for e in events if e['kind']=='generation_completed')
+            if attack=='after_map':transitions[-1]['payload']['transition'].pop('valid_actions')
+            elif attack=='before_map':transitions[1]['payload']['before_state']['valid_actions'].reverse()
+            elif attack=='action_id':transitions[0]['payload']['action_id']='A001'
+            elif attack=='parser':first['payload']['evidence']['parser_result']['action_id']='A001'
+            elif attack=='prompt':
+                first['payload']['evidence']['generation']['prompt']='future or alternate prompt'
+                row['steps'][0]['metadata']['policy']['generation']['prompt']='future or alternate prompt'
+                row['steps'][0]['metadata']['policy']['prompt']='future or alternate prompt'
+        embedded=(lambda row:row['metadata'].pop('termination_reason')) if attack=='embedded' else None
+        manifest,p=reseal_history(f,change,embedded_mutate=embedded)
+>       with pytest.raises(ContractError,match=reason):read_historical(p.read_bytes(),evidence_class=SOFTWARE,expected_manifest_sha256=file_binding(p)['sha256'])
+
+tests/test_si_s01_engineering_history.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_s01/engineering_history.py:98: in read_historical
+    insist(step['observation']==before['observation'] and step['valid_actions']==before['valid_actions'] and step['action_valid'] is True and step['parser_status']=='selected','saved before-state/action validity')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'saved before-state/action validity'
+
+    def insist(condition: bool, message: str) -> None:
+>       if not condition: raise IntegrityError(message)
+E       self_improvement.si_s01.contract.IntegrityError: saved before-state/action validity
+
+src/self_improvement/si_s01/contract.py:26: IntegrityError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_history_parity_v1/test_semantic_old_wire_tamper_1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f9e766663b0>
+attack = 'before_map', reason = 'complete receipt before-state'
+
+    @pytest.mark.parametrize('attack,reason',[('after_map','saved full ordered after-map'),('before_map','complete receipt before-state'),('action_id','historical Action-ID'),('parser','historical parser'),('prompt','historical causal P0'),('embedded','embedded source body')])
+    def test_semantic_old_wire_tamper_rejected_after_all_selected_hashes_refs_resealed(tmp_path,monkeypatch,attack,reason):
+        f=fixture_setup(tmp_path,monkeypatch)
+        def change(row,events):
+            transitions=[e for e in events if e['kind']=='environment_operation_completed' and e['payload']['operation']=='sft_environment_step']
+            first=next(e for e in events if e['kind']=='generation_completed')
+            if attack=='after_map':transitions[-1]['payload']['transition'].pop('valid_actions')
+            elif attack=='before_map':transitions[1]['payload']['before_state']['valid_actions'].reverse()
+            elif attack=='action_id':transitions[0]['payload']['action_id']='A001'
+            elif attack=='parser':first['payload']['evidence']['parser_result']['action_id']='A001'
+            elif attack=='prompt':
+                first['payload']['evidence']['generation']['prompt']='future or alternate prompt'
+                row['steps'][0]['metadata']['policy']['generation']['prompt']='future or alternate prompt'
+                row['steps'][0]['metadata']['policy']['prompt']='future or alternate prompt'
+        embedded=(lambda row:row['metadata'].pop('termination_reason')) if attack=='embedded' else None
+        manifest,p=reseal_history(f,change,embedded_mutate=embedded)
+>       with pytest.raises(ContractError,match=reason):read_historical(p.read_bytes(),evidence_class=SOFTWARE,expected_manifest_sha256=file_binding(p)['sha256'])
+E       AssertionError: Regex pattern did not match.
+E        Regex: 'complete receipt before-state'
+E        Input: 'saved before-state/action validity'
+
+tests/test_si_s01_engineering_history.py:37: AssertionError
+- generated xml file: /home/lizening/research-notes/agent-logs/2026-10-26T122023Z__CODEX__si-s01-engineering-adapter__d7a82ac/draft_history_parity_v1.xml -
+=========================== short test summary info ============================
+FAILED tests/test_si_s01_engineering_history.py::test_semantic_old_wire_tamper_rejected_after_all_selected_hashes_refs_resealed[before_map-complete receipt before-state]

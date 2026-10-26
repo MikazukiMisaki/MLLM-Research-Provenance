@@ -1,0 +1,94 @@
+[
+  {
+    "label": "clone",
+    "argv": [
+      "git",
+      "clone",
+      "--no-checkout",
+      "--no-hardlinks",
+      "/home/lizening/wt-si-s01-engineering-adapter",
+      "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout"
+    ],
+    "cwd": null,
+    "returncode": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e1408e0ebc141bd001ad05ed7e76ba349d22b6abfcd9a8c0a91b9d8b76391613"
+  },
+  {
+    "label": "checkout",
+    "argv": [
+      "git",
+      "checkout",
+      "--detach",
+      "e5f09c05824cb61cb35ccbbf4e189b04e8829cea"
+    ],
+    "cwd": "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout",
+    "returncode": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "544c04fc6de4326847d38e9bc1d2e63616d33546eded155db14d54cbe68d34ba"
+  },
+  {
+    "label": "target_object",
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout",
+    "returncode": 0,
+    "stdout_sha256": "907c5d41a5b7f4e412861ae30caeddbe4596b227dd4c94161aa933fba51f557b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "d7_object",
+    "argv": [
+      "git",
+      "cat-file",
+      "-t",
+      "d7a82acb510157ab7ba5439d790816c5c948439f"
+    ],
+    "cwd": "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout",
+    "returncode": 0,
+    "stdout_sha256": "50836eee574ecff79dea3b4fd40673d7d000f7a5f177d8a6a3000b59c78383b8",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "pre_status",
+    "argv": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "cwd": "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout",
+    "returncode": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "tracked_files",
+    "argv": [
+      "git",
+      "ls-files",
+      "-z"
+    ],
+    "cwd": "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout",
+    "returncode": 0,
+    "stdout_sha256": "aed09817f86254e9e024fe4812c3c4b1bc7ab48c5b026bcbfd7f19197d58dbe8",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "changed_files",
+    "argv": [
+      "git",
+      "diff",
+      "--name-only",
+      "d7a82acb510157ab7ba5439d790816c5c948439f",
+      "e5f09c05824cb61cb35ccbbf4e189b04e8829cea"
+    ],
+    "cwd": "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout",
+    "returncode": 0,
+    "stdout_sha256": "d770f13d84b7ad24e25d5dc650044f1887112ab9edc4a02fd8ce3fcb7ea079c6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

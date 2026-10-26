@@ -1,0 +1,58 @@
+{
+  "schema": "si_s01_engineering_handoff_host_channel_receipt_v1",
+  "status": "HOST_CHANNEL_UNAVAILABLE",
+  "created_utc": "2026-10-26T14:05:20Z",
+  "scope": "hash verification and one read-only lstat only; no SSH, host command, watcher, probe, preflight, or runtime call",
+  "handoff": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T134208Z__SOL__si-s01-engineering-exact-review__e5f09c05_816131/LUNA_ENGINEERING_HANDOFF.md",
+    "expected_sha256": "84b64a1cbe09440bba009f4e20f645af2f5a164d0046de44e163edfdff82b154",
+    "observed_sha256": "84b64a1cbe09440bba009f4e20f645af2f5a164d0046de44e163edfdff82b154",
+    "match": true
+  },
+  "root_reviews": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T134208Z__SOL__si-s01-engineering-exact-review__e5f09c05_816131/INDEPENDENT_REVIEW.json",
+      "sha256": "528a0fda6ee417976d6c9d9ed928af5216ceec30ee4f0cb440c65b030dc575b8",
+      "source_sha": "e5f09c05824cb61cb35ccbbf4e189b04e8829cea",
+      "decision": "PASS_ENGINEERING_HISTORICAL_SOURCE_SOFTWARE",
+      "scope_limit": "software only; not runtime/preflight/launch release"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T134208Z__SOL__si-s01-engineering-exact-review__e5f09c05_816131/SOURCE_ONLY_SOFTWARE_REVIEW.json",
+      "sha256": "12a58061f6a53220e210037bfa410798f11f05114c6f178e224a655ebd809d95",
+      "decision": "PASS_SOURCE_ONLY_SOFTWARE"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T134208Z__SOL__si-s01-engineering-exact-review__e5f09c05_816131/ENGINEERING_SOFTWARE_REVIEW.json",
+      "sha256": "b8e15e4126d447972e986036446fad459ff2429cb40b1ea1ce916413f82448cc",
+      "decision": "PASS_ENGINEERING_HISTORICAL_SOURCE_SOFTWARE"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T134208Z__SOL__si-s01-engineering-exact-review__e5f09c05_816131/INDEPENDENT_REVIEW.md",
+      "sha256": "255c452fca2f0fb9f62e5efb8b5afb260786755d29a123f496f01be9c9a9dffd"
+    }
+  ],
+  "prior_luna_input_bindings": {
+    "directory": "/home/lizening/research-notes/agent-logs/2026-10-26T134000Z__LUNA__si-s01-input-bindings__e5f09c05",
+    "PROPOSAL_INPUT_BINDINGS.json_sha256": "e8fd9f7394c1a4b677467fe54a1c7f91bbd27ed5b9aa9eda63d6ee3f8311a639",
+    "FILE_HASHES.sha256_check": "PASS (all four listed prior artifacts)",
+    "prior_files_modified": false
+  },
+  "socket_lstat": {
+    "path": "/home/lizening/.codex/app-server-control/forwarded-ssh-agent.sock",
+    "operation": "os.lstat",
+    "returncode": 0,
+    "stdout": "{\"error\":\"FileNotFoundError\",\"exists\":false,\"path\":\"/home/lizening/.codex/app-server-control/forwarded-ssh-agent.sock\",\"status\":\"HOST_CHANNEL_UNAVAILABLE\"}\n",
+    "interpretation": "No usable forwarded agent socket observed; no SSH attempt made."
+  },
+  "release_state": {
+    "engineering_preflight": "NOT_AUTHORIZED",
+    "engineering_live": "NOT_AUTHORIZED",
+    "model_or_tokenizer": "NOT_AUTHORIZED",
+    "environment": "NOT_AUTHORIZED",
+    "scientific_execution": "NOT_AUTHORIZED",
+    "next_action": "STOP_AND_STANDBY_UNTIL_ACTUAL_EXTERNAL_CHANNEL_RESTORATION_OR_ROOT_HANDOFF"
+  },
+  "calls": {"ssh":0,"cuda":0,"model":0,"tokenizer":0,"environment":0,"preflight":0,"supervisor":0,"science":0},
+  "shared_publication_changes": 0
+}

@@ -1,0 +1,33 @@
+diff --git a/tests/si_s01_engineering_support.py b/tests/si_s01_engineering_support.py
+index b2ab1fe..b697988 100644
+--- a/tests/si_s01_engineering_support.py
++++ b/tests/si_s01_engineering_support.py
+@@ -177,7 +177,7 @@ def fixture_setup(tmp,monkeypatch):
+     proposal={'schema':'SI_S01_ENGINEERING_PROPOSAL_V1','purpose':PURPOSE,'model':{'base_snapshot':str(base),'adapter_path':str(adapter),'synthetic_files':[file_binding(base/'marker'),file_binding(adapter/'marker')]},'environment':{'config':file_binding(config),'data_root':str(tmp/'train'),'game':file_binding(Path(row['task']['metadata']['game_file'])),'traj_data':file_binding(Path(row['task']['metadata']['game_file']).parent/'traj_data.json'),'logic_files':{k:file_binding(tmp/k) for k in ('domain','grammar')}},'history_manifest':file_binding(mp),'original_files_by_reference':{k:{'path':str(tmp/n),'certified_sha256':file_binding(tmp/n)['sha256'],'certificate':file_binding(cert)} for k,n in [('trajectory','historical_source.jsonl'),('events','historical_events.jsonl')]},'interpreter':file_binding(Path(sys.executable).resolve()),'packages':{k:module_origin(m) for k,m in modules.items()}}
+     pp=tmp/'proposal.json';pp.write_text(canonical(proposal));ap=tmp/'authorization.json';token='@ENGINEERING_AUTHORIZATION_SHA256@'
+     argv=[str(Path(sys.executable).resolve()),'-I',str(REPO/'scripts/run_si_s01_engineering_once.py'),'--live','--authorization',str(ap),'--authorization-sha256',token,'--proposal',str(pp)]
+-    auth={'schema':'SI_S01_ENGINEERING_AUTHORIZATION_V1','status':'SOFTWARE_TEST_ONLY','purpose':PURPOSE,'science_authorized':False,'evidence_class':SOFTWARE,'task_sha256':TASK_SHA256,'proposal_revision_sha256':PROPOSAL_REVISION_SHA256,'source_sha':code,'review':file_binding(review),'proposal_sha256':file_binding(pp)['sha256'],'authorization_id':'6'*32,'run_id':'7'*32,'historical_run_id':HISTORICAL_RUN,'source_index':0,'ceilings':dict(MAXIMA),'gpu_uuid':GPU,'execution_uid':os.getuid(),'output_path':str(tmp/'output'),'environment':{'PATH':os.defpath,'HOME':str(tmp),'CUDA_VISIBLE_DEVICES':'','HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1','PYTHONDONTWRITEBYTECODE':'1','TOKENIZERS_PARALLELISM':'false'},'not_before_utc':stamp(now-timedelta(minutes=1)),'expires_utc':stamp(now+timedelta(minutes=20)),'launch_argv':argv,'preflight_argv':['--preflight-only' if x=='--live' else x for x in argv],'maximum_launches':1,'forbidden_non_engineering':True}
++    auth={'schema':'SI_S01_ENGINEERING_AUTHORIZATION_V1','status':'SOFTWARE_TEST_ONLY','purpose':PURPOSE,'science_authorized':False,'evidence_class':SOFTWARE,'task_sha256':TASK_SHA256,'proposal_revision_sha256':PROPOSAL_REVISION_SHA256,'source_sha':code,'review':file_binding(review),'proposal_sha256':file_binding(pp)['sha256'],'authorization_id':'6'*32,'run_id':'7'*32,'historical_run_id':HISTORICAL_RUN,'source_index':0,'ceilings':dict(MAXIMA),'gpu_uuid':GPU,'execution_uid':os.getuid(),'output_path':str(tmp/'output'),'environment':{'PATH':os.defpath,'HOME':str(tmp),'LANG':'C.UTF-8','LC_ALL':'C.UTF-8','CUDA_VISIBLE_DEVICES':'','HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1','PYTHONDONTWRITEBYTECODE':'1','TOKENIZERS_PARALLELISM':'false'},'not_before_utc':stamp(now-timedelta(minutes=1)),'expires_utc':stamp(now+timedelta(minutes=20)),'launch_argv':argv,'preflight_argv':['--preflight-only' if x=='--live' else x for x in argv],'maximum_launches':1,'forbidden_non_engineering':True}
+     def save():
+         pp.write_text(canonical(proposal));auth['proposal_sha256']=file_binding(pp)['sha256'];ap.write_text(canonical(auth));return [file_binding(ap)['sha256'] if x==token else x for x in auth['preflight_argv']]
+     save();permit=EngineeringPermit(auth,proposal,file_binding(ap)['sha256'],file_binding(pp)['sha256'],REPO,history)
+diff --git a/tests/test_si_s01_engineering_gate.py b/tests/test_si_s01_engineering_gate.py
+index 2798115..59046e1 100644
+--- a/tests/test_si_s01_engineering_gate.py
++++ b/tests/test_si_s01_engineering_gate.py
+@@ -45,6 +45,8 @@ def test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runti
+     if attack=='mode_spoof':argv=['--live' if x=='--preflight-only' else x for x in argv]
+     if attack=='argv':argv=argv[:-1]
+     r=child(f,argv,tmp_path);assert r.returncode!=0
++    reasons={'old_schema':'distinct root engineering authorization','historical_run_reused':'separate new engineering run identity','source_purpose':'distinct root engineering authorization','science_true':'distinct root engineering authorization','old_code':'clean exact engineering source','consumed':'fresh exact engineering argv/output/claim','old_output':'fresh exact engineering argv/output/claim','mode_spoof':'software cannot launch actual engineering','wrong_UUID':'bound UUID/mode','bad_cap':'engineering ceiling may only tighten','bad_manifest':'input hash drift','package_drift':'input hash drift','env':'exact isolated engineering environment','argv':'fresh exact engineering argv/output/claim','expired':'engineering authorization UTC window'}
++    assert reasons[attack] in r.stderr.decode(),r.stderr.decode()
+     if attack!='old_output':assert not f.permit.output.exists()
+     assert not f.state.calls['generation'] and not f.state.calls['reset']
+ 
+@@ -53,4 +55,5 @@ def test_source_and_engineering_authorizations_reject_cross_use(tmp_path,monkeyp
+     f=fixture_setup(tmp_path/'engineering',monkeypatch);argv=f.save()
+     with pytest.raises(ContractError):authenticate_source(REPO,f.ap,file_binding(f.ap)['sha256'],f.pp,invocation=argv,mode='preflight')
+     directory=tmp_path/'source';directory.mkdir();a,p,ap,pp,save=gate_fixture(directory,REPO)
+-    with pytest.raises(ContractError):authenticate_engineering(REPO,ap,file_binding(ap)['sha256'],pp,invocation=save(),mode='preflight')
++    source_argv=save()
++    with pytest.raises(ContractError):authenticate_engineering(REPO,ap,file_binding(ap)['sha256'],pp,invocation=source_argv,mode='preflight')

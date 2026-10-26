@@ -1,0 +1,131 @@
+{
+  "schema": "si_s01_proposal_input_readonly_command_receipts_v1",
+  "scope": "read-only input and prior-evidence binding; no project imports or execution",
+  "attempts": [
+    {
+      "argv": ["sha256sum", "ENGINEERING_ADAPTER_IMPLEMENTATION_TASK.md", "ENGINEERING_VERIFICATION_PROPOSAL_REVISION_2.md", "COUPLED_PATH_ADDENDUM.md"],
+      "cwd": "/home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c",
+      "returncode": 1,
+      "stdout": "525d271b38a8ecd2248c653291679a1c8fd37ceaec05b4dbf3b575932a7e103b  ENGINEERING_ADAPTER_IMPLEMENTATION_TASK.md\nfe974f732ca03d96718c679facaf1201aa78a364c2f3251690c461f28acf189f  ENGINEERING_VERIFICATION_PROPOSAL_REVISION_2.md\n",
+      "stderr": "sha256sum: COUPLED_PATH_ADDENDUM.md: No such file or directory\n",
+      "correction": "Actual filename is ENGINEERING_COUPLED_PATH_ADDENDUM.md; corrected hash 2c03660bf71a08cfdad524ba1215abc9aff1c957552412f87d019947a39f6ded."
+    },
+    {
+      "argv": ["sha256sum", "ENGINEERING_ADAPTER_IMPLEMENTATION_TASK.md", "ENGINEERING_VERIFICATION_PROPOSAL_REVISION_2.md", "ENGINEERING_COUPLED_PATH_ADDENDUM.md", "ADOPTED_SOURCE_ONLY_PROTOCOL.md"],
+      "cwd": "/home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c",
+      "returncode": 0,
+      "stdout": "525d271b38a8ecd2248c653291679a1c8fd37ceaec05b4dbf3b575932a7e103b  ENGINEERING_ADAPTER_IMPLEMENTATION_TASK.md\nfe974f732ca03d96718c679facaf1201aa78a364c2f3251690c461f28acf189f  ENGINEERING_VERIFICATION_PROPOSAL_REVISION_2.md\n2c03660bf71a08cfdad524ba1215abc9aff1c957552412f87d019947a39f6ded  ENGINEERING_COUPLED_PATH_ADDENDUM.md\ndaa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72  ADOPTED_SOURCE_ONLY_PROTOCOL.md\n"
+    },
+    {
+      "argv": ["git", "-C", "/home/lizening/wt-si-s01-engineering-adapter", "rev-parse HEAD"],
+      "returncode": 0,
+      "stdout": "e5f09c05824cb61cb35ccbbf4e189b04e8829cea\n",
+      "interpretation": "Observed development candidate only; no review/freeze accepted."
+    },
+    {
+      "argv": ["git", "-C", "/home/lizening/wt-si-s01-engineering-adapter", "status", "--short", "--branch"],
+      "returncode": 0,
+      "stdout": "## codex/si-s01-engineering-adapter\n",
+      "interpretation": "Clean working tree at observation; status is not independent review."
+    },
+    {
+      "command_text": "sha256sum /home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/{model-00001-of-00005.safetensors,model-00002-of-00005.safetensors,model-00003-of-00005.safetensors,model-00004-of-00005.safetensors,model-00005-of-00005.safetensors,config.json,generation_config.json,model.safetensors.index.json,tokenizer.json,tokenizer_config.json,vocab.json,merges.txt}",
+      "returncode": 0,
+      "elapsed_wall_seconds_approx": 70.5,
+      "stdout_lines_sha256_order": [
+        "31d6a825ae35f11fb85b195b4c42c146c051e446433125a215336abdf95cbf5f  /home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00001-of-00005.safetensors",
+        "5991236cea6fe21f3d43cab0f0e84448734fbbe0789816202989f2ddc9d18282  /home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00002-of-00005.safetensors",
+        "c5185c4794be2d8a9784d5753c9922db38df478ce11f9ed0b415b7304d896836  /home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00003-of-00005.safetensors",
+        "b5ee7de71fbf17db3d5704e0c8f2bc7d005ca9e1d7ca2aeb19827b0cfcaa917a  /home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00004-of-00005.safetensors",
+        "20c2d6366ab85c90786ccdd829cd2b9e7d30ef3b2ebbb998280e7e4014b542ff  /home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model-00005-of-00005.safetensors",
+        "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30  /home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/config.json",
+        "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2  /home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/generation_config.json",
+        "f9fdbcb91c23971c13ec5d5f2573d2349e8f61f2f049371ec699281748fdb1bc  /home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/model.safetensors.index.json",
+        "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4  /home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/tokenizer.json",
+        "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101  /home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/tokenizer_config.json",
+        "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910  /home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/vocab.json",
+        "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5  /home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/merges.txt"
+      ],
+      "interpretation": "Hash output includes no file contents. Files were current container-visible cache bytes, not host observation."
+    },
+    {
+      "argv": ["python", "-c", "stdlib implementation of sft.training.directory_sha256 algorithm over the exact P0 adapter directory; sorted relative paths then file bytes in 1 MiB chunks"],
+      "returncode": 0,
+      "command_text": "python -c using pathlib.rglob('*'), sorted regular files, SHA256.update(str(relative_to(root)).encode()), then 1MiB read chunks for each file; no project module import",
+      "stdout": "{\"file_count\":11,\"path\":\"/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter\",\"sha256\":\"6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11\",\"total_file_bytes\":365138109}\n",
+      "payload_policy": "No adapter file content or per-file weight data emitted."
+    },
+    {
+      "command": "sha256sum over the following paths (exact order)",
+      "returncode": 0,
+      "command_paths": [
+        "/home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_recovery_duration_v1.json",
+        "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml",
+        "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g3_gate_2da980f_phase1.json",
+        "/home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_model_identity_manifest.json",
+        "/home/lizening/wt-r19-recovery-duration-v1/configs/environment/alfworld_text.yaml",
+        "/home/lizening/wt-r19-recovery-duration-v1/src/env/alfworld.py",
+        "/home/lizening/wt-r19-recovery-duration-v1/configs/sft/sft_run_config.json",
+        "/home/lizening/wt-r19-recovery-duration-v1/configs/sft/sft_training_protocol.json",
+        "/home/lizening/alfworld_data/logic/alfred.pddl",
+        "/home/lizening/alfworld_data/logic/alfred.twl2",
+        "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/runtime_manifest.json",
+        "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/runtime_manifest_preload.json",
+        "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/environment_manifest.json",
+        "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/g3_gate_receipt.json",
+        "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_restart_comparison.json",
+        "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_manifest.json",
+        "/home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-g3-live-successor__2da980f/supervisor_live/launch_context.json",
+        "/home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-g3-live-successor__2da980f/supervisor_live/runner_exit.json",
+        "/home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-g3-live-successor__2da980f/supervisor_live/supervisor_status.json",
+        "/home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-g3-live-successor__2da980f/supervisor_live/runner.log",
+        "/home/lizening/research-notes/agent-logs/2026-10-23T005510Z__SOL__r19-authorized-g3-monitor__2da980f_eea6b8/first_source_integrity.json",
+        "/home/lizening/research-notes/agent-logs/2026-10-23T005510Z__SOL__r19-authorized-g3-monitor__2da980f_eea6b8/INDEPENDENT_G3_RESULT.md"
+      ],
+      "stdout": "3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122  /home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_recovery_duration_v1.json\ne90f93eb4604a473b6eb4a259a19ef1ca3c296bba1771ba70a1c9b0edbc99700  /home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml\nc285692615eaaf1c7cb7139b0417528022db6ee03c510de13f881d126f14415e  /home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g3_gate_2da980f_phase1.json\n08c00c8a4bf2ab15bffb59d2d7345c8549608aced0da1eedb2901096a840e2c2  /home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_model_identity_manifest.json\nbaf9996426d6dcf971da05ee2eb2912a24297b178949adb0cdae7dbc85451043  /home/lizening/wt-r19-recovery-duration-v1/configs/environment/alfworld_text.yaml\n086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d  /home/lizening/wt-r19-recovery-duration-v1/src/env/alfworld.py\n15e2db7522e78b98fd9fcfc9f08537108b54353128c986043b8f2e947567a2ec  /home/lizening/wt-r19-recovery-duration-v1/configs/sft/sft_run_config.json\ndd06d08773e9842b2302263429c7a1752e968dcb30d2dd89f185c01ef9605155  /home/lizening/wt-r19-recovery-duration-v1/configs/sft/sft_training_protocol.json\nf1473041ed01da514de1f87adfd7ef0804862361f83ccf63c75e43633b0eb280  /home/lizening/alfworld_data/logic/alfred.pddl\nc5b22f0f73309a7fd7c8e5b71de42ad4803b60766ab4a51cc2feb34162be036b  /home/lizening/alfworld_data/logic/alfred.twl2\n306a9e7c2d1b968e2a56e258fcd07aaf7467739460802a2b94c5e20411264916  /home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/runtime_manifest.json\n6395e65abf266ba5f6a0834023b1da5c3799550b124a75db4d819cf613ee3312  /home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/runtime_manifest_preload.json\n81ea3b3aea86a850c70d88846f1ce12dfb276cca34aacb9f598ea13e733bf902  /home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/environment_manifest.json\n4ab84099f361bf563327168237ac052c19506cd997e159aacd5f1244e3a9c773  /home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/g3_gate_receipt.json\n8d3269fccd346da464c990ff4f50bf1e913031fa210eb3feb8c4307ea8777ee9  /home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_restart_comparison.json\nb00e8e4eed375532a080da6579940b44bc09089d7917540aea3ca4c227daffa0  /home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_manifest.json\n399137330d5dfaccdd8734f7c39b219cfd7040808649e6090af8c9b733af39ac  /home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-g3-live-successor__2da980f/supervisor_live/launch_context.json\n015fe2296f5dce979d6e9db2a17dc03d217958620dd13a29a73b256d56cb144b  /home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-g3-live-successor__2da980f/supervisor_live/runner_exit.json\ndf9ae52504c3f25a7f949ddea0a25b517dfe280d7e5a2ff23880fca68a7d5c99  /home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-g3-live-successor__2da980f/supervisor_live/supervisor_status.json\n849cea6fc021205b1bcc3f12fc403726c726b9050a0aef928af8d591db365ae4  /home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-g3-live-successor__2da980f/supervisor_live/runner.log\n86abe6613352866ad3a6830e9ccd2039aefc5693e5770567df360ec4d3f29a72  /home/lizening/research-notes/agent-logs/2026-10-23T005510Z__SOL__r19-authorized-g3-monitor__2da980f_eea6b8/first_source_integrity.json\n2b4b7fac78d05fbaba813b145595c314f94c56c96d08052b38935217124b5cc5  /home/lizening/research-notes/agent-logs/2026-10-23T005510Z__SOL__r19-authorized-g3-monitor__2da980f_eea6b8/INDEPENDENT_G3_RESULT.md\n",
+      "note": "No source trajectory or event journal was rehashed by these commands."
+    },
+    {
+      "argv": ["git", "-C", "/home/lizening/wt-si-s01-engineering-adapter", "grep", "-n", "P0_SHA256\\|SNAPSHOT =", "d7a82acb510157ab7ba5439d790816c5c948439f", "--", "src/self_improvement/si_p3/contract.py", "src/self_improvement/si_s01/contract.py"],
+      "returncode": 0,
+      "observed_static_constants": {"P0_SHA256":"6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11","SNAPSHOT":"b968826d9c46dd6066d109eabc6255188de91218"},
+      "project_imports": false
+    },
+    {
+      "argv": ["sha256sum", "forwarding_observation_checkpoint4.json"],
+      "returncode": 0,
+      "stdout": "4aad481852493fbc3358d5409f29bed90bb9c8579231f6b2c0a397194819b093  forwarding_observation_checkpoint4.json\n",
+      "interpretation": "Root receipt says forwarded socket ENOENT; not rechecked; no SSH attempt."
+    },
+    {
+      "argv": ["sha256sum", "/home/lizening/research-notes/agent-logs/2026-10-26T121444Z__SOL__si-s01-independent-exact-review__d7a82acb_c9ec89/INDEPENDENT_REVIEW.json", "/home/lizening/research-notes/agent-logs/2026-10-26T121444Z__SOL__si-s01-independent-exact-review__d7a82acb_c9ec89/SOURCE_ONLY_SOFTWARE_REVIEW.json"],
+      "returncode": 0,
+      "stdout": "0e878105b523afef4af18d130f6a60dacccd127c27e6f580723cf625ce2e385d  /home/lizening/research-notes/agent-logs/2026-10-26T121444Z__SOL__si-s01-independent-exact-review__d7a82acb_c9ec89/INDEPENDENT_REVIEW.json\nd587db54f268d2ace2305868f4b7c1c4f3a89ada5bbb2d8af65a4138edb19663  /home/lizening/research-notes/agent-logs/2026-10-26T121444Z__SOL__si-s01-independent-exact-review__d7a82acb_c9ec89/SOURCE_ONLY_SOFTWARE_REVIEW.json\n",
+      "interpretation": "Accepted d7 source-only software review evidence; not engineering runtime authorization."
+    },
+    {
+      "argv": ["python", "-c", "stdlib read of the selected keys from historical runtime_manifest.json; no package imports"],
+      "returncode": 0,
+      "stdout": "{\"environment_hashes\":{\"alfred_domain_sha256\":\"f1473041ed01da514de1f87adfd7ef0804862361f83ccf63c75e43633b0eb280\",\"alfred_grammar_sha256\":\"c5b22f0f73309a7fd7c8e5b71de42ad4803b60766ab4a51cc2feb34162be036b\",\"alfworld_config_sha256\":\"e90f93eb4604a473b6eb4a259a19ef1ca3c296bba1771ba70a1c9b0edbc99700\",\"data_root_identity_sha256\":\"d62900a7a31a181ad4e3f317932c7cb42db93daef4b5e4aff3625dbb12a6fe4a\",\"hf_hub_cache_identity_sha256\":\"6c5ad0875b8f06f749a5bd05acacfa51fbdcd4d95503eaf9a46d24b2c2f79870\"},\"historical_cuda_string\":\"12.4\",\"inference_contract\":{\"external_model_calls\":false,\"generation\":\"greedy; thinking disabled; synchronized per-generation latency\",\"local_files_only\":true,\"offline_environment\":{\"HF_HUB_OFFLINE\":\"1\",\"TRANSFORMERS_OFFLINE\":\"1\"},\"transport\":\"local_transformers\"},\"packages\":{\"PyYAML\":\"6.0.2\",\"accelerate\":\"1.10.1\",\"alfworld\":\"0.4.2\",\"huggingface-hub\":\"0.36.2\",\"numpy\":\"1.26.4\",\"peft\":\"0.17.1\",\"safetensors\":\"0.8.0\",\"textworld\":\"1.7.0\",\"tokenizers\":\"0.22.2\",\"torch\":\"2.6.0+cu124\",\"transformers\":\"4.56.2\"},\"python\":\"3.10.20 (main, Jun 11 2026, 15:17:37) [GCC 14.3.0]\"}\n",
+      "note": "Values are from archived historical receipt only, not current runtime import/origin observations."
+    },
+    {
+      "argv": ["python", "-c", "read safe environment subset from archived supervisor launch_context.json"],
+      "returncode": 0,
+      "stdout": "{\"ALFWORLD_CONFIG_PATH\":\"/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml\",\"ALFWORLD_DATA\":\"/home/lizening/alfworld_data\",\"HF_HUB_CACHE\":\"/home/lizening/.cache/huggingface/hub\",\"HF_HUB_OFFLINE\":\"1\",\"TRANSFORMERS_OFFLINE\":\"1\"}\n",
+      "note": "Historical receipt values only; not a current process environment observation."
+    },
+    {
+      "argv": ["git", "-C", "/home/lizening/wt-r19-recovery-duration-v1", "ls-tree", "-r", "--name-only", "2da980f631badc25086d12db60d128ff507d3ae6", "--", "src/self_improvement/si_s01"],
+      "returncode": 0,
+      "stdout": "",
+      "interpretation": "No SI-S01 runtime source tree in the historical R19 execution commit; do not bind current SI-S01 code to the old G3 implementation SHA."
+    },
+    {
+      "argv": ["git", "-C", "/home/lizening/wt-si-s01-engineering-adapter", "ls-tree", "-r", "--name-only", "d7a82acb510157ab7ba5439d790816c5c948439f", "--", "src/self_improvement/si_s01"],
+      "returncode": 0,
+      "stdout": "src/self_improvement/si_s01/__init__.py\nsrc/self_improvement/si_s01/audit.py\nsrc/self_improvement/si_s01/collector.py\nsrc/self_improvement/si_s01/contract.py\nsrc/self_improvement/si_s01/evidence.py\nsrc/self_improvement/si_s01/gate.py\nsrc/self_improvement/si_s01/runtime.py\nsrc/self_improvement/si_s01/supervisor.py\n",
+      "interpretation": "These are the accepted d7 source paths; their software review does not release engineering execution."
+    }
+  ]
+}

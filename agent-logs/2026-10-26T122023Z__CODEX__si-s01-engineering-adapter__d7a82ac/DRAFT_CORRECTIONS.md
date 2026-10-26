@@ -1,0 +1,7 @@
+# Preserved draft corrections
+
+The first extraction edit command failed an AST assumption before writing source; Python splits semicolon statements, so the source raw wrapper has five entry statements. The corrected extraction and final exact AST parity tests cover this explicitly.
+
+Actual preserved JUnit: draft_engineering_v1 has6pass/14fail (the new auditor lacked its frozen P0_SHA256 import); draft_engineering_v2 has22pass. draft_parity_v1 has2pass/4fail because otherwise equal raw event references used distinct real journal clocks; the test now uses deterministic software clocks and compares complete equal journals. draft_history_parity_v1 has17pass/1fail because a synthetic tamper's list alias also changed the preceding state; the tamper now replaces that list and targets the intended validator. draft_boundaries_v1 has43pass and v2 has54pass.
+
+clean_engineering_gate_v1 has15pass/2fail: its explicit child environment omitted locale variables Python adds, and the cross-use test hashed the source fixture authorization before save(). Commit87→e5 changes only the two test helpers/assertions: explicit LANG/LC_ALL, save-before-hash and specific rejection-reason checks. clean_engineering_gate_v2 has17pass. No production guard was relaxed. The real nine-slice reader at87 exited0; every production src/scripts/config byte is identical at finale5, recorded separately. Root independently validates the finalSHA; developer does not infer independent acceptance from any draft.

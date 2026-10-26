@@ -1,0 +1,1901 @@
+diff --git a/docs/si_s01_engineering_historical_once.md b/docs/si_s01_engineering_historical_once.md
+new file mode 100644
+index 0000000..11968c9
+--- /dev/null
++++ b/docs/si_s01_engineering_historical_once.md
+@@ -0,0 +1,19 @@
++# SI-S01 single historical-source engineering adapter
++
++ENGINEERING_ONLY; no runtime/launch/science clearance is conferred. Task525d271b..., proposal revisionfe974f73... and coupled-path clarification2c03660b... bind this separate engineering check. Exactd7 source-only branch/evidence remains immutable. Scientific85/2da, A96 metadata/42/42/d5/H50/order/thresholds/budgets and old guards remain unchanged.
++
++The source and engineering wrappers call the same runtime_core load/generation mechanics and supervisor_core process cleanup. Source wrappers retain genuine A96 Permit/Plan/artifact/unit identity checks. Source core hooks defaultNone. Engineering uses a distinct EngineeringPermit, reserved engineering units, purpose ENGINEERING_HISTORICAL_SOURCE_ONCE, science_authorized=false and an engineering supervisor profile; it is never a live_source_only Plan. No old LocalInference/four-prompt/two-replay route is used.
++
++The only allowed route is one guarded P0 model/tokenizer load including one explicit one-byte context probe; one fresh unmodified ReadIsolatedEnvironment; reset nominalseed30000 with explicitly new pool42; exact comparison of actual reset public task/goal/state/full ordered map; actual production projection(empty history) equal to the saved first prompt; prepared/sent IDs and mask; one greedy/thinkingfalse/cap16 shared-core generation; production parser/Action-ID/map/saved first command comparison; then exactly the six old whitelist commands with every before/after state/map/receipt reference checked. Generated commands are never used as environment command sources. Any mismatch stops before further work; no alternate prompt/seed/reset/generation is tried.
++
++Historical internal pool/RNG/counter were not recorded. Every result is HISTORICAL_INTERNAL_RNG_NOT_RECONSTRUCTED, including complete public-path compatibility. Missing historical input IDs remain UNRECORDED. New prepared-versus-sent evidence does not fabricate historical arrays or establish internal RNG identity, A96 yield or learning.
++
++The reader authenticates original firstline35486bytes/SHA465bff75... and nine exact referenced receipt slices from manifestc361ba0c...; maximum event offset149225. It does not load a whole journal, another source or A96/heldout task bodies. Whole-file hashes are cited through separately root-bound prior certificate references, not rehashed here. Exact original source_hash canonicalization excludes only the two publication metadata fields and per-step eventrefs; embedded source completion differs only by the two publication metadata additions. Final after-map is mandatory even at terminal.
++
++Hard caps are1model/tokenizer load,1explicit one-byte probe,1generation/16output/8192input,1construct,1reset+6steps=7operations,1close and600totalallocatedseconds including loading/audit/cleanup. The independent ledger durably starts full reservations, snapshots prepared input without mutable aliases, consumes one invocation right and rechecks absolute time after resource checks/CUDA synchronization immediately before the model boundary. Failed/unknown units keep conservative costs and actual raw returns are retained before postcheck failures. Independent raw audit binds returned raw/prepared/full observed sequence to completed evidence and reconstructs all counts. Source and engineering costs are separate; history5142/7949 is not rewritten.
++
++Engineering report time ends at its run_closed stage. Authentic SI_S01_ENGINEERING_SUPERVISOR_EXIT_V1 allocated_device_hours is final authority; overlapping intervals must not be added. All waits use the absolute remaining deadline, unknown reaping remains null/incomplete, and worker marker publication is durable atomic/exclusive. Exit0 alone is insufficient: valid coupled engineering report, exact source/run/history binding, cleanup and time/exit evidence are required.
++
++A new exact-SHA independent engineering software review and one fresh root-issued engineering authorization must bind purpose, sciencefalse, consumed historical source0, source/input/model/module bytes, proposal, UID, GPU UUID, isolated argv/environment, UTC, absent unique output and one-launch claim. Old engineering/G3/A96 authorizations reject cross-use. Preflight-only is static and not a launch. Real entry still needs trusted GPU/host process ownership; no guard or missing socket mapping is waived.
++
++Software fixtures substitute only raw model/tokenizer/CUDA/NVML/TextWorld/OS I/O. They use the production wrappers/core/one-game adapter/reader/parser/journal/registry/auditor/report. AST normalization proves common mechanics equal pinned d7 except typed evidence scope and explicit engineering-only hooks; actual old/new source wrapper differentials compare raw guards/events/debits. Real 8B/world/preflight/SSH-host/science calls are not developer-authorized. Real historical-reader-only validation is separately isolated from synthetic model/environment tests.
+diff --git a/scripts/run_si_s01_engineering_once.py b/scripts/run_si_s01_engineering_once.py
+new file mode 100644
+index 0000000..dfe4cd1
+--- /dev/null
++++ b/scripts/run_si_s01_engineering_once.py
+@@ -0,0 +1,37 @@
++#!/usr/bin/env python3
++"""One separately authorized engineering historical-source check; never science."""
++from __future__ import annotations
++from pathlib import Path
++from datetime import datetime,timezone
++import argparse,json,sys,time
++ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
++from self_improvement.si_s01.contract import insist
++from self_improvement.si_s01.engineering_gate import authenticate_engineering,engineering_binding,verify_artifacts
++
++def main(argv=None):
++    entered=time.monotonic();parser=argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--authorization',type=Path,required=True);parser.add_argument('--authorization-sha256',required=True);parser.add_argument('--proposal',type=Path,required=True)
++    mode=parser.add_mutually_exclusive_group(required=True);mode.add_argument('--preflight-only',action='store_true');mode.add_argument('--live',action='store_true');mode.add_argument('--worker',action='store_true',help=argparse.SUPPRESS)
++    parser.add_argument('--launch-context-sha256',help=argparse.SUPPRESS);args=parser.parse_args(argv)
++    try:
++        insist(sys.flags.isolated==1,'isolated engineering interpreter -I required')
++        phase='preflight' if args.preflight_only else 'worker' if args.worker else 'live'
++        permit=authenticate_engineering(ROOT,args.authorization,args.authorization_sha256,args.proposal,invocation=list(sys.orig_argv),mode=phase,launch_context_sha256=args.launch_context_sha256)
++        if args.preflight_only:
++            print(json.dumps(verify_artifacts(permit)|{'evidence_class':permit.evidence_class,'output_exists':permit.output.exists()}));return 0
++        if args.worker:
++            from self_improvement.si_s01.engineering_runtime import run_engineering_worker
++            return run_engineering_worker(permit)
++        from self_improvement.si_s01.engineering_supervisor import supervise_engineering,engineering_exit_ok
++        from self_improvement.si_s01.engineering_contract import PURPOSE
++        from self_improvement.si_p3.runtime_gate import utc
++        seconds=min(permit.ceilings['seconds'],(utc(permit.authorization['expires_utc'])-datetime.now(timezone.utc)).total_seconds())
++        command=['--worker' if x=='--live' else x for x in sys.orig_argv]
++        context={'purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,'source_sha':permit.authorization['source_sha'],
++            'authorization_sha256':permit.authorization_sha256,'supervisor_argv':list(sys.orig_argv),'allocation_started_monotonic':entered,'engineering_binding':engineering_binding(permit)}
++        r=supervise_engineering(command,permit.output,context=context,seconds=seconds,environment=permit.authorization['environment'])
++        report_path=permit.output/'engineering_report.json';report=json.loads(report_path.read_bytes()) if report_path.is_file() else None
++        return 0 if engineering_exit_ok(r,report) and report['run_id']==permit.authorization['run_id'] and report['history_manifest_sha256']==permit.history.manifest_sha256 else 1
++    except Exception as error:
++        print(json.dumps({'status':'ENGINEERING_REJECTED_OR_STOPPED','science_authorized':False,'exception':type(error).__name__,'message':str(error),'resource_evidence':getattr(error,'resource_evidence',None)}),file=sys.stderr);return 1
++if __name__=='__main__':raise SystemExit(main())
+diff --git a/src/self_improvement/si_s01/engineering_audit.py b/src/self_improvement/si_s01/engineering_audit.py
+new file mode 100644
+index 0000000..6f0e045
+--- /dev/null
++++ b/src/self_improvement/si_s01/engineering_audit.py
+@@ -0,0 +1,134 @@
++"""Independent engineering raw-unit, coupled-path and cost reconciliation."""
++from __future__ import annotations
++from collections import Counter
++from pathlib import Path
++import csv,io
++from .contract import insist,digest,P0_SHA256
++from .evidence import read_events,fresh_json
++from .engineering_contract import *
++from .engineering_evidence import reservation,COST_KEYS
++from .engineering_runtime import compare_generation,compare_prepared
++from self_improvement.si_p3.runtime_backend import verify_adapter_state
++from models.action_parser import action_id_mapping
++
++
++def resource_receipt(data,permit,header):
++    insist(data['checked_pid']==header['worker_pid'],'observed engineering resource PID')
++    devices=list(csv.reader(io.StringIO(data['gpu_raw']),skipinitialspace=True));processes=list(csv.reader(io.StringIO(data['process_raw']),skipinitialspace=True))
++    insist(len([r for r in devices if len(r)==4 and r[0]==permit.gpu_uuid and 'A40' in r[1]])==1,'observed resource UUID/A40')
++    owned=False
++    for row in processes:
++        insist(len(row)==4 and row[1].isdigit(),'observed resource process shape')
++        if row[0]==permit.gpu_uuid:
++            insist(int(row[1])==header['worker_pid'],'observed foreign resource PID');owned=True
++        elif int(row[1])==header['worker_pid']:insist(False,'observed owned PID on wrong UUID')
++    insist(owned,'observed owned context required')
++
++
++def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
++    insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
++    events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
++    expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
++        'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
++        'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
++    insist(all(h[k]==v for k,v in expected.items()) and type(h['worker_pid']) is int and h['worker_pid']>0 and h['worker_uid']==a['execution_uid'],'engineering header/authority identity')
++    if permit.evidence_class==MODE:
++        from .engineering_gate import verified_engineering_context
++        launch,worker=verified_engineering_context(permit)
++        insist(h['worker_pid']==worker['pid'] and h['worker_uid']==worker['uid'] and h['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external engineering allocation/PID/UID')
++    used=Counter(dict.fromkeys(COST_KEYS,0));completed=Counter(used);units={};stack=[];returned={};state=None;joined=None;derived_join=None;stop=None;mismatch=None;failed=False
++    for event in events[1:]:
++        p=event['payload'];kind=event['kind']
++        if kind=='unit_started':
++            identity=p['identity'];op=identity['kind'];index=identity['index'];debit=reservation(op,p['prepared']);parent=stack[-1] if stack else None
++            insist(identity=={'purpose':PURPOSE,'task_id':history.task_id,'kind':op,'index':index} and type(index) is int and index==(used['step'] if op=='step' else 0),'engineering exact operation index/identity')
++            unit=p['unit'];insist(unit==digest([a['run_id'],identity]) and unit not in units and p['reservation']==debit and p['parent_unit']==parent,'engineering physical unit/start/reservation binding')
++            insist((parent is None and op!='context_probe') or (op=='context_probe' and units[parent]['identity']['kind']=='model_load'),'engineering physical nesting')
++            if failed or mismatch:insist(op=='env_close','no new work after mismatch/failure')
++            if op=='model_load':insist(not units,'one initial engineering load')
++            elif op=='context_probe':insist(used['model_load']==1,'one nested engineering probe')
++            elif op=='env_construct':insist(completed['model_load']==completed['context_probe']==1 and p['request']=={'pool_seed':42,'historical_internal_rng':RNG_STATUS},'single environment after guarded load')
++            elif op=='reset':insist(completed['env_construct']==1 and p['request']=={'seed':30000},'one reset30000')
++            elif op=='generation':
++                insist(completed['reset']==1 and state==history.states[0] and used['step']==0 and encoder is not None,'generation is coupled to actual reset')
++                compare_prepared(history,encoder.prepare(history.public_prompt));insist(p['prepared']==encoder.prepare(history.public_prompt).to_dict(),'coupled generation prepared/reserved')
++                refs=history.row['metadata']['r19_source_event_refs'];insist(p['request']=={'historical_reset_event_id':refs['reset_event_id'],'historical_generation_event_id':refs['generation_event_ids'][0]},'generation/reset original refs')
++            elif op=='step':
++                reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index] if index<6 else None
++                insist(completed['reset']==completed['generation']==1 and joined is not None and index<6 and state==history.states[index] and p['request']=={'saved_command':history.commands[index],'historical_transition_event_id':reference},'saved step must follow coupled first-action validation')
++            elif op=='env_close':insist(used['env_construct']==1,'close attempted engineering environment')
++            used.update(debit);insist(all(used[k]<=caps[k] for k in used),'engineering cost exceeds pre-call cap')
++            units[unit]={'identity':identity,'started_event':event['event_id'],'reservation':debit,'finished':False,'failed':False,'prepared':p['prepared'],'invocation_claimed':False,'boundary_entered':False};stack.append(unit)
++        elif kind in ('unit_completed','unit_failed'):
++            unit=p['unit'];insist(stack and stack[-1]==unit and p['identity']==units[unit]['identity'] and p['started_event']==units[unit]['started_event'] and not units[unit]['finished'] and not units[unit]['failed'],'engineering durable completion/failure refs')
++            stack.pop();u=units[unit];op=u['identity']['kind'];index=u['identity']['index'];data=p['data']
++            if kind=='unit_failed':u['failed']=True;failed=True;continue
++            u['finished']=True;actual=0
++            if op=='model_load':insist(data=={'mode':'P0','adapter_sha256':P0_SHA256},'engineering loaded P0 identity')
++            elif op=='context_probe':insist(data=={'probe_bytes':1,'before_8B_weights':True},'one byte before model load')
++            elif op=='env_construct':
++                insist(data['pool_seed']==42 and data['discovery']=='explicit_no_scan_subclass' and Path(data['exact_game']).resolve()==Path(permit.proposal['environment']['game']['path']).resolve() and data['package_origins']=={k:permit.proposal['packages'][k] for k in ('alfworld','alfworld.agents.environment.alfred_tw_env','textworld','textworld.gym','yaml')},'engineering environment isolation/origins')
++            elif op=='reset':
++                insist(set(data)=={'state','actual_task'},'complete reset wire');state=data['state'];task=data['actual_task']
++                if state!=history.states[0] or task!={'task_id':history.task_id,'family':task['family'],'split':'train'} or task['family'] not in (None,history.family):mismatch='reset public state/task/map mismatch'
++            elif op=='generation':
++                insist(set(data)=={'state','prepared','raw','eos_ids','parsed','runtime'} and data['prepared']==u['prepared'],'engineering generation raw envelope')
++                insist(u['invocation_claimed'] and u['boundary_entered'] and unit in returned,'engineering completed generation must have one claimed/entered/returned boundary')
++                observed=returned[unit];sequence=observed.get('observed_sequence')
++                insist(type(observed.get('raw')) is dict and observed['raw']==data['raw'] and observed['prepared']==data['prepared'],'engineering durable returned raw/prepared conflicts with completed generation')
++                insist(type(sequence) is list and all(type(i) is int and i>=0 for i in sequence) and sequence==data['prepared']['input_ids']+data['raw']['token_ids'],'engineering observed sequence conflicts with prepared prefix/output tokens')
++                proof=data['runtime'];insist(proof['tensor_proof']=={'prepared':data['prepared'],'sent':data['prepared']},'actual engineering prepared/sent tensor proof')
++                for point in ('before','during','after'):verify_adapter_state(proof['adapter_states'][point],enabled=True)
++                insist(proof['adapter_states']['before']==proof['adapter_states']['after'],'engineering P0 state restored');resource_receipt(proof['resource_after'],permit,h)
++                try:derived_join=compare_generation(history,state,data,encoder)
++                except (ValueError,KeyError,TypeError) as error:mismatch=str(error)
++                actual=data['raw']['generated_tokens'];insist(type(actual) is int and 0<=actual<=16,'observed engineering output debit')
++            elif op=='step':
++                mapping=action_id_mapping(tuple(state['valid_actions']));command=history.commands[index];reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index]
++                insist(set(data)=={'before','after','command','action_id','action_map','historical_transition_event_id'} and data['before']==state and data['command']==command and data['action_map']==mapping and mapping.get(data['action_id'])==command and data['historical_transition_event_id']==reference,'saved receipt/Action-ID/full ordered map/command')
++                state=data['after']
++                if state!=history.states[index+1]:mismatch='saved complete after-state/map mismatch'
++            elif op=='env_close':insist(data=={'closed':True},'engineering close receipt')
++            used['generated_tokens']-=u['reservation']['generated_tokens']-actual;completed.update(u['reservation']|{'generated_tokens':actual})
++        elif kind=='runtime_evidence':
++            if p['kind']=='coupled_path_compared':
++                insist(not stack and p['unit'] is None and joined is None and derived_join is not None and mismatch is None and p['data']==derived_join and used['step']==0,'joined source interface evidence before first step');joined=p['data'];continue
++            insist(stack and p['unit']==stack[-1],'orphan engineering runtime observation')
++            op=units[p['unit']]['identity']['kind']
++            if p['kind'] in ('generation_invocation_claimed','generation_boundary_entered'):
++                u=units[p['unit']];field='invocation_claimed' if p['kind']=='generation_invocation_claimed' else 'boundary_entered'
++                insist(op=='generation' and not u[field] and p['data']=={'prepared':u['prepared']},'one reserved engineering invocation/tensor binding')
++                if field=='boundary_entered':insist(u['invocation_claimed'],'model boundary requires prior invocation claim')
++                u[field]=True
++            elif p['kind']=='generation_returned':
++                insist(op=='generation' and units[p['unit']]['boundary_entered'] and p['unit'] not in returned and p['data']['generation_returned'] is True and p['data']['prepared']==units[p['unit']]['prepared'],'engineering one raw return boundary');returned[p['unit']]=p['data']
++            elif p['kind'] in ('one_byte_before_weights','resource_before_generation'):resource_receipt(p['data'],permit,h)
++            elif p['kind']=='model_loaded':
++                insist(op=='model_load' and p['data']['origins']=={k:permit.proposal['packages'][k] for k in ('torch','transformers','peft')},'engineering actual model origins');verify_adapter_state(p['data']['adapter_state'],enabled=True);resource_receipt(p['data']['resource'],permit,h)
++        elif kind=='run_stopped':insist(stop is None and not stack,'engineering one stop');stop=p
++        elif kind=='run_closed':insist(event is events[-1] and p=={'stop':stop,'RNG_status':RNG_STATUS,'science_authorized':False} and not stack,'engineering final closure')
++        else:insist(False,'unexpected engineering event kind')
++    insist(events[-1]['kind']=='run_closed' and not stack,'complete engineering raw stream')
++    if stop is None:
++        insist(not failed and mismatch is None and joined is not None and all(completed[k]==MAXIMA[k] for k in ('model_load','context_probe','generation','env_construct','reset','step','env_close','environment_operations')),'engineering compatible result requires the complete joined one-pass path')
++    elapsed=events[-1]['monotonic']-h['allocation_started_monotonic'];insist(elapsed>=0 and (stop is not None or elapsed<=caps['seconds']),'engineering cumulative time cap')
++    return {'schema':'SI_S01_ENGINEERING_REPORT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
++        'status':'OBSERVED_PUBLIC_PATH_COMPATIBLE_NOT_RNG_RECONSTRUCTED' if stop is None else 'ENGINEERING_STOP_NO_COMPATIBILITY_CLAIM',
++        'run_id':a['run_id'],'historical_run_id':HISTORICAL_RUN,'historical_source_index':0,'history_manifest_sha256':history.manifest_sha256,
++        'source_sha':a['source_sha'],'coupled_path':joined,'mismatch':mismatch,'stop':stop,'RNG_status':RNG_STATUS,'internal_rng_reconstructed':False,
++        'nominal_seed':30000,'new_pool_seed':42,'single_passes':int(completed['reset']>0),'generated_commands_executed':0,
++        'physical':{'completed':dict(completed),'reserved_or_spent':dict(used),'open_or_failed_units':[k for k,v in units.items() if not v['finished']],
++            'observed_generation_returns':len(returned),'observed_returned_output_tokens':sum(len(v['raw']['token_ids']) for v in returned.values() if isinstance(v.get('raw'),dict) and isinstance(v['raw'].get('token_ids'),list))},
++        'cost_scope':'ENGINEERING_SEPARATE_FROM_HISTORICAL_SCIENCE_AND_A96','stage_elapsed_seconds_through_run_closed':elapsed,
++        'stage_allocated_device_hours':h['allocated_devices']*elapsed/3600,'final_allocated_device_hours':None,
++        'final_cost_authority':{'artifact':'supervisor_exit.json','schema':'SI_S01_ENGINEERING_SUPERVISOR_EXIT_V1','field':'allocated_device_hours','requires':'AUTHENTIC_EXIT_CONTEXT_AND_CLEANUP_RECEIPTS','aggregation':'DO_NOT_ADD_OVERLAPPING_STAGE_AND_FINAL_INTERVALS'},
++        'historical_input_ids_status':history.historical_input_ids_status,'whole_file_hashes':'CERTIFIED_BY_REFERENCE_NOT_REHASHED',
++        'historical_science_unchanged':{'model_generations':5142,'environment_operations':7949},'learning_or_scientific_yield_claim':False}
++
++
++def write_engineering_report(output:Path,report:dict):
++    fresh_json(output/'engineering_report.json',report)
++    with (output/'ENGINEERING_REPORT.md').open('x') as f:
++        f.write('# Engineering historical source once\n\n'+report['status']+'\n\nScience authorized: false. Public path compatibility only; historical internal RNG is not reconstructed.\n\n'+
++            'Historical input IDs: '+report['historical_input_ids_status']+'. Commands executed only from the six saved whitelist entries.\n\n'+
++            'Hours here stop at run_closed; authentic supervisor_exit is final cost authority. Do not add overlapping intervals. Historical science remains5142/7949.\n')
+diff --git a/src/self_improvement/si_s01/engineering_contract.py b/src/self_improvement/si_s01/engineering_contract.py
+new file mode 100644
+index 0000000..aef40b6
+--- /dev/null
++++ b/src/self_improvement/si_s01/engineering_contract.py
+@@ -0,0 +1,52 @@
++"""Distinct one-consumed-source engineering authority. Never an A96 Plan/Permit."""
++from __future__ import annotations
++from dataclasses import dataclass
++from pathlib import Path
++from typing import Any,Mapping
++from .contract import insist
++
++PURPOSE='ENGINEERING_HISTORICAL_SOURCE_ONCE'
++MODE='engineering_historical_source_once'
++SOFTWARE='synthetic_software_fixture'
++TASK_SHA256='525d271b38a8ecd2248c653291679a1c8fd37ceaec05b4dbf3b575932a7e103b'
++PROPOSAL_REVISION_SHA256='fe974f732ca03d96718c679facaf1201aa78a364c2f3251690c461f28acf189f'
++HISTORY_MANIFEST_SHA256='c361ba0c9d9276eb7dc20c31d0428f51db3f1a9fdd7fccfa23db5edc4f64eb38'
++TRAJECTORY_LINE_SHA256='465bff755ba34c18acca299470cd7c3a40455cb395df3e6fe43eee99119a7c73'
++HISTORICAL_RUN='260422ac02bd42a8b2929d7ef240526b'
++HISTORICAL_CODE='2da980f631badc25086d12db60d128ff507d3ae6'
++HISTORICAL_SOURCE_SHA256='fba2a4278c4f1d9640c1c39f527fe3d5e7022ab50af4d353bc017bb31bbead89'
++RNG_STATUS='HISTORICAL_INTERNAL_RNG_NOT_RECONSTRUCTED'
++MAXIMA={'model_load':1,'context_probe':1,'generation':1,'env_construct':1,'reset':1,'step':6,'env_close':1,
++        'environment_operations':7,'generated_tokens':16,'input_tokens':8192,'seconds':600}
++
++def ceilings(value:Mapping[str,Any])->dict:
++    insist(set(value)==set(MAXIMA),'engineering ceilings fields')
++    for key,maximum in MAXIMA.items():
++        insist(type(value[key]) is int and 0<value[key]<=maximum,'engineering ceiling may only tighten: '+key)
++    return dict(value)
++
++@dataclass(frozen=True)
++class EngineeringPermit:
++    authorization:Mapping[str,Any]
++    proposal:Mapping[str,Any]
++    authorization_sha256:str
++    proposal_sha256:str
++    repository:Path
++    history:Any
++    context_evidence:Any=None
++    def __post_init__(self):
++        a=self.authorization
++        insist(a['purpose']==PURPOSE and a['science_authorized'] is False and a['evidence_class'] in (MODE,SOFTWARE),'distinct engineering purpose/mode')
++        insist(a['historical_run_id']==HISTORICAL_RUN and a['source_index']==0 and type(a['source_index']) is int,'one historical source0')
++        insist(a['run_id']!=HISTORICAL_RUN,'separate new engineering run identity')
++        ceilings(a['ceilings'])
++    @property
++    def evidence_class(self):return self.authorization['evidence_class']
++    @property
++    def output(self):return Path(self.authorization['output_path'])
++    @property
++    def gpu_uuid(self):return self.authorization['gpu_uuid']
++    @property
++    def ceilings(self):return ceilings(self.authorization['ceilings'])
++    @property
++    def claim_path(self):return self.output.parent/(self.output.name+'.launch_claim.json')
+diff --git a/src/self_improvement/si_s01/engineering_evidence.py b/src/self_improvement/si_s01/engineering_evidence.py
+new file mode 100644
+index 0000000..7d58302
+--- /dev/null
++++ b/src/self_improvement/si_s01/engineering_evidence.py
+@@ -0,0 +1,115 @@
++"""Separate durable engineering units/costs; no scientific Plan or source budget."""
++from __future__ import annotations
++from collections import Counter
++from copy import deepcopy
++from pathlib import Path
++from typing import Any,Callable,Mapping
++import math,os,time
++from .contract import insist,digest,BudgetStop
++from .evidence import Journal
++from .engineering_contract import *
++
++COST_KEYS=tuple(k for k in MAXIMA if k!='seconds')
++
++def reservation(kind:str,prepared:Mapping[str,Any]|None)->dict:
++    insist(kind in ('model_load','context_probe','generation','env_construct','reset','step','env_close'),'engineering operation only')
++    debit=dict.fromkeys(COST_KEYS,0);debit[kind]=1;debit['environment_operations']=int(kind in ('reset','step'))
++    if kind=='generation':
++        insist(prepared is not None and set(prepared)=={'prompt','rendered_prompt','input_ids','attention_mask'},'complete engineering prepared tensors')
++        ids=prepared['input_ids'];insist(type(ids) is list and bool(ids) and all(type(i) is int and i>=0 for i in ids) and prepared['attention_mask']==[1]*len(ids),'engineering input IDs/mask')
++        debit['input_tokens']=len(ids);debit['generated_tokens']=16
++    else:insist(prepared is None,'non-generation prepared data forbidden')
++    return debit
++
++class EngineeringLedger:
++    def __init__(self,path:Path,permit:EngineeringPermit,*,started_at:float|None=None,clock:Callable[[],float]=time.monotonic):
++        insist(isinstance(permit,EngineeringPermit),'typed engineering ledger authority')
++        self.permit=permit;self.clock=clock;self.started_at=clock() if started_at is None else started_at;self.last=self.started_at
++        self.caps=permit.ceilings;self.run_id=permit.authorization['run_id'];self.used=Counter(dict.fromkeys(COST_KEYS,0));self.completed=Counter(self.used)
++        self.units={};self._stack=[];self.stopped=False;self.closed=False
++        self.journal=Journal(path,{'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,
++            'evidence_class':permit.evidence_class,'run_id':self.run_id,'source_sha':permit.authorization['source_sha'],
++            'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
++            'history_manifest_sha256':permit.history.manifest_sha256,'task_id':permit.history.task_id,'ceilings':self.caps,
++            'allocation_started_monotonic':self.started_at,'allocated_devices':int(permit.evidence_class==MODE),'worker_pid':os.getpid(),'worker_uid':os.getuid(),'RNG_status':RNG_STATUS},clock=clock)
++    @property
++    def active(self):return self._stack[-1] if self._stack else None
++    def check_time(self):
++        now=self.clock();insist(math.isfinite(now) and now>=self.last,'engineering monotonic clock');self.last=now
++        if now-self.started_at>self.caps['seconds']:
++            self.stopped=True;raise BudgetStop('engineering absolute600-second allocation budget')
++    def begin(self,kind:str,index:int=0,*,prepared=None,request=None)->str:
++        insist(not self.closed and (not self.stopped or kind=='env_close'),'engineering run stopped/closed')
++        self.check_time();insist(type(index) is int and index==(self.used['step'] if kind=='step' else 0),'engineering one-pass operation index')
++        parent=self.active
++        insist((parent is None and kind!='context_probe') or (kind=='context_probe' and self.units[parent]['identity']['kind']=='model_load'),'only context probe may nest under model load')
++        if kind=='model_load':insist(not self.units,'one initial model/tokenizer load')
++        elif kind=='context_probe':insist(self.used['model_load']==1,'probe belongs to one load')
++        elif kind=='generation':insist(self.completed['model_load']==self.completed['context_probe']==self.completed['reset']==1 and self.used['step']==0,'one coupled first-prompt generation after reset')
++        elif kind=='env_construct':insist(self.completed['model_load']==self.completed['context_probe']==1,'environment after guarded load')
++        elif kind=='reset':insist(self.completed['env_construct']==1,'reset after one environment construction')
++        elif kind=='step':insist(self.completed['reset']==self.completed['generation']==1 and index<6,'six saved steps after coupled generation')
++        elif kind=='env_close':insist(self.used['env_construct']==1,'close only an attempted environment')
++        debit=reservation(kind,prepared)
++        if any(self.used[k]+v>self.caps[k] for k,v in debit.items()):
++            self.stopped=True;raise BudgetStop('engineering pre-call physical/token budget')
++        identity={'purpose':PURPOSE,'task_id':self.permit.history.task_id,'kind':kind,'index':index}
++        unit=digest([self.run_id,identity]);insist(unit not in self.units,'engineering physical unit cannot retry')
++        event=self.journal.append('unit_started',{'unit':unit,'identity':identity,'reservation':debit,'prepared':prepared,'request':request,'parent_unit':parent})
++        self.units[unit]={'identity':identity,'started_event':event,'reservation':debit,'finished':False,'failed':False,'parent_unit':parent,'prepared':deepcopy(self.journal.events[-1]['payload']['prepared'])}
++        self.used.update(debit);self._stack.append(unit);return unit
++    def runtime(self,kind:str,data:Mapping[str,Any]):
++        insist(self.active is not None,'engineering runtime observation requires reserved active unit')
++        unit=self.units[self.active]
++        if kind=='generation_returned':
++            insist(unit['identity']['kind']=='generation' and 'return_event' not in unit,'one engineering generation return')
++            unit['return_event']=True
++        self.journal.append('runtime_evidence',{'unit':self.active,'kind':kind,'data':dict(data)})
++    def finish(self,unit:str,data:Mapping[str,Any]):
++        insist(self.active==unit and not self.units[unit]['finished'] and not self.units[unit]['failed'],'engineering active completion')
++        value=dict(data);kind=self.units[unit]['identity']['kind'];debit=self.units[unit]['reservation']
++        self.runtime('operation_returned',value)
++        actual=value['raw']['generated_tokens'] if kind=='generation' else 0
++        insist(type(actual) is int and 0<=actual<=debit['generated_tokens'],'engineering actual output debit')
++        self.journal.append('unit_completed',{'unit':unit,'identity':self.units[unit]['identity'],'started_event':self.units[unit]['started_event'],'data':value})
++        self.units[unit]['finished']=True;self.used['generated_tokens']-=debit['generated_tokens']-actual;self.completed.update(debit|{'generated_tokens':actual});self._stack.pop()
++    def fail(self,unit:str,error:BaseException):
++        insist(self.active==unit and not self.units[unit]['finished'] and not self.units[unit]['failed'],'engineering active failure')
++        self.journal.append('unit_failed',{'unit':unit,'identity':self.units[unit]['identity'],'started_event':self.units[unit]['started_event'],
++            'data':{'exception':type(error).__name__,'message':str(error),'raw_evidence':getattr(error,'raw_evidence',None),'resource_evidence':getattr(error,'resource_evidence',None)}})
++        self.units[unit]['failed']=True;self._stack.pop();self.stopped=True
++    def call(self,kind:str,index:int,function:Callable[[],Mapping[str,Any]],*,prepared=None,request=None):
++        unit=self.begin(kind,index,prepared=prepared,request=request)
++        try:
++            data=dict(function());self.finish(unit,data);self.check_time();return data
++        except BaseException as error:
++            while self.active is not None:
++                active=self.active;self.fail(active,error)
++                if active==unit:break
++            self.stopped=True;raise
++    def probe_started(self):return self.begin('context_probe')
++    def probe_completed(self):
++        insist(self.units[self.active]['identity']['kind']=='context_probe','one active one-byte probe')
++        self.finish(self.active,{'probe_bytes':1,'before_8B_weights':True});self.check_time()
++    def require_generation(self)->str:
++        active=self.active;insist(active in self.units,'engineering generation needs durable pre-call reservation')
++        identity={'purpose':PURPOSE,'task_id':self.permit.history.task_id,'kind':'generation','index':0}
++        insist(self.units[active]['identity']==identity and not self.units[active]['finished'] and not self.units[active]['failed'],'engineering one-generation identity')
++        return active
++    def claim_generation(self,prepared:Mapping[str,Any])->str:
++        active=self.require_generation();unit=self.units[active]
++        insist(unit['prepared']==dict(prepared),'actual engineering prepared tensors must equal reserved unit')
++        insist(not unit.get('invocation_claimed'),'engineering one actual generation invocation already consumed')
++        self.check_time();unit['invocation_claimed']=True
++        self.runtime('generation_invocation_claimed',{'prepared':dict(prepared)})
++        return active
++    def before_generate(self):
++        active=self.require_generation();unit=self.units[active]
++        insist(unit.get('invocation_claimed') is True and not unit.get('model_boundary_entered'),'one claimed engineering model boundary')
++        self.check_time();unit['model_boundary_entered']=True
++        self.runtime('generation_boundary_entered',{'prepared':unit['prepared']})
++        self.check_time()
++    def close(self,stop:Mapping[str,Any]|None):
++        insist(not self.closed and not self._stack,'engineering ledger closure')
++        if stop is not None:self.journal.append('run_stopped',dict(stop))
++        self.journal.append('run_closed',{'stop':stop,'RNG_status':RNG_STATUS,'science_authorized':False});self.journal.close();self.closed=True
+diff --git a/src/self_improvement/si_s01/engineering_gate.py b/src/self_improvement/si_s01/engineering_gate.py
+new file mode 100644
+index 0000000..6371a77
+--- /dev/null
++++ b/src/self_improvement/si_s01/engineering_gate.py
+@@ -0,0 +1,101 @@
++"""Root-issued engineering-only gate; old/A96 authorizations cannot cross-use."""
++from __future__ import annotations
++from dataclasses import replace
++from datetime import datetime,timezone
++from pathlib import Path
++import ctypes,hashlib,json,os,re,signal,sys,time
++from .contract import insist,digest,SNAPSHOT,P0_SHA256
++from .gate import bound
++from .engineering_contract import *
++from .engineering_history import read_historical
++from self_improvement.si_p3.runtime_gate import git_state,utc,PACKAGE_NAMES,verify_logic
++
++def engineering_binding(permit:EngineeringPermit)->dict:
++    a=permit.authorization
++    return {'purpose':PURPOSE,'science_authorized':False,'authorization_sha256':permit.authorization_sha256,
++        'proposal_sha256':permit.proposal_sha256,'source_sha':a['source_sha'],'run_id':a['run_id'],
++        'history_manifest_sha256':permit.history.manifest_sha256,'task_id':permit.history.task_id,
++        'output_path':a['output_path'],'ceilings':permit.ceilings,'execution_uid':a['execution_uid'],
++        'environment_sha256':digest(a['environment']),'evidence_class':permit.evidence_class,'historical_run_id':HISTORICAL_RUN,'source_index':0,'nominal_seed':30000,'new_pool_seed':42,'RNG_status':RNG_STATUS}
++
++
++def verify_artifacts(permit:EngineeringPermit)->dict:
++    insist(isinstance(permit,EngineeringPermit),'engineering artifact authority type')
++    p=permit.proposal;env=p['environment'];history=permit.history
++    for item in [p['interpreter'],*p['packages'].values(),env['config'],*env['logic_files'].values(),env['game'],env['traj_data']]:bound(item['path'],item['sha256'])
++    insist(Path(sys.executable).resolve()==Path(p['interpreter']['path']).resolve(),'pinned engineering interpreter')
++    game=Path(env['game']['path']);traj=Path(env['traj_data']['path'])
++    insist(game.name=='game.tw-pddl' and traj.name=='traj_data.json' and game.parent==traj.parent and '/'.join(game.parent.parts[-2:])==history.task_id and game.resolve()==Path(history.row['task']['metadata']['game_file']).resolve() and game.is_relative_to(Path(env['data_root'])),'original one historical game path, no copies/new tasks')
++    insist(env['game']['sha256']==history.row['metadata']['source_game_sha256'] and env['traj_data']['sha256']==history.row['metadata']['source_traj_data_sha256'],'historical game/traj byte binding')
++    manifests=json.loads(bound(p['history_manifest']['path'],p['history_manifest']['sha256']))
++    for key,path in [('trajectory',manifests['trajectory']['path']),('events',manifests['events'][0]['path'])]:
++        cert=p['original_files_by_reference'][key]
++        insist(set(cert)=={'path','certified_sha256','certificate'} and cert['path']==path and re.fullmatch('[0-9a-f]{64}',cert['certified_sha256']),'whole-file certified hash by reference')
++        bound(cert['certificate']['path'],cert['certificate']['sha256'])
++    if permit.evidence_class==MODE:
++        frozen=json.loads((permit.repository/'configs/experiments/r19_model_identity_manifest.json').read_bytes())['currently_observed_candidate_not_historical_proof']
++        insist(frozen['huggingface_snapshot_revision']==SNAPSHOT and Path(p['model']['base_snapshot']).name==SNAPSHOT,'original Qwen snapshot')
++        for item in frozen['snapshot_files']:
++            path=Path(p['model']['base_snapshot'])/item['name'];insist(Path(item['name']).name==item['name'] and path.stat().st_size==item['bytes'],'model leaf/size');bound(path,item.get('content_sha256',item.get('sha256')))
++        from sft.training import directory_sha256
++        insist(directory_sha256(Path(p['model']['adapter_path']))==P0_SHA256,'original frozen P0 adapter')
++        verify_logic({'config':env['config']['path'],'data_root':env['data_root'],'logic_files':env['logic_files']})
++    else:
++        for item in p['model']['synthetic_files']:bound(item['path'],item['sha256'])
++    return {'status':'STATIC_ENGINEERING_INPUTS_BOUND_NOT_RUNTIME_READY','purpose':PURPOSE,'science_authorized':False,
++        'whole_file_hashes':'PRIOR_CERTIFICATE_REFERENCE_NOT_REHASHED','selected_historical_receipts':9,
++        'maximum_selected_event_offset':history.maximum_read_offset,'historical_input_ids':history.historical_input_ids_status,
++        'models':0,'CUDA_initializations':0,'environment_constructs':0,'generations':0,'resets':0,'steps':0,'units':0}
++
++
++def authenticate_engineering(repository:Path,authorization_path:Path,authorization_sha256:str,proposal_path:Path,*,invocation:list[str],mode:str,launch_context_sha256:str|None=None)->EngineeringPermit:
++    insist(mode in ('preflight','live','worker'),'engineering explicit mode')
++    a=json.loads(bound(authorization_path,authorization_sha256));pbytes=bound(proposal_path,a['proposal_sha256']);p=json.loads(pbytes)
++    fields={'schema','status','purpose','science_authorized','evidence_class','task_sha256','proposal_revision_sha256','source_sha','review','proposal_sha256','authorization_id','run_id','historical_run_id','source_index','ceilings','gpu_uuid','execution_uid','output_path','environment','not_before_utc','expires_utc','launch_argv','preflight_argv','maximum_launches','forbidden_non_engineering'}
++    insist(set(a)==fields and a['schema']=='SI_S01_ENGINEERING_AUTHORIZATION_V1' and a['purpose']==PURPOSE and a['science_authorized'] is False and a['task_sha256']==TASK_SHA256 and a['proposal_revision_sha256']==PROPOSAL_REVISION_SHA256,'distinct root engineering authorization; old/source cross-use forbidden')
++    insist(a['evidence_class'] in (MODE,SOFTWARE) and a['status']==('ROOT_AUTHORIZED_ENGINEERING_ONCE' if a['evidence_class']==MODE else 'SOFTWARE_TEST_ONLY'),'explicit engineering release/evidence class')
++    insist(type(a['maximum_launches']) is int and a['maximum_launches']==1 and a['forbidden_non_engineering'] is True and all(re.fullmatch('[0-9a-f]{32}',a[k]) for k in ('authorization_id','run_id')),'one new engineering identity/launch')
++    sha,clean=git_state(repository);insist(clean and sha==a['source_sha'],'clean exact engineering source')
++    insist(utc(a['not_before_utc'])<=datetime.now(timezone.utc)<utc(a['expires_utc']),'engineering authorization UTC window');ceilings(a['ceilings'])
++    review=json.loads(bound(a['review']['path'],a['review']['sha256']))
++    insist(review=={'schema':'SI_S01_ENGINEERING_REVIEW_V1','source_sha':sha,'task_sha256':TASK_SHA256,'decision':'PASS_ENGINEERING_HISTORICAL_SOURCE_SOFTWARE','reviewer_role':'INDEPENDENT_ROOT'},'independent exact engineering software review')
++    insist(set(p)=={'schema','purpose','model','environment','history_manifest','original_files_by_reference','interpreter','packages'} and p['schema']=='SI_S01_ENGINEERING_PROPOSAL_V1' and p['purpose']==PURPOSE,'engineering proposal fields')
++    insist(set(p['packages'])==set(PACKAGE_NAMES) and all(set(x)=={'path','sha256','version'} for x in p['packages'].values()),'bound actual runtime package set')
++    insist(set(p['model'])==({'base_snapshot','adapter_path'} if a['evidence_class']==MODE else {'base_snapshot','adapter_path','synthetic_files'}),'engineering model fields')
++    insist(set(p['environment'])=={'config','data_root','game','traj_data','logic_files'} and set(p['environment']['logic_files'])=={'domain','grammar'} and set(p['original_files_by_reference'])=={'trajectory','events'},'single historical environment/certifications')
++    history=read_historical(bound(p['history_manifest']['path'],p['history_manifest']['sha256']),evidence_class=a['evidence_class'],expected_manifest_sha256=p['history_manifest']['sha256'])
++    permit=EngineeringPermit(a,p,authorization_sha256,hashlib.sha256(pbytes).hexdigest(),repository,history)
++    insist(type(a['execution_uid']) is int and a['execution_uid']==os.getuid(),'engineering execution UID')
++    insist(dict(os.environ)==a['environment'] and not any(k in os.environ for k in ('PYTHONPATH','PYTHONHOME','LD_PRELOAD')) and all(os.environ.get(k)=='1' for k in ('HF_HUB_OFFLINE','TRANSFORMERS_OFFLINE','PYTHONDONTWRITEBYTECODE')),'exact isolated engineering environment')
++    insist(re.fullmatch(r'GPU-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}',a['gpu_uuid']) is not None and os.environ.get('CUDA_VISIBLE_DEVICES')==(a['gpu_uuid'] if permit.evidence_class==MODE else ''),'bound UUID/mode')
++    token='@ENGINEERING_AUTHORIZATION_SHA256@'
++    for key in ('launch_argv','preflight_argv'):
++        insist(type(a[key]) is list and a[key].count(token)==1 and a[key][a[key].index('--authorization-sha256')+1]==token,'single engineering auth hash argv slot')
++    render=lambda argv:[authorization_sha256 if x==token else x for x in argv]
++    expected=render(a['preflight_argv'] if mode=='preflight' else a['launch_argv'])
++    insist(a['launch_argv'][1]=='-I' and Path(a['launch_argv'][2]).resolve()==repository/'scripts/run_si_s01_engineering_once.py' and '--live' in a['launch_argv'] and '--preflight-only' in a['preflight_argv'],'isolated exact engineering entrypoint')
++    output=permit.output;insist(output.is_absolute() and str(output)==str(output.resolve()) and not output.is_symlink(),'canonical fresh engineering output')
++    if mode=='worker':
++        insist(permit.evidence_class==MODE and invocation[:-2]==['--worker' if x=='--live' else x for x in expected] and invocation[-2:]==['--launch-context-sha256',launch_context_sha256],'exact supervised engineering worker argv')
++        launch_path=output/'launch_context.json';launch=json.loads(bound(launch_path,launch_context_sha256))
++        parent=[x.decode() for x in Path('/proc/'+str(os.getppid())+'/cmdline').read_bytes().split(b'\0') if x]
++        insist(parent==expected and launch['supervisor_pid']==os.getppid() and os.getsid(0)==os.getpid(),'engineering worker parent/session')
++        worker_path=output/'worker_start.json';until=time.monotonic()+2
++        while not worker_path.exists() and time.monotonic()<until:time.sleep(.01)
++        worker_bytes=worker_path.read_bytes();w=json.loads(worker_bytes)
++        insist(w['pid']==os.getpid() and w['uid']==os.getuid() and w['start_tick']==int(Path('/proc/self/stat').read_text().rsplit(')',1)[1].split()[19]) and w['argv']==invocation,'engineering actual worker PID/UID/tick/argv')
++        insist(ctypes.CDLL(None,use_errno=True).prctl(1,signal.SIGKILL,0,0,0)==0,'engineering parent death signal')
++        context={'launch_path':str(launch_path),'launch_sha256':launch_context_sha256,'worker_path':str(worker_path),'worker_sha256':hashlib.sha256(worker_bytes).hexdigest()}
++        permit=replace(permit,context_evidence=context);verified_engineering_context(permit)
++    else:
++        insist(invocation==expected and not output.exists() and not permit.claim_path.exists() and not permit.claim_path.is_symlink(),'fresh exact engineering argv/output/claim')
++        if mode=='live':insist(permit.evidence_class==MODE,'software cannot launch actual engineering')
++    verify_artifacts(permit);return permit
++
++
++def verified_engineering_context(permit:EngineeringPermit):
++    context=permit.context_evidence;insist(context is not None,'external engineering supervisor context')
++    launch=json.loads(bound(context['launch_path'],context['launch_sha256']));worker=json.loads(bound(context['worker_path'],context['worker_sha256']))
++    insist(launch['engineering_binding']==engineering_binding(permit) and launch['allocated_devices']==1 and launch['evidence_class']==MODE and launch['science_authorized'] is False,'engineering external context/authority/device binding')
++    insist(worker['authorization_sha256']==permit.authorization_sha256 and worker['launch_context_sha256']==context['launch_sha256'] and worker['uid']==permit.authorization['execution_uid'] and worker['pid']>0 and launch['allocation_started_monotonic']<=worker['started_monotonic'],'engineering worker external identity/allocation')
++    return launch,worker
+diff --git a/src/self_improvement/si_s01/engineering_history.py b/src/self_improvement/si_s01/engineering_history.py
+new file mode 100644
+index 0000000..d85f350
+--- /dev/null
++++ b/src/self_improvement/si_s01/engineering_history.py
+@@ -0,0 +1,110 @@
++"""Selected-slice original R19 wire reader. Never scans/replays a whole journal."""
++from __future__ import annotations
++from dataclasses import dataclass
++from pathlib import Path
++from typing import Any,Mapping
++from copy import deepcopy
++import hashlib,json
++from models.action_parser import action_id_mapping
++from models.protocol_stability import parse_p2_selection
++from recovery.r19_duration import sha256_json,R19_EVENT_SCHEMA
++from self_improvement.si_p3.runtime_environment import source_hash
++from .contract import PublicState,projection,insist
++from .engineering_contract import *
++
++@dataclass(frozen=True)
++class HistoricalSource:
++    task_id:str
++    family:str
++    seed:int
++    states:tuple[Mapping[str,Any],...]
++    commands:tuple[str,...]
++    row:Mapping[str,Any]
++    generation:Mapping[str,Any]
++    parsed:Mapping[str,Any]
++    manifest_sha256:str
++    source_sha256:str
++    selected_receipts:tuple[Mapping[str,Any],...]
++    maximum_read_offset:int
++    historical_input_ids_status:str
++    @property
++    def public_prompt(self):return projection(PublicState.from_dict(self.states[0]),[])['public_prompt']
++
++
++def read_slice(spec:Mapping[str,Any],*,maximum:int)->bytes:
++    offset,length=spec['byte_offset'],spec['line_length_bytes'];path=Path(spec['path'])
++    insist(path.is_absolute() and type(offset) is int and offset>=0 and type(length) is int and 0<length and offset+length<=maximum,'bounded raw line slice')
++    with path.open('rb') as f:
++        if offset:
++            f.seek(offset-1);insist(f.read(1)==b'\n','slice starts at a line boundary')
++        f.seek(offset);raw=f.read(length)
++    insist(len(raw)==length and raw.endswith(b'\n') and raw.count(b'\n')==1 and hashlib.sha256(raw).hexdigest()==spec['raw_line_sha256'],'selected original line bytes/hash')
++    return raw
++
++
++def parser_receipt(raw:str,actions:list[str])->dict:
++    p=parse_p2_selection(raw,tuple(actions),reflection_required=False)
++    return {'selection_status':p.selection_status,'action_id':p.action_id,'action':p.action,
++            'failure_category':p.action_failure_category,'failure_reason':p.action_failure_reason,
++            'valid_actions':list(actions),'id_to_command':action_id_mapping(tuple(actions))}
++
++
++def read_historical(manifest_bytes:bytes,*,evidence_class:str,expected_manifest_sha256:str)->HistoricalSource:
++    observed=hashlib.sha256(manifest_bytes).hexdigest()
++    insist(evidence_class in (MODE,SOFTWARE) and observed==expected_manifest_sha256,'bound historical manifest')
++    if evidence_class==MODE:insist(observed==HISTORY_MANIFEST_SHA256,'fixed independently certified historical manifest; no override')
++    manifest=json.loads(manifest_bytes);insist(manifest['schema']=='r19_first_source_referenced_event_bindings_v1','historical binding schema')
++    ts=manifest['trajectory'];specs=manifest['events'];bound=manifest['bounded_scan']['bytes_scanned_through_last_needed_event']
++    insist(ts['byte_offset']==0 and ts['nominal_seed']==30000 and ts['schedule_index']==0 and ts['split']=='train' and ts['referenced_event_count']==9,'only first old TRAIN source')
++    insist(len(specs)==9 and len({s['event_id'] for s in specs})==9 and sorted(s['role'] for s in specs)==sorted(['reset','source_episode_completed','first_generation']+['transition']*6),'exact nine referenced receipts')
++    insist(len({s['path'] for s in specs})==1 and bound==max(s['byte_offset']+s['line_length_bytes'] for s in specs),'one bounded event prefix')
++    if evidence_class==MODE:
++        insist(ts['line_length_bytes']==35486 and ts['raw_line_sha256']==TRAJECTORY_LINE_SHA256 and bound==149225,'fixed original first line/prefix cap')
++    row=json.loads(read_slice(ts,maximum=ts['line_length_bytes']));task=row['task'];meta=row['metadata'];source_sha=source_hash(row)
++    insist(source_sha==meta['source_trajectory_sha256'] and (evidence_class==SOFTWARE or source_sha==HISTORICAL_SOURCE_SHA256),'original canonical source hash')
++    insist(task['split']==meta['split']=='train' and task['task_id']==ts['task_id'] and meta['task_family']==ts['family'] and row['seed']==30000 and meta['nominal_seed']==30000 and meta['schedule_index']==0,'trajectory task/family/source identity')
++    insist(len(row['steps'])==6,'exact six saved actions')
++    events={};certified=[];contexts=[];protocols=[]
++    for spec in sorted(specs,key=lambda s:s['byte_offset']):
++        e=json.loads(read_slice(spec,maximum=bound));p=e['payload'];identity=e['identity']
++        insist(e['event_id']==spec['event_id'] and e['kind']==spec['kind'] and e['sequence']==spec['sequence'] and e['schema_version']==R19_EVENT_SCHEMA,'receipt identity/sequence/schema')
++        expected_class='live' if evidence_class==MODE else SOFTWARE
++        insist(e['evidence_class']==expected_class and e['run_id']==HISTORICAL_RUN and e['implementation_sha']==HISTORICAL_CODE,'authentic historical run/code/evidence class')
++        insist(identity['schedule_index']==0 and identity['split']=='train' and identity.get('canonical_trial_id')==task['task_id'],'historical unit task/index')
++        insist(e['payload_sha256']==sha256_json(p) and e['event_id']==sha256_json([e['run_id'],e['sequence'],e['kind'],identity,e['payload_sha256'],e['previous_event_sha256'],e['evidence_class'],e['run_context']]),'original receipt self hash')
++        events[e['event_id']]=e;contexts.append(e['run_context']);protocols.append(e['protocol_sha256']);certified.append(dict(spec))
++    insist(all(x==contexts[0] for x in contexts) and all(x==protocols[0] for x in protocols),'historical run context/protocol joins')
++    refs=meta['r19_source_event_refs'];source=events[refs['source_episode_event_id']]['payload']
++    insist(events[refs['source_episode_event_id']]['kind']=='source_episode_completed' and source['trajectory_sha256']==source_sha and source['source_game_sha256']==meta['source_game_sha256'] and source['source_traj_data_sha256']==meta['source_traj_data_sha256'],'source completion/body/game binding')
++    clean=deepcopy(row)
++    for field in ('r19_source_event_refs','source_trajectory_sha256'):
++        insist(field in clean['metadata'] and field not in source['trajectory']['metadata'],'only two publication metadata additions')
++        clean['metadata'].pop(field)
++    insist(clean==source['trajectory'],'embedded source body differs beyond two allowed metadata fields')
++    insist(source['reset_event_id']==refs['reset_event_id'] and source['transition_event_ids']==refs['transition_event_ids'] and source['generation_event_ids']==refs['generation_event_ids'],'complete source event reference joins')
++    def state(wire):
++        insist(all(k in wire for k in ('observation','valid_actions','done','reward','truncated')) and type(wire['valid_actions']) is list,'saved full ordered after-map required, including terminal')
++        value={'task_id':task['task_id'],'family':meta['task_family'],'goal':task['text'],**{k:wire[k] for k in ('observation','valid_actions','done','reward','truncated')}}
++        PublicState.from_dict(value);return value
++    reset=events[refs['reset_event_id']];p=reset['payload']
++    insist(reset['kind']=='environment_operation_completed' and reset['identity']['operation']=='source_reset' and p['operation']=='environment_reset' and p['task_id']==task['task_id'] and p['seed']==30000,'saved reset identity/seed')
++    states=[state(p['transition'])];insist(states[0]['observation']==row['initial_observation'] and not states[0]['done'] and not states[0]['truncated'] and states[0]['reward']==0,'initial public state')
++    commands=[];history=[];step_refs=manifest['step_event_refs']
++    insist(len(step_refs)==len(refs['transition_event_ids'])==len(refs['generation_event_ids'])==6,'six complete reference slots')
++    for i,(step,ref) in enumerate(zip(row['steps'],refs['transition_event_ids'])):
++        e=events[ref];p=e['payload'];before=states[-1];mapping=action_id_mapping(tuple(before['valid_actions']))
++        insist(step_refs[i]=={'step_index':i,'generation_event_id':refs['generation_event_ids'][i],'transition_event_id':ref} and step['index']==i and step['metadata']['r19_transition_event_id']==ref and step['metadata']['r19_generation_event_id']==refs['generation_event_ids'][i],'step/source/manifest refs')
++        insist(e['kind']=='environment_operation_completed' and e['identity']['operation']==p['operation']=='sft_environment_step' and e['identity']['decision_index']==i and not before['done'] and not before['truncated'],'one old saved step order')
++        insist(step['observation']==before['observation'] and step['valid_actions']==before['valid_actions'] and step['action_valid'] is True and step['parser_status']=='selected','saved before-state/action validity')
++        insist(p['before_state']=={'observation':before['observation'],'valid_actions':before['valid_actions'],'history':history,'actions_consumed':i},'complete receipt before-state/history')
++        selected=parser_receipt(step['model_output'],before['valid_actions'])
++        insist(selected['selection_status']=='selected' and p['action_map']==mapping and p['action_id']==selected['action_id'] and p['command']==step['action']==selected['action']==p['transition']['executed_command'] and mapping.get(p['action_id'])==step['action'],'historical Action-ID/command/full map binding')
++        after=state(p['transition']);insist(after['observation']==step['result_observation'] and after['done']==step['done'] and after['reward']==step['reward'] and after['truncated']==step['metadata']['transition_truncated'],'saved complete after-state')
++        states.append(after);commands.append(step['action']);history.append([before['observation'],step['action']])
++    first_ref=refs['generation_event_ids'][0];event=events[first_ref];p=event['payload']['evidence'];generation=p['generation'];initial=states[0]
++    insist(event['kind']=='generation_completed' and event['identity']['operation']=='source_generation' and event['identity']['decision_index']==0,'first source generation receipt')
++    parsed=parser_receipt(generation['raw_output'],initial['valid_actions']);first=row['steps'][0]
++    insist(parsed==p['parser_result'] and p['action_map']==action_id_mapping(tuple(initial['valid_actions'])) and parsed['selection_status']=='selected' and parsed['action']==commands[0],'historical parser/map first command')
++    insist(generation==first['metadata']['policy']['generation'] and generation['prompt']==first['metadata']['policy']['prompt']==projection(PublicState.from_dict(initial),[])['public_prompt'] and generation['raw_output']==first['model_output'],'historical causal P0 prompt/output/generation binding')
++    insist(generation['max_new_tokens']==16 and generation['do_sample'] is False and generation.get('thinking',False) is False and generation['generated_tokens']==len(generation['token_ids'])<=16,'historical frozen decode metadata')
++    return HistoricalSource(task['task_id'],meta['task_family'],30000,tuple(states),tuple(commands),row,generation,parsed,observed,source_sha,tuple(certified),bound,'RECORDED' if 'input_ids' in generation else 'UNRECORDED')
+diff --git a/src/self_improvement/si_s01/engineering_runtime.py b/src/self_improvement/si_s01/engineering_runtime.py
+new file mode 100644
+index 0000000..39eb7be
+--- /dev/null
++++ b/src/self_improvement/si_s01/engineering_runtime.py
+@@ -0,0 +1,166 @@
++"""One joined historical public path through the actual guarded P0 core."""
++from __future__ import annotations
++from pathlib import Path
++from typing import Any,Callable
++import sys
++from .contract import PublicState,Generation,projection,insist,P0_SHA256
++from .collector import Producer
++from .engineering_contract import *
++from .engineering_evidence import EngineeringLedger
++from .engineering_history import parser_receipt
++from .runtime_core import load_guarded,guarded_generation,resource,module_origin
++from self_improvement.si_p3.collector import parse_generation
++from models.action_parser import action_id_mapping
++
++class EngineeringProducer:
++    prepare=Producer.prepare
++    decode=Producer.decode
++    resource=resource
++    def __init__(self,tokenizer,raw,*,evidence_class):
++        insist(evidence_class in (MODE,SOFTWARE),'engineering producer evidence class')
++        self.tokenizer,self.raw,self.evidence_class=tokenizer,raw,evidence_class
++        eos=tokenizer.eos_token_id;self.eos_ids=(eos,) if type(eos) is int else tuple(eos or ())
++        insist(bool(self.eos_ids),'engineering EOS identity')
++    @classmethod
++    def load(cls,permit:EngineeringPermit,ledger:EngineeringLedger):
++        insist(isinstance(permit,EngineeringPermit) and isinstance(ledger,EngineeringLedger) and ledger.permit==permit and ledger.active in ledger.units and ledger.units[ledger.active]['identity']['kind']=='model_load','typed engineering authority and reserved load')
++        if permit.evidence_class==MODE:
++            from .engineering_gate import verified_engineering_context
++            verified_engineering_context(permit)
++        else:
++            insist(getattr(sys.modules.get('torch'),'_si_s01_software_boundary',False) is True,'software loader requires an explicit fake raw model/CUDA boundary')
++        from .engineering_gate import verify_artifacts
++        ledger.runtime('artifact_recheck',verify_artifacts(permit))
++        return load_guarded(cls,permit,ledger,evidence_class=permit.evidence_class,
++            probe_started=ledger.probe_started,probe_completed=ledger.probe_completed)
++    def _raw(self,prepared):
++        insist(isinstance(self.permit,EngineeringPermit) and isinstance(self.ledger,EngineeringLedger),'engineering generation authority/ledger type')
++        return guarded_generation(self,prepared,self.ledger.require_generation(),pre_call=self.ledger.before_generate)
++    def generate(self,prepared,*,phase=PURPOSE,adapter_mode='P0'):
++        insist(phase==PURPOSE and adapter_mode=='P0','engineering comparison only; no source/teacher/BASE/suffix/train/eval')
++        self.ledger.require_generation();insist(self.prepare(prepared.prepared.prompt)==prepared,'engineering prepared drift')
++        self.ledger.claim_generation(prepared.to_dict())
++        received=self.raw(prepared)
++        try:
++            insist(set(received)=={'raw','runtime'},'engineering raw typed mapping')
++            value=Generation.from_raw(received['raw'],prepared.prepared,16,'P0',self.eos_ids)
++            insist(self.decode(value.raw['token_ids'])==value.raw['raw_output'],'engineering decoded raw mismatch')
++            return {'raw':dict(value.raw),'runtime':received['runtime']}
++        except BaseException as error:
++            error.raw_evidence={'prepared':prepared.to_dict(),'received':received};raise
++
++
++def compare_prepared(history,prepared):
++    raw=history.generation
++    insist(prepared.prepared.prompt==history.public_prompt==raw['prompt'] and prepared.prepared.rendered_prompt==raw['rendered_prompt'] and len(prepared.prepared.input_ids)==raw['input_tokens'],'coupled historical public/rendered prompt/count')
++    if history.historical_input_ids_status=='RECORDED':
++        insist(list(prepared.prepared.input_ids)==raw['input_ids'],'recorded historical input IDs')
++    if 'attention_mask' in raw:insist(list(prepared.attention_mask)==raw['attention_mask'],'recorded historical attention mask')
++
++
++def compare_generation(history,state,data,encoder):
++    public=projection(PublicState.from_dict(state),[])
++    insist(public['public_prompt']==history.public_prompt,'generation must use actual reset public prompt')
++    prepared=encoder.prepare(public['public_prompt']);compare_prepared(history,prepared)
++    insist(data['state']==state and data['prepared']==prepared.to_dict(),'coupled actual reset/prepared tensors')
++    value=Generation.from_raw(data['raw'],prepared.prepared,16,'P0',tuple(data['eos_ids']))
++    insist(encoder.decode(value.raw['token_ids'])==value.raw['raw_output'],'engineering raw decode')
++    parsed=parse_generation('source',value,PublicState.from_dict(state));insist(data['parsed']==parsed,'actual production parser receipt')
++    expected=history.generation
++    for field in ('prompt','rendered_prompt','rendered_prompt_sha256','raw_output','token_ids','token_ids_sha256','input_tokens','generated_tokens','output_complete','token_cap_reached','max_new_tokens','do_sample'):
++        insist(value.raw[field]==expected[field],'historical first-generation observable mismatch: '+field)
++    if 'thinking' in expected:insist(value.raw['thinking']==expected['thinking'],'historical thinking flag')
++    actual=parser_receipt(value.raw['raw_output'],state['valid_actions']);mapping=action_id_mapping(tuple(state['valid_actions']))
++    insist(actual==history.parsed and parsed['status']=='selected' and parsed['action_id']==history.parsed['action_id'] and parsed['command']==history.commands[0] and mapping.get(parsed['action_id'])==history.commands[0],'coupled parser/Action-ID/reset-map/saved first command')
++    return {'actual_reset_to_public_prompt':True,'prepared_and_sent_tensors':data['runtime']['tensor_proof'],
++        'parser':parsed,'historical_first_generation_event_id':history.row['metadata']['r19_source_event_refs']['generation_event_ids'][0],
++        'historical_reset_event_id':history.row['metadata']['r19_source_event_refs']['reset_event_id'],
++        'historical_input_ids_status':history.historical_input_ids_status,'saved_first_command':history.commands[0]}
++
++
++def observed_public(value,history,*,reset,goal):
++    task=value.task if reset else None
++    state={'task_id':task.task_id if reset else history.task_id,'family':(task.family or history.family) if reset else history.family,
++        'goal':task.text if reset else goal,'observation':value.observation,
++        'valid_actions':list(value.valid_actions) if value.valid_actions is not None else None,
++        'done':False if reset else value.done,'reward':0.0 if reset else value.reward,'truncated':False if reset else value.truncated}
++    return {'state':state,'actual_task':{'task_id':task.task_id,'family':task.family,'split':task.split} if reset else None}
++
++
++def real_environment(permit:EngineeringPermit):
++    import importlib
++    origins={}
++    for name in ('alfworld','alfworld.agents.environment.alfred_tw_env','textworld','textworld.gym','yaml'):
++        origins[name]=module_origin(importlib.import_module(name))
++        insist(origins[name]==permit.proposal['packages'][name],'actual engineering environment module: '+name)
++    from env.alfworld import AlfWorldConfig
++    from self_improvement.si_p3.runtime_environment import ReadIsolatedEnvironment
++    from .gate import bound
++    p=permit.proposal['environment']
++    bound(p['game']['path'],p['game']['sha256']);bound(p['traj_data']['path'],p['traj_data']['sha256'])
++    result=ReadIsolatedEnvironment(AlfWorldConfig(Path(p['config']['path']),split='train',data_path=Path(p['data_root'])),
++        game=Path(p['game']['path']),pool_seed=42)
++    result.engineering_package_origins=origins;return result
++
++
++class EngineeringRun:
++    def __init__(self,permit:EngineeringPermit,output:Path,*,loader:Callable|None=None,environment_factory:Callable|None=None,started_at=None,clock=None):
++        insist(isinstance(permit,EngineeringPermit) and output==permit.output,'engineering run authority/output')
++        insist(not output.exists() or (permit.context_evidence is not None and (output/'launch_context.json').is_file()),'fresh one-engineering output')
++        if not output.exists():output.mkdir()
++        kwargs={} if clock is None else {'clock':clock}
++        self.permit=permit;self.output=output;self.ledger=EngineeringLedger(output/'engineering_events.jsonl',permit,started_at=started_at,**kwargs)
++        self.loader=loader or EngineeringProducer.load;self.factory=environment_factory or real_environment;self.ran=False
++    def run(self):
++        insist(not self.ran,'engineering cannot rerun');self.ran=True;ledger=self.ledger;history=self.permit.history;env=None;producer=None;stop=None;joined=None
++        try:
++            box={}
++            def load():
++                box['producer']=self.loader(self.permit,ledger)
++                insist(box['producer'].evidence_class==self.permit.evidence_class,'engineering producer mode')
++                return {'mode':'P0','adapter_sha256':P0_SHA256}
++            ledger.call('model_load',0,load);producer=box['producer']
++            def construct():
++                nonlocal env
++                env=self.factory(self.permit);return dict(env.initialize())|{'package_origins':env.engineering_package_origins}
++            isolation=ledger.call('env_construct',0,construct,request={'pool_seed':42,'historical_internal_rng':RNG_STATUS})
++            insist(isolation['pool_seed']==42 and isolation['discovery']=='explicit_no_scan_subclass' and Path(isolation['exact_game']).resolve()==Path(self.permit.proposal['environment']['game']['path']).resolve(),'one-game new pool42 discovery')
++            data=ledger.call('reset',0,lambda:observed_public(env.reset(seed=30000),history,reset=True,goal=''),request={'seed':30000})
++            state=data['state'];PublicState.from_dict(state)
++            insist(data['actual_task']['split']=='train' and data['actual_task']['family'] in (None,history.family) and state==history.states[0],'actual reset public state/full map/goal/task mismatch')
++            prompt=projection(PublicState.from_dict(state),[])['public_prompt'];insist(prompt==history.generation['prompt'],'actual reset to historical public prompt')
++            prepared=producer.prepare(prompt);compare_prepared(history,prepared)
++            def generate():
++                result=producer.generate(prepared);value=Generation.from_raw(result['raw'],prepared.prepared,16,'P0',producer.eos_ids)
++                return {'state':state,'prepared':prepared.to_dict(),'raw':dict(value.raw),'eos_ids':list(producer.eos_ids),
++                    'parsed':parse_generation('source',value,PublicState.from_dict(state)),'runtime':result['runtime']}
++            generated=ledger.call('generation',0,generate,prepared=prepared.to_dict(),request={'historical_reset_event_id':history.row['metadata']['r19_source_event_refs']['reset_event_id'],'historical_generation_event_id':history.row['metadata']['r19_source_event_refs']['generation_event_ids'][0]})
++            joined=compare_generation(history,state,generated,producer)
++            ledger.journal.append('runtime_evidence',{'unit':None,'kind':'coupled_path_compared','data':joined})
++            for index,command in enumerate(history.commands):
++                before=state;mapping=action_id_mapping(tuple(before['valid_actions']));action_id=next(k for k,v in mapping.items() if v==command)
++                insist(not before['done'] and not before['truncated'] and before==history.states[index],'saved current state before step')
++                reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index]
++                def step():
++                    value=env.step(command);after=observed_public(value,history,reset=False,goal=before['goal'])['state']
++                    return {'before':before,'after':after,'command':command,'action_id':action_id,'action_map':mapping,'historical_transition_event_id':reference}
++                result=ledger.call('step',index,step,request={'saved_command':command,'historical_transition_event_id':reference})
++                state=result['after'];PublicState.from_dict(state);insist(state==history.states[index+1],'observed historical after-state/full map mismatch')
++        except BaseException as error:
++            ledger.stopped=True;stop={'exception':type(error).__name__,'message':str(error)}
++        finally:
++            if env is not None:
++                try:ledger.call('env_close',0,lambda:(env.close() or {'closed':True}))
++                except BaseException as error:
++                    stop={'prior_stop':stop,'exception':type(error).__name__,'message':str(error),'cleanup_incomplete':True}
++            ledger.close(stop)
++        from .engineering_audit import audit_engineering,write_engineering_report
++        report=audit_engineering(self.output/'engineering_events.jsonl',self.permit,producer)
++        write_engineering_report(self.output,report);return report
++
++
++def run_engineering_worker(permit:EngineeringPermit):
++    from .engineering_gate import verified_engineering_context
++    context,_=verified_engineering_context(permit)
++    report=EngineeringRun(permit,permit.output,started_at=context['allocation_started_monotonic']).run()
++    return 0 if report['status']=='OBSERVED_PUBLIC_PATH_COMPATIBLE_NOT_RNG_RECONSTRUCTED' else 1
+diff --git a/src/self_improvement/si_s01/engineering_supervisor.py b/src/self_improvement/si_s01/engineering_supervisor.py
+new file mode 100644
+index 0000000..5b5fda5
+--- /dev/null
++++ b/src/self_improvement/si_s01/engineering_supervisor.py
+@@ -0,0 +1,24 @@
++"""Distinct <=600s engineering wrapper over accepted shared deadline mechanics."""
++from pathlib import Path
++from .contract import insist
++from .engineering_contract import PURPOSE,MODE,SOFTWARE
++from .supervisor_core import SupervisorProfile,supervise_core
++from self_improvement.si_p3.runtime_supervisor import process_table,group_members,descendants,kill_identities
++
++ENGINEERING_PROFILE=SupervisorProfile(600,MODE,'SI_S01_ENGINEERING_SUPERVISOR_EXIT_V1','engineering_report.json',PURPOSE,False,
++    {'purpose':PURPOSE,'science_authorized':False})
++
++def supervise_engineering(command,output:Path,*,context,seconds,environment):
++    insist(context['purpose']==PURPOSE and context['science_authorized'] is False and context['evidence_class'] in (MODE,SOFTWARE),'engineering-only supervisor context')
++    return supervise_core(command,output,context=context,seconds=seconds,environment=environment,profile=ENGINEERING_PROFILE,
++        process_table=process_table,group_members=group_members,descendants=descendants,kill_identities=kill_identities)
++
++
++def engineering_exit_ok(receipt,report):
++    return (receipt['schema']=='SI_S01_ENGINEERING_SUPERVISOR_EXIT_V1' and receipt['authentic_returncode']==0 and
++        receipt['science_authorized'] is False and receipt['scope']==PURPOSE and receipt['within_time_cap'] is True and
++        receipt['cleanup_established'] is True and receipt['deadline_triggered'] is False and
++        receipt['spawn_or_supervisor_error'] is None and receipt['reaping_error'] is None and receipt['child_report_present'] is True and
++        isinstance(report,dict) and report.get('schema')=='SI_S01_ENGINEERING_REPORT_V1' and report.get('purpose')==PURPOSE and
++        report.get('science_authorized') is False and report.get('source_sha')==receipt['source_sha'] and
++        report.get('status')=='OBSERVED_PUBLIC_PATH_COMPATIBLE_NOT_RNG_RECONSTRUCTED' and report.get('internal_rng_reconstructed') is False)
+diff --git a/src/self_improvement/si_s01/runtime.py b/src/self_improvement/si_s01/runtime.py
+index 0784832..945b839 100644
+--- a/src/self_improvement/si_s01/runtime.py
++++ b/src/self_improvement/si_s01/runtime.py
+@@ -10,88 +10,22 @@ from .evidence import Ledger
+ from self_improvement.si_p3.runtime_backend import (adapter_state,verify_adapter_state,module_origin,verify_cuda_uuid)
+ from self_improvement.si_p3.runtime_gate import inspect_gpu
+ 
+-class RuntimeSink:
+-    def __init__(self,ledger:Ledger):self.ledger=ledger
+-    def append(self,kind,data):self.ledger.runtime(kind,data)
++from .runtime_core import RuntimeSink,load_guarded,guarded_generation,resource as shared_resource
+ 
+ class LiveProducer(Producer):
+     @classmethod
+     def load(cls,permit:Permit,ledger:Ledger):
+-        insist(permit.plan.evidence_class=='live_source_only','no synthetic live loader')
++        insist(isinstance(permit,Permit) and permit.plan.evidence_class=='live_source_only','no synthetic live loader')
+         ledger.runtime('artifact_recheck',artifacts(permit))
+-        import torch,transformers,peft
+-        from models.qwen import QwenPolicy,QwenPolicyConfig
+-        from models.policy import GenerationOptions
+-        for name,module in [('torch',torch),('transformers',transformers),('peft',peft)]:
+-            insist(module_origin(module)==permit.proposal['packages'][name],'actual module origin/version: '+name)
+-        insist(torch.cuda.is_available() and torch.cuda.device_count()==1,'one visible CUDA device')
+-        torch.cuda.init()
+-        verify_cuda_uuid(torch,RuntimeSink(ledger),permit.gpu_uuid,point='source_before_context_probe')
+-        probe=torch.empty(1,dtype=torch.uint8,device='cuda:0')
+-        ledger.runtime('one_byte_before_weights',inspect_gpu(permit.gpu_uuid,allowed_pids={os.getpid()},require_owned_context=True));del probe
+-        configured=QwenPolicy(QwenPolicyConfig(model_id=permit.proposal['model']['base_snapshot'],device='cuda:0',dtype='bfloat16',local_files_only=True,trust_remote_code=False,enable_thinking=False,generation=GenerationOptions(max_new_tokens=16,do_sample=False)))
+-        tokenizer,base,_=configured._load()
+-        model=peft.PeftModel.from_pretrained(base,permit.proposal['model']['adapter_path'],is_trainable=False,local_files_only=True)
+-        for parameter in model.parameters():parameter.requires_grad_(False)
+-        insist(str(model.device)=='cuda:0' and all(str(p.device)=='cuda:0' for p in model.parameters()),'one CUDA device no offload')
+-        insist(not getattr(model,'is_loaded_in_4bit',False) and not getattr(model,'is_loaded_in_8bit',False),'no quantization')
+-        for name,p in model.named_parameters():
+-            if p.is_floating_point():insist(p.dtype in ((torch.bfloat16,torch.float32) if 'lora_' in name else (torch.bfloat16,)),'frozen base/PEFT dtypes')
+-        insist(model.config.model_type=='qwen3' and getattr(model.config,'_attn_implementation','')=='sdpa' and Path(model.config._name_or_path).resolve()==Path(permit.proposal['model']['base_snapshot']).resolve(),'effective frozen Qwen3/SDPA config')
+-        insist(all(v in (0,'cuda:0') for v in getattr(model,'hf_device_map',{}).values()),'no offload map')
+-        model.eval();verify_adapter_state(adapter_state(model),enabled=True)
+-        verify_cuda_uuid(torch,RuntimeSink(ledger),permit.gpu_uuid,point='source_after_load')
+-        result=cls(tokenizer,lambda *_:None,evidence_class='live_source_only')
+-        result.torch,result.model,result.permit,result.ledger=torch,model,permit,ledger;result.raw=result._raw
+-        ledger.runtime('model_loaded',{'origins':{name:module_origin(m) for name,m in [('torch',torch),('transformers',transformers),('peft',peft)]},'adapter_state':adapter_state(model),'resource':result.resource()})
+-        return result
+-    def resource(self):return inspect_gpu(self.permit.gpu_uuid,allowed_pids={os.getpid()},require_owned_context=True)
++        return load_guarded(cls,permit,ledger,evidence_class='live_source_only')
++    def resource(self):return shared_resource(self)
+     def _raw(self,prepared:PreparedTensors,slot:Slot,index:int):
+         source_only('source','P0')
+         active=self.ledger.active;insist(active in self.ledger.units,'source generation without pre-reserved task unit')
+         identity=self.ledger.units[active]['identity']
+         insist(identity=={'slot':slot.key,'task_id':slot.task_id,'phase':'source','index':index,'kind':'generation'},'task/decision source identity')
+-        insist(self.prepare(prepared.prepared.prompt)==prepared,'prepared drift before actual generation')
+-        self.model.eval();insist(all(not p.requires_grad for p in self.model.parameters()),'frozen inference')
+-        before=adapter_state(self.model);verify_adapter_state(before,enabled=True)
+-        encoded=self.tokenizer(text=prepared.prepared.rendered_prompt,add_special_tokens=True,return_tensors='pt')
+-        insist(set(encoded)=={'input_ids','attention_mask'},'actual tensor keys')
+-        inputs={k:v.to(self.model.device) for k,v in encoded.items()}
+-        insist(all(v.ndim==2 and v.shape[0]==1 for v in inputs.values()),'single full row')
+-        sent=prepared.prepared.to_dict()|{'input_ids':inputs['input_ids'][0].tolist(),'attention_mask':inputs['attention_mask'][0].tolist()}
+-        insist(sent==prepared.to_dict(),'actual input IDs/mask')
+-        during=adapter_state(self.model);verify_adapter_state(during,enabled=True)
+-        self.ledger.runtime('resource_before_generation',self.resource())
+-        generated=None;returned=None
+-        try:
+-            self.torch.cuda.synchronize();at=time.perf_counter()
+-            with self.torch.no_grad():
+-                generated=self.model.generate(**inputs,max_new_tokens=16,do_sample=False,return_dict_in_generate=True,output_scores=True)
+-            self.torch.cuda.synchronize();elapsed=time.perf_counter()-at
+-            seq=generated.sequences[0].tolist();tokens=seq[len(sent['input_ids']):];reached=len(tokens)==16
+-            raw={'prompt':prepared.prepared.prompt,'rendered_prompt':prepared.prepared.rendered_prompt,
+-                 'rendered_prompt_sha256':hash_text(prepared.prepared.rendered_prompt),'raw_output':self.decode(tokens),
+-                 'token_ids':tokens,'token_ids_sha256':hash_text(json.dumps(tokens,separators=(',',':'))),
+-                 'input_tokens':len(sent['input_ids']),'generated_tokens':len(tokens),'latency_seconds':elapsed,
+-                 'output_complete':not reached or bool(tokens and tokens[-1] in self.eos_ids),'token_cap_reached':reached,
+-                 'max_new_tokens':16,'do_sample':False,'thinking':False,'adapter_mode':'P0','adapter_sha256':P0_SHA256}
+-            returned={'generation_returned':True,'prepared':prepared.to_dict(),'raw':raw,'observed_sequence':seq}
+-            self.ledger.runtime('generation_returned',returned)
+-            insist(seq[:len(sent['input_ids'])]==sent['input_ids'] and len(generated.scores or ())==len(tokens),'generated prefix/scores')
+-            after=adapter_state(self.model);verify_adapter_state(after,enabled=True)
+-            insist(before==after and all(not p.requires_grad for p in self.model.parameters()),'P0 remains enabled/default/unmerged/frozen')
+-            insist(inputs['input_ids'][0].tolist()==sent['input_ids'] and inputs['attention_mask'][0].tolist()==sent['attention_mask'],'generate mutated input')
+-            proof={'tensor_proof':{'prepared':prepared.to_dict(),'sent':sent},'adapter_states':{'before':before,'during':during,'after':after},'resource_after':self.resource()}
+-            return {'raw':raw,'runtime':proof}
+-        except BaseException as error:
+-            if generated is not None:
+-                if returned is None:
+-                    returned={'generation_returned':True,'prepared':prepared.to_dict(),'raw':None,'observation_error':{'exception':type(error).__name__,'message':str(error)}}
+-                    try:returned['observed_sequence']=generated.sequences[0].tolist()
+-                    except Exception as capture_error:returned['capture_error']=str(capture_error)
+-                if not self.ledger.units[active].get('return_event'):self.ledger.runtime('generation_returned',returned)
+-                error.raw_evidence=returned
+-            raise
++
++        return guarded_generation(self,prepared,active)
+ 
+ def hash_text(text):
+     from self_improvement.si_p3.contract import text_hash
+diff --git a/src/self_improvement/si_s01/runtime_core.py b/src/self_improvement/si_s01/runtime_core.py
+new file mode 100644
+index 0000000..5fd9ebb
+--- /dev/null
++++ b/src/self_improvement/si_s01/runtime_core.py
+@@ -0,0 +1,101 @@
++"""Guarded P0 mechanics shared by genuine source and separate engineering wrappers."""
++from __future__ import annotations
++from pathlib import Path
++from typing import Any,Mapping,Protocol
++import json,os,time
++from .contract import *
++from self_improvement.si_p3.runtime_backend import (adapter_state,verify_adapter_state,module_origin,verify_cuda_uuid)
++from self_improvement.si_p3.runtime_gate import inspect_gpu
++
++class RuntimeBinding(Protocol):
++    proposal:Mapping[str,Any]
++    gpu_uuid:str
++
++class RuntimeSink:
++    def __init__(self,ledger):self.ledger=ledger
++    def append(self,kind,data):self.ledger.runtime(kind,data)
++
++
++def load_guarded(cls,permit:RuntimeBinding,ledger,*,evidence_class:str,probe_started=None,probe_completed=None):
++    import torch,transformers,peft
++    from models.qwen import QwenPolicy,QwenPolicyConfig
++    from models.policy import GenerationOptions
++    for name,module in [('torch',torch),('transformers',transformers),('peft',peft)]:
++        insist(module_origin(module)==permit.proposal['packages'][name],'actual module origin/version: '+name)
++    if probe_started is not None:probe_started()
++    insist(torch.cuda.is_available() and torch.cuda.device_count()==1,'one visible CUDA device')
++    torch.cuda.init()
++    verify_cuda_uuid(torch,RuntimeSink(ledger),permit.gpu_uuid,point='source_before_context_probe')
++    probe=torch.empty(1,dtype=torch.uint8,device='cuda:0')
++    ledger.runtime('one_byte_before_weights',inspect_gpu(permit.gpu_uuid,allowed_pids={os.getpid()},require_owned_context=True));del probe
++    if probe_completed is not None:probe_completed()
++    configured=QwenPolicy(QwenPolicyConfig(model_id=permit.proposal['model']['base_snapshot'],device='cuda:0',dtype='bfloat16',local_files_only=True,trust_remote_code=False,enable_thinking=False,generation=GenerationOptions(max_new_tokens=16,do_sample=False)))
++    tokenizer,base,_=configured._load()
++    model=peft.PeftModel.from_pretrained(base,permit.proposal['model']['adapter_path'],is_trainable=False,local_files_only=True)
++    for parameter in model.parameters():parameter.requires_grad_(False)
++    insist(str(model.device)=='cuda:0' and all(str(p.device)=='cuda:0' for p in model.parameters()),'one CUDA device no offload')
++    insist(not getattr(model,'is_loaded_in_4bit',False) and not getattr(model,'is_loaded_in_8bit',False),'no quantization')
++    for name,p in model.named_parameters():
++        if p.is_floating_point():insist(p.dtype in ((torch.bfloat16,torch.float32) if 'lora_' in name else (torch.bfloat16,)),'frozen base/PEFT dtypes')
++    insist(model.config.model_type=='qwen3' and getattr(model.config,'_attn_implementation','')=='sdpa' and Path(model.config._name_or_path).resolve()==Path(permit.proposal['model']['base_snapshot']).resolve(),'effective frozen Qwen3/SDPA config')
++    insist(all(v in (0,'cuda:0') for v in getattr(model,'hf_device_map',{}).values()),'no offload map')
++    model.eval();verify_adapter_state(adapter_state(model),enabled=True)
++    verify_cuda_uuid(torch,RuntimeSink(ledger),permit.gpu_uuid,point='source_after_load')
++    result=cls(tokenizer,lambda *_:None,evidence_class=evidence_class)
++    result.torch,result.model,result.permit,result.ledger=torch,model,permit,ledger;result.raw=result._raw
++    ledger.runtime('model_loaded',{'origins':{name:module_origin(m) for name,m in [('torch',torch),('transformers',transformers),('peft',peft)]},'adapter_state':adapter_state(model),'resource':result.resource()})
++    return result
++
++
++def guarded_generation(self,prepared:PreparedTensors,active:str,*,pre_call=None):
++    insist(self.prepare(prepared.prepared.prompt)==prepared,'prepared drift before actual generation')
++    self.model.eval();insist(all(not p.requires_grad for p in self.model.parameters()),'frozen inference')
++    before=adapter_state(self.model);verify_adapter_state(before,enabled=True)
++    encoded=self.tokenizer(text=prepared.prepared.rendered_prompt,add_special_tokens=True,return_tensors='pt')
++    insist(set(encoded)=={'input_ids','attention_mask'},'actual tensor keys')
++    inputs={k:v.to(self.model.device) for k,v in encoded.items()}
++    insist(all(v.ndim==2 and v.shape[0]==1 for v in inputs.values()),'single full row')
++    sent=prepared.prepared.to_dict()|{'input_ids':inputs['input_ids'][0].tolist(),'attention_mask':inputs['attention_mask'][0].tolist()}
++    insist(sent==prepared.to_dict(),'actual input IDs/mask')
++    during=adapter_state(self.model);verify_adapter_state(during,enabled=True)
++    self.ledger.runtime('resource_before_generation',self.resource())
++    generated=None;returned=None
++    try:
++        self.torch.cuda.synchronize();at=time.perf_counter()
++        if pre_call is not None:pre_call()
++        with self.torch.no_grad():
++            generated=self.model.generate(**inputs,max_new_tokens=16,do_sample=False,return_dict_in_generate=True,output_scores=True)
++        self.torch.cuda.synchronize();elapsed=time.perf_counter()-at
++        seq=generated.sequences[0].tolist();tokens=seq[len(sent['input_ids']):];reached=len(tokens)==16
++        raw={'prompt':prepared.prepared.prompt,'rendered_prompt':prepared.prepared.rendered_prompt,
++             'rendered_prompt_sha256':hash_text(prepared.prepared.rendered_prompt),'raw_output':self.decode(tokens),
++             'token_ids':tokens,'token_ids_sha256':hash_text(json.dumps(tokens,separators=(',',':'))),
++             'input_tokens':len(sent['input_ids']),'generated_tokens':len(tokens),'latency_seconds':elapsed,
++             'output_complete':not reached or bool(tokens and tokens[-1] in self.eos_ids),'token_cap_reached':reached,
++             'max_new_tokens':16,'do_sample':False,'thinking':False,'adapter_mode':'P0','adapter_sha256':P0_SHA256}
++        returned={'generation_returned':True,'prepared':prepared.to_dict(),'raw':raw,'observed_sequence':seq}
++        self.ledger.runtime('generation_returned',returned)
++        insist(seq[:len(sent['input_ids'])]==sent['input_ids'] and len(generated.scores or ())==len(tokens),'generated prefix/scores')
++        after=adapter_state(self.model);verify_adapter_state(after,enabled=True)
++        insist(before==after and all(not p.requires_grad for p in self.model.parameters()),'P0 remains enabled/default/unmerged/frozen')
++        insist(inputs['input_ids'][0].tolist()==sent['input_ids'] and inputs['attention_mask'][0].tolist()==sent['attention_mask'],'generate mutated input')
++        proof={'tensor_proof':{'prepared':prepared.to_dict(),'sent':sent},'adapter_states':{'before':before,'during':during,'after':after},'resource_after':self.resource()}
++        return {'raw':raw,'runtime':proof}
++    except BaseException as error:
++        if generated is not None:
++            if returned is None:
++                returned={'generation_returned':True,'prepared':prepared.to_dict(),'raw':None,'observation_error':{'exception':type(error).__name__,'message':str(error)}}
++                try:returned['observed_sequence']=generated.sequences[0].tolist()
++                except Exception as capture_error:returned['capture_error']=str(capture_error)
++            if not self.ledger.units[active].get('return_event'):self.ledger.runtime('generation_returned',returned)
++            error.raw_evidence=returned
++        raise
++
++
++def resource(self):
++    return inspect_gpu(self.permit.gpu_uuid,allowed_pids={os.getpid()},require_owned_context=True)
++
++
++def hash_text(text):
++    from self_improvement.si_p3.contract import text_hash
++    return text_hash(text)
+diff --git a/src/self_improvement/si_s01/supervisor.py b/src/self_improvement/si_s01/supervisor.py
+index 362d4c2..ae0e8ca 100644
+--- a/src/self_improvement/si_s01/supervisor.py
++++ b/src/self_improvement/si_s01/supervisor.py
+@@ -1,98 +1,12 @@
+-"""Independent up-to-four-hour source supervisor; old SI-E2 1800s gate is frozen."""
++"""Source-only wrapper around the unchanged bounded process mechanics."""
+ from __future__ import annotations
+ import ctypes,os,signal,subprocess,time
+ from pathlib import Path
+ from typing import Mapping,Any,Sequence
+ from self_improvement.si_p3.runtime_supervisor import group_members,process_table,descendants,kill_identities
+-from .contract import require
+-from .evidence import fresh_json,atomic_fresh_json
++from .supervisor_core import supervise_core,SOURCE_PROFILE
+ 
+-def supervise_source(command: Sequence[str], output: Path, *, context: Mapping[str, Any],
+-              seconds: float, environment: Mapping[str, str]) -> dict[str, Any]:
+-    require(seconds > 0 and seconds <= 14400 and not output.exists() and not output.is_symlink(), "fresh bounded supervisor output")
+-    claim=output.parent/(output.name+'.launch_claim.json')
+-    fresh_json(claim,{'authorization_sha256':context['authorization_sha256'],'source_sha':context['source_sha'],'maximum_launches':1,'retry_authorized':False})
+-    output.mkdir(parents=False, exist_ok=False)
+-    start = context.get('allocation_started_monotonic',time.monotonic())
+-    require(start<=time.monotonic()<start+seconds,'allocation deadline before spawn')
+-    baseline_children = {pid for pid,value in process_table().items() if value[0] == os.getpid()}
+-    # Reap orphaned same-group grandchildren on Linux after their parent is killed.
+-    libc = ctypes.CDLL(None, use_errno=True)
+-    old_subreaper = ctypes.c_int()
+-    require(libc.prctl(37, ctypes.byref(old_subreaper), 0, 0, 0) == 0, "cannot read subreaper state")
+-    require(libc.prctl(36, 1, 0, 0, 0) == 0, "Linux child subreaper unavailable")
+-    evidence_class = context["evidence_class"]
+-    require(evidence_class in ("live_source_only", "synthetic_software_fixture"), "supervisor evidence class")
+-    devices = int(evidence_class == "live_source_only")
+-    launch = dict(context) | {"supervisor_pid": os.getpid(), "argv": list(command),
+-                              "allocated_devices": devices, "deadline_seconds": seconds, "allocation_started_monotonic": start}
+-    command_template=list(command)+['--launch-context-sha256','@LAUNCH_CONTEXT_SHA256@'] if evidence_class=='live_source_only' else list(command)
+-    launch['argv']=command_template
+-    fresh_json(output / "launch_context.json", launch)
+-    import hashlib
+-    launch_sha=hashlib.sha256((output/'launch_context.json').read_bytes()).hexdigest()
+-    command=[launch_sha if x=='@LAUNCH_CONTEXT_SHA256@' else x for x in command_template]
+-    known_descendants: dict[int, tuple[int, int, int]] = {}
+-    process = None; timed_out = False; failure = None; members = []; code = None
+-    reaping_error = None; worker_identity = None; deadline = start + seconds
+-    # Reserve cleanup time inside the full allocation ceiling.
+-    callback_deadline = max(0.001, seconds - min(2.0, seconds / 10))
+-    try:
+-        with (output / "worker.stdout").open("xb") as stdout, (output / "worker.stderr").open("xb") as stderr:
+-            process = subprocess.Popen(list(command), stdout=stdout, stderr=stderr,
+-                env=dict(environment), start_new_session=True)
+-            worker_identity = process_table().get(process.pid)
+-            atomic_fresh_json(output / "worker_start.json", {"pid": process.pid, "pgid": process.pid,
+-                "argv": list(command), "authorization_sha256": context["authorization_sha256"], "uid":os.getuid(), "started_monotonic":time.monotonic(), "launch_context_sha256":launch_sha, "start_tick":worker_identity[1] if worker_identity is not None else None})
+-            try:
+-                code = process.wait(timeout=max(0.0, min(deadline, start + callback_deadline) - time.monotonic()))
+-            except subprocess.TimeoutExpired:
+-                timed_out = True
+-    except BaseException as error:
+-        failure = {"exception": type(error).__name__, "message": str(error)}
+-    finally:
+-        if process is not None:
+-            members = group_members(process.pid)
+-            known_descendants.update(descendants(process.pid, process_table()))
+-            try: os.killpg(process.pid, signal.SIGKILL)
+-            except ProcessLookupError: pass
+-            kill_identities(known_descendants)
+-            if code is None:
+-                try:
+-                    code = process.wait(timeout=max(0.0, deadline - time.monotonic()))
+-                except subprocess.TimeoutExpired:
+-                    # SIGKILL does not establish that an uninterruptible process exited.
+-                    code = None
+-                    reaping_error = {'exception': 'TimeoutExpired', 'message': 'worker exit not established before absolute allocation deadline'}
+-            # Bounded cleanup; record any surviving group rather than claiming it disappeared.
+-            until = min(deadline, time.monotonic() + 1.0)
+-            while time.monotonic() < until:
+-                table = process_table()
+-                # Newly orphaned sessions are adopted by this dedicated subreaper.
+-                known_descendants.update({pid:value for pid,value in table.items()
+-                    if value[0] == os.getpid() and pid not in baseline_children and pid != process.pid})
+-                kill_identities(known_descendants)
+-                for pid in known_descendants:
+-                    try: os.waitpid(pid, os.WNOHANG)
+-                    except ChildProcessError: pass
+-                table = process_table()
+-                alive = [pid for pid,value in known_descendants.items() if pid in table and table[pid][1:] == value[1:]]
+-                if not group_members(process.pid) and not alive: break
+-                time.sleep(0.01)
+-        table = process_table()
+-        remaining = sorted(set(group_members(process.pid) if process is not None else []) |
+-            {pid for pid,value in known_descendants.items() if pid in table and table[pid][1:] == value[1:]})
+-        elapsed = time.monotonic() - start
+-        receipt = {"schema": "SI_S01_SUPERVISOR_EXIT_V1", "authorization_sha256": context["authorization_sha256"],
+-            "source_sha": context["source_sha"], "evidence_class": context["evidence_class"],
+-            "authentic_returncode": code, "deadline_triggered": timed_out, "spawn_or_supervisor_error": failure,
+-            "reaping_error": reaping_error, "cleanup_established": code is not None and not remaining,
+-            "unreaped_worker_identity": {'pid': process.pid, 'start_tick': worker_identity[1] if worker_identity else None, 'uid': worker_identity[2] if worker_identity else None} if process is not None and code is None else None,
+-            "execution_status": 'EXIT_RECORDED' if code is not None and not remaining and failure is None else 'SUPERVISOR_INCOMPLETE',
+-            "members_before_cleanup": members, "descendants_observed": sorted(known_descendants), "members_after_cleanup": remaining,
+-            "elapsed_seconds": elapsed, "allocated_devices": devices, "allocated_device_hours": devices * elapsed / 3600,
+-            "within_time_cap": elapsed <= seconds, "child_report_present": (output / "source_report.json").is_file(),
+-            "launch_context_sha256":launch_sha, "worker_start_sha256":hashlib.sha256((output/"worker_start.json").read_bytes()).hexdigest() if (output/"worker_start.json").is_file() else None, "retry_authorized": False, "science_authorized": evidence_class == "live_source_only", "scope": "source_only_no_teacher_training_evaluation"}
+-        require(libc.prctl(36, old_subreaper.value, 0, 0, 0) == 0, "cannot restore subreaper state")
+-        fresh_json(output / "supervisor_exit.json", receipt)
+-    return receipt
++
++def supervise_source(command:Sequence[str],output:Path,*,context:Mapping[str,Any],seconds:float,environment:Mapping[str,str])->dict[str,Any]:
++    return supervise_core(command,output,context=context,seconds=seconds,environment=environment,profile=SOURCE_PROFILE,
++        process_table=process_table,group_members=group_members,descendants=descendants,kill_identities=kill_identities)
+diff --git a/src/self_improvement/si_s01/supervisor_core.py b/src/self_improvement/si_s01/supervisor_core.py
+new file mode 100644
+index 0000000..0d7fbee
+--- /dev/null
++++ b/src/self_improvement/si_s01/supervisor_core.py
+@@ -0,0 +1,110 @@
++"""Accepted d7 absolute-deadline process mechanics; typed wrappers set scope only."""
++from __future__ import annotations
++from dataclasses import dataclass,field
++from pathlib import Path
++from typing import Mapping,Any,Sequence
++import ctypes,os,signal,subprocess,time
++from .contract import require
++from .evidence import fresh_json,atomic_fresh_json
++
++@dataclass(frozen=True)
++class SupervisorProfile:
++    maximum_seconds:float
++    live_mode:str
++    schema:str
++    report_name:str
++    scope:str
++    science_authorized:bool
++    claim_fields:Mapping[str,Any]=field(default_factory=dict)
++
++SOURCE_PROFILE=SupervisorProfile(14400,'live_source_only','SI_S01_SUPERVISOR_EXIT_V1','source_report.json','source_only_no_teacher_training_evaluation',True)
++
++
++def supervise_core(command:Sequence[str],output:Path,*,context:Mapping[str,Any],seconds:float,environment:Mapping[str,str],profile:SupervisorProfile,process_table,group_members,descendants,kill_identities):
++    require(seconds > 0 and seconds <= profile.maximum_seconds and not output.exists() and not output.is_symlink(), "fresh bounded supervisor output")
++    claim=output.parent/(output.name+'.launch_claim.json')
++    fresh_json(claim,{'authorization_sha256':context['authorization_sha256'],'source_sha':context['source_sha'],'maximum_launches':1,'retry_authorized':False}|dict(profile.claim_fields))
++    output.mkdir(parents=False, exist_ok=False)
++    start = context.get('allocation_started_monotonic',time.monotonic())
++    require(start<=time.monotonic()<start+seconds,'allocation deadline before spawn')
++    baseline_children = {pid for pid,value in process_table().items() if value[0] == os.getpid()}
++    # Reap orphaned same-group grandchildren on Linux after their parent is killed.
++    libc = ctypes.CDLL(None, use_errno=True)
++    old_subreaper = ctypes.c_int()
++    require(libc.prctl(37, ctypes.byref(old_subreaper), 0, 0, 0) == 0, "cannot read subreaper state")
++    require(libc.prctl(36, 1, 0, 0, 0) == 0, "Linux child subreaper unavailable")
++    evidence_class = context["evidence_class"]
++    require(evidence_class in (profile.live_mode, "synthetic_software_fixture"), "supervisor evidence class")
++    devices = int(evidence_class == profile.live_mode)
++    launch = dict(context) | {"supervisor_pid": os.getpid(), "argv": list(command),
++                              "allocated_devices": devices, "deadline_seconds": seconds, "allocation_started_monotonic": start}
++    command_template=list(command)+['--launch-context-sha256','@LAUNCH_CONTEXT_SHA256@'] if evidence_class==profile.live_mode else list(command)
++    launch['argv']=command_template
++    fresh_json(output / "launch_context.json", launch)
++    import hashlib
++    launch_sha=hashlib.sha256((output/'launch_context.json').read_bytes()).hexdigest()
++    command=[launch_sha if x=='@LAUNCH_CONTEXT_SHA256@' else x for x in command_template]
++    known_descendants: dict[int, tuple[int, int, int]] = {}
++    process = None; timed_out = False; failure = None; members = []; code = None
++    reaping_error = None; worker_identity = None; deadline = start + seconds
++    # Reserve cleanup time inside the full allocation ceiling.
++    callback_deadline = max(0.001, seconds - min(2.0, seconds / 10))
++    try:
++        with (output / "worker.stdout").open("xb") as stdout, (output / "worker.stderr").open("xb") as stderr:
++            process = subprocess.Popen(list(command), stdout=stdout, stderr=stderr,
++                env=dict(environment), start_new_session=True)
++            worker_identity = process_table().get(process.pid)
++            atomic_fresh_json(output / "worker_start.json", {"pid": process.pid, "pgid": process.pid,
++                "argv": list(command), "authorization_sha256": context["authorization_sha256"], "uid":os.getuid(), "started_monotonic":time.monotonic(), "launch_context_sha256":launch_sha, "start_tick":worker_identity[1] if worker_identity is not None else None})
++            try:
++                code = process.wait(timeout=max(0.0, min(deadline, start + callback_deadline) - time.monotonic()))
++            except subprocess.TimeoutExpired:
++                timed_out = True
++    except BaseException as error:
++        failure = {"exception": type(error).__name__, "message": str(error)}
++    finally:
++        if process is not None:
++            members = group_members(process.pid)
++            known_descendants.update(descendants(process.pid, process_table()))
++            try: os.killpg(process.pid, signal.SIGKILL)
++            except ProcessLookupError: pass
++            kill_identities(known_descendants)
++            if code is None:
++                try:
++                    code = process.wait(timeout=max(0.0, deadline - time.monotonic()))
++                except subprocess.TimeoutExpired:
++                    # SIGKILL does not establish that an uninterruptible process exited.
++                    code = None
++                    reaping_error = {'exception': 'TimeoutExpired', 'message': 'worker exit not established before absolute allocation deadline'}
++            # Bounded cleanup; record any surviving group rather than claiming it disappeared.
++            until = min(deadline, time.monotonic() + 1.0)
++            while time.monotonic() < until:
++                table = process_table()
++                # Newly orphaned sessions are adopted by this dedicated subreaper.
++                known_descendants.update({pid:value for pid,value in table.items()
++                    if value[0] == os.getpid() and pid not in baseline_children and pid != process.pid})
++                kill_identities(known_descendants)
++                for pid in known_descendants:
++                    try: os.waitpid(pid, os.WNOHANG)
++                    except ChildProcessError: pass
++                table = process_table()
++                alive = [pid for pid,value in known_descendants.items() if pid in table and table[pid][1:] == value[1:]]
++                if not group_members(process.pid) and not alive: break
++                time.sleep(0.01)
++        table = process_table()
++        remaining = sorted(set(group_members(process.pid) if process is not None else []) |
++            {pid for pid,value in known_descendants.items() if pid in table and table[pid][1:] == value[1:]})
++        elapsed = time.monotonic() - start
++        receipt = {"schema": profile.schema, "authorization_sha256": context["authorization_sha256"],
++            "source_sha": context["source_sha"], "evidence_class": context["evidence_class"],
++            "authentic_returncode": code, "deadline_triggered": timed_out, "spawn_or_supervisor_error": failure,
++            "reaping_error": reaping_error, "cleanup_established": code is not None and not remaining,
++            "unreaped_worker_identity": {'pid': process.pid, 'start_tick': worker_identity[1] if worker_identity else None, 'uid': worker_identity[2] if worker_identity else None} if process is not None and code is None else None,
++            "execution_status": 'EXIT_RECORDED' if code is not None and not remaining and failure is None else 'SUPERVISOR_INCOMPLETE',
++            "members_before_cleanup": members, "descendants_observed": sorted(known_descendants), "members_after_cleanup": remaining,
++            "elapsed_seconds": elapsed, "allocated_devices": devices, "allocated_device_hours": devices * elapsed / 3600,
++            "within_time_cap": elapsed <= seconds, "child_report_present": (output / profile.report_name).is_file(),
++            "launch_context_sha256":launch_sha, "worker_start_sha256":hashlib.sha256((output/"worker_start.json").read_bytes()).hexdigest() if (output/"worker_start.json").is_file() else None, "retry_authorized": False, "science_authorized": profile.science_authorized and evidence_class == profile.live_mode, "scope": profile.scope}
++        require(libc.prctl(36, old_subreaper.value, 0, 0, 0) == 0, "cannot restore subreaper state")
++        fresh_json(output / "supervisor_exit.json", receipt)
++    return receipt
+diff --git a/tests/si_s01_engineering_support.py b/tests/si_s01_engineering_support.py
+new file mode 100644
+index 0000000..b697988
+--- /dev/null
++++ b/tests/si_s01_engineering_support.py
+@@ -0,0 +1,232 @@
++"""Explicit fake model/CUDA/TextWorld I/O; all controller/guards/reader/audit are real."""
++from __future__ import annotations
++from pathlib import Path
++from types import ModuleType,SimpleNamespace
++from dataclasses import dataclass
++from datetime import datetime,timedelta,timezone
++from contextlib import nullcontext
++from copy import deepcopy
++import hashlib,json,os,subprocess,sys
++from self_improvement.si_s01.contract import canonical,digest,PublicState,projection,SNAPSHOT
++from self_improvement.si_s01.engineering_contract import *
++from self_improvement.si_s01.engineering_history import read_historical,parser_receipt
++from self_improvement.si_p3.runtime_backend import module_origin
++from self_improvement.si_p3.runtime_gate import PACKAGE_NAMES
++from self_improvement.si_p3.runtime_environment import source_hash
++from recovery.r19_duration import R19_EVENT_SCHEMA,sha256_json
++from models.action_parser import action_id_mapping
++from si_s01_support import Tokenizer
++
++GPU='GPU-12345678-abcd-abcd-abcd-123456789abc'
++REPO=Path(__file__).resolve().parents[1]
++
++def file_binding(path):
++    p=Path(path);return {'path':str(p.resolve()),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
++
++class Row:
++    def __init__(self,x):self.x=list(x)
++    def tolist(self):return list(self.x)
++class Tensor:
++    ndim=2
++    def __init__(self,x):self.x=list(x);self.shape=(1,len(x))
++    def to(self,device):return self
++    def __getitem__(self,i):assert i==0;return Row(self.x)
++class Tok(Tokenizer):
++    drift=None
++    def __call__(self,text,**kwargs):
++        result=super().__call__(text,**kwargs)
++        if kwargs.get('return_tensors')=='pt':
++            if self.drift:result[self.drift][-1]=0
++            return {k:Tensor(v) for k,v in result.items()}
++        return result
++
++@dataclass
++class Status:
++    enabled:bool
++    active_adapters:list
++    merged_adapters:list
++    available_adapters:list
++    num_adapter_layers:int=1
++    trainable_params:int=0
++class Parameter:
++    device='cuda:0';requires_grad=True
++    def __init__(self,dtype):self.dtype=dtype
++    def requires_grad_(self,value):self.requires_grad=value
++    def is_floating_point(self):return True
++class Model:
++    device='cuda:0';hf_device_map={'':'cuda:0'};is_loaded_in_4bit=False;is_loaded_in_8bit=False
++    def __init__(self,state,path):
++        self.state=state;self.enabled=True;self.params=[Parameter('bf16'),Parameter('fp32')]
++        self.config=SimpleNamespace(model_type='qwen3',_attn_implementation='sdpa',_name_or_path=str(path))
++    def parameters(self):return self.params
++    def named_parameters(self):return [('base.weight',self.params[0]),('lora_A.weight',self.params[1])]
++    def eval(self):pass
++    def get_model_status(self):return Status(self.enabled,['default'],[],['default'])
++    def get_layer_status(self):return [self.get_model_status()]
++    def generate(self,**kwargs):
++        self.state.calls['generation']+=1;self.state.sent.append(kwargs)
++        assert kwargs['max_new_tokens']==16 and kwargs['do_sample'] is False
++        tokens=self.state.output_tokens
++        return SimpleNamespace(sequences=Tensor(kwargs['input_ids'][0].tolist()+tokens),scores=(None,)*len(tokens))
++
++
++def wire_fixture(tmp,tokenizer):
++    family='pick_and_place_simple';task=family+'-Fixture-None-Table-0/trial_fixture';game=tmp/'train'/task/'game.tw-pddl';game.parent.mkdir(parents=True);game.write_text('explicit synthetic game')
++    traj=game.parent/'traj_data.json';traj.write_text('{}')
++    goal='Fixture goal';states=[]
++    for i in range(7):
++        states.append({'task_id':task,'family':family,'goal':goal,'observation':'Your task is to: Fixture goal.' if i==0 else 'Fixture state '+str(i),
++            'valid_actions':[] if i==6 else ['look','inventory'],'done':i==6,'reward':float(i==6),'truncated':False})
++    row={'trajectory_id':'fixture-first-source','task':{'task_id':task,'text':goal,'split':'train','family':None,'metadata':{'game_file':str(game)}},'model_version':'fixture-frozen-P0','seed':30000,'initial_observation':states[0]['observation'],'steps':[],'truncated':False,
++        'metadata':{'schedule_index':0,'reset_order_position':0,'nominal_seed':30000,'task_family':family,'source_game_sha256':file_binding(game)['sha256'],'source_traj_data_sha256':file_binding(traj)['sha256'],'split':'train','max_steps':50,'termination_reason':'environment_terminal'}}
++    events=[]
++    def event(kind,identity,payload):
++        previous=events[-1]['event_id'] if events else None;seq=len(events)+1
++        item={'schema_version':R19_EVENT_SCHEMA,'run_id':HISTORICAL_RUN,'implementation_sha':HISTORICAL_CODE,'evidence_class':SOFTWARE,'protocol_sha256':'f'*64,'run_context':{'synthetic_wire_only':True},'created_at':'2026-01-01T00:00:00Z','sequence':seq,'kind':kind,'identity':identity,'payload':payload,'payload_sha256':sha256_json(payload),'previous_event_sha256':previous}
++        item['event_id']=sha256_json([item['run_id'],seq,kind,identity,item['payload_sha256'],previous,item['evidence_class'],item['run_context']]);events.append(item);return item
++    base={'canonical_trial_id':task,'split':'train','schedule_index':0,'component':'task_actor'}
++    reset_id=base|{'operation':'source_reset'};event('environment_operation_started',reset_id,{})
++    reset=event('environment_operation_completed',reset_id,{'operation':'environment_reset','task_id':task,'seed':30000,'transition':states[0]})
++    gens=[];trans=[];history=[]
++    for i in range(6):
++        before=states[i];after=states[i+1];prompt=projection(PublicState.from_dict(before),history)['public_prompt'];rendered=tokenizer.apply_chat_template([{'role':'user','content':prompt}],tokenize=False,add_generation_prompt=True,enable_thinking=False);ids=tokenizer(text=rendered,add_special_tokens=True)['input_ids'];tokens=[65,48,48,48,1]
++        generation={'prompt':prompt,'rendered_prompt':rendered,'rendered_prompt_sha256':hashlib.sha256(rendered.encode()).hexdigest(),'raw_output':'A000','token_ids':tokens,'token_ids_sha256':hashlib.sha256(json.dumps(tokens,separators=(',',':')).encode()).hexdigest(),'input_tokens':len(ids),'generated_tokens':5,'latency_seconds':1.0,'output_complete':True,'token_cap_reached':False,'max_new_tokens':16,'do_sample':False,'thinking':False}
++        parser=parser_receipt('A000',before['valid_actions']);mapping=action_id_mapping(tuple(before['valid_actions']))
++        gid=base|{'operation':'source_generation','decision_index':i};event('generation_started',gid,{})
++        ge=event('generation_completed',gid,{'evidence':{'generation':generation,'parser_result':parser,'action_map':mapping}});gens.append(ge['event_id'])
++        tid=base|{'operation':'sft_environment_step','decision_index':i};event('environment_operation_started',tid,{})
++        te=event('environment_operation_completed',tid,{'operation':'sft_environment_step','command':'look','action_id':'A000','action_map':mapping,'before_state':{'observation':before['observation'],'valid_actions':before['valid_actions'],'history':deepcopy(history),'actions_consumed':i},'transition':after|{'executed_command':'look'}});trans.append(te['event_id'])
++        selected={'action_selection_mode':'indexed_admissible','raw_model_output':'A000','parsed_action_id':'A000','selected_index':0,'mapped_environment_command':'look','id_to_command':mapping,'selection_status':'selected','failure_category':None,'failure_reason':None}
++        row['steps'].append({'index':i,'observation':before['observation'],'action':'look','model_output':'A000','result_observation':after['observation'],'reward':after['reward'],'done':after['done'],'timestamp':0.0,'valid_actions':before['valid_actions'],'action_valid':True,'token_statistics':{'generated_tokens':5,'input_tokens':len(ids)},'parser_status':'selected','metadata':{'policy':{'prompt':prompt,'prompt_version':'sft-p0-action-only-v1','action_selection':selected,'generation':generation},'action_selection':selected,'transition_truncated':False,'r19_generation_event_id':ge['event_id'],'r19_transition_event_id':te['event_id']}})
++        history.append([before['observation'],'look'])
++    source_sha=source_hash(row)
++    source=event('source_episode_completed',base,{'trajectory_sha256':source_sha,'trajectory':deepcopy(row),'generation_event_ids':gens,'transition_event_ids':trans,'reset_event_id':reset['event_id'],'source_game_sha256':row['metadata']['source_game_sha256'],'source_traj_data_sha256':row['metadata']['source_traj_data_sha256']})
++    row['metadata'].update(source_trajectory_sha256=source_sha,r19_source_event_refs={'source_episode_event_id':source['event_id'],'generation_event_ids':gens,'transition_event_ids':trans,'reset_event_id':reset['event_id']})
++    ep=tmp/'historical_events.jsonl';tp=tmp/'historical_source.jsonl';tp.write_text(canonical(row)+'\nDO_NOT_READ_ANOTHER_SOURCE\n');offset=0;specs=[]
++    required={reset['event_id']:'reset',source['event_id']:'source_episode_completed',gens[0]:'first_generation',**{x:'transition' for x in trans}}
++    lines=[]
++    for e in events:
++        raw=(canonical(e)+'\n').encode();spec={'path':str(ep),'byte_offset':offset,'line_length_bytes':len(raw),'raw_line_sha256':hashlib.sha256(raw).hexdigest(),'event_id':e['event_id'],'kind':e['kind'],'sequence':e['sequence']}
++        if e['event_id'] in required:specs.append(spec|{'role':required[e['event_id']]})
++        lines.append(raw);offset+=len(raw)
++    ep.write_bytes(b''.join(lines)+b'DO_NOT_READ_FUTURE_EVENTS\n');first=(canonical(row)+'\n').encode()
++    manifest={'schema':'r19_first_source_referenced_event_bindings_v1','trajectory':{'path':str(tp),'byte_offset':0,'line_length_bytes':len(first),'raw_line_sha256':hashlib.sha256(first).hexdigest(),'nominal_seed':30000,'schedule_index':0,'split':'train','task_id':task,'family':family,'referenced_event_count':9},'events':specs,'bounded_scan':{'bytes_scanned_through_last_needed_event':offset,'lines_scanned':27,'stopped_after_all_requested_ids_found':True},'step_event_refs':[{'step_index':i,'generation_event_id':gens[i],'transition_event_id':trans[i]} for i in range(6)],'payload_policy':'EXPLICIT_SYNTHETIC_WIRE_FIXTURE','scope':'one synthetic historical source'}
++    mp=tmp/'historical_manifest.json';mp.write_text(canonical(manifest));h=read_historical(mp.read_bytes(),evidence_class=SOFTWARE,expected_manifest_sha256=file_binding(mp)['sha256'])
++    return h,mp,manifest,row,events
++
++
++def fixture_setup(tmp,monkeypatch):
++    from collections import Counter
++    from models.qwen import QwenPolicy
++    import yaml
++    tmp.mkdir(exist_ok=True);tokenizer=Tok();history,mp,manifest,row,events=wire_fixture(tmp,tokenizer)
++    state=SimpleNamespace(calls=Counter(),output_tokens=[65,48,48,48,1],sent=[],worlds=[],foreign_post=False,uuid=GPU,reset_drift=None,step_drift=None,disable_after_reset=False)
++    base=tmp/SNAPSHOT;base.mkdir();adapter=tmp/'adapter';adapter.mkdir();(base/'marker').write_text('synthetic model boundary');(adapter/'marker').write_text('synthetic adapter boundary')
++    model=Model(state,base);state.model=model;state.tokenizer=tokenizer
++    config=tmp/'config.yaml';config.write_text('dataset:\n  data_path: '+str(tmp/'train')+'\n')
++    for name in ('domain','grammar'):(tmp/name).write_text('synthetic '+name)
++    modules={}
++    for name in PACKAGE_NAMES:
++        if name=='yaml':modules[name]=yaml;continue
++        path=tmp/(name.replace('.','_')+'.py');path.write_text('# synthetic raw I/O boundary '+name+'\n');m=ModuleType(name);m.__file__=str(path);m.__version__='software-fixture';modules[name]=m;monkeypatch.setitem(sys.modules,name,m)
++    torch=modules['torch'];torch._si_s01_software_boundary=True;torch.bfloat16='bf16';torch.float32='fp32';torch.uint8='uint8';torch.no_grad=lambda:nullcontext();torch.manual_seed=lambda seed:state.calls.update({'nominal_seed':1})
++    def init():state.calls['CUDA_init_fake']+=1
++    torch.cuda=SimpleNamespace(is_available=lambda:True,device_count=lambda:1,init=init,synchronize=lambda:None,manual_seed_all=lambda seed:None,get_device_properties=lambda i:SimpleNamespace(uuid=state.uuid))
++    def empty(n,*,dtype,device):
++        assert n==1 and dtype=='uint8' and device=='cuda:0';state.calls['one_byte_fake']+=1;return object()
++    torch.empty=empty
++    def load(self):state.calls['base_load_fake']+=1;return tokenizer,model,torch
++    monkeypatch.setattr(QwenPolicy,'_load',load)
++    def peft_load(base_model,path,*,is_trainable,local_files_only):
++        assert base_model is model and Path(path)==adapter and is_trainable is False and local_files_only is True;state.calls['P0_load_fake']+=1;return model
++    modules['peft'].PeftModel=SimpleNamespace(from_pretrained=peft_load)
++    original_check_output=subprocess.check_output
++    def query(argv,*args,**kwargs):
++        if argv[0]!='nvidia-smi':return original_check_output(argv,*args,**kwargs)
++        state.calls['resource_query_fake']+=1
++        if argv[1].startswith('--query-gpu='):return GPU+', NVIDIA A40, 49140, 1\n'
++        foreign=state.foreign_post and state.calls['generation']>0
++        return GPU+', '+str(os.getpid()+(1000000 if foreign else 0))+', python, 1\n'
++    monkeypatch.setattr(subprocess,'check_output',query)
++    class World:
++        def __init__(self):self.position=0;self.seeds=[];self.closed=False
++        def seed(self,x):self.seeds.append(x)
++        def reset(self):
++            state.calls['reset']+=1;s=deepcopy(history.states[0])
++            if state.reset_drift=='map':s['valid_actions'].reverse()
++            elif state.reset_drift=='goal':s['observation']='Your task is to: Different goal.'
++            if state.disable_after_reset:model.enabled=False
++            return [s['observation']],{'admissible_commands':[s['valid_actions']],'extra.gamefile':[str(row['task']['metadata']['game_file'])]}
++        def step(self,commands):
++            assert commands==[history.commands[self.position]];self.position+=1;state.calls['step']+=1;s=deepcopy(history.states[self.position])
++            if state.step_drift==self.position:s['observation']+=' changed'
++            info={'admissible_commands':[s['valid_actions']]}
++            if state.step_drift=='missing_final_map' and s['done']:info={}
++            return [s['observation']],[s['reward']],[s['done']],info
++        def close(self):self.closed=True;state.calls['close']+=1
++    class Parent:
++        def __init__(self,configuration,train_eval):
++            assert train_eval=='train' and Path(configuration['dataset']['data_path'])==Path(row['task']['metadata']['game_file']).parent
++            self.collect_game_files();assert self.game_files==[row['task']['metadata']['game_file']]
++            self.world=World();state.worlds.append(self.world);state.calls['construct']+=1
++        def init_env(self,batch_size):assert batch_size==1;return self.world
++    modules['alfworld.agents.environment.alfred_tw_env'].AlfredTWEnv=Parent
++    now=datetime.now(timezone.utc);stamp=lambda t:t.isoformat().replace('+00:00','Z');code=subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip()
++    review=tmp/'review.json';review.write_text(canonical({'schema':'SI_S01_ENGINEERING_REVIEW_V1','source_sha':code,'task_sha256':TASK_SHA256,'decision':'PASS_ENGINEERING_HISTORICAL_SOURCE_SOFTWARE','reviewer_role':'INDEPENDENT_ROOT'}))
++    cert=tmp/'prior_certificate.json';cert.write_text(canonical({'explicit_software_fixture':True,'files':{'trajectory':file_binding(tmp/'historical_source.jsonl'),'events':file_binding(tmp/'historical_events.jsonl')}}))
++    proposal={'schema':'SI_S01_ENGINEERING_PROPOSAL_V1','purpose':PURPOSE,'model':{'base_snapshot':str(base),'adapter_path':str(adapter),'synthetic_files':[file_binding(base/'marker'),file_binding(adapter/'marker')]},'environment':{'config':file_binding(config),'data_root':str(tmp/'train'),'game':file_binding(Path(row['task']['metadata']['game_file'])),'traj_data':file_binding(Path(row['task']['metadata']['game_file']).parent/'traj_data.json'),'logic_files':{k:file_binding(tmp/k) for k in ('domain','grammar')}},'history_manifest':file_binding(mp),'original_files_by_reference':{k:{'path':str(tmp/n),'certified_sha256':file_binding(tmp/n)['sha256'],'certificate':file_binding(cert)} for k,n in [('trajectory','historical_source.jsonl'),('events','historical_events.jsonl')]},'interpreter':file_binding(Path(sys.executable).resolve()),'packages':{k:module_origin(m) for k,m in modules.items()}}
++    pp=tmp/'proposal.json';pp.write_text(canonical(proposal));ap=tmp/'authorization.json';token='@ENGINEERING_AUTHORIZATION_SHA256@'
++    argv=[str(Path(sys.executable).resolve()),'-I',str(REPO/'scripts/run_si_s01_engineering_once.py'),'--live','--authorization',str(ap),'--authorization-sha256',token,'--proposal',str(pp)]
++    auth={'schema':'SI_S01_ENGINEERING_AUTHORIZATION_V1','status':'SOFTWARE_TEST_ONLY','purpose':PURPOSE,'science_authorized':False,'evidence_class':SOFTWARE,'task_sha256':TASK_SHA256,'proposal_revision_sha256':PROPOSAL_REVISION_SHA256,'source_sha':code,'review':file_binding(review),'proposal_sha256':file_binding(pp)['sha256'],'authorization_id':'6'*32,'run_id':'7'*32,'historical_run_id':HISTORICAL_RUN,'source_index':0,'ceilings':dict(MAXIMA),'gpu_uuid':GPU,'execution_uid':os.getuid(),'output_path':str(tmp/'output'),'environment':{'PATH':os.defpath,'HOME':str(tmp),'LANG':'C.UTF-8','LC_ALL':'C.UTF-8','CUDA_VISIBLE_DEVICES':'','HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1','PYTHONDONTWRITEBYTECODE':'1','TOKENIZERS_PARALLELISM':'false'},'not_before_utc':stamp(now-timedelta(minutes=1)),'expires_utc':stamp(now+timedelta(minutes=20)),'launch_argv':argv,'preflight_argv':['--preflight-only' if x=='--live' else x for x in argv],'maximum_launches':1,'forbidden_non_engineering':True}
++    def save():
++        pp.write_text(canonical(proposal));auth['proposal_sha256']=file_binding(pp)['sha256'];ap.write_text(canonical(auth));return [file_binding(ap)['sha256'] if x==token else x for x in auth['preflight_argv']]
++    save();permit=EngineeringPermit(auth,proposal,file_binding(ap)['sha256'],file_binding(pp)['sha256'],REPO,history)
++    return SimpleNamespace(permit=permit,state=state,auth=auth,proposal=proposal,ap=ap,pp=pp,save=save,manifest=manifest,row=row,events=events)
++
++
++def reseal_engineering(path,mutate):
++    from self_improvement.si_s01.evidence import read_events
++    rows=[json.loads(line) for line in path.read_text().splitlines()];mutate(rows);mapping={};previous=None
++    def refs(value):
++        if isinstance(value,str):return mapping.get(value,value)
++        if isinstance(value,list):return [refs(v) for v in value]
++        if isinstance(value,dict):return {k:refs(v) for k,v in value.items()}
++        return value
++    for row in rows:
++        old=row['event_id'];row['payload']=refs(row['payload']);row['previous']=previous
++        row['event_id']=digest({k:v for k,v in row.items() if k!='event_id'});mapping[old]=row['event_id'];previous=row['event_id']
++    path.write_text(''.join(canonical(row)+'\n' for row in rows));assert read_events(path)==rows
++    starts={r['payload']['unit']:r['event_id'] for r in rows if r['kind']=='unit_started'}
++    for r in rows:
++        if r['kind'] in ('unit_completed','unit_failed'):assert r['payload']['started_event']==starts[r['payload']['unit']]
++    return rows
++
++
++def reseal_history(f,mutate,embedded_mutate=None):
++    from self_improvement.si_s01.engineering_history import read_historical
++    row=deepcopy(f.row);events=deepcopy(f.events);mutate(row,events)
++    mapping={};previous=None;payloads=[]
++    def remap(value):
++        if isinstance(value,str):return mapping.get(value,value)
++        if isinstance(value,list):return [remap(v) for v in value]
++        if isinstance(value,dict):return {k:remap(v) for k,v in value.items()}
++        return value
++    for event in events:
++        old=event['event_id'];event['payload']=remap(event['payload'])
++        if event['kind']=='source_episode_completed':
++            clean=remap(deepcopy(row))
++            for name in ('r19_source_event_refs','source_trajectory_sha256'):clean['metadata'].pop(name)
++            event['payload']['trajectory']=clean;event['payload']['trajectory_sha256']=source_hash(row)
++            if embedded_mutate:embedded_mutate(event['payload']['trajectory'])
++        event['previous_event_sha256']=previous;event['payload_sha256']=sha256_json(event['payload'])
++        event['event_id']=sha256_json([event['run_id'],event['sequence'],event['kind'],event['identity'],event['payload_sha256'],previous,event['evidence_class'],event['run_context']]);mapping[old]=event['event_id'];previous=event['event_id']
++    row=remap(row);row['metadata']['source_trajectory_sha256']=source_hash(row)
++    manifest=deepcopy(f.manifest);oldspecs={s['event_id']:s for s in manifest['events']};bynew={mapping[k]:v for k,v in oldspecs.items()};ep=Path(manifest['events'][0]['path']);offset=0;selected=[];rawlines=[]
++    for event in events:
++        raw=(canonical(event)+'\n').encode()
++        if event['event_id'] in bynew:selected.append({'path':str(ep),'byte_offset':offset,'line_length_bytes':len(raw),'raw_line_sha256':hashlib.sha256(raw).hexdigest(),'event_id':event['event_id'],'kind':event['kind'],'sequence':event['sequence'],'role':bynew[event['event_id']]['role']})
++        rawlines.append(raw);offset+=len(raw)
++    ep.write_bytes(b''.join(rawlines)+b'DO_NOT_READ_FUTURE_EVENTS\n');tp=Path(manifest['trajectory']['path']);raw=(canonical(row)+'\n').encode();tp.write_bytes(raw+b'DO_NOT_READ_ANOTHER_SOURCE\n')
++    manifest['trajectory'].update(line_length_bytes=len(raw),raw_line_sha256=hashlib.sha256(raw).hexdigest());manifest['events']=selected;manifest['bounded_scan']['bytes_scanned_through_last_needed_event']=offset
++    manifest['step_event_refs']=remap(manifest['step_event_refs']);mp=Path(f.proposal['history_manifest']['path']);mp.write_text(canonical(manifest))
++    return manifest,mp
+diff --git a/tests/test_si_s01_engineering_adapter.py b/tests/test_si_s01_engineering_adapter.py
+new file mode 100644
+index 0000000..0c441ea
+--- /dev/null
++++ b/tests/test_si_s01_engineering_adapter.py
+@@ -0,0 +1,169 @@
++"""Nonempty actual engineering production route with explicit raw I/O fakes."""
++from pathlib import Path
++import json
++import pytest
++from self_improvement.si_s01.contract import ContractError
++from self_improvement.si_s01.engineering_contract import MAXIMA,RNG_STATUS
++from self_improvement.si_s01.engineering_runtime import EngineeringRun,EngineeringProducer,real_environment,observed_public
++from self_improvement.si_s01.engineering_evidence import EngineeringLedger
++from self_improvement.si_s01.evidence import read_events
++from si_s01_engineering_support import fixture_setup
++
++
++def test_real_engineering_core_reader_parser_journal_audit_single_joined_pass(tmp_path,monkeypatch):
++    f=fixture_setup(tmp_path,monkeypatch);r=EngineeringRun(f.permit,f.permit.output).run();calls=f.state.calls
++    assert r['status']=='OBSERVED_PUBLIC_PATH_COMPATIBLE_NOT_RNG_RECONSTRUCTED'
++    assert calls['base_load_fake']==calls['P0_load_fake']==calls['one_byte_fake']==calls['generation']==calls['construct']==calls['reset']==calls['close']==1 and calls['step']==6
++    assert len(f.state.worlds)==1 and f.state.worlds[0].seeds==[42] and f.state.worlds[0].closed
++    assert r['physical']['completed']['generation']==1 and r['physical']['completed']['environment_operations']==7
++    assert r['coupled_path']['actual_reset_to_public_prompt'] and r['coupled_path']['parser']=={'status':'selected','action_id':'A000','command':'look'}
++    assert r['historical_input_ids_status']=='UNRECORDED' and r['RNG_status']==RNG_STATUS and r['internal_rng_reconstructed'] is False and r['science_authorized'] is False
++    assert r['generated_commands_executed']==0 and r['single_passes']==1 and r['final_allocated_device_hours'] is None
++    assert r['historical_science_unchanged']=={'model_generations':5142,'environment_operations':7949}
++    assert (f.permit.output/'ENGINEERING_REPORT.md').is_file()
++
++
++@pytest.mark.parametrize('fault',['reset_map','reset_goal','wrong_output','tensor','PEFT','UUID','post_resource','after_state','missing_final_map'])
++def test_broken_join_stops_once_without_alternative_generation_reset_or_command(tmp_path,monkeypatch,fault):
++    f=fixture_setup(tmp_path,monkeypatch)
++    if fault=='reset_map':f.state.reset_drift='map'
++    elif fault=='reset_goal':f.state.reset_drift='goal'
++    elif fault=='wrong_output':f.state.output_tokens=[65,48,48,49,1]
++    elif fault=='tensor':f.state.tokenizer.drift='attention_mask'
++    elif fault=='PEFT':f.state.disable_after_reset=True
++    elif fault=='UUID':f.state.uuid='GPU-99999999-abcd-abcd-abcd-123456789abc'
++    elif fault=='post_resource':f.state.foreign_post=True
++    elif fault=='after_state':f.state.step_drift=2
++    elif fault=='missing_final_map':f.state.step_drift='missing_final_map'
++    r=EngineeringRun(f.permit,f.permit.output).run();calls=f.state.calls
++    assert r['status']=='ENGINEERING_STOP_NO_COMPATIBILITY_CLAIM' and r['stop'] is not None
++    assert calls['generation']<=1 and calls['reset']<=1 and calls['step']<=6 and calls['construct']<=1
++    if fault in ('reset_map','reset_goal','tensor','PEFT','UUID'):assert calls['generation']==0
++    if fault in ('reset_map','reset_goal','wrong_output','tensor','PEFT','UUID','post_resource'):assert calls['step']==0
++    if fault=='post_resource':
++        assert r['physical']['observed_generation_returns']==1 and r['physical']['observed_returned_output_tokens']==5
++        assert r['physical']['completed']['generation']==0 and r['physical']['reserved_or_spent']['generation']==1 and r['physical']['reserved_or_spent']['generated_tokens']==16
++    assert not r['internal_rng_reconstructed'] and not r['science_authorized']
++
++
++def prime(f,output,*,clock=None):
++    ledger=EngineeringLedger(output,f.permit,**({} if clock is None else {'clock':clock,'started_at':0.0}));box={}
++    def load():
++        box['producer']=EngineeringProducer.load(f.permit,ledger)
++        return {'mode':'P0','adapter_sha256':__import__('self_improvement.si_s01.contract',fromlist=['P0_SHA256']).P0_SHA256}
++    ledger.call('model_load',0,load);producer=box['producer'];env=real_environment(f.permit)
++    ledger.call('env_construct',0,lambda:dict(env.initialize())|{'package_origins':env.engineering_package_origins},request={'pool_seed':42,'historical_internal_rng':RNG_STATUS})
++    ledger.call('reset',0,lambda:observed_public(env.reset(seed=30000),f.permit.history,reset=True,goal=''),request={'seed':30000})
++    return ledger,producer,env
++
++
++def test_second_generation_inside_same_reserved_unit_rejected_before_model_edge(tmp_path,monkeypatch):
++    f=fixture_setup(tmp_path,monkeypatch);ledger,p,env=prime(f,tmp_path/'events.jsonl');prepared=p.prepare(f.permit.history.public_prompt)
++    def twice():p.generate(prepared);return p.generate(prepared)
++    with pytest.raises(ContractError,match='invocation already consumed'):ledger.call('generation',0,twice,prepared=prepared.to_dict())
++    assert f.state.calls['generation']==1 and ledger.used['generation']==1 and ledger.used['generated_tokens']==16
++    ledger.call('env_close',0,lambda:(env.close() or {'closed':True}));ledger.close({'expected':'second invocation rejected'})
++
++
++def test_actual_prepared_must_equal_the_small_reserved_unit_before_model_edge(tmp_path,monkeypatch):
++    f=fixture_setup(tmp_path,monkeypatch);ledger,p,env=prime(f,tmp_path/'events.jsonl');small=p.prepare('small');big=p.prepare(f.permit.history.public_prompt)
++    with pytest.raises(ContractError,match='must equal reserved unit'):ledger.call('generation',0,lambda:p.generate(big),prepared=small.to_dict())
++    assert f.state.calls['generation']==0 and ledger.used['input_tokens']==len(small.prepared.input_ids)
++    ledger.call('env_close',0,lambda:(env.close() or {'closed':True}));ledger.close({'expected':'prepared reservation mismatch'})
++
++
++@pytest.mark.parametrize('advance',['resource','synchronize'])
++def test_absolute_time_rechecked_after_resource_and_cuda_sync_before_model_edge(tmp_path,monkeypatch,advance):
++    class Clock:
++        now=0.0
++        def __call__(self):return self.now
++    clock=Clock();f=fixture_setup(tmp_path,monkeypatch);monkeypatch.setenv('ALFWORLD_DATA','software-restore-marker')
++    ledger,p,env=prime(f,tmp_path/'events.jsonl',clock=clock);prepared=p.prepare(f.permit.history.public_prompt);clock.now=599.0
++    if advance=='resource':
++        original=p.resource
++        def check():
++            value=original();clock.now=601.0;return value
++        p.resource=check
++    else:p.torch.cuda.synchronize=lambda:setattr(clock,'now',601.0)
++    with pytest.raises(ContractError,match='600-second'):ledger.call('generation',0,lambda:p.generate(prepared),prepared=prepared.to_dict())
++    assert f.state.calls['generation']==0 and ledger.used['generation']==1
++    # Budget forbids a new close edge; the software fake owns no real simulator resources.
++    with pytest.raises(ContractError):ledger.call('env_close',0,lambda:(env.close() or {'closed':True}))
++    assert f.state.calls['close']==0
++    ledger.close({'expected':'absolute time exhausted before model edge'})
++
++
++@pytest.mark.parametrize('cap',['generation','reset','step','input_tokens','generated_tokens'])
++def test_caps_reject_extra_work_before_external_edge(tmp_path,monkeypatch,cap):
++    f=fixture_setup(tmp_path,monkeypatch)
++    if cap in ('input_tokens','generated_tokens'):
++        f.auth['ceilings'][cap]=1
++        r=EngineeringRun(f.permit,f.permit.output).run()
++        assert r['status']=='ENGINEERING_STOP_NO_COMPATIBILITY_CLAIM' and f.state.calls['generation']==0
++        return
++    run=EngineeringRun(f.permit,f.permit.output);r=run.run();before=dict(f.state.calls)
++    with pytest.raises(ContractError):run.run()
++    with pytest.raises(ContractError):run.ledger.begin(cap,6 if cap=='step' else 0)
++    assert dict(f.state.calls)==before
++
++
++def test_caller_mutating_prepared_after_reservation_cannot_change_durable_input_binding(tmp_path,monkeypatch):
++    f=fixture_setup(tmp_path,monkeypatch);ledger,p,env=prime(f,tmp_path/'events.jsonl');small=p.prepare('small');big=p.prepare(f.permit.history.public_prompt)
++    caller_owned=small.to_dict()
++    def changed():
++        caller_owned.clear();caller_owned.update(big.to_dict())
++        return p.generate(big)
++    with pytest.raises(ContractError,match='must equal reserved unit'):
++        ledger.call('generation',0,changed,prepared=caller_owned)
++    assert f.state.calls['generation']==0 and ledger.used['input_tokens']==len(small.prepared.input_ids)
++    started=next(e for e in ledger.journal.events if e['kind']=='unit_started' and e['payload']['identity']['kind']=='generation')
++    assert started['payload']['prepared']==small.to_dict()
++    ledger.call('env_close',0,lambda:(env.close() or {'closed':True}));ledger.close({'expected':'caller-owned mutation rejected'})
++
++
++@pytest.mark.parametrize('attack',['returned_tokens','sequence_prefix'])
++def test_independent_audit_binds_durable_raw_return_after_coherent_reseal(tmp_path,monkeypatch,attack):
++    import hashlib
++    from self_improvement.si_s01.engineering_audit import audit_engineering
++    from self_improvement.si_s01.engineering_runtime import EngineeringProducer
++    from si_s01_engineering_support import reseal_engineering
++    f=fixture_setup(tmp_path,monkeypatch);run=EngineeringRun(f.permit,f.permit.output);report=run.run()
++    assert report['status']=='OBSERVED_PUBLIC_PATH_COMPATIBLE_NOT_RNG_RECONSTRUCTED'
++    path=f.permit.output/'engineering_events.jsonl'
++    def change(events):
++        data=next(e['payload']['data'] for e in events if e['kind']=='runtime_evidence' and e['payload']['kind']=='generation_returned')
++        if attack=='returned_tokens':
++            data['raw']['token_ids'][0]+=1
++            data['raw']['token_ids_sha256']=hashlib.sha256(json.dumps(data['raw']['token_ids'],separators=(',',':')).encode()).hexdigest()
++        else:data['observed_sequence'][0]+=1
++    reseal_engineering(path,change) # Includes every completion start-ref and the full event chain.
++    producer=EngineeringProducer(f.state.tokenizer,None,evidence_class=f.permit.evidence_class)
++    with pytest.raises(ContractError,match='durable returned raw|observed sequence'):
++        audit_engineering(path,f.permit,producer)
++    assert f.state.calls['generation']==1 and f.state.calls['reset']==1 and f.state.calls['step']==6
++
++
++@pytest.mark.parametrize('op',['generation','reset','step'])
++def test_per_kind_caps_on_open_legitimate_registry_stop_before_extra_raw_call(tmp_path,monkeypatch,op):
++    f=fixture_setup(tmp_path,monkeypatch);ledger,p,env=prime(f,tmp_path/'events.jsonl');prepared=p.prepare(f.permit.history.public_prompt)
++    if op!='reset':ledger.call('generation',0,lambda:p.generate(prepared),prepared=prepared.to_dict())
++    if op=='step':
++        for i,command in enumerate(f.permit.history.commands):
++            ledger.call('step',i,lambda command=command:observed_public(env.step(command),f.permit.history,reset=False,goal=f.permit.history.states[0]['goal']))
++    before=dict(f.state.calls)
++    def forbidden():
++        if op=='reset':return observed_public(env.reset(seed=30000),f.permit.history,reset=True,goal='')
++        if op=='generation':return p.generate(prepared)
++        return observed_public(env.step('look'),f.permit.history,reset=False,goal=f.permit.history.states[0]['goal'])
++    with pytest.raises(ContractError):ledger.call(op,6 if op=='step' else 0,forbidden,prepared=prepared.to_dict() if op=='generation' else None)
++    assert dict(f.state.calls)==before
++    ledger.call('env_close',0,lambda:(env.close() or {'closed':True}));ledger.close({'expected':'one-pass per-kind cap'})
++
++
++@pytest.mark.parametrize('phase',['source','stage_one','stage_two','teacher','suffix','replay','train','eval'])
++def test_engineering_producer_never_accepts_non_engineering_generation_phase(tmp_path,monkeypatch,phase):
++    f=fixture_setup(tmp_path,monkeypatch);ledger,p,env=prime(f,tmp_path/'events.jsonl');prepared=p.prepare(f.permit.history.public_prompt)
++    with pytest.raises(ContractError,match='engineering comparison only'):p.generate(prepared,phase=phase)
++    with pytest.raises(ContractError,match='engineering comparison only'):p.generate(prepared,adapter_mode='BASE')
++    assert f.state.calls['generation']==0
++    ledger.call('env_close',0,lambda:(env.close() or {'closed':True}));ledger.close({'expected':'non-engineering role rejected'})
+diff --git a/tests/test_si_s01_engineering_gate.py b/tests/test_si_s01_engineering_gate.py
+new file mode 100644
+index 0000000..59046e1
+--- /dev/null
++++ b/tests/test_si_s01_engineering_gate.py
+@@ -0,0 +1,59 @@
++"""Actual isolated CLI software gates: no model/CUDA/world is constructed."""
++import json,subprocess
++from pathlib import Path
++import pytest
++from self_improvement.si_s01.contract import ContractError
++from self_improvement.si_s01.gate import authenticate as authenticate_source
++from self_improvement.si_s01.engineering_gate import authenticate_engineering
++from si_s01_engineering_support import fixture_setup,file_binding,REPO
++from si_s01_support import gate_fixture
++
++
++def child(f,argv,tmp):
++    r=subprocess.run(argv,cwd=REPO,env=f.auth['environment'],capture_output=True,timeout=30)
++    (tmp/'child.stdout').write_bytes(r.stdout);(tmp/'child.stderr').write_bytes(r.stderr)
++    (tmp/'child_receipt.json').write_text(json.dumps({'argv':argv,'authentic_returncode':r.returncode,'scope':'EXPLICIT_SOFTWARE_FIXTURE_CLI_NOT_REAL_PREFLIGHT'}))
++    return r
++
++
++def test_actual_engineering_cli_software_preflight_static_zero_boundaries(tmp_path,monkeypatch):
++    f=fixture_setup(tmp_path,monkeypatch);r=child(f,f.save(),tmp_path)
++    assert r.returncode==0,r.stderr.decode();data=json.loads(r.stdout)
++    assert all(data[k]==0 for k in ('models','CUDA_initializations','environment_constructs','generations','resets','steps','units'))
++    assert data['science_authorized'] is False and data['evidence_class']=='synthetic_software_fixture' and data['output_exists'] is False
++    assert not f.permit.output.exists() and not f.permit.claim_path.exists()
++
++
++@pytest.mark.parametrize('attack',['old_schema','historical_run_reused','source_purpose','science_true','old_code','consumed','old_output','mode_spoof','wrong_UUID','bad_cap','bad_manifest','package_drift','env','argv','expired'])
++def test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime(tmp_path,monkeypatch,attack):
++    f=fixture_setup(tmp_path,monkeypatch)
++    if attack=='old_schema':f.auth['schema']='SI_E2_AUTHORIZATION_V1'
++    elif attack=='historical_run_reused':f.auth['run_id']=f.auth['historical_run_id']
++    elif attack=='source_purpose':f.auth['purpose']='SOURCE_ONLY_A96'
++    elif attack=='science_true':f.auth['science_authorized']=True
++    elif attack=='old_code':f.auth['source_sha']='8'*40
++    elif attack=='consumed':f.permit.claim_path.write_text('consumed')
++    elif attack=='old_output':f.permit.output.mkdir()
++    elif attack=='wrong_UUID':f.auth['gpu_uuid']='GPU-short'
++    elif attack=='bad_cap':f.auth['ceilings']['generation']=2
++    elif attack=='bad_manifest':f.proposal['history_manifest']['sha256']='0'*64
++    elif attack=='package_drift':Path(f.proposal['packages']['torch']['path']).write_text('drift')
++    elif attack=='env':f.auth['environment']['PYTHONPATH']='untrusted'
++    elif attack=='argv':f.auth['preflight_argv'].append('--extra')
++    elif attack=='expired':f.auth['expires_utc']='2020-01-01T00:00:00Z'
++    argv=f.save()
++    if attack=='mode_spoof':argv=['--live' if x=='--preflight-only' else x for x in argv]
++    if attack=='argv':argv=argv[:-1]
++    r=child(f,argv,tmp_path);assert r.returncode!=0
++    reasons={'old_schema':'distinct root engineering authorization','historical_run_reused':'separate new engineering run identity','source_purpose':'distinct root engineering authorization','science_true':'distinct root engineering authorization','old_code':'clean exact engineering source','consumed':'fresh exact engineering argv/output/claim','old_output':'fresh exact engineering argv/output/claim','mode_spoof':'software cannot launch actual engineering','wrong_UUID':'bound UUID/mode','bad_cap':'engineering ceiling may only tighten','bad_manifest':'input hash drift','package_drift':'input hash drift','env':'exact isolated engineering environment','argv':'fresh exact engineering argv/output/claim','expired':'engineering authorization UTC window'}
++    assert reasons[attack] in r.stderr.decode(),r.stderr.decode()
++    if attack!='old_output':assert not f.permit.output.exists()
++    assert not f.state.calls['generation'] and not f.state.calls['reset']
++
++
++def test_source_and_engineering_authorizations_reject_cross_use(tmp_path,monkeypatch):
++    f=fixture_setup(tmp_path/'engineering',monkeypatch);argv=f.save()
++    with pytest.raises(ContractError):authenticate_source(REPO,f.ap,file_binding(f.ap)['sha256'],f.pp,invocation=argv,mode='preflight')
++    directory=tmp_path/'source';directory.mkdir();a,p,ap,pp,save=gate_fixture(directory,REPO)
++    source_argv=save()
++    with pytest.raises(ContractError):authenticate_engineering(REPO,ap,file_binding(ap)['sha256'],pp,invocation=source_argv,mode='preflight')
+diff --git a/tests/test_si_s01_engineering_history.py b/tests/test_si_s01_engineering_history.py
+new file mode 100644
+index 0000000..a16f329
+--- /dev/null
++++ b/tests/test_si_s01_engineering_history.py
+@@ -0,0 +1,50 @@
++"""Original-wire selected-slice consumer: independent hash/ref/causal negatives."""
++from pathlib import Path
++import json
++import pytest
++from self_improvement.si_s01.contract import ContractError
++from self_improvement.si_s01.engineering_contract import MODE,SOFTWARE,HISTORY_MANIFEST_SHA256
++from self_improvement.si_s01.engineering_history import read_historical
++from si_s01_engineering_support import fixture_setup,file_binding,reseal_history
++
++
++def test_bounded_reader_ignores_forbidden_later_source_and_future_journal(tmp_path,monkeypatch):
++    f=fixture_setup(tmp_path,monkeypatch);p=Path(f.proposal['history_manifest']['path']);h=read_historical(p.read_bytes(),evidence_class=SOFTWARE,expected_manifest_sha256=file_binding(p)['sha256'])
++    assert len(h.states)==7 and len(h.commands)==6 and len(h.selected_receipts)==9
++    assert h.historical_input_ids_status=='UNRECORDED'
++    assert Path(f.manifest['trajectory']['path']).read_bytes()[f.manifest['trajectory']['line_length_bytes']:].startswith(b'DO_NOT_READ')
++    assert Path(f.manifest['events'][0]['path']).stat().st_size>h.maximum_read_offset
++    with pytest.raises(ContractError,match='fixed independently certified'):
++        read_historical(p.read_bytes(),evidence_class=MODE,expected_manifest_sha256=file_binding(p)['sha256'])
++
++
++@pytest.mark.parametrize('attack,reason',[('after_map','saved full ordered after-map'),('before_map','complete receipt before-state'),('action_id','historical Action-ID'),('parser','historical parser'),('prompt','historical causal P0'),('embedded','embedded source body')])
++def test_semantic_old_wire_tamper_rejected_after_all_selected_hashes_refs_resealed(tmp_path,monkeypatch,attack,reason):
++    f=fixture_setup(tmp_path,monkeypatch)
++    def change(row,events):
++        transitions=[e for e in events if e['kind']=='environment_operation_completed' and e['payload']['operation']=='sft_environment_step']
++        first=next(e for e in events if e['kind']=='generation_completed')
++        if attack=='after_map':transitions[-1]['payload']['transition'].pop('valid_actions')
++        elif attack=='before_map':transitions[1]['payload']['before_state']['valid_actions']=list(reversed(transitions[1]['payload']['before_state']['valid_actions']))
++        elif attack=='action_id':transitions[0]['payload']['action_id']='A001'
++        elif attack=='parser':first['payload']['evidence']['parser_result']['action_id']='A001'
++        elif attack=='prompt':
++            first['payload']['evidence']['generation']['prompt']='future or alternate prompt'
++            row['steps'][0]['metadata']['policy']['generation']['prompt']='future or alternate prompt'
++            row['steps'][0]['metadata']['policy']['prompt']='future or alternate prompt'
++    embedded=(lambda row:row['metadata'].pop('termination_reason')) if attack=='embedded' else None
++    manifest,p=reseal_history(f,change,embedded_mutate=embedded)
++    with pytest.raises(ContractError,match=reason):read_historical(p.read_bytes(),evidence_class=SOFTWARE,expected_manifest_sha256=file_binding(p)['sha256'])
++
++
++@pytest.mark.parametrize('attack',['raw_hash','duplicate_event','wrong_offset','second_source','wrong_role_count'])
++def test_invalid_slice_manifest_fails_closed_before_any_model_or_environment(tmp_path,monkeypatch,attack):
++    f=fixture_setup(tmp_path,monkeypatch);p=Path(f.proposal['history_manifest']['path']);m=json.loads(p.read_bytes())
++    if attack=='raw_hash':m['events'][0]['raw_line_sha256']='0'*64
++    elif attack=='duplicate_event':m['events'][1]['event_id']=m['events'][0]['event_id']
++    elif attack=='wrong_offset':m['events'][0]['byte_offset']+=1
++    elif attack=='second_source':m['trajectory']['byte_offset']=m['trajectory']['line_length_bytes']
++    elif attack=='wrong_role_count':m['events'][0]['role']='first_generation'
++    p.write_text(json.dumps(m))
++    with pytest.raises((ContractError,ValueError,KeyError)):read_historical(p.read_bytes(),evidence_class=SOFTWARE,expected_manifest_sha256=file_binding(p)['sha256'])
++    assert f.state.calls['generation']==f.state.calls['reset']==0
+diff --git a/tests/test_si_s01_engineering_parity.py b/tests/test_si_s01_engineering_parity.py
+new file mode 100644
+index 0000000..d5c14e9
+--- /dev/null
++++ b/tests/test_si_s01_engineering_parity.py
+@@ -0,0 +1,89 @@
++"""Exact d7 AST normalization and actual old/new source raw-generation differential."""
++import ast,copy,json,subprocess,time,types
++from pathlib import Path
++import pytest
++from self_improvement.si_s01 import runtime,runtime_core,supervisor_core
++from self_improvement.si_s01.collector import Producer
++from self_improvement.si_s01.evidence import Journal,Ledger
++from self_improvement.si_s01.engineering_runtime import EngineeringProducer
++from self_improvement.si_s01.contract import digest
++from self_improvement.si_p3.runtime_gate import inspect_gpu
++from si_s01_support import plan
++from si_s01_engineering_support import fixture_setup,REPO,GPU
++
++BASE='d7a82acb510157ab7ba5439d790816c5c948439f'
++def frozen(path):
++    return subprocess.check_output(['git','show',BASE+':'+path],cwd=REPO,text=True) # Missing pinned Git objects fail, never fallback.
++def body(node):return [ast.dump(x,include_attributes=False) for x in node]
++def method(tree,cls,name):
++    return next(n for n in next(c for c in tree.body if isinstance(c,ast.ClassDef) and c.name==cls).body if isinstance(n,ast.FunctionDef) and n.name==name)
++
++
++def test_load_and_generation_shared_core_AST_exact_except_approved_hooks_and_class_label():
++    old=ast.parse(frozen('src/self_improvement/si_s01/runtime.py'));new=ast.parse(Path(runtime_core.__file__).read_text());source=ast.parse(Path(runtime.__file__).read_text())
++    class Normalize(ast.NodeTransformer):
++        def visit_If(self,node):
++            if isinstance(node.test,ast.Compare) and isinstance(node.test.left,ast.Name) and node.test.left.id in ('probe_started','probe_completed','pre_call'):
++                assert len(node.body)==1 and isinstance(node.body[0],ast.Expr) and isinstance(node.body[0].value,ast.Call) and node.body[0].value.func.id==node.test.left.id
++                return None
++            return self.generic_visit(node)
++        def visit_Name(self,node):
++            return ast.Constant('live_source_only') if node.id=='evidence_class' else node
++    load=next(n for n in new.body if isinstance(n,ast.FunctionDef) and n.name=='load_guarded')
++    raw=next(n for n in new.body if isinstance(n,ast.FunctionDef) and n.name=='guarded_generation')
++    assert body(Normalize().visit(copy.deepcopy(load)).body)==body(method(old,'LiveProducer','load').body[2:])
++    assert body(Normalize().visit(copy.deepcopy(raw)).body)==body(method(old,'LiveProducer','_raw').body[5:])
++    assert body(method(source,'LiveProducer','_raw').body[:5])==body(method(old,'LiveProducer','_raw').body[:5])
++    assert body(next(n for n in new.body if isinstance(n,ast.FunctionDef) and n.name=='resource').body)==body(method(old,'LiveProducer','resource').body)
++    assert EngineeringProducer.prepare is Producer.prepare and EngineeringProducer.decode is Producer.decode
++
++
++def test_supervisor_source_profile_normalizes_exactly_to_d7_mechanics():
++    old=next(n for n in ast.parse(frozen('src/self_improvement/si_s01/supervisor.py')).body if isinstance(n,ast.FunctionDef))
++    tree=ast.parse(Path(supervisor_core.__file__).read_text());core=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='supervise_core');profile=supervisor_core.SOURCE_PROFILE
++    class Normalize(ast.NodeTransformer):
++        def visit_Attribute(self,node):
++            if isinstance(node.value,ast.Name) and node.value.id=='profile':
++                value=getattr(profile,node.attr)
++                return ast.Dict(keys=[],values=[]) if node.attr=='claim_fields' else ast.Constant(value)
++            return self.generic_visit(node)
++        def visit_Call(self,node):
++            node=self.generic_visit(node)
++            if isinstance(node.func,ast.Name) and node.func.id=='dict' and len(node.args)==1 and isinstance(node.args[0],ast.Dict) and not node.args[0].keys:return node.args[0]
++            return node
++        def visit_BinOp(self,node):
++            node=self.generic_visit(node)
++            if isinstance(node.op,ast.BitOr) and isinstance(node.right,ast.Dict) and not node.right.keys:return node.left
++            return node
++        def visit_BoolOp(self,node):
++            node=self.generic_visit(node)
++            if isinstance(node.op,ast.And) and isinstance(node.values[0],ast.Constant) and node.values[0].value is True:
++                return node.values[1] if len(node.values)==2 else ast.BoolOp(op=ast.And(),values=node.values[1:])
++            return node
++    assert body(Normalize().visit(copy.deepcopy(core)).body)==body(old.body)
++    assert profile.maximum_seconds==14400 and profile.live_mode=='live_source_only' and profile.science_authorized is True
++
++
++@pytest.mark.parametrize('fault',[None,'tensor','disabled_P0','post_resource'])
++def test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits(tmp_path,monkeypatch,fault):
++    f=fixture_setup(tmp_path,monkeypatch)
++    for parameter in f.state.model.parameters():parameter.requires_grad_(False)
++    namespace={'__name__':'self_improvement.si_s01._frozen_d7_parity','__package__':'self_improvement.si_s01'}
++    exec(compile(frozen('src/self_improvement/si_s01/runtime.py'),'<pinned-d7-runtime-software-differential>','exec'),namespace)
++    snapshots=[];source_plan=plan()
++    for label,cls in [('d7',namespace['LiveProducer']),('current',runtime.LiveProducer)]:
++        f.state.calls.clear();f.state.model.enabled=fault!='disabled_P0';f.state.tokenizer.drift='attention_mask' if fault=='tensor' else None;f.state.foreign_post=fault=='post_resource'
++        ticks=iter([100.0,100.125]);monkeypatch.setattr(time,'perf_counter',lambda:next(ticks))
++        journal_ticks=iter([float(i) for i in range(100)])
++        journal=Journal(tmp_path/(label+'.jsonl'),{'explicit_synthetic_source_component':True},clock=lambda:next(journal_ticks));ledger=Ledger(journal,source_plan,'8'*32)
++        producer=cls(f.state.tokenizer,None,evidence_class='synthetic_software_fixture');producer.raw=producer._raw
++        producer.torch=__import__('torch');producer.model=f.state.model;producer.ledger=ledger
++        producer.resource=lambda:inspect_gpu(GPU,allowed_pids={__import__('os').getpid()},require_owned_context=True)
++        prepared=producer.prepare('explicit public source component input');value=None;error=None
++        try:
++            event=ledger.call(source_plan.slots[0],'generation',0,lambda:producer.generate(prepared,source_plan.slots[0],0),prepared=prepared.to_dict());value=ledger.data(event)
++        except Exception as exc:error={'type':type(exc).__name__,'message':str(exc),'raw':getattr(exc,'raw_evidence',None),'resource':getattr(exc,'resource_evidence',None)}
++        observations=[{'kind':e['kind'],'payload':e['payload']} for e in journal.events[1:]];journal.close()
++        snapshots.append({'value':value,'error':error,'observations':observations,'used':dict(ledger.used),'completed':dict(ledger.completed),'stopped':ledger.stopped,'model_edge_calls':f.state.calls['generation']})
++    assert snapshots[0]==snapshots[1]
++    assert snapshots[1]['model_edge_calls']==int(fault not in ('tensor','disabled_P0'))
+diff --git a/tests/test_si_s01_engineering_supervisor.py b/tests/test_si_s01_engineering_supervisor.py
+new file mode 100644
+index 0000000..887c5a3
+--- /dev/null
++++ b/tests/test_si_s01_engineering_supervisor.py
+@@ -0,0 +1,23 @@
++"""Real CPU software children only; never an actual engineering invocation."""
++from pathlib import Path
++import json,os,sys
++import pytest
++from self_improvement.si_s01.engineering_supervisor import supervise_engineering,engineering_exit_ok
++from self_improvement.si_s01.engineering_contract import PURPOSE,SOFTWARE
++from self_improvement.si_s01.contract import ContractError
++
++@pytest.mark.parametrize('code',[0,7])
++def test_engineering_supervisor_preserves_exit_but_exit0_without_report_is_not_success(tmp_path,code):
++    context={'purpose':PURPOSE,'science_authorized':False,'evidence_class':SOFTWARE,'authorization_sha256':'a'*64,'source_sha':'b'*40}
++    r=supervise_engineering([sys.executable,'-I','-c',f'raise SystemExit({code})'],tmp_path/'run',context=context,seconds=600,environment={'PATH':os.defpath,'CUDA_VISIBLE_DEVICES':''})
++    assert r['authentic_returncode']==code and r['science_authorized'] is False and r['allocated_device_hours']==0
++    assert r['cleanup_established'] and not r['child_report_present'] and not engineering_exit_ok(r,None)
++    assert not engineering_exit_ok(r,{'status':'OBSERVED_PUBLIC_PATH_COMPATIBLE_NOT_RNG_RECONSTRUCTED'})
++    assert json.loads((tmp_path/'run.launch_claim.json').read_text())['purpose']==PURPOSE
++    with pytest.raises(ContractError):supervise_engineering([sys.executable,'-I','-c','pass'],tmp_path/'other',context=context,seconds=601,environment={})
++    with pytest.raises((ContractError,FileExistsError)):supervise_engineering([sys.executable,'-I','-c','pass'],tmp_path/'run',context=context,seconds=1,environment={})
++
++
++def test_engineering_supervisor_deadline_keeps_real_exit_and_cleanup_receipt(tmp_path):
++    r=supervise_engineering([sys.executable,'-I','-c','import time;time.sleep(20)'],tmp_path/'run',context={'purpose':PURPOSE,'science_authorized':False,'evidence_class':SOFTWARE,'authorization_sha256':'a'*64,'source_sha':'b'*40},seconds=.5,environment={'PATH':os.defpath,'CUDA_VISIBLE_DEVICES':''})
++    assert r['deadline_triggered'] and r['authentic_returncode']!=0 and r['cleanup_established'] and not r['members_after_cleanup'] and not engineering_exit_ok(r,None)

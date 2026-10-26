@@ -1,0 +1,1002 @@
+FFFFFF.FFF....FFFFF.                                                     [100%]
+=================================== FAILURES ===================================
+__ test_real_engineering_core_reader_parser_journal_audit_single_joined_pass ___
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_real_engineering_core_rea0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fcc294343a0>
+
+    def test_real_engineering_core_reader_parser_journal_audit_single_joined_pass(tmp_path,monkeypatch):
+>       f=fixture_setup(tmp_path,monkeypatch);r=EngineeringRun(f.permit,f.permit.output).run();calls=f.state.calls
+
+tests/test_si_s01_engineering_adapter.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_s01/engineering_runtime.py:158: in run
+    report=audit_engineering(self.output/'engineering_events.jsonl',self.permit,producer)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_real_engineering_core_rea0/output/engineering_events.jsonl')
+permit = EngineeringPermit(authorization={'schema': 'SI_S01_ENGINEERING_AUTHORIZATION_V1', 'status': 'SOFTWARE_TEST_ONLY', 'pur...pleted', 'sequence': 27}), maximum_read_offset=58357, historical_input_ids_status='UNRECORDED'), context_evidence=None)
+encoder = <self_improvement.si_s01.engineering_runtime.EngineeringProducer object at 0x7fcc293acca0>
+
+    def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+        insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
+        events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
+        expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
+            'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+            'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
+        insist(all(h[k]==v for k,v in expected.items()) and type(h['worker_pid']) is int and h['worker_pid']>0 and h['worker_uid']==a['execution_uid'],'engineering header/authority identity')
+        if permit.evidence_class==MODE:
+            from .engineering_gate import verified_engineering_context
+            launch,worker=verified_engineering_context(permit)
+            insist(h['worker_pid']==worker['pid'] and h['worker_uid']==worker['uid'] and h['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external engineering allocation/PID/UID')
+        used=Counter(dict.fromkeys(COST_KEYS,0));completed=Counter(used);units={};stack=[];returned={};state=None;joined=None;derived_join=None;stop=None;mismatch=None;failed=False
+        for event in events[1:]:
+            p=event['payload'];kind=event['kind']
+            if kind=='unit_started':
+                identity=p['identity'];op=identity['kind'];index=identity['index'];debit=reservation(op,p['prepared']);parent=stack[-1] if stack else None
+                insist(identity=={'purpose':PURPOSE,'task_id':history.task_id,'kind':op,'index':index} and type(index) is int and index==(used['step'] if op=='step' else 0),'engineering exact operation index/identity')
+                unit=p['unit'];insist(unit==digest([a['run_id'],identity]) and unit not in units and p['reservation']==debit and p['parent_unit']==parent,'engineering physical unit/start/reservation binding')
+                insist((parent is None and op!='context_probe') or (op=='context_probe' and units[parent]['identity']['kind']=='model_load'),'engineering physical nesting')
+                if failed or mismatch:insist(op=='env_close','no new work after mismatch/failure')
+                if op=='model_load':insist(not units,'one initial engineering load')
+                elif op=='context_probe':insist(used['model_load']==1,'one nested engineering probe')
+                elif op=='env_construct':insist(completed['model_load']==completed['context_probe']==1 and p['request']=={'pool_seed':42,'historical_internal_rng':RNG_STATUS},'single environment after guarded load')
+                elif op=='reset':insist(completed['env_construct']==1 and p['request']=={'seed':30000},'one reset30000')
+                elif op=='generation':
+                    insist(completed['reset']==1 and state==history.states[0] and used['step']==0 and encoder is not None,'generation is coupled to actual reset')
+                    compare_prepared(history,encoder.prepare(history.public_prompt));insist(p['prepared']==encoder.prepare(history.public_prompt).to_dict(),'coupled generation prepared/reserved')
+                    refs=history.row['metadata']['r19_source_event_refs'];insist(p['request']=={'historical_reset_event_id':refs['reset_event_id'],'historical_generation_event_id':refs['generation_event_ids'][0]},'generation/reset original refs')
+                elif op=='step':
+                    reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index] if index<6 else None
+                    insist(completed['reset']==completed['generation']==1 and joined is not None and index<6 and state==history.states[index] and p['request']=={'saved_command':history.commands[index],'historical_transition_event_id':reference},'saved step must follow coupled first-action validation')
+                elif op=='env_close':insist(used['env_construct']==1,'close attempted engineering environment')
+                used.update(debit);insist(all(used[k]<=caps[k] for k in used),'engineering cost exceeds pre-call cap')
+                units[unit]={'identity':identity,'started_event':event['event_id'],'reservation':debit,'finished':False,'failed':False,'prepared':p['prepared'],'invocation_claimed':False,'boundary_entered':False};stack.append(unit)
+            elif kind in ('unit_completed','unit_failed'):
+                unit=p['unit'];insist(stack and stack[-1]==unit and p['identity']==units[unit]['identity'] and p['started_event']==units[unit]['started_event'] and not units[unit]['finished'] and not units[unit]['failed'],'engineering durable completion/failure refs')
+                stack.pop();u=units[unit];op=u['identity']['kind'];index=u['identity']['index'];data=p['data']
+                if kind=='unit_failed':u['failed']=True;failed=True;continue
+                u['finished']=True;actual=0
+>               if op=='model_load':insist(data=={'mode':'P0','adapter_sha256':P0_SHA256},'engineering loaded P0 identity')
+E               NameError: name 'P0_SHA256' is not defined
+
+src/self_improvement/si_s01/engineering_audit.py:67: NameError
+_ test_broken_join_stops_once_without_alternative_generation_reset_or_command[reset_map] _
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fcb88178970>
+fault = 'reset_map'
+
+    @pytest.mark.parametrize('fault',['reset_map','reset_goal','wrong_output','tensor','PEFT','UUID','post_resource','after_state','missing_final_map'])
+    def test_broken_join_stops_once_without_alternative_generation_reset_or_command(tmp_path,monkeypatch,fault):
+        f=fixture_setup(tmp_path,monkeypatch)
+        if fault=='reset_map':f.state.reset_drift='map'
+        elif fault=='reset_goal':f.state.reset_drift='goal'
+        elif fault=='wrong_output':f.state.output_tokens=[65,48,48,49,1]
+        elif fault=='tensor':f.state.tokenizer.drift='attention_mask'
+        elif fault=='PEFT':f.state.disable_after_reset=True
+        elif fault=='UUID':f.state.uuid='GPU-99999999-abcd-abcd-abcd-123456789abc'
+        elif fault=='post_resource':f.state.foreign_post=True
+        elif fault=='after_state':f.state.step_drift=2
+        elif fault=='missing_final_map':f.state.step_drift='missing_final_map'
+>       r=EngineeringRun(f.permit,f.permit.output).run();calls=f.state.calls
+
+tests/test_si_s01_engineering_adapter.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_s01/engineering_runtime.py:158: in run
+    report=audit_engineering(self.output/'engineering_events.jsonl',self.permit,producer)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi0/output/engineering_events.jsonl')
+permit = EngineeringPermit(authorization={'schema': 'SI_S01_ENGINEERING_AUTHORIZATION_V1', 'status': 'SOFTWARE_TEST_ONLY', 'pur...pleted', 'sequence': 27}), maximum_read_offset=58357, historical_input_ids_status='UNRECORDED'), context_evidence=None)
+encoder = <self_improvement.si_s01.engineering_runtime.EngineeringProducer object at 0x7fcb8817b9d0>
+
+    def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+        insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
+        events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
+        expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
+            'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+            'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
+        insist(all(h[k]==v for k,v in expected.items()) and type(h['worker_pid']) is int and h['worker_pid']>0 and h['worker_uid']==a['execution_uid'],'engineering header/authority identity')
+        if permit.evidence_class==MODE:
+            from .engineering_gate import verified_engineering_context
+            launch,worker=verified_engineering_context(permit)
+            insist(h['worker_pid']==worker['pid'] and h['worker_uid']==worker['uid'] and h['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external engineering allocation/PID/UID')
+        used=Counter(dict.fromkeys(COST_KEYS,0));completed=Counter(used);units={};stack=[];returned={};state=None;joined=None;derived_join=None;stop=None;mismatch=None;failed=False
+        for event in events[1:]:
+            p=event['payload'];kind=event['kind']
+            if kind=='unit_started':
+                identity=p['identity'];op=identity['kind'];index=identity['index'];debit=reservation(op,p['prepared']);parent=stack[-1] if stack else None
+                insist(identity=={'purpose':PURPOSE,'task_id':history.task_id,'kind':op,'index':index} and type(index) is int and index==(used['step'] if op=='step' else 0),'engineering exact operation index/identity')
+                unit=p['unit'];insist(unit==digest([a['run_id'],identity]) and unit not in units and p['reservation']==debit and p['parent_unit']==parent,'engineering physical unit/start/reservation binding')
+                insist((parent is None and op!='context_probe') or (op=='context_probe' and units[parent]['identity']['kind']=='model_load'),'engineering physical nesting')
+                if failed or mismatch:insist(op=='env_close','no new work after mismatch/failure')
+                if op=='model_load':insist(not units,'one initial engineering load')
+                elif op=='context_probe':insist(used['model_load']==1,'one nested engineering probe')
+                elif op=='env_construct':insist(completed['model_load']==completed['context_probe']==1 and p['request']=={'pool_seed':42,'historical_internal_rng':RNG_STATUS},'single environment after guarded load')
+                elif op=='reset':insist(completed['env_construct']==1 and p['request']=={'seed':30000},'one reset30000')
+                elif op=='generation':
+                    insist(completed['reset']==1 and state==history.states[0] and used['step']==0 and encoder is not None,'generation is coupled to actual reset')
+                    compare_prepared(history,encoder.prepare(history.public_prompt));insist(p['prepared']==encoder.prepare(history.public_prompt).to_dict(),'coupled generation prepared/reserved')
+                    refs=history.row['metadata']['r19_source_event_refs'];insist(p['request']=={'historical_reset_event_id':refs['reset_event_id'],'historical_generation_event_id':refs['generation_event_ids'][0]},'generation/reset original refs')
+                elif op=='step':
+                    reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index] if index<6 else None
+                    insist(completed['reset']==completed['generation']==1 and joined is not None and index<6 and state==history.states[index] and p['request']=={'saved_command':history.commands[index],'historical_transition_event_id':reference},'saved step must follow coupled first-action validation')
+                elif op=='env_close':insist(used['env_construct']==1,'close attempted engineering environment')
+                used.update(debit);insist(all(used[k]<=caps[k] for k in used),'engineering cost exceeds pre-call cap')
+                units[unit]={'identity':identity,'started_event':event['event_id'],'reservation':debit,'finished':False,'failed':False,'prepared':p['prepared'],'invocation_claimed':False,'boundary_entered':False};stack.append(unit)
+            elif kind in ('unit_completed','unit_failed'):
+                unit=p['unit'];insist(stack and stack[-1]==unit and p['identity']==units[unit]['identity'] and p['started_event']==units[unit]['started_event'] and not units[unit]['finished'] and not units[unit]['failed'],'engineering durable completion/failure refs')
+                stack.pop();u=units[unit];op=u['identity']['kind'];index=u['identity']['index'];data=p['data']
+                if kind=='unit_failed':u['failed']=True;failed=True;continue
+                u['finished']=True;actual=0
+>               if op=='model_load':insist(data=={'mode':'P0','adapter_sha256':P0_SHA256},'engineering loaded P0 identity')
+E               NameError: name 'P0_SHA256' is not defined
+
+src/self_improvement/si_s01/engineering_audit.py:67: NameError
+_ test_broken_join_stops_once_without_alternative_generation_reset_or_command[reset_goal] _
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fcb8813f100>
+fault = 'reset_goal'
+
+    @pytest.mark.parametrize('fault',['reset_map','reset_goal','wrong_output','tensor','PEFT','UUID','post_resource','after_state','missing_final_map'])
+    def test_broken_join_stops_once_without_alternative_generation_reset_or_command(tmp_path,monkeypatch,fault):
+        f=fixture_setup(tmp_path,monkeypatch)
+        if fault=='reset_map':f.state.reset_drift='map'
+        elif fault=='reset_goal':f.state.reset_drift='goal'
+        elif fault=='wrong_output':f.state.output_tokens=[65,48,48,49,1]
+        elif fault=='tensor':f.state.tokenizer.drift='attention_mask'
+        elif fault=='PEFT':f.state.disable_after_reset=True
+        elif fault=='UUID':f.state.uuid='GPU-99999999-abcd-abcd-abcd-123456789abc'
+        elif fault=='post_resource':f.state.foreign_post=True
+        elif fault=='after_state':f.state.step_drift=2
+        elif fault=='missing_final_map':f.state.step_drift='missing_final_map'
+>       r=EngineeringRun(f.permit,f.permit.output).run();calls=f.state.calls
+
+tests/test_si_s01_engineering_adapter.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_s01/engineering_runtime.py:158: in run
+    report=audit_engineering(self.output/'engineering_events.jsonl',self.permit,producer)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi1/output/engineering_events.jsonl')
+permit = EngineeringPermit(authorization={'schema': 'SI_S01_ENGINEERING_AUTHORIZATION_V1', 'status': 'SOFTWARE_TEST_ONLY', 'pur...pleted', 'sequence': 27}), maximum_read_offset=58357, historical_input_ids_status='UNRECORDED'), context_evidence=None)
+encoder = <self_improvement.si_s01.engineering_runtime.EngineeringProducer object at 0x7fcb8813cdc0>
+
+    def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+        insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
+        events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
+        expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
+            'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+            'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
+        insist(all(h[k]==v for k,v in expected.items()) and type(h['worker_pid']) is int and h['worker_pid']>0 and h['worker_uid']==a['execution_uid'],'engineering header/authority identity')
+        if permit.evidence_class==MODE:
+            from .engineering_gate import verified_engineering_context
+            launch,worker=verified_engineering_context(permit)
+            insist(h['worker_pid']==worker['pid'] and h['worker_uid']==worker['uid'] and h['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external engineering allocation/PID/UID')
+        used=Counter(dict.fromkeys(COST_KEYS,0));completed=Counter(used);units={};stack=[];returned={};state=None;joined=None;derived_join=None;stop=None;mismatch=None;failed=False
+        for event in events[1:]:
+            p=event['payload'];kind=event['kind']
+            if kind=='unit_started':
+                identity=p['identity'];op=identity['kind'];index=identity['index'];debit=reservation(op,p['prepared']);parent=stack[-1] if stack else None
+                insist(identity=={'purpose':PURPOSE,'task_id':history.task_id,'kind':op,'index':index} and type(index) is int and index==(used['step'] if op=='step' else 0),'engineering exact operation index/identity')
+                unit=p['unit'];insist(unit==digest([a['run_id'],identity]) and unit not in units and p['reservation']==debit and p['parent_unit']==parent,'engineering physical unit/start/reservation binding')
+                insist((parent is None and op!='context_probe') or (op=='context_probe' and units[parent]['identity']['kind']=='model_load'),'engineering physical nesting')
+                if failed or mismatch:insist(op=='env_close','no new work after mismatch/failure')
+                if op=='model_load':insist(not units,'one initial engineering load')
+                elif op=='context_probe':insist(used['model_load']==1,'one nested engineering probe')
+                elif op=='env_construct':insist(completed['model_load']==completed['context_probe']==1 and p['request']=={'pool_seed':42,'historical_internal_rng':RNG_STATUS},'single environment after guarded load')
+                elif op=='reset':insist(completed['env_construct']==1 and p['request']=={'seed':30000},'one reset30000')
+                elif op=='generation':
+                    insist(completed['reset']==1 and state==history.states[0] and used['step']==0 and encoder is not None,'generation is coupled to actual reset')
+                    compare_prepared(history,encoder.prepare(history.public_prompt));insist(p['prepared']==encoder.prepare(history.public_prompt).to_dict(),'coupled generation prepared/reserved')
+                    refs=history.row['metadata']['r19_source_event_refs'];insist(p['request']=={'historical_reset_event_id':refs['reset_event_id'],'historical_generation_event_id':refs['generation_event_ids'][0]},'generation/reset original refs')
+                elif op=='step':
+                    reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index] if index<6 else None
+                    insist(completed['reset']==completed['generation']==1 and joined is not None and index<6 and state==history.states[index] and p['request']=={'saved_command':history.commands[index],'historical_transition_event_id':reference},'saved step must follow coupled first-action validation')
+                elif op=='env_close':insist(used['env_construct']==1,'close attempted engineering environment')
+                used.update(debit);insist(all(used[k]<=caps[k] for k in used),'engineering cost exceeds pre-call cap')
+                units[unit]={'identity':identity,'started_event':event['event_id'],'reservation':debit,'finished':False,'failed':False,'prepared':p['prepared'],'invocation_claimed':False,'boundary_entered':False};stack.append(unit)
+            elif kind in ('unit_completed','unit_failed'):
+                unit=p['unit'];insist(stack and stack[-1]==unit and p['identity']==units[unit]['identity'] and p['started_event']==units[unit]['started_event'] and not units[unit]['finished'] and not units[unit]['failed'],'engineering durable completion/failure refs')
+                stack.pop();u=units[unit];op=u['identity']['kind'];index=u['identity']['index'];data=p['data']
+                if kind=='unit_failed':u['failed']=True;failed=True;continue
+                u['finished']=True;actual=0
+>               if op=='model_load':insist(data=={'mode':'P0','adapter_sha256':P0_SHA256},'engineering loaded P0 identity')
+E               NameError: name 'P0_SHA256' is not defined
+
+src/self_improvement/si_s01/engineering_audit.py:67: NameError
+_ test_broken_join_stops_once_without_alternative_generation_reset_or_command[wrong_output] _
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fcb881796f0>
+fault = 'wrong_output'
+
+    @pytest.mark.parametrize('fault',['reset_map','reset_goal','wrong_output','tensor','PEFT','UUID','post_resource','after_state','missing_final_map'])
+    def test_broken_join_stops_once_without_alternative_generation_reset_or_command(tmp_path,monkeypatch,fault):
+        f=fixture_setup(tmp_path,monkeypatch)
+        if fault=='reset_map':f.state.reset_drift='map'
+        elif fault=='reset_goal':f.state.reset_drift='goal'
+        elif fault=='wrong_output':f.state.output_tokens=[65,48,48,49,1]
+        elif fault=='tensor':f.state.tokenizer.drift='attention_mask'
+        elif fault=='PEFT':f.state.disable_after_reset=True
+        elif fault=='UUID':f.state.uuid='GPU-99999999-abcd-abcd-abcd-123456789abc'
+        elif fault=='post_resource':f.state.foreign_post=True
+        elif fault=='after_state':f.state.step_drift=2
+        elif fault=='missing_final_map':f.state.step_drift='missing_final_map'
+>       r=EngineeringRun(f.permit,f.permit.output).run();calls=f.state.calls
+
+tests/test_si_s01_engineering_adapter.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_s01/engineering_runtime.py:158: in run
+    report=audit_engineering(self.output/'engineering_events.jsonl',self.permit,producer)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi2/output/engineering_events.jsonl')
+permit = EngineeringPermit(authorization={'schema': 'SI_S01_ENGINEERING_AUTHORIZATION_V1', 'status': 'SOFTWARE_TEST_ONLY', 'pur...pleted', 'sequence': 27}), maximum_read_offset=58357, historical_input_ids_status='UNRECORDED'), context_evidence=None)
+encoder = <self_improvement.si_s01.engineering_runtime.EngineeringProducer object at 0x7fcb88178040>
+
+    def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+        insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
+        events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
+        expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
+            'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+            'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
+        insist(all(h[k]==v for k,v in expected.items()) and type(h['worker_pid']) is int and h['worker_pid']>0 and h['worker_uid']==a['execution_uid'],'engineering header/authority identity')
+        if permit.evidence_class==MODE:
+            from .engineering_gate import verified_engineering_context
+            launch,worker=verified_engineering_context(permit)
+            insist(h['worker_pid']==worker['pid'] and h['worker_uid']==worker['uid'] and h['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external engineering allocation/PID/UID')
+        used=Counter(dict.fromkeys(COST_KEYS,0));completed=Counter(used);units={};stack=[];returned={};state=None;joined=None;derived_join=None;stop=None;mismatch=None;failed=False
+        for event in events[1:]:
+            p=event['payload'];kind=event['kind']
+            if kind=='unit_started':
+                identity=p['identity'];op=identity['kind'];index=identity['index'];debit=reservation(op,p['prepared']);parent=stack[-1] if stack else None
+                insist(identity=={'purpose':PURPOSE,'task_id':history.task_id,'kind':op,'index':index} and type(index) is int and index==(used['step'] if op=='step' else 0),'engineering exact operation index/identity')
+                unit=p['unit'];insist(unit==digest([a['run_id'],identity]) and unit not in units and p['reservation']==debit and p['parent_unit']==parent,'engineering physical unit/start/reservation binding')
+                insist((parent is None and op!='context_probe') or (op=='context_probe' and units[parent]['identity']['kind']=='model_load'),'engineering physical nesting')
+                if failed or mismatch:insist(op=='env_close','no new work after mismatch/failure')
+                if op=='model_load':insist(not units,'one initial engineering load')
+                elif op=='context_probe':insist(used['model_load']==1,'one nested engineering probe')
+                elif op=='env_construct':insist(completed['model_load']==completed['context_probe']==1 and p['request']=={'pool_seed':42,'historical_internal_rng':RNG_STATUS},'single environment after guarded load')
+                elif op=='reset':insist(completed['env_construct']==1 and p['request']=={'seed':30000},'one reset30000')
+                elif op=='generation':
+                    insist(completed['reset']==1 and state==history.states[0] and used['step']==0 and encoder is not None,'generation is coupled to actual reset')
+                    compare_prepared(history,encoder.prepare(history.public_prompt));insist(p['prepared']==encoder.prepare(history.public_prompt).to_dict(),'coupled generation prepared/reserved')
+                    refs=history.row['metadata']['r19_source_event_refs'];insist(p['request']=={'historical_reset_event_id':refs['reset_event_id'],'historical_generation_event_id':refs['generation_event_ids'][0]},'generation/reset original refs')
+                elif op=='step':
+                    reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index] if index<6 else None
+                    insist(completed['reset']==completed['generation']==1 and joined is not None and index<6 and state==history.states[index] and p['request']=={'saved_command':history.commands[index],'historical_transition_event_id':reference},'saved step must follow coupled first-action validation')
+                elif op=='env_close':insist(used['env_construct']==1,'close attempted engineering environment')
+                used.update(debit);insist(all(used[k]<=caps[k] for k in used),'engineering cost exceeds pre-call cap')
+                units[unit]={'identity':identity,'started_event':event['event_id'],'reservation':debit,'finished':False,'failed':False,'prepared':p['prepared'],'invocation_claimed':False,'boundary_entered':False};stack.append(unit)
+            elif kind in ('unit_completed','unit_failed'):
+                unit=p['unit'];insist(stack and stack[-1]==unit and p['identity']==units[unit]['identity'] and p['started_event']==units[unit]['started_event'] and not units[unit]['finished'] and not units[unit]['failed'],'engineering durable completion/failure refs')
+                stack.pop();u=units[unit];op=u['identity']['kind'];index=u['identity']['index'];data=p['data']
+                if kind=='unit_failed':u['failed']=True;failed=True;continue
+                u['finished']=True;actual=0
+>               if op=='model_load':insist(data=={'mode':'P0','adapter_sha256':P0_SHA256},'engineering loaded P0 identity')
+E               NameError: name 'P0_SHA256' is not defined
+
+src/self_improvement/si_s01/engineering_audit.py:67: NameError
+_ test_broken_join_stops_once_without_alternative_generation_reset_or_command[tensor] _
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fcb8813fbb0>
+fault = 'tensor'
+
+    @pytest.mark.parametrize('fault',['reset_map','reset_goal','wrong_output','tensor','PEFT','UUID','post_resource','after_state','missing_final_map'])
+    def test_broken_join_stops_once_without_alternative_generation_reset_or_command(tmp_path,monkeypatch,fault):
+        f=fixture_setup(tmp_path,monkeypatch)
+        if fault=='reset_map':f.state.reset_drift='map'
+        elif fault=='reset_goal':f.state.reset_drift='goal'
+        elif fault=='wrong_output':f.state.output_tokens=[65,48,48,49,1]
+        elif fault=='tensor':f.state.tokenizer.drift='attention_mask'
+        elif fault=='PEFT':f.state.disable_after_reset=True
+        elif fault=='UUID':f.state.uuid='GPU-99999999-abcd-abcd-abcd-123456789abc'
+        elif fault=='post_resource':f.state.foreign_post=True
+        elif fault=='after_state':f.state.step_drift=2
+        elif fault=='missing_final_map':f.state.step_drift='missing_final_map'
+>       r=EngineeringRun(f.permit,f.permit.output).run();calls=f.state.calls
+
+tests/test_si_s01_engineering_adapter.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_s01/engineering_runtime.py:158: in run
+    report=audit_engineering(self.output/'engineering_events.jsonl',self.permit,producer)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi3/output/engineering_events.jsonl')
+permit = EngineeringPermit(authorization={'schema': 'SI_S01_ENGINEERING_AUTHORIZATION_V1', 'status': 'SOFTWARE_TEST_ONLY', 'pur...pleted', 'sequence': 27}), maximum_read_offset=58357, historical_input_ids_status='UNRECORDED'), context_evidence=None)
+encoder = <self_improvement.si_s01.engineering_runtime.EngineeringProducer object at 0x7fcb8813f4c0>
+
+    def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+        insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
+        events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
+        expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
+            'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+            'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
+        insist(all(h[k]==v for k,v in expected.items()) and type(h['worker_pid']) is int and h['worker_pid']>0 and h['worker_uid']==a['execution_uid'],'engineering header/authority identity')
+        if permit.evidence_class==MODE:
+            from .engineering_gate import verified_engineering_context
+            launch,worker=verified_engineering_context(permit)
+            insist(h['worker_pid']==worker['pid'] and h['worker_uid']==worker['uid'] and h['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external engineering allocation/PID/UID')
+        used=Counter(dict.fromkeys(COST_KEYS,0));completed=Counter(used);units={};stack=[];returned={};state=None;joined=None;derived_join=None;stop=None;mismatch=None;failed=False
+        for event in events[1:]:
+            p=event['payload'];kind=event['kind']
+            if kind=='unit_started':
+                identity=p['identity'];op=identity['kind'];index=identity['index'];debit=reservation(op,p['prepared']);parent=stack[-1] if stack else None
+                insist(identity=={'purpose':PURPOSE,'task_id':history.task_id,'kind':op,'index':index} and type(index) is int and index==(used['step'] if op=='step' else 0),'engineering exact operation index/identity')
+                unit=p['unit'];insist(unit==digest([a['run_id'],identity]) and unit not in units and p['reservation']==debit and p['parent_unit']==parent,'engineering physical unit/start/reservation binding')
+                insist((parent is None and op!='context_probe') or (op=='context_probe' and units[parent]['identity']['kind']=='model_load'),'engineering physical nesting')
+                if failed or mismatch:insist(op=='env_close','no new work after mismatch/failure')
+                if op=='model_load':insist(not units,'one initial engineering load')
+                elif op=='context_probe':insist(used['model_load']==1,'one nested engineering probe')
+                elif op=='env_construct':insist(completed['model_load']==completed['context_probe']==1 and p['request']=={'pool_seed':42,'historical_internal_rng':RNG_STATUS},'single environment after guarded load')
+                elif op=='reset':insist(completed['env_construct']==1 and p['request']=={'seed':30000},'one reset30000')
+                elif op=='generation':
+                    insist(completed['reset']==1 and state==history.states[0] and used['step']==0 and encoder is not None,'generation is coupled to actual reset')
+                    compare_prepared(history,encoder.prepare(history.public_prompt));insist(p['prepared']==encoder.prepare(history.public_prompt).to_dict(),'coupled generation prepared/reserved')
+                    refs=history.row['metadata']['r19_source_event_refs'];insist(p['request']=={'historical_reset_event_id':refs['reset_event_id'],'historical_generation_event_id':refs['generation_event_ids'][0]},'generation/reset original refs')
+                elif op=='step':
+                    reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index] if index<6 else None
+                    insist(completed['reset']==completed['generation']==1 and joined is not None and index<6 and state==history.states[index] and p['request']=={'saved_command':history.commands[index],'historical_transition_event_id':reference},'saved step must follow coupled first-action validation')
+                elif op=='env_close':insist(used['env_construct']==1,'close attempted engineering environment')
+                used.update(debit);insist(all(used[k]<=caps[k] for k in used),'engineering cost exceeds pre-call cap')
+                units[unit]={'identity':identity,'started_event':event['event_id'],'reservation':debit,'finished':False,'failed':False,'prepared':p['prepared'],'invocation_claimed':False,'boundary_entered':False};stack.append(unit)
+            elif kind in ('unit_completed','unit_failed'):
+                unit=p['unit'];insist(stack and stack[-1]==unit and p['identity']==units[unit]['identity'] and p['started_event']==units[unit]['started_event'] and not units[unit]['finished'] and not units[unit]['failed'],'engineering durable completion/failure refs')
+                stack.pop();u=units[unit];op=u['identity']['kind'];index=u['identity']['index'];data=p['data']
+                if kind=='unit_failed':u['failed']=True;failed=True;continue
+                u['finished']=True;actual=0
+>               if op=='model_load':insist(data=={'mode':'P0','adapter_sha256':P0_SHA256},'engineering loaded P0 identity')
+E               NameError: name 'P0_SHA256' is not defined
+
+src/self_improvement/si_s01/engineering_audit.py:67: NameError
+_ test_broken_join_stops_once_without_alternative_generation_reset_or_command[PEFT] _
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fcc294365c0>
+fault = 'PEFT'
+
+    @pytest.mark.parametrize('fault',['reset_map','reset_goal','wrong_output','tensor','PEFT','UUID','post_resource','after_state','missing_final_map'])
+    def test_broken_join_stops_once_without_alternative_generation_reset_or_command(tmp_path,monkeypatch,fault):
+        f=fixture_setup(tmp_path,monkeypatch)
+        if fault=='reset_map':f.state.reset_drift='map'
+        elif fault=='reset_goal':f.state.reset_drift='goal'
+        elif fault=='wrong_output':f.state.output_tokens=[65,48,48,49,1]
+        elif fault=='tensor':f.state.tokenizer.drift='attention_mask'
+        elif fault=='PEFT':f.state.disable_after_reset=True
+        elif fault=='UUID':f.state.uuid='GPU-99999999-abcd-abcd-abcd-123456789abc'
+        elif fault=='post_resource':f.state.foreign_post=True
+        elif fault=='after_state':f.state.step_drift=2
+        elif fault=='missing_final_map':f.state.step_drift='missing_final_map'
+>       r=EngineeringRun(f.permit,f.permit.output).run();calls=f.state.calls
+
+tests/test_si_s01_engineering_adapter.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_s01/engineering_runtime.py:158: in run
+    report=audit_engineering(self.output/'engineering_events.jsonl',self.permit,producer)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi4/output/engineering_events.jsonl')
+permit = EngineeringPermit(authorization={'schema': 'SI_S01_ENGINEERING_AUTHORIZATION_V1', 'status': 'SOFTWARE_TEST_ONLY', 'pur...pleted', 'sequence': 27}), maximum_read_offset=58357, historical_input_ids_status='UNRECORDED'), context_evidence=None)
+encoder = <self_improvement.si_s01.engineering_runtime.EngineeringProducer object at 0x7fcc295b1bd0>
+
+    def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+        insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
+        events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
+        expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
+            'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+            'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
+        insist(all(h[k]==v for k,v in expected.items()) and type(h['worker_pid']) is int and h['worker_pid']>0 and h['worker_uid']==a['execution_uid'],'engineering header/authority identity')
+        if permit.evidence_class==MODE:
+            from .engineering_gate import verified_engineering_context
+            launch,worker=verified_engineering_context(permit)
+            insist(h['worker_pid']==worker['pid'] and h['worker_uid']==worker['uid'] and h['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external engineering allocation/PID/UID')
+        used=Counter(dict.fromkeys(COST_KEYS,0));completed=Counter(used);units={};stack=[];returned={};state=None;joined=None;derived_join=None;stop=None;mismatch=None;failed=False
+        for event in events[1:]:
+            p=event['payload'];kind=event['kind']
+            if kind=='unit_started':
+                identity=p['identity'];op=identity['kind'];index=identity['index'];debit=reservation(op,p['prepared']);parent=stack[-1] if stack else None
+                insist(identity=={'purpose':PURPOSE,'task_id':history.task_id,'kind':op,'index':index} and type(index) is int and index==(used['step'] if op=='step' else 0),'engineering exact operation index/identity')
+                unit=p['unit'];insist(unit==digest([a['run_id'],identity]) and unit not in units and p['reservation']==debit and p['parent_unit']==parent,'engineering physical unit/start/reservation binding')
+                insist((parent is None and op!='context_probe') or (op=='context_probe' and units[parent]['identity']['kind']=='model_load'),'engineering physical nesting')
+                if failed or mismatch:insist(op=='env_close','no new work after mismatch/failure')
+                if op=='model_load':insist(not units,'one initial engineering load')
+                elif op=='context_probe':insist(used['model_load']==1,'one nested engineering probe')
+                elif op=='env_construct':insist(completed['model_load']==completed['context_probe']==1 and p['request']=={'pool_seed':42,'historical_internal_rng':RNG_STATUS},'single environment after guarded load')
+                elif op=='reset':insist(completed['env_construct']==1 and p['request']=={'seed':30000},'one reset30000')
+                elif op=='generation':
+                    insist(completed['reset']==1 and state==history.states[0] and used['step']==0 and encoder is not None,'generation is coupled to actual reset')
+                    compare_prepared(history,encoder.prepare(history.public_prompt));insist(p['prepared']==encoder.prepare(history.public_prompt).to_dict(),'coupled generation prepared/reserved')
+                    refs=history.row['metadata']['r19_source_event_refs'];insist(p['request']=={'historical_reset_event_id':refs['reset_event_id'],'historical_generation_event_id':refs['generation_event_ids'][0]},'generation/reset original refs')
+                elif op=='step':
+                    reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index] if index<6 else None
+                    insist(completed['reset']==completed['generation']==1 and joined is not None and index<6 and state==history.states[index] and p['request']=={'saved_command':history.commands[index],'historical_transition_event_id':reference},'saved step must follow coupled first-action validation')
+                elif op=='env_close':insist(used['env_construct']==1,'close attempted engineering environment')
+                used.update(debit);insist(all(used[k]<=caps[k] for k in used),'engineering cost exceeds pre-call cap')
+                units[unit]={'identity':identity,'started_event':event['event_id'],'reservation':debit,'finished':False,'failed':False,'prepared':p['prepared'],'invocation_claimed':False,'boundary_entered':False};stack.append(unit)
+            elif kind in ('unit_completed','unit_failed'):
+                unit=p['unit'];insist(stack and stack[-1]==unit and p['identity']==units[unit]['identity'] and p['started_event']==units[unit]['started_event'] and not units[unit]['finished'] and not units[unit]['failed'],'engineering durable completion/failure refs')
+                stack.pop();u=units[unit];op=u['identity']['kind'];index=u['identity']['index'];data=p['data']
+                if kind=='unit_failed':u['failed']=True;failed=True;continue
+                u['finished']=True;actual=0
+>               if op=='model_load':insist(data=={'mode':'P0','adapter_sha256':P0_SHA256},'engineering loaded P0 identity')
+E               NameError: name 'P0_SHA256' is not defined
+
+src/self_improvement/si_s01/engineering_audit.py:67: NameError
+_ test_broken_join_stops_once_without_alternative_generation_reset_or_command[post_resource] _
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi6')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fcb87ff1480>
+fault = 'post_resource'
+
+    @pytest.mark.parametrize('fault',['reset_map','reset_goal','wrong_output','tensor','PEFT','UUID','post_resource','after_state','missing_final_map'])
+    def test_broken_join_stops_once_without_alternative_generation_reset_or_command(tmp_path,monkeypatch,fault):
+        f=fixture_setup(tmp_path,monkeypatch)
+        if fault=='reset_map':f.state.reset_drift='map'
+        elif fault=='reset_goal':f.state.reset_drift='goal'
+        elif fault=='wrong_output':f.state.output_tokens=[65,48,48,49,1]
+        elif fault=='tensor':f.state.tokenizer.drift='attention_mask'
+        elif fault=='PEFT':f.state.disable_after_reset=True
+        elif fault=='UUID':f.state.uuid='GPU-99999999-abcd-abcd-abcd-123456789abc'
+        elif fault=='post_resource':f.state.foreign_post=True
+        elif fault=='after_state':f.state.step_drift=2
+        elif fault=='missing_final_map':f.state.step_drift='missing_final_map'
+>       r=EngineeringRun(f.permit,f.permit.output).run();calls=f.state.calls
+
+tests/test_si_s01_engineering_adapter.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_s01/engineering_runtime.py:158: in run
+    report=audit_engineering(self.output/'engineering_events.jsonl',self.permit,producer)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi6/output/engineering_events.jsonl')
+permit = EngineeringPermit(authorization={'schema': 'SI_S01_ENGINEERING_AUTHORIZATION_V1', 'status': 'SOFTWARE_TEST_ONLY', 'pur...pleted', 'sequence': 27}), maximum_read_offset=58357, historical_input_ids_status='UNRECORDED'), context_evidence=None)
+encoder = <self_improvement.si_s01.engineering_runtime.EngineeringProducer object at 0x7fcb87ff1420>
+
+    def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+        insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
+        events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
+        expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
+            'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+            'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
+        insist(all(h[k]==v for k,v in expected.items()) and type(h['worker_pid']) is int and h['worker_pid']>0 and h['worker_uid']==a['execution_uid'],'engineering header/authority identity')
+        if permit.evidence_class==MODE:
+            from .engineering_gate import verified_engineering_context
+            launch,worker=verified_engineering_context(permit)
+            insist(h['worker_pid']==worker['pid'] and h['worker_uid']==worker['uid'] and h['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external engineering allocation/PID/UID')
+        used=Counter(dict.fromkeys(COST_KEYS,0));completed=Counter(used);units={};stack=[];returned={};state=None;joined=None;derived_join=None;stop=None;mismatch=None;failed=False
+        for event in events[1:]:
+            p=event['payload'];kind=event['kind']
+            if kind=='unit_started':
+                identity=p['identity'];op=identity['kind'];index=identity['index'];debit=reservation(op,p['prepared']);parent=stack[-1] if stack else None
+                insist(identity=={'purpose':PURPOSE,'task_id':history.task_id,'kind':op,'index':index} and type(index) is int and index==(used['step'] if op=='step' else 0),'engineering exact operation index/identity')
+                unit=p['unit'];insist(unit==digest([a['run_id'],identity]) and unit not in units and p['reservation']==debit and p['parent_unit']==parent,'engineering physical unit/start/reservation binding')
+                insist((parent is None and op!='context_probe') or (op=='context_probe' and units[parent]['identity']['kind']=='model_load'),'engineering physical nesting')
+                if failed or mismatch:insist(op=='env_close','no new work after mismatch/failure')
+                if op=='model_load':insist(not units,'one initial engineering load')
+                elif op=='context_probe':insist(used['model_load']==1,'one nested engineering probe')
+                elif op=='env_construct':insist(completed['model_load']==completed['context_probe']==1 and p['request']=={'pool_seed':42,'historical_internal_rng':RNG_STATUS},'single environment after guarded load')
+                elif op=='reset':insist(completed['env_construct']==1 and p['request']=={'seed':30000},'one reset30000')
+                elif op=='generation':
+                    insist(completed['reset']==1 and state==history.states[0] and used['step']==0 and encoder is not None,'generation is coupled to actual reset')
+                    compare_prepared(history,encoder.prepare(history.public_prompt));insist(p['prepared']==encoder.prepare(history.public_prompt).to_dict(),'coupled generation prepared/reserved')
+                    refs=history.row['metadata']['r19_source_event_refs'];insist(p['request']=={'historical_reset_event_id':refs['reset_event_id'],'historical_generation_event_id':refs['generation_event_ids'][0]},'generation/reset original refs')
+                elif op=='step':
+                    reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index] if index<6 else None
+                    insist(completed['reset']==completed['generation']==1 and joined is not None and index<6 and state==history.states[index] and p['request']=={'saved_command':history.commands[index],'historical_transition_event_id':reference},'saved step must follow coupled first-action validation')
+                elif op=='env_close':insist(used['env_construct']==1,'close attempted engineering environment')
+                used.update(debit);insist(all(used[k]<=caps[k] for k in used),'engineering cost exceeds pre-call cap')
+                units[unit]={'identity':identity,'started_event':event['event_id'],'reservation':debit,'finished':False,'failed':False,'prepared':p['prepared'],'invocation_claimed':False,'boundary_entered':False};stack.append(unit)
+            elif kind in ('unit_completed','unit_failed'):
+                unit=p['unit'];insist(stack and stack[-1]==unit and p['identity']==units[unit]['identity'] and p['started_event']==units[unit]['started_event'] and not units[unit]['finished'] and not units[unit]['failed'],'engineering durable completion/failure refs')
+                stack.pop();u=units[unit];op=u['identity']['kind'];index=u['identity']['index'];data=p['data']
+                if kind=='unit_failed':u['failed']=True;failed=True;continue
+                u['finished']=True;actual=0
+>               if op=='model_load':insist(data=={'mode':'P0','adapter_sha256':P0_SHA256},'engineering loaded P0 identity')
+E               NameError: name 'P0_SHA256' is not defined
+
+src/self_improvement/si_s01/engineering_audit.py:67: NameError
+_ test_broken_join_stops_once_without_alternative_generation_reset_or_command[after_state] _
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi7')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fcb8805f340>
+fault = 'after_state'
+
+    @pytest.mark.parametrize('fault',['reset_map','reset_goal','wrong_output','tensor','PEFT','UUID','post_resource','after_state','missing_final_map'])
+    def test_broken_join_stops_once_without_alternative_generation_reset_or_command(tmp_path,monkeypatch,fault):
+        f=fixture_setup(tmp_path,monkeypatch)
+        if fault=='reset_map':f.state.reset_drift='map'
+        elif fault=='reset_goal':f.state.reset_drift='goal'
+        elif fault=='wrong_output':f.state.output_tokens=[65,48,48,49,1]
+        elif fault=='tensor':f.state.tokenizer.drift='attention_mask'
+        elif fault=='PEFT':f.state.disable_after_reset=True
+        elif fault=='UUID':f.state.uuid='GPU-99999999-abcd-abcd-abcd-123456789abc'
+        elif fault=='post_resource':f.state.foreign_post=True
+        elif fault=='after_state':f.state.step_drift=2
+        elif fault=='missing_final_map':f.state.step_drift='missing_final_map'
+>       r=EngineeringRun(f.permit,f.permit.output).run();calls=f.state.calls
+
+tests/test_si_s01_engineering_adapter.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_s01/engineering_runtime.py:158: in run
+    report=audit_engineering(self.output/'engineering_events.jsonl',self.permit,producer)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi7/output/engineering_events.jsonl')
+permit = EngineeringPermit(authorization={'schema': 'SI_S01_ENGINEERING_AUTHORIZATION_V1', 'status': 'SOFTWARE_TEST_ONLY', 'pur...pleted', 'sequence': 27}), maximum_read_offset=58357, historical_input_ids_status='UNRECORDED'), context_evidence=None)
+encoder = <self_improvement.si_s01.engineering_runtime.EngineeringProducer object at 0x7fcb8805dc90>
+
+    def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+        insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
+        events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
+        expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
+            'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+            'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
+        insist(all(h[k]==v for k,v in expected.items()) and type(h['worker_pid']) is int and h['worker_pid']>0 and h['worker_uid']==a['execution_uid'],'engineering header/authority identity')
+        if permit.evidence_class==MODE:
+            from .engineering_gate import verified_engineering_context
+            launch,worker=verified_engineering_context(permit)
+            insist(h['worker_pid']==worker['pid'] and h['worker_uid']==worker['uid'] and h['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external engineering allocation/PID/UID')
+        used=Counter(dict.fromkeys(COST_KEYS,0));completed=Counter(used);units={};stack=[];returned={};state=None;joined=None;derived_join=None;stop=None;mismatch=None;failed=False
+        for event in events[1:]:
+            p=event['payload'];kind=event['kind']
+            if kind=='unit_started':
+                identity=p['identity'];op=identity['kind'];index=identity['index'];debit=reservation(op,p['prepared']);parent=stack[-1] if stack else None
+                insist(identity=={'purpose':PURPOSE,'task_id':history.task_id,'kind':op,'index':index} and type(index) is int and index==(used['step'] if op=='step' else 0),'engineering exact operation index/identity')
+                unit=p['unit'];insist(unit==digest([a['run_id'],identity]) and unit not in units and p['reservation']==debit and p['parent_unit']==parent,'engineering physical unit/start/reservation binding')
+                insist((parent is None and op!='context_probe') or (op=='context_probe' and units[parent]['identity']['kind']=='model_load'),'engineering physical nesting')
+                if failed or mismatch:insist(op=='env_close','no new work after mismatch/failure')
+                if op=='model_load':insist(not units,'one initial engineering load')
+                elif op=='context_probe':insist(used['model_load']==1,'one nested engineering probe')
+                elif op=='env_construct':insist(completed['model_load']==completed['context_probe']==1 and p['request']=={'pool_seed':42,'historical_internal_rng':RNG_STATUS},'single environment after guarded load')
+                elif op=='reset':insist(completed['env_construct']==1 and p['request']=={'seed':30000},'one reset30000')
+                elif op=='generation':
+                    insist(completed['reset']==1 and state==history.states[0] and used['step']==0 and encoder is not None,'generation is coupled to actual reset')
+                    compare_prepared(history,encoder.prepare(history.public_prompt));insist(p['prepared']==encoder.prepare(history.public_prompt).to_dict(),'coupled generation prepared/reserved')
+                    refs=history.row['metadata']['r19_source_event_refs'];insist(p['request']=={'historical_reset_event_id':refs['reset_event_id'],'historical_generation_event_id':refs['generation_event_ids'][0]},'generation/reset original refs')
+                elif op=='step':
+                    reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index] if index<6 else None
+                    insist(completed['reset']==completed['generation']==1 and joined is not None and index<6 and state==history.states[index] and p['request']=={'saved_command':history.commands[index],'historical_transition_event_id':reference},'saved step must follow coupled first-action validation')
+                elif op=='env_close':insist(used['env_construct']==1,'close attempted engineering environment')
+                used.update(debit);insist(all(used[k]<=caps[k] for k in used),'engineering cost exceeds pre-call cap')
+                units[unit]={'identity':identity,'started_event':event['event_id'],'reservation':debit,'finished':False,'failed':False,'prepared':p['prepared'],'invocation_claimed':False,'boundary_entered':False};stack.append(unit)
+            elif kind in ('unit_completed','unit_failed'):
+                unit=p['unit'];insist(stack and stack[-1]==unit and p['identity']==units[unit]['identity'] and p['started_event']==units[unit]['started_event'] and not units[unit]['finished'] and not units[unit]['failed'],'engineering durable completion/failure refs')
+                stack.pop();u=units[unit];op=u['identity']['kind'];index=u['identity']['index'];data=p['data']
+                if kind=='unit_failed':u['failed']=True;failed=True;continue
+                u['finished']=True;actual=0
+>               if op=='model_load':insist(data=={'mode':'P0','adapter_sha256':P0_SHA256},'engineering loaded P0 identity')
+E               NameError: name 'P0_SHA256' is not defined
+
+src/self_improvement/si_s01/engineering_audit.py:67: NameError
+_ test_broken_join_stops_once_without_alternative_generation_reset_or_command[missing_final_map] _
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi8')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fcb87f136a0>
+fault = 'missing_final_map'
+
+    @pytest.mark.parametrize('fault',['reset_map','reset_goal','wrong_output','tensor','PEFT','UUID','post_resource','after_state','missing_final_map'])
+    def test_broken_join_stops_once_without_alternative_generation_reset_or_command(tmp_path,monkeypatch,fault):
+        f=fixture_setup(tmp_path,monkeypatch)
+        if fault=='reset_map':f.state.reset_drift='map'
+        elif fault=='reset_goal':f.state.reset_drift='goal'
+        elif fault=='wrong_output':f.state.output_tokens=[65,48,48,49,1]
+        elif fault=='tensor':f.state.tokenizer.drift='attention_mask'
+        elif fault=='PEFT':f.state.disable_after_reset=True
+        elif fault=='UUID':f.state.uuid='GPU-99999999-abcd-abcd-abcd-123456789abc'
+        elif fault=='post_resource':f.state.foreign_post=True
+        elif fault=='after_state':f.state.step_drift=2
+        elif fault=='missing_final_map':f.state.step_drift='missing_final_map'
+>       r=EngineeringRun(f.permit,f.permit.output).run();calls=f.state.calls
+
+tests/test_si_s01_engineering_adapter.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_s01/engineering_runtime.py:158: in run
+    report=audit_engineering(self.output/'engineering_events.jsonl',self.permit,producer)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_broken_join_stops_once_wi8/output/engineering_events.jsonl')
+permit = EngineeringPermit(authorization={'schema': 'SI_S01_ENGINEERING_AUTHORIZATION_V1', 'status': 'SOFTWARE_TEST_ONLY', 'pur...pleted', 'sequence': 27}), maximum_read_offset=58357, historical_input_ids_status='UNRECORDED'), context_evidence=None)
+encoder = <self_improvement.si_s01.engineering_runtime.EngineeringProducer object at 0x7fcb87f11c90>
+
+    def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+        insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
+        events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
+        expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
+            'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+            'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
+        insist(all(h[k]==v for k,v in expected.items()) and type(h['worker_pid']) is int and h['worker_pid']>0 and h['worker_uid']==a['execution_uid'],'engineering header/authority identity')
+        if permit.evidence_class==MODE:
+            from .engineering_gate import verified_engineering_context
+            launch,worker=verified_engineering_context(permit)
+            insist(h['worker_pid']==worker['pid'] and h['worker_uid']==worker['uid'] and h['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external engineering allocation/PID/UID')
+        used=Counter(dict.fromkeys(COST_KEYS,0));completed=Counter(used);units={};stack=[];returned={};state=None;joined=None;derived_join=None;stop=None;mismatch=None;failed=False
+        for event in events[1:]:
+            p=event['payload'];kind=event['kind']
+            if kind=='unit_started':
+                identity=p['identity'];op=identity['kind'];index=identity['index'];debit=reservation(op,p['prepared']);parent=stack[-1] if stack else None
+                insist(identity=={'purpose':PURPOSE,'task_id':history.task_id,'kind':op,'index':index} and type(index) is int and index==(used['step'] if op=='step' else 0),'engineering exact operation index/identity')
+                unit=p['unit'];insist(unit==digest([a['run_id'],identity]) and unit not in units and p['reservation']==debit and p['parent_unit']==parent,'engineering physical unit/start/reservation binding')
+                insist((parent is None and op!='context_probe') or (op=='context_probe' and units[parent]['identity']['kind']=='model_load'),'engineering physical nesting')
+                if failed or mismatch:insist(op=='env_close','no new work after mismatch/failure')
+                if op=='model_load':insist(not units,'one initial engineering load')
+                elif op=='context_probe':insist(used['model_load']==1,'one nested engineering probe')
+                elif op=='env_construct':insist(completed['model_load']==completed['context_probe']==1 and p['request']=={'pool_seed':42,'historical_internal_rng':RNG_STATUS},'single environment after guarded load')
+                elif op=='reset':insist(completed['env_construct']==1 and p['request']=={'seed':30000},'one reset30000')
+                elif op=='generation':
+                    insist(completed['reset']==1 and state==history.states[0] and used['step']==0 and encoder is not None,'generation is coupled to actual reset')
+                    compare_prepared(history,encoder.prepare(history.public_prompt));insist(p['prepared']==encoder.prepare(history.public_prompt).to_dict(),'coupled generation prepared/reserved')
+                    refs=history.row['metadata']['r19_source_event_refs'];insist(p['request']=={'historical_reset_event_id':refs['reset_event_id'],'historical_generation_event_id':refs['generation_event_ids'][0]},'generation/reset original refs')
+                elif op=='step':
+                    reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index] if index<6 else None
+                    insist(completed['reset']==completed['generation']==1 and joined is not None and index<6 and state==history.states[index] and p['request']=={'saved_command':history.commands[index],'historical_transition_event_id':reference},'saved step must follow coupled first-action validation')
+                elif op=='env_close':insist(used['env_construct']==1,'close attempted engineering environment')
+                used.update(debit);insist(all(used[k]<=caps[k] for k in used),'engineering cost exceeds pre-call cap')
+                units[unit]={'identity':identity,'started_event':event['event_id'],'reservation':debit,'finished':False,'failed':False,'prepared':p['prepared'],'invocation_claimed':False,'boundary_entered':False};stack.append(unit)
+            elif kind in ('unit_completed','unit_failed'):
+                unit=p['unit'];insist(stack and stack[-1]==unit and p['identity']==units[unit]['identity'] and p['started_event']==units[unit]['started_event'] and not units[unit]['finished'] and not units[unit]['failed'],'engineering durable completion/failure refs')
+                stack.pop();u=units[unit];op=u['identity']['kind'];index=u['identity']['index'];data=p['data']
+                if kind=='unit_failed':u['failed']=True;failed=True;continue
+                u['finished']=True;actual=0
+>               if op=='model_load':insist(data=={'mode':'P0','adapter_sha256':P0_SHA256},'engineering loaded P0 identity')
+E               NameError: name 'P0_SHA256' is not defined
+
+src/self_improvement/si_s01/engineering_audit.py:67: NameError
+_________ test_caps_reject_extra_work_before_external_edge[generation] _________
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_caps_reject_extra_work_be0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fcb8805d0c0>
+cap = 'generation'
+
+    @pytest.mark.parametrize('cap',['generation','reset','step','input_tokens','generated_tokens'])
+    def test_caps_reject_extra_work_before_external_edge(tmp_path,monkeypatch,cap):
+        f=fixture_setup(tmp_path,monkeypatch)
+        if cap in ('input_tokens','generated_tokens'):
+            f.auth['ceilings'][cap]=1
+            r=EngineeringRun(f.permit,f.permit.output).run()
+            assert r['status']=='ENGINEERING_STOP_NO_COMPATIBILITY_CLAIM' and f.state.calls['generation']==0
+            return
+>       run=EngineeringRun(f.permit,f.permit.output);r=run.run();before=dict(f.state.calls)
+
+tests/test_si_s01_engineering_adapter.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_s01/engineering_runtime.py:158: in run
+    report=audit_engineering(self.output/'engineering_events.jsonl',self.permit,producer)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_caps_reject_extra_work_be0/output/engineering_events.jsonl')
+permit = EngineeringPermit(authorization={'schema': 'SI_S01_ENGINEERING_AUTHORIZATION_V1', 'status': 'SOFTWARE_TEST_ONLY', 'pur...pleted', 'sequence': 27}), maximum_read_offset=58357, historical_input_ids_status='UNRECORDED'), context_evidence=None)
+encoder = <self_improvement.si_s01.engineering_runtime.EngineeringProducer object at 0x7fcb8805c0d0>
+
+    def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+        insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
+        events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
+        expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
+            'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+            'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
+        insist(all(h[k]==v for k,v in expected.items()) and type(h['worker_pid']) is int and h['worker_pid']>0 and h['worker_uid']==a['execution_uid'],'engineering header/authority identity')
+        if permit.evidence_class==MODE:
+            from .engineering_gate import verified_engineering_context
+            launch,worker=verified_engineering_context(permit)
+            insist(h['worker_pid']==worker['pid'] and h['worker_uid']==worker['uid'] and h['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external engineering allocation/PID/UID')
+        used=Counter(dict.fromkeys(COST_KEYS,0));completed=Counter(used);units={};stack=[];returned={};state=None;joined=None;derived_join=None;stop=None;mismatch=None;failed=False
+        for event in events[1:]:
+            p=event['payload'];kind=event['kind']
+            if kind=='unit_started':
+                identity=p['identity'];op=identity['kind'];index=identity['index'];debit=reservation(op,p['prepared']);parent=stack[-1] if stack else None
+                insist(identity=={'purpose':PURPOSE,'task_id':history.task_id,'kind':op,'index':index} and type(index) is int and index==(used['step'] if op=='step' else 0),'engineering exact operation index/identity')
+                unit=p['unit'];insist(unit==digest([a['run_id'],identity]) and unit not in units and p['reservation']==debit and p['parent_unit']==parent,'engineering physical unit/start/reservation binding')
+                insist((parent is None and op!='context_probe') or (op=='context_probe' and units[parent]['identity']['kind']=='model_load'),'engineering physical nesting')
+                if failed or mismatch:insist(op=='env_close','no new work after mismatch/failure')
+                if op=='model_load':insist(not units,'one initial engineering load')
+                elif op=='context_probe':insist(used['model_load']==1,'one nested engineering probe')
+                elif op=='env_construct':insist(completed['model_load']==completed['context_probe']==1 and p['request']=={'pool_seed':42,'historical_internal_rng':RNG_STATUS},'single environment after guarded load')
+                elif op=='reset':insist(completed['env_construct']==1 and p['request']=={'seed':30000},'one reset30000')
+                elif op=='generation':
+                    insist(completed['reset']==1 and state==history.states[0] and used['step']==0 and encoder is not None,'generation is coupled to actual reset')
+                    compare_prepared(history,encoder.prepare(history.public_prompt));insist(p['prepared']==encoder.prepare(history.public_prompt).to_dict(),'coupled generation prepared/reserved')
+                    refs=history.row['metadata']['r19_source_event_refs'];insist(p['request']=={'historical_reset_event_id':refs['reset_event_id'],'historical_generation_event_id':refs['generation_event_ids'][0]},'generation/reset original refs')
+                elif op=='step':
+                    reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index] if index<6 else None
+                    insist(completed['reset']==completed['generation']==1 and joined is not None and index<6 and state==history.states[index] and p['request']=={'saved_command':history.commands[index],'historical_transition_event_id':reference},'saved step must follow coupled first-action validation')
+                elif op=='env_close':insist(used['env_construct']==1,'close attempted engineering environment')
+                used.update(debit);insist(all(used[k]<=caps[k] for k in used),'engineering cost exceeds pre-call cap')
+                units[unit]={'identity':identity,'started_event':event['event_id'],'reservation':debit,'finished':False,'failed':False,'prepared':p['prepared'],'invocation_claimed':False,'boundary_entered':False};stack.append(unit)
+            elif kind in ('unit_completed','unit_failed'):
+                unit=p['unit'];insist(stack and stack[-1]==unit and p['identity']==units[unit]['identity'] and p['started_event']==units[unit]['started_event'] and not units[unit]['finished'] and not units[unit]['failed'],'engineering durable completion/failure refs')
+                stack.pop();u=units[unit];op=u['identity']['kind'];index=u['identity']['index'];data=p['data']
+                if kind=='unit_failed':u['failed']=True;failed=True;continue
+                u['finished']=True;actual=0
+>               if op=='model_load':insist(data=={'mode':'P0','adapter_sha256':P0_SHA256},'engineering loaded P0 identity')
+E               NameError: name 'P0_SHA256' is not defined
+
+src/self_improvement/si_s01/engineering_audit.py:67: NameError
+___________ test_caps_reject_extra_work_before_external_edge[reset] ____________
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_caps_reject_extra_work_be1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fcb87ff2da0>
+cap = 'reset'
+
+    @pytest.mark.parametrize('cap',['generation','reset','step','input_tokens','generated_tokens'])
+    def test_caps_reject_extra_work_before_external_edge(tmp_path,monkeypatch,cap):
+        f=fixture_setup(tmp_path,monkeypatch)
+        if cap in ('input_tokens','generated_tokens'):
+            f.auth['ceilings'][cap]=1
+            r=EngineeringRun(f.permit,f.permit.output).run()
+            assert r['status']=='ENGINEERING_STOP_NO_COMPATIBILITY_CLAIM' and f.state.calls['generation']==0
+            return
+>       run=EngineeringRun(f.permit,f.permit.output);r=run.run();before=dict(f.state.calls)
+
+tests/test_si_s01_engineering_adapter.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_s01/engineering_runtime.py:158: in run
+    report=audit_engineering(self.output/'engineering_events.jsonl',self.permit,producer)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_caps_reject_extra_work_be1/output/engineering_events.jsonl')
+permit = EngineeringPermit(authorization={'schema': 'SI_S01_ENGINEERING_AUTHORIZATION_V1', 'status': 'SOFTWARE_TEST_ONLY', 'pur...pleted', 'sequence': 27}), maximum_read_offset=58357, historical_input_ids_status='UNRECORDED'), context_evidence=None)
+encoder = <self_improvement.si_s01.engineering_runtime.EngineeringProducer object at 0x7fcb87ff3940>
+
+    def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+        insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
+        events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
+        expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
+            'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+            'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
+        insist(all(h[k]==v for k,v in expected.items()) and type(h['worker_pid']) is int and h['worker_pid']>0 and h['worker_uid']==a['execution_uid'],'engineering header/authority identity')
+        if permit.evidence_class==MODE:
+            from .engineering_gate import verified_engineering_context
+            launch,worker=verified_engineering_context(permit)
+            insist(h['worker_pid']==worker['pid'] and h['worker_uid']==worker['uid'] and h['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external engineering allocation/PID/UID')
+        used=Counter(dict.fromkeys(COST_KEYS,0));completed=Counter(used);units={};stack=[];returned={};state=None;joined=None;derived_join=None;stop=None;mismatch=None;failed=False
+        for event in events[1:]:
+            p=event['payload'];kind=event['kind']
+            if kind=='unit_started':
+                identity=p['identity'];op=identity['kind'];index=identity['index'];debit=reservation(op,p['prepared']);parent=stack[-1] if stack else None
+                insist(identity=={'purpose':PURPOSE,'task_id':history.task_id,'kind':op,'index':index} and type(index) is int and index==(used['step'] if op=='step' else 0),'engineering exact operation index/identity')
+                unit=p['unit'];insist(unit==digest([a['run_id'],identity]) and unit not in units and p['reservation']==debit and p['parent_unit']==parent,'engineering physical unit/start/reservation binding')
+                insist((parent is None and op!='context_probe') or (op=='context_probe' and units[parent]['identity']['kind']=='model_load'),'engineering physical nesting')
+                if failed or mismatch:insist(op=='env_close','no new work after mismatch/failure')
+                if op=='model_load':insist(not units,'one initial engineering load')
+                elif op=='context_probe':insist(used['model_load']==1,'one nested engineering probe')
+                elif op=='env_construct':insist(completed['model_load']==completed['context_probe']==1 and p['request']=={'pool_seed':42,'historical_internal_rng':RNG_STATUS},'single environment after guarded load')
+                elif op=='reset':insist(completed['env_construct']==1 and p['request']=={'seed':30000},'one reset30000')
+                elif op=='generation':
+                    insist(completed['reset']==1 and state==history.states[0] and used['step']==0 and encoder is not None,'generation is coupled to actual reset')
+                    compare_prepared(history,encoder.prepare(history.public_prompt));insist(p['prepared']==encoder.prepare(history.public_prompt).to_dict(),'coupled generation prepared/reserved')
+                    refs=history.row['metadata']['r19_source_event_refs'];insist(p['request']=={'historical_reset_event_id':refs['reset_event_id'],'historical_generation_event_id':refs['generation_event_ids'][0]},'generation/reset original refs')
+                elif op=='step':
+                    reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index] if index<6 else None
+                    insist(completed['reset']==completed['generation']==1 and joined is not None and index<6 and state==history.states[index] and p['request']=={'saved_command':history.commands[index],'historical_transition_event_id':reference},'saved step must follow coupled first-action validation')
+                elif op=='env_close':insist(used['env_construct']==1,'close attempted engineering environment')
+                used.update(debit);insist(all(used[k]<=caps[k] for k in used),'engineering cost exceeds pre-call cap')
+                units[unit]={'identity':identity,'started_event':event['event_id'],'reservation':debit,'finished':False,'failed':False,'prepared':p['prepared'],'invocation_claimed':False,'boundary_entered':False};stack.append(unit)
+            elif kind in ('unit_completed','unit_failed'):
+                unit=p['unit'];insist(stack and stack[-1]==unit and p['identity']==units[unit]['identity'] and p['started_event']==units[unit]['started_event'] and not units[unit]['finished'] and not units[unit]['failed'],'engineering durable completion/failure refs')
+                stack.pop();u=units[unit];op=u['identity']['kind'];index=u['identity']['index'];data=p['data']
+                if kind=='unit_failed':u['failed']=True;failed=True;continue
+                u['finished']=True;actual=0
+>               if op=='model_load':insist(data=={'mode':'P0','adapter_sha256':P0_SHA256},'engineering loaded P0 identity')
+E               NameError: name 'P0_SHA256' is not defined
+
+src/self_improvement/si_s01/engineering_audit.py:67: NameError
+____________ test_caps_reject_extra_work_before_external_edge[step] ____________
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_caps_reject_extra_work_be2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fcb87f10370>
+cap = 'step'
+
+    @pytest.mark.parametrize('cap',['generation','reset','step','input_tokens','generated_tokens'])
+    def test_caps_reject_extra_work_before_external_edge(tmp_path,monkeypatch,cap):
+        f=fixture_setup(tmp_path,monkeypatch)
+        if cap in ('input_tokens','generated_tokens'):
+            f.auth['ceilings'][cap]=1
+            r=EngineeringRun(f.permit,f.permit.output).run()
+            assert r['status']=='ENGINEERING_STOP_NO_COMPATIBILITY_CLAIM' and f.state.calls['generation']==0
+            return
+>       run=EngineeringRun(f.permit,f.permit.output);r=run.run();before=dict(f.state.calls)
+
+tests/test_si_s01_engineering_adapter.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_s01/engineering_runtime.py:158: in run
+    report=audit_engineering(self.output/'engineering_events.jsonl',self.permit,producer)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_caps_reject_extra_work_be2/output/engineering_events.jsonl')
+permit = EngineeringPermit(authorization={'schema': 'SI_S01_ENGINEERING_AUTHORIZATION_V1', 'status': 'SOFTWARE_TEST_ONLY', 'pur...pleted', 'sequence': 27}), maximum_read_offset=58357, historical_input_ids_status='UNRECORDED'), context_evidence=None)
+encoder = <self_improvement.si_s01.engineering_runtime.EngineeringProducer object at 0x7fcb87f135b0>
+
+    def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+        insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
+        events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
+        expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
+            'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+            'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
+        insist(all(h[k]==v for k,v in expected.items()) and type(h['worker_pid']) is int and h['worker_pid']>0 and h['worker_uid']==a['execution_uid'],'engineering header/authority identity')
+        if permit.evidence_class==MODE:
+            from .engineering_gate import verified_engineering_context
+            launch,worker=verified_engineering_context(permit)
+            insist(h['worker_pid']==worker['pid'] and h['worker_uid']==worker['uid'] and h['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external engineering allocation/PID/UID')
+        used=Counter(dict.fromkeys(COST_KEYS,0));completed=Counter(used);units={};stack=[];returned={};state=None;joined=None;derived_join=None;stop=None;mismatch=None;failed=False
+        for event in events[1:]:
+            p=event['payload'];kind=event['kind']
+            if kind=='unit_started':
+                identity=p['identity'];op=identity['kind'];index=identity['index'];debit=reservation(op,p['prepared']);parent=stack[-1] if stack else None
+                insist(identity=={'purpose':PURPOSE,'task_id':history.task_id,'kind':op,'index':index} and type(index) is int and index==(used['step'] if op=='step' else 0),'engineering exact operation index/identity')
+                unit=p['unit'];insist(unit==digest([a['run_id'],identity]) and unit not in units and p['reservation']==debit and p['parent_unit']==parent,'engineering physical unit/start/reservation binding')
+                insist((parent is None and op!='context_probe') or (op=='context_probe' and units[parent]['identity']['kind']=='model_load'),'engineering physical nesting')
+                if failed or mismatch:insist(op=='env_close','no new work after mismatch/failure')
+                if op=='model_load':insist(not units,'one initial engineering load')
+                elif op=='context_probe':insist(used['model_load']==1,'one nested engineering probe')
+                elif op=='env_construct':insist(completed['model_load']==completed['context_probe']==1 and p['request']=={'pool_seed':42,'historical_internal_rng':RNG_STATUS},'single environment after guarded load')
+                elif op=='reset':insist(completed['env_construct']==1 and p['request']=={'seed':30000},'one reset30000')
+                elif op=='generation':
+                    insist(completed['reset']==1 and state==history.states[0] and used['step']==0 and encoder is not None,'generation is coupled to actual reset')
+                    compare_prepared(history,encoder.prepare(history.public_prompt));insist(p['prepared']==encoder.prepare(history.public_prompt).to_dict(),'coupled generation prepared/reserved')
+                    refs=history.row['metadata']['r19_source_event_refs'];insist(p['request']=={'historical_reset_event_id':refs['reset_event_id'],'historical_generation_event_id':refs['generation_event_ids'][0]},'generation/reset original refs')
+                elif op=='step':
+                    reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index] if index<6 else None
+                    insist(completed['reset']==completed['generation']==1 and joined is not None and index<6 and state==history.states[index] and p['request']=={'saved_command':history.commands[index],'historical_transition_event_id':reference},'saved step must follow coupled first-action validation')
+                elif op=='env_close':insist(used['env_construct']==1,'close attempted engineering environment')
+                used.update(debit);insist(all(used[k]<=caps[k] for k in used),'engineering cost exceeds pre-call cap')
+                units[unit]={'identity':identity,'started_event':event['event_id'],'reservation':debit,'finished':False,'failed':False,'prepared':p['prepared'],'invocation_claimed':False,'boundary_entered':False};stack.append(unit)
+            elif kind in ('unit_completed','unit_failed'):
+                unit=p['unit'];insist(stack and stack[-1]==unit and p['identity']==units[unit]['identity'] and p['started_event']==units[unit]['started_event'] and not units[unit]['finished'] and not units[unit]['failed'],'engineering durable completion/failure refs')
+                stack.pop();u=units[unit];op=u['identity']['kind'];index=u['identity']['index'];data=p['data']
+                if kind=='unit_failed':u['failed']=True;failed=True;continue
+                u['finished']=True;actual=0
+>               if op=='model_load':insist(data=={'mode':'P0','adapter_sha256':P0_SHA256},'engineering loaded P0 identity')
+E               NameError: name 'P0_SHA256' is not defined
+
+src/self_improvement/si_s01/engineering_audit.py:67: NameError
+________ test_caps_reject_extra_work_before_external_edge[input_tokens] ________
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_caps_reject_extra_work_be3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fcc294367a0>
+cap = 'input_tokens'
+
+    @pytest.mark.parametrize('cap',['generation','reset','step','input_tokens','generated_tokens'])
+    def test_caps_reject_extra_work_before_external_edge(tmp_path,monkeypatch,cap):
+        f=fixture_setup(tmp_path,monkeypatch)
+        if cap in ('input_tokens','generated_tokens'):
+            f.auth['ceilings'][cap]=1
+>           r=EngineeringRun(f.permit,f.permit.output).run()
+
+tests/test_si_s01_engineering_adapter.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_s01/engineering_runtime.py:158: in run
+    report=audit_engineering(self.output/'engineering_events.jsonl',self.permit,producer)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_caps_reject_extra_work_be3/output/engineering_events.jsonl')
+permit = EngineeringPermit(authorization={'schema': 'SI_S01_ENGINEERING_AUTHORIZATION_V1', 'status': 'SOFTWARE_TEST_ONLY', 'pur...pleted', 'sequence': 27}), maximum_read_offset=58357, historical_input_ids_status='UNRECORDED'), context_evidence=None)
+encoder = <self_improvement.si_s01.engineering_runtime.EngineeringProducer object at 0x7fcb8817a410>
+
+    def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+        insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
+        events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
+        expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
+            'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+            'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
+        insist(all(h[k]==v for k,v in expected.items()) and type(h['worker_pid']) is int and h['worker_pid']>0 and h['worker_uid']==a['execution_uid'],'engineering header/authority identity')
+        if permit.evidence_class==MODE:
+            from .engineering_gate import verified_engineering_context
+            launch,worker=verified_engineering_context(permit)
+            insist(h['worker_pid']==worker['pid'] and h['worker_uid']==worker['uid'] and h['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external engineering allocation/PID/UID')
+        used=Counter(dict.fromkeys(COST_KEYS,0));completed=Counter(used);units={};stack=[];returned={};state=None;joined=None;derived_join=None;stop=None;mismatch=None;failed=False
+        for event in events[1:]:
+            p=event['payload'];kind=event['kind']
+            if kind=='unit_started':
+                identity=p['identity'];op=identity['kind'];index=identity['index'];debit=reservation(op,p['prepared']);parent=stack[-1] if stack else None
+                insist(identity=={'purpose':PURPOSE,'task_id':history.task_id,'kind':op,'index':index} and type(index) is int and index==(used['step'] if op=='step' else 0),'engineering exact operation index/identity')
+                unit=p['unit'];insist(unit==digest([a['run_id'],identity]) and unit not in units and p['reservation']==debit and p['parent_unit']==parent,'engineering physical unit/start/reservation binding')
+                insist((parent is None and op!='context_probe') or (op=='context_probe' and units[parent]['identity']['kind']=='model_load'),'engineering physical nesting')
+                if failed or mismatch:insist(op=='env_close','no new work after mismatch/failure')
+                if op=='model_load':insist(not units,'one initial engineering load')
+                elif op=='context_probe':insist(used['model_load']==1,'one nested engineering probe')
+                elif op=='env_construct':insist(completed['model_load']==completed['context_probe']==1 and p['request']=={'pool_seed':42,'historical_internal_rng':RNG_STATUS},'single environment after guarded load')
+                elif op=='reset':insist(completed['env_construct']==1 and p['request']=={'seed':30000},'one reset30000')
+                elif op=='generation':
+                    insist(completed['reset']==1 and state==history.states[0] and used['step']==0 and encoder is not None,'generation is coupled to actual reset')
+                    compare_prepared(history,encoder.prepare(history.public_prompt));insist(p['prepared']==encoder.prepare(history.public_prompt).to_dict(),'coupled generation prepared/reserved')
+                    refs=history.row['metadata']['r19_source_event_refs'];insist(p['request']=={'historical_reset_event_id':refs['reset_event_id'],'historical_generation_event_id':refs['generation_event_ids'][0]},'generation/reset original refs')
+                elif op=='step':
+                    reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index] if index<6 else None
+                    insist(completed['reset']==completed['generation']==1 and joined is not None and index<6 and state==history.states[index] and p['request']=={'saved_command':history.commands[index],'historical_transition_event_id':reference},'saved step must follow coupled first-action validation')
+                elif op=='env_close':insist(used['env_construct']==1,'close attempted engineering environment')
+                used.update(debit);insist(all(used[k]<=caps[k] for k in used),'engineering cost exceeds pre-call cap')
+                units[unit]={'identity':identity,'started_event':event['event_id'],'reservation':debit,'finished':False,'failed':False,'prepared':p['prepared'],'invocation_claimed':False,'boundary_entered':False};stack.append(unit)
+            elif kind in ('unit_completed','unit_failed'):
+                unit=p['unit'];insist(stack and stack[-1]==unit and p['identity']==units[unit]['identity'] and p['started_event']==units[unit]['started_event'] and not units[unit]['finished'] and not units[unit]['failed'],'engineering durable completion/failure refs')
+                stack.pop();u=units[unit];op=u['identity']['kind'];index=u['identity']['index'];data=p['data']
+                if kind=='unit_failed':u['failed']=True;failed=True;continue
+                u['finished']=True;actual=0
+>               if op=='model_load':insist(data=={'mode':'P0','adapter_sha256':P0_SHA256},'engineering loaded P0 identity')
+E               NameError: name 'P0_SHA256' is not defined
+
+src/self_improvement/si_s01/engineering_audit.py:67: NameError
+______ test_caps_reject_extra_work_before_external_edge[generated_tokens] ______
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_caps_reject_extra_work_be4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fcb8817e290>
+cap = 'generated_tokens'
+
+    @pytest.mark.parametrize('cap',['generation','reset','step','input_tokens','generated_tokens'])
+    def test_caps_reject_extra_work_before_external_edge(tmp_path,monkeypatch,cap):
+        f=fixture_setup(tmp_path,monkeypatch)
+        if cap in ('input_tokens','generated_tokens'):
+            f.auth['ceilings'][cap]=1
+>           r=EngineeringRun(f.permit,f.permit.output).run()
+
+tests/test_si_s01_engineering_adapter.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/self_improvement/si_s01/engineering_runtime.py:158: in run
+    report=audit_engineering(self.output/'engineering_events.jsonl',self.permit,producer)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/tmp/si-s01-eng-draft_engineering_v1/test_caps_reject_extra_work_be4/output/engineering_events.jsonl')
+permit = EngineeringPermit(authorization={'schema': 'SI_S01_ENGINEERING_AUTHORIZATION_V1', 'status': 'SOFTWARE_TEST_ONLY', 'pur...pleted', 'sequence': 27}), maximum_read_offset=58357, historical_input_ids_status='UNRECORDED'), context_evidence=None)
+encoder = <self_improvement.si_s01.engineering_runtime.EngineeringProducer object at 0x7fcb8817efb0>
+
+    def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+        insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
+        events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
+        expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
+            'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+            'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
+        insist(all(h[k]==v for k,v in expected.items()) and type(h['worker_pid']) is int and h['worker_pid']>0 and h['worker_uid']==a['execution_uid'],'engineering header/authority identity')
+        if permit.evidence_class==MODE:
+            from .engineering_gate import verified_engineering_context
+            launch,worker=verified_engineering_context(permit)
+            insist(h['worker_pid']==worker['pid'] and h['worker_uid']==worker['uid'] and h['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external engineering allocation/PID/UID')
+        used=Counter(dict.fromkeys(COST_KEYS,0));completed=Counter(used);units={};stack=[];returned={};state=None;joined=None;derived_join=None;stop=None;mismatch=None;failed=False
+        for event in events[1:]:
+            p=event['payload'];kind=event['kind']
+            if kind=='unit_started':
+                identity=p['identity'];op=identity['kind'];index=identity['index'];debit=reservation(op,p['prepared']);parent=stack[-1] if stack else None
+                insist(identity=={'purpose':PURPOSE,'task_id':history.task_id,'kind':op,'index':index} and type(index) is int and index==(used['step'] if op=='step' else 0),'engineering exact operation index/identity')
+                unit=p['unit'];insist(unit==digest([a['run_id'],identity]) and unit not in units and p['reservation']==debit and p['parent_unit']==parent,'engineering physical unit/start/reservation binding')
+                insist((parent is None and op!='context_probe') or (op=='context_probe' and units[parent]['identity']['kind']=='model_load'),'engineering physical nesting')
+                if failed or mismatch:insist(op=='env_close','no new work after mismatch/failure')
+                if op=='model_load':insist(not units,'one initial engineering load')
+                elif op=='context_probe':insist(used['model_load']==1,'one nested engineering probe')
+                elif op=='env_construct':insist(completed['model_load']==completed['context_probe']==1 and p['request']=={'pool_seed':42,'historical_internal_rng':RNG_STATUS},'single environment after guarded load')
+                elif op=='reset':insist(completed['env_construct']==1 and p['request']=={'seed':30000},'one reset30000')
+                elif op=='generation':
+                    insist(completed['reset']==1 and state==history.states[0] and used['step']==0 and encoder is not None,'generation is coupled to actual reset')
+                    compare_prepared(history,encoder.prepare(history.public_prompt));insist(p['prepared']==encoder.prepare(history.public_prompt).to_dict(),'coupled generation prepared/reserved')
+                    refs=history.row['metadata']['r19_source_event_refs'];insist(p['request']=={'historical_reset_event_id':refs['reset_event_id'],'historical_generation_event_id':refs['generation_event_ids'][0]},'generation/reset original refs')
+                elif op=='step':
+                    reference=history.row['metadata']['r19_source_event_refs']['transition_event_ids'][index] if index<6 else None
+                    insist(completed['reset']==completed['generation']==1 and joined is not None and index<6 and state==history.states[index] and p['request']=={'saved_command':history.commands[index],'historical_transition_event_id':reference},'saved step must follow coupled first-action validation')
+                elif op=='env_close':insist(used['env_construct']==1,'close attempted engineering environment')
+                used.update(debit);insist(all(used[k]<=caps[k] for k in used),'engineering cost exceeds pre-call cap')
+                units[unit]={'identity':identity,'started_event':event['event_id'],'reservation':debit,'finished':False,'failed':False,'prepared':p['prepared'],'invocation_claimed':False,'boundary_entered':False};stack.append(unit)
+            elif kind in ('unit_completed','unit_failed'):
+                unit=p['unit'];insist(stack and stack[-1]==unit and p['identity']==units[unit]['identity'] and p['started_event']==units[unit]['started_event'] and not units[unit]['finished'] and not units[unit]['failed'],'engineering durable completion/failure refs')
+                stack.pop();u=units[unit];op=u['identity']['kind'];index=u['identity']['index'];data=p['data']
+                if kind=='unit_failed':u['failed']=True;failed=True;continue
+                u['finished']=True;actual=0
+>               if op=='model_load':insist(data=={'mode':'P0','adapter_sha256':P0_SHA256},'engineering loaded P0 identity')
+E               NameError: name 'P0_SHA256' is not defined
+
+src/self_improvement/si_s01/engineering_audit.py:67: NameError
+- generated xml file: /home/lizening/research-notes/agent-logs/2026-10-26T122023Z__CODEX__si-s01-engineering-adapter__d7a82ac/draft_engineering_v1.xml -
+=========================== short test summary info ============================
+FAILED tests/test_si_s01_engineering_adapter.py::test_real_engineering_core_reader_parser_journal_audit_single_joined_pass
+FAILED tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[reset_map]
+FAILED tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[reset_goal]
+FAILED tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[wrong_output]
+FAILED tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[tensor]
+FAILED tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[PEFT]
+FAILED tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[post_resource]
+FAILED tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[after_state]
+FAILED tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[missing_final_map]
+FAILED tests/test_si_s01_engineering_adapter.py::test_caps_reject_extra_work_before_external_edge[generation]
+FAILED tests/test_si_s01_engineering_adapter.py::test_caps_reject_extra_work_before_external_edge[reset]
+FAILED tests/test_si_s01_engineering_adapter.py::test_caps_reject_extra_work_before_external_edge[step]
+FAILED tests/test_si_s01_engineering_adapter.py::test_caps_reject_extra_work_before_external_edge[input_tokens]
+FAILED tests/test_si_s01_engineering_adapter.py::test_caps_reject_extra_work_before_external_edge[generated_tokens]

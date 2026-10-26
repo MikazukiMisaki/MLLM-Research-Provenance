@@ -1,0 +1,125 @@
+{
+  "PC01": {
+    "locations": [
+      {
+        "claim": "canonical durable prepared payload deep-copied; caller dictionary mutation cannot change reservation identity",
+        "lines": [
+          58,
+          59
+        ],
+        "path": "src/self_improvement/si_s01/engineering_evidence.py"
+      },
+      {
+        "claim": "actual prepared equals durable reservation; invocation claim consumed once before raw route",
+        "lines": [
+          94,
+          105
+        ],
+        "path": "src/self_improvement/si_s01/engineering_evidence.py"
+      },
+      {
+        "claim": "actual model boundary requires prior claim and is single-use",
+        "lines": [
+          106,
+          111
+        ],
+        "path": "src/self_improvement/si_s01/engineering_evidence.py"
+      },
+      {
+        "claim": "both generate and direct _raw routes reach claimed boundary guard",
+        "lines": [
+          36,
+          43
+        ],
+        "path": "src/self_improvement/si_s01/engineering_runtime.py"
+      }
+    ],
+    "status": "STATICALLY_CLOSED"
+  },
+  "PC02": {
+    "locations": [
+      {
+        "claim": "pre_call after resource inspection and CUDA synchronize immediately before actual model.generate",
+        "lines": [
+          61,
+          67
+        ],
+        "path": "src/self_improvement/si_s01/runtime_core.py"
+      },
+      {
+        "claim": "deadline checked before and after durable boundary-entered fsync",
+        "lines": [
+          106,
+          111
+        ],
+        "path": "src/self_improvement/si_s01/engineering_evidence.py"
+      }
+    ],
+    "status": "STATICALLY_CLOSED"
+  },
+  "artifact_writes": "ONLY_THIS_NEW_REVIEW_DIRECTORY",
+  "assigned_file_count": 8,
+  "base_sha": "d7a82acb510157ab7ba5439d790816c5c948439f",
+  "changed_file_count": 19,
+  "decision": "NO_NEW_STATIC_FINDINGS_IN_ASSIGNED_SCOPE_NOT_FINAL_ACCEPTANCE",
+  "direct_parent_verified": true,
+  "final_acceptance": "PENDING_ROOT_AND_FINAL_FREEZE_SAME_SHA_REQUIRED",
+  "final_frozen_handoff_received": false,
+  "findings": [],
+  "hardware_ownership_or_compatibility_proved": false,
+  "launch_clearance_granted": false,
+  "once_and_timeout": {
+    "atomic_marker_lines": [
+      57,
+      58
+    ],
+    "description": "fresh once-only output/claim, same absolute start/deadline through waits/cleanup, 600-second engineering profile, science=false, authentic exit/time/cleanup/report identity required",
+    "engineering_profile_lines": [
+      8,
+      9
+    ],
+    "final_result_consumer": {
+      "helper_lines": [
+        17,
+        24
+      ],
+      "helper_path": "src/self_improvement/si_s01/engineering_supervisor.py",
+      "lines": [
+        32,
+        34
+      ],
+      "path": "scripts/run_si_s01_engineering_once.py"
+    },
+    "supervisor_core_lines": [
+      24,
+      29,
+      49,
+      60,
+      74,
+      80,
+      96
+    ]
+  },
+  "project_imports_executed": false,
+  "read_before_after_hashes_equal": true,
+  "reviewer": "CRITIC_SUBAGENT_FOR_ROOT",
+  "runtime_model_CUDA_environment_SSH_preflight_science_calls": 0,
+  "schema": "SI_S01_ENGINEERING_RUNTIME_STATIC_REVIEW_V1",
+  "scientific_files_modified": false,
+  "scope": "RUNTIME_SOURCE_PARITY_AND_ENGINEERING_ONCE_ONLY_ABSOLUTE_TIMEOUT_BOUNDARIES",
+  "shared_INDEX_inventory_staging_push_modified": false,
+  "source_parity": {
+    "additional_source_guard": "LiveProducer.load requires isinstance(permit,Permit); this tightens original production type boundary",
+    "all_archived_AST_checks_equal": true,
+    "source_hooks": "LiveProducer source wrapper passes no optional probe or pre_call callbacks",
+    "unchanged_hardware_guards": "strict actual UUID, exact own PID and required owned context; no host PID mapping claim"
+  },
+  "summary": "Static Git-object review only; no final PASS and no execution permission. If final SHA changes, changed objects require re-review.",
+  "target_sha": "87f46d731f1575731bd7ea1fa7dfb2e982da4c33",
+  "test_code_read_only": [
+    "tests/test_si_s01_engineering_adapter.py:60-93",
+    "tests/test_si_s01_engineering_adapter.py:110-121",
+    "tests/test_si_s01_engineering_parity.py:22-89"
+  ],
+  "tests_executed": false
+}

@@ -1,0 +1,605 @@
+{
+  "status": "DEVELOPER_SOFTWARE_VERIFIED_PENDING_INDEPENDENT_EXACT_SHA_REVIEW",
+  "source_sha": "e5f09c05824cb61cb35ccbbf4e189b04e8829cea",
+  "base_d7_sha": "d7a82acb510157ab7ba5439d790816c5c948439f",
+  "base844_problem_binding": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T111621Z__SOL__si-s01-independent-base844-suite__critic_1f34d86d/BASELINE_ID_SETS.json",
+    "bytes": 161490,
+    "sha256": "7f6c762e6c02bc144d371102cd4dd9acb5e1dddc8c1ec7898ec0124f95911499"
+  },
+  "sealed_d7_reports_binding": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T102514Z__CODEX__si-s01-source-only-implementation__f1a52e8c/comparable_rt/full.reports.json",
+    "bytes": 852099,
+    "sha256": "a09a3c0a88bd7fd02ba18876c61cfed5fdf33d2dd179b3560f45c40c1d415b3e"
+  },
+  "counts": {
+    "passed": 1107,
+    "failed": 3,
+    "errors": 77,
+    "skipped": 0,
+    "collected": 1187
+  },
+  "focused_counts": {
+    "passed": 154,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "collected": 154
+  },
+  "new_engineering_tests": 71,
+  "new_problem_IDs": [],
+  "all80_ID_classification_phase_exception_types_match_both_bases": true,
+  "all1036_d7_prior_passing_IDs_preserved": true,
+  "all953_base844_passing_IDs_preserved": true,
+  "all83_source_only_tests_preserved": true,
+  "no_dropped_collected_IDs": true,
+  "relative_prior_collection_order_preserved": true,
+  "candidate_problem_keys": [
+    [
+      "tests/test_persistent_recovery_r12.py::test_control_pick_two_audit_is_present",
+      "error",
+      "setup",
+      "builtins.FileNotFoundError"
+    ],
+    [
+      "tests/test_persistent_recovery_r12.py::test_discordant_ids_and_tie_partition",
+      "error",
+      "setup",
+      "builtins.FileNotFoundError"
+    ],
+    [
+      "tests/test_persistent_recovery_r12.py::test_frozen_provenance_and_result_arithmetic",
+      "error",
+      "setup",
+      "builtins.FileNotFoundError"
+    ],
+    [
+      "tests/test_persistent_recovery_r12.py::test_handoff_context_and_horizon_metrics",
+      "error",
+      "setup",
+      "builtins.FileNotFoundError"
+    ],
+    [
+      "tests/test_persistent_recovery_r12.py::test_pick_two_public_progress_and_exact_instance_identity",
+      "error",
+      "setup",
+      "builtins.FileNotFoundError"
+    ],
+    [
+      "tests/test_persistent_recovery_r12.py::test_public_source_excludes_hidden_facts_and_frozen_manifest_is_not_written",
+      "failure",
+      "call",
+      "builtins.FileNotFoundError"
+    ],
+    [
+      "tests/test_persistent_recovery_r12.py::test_subgoal_staleness_rule_and_frozen_counts",
+      "error",
+      "setup",
+      "builtins.FileNotFoundError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_actual_sft_continuation_rejects_both_treatment_leaks[card]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_actual_sft_continuation_rejects_both_treatment_leaks[fact]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_changed_real_head_cannot_resume",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_completed_run_rejects_fresh_output_and_same_output",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[continuation protocol]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[empty generation]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[empty success]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[invented status]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[malformed executed]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[missing nested decisions]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[missing nested loops]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[missing trace]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[nonfinite latency]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[parsed diagnosis]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[raw output]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[terminal reward]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[termination reason]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[trace twice]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[transition list]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong comparator]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong cost delta]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong derived cost]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong generation limit]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong prompt]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_corrupt_result_fails_during_reconciliation[wrong relation]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_execution_journal_detects_actual_completed_then_started",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_frozen_hashes_and_r18_c1_provenance",
+      "failure",
+      "call",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_global_lock_is_shared_by_linked_worktrees",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_identical_full_records_deduplicate",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_jsonl_only_completion_remains_sixty_executions",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_late_crash_reconstructs_reports_without_scientific_calls[completed_manifest]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_late_crash_reconstructs_reports_without_scientific_calls[report]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_ledger_conflicts_fail_closed[branch_file-branches/wrong.json]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_ledger_conflicts_fail_closed[position-2]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_ledger_conflicts_fail_closed[record_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_ledger_conflicts_fail_closed[status-unknown]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_lock_survives_exceptions_and_process_death",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[missing_model_isolation]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[missing_provenance]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[missing_r18_b_commit]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[wrong_commit]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[wrong_model_isolation]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_manifest_provenance_required_before_resume[wrong_schema]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[continuation-cross-source]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[continuation-jsonl]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[cost-cross-source]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[cost-jsonl]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[generation-cross-source]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[generation-jsonl]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[replay-cross-source]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_nested_conflicts_never_select_a_winner[replay-jsonl]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_orphaned_report_staging_does_not_block_resume",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_output_paths_fail_before_execution[../outside]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_output_paths_fail_before_execution[/tmp/outside-workspace]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_output_paths_fail_before_execution[scripts/forbidden]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_continuation_and_terminal_semantics[horizon]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_continuation_and_terminal_semantics[recovery_terminal]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_continuation_and_terminal_semantics[recovery_terminal_failure]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_continuation_and_terminal_semantics[sft_failure]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_continuation_and_terminal_semantics[sft_terminal]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_guard_rejects_unrelated_changes[modified]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_guard_rejects_unrelated_changes[rename]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_guard_rejects_unrelated_changes[untracked]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_overlapping_entry_paths_execute_only_sixty[False]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_overlapping_entry_paths_execute_only_sixty[True]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_parser_failure_continues_and_persists[diagnosis_too_long]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_parser_failure_continues_and_persists[malformed_stage_one]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_parser_failure_continues_and_persists[subgoal_too_long]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_parser_failure_continues_and_persists[truncated_stage_one]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_real_parser_failure_continues_and_persists[truncated_stage_two]",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_unignored_output_rejected_before_execution",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_aware_card_v2_r18_c2.py::test_withheld_recovery_rejects_any_transition",
+      "error",
+      "setup",
+      "builtins.RuntimeError"
+    ],
+    [
+      "tests/test_progress_card_semantic_audit_r18_a.py::test_frozen_phase_artifact_is_hashable_and_self_describing",
+      "failure",
+      "call",
+      "builtins.FileNotFoundError"
+    ]
+  ],
+  "new_passed_IDs": [
+    "tests/test_si_s01_engineering_adapter.py::test_real_engineering_core_reader_parser_journal_audit_single_joined_pass",
+    "tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[reset_map]",
+    "tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[reset_goal]",
+    "tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[wrong_output]",
+    "tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[tensor]",
+    "tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[PEFT]",
+    "tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[UUID]",
+    "tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[post_resource]",
+    "tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[after_state]",
+    "tests/test_si_s01_engineering_adapter.py::test_broken_join_stops_once_without_alternative_generation_reset_or_command[missing_final_map]",
+    "tests/test_si_s01_engineering_adapter.py::test_second_generation_inside_same_reserved_unit_rejected_before_model_edge",
+    "tests/test_si_s01_engineering_adapter.py::test_actual_prepared_must_equal_the_small_reserved_unit_before_model_edge",
+    "tests/test_si_s01_engineering_adapter.py::test_absolute_time_rechecked_after_resource_and_cuda_sync_before_model_edge[resource]",
+    "tests/test_si_s01_engineering_adapter.py::test_absolute_time_rechecked_after_resource_and_cuda_sync_before_model_edge[synchronize]",
+    "tests/test_si_s01_engineering_adapter.py::test_caps_reject_extra_work_before_external_edge[generation]",
+    "tests/test_si_s01_engineering_adapter.py::test_caps_reject_extra_work_before_external_edge[reset]",
+    "tests/test_si_s01_engineering_adapter.py::test_caps_reject_extra_work_before_external_edge[step]",
+    "tests/test_si_s01_engineering_adapter.py::test_caps_reject_extra_work_before_external_edge[input_tokens]",
+    "tests/test_si_s01_engineering_adapter.py::test_caps_reject_extra_work_before_external_edge[generated_tokens]",
+    "tests/test_si_s01_engineering_adapter.py::test_caller_mutating_prepared_after_reservation_cannot_change_durable_input_binding",
+    "tests/test_si_s01_engineering_adapter.py::test_independent_audit_binds_durable_raw_return_after_coherent_reseal[returned_tokens]",
+    "tests/test_si_s01_engineering_adapter.py::test_independent_audit_binds_durable_raw_return_after_coherent_reseal[sequence_prefix]",
+    "tests/test_si_s01_engineering_adapter.py::test_per_kind_caps_on_open_legitimate_registry_stop_before_extra_raw_call[generation]",
+    "tests/test_si_s01_engineering_adapter.py::test_per_kind_caps_on_open_legitimate_registry_stop_before_extra_raw_call[reset]",
+    "tests/test_si_s01_engineering_adapter.py::test_per_kind_caps_on_open_legitimate_registry_stop_before_extra_raw_call[step]",
+    "tests/test_si_s01_engineering_adapter.py::test_engineering_producer_never_accepts_non_engineering_generation_phase[source]",
+    "tests/test_si_s01_engineering_adapter.py::test_engineering_producer_never_accepts_non_engineering_generation_phase[stage_one]",
+    "tests/test_si_s01_engineering_adapter.py::test_engineering_producer_never_accepts_non_engineering_generation_phase[stage_two]",
+    "tests/test_si_s01_engineering_adapter.py::test_engineering_producer_never_accepts_non_engineering_generation_phase[teacher]",
+    "tests/test_si_s01_engineering_adapter.py::test_engineering_producer_never_accepts_non_engineering_generation_phase[suffix]",
+    "tests/test_si_s01_engineering_adapter.py::test_engineering_producer_never_accepts_non_engineering_generation_phase[replay]",
+    "tests/test_si_s01_engineering_adapter.py::test_engineering_producer_never_accepts_non_engineering_generation_phase[train]",
+    "tests/test_si_s01_engineering_adapter.py::test_engineering_producer_never_accepts_non_engineering_generation_phase[eval]",
+    "tests/test_si_s01_engineering_gate.py::test_actual_engineering_cli_software_preflight_static_zero_boundaries",
+    "tests/test_si_s01_engineering_gate.py::test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[old_schema]",
+    "tests/test_si_s01_engineering_gate.py::test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[historical_run_reused]",
+    "tests/test_si_s01_engineering_gate.py::test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[source_purpose]",
+    "tests/test_si_s01_engineering_gate.py::test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[science_true]",
+    "tests/test_si_s01_engineering_gate.py::test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[old_code]",
+    "tests/test_si_s01_engineering_gate.py::test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[consumed]",
+    "tests/test_si_s01_engineering_gate.py::test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[old_output]",
+    "tests/test_si_s01_engineering_gate.py::test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[mode_spoof]",
+    "tests/test_si_s01_engineering_gate.py::test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[wrong_UUID]",
+    "tests/test_si_s01_engineering_gate.py::test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[bad_cap]",
+    "tests/test_si_s01_engineering_gate.py::test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[bad_manifest]",
+    "tests/test_si_s01_engineering_gate.py::test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[package_drift]",
+    "tests/test_si_s01_engineering_gate.py::test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[env]",
+    "tests/test_si_s01_engineering_gate.py::test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[argv]",
+    "tests/test_si_s01_engineering_gate.py::test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[expired]",
+    "tests/test_si_s01_engineering_gate.py::test_source_and_engineering_authorizations_reject_cross_use",
+    "tests/test_si_s01_engineering_history.py::test_bounded_reader_ignores_forbidden_later_source_and_future_journal",
+    "tests/test_si_s01_engineering_history.py::test_semantic_old_wire_tamper_rejected_after_all_selected_hashes_refs_resealed[after_map-saved full ordered after-map]",
+    "tests/test_si_s01_engineering_history.py::test_semantic_old_wire_tamper_rejected_after_all_selected_hashes_refs_resealed[before_map-complete receipt before-state]",
+    "tests/test_si_s01_engineering_history.py::test_semantic_old_wire_tamper_rejected_after_all_selected_hashes_refs_resealed[action_id-historical Action-ID]",
+    "tests/test_si_s01_engineering_history.py::test_semantic_old_wire_tamper_rejected_after_all_selected_hashes_refs_resealed[parser-historical parser]",
+    "tests/test_si_s01_engineering_history.py::test_semantic_old_wire_tamper_rejected_after_all_selected_hashes_refs_resealed[prompt-historical causal P0]",
+    "tests/test_si_s01_engineering_history.py::test_semantic_old_wire_tamper_rejected_after_all_selected_hashes_refs_resealed[embedded-embedded source body]",
+    "tests/test_si_s01_engineering_history.py::test_invalid_slice_manifest_fails_closed_before_any_model_or_environment[raw_hash]",
+    "tests/test_si_s01_engineering_history.py::test_invalid_slice_manifest_fails_closed_before_any_model_or_environment[duplicate_event]",
+    "tests/test_si_s01_engineering_history.py::test_invalid_slice_manifest_fails_closed_before_any_model_or_environment[wrong_offset]",
+    "tests/test_si_s01_engineering_history.py::test_invalid_slice_manifest_fails_closed_before_any_model_or_environment[second_source]",
+    "tests/test_si_s01_engineering_history.py::test_invalid_slice_manifest_fails_closed_before_any_model_or_environment[wrong_role_count]",
+    "tests/test_si_s01_engineering_parity.py::test_load_and_generation_shared_core_AST_exact_except_approved_hooks_and_class_label",
+    "tests/test_si_s01_engineering_parity.py::test_supervisor_source_profile_normalizes_exactly_to_d7_mechanics",
+    "tests/test_si_s01_engineering_parity.py::test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits[None]",
+    "tests/test_si_s01_engineering_parity.py::test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits[tensor]",
+    "tests/test_si_s01_engineering_parity.py::test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits[disabled_P0]",
+    "tests/test_si_s01_engineering_parity.py::test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits[post_resource]",
+    "tests/test_si_s01_engineering_supervisor.py::test_engineering_supervisor_preserves_exit_but_exit0_without_report_is_not_success[0]",
+    "tests/test_si_s01_engineering_supervisor.py::test_engineering_supervisor_preserves_exit_but_exit0_without_report_is_not_success[7]",
+    "tests/test_si_s01_engineering_supervisor.py::test_engineering_supervisor_deadline_keeps_real_exit_and_cleanup_receipt"
+  ],
+  "full_authentic_returncode": 1,
+  "focused_authentic_returncode": 0,
+  "collect_authentic_returncode": 0,
+  "same_baseline_runner_sha256": "f1ae81f68f3ea75e65976c2726fa75be665684072482f84fdb61b5da570cb1ba",
+  "module_origins_unchanged_and_inside_worktree": true,
+  "CUDA_initialized_before_after": false,
+  "CPU_fixture_activity": "Tiny existing CPU PEFT/tokenizer/model software tests and explicit fake model/CUDA/NVML/TextWorld I/O only; no actual Qwen/ALFWorld/hostSSH/preflight/science.",
+  "actual_reader_evidence": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T122023Z__CODEX__si-s01-engineering-adapter__d7a82ac/ACTUAL_READER_CARRY_FORWARD.json",
+    "bytes": 806,
+    "sha256": "6af483cb13883f83f4f5a622a908222efe268ada1b62db7b2593553c2c28ccde"
+  },
+  "independent_review_or_runtime_launch_claim": false
+}

@@ -1,0 +1,70 @@
+{
+  "schema": "SI_S01_COORDINATOR_PROGRESS_CHECKPOINT_V1",
+  "utc": "2026-10-26T13:40:25.818205+00:00",
+  "status": "MEANINGFUL_PROGRESS_NOT_FINAL_ACCEPTANCE_OR_LAUNCH",
+  "root_review_worktree_sha": "e537f441010077123a307e9d50ea40cf8dad8547",
+  "source_software_exact_d7_review_unchanged": true,
+  "engineering_candidate_observed": "e5f09c05824cb61cb35ccbbf4e189b04e8829cea",
+  "candidate_frozen_handoff": "PENDING",
+  "preliminary_production_static_review": {
+    "target": "87f46d731f1575731bd7ea1fa7dfb2e982da4c33",
+    "path": "agent-logs/2026-10-26T133229Z__CRITIC__si-s01-engineering-static__87f46d73/REVIEW.json",
+    "sha256": "5ce4b680d44ebf17ac3e819e5e9ebd6cc523bbd6aec809e84f91c970061b92ee",
+    "decision": "NO_NEW_STATIC_FINDINGS_IN_ASSIGNED_SCOPE_NOT_FINAL_ACCEPTANCE"
+  },
+  "incremental_e5_scope": "Two test fixture files only: explicit UTF-8 locale and save-before-hash; reason-specific negative assertions. No production delta from87. Root read complete diff.",
+  "independent_scripts_prepared_not_executed": [
+    {
+      "path": "/tmp/si-s01-eng-independent-closure-ZcfUhzvC/independent_closure_probe.py",
+      "sha256": "05a5d3e2fe896e92b03b013d9a0de389dd80d0a78204b2b25c7a237fdb650af9"
+    },
+    {
+      "path": "/tmp/si-s01-root-historical-reader-prepared/independent_reader_probe.py",
+      "sha256": "96d5b420a2eb1e3e3936ccc2c8e9421a9efd6d1f35d75fff30d16f3540beabe5"
+    }
+  ],
+  "Sol_job": {
+    "thread": "01a165de-c75e-7120-abc9-fa74cde1f17f",
+    "turn": "01a17826-ddcd-73e0-9828-356e6c949fd8",
+    "cursor": "a9b9b627-e6e2-498e-978f-27e6adbaff06:45",
+    "status": "inProgress",
+    "observed_final_software_processes": [
+      {
+        "pid": 858716,
+        "basename": "run_final_tests.py"
+      },
+      {
+        "pid": 858720,
+        "basename": "focused_runner.py"
+      }
+    ],
+    "timeout_is_not_job_failure": true
+  },
+  "Luna_read_only_assignment": {
+    "thread": "01a09fcb-ab5f-7b83-9acf-91026145b764",
+    "turn": "01a1786d-47f4-76a0-ba79-afecd09bb1a8",
+    "cursor": "d503fcb1-a523-481f-9e86-d290ee310beb:24",
+    "direct_dispatch_acknowledged": true,
+    "purpose": "Full frozen snapshot/P0/config/logic/package-file hash evidence and unresolved execution conditions only",
+    "forbidden": [
+      "SSH attempts",
+      "actual tokenizer/model/CUDA/environment",
+      "runtime/validator/preflight/supervisor/science",
+      "source/config edits",
+      "shared INDEX/inventory/staging/push"
+    ],
+    "root_source_review_or_execution_release": "NOT_GRANTED_FOR_NEW_ENGINEERING_CANDIDATE"
+  },
+  "host_capability": {
+    "latest_observed_utc": "2026-10-26T13:28:24.018282+00:00",
+    "SSH_AUTH_SOCK": "/home/lizening/.codex/app-server-control/forwarded-ssh-agent.sock",
+    "lstat": "ENOENT",
+    "user_desktop_restore_choice_is_observed_restoration": false
+  },
+  "science_cumulative_unchanged": {
+    "generations": 5142,
+    "reset_inclusive_environment_operations": 7949
+  },
+  "new_root_real_runtime_or_science_calls": 0,
+  "launch_clearance": "NOT_GRANTED"
+}

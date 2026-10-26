@@ -1,0 +1,178 @@
+{
+  "schema": "si_s01_engineering_proposal_input_bindings_v1",
+  "status": "READ_ONLY_PREPARATION_NOT_RELEASE",
+  "executable": false,
+  "launch_authorized": false,
+  "created_utc": "2026-10-26T13:40:20Z",
+  "candidate_observation": {
+    "current_head": "e5f09c05824cb61cb35ccbbf4e189b04e8829cea",
+    "branch": "codex/si-s01-engineering-adapter",
+    "worktree_status": "clean at observation",
+    "review_status": "PENDING_NOT_FROZEN_NOT_ACCEPTED",
+    "use_as_final_source_binding": false,
+    "note": "Candidate identity is recorded only to distinguish it from the independently accepted d7 base; no PASS or release is inferred."
+  },
+  "controlling_documents": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c/ENGINEERING_ADAPTER_IMPLEMENTATION_TASK.md",
+      "sha256": "525d271b38a8ecd2248c653291679a1c8fd37ceaec05b4dbf3b575932a7e103b"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c/ENGINEERING_VERIFICATION_PROPOSAL_REVISION_2.md",
+      "sha256": "fe974f732ca03d96718c679facaf1201aa78a364c2f3251690c461f28acf189f"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c/ENGINEERING_COUPLED_PATH_ADDENDUM.md",
+      "sha256": "2c03660bf71a08cfdad524ba1215abc9aff1c957552412f87d019947a39f6ded"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c/ADOPTED_SOURCE_ONLY_PROTOCOL.md",
+      "sha256": "daa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T121444Z__SOL__si-s01-independent-exact-review__d7a82acb_c9ec89/INDEPENDENT_REVIEW.json",
+      "sha256": "0e878105b523afef4af18d130f6a60dacccd127c27e6f580723cf625ce2e385d",
+      "reviewed_source": "d7a82acb510157ab7ba5439d790816c5c948439f",
+      "scope": "source-only software review; not engineering/runtime clearance"
+    }
+  ],
+  "model_snapshot": {
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "directory": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218",
+    "identity_manifest_path": "/home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_model_identity_manifest.json",
+    "identity_manifest_raw_sha256": "08c00c8a4bf2ab15bffb59d2d7345c8549608aced0da1eedb2901096a840e2c2",
+    "verification_scope": "12 current container-visible cached files; complete bytes read for SHA-256, no model/tokenizer import or load",
+    "host_runtime_binding": "NOT_OBSERVED",
+    "all_observed_hashes_match_frozen_manifest": true,
+    "files": [
+      {"name":"model-00001-of-00005.safetensors","bytes":3996250744,"sha256":"31d6a825ae35f11fb85b195b4c42c146c051e446433125a215336abdf95cbf5f"},
+      {"name":"model-00002-of-00005.safetensors","bytes":3993160032,"sha256":"5991236cea6fe21f3d43cab0f0e84448734fbbe0789816202989f2ddc9d18282"},
+      {"name":"model-00003-of-00005.safetensors","bytes":3959604768,"sha256":"c5185c4794be2d8a9784d5753c9922db38df478ce11f9ed0b415b7304d896836"},
+      {"name":"model-00004-of-00005.safetensors","bytes":3187841392,"sha256":"b5ee7de71fbf17db3d5704e0c8f2bc7d005ca9e1d7ca2aeb19827b0cfcaa917a"},
+      {"name":"model-00005-of-00005.safetensors","bytes":1244659840,"sha256":"20c2d6366ab85c90786ccdd829cd2b9e7d30ef3b2ebbb998280e7e4014b542ff"},
+      {"name":"config.json","bytes":728,"sha256":"f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30"},
+      {"name":"generation_config.json","bytes":239,"sha256":"2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2"},
+      {"name":"model.safetensors.index.json","bytes":32878,"sha256":"f9fdbcb91c23971c13ec5d5f2573d2349e8f61f2f049371ec699281748fdb1bc"},
+      {"name":"tokenizer.json","bytes":11422654,"sha256":"aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"},
+      {"name":"tokenizer_config.json","bytes":9732,"sha256":"d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"},
+      {"name":"vocab.json","bytes":2776833,"sha256":"ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"},
+      {"name":"merges.txt","bytes":1671853,"sha256":"8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"}
+    ]
+  },
+  "p0_adapter": {
+    "directory": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+    "hash_algorithm": "SHA256; sorted recursive regular files; update with UTF-8 relative path bytes then each file's bytes in 1MiB chunks, matching sft.training.directory_sha256 without importing project code",
+    "file_count": 11,
+    "total_file_bytes": 365138109,
+    "expected_frozen_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+    "observed_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+    "matches_d7_constant_and_historical_execution_manifest": true,
+    "payload_copied_or_exported": false,
+    "host_runtime_binding": "NOT_OBSERVED"
+  },
+  "historical_source_binding": {
+    "executed_source_sha": "2da980f631badc25086d12db60d128ff507d3ae6",
+    "run_id": "260422ac02bd42a8b2929d7ef240526b",
+    "first_source_index": 0,
+    "nominal_seed": 30000,
+    "full_trajectory_certified_sha256_reference": "c6f37a7da28e326c70818524c79c17bbd85a286754c111f17db07cbe151a4f1c",
+    "full_trajectory_rehashed_now": false,
+    "bounded_first_row_and_nine_slice_binding_path": "/home/lizening/research-notes/agent-logs/2026-10-26T110000Z__LUNA__si-s01-input-readiness__f1a52e8c/FIRST_SOURCE_EVENT_BINDINGS_V2.json",
+    "bounded_binding_sha256": "c361ba0c9d9276eb7dc20c31d0428f51db3f1a9fdd7fccfa23db5edc4f64eb38",
+    "historical_internal_pool_seed_or_rng_counter": "NOT_RECORDED; do not infer from nominal seed",
+    "historical_cumulative_science_cost": {"generations":5142,"environment_operations_including_resets":7949},
+    "new_engineering_cost_is_separate": true
+  },
+  "historical_configuration_and_logic": [
+    {"role":"historical R19 protocol","path":"/home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_recovery_duration_v1.json","raw_sha256":"3d7d1865c807d12276a8109b06c55da4e9182df0ca05a0b5463f8128dd03e122"},
+    {"role":"actual G3 ALFWorld config","path":"/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml","raw_sha256":"e90f93eb4604a473b6eb4a259a19ef1ca3c296bba1771ba70a1c9b0edbc99700","declared_dataset_data_path":"/home/lizening/alfworld_data/json_2.1.1/train"},
+    {"role":"actual ALFWORLD_DATA root from historical command","path":"/home/lizening/alfworld_data","binding":"historical launch argv; no current dataset traversal"},
+    {"role":"frozen ALFWorld logic domain","path":"/home/lizening/alfworld_data/logic/alfred.pddl","sha256":"f1473041ed01da514de1f87adfd7ef0804862361f83ccf63c75e43633b0eb280"},
+    {"role":"frozen ALFWorld logic grammar","path":"/home/lizening/alfworld_data/logic/alfred.twl2","sha256":"c5b22f0f73309a7fd7c8e5b71de42ad4803b60766ab4a51cc2feb34162be036b"},
+    {"role":"generic ALFWorld config","path":"/home/lizening/wt-r19-recovery-duration-v1/configs/environment/alfworld_text.yaml","raw_sha256":"baf9996426d6dcf971da05ee2eb2912a24297b178949adb0cdae7dbc85451043"},
+    {"role":"repository ALFWorld wrapper source at historical checkout","path":"/home/lizening/wt-r19-recovery-duration-v1/src/env/alfworld.py","raw_sha256":"086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d"},
+    {"role":"original local G3 gate bytes (not reusable authorization)","path":"/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g3_gate_2da980f_phase1.json","raw_sha256":"c285692615eaaf1c7cb7139b0417528022db6ee03c510de13f881d126f14415e","status":"historical_and_consumed; not a new engineering gate"},
+    {"role":"R19 model identity manifest","path":"/home/lizening/wt-r19-recovery-duration-v1/configs/experiments/r19_model_identity_manifest.json","raw_sha256":"08c00c8a4bf2ab15bffb59d2d7345c8549608aced0da1eedb2901096a840e2c2"},
+    {"role":"historical SFT run config","path":"/home/lizening/wt-r19-recovery-duration-v1/configs/sft/sft_run_config.json","raw_sha256":"15e2db7522e78b98fd9fcfc9f08537108b54353128c986043b8f2e947567a2ec"},
+    {"role":"historical SFT training protocol","path":"/home/lizening/wt-r19-recovery-duration-v1/configs/sft/sft_training_protocol.json","raw_sha256":"dd06d08773e9842b2302263429c7a1752e968dcb30d2dd89f185c01ef9605155"}
+  ],
+  "historical_runtime_manifest": {
+    "path":"/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/runtime_manifest.json",
+    "raw_sha256":"306a9e7c2d1b968e2a56e258fcd07aaf7467739460802a2b94c5e20411264916",
+    "schema":"r19_inference_runtime_manifest_v2",
+    "historical_python":"3.10.20",
+    "historical_package_versions":{"PyYAML":"6.0.2","accelerate":"1.10.1","alfworld":"0.4.2","huggingface-hub":"0.36.2","numpy":"1.26.4","peft":"0.17.1","safetensors":"0.8.0","textworld":"1.7.0","tokenizers":"0.22.2","torch":"2.6.0+cu124","transformers":"4.56.2"},
+    "package_module_origins_in_manifest":false,
+    "current_package_origins_and_versions":"NOT_OBSERVED; no package imports performed",
+    "raw_manifest_hash_not_canonical_manifest_binding":true
+  },
+  "source_code_bindings": {
+    "historical_R19_execution_tree": {
+      "commit": "2da980f631badc25086d12db60d128ff507d3ae6",
+      "worktree_observation": "detached exact commit and clean at check",
+      "files": [
+        {"path":"scripts/run_r19_recovery_duration.py","sha256":"e59ea929d12194233cc50062ad8693e5341b7645ee2be819fe118ef39b9c52ce"},
+        {"path":"scripts/launch_r19_supervised.py","sha256":"22b79f701826c46df6f486f336a135130887bbbee3daa65ccbc25179b166b6bc"},
+        {"path":"src/sft/training.py","sha256":"0c722ca6ff17aa50da6fb294b632619f65f99936ce41e61ec0dab6288c7b584e"},
+        {"path":"src/models/qwen.py","sha256":"ee3a5a599a8dece7b206b2aa675004723fa343bcbd8844063d00a7af154140eb"},
+        {"path":"src/models/policy.py","sha256":"afbb9544e2ea0c2aa73d3f7dcfbf7e366f1daf6eb95fd4e89fefe0c913dda469"},
+        {"path":"src/models/action_parser.py","sha256":"0a1c668d590980d1d8cdd4104a2b3c9aa851037fc238a2c73c45b7ab4432fbe"},
+        {"path":"src/env/alfworld.py","sha256":"086a4a6fc7aac6250230ceeb5f1fa2f198ef4d529bc5af6c476181cd1c7f959d"}
+      ],
+      "si_s01_runtime_source_paths_exist_in_this_historical_commit": false
+    },
+    "accepted_SI_S01_software_base": {
+      "commit":"d7a82acb510157ab7ba5439d790816c5c948439f",
+      "files": [
+        {"path":"src/self_improvement/si_s01/runtime.py","sha256":"e33f96daf677480c81f71fb4c9d04e9e30050e9084cb285cff5e5600629da3e6"},
+        {"path":"src/self_improvement/si_s01/contract.py","sha256":"43350414e313273eb9747e879c70e24c90a044562e509a4bfff20fd26104d507"},
+        {"path":"src/self_improvement/si_s01/gate.py","sha256":"cde29b94d87070a117825cc1ec80aec23f098ee14550690b5e820d3fe15ea6a8"},
+        {"path":"src/self_improvement/si_s01/collector.py","sha256":"02c6a0fe8a213885bf46801847d517f1ee564f97de7c026762af8a92f401ca6a"},
+        {"path":"src/self_improvement/si_s01/evidence.py","sha256":"4048468a1666d23547f0d48cfcd42d20edd526893498a0d91e7434ad3cb5a1f0"},
+        {"path":"src/self_improvement/si_p3/runtime_backend.py","sha256":"7a448e745c1d5a2b40a11a7c788b5b945a800223edc439871e2291e59b4850c3"},
+        {"path":"src/self_improvement/si_p3/runtime_gate.py","sha256":"da9ef92150e4310faab3eccd32d1d40a34e78f1f106aa34820a78d66ffb50c95"},
+        {"path":"src/self_improvement/si_p3/collector.py","sha256":"1c3604131004487f0b139b26c2891c62cf932f21edec160c32f86493c1993269"},
+        {"path":"src/self_improvement/si_p3/runtime_environment.py","sha256":"d563f8235c8890f98375932089bd6abbf9cfcb1a1e7478f9e069b1ac6a2e590d"},
+        {"path":"src/self_improvement/si_p3/contract.py","sha256":"2d7b05d5c230cb45c2ad90c7507c11a5c76ce52f7335548c46a48d78e8842239"},
+        {"path":"src/sft/training.py","sha256":"0c722ca6ff17aa50da6fb294b632619f65f99936ce41e61ec0dab6288c7b584e"}
+      ],
+      "review_scope":"d7 source-only software only; not engineering candidate/runtime release"
+    },
+    "installed_package_source_origins": "NOT_OBSERVED; historical runtime manifest records versions but not filesystem module origins"
+  },
+  "historical_receipts": [
+    {"path":"/home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-g3-live-successor__2da980f/supervisor_live/launch_context.json","bytes":4235,"sha256":"399137330d5dfaccdd8734f7c39b219cfd7040808649e6090af8c9b733af39ac","run_id":"260422ac02bd42a8b2929d7ef240526b","historical_child_argv_sha256":"93aa3a833fbb65241fcab6b7e68d3863fa83985084d9c1b27875c730285f55ef","historical_environment_subset":{"ALFWORLD_DATA":"/home/lizening/alfworld_data","ALFWORLD_CONFIG_PATH":"/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml","HF_HUB_CACHE":"/home/lizening/.cache/huggingface/hub","HF_HUB_OFFLINE":"1","TRANSFORMERS_OFFLINE":"1"}},
+    {"path":"/home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-g3-live-successor__2da980f/supervisor_live/runner_exit.json","bytes":2023,"sha256":"015fe2296f5dce979d6e9db2a17dc03d217958620dd13a29a73b256d56cb144b"},
+    {"path":"/home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-g3-live-successor__2da980f/supervisor_live/supervisor_status.json","bytes":1904,"sha256":"df9ae52504c3f25a7f949ddea0a25b517dfe280d7e5a2ff23880fca68a7d5c99"},
+    {"path":"/home/lizening/research-notes/agent-logs/2026-10-23T002200Z__LUNA__r19-g3-live-successor__2da980f/supervisor_live/runner.log","bytes":861481,"sha256":"849cea6fc021205b1bcc3f12fc403726c726b9050a0aef928af8d591db365ae4"},
+    {"path":"/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/runtime_manifest_preload.json","bytes":4183,"raw_sha256":"6395e65abf266ba5f6a0834023b1da5c3799550b124a75db4d819cf613ee3312","frozen_preload_canonical_sha256":"64ebf4667da70dc4acd0a49b645bb6b6d4c3e1fe5d3e8e6351a8bf66f148ab9a"},
+    {"path":"/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/environment_manifest.json","bytes":409,"raw_sha256":"81ea3b3aea86a850c70d88846f1ce12dfb276cca34aacb9f598ea13e733bf902","execution_manifest_canonical_sha256":"2a1e4d35db31cdd0d8adcdf15df60b577a79b3b7e51c74c2546ed97463c178d0","recorded_data_root_identity_sha256":"d62900a7a31a181ad4e3f317932c7cb42db93daef4b5e4aff3625dbb12a6fe4a","recorded_domain_sha256":"f1473041ed01da514de1f87adfd7ef0804862361f83ccf63c75e43633b0eb280","recorded_grammar_sha256":"c5b22f0f73309a7fd7c8e5b71de42ad4803b60766ab4a51cc2feb34162be036b"},
+    {"path":"/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/g3_gate_receipt.json","bytes":5685,"raw_sha256":"4ab84099f361bf563327168237ac052c19506cd997e159aacd5f1244e3a9c773"},
+    {"path":"/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/source_restart_comparison.json","bytes":3210,"raw_sha256":"8d3269fccd346da464c990ff4f50bf1e913031fa210eb3feb8c4307ea8777ee9","status":"PASS for historical restart comparison only"},
+    {"path":"/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/execution_manifest.json","raw_sha256":"b00e8e4eed375532a080da6579940b44bc09089d7917540aea3ca4c227daffa0","recorded_adapter_sha256":"6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11","recorded_runtime_manifest_raw_sha256":"306a9e7c2d1b968e2a56e258fcd07aaf7467739460802a2b94c5e20411264916","recorded_runtime_manifest_canonical_sha256":"f4c6b5eac9b1558b82e0e626ea4412437ff924f839a62f8fe3962a141effe7f7","recorded_preload_manifest_canonical_sha256":"64ebf4667da70dc4acd0a49b645bb6b6d4c3e1fe5d3e8e6351a8bf66f148ab9a"}
+  ],
+  "execution_boundary": {
+    "fixed_scope": {"historical_run_id":"260422ac02bd42a8b2929d7ef240526b","source_index":0,"generation_count":1,"generated_tokens_max":16,"input_tokens_max":8192,"environment_constructs":1,"reset_seed":30000,"saved_steps":6,"reset_plus_steps_max":7,"environment_closes":1,"allocated_deadline_seconds":600},
+    "pool_seed":42,
+    "pool_seed_interpretation":"new engineering setting; not reconstruction of historical internal RNG",
+    "required_join":"reset -> saved public prompt -> prepared/sent IDs and mask -> one new raw generation/parser/action map -> saved first command -> each of six saved transitions",
+    "mismatch_rule":"stop immediately; no retry, second reset, alternate prompt/seed, or other action",
+    "historical_science_cost_5142_generations_7949_environment_ops_is_unchanged":true,
+    "engineering_cost_accounting":"separate; no engineering calls occurred in this preparation"
+  },
+  "readiness_conditions": {
+    "independent_review_of_final_candidate":"PENDING",
+    "candidate_implementation_returned_and_frozen":"PENDING",
+    "new_root_engineering_authorization":"NOT_GRANTED",
+    "new_independent_launch_clearance":"NOT_GRANTED",
+    "forwarded_ssh_agent_socket":"ROOT_CHECKPOINT_SAYS_ENOENT; NOT_RECHECKED; NO_SSH_ATTEMPT",
+    "trusted_host_UID_mapping":"NOT_OBSERVED",
+    "trusted_GPU_UUID_and_process_ownership":"NOT_OBSERVED",
+    "host_visible_cache_and_adapter_binding":"NOT_OBSERVED; only current container-visible bytes were hashed",
+    "current_package_origins_and_environment_versions":"NOT_OBSERVED",
+    "future exact argv/env/output path":"NOT_CREATED; NOT_BOUND",
+    "old_authorizations_and_clearances":"CONSUMED; NOT_REUSABLE"
+  },
+  "calls_in_this_task": {"ssh":0,"cuda":0,"model_or_tokenizer_load":0,"generation":0,"environment_construct_reset_step":0,"project_validator_or_test":0,"preflight_or_supervisor":0,"science":0},
+  "prohibited_artifacts_created": {"gate":false,"authorization":false,"scientific_output":false,"executable_argv":false,"shared_index_or_inventory_edit":false}
+}

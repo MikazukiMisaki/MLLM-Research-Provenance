@@ -1,0 +1,55 @@
+F...............F                                                        [100%]
+=================================== FAILURES ===================================
+____ test_actual_engineering_cli_software_preflight_static_zero_boundaries _____
+
+tmp_path = PosixPath('/tmp/si-s01-eng-clean_engineering_gate_v1/test_actual_engineering_cli_so0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f99f5f1db70>
+
+    def test_actual_engineering_cli_software_preflight_static_zero_boundaries(tmp_path,monkeypatch):
+        f=fixture_setup(tmp_path,monkeypatch);r=child(f,f.save(),tmp_path)
+>       assert r.returncode==0,r.stderr.decode();data=json.loads(r.stdout)
+E       AssertionError: {"status": "ENGINEERING_REJECTED_OR_STOPPED", "science_authorized": false, "exception": "IntegrityError", "message": "exact isolated engineering environment", "resource_evidence": null}
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python3.10', '-I', '/home/lizening/wt...lse, "exception": "IntegrityError", "message": "exact isolated engineering environment", "resource_evidence": null}\n').returncode
+
+tests/test_si_s01_engineering_gate.py:21: AssertionError
+_________ test_source_and_engineering_authorizations_reject_cross_use __________
+
+tmp_path = PosixPath('/tmp/si-s01-eng-clean_engineering_gate_v1/test_source_and_engineering_au0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f99f7316da0>
+
+    def test_source_and_engineering_authorizations_reject_cross_use(tmp_path,monkeypatch):
+        f=fixture_setup(tmp_path/'engineering',monkeypatch);argv=f.save()
+        with pytest.raises(ContractError):authenticate_source(REPO,f.ap,file_binding(f.ap)['sha256'],f.pp,invocation=argv,mode='preflight')
+        directory=tmp_path/'source';directory.mkdir();a,p,ap,pp,save=gate_fixture(directory,REPO)
+>       with pytest.raises(ContractError):authenticate_engineering(REPO,ap,file_binding(ap)['sha256'],pp,invocation=save(),mode='preflight')
+
+tests/test_si_s01_engineering_gate.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/si_s01_engineering_support.py:24: in file_binding
+    p=Path(path);return {'path':str(p.resolve()),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
+../miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1126: in read_bytes
+    with self.open(mode='rb') as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/si-s01-eng-clean_engineering_gate_v1/test_source_and_engineering_au0/source/auth.json')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/tmp/si-s01-eng-clean_engineering_gate_v1/test_source_and_engineering_au0/source/auth.json'
+
+../miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1119: FileNotFoundError
+- generated xml file: /home/lizening/research-notes/agent-logs/2026-10-26T122023Z__CODEX__si-s01-engineering-adapter__d7a82ac/clean_engineering_gate_v1.xml -
+=========================== short test summary info ============================
+FAILED tests/test_si_s01_engineering_gate.py::test_actual_engineering_cli_software_preflight_static_zero_boundaries
+FAILED tests/test_si_s01_engineering_gate.py::test_source_and_engineering_authorizations_reject_cross_use

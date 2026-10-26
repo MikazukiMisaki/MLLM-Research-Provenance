@@ -1,0 +1,32 @@
+{
+  "additional_interpreter_flags": [
+    "-B"
+  ],
+  "reason": "disable main-process bytecode writes while preserving runner exact bytes; project tests may use explicit isolated subprocess flags",
+  "cache_redirects": {
+    "TMPDIR": "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/external",
+    "PYTHONPYCACHEPREFIX": "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/external/cache/pycache",
+    "XDG_CACHE_HOME": "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/external/cache/xdg",
+    "HF_HOME": "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/external/cache/hf",
+    "TORCH_HOME": "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/external/cache/torch",
+    "PYTEST_DEBUG_TEMPROOT": "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/external/pytest-temproot"
+  },
+  "contract_key_presence": {
+    "PYTHONPATH": false,
+    "PYTHONHOME": false,
+    "VIRTUAL_ENV": false,
+    "PYTEST_ADDOPTS": false,
+    "PYTEST_PLUGINS": false
+  },
+  "contract_overrides": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "run_each_mode_once": [
+    "collect",
+    "full"
+  ]
+}

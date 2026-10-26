@@ -1,0 +1,148 @@
+..FFFF                                                                   [100%]
+=================================== FAILURES ===================================
+_ test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits[None] _
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_parity_v1/test_actual_source_wrapper_dif0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe65e41fee0>
+fault = None
+
+    @pytest.mark.parametrize('fault',[None,'tensor','disabled_P0','post_resource'])
+    def test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits(tmp_path,monkeypatch,fault):
+        f=fixture_setup(tmp_path,monkeypatch)
+        for parameter in f.state.model.parameters():parameter.requires_grad_(False)
+        namespace={'__name__':'self_improvement.si_s01._frozen_d7_parity','__package__':'self_improvement.si_s01'}
+        exec(compile(frozen('src/self_improvement/si_s01/runtime.py'),'<pinned-d7-runtime-software-differential>','exec'),namespace)
+        snapshots=[];source_plan=plan()
+        for label,cls in [('d7',namespace['LiveProducer']),('current',runtime.LiveProducer)]:
+            f.state.calls.clear();f.state.model.enabled=fault!='disabled_P0';f.state.tokenizer.drift='attention_mask' if fault=='tensor' else None;f.state.foreign_post=fault=='post_resource'
+            ticks=iter([100.0,100.125]);monkeypatch.setattr(time,'perf_counter',lambda:next(ticks))
+            journal=Journal(tmp_path/(label+'.jsonl'),{'explicit_synthetic_source_component':True});ledger=Ledger(journal,source_plan,'8'*32)
+            producer=cls(f.state.tokenizer,None,evidence_class='synthetic_software_fixture');producer.raw=producer._raw
+            producer.torch=__import__('torch');producer.model=f.state.model;producer.ledger=ledger
+            producer.resource=lambda:inspect_gpu(GPU,allowed_pids={__import__('os').getpid()},require_owned_context=True)
+            prepared=producer.prepare('explicit public source component input');value=None;error=None
+            try:
+                event=ledger.call(source_plan.slots[0],'generation',0,lambda:producer.generate(prepared,source_plan.slots[0],0),prepared=prepared.to_dict());value=ledger.data(event)
+            except Exception as exc:error={'type':type(exc).__name__,'message':str(exc),'raw':getattr(exc,'raw_evidence',None),'resource':getattr(exc,'resource_evidence',None)}
+            observations=[{'kind':e['kind'],'payload':e['payload']} for e in journal.events[1:]];journal.close()
+            snapshots.append({'value':value,'error':error,'observations':observations,'used':dict(ledger.used),'completed':dict(ledger.completed),'stopped':ledger.stopped,'model_edge_calls':f.state.calls['generation']})
+>       assert snapshots[0]==snapshots[1]
+E       AssertionError: assert {'completed':...106d'}}], ...} == {'completed':...106d'}}], ...}
+E         
+E         Omitting 6 identical items, use -vv to show
+E         Differing items:
+E         {'observations': [{'kind': 'unit_started', 'payload': {'identity': {'index': 0, 'kind': 'generation', 'phase': 'source...e869af3042530631741766a83a816e66da9962', 'unit': '6542b067ba0bb147b58bd53448fd08899dbff0b6b1e4afacc3bea7167ca6106d'}}]} != {'observations': [{'kind': 'unit_started', 'payload': {'identity': {'index': 0, 'kind': 'generation', 'phase': 'source...36ae3175aad6642ae084aae7948cbda2ee5940', 'unit': '6542b067ba0bb147b58bd53448fd08899dbff0b6b1e4afacc3bea7167ca6106d'}}]}
+E         Use -v to get more diff
+
+tests/test_si_s01_engineering_parity.py:87: AssertionError
+_ test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits[tensor] _
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_parity_v1/test_actual_source_wrapper_dif1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe65e5bdc00>
+fault = 'tensor'
+
+    @pytest.mark.parametrize('fault',[None,'tensor','disabled_P0','post_resource'])
+    def test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits(tmp_path,monkeypatch,fault):
+        f=fixture_setup(tmp_path,monkeypatch)
+        for parameter in f.state.model.parameters():parameter.requires_grad_(False)
+        namespace={'__name__':'self_improvement.si_s01._frozen_d7_parity','__package__':'self_improvement.si_s01'}
+        exec(compile(frozen('src/self_improvement/si_s01/runtime.py'),'<pinned-d7-runtime-software-differential>','exec'),namespace)
+        snapshots=[];source_plan=plan()
+        for label,cls in [('d7',namespace['LiveProducer']),('current',runtime.LiveProducer)]:
+            f.state.calls.clear();f.state.model.enabled=fault!='disabled_P0';f.state.tokenizer.drift='attention_mask' if fault=='tensor' else None;f.state.foreign_post=fault=='post_resource'
+            ticks=iter([100.0,100.125]);monkeypatch.setattr(time,'perf_counter',lambda:next(ticks))
+            journal=Journal(tmp_path/(label+'.jsonl'),{'explicit_synthetic_source_component':True});ledger=Ledger(journal,source_plan,'8'*32)
+            producer=cls(f.state.tokenizer,None,evidence_class='synthetic_software_fixture');producer.raw=producer._raw
+            producer.torch=__import__('torch');producer.model=f.state.model;producer.ledger=ledger
+            producer.resource=lambda:inspect_gpu(GPU,allowed_pids={__import__('os').getpid()},require_owned_context=True)
+            prepared=producer.prepare('explicit public source component input');value=None;error=None
+            try:
+                event=ledger.call(source_plan.slots[0],'generation',0,lambda:producer.generate(prepared,source_plan.slots[0],0),prepared=prepared.to_dict());value=ledger.data(event)
+            except Exception as exc:error={'type':type(exc).__name__,'message':str(exc),'raw':getattr(exc,'raw_evidence',None),'resource':getattr(exc,'resource_evidence',None)}
+            observations=[{'kind':e['kind'],'payload':e['payload']} for e in journal.events[1:]];journal.close()
+            snapshots.append({'value':value,'error':error,'observations':observations,'used':dict(ledger.used),'completed':dict(ledger.completed),'stopped':ledger.stopped,'model_edge_calls':f.state.calls['generation']})
+>       assert snapshots[0]==snapshots[1]
+E       AssertionError: assert {'completed':...106d'}}], ...} == {'completed':...106d'}}], ...}
+E         
+E         Omitting 6 identical items, use -vv to show
+E         Differing items:
+E         {'observations': [{'kind': 'unit_started', 'payload': {'identity': {'index': 0, 'kind': 'generation', 'phase': 'source...1acdea7122a8877254665571a1b5ce37a92eb8', 'unit': '6542b067ba0bb147b58bd53448fd08899dbff0b6b1e4afacc3bea7167ca6106d'}}]} != {'observations': [{'kind': 'unit_started', 'payload': {'identity': {'index': 0, 'kind': 'generation', 'phase': 'source...ba1b188c4b109d5801c531544789f0b6b26a0a', 'unit': '6542b067ba0bb147b58bd53448fd08899dbff0b6b1e4afacc3bea7167ca6106d'}}]}
+E         Use -v to get more diff
+
+tests/test_si_s01_engineering_parity.py:87: AssertionError
+_ test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits[disabled_P0] _
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_parity_v1/test_actual_source_wrapper_dif2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe65e46b700>
+fault = 'disabled_P0'
+
+    @pytest.mark.parametrize('fault',[None,'tensor','disabled_P0','post_resource'])
+    def test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits(tmp_path,monkeypatch,fault):
+        f=fixture_setup(tmp_path,monkeypatch)
+        for parameter in f.state.model.parameters():parameter.requires_grad_(False)
+        namespace={'__name__':'self_improvement.si_s01._frozen_d7_parity','__package__':'self_improvement.si_s01'}
+        exec(compile(frozen('src/self_improvement/si_s01/runtime.py'),'<pinned-d7-runtime-software-differential>','exec'),namespace)
+        snapshots=[];source_plan=plan()
+        for label,cls in [('d7',namespace['LiveProducer']),('current',runtime.LiveProducer)]:
+            f.state.calls.clear();f.state.model.enabled=fault!='disabled_P0';f.state.tokenizer.drift='attention_mask' if fault=='tensor' else None;f.state.foreign_post=fault=='post_resource'
+            ticks=iter([100.0,100.125]);monkeypatch.setattr(time,'perf_counter',lambda:next(ticks))
+            journal=Journal(tmp_path/(label+'.jsonl'),{'explicit_synthetic_source_component':True});ledger=Ledger(journal,source_plan,'8'*32)
+            producer=cls(f.state.tokenizer,None,evidence_class='synthetic_software_fixture');producer.raw=producer._raw
+            producer.torch=__import__('torch');producer.model=f.state.model;producer.ledger=ledger
+            producer.resource=lambda:inspect_gpu(GPU,allowed_pids={__import__('os').getpid()},require_owned_context=True)
+            prepared=producer.prepare('explicit public source component input');value=None;error=None
+            try:
+                event=ledger.call(source_plan.slots[0],'generation',0,lambda:producer.generate(prepared,source_plan.slots[0],0),prepared=prepared.to_dict());value=ledger.data(event)
+            except Exception as exc:error={'type':type(exc).__name__,'message':str(exc),'raw':getattr(exc,'raw_evidence',None),'resource':getattr(exc,'resource_evidence',None)}
+            observations=[{'kind':e['kind'],'payload':e['payload']} for e in journal.events[1:]];journal.close()
+            snapshots.append({'value':value,'error':error,'observations':observations,'used':dict(ledger.used),'completed':dict(ledger.completed),'stopped':ledger.stopped,'model_edge_calls':f.state.calls['generation']})
+>       assert snapshots[0]==snapshots[1]
+E       AssertionError: assert {'completed':...106d'}}], ...} == {'completed':...106d'}}], ...}
+E         
+E         Omitting 6 identical items, use -vv to show
+E         Differing items:
+E         {'observations': [{'kind': 'unit_started', 'payload': {'identity': {'index': 0, 'kind': 'generation', 'phase': 'source...9d85d699a07d199f9cef2f2b7920809ac53950', 'unit': '6542b067ba0bb147b58bd53448fd08899dbff0b6b1e4afacc3bea7167ca6106d'}}]} != {'observations': [{'kind': 'unit_started', 'payload': {'identity': {'index': 0, 'kind': 'generation', 'phase': 'source...6339dd93336fc7fcca599a742dfaaa2270f41a', 'unit': '6542b067ba0bb147b58bd53448fd08899dbff0b6b1e4afacc3bea7167ca6106d'}}]}
+E         Use -v to get more diff
+
+tests/test_si_s01_engineering_parity.py:87: AssertionError
+_ test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits[post_resource] _
+
+tmp_path = PosixPath('/tmp/si-s01-eng-draft_parity_v1/test_actual_source_wrapper_dif3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe65f843eb0>
+fault = 'post_resource'
+
+    @pytest.mark.parametrize('fault',[None,'tensor','disabled_P0','post_resource'])
+    def test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits(tmp_path,monkeypatch,fault):
+        f=fixture_setup(tmp_path,monkeypatch)
+        for parameter in f.state.model.parameters():parameter.requires_grad_(False)
+        namespace={'__name__':'self_improvement.si_s01._frozen_d7_parity','__package__':'self_improvement.si_s01'}
+        exec(compile(frozen('src/self_improvement/si_s01/runtime.py'),'<pinned-d7-runtime-software-differential>','exec'),namespace)
+        snapshots=[];source_plan=plan()
+        for label,cls in [('d7',namespace['LiveProducer']),('current',runtime.LiveProducer)]:
+            f.state.calls.clear();f.state.model.enabled=fault!='disabled_P0';f.state.tokenizer.drift='attention_mask' if fault=='tensor' else None;f.state.foreign_post=fault=='post_resource'
+            ticks=iter([100.0,100.125]);monkeypatch.setattr(time,'perf_counter',lambda:next(ticks))
+            journal=Journal(tmp_path/(label+'.jsonl'),{'explicit_synthetic_source_component':True});ledger=Ledger(journal,source_plan,'8'*32)
+            producer=cls(f.state.tokenizer,None,evidence_class='synthetic_software_fixture');producer.raw=producer._raw
+            producer.torch=__import__('torch');producer.model=f.state.model;producer.ledger=ledger
+            producer.resource=lambda:inspect_gpu(GPU,allowed_pids={__import__('os').getpid()},require_owned_context=True)
+            prepared=producer.prepare('explicit public source component input');value=None;error=None
+            try:
+                event=ledger.call(source_plan.slots[0],'generation',0,lambda:producer.generate(prepared,source_plan.slots[0],0),prepared=prepared.to_dict());value=ledger.data(event)
+            except Exception as exc:error={'type':type(exc).__name__,'message':str(exc),'raw':getattr(exc,'raw_evidence',None),'resource':getattr(exc,'resource_evidence',None)}
+            observations=[{'kind':e['kind'],'payload':e['payload']} for e in journal.events[1:]];journal.close()
+            snapshots.append({'value':value,'error':error,'observations':observations,'used':dict(ledger.used),'completed':dict(ledger.completed),'stopped':ledger.stopped,'model_edge_calls':f.state.calls['generation']})
+>       assert snapshots[0]==snapshots[1]
+E       AssertionError: assert {'completed':...106d'}}], ...} == {'completed':...106d'}}], ...}
+E         
+E         Omitting 6 identical items, use -vv to show
+E         Differing items:
+E         {'observations': [{'kind': 'unit_started', 'payload': {'identity': {'index': 0, 'kind': 'generation', 'phase': 'source...fca06d93a4398de963009da5f06d34eecf01c8', 'unit': '6542b067ba0bb147b58bd53448fd08899dbff0b6b1e4afacc3bea7167ca6106d'}}]} != {'observations': [{'kind': 'unit_started', 'payload': {'identity': {'index': 0, 'kind': 'generation', 'phase': 'source...34ce03f2bbff22fa3e07cb7787d9a66b008efa', 'unit': '6542b067ba0bb147b58bd53448fd08899dbff0b6b1e4afacc3bea7167ca6106d'}}]}
+E         Use -v to get more diff
+
+tests/test_si_s01_engineering_parity.py:87: AssertionError
+- generated xml file: /home/lizening/research-notes/agent-logs/2026-10-26T122023Z__CODEX__si-s01-engineering-adapter__d7a82ac/draft_parity_v1.xml -
+=========================== short test summary info ============================
+FAILED tests/test_si_s01_engineering_parity.py::test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits[None]
+FAILED tests/test_si_s01_engineering_parity.py::test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits[tensor]
+FAILED tests/test_si_s01_engineering_parity.py::test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits[disabled_P0]
+FAILED tests/test_si_s01_engineering_parity.py::test_actual_source_wrapper_differential_preserves_raw_guards_events_and_debits[post_resource]

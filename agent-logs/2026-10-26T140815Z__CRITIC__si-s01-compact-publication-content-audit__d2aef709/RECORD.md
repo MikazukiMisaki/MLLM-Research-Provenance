@@ -1,0 +1,7 @@
+ALLOW: all155 files selected by developer PUBLICATION_MANIFEST.json 419a625bc4368c3041b0264a9e1f39d66f8888ecfc8ca8edc8444cf3fe850492. EXCLUDE:0. Selected total2,906,330 bytes; manifest itself53566 bytes is the separately bound control artifact.
+
+Every selected absolute/relative path join, canonical regular-file status, byte count and SHA256 was checked and remained stable after review. HANDOFF SHA256 150d37ab976085631e29cd22d8bdecc5f048894ff8501cb2ed9e01b74d6318d0. FILE_HASHES has154 matching selected entries under its declared self-exclusion convention.
+
+The48 selected evidence files are synthetic software evidence: explicit fixture labels or exact selected synthetic-context/index bindings. Three worker_start metadata sidecars are bound by launch-context SHA/argv to synthetic contexts; empty streams contain no payload. Intentionally tampered journals are marked as rejected negative evidence. Actual historical reader results contain only hashes/counts/read-window metadata, without original prompt/state/token arrays. No selected actual historical payload, weight/adapter/cache/input artifact, credential or namespace-root-only content was found.
+
+Exact allow rows and reasons: ALLOW.json / ALLOW.tsv. Exclusion list: EXCLUDE.json (empty). This review read only the fixed155 selected files and the controlling manifest, did not follow referenced input paths, scan unselected fixture trees, execute project/tests, modify author/shared records or publish. It grants compact-content publication approval only; root coordinates publication.

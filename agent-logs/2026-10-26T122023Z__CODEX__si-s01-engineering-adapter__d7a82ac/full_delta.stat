@@ -1,0 +1,20 @@
+ docs/si_s01_engineering_historical_once.md         |  19 ++
+ scripts/run_si_s01_engineering_once.py             |  37 ++++
+ src/self_improvement/si_s01/engineering_audit.py   | 134 ++++++++++++
+ .../si_s01/engineering_contract.py                 |  52 +++++
+ .../si_s01/engineering_evidence.py                 | 115 ++++++++++
+ src/self_improvement/si_s01/engineering_gate.py    | 101 +++++++++
+ src/self_improvement/si_s01/engineering_history.py | 110 ++++++++++
+ src/self_improvement/si_s01/engineering_runtime.py | 166 +++++++++++++++
+ .../si_s01/engineering_supervisor.py               |  24 +++
+ src/self_improvement/si_s01/runtime.py             |  78 +------
+ src/self_improvement/si_s01/runtime_core.py        | 101 +++++++++
+ src/self_improvement/si_s01/supervisor.py          |  98 +--------
+ src/self_improvement/si_s01/supervisor_core.py     | 110 ++++++++++
+ tests/si_s01_engineering_support.py                | 232 +++++++++++++++++++++
+ tests/test_si_s01_engineering_adapter.py           | 169 +++++++++++++++
+ tests/test_si_s01_engineering_gate.py              |  59 ++++++
+ tests/test_si_s01_engineering_history.py           |  50 +++++
+ tests/test_si_s01_engineering_parity.py            |  89 ++++++++
+ tests/test_si_s01_engineering_supervisor.py        |  23 ++
+ 19 files changed, 1603 insertions(+), 164 deletions(-)

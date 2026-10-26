@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="17" time="4.112" timestamp="2026-10-26T13:27:10.520796+00:00" hostname="acc28b43e0d2"><testcase classname="tests.test_si_s01_engineering_gate" name="test_actual_engineering_cli_software_preflight_static_zero_boundaries" time="0.343"><failure message="AssertionError: {&quot;status&quot;: &quot;ENGINEERING_REJECTED_OR_STOPPED&quot;, &quot;science_authorized&quot;: false, &quot;exception&quot;: &quot;IntegrityError&quot;, &quot;message&quot;: &quot;exact isolated engineering environment&quot;, &quot;resource_evidence&quot;: null}&#10;  &#10;assert 1 == 0&#10; +  where 1 = CompletedProcess(args=['/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python3.10', '-I', '/home/lizening/wt...lse, &quot;exception&quot;: &quot;IntegrityError&quot;, &quot;message&quot;: &quot;exact isolated engineering environment&quot;, &quot;resource_evidence&quot;: null}\n').returncode">tmp_path = PosixPath('/tmp/si-s01-eng-clean_engineering_gate_v1/test_actual_engineering_cli_so0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7f99f5f1db70&gt;
+
+    def test_actual_engineering_cli_software_preflight_static_zero_boundaries(tmp_path,monkeypatch):
+        f=fixture_setup(tmp_path,monkeypatch);r=child(f,f.save(),tmp_path)
+&gt;       assert r.returncode==0,r.stderr.decode();data=json.loads(r.stdout)
+E       AssertionError: {"status": "ENGINEERING_REJECTED_OR_STOPPED", "science_authorized": false, "exception": "IntegrityError", "message": "exact isolated engineering environment", "resource_evidence": null}
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python3.10', '-I', '/home/lizening/wt...lse, "exception": "IntegrityError", "message": "exact isolated engineering environment", "resource_evidence": null}\n').returncode
+
+tests/test_si_s01_engineering_gate.py:21: AssertionError</failure></testcase><testcase classname="tests.test_si_s01_engineering_gate" name="test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[old_schema]" time="0.215" /><testcase classname="tests.test_si_s01_engineering_gate" name="test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[historical_run_reused]" time="0.224" /><testcase classname="tests.test_si_s01_engineering_gate" name="test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[source_purpose]" time="0.223" /><testcase classname="tests.test_si_s01_engineering_gate" name="test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[science_true]" time="0.204" /><testcase classname="tests.test_si_s01_engineering_gate" name="test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[old_code]" time="0.218" /><testcase classname="tests.test_si_s01_engineering_gate" name="test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[consumed]" time="0.223" /><testcase classname="tests.test_si_s01_engineering_gate" name="test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[old_output]" time="0.223" /><testcase classname="tests.test_si_s01_engineering_gate" name="test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[mode_spoof]" time="0.224" /><testcase classname="tests.test_si_s01_engineering_gate" name="test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[wrong_UUID]" time="0.222" /><testcase classname="tests.test_si_s01_engineering_gate" name="test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[bad_cap]" time="0.217" /><testcase classname="tests.test_si_s01_engineering_gate" name="test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[bad_manifest]" time="0.217" /><testcase classname="tests.test_si_s01_engineering_gate" name="test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[package_drift]" time="0.223" /><testcase classname="tests.test_si_s01_engineering_gate" name="test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[env]" time="0.222" /><testcase classname="tests.test_si_s01_engineering_gate" name="test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[argv]" time="0.221" /><testcase classname="tests.test_si_s01_engineering_gate" name="test_engineering_cli_scope_identity_budget_input_negatives_fail_before_runtime[expired]" time="0.220" /><testcase classname="tests.test_si_s01_engineering_gate" name="test_source_and_engineering_authorizations_reject_cross_use" time="0.118"><failure message="FileNotFoundError: [Errno 2] No such file or directory: '/tmp/si-s01-eng-clean_engineering_gate_v1/test_source_and_engineering_au0/source/auth.json'">tmp_path = PosixPath('/tmp/si-s01-eng-clean_engineering_gate_v1/test_source_and_engineering_au0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7f99f7316da0&gt;
+
+    def test_source_and_engineering_authorizations_reject_cross_use(tmp_path,monkeypatch):
+        f=fixture_setup(tmp_path/'engineering',monkeypatch);argv=f.save()
+        with pytest.raises(ContractError):authenticate_source(REPO,f.ap,file_binding(f.ap)['sha256'],f.pp,invocation=argv,mode='preflight')
+        directory=tmp_path/'source';directory.mkdir();a,p,ap,pp,save=gate_fixture(directory,REPO)
+&gt;       with pytest.raises(ContractError):authenticate_engineering(REPO,ap,file_binding(ap)['sha256'],pp,invocation=save(),mode='preflight')
+
+tests/test_si_s01_engineering_gate.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/si_s01_engineering_support.py:24: in file_binding
+    p=Path(path);return {'path':str(p.resolve()),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
+../miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1126: in read_bytes
+    with self.open(mode='rb') as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/si-s01-eng-clean_engineering_gate_v1/test_source_and_engineering_au0/source/auth.json')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/tmp/si-s01-eng-clean_engineering_gate_v1/test_source_and_engineering_au0/source/auth.json'
+
+../miniconda3/envs/alfworld-self-improve/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase></testsuite></testsuites>

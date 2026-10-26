@@ -1,0 +1,198 @@
+{
+  "baseline_environment_contract_sha256": "3bd58e2d652d26cf22c7cffdae24919fd36b463d8c452604d1af3843834466e0",
+  "byte_exact_runner_sha256": "f1ae81f68f3ea75e65976c2726fa75be665684072482f84fdb61b5da570cb1ba",
+  "cache_placement_deviation": {
+    "no_test_rerun": true,
+    "observed_directory_count": 10,
+    "post_relocation_git_status_clean": true,
+    "record": "CACHE_PLACEMENT_DEVIATION.json",
+    "remaining_checkout_pycache_paths": [],
+    "status": "DISCLOSED_TRANSIENT_IGNORED_CACHE_PLACEMENT_DEVIATION_RELOCATED_WITHOUT_RERUN"
+  },
+  "candidate_sha": "e5f09c05824cb61cb35ccbbf4e189b04e8829cea",
+  "checkout_pycache_paths": [
+    "tests/__pycache__",
+    "src/trajectory/__pycache__",
+    "src/sft/__pycache__",
+    "src/models/__pycache__",
+    "src/env/__pycache__",
+    "src/self_improvement/__pycache__",
+    "src/self_improvement/si_s01/__pycache__",
+    "src/self_improvement/si_p3/__pycache__",
+    "src/recovery/__pycache__",
+    "src/evaluation/__pycache__"
+  ],
+  "collect_full_IDs_and_order_identical": true,
+  "collect_returncode": 0,
+  "comparisons": {
+    "base844": {
+      "NEW_failure_or_error_keys": [],
+      "NEW_skipped_ids": [],
+      "added_test_count": 154,
+      "added_test_ids_not_passed": [],
+      "added_test_ids_without_three_passed_phases": [],
+      "all_added_test_ids_passed": true,
+      "all_common_ID_phase_outcome_exception_sequences_identical": true,
+      "candidate_collection_errors": [],
+      "candidate_passed_ID_count": 1107,
+      "candidate_problem_key_count": 80,
+      "environment_contract_exact_bytes_equal": true,
+      "invocation_difference": "candidate adds -B; external cache/output/tmp roots differ; full ambient environment was not sealed in prior contract",
+      "no_new_regression_under_recorded_keys_and_pass_checks": true,
+      "prior_collect_full_orders_identical": true,
+      "prior_collection_errors": [],
+      "prior_collection_missing_ids": [],
+      "prior_collection_relative_order_preserved": true,
+      "prior_counts": {
+        "collected": 1033,
+        "collection_errors": 0,
+        "errors": 77,
+        "failed_calls": 3,
+        "passed": 953,
+        "skipped": 0
+      },
+      "prior_passed_ID_count": 953,
+      "prior_passed_IDs_newly_skipped": [],
+      "prior_passed_IDs_not_passed": [],
+      "prior_problem_key_count": 80,
+      "prior_sha": "844cc4b78df1f83e29391ffd5ab861a2d0c0a3fd",
+      "problem_key_definition": [
+        "nodeid",
+        "phase",
+        "exception_type"
+      ],
+      "problem_keys_identical": true,
+      "resolved_prior_problem_keys": [],
+      "runner_exact_bytes_equal": true
+    },
+    "d7a82acb": {
+      "NEW_failure_or_error_keys": [],
+      "NEW_skipped_ids": [],
+      "added_test_count": 71,
+      "added_test_ids_not_passed": [],
+      "added_test_ids_without_three_passed_phases": [],
+      "all_added_test_ids_passed": true,
+      "all_common_ID_phase_outcome_exception_sequences_identical": true,
+      "candidate_collection_errors": [],
+      "candidate_passed_ID_count": 1107,
+      "candidate_problem_key_count": 80,
+      "environment_contract_exact_bytes_equal": true,
+      "invocation_difference": "candidate adds -B; external cache/output/tmp roots differ; full ambient environment was not sealed in prior contract",
+      "no_new_regression_under_recorded_keys_and_pass_checks": true,
+      "prior_collect_full_orders_identical": true,
+      "prior_collection_errors": [],
+      "prior_collection_missing_ids": [],
+      "prior_collection_relative_order_preserved": true,
+      "prior_counts": {
+        "collected": 1116,
+        "collection_errors": 0,
+        "errors": 77,
+        "failed_calls": 3,
+        "passed": 1036,
+        "skipped": 0
+      },
+      "prior_passed_ID_count": 1036,
+      "prior_passed_IDs_newly_skipped": [],
+      "prior_passed_IDs_not_passed": [],
+      "prior_problem_key_count": 80,
+      "prior_sha": "d7a82acb510157ab7ba5439d790816c5c948439f",
+      "problem_key_definition": [
+        "nodeid",
+        "phase",
+        "exception_type"
+      ],
+      "problem_keys_identical": true,
+      "resolved_prior_problem_keys": [],
+      "runner_exact_bytes_equal": true
+    }
+  },
+  "compile_changed_python_count": 18,
+  "compile_returncode": 0,
+  "counts": {
+    "collected": 1187,
+    "collection_errors": 0,
+    "errors": 77,
+    "failed_calls": 3,
+    "failed_exception_types_by_phase": {
+      "call:builtins.FileNotFoundError": 2,
+      "call:builtins.RuntimeError": 1,
+      "setup:builtins.FileNotFoundError": 6,
+      "setup:builtins.RuntimeError": 71
+    },
+    "passed": 1107,
+    "phase_report_count": 3484,
+    "skipped": 0
+  },
+  "diff_check_returncode": 0,
+  "duplicate_collection_ids": 0,
+  "final_handoff_condition": "Adopt only if developer final source SHA exactly equals candidate_sha; never relabel for another SHA.",
+  "full_returncode": 1,
+  "invocation_difference": [
+    "additional -B flag",
+    "pytest evidence/cache and temp/cache roots redirected outside checkout"
+  ],
+  "origins": {
+    "collect.after": {
+      "CUDA_VISIBLE_DEVICES": "",
+      "executable": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+      "first_three_origins_correct": false,
+      "first_three_sys_path_entries": [
+        "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout/tests",
+        "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout/src",
+        "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout/tests"
+      ],
+      "project_modules_under_exact_checkout": true,
+      "removed_import_env_keys_absent": true,
+      "torch_cuda_initialized": false,
+      "torch_imported": false
+    },
+    "collect.before": {
+      "CUDA_VISIBLE_DEVICES": "",
+      "executable": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+      "first_three_origins_correct": false,
+      "first_three_sys_path_entries": [
+        "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout/src",
+        "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout",
+        "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout/src"
+      ],
+      "project_modules_under_exact_checkout": true,
+      "removed_import_env_keys_absent": true,
+      "torch_cuda_initialized": false,
+      "torch_imported": false
+    },
+    "full.after": {
+      "CUDA_VISIBLE_DEVICES": "",
+      "executable": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+      "first_three_origins_correct": false,
+      "first_three_sys_path_entries": [
+        "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout/tests",
+        "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout/src",
+        "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout/tests"
+      ],
+      "project_modules_under_exact_checkout": true,
+      "removed_import_env_keys_absent": true,
+      "torch_cuda_initialized": false,
+      "torch_imported": true
+    },
+    "full.before": {
+      "CUDA_VISIBLE_DEVICES": "",
+      "executable": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+      "first_three_origins_correct": false,
+      "first_three_sys_path_entries": [
+        "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout/src",
+        "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout",
+        "/tmp/si-s01-independent-e5f09c0-4d863fc1-7nai5h78/checkout/src"
+      ],
+      "project_modules_under_exact_checkout": true,
+      "removed_import_env_keys_absent": true,
+      "torch_cuda_initialized": false,
+      "torch_imported": false
+    }
+  },
+  "path_order_check_note": "The diagnostic first_three_origins_correct=false assumes initial src/tests/root order remains literal after imports. Existing script imports and pytest reorder/duplicate checkout paths. Actual normalized first-three ordering matches BOTH retained baselines in every stage; all captured project-module origins remain under this exact checkout. See ORIGIN_NORMALIZED_BASELINE_COMPARISON.json.",
+  "post_head_is_fixed_target": true,
+  "post_status_clean": true,
+  "scope": "Software full suite includes pre-existing real tiny CPU GPT2/PEFT and tiny CPU Llama training fixture objects. New engineering raw model/tokenizer/CUDA/TextWorld boundaries are fakes. No actual Qwen3-8B checkpoint, real CUDA initialization, real ALFWorld, SSH, production preflight or science acquisition is authorized by this evidence.",
+  "status": "EXACT_E5_SOFTWARE_COMPARISON_ONLY_PENDING_FINAL_HANDOFF_NOT_LAUNCH",
+  "tracked_file_hashes_unchanged": true
+}
