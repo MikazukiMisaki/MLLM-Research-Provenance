@@ -1,0 +1,22 @@
+{
+  "schema": "LUNA_EXISTING_SSH_AGENT_SOCKET_READONLY_CHECK_V1",
+  "observed_utc": "2026-10-26T10:18:41Z",
+  "authorization_context": "User selected restoration of the existing desktop-to-sdxsrv03 SSH/agent-forwarding route. This record checks whether it is already restored; it does not restore or mutate it.",
+  "protocol_path": "/home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c/ADOPTED_SOURCE_ONLY_PROTOCOL.md",
+  "protocol_sha256": "daa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72",
+  "check": {
+    "method": "python3 -I; os.environ SSH_AUTH_SOCK comparison, os.lstat, stat.S_ISSOCK, os.access R/W/X only; did not connect to or read socket",
+    "path": "/home/lizening/.codex/app-server-control/forwarded-ssh-agent.sock",
+    "return_code": 0,
+    "stdout": "{\"env_matches_expected\": true, \"executable\": false, \"file_type\": \"missing\", \"lstat_exists\": false, \"mode_octal\": null, \"owner_uid\": null, \"path\": \"/home/lizening/.codex/app-server-control/forwarded-ssh-agent.sock\", \"process_uid\": 2000, \"readable\": false, \"writable\": false}\n",
+    "stderr": "",
+    "classification": "NOT_RESTORED"
+  },
+  "actions_not_taken": [
+    "SSH authentication or remote command",
+    "agent/socket content read",
+    "key, config, permission, daemon, or forwarding changes",
+    "CUDA/NVML/model/environment/preflight/supervisor/science invocation"
+  ],
+  "next_gate": "Do not attempt SSH unless a subsequent read-only lstat shows the already-existing expected path is a socket, owned by the trusted UID, and accessible. This check does not itself authorize any runtime/scientific probe."
+}
