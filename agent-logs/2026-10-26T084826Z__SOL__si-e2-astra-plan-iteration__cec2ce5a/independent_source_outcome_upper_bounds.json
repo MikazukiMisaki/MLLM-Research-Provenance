@@ -1,0 +1,59 @@
+{
+  "schema": "historical_source_outcome_upper_bound_v1",
+  "scope": "Already-consumed old sources only; no teacher/recovery outcomes; not prediction for new96",
+  "source_sha256_before": "c6f37a7da28e326c70818524c79c17bbd85a286754c111f17db07cbe151a4f1c",
+  "source_sha256_after": "c6f37a7da28e326c70818524c79c17bbd85a286754c111f17db07cbe151a4f1c",
+  "success_definition": "bool(steps and last.done is True and float(last.reward)>0)",
+  "production_semantics": "scripts/run_r19_experiment.py _build_source_candidates, current candidate lines2782+; SI-P3 collector _rollout source success done and reward>0",
+  "counts": {
+    "all": {
+      "N": 127,
+      "Y0_success": 120,
+      "d5_reachable": 117,
+      "d5_reachable_failure": 7,
+      "Y0_failure": 7
+    },
+    "pick_and_place_simple": {
+      "N": 30,
+      "Y0_success": 30,
+      "d5_reachable": 21,
+      "d5_reachable_failure": 0
+    },
+    "nonlight": {
+      "N": 120,
+      "Y0_success": 114,
+      "d5_reachable": 111,
+      "d5_reachable_failure": 6,
+      "Y0_failure": 6
+    },
+    "pick_clean_then_place_in_recep": {
+      "N": 30,
+      "Y0_success": 28,
+      "d5_reachable": 30,
+      "d5_reachable_failure": 2,
+      "Y0_failure": 2
+    },
+    "pick_cool_then_place_in_recep": {
+      "N": 30,
+      "Y0_success": 28,
+      "d5_reachable": 30,
+      "d5_reachable_failure": 2,
+      "Y0_failure": 2
+    },
+    "pick_heat_then_place_in_recep": {
+      "N": 30,
+      "Y0_failure": 2,
+      "d5_reachable": 30,
+      "d5_reachable_failure": 2,
+      "Y0_success": 28
+    },
+    "look_at_obj_in_light": {
+      "N": 7,
+      "Y0_success": 6,
+      "d5_reachable": 6,
+      "d5_reachable_failure": 1,
+      "Y0_failure": 1
+    }
+  },
+  "future96_C24_status": "NOT_PROVEN; anchor improvement alone cannot generate more source failures"
+}

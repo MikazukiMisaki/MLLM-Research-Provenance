@@ -1,0 +1,52 @@
+{
+  "status": "PAPER_ARITHMETIC_ONLY_NO_EXECUTION_RELEASE",
+  "assumptions": "All96 reach one fixed anchor and execute singleK1 in-place handback under H50; each source/suffix generation at most16 tokens, teacher Stage1/2 at most40/16. Upper caps, not measured costs or expected yield. No second baseline rollout, extra branches, top-up or implicit engineering budget.",
+  "designs": [
+    {
+      "design": "v1_equal_5_10_15_20",
+      "N": 96,
+      "H": 50,
+      "sum_d": 1200,
+      "source_generation_cap": 4800,
+      "teacher_generation_cap": 192,
+      "suffix_generation_cap": 3504,
+      "total_generation_cap": 8496,
+      "source_action_cap": 4800,
+      "replay_action_cap": 1200,
+      "teacher_action_cap": 96,
+      "suffix_action_cap": 3504,
+      "reset_cap": 192,
+      "total_reset_inclusive_environment_operation_cap": 9792,
+      "generated_token_cap": 138240,
+      "cumulative_input_token_hard_cap_proposed_unchanged": 16000000,
+      "device_hours_hard_cap_proposed_unchanged": 4,
+      "per_call_input_token_cap": 8192
+    },
+    {
+      "design": "v2_candidate_fixed_5",
+      "N": 96,
+      "H": 50,
+      "sum_d": 480,
+      "source_generation_cap": 4800,
+      "teacher_generation_cap": 192,
+      "suffix_generation_cap": 4224,
+      "total_generation_cap": 9216,
+      "source_action_cap": 4800,
+      "replay_action_cap": 480,
+      "teacher_action_cap": 96,
+      "suffix_action_cap": 4224,
+      "reset_cap": 192,
+      "total_reset_inclusive_environment_operation_cap": 9792,
+      "generated_token_cap": 149760,
+      "cumulative_input_token_hard_cap_proposed_unchanged": 16000000,
+      "device_hours_hard_cap_proposed_unchanged": 4,
+      "per_call_input_token_cap": 8192
+    }
+  ],
+  "v2_minus_v1": {
+    "generations": 720,
+    "output_tokens": 11520,
+    "reset_inclusive_environment_operations": 0
+  },
+  "v2_adopted": false
+}
