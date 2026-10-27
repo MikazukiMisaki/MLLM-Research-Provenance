@@ -1,0 +1,59 @@
+{
+  "schema": "ROOT_REVIEWED_SOURCE_ONLY_EXACT_COMMANDS_V1",
+  "cwd": "/home/lizening/wt-si-s01-shared-gpu-adapter",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "environment": {
+    "ALFWORLD_CONFIG_PATH": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml",
+    "ALFWORLD_DATA": "/home/lizening/alfworld_data",
+    "CUDA_VISIBLE_DEVICES": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+    "HF_HOME": "/home/lizening/.cache/huggingface",
+    "HF_HUB_CACHE": "/home/lizening/.cache/huggingface/hub",
+    "HF_HUB_OFFLINE": "1",
+    "HOME": "/home/lizening",
+    "LC_CTYPE": "C.UTF-8",
+    "PATH": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTORCH_CUDA_ALLOC_CONF": "backend:native",
+    "TRANSFORMERS_OFFLINE": "1",
+    "CUDA_MODULE_LOADING": "LAZY"
+  },
+  "inherit_environment": false,
+  "environment_sha256": "a4ec1864fac27a73c0142494dc9f9228b3a5bdd1d1693944795e047f80ecee8b",
+  "preflight_argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "/home/lizening/wt-si-s01-shared-gpu-adapter/scripts/run_si_s01_source_only.py",
+    "--preflight-only",
+    "--authorization",
+    "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/ROOT_SOURCE_AUTHORIZATION_V2.json",
+    "--authorization-sha256",
+    "cf25576d5bf019a925cb1cd1d878046921162f136de173dad870ce8365e40a05",
+    "--proposal",
+    "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_PRODUCTION_PROPOSAL.json"
+  ],
+  "live_base_argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "/home/lizening/wt-si-s01-shared-gpu-adapter/scripts/run_si_s01_source_only.py",
+    "--live",
+    "--authorization",
+    "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/ROOT_SOURCE_AUTHORIZATION_V2.json",
+    "--authorization-sha256",
+    "cf25576d5bf019a925cb1cd1d878046921162f136de173dad870ce8365e40a05",
+    "--proposal",
+    "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_PRODUCTION_PROPOSAL.json"
+  ],
+  "authorization": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/ROOT_SOURCE_AUTHORIZATION_V2.json",
+    "sha256": "cf25576d5bf019a925cb1cd1d878046921162f136de173dad870ce8365e40a05"
+  },
+  "proposal": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_PRODUCTION_PROPOSAL.json",
+    "sha256": "227eef584d8d8bd991e4e783eebb1203f249f9e64835282ba5b4e69328e02580"
+  },
+  "live_release": "NOT_ISSUED_CLEARANCE_REQUIRED",
+  "output_path": "/tmp/si_s01_source_uid-2000_run-f96b86f3391940eaa9d75040c444a8e4_oxwwsyg4/raw",
+  "maximum_source_live_launches": 1,
+  "retry": false,
+  "preflight_argv_sha256": "e39deed26d3e849ca3479a46e684875819ec568f8f8206584a9d8c82e3d91f02"
+}

@@ -1,0 +1,101 @@
+{
+  "schema": "ROOT_SINGLE_A96_SOURCE_EXECUTION_HANDOFF_V1",
+  "status": "RELEASED_ONE_FORMAL_SOURCE_ONLY_EXECUTION",
+  "created_utc": "2026-10-27T00:22:28.290056Z",
+  "authority_basis": "Standing human task-specific instructions to continue reviewed runtime adaptation until experiment starts, and adopted frozen source-onlyA96 protocol. No fresh human approval claimed; explicit source-only scope under root coordination.",
+  "independent_review": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_PREFLIGHT_INDEPENDENT_VERIFICATION.json",
+    "sha256": "6a305a810c54f3cb5757222143f0564885c418287b4dad249b51ba8a09a89ad1"
+  },
+  "actual_engineering_acceptance": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T000517Z__SOL__si-s01-framework-default-amendment__f1e0d56_bf6d2eb7/ACTUAL_ENGINEERING_INDEPENDENT_ACCEPTANCE.json",
+    "sha256": "dfa1f3e89ff1a654a0329109d960b2775dc99841bb98a2c6dc4c7e4e6545cef9"
+  },
+  "clearance": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_LAUNCH_CLEARANCE_V2.json",
+    "sha256": "3defb7052665b5ad365093880912f4be8c667d0d3c65979e15373afe014e7524"
+  },
+  "authorization": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/ROOT_SOURCE_AUTHORIZATION_V2.json",
+    "sha256": "cf25576d5bf019a925cb1cd1d878046921162f136de173dad870ce8365e40a05"
+  },
+  "proposal": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_PRODUCTION_PROPOSAL.json",
+    "sha256": "227eef584d8d8bd991e4e783eebb1203f249f9e64835282ba5b4e69328e02580"
+  },
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "run_id": "f96b86f3391940eaa9d75040c444a8e4",
+  "cwd": "/home/lizening/wt-si-s01-shared-gpu-adapter",
+  "allowed_live_argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "/home/lizening/wt-si-s01-shared-gpu-adapter/scripts/run_si_s01_source_only.py",
+    "--live",
+    "--authorization",
+    "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/ROOT_SOURCE_AUTHORIZATION_V2.json",
+    "--authorization-sha256",
+    "cf25576d5bf019a925cb1cd1d878046921162f136de173dad870ce8365e40a05",
+    "--proposal",
+    "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_PRODUCTION_PROPOSAL.json",
+    "--clearance",
+    "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_LAUNCH_CLEARANCE_V2.json",
+    "--clearance-sha256",
+    "3defb7052665b5ad365093880912f4be8c667d0d3c65979e15373afe014e7524"
+  ],
+  "allowed_live_argv_sha256": "53829b6ccbfb46d6d714163213c6685370304f855af5272302cad8302e72ded9",
+  "environment": {
+    "ALFWORLD_CONFIG_PATH": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml",
+    "ALFWORLD_DATA": "/home/lizening/alfworld_data",
+    "CUDA_VISIBLE_DEVICES": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+    "HF_HOME": "/home/lizening/.cache/huggingface",
+    "HF_HUB_CACHE": "/home/lizening/.cache/huggingface/hub",
+    "HF_HUB_OFFLINE": "1",
+    "HOME": "/home/lizening",
+    "LC_CTYPE": "C.UTF-8",
+    "PATH": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTORCH_CUDA_ALLOC_CONF": "backend:native",
+    "TRANSFORMERS_OFFLINE": "1",
+    "CUDA_MODULE_LOADING": "LAZY"
+  },
+  "inherit_environment": false,
+  "shell": false,
+  "ceilings": {
+    "generations": 4800,
+    "environment_operations": 4896,
+    "generated_tokens": 76800,
+    "input_tokens": 16000000,
+    "per_call_input": 8192,
+    "device_hours": 4.0
+  },
+  "maximum_source_launches": 1,
+  "task_identity_order_seed_cutoff_horizon_quotas_and_exclusions": "Frozen96TRAIN / 35-26-16-9-10 /42 / pool42 /S5 /H50; no skips, backfill, topups or newseeds",
+  "hard_stops": [
+    "Any integrity/authority/input/source/environment/resource/budget error",
+    "OOM or physicalexternalfailure, timeout or cleanup uncertainty",
+    "No automatic retry/resume/relaunch after stop"
+  ],
+  "normal_task_outcomes": "Normal source parser/empty-map/H50 failures and success outcomes recorded per frozen collector; continue fixed schedule once each. Technical interruption Y0unknown, never relabel task failure.",
+  "analysis_gate": "Only after all96normal sealed may report E/F/S structural thresholds; incomplete run cannot be declared structuralNO_GO. YTnull, no learning claim.",
+  "historical_science_counts_unchanged": {
+    "generations": 5142,
+    "environment_operations": 7949
+  },
+  "completed_extra_engineering_cost_separate": {
+    "generations": 1,
+    "environment_operations": 7,
+    "input_tokens": 267,
+    "output_tokens": 5
+  },
+  "teacher_recovery_training_evaluation_heldout": "NOT_AUTHORIZED",
+  "storage": {
+    "output": "/tmp/si_s01_source_uid-2000_run-f96b86f3391940eaa9d75040c444a8e4_oxwwsyg4/raw",
+    "private_parent": "/tmp/si_s01_source_uid-2000_run-f96b86f3391940eaa9d75040c444a8e4_oxwwsyg4",
+    "local_UID": 2000,
+    "raw_retention": "Preserve originals including failed/incomplete. No container recycle/tmp cleanup; no raw overwrite/rotation.",
+    "capacity_monitor": "Read-onlyfilesystem free/inode observations, no extra CUDA probes; preserve actualerrors/prefix on IO failure.",
+    "archive": "After writers quiesce, deterministic lossless regular-file tar/gzip/chunks under own/tmp publication area, before/after raw hashes+roundtrip members verified. No model/cache/dataset inputs. Coordinate Root publication; separate/tmp fullGitclone avoids homebulk.",
+    "publication_repository_prepared": "/tmp/si_s01_source_uid-2000_run-f96b86f3391940eaa9d75040c444a8e4_oxwwsyg4/publication/repository"
+  },
+  "reporting": "Return actual supervisor/worker/run identity and first durable source unit evidence once started. Then monitor existing run/cumulativecaps until authentic exit; retain raw units/ledger/receipts/stdoutstderr and output exactly; send result. Separate fresh Lunaowned live subdir, preflight originals remainimmutable; no sharedINDEX/stage/push until Root coordination."
+}

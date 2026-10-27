@@ -1,0 +1,86 @@
+{
+  "schema": "ROOT_INDEPENDENT_ACTUAL_A96_SOURCE_START_VERIFICATION_V1",
+  "status": "FORMAL_SOURCE_ONLY_EXPERIMENT_STARTED_REAL_GENERATION_AND_ENV_STEPS_OBSERVED",
+  "observed_utc": "2026-10-27T00:30:23.499929Z",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "run_id": "f96b86f3391940eaa9d75040c444a8e4",
+  "clearance": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_LAUNCH_CLEARANCE_V2.json",
+    "sha256": "3defb7052665b5ad365093880912f4be8c667d0d3c65979e15373afe014e7524"
+  },
+  "handoff": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_EXECUTION_HANDOFF.json",
+    "sha256": "d2ee23838417dd37e8c4743bfc9b3c39f07c38c1a3fa7182f849fe6ea5538e26"
+  },
+  "launch_context": {
+    "path": "/tmp/si_s01_source_uid-2000_run-f96b86f3391940eaa9d75040c444a8e4_oxwwsyg4/raw/launch_context.json",
+    "sha256": "be8295745e057096b45f6aa4fb77caea0fd9e438dad01f1805a366d194912f22"
+  },
+  "worker_start": {
+    "path": "/tmp/si_s01_source_uid-2000_run-f96b86f3391940eaa9d75040c444a8e4_oxwwsyg4/raw/worker_start.json",
+    "sha256": "fbfd5bcfc5e4737e561db613d99a11164dfe247462077d4898ef26cf56b63571"
+  },
+  "actual_process_identity": {
+    "supervisor": {
+      "pid": 882767,
+      "uid": 2000,
+      "start_tick": 491085052,
+      "ppid": 882742,
+      "argv_sha256": "53829b6ccbfb46d6d714163213c6685370304f855af5272302cad8302e72ded9",
+      "alive": true
+    },
+    "worker": {
+      "pid": 882823,
+      "uid": 2000,
+      "start_tick": 491087408,
+      "ppid": 882767,
+      "argv_sha256": "fe1a474eff7521bc081540c012772b2f28c9a533ae7ed55f61cb89245ba2b77c",
+      "alive": true
+    }
+  },
+  "source_binding_and_actual_live_runtime_binding_exact": true,
+  "full_event_prefix_hash_chain_valid": true,
+  "observed_event_prefix": {
+    "path": "/tmp/si_s01_source_uid-2000_run-f96b86f3391940eaa9d75040c444a8e4_oxwwsyg4/raw/source_events.jsonl",
+    "complete_bytes": 40462338,
+    "sha256": "afea3a769cd24ad078a81a2c896635a446a903382c24c1a21f5a555dad0a8720",
+    "complete_events": 1550,
+    "last_event_id": "ff0264fa87e6950305c1b570bc822bd0ee77325bc72164c14c47afc27b3e15a2",
+    "whole_file_final_digest": "NOT_FINAL_ACTIVE_WRITERS",
+    "pending_partial_bytes_at_read": 0
+  },
+  "physical_completed_prefix_counts": {
+    "model_load": 1,
+    "env_construct": 17,
+    "reset": 17,
+    "generation": 175,
+    "step": 175,
+    "env_close": 16
+  },
+  "source_units_closed_prefix": 16,
+  "active_or_pending_reservations_at_observation": 1,
+  "failed_unit_events_prefix": 0,
+  "stops_or_incomplete_prefix": 0,
+  "first_frozen_slot_proven": {
+    "slot_key": "3506663e07bf50baf97882d2fbd0966d21ae18d33dff71d218f7a48fed229752",
+    "task_id_sha256": "9ab00c44ecc39610f655ca7c3df713429e713353af540a77cd08f2de8ceaa797",
+    "seed": 42,
+    "pool_seed": 42,
+    "cutoff": 5,
+    "reset_generation_step_completed": true
+  },
+  "resource_policy": "SHARED_CONTAINER_CUDA_V1",
+  "observed_native_allocator_limit_bytes": 25769803776,
+  "shared_nonexclusive_no_hostPID_NVML_exclusivity_or_wholeprocessclaim": true,
+  "budget": {
+    "generations": 4800,
+    "environment_operations": 4896,
+    "generated_tokens": 76800,
+    "input_tokens": 16000000,
+    "per_call_input": 8192,
+    "device_hours": 4.0
+  },
+  "interim_outcome_interpretation": "NONE; no quota/order/model/prompt/seed changes or structuraldecisionfromprefix",
+  "task_status": "Running, no finalcompletion/results claim. Luna monitors sameoneshotrun to authenticexit and saves raw/archives; no retry/teacher/train/eval.",
+  "root_preparation_note": "Initial startup checker incorrectly equated runtime live_binding envelope to source_binding; corrected using documented production actual runtime envelope and separately verified source_binding in launchcontext. Initial stdlib assertion made no runtime changes/calls; no producer or guard changed."
+}

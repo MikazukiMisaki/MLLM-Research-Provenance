@@ -1,0 +1,8 @@
+# Local prelaunch-checker incidents
+
+These were failures in Luna's local wrapper checks, before the production preflight child was started. Neither incident invoked the source runner, model, CUDA, ALFWorld, or any scientific unit. The original error evidence is retained as observed; the released command and environment were not changed.
+
+1. `PRELAUNCH_ABORT.json` records the first wrapper exit 1 at `2026-10-27T00:18:45.742987Z`. The wrapper incorrectly demanded literal equality with the authorization's `preflight_argv`; that immutable authorization intentionally contains `@AUTHORIZATION_SHA256@`, while the released exact-command and release files contain the actual authorization-file SHA. A read-only comparison confirmed expansion gives the exact released argv.
+2. A second wrapper exit 1 reported `RuntimeError: pinned interpreter mismatch`. The wrapper incorrectly resolved the approved interpreter symlink before comparing it to the literal path in the approved argv. No child had started; no invocation-consumed marker, production receipt, or source output existed at that point. The approved argv retained its original symlink path.
+
+The wrapper was corrected only in Luna's evidence directory: the authorization placeholder is expanded using the already pinned authorization-file SHA, and the interpreter is compared as the exact approved argv string. The production gate remains authoritative for its own executable/input checks. The sole production preflight was subsequently started once, under the unchanged approved argv and exact 13-key environment, and exited 0. The two local wrapper failures are not production preflight retries.

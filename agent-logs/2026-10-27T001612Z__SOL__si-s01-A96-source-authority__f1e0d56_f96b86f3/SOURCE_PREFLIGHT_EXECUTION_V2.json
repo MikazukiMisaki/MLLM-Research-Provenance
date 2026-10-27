@@ -1,0 +1,65 @@
+{
+  "schema": "SI_S01_PREFLIGHT_EXECUTION_V2",
+  "authentic_returncode": 0,
+  "argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "/home/lizening/wt-si-s01-shared-gpu-adapter/scripts/run_si_s01_source_only.py",
+    "--preflight-only",
+    "--authorization",
+    "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/ROOT_SOURCE_AUTHORIZATION_V2.json",
+    "--authorization-sha256",
+    "cf25576d5bf019a925cb1cd1d878046921162f136de173dad870ce8365e40a05",
+    "--proposal",
+    "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_PRODUCTION_PROPOSAL.json"
+  ],
+  "binding": {
+    "authorization_sha256": "cf25576d5bf019a925cb1cd1d878046921162f136de173dad870ce8365e40a05",
+    "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+    "protocol_sha256": "daa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72",
+    "proposal_sha256": "227eef584d8d8bd991e4e783eebb1203f249f9e64835282ba5b4e69328e02580",
+    "plan_sha256": "41ae5f2ae999e5682e7207084282b74fa053287391654ac30c2acabbcb5170b3",
+    "environment_sha256": "a4ec1864fac27a73c0142494dc9f9228b3a5bdd1d1693944795e047f80ecee8b",
+    "ceilings": {
+      "generations": 4800,
+      "environment_operations": 4896,
+      "generated_tokens": 76800,
+      "input_tokens": 16000000,
+      "per_call_input": 8192,
+      "device_hours": 4.0
+    },
+    "run_id": "f96b86f3391940eaa9d75040c444a8e4",
+    "execution_uid": 2000,
+    "output_path": "/tmp/si_s01_source_uid-2000_run-f96b86f3391940eaa9d75040c444a8e4_oxwwsyg4/raw",
+    "evidence_class": "live_source_only",
+    "resource_policy": {
+      "policy": "SHARED_CONTAINER_CUDA_V1",
+      "contract_sha256": "d908573f0c6d9518aec0a9b6b0a48c24648a26c3c708652b185a7cfe7b7e2489",
+      "proposal_sha256": "6998fe2ffcfd583741cd12ecf6b08638ed0e5da16d671f761a0af1df59c4dc5a",
+      "scientific_execution_behavior_changed": true,
+      "offline_evidence_validation_behavior_changed": true,
+      "source_treatment_semantics_changed": false,
+      "exclusive_gpu": false,
+      "NVML_to_local_PID_mapping": "UNPROVEN_NOT_ASSERTED",
+      "whole_process_vram_cap": false,
+      "device_wide_delta_attribution": false
+    }
+  },
+  "preflight_receipt_sha256": "c35dd9bda121aab54901ae5f9057a568330e9e11487f2238ae4c392279853c69",
+  "authentic_subprocess_receipt": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T001713Z__LUNA__si-s01-source-preflight__f96b86f3/SOURCE_PREFLIGHT_SUBPROCESS_RECEIPT.json",
+    "sha256": "c5f8fef69f0cfd84bf549b7fdef3b5829a4b3764ecbde80597d6ffb12c9d21ee"
+  },
+  "stdout": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T001713Z__LUNA__si-s01-source-preflight__f96b86f3/preflight.stdout.bin",
+    "sha256": "21e5cbeef1112ffbb87b6f1dadc133191568afdef0f2be27c33f9afe144963e3"
+  },
+  "stderr": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T001713Z__LUNA__si-s01-source-preflight__f96b86f3/preflight.stderr.bin",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "provenance": "Canonical binding wrapper derived by independent Root from authentic Luna subprocess receipt, exact raw stdout/stderr and actualproductionreceipt; not another execution or synthetic receipt",
+  "production_started_utc": "2026-10-27T00:19:43.317395Z",
+  "production_ended_utc": "2026-10-27T00:20:07.242606Z",
+  "authentic_child_pid": 882065
+}
