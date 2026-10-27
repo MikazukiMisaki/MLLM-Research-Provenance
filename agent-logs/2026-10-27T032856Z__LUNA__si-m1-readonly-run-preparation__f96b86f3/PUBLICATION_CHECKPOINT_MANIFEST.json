@@ -1,0 +1,31 @@
+{
+  "schema": "LUNA_SI_M1_READ_ONLY_PREPARATION_CHECKPOINT_V1",
+  "created_utc": "2026-10-27T03:47:30Z",
+  "status": "AUTHORIZED_PROVENANCE_CHECKPOINT; NOT_LAUNCH_CLEARANCE",
+  "authority_scope": "Publish only this Luna-owned frozen read-only preparation record and its two append-only corrections. This does not authorize preflight, model/environment initialization, or experiment execution.",
+  "record_directory": "/home/lizening/research-notes/agent-logs/2026-10-27T032856Z__LUNA__si-m1-readonly-run-preparation__f96b86f3",
+  "publication_files": [
+    {"path":"RECORD.md","sha256":"f660000bb38df2989db92104aa85e2568aa614381f62dc78486ca3dc6c1f4980","class":"task_record"},
+    {"path":"CURRENT_BINDINGS.json","sha256":"ec5b0cb52313323436001c701a7eb774ca51895d316ce1094d07bcf163f5cb3b","class":"read_only_input_bindings"},
+    {"path":"BUDGET_AND_STOP_RULES.md","sha256":"56eb71010323103a36f99bd8fdce9ac712b9410b45e80f80fbce8f75825e9eb4","class":"read_only_budget_and_stop_rules"},
+    {"path":"MODEL_ADAPTER_SHA256SUMS","sha256":"ae1f839c6ca9a7cc224ce3f7fcd76c35184d58ee6f42c6a1edc8f2267e85781e","class":"model_file_hashes_only; no model payload"},
+    {"path":"CASE_ASSET_SHA256SUMS","sha256":"1fd7ed46b39463e368afb30c3523d29af8295b1eafa56713c6dcb68ce516c11d","class":"case_asset_hashes_only; no task body"},
+    {"path":"READ_ONLY_RECEIPTS.md","sha256":"f8c944431e500f5c755ed45ab2bb6eb089ba181c4aa935717c8f41bd1478d090","class":"read_only_command_summary"},
+    {"path":"FILE_HASHES.sha256","sha256":"3986a2c3c39cd4fcfc65dbfe8ca0d5ff19d9957b8200c4f24fd19de4fc9eed7a","class":"preserved_original_task_inventory"},
+    {"path":"CORRECTION_ADDENDUM.json","sha256":"3d9267770a260f747ca7e43cc4e314935a3d5dbed02ae7412dd97e0bfd13d444","class":"append_only_correction_1"},
+    {"path":"GATE_MERGES_BINDING_SUPPLEMENT.json","sha256":"002329442d78cf4c9ff0c3097d4494c91c270e9920ccf0a86d2eba94c27fd5a5","class":"append_only_correction_2"},
+    {"path":"APPEND_ONLY_PUBLICATION_MANIFEST.json","sha256":"d971c9af4c8c8ecb76db55e5e10376c2ad0f5ef476f43eacc8ed7b5dd05487b8","class":"reviewed_corrections_allowlist"}
+  ],
+  "scope_checks": {
+    "candidate_files_scanned_for_common_credential_patterns": 11,
+    "credential_pattern_findings": 0,
+    "weights_adapters_dataset_cache_or_raw_task_bodies_included": false,
+    "other_agent_directories_touched": false,
+    "shared_index_or_root_hash_inventory_changed_yet": false,
+    "scientific_or_runtime_calls": 0
+  },
+  "preservation": {
+    "all_preparation_files_and_old_corrections_are_immutable": true,
+    "this_manifest_supplements_but_does_not_rewrite_the_corrections_only_allowlist": true
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "schema": "SI_M1_PREPARATION_CORRECTION_ADDENDUM_V1",
+  "created_utc": "2026-10-27T03:38:57Z",
+  "status": "APPEND_ONLY_CORRECTIONS; ORIGINAL_PREPARATION_FILES_UNCHANGED",
+  "supersedes": [
+    "Do not interpret the original record's design-only label as absence of human authority to implement/test or conditionally execute one reviewed five-case run.",
+    "Do not interpret the original CURRENT_BINDINGS.json map_sha256 entries as ordered-map digests.",
+    "Do not treat a malformed later merges.txt inventory entry as the hash bound by the accepted A96 gate.",
+    "Do not emit a new per-case Y_T field; only the authorized immediate outcome schema applies."
+  ],
+  "immutable_originals": {
+    "record_directory": "/home/lizening/research-notes/agent-logs/2026-10-27T032856Z__LUNA__si-m1-readonly-run-preparation__f96b86f3",
+    "CURRENT_BINDINGS.json_sha256": "ec5b0cb52313323436001c701a7eb774ca51895d316ce1094d07bcf163f5cb3b",
+    "RECORD.md_sha256": "f660000bb38df2989db92104aa85e2568aa614381f62dc78486ca3dc6c1f4980",
+    "BUDGET_AND_STOP_RULES.md_sha256": "56eb71010323103a36f99bd8fdce9ac712b9410b45e80f80fbce8f75825e9eb4",
+    "FILE_HASHES.sha256_sha256": "3986a2c3c39cd4fcfc65dbfe8ca0d5ff19d9957b8200c4f24fd19de4fc9eed7a",
+    "original_files_rewritten": false
+  },
+  "authority_correction": {
+    "authoritative_initial_state_path": "/home/lizening/research-notes/agent-logs/2026-10-27T031610Z__ASTRA__five-case-probe-execution-coordination__097f24e0/INITIAL_STATE.json",
+    "authoritative_initial_state_sha256": "32fd1464aa6a9471384cdd11ff6e77437cab17c84f4f405fb328dedb6545a312",
+    "human_turn_id": "01a17b58-0dfb-70c1-8da4-f9fb73acd388",
+    "source_thread_id": "01a0994c-a209-7600-8a3e-5ff3096ed346",
+    "verified_authority_status": "ACTIVE_IMPLEMENTATION_AND_REVIEW_NOT_LAUNCH_CLEARANCE",
+    "authorized_scope": "Sol Research implements/tests; Luna prepares execution and, after Astra's exact-SHA review/clearance, may execute one five-case single-step validation within the adopted caps, preserve and upload evidence. Routine steps do not require repeated user confirmation.",
+    "current_phase_interpretation": "Implementation and preparation are authorized; conditional one-run scientific execution is human-authorized only after the specified independent review and separate clearance. This is not a current launch clearance.",
+    "current_execution_gates": {
+      "candidate_exact_commit_sha": "PENDING; current candidate remains untracked at base HEAD f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+      "Astra_exact_sha_review": "PENDING",
+      "new_zero_science_preflight": "NOT_RUN",
+      "new_one_run_launch_clearance": "NOT_ISSUED",
+      "current_gpu_preweight_gate": "FAIL",
+      "reusable_old_A96_clearance": false
+    },
+    "latest_gpu_snapshot": {
+      "utc": "2026-10-27T03:38:57Z",
+      "uuid": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+      "model": "NVIDIA A40",
+      "total_mib": 46068,
+      "used_mib": 40781,
+      "free_mib": 4623,
+      "utilization_percent": 100,
+      "temperature_c": 78,
+      "required_preweight_free_bytes": 30064771072,
+      "nvml_pids": [4001127, 4001123, 4001122, 4001126, 4001124, 4001125],
+      "local_pid_mapping": "UNPROVEN; ps did not see these PIDs; do not attribute or interrupt them"
+    }
+  },
+  "ordered_map_hash_correction": {
+    "authoritative_evidence_path": "/home/lizening/research-notes/agent-logs/2026-10-27T024153Z__ASTRA__minimal-recoverability-design-review__e6fb570f/INDEPENDENT_ANCHOR_EVIDENCE.json",
+    "authoritative_evidence_sha256": "091b867ac2204d1567eb2d5dd44dbfb35e0c982e3f7b8015064254edd261e577",
+    "original_binding_path": "/home/lizening/research-notes/agent-logs/2026-10-27T032856Z__LUNA__si-m1-readonly-run-preparation__f96b86f3/CURRENT_BINDINGS.json",
+    "correction": "The original map_sha256 values exactly equal SHA256(UTF-8 diagnostic_admissible_delivery_command), not ordered_map_sha256. Keep the old file unchanged; use the corrected digest name/value below in any future exact binding.",
+    "cases": [
+      {
+        "case": "C088",
+        "old_mislabeled_map_sha256": "e7379cc663de49f2d797127f740d6b150d02ac34583a74ab2349a9ad28771c1c",
+        "old_value_is_diagnostic_command_sha256": true,
+        "correct_field": "ordered_map_sha256",
+        "correct_value": "5476a5eb76ea09fdafa8d67d26608c35be9f6c0a81abd3a5f043da724bd776ba"
+      },
+      {
+        "case": "C091",
+        "old_mislabeled_map_sha256": "7beaf43f16cadbc95f7cc508d648464809830d0f631f21f51d47755bf1924c6d",
+        "old_value_is_diagnostic_command_sha256": true,
+        "correct_field": "ordered_map_sha256",
+        "correct_value": "3e4d5a31173a9666b3271931ae7692aabea78fb51cefd4ce22cae2f59756e09a"
+      },
+      {
+        "case": "C093",
+        "old_mislabeled_map_sha256": "e6861b17284aa9c5cd3b687f3e43f6a9bf757c7bdd84f2a76d56b227c86b5f73",
+        "old_value_is_diagnostic_command_sha256": true,
+        "correct_field": "ordered_map_sha256",
+        "correct_value": "bae3500d6656bad820022b9d826da4660135dc169fe01628142d5e372e9d8e82"
+      },
+      {
+        "case": "C094",
+        "old_mislabeled_map_sha256": "d8476a40153a2a4655d5289c5a369100aaf584fb4d1d7936748711af72051697",
+        "old_value_is_diagnostic_command_sha256": true,
+        "correct_field": "ordered_map_sha256",
+        "correct_value": "17b6857990605f4f4837a052e9cb0c9069bab62e88cbee1cb604d94dff8ab5f0"
+      },
+      {
+        "case": "C095",
+        "old_mislabeled_map_sha256": "7beaf43f16cadbc95f7cc508d648464809830d0f631f21f51d47755bf1924c6d",
+        "old_value_is_diagnostic_command_sha256": true,
+        "correct_field": "ordered_map_sha256",
+        "correct_value": "036b176a0c92eee08ccecca103c2b93deb2886716290a0b5aef4cb08939b5c43"
+      }
+    ],
+    "diagnostic_command_hash_comparison_exit_code": 0,
+    "all_five_old_values_match_their_diagnostic_command_hash": true
+  },
+  "merges_hash_correction": {
+    "malformed_later_inventory": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T222916Z__LUNA__si-s01-concrete-shared-gpu-proposal__f1e0d56/INPUT_HASH_INVENTORY.json",
+      "file_sha256": "252eb5722eb4fff49eb1230a258ec1f07aee1f7ac61318fd5037829c0f5d5dca",
+      "json_path": "$.model_snapshot.files[11].sha256",
+      "file_name": "merges.txt",
+      "stored_value": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d12",
+      "stored_value_length": 65,
+      "is_valid_sha256_length": false
+    },
+    "correct_prior_frozen_binding": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__LUNA__si-e1-token-runtime-audit__sie1_b8f6/input_bindings.json",
+      "file_sha256": "30f6facfb11850a13f4fa0233f9a837addd5b187bcefd9c67ad475d81dea2a05",
+      "status": "BEFORE_AFTER_IDENTICAL",
+      "base_snapshot_merges_sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "p0_adapter_merges_sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    "independent_tokenizer_audit": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T102943Z__LUNA__si-e1-token-runtime-audit__sie1_b8f6/TOKENIZER_MASK_AUDIT.json",
+      "file_sha256": "3c89d08979f72bf5c0dd4bbc7de7ead1c1c71d733c0be2df38c0d33424415ea5",
+      "comparison_path": "snapshot_vs_adapter_comparison.tokenizer_file_bytes.merges.txt",
+      "snapshot_sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "adapter_sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "same_sha256": true
+    },
+    "fresh_current_rehash": {
+      "manifest_path": "/home/lizening/research-notes/agent-logs/2026-10-27T032856Z__LUNA__si-m1-readonly-run-preparation__f96b86f3/MODEL_ADAPTER_SHA256SUMS",
+      "manifest_sha256": "ae1f839c6ca9a7cc224ce3f7fcd76c35184d58ee6f42c6a1edc8f2267e85781e",
+      "sha256sum_check": "23_of_23_entries_OK",
+      "current_base_snapshot_merges_sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "current_adapter_merges_sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    "accepted_A96_binding_chain": {
+      "run_id": "f96b86f3391940eaa9d75040c444a8e4",
+      "launch_context_path": "/tmp/si_s01_source_uid-2000_run-f96b86f3391940eaa9d75040c444a8e4_oxwwsyg4/raw/launch_context.json",
+      "launch_context_sha256": "be8295745e057096b45f6aa4fb77caea0fd9e438dad01f1805a366d194912f22",
+      "launch_context_proposal_sha256": "227eef584d8d8bd991e4e783eebb1203f249f9e64835282ba5b4e69328e02580",
+      "proposal_path": "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_PRODUCTION_PROPOSAL.json",
+      "proposal_sha256": "227eef584d8d8bd991e4e783eebb1203f249f9e64835282ba5b4e69328e02580",
+      "proposal_model_base_snapshot": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218",
+      "proposal_model_adapter_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+      "proposal_contains_individual_merges_digest": false,
+      "clearance_path": "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_LAUNCH_CLEARANCE_V2.json",
+      "clearance_sha256": "3defb7052665b5ad365093880912f4be8c667d0d3c65979e15373afe014e7524",
+      "clearance_binds_proposal_sha256": "227eef584d8d8bd991e4e783eebb1203f249f9e64835282ba5b4e69328e02580",
+      "clearance_contains_individual_merges_digest": false,
+      "preflight_receipt_path": "/tmp/si_s01_source_uid-2000_run-f96b86f3391940eaa9d75040c444a8e4_oxwwsyg4/control/source_preflight_receipt.json",
+      "preflight_receipt_sha256": "c35dd9bda121aab54901ae5f9057a568330e9e11487f2238ae4c392279853c69",
+      "preflight_binds_proposal_sha256": "227eef584d8d8bd991e4e783eebb1203f249f9e64835282ba5b4e69328e02580",
+      "preflight_contains_individual_merges_digest": false,
+      "historical_binding_interpretation": "A96 accepted launch binding is snapshot-revision/path plus proposal hash; the accepted chain does not independently serialize a per-file merges.txt SHA256. Therefore the later 65-character inventory string is confirmed malformed metadata and not evidence of an A96 input mismatch, but the A96 gate alone cannot be cited as a per-file merges digest attestation."
+    },
+    "conclusion": "The stale inventory's 65-character value is an invalid transcription/metadata entry. The correct 64-character digest is independently present in the prior certified binding and tokenizer audit, and matches the fresh current bytes. Preserve the malformed old file; do not silently repair it. Do not overstate the granularity of the A96 accepted gate."
+  },
+  "outcome_schema_correction": {
+    "authorized_per_case_outcome_fields": ["Z_immediate", "P0_suffix"],
+    "P0_suffix_value": "NOT_RUN",
+    "full_horizon_protocol_status": "H50_NOT_EXECUTED",
+    "new_full_horizon_outcome_field_authorized": false,
+    "previous_BUDGET_AND_STOP_RULES_full_horizon_field_language": "SUPERSEDED; do not implement or emit it",
+    "interpretation": "Classify only immediate Z from authentic done/reward/action evidence. Preserve P0 suffix as NOT_RUN. The original H50 protocol was NOT_EXECUTED; do not add a Y_T field or infer a full-horizon failure."
+  },
+  "read_only_receipt_summary": {
+    "authority_and_anchor_inputs_rehashed": true,
+    "malformed_inventory_and_A96_chain_parsed_with_python_stdlib_only": true,
+    "A96_chain_hashes": {
+      "proposal": "227eef584d8d8bd991e4e783eebb1203f249f9e64835282ba5b4e69328e02580",
+      "clearance": "3defb7052665b5ad365093880912f4be8c667d0d3c65979e15373afe014e7524",
+      "launch_context": "be8295745e057096b45f6aa4fb77caea0fd9e438dad01f1805a366d194912f22",
+      "preflight_receipt": "c35dd9bda121aab54901ae5f9057a568330e9e11487f2238ae4c392279853c69"
+    },
+    "all_source_review_and_data_files_unchanged": true,
+    "read_only_navigation_diagnostics": [
+      {
+        "attempt": "Initial anchor-file lookup used the Sol semantic-review directory rather than Astra's design-review directory.",
+        "return_code": 2,
+        "result": "No file mutation; corrected to the authoritative Astra path recorded above."
+      },
+      {
+        "attempt": "First stdlib extraction treated input_bindings.inputs_after values as lists rather than objects containing files arrays.",
+        "return_code": 1,
+        "stderr": "TypeError: string indices must be integers, not 'str'",
+        "result": "Read-only parser assumption corrected; no source or record mutation."
+      },
+      {
+        "attempt": "One A96 receipt lookup omitted the actual _oxwwsyg4 run-directory suffix.",
+        "return_code": 1,
+        "stderr": "FileNotFoundError for the mistyped path",
+        "result": "Resolved from the accepted clearance's preflight.path; correct path/hash are recorded above."
+      },
+      {
+        "attempt": "One tokenizer-audit extraction initially looked for merges.txt at the wrong nesting level.",
+        "return_code": 1,
+        "stderr": "KeyError: 'merges.txt'",
+        "result": "Corrected read-only extraction from snapshot_vs_adapter_comparison.tokenizer_file_bytes.merges.txt; both values and same_sha256 are recorded above."
+      },
+      {
+        "attempt": "A broad rg diagnostic over the old A96 temporary output tree matched many lines in its raw source_events.jsonl and produced oversized stdout truncated by the tool.",
+        "return_code": 0,
+        "result": "Matches were from the already-consumed A96 source run; no new/unconsumed task body was sought, no output was saved or shared, and no file was modified. Future hash searches are restricted to manifest JSON and exclude JSONL payloads."
+      },
+      {
+        "attempt": "Local ps lookup for NVML PIDs returned no process rows and exit 1.",
+        "return_code": 1,
+        "result": "Consistent with unproven namespace/PID mapping; no PID ownership asserted and no process interrupted."
+      }
+    ],
+    "no_model_cuda_tokenizer_environment_or_scientific_calls": true,
+    "no_scientific_source_test_gate_or_original_record_modified": true,
+    "no_output_directory_or_preflight_created": true,
+    "no_commit_or_push": true
+  }
+}

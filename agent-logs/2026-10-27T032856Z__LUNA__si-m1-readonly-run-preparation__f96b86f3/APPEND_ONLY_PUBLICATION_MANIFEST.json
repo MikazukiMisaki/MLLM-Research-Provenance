@@ -1,0 +1,31 @@
+{
+  "schema": "LUNA_SI_M1_APPEND_ONLY_PUBLICATION_MANIFEST_V1",
+  "created_utc": "2026-10-27T03:45:33Z",
+  "status": "READY_FOR_DESIGNER_COMBINED_PUBLICATION; NOT_YET_PUBLISHED",
+  "scope": "Only the two Luna-owned SI-M1 correction appendices below. This is not a shared INDEX, root inventory, Git staging record, commit, or push.",
+  "record_directory": "/home/lizening/research-notes/agent-logs/2026-10-27T032856Z__LUNA__si-m1-readonly-run-preparation__f96b86f3",
+  "appendices": [
+    {
+      "path": "CORRECTION_ADDENDUM.json",
+      "sha256": "3d9267770a260f747ca7e43cc4e314935a3d5dbed02ae7412dd97e0bfd13d444",
+      "role": "Prior append-only correction: authority, map-field semantics, stale inventory distinction, outcome schema. Preserved byte-for-byte."
+    },
+    {
+      "path": "GATE_MERGES_BINDING_SUPPLEMENT.json",
+      "sha256": "002329442d78cf4c9ff0c3097d4494c91c270e9920ccf0a86d2eba94c27fd5a5",
+      "role": "Exact f1e0 production source-chain correction: tracked manifest merges.txt digest is checked by artifacts()/bound(); historical R18 identity remains unresolved."
+    }
+  ],
+  "publication_controls": {
+    "original_preparation_records_rewritten": false,
+    "shared_index_or_root_inventory_changed": false,
+    "git_stage_commit_or_push_performed": false,
+    "scientific_source_changed": false,
+    "preflight_model_environment_or_experiment_calls": 0
+  },
+  "next_state": {
+    "awaiting": "Sol frozen candidate exact SHA and explicit configuration for the next preparation step",
+    "current_launch_clearance": "NOT_GRANTED",
+    "execution": "STOPPED; no experiment may start from this manifest"
+  }
+}

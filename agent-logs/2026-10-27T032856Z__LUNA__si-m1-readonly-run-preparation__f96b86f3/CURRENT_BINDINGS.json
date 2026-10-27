@@ -1,0 +1,168 @@
+{
+  "schema": "SI_M1_READ_ONLY_RUN_PREPARATION_V1",
+  "record_created_utc": "2026-10-27T03:28:56Z",
+  "record_frozen_utc": "2026-10-27T03:33:28Z",
+  "status": "PREPARATION_ONLY_NOT_READY_TO_START",
+  "target": "SI-M1 five-case single-step probe",
+  "not_this_task": "Do not rerun the completed A96 source campaign; its old clearance is not reusable.",
+  "candidate": {
+    "worktree": "/home/lizening/wt-si-five-case-probe",
+    "branch": "codex/si-five-case-probe",
+    "base_head": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+    "working_tree_status_at_2026_10_27T03_28_56Z": [
+      "?? configs/experiments/si_m1_single_step_v1.json",
+      "?? src/self_improvement/si_m1/"
+    ],
+    "candidate_commit_sha": null,
+    "candidate_sha_status": "PENDING_NOT_COMMITTED_OR_BOUND",
+    "candidate_files_modified_by_luna": false
+  },
+  "review_and_release": {
+    "astra_design_path": "/home/lizening/research-notes/agent-logs/2026-10-27T024153Z__ASTRA__minimal-recoverability-design-review__e6fb570f/MINIMAL_RECOVERABILITY_DESIGN.md",
+    "astra_design_sha256": "c1c8e3eca3b812f633c4cb2531533fc5a2785bc3870ae5c7f5095deb5f4abeb2",
+    "astra_decision_path": "/home/lizening/research-notes/agent-logs/2026-10-27T024153Z__ASTRA__minimal-recoverability-design-review__e6fb570f/DECISION.json",
+    "astra_decision_sha256": "cffbbeeace7d16ae2cd2b7ea6304be4fe6e08ae06779b3d582b4f738236bfbbc",
+    "astra_status": "GO_DESIGN_ONLY_NOT_EXECUTABLE",
+    "root_crossreview_path": "/home/lizening/research-notes/agent-logs/2026-10-27T024341Z__SOL__si-s01-s5-case-support__1eeca2c5/ROOT_DESIGN_CROSSREVIEW.json",
+    "root_crossreview_sha256": "7053edd96a7e88c62430b1d7836edbda5d188098db6ea3efb652cdc5c34c5e74",
+    "root_crossreview_status": "ASTRA_GO_DESIGN_ONLY_ROOT_CROSSCHECK_CONCURS",
+    "future_execution_ready": false,
+    "engineering_budget_frozen": false,
+    "exact_candidate_review": "NOT_OBSERVED",
+    "new_zero_science_preflight": "NOT_RUN",
+    "new_launch_clearance": "NOT_ISSUED_OR_NOT_OBSERVED",
+    "old_A96_clearance_reusable": false
+  },
+  "frozen_design": {
+    "source_commit": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+    "source_run_id": "f96b86f3391940eaa9d75040c444a8e4",
+    "source_status": "A96_COMPLETE; prior structural NO_GO interpretation preserved",
+    "cases": [
+      {
+        "case": "C088",
+        "task": "pick_two_obj_and_place-Book-None-Sofa-209/trial_T20190909_022528_723601",
+        "prefix_depth": 11,
+        "h4_indices": [8, 9, 10, 11],
+        "anchor_event_sha256": "ba793ef28932c26cab616be6462334a24e08c36f1ae83f121a5504dc9e345c44",
+        "actor_input_sha256": "4b8ed70d92f4fa3a71da8e1dd4d3faf811acc36ff6e5f08f9b24cc26fa77e0a7",
+        "map_sha256": "e7379cc663de49f2d797127f740d6b150d02ac34583a74ab2349a9ad28771c1c"
+      },
+      {
+        "case": "C091",
+        "task": "pick_two_obj_and_place-AlarmClock-None-Desk-304/trial_T20190910_021303_108559",
+        "prefix_depth": 8,
+        "h4_indices": [5, 6, 7, 8],
+        "anchor_event_sha256": "86277145aafc4f6e32306bb36dd16bbbf1dad1ceca7261a83122be83b8c259dc",
+        "prompt_sha256": "3a4bbcead4bf9f22e7730b3265ea93b9fa4a59b44cbfd88561abf6687b8af8d9",
+        "map_sha256": "7beaf43f16cadbc95f7cc508d648464809830d0f631f21f51d47755bf1924c6d"
+      },
+      {
+        "case": "C093",
+        "task": "pick_two_obj_and_place-Lettuce-None-Fridge-1/trial_T20190908_124634_452782",
+        "prefix_depth": 16,
+        "h4_indices": [13, 14, 15, 16],
+        "anchor_event_sha256": "af56b8f3f7bd31a06fd38e7708ca55b01b4d43c906ab46428f740388d884cead",
+        "prompt_sha256": "c4f0767bbc255dc80ca14daf45e026b5f147234692d69a2f63f6931a3fb3395f",
+        "map_sha256": "e6861b17284aa9c5cd3b687f3e43f6a9bf757c7bdd84f2a76d56b227c86b5f73"
+      },
+      {
+        "case": "C094",
+        "task": "pick_two_obj_and_place-TissueBox-None-Drawer-216/trial_T20190908_150513_129789",
+        "prefix_depth": 12,
+        "h4_indices": [9, 10, 11, 12],
+        "anchor_event_sha256": "d0ac2da25c5aeec8839b3564e247a93229ac26db96943dbaa14d364c6d6f8b3e",
+        "prompt_sha256": "253261f87089b375d19cdaa044fc4cf1b8169353282c7fc2f06ebc2ea1d9da52",
+        "map_sha256": "d8476a40153a2a4655d5289c5a369100aaf584fb4d1d7936748711af72051697"
+      },
+      {
+        "case": "C095",
+        "task": "pick_two_obj_and_place-AlarmClock-None-Desk-307/trial_T20190907_013652_494441",
+        "prefix_depth": 8,
+        "h4_indices": [5, 6, 7, 8],
+        "anchor_event_sha256": "eff870d51ad5c290b3ea4a6b01b6567e1524ed3193aaaf7b719c4f0949f00b6b",
+        "prompt_sha256": "96dc9e62564978d3fa4b42e98525f3fcb957d42df04446dcb531beb824ea840e",
+        "map_sha256": "7beaf43f16cadbc95f7cc508d648464809830d0f631f21f51d47755bf1924c6d"
+      }
+    ],
+    "case_asset_manifest": "CASE_ASSET_SHA256SUMS",
+    "case_asset_manifest_scope": "Only the ten selected existing game/traj_data files; no ALFWorld execution.",
+    "source_raw": {
+      "events_path": "/tmp/si_s01_source_uid-2000_run-f96b86f3391940eaa9d75040c444a8e4_oxwwsyg4/raw/source_events.jsonl",
+      "events_bytes": 474180490,
+      "events_sha256": "04ce4c0f32f40a3dbff6f42fec3c54107534ec45dd005795bd52014442513105",
+      "trajectories_path": "/tmp/si_s01_source_uid-2000_run-f96b86f3391940eaa9d75040c444a8e4_oxwwsyg4/raw/source_trajectories.jsonl",
+      "trajectories_bytes": 415054,
+      "trajectories_sha256": "5e74691cee1cddae2c58191a524970fb0bd8a6f5517f40b4daa17c77d5fa3848",
+      "event_id_chain_validation": "Bound by existing Sol/Astra read-only review; no event payload was emitted by this preparation."
+    }
+  },
+  "model_and_adapter": {
+    "base_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "base_snapshot_path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218",
+    "base_files_rehashed_now": 12,
+    "adapter_path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter",
+    "adapter_files_rehashed_now": 11,
+    "adapter_tree_sha256_from_prior_certified_manifest": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+    "hash_manifest": "MODEL_ADAPTER_SHA256SUMS",
+    "model_or_adapter_loaded": false,
+    "cuda_initialized": false
+  },
+  "resource_contract": {
+    "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/configs/experiments/si_s01_shared_resource_v1.json",
+    "sha256": "d908573f0c6d9518aec0a9b6b0a48c24648a26c3c708652b185a7cfe7b7e2489",
+    "contract_status": "SOFTWARE_CONTRACT_ONLY_NO_AUTHORITY",
+    "allocator_cap_bytes": 25769803776,
+    "preweight_global_free_min_bytes": 30064771072,
+    "later_global_free_min_bytes": 2147483648,
+    "policy": "SHARED_CONTAINER_CUDA_V1",
+    "exclusive_gpu": false,
+    "nvml_to_local_pid_mapping": "UNPROVEN_NOT_ASSERTED",
+    "current_snapshot_utc": "2026-10-27T03:32:50Z",
+    "gpu_uuid": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+    "gpu_model": "NVIDIA A40",
+    "memory_total_mib": 46068,
+    "memory_used_mib": 40805,
+    "memory_free_mib": 4599,
+    "gpu_utilization_percent": 100,
+    "temperature_c": 77,
+    "nvml_compute_pids": [4001127, 4001123, 4001122, 4001126, 4001124, 4001125],
+    "nvml_process_ownership": "UNPROVEN; local ps returned no matching PIDs; do not stop or attribute these processes",
+    "preweight_gate_pass": false
+  },
+  "storage": {
+    "home_available_1024_blocks": 401220,
+    "home_capacity_percent": 100,
+    "tmp_available_1024_blocks": 177974916,
+    "tmp_fstype": "overlay",
+    "tmp_mount_target": "/",
+    "tmp_mode": "1777",
+    "tmp_owner": "0:0",
+    "tmp_writable_by_agent": true,
+    "secure_future_method": "At a separately cleared launch only: umask 077; create a unique private parent under /tmp with mktemp -d; verify uid and mode 0700; place run output and archive below that parent so both remain on the same overlay filesystem. Recheck free space and absence immediately before use.",
+    "private_directory_created": false,
+    "scientific_output_directory_created": false
+  },
+  "new_run_bindings": {
+    "run_id": null,
+    "argv": null,
+    "environment_sha256": null,
+    "output_path": null,
+    "supervisor_record_path": null,
+    "new_gate": null,
+    "zero_science_preflight": "NOT_RUN",
+    "launch_clearance": "PENDING"
+  },
+  "execution_counts_this_preparation": {
+    "model_loads": 0,
+    "generations": 0,
+    "tokenizer_loads": 0,
+    "cuda_initializations": 0,
+    "environment_constructions": 0,
+    "resets": 0,
+    "steps": 0,
+    "training_calls": 0,
+    "project_tests_or_validators": 0,
+    "preflight_invocations": 0,
+    "scientific_outputs_created": 0
+  }
+}

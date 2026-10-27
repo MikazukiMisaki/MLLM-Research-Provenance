@@ -1,0 +1,88 @@
+{
+  "schema": "SI_M1_GATE_MERGES_BINDING_SUPPLEMENT_V1",
+  "created_utc": "2026-10-27T03:43:57Z",
+  "status": "APPEND_ONLY_SOURCE_CHAIN_CORRECTION; ORIGINAL_RECORDS_UNCHANGED",
+  "purpose": "Correct the prior CORRECTION_ADDENDUM interpretation of whether the accepted A96 production gate checked the merges.txt file digest.",
+  "preserved_prior_records": {
+    "preparation_directory": "/home/lizening/research-notes/agent-logs/2026-10-27T032856Z__LUNA__si-m1-readonly-run-preparation__f96b86f3",
+    "prior_correction_addendum": "CORRECTION_ADDENDUM.json",
+    "prior_correction_addendum_sha256": "3d9267770a260f747ca7e43cc4e314935a3d5dbed02ae7412dd97e0bfd13d444",
+    "old_bytes_modified": false
+  },
+  "superseded_interpretation": {
+    "prior_claim": "The accepted A96 gate chain could not be cited as a per-file merges.txt SHA256 attestation because the proposal, clearance, and preflight receipt did not each serialize that individual digest.",
+    "correction": "Those receipt documents do not duplicate the per-file digest, but the exact production gate code reads the tracked model identity manifest and verifies every snapshot_files entry, including merges.txt, against the file bytes. The previous inference from receipt-field absence to gate-check absence was incorrect."
+  },
+  "exact_source_identity": {
+    "commit": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+    "tree_cleanliness_claim": "No source file was changed by this supplement; source was inspected with git-show at the pinned commit.",
+    "source_files": [
+      {
+        "path": "scripts/run_si_s01_source_only.py",
+        "sha256": "ebe82f46afb873534d2750591b5f14003f867224d65ce4efe74041b050e46dbb",
+        "relevant_lines": "10, 25-32",
+        "role": "Imports authenticate; calls authenticate before dispatching the worker; worker dispatch imports run_worker."
+      },
+      {
+        "path": "src/self_improvement/si_s01/gate.py",
+        "sha256": "74b32fdccd84492e54453ad32f4cae16bbe6b621d24dcbc9bde9e450056080bf",
+        "relevant_lines": "32-40, 48-58, 136",
+        "role": "bound() checks SHA256 of file bytes; live-source artifacts() loads the tracked identity manifest and verifies every snapshot file; authenticate() returns with artifact_receipt=artifacts(permit)."
+      },
+      {
+        "path": "configs/experiments/r19_model_identity_manifest.json",
+        "sha256": "08c00c8a4bf2ab15bffb59d2d7345c8549608aced0da1eedb2901096a840e2c2",
+        "relevant_lines": "42-58",
+        "role": "Tracked candidate snapshot file inventory, including merges.txt size and content SHA256. The manifest explicitly labels this as a currently observed candidate, not historical proof."
+      },
+      {
+        "path": "src/self_improvement/si_s01/runtime.py",
+        "sha256": "9b33feea6ab55f84768fcdc052212d5c807b23f3a2cad7590e601411acb1d4dd",
+        "relevant_lines": "15-21, 68-76",
+        "role": "run_worker wires LiveProducer.load as the collector loader; LiveProducer.load records artifact_recheck(artifacts(permit)) before load_guarded()."
+      },
+      {
+        "path": "src/self_improvement/si_s01/collector.py",
+        "git_blob_oid_sha1": "126fb8709a72af6914dc3833d7cffc211be6a092",
+        "git_blob_size_bytes": 11203,
+        "relevant_lines": "114-124",
+        "role": "Collector.run invokes its loader inside the model_load ledger call, before collecting source slots. Exact commit path and Git blob identity are recorded; no raw-file SHA256 is asserted here."
+      }
+    ]
+  },
+  "merges_file_binding": {
+    "identity_manifest_path": "configs/experiments/r19_model_identity_manifest.json",
+    "manifest_entry_line": 57,
+    "manifest_content_sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "manifest_size_bytes": 1671853,
+    "gate_behavior": "For live_source_only, artifacts() reads the manifest from permit.repository, iterates frozen.snapshot_files, checks each file size, then calls bound(path, expected_digest). The merges.txt row is in that iteration; bound() hashes the actual file bytes and rejects mismatch.",
+    "execution_order": [
+      "source-only entrypoint calls authenticate()",
+      "authenticate() calls artifacts(permit) before returning",
+      "worker Collector.run() invokes the LiveProducer loader as part of model_load",
+      "LiveProducer.load() repeats artifacts(permit) as artifact_recheck before load_guarded()"
+    ]
+  },
+  "stale_inventory_distinction": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T222916Z__LUNA__si-s01-concrete-shared-gpu-proposal__f1e0d56/INPUT_HASH_INVENTORY.json",
+    "sha256": "252eb5722eb4fff49eb1230a258ec1f07aee1f7ac61318fd5037829c0f5d5dca",
+    "malformed_merges_value": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d12",
+    "interpretation": "This later, unused inventory entry is 65 characters and malformed. It is not the manifest read by the f1e0 production gate and did not supply the digest used for A96 artifact binding. Preserve it unchanged as historical metadata."
+  },
+  "accepted_A96_chain": {
+    "run_id": "f96b86f3391940eaa9d75040c444a8e4",
+    "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+    "proposal_sha256": "227eef584d8d8bd991e4e783eebb1203f249f9e64835282ba5b4e69328e02580",
+    "launch_context_sha256": "be8295745e057096b45f6aa4fb77caea0fd9e438dad01f1805a366d194912f22",
+    "preflight_receipt_sha256": "c35dd9bda121aab54901ae5f9057a568330e9e11487f2238ae4c392279853c69",
+    "receipt_field_scope_note": "The proposal/context/preflight bind the source and proposal but do not individually repeat the merges digest. The per-file digest enforcement is established by the authenticated production source chain and the tracked manifest."
+  },
+  "bounded_conclusion": {
+    "a96_gate_checked_candidate_merges_bytes_against_manifest_sha256": true,
+    "correct_candidate_merges_sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "historical_r18_model_identity_resolved": false,
+    "current_SI_M1_launch_clearance_granted": false,
+    "new_preflight_or_scientific_calls": 0,
+    "scope": "This corrects only the historical A96 production-gate interpretation. It does not prove historical R18 identity, grant current launch clearance, or authorize a new preflight or experiment."
+  }
+}
