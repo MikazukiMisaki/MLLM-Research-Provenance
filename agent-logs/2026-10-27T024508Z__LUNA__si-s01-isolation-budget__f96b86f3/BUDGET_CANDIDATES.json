@@ -1,0 +1,84 @@
+{
+  "schema": "LUNA_SI_S01_MINIMUM_RECOVERABILITY_BUDGET_CANDIDATES_V1",
+  "status": "PROSPECTIVE_CANDIDATES_ONLY_NOT_A_PROTOCOL_NOT_AUTHORIZED",
+  "fixed_design_shape_for_arithmetic": {
+    "failure_cases": 17,
+    "failure_cases_are_already_used_train_development_identities": true,
+    "anchor": "exactly after five source actions (S5); one reset plus five saved-action prefix steps to reconstruct each branch",
+    "intervention": "one Stage1 generation, one Stage2 generation producing one K1 action, then at most 44 P0 suffix steps to the original total horizon of 50",
+    "P0_continue_from_S5": "up to 45 P0 generations/actions per branch",
+    "success_controls": "optional 17 preselected among the 72 S5-usable source successes; control is P0 continuation only in the arithmetic below",
+    "per_call_max_input_tokens_candidate": 8192,
+    "conditional_per_call_output_caps_candidate": {"Stage1": 40, "Stage2": 16, "P0": 16},
+    "cap_source_note": "40/16/16 output and 8192 input ceilings are prior engineering/source bounds used only to calculate candidate maxima. A science protocol must explicitly adopt or replace them before launch.",
+    "no_model_load_cost_hidden": "Model-load count depends on the exact frozen actor artifact/process architecture. It is UNRESOLVED here and must be bound and separately capped; no cache reuse is treated as free.",
+    "physical_environment_operation_definition": "one reset plus each actual step/action; environment construction and close are reported separately and are not included in reset-inclusive operation totals."
+  },
+  "scenarios": [
+    {
+      "id": "F17_INTERVENTION_HISTORICAL_P0_REFERENCE_ONLY",
+      "new_branches": {"failure_intervention": 17},
+      "per_failure_branch": {"generations": 46, "generation_breakdown": {"Stage1": 1, "Stage2": 1, "P0_suffix": 44}, "max_output_tokens": 760, "max_input_tokens": 376832, "resets": 1, "replay_prefix_steps": 5, "K1_steps": 1, "P0_suffix_steps_max": 44, "physical_action_steps_max": 50, "reset_inclusive_environment_operations_max": 51},
+      "total_maxima": {"generations": 782, "Stage1_generations": 17, "Stage2_generations": 17, "P0_generations": 748, "output_tokens": 12920, "input_tokens": 6406144, "resets": 17, "replay_prefix_steps": 85, "K1_steps": 17, "P0_suffix_steps": 748, "physical_action_steps": 850, "reset_inclusive_environment_operations": 867, "environment_constructions": 17, "environment_closes": 17, "model_loads": "UNBOUND_SEPARATE_CAP_REQUIRED"},
+      "comparison": "The archived P0 suffix is a historical descriptive reference only; no fresh matched CONTINUE control is included."
+    },
+    {
+      "id": "F17_INTERVENTION_PLUS_RECORDED_ACTION_SUFFIX_REPLAY_CONTROL",
+      "new_branches": {"failure_intervention": 17, "failure_recorded_P0_action_replay": 17},
+      "added_control_maxima": {"generations": 0, "output_tokens": 0, "input_tokens": 0, "resets": 17, "prefix_steps": 85, "saved_P0_suffix_steps": 765, "physical_action_steps": 850, "reset_inclusive_environment_operations": 867},
+      "combined_maxima": {"generations": 782, "output_tokens": 12920, "input_tokens": 6406144, "resets": 34, "physical_action_steps": 1700, "reset_inclusive_environment_operations": 1734, "environment_constructions": 34, "environment_closes": 34, "model_loads": "UNBOUND_SEPARATE_CAP_REQUIRED"},
+      "comparison": "This replays saved P0 commands without CONTINUE inference; it checks recorded-command/environment replay, not a new P0 policy decision and not a causal estimate of policy benefit."
+    },
+    {
+      "id": "F17_INTERVENTION_PLUS_FRESH_MATCHED_CONTINUE",
+      "new_branches": {"failure_intervention": 17, "failure_fresh_P0_continue": 17},
+      "continue_arm_maxima": {"generations": 765, "P0_generations": 765, "output_tokens": 12240, "input_tokens": 6266880, "resets": 17, "prefix_steps": 85, "P0_continue_steps": 765, "physical_action_steps": 850, "reset_inclusive_environment_operations": 867},
+      "combined_maxima": {"generations": 1547, "Stage1_generations": 17, "Stage2_generations": 17, "P0_generations": 1513, "output_tokens": 25160, "input_tokens": 12673024, "resets": 34, "physical_action_steps": 1700, "reset_inclusive_environment_operations": 1734, "environment_constructions": 34, "environment_closes": 34, "model_loads": "UNBOUND_SEPARATE_CAP_REQUIRED"},
+      "comparison": "A fresh P0 continuation arm is the prospective paired comparator; exact public S5 matching still does not prove identical hidden simulator/RNG state."
+    },
+    {
+      "id": "F17_INTERVENTION_PLUS_FRESH_CONTINUE_PLUS_17_SUCCESS_CONTROLS",
+      "new_branches": {"failure_intervention": 17, "failure_fresh_P0_continue": 17, "S5_usable_success_P0_continue": 17},
+      "success_control_maxima": {"generations": 765, "P0_generations": 765, "output_tokens": 12240, "input_tokens": 6266880, "resets": 17, "prefix_steps": 85, "P0_continue_steps": 765, "physical_action_steps": 850, "reset_inclusive_environment_operations": 867},
+      "combined_maxima": {"generations": 2312, "Stage1_generations": 17, "Stage2_generations": 17, "P0_generations": 2278, "output_tokens": 37400, "input_tokens": 18939904, "resets": 51, "physical_action_steps": 2550, "reset_inclusive_environment_operations": 2601, "environment_constructions": 51, "environment_closes": 51, "model_loads": "UNBOUND_SEPARATE_CAP_REQUIRED"},
+      "comparison": "Success controls are prospective same-pool TRAIN development controls, not held-out identities. If success controls are also intervened on, add one intervention-branch cost per control; not included here."
+    }
+  ],
+  "candidate_hard_stop_envelopes_not_authorizations": [
+    {
+      "scope": "F17 intervention-only",
+      "generations_max": 782,
+      "reset_inclusive_environment_operations_max": 867,
+      "output_tokens_max_conditional_on_caps": 12920,
+      "input_tokens_max_at_8192_per_call": 6406144,
+      "allocated_device_hours_stop_candidate": 1.0
+    },
+    {
+      "scope": "three-arm 17-failure intervention + fresh failure CONTINUE + 17 positive P0 controls",
+      "generations_max": 2312,
+      "reset_inclusive_environment_operations_max": 2601,
+      "output_tokens_max_conditional_on_caps": 37400,
+      "input_tokens_max_at_8192_per_call": 18939904,
+      "global_input_cap_candidate": 20000000,
+      "allocated_device_hours_stop_candidate": 2.0,
+      "wall_clock_hours_stop_candidate": 2.0,
+      "resource_accounting": "Count all allocated devices times monotonic supervisor duration. This is a stop ceiling only, not a speed, capacity, free-memory, or exclusive-GPU estimate."
+    }
+  ],
+  "budget_warnings": [
+    "The old R19/A96 and prior design ceilings are not reallocated. Only a fresh prospective user authorization can authorize any future call.",
+    "The three-arm maximum (18,939,904 input tokens) exceeds a 16,000,000-token candidate ceiling; do not silently transfer quota or reduce cases after observing outcomes. Freeze a new cap or choose a smaller arm set before authorization.",
+    "The 1.0/2.0 device-hour values are proposed fail-stop ceilings only. Shared GPU accounting and unproven PID-to-NVML mapping prevent estimating actual free capacity or inference fit.",
+    "Every reset, prefix replay action, K1 action, suffix step, and continue step is counted. An incomplete/unknown operation consumes its reservation and stops; no retry, resume, replacement, or automatic top-up.",
+    "Input-token maxima are formula ceilings, not measured prompt lengths. Actual tokenization/context length must be checked under a separately authorized frozen runtime before execution.",
+    "Model-load counts and actor artifact/process layout remain unspecified; freeze and meter them explicitly rather than treating loaded weights or cache as free."
+  ],
+  "pre_registered_stop_rules": [
+    "No launch without fresh human authorization, a frozen exact proposal, independent exact-source review, and a distinct single-use clearance.",
+    "Before each case's first intervention action, exact S5 observation, full ordered action map, reward, done/truncated flags and event/command bindings must match the saved anchor; otherwise stop that case without replacement.",
+    "A source terminal at/before S5 is ineligible; do not replace the seven observed early-terminal successes or alter the sample after outcomes.",
+    "Stop on identity/register collision, unknown task alias mapping, replay divergence, invalid parser/action map, incomplete external operation, process/cleanup ambiguity, or any fixed cap.",
+    "Require trusted worker PID-to-GPU-UUID ownership before model weights load. If unavailable, do not initialize/load and stop.",
+    "No sample top-up, quota transfer, extra seed, repeated case, prompt tuning, effect-based recipe selection, training, held-out use, or G4/statistical confirmation under this design-only task."
+  ]
+}

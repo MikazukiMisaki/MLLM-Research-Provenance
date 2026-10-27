@@ -1,0 +1,80 @@
+{
+  "schema": "INDEPENDENT_POSTHOC_5_ANCHORS_V1",
+  "event_ledger_sha256": "04ce4c0f32f40a3dbff6f42fec3c54107534ec45dd005795bd52014442513105",
+  "trajectory_sha256": "5e74691cee1cddae2c58191a524970fb0bd8a6f5517f40b4daa17c77d5fa3848",
+  "cases": [
+    {
+      "case": "C088",
+      "d": 11,
+      "after_d_event_id": "ba793ef28932c26cab616be6462334a24e08c36f1ae83f121a5504dc9e345c44",
+      "next_event_id": "3a0e638d297a4b9b80e7f263385ffe0ce028a7f073354fcd1c0be9d32fb8f674",
+      "source_next_action": "look",
+      "available_move_sha256": "e7379cc663de49f2d797127f740d6b150d02ac34583a74ab2349a9ad28771c1c",
+      "prior_same_destination_move_count": 1,
+      "prior_take_of_item_proposed_for_move_count": 1,
+      "public_state_match": true,
+      "original_Y0": 0,
+      "source_horizon": 50
+    },
+    {
+      "case": "C091",
+      "d": 8,
+      "after_d_event_id": "86277145aafc4f6e32306bb36dd16bbbf1dad1ceca7261a83122be83b8c259dc",
+      "next_event_id": "cea1315c0089e43620b1d979bec736b933b804dcb8cc8b1dde2433644b4efaef",
+      "source_next_action": "look",
+      "available_move_sha256": "7beaf43f16cadbc95f7cc508d648464809830d0f631f21f51d47755bf1924c6d",
+      "prior_same_destination_move_count": 1,
+      "prior_take_of_item_proposed_for_move_count": 1,
+      "public_state_match": true,
+      "original_Y0": 0,
+      "source_horizon": 50
+    },
+    {
+      "case": "C093",
+      "d": 16,
+      "after_d_event_id": "af56b8f3f7bd31a06fd38e7708ca55b01b4d43c906ab46428f740388d884cead",
+      "next_event_id": "f00f23add3ba66469064cc4b998d540270bb367d26f3c6587ba019606680b241",
+      "source_next_action": "look",
+      "available_move_sha256": "e6861b17284aa9c5cd3b687f3e43f6a9bf757c7bdd84f2a76d56b227c86b5f73",
+      "prior_same_destination_move_count": 1,
+      "prior_take_of_item_proposed_for_move_count": 1,
+      "public_state_match": true,
+      "original_Y0": 0,
+      "source_horizon": 50
+    },
+    {
+      "case": "C094",
+      "d": 12,
+      "after_d_event_id": "d0ac2da25c5aeec8839b3564e247a93229ac26db96943dbaa14d364c6d6f8b3e",
+      "next_event_id": "e47e4329d8b76506ee8d910bc567c258a80282a3744da1b33c6ffb30a57e7764",
+      "source_next_action": "look",
+      "available_move_sha256": "d8476a40153a2a4655d5289c5a369100aaf584fb4d1d7936748711af72051697",
+      "prior_same_destination_move_count": 1,
+      "prior_take_of_item_proposed_for_move_count": 1,
+      "public_state_match": true,
+      "original_Y0": 0,
+      "source_horizon": 50
+    },
+    {
+      "case": "C095",
+      "d": 8,
+      "after_d_event_id": "eff870d51ad5c290b3ea4a6b01b6567e1524ed3193aaaf7b719c4f0949f00b6b",
+      "next_event_id": "7a9aaf1b8264770d477a13c5fd086d2b85550430bb9fca38c57ea87b6f1af2c7",
+      "source_next_action": "look",
+      "available_move_sha256": "7beaf43f16cadbc95f7cc508d648464809830d0f631f21f51d47755bf1924c6d",
+      "prior_same_destination_move_count": 1,
+      "prior_take_of_item_proposed_for_move_count": 1,
+      "public_state_match": true,
+      "original_Y0": 0,
+      "source_horizon": 50
+    }
+  ],
+  "selection": "post-hoc development: selected after full source failure outcomes; not representative, no trained selector",
+  "scope": "Observed action and admissible map only; absence of hidden simulator state and unrun alternate action prevent claims move suffices or succeeds. Actual teacher/student public prompt projection needs separate validation.",
+  "budget_math_assumptions": "single d replay, 2 teacher gens, one teacher action, P0 suffix H50, original output caps40/16/16; no retry, no new baseline",
+  "sum_d": 55,
+  "paper_generation_cap": 200,
+  "paper_reset_inclusive_env_cap": 255,
+  "paper_output_token_cap": 3320,
+  "new_scientific_calls": 0
+}

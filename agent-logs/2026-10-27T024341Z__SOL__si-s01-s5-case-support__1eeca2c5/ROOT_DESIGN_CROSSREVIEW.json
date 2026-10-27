@@ -1,0 +1,78 @@
+{
+  "schema": "SOL_DESIGNER_ASTRA_LED_DESIGN_SUPPORT_FINAL_V1",
+  "status": "ASTRA_GO_DESIGN_ONLY_ROOT_CROSSCHECK_CONCURS",
+  "finish_utc": "2026-10-27T03:08:27.850056+00:00",
+  "scientific_source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "source_run_id": "f96b86f3391940eaa9d75040c444a8e4",
+  "accepted_plan": "five posthoc two-object late anchors; one two-stage teacher selection and at most one environment action per case; no P0 suffix",
+  "checks": {
+    "17_s5_anchor_chain_matches": true,
+    "17_case_evidence_222_full_hash_checks_pass": true,
+    "five_late_anchor_original_ledger_checks_pass": true,
+    "eight_two_object_failure_surface_signature_scan_agrees": true,
+    "reservation_identity_partitions_pairwise_disjoint": true,
+    "cost_arithmetic_independently_recomputed": true,
+    "future_execution_ready": false
+  },
+  "budget_design_only": {
+    "teacher_generations_max": 10,
+    "env_operations_including_resets_max": 65,
+    "output_tokens_max": 280,
+    "conservative_input_tokens_max_at_8192_per_call": 81920,
+    "device_hours_candidate": 0.5,
+    "engineering_budget_frozen": false
+  },
+  "scientific_limits": [
+    "Unobserved nonterminal full-path outcome unknown; invalid/missing action receipt Z=NA.",
+    "Observed immediate terminal success is real but not evidence that student learning improves.",
+    "All five chosen posthoc from known failed development tasks; no population rate or harm estimate.",
+    "Old source-only C24/B24 NO_GO remains; no B/C mechanism identification.",
+    "No trained selector, memory, multi-round, extra environment, or automatic retry."
+  ],
+  "task_assignments": [
+    "Astra leads design and independent review",
+    "Sol Research 17 case review",
+    "Luna identity and budget evidence",
+    "Sol Designer crosschecks and coordinates provenance"
+  ],
+  "bindings": [
+    {
+      "name": "astra_protocol",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-27T024153Z__ASTRA__minimal-recoverability-design-review__e6fb570f/MINIMAL_RECOVERABILITY_DESIGN.md",
+      "sha256": "c1c8e3eca3b812f633c4cb2531533fc5a2785bc3870ae5c7f5095deb5f4abeb2"
+    },
+    {
+      "name": "astra_decision",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-27T024153Z__ASTRA__minimal-recoverability-design-review__e6fb570f/DECISION.json",
+      "sha256": "cffbbeeace7d16ae2cd2b7ea6304be4fe6e08ae06779b3d582b4f738236bfbbc"
+    },
+    {
+      "name": "sol_case_review",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-27T024208Z__CODEX__si-s01-s5-case-semantic-review__f96b86f3/COMPACT_CASE_REVIEW.json",
+      "sha256": "057d5daf7180e281cc9acef85259896ddd2d04b32d66fbc9a9f40f4f9a21975f"
+    },
+    {
+      "name": "sol_raw_annotations",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-27T024208Z__CODEX__si-s01-s5-case-semantic-review__f96b86f3/CASE_BY_CASE_S5_REVIEW.json",
+      "sha256": "12423b356ff0c20cd81ed39cc398599839f9c567d40282f9142fd624f1c22cec"
+    },
+    {
+      "name": "sol_five_review",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-27T024208Z__CODEX__si-s01-s5-case-semantic-review__f96b86f3/FIVE_LATER_ANCHOR_REVIEW.json",
+      "sha256": "d5b76f3b3c65131c47783e4db5affd331ea93083a4ef7da235dc4e433f21e3eb"
+    },
+    {
+      "name": "luna_isolation",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-27T024508Z__LUNA__si-s01-isolation-budget__f96b86f3/SI_S01_ISOLATION_AND_COST_AUDIT.json",
+      "sha256": "54c6de52be5bbf152fc8857b46287e3a234d06abe1ee63b00fa6f7c50924576f"
+    },
+    {
+      "name": "luna_correction",
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-27T024508Z__LUNA__si-s01-isolation-budget__f96b86f3/INDEPENDENT_REVIEW_CORRECTION_ADDENDUM.md",
+      "sha256": "3037ee488de753923486c929b8bc78ff20e95ad7f9385c6858e9962410e19907"
+    }
+  ],
+  "new_scientific_calls": 0,
+  "no_new_model_cuda_tokenizer_or_world": true,
+  "no_scientific_code_changes": true
+}

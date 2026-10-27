@@ -1,0 +1,496 @@
+{
+  "schema": "SI_S01_FIVE_LATER_DEVELOPMENT_ANCHOR_REVIEW_V1",
+  "created_utc": "2026-10-27T03:00:47.892457+00:00",
+  "status": "READ_ONLY_POST_HOC_DIAGNOSTIC_NOT_SELECTOR_OR_LAUNCH_AUTHORITY",
+  "parent_failed_denominator": 17,
+  "two_object_failed_denominator": 8,
+  "selected_case_count": 5,
+  "source_case_exhaustiveness": "For the recorded criterion: an actor-placed first target, a distinct second target subsequently picked up, first arrival at that same chosen goal container while still holding it, current observation showing the first target and an admissible move, next original action look. All8 two-object failure traces inspected; five meet it and three have no second pickup. This does not prove these are all possible errors or that the five checkpoints are unique opportunities; later qualifying states also exist.",
+  "earliest_selected_checkpoints": [
+    {
+      "case_id": "C088",
+      "after_action_checkpoint": 11,
+      "next_action": 12
+    },
+    {
+      "case_id": "C091",
+      "after_action_checkpoint": 8,
+      "next_action": 9
+    },
+    {
+      "case_id": "C095",
+      "after_action_checkpoint": 8,
+      "next_action": 9
+    },
+    {
+      "case_id": "C094",
+      "after_action_checkpoint": 12,
+      "next_action": 13
+    },
+    {
+      "case_id": "C093",
+      "after_action_checkpoint": 16,
+      "next_action": 17
+    }
+  ],
+  "anchors": [
+    {
+      "case_id": "C088",
+      "slot_key": "7786aebcc45ee79209351b96094065145fba5c516d9aa5d15b27597e454ddedd",
+      "family": "pick_two_obj_and_place",
+      "after_action_checkpoint": 11,
+      "candidate_replacement_action": 12,
+      "checkpoint_event": {
+        "step": 11,
+        "event_id": "ba793ef28932c26cab616be6462334a24e08c36f1ae83f121a5504dc9e345c44",
+        "generation_event_id": "c77796e2fe73f544932c0498e8c9d68b239bfef58e7f03d1a551377a8617cabb"
+      },
+      "original_next_step": {
+        "step": 12,
+        "event_id": "3a0e638d297a4b9b80e7f263385ffe0ce028a7f073354fcd1c0be9d32fb8f674",
+        "generation_event_id": "d1eaf9fc05c67e059c761bac0a8006774a2449eefb0bfa8c8e72ecfff9e776d0"
+      },
+      "original_next_command": "look",
+      "first_placed_object": "book 1",
+      "held_second_object": "book 2",
+      "same_chosen_goal_container": "sofa 1",
+      "first_placement_evidence": {
+        "step": 8,
+        "event_id": "720b97b3d0aeece7b39b4fdfb1266fea8e71e062d2f7691cb1a73ebcaea35404",
+        "generation_event_id": "afedd2e2f8fba490ef80687bcd0aba1746139f97f57f1467a6822a21732aadd5"
+      },
+      "second_pickup_evidence": {
+        "step": 10,
+        "event_id": "9d0297c025771c739a571a0f2931872133cd850257b3ee552748cb4744342719",
+        "generation_event_id": "82a6e27c82e7aaea5825f1b00ff85a560cb2ad033ace135c060d25f59b8bcbee"
+      },
+      "recorded_admissible_placement_command": {
+        "command": "move book 2 to sofa 1",
+        "action_id": "A015",
+        "status": "Observed legal affordance, not a hand-labeled correct/successful target"
+      },
+      "as_of_anchor_public_input": {
+        "H4_action_indices": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "first_placement_action_itself_in_H4": true,
+        "first_placement_action_if_outside_H4": null,
+        "first_object_presence_current_observation_substring": "book 1",
+        "first_object_presence_in_current_observation": true,
+        "second_pickup_and_no_release_evidence": "Recorded pickup in H4 plus no intervening release and a corresponding current legal move; inferred holding, not an unrecorded inventory read.",
+        "exact_recorded_actor_input_checks": {
+          "case_id": "C088",
+          "S_index": 11,
+          "recorded_input_state_equals_checkpoint": true,
+          "H4_matches_exactly": true,
+          "ordered_map_text_matches_exactly": true,
+          "goal_and_current_observation_present": true,
+          "actual_generation_event_id": "d1eaf9fc05c67e059c761bac0a8006774a2449eefb0bfa8c8e72ecfff9e776d0",
+          "actual_prompt_sha256": "4b8ed70d92f4fa3a71da8e1dd4d3faf811acc36ff6e5f08f9b24cc26fa77e0a7"
+        }
+      },
+      "source_after_anchor_only": {
+        "original_Y0": 0,
+        "no_second_object_move_to_goal_later_in_source": true,
+        "role": "Used to select this already-observed development diagnostic, never included in the anchor input"
+      },
+      "semantic_uncertainty": [
+        "A look can be a legitimate information-gathering step; it is not proved wrong merely because placement is available.",
+        "An admissible placement matching the natural goal does not prove actual terminal success or all hidden predicates.",
+        "Even immediate teacher success would support only this selected proximal mechanism, not broad recoverability, student learning or original B/C adoption filtering."
+      ]
+    },
+    {
+      "case_id": "C091",
+      "slot_key": "343fd328ed38ab5cec2ff40244bd5fc37cce7e39038e1515b584be49161a1ce6",
+      "family": "pick_two_obj_and_place",
+      "after_action_checkpoint": 8,
+      "candidate_replacement_action": 9,
+      "checkpoint_event": {
+        "step": 8,
+        "event_id": "86277145aafc4f6e32306bb36dd16bbbf1dad1ceca7261a83122be83b8c259dc",
+        "generation_event_id": "54a25858e1e464914f48bdcbe8a8e943aab9ed1699d7dd889bb082f752d3da67"
+      },
+      "original_next_step": {
+        "step": 9,
+        "event_id": "cea1315c0089e43620b1d979bec736b933b804dcb8cc8b1dde2433644b4efaef",
+        "generation_event_id": "3726bfc948b2b057f47fc6e9ff8b92ccfe3b2a8305f18b9186069a8e4c7e63cf"
+      },
+      "original_next_command": "look",
+      "first_placed_object": "alarmclock 1",
+      "held_second_object": "alarmclock 2",
+      "same_chosen_goal_container": "desk 1",
+      "first_placement_evidence": {
+        "step": 5,
+        "event_id": "bab5632bdea51ec3eb0fa6c29d700c59a3ab378ec292af2068f3577f6c292c68",
+        "generation_event_id": "f182011d3d03cf45f1db1578290094511dc1962a4e98e41fc6e215d56920941e"
+      },
+      "second_pickup_evidence": {
+        "step": 7,
+        "event_id": "37b97dd0e786c0df7fb372bcf965f8838dc37f6a0025f6d97c3014a3ea5cf93b",
+        "generation_event_id": "25a1c9bff197eba710dbd06e480fdc8b09bfd013d28509b0df92be870b09ed8f"
+      },
+      "recorded_admissible_placement_command": {
+        "command": "move alarmclock 2 to desk 1",
+        "action_id": "A013",
+        "status": "Observed legal affordance, not a hand-labeled correct/successful target"
+      },
+      "as_of_anchor_public_input": {
+        "H4_action_indices": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "first_placement_action_itself_in_H4": true,
+        "first_placement_action_if_outside_H4": null,
+        "first_object_presence_current_observation_substring": "alarmclock 1",
+        "first_object_presence_in_current_observation": true,
+        "second_pickup_and_no_release_evidence": "Recorded pickup in H4 plus no intervening release and a corresponding current legal move; inferred holding, not an unrecorded inventory read.",
+        "exact_recorded_actor_input_checks": {
+          "case_id": "C091",
+          "S_index": 8,
+          "recorded_input_state_equals_checkpoint": true,
+          "H4_matches_exactly": true,
+          "ordered_map_text_matches_exactly": true,
+          "goal_and_current_observation_present": true,
+          "actual_generation_event_id": "3726bfc948b2b057f47fc6e9ff8b92ccfe3b2a8305f18b9186069a8e4c7e63cf",
+          "actual_prompt_sha256": "3a4bbcead4bf9f22e7730b3265ea93b9fa4a59b44cbfd88561abf6687b8af8d9"
+        }
+      },
+      "source_after_anchor_only": {
+        "original_Y0": 0,
+        "no_second_object_move_to_goal_later_in_source": true,
+        "role": "Used to select this already-observed development diagnostic, never included in the anchor input"
+      },
+      "semantic_uncertainty": [
+        "A look can be a legitimate information-gathering step; it is not proved wrong merely because placement is available.",
+        "An admissible placement matching the natural goal does not prove actual terminal success or all hidden predicates.",
+        "Even immediate teacher success would support only this selected proximal mechanism, not broad recoverability, student learning or original B/C adoption filtering."
+      ]
+    },
+    {
+      "case_id": "C095",
+      "slot_key": "bc6406f294655e6f01e7b6e1334408f2422c967aa759aac85d33ec4df33b84ea",
+      "family": "pick_two_obj_and_place",
+      "after_action_checkpoint": 8,
+      "candidate_replacement_action": 9,
+      "checkpoint_event": {
+        "step": 8,
+        "event_id": "eff870d51ad5c290b3ea4a6b01b6567e1524ed3193aaaf7b719c4f0949f00b6b",
+        "generation_event_id": "51ee33108910f65fb8a473a80e417fbd061c7b86b6885fa653bb85b36291ed98"
+      },
+      "original_next_step": {
+        "step": 9,
+        "event_id": "7a9aaf1b8264770d477a13c5fd086d2b85550430bb9fca38c57ea87b6f1af2c7",
+        "generation_event_id": "94883e87a93a7106d73ea16af1c8926eed639e329f526d707c6afa04abf999f7"
+      },
+      "original_next_command": "look",
+      "first_placed_object": "alarmclock 1",
+      "held_second_object": "alarmclock 2",
+      "same_chosen_goal_container": "desk 1",
+      "first_placement_evidence": {
+        "step": 5,
+        "event_id": "52a0ee9f5c93691cbed7c63420e356aaab13d1f2043d61dd21ae78de743550de",
+        "generation_event_id": "7601ddcb502102f614965f1193daf061ddc990d523f5800d3f0dbd79c8dfcc8e"
+      },
+      "second_pickup_evidence": {
+        "step": 7,
+        "event_id": "d66c723174101ad041c7526cab97f5411a2207ee64a6c115fdf7ad8cb67b68e1",
+        "generation_event_id": "67eb4caab2cb28157e89c908f93afde24adfd0cc4e98d2fbe3a13b14a6d6830e"
+      },
+      "recorded_admissible_placement_command": {
+        "command": "move alarmclock 2 to desk 1",
+        "action_id": "A014",
+        "status": "Observed legal affordance, not a hand-labeled correct/successful target"
+      },
+      "as_of_anchor_public_input": {
+        "H4_action_indices": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "first_placement_action_itself_in_H4": true,
+        "first_placement_action_if_outside_H4": null,
+        "first_object_presence_current_observation_substring": "alarmclock 1",
+        "first_object_presence_in_current_observation": true,
+        "second_pickup_and_no_release_evidence": "Recorded pickup in H4 plus no intervening release and a corresponding current legal move; inferred holding, not an unrecorded inventory read.",
+        "exact_recorded_actor_input_checks": {
+          "case_id": "C095",
+          "S_index": 8,
+          "recorded_input_state_equals_checkpoint": true,
+          "H4_matches_exactly": true,
+          "ordered_map_text_matches_exactly": true,
+          "goal_and_current_observation_present": true,
+          "actual_generation_event_id": "94883e87a93a7106d73ea16af1c8926eed639e329f526d707c6afa04abf999f7",
+          "actual_prompt_sha256": "96dc9e62564978d3fa4b42e98525f3fcb957d42df04446dcb531beb824ea840e"
+        }
+      },
+      "source_after_anchor_only": {
+        "original_Y0": 0,
+        "no_second_object_move_to_goal_later_in_source": true,
+        "role": "Used to select this already-observed development diagnostic, never included in the anchor input"
+      },
+      "semantic_uncertainty": [
+        "A look can be a legitimate information-gathering step; it is not proved wrong merely because placement is available.",
+        "An admissible placement matching the natural goal does not prove actual terminal success or all hidden predicates.",
+        "Even immediate teacher success would support only this selected proximal mechanism, not broad recoverability, student learning or original B/C adoption filtering."
+      ]
+    },
+    {
+      "case_id": "C094",
+      "slot_key": "65479c6389cd53899f8f24e5b624d3313b20d1b18724914977ed1dae35e941da",
+      "family": "pick_two_obj_and_place",
+      "after_action_checkpoint": 12,
+      "candidate_replacement_action": 13,
+      "checkpoint_event": {
+        "step": 12,
+        "event_id": "d0ac2da25c5aeec8839b3564e247a93229ac26db96943dbaa14d364c6d6f8b3e",
+        "generation_event_id": "4e93cd58417ab973e409cf1538687f46b6d26b30162147eb16262063e5bd92ac"
+      },
+      "original_next_step": {
+        "step": 13,
+        "event_id": "e47e4329d8b76506ee8d910bc567c258a80282a3744da1b33c6ffb30a57e7764",
+        "generation_event_id": "a24891e9f2709e4ab5376034db0ee04280da927e8966e2412c64b1219cdc99a5"
+      },
+      "original_next_command": "look",
+      "first_placed_object": "tissuebox 1",
+      "held_second_object": "tissuebox 3",
+      "same_chosen_goal_container": "drawer 1",
+      "first_placement_evidence": {
+        "step": 7,
+        "event_id": "682264e67971120a692f24dd9a2225c9f1676fea57ef351e71f2de2ab9d801a6",
+        "generation_event_id": "4b1acf237459c94cd1e623a57be67af785cc58591a4a3c3c71e4796d2258ce3c"
+      },
+      "second_pickup_evidence": {
+        "step": 11,
+        "event_id": "f149e8acd7090fdf1e878be582caf2f35150d6b2fe22560b4998b7cbd5178c30",
+        "generation_event_id": "6d08c77f37c3cd2deb33c841d89e9f7900ac47436c43ef51cbaf46b57caa9d98"
+      },
+      "recorded_admissible_placement_command": {
+        "command": "move tissuebox 3 to drawer 1",
+        "action_id": "A017",
+        "status": "Observed legal affordance, not a hand-labeled correct/successful target"
+      },
+      "as_of_anchor_public_input": {
+        "H4_action_indices": [
+          9,
+          10,
+          11,
+          12
+        ],
+        "first_placement_action_itself_in_H4": false,
+        "first_placement_action_if_outside_H4": "Must not be appended to actor/teacher input",
+        "first_object_presence_current_observation_substring": "tissuebox 1",
+        "first_object_presence_in_current_observation": true,
+        "second_pickup_and_no_release_evidence": "Recorded pickup in H4 plus no intervening release and a corresponding current legal move; inferred holding, not an unrecorded inventory read.",
+        "exact_recorded_actor_input_checks": {
+          "case_id": "C094",
+          "S_index": 12,
+          "recorded_input_state_equals_checkpoint": true,
+          "H4_matches_exactly": true,
+          "ordered_map_text_matches_exactly": true,
+          "goal_and_current_observation_present": true,
+          "actual_generation_event_id": "a24891e9f2709e4ab5376034db0ee04280da927e8966e2412c64b1219cdc99a5",
+          "actual_prompt_sha256": "253261f87089b375d19cdaa044fc4cf1b8169353282c7fc2f06ebc2ea1d9da52"
+        }
+      },
+      "source_after_anchor_only": {
+        "original_Y0": 0,
+        "no_second_object_move_to_goal_later_in_source": true,
+        "role": "Used to select this already-observed development diagnostic, never included in the anchor input"
+      },
+      "semantic_uncertainty": [
+        "A look can be a legitimate information-gathering step; it is not proved wrong merely because placement is available.",
+        "An admissible placement matching the natural goal does not prove actual terminal success or all hidden predicates.",
+        "Even immediate teacher success would support only this selected proximal mechanism, not broad recoverability, student learning or original B/C adoption filtering."
+      ]
+    },
+    {
+      "case_id": "C093",
+      "slot_key": "1ab4f458c4e1603b29602ab86d9a4cad26e36159bf984a0d1edd2ef9ffa5cdd1",
+      "family": "pick_two_obj_and_place",
+      "after_action_checkpoint": 16,
+      "candidate_replacement_action": 17,
+      "checkpoint_event": {
+        "step": 16,
+        "event_id": "af56b8f3f7bd31a06fd38e7708ca55b01b4d43c906ab46428f740388d884cead",
+        "generation_event_id": "c285d0c2ee63d9a6b24984bf5f080400ebae23027d0285094eceaf83fab67e28"
+      },
+      "original_next_step": {
+        "step": 17,
+        "event_id": "f00f23add3ba66469064cc4b998d540270bb367d26f3c6587ba019606680b241",
+        "generation_event_id": "dc73df5cb0c036c6db594e4ea228e891ebaf56518fbc14b9c14d18ca48c31681"
+      },
+      "original_next_command": "look",
+      "first_placed_object": "lettuce 4",
+      "held_second_object": "lettuce 3",
+      "same_chosen_goal_container": "fridge 1",
+      "first_placement_evidence": {
+        "step": 12,
+        "event_id": "4d6806dc8adf7cfe72b3f35d663c4f096258dd2a2c43782bf31f6cbb308f65ca",
+        "generation_event_id": "d35f59e20e22a31369d0273f0a23c8a4fe14d61753369dbb509fb21e9273d458"
+      },
+      "second_pickup_evidence": {
+        "step": 14,
+        "event_id": "4b1bd9c736bce9f352182fd89a94af60aa3794cca1c8842c57903d010fe783fd",
+        "generation_event_id": "86d6c890e3b9c494e7396a05d980ffcc61cdafcd4d48cc45bd8b13bad8bbd508"
+      },
+      "recorded_admissible_placement_command": {
+        "command": "move lettuce 3 to fridge 1",
+        "action_id": "A040",
+        "status": "Observed legal affordance, not a hand-labeled correct/successful target"
+      },
+      "as_of_anchor_public_input": {
+        "H4_action_indices": [
+          13,
+          14,
+          15,
+          16
+        ],
+        "first_placement_action_itself_in_H4": false,
+        "first_placement_action_if_outside_H4": "Must not be appended to actor/teacher input",
+        "first_object_presence_current_observation_substring": "lettuce 4",
+        "first_object_presence_in_current_observation": true,
+        "second_pickup_and_no_release_evidence": "Recorded pickup in H4 plus no intervening release and a corresponding current legal move; inferred holding, not an unrecorded inventory read.",
+        "exact_recorded_actor_input_checks": {
+          "case_id": "C093",
+          "S_index": 16,
+          "recorded_input_state_equals_checkpoint": true,
+          "H4_matches_exactly": true,
+          "ordered_map_text_matches_exactly": true,
+          "goal_and_current_observation_present": true,
+          "actual_generation_event_id": "dc73df5cb0c036c6db594e4ea228e891ebaf56518fbc14b9c14d18ca48c31681",
+          "actual_prompt_sha256": "c4f0767bbc255dc80ca14daf45e026b5f147234692d69a2f63f6931a3fb3395f"
+        }
+      },
+      "source_after_anchor_only": {
+        "original_Y0": 0,
+        "no_second_object_move_to_goal_later_in_source": true,
+        "role": "Used to select this already-observed development diagnostic, never included in the anchor input"
+      },
+      "semantic_uncertainty": [
+        "A look can be a legitimate information-gathering step; it is not proved wrong merely because placement is available.",
+        "An admissible placement matching the natural goal does not prove actual terminal success or all hidden predicates.",
+        "Even immediate teacher success would support only this selected proximal mechanism, not broad recoverability, student learning or original B/C adoption filtering."
+      ]
+    }
+  ],
+  "remaining12_cases": [
+    {
+      "case_id": "C038",
+      "family": "pick_clean_then_place_in_recep",
+      "exclusion_reason": "Different task family; no two-object second-placement mechanism claimed.",
+      "evidence": []
+    },
+    {
+      "case_id": "C054",
+      "family": "pick_clean_then_place_in_recep",
+      "exclusion_reason": "Different task family; no two-object second-placement mechanism claimed.",
+      "evidence": []
+    },
+    {
+      "case_id": "C066",
+      "family": "pick_cool_then_place_in_recep",
+      "exclusion_reason": "Different task family; no two-object second-placement mechanism claimed.",
+      "evidence": []
+    },
+    {
+      "case_id": "C067",
+      "family": "pick_cool_then_place_in_recep",
+      "exclusion_reason": "Different task family; no two-object second-placement mechanism claimed.",
+      "evidence": []
+    },
+    {
+      "case_id": "C068",
+      "family": "pick_cool_then_place_in_recep",
+      "exclusion_reason": "Different task family; no two-object second-placement mechanism claimed.",
+      "evidence": []
+    },
+    {
+      "case_id": "C069",
+      "family": "pick_cool_then_place_in_recep",
+      "exclusion_reason": "Different task family; no two-object second-placement mechanism claimed.",
+      "evidence": []
+    },
+    {
+      "case_id": "C071",
+      "family": "pick_cool_then_place_in_recep",
+      "exclusion_reason": "Different task family; no two-object second-placement mechanism claimed.",
+      "evidence": []
+    },
+    {
+      "case_id": "C077",
+      "family": "pick_cool_then_place_in_recep",
+      "exclusion_reason": "Different task family; no two-object second-placement mechanism claimed.",
+      "evidence": []
+    },
+    {
+      "case_id": "C081",
+      "family": "pick_heat_then_place_in_recep",
+      "exclusion_reason": "Different task family; no two-object second-placement mechanism claimed.",
+      "evidence": []
+    },
+    {
+      "case_id": "C090",
+      "family": "pick_two_obj_and_place",
+      "exclusion_reason": "One first-target placement is recorded, but no second distinct target pickup is recorded anywhere in the50-step source.",
+      "evidence": [
+        {
+          "step": 6,
+          "event_id": "c58c893d264aa07c8ad2e5acc547150f04afc6f4f609cd2039490be898f4d5cd",
+          "generation_event_id": "d1f2460c520dc96f51a284ab359269aa4f3afb6ad83841eef51618bb11ed4f98"
+        },
+        {
+          "step": 50,
+          "event_id": "00f1f22857457e89d2e9224743cb2cac86ae22d9714457117ff832a3b2d80815",
+          "generation_event_id": "65e2a2cf644148aa539d5491f42ca97aaa00c814d7b520f866cf9e9489210df6"
+        }
+      ]
+    },
+    {
+      "case_id": "C092",
+      "family": "pick_two_obj_and_place",
+      "exclusion_reason": "One first-target placement is recorded, but no second distinct target pickup is recorded anywhere in the50-step source.",
+      "evidence": [
+        {
+          "step": 6,
+          "event_id": "c8df4bac53243f1b45511e559094d9308b889a82232cac94b64f9fcf762d295b",
+          "generation_event_id": "412031d69a66f09931c156dcbba9a898bed037c97bf8b642e6f3c02d77c03342"
+        },
+        {
+          "step": 50,
+          "event_id": "e85877da2f07637b88340edf50e53dc2c3e2dbbe4ea097417448eec3f351ca06",
+          "generation_event_id": "8c4548df39d763e4bd889c5bf100c5f3b21685bdd97854626250c1f0217d1d5a"
+        }
+      ]
+    },
+    {
+      "case_id": "C096",
+      "family": "pick_two_obj_and_place",
+      "exclusion_reason": "One first-target placement is recorded, but no second distinct target pickup is recorded anywhere in the50-step source.",
+      "evidence": [
+        {
+          "step": 7,
+          "event_id": "3fb954832c826de3d21823410821a4f2e1762fd4552e33f01f7b18f62f2a1ccd",
+          "generation_event_id": "655ec064933b5a5964d3b550181fe99b87d8d305f3d5f398cee7cb62c787ec47"
+        },
+        {
+          "step": 50,
+          "event_id": "683961226f889b6883591db62c0e9b94b68aa08b5b777bf51a201179ab679b4b",
+          "generation_event_id": "3534a9fbcc5bb86949b850025af4a1c538c11b7393dda82d93d068fc24f25ef4"
+        }
+      ]
+    }
+  ],
+  "causal_visibility_boundary": "All selected cues are available by each selected checkpoint. In C094 and C093 first placement actions lie outside H4: only current first-object presence is available; never append those older actions. Holding and goal matching are reasoned from recorded feedback/current admissible map, not complete latent simulator state.",
+  "single_step_identifiability": "A prospective diagnostic can separately record whether the teacher voluntarily selects a legal placement and whether execution immediately produces done and reward>0; full P0-suffix terminal success is a different endpoint. Do not force the quoted command or treat any different action plus late success as proof of the proximal placement mechanism. No such action/outcome was run here.",
+  "selection_bias": "Cases and checkpoints were chosen after full source failures and stalls were observed. They are selected development mechanism examples, not a deployed trigger, natural success-rate or general recovery sample. All17 and12 exclusions stay visible. No retrospective source action becomes supervised correct/incorrect data solely from this selection.",
+  "incremental_information_vs_R19": "Would test the narrower public-information/action-choice question at selected second-object placement opportunities. R19 already showed recovery rescue and harm; another generic rescue is not a new self-improvement result. Immediate placement completion would localize an intervention effect in selected cases, but would not prove adapter-only causation (teacher role/prompt also differ), transferable learning or a useful training dose.",
+  "scientific_tradeoff": "These anchors have clearer proximal subgoal evidence than fixedS5, while greater outcome-informed selection and only five cases sharply limit external claims. This review supports only considering a separate explicitly exploratory diagnostic design, not its execution.",
+  "unchanged_decisions": "SI-S01 structural NO_GO and prior source/costs remain unchanged; no teacher/train/eval/replay authority."
+}

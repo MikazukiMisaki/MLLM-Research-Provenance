@@ -1,0 +1,11 @@
+# 更正：先前的 JSON 格式疑虑未成立
+
+本任务记录曾称Sol行为审计新副本存在字面量\n文件结尾，该表述错误。三份当前冻结文件经标准json.loads逐一严格解析均通过，末尾均为真实换行0a。Sol Research独立报告13个文件均严格解析通过且未修改旧字节；本记录仅独立复核列出的三份，不替代其13份清单。前述错误不影响SI-S01原始运行验收及已独立复算的结果。本更正以追加方式保留原文，不修改或覆盖其历史记录。
+
+原记录：/home/lizening/research-notes/agent-logs/2026-10-27T022715Z__SOL__si-s01-scientific-interpretation__cf4e6dff/RECORD.md
+
+核验范围和当前SHA256：
+
+- BEHAVIOR_FACTS.json: 11b16434a1808abfbdedcf9ef9a4718bfe7312c030371b10126b2dd28332a701；严格解析通过，末字节0a
+- OBSERVATION_MAP_ORDER_AND_CYCLE_ADDENDUM.json: b7abd63ce62c5242828f24f5bb589b24f79d4fdc76186363a548e9eed825289d；严格解析通过，末字节0a
+- BEHAVIOR_INTERPRETATION.json: c4d09e03882cc9b073890cf5da2d2316c1477ac887995eb7059cb776d2907324；严格解析通过，末字节0a

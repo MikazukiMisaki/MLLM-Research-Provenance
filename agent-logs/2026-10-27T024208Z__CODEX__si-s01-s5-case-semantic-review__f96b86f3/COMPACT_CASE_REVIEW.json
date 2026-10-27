@@ -1,0 +1,2788 @@
+{
+  "schema": "SI_S01_COMPACT_ALL17_S5_SEMANTIC_REVIEW_V1",
+  "created_utc": "2026-10-27T02:55:48.639840+00:00",
+  "status": "OFFLINE_MANUAL_REVIEW_NOT_POLICY_OR_RUN_ACCEPTANCE",
+  "denominator": 17,
+  "classification_definition": {
+    "支持": "Contemporaneous evidence supports labeling action6 a known actual error; none established.",
+    "不支持": "Recorded goal/subgoals and action6 consequence support normal search/progress; this rejects a known-error label, not proof of optimality or no possible intervention value.",
+    "证据不足": "A local redundancy candidate is observable, but its necessity/utility and causal relation to failure are not established."
+  },
+  "classification_counts": {
+    "不支持": 13,
+    "证据不足": 4,
+    "支持": 0
+  },
+  "cases": [
+    {
+      "case_id": "C038",
+      "slot_key": "bc548f72c8eeefa4e2578c6662186c106c960e2493b6803fba96634cc0c824a1",
+      "family": "pick_clean_then_place_in_recep",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "bc14cfb05a745ac45ca2e7424daf54cc67514275ac19f5ac27e83c54cb1f5b10",
+      "S5_seal_event_id": "2e4b218633e0b24e5c16fb67c138c0ba892df3d61feafeac28f0ead2e6a41325",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "截至S5只观察了sinkbasin并检查drawer1为空、随后关闭；无找到/拿取fork、清洁或放置的记录。",
+        "evidence": [
+          {
+            "step": 2,
+            "event_id": "6aaf7e9cf1cb7c06017ceac7b07f9de3c27fc9d49ee472f2d00649817b7afdba",
+            "generation_event_id": "139eb472654fe4eb7d804e530c5dd6b2983868becb628b6293685e34c27151b3",
+            "command": "go to sinkbasin 1",
+            "feedback_excerpt": "You arrive at sinkbasin 1. On the sinkbasin 1, you see a glassbottle 2, and a spoon 1.",
+            "feedback_sha256": "4fa4ccd487e5eefa51753dd7c4b68641ab49d5bca66025e3028642b37fb3eaf2"
+          },
+          {
+            "step": 3,
+            "event_id": "2090e71a1ed6f6a770f3520a00c88dc4cd8b70e22c79566f7648c27bfda8e737",
+            "generation_event_id": "cf4937f797d53c95c94aeab4ad5996ef90d311c9382240da4981c527cc0ca0b8",
+            "command": "go to drawer 1",
+            "feedback_excerpt": "You arrive at drawer 1. The drawer 1 is closed.",
+            "feedback_sha256": "d022fab0de1bae367e927cc37ab9f54c07d3abba9e96d6e2e959b38b4b07ec84"
+          },
+          {
+            "step": 4,
+            "event_id": "01e72b7f30852717ea29b1859d9ea704f548725bc7f1b42bec6c2880c52b1ec4",
+            "generation_event_id": "73c99440ee8951bc305ca8783cef93dd893b028cc5cead4e6a95bc374baf1f9d",
+            "command": "open drawer 1",
+            "feedback_excerpt": "You open the drawer 1. The drawer 1 is open. In it, you see nothing.",
+            "feedback_sha256": "0881cecd88160f4d68f037abef13440963740fd1af5b0f98b816f95b2bb46299"
+          },
+          {
+            "step": 5,
+            "event_id": "bc14cfb05a745ac45ca2e7424daf54cc67514275ac19f5ac27e83c54cb1f5b10",
+            "generation_event_id": "fe97f649008498d33ea99b98cdece63dae4303c3cbda4426549713bccf58b383",
+            "command": "close drawer 1",
+            "feedback_excerpt": "You close the drawer 1.",
+            "feedback_sha256": "4c2a4a0b00b5fe63902643fa38ffb67e15271b3d2ebab7e7ff2ee25b01bcb7c6"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "3f5884c5c29846065d7dd41b8bbef7a1947f8a715c3eb6556b0184afd1dd6b28"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "a5ea19716d4391a242f708e300dae422bc705e01888eee1665a678be04afe364",
+        "generation_event_id": "2d6c027289bab02f431d8332db858b93bc259d5c23de328c2d6919cf9f0acc59",
+        "command": "go to drawer 2",
+        "feedback_excerpt": "You arrive at drawer 2. The drawer 2 is closed.",
+        "feedback_sha256": "38cc27d01b9fbf3c534e1a0f2386ef54d44e3046ea1e1ffc7a74ef75a7053e1e"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "不支持",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Consistent with goal-directed search or observed task progress; not asserted optimal",
+        "contemporaneous_and_action6_feedback_reasoning": "前往尚未检查的drawer2，反馈确认到达另一个关闭抽屉；与继续寻找fork相容，不能据未来循环认定这次移动错误。",
+        "classification_reason": "第6动作不是后来drawer4重复开关循环中的动作。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": 17,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 13,
+            "event_id": "f615a459878fb3a911b89df04a0bf9a95e8820d71b5e89821f56cef336461566",
+            "generation_event_id": "e5ee80472231c3423bd07f70e9719b85fd0ef21a6e61ff184836b499bf7e7789",
+            "command": "open drawer 4",
+            "feedback_excerpt": "You open the drawer 4. The drawer 4 is open. In it, you see nothing.",
+            "feedback_sha256": "810eb354938ac4e8277a82de9510cd8ab8800caa7f292e9387f22537188b67ef"
+          },
+          {
+            "step": 14,
+            "event_id": "c9bb04851d73df804857fe333aa86e393873264dd0cd908660a74e2a4c4a0727",
+            "generation_event_id": "d4aca9265c7f854fa70694748ae8aab908ef6bfc89498147fbe6d18026766ec3",
+            "command": "close drawer 4",
+            "feedback_excerpt": "You close the drawer 4.",
+            "feedback_sha256": "ee2ef7205606a78fd1ca5a1dd361475fc1faecb2cf19ae0991d8bae182f07274"
+          },
+          {
+            "step": 16,
+            "event_id": "588281a97be675e1c4bfd6492a73480ac8a52e38abf2723edd4818921b96d9a9",
+            "generation_event_id": "70e0f8afa6418c9bd0525f367c2038bb65043ebf5c7d9d39f6354069a543b74e",
+            "command": "examine drawer 4",
+            "feedback_excerpt": "The drawer 4 is closed.",
+            "feedback_sha256": "804ece878d1318d8920e6e99d9078983c3bb545dac7e0acb41eaa5ecb492cd31"
+          },
+          {
+            "step": 17,
+            "event_id": "48c9ee85e6af16ec2036730620b4e72f55384da2af83924e4394e91fbfbdc8c6",
+            "generation_event_id": "fb09f1f2e0646ba47f61f07ee11c126f615a67daf0174c6e2c490f1be6c14337",
+            "command": "open drawer 4",
+            "feedback_excerpt": "You open the drawer 4. The drawer 4 is open. In it, you see nothing.",
+            "feedback_sha256": "810eb354938ac4e8277a82de9510cd8ab8800caa7f292e9387f22537188b67ef"
+          },
+          {
+            "step": 21,
+            "event_id": "82cd4872e0db85aff819d6cd05c3b5e755f820eec51461c47e6328dcded8bd3e",
+            "generation_event_id": "9b2ddfdc36cb37223223753b67b5e6533073ade086ba3c5dd33b1e6f2e9224b3",
+            "command": "open drawer 4",
+            "feedback_excerpt": "You open the drawer 4. The drawer 4 is open. In it, you see nothing.",
+            "feedback_sha256": "810eb354938ac4e8277a82de9510cd8ab8800caa7f292e9387f22537188b67ef"
+          }
+        ],
+        "interpretation": "step13已见drawer4为空；step17再次打开它，是可疑重复检查；到step21已观察重复块。该时点是事后可核验的重复行为，不是唯一因果错误定位。",
+        "relation_to_S5": "长期循环在14–50附近，晚于S5；未曾记录拿到fork。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "fork",
+        "required_treatment": "clean",
+        "destination_type": "drawer",
+        "required_object_count": 1
+      }
+    },
+    {
+      "case_id": "C054",
+      "slot_key": "6048cf16e9e37c89ec7ed03ba489aa08a1418df649954f592eab6ba2563d1705",
+      "family": "pick_clean_then_place_in_recep",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "e599cfab7575a424ed267686de5dad547c43b02f6e36b2de177dba342af5aa2a",
+      "S5_seal_event_id": "bca79ae2f0174a2857e4709f5b504b110b3d3ee6af87a87396759023dc8d7526",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "截至S5未发现cup，无拿取/清洁/放置记录。step3见stoveburner1为空，step4 look，step5再次examine同一空炉位；存在语义上的重复查看候选。",
+        "evidence": [
+          {
+            "step": 3,
+            "event_id": "3a04acab8e0474405e0664a673bb80709ee6a7b0fa4b6540df3beae1084ff6e1",
+            "generation_event_id": "4fad282dec5cbf930c840122bf0c71404218dbc5a4b09ce970f0fa0566c7fd74",
+            "command": "go to stoveburner 1",
+            "feedback_excerpt": "You arrive at stoveburner 1. On the stoveburner 1, you see nothing.",
+            "feedback_sha256": "3f0336426632a5e9df70705d61195b1b18dd944790933c42dc2725d9bf2d5c52"
+          },
+          {
+            "step": 4,
+            "event_id": "ce089b82e80f39449aa1ce62641bf0759cbfeb594e4a5e12b9e37a96b4d2032e",
+            "generation_event_id": "1c3d9702cf3932244fd086bafc604221e983c4d9fe8f1aa9fe126566c1910942",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+            "feedback_sha256": "1055e99bc0934af120e077bc48f3aec1d6443b4daff97c750eed4df94ef2557f"
+          },
+          {
+            "step": 5,
+            "event_id": "e599cfab7575a424ed267686de5dad547c43b02f6e36b2de177dba342af5aa2a",
+            "generation_event_id": "a8f4e728ede9421451d4138d89e32f5cdae109b1b96386e81598cc47ce6439c1",
+            "command": "examine stoveburner 1",
+            "feedback_excerpt": "On the stoveburner 1, you see nothing.",
+            "feedback_sha256": "578cf21e68dc1c7131cea265282c5a5a556c4174465a829539e8235a38f3d829"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "be5f492c91fa99285025119f6aac48df8350e56ed0bcd8b54c8e141291c0cf67"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "4becd008801e2222cb358659fece38678a1712642f433f52ee49ff01dcb9eea7",
+        "generation_event_id": "d30ef4656272885217e3b0716fdc6e1fa7b70dca004050d3e9d537a42f439df0",
+        "command": "look",
+        "feedback_excerpt": "You are facing the stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+        "feedback_sha256": "1055e99bc0934af120e077bc48f3aec1d6443b4daff97c750eed4df94ef2557f"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "证据不足",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Ambiguous redundancy candidate",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步look返回与step4完全相同的观察；这支持局部冗余候选，不证明look错误、不可恢复或导致终局失败。",
+        "classification_reason": "重复感知可见，但其效用及与未找到cup的因果联系不明。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": 5,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 3,
+            "event_id": "3a04acab8e0474405e0664a673bb80709ee6a7b0fa4b6540df3beae1084ff6e1",
+            "generation_event_id": "4fad282dec5cbf930c840122bf0c71404218dbc5a4b09ce970f0fa0566c7fd74",
+            "command": "go to stoveburner 1",
+            "feedback_excerpt": "You arrive at stoveburner 1. On the stoveburner 1, you see nothing.",
+            "feedback_sha256": "3f0336426632a5e9df70705d61195b1b18dd944790933c42dc2725d9bf2d5c52"
+          },
+          {
+            "step": 4,
+            "event_id": "ce089b82e80f39449aa1ce62641bf0759cbfeb594e4a5e12b9e37a96b4d2032e",
+            "generation_event_id": "1c3d9702cf3932244fd086bafc604221e983c4d9fe8f1aa9fe126566c1910942",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+            "feedback_sha256": "1055e99bc0934af120e077bc48f3aec1d6443b4daff97c750eed4df94ef2557f"
+          },
+          {
+            "step": 5,
+            "event_id": "e599cfab7575a424ed267686de5dad547c43b02f6e36b2de177dba342af5aa2a",
+            "generation_event_id": "a8f4e728ede9421451d4138d89e32f5cdae109b1b96386e81598cc47ce6439c1",
+            "command": "examine stoveburner 1",
+            "feedback_excerpt": "On the stoveburner 1, you see nothing.",
+            "feedback_sha256": "578cf21e68dc1c7131cea265282c5a5a556c4174465a829539e8235a38f3d829"
+          },
+          {
+            "step": 6,
+            "event_id": "4becd008801e2222cb358659fece38678a1712642f433f52ee49ff01dcb9eea7",
+            "generation_event_id": "d30ef4656272885217e3b0716fdc6e1fa7b70dca004050d3e9d537a42f439df0",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+            "feedback_sha256": "1055e99bc0934af120e077bc48f3aec1d6443b4daff97c750eed4df94ef2557f"
+          },
+          {
+            "step": 7,
+            "event_id": "465b2bce88ecc27f16cad64e7aa1a8258845fd9ebaf1d9857a7773ca144045d0",
+            "generation_event_id": "09e43235d9bc3afb4f8770a9b158fd1e136c3ddbe9ce5e865f8faafd5c3bd070",
+            "command": "examine stoveburner 1",
+            "feedback_excerpt": "On the stoveburner 1, you see nothing.",
+            "feedback_sha256": "578cf21e68dc1c7131cea265282c5a5a556c4174465a829539e8235a38f3d829"
+          },
+          {
+            "step": 8,
+            "event_id": "f2a824078360e14a52f4a8db59685b643176c6441713e0f928f1bb3342fd050b",
+            "generation_event_id": "561010458184ee5c7f65aca951684ed6f55fee184a99a71eb6f62d657710a8d1",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+            "feedback_sha256": "1055e99bc0934af120e077bc48f3aec1d6443b4daff97c750eed4df94ef2557f"
+          },
+          {
+            "step": 49,
+            "event_id": "2c562928f653933ac60a199ba259174f189791d1a318a30790005c231d39b2b6",
+            "generation_event_id": "f4bea87cf117db3d5b2fd48b8d7c66081b039b1731c7102628b6ded567fc8f53",
+            "command": "go to drawer 6",
+            "feedback_excerpt": "You arrive at drawer 6. The drawer 6 is closed.",
+            "feedback_sha256": "ab7f27c232548ac948b30c48fada51833c701f6c52d4c93546077550aff80a61"
+          },
+          {
+            "step": 50,
+            "event_id": "36ab29aee55fc946e78d7adb905f5fb407f2b42f9663f1182a0b8771f23a06a5",
+            "generation_event_id": "bb992d8a619696c82a0582f1776f442a93ec42f8433e39c7eb6a39c4b2b36687",
+            "command": "open drawer 6",
+            "feedback_excerpt": "You open the drawer 6. The drawer 6 is open. In it, you see nothing.",
+            "feedback_sha256": "fd842fd438a1b747cd3425d0615c2f4c8bdd86a4500018ad523d7fd5b65a6286"
+          }
+        ],
+        "interpretation": "step5已是再次检查已观察地点的候选；step6返回step4观察，step8形成可核验的短重复。之后仍继续搜索，终局未记录cup拿取。不能把短重复当全部失败原因。",
+        "relation_to_S5": "S5附近有弱冗余迹象，后来主要是搜索未完成；不是已知错误动作标签。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "cup",
+        "required_treatment": "clean",
+        "destination_type": "microwave",
+        "required_object_count": 1
+      }
+    },
+    {
+      "case_id": "C066",
+      "slot_key": "3f6a5a5cc84e5acae513e97da80a9637f696d987bf57056b35fe19eb1c6d1017",
+      "family": "pick_cool_then_place_in_recep",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "223bd8e621476fd7859bbcd1886bd9e2276703fc343e46c598b30d894944323e",
+      "S5_seal_event_id": "9944980777af62f4239ee7ef7c8a488b512cabf433064995a6c7818f337c9a2c",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "截至S5仅检查toaster及stoveburner1–3；看到的是pot而非任务pan，无pan拿取、冷却或放置记录。",
+        "evidence": [
+          {
+            "step": 2,
+            "event_id": "0776819f32f0866d24452a643e068c54a900bb10310b74f649d660a7c7007aeb",
+            "generation_event_id": "466a51e02ef94b51451eba47b3876ee7f6f98364af05432e848112ac43f68c95",
+            "command": "go to toaster 1",
+            "feedback_excerpt": "You arrive at toaster 1. On the toaster 1, you see nothing.",
+            "feedback_sha256": "709c77f3effd855a0f914aef639904534ce10d56d571050a654781fd06d63565"
+          },
+          {
+            "step": 3,
+            "event_id": "a1f5e92ae7c43305de2c83089f5c7ea1ee797ae8d3107a7f6a104eb1c0e8bf9e",
+            "generation_event_id": "7ba23bae8b0c300d795d999988e4f5ad358c9fb11abc02a8df9feab14294380c",
+            "command": "go to stoveburner 1",
+            "feedback_excerpt": "You arrive at stoveburner 1. On the stoveburner 1, you see a pot 1.",
+            "feedback_sha256": "f0fc84a7b05fdf3c153ed5375b447df553d7c5b51f75ecbee9ed7805c1b8f17d"
+          },
+          {
+            "step": 4,
+            "event_id": "701236a0c6597756a328ae059d71892e428d02b3ae7962d1dde4232d1627cae0",
+            "generation_event_id": "c61a391e5723ef4d7dfc626f99ef38d56548e3e8f37372f89aa1fcc099d17b84",
+            "command": "go to stoveburner 2",
+            "feedback_excerpt": "You arrive at stoveburner 2. On the stoveburner 2, you see nothing.",
+            "feedback_sha256": "0dfd16a5c74c68744549f1a312296638f31c430925459a167e9777dbcd3bf707"
+          },
+          {
+            "step": 5,
+            "event_id": "223bd8e621476fd7859bbcd1886bd9e2276703fc343e46c598b30d894944323e",
+            "generation_event_id": "1923e0ae87e78210d1f0c165330e001e0a014d8fcdbc0da6cfc140239940ca6c",
+            "command": "go to stoveburner 3",
+            "feedback_excerpt": "You arrive at stoveburner 3. On the stoveburner 3, you see nothing.",
+            "feedback_sha256": "ae00f5a72fcb7df0662938220b7c5310f5f3bc494f68d96e5a79cb71099cf6c5"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "aa14f8a5dbe556194dbfd26cee178457ec06980f4d85470b478f222b2cf0729b"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "b22ebc7affbcdee879c0a0351336edfcf7b9abbdd221788244e6b1c1fac00019",
+        "generation_event_id": "9bc6bf6f4d1c7b85f1b2a859257a93cca2171e575c60930b8168e818e6a15ea1",
+        "command": "go to stoveburner 4",
+        "feedback_excerpt": "You arrive at stoveburner 4. On the stoveburner 4, you see nothing.",
+        "feedback_sha256": "349679f662e18d850ed726511f32d40d8d626d113a1de3ad351933c0e084e250"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "不支持",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Consistent with goal-directed search or observed task progress; not asserted optimal",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步去另一个尚未检查的stoveburner4，新增搜索结果为空；没有证据说明这一步是错误。",
+        "classification_reason": "第6动作与正常寻找pan相容；真正困难只在后期搜索与剩余时限的组合中显现。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": null,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 47,
+            "event_id": "e2bc23f81f963617cb32d0b0779579546b248836e5c845d8a89e554a0581426a",
+            "generation_event_id": "0bbb5b6023c7eaa8ea39e4e967e46c02e8e3cbd315f7bee642642fc1a8a13e8d",
+            "command": "open cabinet 9",
+            "feedback_excerpt": "You open the cabinet 9. The cabinet 9 is open. In it, you see a pan 1.",
+            "feedback_sha256": "023bf623669bf7f271a4705e8ecd2569b9aa6a82ce9222124e38647cb90178f0"
+          },
+          {
+            "step": 48,
+            "event_id": "390cd09fd2db39583e7bfcd39617b8e8a8efb212c05d075df1365658fc2b4c73",
+            "generation_event_id": "71b0e57c5fc03bfaa1cbc9b9ccd874ec04182f693213e02b27649cb069361a57",
+            "command": "take pan 1 from cabinet 9",
+            "feedback_excerpt": "You pick up the pan 1 from the cabinet 9.",
+            "feedback_sha256": "0eea645156ac88299397644ce7b46aba54e84e10866f6adb77acc1f48b2bac49"
+          },
+          {
+            "step": 49,
+            "event_id": "ec95360b89953bd1f67c1625f1fb1c3b05d710697f836876b67a95a79d2f1271",
+            "generation_event_id": "934d700f0cc9057d8ac1a03accfd603b97e37eeaa51fa2c24f48b1ae5ecd38b6",
+            "command": "go to fridge 1",
+            "feedback_excerpt": "You arrive at fridge 1. The fridge 1 is closed.",
+            "feedback_sha256": "632783d4518ea73e1b6b9b37d94f3ee58a2596e41b0e5d1db7d6b62e7c477859"
+          },
+          {
+            "step": 50,
+            "event_id": "ca6a2a972af78b22673704fe13e011d5d619dab930a8936f19d6e3053271ddb5",
+            "generation_event_id": "7badc1489a0e86fc8f820cae846606334a53a95f815f323cc4cbf4dd48d97510",
+            "command": "cool pan 1 with fridge 1",
+            "feedback_excerpt": "You cool the pan 1 using the fridge 1.",
+            "feedback_sha256": "9443317998755dc36c62b5e1e2b25d8d10855a12247a684f085388b408f2141a"
+          }
+        ],
+        "interpretation": "直到47才在cabinet9看到pan，48拿起，50反馈冷却成功；到H50尚未有放到stoveburner的记录。未识别到更早唯一的错误动作；不能用目标位置事后知识否定早期搜索。",
+        "relation_to_S5": "不是已测短周期循环案例；晚发现目标与终局未完成不证明S5动作错。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "pan",
+        "required_treatment": "cool",
+        "destination_type": "stoveburner",
+        "required_object_count": 1
+      }
+    },
+    {
+      "case_id": "C067",
+      "slot_key": "e406b478f9f66831f8d9db44c14e1f682b1733e34795b9b0b6540717d17aa64a",
+      "family": "pick_cool_then_place_in_recep",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "d6878c59fffb0936693c1e069b8d10f147709c465e3356d0987acdbab9d8d7b9",
+      "S5_seal_event_id": "0e23699894521e98b28f55861e645f7279c6804cc0fd81fb6fb02541db85bc97",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "截至S5未发现目标pot；所见pan1不是pot。step3到stoveburner1、step4 look、step5 examine同一位置，未拿取/冷却/放置任务目标。",
+        "evidence": [
+          {
+            "step": 3,
+            "event_id": "751072e5b9417584bdfe0ed30f1404f3a946004dc76afda0d68817d1ba801e80",
+            "generation_event_id": "298f895ced258437f2503c379b906de1184c5bddd75acd385573bd1d02048319",
+            "command": "go to stoveburner 1",
+            "feedback_excerpt": "You arrive at stoveburner 1. On the stoveburner 1, you see a pan 1.",
+            "feedback_sha256": "57a1d37fe86f83afb8dd7efd1f67a0c5f9c346503dfe604b96964f2af5a4aa41"
+          },
+          {
+            "step": 4,
+            "event_id": "702c2ea7d09fe6e98f0d404c151be7d063ea439211186264f13b9a3559944ce7",
+            "generation_event_id": "057301e20a54dce957f400dc389556fedccb02a68c3ea68299751495fd72a7de",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+            "feedback_sha256": "1055e99bc0934af120e077bc48f3aec1d6443b4daff97c750eed4df94ef2557f"
+          },
+          {
+            "step": 5,
+            "event_id": "d6878c59fffb0936693c1e069b8d10f147709c465e3356d0987acdbab9d8d7b9",
+            "generation_event_id": "582fac20203af267b1a476ab1fd7a6270f24733040410b3687e2736bc6d7742e",
+            "command": "examine stoveburner 1",
+            "feedback_excerpt": "On the stoveburner 1, you see a pan 1.",
+            "feedback_sha256": "0384225c53258d219a4c676d3e5f196bad9e463b80caf8f555677db1f84bb17d"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "467800e2f4fed0c11385e5ace3efbd7c0f883984fe3b23591647eb6d02256d17"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "14102184b76d74238acc3f06345d039ae4e8e8e23b99104a8acc95672047d60c",
+        "generation_event_id": "b79f87e9f46a8c96ec2592cca008335670ac1732b45cec14fa0a63ec6d8198c9",
+        "command": "look",
+        "feedback_excerpt": "You are facing the stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+        "feedback_sha256": "1055e99bc0934af120e077bc48f3aec1d6443b4daff97c750eed4df94ef2557f"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "证据不足",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Ambiguous redundancy candidate",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步look重复step4观察，有感知冗余候选；不能把pan与pot混同，也不能把搜索失败归因于这一步。",
+        "classification_reason": "有局部重复但无已知语义错误或因果失败证明。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": 5,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 3,
+            "event_id": "751072e5b9417584bdfe0ed30f1404f3a946004dc76afda0d68817d1ba801e80",
+            "generation_event_id": "298f895ced258437f2503c379b906de1184c5bddd75acd385573bd1d02048319",
+            "command": "go to stoveburner 1",
+            "feedback_excerpt": "You arrive at stoveburner 1. On the stoveburner 1, you see a pan 1.",
+            "feedback_sha256": "57a1d37fe86f83afb8dd7efd1f67a0c5f9c346503dfe604b96964f2af5a4aa41"
+          },
+          {
+            "step": 4,
+            "event_id": "702c2ea7d09fe6e98f0d404c151be7d063ea439211186264f13b9a3559944ce7",
+            "generation_event_id": "057301e20a54dce957f400dc389556fedccb02a68c3ea68299751495fd72a7de",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+            "feedback_sha256": "1055e99bc0934af120e077bc48f3aec1d6443b4daff97c750eed4df94ef2557f"
+          },
+          {
+            "step": 5,
+            "event_id": "d6878c59fffb0936693c1e069b8d10f147709c465e3356d0987acdbab9d8d7b9",
+            "generation_event_id": "582fac20203af267b1a476ab1fd7a6270f24733040410b3687e2736bc6d7742e",
+            "command": "examine stoveburner 1",
+            "feedback_excerpt": "On the stoveburner 1, you see a pan 1.",
+            "feedback_sha256": "0384225c53258d219a4c676d3e5f196bad9e463b80caf8f555677db1f84bb17d"
+          },
+          {
+            "step": 6,
+            "event_id": "14102184b76d74238acc3f06345d039ae4e8e8e23b99104a8acc95672047d60c",
+            "generation_event_id": "b79f87e9f46a8c96ec2592cca008335670ac1732b45cec14fa0a63ec6d8198c9",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+            "feedback_sha256": "1055e99bc0934af120e077bc48f3aec1d6443b4daff97c750eed4df94ef2557f"
+          },
+          {
+            "step": 7,
+            "event_id": "143b7bee16451c047292ff410f7e78ef643c2ad6a009fd23fa670995b3c9d58c",
+            "generation_event_id": "1329904d7a783269795a4e33fb308c2e7e1720520fcc4a6955f098e362dfc374",
+            "command": "examine stoveburner 1",
+            "feedback_excerpt": "On the stoveburner 1, you see a pan 1.",
+            "feedback_sha256": "0384225c53258d219a4c676d3e5f196bad9e463b80caf8f555677db1f84bb17d"
+          },
+          {
+            "step": 8,
+            "event_id": "1e80e60b496d801f7ebf8ffcfebb5b4480474332068cd75edc9240770055d2c8",
+            "generation_event_id": "ad58ee665ac3c2e72c1a794cb7bb8964529eeb4fcff4774916ed366f734fbe88",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+            "feedback_sha256": "1055e99bc0934af120e077bc48f3aec1d6443b4daff97c750eed4df94ef2557f"
+          },
+          {
+            "step": 45,
+            "event_id": "cd6009b9e5a47a55eab18d63e9a40a6270b2ea8f288d95d5aeef7c0c6fb3ada3",
+            "generation_event_id": "6870c8437fdcf68053394cd851701a00fe0ff56efce6dc1b98c1f4396c670dc7",
+            "command": "go to drawer 8",
+            "feedback_excerpt": "You arrive at drawer 8. On the drawer 8, you see nothing.",
+            "feedback_sha256": "a82d7296f10bf82205b424d1e53a33135db3a883ef8c1bf96811ca4acbd76f82"
+          },
+          {
+            "step": 49,
+            "event_id": "fc98fe9131f1a8bd081ac094db8c0b62827199c41c22dff7e0a2b899a04c5f82",
+            "generation_event_id": "ce2c053ca26565a570e395b3484e5498da9e892e1ccf38e2a14bb62b7caa1370",
+            "command": "go to drawer 6",
+            "feedback_excerpt": "You arrive at drawer 6. The drawer 6 is closed.",
+            "feedback_sha256": "ab7f27c232548ac948b30c48fada51833c701f6c52d4c93546077550aff80a61"
+          },
+          {
+            "step": 50,
+            "event_id": "05431c6341d616242bf3a893d9d3623880515f3c9e86b96b45b7363edb83b08e",
+            "generation_event_id": "9a406f76d81ca2181e0e19b4147b9d61a059ccb191e682af52ac2aea6e7f7b18",
+            "command": "open drawer 6",
+            "feedback_excerpt": "You open the drawer 6. The drawer 6 is open. In it, you see a spatula 1.",
+            "feedback_sha256": "80ef74a057c1f44c89f4db8e2e46f6cfc4708a656c79a6e35a64ca8d063551b7"
+          }
+        ],
+        "interpretation": "与C054相似，step5可疑重复检查，step6/8观察再现；随后仍搜索许多地点，未记录取得pot。最早的冗余候选并不等于最早已证明错误。",
+        "relation_to_S5": "S5附近的短感知循环存在，持续失败原因及可恢复性未知。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "pot",
+        "required_treatment": "cool",
+        "destination_type": "countertop",
+        "required_object_count": 1
+      }
+    },
+    {
+      "case_id": "C068",
+      "slot_key": "fc67b15d67dec4592d95d54e4cd604a1d726b9fddb4559a2790315341a83c864",
+      "family": "pick_cool_then_place_in_recep",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "6fd0351a937432271c8825580b6c00baed0f17feea3a09c0b4ba7c2a4d0bbaeb",
+      "S5_seal_event_id": "882df129d371d0ee6def33b89528f7a2700948ae3079b4c070e794a0ea45757f",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "截至S5未发现目标mug；已到toaster1并见空，随后检查stoveburner1/2及look。无mug拿取、冷却或放置记录。",
+        "evidence": [
+          {
+            "step": 2,
+            "event_id": "db2bb3b4bcd0f4930b7215b39a61f7ec10ec76d3bc94a6554420ecdf71b2ec03",
+            "generation_event_id": "1c576246d0346f0bee2b745ed549183b45d5a5fd9f428b2ca247fd79aded8f0b",
+            "command": "go to toaster 1",
+            "feedback_excerpt": "You arrive at toaster 1. On the toaster 1, you see nothing.",
+            "feedback_sha256": "709c77f3effd855a0f914aef639904534ce10d56d571050a654781fd06d63565"
+          },
+          {
+            "step": 3,
+            "event_id": "9a844cf5e2d5bdf10530a4b58c7b0f271334356bcca12963528bf439f0c7ad6c",
+            "generation_event_id": "30f3090c75d4a7dc9ff4c891edfe6ab1b703d191d5c59b8db16a9e2a059a81db",
+            "command": "go to stoveburner 1",
+            "feedback_excerpt": "You arrive at stoveburner 1. On the stoveburner 1, you see nothing.",
+            "feedback_sha256": "3f0336426632a5e9df70705d61195b1b18dd944790933c42dc2725d9bf2d5c52"
+          },
+          {
+            "step": 4,
+            "event_id": "438749d48690d1bb21bc5e2ca76b718809b496a5cee23eb6c405126d37edda50",
+            "generation_event_id": "7ba60f5c9acac506a2450fc570d76cc8126d08c1ef4561f09fcbd75d14a2c9d9",
+            "command": "go to stoveburner 2",
+            "feedback_excerpt": "You arrive at stoveburner 2. On the stoveburner 2, you see a pot 1.",
+            "feedback_sha256": "187bba2be4e1340ac0cbd364d7ad7de7adbe3262dd5104627c1fc87fead8474f"
+          },
+          {
+            "step": 5,
+            "event_id": "6fd0351a937432271c8825580b6c00baed0f17feea3a09c0b4ba7c2a4d0bbaeb",
+            "generation_event_id": "fb8deab6d7c7cb1b0c493adfa90634ddadd21e3533bc1a96b16af8bd3c892f3b",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 3, and stoveburner 2. Next to it, you see nothing.",
+            "feedback_sha256": "ac8371dd6eb23dd7905e1fac4f809908e8cacd058cfa6418c44a3f2e899bce8b"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "87ddea51c19c9c74fb3bb49c37c8ea0d69bddacc6886794ae9090e1d23990dab"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "b0cce943bf9fbd0d83496724f103ef86628df508b1af0c44a5f3be9ab996d950",
+        "generation_event_id": "dc1b93ba1ac3f236206a5d7d614cbd16cb6eee5358fb0fd8848ab6b4d0415af5",
+        "command": "go to toaster 1",
+        "feedback_excerpt": "You arrive at toaster 1. On the toaster 1, you see nothing.",
+        "feedback_sha256": "709c77f3effd855a0f914aef639904534ce10d56d571050a654781fd06d63565"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "证据不足",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Ambiguous redundancy candidate",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步重访step2已见空的toaster1，并得到相同到达反馈；疑似浪费，但导航/感知可能有其他作用，不能严格称错误。",
+        "classification_reason": "存在一个重复地点访问，而非已确认失败循环或已知错误目标。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": 6,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 2,
+            "event_id": "db2bb3b4bcd0f4930b7215b39a61f7ec10ec76d3bc94a6554420ecdf71b2ec03",
+            "generation_event_id": "1c576246d0346f0bee2b745ed549183b45d5a5fd9f428b2ca247fd79aded8f0b",
+            "command": "go to toaster 1",
+            "feedback_excerpt": "You arrive at toaster 1. On the toaster 1, you see nothing.",
+            "feedback_sha256": "709c77f3effd855a0f914aef639904534ce10d56d571050a654781fd06d63565"
+          },
+          {
+            "step": 5,
+            "event_id": "6fd0351a937432271c8825580b6c00baed0f17feea3a09c0b4ba7c2a4d0bbaeb",
+            "generation_event_id": "fb8deab6d7c7cb1b0c493adfa90634ddadd21e3533bc1a96b16af8bd3c892f3b",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 3, and stoveburner 2. Next to it, you see nothing.",
+            "feedback_sha256": "ac8371dd6eb23dd7905e1fac4f809908e8cacd058cfa6418c44a3f2e899bce8b"
+          },
+          {
+            "step": 6,
+            "event_id": "b0cce943bf9fbd0d83496724f103ef86628df508b1af0c44a5f3be9ab996d950",
+            "generation_event_id": "dc1b93ba1ac3f236206a5d7d614cbd16cb6eee5358fb0fd8848ab6b4d0415af5",
+            "command": "go to toaster 1",
+            "feedback_excerpt": "You arrive at toaster 1. On the toaster 1, you see nothing.",
+            "feedback_sha256": "709c77f3effd855a0f914aef639904534ce10d56d571050a654781fd06d63565"
+          },
+          {
+            "step": 49,
+            "event_id": "0706dc28f500d7f7c10503b9af5e6427976414091ca72d050d107970af1a134b",
+            "generation_event_id": "702094044ac7a4b215258a4bf8d5eb5b02306aa6ed21ee33e7fa912750e28227",
+            "command": "go to drawer 11",
+            "feedback_excerpt": "You arrive at drawer 11. The drawer 11 is closed.",
+            "feedback_sha256": "02e2d94652299f2b879a51078ec62399c7092c164a1477844298fb9766ad7593"
+          },
+          {
+            "step": 50,
+            "event_id": "595b61f88542cdb441339b3605278fda69ff6d35799130ac577cfb6fdeaa7239",
+            "generation_event_id": "ac978457a3586fcadeed94774f263d4f85745ddd2d24321d1e4395040f25269d",
+            "command": "open drawer 11",
+            "feedback_excerpt": "You open the drawer 11. The drawer 11 is open. In it, you see a butterknife 2.",
+            "feedback_sha256": "7e16b3cae6a8b9c97879130bf8ed584d534c72573bbee10903205499a6551048"
+          }
+        ],
+        "interpretation": "step6是最早可直接指出的已访问空地点回访；之后主要搜索新地点，未找到mug。它是否导致时限耗尽不可从记录识别。",
+        "relation_to_S5": "回访恰在候选第6动作，但仅支持弱冗余，不支持错误修复标签。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "mug",
+        "required_treatment": "cool",
+        "destination_type": "coffeemachine",
+        "required_object_count": 1
+      }
+    },
+    {
+      "case_id": "C069",
+      "slot_key": "ac3a841a7b4bd0925eedbb75cebe2976ab5b57471f065ef95257fef14186721b",
+      "family": "pick_cool_then_place_in_recep",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "428a610769b8e425ce77a60dd53375d67835d8f5d5a0d637aef627208e9b643d",
+      "S5_seal_event_id": "1ed42311c2de15b1def5d349ee5fc09d557a2119bd23cf6636c416f5f6c66396",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "截至S5刚到此前未打开的cabinet6；无发现plate、拿取、冷却或放置记录。",
+        "evidence": [
+          {
+            "step": 2,
+            "event_id": "21c2cb0c61dd4fa39320febe6fae200c393ca920c1a798265e3c28a456411edd",
+            "generation_event_id": "2cf592f9721078bb391c6627d5d4365b0a9502feb995a309ac2d44318fa6e304",
+            "command": "go to toaster 1",
+            "feedback_excerpt": "You arrive at toaster 1. On the toaster 1, you see nothing.",
+            "feedback_sha256": "709c77f3effd855a0f914aef639904534ce10d56d571050a654781fd06d63565"
+          },
+          {
+            "step": 3,
+            "event_id": "7479dfc2690146e63d5b9f0f8d91c9ff1ca9fe1feedb2c02d5393793c7b04b69",
+            "generation_event_id": "6fef4bfdfc477b733e7a5e0f6eb805bfb38e029931434406994375a52e6b0362",
+            "command": "go to stoveburner 1",
+            "feedback_excerpt": "You arrive at stoveburner 1. On the stoveburner 1, you see nothing.",
+            "feedback_sha256": "3f0336426632a5e9df70705d61195b1b18dd944790933c42dc2725d9bf2d5c52"
+          },
+          {
+            "step": 4,
+            "event_id": "ed019f3f7bfefcad8a072c0a1952dc20e9dcd9aa3a57d1cdcfbc66cb5f07ac29",
+            "generation_event_id": "6755d8876c57c0d079b983ce6c5406e6866c3df0a8fbc7f6cbd89a1ea40b4111",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+            "feedback_sha256": "1055e99bc0934af120e077bc48f3aec1d6443b4daff97c750eed4df94ef2557f"
+          },
+          {
+            "step": 5,
+            "event_id": "428a610769b8e425ce77a60dd53375d67835d8f5d5a0d637aef627208e9b643d",
+            "generation_event_id": "3dc837792d730b6fd1e53ca205d121c4db4b876c1e9926e259bab384a26f742f",
+            "command": "go to cabinet 6",
+            "feedback_excerpt": "You arrive at cabinet 6. The cabinet 6 is closed.",
+            "feedback_sha256": "329999d96dc374d0663bcf650733b30285c7c54eb1a6ca5505daeda241057982"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "2546612d3de294fd6c141b9e4e63f9ccef2105df42aaa47ef1031520f5163b2d"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "151ef59c65cbce72e2fccbd863824070e68f1fe0efb3ed0d8047a8948eb0a8f2",
+        "generation_event_id": "14eeb82d85e4bfbd4450c7bb96bd2a7fce38e438ad0e3b4e4bf651dee9c3f7de",
+        "command": "open cabinet 6",
+        "feedback_excerpt": "You open the cabinet 6. The cabinet 6 is open. In it, you see nothing.",
+        "feedback_sha256": "573e442463a53383c1cfab3bd4386a2a903dba8af35be40496cef579e3adb1d7"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "不支持",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Consistent with goal-directed search or observed task progress; not asserted optimal",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步首次打开cabinet6并观察到空，是合法的新信息采集；后来看它为空不能反过来否定当时打开它。",
+        "classification_reason": "第6动作在当时公开信息下合理，失败的终局不能将空结果重标为错误选择。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": 46,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 11,
+            "event_id": "a4bff226af693ef10a96b7906d1ecfd2aad3c238a1d93d7b8095819959463ad5",
+            "generation_event_id": "cc697b9c35c6b39018279649e92de87b9e7e5a98b6b0c5f6a9169424cccdd700",
+            "command": "go to drawer 6",
+            "feedback_excerpt": "You arrive at drawer 6. The drawer 6 is closed.",
+            "feedback_sha256": "ab7f27c232548ac948b30c48fada51833c701f6c52d4c93546077550aff80a61"
+          },
+          {
+            "step": 12,
+            "event_id": "3dafad0e8e9e74be84eb8968a92f39631e9f9c315e7d34c1982c4c3e4f527f91",
+            "generation_event_id": "d6a051f1d3949ae1992eb8556a77f28724d2bfab9711fcd90c86d061ee7c079e",
+            "command": "open drawer 6",
+            "feedback_excerpt": "You open the drawer 6. The drawer 6 is open. In it, you see nothing.",
+            "feedback_sha256": "fd842fd438a1b747cd3425d0615c2f4c8bdd86a4500018ad523d7fd5b65a6286"
+          },
+          {
+            "step": 13,
+            "event_id": "c78e9183dfb34cbc2c0a1d052193011d751d36f2f75f25985815088c4e21989a",
+            "generation_event_id": "2d91dca3d181f19c95222229eb4ef132b4f994cc18a84292c85af3b4c348c542",
+            "command": "close drawer 6",
+            "feedback_excerpt": "You close the drawer 6.",
+            "feedback_sha256": "00ac869e71c0cd85656b53b142ab3f0ad56ac88e7f880c2802fb75c9a94ab636"
+          },
+          {
+            "step": 45,
+            "event_id": "1162cd8bc7710f0071aaa6f6c3982a1172c491cb6b8212cd8971af115147a193",
+            "generation_event_id": "f9967f296466d2f455694edb323cdfb932a8b105c39c96988fb314147d7958cd",
+            "command": "go to drawer 6",
+            "feedback_excerpt": "You arrive at drawer 6. The drawer 6 is closed.",
+            "feedback_sha256": "ab7f27c232548ac948b30c48fada51833c701f6c52d4c93546077550aff80a61"
+          },
+          {
+            "step": 46,
+            "event_id": "41de05b9776d0bf039dabe43414e3267b11584ed41033a2257d852d80d02833f",
+            "generation_event_id": "db1ba2d13a1de8ba7e096c87491e4c1830ef7d81f28e6fe205ac85121e12cd63",
+            "command": "open drawer 6",
+            "feedback_excerpt": "You open the drawer 6. The drawer 6 is open. In it, you see nothing.",
+            "feedback_sha256": "fd842fd438a1b747cd3425d0615c2f4c8bdd86a4500018ad523d7fd5b65a6286"
+          },
+          {
+            "step": 47,
+            "event_id": "e2766ec7e8ad343f7731adec1ff1c28df584d0df77aa0d62d10bf8e491da824b",
+            "generation_event_id": "bd6ba3e7e5b6882144902e94795d9674c9cd08c99f38039f4db1ea7bd191e5ec",
+            "command": "close drawer 6",
+            "feedback_excerpt": "You close the drawer 6.",
+            "feedback_sha256": "00ac869e71c0cd85656b53b142ab3f0ad56ac88e7f880c2802fb75c9a94ab636"
+          },
+          {
+            "step": 50,
+            "event_id": "74f5c5e6d8d6e76ad11205b8913cabe4fafbec524edb8b281151fd542283060d",
+            "generation_event_id": "5a850a1e2aceb8b44759508d559f83a9fd6087c3fa65e199d4c1c535ac4665e9",
+            "command": "close drawer 7",
+            "feedback_excerpt": "You close the drawer 7.",
+            "feedback_sha256": "31b85aaa1fc47cb5400075f5988aaadf810d1a27e0d618f20a55509c95ce5fd2"
+          }
+        ],
+        "interpretation": "step12已经打开drawer6且见空；step46在再次到达后又打开它，是后期重复检查候选。全程没有取得plate，唯一决定性错误时点未确定。",
+        "relation_to_S5": "后期重复drawer6与S5首次检查cabinet6是不同容器、不同时间。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "plate",
+        "required_treatment": "cool",
+        "destination_type": "shelf",
+        "required_object_count": 1
+      }
+    },
+    {
+      "case_id": "C071",
+      "slot_key": "69f48ac3a10a98c3eb8a196c9e4dcc9409ad2a385f67526cb9e57bab3bc72f65",
+      "family": "pick_cool_then_place_in_recep",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "ef22a55c2d8b463166d5bc224cd9f934bb34fa388c12430fcc3f209a7aa2abe4",
+      "S5_seal_event_id": "1aa2ed56050473bb97bdbe3eb3971e183c111b69af26b56fcb19f62bf56c98ec",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "截至S5检查toaster及stoveburner1–3，看到pot/pan而不是任务bowl；无目标拿取、冷却或放置记录。",
+        "evidence": [
+          {
+            "step": 2,
+            "event_id": "a5979623c58c31cdaaa69d21f91a72ee02ac9ed7588b29d0b69f57dbd18a3eac",
+            "generation_event_id": "dd96a6333c8245a17de0d23ab172d2ebfdc1e62d093cee5e809800f1085de0c9",
+            "command": "go to toaster 1",
+            "feedback_excerpt": "You arrive at toaster 1. On the toaster 1, you see nothing.",
+            "feedback_sha256": "709c77f3effd855a0f914aef639904534ce10d56d571050a654781fd06d63565"
+          },
+          {
+            "step": 3,
+            "event_id": "86417f9943f471c31e15ad2e53e3925e667a441d8749ab5622826a6879c17ba4",
+            "generation_event_id": "d56d8cfbda79f9e02cec5bf6e16873cc8c737a40375cb7653f4e5f93e617da14",
+            "command": "go to stoveburner 1",
+            "feedback_excerpt": "You arrive at stoveburner 1. On the stoveburner 1, you see a pot 1.",
+            "feedback_sha256": "f0fc84a7b05fdf3c153ed5375b447df553d7c5b51f75ecbee9ed7805c1b8f17d"
+          },
+          {
+            "step": 4,
+            "event_id": "e84a6c9da023d6ff9896dcaa9a8fb7305d3ac2f1be99c3d7e1f9c1da92140b5b",
+            "generation_event_id": "cd00dcfd9cfffbfc427fa03df8dae9b471cd36d7b4573406b24947f5aaa8625b",
+            "command": "go to stoveburner 2",
+            "feedback_excerpt": "You arrive at stoveburner 2. On the stoveburner 2, you see nothing.",
+            "feedback_sha256": "0dfd16a5c74c68744549f1a312296638f31c430925459a167e9777dbcd3bf707"
+          },
+          {
+            "step": 5,
+            "event_id": "ef22a55c2d8b463166d5bc224cd9f934bb34fa388c12430fcc3f209a7aa2abe4",
+            "generation_event_id": "fb1cb5dd4e5dad5653251b1b101453c2ec9918a4d2265cb6fb15dcf7bdee452e",
+            "command": "go to stoveburner 3",
+            "feedback_excerpt": "You arrive at stoveburner 3. On the stoveburner 3, you see a pan 1.",
+            "feedback_sha256": "84c9ec48b040f0fddd03398f6bd0cde34f65d945dc94eafa6a15d99535240da0"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "76a6f62f3db0e54ce30355e41892e4a52cb3828b5f3f764b41824d321b626dff"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "5f0515731e8d78a5f3988b964025e9270a085261d30089734974cae2b8b31a1b",
+        "generation_event_id": "89c3eb9fd8da47ed2ea466899692758bf90c0bba0bf0f5ac9d5ff39fe52c3544",
+        "command": "go to stoveburner 4",
+        "feedback_excerpt": "You arrive at stoveburner 4. On the stoveburner 4, you see a pan 2.",
+        "feedback_sha256": "555f89ed2f1a02c735192e8aaec76f7578f5b1e417022c1c271473cbaeb728d3"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "不支持",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Consistent with goal-directed search or observed task progress; not asserted optimal",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步去尚未检查的stoveburner4并看到pan2；与寻找bowl相容，没有证据支持错误标注。",
+        "classification_reason": "无第6动作的公开语义矛盾，不能利用未读任务布局推定应去哪个地方。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": null,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 47,
+            "event_id": "526b10dcc1096d17a8832b318b7eba2c79becce527e46cf4fe91f74a4b39d9df",
+            "generation_event_id": "5fa08780a8f06e4345b114b6432d76b893238d82cb0d9373eb9996af37bc0c1e",
+            "command": "go to cabinet 7",
+            "feedback_excerpt": "You arrive at cabinet 7. The cabinet 7 is closed.",
+            "feedback_sha256": "34432b028d7bac7452fe5511cb741e109e21c33048faffbda85906a109965bec"
+          },
+          {
+            "step": 48,
+            "event_id": "6cbe0c434dda1c28cd4dfe74b1c7f3b0e71e6dbce33043404daf8f48672d9a16",
+            "generation_event_id": "65543652f7a250c55ca16dc531c1538eaf2ebbe1e7c95d77ff3760778a0df1f9",
+            "command": "open cabinet 7",
+            "feedback_excerpt": "You open the cabinet 7. The cabinet 7 is open. In it, you see nothing.",
+            "feedback_sha256": "8f4fac0ea16bab8b83cd7bb7efae0ec3f28a86698a1ac38c70ca68368f86d45a"
+          },
+          {
+            "step": 49,
+            "event_id": "d09a26aecbe1967773a5bb9f763d63e4798732fab22823d8cec37242358404b6",
+            "generation_event_id": "adb18d0c07b289ac36821848ae2cd208652393a348d6ade5d0ab95d443a37482",
+            "command": "close cabinet 7",
+            "feedback_excerpt": "You close the cabinet 7.",
+            "feedback_sha256": "a166f91021f504f92cdfa9a33347c728bfbb50ff5dd3275087e5e10627f1656b"
+          },
+          {
+            "step": 50,
+            "event_id": "0c8c29cb90040052d97706a745d915723af2f48f66244c3c95281790f6c510a2",
+            "generation_event_id": "afab7b876ed15632e32676ce47ccf54657f53d2551edbc0a05ff4ff59f418ad2",
+            "command": "go to cabinet 8",
+            "feedback_excerpt": "You arrive at cabinet 8. The cabinet 8 is closed.",
+            "feedback_sha256": "860dc578d1c1d2498e99f550a6bcc6c1e3cdb8aab20e96b0c22c3a996c2bb097"
+          }
+        ],
+        "interpretation": "在现有50动作中一直搜索，最后到达关闭的cabinet8；无bowl拿取/冷却/放置记录，也无此前记录的完整短周期。可确认的是时限内未完成，不能定位唯一错误。",
+        "relation_to_S5": "失败发生在持续搜索后；固定S5不是已知错误点。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "bowl",
+        "required_treatment": "cool",
+        "destination_type": "microwave",
+        "required_object_count": 1
+      }
+    },
+    {
+      "case_id": "C077",
+      "slot_key": "267916d280fb7c3c76b3338b9b25aa941b21a8e81b04b702927a845b3f3f3515",
+      "family": "pick_cool_then_place_in_recep",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "e410dd7b27dbbc9603b476626391f90e42b997027d26aba897facd68d96aa1fe",
+      "S5_seal_event_id": "c287b680ccfff5c07f21219c769cead8ccb8de99e1181c7fe821c7ad7a20e695",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "截至S5到达此前未检查的drawer6，处于关闭状态；无pot拿取、冷却或放置记录，之前kettle不是任务pot。",
+        "evidence": [
+          {
+            "step": 3,
+            "event_id": "2c0f2f4b4ff07a23eff7aa99a44c496a1f710f9baf9500869d896310b852d01c",
+            "generation_event_id": "3f0a5e5dda6ee1067f4db945b9251b9d0ab10683df8c192dc1224e870ef0909a",
+            "command": "go to stoveburner 1",
+            "feedback_excerpt": "You arrive at stoveburner 1. On the stoveburner 1, you see a kettle 2.",
+            "feedback_sha256": "980b8cdd41e8cfaf09c1abb11b1cc1e5b23ab5eccd87dd0720235f6b604f325d"
+          },
+          {
+            "step": 4,
+            "event_id": "a88749c827f8765b9a0d2b31284be4e86d21da3ed8e74a10983947c626049e35",
+            "generation_event_id": "927b3d7e1252307f3d0eb8e616b172e7e1b19826ff5adfefb2425df84b8f37cc",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+            "feedback_sha256": "1055e99bc0934af120e077bc48f3aec1d6443b4daff97c750eed4df94ef2557f"
+          },
+          {
+            "step": 5,
+            "event_id": "e410dd7b27dbbc9603b476626391f90e42b997027d26aba897facd68d96aa1fe",
+            "generation_event_id": "7e4064e54005c8058a976300a67e62afa29c79438ac09dfa9334660ed6d7d786",
+            "command": "go to drawer 6",
+            "feedback_excerpt": "You arrive at drawer 6. The drawer 6 is closed.",
+            "feedback_sha256": "ab7f27c232548ac948b30c48fada51833c701f6c52d4c93546077550aff80a61"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "3ab2c2ba952bc1708ffbb7878bf526a4e810186f5b3f25d3a000b4107b0bf4eb"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "8d9aa55827828b09f6f9f51cba600b9a9a9e2537544aa5c51c1a61f16e9ce67b",
+        "generation_event_id": "f9401c615408e27c2b75a45f424fd34ec0e42e1dd2d8d2b7f9e065e912c14881",
+        "command": "open drawer 6",
+        "feedback_excerpt": "You open the drawer 6. The drawer 6 is open. In it, you see nothing.",
+        "feedback_sha256": "fd842fd438a1b747cd3425d0615c2f4c8bdd86a4500018ad523d7fd5b65a6286"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "不支持",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Consistent with goal-directed search or observed task progress; not asserted optimal",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步首次打开drawer6得到新信息为空，与搜索相容；不能与后期对同一抽屉的重复打开混为一谈。",
+        "classification_reason": "第一次打开是正常探索，后来的重访才有可复核冗余。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": 12,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 5,
+            "event_id": "e410dd7b27dbbc9603b476626391f90e42b997027d26aba897facd68d96aa1fe",
+            "generation_event_id": "7e4064e54005c8058a976300a67e62afa29c79438ac09dfa9334660ed6d7d786",
+            "command": "go to drawer 6",
+            "feedback_excerpt": "You arrive at drawer 6. The drawer 6 is closed.",
+            "feedback_sha256": "ab7f27c232548ac948b30c48fada51833c701f6c52d4c93546077550aff80a61"
+          },
+          {
+            "step": 6,
+            "event_id": "8d9aa55827828b09f6f9f51cba600b9a9a9e2537544aa5c51c1a61f16e9ce67b",
+            "generation_event_id": "f9401c615408e27c2b75a45f424fd34ec0e42e1dd2d8d2b7f9e065e912c14881",
+            "command": "open drawer 6",
+            "feedback_excerpt": "You open the drawer 6. The drawer 6 is open. In it, you see nothing.",
+            "feedback_sha256": "fd842fd438a1b747cd3425d0615c2f4c8bdd86a4500018ad523d7fd5b65a6286"
+          },
+          {
+            "step": 7,
+            "event_id": "a214e0537b566c4216922e9cf71560f21134d7e47ce8f1fd0942fef51fbde3de",
+            "generation_event_id": "6e7623f7b2680756e2ab3d6c9273eed749136a51c04631a71f29ac35c9adf656",
+            "command": "close drawer 6",
+            "feedback_excerpt": "You close the drawer 6.",
+            "feedback_sha256": "00ac869e71c0cd85656b53b142ab3f0ad56ac88e7f880c2802fb75c9a94ab636"
+          },
+          {
+            "step": 11,
+            "event_id": "038b7b83f401cbaed762e815208266f9c88482c99716a0691096e18b720a4a85",
+            "generation_event_id": "17f2b301582579c8a5797f9fbe41335085712c8d68131faa6fac91f72a1a2fc7",
+            "command": "go to drawer 6",
+            "feedback_excerpt": "You arrive at drawer 6. The drawer 6 is closed.",
+            "feedback_sha256": "ab7f27c232548ac948b30c48fada51833c701f6c52d4c93546077550aff80a61"
+          },
+          {
+            "step": 12,
+            "event_id": "fdd1ac365f1099e161d21ef31cf4a2d44a913398188e2b868e650c7f2f92ff98",
+            "generation_event_id": "c6401c6607f9dccd4edf7d79b9c6d05ebed45d5c23391995388a7092ea34dbf0",
+            "command": "open drawer 6",
+            "feedback_excerpt": "You open the drawer 6. The drawer 6 is open. In it, you see nothing.",
+            "feedback_sha256": "fd842fd438a1b747cd3425d0615c2f4c8bdd86a4500018ad523d7fd5b65a6286"
+          },
+          {
+            "step": 13,
+            "event_id": "333f517551149ae1abcdc689125ef508628846cfc1196c2b5fc29941c4d28761",
+            "generation_event_id": "abc9f1762740a738327d11420e01557dd7e58794de2740058e9b8cc932404803",
+            "command": "close drawer 6",
+            "feedback_excerpt": "You close the drawer 6.",
+            "feedback_sha256": "00ac869e71c0cd85656b53b142ab3f0ad56ac88e7f880c2802fb75c9a94ab636"
+          },
+          {
+            "step": 45,
+            "event_id": "03f230098656a4e1cbb28b945561cbbe50e74f8c1e1ee6108b9a7e48fd13247a",
+            "generation_event_id": "874d2d266d5f4f7a160e66642eb86b5364e74fa9d1f32111e2fe354f1a2cf7f3",
+            "command": "go to drawer 6",
+            "feedback_excerpt": "You arrive at drawer 6. The drawer 6 is closed.",
+            "feedback_sha256": "ab7f27c232548ac948b30c48fada51833c701f6c52d4c93546077550aff80a61"
+          },
+          {
+            "step": 46,
+            "event_id": "299ff245948f532ef0c9b8fb61030dc0d2249591763f5f67c5faf5030c708f3f",
+            "generation_event_id": "762fdb18bfbe1de939247f210102678fc1bd0648c9bf11f01ec112845757594d",
+            "command": "open drawer 6",
+            "feedback_excerpt": "You open the drawer 6. The drawer 6 is open. In it, you see nothing.",
+            "feedback_sha256": "fd842fd438a1b747cd3425d0615c2f4c8bdd86a4500018ad523d7fd5b65a6286"
+          }
+        ],
+        "interpretation": "step6已见drawer6为空；step12再次打开相同抽屉，是可疑重复检查，step46又重复。没有证据将最初step6重标为错误。",
+        "relation_to_S5": "S5后立即有正常新信息；问题候选在更晚重访。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "pot",
+        "required_treatment": "cool",
+        "destination_type": "cabinet",
+        "required_object_count": 1
+      }
+    },
+    {
+      "case_id": "C081",
+      "slot_key": "d31227e079fe1a1a75f446af07408a1070b15b295747cd72d6562507a30d6a9d",
+      "family": "pick_heat_then_place_in_recep",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "808f2dcb74ac145cde3faf9356ac79133e6ee1833179cfaad58af051d2aa954c",
+      "S5_seal_event_id": "4f7908e8a55ef8f8945a552118b3cd4cea8952e445b9625aa55caab787684c1b",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "截至S5未发现mug；step3已看到stoveburner1为空，step4 look，step5再次examine同一地点；无目标拿取、加热或放置记录。",
+        "evidence": [
+          {
+            "step": 3,
+            "event_id": "030e174c04dc530a359a7c2741633b350ff3da697ea40de5905b15659ad0bdab",
+            "generation_event_id": "8972efffae8605be35e79caace01c42207b09e755f32ae67f2ed6c431b356529",
+            "command": "go to stoveburner 1",
+            "feedback_excerpt": "You arrive at stoveburner 1. On the stoveburner 1, you see nothing.",
+            "feedback_sha256": "3f0336426632a5e9df70705d61195b1b18dd944790933c42dc2725d9bf2d5c52"
+          },
+          {
+            "step": 4,
+            "event_id": "918cba487a70afc540d95ed8f71c5b06f2f31a13fde20f200408c80ad76379f4",
+            "generation_event_id": "c6cf6aa6e84be0c03f09e3193a7fc8e36976e4d97ff621e4c1f955a27f7c4bd0",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 4, stoveburner 3, stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+            "feedback_sha256": "b796efbd7f2f1413e347a337bf8188782f685eaa8f301eb7e3d2631b40567c36"
+          },
+          {
+            "step": 5,
+            "event_id": "808f2dcb74ac145cde3faf9356ac79133e6ee1833179cfaad58af051d2aa954c",
+            "generation_event_id": "d648c8ff6f3ddf71d1231396348fdb8032164a230b186f697764eea0b89b4093",
+            "command": "examine stoveburner 1",
+            "feedback_excerpt": "On the stoveburner 1, you see nothing.",
+            "feedback_sha256": "578cf21e68dc1c7131cea265282c5a5a556c4174465a829539e8235a38f3d829"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "f3fb88d198a8701864ef026fa9e07400cc2ac85065995e42e464b7e2a1e694ac"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "785153b50d0757d015b28b35ce26fb799f09f5b225c60f8533028b4a627d7c5b",
+        "generation_event_id": "745017174597d0109103a8a44e333be6843e92155fb6c020858f05f159becca4",
+        "command": "look",
+        "feedback_excerpt": "You are facing the stoveburner 4, stoveburner 3, stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+        "feedback_sha256": "b796efbd7f2f1413e347a337bf8188782f685eaa8f301eb7e3d2631b40567c36"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "证据不足",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Ambiguous redundancy candidate",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步look返回step4观察，存在冗余候选；但随后仍探索新cabinet，不能证明此look就是实际失败原因。",
+        "classification_reason": "早期感知重复与晚期持续循环有关联外观，因果错误和替代动作效果都未测。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": 5,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 3,
+            "event_id": "030e174c04dc530a359a7c2741633b350ff3da697ea40de5905b15659ad0bdab",
+            "generation_event_id": "8972efffae8605be35e79caace01c42207b09e755f32ae67f2ed6c431b356529",
+            "command": "go to stoveburner 1",
+            "feedback_excerpt": "You arrive at stoveburner 1. On the stoveburner 1, you see nothing.",
+            "feedback_sha256": "3f0336426632a5e9df70705d61195b1b18dd944790933c42dc2725d9bf2d5c52"
+          },
+          {
+            "step": 4,
+            "event_id": "918cba487a70afc540d95ed8f71c5b06f2f31a13fde20f200408c80ad76379f4",
+            "generation_event_id": "c6cf6aa6e84be0c03f09e3193a7fc8e36976e4d97ff621e4c1f955a27f7c4bd0",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 4, stoveburner 3, stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+            "feedback_sha256": "b796efbd7f2f1413e347a337bf8188782f685eaa8f301eb7e3d2631b40567c36"
+          },
+          {
+            "step": 5,
+            "event_id": "808f2dcb74ac145cde3faf9356ac79133e6ee1833179cfaad58af051d2aa954c",
+            "generation_event_id": "d648c8ff6f3ddf71d1231396348fdb8032164a230b186f697764eea0b89b4093",
+            "command": "examine stoveburner 1",
+            "feedback_excerpt": "On the stoveburner 1, you see nothing.",
+            "feedback_sha256": "578cf21e68dc1c7131cea265282c5a5a556c4174465a829539e8235a38f3d829"
+          },
+          {
+            "step": 6,
+            "event_id": "785153b50d0757d015b28b35ce26fb799f09f5b225c60f8533028b4a627d7c5b",
+            "generation_event_id": "745017174597d0109103a8a44e333be6843e92155fb6c020858f05f159becca4",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 4, stoveburner 3, stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+            "feedback_sha256": "b796efbd7f2f1413e347a337bf8188782f685eaa8f301eb7e3d2631b40567c36"
+          },
+          {
+            "step": 11,
+            "event_id": "53738ac4653a4c228c460eb2bcea825c7142e602f256dd9547cb5b2763e156f0",
+            "generation_event_id": "00fef850257a7da757991ef18ea27c24a9d95ce504b36187bc98f9d553e48f9a",
+            "command": "look",
+            "feedback_excerpt": "You are facing the stoveburner 4, stoveburner 3, stoveburner 2, and stoveburner 1. Next to it, you see nothing.",
+            "feedback_sha256": "b796efbd7f2f1413e347a337bf8188782f685eaa8f301eb7e3d2631b40567c36"
+          },
+          {
+            "step": 14,
+            "event_id": "a1c28769ae6ff2ea27a7fdef7b1d2f2f75297aab2131a1abb8acf313c81ccdc5",
+            "generation_event_id": "19482d9d7a4f74fece1bd07186fac43a339e4de82ed14056ab7e7a49a7918bca",
+            "command": "go to cabinet 12",
+            "feedback_excerpt": "You arrive at cabinet 12. The cabinet 12 is closed.",
+            "feedback_sha256": "3405055ae777093c5f1e6e9664fc5199908d376bd2374e21ff0a1a6e01a35c48"
+          },
+          {
+            "step": 17,
+            "event_id": "d52dbb7046d462cd3ecd2a02fa2957f5156a8fc51d76c622ada75b6331cf1c22",
+            "generation_event_id": "300259227cca8f5452ba884c6fe381f5cc21e72efa2987b06d7b6c1b08457925",
+            "command": "go to stoveburner 2",
+            "feedback_excerpt": "You arrive at stoveburner 2. On the stoveburner 2, you see a pot 2.",
+            "feedback_sha256": "0e1956b082807598ecab7d3bbdbf92cfe0f3c4d44d1d164c8f6733cb848e5516"
+          },
+          {
+            "step": 24,
+            "event_id": "4674a7a67804baea52d302081ef4571c2506528583616b0aded32634a2c03c73",
+            "generation_event_id": "d00171076fdf6ce25d5af2949f9c10b59a2ea3eb806bb03889088d5a3e949531",
+            "command": "go to stoveburner 2",
+            "feedback_excerpt": "You arrive at stoveburner 2. On the stoveburner 2, you see a pot 2.",
+            "feedback_sha256": "0e1956b082807598ecab7d3bbdbf92cfe0f3c4d44d1d164c8f6733cb848e5516"
+          },
+          {
+            "step": 50,
+            "event_id": "e8b648608885fb27b798cd90e3b0f75507930037be41b222777d7e48d28801ed",
+            "generation_event_id": "96a57ad0c159145d26bbb6990cfb42069e2e4add6a14af385368bc3a43833eb8",
+            "command": "open cabinet 12",
+            "feedback_excerpt": "You open the cabinet 12. The cabinet 12 is open. In it, you see nothing.",
+            "feedback_sha256": "82246bd444fd811054d8becfc078c8e11684de32598d7ce717df1e01a5698b1f"
+          }
+        ],
+        "interpretation": "step5是可疑重复检查；后面11–50重复look/examine/查看空cabinet12/回stoveburner2，至24可核验重复长块。不将早期候选升级成已知错误。",
+        "relation_to_S5": "S5附近重复与后续循环均可描述，但不能得出S5纠错可救回。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "mug",
+        "required_treatment": "heat",
+        "destination_type": "coffeemachine",
+        "required_object_count": 1
+      }
+    },
+    {
+      "case_id": "C088",
+      "slot_key": "7786aebcc45ee79209351b96094065145fba5c516d9aa5d15b27597e454ddedd",
+      "family": "pick_two_obj_and_place",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "77dfd9dca379c1194b084722c0d2eaf36a477e651ba3cb1bd7ce0c7ff30916a2",
+      "S5_seal_event_id": "fa8f7e3adb6c8761eed4ae9c554eb2c98ea56efb9f50710a74e18a796034e866",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "step5在dresser1看到book1和book2；截至S5已定位两个目标，尚无拿取或放置记录。",
+        "evidence": [
+          {
+            "step": 5,
+            "event_id": "77dfd9dca379c1194b084722c0d2eaf36a477e651ba3cb1bd7ce0c7ff30916a2",
+            "generation_event_id": "f8bd4ef047c3b67684341e98bc4f4a7228e9038cc0d3d8dee21b1becc022d86f",
+            "command": "go to dresser 1",
+            "feedback_excerpt": "You arrive at dresser 1. On the dresser 1, you see a book 2, a book 1, a creditcard 1, a newspaper 1, a pen 3, a pen 2, a statue 1, a vase 4, a vase 3, a vase 2, and a watch 1.",
+            "feedback_sha256": "16ea69109be6f225655ca23163d5ba83f89a81451a283300a435f652ff5135c1"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "89479214574879b84b9669be2681dac8c77f70d3ad8e591d4d84fa07c8b43ec9"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "0f998a79be58543fe81aa303a7feb1a516cabb307a9f2f43d6f9e88b0c82ee73",
+        "generation_event_id": "99a095e4c4ea18cc3987bf2d9011eac7f792647f5fac883bb0a275887c517f8e",
+        "command": "take book 1 from dresser 1",
+        "feedback_excerpt": "You pick up the book 1 from the dresser 1.",
+        "feedback_sha256": "39a45540088b3e074095909aea69890508ae3a6dacfb95660b9fd58cf9569040"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "不支持",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Consistent with goal-directed search or observed task progress; not asserted optimal",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步拿起book1，得到明确成功拾取反馈，直接推进任务；不是由未来失败能证明错误的动作。",
+        "classification_reason": "S5处仍在正常执行第一物体子目标。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": 13,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 6,
+            "event_id": "0f998a79be58543fe81aa303a7feb1a516cabb307a9f2f43d6f9e88b0c82ee73",
+            "generation_event_id": "99a095e4c4ea18cc3987bf2d9011eac7f792647f5fac883bb0a275887c517f8e",
+            "command": "take book 1 from dresser 1",
+            "feedback_excerpt": "You pick up the book 1 from the dresser 1.",
+            "feedback_sha256": "39a45540088b3e074095909aea69890508ae3a6dacfb95660b9fd58cf9569040"
+          },
+          {
+            "step": 8,
+            "event_id": "720b97b3d0aeece7b39b4fdfb1266fea8e71e062d2f7691cb1a73ebcaea35404",
+            "generation_event_id": "afedd2e2f8fba490ef80687bcd0aba1746139f97f57f1467a6822a21732aadd5",
+            "command": "move book 1 to sofa 1",
+            "feedback_excerpt": "You move the book 1 to the sofa 1.",
+            "feedback_sha256": "04d59c17a76a9139d42e1f581a4d221b490c184a13c83d9ca1e26826a75e1259"
+          },
+          {
+            "step": 10,
+            "event_id": "9d0297c025771c739a571a0f2931872133cd850257b3ee552748cb4744342719",
+            "generation_event_id": "82a6e27c82e7aaea5825f1b00ff85a560cb2ad033ace135c060d25f59b8bcbee",
+            "command": "take book 2 from dresser 1",
+            "feedback_excerpt": "You pick up the book 2 from the dresser 1.",
+            "feedback_sha256": "f379ef812b8c266b887f2ec201124106da983a47a320f572a6cfc01e92108bc4"
+          },
+          {
+            "step": 11,
+            "event_id": "ba793ef28932c26cab616be6462334a24e08c36f1ae83f121a5504dc9e345c44",
+            "generation_event_id": "c77796e2fe73f544932c0498e8c9d68b239bfef58e7f03d1a551377a8617cabb",
+            "command": "go to sofa 1",
+            "feedback_excerpt": "You arrive at sofa 1. On the sofa 1, you see a book 1, a box 1, and a keychain 1.",
+            "feedback_sha256": "2380ab6f5133aa2572bf758df8ad0f3d069715c700266fff3fcac1f51d91a50c"
+          },
+          {
+            "step": 12,
+            "event_id": "3a0e638d297a4b9b80e7f263385ffe0ce028a7f073354fcd1c0be9d32fb8f674",
+            "generation_event_id": "d1eaf9fc05c67e059c761bac0a8006774a2449eefb0bfa8c8e72ecfff9e776d0",
+            "command": "look",
+            "feedback_excerpt": "You are facing the sofa 1. Next to it, you see nothing.",
+            "feedback_sha256": "6c8898f441e38507dbb18bcd4156a0290f82d05cacd01503a7c672efb04261d0"
+          },
+          {
+            "step": 13,
+            "event_id": "e459fc9e9d52ff5aac586da0551bec37bee11433b12ec6acd441f3168630e584",
+            "generation_event_id": "e680307b051c61be07a4df9d0383845daaac6e094ebe2b49e1e962e72060bee7",
+            "command": "go to drawer 3",
+            "feedback_excerpt": "You arrive at drawer 3. The drawer 3 is closed.",
+            "feedback_sha256": "5c3e6d9cbbdd061e91a6f7a6d2fb84427c2103ed5a0776c4ad02c75cfc82b239"
+          },
+          {
+            "step": 14,
+            "event_id": "37f556c2de0be56c1e3775b15e431c271b8d41c204fd11213e8065a84652a091",
+            "generation_event_id": "0d6d772313bfeaedcad61ef15f762e552a5eef96af74b31d723bf01b98ff05df",
+            "command": "open drawer 3",
+            "feedback_excerpt": "You open the drawer 3. The drawer 3 is open. In it, you see nothing.",
+            "feedback_sha256": "6092526703db959c9665256c0f49577355bff662ff2068b98c3c8401ccf4da08"
+          },
+          {
+            "step": 21,
+            "event_id": "7e626ba97576242dd666d32911e1bb2706695e5d88385bacd3987367f103d5eb",
+            "generation_event_id": "b0ff762f892bcb989e40645dac1e5dee2a427870493ac6a1ddc4975bc0c98254",
+            "command": "go to sofa 1",
+            "feedback_excerpt": "You arrive at sofa 1. On the sofa 1, you see a book 1, a box 1, and a keychain 1.",
+            "feedback_sha256": "2380ab6f5133aa2572bf758df8ad0f3d069715c700266fff3fcac1f51d91a50c"
+          },
+          {
+            "step": 34,
+            "event_id": "0f2018e2094dc969a5441c5ffd034ec6fea6dd67d0e7f78cde12d5a71ee55ccb",
+            "generation_event_id": "ad6359811db66cd1dca18f62bbfea457ff4baf688b21183a23ff5d594cc93534",
+            "command": "close drawer 4",
+            "feedback_excerpt": "You close the drawer 4.",
+            "feedback_sha256": "ee2ef7205606a78fd1ca5a1dd361475fc1faecb2cf19ae0991d8bae182f07274"
+          },
+          {
+            "step": 35,
+            "event_id": "fa7dbce4ca4a6c6f0c1b546bbb7a1325facc053dda8ca37604bc25a652ff1fd2",
+            "generation_event_id": "3bfe0359f81496c757d094053593a0e492f8f8175683ccd142b5c4e42dff765b",
+            "command": "go to sofa 1",
+            "feedback_excerpt": "You arrive at sofa 1. On the sofa 1, you see a book 1, a box 1, and a keychain 1.",
+            "feedback_sha256": "2380ab6f5133aa2572bf758df8ad0f3d069715c700266fff3fcac1f51d91a50c"
+          },
+          {
+            "step": 48,
+            "event_id": "9ef0a009de9226e47054301d9da061efba71ffa59900e631c0186f60d822348f",
+            "generation_event_id": "5d41834488ea02c162e43c494f38c647590fe95dc1d1b88f43dbde1507fc7594",
+            "command": "close drawer 4",
+            "feedback_excerpt": "You close the drawer 4.",
+            "feedback_sha256": "ee2ef7205606a78fd1ca5a1dd361475fc1faecb2cf19ae0991d8bae182f07274"
+          },
+          {
+            "step": 50,
+            "event_id": "67e8e803cea88ffd08a347c404d4aa7ae30ad44f1a41954f525d332dc20cbd7b",
+            "generation_event_id": "1502bf3fb89bfae82f30daaf88a61a3d762969f201cc95b33554894bd1d72a97",
+            "command": "look",
+            "feedback_excerpt": "You are facing the sofa 1. Next to it, you see nothing.",
+            "feedback_sha256": "6c8898f441e38507dbb18bcd4156a0290f82d05cacd01503a7c672efb04261d0"
+          }
+        ],
+        "interpretation": "第一本书8已放sofa，第二本10已拿，11已到sofa；13离开去查drawer3，是有证据支持的任务外绕行候选，但单个look/绕行不证明唯一错误。21–34与35–48存在14动作的重复命令+公开状态块；这超出旧period<=10描述口径，另列不改旧计数。",
+        "relation_to_S5": "可疑第二物体投放停滞在S11之后，显著晚于S5首次取书。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "book",
+        "required_treatment": null,
+        "destination_type": "sofa",
+        "required_object_count": 2
+      }
+    },
+    {
+      "case_id": "C090",
+      "slot_key": "4ae73623c78010ea7908db810a1cb0a4740ff01ccff969fe0a6688a96bb9ccf7",
+      "family": "pick_two_obj_and_place",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "46b2b356a0f72cd7319c74980e68c78291c8f0d1a7a07444f93a57a4cb98d457",
+      "S5_seal_event_id": "7ea3ce40d04d6aed5e988f8cbd1b0edc46d4e94857b58e0d9d7744d3bd079ebe",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "step2发现pen1，step3拿起，step4到drawer1，step5打开；截至S5第一目标在手、目标容器已打开，尚未放置。",
+        "evidence": [
+          {
+            "step": 2,
+            "event_id": "98313e47471936cb5809b71b9445895064d2e2027a06ef6e96c8496eef6de458",
+            "generation_event_id": "81bbd58b70e3b650fba0d64c8639bafc623b308bb87507e7ee1130f1593e66eb",
+            "command": "go to sidetable 1",
+            "feedback_excerpt": "You arrive at sidetable 1. On the sidetable 1, you see a alarmclock 1, a pen 1, and a remotecontrol 2.",
+            "feedback_sha256": "16bfca324be768b68fa426ae46d58f18aae1df307b60c0795a90c25c139f1caa"
+          },
+          {
+            "step": 3,
+            "event_id": "402ed1874a0b1b38ce8690e2768da47bbcfc33d3b2f9b095840e3dc728d1ca93",
+            "generation_event_id": "8e8a61f169581efb8665d815a69944d754fbadc3fa51d4f75b643c8b22df9b64",
+            "command": "take pen 1 from sidetable 1",
+            "feedback_excerpt": "You pick up the pen 1 from the sidetable 1.",
+            "feedback_sha256": "511a43a6365710dcbf2e3339d8b60f654d378db5c9690f5fc0d6db5a61e1ddad"
+          },
+          {
+            "step": 4,
+            "event_id": "793a3a633f2e2a51b1a34ca0279770e456bb82298c655c5433bfdcd07dc6f3f8",
+            "generation_event_id": "9689517e5074ee13dff3e3ed379b134ab07c058d2cf2302c8836eb03f99e7aa9",
+            "command": "go to drawer 1",
+            "feedback_excerpt": "You arrive at drawer 1. The drawer 1 is closed.",
+            "feedback_sha256": "d022fab0de1bae367e927cc37ab9f54c07d3abba9e96d6e2e959b38b4b07ec84"
+          },
+          {
+            "step": 5,
+            "event_id": "46b2b356a0f72cd7319c74980e68c78291c8f0d1a7a07444f93a57a4cb98d457",
+            "generation_event_id": "ed6067a9a6468f34437caf832179429881500017ea0d5db64dbbc10c65246e8e",
+            "command": "open drawer 1",
+            "feedback_excerpt": "You open the drawer 1. The drawer 1 is open. In it, you see a creditcard 1, and a remotecontrol 1.",
+            "feedback_sha256": "b6e610d49f2724fbdaee768d1c14379cdc5fc58d32edb39a74f97af58db8ab1a"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "f467dd3bc2ec48635dec3e1732b29f70460a41ea3735929d8b78654a32b56ee8"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "c58c893d264aa07c8ad2e5acc547150f04afc6f4f609cd2039490be898f4d5cd",
+        "generation_event_id": "d1f2460c520dc96f51a284ab359269aa4f3afb6ad83841eef51618bb11ed4f98",
+        "command": "move pen 1 to drawer 1",
+        "feedback_excerpt": "You move the pen 1 to the drawer 1.",
+        "feedback_sha256": "744fd073b98ae636504f208ff0524ba198ba3dff64292a0013b8e0319ec79558"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "不支持",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Consistent with goal-directed search or observed task progress; not asserted optimal",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步将pen1放入drawer1，反馈成功，完成第一物体放置。固定S5替换会干预一个已观察到推进的动作。",
+        "classification_reason": "第一物体子目标成功发生在候选动作本身。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": 10,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 3,
+            "event_id": "402ed1874a0b1b38ce8690e2768da47bbcfc33d3b2f9b095840e3dc728d1ca93",
+            "generation_event_id": "8e8a61f169581efb8665d815a69944d754fbadc3fa51d4f75b643c8b22df9b64",
+            "command": "take pen 1 from sidetable 1",
+            "feedback_excerpt": "You pick up the pen 1 from the sidetable 1.",
+            "feedback_sha256": "511a43a6365710dcbf2e3339d8b60f654d378db5c9690f5fc0d6db5a61e1ddad"
+          },
+          {
+            "step": 5,
+            "event_id": "46b2b356a0f72cd7319c74980e68c78291c8f0d1a7a07444f93a57a4cb98d457",
+            "generation_event_id": "ed6067a9a6468f34437caf832179429881500017ea0d5db64dbbc10c65246e8e",
+            "command": "open drawer 1",
+            "feedback_excerpt": "You open the drawer 1. The drawer 1 is open. In it, you see a creditcard 1, and a remotecontrol 1.",
+            "feedback_sha256": "b6e610d49f2724fbdaee768d1c14379cdc5fc58d32edb39a74f97af58db8ab1a"
+          },
+          {
+            "step": 6,
+            "event_id": "c58c893d264aa07c8ad2e5acc547150f04afc6f4f609cd2039490be898f4d5cd",
+            "generation_event_id": "d1f2460c520dc96f51a284ab359269aa4f3afb6ad83841eef51618bb11ed4f98",
+            "command": "move pen 1 to drawer 1",
+            "feedback_excerpt": "You move the pen 1 to the drawer 1.",
+            "feedback_sha256": "744fd073b98ae636504f208ff0524ba198ba3dff64292a0013b8e0319ec79558"
+          },
+          {
+            "step": 7,
+            "event_id": "6f8393a8d4bced2832f1a2fe7e2b681fa04cd9cf97023ba34681a0f03dc5195a",
+            "generation_event_id": "251c9d87825bebf0970850808435147db5d7fb753ccf1e56e769aec5206c804e",
+            "command": "go to sidetable 1",
+            "feedback_excerpt": "You arrive at sidetable 1. On the sidetable 1, you see a alarmclock 1, and a remotecontrol 2.",
+            "feedback_sha256": "55f5cb553010070324ce172de2e1ff9e9f9707b94c25a07e5b805a7c873cde31"
+          },
+          {
+            "step": 9,
+            "event_id": "9f5935e800ba87aad6127dfdf31d770c05ac344287bfb26bbdc48aba8c631fd4",
+            "generation_event_id": "39a1729346e83bc6a437f1505f7da2b9a211bf0d8f53aa3b9a9af8c68c5324e8",
+            "command": "go to countertop 1",
+            "feedback_excerpt": "You arrive at countertop 1. On the countertop 1, you see a alarmclock 3, a cellphone 3, a cellphone 2, a laptop 2, a mirror 1, and a remotecontrol 3.",
+            "feedback_sha256": "6a6da0958d245a7921514df909f7e9b192e2c385edc20ded3dc3fb278cf86d8c"
+          },
+          {
+            "step": 10,
+            "event_id": "350c6156e9feb964237630e5cbdaad19277aa52db9109cd283bbcf1903215a04",
+            "generation_event_id": "3b910fb548acba34983a1f4a8c1ffad4b854b557e2fc491252a592c213a287f9",
+            "command": "go to sidetable 1",
+            "feedback_excerpt": "You arrive at sidetable 1. On the sidetable 1, you see a alarmclock 1, and a remotecontrol 2.",
+            "feedback_sha256": "55f5cb553010070324ce172de2e1ff9e9f9707b94c25a07e5b805a7c873cde31"
+          },
+          {
+            "step": 11,
+            "event_id": "ea02b857fb04ef65395540007abdb72aa0cbccde4d57a8f069fe9dfc02a73122",
+            "generation_event_id": "c5c2027d85f33b6e5e9de635049bd0782a7ff05cae1536108919746d7dc5ff87",
+            "command": "look",
+            "feedback_excerpt": "You are facing the sidetable 1. Next to it, you see nothing.",
+            "feedback_sha256": "0173ff3ff620e9abaafafb3ab0bb01faa2755211c626698109088a8b4f717ff8"
+          },
+          {
+            "step": 12,
+            "event_id": "0b2f3a2aee6f85fece0a350043c7e5ea4fa94b65baa002753afbcf4ecc89aec7",
+            "generation_event_id": "d27da6d466cfdd02c8a015b641464d21c9a3efed5645c2951b6d1e029abcf70d",
+            "command": "go to drawer 1",
+            "feedback_excerpt": "You arrive at drawer 1. The drawer 1 is open. In it, you see a creditcard 1, a pen 1, and a remotecontrol 1.",
+            "feedback_sha256": "b47a1ffac409b9380a44b9726213f7e05e28554d71ab7e0bd9d914c9f0f9ce87"
+          },
+          {
+            "step": 16,
+            "event_id": "b83036b1a213ea5bc2363396450e4c6cc5a8781a08638220427b433fdf54a9ca",
+            "generation_event_id": "6138f283da71185e686219b0a449e205917021d9e10b6df2f3d0dcb490d85475",
+            "command": "go to sidetable 1",
+            "feedback_excerpt": "You arrive at sidetable 1. On the sidetable 1, you see a alarmclock 1, and a remotecontrol 2.",
+            "feedback_sha256": "55f5cb553010070324ce172de2e1ff9e9f9707b94c25a07e5b805a7c873cde31"
+          },
+          {
+            "step": 50,
+            "event_id": "00f1f22857457e89d2e9224743cb2cac86ae22d9714457117ff832a3b2d80815",
+            "generation_event_id": "65e2a2cf644148aa539d5491f42ca97aaa00c814d7b520f866cf9e9489210df6",
+            "command": "look",
+            "feedback_excerpt": "You are facing the sidetable 1. Next to it, you see nothing.",
+            "feedback_sha256": "0173ff3ff620e9abaafafb3ab0bb01faa2755211c626698109088a8b4f717ff8"
+          }
+        ],
+        "interpretation": "7回到原sidetable已无pen1；10又返回该处是重复搜索候选，之后11–50形成循环且始终未记录第二支pen拿取。不能把查找第二物体失败归给正常的第一物体投放。",
+        "relation_to_S5": "问题在第一物体放好之后，S5动作有明确正向后果。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "pen",
+        "required_treatment": null,
+        "destination_type": "drawer",
+        "required_object_count": 2
+      }
+    },
+    {
+      "case_id": "C091",
+      "slot_key": "343fd328ed38ab5cec2ff40244bd5fc37cce7e39038e1515b584be49161a1ce6",
+      "family": "pick_two_obj_and_place",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "bab5632bdea51ec3eb0fa6c29d700c59a3ab378ec292af2068f3577f6c292c68",
+      "S5_seal_event_id": "e048fb0f2438e08a41adc038310894f1370206642e2cc1802d62e0299371284d",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "step2发现alarmclock1/2，step3拿起1，step5已将1放到desk1；截至S5第一物体放置完成且第二个目标位置已知。",
+        "evidence": [
+          {
+            "step": 2,
+            "event_id": "ac2051728ffa99688b0d60cc90566090a16586f318b49b32d2ab30cfb19a4e5a",
+            "generation_event_id": "0aa29698212c832284700acd31a1238ee486e40acbb3326184d1ed10614f760b",
+            "command": "go to shelf 1",
+            "feedback_excerpt": null,
+            "feedback_sha256": "601e3acbcc0fd0171a8b8afbfc24e9f172ca87624c3ba66d3f0146d01c940271"
+          },
+          {
+            "step": 3,
+            "event_id": "e23a2c6ab3ed7735b976cb3183486ad0e62cdc011e64aee06d19731ba08f5ed8",
+            "generation_event_id": "b832caf2d108b1a57b6151456f208e6d2ef05be8e4ed6aae84148540bc7ada07",
+            "command": "take alarmclock 1 from shelf 1",
+            "feedback_excerpt": "You pick up the alarmclock 1 from the shelf 1.",
+            "feedback_sha256": "8f4a82a8ac7bb22656782ab44c57829420bfef431069dc04a398d57dd481591d"
+          },
+          {
+            "step": 4,
+            "event_id": "a61612253b18304bd3625f0c13d6a0c6f05dc9ad8bcb3b2eb84ba35243bf23bd",
+            "generation_event_id": "1294ff9f88a3210cb82cc4ec471c5bdd3a2e5d2e62d1792d09f0477e1edb9e61",
+            "command": "go to desk 1",
+            "feedback_excerpt": null,
+            "feedback_sha256": "0edef5289268ccac179956b274c7894b36e4a41c28858c4fd3c816eab0472f27"
+          },
+          {
+            "step": 5,
+            "event_id": "bab5632bdea51ec3eb0fa6c29d700c59a3ab378ec292af2068f3577f6c292c68",
+            "generation_event_id": "f182011d3d03cf45f1db1578290094511dc1962a4e98e41fc6e215d56920941e",
+            "command": "move alarmclock 1 to desk 1",
+            "feedback_excerpt": "You move the alarmclock 1 to the desk 1.",
+            "feedback_sha256": "bf948f4b34596b0254088c5cec5a9020bba1691138ee749f7d8ddf372874f4fa"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "0fb0cfe4a1c6ad4b3fdeb43c2fd74a4f4dced6c2f9f7e4671ddeb41798dac274"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "6fe122e44e2e4c5719934dd0f2833406f1e61a6e183cab7cf726c001aed68edd",
+        "generation_event_id": "196c5d17b8fcab402243d0f5202e37e8185f370d3eb1336b9eb37f7ad0c594fb",
+        "command": "go to shelf 1",
+        "feedback_excerpt": null,
+        "feedback_sha256": "d83a14288f2184cd7a79dd74536aa4bc84ef7d7f5f6b2ca395d255a920c18048"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "不支持",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Consistent with goal-directed search or observed task progress; not asserted optimal",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步返回第二个目标仍在的shelf1，后续step7成功拿起2；与任务正常推进相容。",
+        "classification_reason": "截至S5有完整第一物体子目标证据，第6步是继续取第二物体的合理移动。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": 14,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 5,
+            "event_id": "bab5632bdea51ec3eb0fa6c29d700c59a3ab378ec292af2068f3577f6c292c68",
+            "generation_event_id": "f182011d3d03cf45f1db1578290094511dc1962a4e98e41fc6e215d56920941e",
+            "command": "move alarmclock 1 to desk 1",
+            "feedback_excerpt": "You move the alarmclock 1 to the desk 1.",
+            "feedback_sha256": "bf948f4b34596b0254088c5cec5a9020bba1691138ee749f7d8ddf372874f4fa"
+          },
+          {
+            "step": 6,
+            "event_id": "6fe122e44e2e4c5719934dd0f2833406f1e61a6e183cab7cf726c001aed68edd",
+            "generation_event_id": "196c5d17b8fcab402243d0f5202e37e8185f370d3eb1336b9eb37f7ad0c594fb",
+            "command": "go to shelf 1",
+            "feedback_excerpt": null,
+            "feedback_sha256": "d83a14288f2184cd7a79dd74536aa4bc84ef7d7f5f6b2ca395d255a920c18048"
+          },
+          {
+            "step": 7,
+            "event_id": "37b97dd0e786c0df7fb372bcf965f8838dc37f6a0025f6d97c3014a3ea5cf93b",
+            "generation_event_id": "25a1c9bff197eba710dbd06e480fdc8b09bfd013d28509b0df92be870b09ed8f",
+            "command": "take alarmclock 2 from shelf 1",
+            "feedback_excerpt": "You pick up the alarmclock 2 from the shelf 1.",
+            "feedback_sha256": "6dd7b3586a82bbcee1268a52210f11304e4d6869e14741e79fc0efbbb65586e1"
+          },
+          {
+            "step": 8,
+            "event_id": "86277145aafc4f6e32306bb36dd16bbbf1dad1ceca7261a83122be83b8c259dc",
+            "generation_event_id": "54a25858e1e464914f48bdcbe8a8e943aab9ed1699d7dd889bb082f752d3da67",
+            "command": "go to desk 1",
+            "feedback_excerpt": null,
+            "feedback_sha256": "a83f173f34f63b21e01ea284acc0309ea3a62a694b2a987cab5d05c32ff495f0"
+          },
+          {
+            "step": 9,
+            "event_id": "cea1315c0089e43620b1d979bec736b933b804dcb8cc8b1dde2433644b4efaef",
+            "generation_event_id": "3726bfc948b2b057f47fc6e9ff8b92ccfe3b2a8305f18b9186069a8e4c7e63cf",
+            "command": "look",
+            "feedback_excerpt": "You are facing the desk 1, drawer 3, drawer 2, and drawer 1. Next to it, you see nothing.",
+            "feedback_sha256": "6c3f624a973291ef2874c24a8b03ff9e7f64bfa660eb62a9aac0a752937a6aad"
+          },
+          {
+            "step": 10,
+            "event_id": "29fa91415da64f60e23a26cd450506d630356be0a3c5346457722409adf05a3a",
+            "generation_event_id": "413434b7d142eb20cbe7a8631fdea8ec3990d9430e9b794a0d71005e5a6c6f20",
+            "command": "examine desk 1",
+            "feedback_excerpt": "On the desk 1, you see a alarmclock 1, a book 2, a bowl 1, a cd 2, a cd 1, a cellphone 3, a creditcard 1, a keychain 2, a mug 2, a pen 2, a pencil 1, a statue 2, and a statue 1.",
+            "feedback_sha256": "a9533b678d5cb48ba1b463272255e20a7e8129f82d191efc4ddf4dbbc7a01d4d"
+          },
+          {
+            "step": 12,
+            "event_id": "ba69206104ba215b9e3ed5fdf47e5d378dc8e34127cdbb1d45ddc65193166580",
+            "generation_event_id": "a2cb8fb9826d4631c90f705d808fcbe72486f8474d0edcaf85634a16a37d1272",
+            "command": "examine alarmclock 2",
+            "feedback_excerpt": "There's nothing special about alarmclock 2.",
+            "feedback_sha256": "c75e7274a904ec783bcf9b0932c2e1f1005cd23f76b22a078f45427ffe7063c0"
+          },
+          {
+            "step": 14,
+            "event_id": "33bac9d8d0baaf1c8f1cbf6f361d798f20327398c1990574762b70c0cd4ac255",
+            "generation_event_id": "a5bd04830c319414bbfb209c89e0adef2afebcf10b4f700796f0603ecef4e4cf",
+            "command": "examine alarmclock 2",
+            "feedback_excerpt": "There's nothing special about alarmclock 2.",
+            "feedback_sha256": "c75e7274a904ec783bcf9b0932c2e1f1005cd23f76b22a078f45427ffe7063c0"
+          },
+          {
+            "step": 15,
+            "event_id": "d13c5d5c478c5a2a4da23042c0c656603cf022204ae7ced0f63a9053b21fcc11",
+            "generation_event_id": "f45a097549462bc67e456b14bdb717fa6ece004e4efbe3e4a68b8d985e36c3c3",
+            "command": "look",
+            "feedback_excerpt": "You are facing the desk 1, drawer 3, drawer 2, and drawer 1. Next to it, you see nothing.",
+            "feedback_sha256": "6c3f624a973291ef2874c24a8b03ff9e7f64bfa660eb62a9aac0a752937a6aad"
+          },
+          {
+            "step": 50,
+            "event_id": "921461cb33c4355ab432d3cce3d3e112326c0eba5366849f2bc067e86fea63a9",
+            "generation_event_id": "115b66249234e26904098c126c8d0e5af2ce98931abd2bb64003b994beb883f6",
+            "command": "examine alarmclock 2",
+            "feedback_excerpt": "There's nothing special about alarmclock 2.",
+            "feedback_sha256": "c75e7274a904ec783bcf9b0932c2e1f1005cd23f76b22a078f45427ffe7063c0"
+          }
+        ],
+        "interpretation": "第二个目标7已拿、8已到desk；之后未投放，14重复12的held-object检查，是明确重复信息候选，15确认短周期。最早偏离可能在9的额外look，但其本身不能判错。",
+        "relation_to_S5": "第二物体目标前停滞在S8后；不是S5返回取物动作的已知错误。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "alarmclock",
+        "required_treatment": null,
+        "destination_type": "desk",
+        "required_object_count": 2
+      }
+    },
+    {
+      "case_id": "C092",
+      "slot_key": "96ddf56420db2e5f430b55fe33b841f7a2303bd1331cbbb653d75eb83523bb82",
+      "family": "pick_two_obj_and_place",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "6653bd1f37c6a48aa784ae57b34820071e08940b77ba5ce26857d916fa80090c",
+      "S5_seal_event_id": "0c0d93965e0881f333415dd2ba1f39bec3e9c72e61a3ab3dda9dfc207ae71d2f",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "step3看到soapbottle1，step4拿起，step5到toilet1；截至S5第一目标在手且到达目标容器，尚未放置。",
+        "evidence": [
+          {
+            "step": 3,
+            "event_id": "84551234d17859d014f28de675f5b25671f57a3f9d9cf54e669e2449fc4fb213",
+            "generation_event_id": "617f5d0b0e0771bd6a5ba08a417583d1cf21fa0aaafd526d7aebb9a14ee87f5a",
+            "command": "go to garbagecan 1",
+            "feedback_excerpt": "You arrive at garbagecan 1. On the garbagecan 1, you see a soapbottle 1.",
+            "feedback_sha256": "4504767cb3401276917497e7e03bae75ab2e8d4be9f1dfba29af515dad5f4478"
+          },
+          {
+            "step": 4,
+            "event_id": "c9188bc0c3ade71d8b1fefe0915f3f66559112d55cb3430ef092ffb514ad82fa",
+            "generation_event_id": "43913bbfeb51d926da710d8bf090465010d36eb3c2197d338d644dba6e429baf",
+            "command": "take soapbottle 1 from garbagecan 1",
+            "feedback_excerpt": "You pick up the soapbottle 1 from the garbagecan 1.",
+            "feedback_sha256": "13937d6cc897acd14f8b1d51539210ec3e75da74f5a63b3f3981391369cedef2"
+          },
+          {
+            "step": 5,
+            "event_id": "6653bd1f37c6a48aa784ae57b34820071e08940b77ba5ce26857d916fa80090c",
+            "generation_event_id": "a4dc0c0f1082ed805acaac2bee8aae358d5954fbad83ef2a23e9078f5155ff4b",
+            "command": "go to toilet 1",
+            "feedback_excerpt": "You arrive at toilet 1. On the toilet 1, you see a toiletpaper 1.",
+            "feedback_sha256": "f4a8469775910ef88ac5c5e5bad64ae74a24440af7b8b602be9cd497c3f22f30"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "33c35664f9665dd5196403d568ce5d6cd5f8b371b936b7a9a9e0a90795984430"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "c8df4bac53243f1b45511e559094d9308b889a82232cac94b64f9fcf762d295b",
+        "generation_event_id": "412031d69a66f09931c156dcbba9a898bed037c97bf8b642e6f3c02d77c03342",
+        "command": "move soapbottle 1 to toilet 1",
+        "feedback_excerpt": "You move the soapbottle 1 to the toilet 1.",
+        "feedback_sha256": "2ff74a565c5517dd3f76645dd148b1e209645eb71dc45f41fea4459c28bc36e4"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "不支持",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Consistent with goal-directed search or observed task progress; not asserted optimal",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步成功将soapbottle1放到toilet1，是可观察的第一物体子目标完成。",
+        "classification_reason": "候选替换动作本身有明确正向任务后果。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": 10,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 4,
+            "event_id": "c9188bc0c3ade71d8b1fefe0915f3f66559112d55cb3430ef092ffb514ad82fa",
+            "generation_event_id": "43913bbfeb51d926da710d8bf090465010d36eb3c2197d338d644dba6e429baf",
+            "command": "take soapbottle 1 from garbagecan 1",
+            "feedback_excerpt": "You pick up the soapbottle 1 from the garbagecan 1.",
+            "feedback_sha256": "13937d6cc897acd14f8b1d51539210ec3e75da74f5a63b3f3981391369cedef2"
+          },
+          {
+            "step": 5,
+            "event_id": "6653bd1f37c6a48aa784ae57b34820071e08940b77ba5ce26857d916fa80090c",
+            "generation_event_id": "a4dc0c0f1082ed805acaac2bee8aae358d5954fbad83ef2a23e9078f5155ff4b",
+            "command": "go to toilet 1",
+            "feedback_excerpt": "You arrive at toilet 1. On the toilet 1, you see a toiletpaper 1.",
+            "feedback_sha256": "f4a8469775910ef88ac5c5e5bad64ae74a24440af7b8b602be9cd497c3f22f30"
+          },
+          {
+            "step": 6,
+            "event_id": "c8df4bac53243f1b45511e559094d9308b889a82232cac94b64f9fcf762d295b",
+            "generation_event_id": "412031d69a66f09931c156dcbba9a898bed037c97bf8b642e6f3c02d77c03342",
+            "command": "move soapbottle 1 to toilet 1",
+            "feedback_excerpt": "You move the soapbottle 1 to the toilet 1.",
+            "feedback_sha256": "2ff74a565c5517dd3f76645dd148b1e209645eb71dc45f41fea4459c28bc36e4"
+          },
+          {
+            "step": 7,
+            "event_id": "35e5e30450c470d95423d5e1ccb81dbad265ad96d946c4c3fe394371b1e648cb",
+            "generation_event_id": "de0f040cff6f402c527602f186182fe3e1442b67f9b96303dcc0989bf8413c66",
+            "command": "go to garbagecan 1",
+            "feedback_excerpt": "You arrive at garbagecan 1. On the garbagecan 1, you see nothing.",
+            "feedback_sha256": "ac52157e7eb8423d83091bf1ef5ae14bdf9595b05f92c7880bba7e95b3a4e38f"
+          },
+          {
+            "step": 9,
+            "event_id": "c0d2622ef68e207e0e3fee7d4f0f9a6356f0b598bd91911b0b4fa634abd38b9d",
+            "generation_event_id": "55d2180b6e79727711e7a001acbb90b7d1f2eb9ef7a5edcbf69da3250bc58b16",
+            "command": "go to countertop 1",
+            "feedback_excerpt": "You arrive at countertop 1. On the countertop 1, you see nothing.",
+            "feedback_sha256": "3faa7285f6f9dd2ebd36ff10f1f02f96ff3a4fbd3482e555103e046641be992b"
+          },
+          {
+            "step": 10,
+            "event_id": "a7e21807c0fea354aa906bdf3b6e96db4e9c968fc7fa5a0465abd6645830b747",
+            "generation_event_id": "3767e4b66edde48fc6cb77a81918d8c9639a23be41c3359282e4522c9c08889c",
+            "command": "go to garbagecan 1",
+            "feedback_excerpt": "You arrive at garbagecan 1. On the garbagecan 1, you see nothing.",
+            "feedback_sha256": "ac52157e7eb8423d83091bf1ef5ae14bdf9595b05f92c7880bba7e95b3a4e38f"
+          },
+          {
+            "step": 12,
+            "event_id": "99ea2bb89cfaddcf751602bcf48df731ff62db498cd65d30ef3df74326183316",
+            "generation_event_id": "6276df27f050a6f050551d38fe01aba1f94fae266077a25c05dce6846c8904bc",
+            "command": "go to cabinet 1",
+            "feedback_excerpt": "You arrive at cabinet 1. The cabinet 1 is closed.",
+            "feedback_sha256": "70626470c3ce869d960acf717dde75600c931e4d95e71dcb1a92c39a9eae39a6"
+          },
+          {
+            "step": 13,
+            "event_id": "95460e9cbd5738fb0d4474fdd1973317f4373223f507f446033aa45237b2e690",
+            "generation_event_id": "13b74d431d97601382e5586be6f68deea90b31101ac4cea499e9bdb10f16ec38",
+            "command": "go to garbagecan 1",
+            "feedback_excerpt": "You arrive at garbagecan 1. On the garbagecan 1, you see nothing.",
+            "feedback_sha256": "ac52157e7eb8423d83091bf1ef5ae14bdf9595b05f92c7880bba7e95b3a4e38f"
+          },
+          {
+            "step": 18,
+            "event_id": "c5863160dda6ac65eed2493abd4280f3a2aa3290de6a78e519be1a642eb5e829",
+            "generation_event_id": "a27c8c7ec1d0cacd3703e01a20ddb252effd7ee0ae88518c6190b85319257ab6",
+            "command": "go to cabinet 1",
+            "feedback_excerpt": "You arrive at cabinet 1. The cabinet 1 is closed.",
+            "feedback_sha256": "70626470c3ce869d960acf717dde75600c931e4d95e71dcb1a92c39a9eae39a6"
+          },
+          {
+            "step": 19,
+            "event_id": "af791dbc1b65c354c7ab2fe0402b825787029946a138050c09e32bc5b713d6d6",
+            "generation_event_id": "4b4931b60ae09d699c2454c2dd8755e4e18c912a180d2227020f23e9fdcf6015",
+            "command": "go to garbagecan 1",
+            "feedback_excerpt": "You arrive at garbagecan 1. On the garbagecan 1, you see nothing.",
+            "feedback_sha256": "ac52157e7eb8423d83091bf1ef5ae14bdf9595b05f92c7880bba7e95b3a4e38f"
+          },
+          {
+            "step": 50,
+            "event_id": "e85877da2f07637b88340edf50e53dc2c3e2dbbe4ea097417448eec3f351ca06",
+            "generation_event_id": "8c4548df39d763e4bd889c5bf100c5f3b21685bdd97854626250c1f0217d1d5a",
+            "command": "look",
+            "feedback_excerpt": "You are facing the garbagecan 1, and toiletpaperhanger 1. Next to it, you see nothing.",
+            "feedback_sha256": "c296f15c9a174588b2107c02957c2980a4a89b2a9bf2975c339f9fa49cf763aa"
+          }
+        ],
+        "interpretation": "7原garbagecan已空，10再次返回是冗余访问候选；随后反复garbagecan/空countertop/关闭cabinet而无第二个soapbottle拿取。首个投放动作并非可证明问题点。",
+        "relation_to_S5": "后续查找第二物体停滞，与S5正常投放不同阶段。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "soapbottle",
+        "required_treatment": null,
+        "destination_type": "toilet",
+        "required_object_count": 2
+      }
+    },
+    {
+      "case_id": "C093",
+      "slot_key": "1ab4f458c4e1603b29602ab86d9a4cad26e36159bf984a0d1edd2ef9ffa5cdd1",
+      "family": "pick_two_obj_and_place",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "1fa3b6602dd61614515a06ca0e6154a80fd82d21d834ddfe4b506b0ec4b513b7",
+      "S5_seal_event_id": "6b0482c2bb4a999f5f1fd60d1e84468eff51edd811347f335c9541a5346ad63e",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "截至S5检查过sink/garbagecan并打开fridge；所见fridge内容不含lettuce，无目标拿取/放置记录。",
+        "evidence": [
+          {
+            "step": 2,
+            "event_id": "4e2c41320aeae419c68d09a52f7b238f2746a2b90fd8949c743a7309edefbf28",
+            "generation_event_id": "2d9638d19c213bb400981735174d45c7ed53e5dc675977450465acca4222edd2",
+            "command": "go to sinkbasin 1",
+            "feedback_excerpt": "You arrive at sinkbasin 1. On the sinkbasin 1, you see a mug 3, a spatula 2, and a spoon 1.",
+            "feedback_sha256": "2a26036234e65fa75736d80448840503996a0da56d0317b05b9f6663a3b3963e"
+          },
+          {
+            "step": 3,
+            "event_id": "161ef623d6e521e67e4c52e5d9f181a78e88903510b8b78c76739435f128c9b4",
+            "generation_event_id": "31e82bb5678a67eb24a894e48922d2cd60b052e891c96cf2b9b80b9a4aed6c30",
+            "command": "go to garbagecan 1",
+            "feedback_excerpt": "You arrive at garbagecan 1. On the garbagecan 1, you see a egg 2, a egg 1, a tomato 2, and a winebottle 2.",
+            "feedback_sha256": "f0b01b00d59f07f618c9d6192ce6cd51e60a6237949471fbb92a0da3f8080e9d"
+          },
+          {
+            "step": 4,
+            "event_id": "58d5de9bc1db97a594f4c01f76c24b13ad999366d0661f87cdd20bc03ae7fcc8",
+            "generation_event_id": "8490ef3704fcc250e02da0fdd4f54d01a3de8f172ca76103fdcdc2608548defc",
+            "command": "go to fridge 1",
+            "feedback_excerpt": "You arrive at fridge 1. The fridge 1 is closed.",
+            "feedback_sha256": "632783d4518ea73e1b6b9b37d94f3ee58a2596e41b0e5d1db7d6b62e7c477859"
+          },
+          {
+            "step": 5,
+            "event_id": "1fa3b6602dd61614515a06ca0e6154a80fd82d21d834ddfe4b506b0ec4b513b7",
+            "generation_event_id": "d5ec2e9c66a84835de717a20731b6ad4758963a843a3bfe7ffcc4b3a5715d901",
+            "command": "open fridge 1",
+            "feedback_excerpt": "You open the fridge 1. The fridge 1 is open. In it, you see a apple 1, a cup 2, a mug 2, a mug 1, a plate 3, and a tomato 1.",
+            "feedback_sha256": "c77267eb1032bcbb6709d77bd8866a4abeacd9589161628c23634e60d545047a"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "72f3bf5ca763be95d7ce6bcd765eceb088c254bcd5835c9a2784f82718a89718"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "1529a117f4a57f727cf553c8cfdf59a0e56f6c217427b23936609efac352892f",
+        "generation_event_id": "92cbc6fe98a46714db69a44a28ce5ef03955fcdb708403d48e68320353d2a053",
+        "command": "close fridge 1",
+        "feedback_excerpt": "You close the fridge 1.",
+        "feedback_sha256": "2bd80f6108a871d9319d2c1c5338f32419d572957a838b4e8b050f0c240b2ec6"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "不支持",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Consistent with goal-directed search or observed task progress; not asserted optimal",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步关闭刚检查的fridge、随后转向新地点找lettuce；关闭本身不是已知错误，也不是后面反复cool动作的同一决策。",
+        "classification_reason": "S5还未取得任何目标，后续两个lettuce的获取和第二物体投放机会都发生得更晚。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": 18,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 6,
+            "event_id": "1529a117f4a57f727cf553c8cfdf59a0e56f6c217427b23936609efac352892f",
+            "generation_event_id": "92cbc6fe98a46714db69a44a28ce5ef03955fcdb708403d48e68320353d2a053",
+            "command": "close fridge 1",
+            "feedback_excerpt": "You close the fridge 1.",
+            "feedback_sha256": "2bd80f6108a871d9319d2c1c5338f32419d572957a838b4e8b050f0c240b2ec6"
+          },
+          {
+            "step": 8,
+            "event_id": "10c8e6336d4f8bb5f0d5c5a10dcef9b29f6bd081f828997ad1939acb5d450018",
+            "generation_event_id": "2b9b379abd88bc5fd426938a583af02f105ca5130fd7481299445150f0ef10dc",
+            "command": "go to countertop 2",
+            "feedback_excerpt": null,
+            "feedback_sha256": "08386f0ee3413284a67285460b20f853bde98f57e8ddae7c6fc30550162cc14d"
+          },
+          {
+            "step": 9,
+            "event_id": "b5a4bd990d653b4abc8b18daea51b736cb240848f10a7ca76e1f9e4a956692e3",
+            "generation_event_id": "9377a217bb8a0c4766d191440abd27247416834b9044786a13efddc3a6f1b998",
+            "command": "take lettuce 4 from countertop 2",
+            "feedback_excerpt": "You pick up the lettuce 4 from the countertop 2.",
+            "feedback_sha256": "d4289e685a30cc3efdc25ca5de85161486e15b461c8561acfcf285ff1b463f25"
+          },
+          {
+            "step": 12,
+            "event_id": "4d6806dc8adf7cfe72b3f35d663c4f096258dd2a2c43782bf31f6cbb308f65ca",
+            "generation_event_id": "d35f59e20e22a31369d0273f0a23c8a4fe14d61753369dbb509fb21e9273d458",
+            "command": "move lettuce 4 to fridge 1",
+            "feedback_excerpt": "You move the lettuce 4 to the fridge 1.",
+            "feedback_sha256": "91d34f869aed1e7d1a176bc06378175006d17da8c823d0e39b51f38a3a7ed9f9"
+          },
+          {
+            "step": 14,
+            "event_id": "4b1bd9c736bce9f352182fd89a94af60aa3794cca1c8842c57903d010fe783fd",
+            "generation_event_id": "86d6c890e3b9c494e7396a05d980ffcc61cdafcd4d48cc45bd8b13bad8bbd508",
+            "command": "take lettuce 3 from countertop 2",
+            "feedback_excerpt": "You pick up the lettuce 3 from the countertop 2.",
+            "feedback_sha256": "0396cea90b4722fdf525174d02658beda6d0385d4a14987e98f282e7e7c627f1"
+          },
+          {
+            "step": 16,
+            "event_id": "af56b8f3f7bd31a06fd38e7708ca55b01b4d43c906ab46428f740388d884cead",
+            "generation_event_id": "c285d0c2ee63d9a6b24984bf5f080400ebae23027d0285094eceaf83fab67e28",
+            "command": "go to fridge 1",
+            "feedback_excerpt": "You arrive at fridge 1. The fridge 1 is open. In it, you see a apple 1, a cup 2, a lettuce 4, a mug 2, a mug 1, a plate 3, and a tomato 1.",
+            "feedback_sha256": "1757130d9dcf0ac1ffa01d88c5dccd8da94d563f7df67a0dc8e200cc7fd6c137"
+          },
+          {
+            "step": 17,
+            "event_id": "f00f23add3ba66469064cc4b998d540270bb367d26f3c6587ba019606680b241",
+            "generation_event_id": "dc73df5cb0c036c6db594e4ea228e891ebaf56518fbc14b9c14d18ca48c31681",
+            "command": "look",
+            "feedback_excerpt": "You are facing the fridge 1. Next to it, you see nothing.",
+            "feedback_sha256": "ce1974562c7ca240cf0118bb96f61d8e145921f24c1c61f21ac405993940bdd8"
+          },
+          {
+            "step": 18,
+            "event_id": "cdb1f9bd85a035e4c6813c63c20a6f42803474315b96e20bb3918ca63b0965c4",
+            "generation_event_id": "1ba6e1d9b9797baf3b2e59a8246d2592ea128295af2cc64f22060ece53ed2200",
+            "command": "close fridge 1",
+            "feedback_excerpt": "You close the fridge 1.",
+            "feedback_sha256": "2bd80f6108a871d9319d2c1c5338f32419d572957a838b4e8b050f0c240b2ec6"
+          },
+          {
+            "step": 19,
+            "event_id": "c6fef1e7144fc56091bc7c6304ff49ea1663d02296247ab15e6311512f24d77b",
+            "generation_event_id": "374db2644caf2450af75a3ff446cfa1dde3322f91e1f1b44828e709e535f03cc",
+            "command": "go to countertop 1",
+            "feedback_excerpt": "You arrive at countertop 1. On the countertop 1, you see a butterknife 1, a knife 1, a pan 1, a soapbottle 1, and a spatula 1.",
+            "feedback_sha256": "ea6ef936dd20977b923b71d6410953e5d2f7c6b5041745fac19e5220a1a78de3"
+          },
+          {
+            "step": 22,
+            "event_id": "74c3d2c5c8b3643f8b95fe2a05070f22f41e4342fd7178b05ce1bbbfe43748eb",
+            "generation_event_id": "e2843458330689ecbd81a32468085b042194f4b988f6546a75ef8d690db367a7",
+            "command": "cool lettuce 3 with fridge 1",
+            "feedback_excerpt": "You cool the lettuce 3 using the fridge 1.",
+            "feedback_sha256": "5b03fe146630cd1b30e0d6c07553cc362407c9ffbc2bf5bb61bbee411d1744c2"
+          },
+          {
+            "step": 24,
+            "event_id": "c6003ee8a636aee16418abb800c87214eb1edaca25b52dad0ff11edae9e2b604",
+            "generation_event_id": "e65143dfd065ddae659aeb1b8d9cac76684d81d36222541f86a0a010754b0158",
+            "command": "cool lettuce 3 with fridge 1",
+            "feedback_excerpt": "You cool the lettuce 3 using the fridge 1.",
+            "feedback_sha256": "5b03fe146630cd1b30e0d6c07553cc362407c9ffbc2bf5bb61bbee411d1744c2"
+          },
+          {
+            "step": 25,
+            "event_id": "2879a6aa28fc04ff628c8eee6aabc0afb2e9b350fba26f9f0b785670d90c9107",
+            "generation_event_id": "906904042473dd8cf58af66ce084b9730737d9f5135816d75236e4e288885a0f",
+            "command": "look",
+            "feedback_excerpt": "You are facing the fridge 1. Next to it, you see nothing.",
+            "feedback_sha256": "ce1974562c7ca240cf0118bb96f61d8e145921f24c1c61f21ac405993940bdd8"
+          },
+          {
+            "step": 50,
+            "event_id": "4ad2ff9391f763da15b614b16e35b969b883ed1736c49a0f17981981ed852259",
+            "generation_event_id": "86313eec976259c8e206120e2dd60e8996b7989bf746736d2e26d54e9c2c7eac",
+            "command": "cool lettuce 3 with fridge 1",
+            "feedback_excerpt": "You cool the lettuce 3 using the fridge 1.",
+            "feedback_sha256": "5b03fe146630cd1b30e0d6c07553cc362407c9ffbc2bf5bb61bbee411d1744c2"
+          }
+        ],
+        "interpretation": "第一lettuce12已入fridge，第二个14已拿，16回到打开的目标fridge；18关门并19离开是目标前绕行候选。22冷却不是任务所要求的子目标，24再次冷却后重复，25可确认周期；不能把一次冷却或关闭称不可逆错误。",
+        "relation_to_S5": "更具体的问题在S16后的第二目标投放机会，而非S5搜索阶段。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "lettuce",
+        "required_treatment": null,
+        "destination_type": "fridge",
+        "required_object_count": 2
+      }
+    },
+    {
+      "case_id": "C094",
+      "slot_key": "65479c6389cd53899f8f24e5b624d3313b20d1b18724914977ed1dae35e941da",
+      "family": "pick_two_obj_and_place",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "8a2adf8ed5b3de778eda3b28e17ab4493e915c31a1dd3a2f04bc576e81a10562",
+      "S5_seal_event_id": "7caee3597a12acfe57b1c7c1311c0a1a5f198dbd2cd1ab2e7b690b2374b58667",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "step3发现tissuebox1，step4拿起，step5到关闭的drawer1；截至S5持有第一目标、到达容器，尚未打开或放置。",
+        "evidence": [
+          {
+            "step": 3,
+            "event_id": "552d3e2e4ceec5444f9ab97d84e71848fd4a599fbfd78c7b6f6bec7f197f5a46",
+            "generation_event_id": "20221c7f75bf09bb11c7f01a073e1507aac6b1c0245f6073cc51ece13d3d01f9",
+            "command": "go to sidetable 2",
+            "feedback_excerpt": "You arrive at sidetable 2. On the sidetable 2, you see a houseplant 1, a laptop 1, a statue 1, and a tissuebox 1.",
+            "feedback_sha256": "1ed05718f58c54f9b2fdf298578bea1379e0ee58c643bd00ff8efb22f98688fe"
+          },
+          {
+            "step": 4,
+            "event_id": "6d3a8ce3a49b8fd61bef596a4cdca84885e949ef18fae5e96ef57406db5ca7f3",
+            "generation_event_id": "d40d084addd14b40f139901cac9a32e4b108516706731e6f1fa49b0f55e7bfe5",
+            "command": "take tissuebox 1 from sidetable 2",
+            "feedback_excerpt": "You pick up the tissuebox 1 from the sidetable 2.",
+            "feedback_sha256": "303c52736232902f607f5bb7d53a2ef908216c7b25da3f00d680e277ad3a57a0"
+          },
+          {
+            "step": 5,
+            "event_id": "8a2adf8ed5b3de778eda3b28e17ab4493e915c31a1dd3a2f04bc576e81a10562",
+            "generation_event_id": "56f5d4c1e7905b397175dd5f5acc2356c3a585ff763167d746666042fa90702e",
+            "command": "go to drawer 1",
+            "feedback_excerpt": "You arrive at drawer 1. The drawer 1 is closed.",
+            "feedback_sha256": "d022fab0de1bae367e927cc37ab9f54c07d3abba9e96d6e2e959b38b4b07ec84"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "2cf202af6aea9c76c431956ccf27516e75fb3616e9451f0f39940655906ec886"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "538d4104561cc9d1d08cce97b0bffd8e900d51894d381d96091c3e4d11ba14ad",
+        "generation_event_id": "f89ab7c83b09919c0f734c7207598cc9bbc4ed314d3fc0681690aa2ef4b395df",
+        "command": "open drawer 1",
+        "feedback_excerpt": "You open the drawer 1. The drawer 1 is open. In it, you see nothing.",
+        "feedback_sha256": "0881cecd88160f4d68f037abef13440963740fd1af5b0f98b816f95b2bb46299"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "不支持",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Consistent with goal-directed search or observed task progress; not asserted optimal",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步打开目标drawer1，随后step7成功放入tissuebox1；这是可观察的任务前置推进。",
+        "classification_reason": "用未来第二物体停滞否定首次开目标抽屉不成立。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": 14,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 4,
+            "event_id": "6d3a8ce3a49b8fd61bef596a4cdca84885e949ef18fae5e96ef57406db5ca7f3",
+            "generation_event_id": "d40d084addd14b40f139901cac9a32e4b108516706731e6f1fa49b0f55e7bfe5",
+            "command": "take tissuebox 1 from sidetable 2",
+            "feedback_excerpt": "You pick up the tissuebox 1 from the sidetable 2.",
+            "feedback_sha256": "303c52736232902f607f5bb7d53a2ef908216c7b25da3f00d680e277ad3a57a0"
+          },
+          {
+            "step": 6,
+            "event_id": "538d4104561cc9d1d08cce97b0bffd8e900d51894d381d96091c3e4d11ba14ad",
+            "generation_event_id": "f89ab7c83b09919c0f734c7207598cc9bbc4ed314d3fc0681690aa2ef4b395df",
+            "command": "open drawer 1",
+            "feedback_excerpt": "You open the drawer 1. The drawer 1 is open. In it, you see nothing.",
+            "feedback_sha256": "0881cecd88160f4d68f037abef13440963740fd1af5b0f98b816f95b2bb46299"
+          },
+          {
+            "step": 7,
+            "event_id": "682264e67971120a692f24dd9a2225c9f1676fea57ef351e71f2de2ab9d801a6",
+            "generation_event_id": "4b1acf237459c94cd1e623a57be67af785cc58591a4a3c3c71e4796d2258ce3c",
+            "command": "move tissuebox 1 to drawer 1",
+            "feedback_excerpt": "You move the tissuebox 1 to the drawer 1.",
+            "feedback_sha256": "4447fc130dd2b67882a158c8735a3a755044f8ac596d80c70c55248f69cea154"
+          },
+          {
+            "step": 10,
+            "event_id": "2b88f1c2894a8b82f8ecd7096badef0c32d039795911cc0a6c4bb400c5c9820c",
+            "generation_event_id": "2093b258fa5635bff8c9d6f51b7a5df22cc8bef527352876853d04e9d00ee284",
+            "command": "go to shelf 1",
+            "feedback_excerpt": "You arrive at shelf 1. On the shelf 1, you see a tissuebox 3, a vase 3, and a vase 2.",
+            "feedback_sha256": "036d02a23ddeb9586bbea4c37b0174ae3da9949d28e3d7a07df86d55e80f100f"
+          },
+          {
+            "step": 11,
+            "event_id": "f149e8acd7090fdf1e878be582caf2f35150d6b2fe22560b4998b7cbd5178c30",
+            "generation_event_id": "6d08c77f37c3cd2deb33c841d89e9f7900ac47436c43ef51cbaf46b57caa9d98",
+            "command": "take tissuebox 3 from shelf 1",
+            "feedback_excerpt": "You pick up the tissuebox 3 from the shelf 1.",
+            "feedback_sha256": "0d55760e088e1f5126ff4ec8fd111bc8086d49e6cc9284bb0e72be941c8f109e"
+          },
+          {
+            "step": 12,
+            "event_id": "d0ac2da25c5aeec8839b3564e247a93229ac26db96943dbaa14d364c6d6f8b3e",
+            "generation_event_id": "4e93cd58417ab973e409cf1538687f46b6d26b30162147eb16262063e5bd92ac",
+            "command": "go to drawer 1",
+            "feedback_excerpt": "You arrive at drawer 1. The drawer 1 is open. In it, you see a tissuebox 1.",
+            "feedback_sha256": "ee68b04b85b723cc97672c9cc4939d1fe4d284765da0fec8b5356fa530ad410e"
+          },
+          {
+            "step": 13,
+            "event_id": "e47e4329d8b76506ee8d910bc567c258a80282a3744da1b33c6ffb30a57e7764",
+            "generation_event_id": "a24891e9f2709e4ab5376034db0ee04280da927e8966e2412c64b1219cdc99a5",
+            "command": "look",
+            "feedback_excerpt": "You are facing the drawer 1. Next to it, you see nothing.",
+            "feedback_sha256": "78f93bfa82806c893771e516166b433bb03f35e0245ec657c4925b7b1338cc63"
+          },
+          {
+            "step": 14,
+            "event_id": "ffc8d5ffe927c2a7e71e80fec47e61d412e3195c088e8bb67698457bb45fd50d",
+            "generation_event_id": "4a38c705d218c873c8c440bc489c50306b3cf650ba59f010e619aa54c4e0e7c4",
+            "command": "go to drawer 4",
+            "feedback_excerpt": "You arrive at drawer 4. The drawer 4 is closed.",
+            "feedback_sha256": "5b53df97ecde9aa7dd4ccbcdc174aa306116c1d215d6bf251a76a2a283c12db1"
+          },
+          {
+            "step": 15,
+            "event_id": "c0d0b8f6e0d5dec36827be175b49c7d13130ebde100b2d830a32360fa7b13f48",
+            "generation_event_id": "c5f19c2cf22dd599fc7a31c4715b1a2f960d694a3304946536ffac6622e3afb2",
+            "command": "open drawer 4",
+            "feedback_excerpt": "You open the drawer 4. The drawer 4 is open. In it, you see nothing.",
+            "feedback_sha256": "810eb354938ac4e8277a82de9510cd8ab8800caa7f292e9387f22537188b67ef"
+          },
+          {
+            "step": 17,
+            "event_id": "dc5c2538b4b97da0149586252b4d433a2d7cb10410194629b586c3c8b502c340",
+            "generation_event_id": "482614a8a4ebeb0e715963957260c84796a6cfd10db530426fa8534a22d9a9f4",
+            "command": "close drawer 4",
+            "feedback_excerpt": "You close the drawer 4.",
+            "feedback_sha256": "ee2ef7205606a78fd1ca5a1dd361475fc1faecb2cf19ae0991d8bae182f07274"
+          },
+          {
+            "step": 18,
+            "event_id": "b99c58518eabc88dc418e16507d8901cc57d11adddcae63acfc18d6e21de215b",
+            "generation_event_id": "c63d7a357036533b0c0bdf8352a8ad92e9bde236675e21286d2b17831eab25de",
+            "command": "go to diningtable 1",
+            "feedback_excerpt": "You arrive at diningtable 1. On the diningtable 1, you see a box 1.",
+            "feedback_sha256": "63217ead8c5104ce02775b13b4583d8bfff2c62686b60acbd60da77921b80436"
+          },
+          {
+            "step": 19,
+            "event_id": "02277e77015fb6fc5f0221b267d39978ace7615cb1686ff1553ef5df1dbbd579",
+            "generation_event_id": "dacda11ee39c343725c0d407dfa13c62019e0c13cfbf450716c22eda1fc7d9f9",
+            "command": "go to drawer 1",
+            "feedback_excerpt": "You arrive at drawer 1. The drawer 1 is open. In it, you see a tissuebox 1.",
+            "feedback_sha256": "ee68b04b85b723cc97672c9cc4939d1fe4d284765da0fec8b5356fa530ad410e"
+          },
+          {
+            "step": 26,
+            "event_id": "b5aae25d093d3841e6960e0609eb4ddfa25282e7e0e6db76819da4a2552ebc79",
+            "generation_event_id": "be55efeef3d5f86ef1b7facb02de8b991690c577399f3f9be0e94838b066f00f",
+            "command": "go to drawer 1",
+            "feedback_excerpt": "You arrive at drawer 1. The drawer 1 is open. In it, you see a tissuebox 1.",
+            "feedback_sha256": "ee68b04b85b723cc97672c9cc4939d1fe4d284765da0fec8b5356fa530ad410e"
+          },
+          {
+            "step": 50,
+            "event_id": "25cecbf7c756fddbc79af9cdc9c36d9f640d6c0aab543f19dbc56f0d9970cd7b",
+            "generation_event_id": "c699d2e0178afcd95661bfb66a85cab1c3aea192a07f7e9ce1287f72ae7a6fba",
+            "command": "open drawer 4",
+            "feedback_excerpt": "You open the drawer 4. The drawer 4 is open. In it, you see nothing.",
+            "feedback_sha256": "810eb354938ac4e8277a82de9510cd8ab8800caa7f292e9387f22537188b67ef"
+          }
+        ],
+        "interpretation": "第二目标11已拿、12到装有第一物体的drawer1；14离开去drawer4，17关闭未投放、18去diningtable，后续循环至50。仅凭任务写drawer不能证明去drawer4本身违反目标实例；充分证据是未放第二物体且重复绕行，26可核验重复块。",
+        "relation_to_S5": "问题候选在S12之后，S5开抽屉正向推进。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "tissuebox",
+        "required_treatment": null,
+        "destination_type": "drawer",
+        "required_object_count": 2
+      }
+    },
+    {
+      "case_id": "C095",
+      "slot_key": "bc6406f294655e6f01e7b6e1334408f2422c967aa759aac85d33ec4df33b84ea",
+      "family": "pick_two_obj_and_place",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "52a0ee9f5c93691cbed7c63420e356aaab13d1f2043d61dd21ae78de743550de",
+      "S5_seal_event_id": "adf77dff7b3aaac17bc57d115a9a2ccb1dddc659db4fcbf0045505448c88f27c",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "step2发现alarmclock1/2，step3拿起1，step5已放到desk1；截至S5第一物体已放且第二物体位置已知。",
+        "evidence": [
+          {
+            "step": 2,
+            "event_id": "f8aade5a36a844dc95fdc870c6080eb961210c0625694e479dc1b5df11158859",
+            "generation_event_id": "6f2fc846df651366491831967b4f75f992e360a5acb570e36e622081982253b7",
+            "command": "go to sidetable 1",
+            "feedback_excerpt": "You arrive at sidetable 1. On the sidetable 1, you see a alarmclock 2, a alarmclock 1, a desklamp 1, a pen 3, a pencil 2, a pencil 1, and a remotecontrol 1.",
+            "feedback_sha256": "11cc94cdf224af703b8a2609db6ec83cee0d932c8fb5b4d84db0b4b771f26975"
+          },
+          {
+            "step": 3,
+            "event_id": "f2080627ffa2603916f1eaf9dddb1caf35e34f4cdcd26f1f0a5bdb2b210711d0",
+            "generation_event_id": "8685704bf39fd9abb2a7fda3e206b56c3f4f14615676f8b7a49ee01d27a0317a",
+            "command": "take alarmclock 1 from sidetable 1",
+            "feedback_excerpt": "You pick up the alarmclock 1 from the sidetable 1.",
+            "feedback_sha256": "b0753213b66a00452a23db2e7b1fc450507354ac86b65c5488cc23bc9c9c451d"
+          },
+          {
+            "step": 4,
+            "event_id": "3adb1e71bd1331ca2c79921a4e14625e2b0e39fda5ba22628b2357a71d50e823",
+            "generation_event_id": "9dd3199fb063553def51bc5047317fb8a3f680cf2d11ebf06dbbd3656a4ce5b4",
+            "command": "go to desk 1",
+            "feedback_excerpt": "You arrive at desk 1. On the desk 1, you see a bowl 2, a bowl 1, a cd 3, a keychain 1, a laptop 1, a pencil 3, and a remotecontrol 3.",
+            "feedback_sha256": "91306855765d503a8167c3af5f38d53cdad212580316658d204920f0eafa3662"
+          },
+          {
+            "step": 5,
+            "event_id": "52a0ee9f5c93691cbed7c63420e356aaab13d1f2043d61dd21ae78de743550de",
+            "generation_event_id": "7601ddcb502102f614965f1193daf061ddc990d523f5800d3f0dbd79c8dfcc8e",
+            "command": "move alarmclock 1 to desk 1",
+            "feedback_excerpt": "You move the alarmclock 1 to the desk 1.",
+            "feedback_sha256": "bf948f4b34596b0254088c5cec5a9020bba1691138ee749f7d8ddf372874f4fa"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "621374b01d3c551d6e1128e82f50d4a07d1b48ba2ea1d058886dfb8d0651be1f"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "415b0c79718f41742e815aeac55aa0d0a3ca78731392348c0b6e9db1556cc1c3",
+        "generation_event_id": "524c5a9e64d94a513b5d648e8d05fb39dcc6f59db50bb875475983c7601a8ac1",
+        "command": "go to sidetable 1",
+        "feedback_excerpt": "You arrive at sidetable 1. On the sidetable 1, you see a alarmclock 2, a desklamp 1, a pen 3, a pencil 2, a pencil 1, and a remotecontrol 1.",
+        "feedback_sha256": "74f626bcd001fa6e5f5ca3409affbee30d1a0b6a2dcd535d8ed2fa60d5e8ed8c"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "不支持",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Consistent with goal-directed search or observed task progress; not asserted optimal",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步回到仍有alarmclock2的sidetable1，step7成功拿起；这是正常继续第二物体子目标。",
+        "classification_reason": "该动作与已知公开目标信息一致，失败晚于其正向进展。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": 12,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 5,
+            "event_id": "52a0ee9f5c93691cbed7c63420e356aaab13d1f2043d61dd21ae78de743550de",
+            "generation_event_id": "7601ddcb502102f614965f1193daf061ddc990d523f5800d3f0dbd79c8dfcc8e",
+            "command": "move alarmclock 1 to desk 1",
+            "feedback_excerpt": "You move the alarmclock 1 to the desk 1.",
+            "feedback_sha256": "bf948f4b34596b0254088c5cec5a9020bba1691138ee749f7d8ddf372874f4fa"
+          },
+          {
+            "step": 6,
+            "event_id": "415b0c79718f41742e815aeac55aa0d0a3ca78731392348c0b6e9db1556cc1c3",
+            "generation_event_id": "524c5a9e64d94a513b5d648e8d05fb39dcc6f59db50bb875475983c7601a8ac1",
+            "command": "go to sidetable 1",
+            "feedback_excerpt": "You arrive at sidetable 1. On the sidetable 1, you see a alarmclock 2, a desklamp 1, a pen 3, a pencil 2, a pencil 1, and a remotecontrol 1.",
+            "feedback_sha256": "74f626bcd001fa6e5f5ca3409affbee30d1a0b6a2dcd535d8ed2fa60d5e8ed8c"
+          },
+          {
+            "step": 7,
+            "event_id": "d66c723174101ad041c7526cab97f5411a2207ee64a6c115fdf7ad8cb67b68e1",
+            "generation_event_id": "67eb4caab2cb28157e89c908f93afde24adfd0cc4e98d2fbe3a13b14a6d6830e",
+            "command": "take alarmclock 2 from sidetable 1",
+            "feedback_excerpt": "You pick up the alarmclock 2 from the sidetable 1.",
+            "feedback_sha256": "fa13fb0ae3f0c53c081a6f095fea20b64f0b2f91d94bb5aa75401043b086d0a9"
+          },
+          {
+            "step": 8,
+            "event_id": "eff870d51ad5c290b3ea4a6b01b6567e1524ed3193aaaf7b719c4f0949f00b6b",
+            "generation_event_id": "51ee33108910f65fb8a473a80e417fbd061c7b86b6885fa653bb85b36291ed98",
+            "command": "go to desk 1",
+            "feedback_excerpt": "You arrive at desk 1. On the desk 1, you see a alarmclock 1, a bowl 2, a bowl 1, a cd 3, a keychain 1, a laptop 1, a pencil 3, and a remotecontrol 3.",
+            "feedback_sha256": "6b786abc4fcdaa9194bcaa601791f19ddc4191a3ab8fd3fc1564f5a72b74bfeb"
+          },
+          {
+            "step": 9,
+            "event_id": "7a9aaf1b8264770d477a13c5fd086d2b85550430bb9fca38c57ea87b6f1af2c7",
+            "generation_event_id": "94883e87a93a7106d73ea16af1c8926eed639e329f526d707c6afa04abf999f7",
+            "command": "look",
+            "feedback_excerpt": "You are facing the desk 1. Next to it, you see nothing.",
+            "feedback_sha256": "807c630588ac2a399a72d3dad974cd422774f32dfc805a75548a0aac3f00174e"
+          },
+          {
+            "step": 10,
+            "event_id": "a97904daadb52eba6ced30cfbf6372db0dc55cdb86ef14ffa1de83271f98196b",
+            "generation_event_id": "2812635450d401413fbd7d160cceb76f07077faeb44c7c49e67cc1930ff1cd23",
+            "command": "examine alarmclock 2",
+            "feedback_excerpt": "There's nothing special about alarmclock 2.",
+            "feedback_sha256": "c75e7274a904ec783bcf9b0932c2e1f1005cd23f76b22a078f45427ffe7063c0"
+          },
+          {
+            "step": 12,
+            "event_id": "1bcf7a6aa12de22194c616ca44e3afb066578007a58f799267ed3d1b55e4513a",
+            "generation_event_id": "14da1b8b0dfcc78ec9173cc17f8ecae53971e17385688ea7ce8da5c4643fb880",
+            "command": "examine alarmclock 2",
+            "feedback_excerpt": "There's nothing special about alarmclock 2.",
+            "feedback_sha256": "c75e7274a904ec783bcf9b0932c2e1f1005cd23f76b22a078f45427ffe7063c0"
+          },
+          {
+            "step": 13,
+            "event_id": "a1b8894093b95a4e0a77c0e8335d0563adc30799d544acc017fbbc5671d7b105",
+            "generation_event_id": "42a54f547cb06a74199c67021e48a15976c1b5e1d4e5bf7139c2b0c84174bf5d",
+            "command": "look",
+            "feedback_excerpt": "You are facing the desk 1. Next to it, you see nothing.",
+            "feedback_sha256": "807c630588ac2a399a72d3dad974cd422774f32dfc805a75548a0aac3f00174e"
+          },
+          {
+            "step": 50,
+            "event_id": "2be8c85ead300337fdfaafe11bac54cac58e4c0d3b26bf20500e251c4d73c7d2",
+            "generation_event_id": "6cfb07c699e48d199e4a3bcc82e75f082efff06e116c6a4cf7318dfa52b327f2",
+            "command": "examine alarmclock 2",
+            "feedback_excerpt": "There's nothing special about alarmclock 2.",
+            "feedback_sha256": "c75e7274a904ec783bcf9b0932c2e1f1005cd23f76b22a078f45427ffe7063c0"
+          }
+        ],
+        "interpretation": "第二个alarmclock7已拿、8已到desk；10检查持有物，12再次检查同一物体得到相同反馈，是可疑重复；13确认周期，之后一直未投放。9额外look是否错误不能单独确定。",
+        "relation_to_S5": "第二次投放前的后期停滞，不支持S5取第二物体的动作有错。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "alarmclock",
+        "required_treatment": null,
+        "destination_type": "desk",
+        "required_object_count": 2
+      }
+    },
+    {
+      "case_id": "C096",
+      "slot_key": "1cebdd4281f0f1d183b72a32b3e2be48582c2e94c07a642f06c93a2882dff2df",
+      "family": "pick_two_obj_and_place",
+      "S5_definition": "State after5 executed environment actions; candidate replacement is action6.",
+      "S5_event_id": "8d8c578d9540c3c2695c0649278e817ddc979d05351bc0735650934a06f41742",
+      "S5_seal_event_id": "f898dcb535fc5165f14b8a53e34c4bce2dbdcdf23c342a4e63613a215f7d5a9c",
+      "as_of_S5_only": {
+        "completed_subgoals_and_missing_evidence": "step4在countertop1找到peppershaker2，step5成功拿起；截至S5第一目标在手，尚未投放。",
+        "evidence": [
+          {
+            "step": 4,
+            "event_id": "cd9cda3636c282f5cfc93f6b3639b320c76a3c2db453a2125f0d842039a2be23",
+            "generation_event_id": "268afbb38dbb7ffb95c4124ad3ae51d680ac61e8bb1ce9f6e68c78ec806bec49",
+            "command": "go to countertop 1",
+            "feedback_excerpt": null,
+            "feedback_sha256": "1bd8c6ae938c0998c4ee77ac7008d109cfa5ad058838625f05bc532a89a591c5"
+          },
+          {
+            "step": 5,
+            "event_id": "8d8c578d9540c3c2695c0649278e817ddc979d05351bc0735650934a06f41742",
+            "generation_event_id": "42b68631a031498dbc4edc4e0bb45af7eee1a544929a2f20f0d9c04e77f8660f",
+            "command": "take peppershaker 2 from countertop 1",
+            "feedback_excerpt": "You pick up the peppershaker 2 from the countertop 1.",
+            "feedback_sha256": "0ac78593dc9e0daef1d10061867cf884d0a6e566eb0453e5048d594833cf961a"
+          }
+        ],
+        "public_H4_action_indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "actual_recorded_input_binding": {
+          "recorded_generation_state_equals_S5": true,
+          "actual_H4_commands_present": true,
+          "actual_H4_feedback_present": true,
+          "current_observation_present": true,
+          "candidate_command_in_exact_map": true
+        },
+        "actual_actor_prompt_sha256": "98ce8bf50199bcb6f2ad4dcdeca7cf233283aecc5ec2275b10f6ce3f804836e7"
+      },
+      "original_action6": {
+        "step": 6,
+        "event_id": "e2519573bf7f55536887683d0e3ab1bbc21040fb4f11b22a9695b11d35e677cd",
+        "generation_event_id": "2d9c5ef2d9a3dae246b656c763098daf1e9066401c9350d7ec508129d3123825",
+        "command": "go to shelf 1",
+        "feedback_excerpt": "You arrive at shelf 1. On the shelf 1, you see a mug 1, and a winebottle 1.",
+        "feedback_sha256": "27d8879def908798520e2efe11c1fc136924f46923be97ce5ae9e5508d468652"
+      },
+      "manual_semantic_assessment": {
+        "supports_S5_as_known_error_anchor": "不支持",
+        "action6_known_wrong": "NOT_ESTABLISHED",
+        "reasonableness": "Consistent with goal-directed search or observed task progress; not asserted optimal",
+        "contemporaneous_and_action6_feedback_reasoning": "第6步携目标去任务要求的shelf1，step7成功放置；与任务推进一致。",
+        "classification_reason": "第一物体搬运在候选动作之后正常完成，失败发生在随后找第二个物体阶段。",
+        "confidence": "HIGH for literal event/feedback provenance; MEDIUM for reasonable-progress/ redundancy interpretation; no causal optimality confidence assigned"
+      },
+      "posthoc_only": {
+        "earliest_supported_problem_candidate_step": 10,
+        "unique_first_causal_error_step": "NOT_IDENTIFIED",
+        "evidence": [
+          {
+            "step": 5,
+            "event_id": "8d8c578d9540c3c2695c0649278e817ddc979d05351bc0735650934a06f41742",
+            "generation_event_id": "42b68631a031498dbc4edc4e0bb45af7eee1a544929a2f20f0d9c04e77f8660f",
+            "command": "take peppershaker 2 from countertop 1",
+            "feedback_excerpt": "You pick up the peppershaker 2 from the countertop 1.",
+            "feedback_sha256": "0ac78593dc9e0daef1d10061867cf884d0a6e566eb0453e5048d594833cf961a"
+          },
+          {
+            "step": 6,
+            "event_id": "e2519573bf7f55536887683d0e3ab1bbc21040fb4f11b22a9695b11d35e677cd",
+            "generation_event_id": "2d9c5ef2d9a3dae246b656c763098daf1e9066401c9350d7ec508129d3123825",
+            "command": "go to shelf 1",
+            "feedback_excerpt": "You arrive at shelf 1. On the shelf 1, you see a mug 1, and a winebottle 1.",
+            "feedback_sha256": "27d8879def908798520e2efe11c1fc136924f46923be97ce5ae9e5508d468652"
+          },
+          {
+            "step": 7,
+            "event_id": "3fb954832c826de3d21823410821a4f2e1762fd4552e33f01f7b18f62f2a1ccd",
+            "generation_event_id": "655ec064933b5a5964d3b550181fe99b87d8d305f3d5f398cee7cb62c787ec47",
+            "command": "move peppershaker 2 to shelf 1",
+            "feedback_excerpt": "You move the peppershaker 2 to the shelf 1.",
+            "feedback_sha256": "ce5ff24ca770db94b78148c316e10b14b84c0000051f239712f7a3a0b5892303"
+          },
+          {
+            "step": 8,
+            "event_id": "997031693101f8b01d88741fb36f4960c2cb7dac7de65faeda18ad5bf0a695d4",
+            "generation_event_id": "13b59922f486bfb87741453a158040ce0970f874e9d047cfb15019da0148c087",
+            "command": "go to countertop 1",
+            "feedback_excerpt": null,
+            "feedback_sha256": "6ac165c42765ae8843b68d3620d8702ac844c4fca7bf04f6a16527b0cb93b63e"
+          },
+          {
+            "step": 9,
+            "event_id": "4540137abe97593b13d908b06e314c35c39366d0161db82a0d1070879ff2fdec",
+            "generation_event_id": "5ec9f245ceb2f1ea4a7574c1b33dcc6421f249052482e6017fe7765c7a2a31b4",
+            "command": "look",
+            "feedback_excerpt": "You are facing the countertop 1, and toaster 1. Next to it, you see nothing.",
+            "feedback_sha256": "44f71b3d5acd5bb78a56137091ff2ac5210432c0cf0880b3eb218aefaffcfc5b"
+          },
+          {
+            "step": 10,
+            "event_id": "f00f0aeefaa9fe76d00fc5436aa00468adc28fce8b18bb15d0032149d998215c",
+            "generation_event_id": "45547e68cf33274baaa31ee576b9487cb828738b4cd4c4a7c58552d18460e361",
+            "command": "examine countertop 1",
+            "feedback_excerpt": null,
+            "feedback_sha256": "1df551a06ddb7923e8f9102c2488bf85810ba03cdc373d3a65b33a7e19fe65eb"
+          },
+          {
+            "step": 11,
+            "event_id": "0d3cb9595621fef3ee65e2bd8f2ddd3ba40adb024c17a66af74dd97b8fbd4918",
+            "generation_event_id": "96073a3844b7d200cc9c87aea61545dcfd6991a9d7a5374740ef1efe65e22768",
+            "command": "look",
+            "feedback_excerpt": "You are facing the countertop 1, and toaster 1. Next to it, you see nothing.",
+            "feedback_sha256": "44f71b3d5acd5bb78a56137091ff2ac5210432c0cf0880b3eb218aefaffcfc5b"
+          },
+          {
+            "step": 12,
+            "event_id": "80e24fb4268706b48e45adfdf330b0129fc7ee0c9bdcb2cd28f5b9c24878522d",
+            "generation_event_id": "dec7a9cbb96f1342754356d6a36e910351333938aa27ee2e92d6f6d534f79b0f",
+            "command": "examine countertop 1",
+            "feedback_excerpt": null,
+            "feedback_sha256": "1df551a06ddb7923e8f9102c2488bf85810ba03cdc373d3a65b33a7e19fe65eb"
+          },
+          {
+            "step": 13,
+            "event_id": "2a5a2bb81d126c0f2233c4424db1dd1987c57d46a0be66bd9f16f6a8f25970c2",
+            "generation_event_id": "6ddbe0f456ed03b94ce7d6ace05c7dec277dec022ad147bf2685422a7a2cfa74",
+            "command": "look",
+            "feedback_excerpt": "You are facing the countertop 1, and toaster 1. Next to it, you see nothing.",
+            "feedback_sha256": "44f71b3d5acd5bb78a56137091ff2ac5210432c0cf0880b3eb218aefaffcfc5b"
+          },
+          {
+            "step": 50,
+            "event_id": "683961226f889b6883591db62c0e9b94b68aa08b5b777bf51a201179ab679b4b",
+            "generation_event_id": "3534a9fbcc5bb86949b850025af4a1c538c11b7393dda82d93d068fc24f25ef4",
+            "command": "examine countertop 1",
+            "feedback_excerpt": null,
+            "feedback_sha256": "1df551a06ddb7923e8f9102c2488bf85810ba03cdc373d3a65b33a7e19fe65eb"
+          }
+        ],
+        "interpretation": "8回到原countertop已无peppershaker2；10再次检查该表面是冗余候选，12重复检查、13确认周期，后续未找到或取得第二个peppershaker。不能据此推断S5去shelf错误。",
+        "relation_to_S5": "第一物体正常放置后的搜索停滞。",
+        "future_use_prohibited": "Do not feed this future behavior/Y0 annotation into S5 input, use it to move the old prefix, or turn it into a training target."
+      },
+      "outcome": {
+        "Y0": 0,
+        "terminal_step": 50,
+        "recorded_done": true,
+        "recorded_reward": 0.0,
+        "YT": "NOT_MEASURED"
+      },
+      "counterfactual_correct_action_or_recoverability": "NOT_INFERRED",
+      "goal_semantic_summary": {
+        "object_type": "peppershaker",
+        "required_treatment": null,
+        "destination_type": "shelf",
+        "required_object_count": 2
+      }
+    }
+  ],
+  "limits": [
+    "These are manual semantic audit judgments on already-seen TRAIN outputs, not pre-registered outcome labels or a learned selector.",
+    "Earliest_problem_candidate is an explicitly uncertain retrospective warning, not a uniquely identified incorrect action or an admissible deployment trigger.",
+    "Public feedback does not expose all latent simulator predicates; no unique correct action or counterfactual success is inferred.",
+    "No held-out evidence, new model/teacher/environment/tokenizer call or policy replay."
+  ],
+  "source_annotation_sha256": "12423b356ff0c20cd81ed39cc398599839f9c567d40282f9142fd624f1c22cec",
+  "publication_scope": "Necessary short action/feedback evidence only; full original goals/prompts/observations/maps retained in separately listed local-only files."
+}

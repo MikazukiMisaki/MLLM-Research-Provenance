@@ -1,0 +1,73 @@
+{
+  "schema": "ASTRA_MINIMUM_RECOVERABILITY_DESIGN_DECISION_V1",
+  "created_utc": "2026-10-27T03:06:51.171482+00:00",
+  "status": "GO_DESIGN_ONLY_NOT_EXECUTABLE",
+  "independent_review_complete": true,
+  "preferred_question": "Can the frozen same-base two-stage teacher, using only original causal public inputs, select a legal next action that immediately terminates successfully at each of five post-hoc second-object placement opportunity states?",
+  "preferred_case_order": [
+    "C088",
+    "C091",
+    "C093",
+    "C094",
+    "C095"
+  ],
+  "depths": [
+    11,
+    8,
+    16,
+    12,
+    8
+  ],
+  "parent_failed_cohort": 17,
+  "audit_S5_counts": {
+    "no_support_for_known_error": 13,
+    "insufficient_ambiguous_redundancy": 4,
+    "established_known_error": 0
+  },
+  "fixed_S5_error_label_interpretation": "NO_GO",
+  "sample_status": "POST_HOC_SINGLE_FAMILY_DEVELOPMENT_MECHANISM_COHORT_NOT_HELDOUT_OR_DEPLOYED_SELECTOR",
+  "protocol_shape": {
+    "new_source": 0,
+    "teacher_stage1_per_case_max": 1,
+    "teacher_stage2_per_case_max": 1,
+    "teacher_action_per_case_max": 1,
+    "P0_suffix_for_all_cases": 0,
+    "new_CONTINUE": 0,
+    "retry_topup_extra_seed": 0,
+    "runtime_selector": false,
+    "teacher_sees_hypothesized_move_or_future_outcome": false
+  },
+  "endpoint": {
+    "Z_immediate_1": "A legal selected command was actually executed with trustworthy receipt and resulting done=true,reward>0.",
+    "Z_immediate_0": "A legal selected command was actually executed with trustworthy receipt and no immediate positive terminal outcome; record nonterminal versus terminal-zero distinctly.",
+    "Z_immediate_NA": "No valid completed action receipt, invalid selection, not executed, technical interruption or integrity contradiction. Preserve reason/cost.",
+    "terminal_observed": "Record true terminal success/failure when actually observed; nonterminal future outcome remains unknown.",
+    "P0_suffix": "NOT_RUN",
+    "old_H50_protocol": "NOT_EXECUTED; do not create reused YT labels",
+    "denominators": "Report planned5, actual observed m, immediate success r, known Z0, unknown5-m; r/5 is realized candidate yield including NA, not natural success rate."
+  },
+  "prospective_scientific_budget_candidate": {
+    "generations_max": 10,
+    "environment_resets_max": 5,
+    "replay_actions": 55,
+    "teacher_actions_max": 5,
+    "environment_operations_reset_inclusive_max": 65,
+    "output_tokens_max": 280,
+    "input_tokens_max_at8192_per_generation": 81920,
+    "input_tokens_per_generation_max": 8192,
+    "model_loads_max": 1,
+    "environment_constructions_closes_max_each": 5,
+    "allocated_device_hours_stop_candidate": 0.5,
+    "device_hours_meaning": "Suggested investment cap including load/wait/use/audit/cleanup; not prediction or authorization.",
+    "engineering_validation_calls_in_this_task": 0,
+    "training_evaluation_calls": 0
+  },
+  "outcome_decisions": {
+    "no_certified_immediate_success": "Close this one-shot local immediate-terminal signal probe without automatic suffix, retuning, extra anchor or data. Does not reject full-horizon recoverability.",
+    "some_certified_immediate_success": "At most5 environment-verified local candidates; assess learning dose/task diversity/control/affordable evaluation separately, no automatic training or collection.",
+    "technical_or_attribution_failure": "INCONCLUSIVE; preserve expense and unknowns, stop without automatic retry."
+  },
+  "unchanged": "Original SI-S01 structural NO_GO; scientific code/evidence/costs unchanged.",
+  "new_scientific_calls": 0,
+  "publication": "Local task-owned safe artifacts only; Sol Designer coordinates shared INDEX/staging/commit/push."
+}
