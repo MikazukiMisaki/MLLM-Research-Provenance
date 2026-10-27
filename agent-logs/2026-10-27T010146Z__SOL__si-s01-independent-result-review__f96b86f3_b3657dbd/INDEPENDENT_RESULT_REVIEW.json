@@ -1,0 +1,351 @@
+{
+  "schema": "ROOT_INDEPENDENT_SEALED_SI_S01_ACTUAL_RESULT_REVIEW_V1",
+  "created_utc": "2026-10-27T01:03:58.755270Z",
+  "decision": "ACCEPT_AUTHENTIC_COMPLETE_SOURCE_ACQUISITION_STRUCTURAL_NO_GO",
+  "implementation_or_runtime_failure": false,
+  "run_id": "f96b86f3391940eaa9d75040c444a8e4",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "protocol_sha256": "daa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72",
+  "plan_sha256": "41ae5f2ae999e5682e7207084282b74fa053287391654ac30c2acabbcb5170b3",
+  "production_independent_audit_recomputed_equal_original": true,
+  "CPU_audit_elapsed_seconds": 37.03952296823263,
+  "original_files_before": {
+    "source_trajectories.jsonl": {
+      "bytes": 415054,
+      "sha256": "5e74691cee1cddae2c58191a524970fb0bd8a6f5517f40b4daa17c77d5fa3848"
+    },
+    "supervisor_exit.json": {
+      "bytes": 940,
+      "sha256": "a2fd177deed7dcb731bf3afa960020828a7cbe89047f930cf14070690ac9fdab"
+    },
+    "SOURCE_REPORT.md": {
+      "bytes": 1335,
+      "sha256": "21397a23ca3ae1ac30930c4fcb4e61e62e94125e10928549a4b941544b4f5975"
+    },
+    "worker_start.json": {
+      "bytes": 1211,
+      "sha256": "fbfd5bcfc5e4737e561db613d99a11164dfe247462077d4898ef26cf56b63571"
+    },
+    "worker.stderr": {
+      "bytes": 312,
+      "sha256": "fc8245efd0c9f12aa5b52ebedd886b8d0e81599df3c4f9c437387831028edd61"
+    },
+    "worker.stdout": {
+      "bytes": 2688,
+      "sha256": "04fd793dfc2f8fc1ef79c2a08399d62ac123a0caffae356f2db25dba92fb05f4"
+    },
+    "source_report.json": {
+      "bytes": 2836,
+      "sha256": "1e38c9355f81cb26af5fae7bd3351057d06be86fe3be1aa68864c594bc3c6fe3"
+    },
+    "launch_context.json": {
+      "bytes": 3651,
+      "sha256": "be8295745e057096b45f6aa4fb77caea0fd9e438dad01f1805a366d194912f22"
+    },
+    "source_events.jsonl": {
+      "bytes": 474180490,
+      "sha256": "04ce4c0f32f40a3dbff6f42fec3c54107534ec45dd005795bd52014442513105"
+    }
+  },
+  "original_files_after": {
+    "source_trajectories.jsonl": {
+      "bytes": 415054,
+      "sha256": "5e74691cee1cddae2c58191a524970fb0bd8a6f5517f40b4daa17c77d5fa3848"
+    },
+    "supervisor_exit.json": {
+      "bytes": 940,
+      "sha256": "a2fd177deed7dcb731bf3afa960020828a7cbe89047f930cf14070690ac9fdab"
+    },
+    "SOURCE_REPORT.md": {
+      "bytes": 1335,
+      "sha256": "21397a23ca3ae1ac30930c4fcb4e61e62e94125e10928549a4b941544b4f5975"
+    },
+    "worker_start.json": {
+      "bytes": 1211,
+      "sha256": "fbfd5bcfc5e4737e561db613d99a11164dfe247462077d4898ef26cf56b63571"
+    },
+    "worker.stderr": {
+      "bytes": 312,
+      "sha256": "fc8245efd0c9f12aa5b52ebedd886b8d0e81599df3c4f9c437387831028edd61"
+    },
+    "worker.stdout": {
+      "bytes": 2688,
+      "sha256": "04fd793dfc2f8fc1ef79c2a08399d62ac123a0caffae356f2db25dba92fb05f4"
+    },
+    "source_report.json": {
+      "bytes": 2836,
+      "sha256": "1e38c9355f81cb26af5fae7bd3351057d06be86fe3be1aa68864c594bc3c6fe3"
+    },
+    "launch_context.json": {
+      "bytes": 3651,
+      "sha256": "be8295745e057096b45f6aa4fb77caea0fd9e438dad01f1805a366d194912f22"
+    },
+    "source_events.jsonl": {
+      "bytes": 474180490,
+      "sha256": "04ce4c0f32f40a3dbff6f42fec3c54107534ec45dd005795bd52014442513105"
+    }
+  },
+  "original_bytes_unchanged": true,
+  "physical": {
+    "completed": {
+      "generations": 1959,
+      "environment_operations": 2055,
+      "generated_tokens": 9795,
+      "input_tokens": 1164593
+    },
+    "reserved_or_spent": {
+      "generations": 1959,
+      "environment_operations": 2055,
+      "generated_tokens": 9795,
+      "input_tokens": 1164593
+    },
+    "open_units": [],
+    "failed_units": [],
+    "components": {
+      "model_load": 1,
+      "env_construct": 96,
+      "reset": 96,
+      "generation": 1959,
+      "step": 1959,
+      "env_close": 96
+    },
+    "observed_returned_generation_boundaries": 1959,
+    "observed_returned_tokens": 9795
+  },
+  "supervisor_final_authoritative_cost": {
+    "allocated_device_hours": 0.5624755142595516,
+    "allocated_devices": 1,
+    "authentic_returncode": 0,
+    "authorization_sha256": "cf25576d5bf019a925cb1cd1d878046921162f136de173dad870ce8365e40a05",
+    "child_report_present": true,
+    "cleanup_established": true,
+    "deadline_triggered": false,
+    "descendants_observed": [],
+    "elapsed_seconds": 2024.9118513343856,
+    "evidence_class": "live_source_only",
+    "execution_status": "EXIT_RECORDED",
+    "launch_context_sha256": "be8295745e057096b45f6aa4fb77caea0fd9e438dad01f1805a366d194912f22",
+    "members_after_cleanup": [],
+    "members_before_cleanup": [],
+    "reaping_error": null,
+    "retry_authorized": false,
+    "schema": "SI_S01_SUPERVISOR_EXIT_V1",
+    "science_authorized": true,
+    "scope": "source_only_no_teacher_training_evaluation",
+    "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+    "spawn_or_supervisor_error": null,
+    "unreaped_worker_identity": null,
+    "within_time_cap": true,
+    "worker_start_sha256": "fbfd5bcfc5e4737e561db613d99a11164dfe247462077d4898ef26cf56b63571"
+  },
+  "source_report_stage_cost": "Stage lower bound only; do not add overlapping0.5456197222185114h to supervisor0.5624755142595516h",
+  "structural_upper_bounds": {
+    "E": 89,
+    "F": 17,
+    "S": 72,
+    "by_family": {
+      "pick_and_place_simple": {
+        "E": 28,
+        "F": 0,
+        "S": 28
+      },
+      "pick_clean_then_place_in_recep": {
+        "E": 26,
+        "F": 2,
+        "S": 24
+      },
+      "pick_cool_then_place_in_recep": {
+        "E": 16,
+        "F": 6,
+        "S": 10
+      },
+      "pick_heat_then_place_in_recep": {
+        "E": 9,
+        "F": 1,
+        "S": 8
+      },
+      "pick_two_obj_and_place": {
+        "E": 10,
+        "F": 8,
+        "S": 2
+      }
+    }
+  },
+  "preregistered_threshold_checks": [
+    {
+      "scope": "total",
+      "metric": "E",
+      "observed": 89,
+      "minimum": 72,
+      "pass": true
+    },
+    {
+      "scope": "total",
+      "metric": "F",
+      "observed": 17,
+      "minimum": 24,
+      "pass": false
+    },
+    {
+      "scope": "total",
+      "metric": "S",
+      "observed": 72,
+      "minimum": 24,
+      "pass": true
+    },
+    {
+      "scope": "pick_and_place_simple",
+      "metric": "E",
+      "observed": 28,
+      "minimum": 22,
+      "pass": true
+    },
+    {
+      "scope": "pick_and_place_simple",
+      "metric": "F",
+      "observed": 0,
+      "minimum": 9,
+      "pass": false
+    },
+    {
+      "scope": "pick_and_place_simple",
+      "metric": "S",
+      "observed": 28,
+      "minimum": 9,
+      "pass": true
+    },
+    {
+      "scope": "pick_clean_then_place_in_recep",
+      "metric": "E",
+      "observed": 26,
+      "minimum": 17,
+      "pass": true
+    },
+    {
+      "scope": "pick_clean_then_place_in_recep",
+      "metric": "F",
+      "observed": 2,
+      "minimum": 6,
+      "pass": false
+    },
+    {
+      "scope": "pick_clean_then_place_in_recep",
+      "metric": "S",
+      "observed": 24,
+      "minimum": 6,
+      "pass": true
+    },
+    {
+      "scope": "pick_cool_then_place_in_recep",
+      "metric": "E",
+      "observed": 16,
+      "minimum": 10,
+      "pass": true
+    },
+    {
+      "scope": "pick_cool_then_place_in_recep",
+      "metric": "F",
+      "observed": 6,
+      "minimum": 4,
+      "pass": true
+    },
+    {
+      "scope": "pick_cool_then_place_in_recep",
+      "metric": "S",
+      "observed": 10,
+      "minimum": 4,
+      "pass": true
+    },
+    {
+      "scope": "pick_heat_then_place_in_recep",
+      "metric": "E",
+      "observed": 9,
+      "minimum": 6,
+      "pass": true
+    },
+    {
+      "scope": "pick_heat_then_place_in_recep",
+      "metric": "F",
+      "observed": 1,
+      "minimum": 2,
+      "pass": false
+    },
+    {
+      "scope": "pick_heat_then_place_in_recep",
+      "metric": "S",
+      "observed": 8,
+      "minimum": 2,
+      "pass": true
+    },
+    {
+      "scope": "pick_two_obj_and_place",
+      "metric": "E",
+      "observed": 10,
+      "minimum": 7,
+      "pass": true
+    },
+    {
+      "scope": "pick_two_obj_and_place",
+      "metric": "F",
+      "observed": 8,
+      "minimum": 3,
+      "pass": true
+    },
+    {
+      "scope": "pick_two_obj_and_place",
+      "metric": "S",
+      "observed": 2,
+      "minimum": 3,
+      "pass": false
+    }
+  ],
+  "failed_check_count": 5,
+  "source_shared_resource": {
+    "resource_policy": {
+      "policy": "SHARED_CONTAINER_CUDA_V1",
+      "contract_sha256": "d908573f0c6d9518aec0a9b6b0a48c24648a26c3c708652b185a7cfe7b7e2489",
+      "proposal_sha256": "6998fe2ffcfd583741cd12ecf6b08638ed0e5da16d671f761a0af1df59c4dc5a",
+      "scientific_execution_behavior_changed": true,
+      "offline_evidence_validation_behavior_changed": true,
+      "source_treatment_semantics_changed": false,
+      "exclusive_gpu": false,
+      "NVML_to_local_PID_mapping": "UNPROVEN_NOT_ASSERTED",
+      "whole_process_vram_cap": false,
+      "device_wide_delta_attribution": false
+    },
+    "validated_resource_samples": 3921,
+    "resource_rejected": false,
+    "resource_accounting": "FULL_ONE_DEVICE_ELAPSED_SHARED_NONEXCLUSIVE",
+    "NVML_mapping": "UNPROVEN_NOT_ASSERTED"
+  },
+  "CPU_offline_scope": {
+    "tokenizer_loaded": 1,
+    "CUDA_initialized": false,
+    "model_weights_or_model_calls": 0,
+    "environment_construct_reset_step": 0,
+    "collector_or_source_cli_invoked": false
+  },
+  "scientific_interpretation": {
+    "source_acquisition_complete": true,
+    "frozen_balanced_experience_protocol_can_proceed": false,
+    "teacher_training_evaluation_authorized_or_executed": false,
+    "learning_or_heldout_success_rate_improvement_demonstrated": false,
+    "adopted_stop": "No teacher/training/eval/topup/taskreplacement/quota_relaxation/retry; future changes require a separate prospective design/review."
+  },
+  "historical_science": {
+    "generations": 5142,
+    "environment_operations": 7949
+  },
+  "additional_completed_engineering_separate": {
+    "generations": 1,
+    "environment_operations": 7
+  },
+  "new_source_science": {
+    "generations": 1959,
+    "environment_operations": 2055
+  },
+  "cumulative_known_science_excluding_engineering": {
+    "generations": 7101,
+    "environment_operations": 10004
+  }
+}

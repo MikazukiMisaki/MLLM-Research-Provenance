@@ -1,0 +1,122 @@
+{
+  "schema": "ROOT_INDEPENDENT_ACTUAL_ENGINEERING_RAW_AUDIT_V1",
+  "decision": "PASS_OBSERVED_BOUND_PUBLIC_PATH_AND_RESOURCE_ONLY",
+  "created_utc": "2026-10-27T00:15:09.253974Z",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "run_id": "bf535c3579cc48f88a3046c8ac27aacf",
+  "production_audit_recomputed_equal_original": true,
+  "report_status": "OBSERVED_PUBLIC_PATH_COMPATIBLE_NOT_RNG_RECONSTRUCTED",
+  "coupled_path": {
+    "actual_reset_to_public_prompt": true,
+    "historical_input_ids_status": "UNRECORDED",
+    "internal_rng_reconstructed": false
+  },
+  "physical": {
+    "completed": {
+      "model_load": 1,
+      "context_probe": 1,
+      "generation": 1,
+      "env_construct": 1,
+      "reset": 1,
+      "step": 6,
+      "env_close": 1,
+      "environment_operations": 7,
+      "generated_tokens": 5,
+      "input_tokens": 267
+    },
+    "reserved_or_spent": {
+      "model_load": 1,
+      "context_probe": 1,
+      "generation": 1,
+      "env_construct": 1,
+      "reset": 1,
+      "step": 6,
+      "env_close": 1,
+      "environment_operations": 7,
+      "generated_tokens": 5,
+      "input_tokens": 267
+    },
+    "open_or_failed_units": [],
+    "observed_generation_returns": 1,
+    "observed_returned_output_tokens": 5
+  },
+  "shared_resource": {
+    "resource_policy": {
+      "policy": "SHARED_CONTAINER_CUDA_V1",
+      "contract_sha256": "d908573f0c6d9518aec0a9b6b0a48c24648a26c3c708652b185a7cfe7b7e2489",
+      "proposal_sha256": "6998fe2ffcfd583741cd12ecf6b08638ed0e5da16d671f761a0af1df59c4dc5a",
+      "scientific_execution_behavior_changed": true,
+      "offline_evidence_validation_behavior_changed": true,
+      "source_treatment_semantics_changed": false,
+      "exclusive_gpu": false,
+      "NVML_to_local_PID_mapping": "UNPROVEN_NOT_ASSERTED",
+      "whole_process_vram_cap": false,
+      "device_wide_delta_attribution": false
+    },
+    "validated_resource_samples": 5,
+    "resource_rejected": false,
+    "resource_accounting": "FULL_ONE_DEVICE_ELAPSED_SHARED_NONEXCLUSIVE",
+    "NVML_mapping": "UNPROVEN_NOT_ASSERTED"
+  },
+  "supervisor": {
+    "allocated_device_hours": 0.020915668825360223,
+    "allocated_devices": 1,
+    "authentic_returncode": 0,
+    "authorization_sha256": "588b3f3f49f2f500b78bfab01bb09f31a1f2e129f55037a841aa4bcab8f5450a",
+    "child_report_present": true,
+    "cleanup_established": true,
+    "deadline_triggered": false,
+    "descendants_observed": [],
+    "elapsed_seconds": 75.2964077712968,
+    "evidence_class": "engineering_historical_source_once",
+    "execution_status": "EXIT_RECORDED",
+    "launch_context_sha256": "2f973feabc88d2ac79f1fede148d434a3f76faaf5ef0b2d84e6df3edaf52735e",
+    "members_after_cleanup": [],
+    "members_before_cleanup": [],
+    "reaping_error": null,
+    "retry_authorized": false,
+    "schema": "SI_S01_ENGINEERING_SUPERVISOR_EXIT_V1",
+    "science_authorized": false,
+    "scope": "ENGINEERING_HISTORICAL_SOURCE_ONCE",
+    "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+    "spawn_or_supervisor_error": null,
+    "unreaped_worker_identity": null,
+    "within_time_cap": true,
+    "worker_start_sha256": "e864cb1c2c6b6fdfbe6dbd25b208dd9091c993e2e3e67cd4e7d465e8925cf9ed"
+  },
+  "original_hashes_before": {
+    "supervisor_exit.json": "f8b95e0c935ddcb98e3298967cb261e1594c04f027cd2dc6960bbc8fc4169c16",
+    "worker_start.json": "e864cb1c2c6b6fdfbe6dbd25b208dd9091c993e2e3e67cd4e7d465e8925cf9ed",
+    "launch_context.json": "2f973feabc88d2ac79f1fede148d434a3f76faaf5ef0b2d84e6df3edaf52735e",
+    "worker.stdout": "192f7d3255f5bbc24517a77d24f6dc0bca77e2fe847d07aaa05791e0241b5142",
+    "ENGINEERING_REPORT.md": "68c1647508dff1201da83dd39b2ed311c6286a93bb9cea8f7c8e9dfa2e1bc46b",
+    "engineering_events.jsonl": "eb57fd9b84e0ecf69b25c56368b630edbcf5804e1929428da069b9c0f697289b",
+    "engineering_report.json": "072f1d027af4582dd551dd21a41cf09d56655e20a6ce042ab03e8ab6ac15fd80",
+    "worker.stderr": "68990748b950d4a6dd5813f265cb3cb59be77af398a9caaba61317c707a2cf97"
+  },
+  "original_hashes_after": {
+    "supervisor_exit.json": "f8b95e0c935ddcb98e3298967cb261e1594c04f027cd2dc6960bbc8fc4169c16",
+    "worker_start.json": "e864cb1c2c6b6fdfbe6dbd25b208dd9091c993e2e3e67cd4e7d465e8925cf9ed",
+    "launch_context.json": "2f973feabc88d2ac79f1fede148d434a3f76faaf5ef0b2d84e6df3edaf52735e",
+    "worker.stdout": "192f7d3255f5bbc24517a77d24f6dc0bca77e2fe847d07aaa05791e0241b5142",
+    "ENGINEERING_REPORT.md": "68c1647508dff1201da83dd39b2ed311c6286a93bb9cea8f7c8e9dfa2e1bc46b",
+    "engineering_events.jsonl": "eb57fd9b84e0ecf69b25c56368b630edbcf5804e1929428da069b9c0f697289b",
+    "engineering_report.json": "072f1d027af4582dd551dd21a41cf09d56655e20a6ce042ab03e8ab6ac15fd80",
+    "worker.stderr": "68990748b950d4a6dd5813f265cb3cb59be77af398a9caaba61317c707a2cf97"
+  },
+  "raw_bytes_unchanged": true,
+  "offline_boundary": {
+    "cached_CPU_tokenizer_loaded": 1,
+    "model_objects_or_weights_loaded": 0,
+    "model_generation_calls": 0,
+    "CUDA_initialized": false,
+    "environment_construct_reset_step": 0,
+    "original_history_read": "only frozen first rawline35486B plus9 exact referenced event slices <=149225 maxend; no whole-file input hash or scan"
+  },
+  "scope_limitations": [
+    "One real first prompt and saved six-action path, not arbitrary8192token inference memory-fit proof",
+    "Original internal RNG and historical inputIDs not reconstructed",
+    "Shared nonexclusive GPU, no NVML/localPID mapping or wholeprocessVRAM cap claim",
+    "Engineering separate from historical5142gens7949ops and futureA96; no selfimprovement success claim"
+  ]
+}

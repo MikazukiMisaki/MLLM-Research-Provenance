@@ -1,0 +1,85 @@
+{
+  "schema": "ROOT_SOURCE_RESULT_SCIENTIFIC_STOP_DECISION_V1",
+  "execution_acceptance": "PASS_AUTHENTIC_COMPLETE_SOURCE96",
+  "frozen_data_recipe": "STRUCTURAL_NO_GO",
+  "eligible_checkpoint_counts": {
+    "E": 89,
+    "F": 17,
+    "S": 72,
+    "by_family": {
+      "pick_and_place_simple": {
+        "E": 28,
+        "F": 0,
+        "S": 28
+      },
+      "pick_clean_then_place_in_recep": {
+        "E": 26,
+        "F": 2,
+        "S": 24
+      },
+      "pick_cool_then_place_in_recep": {
+        "E": 16,
+        "F": 6,
+        "S": 10
+      },
+      "pick_heat_then_place_in_recep": {
+        "E": 9,
+        "F": 1,
+        "S": 8
+      },
+      "pick_two_obj_and_place": {
+        "E": 10,
+        "F": 8,
+        "S": 2
+      }
+    }
+  },
+  "failed_preregistered_checks": [
+    {
+      "scope": "total",
+      "metric": "F",
+      "observed": 17,
+      "minimum": 24,
+      "pass": false
+    },
+    {
+      "scope": "pick_and_place_simple",
+      "metric": "F",
+      "observed": 0,
+      "minimum": 9,
+      "pass": false
+    },
+    {
+      "scope": "pick_clean_then_place_in_recep",
+      "metric": "F",
+      "observed": 2,
+      "minimum": 6,
+      "pass": false
+    },
+    {
+      "scope": "pick_heat_then_place_in_recep",
+      "metric": "F",
+      "observed": 1,
+      "minimum": 2,
+      "pass": false
+    },
+    {
+      "scope": "pick_two_obj_and_place",
+      "metric": "S",
+      "observed": 2,
+      "minimum": 3,
+      "pass": false
+    }
+  ],
+  "teacher_training_eval": "STOP_NOT_AUTHORIZED_NOT_EXECUTED",
+  "formal_Bpool_C_dataset_sizes": "NOT_MEASURED_DO_NOT_EQUATE_TO_F17_OR_PAPER_PAIR_BOUND11",
+  "original_raw_archive_review": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T010146Z__SOL__si-s01-independent-result-review__f96b86f3_b3657dbd/RAW_ARCHIVE_INDEPENDENT_REVIEW.json",
+    "sha256": "9544114e17c18a3fd6112223061ecb374b239033ade310eefe0cf3c28a2836b0"
+  },
+  "Sol_scientific_addendum": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T010716Z__CODEX__si-s01-accepted-source-interpretation__f1e0d56/SCIENTIFIC_REVIEW_ADDENDUM.json",
+    "sha256": "b6cdc2ecb72d98748ee73f4a45e78881f059576b8a82619dbfd3d2cd60644793"
+  },
+  "future_scope": "Design/review only, no new scientific launch"
+}

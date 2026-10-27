@@ -1,0 +1,43 @@
+{
+  "schema": "ROOT_ONE_SOURCE_STATIC_PREFLIGHT_RELEASE_V1",
+  "status": "RELEASED_ONE_SOURCE_ZERO_SCIENCE_PREFLIGHT_ONLY",
+  "created_utc": "2026-10-27T00:16:12.165122Z",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "concrete_review": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_CONCRETE_RELEASE_REVIEW.json",
+    "sha256": "93acff00d94a5dbf632c4460ab88aceb70dc51fe1a25a820aed60830f3588b82"
+  },
+  "authorization": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/ROOT_SOURCE_AUTHORIZATION_V2.json",
+    "sha256": "cf25576d5bf019a925cb1cd1d878046921162f136de173dad870ce8365e40a05"
+  },
+  "proposal": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_PRODUCTION_PROPOSAL.json",
+    "sha256": "227eef584d8d8bd991e4e783eebb1203f249f9e64835282ba5b4e69328e02580"
+  },
+  "commands": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_EXACT_COMMANDS.json",
+    "sha256": "149953aab65001c79f5838c03c1c401867459ccf5976854c58e854cf2133e19a"
+  },
+  "allowed_argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "/home/lizening/wt-si-s01-shared-gpu-adapter/scripts/run_si_s01_source_only.py",
+    "--preflight-only",
+    "--authorization",
+    "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/ROOT_SOURCE_AUTHORIZATION_V2.json",
+    "--authorization-sha256",
+    "cf25576d5bf019a925cb1cd1d878046921162f136de173dad870ce8365e40a05",
+    "--proposal",
+    "/home/lizening/research-notes/agent-logs/2026-10-27T001612Z__SOL__si-s01-A96-source-authority__f1e0d56_f96b86f3/SOURCE_PRODUCTION_PROPOSAL.json"
+  ],
+  "environment_sha256": "a4ec1864fac27a73c0142494dc9f9228b3a5bdd1d1693944795e047f80ecee8b",
+  "maximum_preflight_invocations": 1,
+  "expected": "authentic rc0 STATIC_PREFLIGHT_0SCIENCE_PASS receipt with all8counters0, source output/claim absent; exact same reviewed source/task/protocol/plan/resource/caps/environment/runtimebindings",
+  "source_run_id": "f96b86f3391940eaa9d75040c444a8e4",
+  "preflight_receipt_path": "/tmp/si_s01_source_uid-2000_run-f96b86f3391940eaa9d75040c444a8e4_oxwwsyg4/control/source_preflight_receipt.json",
+  "stop_on_any_error_or_drift": true,
+  "source_live_model_environment": "NOT_RELEASED",
+  "teacher_training_evaluation_heldout": "NOT_AUTHORIZED",
+  "after_completion": "Preserve raw stdout/stderr/actualexecution/env/argv and the production source receipt; return originals to Root. New independent exact source clearance required; no follow-on/no automaticretry."
+}

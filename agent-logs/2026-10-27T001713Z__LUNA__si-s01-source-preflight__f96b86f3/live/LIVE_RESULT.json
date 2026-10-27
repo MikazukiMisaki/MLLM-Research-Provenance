@@ -1,0 +1,114 @@
+{
+  "schema": "luna.si_s01_a96_live_result.v1",
+  "run_id": "f96b86f3391940eaa9d75040c444a8e4",
+  "task_status": "LIVE_RUN_COMPLETE_RAW_EVIDENCE_ARCHIVED_LOCALLY_PENDING_ROOT_AUDIT_AND_PUBLICATION",
+  "execution": {
+    "evidence_class": "live_source_only",
+    "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+    "branch": "codex/si-s01-shared-gpu-adapter",
+    "cwd": "/home/lizening/wt-si-s01-shared-gpu-adapter",
+    "argv_sha256_canonical": "53829b6ccbfb46d6d714163213c6685370304f855af5272302cad8302e72ded9",
+    "environment_sha256_canonical": "a4ec1864fac27a73c0142494dc9f9228b3a5bdd1d1693944795e047f80ecee8b",
+    "inherit_environment": false,
+    "top_supervisor_pid": 882767,
+    "worker_pid": 882823,
+    "started_utc": "2026-10-27T00:26:37.318091Z",
+    "ended_utc": "2026-10-27T01:00:22.356308Z",
+    "outer_subprocess_returncode": 0,
+    "supervisor_authentic_returncode": 0,
+    "supervisor_elapsed_seconds": 2024.9118513343856,
+    "outer_elapsed_seconds_monotonic": 2025.0381665341556,
+    "allocated_device_hours": 0.5624755142595516,
+    "supervisor_cleanup_established": true,
+    "deadline_triggered": false,
+    "automatic_retry": false,
+    "post_exit_pid_882767_present": false,
+    "post_exit_pid_882823_present": false
+  },
+  "production_result": {
+    "source_report_status": "COMPLETE_SOURCE96_STRUCTURAL_NO_GO",
+    "source_phase_sealed": true,
+    "normal_sources": 96,
+    "trajectory_rows": 96,
+    "run_closed_events": 1,
+    "ledger_lines": 16455,
+    "ledger_sequence_first": 0,
+    "ledger_sequence_last": 16454,
+    "ledger_sequence_contiguous": true,
+    "failed_units": 0,
+    "open_units": 0,
+    "all_YT": null,
+    "teacher_status": "TEACHER_NOT_AUTHORIZED_SOURCE_ONLY",
+    "science_acceptance": "NOT_LEARNING_OR_TEACHER_ACCEPTANCE",
+    "upper_bound_counts_as_reported": {
+      "E": 89,
+      "F": 17,
+      "S": 72
+    }
+  },
+  "physical_cost": {
+    "generations": 1959,
+    "input_tokens": 1164593,
+    "generated_tokens": 9795,
+    "environment_operations": 2055,
+    "components": {
+      "model_load": 1,
+      "generation": 1959,
+      "env_construct": 96,
+      "reset": 96,
+      "step": 1959,
+      "env_close": 96
+    },
+    "source_stage_device_hours_lower_bound": 0.5456197222185114,
+    "source_stage_hours_note": "Stage lower bound only; do not add to supervisor allocation total.",
+    "historical_science_unchanged_field": {
+      "generations": 5142,
+      "environment_operations": 7949,
+      "note": "Copied from production report as historical baseline field; not combined with this run's physical delta."
+    }
+  },
+  "raw_output": {
+    "path": "/tmp/si_s01_source_uid-2000_run-f96b86f3391940eaa9d75040c444a8e4_oxwwsyg4/raw",
+    "file_count": 9,
+    "total_bytes": 474608517,
+    "files": [
+      {"path": "SOURCE_REPORT.md", "bytes": 1335, "sha256": "21397a23ca3ae1ac30930c4fcb4e61e62e94125e10928549a4b941544b4f5975"},
+      {"path": "launch_context.json", "bytes": 3651, "sha256": "be8295745e057096b45f6aa4fb77caea0fd9e438dad01f1805a366d194912f22"},
+      {"path": "source_events.jsonl", "bytes": 474180490, "sha256": "04ce4c0f32f40a3dbff6f42fec3c54107534ec45dd005795bd52014442513105"},
+      {"path": "source_report.json", "bytes": 2836, "sha256": "1e38c9355f81cb26af5fae7bd3351057d06be86fe3be1aa68864c594bc3c6fe3"},
+      {"path": "source_trajectories.jsonl", "bytes": 415054, "sha256": "5e74691cee1cddae2c58191a524970fb0bd8a6f5517f40b4daa17c77d5fa3848"},
+      {"path": "supervisor_exit.json", "bytes": 940, "sha256": "a2fd177deed7dcb731bf3afa960020828a7cbe89047f930cf14070690ac9fdab"},
+      {"path": "worker.stderr", "bytes": 312, "sha256": "fc8245efd0c9f12aa5b52ebedd886b8d0e81599df3c4f9c437387831028edd61"},
+      {"path": "worker.stdout", "bytes": 2688, "sha256": "04fd793dfc2f8fc1ef79c2a08399d62ac123a0caffae356f2db25dba92fb05f4"},
+      {"path": "worker_start.json", "bytes": 1211, "sha256": "fbfd5bcfc5e4737e561db613d99a11164dfe247462077d4898ef26cf56b63571"}
+    ],
+    "launch_claim_sha256": "2b835c5f0dee1d30b170ed70a7a4144a5d711a13570fd006dbbc4a5520e3254e"
+  },
+  "raw_archive": {
+    "path": "/tmp/si_s01_source_uid-2000_run-f96b86f3391940eaa9d75040c444a8e4_oxwwsyg4/publication/luna_source_bundle_f96b86f3/si_s01_source_f96b86f3_evidence.tar.gz",
+    "bytes": 17608129,
+    "sha256": "474a9264bc483b2c641842478f5dcd8287e8d01a60a764c8dd84d892a922ef0a",
+    "member_count": 41,
+    "roundtrip_member_count": 41,
+    "all_member_bytes_match_original": true,
+    "original_files_pre_post_hashes_equal": true,
+    "includes_dataset_payload": false,
+    "includes_model_weights_adapters_or_cache": false,
+    "member_manifest_sha256": "2335d415e8e2bc3ace0b2457e09f35ec61c286b1bd975ef9e9f433a317033264",
+    "verification_sha256": "295414a4fd3508fc8a435867b8925ea2ccd639b093d413209bffc0dc1d09bb64",
+    "publication_state": "LOCAL_ONLY_NOT_UPLOADED"
+  },
+  "authority_bindings": {
+    "source_execution_handoff_sha256": "d2ee23838417dd37e8c4743bfc9b3c39f07c38c1a3fa7182f849fe6ea5538e26",
+    "single_use_launch_clearance_sha256": "3defb7052665b5ad365093880912f4be8c667d0d3c65979e15373afe014e7524",
+    "source_preflight_independent_verification_sha256": "6a305a810c54f3cb5757222143f0564885c418287b4dad249b51ba8a09a89ad1",
+    "authorization_sha256": "cf25576d5bf019a925cb1cd1d878046921162f136de173dad870ce8365e40a05"
+  },
+  "limitations_and_stops": [
+    "This was the sole authorized source-only live invocation; the allowance is consumed.",
+    "No teacher, training, evaluation, G4 analysis, retry, or additional science call was performed or is implied.",
+    "The production status is structural no-go; do not describe it as a learning or teacher acceptance pass.",
+    "NVML-to-local-PID mapping remains UNPROVEN_NOT_ASSERTED; the run used shared nonexclusive allocation accounting.",
+    "The evidence bundle is local-only pending Root's independent audit/publication."
+  ]
+}
