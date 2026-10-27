@@ -1,0 +1,164 @@
+{
+  "schema": "SI_S01_SHARED_CONTAINER_RESOURCE_CONTRACT_PROPOSAL_V1",
+  "status": "PROPOSED_FOR_INDEPENDENT_REVIEW_NO_EXECUTION_RELEASE",
+  "created_utc": "2026-10-26T21:27:26.067321+00:00",
+  "review_base_sha": "e5f09c05824cb61cb35ccbbf4e189b04e8829cea",
+  "motivation": "User explicitly confirms authorized shared A40 use and reports a successful local CUDA arithmetic probe. Native-host SSH is not necessary for local CUDA execution; the current strict NVML/local-PID admission contract is not the only scientifically adequate resource policy.",
+  "user_facts": {
+    "host_access": "User does not know whether native-host SSH access exists.",
+    "GPU_allocation": "Allowed to use A40, shared with other tasks.",
+    "route": "Local current container; no nested SSH required for this mode."
+  },
+  "explicit_contract_change": {
+    "not_equivalent_to_old_strict_PID_contract": true,
+    "resource_admission_policy_changed": true,
+    "scientific_execution_behavior_changed": true,
+    "offline_evidence_validation_behavior_changed": true,
+    "source_treatment_semantics_changed": false,
+    "old_e5_and_old_failed_evidence": "Remain immutable; no old proof or pass is reinterpreted."
+  },
+  "scope": [
+    "One existing-budget historical-source engineering verification first",
+    "Only after software and actual engineering acceptance: the already frozen source-only A96 collection under separate fresh bindings",
+    "No teacher/recovery branch/training/evaluation or G3 rerun"
+  ],
+  "frozen_science": [
+    "Same actual Qwen3-8B and frozen P0 file identities",
+    "Same production preparation/raw generation/parser/environment path",
+    "Same prompt/decoding/dtype/adapter/horizon/seeds/schedule/order/quotas/exclusions",
+    "Same first historical public-input/action join and six saved-command transitions",
+    "All existing scientific and aggregate caps unchanged; no reclassification of prior costs"
+  ],
+  "proposed_resource_policy": {
+    "name": "SHARED_CONTAINER_CUDA_V1",
+    "mode_selection": "Explicit versioned authorization and review bound to this contract hash; never exception fallback from strict verification.",
+    "own_identity": [
+      "Local supervisor/worker PID, UID, start tick, process group/session, source/run/auth/context hashes remain mandatory.",
+      "Only local owned worker/group/known descendants may be signalled; never use NVML reported PIDs as kill targets."
+    ],
+    "device_proof": [
+      "One visible CUDA device selected by the full bound UUID",
+      "Actual CUDA context UUID verified with the accepted raw/canonical UUID handling",
+      "Actual one-byte allocation/synchronization before weights, frozen P0/base/adapter and prepared/sent tensor device checks",
+      "Same pre-call durable reservations and observed raw return before any failing post-check"
+    ],
+    "PID_and_exclusivity_claims": {
+      "NVML_to_local_PID_mapping": "UNPROVEN_NOT_ASSERTED",
+      "exclusive_gpu": false,
+      "device_wide_utilization_or_memory_delta_attributed_to_worker": false,
+      "raw_NVML_rows_if_collected": "Preserved unchanged and labelled unmapped; never relabelled as own.",
+      "other_compute_processes": "May coexist under user-confirmed shared-use entitlement; no arbitrary or foreign process intervention."
+    },
+    "proposed_memory_numbers_for_review": {
+      "allocator_limit_bytes": 25769803776,
+      "minimum_device_free_bytes_before_load": 30064771072,
+      "minimum_device_free_bytes_at_subsequent_resource_checks": 2147483648,
+      "units": "binary GiB converted to bytes",
+      "status": "Proposed conservative admission/stop thresholds; not measured model-fit or provider quota.",
+      "enforcement": "Use pinned PyTorch native caching allocator public fraction API on actual device total, verify effective fraction/backend; record current/peak allocated/reserved. Reject rather than tune/retry if insufficient.",
+      "claim_limit": "Allocator cap does not bound all CUDA/driver process VRAM; device-free thresholds are sampled, not reservations, exclusivity or continuous fairness guarantees.",
+      "no_precision_or_allocator_tuning": "No quantization/offload/prompt truncation/decoding or allocator backend autotuning to make the run fit."
+    },
+    "time_and_cost": [
+      "Existing authentic supervisor interval including load/exit/cleanup remains final authority.",
+      "Charge full one-device elapsed interval conservatively; do not call it exclusive allocation, actual GPU utilization share, or other-user cost.",
+      "Preserve open/failed units, partial/returned generation costs and all prior engineering/scientific costs.",
+      "User smoke elapsed/device-hours remain explicitly unknown and nonzero, not retroactively zero."
+    ],
+    "stop_rules": [
+      "UUID/source/model/adapter/input/permission binding mismatch: stop before relevant external call",
+      "Missing or malformed resource evidence, allocator setup failure, insufficient free memory, OOM, timeout or failed owned cleanup: fail-stop",
+      "Keep actual raw return/cost if resource post-check fails after a generation",
+      "No automatic retry, replacement tasks, backfill, teacher/train/eval, GPU reset or other-job kill"
+    ]
+  },
+  "engineering_caps_unchanged": {
+    "model_load": 1,
+    "context_probe": 1,
+    "generation": 1,
+    "env_construct": 1,
+    "reset": 1,
+    "saved_steps": 6,
+    "env_close": 1,
+    "reset_inclusive_environment_operations": 7,
+    "generated_tokens": 16,
+    "input_tokens": 8192,
+    "allocated_seconds": 600
+  },
+  "A96_caps_unchanged": {
+    "tasks": 96,
+    "generations": 4800,
+    "reset_inclusive_environment_operations": 4896,
+    "generated_tokens": 76800,
+    "input_tokens": 16000000,
+    "per_call_input_tokens": 8192,
+    "allocated_seconds": 14400,
+    "protocol_sha256": "daa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72",
+    "all_remaining_structural_thresholds_and_family_order": "Exact original protocol; this record does not replace it."
+  },
+  "minimum_implementation_conditions": [
+    "New separately versioned shared-resource receipt/auth/review schema or explicitly bound identity mode; e5 strict mode stays available and old SI-P3 methods unchanged.",
+    "Runtime checks and independent engineering/source auditors must agree on new evidence semantics.",
+    "No fabricated owned-context PASS or full-process-VRAM cap.",
+    "Accepted supervisor local cleanup mechanics retained; any required changes individually justified.",
+    "New source exactly frozen and independently reviewed before any new production preflight or actual call."
+  ],
+  "required_software_cases": [
+    "Nonempty genuine producer/collector/auditor pipeline with explicitly synthetic model/environment edges",
+    "Unmapped distinct NVML/local PIDs and shared other-process observations do not become ownership proof",
+    "Wrong UUID, UID/start-tick/context, unsupported policy/hash/backend, malformed or missing stats, threshold/OOM/deadline cases fail closed",
+    "No downgrade of old strict mode when authorization is old/missing/new fields forged",
+    "Own cleanup never signals NVML/foreign PIDs; incomplete cleanup remains incomplete",
+    "Post-generation resource failure preserves actual return and cost",
+    "Frozen science parity and no new regression IDs against exact e5 baseline"
+  ],
+  "independent_review_questions": [
+    "Is this explicitly weaker resource-ownership claim sufficient for a bounded engineering check and later frozen source-only collection on user-authorized shared GPU?",
+    "Are the proposed allocator/admission thresholds technically justified and safely described; do any need changing before implementation?",
+    "What concrete evidence still needs an external capability, and is that necessary for the stated claims?",
+    "Identify minimal code/receipt/auditor/test scope; reject any false PASS or unchanged-behavior claim."
+  ],
+  "not_authorized_by_this_record": [
+    "Code implementation or source edits until root scope decision",
+    "CUDA smoke rerun/probe/model/environment/preflight/science invocation",
+    "Launch gate, release, clearance or reinterpretation of old failed evidence"
+  ],
+  "evidence_refs": [
+    {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/scripts/a40_connectivity_smoke.py",
+      "bytes": 3891,
+      "sha256": "c365797a656633f978261832a301ed7c9d62dde6f541247fdce8dab0b2bc20dc"
+    },
+    {
+      "path": "/home/lizening/wt-si-s01-engineering-adapter/src/self_improvement/si_s01/runtime_core.py",
+      "bytes": 7429,
+      "sha256": "58f0266f2e34a6b5061038b493ddc4bd7d9c282b74a636bbdfa8bf8a45b0b3e0"
+    },
+    {
+      "path": "/home/lizening/wt-si-s01-engineering-adapter/src/self_improvement/si_p3/runtime_gate.py",
+      "bytes": 14890,
+      "sha256": "da9ef92150e4310faab3eccd32d1d40a34e78f1f106aa34820a78d66ffb50c95"
+    },
+    {
+      "path": "/home/lizening/wt-si-s01-engineering-adapter/src/self_improvement/si_s01/engineering_audit.py",
+      "bytes": 15372,
+      "sha256": "69b631fd939b8b01c95ed253ad7508d36bb6262f1f144c79c864a7437b126197"
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/torch/cuda/memory.py",
+      "bytes": 41574,
+      "sha256": "131fcd492398bc4443ccff0c27a9963a5acb2ab1bde8e62f0430fb9fc8d3557b"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T154528Z__ASTRA__container-gpu-identity-design__0ef75ce7/DESIGN_REVIEW.md",
+      "bytes": 10151,
+      "sha256": "14810ed9985662e4111ede595a86b1f3a9ad9649e23595d0b7b3b37bdfe3ac43"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T154939Z__CODEX__container-execution-static-feasibility__e5f09c0/STATIC_CONTAINER_EXECUTION_OPINION.md",
+      "bytes": 9211,
+      "sha256": "0bf66f3a089f0344f7f18f39216b85a2798c6a0e56f6c5606e0e559f5b403f54"
+    }
+  ],
+  "primary_docs": "https://docs.pytorch.org/docs/2.6/notes/cuda.html#memory-management"
+}

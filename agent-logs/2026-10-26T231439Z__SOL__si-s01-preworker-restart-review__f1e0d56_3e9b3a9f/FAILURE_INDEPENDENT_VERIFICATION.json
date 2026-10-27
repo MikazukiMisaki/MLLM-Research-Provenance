@@ -1,0 +1,29 @@
+{
+  "schema": "ROOT_PREWORKER_FAILURE_EVIDENCE_VERIFICATION_V1",
+  "status": "AUTHENTIC_CLI_FAILURE_BEFORE_WORKER_NOT_A_MODEL_OR_TASK_FAILURE",
+  "receipt": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T230809Z__LUNA__si-s01-engineering-live__f1e0d56_once1/subprocess_receipt.json",
+    "sha256": "8352e8d573f056a4d7fa44c9abc4ace4c761f60eb6f565531e3f67cc9486734e"
+  },
+  "stderr": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T230809Z__LUNA__si-s01-engineering-live__f1e0d56_once1/live_child.stderr.bin",
+    "sha256": "d78484b541f62b18f7687bc1e4a584cc39130772e5226a741bb770db29555d85",
+    "parsed": {
+      "status": "ENGINEERING_REJECTED_OR_STOPPED",
+      "science_authorized": false,
+      "exception": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/home/lizening/wt-si-s01-shared-gpu-adapter/artifacts/runtime/si_s01_engineering_shared_cuda_v1_f1e0d56_cfce7ad1c9e3437a9edc2a0f4b6ae5bf.launch_claim.json'",
+      "resource_evidence": null
+    }
+  },
+  "actual_cli_returncode": 1,
+  "actual_cli_elapsed_seconds": 21.601499736,
+  "root_conservative_budget_debit_seconds": 22,
+  "budget_charge_label": "CONSERVATIVE_ONE_DEVICE_BUDGET_DEBIT_NOT_OBSERVED_GPU_ALLOCATION_OR_UTILIZATION",
+  "no_worker_model_probe_generation_environment_calls": "INFERRED_FROM_EXACT_CONTROL_FLOW_BEFORE_SUPERVISOR_CORE_POPEN_AND_ABSENT_CONTEXT_WORKER_LEDGER_NOT_FROM_A_FABRICATED_ZERO_RESOURCE_RECEIPT",
+  "no_source_unit_or_task_outcome_created": true,
+  "original_failure_evidence_preserved": true,
+  "later_parent_creation_record": "OUTPUT_PARENT_REMEDIATION.json",
+  "frozen_source_unchanged": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "launch_restart": "PENDING_INDEPENDENT_ADJUDICATION_AND_FRESH_AUTHORITY"
+}

@@ -1,0 +1,2461 @@
+{
+  "schema": "SOURCE_ONLY_GATE_BLUEPRINT_NOT_AUTHORITY_V1",
+  "status": "READ_ONLY_COORDINATION_BLUEPRINT_NOT_EXECUTABLE_NOT_AUTHORIZED",
+  "created_utc": "2026-10-26T23:17:32.538252Z",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "worktree": "/home/lizening/wt-si-s01-shared-gpu-adapter",
+  "source_binding_kind": "SOURCE_ONLY_A96; V2 shared policy; software review is not source authority",
+  "authorization_state": {
+    "real_engineering_acceptance": "PENDING_NOT_PASSED per coordinator update; no result/clearance inspected or adjudicated by this author",
+    "source_identifiers": "PENDING_ROOT_FRESH_IDENTITIES",
+    "source_production_authority": "PENDING_NOT_ISSUED",
+    "source_preflight": "PENDING_NOT_RUN",
+    "source_launch_clearance": "PENDING_NOT_ISSUED",
+    "actual_source_runtime": "PENDING_NOT_STARTED_BY_THIS_TASK",
+    "teacher_train_eval": "NOT_AUTHORIZED",
+    "this_file_is_gate_or_release": false
+  },
+  "frozen_inputs": {
+    "source_task": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c/SOURCE_ONLY_IMPLEMENTATION_TASK.md",
+      "raw_sha256": "5fd913a8d980f8e3eba551e3d377221c691033c090bb5a3a9af3b3ce7845263c"
+    },
+    "source_protocol": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T100859Z__SOL__si-p3-persistent-launch-coordination__f1a52e8c/ADOPTED_SOURCE_ONLY_PROTOCOL.md",
+      "raw_sha256": "daa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72"
+    },
+    "metadata_reservations": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/ADOPTED_METADATA_RESERVATIONS.json",
+      "raw_sha256": "6ce8a32a2345b59ecdef9c28c3a341e9c0801b8105f79895f9b2cb9545a4937e",
+      "rows_total": 1139,
+      "selected_partition": "acquisition_feasibility_96",
+      "selected_count": 96
+    },
+    "exclusions": {
+      "registered_known_use_identity_file": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T065200Z__LUNA__si-p1-isolation-budget__caae4c/KNOWN_USE_IDENTITIES.json",
+        "raw_sha256": "98580db9a8322c52c87d6f30dcb75858b00f3b0ec6d3494a4a87923504ddca60"
+      },
+      "frozen_input_binding_reference": {
+        "path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__LUNA__si-p3-isolation-budget-design__si3_7d91/input_bindings.json",
+        "raw_sha256": "88e1d3bb0df3887423533c3038f61c6da4ef84e415a5f1fb73cd91c5739bf553"
+      },
+      "registered_union_count_from_frozen_reservation": 2612,
+      "scope": "All seeds/prefixes/aliases inherit canonical task partition; old R19/expert/S120/registered known-use excluded. D48/E600/reserve395 and2light remain unrun.",
+      "gate_binding": "Gate authenticates exact reservation bytes transitively; there is no extra exclusions field in the exact source auth/proposal schema.",
+      "fresh_intersection_audit": "NOT_RUN; no new cleanliness/never-viewed or scene/template-disjoint claim"
+    }
+  },
+  "frozen_scientific_plan": {
+    "mode": "source_only",
+    "families_in_order": [
+      "pick_and_place_simple",
+      "pick_clean_then_place_in_recep",
+      "pick_cool_then_place_in_recep",
+      "pick_heat_then_place_in_recep",
+      "pick_two_obj_and_place"
+    ],
+    "source_family_quotas": {
+      "pick_and_place_simple": 35,
+      "pick_clean_then_place_in_recep": 26,
+      "pick_cool_then_place_in_recep": 16,
+      "pick_heat_then_place_in_recep": 9,
+      "pick_two_obj_and_place": 10
+    },
+    "family_ordering_rule": "ascending SHA256('SI-P3-prefix-v1\\n'+family+'\\n'+canonical_task_id+'\\n'), then task_id",
+    "slot_seed": 42,
+    "fresh_pool_seed": 42,
+    "initial_reset_per_task": 1,
+    "horizon_actions": 50,
+    "prefix_cutoff_actions": 5,
+    "prefix_rule": "Persist actual after-action5 S5/fullmap/H4 before generation6/future outcome; early terminal/truncated/explicit empty map keeps normal unusable disposition.",
+    "actor": "frozen original Qwen3-8B + P0 adapter-on, greedy/thinking=false,16 output cap, original public goal/current observation/H4/full ordered action map/parser",
+    "snapshot_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "P0_adapter_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+    "teacher_and_independent_suffix_calls": 0,
+    "Y0": "normal done && reward>0; normal parser/empty-map/H50 failure0; technical/budget incomplete unknown",
+    "YT": "null / TEACHER_NOT_AUTHORIZED_SOURCE_ONLY",
+    "no_retry_backfill_topup": true,
+    "structural_thresholds_only_after_all96_normal_sealed": {
+      "E_total_min": 72,
+      "E_family_min": {
+        "pick_and_place_simple": 22,
+        "pick_clean_then_place_in_recep": 17,
+        "pick_cool_then_place_in_recep": 10,
+        "pick_heat_then_place_in_recep": 6,
+        "pick_two_obj_and_place": 7
+      },
+      "F_total_min": 24,
+      "S_total_min": 24,
+      "F_and_S_each_family_min": {
+        "pick_and_place_simple": 9,
+        "pick_clean_then_place_in_recep": 6,
+        "pick_cool_then_place_in_recep": 4,
+        "pick_heat_then_place_in_recep": 2,
+        "pick_two_obj_and_place": 3
+      },
+      "not_futile_is_not_teacher_Q_C_or_learning_success": true
+    },
+    "ceilings_exact": {
+      "generations": 4800,
+      "environment_operations": 4896,
+      "generated_tokens": 76800,
+      "input_tokens": 16000000,
+      "per_call_input": 8192,
+      "device_hours": 4.0
+    },
+    "accounting": "Independent hard ceilings; reset+step counted once, construct/close separately recorded; full one-visible-device supervisor elapsed interval conservatively charged incl.load/audit/exit/cleanup, shared nonexclusive. Source has original model_load reservation, no new context_probe unit kind."
+  },
+  "metadata_only_plan_preview": {
+    "production_schema": "si_s01_source_only_v2",
+    "production_slot_fields": [
+      "task_id",
+      "family",
+      "seed",
+      "pool_seed",
+      "cutoff"
+    ],
+    "evidence_class": "live_source_only",
+    "plan_sha256_preview": "41ae5f2ae999e5682e7207084282b74fa053287391654ac30c2acabbcb5170b3",
+    "canonical_json_rule": "ensure_ascii=True,sort_keys=True,separators=(comma,colon),allow_nan=False; UTF-8 SHA256",
+    "status": "STDLIB_HASH_DERIVATION_ONLY; no bind_plan/Plan/validator called; later independent binding still required",
+    "ordered_source_slots": [
+      {
+        "ordinal": 0,
+        "slot": {
+          "task_id": "pick_and_place_simple-SoapBar-None-GarbageCan-416/trial_T20190908_020805_738262",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "03bad6554ca1f3dd7b506dc8b4c154fe6b43144f9fa631d553c5fb3e47bb8831",
+        "slot_key_preview": "3506663e07bf50baf97882d2fbd0966d21ae18d33dff71d218f7a48fed229752",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-SoapBar-None-GarbageCan-416/trial_T20190908_020805_738262/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-SoapBar-None-GarbageCan-416/trial_T20190908_020805_738262/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 1,
+        "slot": {
+          "task_id": "pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-413/trial_T20190909_102005_152721",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "0992d1dc665491682d097a9a90610c2a5ff52569d526f7d9091adfc902f5ecf5",
+        "slot_key_preview": "9c713a2f8f9743c8a2bb817d3f0927e54f3f97fecb25589f1e04987896a21839",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-413/trial_T20190909_102005_152721/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-413/trial_T20190909_102005_152721/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 2,
+        "slot": {
+          "task_id": "pick_and_place_simple-ToiletPaper-None-GarbageCan-403/trial_T20190907_034554_937587",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "0ccf91b753f4f193152d858ab3f0151dcfe3a9539c1fb6c40bbbfb2dd803bd80",
+        "slot_key_preview": "002ed69186dc0b13dd77a70f32b930bfc077a0755d5696fc443f5fe78982fd29",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-ToiletPaper-None-GarbageCan-403/trial_T20190907_034554_937587/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-ToiletPaper-None-GarbageCan-403/trial_T20190907_034554_937587/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 3,
+        "slot": {
+          "task_id": "pick_and_place_simple-Statue-None-SideTable-214/trial_T20190909_035314_885391",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "35ec1ca0f7ed744af981309c3cf5c560c8fdf32cb169ab4d8e6778af82c578fc",
+        "slot_key_preview": "316fd479872a32204f511b582f06ad2335e375d31e32dd20a41e827b80118b9f",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Statue-None-SideTable-214/trial_T20190909_035314_885391/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Statue-None-SideTable-214/trial_T20190909_035314_885391/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 4,
+        "slot": {
+          "task_id": "pick_and_place_simple-Pillow-None-Sofa-221/trial_T20190908_175303_977893",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "4b133ffb4fe4c95ddb0de6ab64d528c27677809ad754fe956d20b8c96c0bf763",
+        "slot_key_preview": "543eab12cfa4cafa96622f5be9994d54a1187c4023c1ef2082726b94cbfed583",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Pillow-None-Sofa-221/trial_T20190908_175303_977893/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Pillow-None-Sofa-221/trial_T20190908_175303_977893/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 5,
+        "slot": {
+          "task_id": "pick_and_place_simple-ToiletPaper-None-Toilet-419/trial_T20190908_002335_756186",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "4cc0373ce3159e12dffc423bfdfa3c47a2835afd1fb6a1e9e907a7043b42cc16",
+        "slot_key_preview": "2a4db1dd0ef960026b5a03d33b8d2e4a1170eea2c8d51f36d516dd5232a2ec9f",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-ToiletPaper-None-Toilet-419/trial_T20190908_002335_756186/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-ToiletPaper-None-Toilet-419/trial_T20190908_002335_756186/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 6,
+        "slot": {
+          "task_id": "pick_and_place_simple-SprayBottle-None-Toilet-426/trial_T20190908_155236_907481",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "51a34c9bd5f41ba4fa0aaad74ccee9725aa10e3e3b1829fc8eb07b661eaed52f",
+        "slot_key_preview": "e1917d651db99c61b7372d1b9df200ce5177ba9fd4ffced90d8ce734b1cdc9d4",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-SprayBottle-None-Toilet-426/trial_T20190908_155236_907481/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-SprayBottle-None-Toilet-426/trial_T20190908_155236_907481/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 7,
+        "slot": {
+          "task_id": "pick_and_place_simple-SoapBottle-None-Toilet-412/trial_T20190907_133810_532978",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "523d090984900c3c778fbfbde45d1d5547ed7f8a7ea478564cfbcfb4ed315d43",
+        "slot_key_preview": "1e4fca35c25ad8e0dd6459a87602e26c8c7fee157f54bb66977100944199eceb",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-SoapBottle-None-Toilet-412/trial_T20190907_133810_532978/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-SoapBottle-None-Toilet-412/trial_T20190907_133810_532978/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 8,
+        "slot": {
+          "task_id": "pick_and_place_simple-Box-None-Sofa-206/trial_T20190909_102133_696249",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "57c5f592cc4e5431e3c2ab011418b57f4d544434180836b52dfa6cfec32d6146",
+        "slot_key_preview": "4bcfcc7ee4e3c335a453c7e122fd16a65f23f04de02f7599e4bd3d956c01eb38",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Box-None-Sofa-206/trial_T20190909_102133_696249/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Box-None-Sofa-206/trial_T20190909_102133_696249/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 9,
+        "slot": {
+          "task_id": "pick_and_place_simple-Book-None-Sofa-209/trial_T20190909_035124_250394",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "5b509ffe255eca9fb0a85ff967ccb7c24f0b35ca3c6d1ff5e2cec697b7ff0e7c",
+        "slot_key_preview": "b20077db98f9c3686b33fbf0a2b06367affe8747433243e2a71e915857123e97",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Book-None-Sofa-209/trial_T20190909_035124_250394/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Book-None-Sofa-209/trial_T20190909_035124_250394/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 10,
+        "slot": {
+          "task_id": "pick_and_place_simple-Pen-None-Desk-310/trial_T20190908_030156_053101",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "60cbe727fe5c4201a0d177fb29e57f00dac3ceb252ef8e7b5b6f9fc308bd3059",
+        "slot_key_preview": "750e50fc131c583d47225079519a710f0d4fd5324a9245ea5dda34340238d589",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Pen-None-Desk-310/trial_T20190908_030156_053101/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Pen-None-Desk-310/trial_T20190908_030156_053101/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 11,
+        "slot": {
+          "task_id": "pick_and_place_simple-Pen-None-Shelf-319/trial_T20190907_203141_178191",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "680e6cd1646c5570f5ea807a8a46b9e622f76fed000cd5dfe4548960dc8b331e",
+        "slot_key_preview": "f2f66ebdcf1215298306356665c0befa3f1c6e2599e63397a449cd0f0662eea5",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Pen-None-Shelf-319/trial_T20190907_203141_178191/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Pen-None-Shelf-319/trial_T20190907_203141_178191/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 12,
+        "slot": {
+          "task_id": "pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-413/trial_T20190909_043758_754672",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "6b18dbc5489d77fb9da7c36573f04f1cf226b31167f47843df31b483d78d04a1",
+        "slot_key_preview": "5dc98a519cc849f9a3a61dc6854ef2077d202d0af7fea4eb1e8cd512b92e58a0",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-413/trial_T20190909_043758_754672/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-413/trial_T20190909_043758_754672/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 13,
+        "slot": {
+          "task_id": "pick_and_place_simple-SprayBottle-None-CounterTop-427/trial_T20190919_014945_471194",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "6c522254c4f6c2c821138b514b8161581446271e057cae117e51426c3f065df0",
+        "slot_key_preview": "3684d0f150c0b8136a58d27c9293cc6acc4ab05f23b371b36a8020e8ae699d87",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-SprayBottle-None-CounterTop-427/trial_T20190919_014945_471194/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-SprayBottle-None-CounterTop-427/trial_T20190919_014945_471194/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 14,
+        "slot": {
+          "task_id": "pick_and_place_simple-Pencil-None-Desk-310/trial_T20190909_142857_563593",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "6d3f2256266ffcd98440c7f6738ca4203a1007664e0eb8379277ba46160e6fc1",
+        "slot_key_preview": "eed1e678e946d5989455af59aab68a7666f726c79e6daa873adf8f4088ea11ba",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Pencil-None-Desk-310/trial_T20190909_142857_563593/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Pencil-None-Desk-310/trial_T20190909_142857_563593/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 15,
+        "slot": {
+          "task_id": "pick_and_place_simple-SprayBottle-None-Toilet-412/trial_T20190908_042250_246115",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "7180359c5d4862efbdce555ba61b2a8e9ce8db7a0c3d608f7cd47dff1181c612",
+        "slot_key_preview": "ed4c4c623ebd30f95c9607e39fb59302fe8e71d3c5dd72055466fa8ce0399e32",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-SprayBottle-None-Toilet-412/trial_T20190908_042250_246115/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-SprayBottle-None-Toilet-412/trial_T20190908_042250_246115/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 16,
+        "slot": {
+          "task_id": "pick_and_place_simple-CellPhone-None-Safe-323/trial_T20190907_234431_849819",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "7299400eb9fc6900b13d6b0891bf8f53bca22d9f99853ca3f517a58107e115c2",
+        "slot_key_preview": "bf6e68820100433401ab5f33b4eb3d5df9e55c461c06b30cf51aef2c71cb69d0",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-CellPhone-None-Safe-323/trial_T20190907_234431_849819/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-CellPhone-None-Safe-323/trial_T20190907_234431_849819/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 17,
+        "slot": {
+          "task_id": "pick_and_place_simple-HandTowel-None-GarbageCan-420/trial_T20190908_153318_365643",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "7392a1abc8dbdd315457f5f14b2994bdeb284942eed85e2b68c7b04a4c456ab8",
+        "slot_key_preview": "3227ecc0017ff068d50a8e089110b75aab18b8b6299b1b2dc5b84ccacc00a18a",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-HandTowel-None-GarbageCan-420/trial_T20190908_153318_365643/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-HandTowel-None-GarbageCan-420/trial_T20190908_153318_365643/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 18,
+        "slot": {
+          "task_id": "pick_and_place_simple-Cloth-None-Drawer-409/trial_T20190908_032838_597592",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "762b77496fccc98ed1d87a515bed36fc57082ba24fa5fc148b8946c328014dc7",
+        "slot_key_preview": "8407c3487707c70038641b12d2b9317ae8ac96797b10d1169c2b37f70d05c7d8",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Cloth-None-Drawer-409/trial_T20190908_032838_597592/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Cloth-None-Drawer-409/trial_T20190908_032838_597592/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 19,
+        "slot": {
+          "task_id": "pick_and_place_simple-CellPhone-None-Bed-322/trial_T20190907_163932_211569",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "762c0761456037c7272a23c1efa6b8efab04af339e8affa69cb407be9e5b5a2d",
+        "slot_key_preview": "23e5d698cb2d0fba247a9bcd7c89febdb327aadf4a5fd76d9c13292c12844384",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-CellPhone-None-Bed-322/trial_T20190907_163932_211569/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-CellPhone-None-Bed-322/trial_T20190907_163932_211569/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 20,
+        "slot": {
+          "task_id": "pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-409/trial_T20190907_152755_762065",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "7ae100b25332892542cf2ee8f5e3394a090931cb8baf01ac4cdb3271e116bfe2",
+        "slot_key_preview": "a2c1a57f17b6db96b1b53b471db49fc75340f0af7f48f2a3c2fdf9e96aeee41f",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-409/trial_T20190907_152755_762065/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-409/trial_T20190907_152755_762065/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 21,
+        "slot": {
+          "task_id": "pick_and_place_simple-CreditCard-None-Desk-310/trial_T20190908_033219_058539",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "87c125832e8b66121ebdaf6f65ee0b610099f95d68d34249a271d5c3007972f5",
+        "slot_key_preview": "0fb3eba5dc534ab12d05b961bc5d0be9dc21ef126d9b6b6278f714902daaac64",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-CreditCard-None-Desk-310/trial_T20190908_033219_058539/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-CreditCard-None-Desk-310/trial_T20190908_033219_058539/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 22,
+        "slot": {
+          "task_id": "pick_and_place_simple-ToiletPaper-None-GarbageCan-416/trial_T20190906_202104_886119",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "992b41533234add1b03fe91d03e6cf619533424551c49b31343d5a30658e1c5b",
+        "slot_key_preview": "ab379bff7c724ac1e571f38bc73c8315146eb9bf35f09d0260760248ed8bbd97",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-ToiletPaper-None-GarbageCan-416/trial_T20190906_202104_886119/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-ToiletPaper-None-GarbageCan-416/trial_T20190906_202104_886119/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 23,
+        "slot": {
+          "task_id": "pick_and_place_simple-RemoteControl-None-ArmChair-223/trial_T20190908_163723_604442",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "9de59a4dc8675d24633d423b3e0da2ccf2c40a2682870926a528c78dec1335e1",
+        "slot_key_preview": "c3359cb36b2a7757546447c123a51d4b948e0092114237d52d122d49c333bfab",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-RemoteControl-None-ArmChair-223/trial_T20190908_163723_604442/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-RemoteControl-None-ArmChair-223/trial_T20190908_163723_604442/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 24,
+        "slot": {
+          "task_id": "pick_and_place_simple-KeyChain-None-Sofa-208/trial_T20190909_065845_651712",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "a57eaeb4dbb43e4cc8bb26e12d7f82715c6c06da34b8550e4d1a18d4ad8cd3d6",
+        "slot_key_preview": "dd26a052246181678916b82cd29edff1c88806d1ec45ed43a024498a26742526",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-KeyChain-None-Sofa-208/trial_T20190909_065845_651712/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-KeyChain-None-Sofa-208/trial_T20190909_065845_651712/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 25,
+        "slot": {
+          "task_id": "pick_and_place_simple-AlarmClock-None-DiningTable-329/trial_T20190909_022322_775566",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "b0760fac073122096adad10d19b41cd98cd9f0deea3e4399d2d79e1b0d776ad1",
+        "slot_key_preview": "b7c39a1150e36ddb453eb3c379f9bd5f41fd41a675db0fb2d058ddebf9064578",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-AlarmClock-None-DiningTable-329/trial_T20190909_022322_775566/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-AlarmClock-None-DiningTable-329/trial_T20190909_022322_775566/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 26,
+        "slot": {
+          "task_id": "pick_and_place_simple-Tomato-None-Microwave-8/trial_T20190907_205133_881018",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "b22efcfc57179f6e6e9c5d559aca4e1d201fa1b3e8d65a2512825a194fa24c3b",
+        "slot_key_preview": "41f5a9f8245a11a9c51e6a6cbb560ff1184834599840efe88e12f92b144bc9cf",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Tomato-None-Microwave-8/trial_T20190907_205133_881018/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Tomato-None-Microwave-8/trial_T20190907_205133_881018/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 27,
+        "slot": {
+          "task_id": "pick_and_place_simple-Candle-None-Toilet-418/trial_T20190907_184947_274026",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "b24d9b3a5c6247f89bdaba44b0e604ebc875302ee413906883aa9545f951e35e",
+        "slot_key_preview": "16df5a9a8b89f690202916e7fa583129fb416df54938d27c36026e48abf5dd4c",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Candle-None-Toilet-418/trial_T20190907_184947_274026/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Candle-None-Toilet-418/trial_T20190907_184947_274026/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 28,
+        "slot": {
+          "task_id": "pick_and_place_simple-Pillow-None-Sofa-209/trial_T20190907_101320_162709",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "d6abb81ae3615fc27d6f847f086668b3f26045c8cdd741963af2f815eaf4bf59",
+        "slot_key_preview": "2c4365eba9d5f69a4ddcc23179b722ddee69d92498b8938e0093044658eb25cc",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Pillow-None-Sofa-209/trial_T20190907_101320_162709/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Pillow-None-Sofa-209/trial_T20190907_101320_162709/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 29,
+        "slot": {
+          "task_id": "pick_and_place_simple-SprayBottle-None-Toilet-420/trial_T20190909_113816_097874",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "d6bafe67523bfc210bea445b4adafca4e03b999c0af621d810014128ffaca20b",
+        "slot_key_preview": "d21971ef7c95b409ca010d5cb80bf9966da1a5c38c4823209606feb37bb3bc28",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-SprayBottle-None-Toilet-420/trial_T20190909_113816_097874/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-SprayBottle-None-Toilet-420/trial_T20190909_113816_097874/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 30,
+        "slot": {
+          "task_id": "pick_and_place_simple-ButterKnife-None-SideTable-28/trial_T20190908_133100_085069",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "dc87567eeca9c72d963910e90bc2c6f9d2eba28da9eaf285fce92da1dfb8d98f",
+        "slot_key_preview": "7a0c8fefa4f53d3e886f24fdcbb5e2e789ff164910773f250b689b8f86c4c062",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-ButterKnife-None-SideTable-28/trial_T20190908_133100_085069/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-ButterKnife-None-SideTable-28/trial_T20190908_133100_085069/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 31,
+        "slot": {
+          "task_id": "pick_and_place_simple-CD-None-Shelf-310/trial_T20190908_125951_058277",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "e0e3d6fe3bebcb4652e128a823f9e39e937e33aa2c9aa14cfb9c1a8ed8d80391",
+        "slot_key_preview": "c3c8d4ef58c91d468adc8f703d980d46f058ce5397c7540afbf87f19e5e91af6",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-CD-None-Shelf-310/trial_T20190908_125951_058277/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-CD-None-Shelf-310/trial_T20190908_125951_058277/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 32,
+        "slot": {
+          "task_id": "pick_and_place_simple-HandTowel-None-GarbageCan-416/trial_T20190908_234752_613977",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "e7c86334e67d915c52813ee1dec9f4bb9e179e4f09a5fc711996f07002f34a87",
+        "slot_key_preview": "512cbca8cf09f14fdcf896665e499f6d21ebbd65c686e94ed645e2a29089c5e1",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-HandTowel-None-GarbageCan-416/trial_T20190908_234752_613977/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-HandTowel-None-GarbageCan-416/trial_T20190908_234752_613977/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 33,
+        "slot": {
+          "task_id": "pick_and_place_simple-Laptop-None-Desk-306/trial_T20190909_074933_198388",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "eb7ba31af2cb59a13fbc1095b6853429321a371b8ba7e46dc9fecd72cae4df65",
+        "slot_key_preview": "c3fe41e9e077bc4fd53d19818de21303eaf1cf8f15bfc946d1708ee25358dd3d",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Laptop-None-Desk-306/trial_T20190909_074933_198388/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Laptop-None-Desk-306/trial_T20190909_074933_198388/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 34,
+        "slot": {
+          "task_id": "pick_and_place_simple-Box-None-Dresser-224/trial_T20190907_164025_332377",
+          "family": "pick_and_place_simple",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "f39d49b43507a67c28cd66a7889e81a5d9f965c73d81098efe713782e542de9f",
+        "slot_key_preview": "07f98126ecd411fb23b82b7327b11aecc15d15da0f744527d9b6dec856d8379c",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Box-None-Dresser-224/trial_T20190907_164025_332377/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_and_place_simple-Box-None-Dresser-224/trial_T20190907_164025_332377/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 35,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Cloth-None-Dresser-413/trial_T20190906_194709_189668",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "01f9e13c67c69d903ee99fb5d8ec434f75587341585729580b4d52ddcaa77d81",
+        "slot_key_preview": "0e70f64cead6c0619ec6f9e9b66e73fc6b568f6fb08000471db0dc26e8370513",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Cloth-None-Dresser-413/trial_T20190906_194709_189668/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Cloth-None-Dresser-413/trial_T20190906_194709_189668/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 36,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-SoapBar-None-Cabinet-408/trial_T20190908_032511_198283",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "08e8aa6483b13b4ade1b9903b1ab7ea6b83b504e153a05bf16a3f340b204764c",
+        "slot_key_preview": "8072b356980d19d1a22126384d26c1cdf83fdab851d6c588a0851111884c84a1",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-SoapBar-None-Cabinet-408/trial_T20190908_032511_198283/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-SoapBar-None-Cabinet-408/trial_T20190908_032511_198283/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 37,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Fork-None-Drawer-30/trial_T20190908_030821_996789",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "0eef4c5ac99738bb6e8eb401f0ec2fb244f238862d3558e98e22bf5e590f0b41",
+        "slot_key_preview": "bc548f72c8eeefa4e2578c6662186c106c960e2493b6803fba96634cc0c824a1",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Fork-None-Drawer-30/trial_T20190908_030821_996789/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Fork-None-Drawer-30/trial_T20190908_030821_996789/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 38,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Plate-None-Microwave-7/trial_T20190907_170244_518138",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "18d6252c735595a5eec459f6af20e591e540c776c0079b3eeeb8c14f9e7544ec",
+        "slot_key_preview": "4fe06ed644990fe2ed98113f4511276dd7298e8094365bfbdbcb4f9c41d5353b",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Plate-None-Microwave-7/trial_T20190907_170244_518138/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Plate-None-Microwave-7/trial_T20190907_170244_518138/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 39,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Cup-None-Microwave-6/trial_T20190909_033518_213036",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "1e0e69b0d28a96a4b1ded78ceb11532246d92d172120e710e63e076db9477b9a",
+        "slot_key_preview": "6a09d4421e284cfc8f59f669a7a1c26a80e9aa591fd174054cccf030de2aac31",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Cup-None-Microwave-6/trial_T20190909_033518_213036/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Cup-None-Microwave-6/trial_T20190909_033518_213036/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 40,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Apple-None-Microwave-14/trial_T20190909_120203_117379",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "2244a099900351575dee6cf5d17f15c15ab6c00005aa4da43c7342eced521f09",
+        "slot_key_preview": "71c34f4ea8f074da07f9de0d194cb736a3a46f6e8372beb8946af1ce1c8d944e",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Apple-None-Microwave-14/trial_T20190909_120203_117379/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Apple-None-Microwave-14/trial_T20190909_120203_117379/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 41,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Bowl-None-Microwave-30/trial_T20190907_063358_779511",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "22ed6b1be803f7da2dfa8c170627f6c64b2817bbc050224e91cb36e97e35b70a",
+        "slot_key_preview": "9ed0c823278c7db29e00bd99bcda53b473b95f443c58105e7818032f2cc396d0",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Bowl-None-Microwave-30/trial_T20190907_063358_779511/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Bowl-None-Microwave-30/trial_T20190907_063358_779511/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 42,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-SoapBar-None-Toilet-419/trial_T20190907_005259_630711",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "33502655122fd65b5be3ceb281e9d848be04dd1aa41ed5b4cf0905ec57d6ab0d",
+        "slot_key_preview": "2f8e217001e9d4ae1de02ade4b2e2bf17196d3ffae9f85265694f7a06939e9de",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-SoapBar-None-Toilet-419/trial_T20190907_005259_630711/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-SoapBar-None-Toilet-419/trial_T20190907_005259_630711/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 43,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-SoapBar-None-Cabinet-418/trial_T20190907_035119_119174",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "4372a991703dce718813e028e5bc4cf923758ee3de40c2e1100759be5d2272a6",
+        "slot_key_preview": "b403b11e9a58548359eddb29c44133995409e6f248040d9faf550f4eec08824f",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-SoapBar-None-Cabinet-418/trial_T20190907_035119_119174/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-SoapBar-None-Cabinet-418/trial_T20190907_035119_119174/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 44,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Bowl-None-Fridge-21/trial_T20190909_014336_206275",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "4f91d71d1978a1a2a9fb23bfe4f091e28a3192994644a89769de1585219a36ae",
+        "slot_key_preview": "55cd2b7a65295dafa29f6a0e44fc96e3f139fce0722ba2fb880830449706190b",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Bowl-None-Fridge-21/trial_T20190909_014336_206275/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Bowl-None-Fridge-21/trial_T20190909_014336_206275/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 45,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Tomato-None-SideTable-3/trial_T20190909_002446_748693",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "526d11d537689ed9464a19b25c06c665e9a249502f6d2cbb1b364169e113aeea",
+        "slot_key_preview": "67cee7a256354de10b11d445afd66625f81dda2694008eae841e9fe99a76cbc8",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Tomato-None-SideTable-3/trial_T20190909_002446_748693/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Tomato-None-SideTable-3/trial_T20190909_002446_748693/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 46,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Cloth-None-Shelf-415/trial_T20190909_051848_377511",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "5d46265eda694a0d6b7979c7aae70c0e8add94bf2cf1a1cc58431318e9526b9e",
+        "slot_key_preview": "2c3892f237513d2f3ba5dc07a2aac842cf525461fcab9e7b0641310bda6ccaea",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Cloth-None-Shelf-415/trial_T20190909_051848_377511/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Cloth-None-Shelf-415/trial_T20190909_051848_377511/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 47,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Spoon-None-SideTable-21/trial_T20190908_231958_358508",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "650585677779d4b27058f3c2d594c6a0f125415d9d1d758f0a766a52c95283bb",
+        "slot_key_preview": "73eb120a0b554eecc3894a4f27af404737c3e589bac04ef69f01aa30ff6e7157",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Spoon-None-SideTable-21/trial_T20190908_231958_358508/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Spoon-None-SideTable-21/trial_T20190908_231958_358508/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 48,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Ladle-None-Cabinet-16/trial_T20190910_022155_266935",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "6f980a7680f8643d3fb4181a7d1bef0dab87b75a1af328cad690a505c927b6ff",
+        "slot_key_preview": "50d63649a3b8277e0bc534ad4444f269b4995fb3bb1719d70c4310b47c22d300",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Ladle-None-Cabinet-16/trial_T20190910_022155_266935/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Ladle-None-Cabinet-16/trial_T20190910_022155_266935/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 49,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Kettle-None-DiningTable-17/trial_T20190909_023440_415981",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "6fa450848b60a7fae924f43b1608a7ff8bf4e78a7a5ef42316173bc68f5332c1",
+        "slot_key_preview": "75492e6998e7512c10aa92c437175e6f8fc86451855bf678a0a9fb08bfe046b3",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Kettle-None-DiningTable-17/trial_T20190909_023440_415981/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Kettle-None-DiningTable-17/trial_T20190909_023440_415981/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 50,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Lettuce-None-SideTable-21/trial_T20190906_180547_003950",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "77907b557d730bef5f973da4c6c8c3b30390c494a631299fbce724be66b3c28d",
+        "slot_key_preview": "c4d91b91602d140621cb89f9f5e7cd023d3799cb2dba509ac9b775e19137229f",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Lettuce-None-SideTable-21/trial_T20190906_180547_003950/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Lettuce-None-SideTable-21/trial_T20190906_180547_003950/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 51,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Spatula-None-DiningTable-24/trial_T20190909_021012_621960",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "860144d4a2ef7fb10c193860eb02368ed179145b7b61acb998e044eb54518b29",
+        "slot_key_preview": "4d80e67cef6ecdf6bb0a7cd7a2ba1b95d276b459b5716c060e802d4aa35339e5",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Spatula-None-DiningTable-24/trial_T20190909_021012_621960/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Spatula-None-DiningTable-24/trial_T20190909_021012_621960/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 52,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Pan-None-Cabinet-1/trial_T20190908_131016_333757",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "8e6da5cc841317f987daa611376fb696d8fbaa55a2ac57089ad3df31c5944c8c",
+        "slot_key_preview": "721b2a931cab23968ae7e42066608e3fc1a6c2183b17cd49c08d8796c1322a4c",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Pan-None-Cabinet-1/trial_T20190908_131016_333757/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Pan-None-Cabinet-1/trial_T20190908_131016_333757/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 53,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Cup-None-Microwave-1/trial_T20190909_150955_575706",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "9a7e02ba06e20231737951a1bee9cd9bdbf566d941aa5a6bc02f189baa322928",
+        "slot_key_preview": "6048cf16e9e37c89ec7ed03ba489aa08a1418df649954f592eab6ba2563d1705",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Cup-None-Microwave-1/trial_T20190909_150955_575706/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Cup-None-Microwave-1/trial_T20190909_150955_575706/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 54,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-DishSponge-None-Shelf-1/trial_T20190908_114111_289794",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "9f81a9923340f490d1456d4a1dfd13206bd90a61e2e14cb22b98d57cede87e90",
+        "slot_key_preview": "1ca32bd839a51413daf9a14d2eaaa8f9df49a92a2d5bbf2fde2d5d6894b72383",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-DishSponge-None-Shelf-1/trial_T20190908_114111_289794/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-DishSponge-None-Shelf-1/trial_T20190908_114111_289794/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 55,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Plate-None-Fridge-19/trial_T20190907_014117_377949",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "aaa4d239b54c41ef954be37d1b06ac91c844af9fcab3338bf4f95b7a857f4afc",
+        "slot_key_preview": "3722e3bf0a82aa8a35b09d6ef91a5c8ddb2e107f27de21cfce7334a04165ab06",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Plate-None-Fridge-19/trial_T20190907_014117_377949/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Plate-None-Fridge-19/trial_T20190907_014117_377949/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 56,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Kettle-None-StoveBurner-1/trial_T20190908_172105_948396",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "bbcc0f21f60b3d5a9c675db5491d7ab4fe9cbdf9b60d8561d26f79e497057732",
+        "slot_key_preview": "7f3f1d16e9392a1b4ceb4edf0213307a9757eea9492c00553aa91b9101f46f3a",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Kettle-None-StoveBurner-1/trial_T20190908_172105_948396/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Kettle-None-StoveBurner-1/trial_T20190908_172105_948396/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 57,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-SoapBar-None-Toilet-408/trial_T20190908_122434_336174",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "c687e0e2d1b6c7c4b5abfcf7e3678e75bcdd8af6d9b8c3e3d582bd776833282e",
+        "slot_key_preview": "78c7e3fa3d75b5a45b00f780e082c22136163c3d2966fa6c67bba50ffdf41ab5",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-SoapBar-None-Toilet-408/trial_T20190908_122434_336174/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-SoapBar-None-Toilet-408/trial_T20190908_122434_336174/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 58,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Cloth-None-Toilet-411/trial_T20190908_011620_868206",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "db569054e064c18f3bfe731b6afbf57a1b86ef0aac6d7bd068e2d051d4e8559e",
+        "slot_key_preview": "382dba2330984f0dee15b4ba14a59a24f7b8e2a9f7738bbcc117a33291ec1abf",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Cloth-None-Toilet-411/trial_T20190908_011620_868206/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Cloth-None-Toilet-411/trial_T20190908_011620_868206/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 59,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Tomato-None-DiningTable-23/trial_T20190909_000844_354286",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "eea6a54bb231bce9d4a20c60d8ebb4094b68da127183338bd95a51ae10aa8521",
+        "slot_key_preview": "f67daa6ab94bcd45a6cb07dd93b3cdbaf7e6014b39918c323776f2a1767822db",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Tomato-None-DiningTable-23/trial_T20190909_000844_354286/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Tomato-None-DiningTable-23/trial_T20190909_000844_354286/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 60,
+        "slot": {
+          "task_id": "pick_clean_then_place_in_recep-Pan-None-CounterTop-13/trial_T20190908_113305_154837",
+          "family": "pick_clean_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "f970ff838b9218eaaa549f63df8c58241ba60f7a18274d072c08d4d632c66c59",
+        "slot_key_preview": "c2df9b95cc10fb856e5ef04cb465e46947f983457929cafeb8af6b82f85239b4",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Pan-None-CounterTop-13/trial_T20190908_113305_154837/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_clean_then_place_in_recep-Pan-None-CounterTop-13/trial_T20190908_113305_154837/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 61,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Tomato-None-Microwave-13/trial_T20190908_075444_186083",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "0576ce405ad8332c6175dd957a9f85aadfceee5336ad6774c2f4a1146b73c6d3",
+        "slot_key_preview": "6cb90ed2d9766b9975ddc399d87e1459d0df5a31e9f40ea468bb7c50ee82dce9",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Tomato-None-Microwave-13/trial_T20190908_075444_186083/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Tomato-None-Microwave-13/trial_T20190908_075444_186083/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 62,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Potato-None-Microwave-5/trial_T20190909_102546_579154",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "0f6f875b51a9ea3309da4a579b45c8c847c99ec193cd3be3d53b3440f74d2e8c",
+        "slot_key_preview": "5766372f01eb3b4dab36a34c5a488547c3450f1f703ab68ec9ba5e0815311b6a",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Potato-None-Microwave-5/trial_T20190909_102546_579154/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Potato-None-Microwave-5/trial_T20190909_102546_579154/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 63,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Cup-None-Cabinet-23/trial_T20190908_213517_262462",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "23ba299597734de0e5016edd54396384b68aa7f9119b355a5a605ee746063a63",
+        "slot_key_preview": "c7da9c0828af07ed3e481333a0c964b4cdcbba396a570039879fbd1ed164cc29",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Cup-None-Cabinet-23/trial_T20190908_213517_262462/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Cup-None-Cabinet-23/trial_T20190908_213517_262462/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 64,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Pan-None-DiningTable-11/trial_T20190908_204347_530034",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "44ce3b0f05f788e4f12465fe5e1093dbdd9afe7bea5d0fcb65dfdd9c5903139e",
+        "slot_key_preview": "6a1f75ab8d94d5d3386089918e300c60a2ff7be7141ed4c7ce0eaeed9bb6e2f3",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Pan-None-DiningTable-11/trial_T20190908_204347_530034/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Pan-None-DiningTable-11/trial_T20190908_204347_530034/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 65,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Pan-None-StoveBurner-27/trial_T20190906_212619_469871",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "471e76c365b854eb18430f766de697e63036a4e2b1deec40b942dd8e83f3dee8",
+        "slot_key_preview": "3f6a5a5cc84e5acae513e97da80a9637f696d987bf57056b35fe19eb1c6d1017",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Pan-None-StoveBurner-27/trial_T20190906_212619_469871/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Pan-None-StoveBurner-27/trial_T20190906_212619_469871/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 66,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Pot-None-CounterTop-1/trial_T20190909_124332_831471",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "4e5aa46ae2d9a836a25ad7e60275af5c2921d0eb6dd4f87aaac2a5cb4eb1da4b",
+        "slot_key_preview": "e406b478f9f66831f8d9db44c14e1f682b1733e34795b9b0b6540717d17aa64a",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Pot-None-CounterTop-1/trial_T20190909_124332_831471/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Pot-None-CounterTop-1/trial_T20190909_124332_831471/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 67,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-16/trial_T20190908_184207_182636",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "7cd127cec1a3a9311fa8e3e41e56b2a8f38a1ec135e4a6411880fe99db1dcafe",
+        "slot_key_preview": "fc67b15d67dec4592d95d54e4cd604a1d726b9fddb4559a2790315341a83c864",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-16/trial_T20190908_184207_182636/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-16/trial_T20190908_184207_182636/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 68,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Plate-None-Shelf-1/trial_T20190908_224123_748784",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "80b18c5ce739ad0b41e0152a72241e336d77f7648c135688338129b9a61d2b18",
+        "slot_key_preview": "ac3a841a7b4bd0925eedbb75cebe2976ab5b57471f065ef95257fef14186721b",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Plate-None-Shelf-1/trial_T20190908_224123_748784/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Plate-None-Shelf-1/trial_T20190908_224123_748784/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 69,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Egg-None-GarbageCan-13/trial_T20190906_191037_289101",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "8c919b4d15433447e7716051d42924f325072293931ba8a2019cef6e81969767",
+        "slot_key_preview": "d2ad2bf375912b902cb1a3234535f5d6f9c3b9e35900a3a1f52b67c57bcf6f50",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Egg-None-GarbageCan-13/trial_T20190906_191037_289101/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Egg-None-GarbageCan-13/trial_T20190906_191037_289101/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 70,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Bowl-None-Microwave-25/trial_T20190906_180204_213411",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "bcd8211276797479f9d586f1a22489d783a685376aa8cdcb281a81b3c9e525f5",
+        "slot_key_preview": "69f48ac3a10a98c3eb8a196c9e4dcc9409ad2a385f67526cb9e57bab3bc72f65",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Bowl-None-Microwave-25/trial_T20190906_180204_213411/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Bowl-None-Microwave-25/trial_T20190906_180204_213411/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 71,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Bread-None-DiningTable-11/trial_T20190908_005202_990135",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "c0aa0cefea7221f63a8a4e7448550d550dbc4c2d26fe67fc781b576ab9457a80",
+        "slot_key_preview": "4b490423adfc9778b2df627a9f4d0afbd5a4fa4a4050b12091827608ee4bfa8d",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Bread-None-DiningTable-11/trial_T20190908_005202_990135/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Bread-None-DiningTable-11/trial_T20190908_005202_990135/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 72,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Potato-None-SideTable-21/trial_T20190907_040257_213566",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "cc2b06878e81394b88bc0877612c09888801f71a1c12bdf6e1051e685fafaf2a",
+        "slot_key_preview": "918aa3cf6f2d132f670e733f4f7d7c1c547666f0887fc353eec04117adcca9b4",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Potato-None-SideTable-21/trial_T20190907_040257_213566/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Potato-None-SideTable-21/trial_T20190907_040257_213566/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 73,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-1/trial_T20190907_100841_356010",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "d8ed37f57357a79eeb5dcf08d33bc86a23e5c5c2191e5db9a25201f2c613b180",
+        "slot_key_preview": "57e85f5d0941dad9d76744c5e4c5c373f207fab15059cb63cf6deae7865d69c2",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-1/trial_T20190907_100841_356010/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-1/trial_T20190907_100841_356010/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 74,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Egg-None-SideTable-21/trial_T20190907_044039_497081",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "d996ad6d14e45c46b349b63c32df09ac6162371e0604af7c038f75cf4289f535",
+        "slot_key_preview": "c5344498f09b8583ee1eaf8e18300fcce7450d0c3541507ce681e7e2095573f9",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Egg-None-SideTable-21/trial_T20190907_044039_497081/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Egg-None-SideTable-21/trial_T20190907_044039_497081/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 75,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Plate-None-Shelf-7/trial_T20190907_124821_318217",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "e7967d85670380d004ce557846fa8a1bc4085768c6d6e4bd5a1a4961339653cf",
+        "slot_key_preview": "7f71ca4b7c0cfbfc0f6c3bbeabca7f8e5d6d4f53a78516fe3b4ba6cfa790fc13",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Plate-None-Shelf-7/trial_T20190907_124821_318217/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Plate-None-Shelf-7/trial_T20190907_124821_318217/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 76,
+        "slot": {
+          "task_id": "pick_cool_then_place_in_recep-Pot-None-Cabinet-1/trial_T20190908_184157_888194",
+          "family": "pick_cool_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "ec4c40a4d03d0810a9b79d5f95e96fbcf20e536ec38f04515177fe27a9dd7fcd",
+        "slot_key_preview": "267916d280fb7c3c76b3338b9b25aa941b21a8e81b04b702927a845b3f3f3515",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Pot-None-Cabinet-1/trial_T20190908_184157_888194/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_cool_then_place_in_recep-Pot-None-Cabinet-1/trial_T20190908_184157_888194/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 77,
+        "slot": {
+          "task_id": "pick_heat_then_place_in_recep-Cup-None-Cabinet-8/trial_T20190907_170428_184361",
+          "family": "pick_heat_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "328f63dcd32354adc52f72f468c0e28b1a2b0404badaa7dc24c06ad8c56fd51a",
+        "slot_key_preview": "5eb5d7b9d3230179e34ee676e8063f46d5627d4c1ea0d7d4d17cbc9b64be3b92",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Cup-None-Cabinet-8/trial_T20190907_170428_184361/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Cup-None-Cabinet-8/trial_T20190907_170428_184361/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 78,
+        "slot": {
+          "task_id": "pick_heat_then_place_in_recep-Tomato-None-CounterTop-2/trial_T20190908_171606_930881",
+          "family": "pick_heat_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "6c0f43769322a2e211e28e866b5fc7554d566cb7a707e48d9e9ed08b4e9d7041",
+        "slot_key_preview": "b96c5306de0977cbe4c89367c5c6bd2a70abc8679fa9ab580dfad75c333e9802",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Tomato-None-CounterTop-2/trial_T20190908_171606_930881/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Tomato-None-CounterTop-2/trial_T20190908_171606_930881/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 79,
+        "slot": {
+          "task_id": "pick_heat_then_place_in_recep-Egg-None-DiningTable-11/trial_T20190907_125428_577559",
+          "family": "pick_heat_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "73064c740353b8451cf4b716cc83d713b8a097d9912b9abcbf7d7a9a34876c1e",
+        "slot_key_preview": "259e1581d10403dce90f0418b8f9323130bdd5577e3ff637cb04817e1b70854f",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Egg-None-DiningTable-11/trial_T20190907_125428_577559/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Egg-None-DiningTable-11/trial_T20190907_125428_577559/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 80,
+        "slot": {
+          "task_id": "pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-22/trial_T20190906_184740_858978",
+          "family": "pick_heat_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "73c81a42fa2c6dce47c1540a676cf4c74a2abcf82eafa0ee05abfc9cec30ed56",
+        "slot_key_preview": "d31227e079fe1a1a75f446af07408a1070b15b295747cd72d6562507a30d6a9d",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-22/trial_T20190906_184740_858978/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-22/trial_T20190906_184740_858978/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 81,
+        "slot": {
+          "task_id": "pick_heat_then_place_in_recep-Potato-None-CounterTop-19/trial_T20190909_151946_958394",
+          "family": "pick_heat_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "78e89fcadf08a85a3a6dfee0d8304470326af1f6ea5e644cdae3b4ce3d92bbf1",
+        "slot_key_preview": "8fc9ed3c84e3ef57c60595c4117827f8017ee6c6156dc7289003404e7d2cf704",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Potato-None-CounterTop-19/trial_T20190909_151946_958394/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Potato-None-CounterTop-19/trial_T20190909_151946_958394/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 82,
+        "slot": {
+          "task_id": "pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-28/trial_T20190907_190721_183592",
+          "family": "pick_heat_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "925f625f58c0339ba66df97beb1fdaeac4e0216fdd622f68f2fecdf1b2b549b7",
+        "slot_key_preview": "9a1a882ae4a5f7429a4397223dd9f3a771029be8889285826b35133b56845d5c",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-28/trial_T20190907_190721_183592/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-28/trial_T20190907_190721_183592/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 83,
+        "slot": {
+          "task_id": "pick_heat_then_place_in_recep-Apple-None-GarbageCan-12/trial_T20190908_172302_166350",
+          "family": "pick_heat_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "c7b0ff11d4387b8f5615344d32581d509a68534a1807663e014d7ff674641458",
+        "slot_key_preview": "bdc476ff97f4b237ee36bff8d5a1a4f3d66ff9cc39b39a949e5d76881821c3da",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Apple-None-GarbageCan-12/trial_T20190908_172302_166350/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Apple-None-GarbageCan-12/trial_T20190908_172302_166350/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 84,
+        "slot": {
+          "task_id": "pick_heat_then_place_in_recep-Apple-None-CounterTop-30/trial_T20190908_103828_466550",
+          "family": "pick_heat_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "dd5f159ea5564ebabeacdf58b854eb15b5a7ba079458a185b5d77367507856f0",
+        "slot_key_preview": "e84b3a68e16e7773840d537751bdd288bd0944ed1030bafa948ffea478c4a1db",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Apple-None-CounterTop-30/trial_T20190908_103828_466550/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Apple-None-CounterTop-30/trial_T20190908_103828_466550/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 85,
+        "slot": {
+          "task_id": "pick_heat_then_place_in_recep-Egg-None-GarbageCan-2/trial_T20190909_101128_479012",
+          "family": "pick_heat_then_place_in_recep",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "e9d1dc9b72cc6df0e503b5558d7c92122cc87cc70647827dc6cdd7999068f388",
+        "slot_key_preview": "0ad4482a798f6233eaac0e9ce7ef709a038a1b5f420a4c21f2d01f39d564a366",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Egg-None-GarbageCan-2/trial_T20190909_101128_479012/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_heat_then_place_in_recep-Egg-None-GarbageCan-2/trial_T20190909_101128_479012/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 86,
+        "slot": {
+          "task_id": "pick_two_obj_and_place-SprayBottle-None-Toilet-422/trial_T20190908_164720_891084",
+          "family": "pick_two_obj_and_place",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "2b99d30e537103cab82bd56b79e4db3f54e8d77ceb49c97999b8632e05fd154b",
+        "slot_key_preview": "398d538aa0b6f8835d8678719838c19ec521e0464d5340c2d576e05cf3db4f3e",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-SprayBottle-None-Toilet-422/trial_T20190908_164720_891084/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-SprayBottle-None-Toilet-422/trial_T20190908_164720_891084/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 87,
+        "slot": {
+          "task_id": "pick_two_obj_and_place-Book-None-Sofa-209/trial_T20190909_022528_723601",
+          "family": "pick_two_obj_and_place",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "5afb38a1282ecab270bd2633caf0a61aa2935af7d58f18d0bd77c098fa1b88bb",
+        "slot_key_preview": "7786aebcc45ee79209351b96094065145fba5c516d9aa5d15b27597e454ddedd",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-Book-None-Sofa-209/trial_T20190909_022528_723601/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-Book-None-Sofa-209/trial_T20190909_022528_723601/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 88,
+        "slot": {
+          "task_id": "pick_two_obj_and_place-Egg-None-Microwave-30/trial_T20190907_163255_256147",
+          "family": "pick_two_obj_and_place",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "84a6ef4a0570d604fb1862611e29c70b460f4cd59eda142e253074fcd13020ff",
+        "slot_key_preview": "d54c5d545f90e6e3608832da4ba1f0aa031a732c93e121c3e2b2108be260c912",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-Egg-None-Microwave-30/trial_T20190907_163255_256147/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-Egg-None-Microwave-30/trial_T20190907_163255_256147/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 89,
+        "slot": {
+          "task_id": "pick_two_obj_and_place-Pen-None-Drawer-311/trial_T20190908_072309_675103",
+          "family": "pick_two_obj_and_place",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "b32117c80b16c992672355355b876de03626bd834a5248ba76576cf5af36f79f",
+        "slot_key_preview": "4ae73623c78010ea7908db810a1cb0a4740ff01ccff969fe0a6688a96bb9ccf7",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-Pen-None-Drawer-311/trial_T20190908_072309_675103/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-Pen-None-Drawer-311/trial_T20190908_072309_675103/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 90,
+        "slot": {
+          "task_id": "pick_two_obj_and_place-AlarmClock-None-Desk-304/trial_T20190910_021303_108559",
+          "family": "pick_two_obj_and_place",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "b3cff5989d332abbb271a1ec60e28009f2edae3e87e7f7f6f18dc626aa4dc075",
+        "slot_key_preview": "343fd328ed38ab5cec2ff40244bd5fc37cce7e39038e1515b584be49161a1ce6",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-AlarmClock-None-Desk-304/trial_T20190910_021303_108559/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-AlarmClock-None-Desk-304/trial_T20190910_021303_108559/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 91,
+        "slot": {
+          "task_id": "pick_two_obj_and_place-SoapBottle-None-Toilet-405/trial_T20190909_014710_793462",
+          "family": "pick_two_obj_and_place",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "b828a74bdf2974f05fc16d7fa3c719a5a7d2c9f5286dca4abfc9398a7dcf4cbe",
+        "slot_key_preview": "96ddf56420db2e5f430b55fe33b841f7a2303bd1331cbbb653d75eb83523bb82",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-SoapBottle-None-Toilet-405/trial_T20190909_014710_793462/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-SoapBottle-None-Toilet-405/trial_T20190909_014710_793462/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 92,
+        "slot": {
+          "task_id": "pick_two_obj_and_place-Lettuce-None-Fridge-1/trial_T20190908_124634_452782",
+          "family": "pick_two_obj_and_place",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "c61984298882f1362733040aef130ce19239901a993f48b169d4db2a65ed607e",
+        "slot_key_preview": "1ab4f458c4e1603b29602ab86d9a4cad26e36159bf984a0d1edd2ef9ffa5cdd1",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-Lettuce-None-Fridge-1/trial_T20190908_124634_452782/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-Lettuce-None-Fridge-1/trial_T20190908_124634_452782/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 93,
+        "slot": {
+          "task_id": "pick_two_obj_and_place-TissueBox-None-Drawer-216/trial_T20190908_150513_129789",
+          "family": "pick_two_obj_and_place",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "d1c989024970e63c7efffe3d5995aabcc867b684e2bed4cf14320a0cecb7c856",
+        "slot_key_preview": "65479c6389cd53899f8f24e5b624d3313b20d1b18724914977ed1dae35e941da",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-TissueBox-None-Drawer-216/trial_T20190908_150513_129789/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-TissueBox-None-Drawer-216/trial_T20190908_150513_129789/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 94,
+        "slot": {
+          "task_id": "pick_two_obj_and_place-AlarmClock-None-Desk-307/trial_T20190907_013652_494441",
+          "family": "pick_two_obj_and_place",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "d8d9133da2af39ef29eeab7ab288828364f9595e25cdcb03f5ca44b4dc4326d6",
+        "slot_key_preview": "bc6406f294655e6f01e7b6e1334408f2422c967aa759aac85d33ec4df33b84ea",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-AlarmClock-None-Desk-307/trial_T20190907_013652_494441/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-AlarmClock-None-Desk-307/trial_T20190907_013652_494441/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      },
+      {
+        "ordinal": 95,
+        "slot": {
+          "task_id": "pick_two_obj_and_place-PepperShaker-None-Shelf-20/trial_T20190907_021457_366943",
+          "family": "pick_two_obj_and_place",
+          "seed": 42,
+          "pool_seed": 42,
+          "cutoff": 5
+        },
+        "ordering_rank": "fc9528c163595d359cf0695c4f52c46d9f27bac1ad87163e9a1743844d3319a0",
+        "slot_key_preview": "1cebdd4281f0f1d183b72a32b3e2be48582c2e94c07a642f06c93a2882dff2df",
+        "future_game_binding": {
+          "game": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-PepperShaker-None-Shelf-20/trial_T20190907_021457_366943/game.tw-pddl",
+          "traj_data": "@PENDING_SOURCE_TRAIN_ROOT@/pick_two_obj_and_place-PepperShaker-None-Shelf-20/trial_T20190907_021457_366943/traj_data.json",
+          "game_sha256": null,
+          "traj_data_sha256": null,
+          "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING_NOT_OPENED"
+        }
+      }
+    ]
+  },
+  "future_input_binding": {
+    "proposal_schema": "SI_S01_PROPOSAL_V1",
+    "exact_top_fields": [
+      "schema",
+      "metadata",
+      "interpreter",
+      "packages",
+      "model",
+      "environment"
+    ],
+    "metadata": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T084517Z__SOL__si-p3-controlled-experience-design__si3_7d91/ADOPTED_METADATA_RESERVATIONS.json",
+      "sha256": "6ce8a32a2345b59ecdef9c28c3a341e9c0801b8105f79895f9b2cb9545a4937e"
+    },
+    "interpreter": {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+      "sha256": null,
+      "status": "PENDING_LATER_AUTHORIZED_INPUT_BINDING; executable not read here"
+    },
+    "packages_exact_values_reused": {
+      "alfworld": {
+        "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/alfworld/__init__.py",
+        "sha256": "4d89c431771807e2abc99b5df152bd9870257e608635e32f393aac56cc0be56e",
+        "version": ""
+      },
+      "alfworld.agents.environment.alfred_tw_env": {
+        "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/alfworld/agents/environment/alfred_tw_env.py",
+        "sha256": "4d9166363e32f0fa70c63530a900785ddb45c79387a02ebcb9a21252869a8924",
+        "version": ""
+      },
+      "peft": {
+        "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/peft/__init__.py",
+        "sha256": "efabc3b44d7326eee59c07910e426fa38ee0c6419b773e8f75af87ae61d3fa32",
+        "version": "0.17.1"
+      },
+      "textworld": {
+        "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/textworld/__init__.py",
+        "sha256": "651106cbb89b93caa81275d75a0f292c66b95f774947a61e573e28b3981e69ba",
+        "version": "1.7.0"
+      },
+      "textworld.gym": {
+        "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/textworld/gym/__init__.py",
+        "sha256": "d816323fa2c285604897c0652de0ae784d20ae9523f2502159a042a995148a51",
+        "version": ""
+      },
+      "torch": {
+        "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/torch/__init__.py",
+        "sha256": "5a190666c3853aa236c4d48ed64e2d4bbcd23bd32c21e64c0867646a6852e43f",
+        "version": "2.6.0+cu124"
+      },
+      "transformers": {
+        "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/__init__.py",
+        "sha256": "2f92b5a7b85d2cbce640da83b48c032d1bf6b383963a779a1458c94f2f4ae89d",
+        "version": "4.56.2"
+      },
+      "yaml": {
+        "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/yaml/__init__.py",
+        "sha256": "377e52d351cc7ac1537b469144c5a43e3d0f6bc2046c7a44f452bb72be4176dc",
+        "version": "6.0.2"
+      }
+    },
+    "packages_receipt": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/ACTUAL_PACKAGE_ORIGINS.json",
+      "raw_sha256": "c3d7f1cdeb3859fa56c91d0efbe5b39141251f59a768d92ba165f11550a2276b",
+      "freshness": "receipt reuse only; no package import or module-file rehash here",
+      "empty_versions_preserved": [
+        "alfworld",
+        "alfworld.agents.environment.alfred_tw_env",
+        "textworld.gym"
+      ],
+      "distribution_metadata_substitution_forbidden": true
+    },
+    "model": {
+      "production_fields": [
+        "base_snapshot",
+        "adapter_path"
+      ],
+      "base_snapshot_path": null,
+      "adapter_path": null,
+      "status": "PENDING authorized input paths/bytes; snapshot/P0 identities above fixed; no model/tokenizer import or weight read"
+    },
+    "environment": {
+      "exact_fields": [
+        "config",
+        "data_root",
+        "logic_files",
+        "games"
+      ],
+      "config_path_from_frozen_env": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml",
+      "config_sha256": null,
+      "data_root_from_frozen_env": "/home/lizening/alfworld_data",
+      "logic_files_fields": [
+        "domain",
+        "grammar"
+      ],
+      "logic_bindings": "PENDING",
+      "train_root": "PENDING_FROZEN_CONFIG_RESOLUTION; no YAML/game/traj payload read here",
+      "path_construction": "join(future exact TRAIN game root, frozen canonical task_id, game.tw-pddl or traj_data.json); parent last2 components must equal canonical task/trial. No dataset scan or discovery of D48/E600/reserve.",
+      "games_entry_exact_fields": [
+        "task_id",
+        "game",
+        "game_sha256",
+        "traj_data",
+        "traj_data_sha256"
+      ],
+      "all96_game_traj_content_hashes": "PENDING; null in preview; no file stat/open/hash performed",
+      "read_isolation": "Frozen LiveEnvironment passes one explicit game into ReadIsolatedEnvironment; effective dataset.data_path becomes game.parent BEFORE stock AlfredTWEnv construction; collect_game_files fixes exactly that one file.",
+      "train_root_resolution_rule": "Later authorized binder resolves frozen config dataset.data_path under the exact frozen ALFWORLD_DATA env, then joins the fixed canonical task/trial and the two fixed leaf names; no scan/discovery or outcome selection. No config body opened in this blueprint task."
+    }
+  },
+  "resource_policy": {
+    "portable_contract_path": "/home/lizening/wt-si-s01-shared-gpu-adapter/configs/experiments/si_s01_shared_resource_v1.json",
+    "portable_raw_sha256": "d908573f0c6d9518aec0a9b6b0a48c24648a26c3c708652b185a7cfe7b7e2489",
+    "auth_review_header_binding_exact": {
+      "policy": "SHARED_CONTAINER_CUDA_V1",
+      "contract_sha256": "d908573f0c6d9518aec0a9b6b0a48c24648a26c3c708652b185a7cfe7b7e2489",
+      "proposal_sha256": "6998fe2ffcfd583741cd12ecf6b08638ed0e5da16d671f761a0af1df59c4dc5a",
+      "scientific_execution_behavior_changed": true,
+      "offline_evidence_validation_behavior_changed": true,
+      "source_treatment_semantics_changed": false,
+      "exclusive_gpu": false,
+      "NVML_to_local_PID_mapping": "UNPROVEN_NOT_ASSERTED",
+      "whole_process_vram_cap": false,
+      "device_wide_delta_attribution": false
+    },
+    "allocator_cap_bytes": 25769803776,
+    "preweight_global_free_min_bytes": 30064771072,
+    "later_global_free_min_bytes": 2147483648,
+    "semantics": "Fixed native-allocator cap and sampled stops only; not process-total cap, lease, fit, fairness, hostPID proof or exclusivity. Old strict not weakened or reused."
+  },
+  "launch_environment_template": {
+    "reuse_source_receipt": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T225739Z__SOL__si-s01-shared-engineering-authority-r2__f1e0d56_8ba08858/EXACT_COMMANDS.json",
+      "raw_sha256": "c4858c54d325144da159114245bd0130f53b637b21d96a0111bdc0879397ba75"
+    },
+    "inherit_environment": false,
+    "exact_environment": {
+      "ALFWORLD_CONFIG_PATH": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml",
+      "ALFWORLD_DATA": "/home/lizening/alfworld_data",
+      "CUDA_VISIBLE_DEVICES": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+      "HF_HOME": "/home/lizening/.cache/huggingface",
+      "HF_HUB_CACHE": "/home/lizening/.cache/huggingface/hub",
+      "HF_HUB_OFFLINE": "1",
+      "HOME": "/home/lizening",
+      "LC_CTYPE": "C.UTF-8",
+      "PATH": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTORCH_CUDA_ALLOC_CONF": "backend:native",
+      "TRANSFORMERS_OFFLINE": "1"
+    },
+    "environment_sha256_preview": "ee0ee968bb128b6ed5249fb39b7d84334f232f0f6b134e0519469db312294ff9",
+    "LC_CTYPE_explicit": "C.UTF-8",
+    "not_reused_from_engineering": [
+      "engineering auth/run IDs",
+      "engineering authorization/proposal hashes",
+      "engineering output/claim",
+      "engineering clearance/allowance"
+    ],
+    "status": "ENV VALUES ONLY; no source authority/output created"
+  },
+  "gate_contracts": {
+    "authorization": {
+      "schema": "SI_S01_AUTHORIZATION_V2",
+      "exact_fields": [
+        "authorization_id",
+        "ceilings",
+        "environment",
+        "evidence_class",
+        "execution_uid",
+        "expires_utc",
+        "forbidden_non_source",
+        "gpu_uuid",
+        "launch_argv",
+        "maximum_launches",
+        "not_before_utc",
+        "output_path",
+        "preflight_argv",
+        "preflight_receipt_path",
+        "proposal_sha256",
+        "protocol_sha256",
+        "purpose",
+        "resource_policy",
+        "review",
+        "run_id",
+        "schema",
+        "source_sha",
+        "status",
+        "task_sha256"
+      ],
+      "fixed_values": {
+        "purpose": "SOURCE_ONLY_A96",
+        "protocol_sha256": "daa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72",
+        "task_sha256": "5fd913a8d980f8e3eba551e3d377221c691033c090bb5a3a9af3b3ce7845263c",
+        "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+        "status": "PREFLIGHT_ONLY",
+        "evidence_class": "live_source_only",
+        "maximum_launches": 1,
+        "forbidden_non_source": true,
+        "ceilings": {
+          "generations": 4800,
+          "environment_operations": 4896,
+          "generated_tokens": 76800,
+          "input_tokens": 16000000,
+          "per_call_input": 8192,
+          "device_hours": 4.0
+        },
+        "resource_policy": {
+          "policy": "SHARED_CONTAINER_CUDA_V1",
+          "contract_sha256": "d908573f0c6d9518aec0a9b6b0a48c24648a26c3c708652b185a7cfe7b7e2489",
+          "proposal_sha256": "6998fe2ffcfd583741cd12ecf6b08638ed0e5da16d671f761a0af1df59c4dc5a",
+          "scientific_execution_behavior_changed": true,
+          "offline_evidence_validation_behavior_changed": true,
+          "source_treatment_semantics_changed": false,
+          "exclusive_gpu": false,
+          "NVML_to_local_PID_mapping": "UNPROVEN_NOT_ASSERTED",
+          "whole_process_vram_cap": false,
+          "device_wide_delta_attribution": false
+        }
+      },
+      "pending_values": [
+        "authorization_id",
+        "run_id",
+        "reviewed proposal path/hash",
+        "output_path",
+        "preflight_receipt_path",
+        "not_before_utc",
+        "expires_utc",
+        "exact source argv containing future paths/hash tokens",
+        "fresh execution UID confirmation"
+      ],
+      "identifier_rule": "authorization_id/run_id32 lowercase hex, fresh one-shot; not generated here",
+      "UTC_rule": "All future not_before_utc/expires_utc strings MUST endZ; +00:00 strings fail frozen utc(). No future time window chosen here.",
+      "freshness_rule": "Canonical absolute nonsymlink output and claim must not exist; preflight receipt must be separate/outside output and absent; all checks PENDING"
+    },
+    "review": {
+      "schema": "SI_S01_INDEPENDENT_REVIEW_V2",
+      "exact_fields": [
+        "decision",
+        "protocol_sha256",
+        "resource_policy",
+        "reviewer_role",
+        "schema",
+        "source_sha"
+      ],
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/SOURCE_ONLY_SOFTWARE_REVIEW.json",
+      "raw_sha256": "612ad397d3e3e4f67f76f05af4fb6478c181f0dd04d3bb54ff11314d2ac64ea1",
+      "fixed_contents": {
+        "schema": "SI_S01_INDEPENDENT_REVIEW_V2",
+        "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+        "protocol_sha256": "daa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72",
+        "decision": "PASS_SOURCE_ONLY_SOFTWARE",
+        "reviewer_role": "INDEPENDENT_ROOT",
+        "resource_policy": {
+          "policy": "SHARED_CONTAINER_CUDA_V1",
+          "contract_sha256": "d908573f0c6d9518aec0a9b6b0a48c24648a26c3c708652b185a7cfe7b7e2489",
+          "proposal_sha256": "6998fe2ffcfd583741cd12ecf6b08638ed0e5da16d671f761a0af1df59c4dc5a",
+          "scientific_execution_behavior_changed": true,
+          "offline_evidence_validation_behavior_changed": true,
+          "source_treatment_semantics_changed": false,
+          "exclusive_gpu": false,
+          "NVML_to_local_PID_mapping": "UNPROVEN_NOT_ASSERTED",
+          "whole_process_vram_cap": false,
+          "device_wide_delta_attribution": false
+        }
+      },
+      "scope": "Independent software only; no engineering acceptance/source release inferred"
+    },
+    "source_binding_fields": [
+      "authorization_sha256",
+      "source_sha",
+      "protocol_sha256",
+      "proposal_sha256",
+      "plan_sha256",
+      "environment_sha256",
+      "ceilings",
+      "run_id",
+      "execution_uid",
+      "output_path",
+      "evidence_class",
+      "resource_policy"
+    ],
+    "preflight_receipt": {
+      "schema": "SI_S01_PREFLIGHT_RECEIPT_V2",
+      "exact_fields": [
+        "schema",
+        "status",
+        "binding",
+        "counters",
+        "argv_sha256",
+        "receipt_id",
+        "finished_utc"
+      ],
+      "status": "STATIC_PREFLIGHT_0SCIENCE_PASS",
+      "counter_fields_all_int_zero": [
+        "model_objects",
+        "generations",
+        "CUDA_initializations",
+        "environment_constructs",
+        "resets",
+        "steps",
+        "units",
+        "fresh_sources"
+      ],
+      "must_not_create_science_output": true,
+      "receipt_or_execution_created_now": false
+    },
+    "authentic_preflight_execution": {
+      "schema": "SI_S01_PREFLIGHT_EXECUTION_V2",
+      "checked_fields": [
+        "schema",
+        "authentic_returncode",
+        "argv",
+        "binding",
+        "preflight_receipt_sha256"
+      ],
+      "returncode_must_be": 0,
+      "argv_must_equal_rendered_preflight": true,
+      "status": "PENDING real source preflight; engineering preflight cannot substitute"
+    },
+    "clearance": {
+      "schema": "SI_S01_LAUNCH_CLEARANCE_V2",
+      "exact_fields": [
+        "schema",
+        "status",
+        "issuer",
+        "binding",
+        "preflight",
+        "preflight_execution",
+        "live_argv",
+        "clearance_id",
+        "maximum_launches",
+        "not_before_utc",
+        "expires_utc"
+      ],
+      "status": "CLEARED_ONE_SOURCE_ONLY_LAUNCH",
+      "issuer": "INDEPENDENT_ROOT",
+      "maximum_launches": 1,
+      "clearance_id": "PENDING32LOWERHEX",
+      "required_binding": "exact source_binding with approved source auth/proposal/plan/env/caps/resource policy",
+      "ordering": "source auth.not_before<=preflight.finished<=clearance.not_before<=now<clearance.expires<=auth.expires; all UTC endZ",
+      "status_now": "PENDING_NOT_CREATED"
+    },
+    "runtime_context": {
+      "launch": "source_binding + clearance_sha256 + supervisor argv/PID + one-device allocation start/deadline; authentic hashes",
+      "worker": "supervisor only; localPID/UID/starttick/PGID/SID/parent/session and exactargv/context hash verified; never host/NVML PID mapping",
+      "maximum_seconds": "min(14400,remaining auth/clearance UTC lifetime), full monotonic interval; no per-task clock reset",
+      "status": "PENDING_NOT_CREATED"
+    }
+  },
+  "argv_templates_non_executable": {
+    "entrypoint": "/home/lizening/wt-si-s01-shared-gpu-adapter/scripts/run_si_s01_source_only.py",
+    "interpreter": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "authorization_launch_argv": [
+      "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+      "-I",
+      "/home/lizening/wt-si-s01-shared-gpu-adapter/scripts/run_si_s01_source_only.py",
+      "--live",
+      "--authorization",
+      "@PENDING_SOURCE_AUTHORIZATION_PATH@",
+      "--authorization-sha256",
+      "@AUTHORIZATION_SHA256@",
+      "--proposal",
+      "@PENDING_SOURCE_PROPOSAL_PATH@"
+    ],
+    "authorization_preflight_argv": [
+      "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+      "-I",
+      "/home/lizening/wt-si-s01-shared-gpu-adapter/scripts/run_si_s01_source_only.py",
+      "--preflight-only",
+      "--authorization",
+      "@PENDING_SOURCE_AUTHORIZATION_PATH@",
+      "--authorization-sha256",
+      "@AUTHORIZATION_SHA256@",
+      "--proposal",
+      "@PENDING_SOURCE_PROPOSAL_PATH@"
+    ],
+    "clearance_live_argv": [
+      "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+      "-I",
+      "/home/lizening/wt-si-s01-shared-gpu-adapter/scripts/run_si_s01_source_only.py",
+      "--live",
+      "--authorization",
+      "@PENDING_SOURCE_AUTHORIZATION_PATH@",
+      "--authorization-sha256",
+      "@AUTHORIZATION_SHA256@",
+      "--proposal",
+      "@PENDING_SOURCE_PROPOSAL_PATH@",
+      "--clearance",
+      "@PENDING_SOURCE_CLEARANCE_PATH@",
+      "--clearance-sha256",
+      "@CLEARANCE_SHA256@"
+    ],
+    "supervisor_only_worker_argv_shape": [
+      "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+      "-I",
+      "/home/lizening/wt-si-s01-shared-gpu-adapter/scripts/run_si_s01_source_only.py",
+      "--worker",
+      "--authorization",
+      "@PENDING_SOURCE_AUTHORIZATION_PATH@",
+      "--authorization-sha256",
+      "@AUTHORIZATION_SHA256@",
+      "--proposal",
+      "@PENDING_SOURCE_PROPOSAL_PATH@",
+      "--clearance",
+      "@PENDING_SOURCE_CLEARANCE_PATH@",
+      "--clearance-sha256",
+      "@CLEARANCE_SHA256@",
+      "--launch-context-sha256",
+      "@PENDING_SUPERVISOR_CONTEXT_SHA256@"
+    ],
+    "critical_order": "Source mode flag must be first flag after script, matching CLI fixed worker construction. Do not copy engineering r2 mode-last layout. Worker is never manually invoked.",
+    "token_rules": [
+      "@AUTHORIZATION_SHA256@ exactly once in auth launch/preflight arrays immediately following --authorization-sha256",
+      "@CLEARANCE_SHA256@ exactly once in clearance.live_argv following --clearance-sha256",
+      "Removing clearance options from rendered cleared live argv must reproduce rendered auth.launch_argv exactly."
+    ],
+    "all_pending_path_hash_tokens_are_invalid_production_values": true
+  },
+  "read_and_action_scope": {
+    "stdlib_metadata_parsing_and_hashing_only": true,
+    "project_modules_imported": 0,
+    "model_tokenizer_imports": 0,
+    "game_traj_file_bodies_opened": 0,
+    "game_traj_stats_or_content_hashes": 0,
+    "validators_tests_preflight_calls": 0,
+    "CUDA_model_environment_science_calls": 0,
+    "code_changes": 0,
+    "executable_gate_auth_output_created": false,
+    "shared_index_inventory_git_stage_commit_push": false,
+    "no_new_design_or_budget": true,
+    "independent_acceptance_asserted": false
+  },
+  "source_code_bindings": {
+    "src/self_improvement/si_s01/contract.py": {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/src/self_improvement/si_s01/contract.py",
+      "raw_sha256": "43350414e313273eb9747e879c70e24c90a044562e509a4bfff20fd26104d507",
+      "git_blob": "37816b0d4688768e059526f9250e29b72b6c0efd"
+    },
+    "src/self_improvement/si_s01/gate.py": {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/src/self_improvement/si_s01/gate.py",
+      "raw_sha256": "74b32fdccd84492e54453ad32f4cae16bbe6b621d24dcbc9bde9e450056080bf",
+      "git_blob": "3c3c87b96b020f18132d8d09ad12840154576716"
+    },
+    "src/self_improvement/si_s01/runtime.py": {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/src/self_improvement/si_s01/runtime.py",
+      "raw_sha256": "9b33feea6ab55f84768fcdc052212d5c807b23f3a2cad7590e601411acb1d4dd",
+      "git_blob": "4eb1227036950fb98c77faf00b03816aabe7bab1"
+    },
+    "src/self_improvement/si_p3/contract.py": {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/src/self_improvement/si_p3/contract.py",
+      "raw_sha256": "2d7b05d5c230cb45c2ad90c7507c11a5c76ce52f7335548c46a48d78e8842239",
+      "git_blob": "d334b12e5ec16b7f11a395e305f2ac10dd7f034f"
+    },
+    "src/self_improvement/si_p3/runtime_gate.py": {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/src/self_improvement/si_p3/runtime_gate.py",
+      "raw_sha256": "da9ef92150e4310faab3eccd32d1d40a34e78f1f106aa34820a78d66ffb50c95",
+      "git_blob": "195982ec968aab14ee3189762938c42f7333da5d"
+    },
+    "src/self_improvement/si_p3/runtime_environment.py": {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/src/self_improvement/si_p3/runtime_environment.py",
+      "raw_sha256": "d563f8235c8890f98375932089bd6abbf9cfcb1a1e7478f9e069b1ac6a2e590d",
+      "git_blob": "42de6a4fef9d4a4a3e5debc761001adbe183030f"
+    },
+    "scripts/run_si_s01_source_only.py": {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/scripts/run_si_s01_source_only.py",
+      "raw_sha256": "ebe82f46afb873534d2750591b5f14003f867224d65ce4efe74041b050e46dbb",
+      "git_blob": "01824652cf80eb924df5ff1a6fee1b773563f09d"
+    },
+    "configs/experiments/si_s01_shared_resource_v1.json": {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/configs/experiments/si_s01_shared_resource_v1.json",
+      "raw_sha256": "d908573f0c6d9518aec0a9b6b0a48c24648a26c3c708652b185a7cfe7b7e2489",
+      "git_blob": "ef93dc889259df7d5acb6b31dfe5d48d4eb23018"
+    }
+  },
+  "remaining_pending_dependencies": [
+    "Observed real engineering acceptance, not merely software or engineering preflight PASS.",
+    "Later authorized input binding for frozen config/logic/interpreter/model paths and96 exact game/traj content hashes; no payload opened now.",
+    "Fresh source identifiers/output/preflight-receipt path and new production proposal/auth with exact env/argv and UTC-Z window.",
+    "Authentic positive source preflight and separate independent root source clearance; neither issued by this blueprint.",
+    "Actual source runtime and all results remain unexecuted by this task."
+  ],
+  "revision": "V2_FINAL_WITH_OUTPUT_PARENT_READINESS",
+  "previous_blueprint": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T231302Z__CODEX__si-s01-source-gate-blueprint__f1e0d56/SOURCE_ONLY_GATE_BLUEPRINT.json",
+    "raw_sha256": "3a981fe6519a9ba439e61cd3aed3db6564e1074bb9cb344b9edd6c1004058e14",
+    "bytes_preserved": true
+  },
+  "coordinator_reported_engineering_update": {
+    "status": "SOLE_LIVE_CLI_FAILED_PRE_SUPERVISOR_WORKER_MODEL",
+    "cause_reported": "Ignored artifacts/runtime parent missing at fresh_json(launch_claim).",
+    "source_code_changed": false,
+    "old_clearance": "CONSUMED as reported; not reused",
+    "controlled_pre_worker_restart_review": "PENDING with Astra/Root; this blueprint neither approves nor performs restart and does not change caps",
+    "evidence_status": "COORDINATOR_MESSAGE_ONLY_NOT_INDEPENDENTLY_VERIFIED_HERE"
+  },
+  "source_output_parent_preparation_requirement": {
+    "status": "PENDING_LATER_AUTHORIZED_SOURCE_PREPARATION",
+    "when": "Before freezing real source proposal/auth/preflight argv and before any approved source live attempt; verify again for the actual chosen checkout/path.",
+    "required_readiness": [
+      "Chosen output.parent exists and is a directory.",
+      "Chosen output.parent is writable by the authorized execution UID.",
+      "Chosen path is canonical and covered by the intended ignored/untracked runtime-artifact location; no science-tree tracked output.",
+      "Only the parent is prepared. Source output itself, its sibling <output.name>.launch_claim.json and the separate preflight receipt must remain absent as required by the gate.",
+      "Persist the parent-readiness receipt with actual selected path/UID/context in later authorized preparation; do not assume a fresh clone has an ignored artifacts/runtime directory."
+    ],
+    "frozen_code_evidence": [
+      "si_s01/supervisor_core.py creates launch claim with fresh_json before output.mkdir(parents=False).",
+      "si_s01/evidence.py fresh_json uses exclusive open; it does not create parents."
+    ],
+    "actions_by_blueprint_author": "No parent/output/claim created or stat/writability test performed; only own provenance directory written.",
+    "retry_boundary": "A pre-worker failure does not authorize reusing consumed source clearance or restarting; Root alone adjudicates fresh authority. No source IDs/allowances minted here."
+  }
+}

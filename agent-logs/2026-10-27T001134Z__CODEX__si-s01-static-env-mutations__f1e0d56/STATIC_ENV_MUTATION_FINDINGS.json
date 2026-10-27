@@ -1,0 +1,163 @@
+{
+  "schema": "SI_S01_STATIC_ENV_MUTATION_AUDIT_V1",
+  "status": "READ_ONLY_STATIC_FINDINGS_NOT_RUNTIME_CLEARANCE",
+  "created_utc": "2026-10-27T00:11:34.505667+00:00",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "source_clean": true,
+  "scope": "Frozen source and installed Python source only; no dependency imports or execution, tests, CUDA, tokenizer/model load, environment construction, preflight, source/science execution, archive, publication or source changes.",
+  "authority_snapshot": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/ROOT_ENGINEERING_AUTHORIZATION_V2.json",
+    "sha256": "8829121a1a6f78ccaaab1010980d9b41a3f7fbbff36120facfa36f1d876851ad",
+    "role": "Consumed second engineering-attempt snapshot inspected here; newer Root/Astra amendment not audited or inferred to be authorized by this record."
+  },
+  "conclusion": {
+    "CONFIRMED_STATIC": "torch.cuda.init calls _lazy_init, which inserts CUDA_MODULE_LOADING=LAZY when missing before the SharedGuard.configure full-environment comparison. The inspected consumed authorization omits it.",
+    "additional_confirmed_deterministic_preconfigure_environment_writes_found": 0,
+    "limitation": "Zero additional confirmed writes is limited to inspected Python call paths. It is not proof that native/deferred code cannot mutate the environment, and not runtime readiness.",
+    "later_full_environment_comparison": "None found on the inspected generation/environment call chain. SharedGuard.sample checks only three allocator-related variables in current os.environ; policy_binding inspects the authorization snapshot, not full current environment.",
+    "root_runtime_observation": "Root reports the second engineering invocation stopped before onebyte/weights on this exact-environment issue. This audit did not execute or independently replay that observation.",
+    "action": "No guessed variables/default changes or source fixes proposed. Any amendment and fresh runtime authority remain with Root/Astra."
+  },
+  "guard_order": [
+    {
+      "site": "src/self_improvement/si_s01/engineering_gate.py:78",
+      "type": "full environment",
+      "phase": "engineering authorization before runtime CUDA initialization"
+    },
+    {
+      "site": "src/self_improvement/si_s01/gate.py:94",
+      "type": "full environment",
+      "phase": "source authorization before runtime; source not released"
+    },
+    {
+      "site": "src/self_improvement/si_s01/runtime_core.py:30",
+      "type": "torch.cuda.init",
+      "phase": "before configure"
+    },
+    {
+      "site": "src/self_improvement/si_s01/shared_resource.py:80",
+      "type": "full environment",
+      "phase": "configure after CUDA init and before onebyte and all weights"
+    },
+    {
+      "site": "src/self_improvement/si_s01/runtime_core.py:42",
+      "type": "tokenizer/base load",
+      "phase": "after configure"
+    },
+    {
+      "site": "src/self_improvement/si_s01/runtime_core.py:43",
+      "type": "P0 PEFT load",
+      "phase": "after configure"
+    },
+    {
+      "site": "src/self_improvement/si_s01/shared_resource.py:96",
+      "type": "current allocator variables only",
+      "phase": "later samples; PYTORCH_CUDA_ALLOC_CONF exact backend:native, no PYTORCH_NO_CUDA_MEMORY_CACHING or PYTORCH_NO_HIP_MEMORY_CACHING"
+    }
+  ],
+  "assignments": [
+    {
+      "id": "ENV01",
+      "classification": "CONFIRMED_STATIC_REACHABLE_BEFORE_EXACT_GUARD",
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/torch/cuda/__init__.py",
+      "lines": [
+        275,
+        286,
+        317,
+        318,
+        319
+      ],
+      "variable": "CUDA_MODULE_LOADING",
+      "condition": "_lazy_init first-init path reaches the assignment and variable is absent; existing initialization returns early, an existing value is not overwritten.",
+      "expected_value": "LAZY",
+      "authorized_value_in_inspected_snapshot": null,
+      "authorized_presence": false,
+      "impact": "Changes the full environment immediately before shared_resource.py:80; sufficient to break equality even if all other variables stay unchanged."
+    },
+    {
+      "id": "ENV02",
+      "classification": "CONFIRMED_STATIC_REACHABLE_AFTER_EXACT_GUARD_IDEMPOTENT_FOR_INSPECTED_BINDING",
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/alfworld/info.py",
+      "lines": [
+        9,
+        10,
+        11
+      ],
+      "variable": "ALFWORLD_DATA",
+      "condition": "First import of alfworld.info on the actual environment path; value is existing os.getenv value or default cache path; mkdirs returns input path unchanged.",
+      "expected_value": "/home/lizening/alfworld_data",
+      "authorized_value_in_inspected_snapshot": "/home/lizening/alfworld_data",
+      "authorized_presence": true,
+      "impact": "Existing authorization already supplies exactly this value. Environment setup occurs after configure. Does not affect any sampled allocator variable."
+    },
+    {
+      "id": "ENV03",
+      "classification": "CONFIRMED_STATIC_REACHABLE_AFTER_EXACT_GUARD_IDEMPOTENT_FOR_INSPECTED_BINDING",
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/src/self_improvement/si_p3/runtime_environment.py",
+      "lines": [
+        105,
+        110,
+        118,
+        145,
+        146
+      ],
+      "variable": "ALFWORLD_DATA",
+      "condition": "ReadIsolatedEnvironment._get_environment and data_path is not None; close restores previous value or removes if absent.",
+      "expected_value": "/home/lizening/alfworld_data",
+      "authorized_value_in_inspected_snapshot": "/home/lizening/alfworld_data",
+      "authorized_presence": true,
+      "binding_sites": [
+        "src/self_improvement/si_s01/engineering_runtime.py:102",
+        "src/self_improvement/si_s01/runtime.py:52"
+      ],
+      "impact": "Proposal data_root equals exact authorized value; close restores that existing value in this snapshot. Later than configure, not a same-guard blocker."
+    },
+    {
+      "id": "ENV04",
+      "classification": "CONDITIONAL_NOT_PROVEN_REACHABLE_AND_NOT_SAME_GUARD",
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/generation/utils.py",
+      "lines": [
+        2099,
+        2104,
+        2111,
+        2114,
+        2838,
+        2839,
+        2840
+      ],
+      "variable": "TOKENIZERS_PARALLELISM",
+      "condition": "_valid_auto_compile_criteria returns True: compile not disabled, supported hardware, compilable cache, applicable quantizer and offload restrictions pass.",
+      "expected_value": "0",
+      "authorized_value_in_inspected_snapshot": null,
+      "authorized_presence": false,
+      "impact": "Only in generation after configure; does not touch current allocator checks. Frozen call does not explicitly request compile/static-cache; default helper chooses DynamicCache whose dynamic layer inherits is_compileable=False. Effective loaded generation config is NOT_VERIFIED in this audit; do not assert the write occurs or prescribe this variable."
+    }
+  ],
+  "negative_and_uncertain_findings": [
+    {
+      "status": "INSPECTED_SOURCE_ONLY",
+      "finding": "No direct environment writes/patch_environment/clear_environment references found in selected PEFT LoRA/from_pretrained/save_and_load and Transformers AutoTokenizer/PyTorch Qwen3 loading files; modeling_utils hits in raw scan are environment reads. This is not a transitive native side-effect guarantee."
+    },
+    {
+      "status": "EXCLUDED_CALL_PATH",
+      "finding": "Trainer full-determinism setters, pipeline worker TOKENIZERS_PARALLELISM, distributed Accelerate/DeepSpeed/FSDP and PEFT BOFT generic patch helpers are not invoked by the frozen single-CUDA direct QwenPolicy/PeftModel path; no variables from those paths are recommended."
+    },
+    {
+      "status": "NOT_VERIFIED",
+      "finding": "Native torch/tokenizers/TextWorld extension internals, deferred callbacks and actual post-load generation config were not exercised. No CUDA/model/tokenizer/env imports or probes were run."
+    },
+    {
+      "status": "ROOT_REPORTED_PRIOR_EVIDENCE",
+      "finding": "Root reports earlier CPU imports had no environment delta; this audit did not rerun them."
+    }
+  ],
+  "costs_and_authority": {
+    "new_model_calls": 0,
+    "new_environment_calls": 0,
+    "new_cuda_calls": 0,
+    "new_tests": 0,
+    "source_execution_authority": "NOT_GRANTED",
+    "science_authority": "NOT_GRANTED",
+    "new_runtime_claim": "NONE"
+  }
+}

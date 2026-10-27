@@ -1,0 +1,71 @@
+{
+  "schema": "SI_S01_AUTHENTIC_ENGINEERING_LIVE_ATTEMPT_RESULT_V1",
+  "status": "ENGINEERING_REJECTED_OR_STOPPED",
+  "clearance_consumed": true,
+  "retry_allowed": false,
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "clearance": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T225739Z__SOL__si-s01-shared-engineering-authority-r2__f1e0d56_8ba08858/ENGINEERING_LIVE_CLEARANCE.json",
+    "sha256": "d61e4dc6ef12b5561b3a23680980e7701a0cb3460fb1327b485647e49a427e8d",
+    "independent_preflight_verification_sha256": "ecb305e7ac4c86cb049ea9da0d3fbb2ac008dbdbac62b9bdb05517ce78732a12",
+    "commands_sha256": "c4858c54d325144da159114245bd0130f53b637b21d96a0111bdc0879397ba75",
+    "authorization_sha256": "114a051124f701c118db39650c8b0386e58da01fdf5c32517ac0007793c9fab2",
+    "proposal_sha256": "a9b1c43ebdafbb2d7e33a2377c34428a5788d91afc140d5bbcf1957d08881c2a",
+    "corrected_review_sha256": "d2f98aa5ae379273f5ecd98d38f3dbba9c7a92f840ec9c9e68623c3b9ea668ae"
+  },
+  "actual_live_cli_child": {
+    "pid": 878781,
+    "run_id": "cfce7ad1c9e3437a9edc2a0f4b6ae5bf",
+    "start_utc": "2026-10-26T23:08:38.867801+00:00",
+    "end_utc": "2026-10-26T23:09:00.469288+00:00",
+    "elapsed_monotonic_ns": 21601499736,
+    "elapsed_seconds": 21.601499736,
+    "returncode": 1,
+    "shell": false,
+    "argv_sha256": "52cf78de46894c3f436a9b4f58d0bd927dacded1db0cef84fb43e4e39cb4fada",
+    "environment_sha256": "ee0ee968bb128b6ed5249fb39b7d84334f232f0f6b134e0519469db312294ff9",
+    "cwd": "/home/lizening/wt-si-s01-shared-gpu-adapter"
+  },
+  "raw_outputs": {
+    "stdout_path": "/home/lizening/research-notes/agent-logs/2026-10-26T230809Z__LUNA__si-s01-engineering-live__f1e0d56_once1/live_child.stdout.bin",
+    "stdout_bytes": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_path": "/home/lizening/research-notes/agent-logs/2026-10-26T230809Z__LUNA__si-s01-engineering-live__f1e0d56_once1/live_child.stderr.bin",
+    "stderr_bytes": 344,
+    "stderr_sha256": "d78484b541f62b18f7687bc1e4a584cc39130772e5226a741bb770db29555d85",
+    "subprocess_receipt_path": "/home/lizening/research-notes/agent-logs/2026-10-26T230809Z__LUNA__si-s01-engineering-live__f1e0d56_once1/subprocess_receipt.json"
+  },
+  "failure": {
+    "status": "ENGINEERING_REJECTED_OR_STOPPED",
+    "science_authorized": false,
+    "exception": "FileNotFoundError",
+    "message": "[Errno 2] No such file or directory: '/home/lizening/wt-si-s01-shared-gpu-adapter/artifacts/runtime/si_s01_engineering_shared_cuda_v1_f1e0d56_cfce7ad1c9e3437a9edc2a0f4b6ae5bf.launch_claim.json'",
+    "resource_evidence": null,
+    "failure_classification": "Could not create the authorized launch-claim path because its parent runtime directory did not exist. No fallback directory, mkdir repair, or retry was attempted."
+  },
+  "observed_execution_scope": {
+    "worker_start_receipt": "NOT_PRESENT",
+    "supervisor_launch_context_or_status": "NOT_PRESENT",
+    "execution_event_ledger": "NOT_PRESENT",
+    "runner_log_or_report": "NOT_PRESENT",
+    "authorized_output_path_exists": false,
+    "authorized_runtime_parent_exists": false,
+    "output_file_count": 0,
+    "launch_claim_exists": false,
+    "child_process_proc_entry_exists_after_exit": false,
+    "model_or_environment_unit_actions": "No worker/unit receipts exist; do not assert unobserved counters beyond what these facts establish.",
+    "cuda_or_device_allocation_counters": "UNOBSERVED; error returned resource_evidence=null. Do not report device-hours/peak as zero."
+  },
+  "post_attempt_input_hashes_unchanged": true,
+  "historical_science_totals_unchanged": {
+    "generations": 5142,
+    "reset_inclusive_environment_operations": 7949,
+    "older_177_342_already_included": true
+  },
+  "authorization_boundary": {
+    "one_live_clearance_used": true,
+    "second_live_or_retry_authorized": false,
+    "A96_or_other_science_authorized": false,
+    "G3_G4_or_training_authorized": false
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "SI_S01_AUTHENTIC_PREFLIGHT_RESULT_V1",
+  "status": "ENGINEERING_REJECTED_OR_STOPPED",
+  "release_consumed": true,
+  "retry_or_second_preflight_allowed": false,
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "release": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T224903Z__SOL__si-s01-shared-engineering-authority__f1e0d56_61a76087/PREFLIGHT_ONLY_RELEASE.json",
+    "sha256": "4a3c90154bd050643496b78a641748d7c00941da409fc8ba96fa7fe3589c4a0a",
+    "commands_sha256": "ad7f39c9d342d1114ade6d65409af3217808f6f7d4af7f8c3e14b45eeb9d5d45"
+  },
+  "actual_child": {
+    "pid": 878318,
+    "start_utc": "2026-10-26T22:51:56.107180+00:00",
+    "end_utc": "2026-10-26T22:51:56.278213+00:00",
+    "elapsed_monotonic_ns": 171004903,
+    "returncode": 1,
+    "shell": false,
+    "argv_sha256": "061293f1739c3bf2cbad0ecd03ab16190808e8017e369ae1f1551aeabc4f6501",
+    "environment_sha256": "4e59023968de727caeff6ff860ba4048ec3849eb850a43bbda266a8208778d9b"
+  },
+  "raw_outputs": {
+    "stdout_path": "/home/lizening/research-notes/agent-logs/2026-10-26T225119Z__LUNA__si-s01-engineering-preflight__f1e0d56_once1/preflight.stdout.bin",
+    "stdout_bytes": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_path": "/home/lizening/research-notes/agent-logs/2026-10-26T225119Z__LUNA__si-s01-engineering-preflight__f1e0d56_once1/preflight.stderr.bin",
+    "stderr_bytes": 174,
+    "stderr_sha256": "2ef99080ca98390f39acfe1e8f62a460c14fe9d394f7aaa62cdee63f7f4d1c74"
+  },
+  "observed_error": {
+    "type": "ContractError",
+    "message": "UTC timestamp must end in Z",
+    "resource_evidence": null,
+    "science_authorized": false
+  },
+  "post_exit_checks": {
+    "child_proc_entry_absent": true,
+    "scientific_output_path_absent": true,
+    "launch_claim_absent": true,
+    "source_head_unchanged": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+    "source_worktree_clean": true,
+    "release_commands_authorization_proposal_review_hashes_unchanged": true
+  },
+  "science_and_resource_counters": {
+    "successful_preflight_receipt": false,
+    "runner_counter_record": "NOT_EMITTED; contract rejection occurred before the preflight receipt",
+    "model_generation_or_alfworld_invocation_observed": false,
+    "cuda_or_environment_resource_evidence": "null in authentic rejection output; do not call this a successful zero-counter preflight"
+  },
+  "required_next_action": "Stop. Root may correct its authorization timestamp and issue a fresh distinct preflight release; this consumed release must not be reused, and Luna performs no retry without that new release."
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "ROOT_CPU_ONLY_PRELOAD_IMPORT_ENV_DIAGNOSTIC_V1",
+  "argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "-B",
+    "-c",
+    "import os,json,sys; initial=dict(os.environ); sys.path.insert(0,'/home/lizening/wt-si-s01-shared-gpu-adapter/src'); from sft.training import directory_sha256; import torch,transformers,peft; from models.qwen import QwenPolicy,QwenPolicyConfig; from models.policy import GenerationOptions; after=dict(os.environ); assert not torch.cuda.is_initialized(); print(json.dumps({'CUDA_initialized':torch.cuda.is_initialized(),'added':{k:after[k] for k in after.keys()-initial.keys()},'removed':sorted(initial.keys()-after.keys()),'changed':{k:{'before':initial[k],'after':after[k]} for k in initial.keys()&after.keys() if initial[k]!=after[k]},'models_or_env_objects_constructed':0},sort_keys=True))"
+  ],
+  "environment": {
+    "ALFWORLD_CONFIG_PATH": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml",
+    "ALFWORLD_DATA": "/home/lizening/alfworld_data",
+    "CUDA_VISIBLE_DEVICES": "",
+    "HF_HOME": "/home/lizening/.cache/huggingface",
+    "HF_HUB_CACHE": "/home/lizening/.cache/huggingface/hub",
+    "HF_HUB_OFFLINE": "1",
+    "HOME": "/home/lizening",
+    "LC_CTYPE": "C.UTF-8",
+    "PATH": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTORCH_CUDA_ALLOC_CONF": "backend:native",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "authentic_returncode": 0,
+  "stdout": "{\"CUDA_initialized\": false, \"added\": {}, \"changed\": {}, \"models_or_env_objects_constructed\": 0, \"removed\": []}\n",
+  "stderr": "",
+  "scope": "stdlib/hash-only utility and production preloader module imports; no CUDA init/tensor, frozen model objects/weights load, environment construct/reset/step or production CLI invocation"
+}

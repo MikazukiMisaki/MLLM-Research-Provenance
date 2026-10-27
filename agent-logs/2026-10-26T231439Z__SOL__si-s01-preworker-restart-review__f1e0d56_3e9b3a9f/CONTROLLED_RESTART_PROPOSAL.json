@@ -1,0 +1,58 @@
+{
+  "schema": "ROOT_PREWORKER_ENGINEERING_RESTART_PROPOSAL_V1",
+  "status": "PROPOSED_FOR_INDEPENDENT_REVIEW_NO_LAUNCH_RELEASE",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "failed_run_id": "cfce7ad1c9e3437a9edc2a0f4b6ae5bf",
+  "failed_clearance": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T225739Z__SOL__si-s01-shared-engineering-authority-r2__f1e0d56_8ba08858/ENGINEERING_LIVE_CLEARANCE.json",
+    "sha256": "d61e4dc6ef12b5561b3a23680980e7701a0cb3460fb1327b485647e49a427e8d",
+    "status": "CONSUMED_NOT_REUSABLE"
+  },
+  "failed_original_evidence_directory": "/home/lizening/research-notes/agent-logs/2026-10-26T230809Z__LUNA__si-s01-engineering-live__f1e0d56_once1",
+  "actual_failure": "FileNotFoundError writing launch_claim.json because ignored artifacts/runtime parent was absent; output/claim/worker/context/ledger all absent. Production CLI exit1 after21.601499736s.",
+  "scope_of_inference": "No worker/Popen point reached, hence no explicit model load/generation/one-byte probe/environment construction/reset/step called by production path. No authentic supervisor allocation/resource receipt exists; do not claim observed GPU allocation cost0.",
+  "budget_proposal": {
+    "original_supervisor_seconds": 600,
+    "failed_authentic_cli_elapsed_seconds": 21.601499736,
+    "conservative_charged_seconds_at_one_device": 22,
+    "new_supervisor_seconds_maximum": 578,
+    "aggregate_conservative_charged_seconds_maximum": 600,
+    "exact_GPU_allocation_or_utilization_share": "UNOBSERVED_NOT_ASSERTED",
+    "combined_real_model_loads_max": 1,
+    "combined_explicit_original_probes_max": 1,
+    "combined_generations_max": 1,
+    "combined_resets_max": 1,
+    "combined_saved_steps_max": 6,
+    "combined_env_construct_close_max_each": 1,
+    "combined_reset_inclusive_env_operations_max": 7,
+    "input_output_token_caps_unchanged": [
+      8192,
+      16
+    ]
+  },
+  "operational_fix": {
+    "schema": "ROOT_IGNORED_OUTPUT_PARENT_READINESS_V1",
+    "created_utc": "2026-10-26T23:14:39.084094Z",
+    "parent": "/home/lizening/wt-si-s01-shared-gpu-adapter/artifacts/runtime",
+    "existed_before": false,
+    "exists_after": true,
+    "owner_uid": 2000,
+    "mode_octal": "0o755",
+    "writable_searchable_for_executor": true,
+    "scientific_output_or_failed_claim_created": false,
+    "source_changed": false,
+    "models_CUDA_environment_calls": 0
+  },
+  "new_authority_plan": "If independently accepted under standing human full-access/continue-until-experiment authorization: exactly one fresh engineering restart with new auth/run/output/clearance identity; old failed bytes remain immutable; tighten seconds to578 and preserve all other caps/model/prompt/task/source semantics; no automatic retry, code change or source/A96 launch. Explicitly amend root-created family CLI-attempt limit from1consumed to2total while preserving combined scientific-unit limits.",
+  "authorization_question": "Assess standing human authorization and scientific/budget validity; do not assume old consumed clearance can be reused or treat Full Access as permission to raise scientific budgets. If a genuinely new human-specific authorization is required, say so explicitly. Root will not invent human approval.",
+  "conditions": [
+    "Read authentic failure stdout/stderr/receipt and static supervise_core ordering before decision.",
+    "No old source unit/task failure relabel; no unit exists for this pre-worker failure.",
+    "Parent operational readiness before any fresh launch; actual output/claim still fresh.",
+    "All actual scientific calls within original cardinal caps and aggregate600s bound; earlier unrelated engineering/manual GPU costs remain separately preserved.",
+    "Positive preflight/auth/review hashes may be reused only as evidence; any new auth/output identity needs its own zero-science check/new exact release before live."
+  ],
+  "source_treatment_semantics_changed": false,
+  "scientific_execution_behavior_changed": true,
+  "new_launch_authority": false
+}

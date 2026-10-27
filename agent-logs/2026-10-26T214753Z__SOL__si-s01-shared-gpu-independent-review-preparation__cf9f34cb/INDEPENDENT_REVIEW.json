@@ -1,0 +1,141 @@
+{
+  "schema": "ROOT_SI_S01_SHARED_GPU_EXACT_SHA_REVIEW_V1",
+  "created_utc": "2026-10-26T22:37:24.696939+00:00",
+  "IMPLEMENTATION_REVIEW": "PASS_SOFTWARE_ONLY",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "base_sha": "e5f09c05824cb61cb35ccbbf4e189b04e8829cea",
+  "branch": "codex/si-s01-shared-gpu-adapter",
+  "reviewer_thread": "01a0994c-a209-7600-8a3e-5ff3096ed346",
+  "resource_policy": {
+    "policy": "SHARED_CONTAINER_CUDA_V1",
+    "contract_sha256": "d908573f0c6d9518aec0a9b6b0a48c24648a26c3c708652b185a7cfe7b7e2489",
+    "proposal_sha256": "6998fe2ffcfd583741cd12ecf6b08638ed0e5da16d671f761a0af1df59c4dc5a",
+    "scientific_execution_behavior_changed": true,
+    "offline_evidence_validation_behavior_changed": true,
+    "source_treatment_semantics_changed": false,
+    "exclusive_gpu": false,
+    "NVML_to_local_PID_mapping": "UNPROVEN_NOT_ASSERTED",
+    "whole_process_vram_cap": false,
+    "device_wide_delta_attribution": false
+  },
+  "resource_admission_policy_changed": true,
+  "source_treatment_semantics_changed": false,
+  "scientific_execution_behavior_changed": true,
+  "offline_evidence_validation_behavior_changed": true,
+  "independent_review_methods": [
+    "Read complete17file delta and final timestamp/OOM closure; independently checked allowed existing-method changes and untouched scientific producer/collector loop/parser/env/supervisor behavior.",
+    "Independent pinned clean-clone full regression, exact failure-ID/phase/exception comparison to independently archived e5 baseline; independent compile/diff/portable hash checks.",
+    "Independent live remote ref equality and clean HEAD verification; source module origins in before/after receipts are reviewed checkout.",
+    "Real production synthetic nonempty engineering and96-slot source paths with model/env/CUDA edges synthetic; no mocked auditor/collector/parser PASS."
+  ],
+  "scope": {
+    "changed_files": 17,
+    "changed_existing_methods": 16,
+    "authorized_existing_method_limit": 17,
+    "scope_violations": 0
+  },
+  "regression": {
+    "schema": "ROOT_EXACT_SHA_REGRESSION_COMPARISON_V1",
+    "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+    "candidate_collected": 1242,
+    "candidate_call_outcomes": {
+      "passed": 1162,
+      "failed": 3
+    },
+    "candidate_failed_phase_counts": {
+      "setup": 77,
+      "call": 3
+    },
+    "known_failure_error_keys": 80,
+    "new_failure_error_keys": [],
+    "removed_failure_error_keys": [],
+    "old_passes_lost": [],
+    "new_passes": 55,
+    "collection_errors": [],
+    "actual_pytest_returncode": 1,
+    "cuda_initialized_after": false,
+    "post_git_status": "",
+    "baseline_sha256": "e64e7a5a14a2c53d1e6bfd2ccbdda234d01467d973d058680bb2b4e78d827b2c",
+    "candidate_reports_sha256": "99528d19b1f684b433f5a13487e4129eddc749726ef1205088bd6105683a6deb"
+  },
+  "confirmed_properties": [
+    "Explicit V2 shared binding across auth/review/preflight/clearance/header/context/resource/auditor; V1 strict preserved, no implicit fallback.",
+    "Auth and durable existing-unit intent precede CUDA APIs; native caching fraction before single original one-byte and weights; positive tracked allocation while probe alive.",
+    "24GiB allocator-only cap reconstructed from actual total with <=1byte readback reconstruction and no cap enlargement;28GiB preweights/2GiB subsequent sampled free, mandatory typed stats and monotone counters.",
+    "Independent resource chain pins setup total/fraction/configuration, local worker/context, real full UUID observation, point ordinal/unit and post-reservation timeline.",
+    "Actual raw generation return is durable before post-check; failed resources retain return/cost and source NA, no retry/backfill or premature structural decision.",
+    "No NVML ownership, exclusivity, whole-process cap, fairness, reserved capacity, A96 fit or learning-effect claim. Own local cleanup and conservative full one-device supervisor interval retained.",
+    "Frozen model/P0/prompts/decoding/adapter/dtype/tensor/parser/actions/schedule/seeds/quotas/exclusions/scientific caps/statistics unchanged."
+  ],
+  "remaining_observations": {
+    "actual_P0_load": "NOT_YET_OBSERVED_IN_NEW_MODE",
+    "actual_engineering_generation_and_saved_path": "NOT_YET_EXECUTED",
+    "positive_production_preflight": "NOT_YET_EXECUTED",
+    "A96_source_collection": "NOT_STARTED",
+    "launch_clearance": "NOT_GRANTED_BY_THIS_REVIEW",
+    "new_scientific_generations": 0,
+    "new_scientific_environment_operations": 0,
+    "historical_science": {
+      "generations": 5142,
+      "environment_operations": 7949
+    }
+  },
+  "conditions": [
+    "Concrete fresh engineering argv/env/proposal/root authority still require review; no old consumed clearance/output identity reused.",
+    "First zero-science real CLI preflight, then separately root-released exactly once bounded engineering:1load/1originalprobe/1generation<=8192in16out/1construct+1reset30000+6savedsteps+1close/600fullsupervisorseconds; failure or actual first-source mismatch stops without retry.",
+    "Actual original frozen P0/base/origins/UUID/resource proof, raw/sent/parser/map join before action1 and all6 historical transitions must pass; software PASS is not this observed acceptance.",
+    "Only after independent actual engineering acceptance may separate frozen A96 source authorization/preflight/clearance be issued; no teacher/recovery/training/eval/heldout.",
+    "Preserve and disclose the adjudicated preparation full-read deviation; no further whole-trajectory reads. It did not parse/emit trajectory bodies or change frozen science and is not labelled bounded-read PASS.",
+    "24/28/2GiB are fixed unmeasured runtime gates; no tuning or quota increase after failure. Preserve all prior costs and original raw evidence."
+  ],
+  "evidence": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/COMPLETE_DELTA.patch",
+      "sha256": "e45253e71b00aab52faf84ee8dbc21788c2bc21e81d91add4da29f0c5a32271a"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/EXACT_SCOPE.json",
+      "sha256": "ee20efdcb49dfee197c2215be12bdc2a7de98781f8634761d4addc28d1a8125b"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/REGRESSION_COMPARISON.json",
+      "sha256": "f1836166956c9db0149d327486b1b43df3bb9415735674f9d597ed12d1dd9ee3"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/STATIC_FINAL_CHECKS.json",
+      "sha256": "1d478affe27e36ff84b6375343eccab5263a5a5d8a0ee9ab2f947f515d8d2945"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/REMOTE_VERIFICATION.json",
+      "sha256": "6f292d0f6b816446fc43c5ac91ad80cab4b3b6c88048266a2324bcb761996e1e"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/independent_full/AUTHENTIC_EXECUTION_RECEIPT.json",
+      "sha256": "9a19190370114e71e74e715e03409792d6b02d8dcb3a968a1f818fe4950f20aa"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/independent_full/full.reports.json",
+      "sha256": "99528d19b1f684b433f5a13487e4129eddc749726ef1205088bd6105683a6deb"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/independent_full/full.origins.before.json",
+      "sha256": "e063763accfc4a7f5abfe56b5d3a77b8a70f76ad883f864a2ce59b4d08623370"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/independent_full/full.origins.after.json",
+      "sha256": "8e2d7455ece672fea3a45e69cdde60c13a363e7ad33e15461e406b14ada6a1b2"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/READ_BOUNDARY_DEVIATION_ADJUDICATION.json",
+      "sha256": "da542d7a869e740932c744d33bd8af25cb5e9943785c3b45066cf65533fd1312"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/ENGINEERING_SOFTWARE_REVIEW.json",
+      "sha256": "72bcfcdc5e930cfa34f5526f2e5d6399068f09b7d1ced8897897be6584d280e4"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/SOURCE_ONLY_SOFTWARE_REVIEW.json",
+      "sha256": "612ad397d3e3e4f67f76f05af4fb6478c181f0dd04d3bb54ff11314d2ac64ea1"
+    }
+  ]
+}

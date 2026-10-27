@@ -1,0 +1,66 @@
+{
+  "schema": "SI_S01_FRAMEWORK_DEFAULT_AMENDMENT_PREFLIGHT_RESULT_V1",
+  "status": "PREFLIGHT_ONLY_EXIT_0_STATIC_INPUTS_BOUND_NOT_RUNTIME_READY",
+  "preflight_release_consumed": true,
+  "live_launch_authorized": false,
+  "science_authorized": false,
+  "run_id": "bf535c3579cc48f88a3046c8ac27aacf",
+  "source": {
+    "checkout": "/home/lizening/wt-si-s01-shared-gpu-adapter",
+    "branch": "codex/si-s01-shared-gpu-adapter",
+    "sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+    "worktree_clean_after": true,
+    "origin_branch_sha_after": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace"
+  },
+  "amendment": {
+    "adoption_sha256": "9eb11831de03fa1bb6f0f8b67c0d676a430b51a9912cb88c7ec8dcf08980d070",
+    "release_path": "/home/lizening/research-notes/agent-logs/2026-10-27T000517Z__SOL__si-s01-framework-default-amendment__f1e0d56_bf6d2eb7/PREFLIGHT_ONLY_RELEASE.json",
+    "release_sha256": "ffd0fc4bf652801e144761ee2c3c25b1def1c60f3072d16a4ec8d2b1616e2e91",
+    "commands_sha256": "ee45f22068a3e5f24506561bcde1a9c135b9099ea0d08253081ff741814c08ea",
+    "authorization_sha256": "588b3f3f49f2f500b78bfab01bb09f31a1f2e129f55037a841aa4bcab8f5450a",
+    "proposal_sha256": "a9b1c43ebdafbb2d7e33a2377c34428a5788d91afc140d5bbcf1957d08881c2a",
+    "review_sha256": "6ac8d943ff59d3a3054a6fad6ce618a7fdde230afe1bf8a127da0022b5731f4d"
+  },
+  "process": {
+    "pid": 880913,
+    "returncode": 0,
+    "start_utc": "2026-10-27T00:06:38.647043+00:00",
+    "end_utc": "2026-10-27T00:07:20.368123+00:00",
+    "elapsed_monotonic_ns": 41721049325,
+    "cwd": "/home/lizening/wt-si-s01-shared-gpu-adapter",
+    "shell": false,
+    "stdin": "DEVNULL"
+  },
+  "argv_sha256": "a4c479a6345be05cc1c65f976469898fdca6d45dae35c831b6545d7fc73fb0ff",
+  "environment_sha256": "a4ec1864fac27a73c0142494dc9f9228b3a5bdd1d1693944795e047f80ecee8b",
+  "environment_change_from_prior_release": "CUDA_MODULE_LOADING=LAZY added; otherwise exact mapping preserved",
+  "preflight_stdout": {
+    "status": "STATIC_ENGINEERING_INPUTS_BOUND_NOT_RUNTIME_READY",
+    "purpose": "ENGINEERING_HISTORICAL_SOURCE_ONCE",
+    "science_authorized": false,
+    "whole_file_hashes": "PRIOR_CERTIFICATE_REFERENCE_NOT_REHASHED",
+    "selected_historical_receipts": 9,
+    "maximum_selected_event_offset": 149225,
+    "historical_input_ids": "UNRECORDED",
+    "models": 0,
+    "CUDA_initializations": 0,
+    "environment_constructs": 0,
+    "generations": 0,
+    "resets": 0,
+    "steps": 0,
+    "units": 0,
+    "output_exists": false
+  },
+  "interpretation": {
+    "whole_file_hashes": "The production receipt references prior certificates for historical trajectory/event whole-file hashes; this does not say current frozen model/P0 inputs were unhashed.",
+    "historical_input_ids": "Accepted declared historical limitation; not a newly inferred blocker and not reconstructed.",
+    "readiness": "This authentic static preflight is not a runtime-ready declaration and is not live clearance. Await independent root review and a separate exact live clearance."
+  },
+  "protected_state": {
+    "new_output_path": "/home/lizening/wt-si-s01-shared-gpu-adapter/artifacts/runtime/si_s01_engineering_shared_cuda_v1_f1e0d56_bf535c3579cc48f88a3046c8ac27aacf",
+    "new_output_absent_after_preflight": true,
+    "new_claim_absent_after_preflight": true,
+    "old_claims_unchanged": true
+  },
+  "next_step": "STOP. Return authentic raw receipts for independent verification. No second preflight, live launch, model, CUDA, or environment call is authorized by this release."
+}

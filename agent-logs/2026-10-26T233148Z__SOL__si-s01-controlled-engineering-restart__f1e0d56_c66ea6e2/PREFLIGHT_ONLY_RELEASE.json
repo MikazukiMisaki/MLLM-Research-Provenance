@@ -1,0 +1,46 @@
+{
+  "schema": "ROOT_SINGLE_STATIC_ENGINEERING_PREFLIGHT_RELEASE_V1",
+  "status": "RELEASED_ONE_CONTROLLED_RESTART_PREFLIGHT_ONLY",
+  "created_utc": "2026-10-26T23:31:48.836944Z",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "review": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/CORRECTED_RESTART_PROPOSAL_REVIEW.json",
+    "sha256": "75feca949dd19ea7885bc35aa83504c463aecf14fb44113c73b444160cd57a66"
+  },
+  "commands": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/EXACT_COMMANDS.json",
+    "sha256": "7755960626e6345a2f4da712284fe9239d590dad792eadfae418e137293f3a99"
+  },
+  "authorization": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/ROOT_ENGINEERING_AUTHORIZATION_V2.json",
+    "sha256": "8829121a1a6f78ccaaab1010980d9b41a3f7fbbff36120facfa36f1d876851ad"
+  },
+  "proposal": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/PRODUCTION_PROPOSAL.json",
+    "sha256": "a9b1c43ebdafbb2d7e33a2377c34428a5788d91afc140d5bbcf1957d08881c2a"
+  },
+  "allowed_argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "/home/lizening/wt-si-s01-shared-gpu-adapter/scripts/run_si_s01_engineering_once.py",
+    "--authorization",
+    "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/ROOT_ENGINEERING_AUTHORIZATION_V2.json",
+    "--authorization-sha256",
+    "8829121a1a6f78ccaaab1010980d9b41a3f7fbbff36120facfa36f1d876851ad",
+    "--proposal",
+    "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/PRODUCTION_PROPOSAL.json",
+    "--preflight-only"
+  ],
+  "allowed_argv_sha256": "69df17615c17c9b148f9afc320d084227dcb09a1d822bf8f0096522a091a1e93",
+  "environment_sha256": "ee0ee968bb128b6ed5249fb39b7d84334f232f0f6b134e0519469db312294ff9",
+  "maximum_preflight_invocations": 1,
+  "old_consumed_guard_must_exist": {
+    "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/artifacts/runtime/si_s01_engineering_shared_cuda_v1_f1e0d56_cfce7ad1c9e3437a9edc2a0f4b6ae5bf.launch_claim.json",
+    "sha256": "2387d1181ee8a32006c3ab84e2e5e938bb95c45bd400f5f952e8e9fbfc2d12b2"
+  },
+  "expected": "authentic rc0 static inputs-bound receipt, all runtime/scientific counters0, new output/claim absent; exact578seconds auth; old guard and original evidence unchanged",
+  "stop_on_nonzero_or_drift": true,
+  "live_launch": "NOT_RELEASED",
+  "A96_or_other_science": "NOT_AUTHORIZED",
+  "after_completion": "Return authentic receipts for root independent verification and new exact engineering clearance. No automatic follow-on or retry."
+}

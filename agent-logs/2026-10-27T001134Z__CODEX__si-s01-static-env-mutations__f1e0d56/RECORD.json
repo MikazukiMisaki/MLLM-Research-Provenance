@@ -1,0 +1,49 @@
+{
+  "schema": "READ_ONLY_ADDENDUM_RECORD_V1",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "source_status_stdout": "",
+  "boundary": "New own JSON files only; no source/provenance/index edits, commit/push, publication or experiments. Existing source blueprint v1/v2/v3 and prior handoffs preserved.",
+  "files": [
+    "STATIC_ENV_MUTATION_FINDINGS.json",
+    "SOURCE_BINDINGS_AND_READ_RECEIPTS.json",
+    "RECORD.json"
+  ],
+  "review_status": "NOT_INDEPENDENTLY_REVIEWED",
+  "runtime_clearance": "NONE",
+  "actual_subprocess_returncodes": [
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "rg",
+        "-n",
+        "os\\.environ|os\\.putenv|patch_environment|clear_environment",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/modeling_utils.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/tokenization_utils_base.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/tokenization_utils_fast.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/tokenization_utils.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/models/auto/tokenization_auto.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/models/qwen3/modeling_qwen3.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/peft/peft_model.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/peft/utils/save_and_load.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/peft/tuners/lora/model.py"
+      ],
+      "returncode": 0
+    }
+  ]
+}

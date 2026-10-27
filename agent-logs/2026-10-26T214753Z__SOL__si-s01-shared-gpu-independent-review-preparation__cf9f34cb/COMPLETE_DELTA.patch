@@ -1,0 +1,964 @@
+diff --git a/configs/experiments/si_s01_shared_resource_v1.json b/configs/experiments/si_s01_shared_resource_v1.json
+new file mode 100644
+index 0000000..ef93dc8
+--- /dev/null
++++ b/configs/experiments/si_s01_shared_resource_v1.json
+@@ -0,0 +1,18 @@
++{
++  "schema": "SI_S01_SHARED_RESOURCE_CONTRACT_V1",
++  "status": "SOFTWARE_CONTRACT_ONLY_NO_AUTHORITY",
++  "policy": "SHARED_CONTAINER_CUDA_V1",
++  "proposal_sha256": "6998fe2ffcfd583741cd12ecf6b08638ed0e5da16d671f761a0af1df59c4dc5a",
++  "allocator_cap_bytes": 25769803776,
++  "preweight_global_free_min_bytes": 30064771072,
++  "later_global_free_min_bytes": 2147483648,
++  "readback_reconstruction_tolerance_bytes": 1,
++  "allocator_config": "backend:native",
++  "scientific_execution_behavior_changed": true,
++  "offline_evidence_validation_behavior_changed": true,
++  "source_treatment_semantics_changed": false,
++  "exclusive_gpu": false,
++  "NVML_to_local_PID_mapping": "UNPROVEN_NOT_ASSERTED",
++  "whole_process_vram_cap": false,
++  "device_wide_delta_attribution": false
++}
+diff --git a/src/self_improvement/si_s01/audit.py b/src/self_improvement/si_s01/audit.py
+index 2a0fcbb..0d57117 100644
+--- a/src/self_improvement/si_s01/audit.py
++++ b/src/self_improvement/si_s01/audit.py
+@@ -12,6 +12,10 @@ from .evidence import read_events,fresh_json
+ 
+ def audit(events_path:Path,trajectory_path:Path,expected_plan:Plan,encoder=None,*,authority=None)->dict:
+     events=read_events(events_path);index={r['event_id']:r for r in events};header=events[0]['payload']
++    from .shared_resource import policy_binding
++    from .shared_resource_audit import audit_resources
++    resource_binding=policy_binding(authority.authorization) if authority is not None else None
++    resource_audit=audit_resources(events,authority,header) if resource_binding is not None else None
+     plan=restore_plan(header['plan']);insist(plan==expected_plan and header['plan_sha256']==plan.sha256 and header['schema']==VERSION and header['protocol_sha256']==PROTOCOL_SHA256,'expected authenticated plan/header')
+     if authority is not None:
+         from .gate import verified_context,source_binding
+@@ -19,7 +23,7 @@ def audit(events_path:Path,trajectory_path:Path,expected_plan:Plan,encoder=None,
+         insist(authority.context_evidence is not None,'external supervisor context required')
+         launch,worker=verified_context(authority,authority.context_evidence)
+         insist(header['run_id']==authority.authorization['run_id'] and header['ceilings']==dict(authority.authorization['ceilings']) and header['allocated_devices']==1 and header['allocation_started_monotonic']==launch['allocation_started_monotonic'],'external run/caps/device/allocation binding')
+-        insist(header['live_binding']=={'authorization_sha256':authority.authorization_sha256,'proposal_sha256':authority.proposal_sha256,'source_sha':authority.authorization['source_sha'],'packages':dict(authority.proposal['packages']),'gpu_uuid':authority.gpu_uuid,'worker_pid':worker['pid'],'worker_uid':worker['uid'],'clearance_sha256':authority.clearance_sha256},'external worker/source identity binding')
++        insist(header['live_binding']=={'authorization_sha256':authority.authorization_sha256,'proposal_sha256':authority.proposal_sha256,'source_sha':authority.authorization['source_sha'],'packages':dict(authority.proposal['packages']),'gpu_uuid':authority.gpu_uuid,'worker_pid':worker['pid'],'worker_uid':worker['uid'],'clearance_sha256':authority.clearance_sha256,**({'resource_policy':resource_binding} if resource_binding is not None else {})},'external worker/source identity binding')
+     elif plan.evidence_class=='live_source_only':insist(False,'live independent audit lacks external authority/context')
+     else:insist(header['live_binding'] is None,'synthetic cannot claim live binding')
+     ceilings=limits(header['ceilings']);run_id=header['run_id']
+@@ -83,7 +87,7 @@ def audit(events_path:Path,trajectory_path:Path,expected_plan:Plan,encoder=None,
+                 value=Generation.from_raw(data['raw'],Prepared(prepared['prompt'],prepared['rendered_prompt'],tuple(prepared['input_ids'])),16,'P0',tuple(data['eos_ids']))
+                 insist(encoder.decode(value.raw['token_ids'])==value.raw['raw_output'],'raw output decode')
+                 parsed=parse_generation('source',value,state);insist(parsed==data['parsed'],'P0 parser binding')
+-                if plan.evidence_class=='live_source_only':
++                if plan.evidence_class=='live_source_only' or resource_binding is not None:
+                     proof=data['runtime'];insist(proof['tensor_proof']=={'prepared':prepared,'sent':prepared},'actual prepared/sent tensor proof')
+                     for point in ('before','during','after'):verify_adapter_state(proof['adapter_states'][point],enabled=True)
+                     insist(proof['adapter_states']['before']==proof['adapter_states']['after'],'adapter restoration')
+@@ -104,7 +108,7 @@ def audit(events_path:Path,trajectory_path:Path,expected_plan:Plan,encoder=None,
+             if p['kind']=='generation_returned':
+                 insist(units[active]['start']['payload']['identity']['kind']=='generation' and active not in returned and p['data']['generation_returned'] is True and p['data']['prepared']==units[active]['start']['payload']['prepared'],'returned raw source boundary')
+                 returned[active]=p['data']
+-            if plan.evidence_class=='live_source_only' and p['kind']=='model_loaded':
++            if (plan.evidence_class=='live_source_only' or resource_binding is not None) and p['kind']=='model_loaded':
+                 observed=p['data'];insist(observed['origins']=={k:authority.proposal['packages'][k] for k in ('torch','transformers','peft')},'actual model origin proof')
+                 verify_adapter_state(observed['adapter_state'],enabled=True)
+         elif kind=='anchor_sealed':
+@@ -154,6 +158,7 @@ def audit(events_path:Path,trajectory_path:Path,expected_plan:Plan,encoder=None,
+             'excluded_later_intervals':['independent_audit','report_write','worker_exit','supervisor_cleanup'],
+             'final_authority':{'artifact':'supervisor_exit.json','schema':'SI_S01_SUPERVISOR_EXIT_V1','field':'allocated_device_hours','requires':'AUTHENTIC_SUPERVISOR_EXECUTION_RECEIPT'},
+             'final_allocated_device_hours':None,'aggregation':'DO_NOT_ADD_STAGE_HOURS_TO_SAME_ALLOCATION_SUPERVISOR_TOTAL'},
++        **({'shared_resource':resource_audit} if resource_audit is not None else {}),
+         'historical_science_unchanged':{'generations':5142,'environment_operations':7949},'science_acceptance':'NOT_LEARNING_OR_TEACHER_ACCEPTANCE','raw_final_event':events[-1]['event_id']}
+ 
+ def asdict_slot(slot):
+diff --git a/src/self_improvement/si_s01/collector.py b/src/self_improvement/si_s01/collector.py
+index 6080b98..126fb87 100644
+--- a/src/self_improvement/si_s01/collector.py
++++ b/src/self_improvement/si_s01/collector.py
+@@ -42,10 +42,12 @@ class Collector:
+         insist(not output.exists() or (live_permit is not None and (output/'launch_context.json').is_file()),'fresh source output')
+         if not output.exists():output.mkdir()
+         self.plan,self.output,self.factory,self.loader=plan,output,environment_factory,loader
++        from .shared_resource import policy_binding
++        resource_binding=policy_binding(live_permit.authorization) if live_permit is not None else None
+         self.run_id=run_id;self.journal=Journal(output/'source_events.jsonl',{'schema':VERSION,'protocol_sha256':PROTOCOL_SHA256,
+             'plan':plan.to_dict(),'plan_sha256':plan.sha256,'run_id':run_id,'ceilings':limits(ceilings),'allocated_devices':devices,
+             'allocation_started_monotonic':clock() if started_at is None else started_at,
+-            'live_binding':{'authorization_sha256':live_permit.authorization_sha256,'proposal_sha256':live_permit.proposal_sha256,'source_sha':live_permit.authorization['source_sha'],'packages':dict(live_permit.proposal['packages']),'gpu_uuid':live_permit.gpu_uuid,'worker_pid':os.getpid(),'worker_uid':os.getuid(),'clearance_sha256':live_permit.clearance_sha256} if live_permit is not None else None},clock=clock)
++            'live_binding':{'authorization_sha256':live_permit.authorization_sha256,'proposal_sha256':live_permit.proposal_sha256,'source_sha':live_permit.authorization['source_sha'],'packages':dict(live_permit.proposal['packages']),'gpu_uuid':live_permit.gpu_uuid,'worker_pid':os.getpid(),'worker_uid':os.getuid(),'clearance_sha256':live_permit.clearance_sha256,**({'resource_policy':resource_binding} if resource_binding is not None else {})} if live_permit is not None else None},clock=clock)
+         self.ledger=Ledger(self.journal,plan,run_id,ceilings=ceilings,allocated_devices=devices,started_at=started_at,clock=clock)
+         self.trajectory=(output/'source_trajectories.jsonl').open('x',encoding='utf-8');self.rows=[];self.ran=False;self.environments=[]
+     def _write(self,row,normal:bool):
+diff --git a/src/self_improvement/si_s01/engineering_audit.py b/src/self_improvement/si_s01/engineering_audit.py
+index 6f0e045..8f7a15f 100644
+--- a/src/self_improvement/si_s01/engineering_audit.py
++++ b/src/self_improvement/si_s01/engineering_audit.py
+@@ -13,6 +13,10 @@ from models.action_parser import action_id_mapping
+ 
+ 
+ def resource_receipt(data,permit,header):
++    from .shared_resource import policy_binding
++    if policy_binding(permit.authorization) is not None:
++        from .shared_resource_audit import validate_receipt
++        return validate_receipt(data,permit,header)
+     insist(data['checked_pid']==header['worker_pid'],'observed engineering resource PID')
+     devices=list(csv.reader(io.StringIO(data['gpu_raw']),skipinitialspace=True));processes=list(csv.reader(io.StringIO(data['process_raw']),skipinitialspace=True))
+     insist(len([r for r in devices if len(r)==4 and r[0]==permit.gpu_uuid and 'A40' in r[1]])==1,'observed resource UUID/A40')
+@@ -28,6 +32,10 @@ def resource_receipt(data,permit,header):
+ def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+     insist(isinstance(permit,EngineeringPermit),'typed engineering audit authority')
+     events=read_events(path);h=events[0]['payload'];history=permit.history;a=permit.authorization;caps=permit.ceilings
++    from .shared_resource import policy_binding
++    from .shared_resource_audit import audit_resources
++    resource_binding=policy_binding(a)
++    resource_audit=audit_resources(events,permit,h) if resource_binding is not None else None
+     expected={'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,'evidence_class':permit.evidence_class,
+         'run_id':a['run_id'],'source_sha':a['source_sha'],'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+         'history_manifest_sha256':history.manifest_sha256,'task_id':history.task_id,'ceilings':caps,'RNG_status':RNG_STATUS,'allocated_devices':int(permit.evidence_class==MODE)}
+@@ -123,7 +131,7 @@ def audit_engineering(path:Path,permit:EngineeringPermit,encoder=None)->dict:
+         'stage_allocated_device_hours':h['allocated_devices']*elapsed/3600,'final_allocated_device_hours':None,
+         'final_cost_authority':{'artifact':'supervisor_exit.json','schema':'SI_S01_ENGINEERING_SUPERVISOR_EXIT_V1','field':'allocated_device_hours','requires':'AUTHENTIC_EXIT_CONTEXT_AND_CLEANUP_RECEIPTS','aggregation':'DO_NOT_ADD_OVERLAPPING_STAGE_AND_FINAL_INTERVALS'},
+         'historical_input_ids_status':history.historical_input_ids_status,'whole_file_hashes':'CERTIFIED_BY_REFERENCE_NOT_REHASHED',
+-        'historical_science_unchanged':{'model_generations':5142,'environment_operations':7949},'learning_or_scientific_yield_claim':False}
++        'historical_science_unchanged':{'model_generations':5142,'environment_operations':7949},'learning_or_scientific_yield_claim':False,**({'shared_resource':resource_audit} if resource_audit is not None else {})}
+ 
+ 
+ def write_engineering_report(output:Path,report:dict):
+diff --git a/src/self_improvement/si_s01/engineering_evidence.py b/src/self_improvement/si_s01/engineering_evidence.py
+index 7d58302..097c0ef 100644
+--- a/src/self_improvement/si_s01/engineering_evidence.py
++++ b/src/self_improvement/si_s01/engineering_evidence.py
+@@ -27,11 +27,12 @@ class EngineeringLedger:
+         self.permit=permit;self.clock=clock;self.started_at=clock() if started_at is None else started_at;self.last=self.started_at
+         self.caps=permit.ceilings;self.run_id=permit.authorization['run_id'];self.used=Counter(dict.fromkeys(COST_KEYS,0));self.completed=Counter(self.used)
+         self.units={};self._stack=[];self.stopped=False;self.closed=False
++        from .shared_resource import shared_header_metadata
+         self.journal=Journal(path,{'schema':'SI_S01_ENGINEERING_EVENT_V1','purpose':PURPOSE,'science_authorized':False,
+             'evidence_class':permit.evidence_class,'run_id':self.run_id,'source_sha':permit.authorization['source_sha'],
+             'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,
+             'history_manifest_sha256':permit.history.manifest_sha256,'task_id':permit.history.task_id,'ceilings':self.caps,
+-            'allocation_started_monotonic':self.started_at,'allocated_devices':int(permit.evidence_class==MODE),'worker_pid':os.getpid(),'worker_uid':os.getuid(),'RNG_status':RNG_STATUS},clock=clock)
++            'allocation_started_monotonic':self.started_at,'allocated_devices':int(permit.evidence_class==MODE),'worker_pid':os.getpid(),'worker_uid':os.getuid(),'RNG_status':RNG_STATUS,**shared_header_metadata(permit)},clock=clock)
+     @property
+     def active(self):return self._stack[-1] if self._stack else None
+     def check_time(self):
+diff --git a/src/self_improvement/si_s01/engineering_gate.py b/src/self_improvement/si_s01/engineering_gate.py
+index 6371a77..5ca25e1 100644
+--- a/src/self_improvement/si_s01/engineering_gate.py
++++ b/src/self_improvement/si_s01/engineering_gate.py
+@@ -12,11 +12,15 @@ from self_improvement.si_p3.runtime_gate import git_state,utc,PACKAGE_NAMES,veri
+ 
+ def engineering_binding(permit:EngineeringPermit)->dict:
+     a=permit.authorization
+-    return {'purpose':PURPOSE,'science_authorized':False,'authorization_sha256':permit.authorization_sha256,
++    value={'purpose':PURPOSE,'science_authorized':False,'authorization_sha256':permit.authorization_sha256,
+         'proposal_sha256':permit.proposal_sha256,'source_sha':a['source_sha'],'run_id':a['run_id'],
+         'history_manifest_sha256':permit.history.manifest_sha256,'task_id':permit.history.task_id,
+         'output_path':a['output_path'],'ceilings':permit.ceilings,'execution_uid':a['execution_uid'],
+         'environment_sha256':digest(a['environment']),'evidence_class':permit.evidence_class,'historical_run_id':HISTORICAL_RUN,'source_index':0,'nominal_seed':30000,'new_pool_seed':42,'RNG_status':RNG_STATUS}
++    from .shared_resource import policy_binding
++    resource=policy_binding(a)
++    if resource is not None:value['resource_policy']=resource
++    return value
+ 
+ 
+ def verify_artifacts(permit:EngineeringPermit)->dict:
+@@ -52,13 +56,18 @@ def authenticate_engineering(repository:Path,authorization_path:Path,authorizati
+     insist(mode in ('preflight','live','worker'),'engineering explicit mode')
+     a=json.loads(bound(authorization_path,authorization_sha256));pbytes=bound(proposal_path,a['proposal_sha256']);p=json.loads(pbytes)
+     fields={'schema','status','purpose','science_authorized','evidence_class','task_sha256','proposal_revision_sha256','source_sha','review','proposal_sha256','authorization_id','run_id','historical_run_id','source_index','ceilings','gpu_uuid','execution_uid','output_path','environment','not_before_utc','expires_utc','launch_argv','preflight_argv','maximum_launches','forbidden_non_engineering'}
+-    insist(set(a)==fields and a['schema']=='SI_S01_ENGINEERING_AUTHORIZATION_V1' and a['purpose']==PURPOSE and a['science_authorized'] is False and a['task_sha256']==TASK_SHA256 and a['proposal_revision_sha256']==PROPOSAL_REVISION_SHA256,'distinct root engineering authorization; old/source cross-use forbidden')
++    insist(a['schema'] in ('SI_S01_ENGINEERING_AUTHORIZATION_V1','SI_S01_ENGINEERING_AUTHORIZATION_V2'),'distinct root engineering authorization; old/source cross-use forbidden')
++    from .shared_resource import policy_binding,review_binding
++    resource_binding=policy_binding(a)
++    if resource_binding is not None:fields.add('resource_policy')
++    insist(set(a)==fields and a['schema'] in ('SI_S01_ENGINEERING_AUTHORIZATION_V1','SI_S01_ENGINEERING_AUTHORIZATION_V2') and a['purpose']==PURPOSE and a['science_authorized'] is False and a['task_sha256']==TASK_SHA256 and a['proposal_revision_sha256']==PROPOSAL_REVISION_SHA256,'distinct root engineering authorization; old/source cross-use forbidden')
+     insist(a['evidence_class'] in (MODE,SOFTWARE) and a['status']==('ROOT_AUTHORIZED_ENGINEERING_ONCE' if a['evidence_class']==MODE else 'SOFTWARE_TEST_ONLY'),'explicit engineering release/evidence class')
+     insist(type(a['maximum_launches']) is int and a['maximum_launches']==1 and a['forbidden_non_engineering'] is True and all(re.fullmatch('[0-9a-f]{32}',a[k]) for k in ('authorization_id','run_id')),'one new engineering identity/launch')
+     sha,clean=git_state(repository);insist(clean and sha==a['source_sha'],'clean exact engineering source')
+     insist(utc(a['not_before_utc'])<=datetime.now(timezone.utc)<utc(a['expires_utc']),'engineering authorization UTC window');ceilings(a['ceilings'])
+     review=json.loads(bound(a['review']['path'],a['review']['sha256']))
+-    insist(review=={'schema':'SI_S01_ENGINEERING_REVIEW_V1','source_sha':sha,'task_sha256':TASK_SHA256,'decision':'PASS_ENGINEERING_HISTORICAL_SOURCE_SOFTWARE','reviewer_role':'INDEPENDENT_ROOT'},'independent exact engineering software review')
++    if resource_binding is None:insist(review=={'schema':'SI_S01_ENGINEERING_REVIEW_V1','source_sha':sha,'task_sha256':TASK_SHA256,'decision':'PASS_ENGINEERING_HISTORICAL_SOURCE_SOFTWARE','reviewer_role':'INDEPENDENT_ROOT'},'independent exact engineering software review')
++    else:review_binding(review,a,{'schema':'SI_S01_ENGINEERING_REVIEW_V1','source_sha':sha,'task_sha256':TASK_SHA256,'decision':'PASS_ENGINEERING_HISTORICAL_SOURCE_SOFTWARE','reviewer_role':'INDEPENDENT_ROOT'})
+     insist(set(p)=={'schema','purpose','model','environment','history_manifest','original_files_by_reference','interpreter','packages'} and p['schema']=='SI_S01_ENGINEERING_PROPOSAL_V1' and p['purpose']==PURPOSE,'engineering proposal fields')
+     insist(set(p['packages'])==set(PACKAGE_NAMES) and all(set(x)=={'path','sha256','version'} for x in p['packages'].values()),'bound actual runtime package set')
+     insist(set(p['model'])==({'base_snapshot','adapter_path'} if a['evidence_class']==MODE else {'base_snapshot','adapter_path','synthetic_files'}),'engineering model fields')
+diff --git a/src/self_improvement/si_s01/engineering_runtime.py b/src/self_improvement/si_s01/engineering_runtime.py
+index 39eb7be..b5f0b1a 100644
+--- a/src/self_improvement/si_s01/engineering_runtime.py
++++ b/src/self_improvement/si_s01/engineering_runtime.py
+@@ -31,7 +31,8 @@ class EngineeringProducer:
+             insist(getattr(sys.modules.get('torch'),'_si_s01_software_boundary',False) is True,'software loader requires an explicit fake raw model/CUDA boundary')
+         from .engineering_gate import verify_artifacts
+         ledger.runtime('artifact_recheck',verify_artifacts(permit))
+-        return load_guarded(cls,permit,ledger,evidence_class=permit.evidence_class,
++        from .shared_resource import guard_for
++        return load_guarded(cls,permit,ledger,evidence_class=permit.evidence_class,resource_policy=guard_for(permit,ledger),
+             probe_started=ledger.probe_started,probe_completed=ledger.probe_completed)
+     def _raw(self,prepared):
+         insist(isinstance(self.permit,EngineeringPermit) and isinstance(self.ledger,EngineeringLedger),'engineering generation authority/ledger type')
+diff --git a/src/self_improvement/si_s01/gate.py b/src/self_improvement/si_s01/gate.py
+index f77d410..3c3c87b 100644
+--- a/src/self_improvement/si_s01/gate.py
++++ b/src/self_improvement/si_s01/gate.py
+@@ -71,13 +71,18 @@ def authenticate(repository:Path,authorization_path:Path,authorization_sha256:st
+     a=json.loads(bound(authorization_path,authorization_sha256));proposal_bytes=bound(proposal_path,a['proposal_sha256']);p=json.loads(proposal_bytes)
+     fields={'schema','purpose','protocol_sha256','task_sha256','source_sha','review','proposal_sha256','authorization_id','run_id',
+             'evidence_class','status','preflight_receipt_path','execution_uid','output_path','gpu_uuid','ceilings','not_before_utc','expires_utc','environment','launch_argv','preflight_argv','maximum_launches','forbidden_non_source'}
+-    insist(set(a)==fields and a['schema']=='SI_S01_AUTHORIZATION_V1' and a['purpose']=='SOURCE_ONLY_A96' and a['protocol_sha256']==PROTOCOL_SHA256 and a['task_sha256']==TASK_SHA256,'new source-only scope; old authorization forbidden')
++    insist(a['schema'] in ('SI_S01_AUTHORIZATION_V1','SI_S01_AUTHORIZATION_V2'),'new source-only scope; old authorization forbidden')
++    from .shared_resource import policy_binding,review_binding
++    resource_binding=policy_binding(a)
++    if resource_binding is not None:fields.add('resource_policy')
++    insist(set(a)==fields and a['schema'] in ('SI_S01_AUTHORIZATION_V1','SI_S01_AUTHORIZATION_V2') and a['purpose']=='SOURCE_ONLY_A96' and a['protocol_sha256']==PROTOCOL_SHA256 and a['task_sha256']==TASK_SHA256,'new source-only scope; old authorization forbidden')
+     insist(a['status']=='PREFLIGHT_ONLY' and type(a['maximum_launches']) is int and a['maximum_launches']==1 and a['forbidden_non_source'] is True,'preflight-only permit; no live capability')
+     insist(a['evidence_class'] in MODES and re.fullmatch('[0-9a-f]{32}',a['authorization_id']) and re.fullmatch('[0-9a-f]{32}',a['run_id']),'authorization/run identity')
+     sha,clean=git_state(repository);insist(clean and sha==a['source_sha'],'clean exact source SHA')
+     limits(a['ceilings']);now=datetime.now(timezone.utc);insist(utc(a['not_before_utc'])<=now<utc(a['expires_utc']),'authorization UTC window')
+     review=json.loads(bound(a['review']['path'],a['review']['sha256']))
+-    insist(review=={'schema':'SI_S01_INDEPENDENT_REVIEW_V1','source_sha':sha,'protocol_sha256':PROTOCOL_SHA256,'decision':'PASS_SOURCE_ONLY_SOFTWARE','reviewer_role':'INDEPENDENT_ROOT'},'independent exact-SHA review')
++    if resource_binding is None:insist(review=={'schema':'SI_S01_INDEPENDENT_REVIEW_V1','source_sha':sha,'protocol_sha256':PROTOCOL_SHA256,'decision':'PASS_SOURCE_ONLY_SOFTWARE','reviewer_role':'INDEPENDENT_ROOT'},'independent exact-SHA review')
++    else:review_binding(review,a,{'schema':'SI_S01_INDEPENDENT_REVIEW_V1','source_sha':sha,'protocol_sha256':PROTOCOL_SHA256,'decision':'PASS_SOURCE_ONLY_SOFTWARE','reviewer_role':'INDEPENDENT_ROOT'})
+     insist(set(p)=={'schema','metadata','interpreter','packages','model','environment'} and p['schema']=='SI_S01_PROPOSAL_V1','source proposal fields')
+     insist(set(p['packages'])==set(PACKAGE_NAMES),'bound runtime module set')
+     for binding in p['packages'].values():insist(set(binding)=={'path','sha256','version'},'module path/hash/version')
+@@ -135,10 +140,15 @@ ZERO={'model_objects':0,'generations':0,'CUDA_initializations':0,'environment_co
+ 
+ def source_binding(permit:Permit)->dict:
+     a=permit.authorization
+-    return {'authorization_sha256':permit.authorization_sha256,'source_sha':a['source_sha'],'protocol_sha256':PROTOCOL_SHA256,
++    value={'authorization_sha256':permit.authorization_sha256,'source_sha':a['source_sha'],'protocol_sha256':PROTOCOL_SHA256,
+             'proposal_sha256':permit.proposal_sha256,'plan_sha256':permit.plan.sha256,'environment_sha256':digest(a['environment']),
+             'ceilings':dict(a['ceilings']),'run_id':a['run_id'],'execution_uid':a['execution_uid'],'output_path':a['output_path'],
+             'evidence_class':permit.plan.evidence_class}
++    from .shared_resource import policy_binding
++    resource=policy_binding(a)
++    if resource is not None:value['resource_policy']=resource
++    return value
++
+ 
+ def complete_preflight(permit:Permit)->dict:
+     """Only called by --preflight-only after static authentication; never source output."""
+@@ -146,7 +156,7 @@ def complete_preflight(permit:Permit)->dict:
+     import uuid
+     a=permit.authorization
+     argv=[permit.authorization_sha256 if x=='@AUTHORIZATION_SHA256@' else x for x in a['preflight_argv']]
+-    value={'schema':'SI_S01_PREFLIGHT_RECEIPT_V1','status':'STATIC_PREFLIGHT_0SCIENCE_PASS','binding':source_binding(permit),
++    value={'schema':'SI_S01_PREFLIGHT_RECEIPT_V2' if 'resource_policy' in source_binding(permit) else 'SI_S01_PREFLIGHT_RECEIPT_V1','status':'STATIC_PREFLIGHT_0SCIENCE_PASS','binding':source_binding(permit),
+            'counters':ZERO,'argv_sha256':digest(argv),'receipt_id':uuid.uuid4().hex,
+            'finished_utc':datetime.now(timezone.utc).isoformat().replace('+00:00','Z')}
+     fresh_json(Path(a['preflight_receipt_path']),value)
+@@ -159,17 +169,18 @@ def render_clearance_argv(clearance:Mapping[str,Any],sha:str)->list[str]:
+ 
+ def check_clearance(permit:Permit,path:Path,sha:str)->dict:
+     c=json.loads(bound(path,sha));a=permit.authorization
++    version='V2' if 'resource_policy' in source_binding(permit) else 'V1'
+     insist(set(c)=={'schema','status','issuer','binding','preflight','preflight_execution','live_argv','clearance_id','maximum_launches','not_before_utc','expires_utc'},'launch clearance fields')
+-    insist(c['schema']=='SI_S01_LAUNCH_CLEARANCE_V1' and c['status']=='CLEARED_ONE_SOURCE_ONLY_LAUNCH' and c['issuer']=='INDEPENDENT_ROOT' and type(c['maximum_launches']) is int and c['maximum_launches']==1 and re.fullmatch('[0-9a-f]{32}',c['clearance_id']),'fresh independent source-only clearance')
++    insist(c['schema']==('SI_S01_LAUNCH_CLEARANCE_'+version) and c['status']=='CLEARED_ONE_SOURCE_ONLY_LAUNCH' and c['issuer']=='INDEPENDENT_ROOT' and type(c['maximum_launches']) is int and c['maximum_launches']==1 and re.fullmatch('[0-9a-f]{32}',c['clearance_id']),'fresh independent source-only clearance')
+     insist(c['binding']==source_binding(permit),'clearance source/proposal/plan/env/caps/run/output binding')
+     now=datetime.now(timezone.utc);insist(utc(c['not_before_utc'])<=now<utc(c['expires_utc'])<=utc(a['expires_utc']),'clearance UTC window')
+     insist(c['preflight']['path']==a['preflight_receipt_path'],'the actual prescribed preflight receipt')
+     pre=json.loads(bound(c['preflight']['path'],c['preflight']['sha256']))
+     expected_argv=[permit.authorization_sha256 if x=='@AUTHORIZATION_SHA256@' else x for x in a['preflight_argv']]
+-    insist(set(pre)=={'schema','status','binding','counters','argv_sha256','receipt_id','finished_utc'} and pre['schema']=='SI_S01_PREFLIGHT_RECEIPT_V1' and pre['status']=='STATIC_PREFLIGHT_0SCIENCE_PASS' and pre['binding']==source_binding(permit) and pre['counters']==ZERO and all(type(v) is int and v==0 for v in pre['counters'].values()) and pre['argv_sha256']==digest(expected_argv),'positive zero-science preflight exact context')
++    insist(set(pre)=={'schema','status','binding','counters','argv_sha256','receipt_id','finished_utc'} and pre['schema']==('SI_S01_PREFLIGHT_RECEIPT_'+version) and pre['status']=='STATIC_PREFLIGHT_0SCIENCE_PASS' and pre['binding']==source_binding(permit) and pre['counters']==ZERO and all(type(v) is int and v==0 for v in pre['counters'].values()) and pre['argv_sha256']==digest(expected_argv),'positive zero-science preflight exact context')
+     insist(utc(a['not_before_utc'])<=utc(pre['finished_utc'])<=utc(c['not_before_utc']),'preflight must precede independent clearance')
+     execution=json.loads(bound(c['preflight_execution']['path'],c['preflight_execution']['sha256']))
+-    insist(execution['schema']=='SI_S01_PREFLIGHT_EXECUTION_V1' and type(execution['authentic_returncode']) is int and execution['authentic_returncode']==0 and execution['argv']==expected_argv and execution['binding']==source_binding(permit) and execution['preflight_receipt_sha256']==c['preflight']['sha256'],'authentic successful preflight execution receipt')
++    insist(execution['schema']==('SI_S01_PREFLIGHT_EXECUTION_'+version) and type(execution['authentic_returncode']) is int and execution['authentic_returncode']==0 and execution['argv']==expected_argv and execution['binding']==source_binding(permit) and execution['preflight_receipt_sha256']==c['preflight']['sha256'],'authentic successful preflight execution receipt')
+     actual=render_clearance_argv(c,sha)
+     insist(actual[actual.index('--clearance')+1]==str(path.resolve()),'exact clearance file path argv')
+     stripped=[];i=0
+diff --git a/src/self_improvement/si_s01/runtime.py b/src/self_improvement/si_s01/runtime.py
+index 945b839..4eb1227 100644
+--- a/src/self_improvement/si_s01/runtime.py
++++ b/src/self_improvement/si_s01/runtime.py
+@@ -17,7 +17,8 @@ class LiveProducer(Producer):
+     def load(cls,permit:Permit,ledger:Ledger):
+         insist(isinstance(permit,Permit) and permit.plan.evidence_class=='live_source_only','no synthetic live loader')
+         ledger.runtime('artifact_recheck',artifacts(permit))
+-        return load_guarded(cls,permit,ledger,evidence_class='live_source_only')
++        from .shared_resource import guard_for
++        return load_guarded(cls,permit,ledger,evidence_class='live_source_only',resource_policy=guard_for(permit,ledger))
+     def resource(self):return shared_resource(self)
+     def _raw(self,prepared:PreparedTensors,slot:Slot,index:int):
+         source_only('source','P0')
+diff --git a/src/self_improvement/si_s01/runtime_core.py b/src/self_improvement/si_s01/runtime_core.py
+index 5fd9ebb..570da8d 100644
+--- a/src/self_improvement/si_s01/runtime_core.py
++++ b/src/self_improvement/si_s01/runtime_core.py
+@@ -6,6 +6,7 @@ import json,os,time
+ from .contract import *
+ from self_improvement.si_p3.runtime_backend import (adapter_state,verify_adapter_state,module_origin,verify_cuda_uuid)
+ from self_improvement.si_p3.runtime_gate import inspect_gpu
++from .shared_resource import validate_guard_argument
+ 
+ class RuntimeBinding(Protocol):
+     proposal:Mapping[str,Any]
+@@ -16,18 +17,26 @@ class RuntimeSink:
+     def append(self,kind,data):self.ledger.runtime(kind,data)
+ 
+ 
+-def load_guarded(cls,permit:RuntimeBinding,ledger,*,evidence_class:str,probe_started=None,probe_completed=None):
++def load_guarded(cls,permit:RuntimeBinding,ledger,*,evidence_class:str,probe_started=None,probe_completed=None,resource_policy=None):
++    validate_guard_argument(permit,ledger,resource_policy)
+     import torch,transformers,peft
+     from models.qwen import QwenPolicy,QwenPolicyConfig
+     from models.policy import GenerationOptions
+     for name,module in [('torch',torch),('transformers',transformers),('peft',peft)]:
+         insist(module_origin(module)==permit.proposal['packages'][name],'actual module origin/version: '+name)
+     if probe_started is not None:probe_started()
++    if resource_policy is not None:resource_policy.intent()
+     insist(torch.cuda.is_available() and torch.cuda.device_count()==1,'one visible CUDA device')
+     torch.cuda.init()
+     verify_cuda_uuid(torch,RuntimeSink(ledger),permit.gpu_uuid,point='source_before_context_probe')
++    if resource_policy is not None:resource_policy.configure(torch)
+     probe=torch.empty(1,dtype=torch.uint8,device='cuda:0')
+-    ledger.runtime('one_byte_before_weights',inspect_gpu(permit.gpu_uuid,allowed_pids={os.getpid()},require_owned_context=True));del probe
++    if resource_policy is None:
++        ledger.runtime('one_byte_before_weights',inspect_gpu(permit.gpu_uuid,allowed_pids={os.getpid()},require_owned_context=True))
++    else:
++        torch.cuda.synchronize()
++        ledger.runtime('one_byte_before_weights',resource_policy.sample('one_byte_before_weights'))
++    del probe
+     if probe_completed is not None:probe_completed()
+     configured=QwenPolicy(QwenPolicyConfig(model_id=permit.proposal['model']['base_snapshot'],device='cuda:0',dtype='bfloat16',local_files_only=True,trust_remote_code=False,enable_thinking=False,generation=GenerationOptions(max_new_tokens=16,do_sample=False)))
+     tokenizer,base,_=configured._load()
+@@ -43,6 +52,8 @@ def load_guarded(cls,permit:RuntimeBinding,ledger,*,evidence_class:str,probe_sta
+     verify_cuda_uuid(torch,RuntimeSink(ledger),permit.gpu_uuid,point='source_after_load')
+     result=cls(tokenizer,lambda *_:None,evidence_class=evidence_class)
+     result.torch,result.model,result.permit,result.ledger=torch,model,permit,ledger;result.raw=result._raw
++    result.resource_policy=resource_policy
++    result._resource_point='model_loaded'
+     ledger.runtime('model_loaded',{'origins':{name:module_origin(m) for name,m in [('torch',torch),('transformers',transformers),('peft',peft)]},'adapter_state':adapter_state(model),'resource':result.resource()})
+     return result
+ 
+@@ -58,6 +69,7 @@ def guarded_generation(self,prepared:PreparedTensors,active:str,*,pre_call=None)
+     sent=prepared.prepared.to_dict()|{'input_ids':inputs['input_ids'][0].tolist(),'attention_mask':inputs['attention_mask'][0].tolist()}
+     insist(sent==prepared.to_dict(),'actual input IDs/mask')
+     during=adapter_state(self.model);verify_adapter_state(during,enabled=True)
++    self._resource_point='before_generation'
+     self.ledger.runtime('resource_before_generation',self.resource())
+     generated=None;returned=None
+     try:
+@@ -79,6 +91,7 @@ def guarded_generation(self,prepared:PreparedTensors,active:str,*,pre_call=None)
+         after=adapter_state(self.model);verify_adapter_state(after,enabled=True)
+         insist(before==after and all(not p.requires_grad for p in self.model.parameters()),'P0 remains enabled/default/unmerged/frozen')
+         insist(inputs['input_ids'][0].tolist()==sent['input_ids'] and inputs['attention_mask'][0].tolist()==sent['attention_mask'],'generate mutated input')
++        self._resource_point='after_generation'
+         proof={'tensor_proof':{'prepared':prepared.to_dict(),'sent':sent},'adapter_states':{'before':before,'during':during,'after':after},'resource_after':self.resource()}
+         return {'raw':raw,'runtime':proof}
+     except BaseException as error:
+@@ -93,6 +106,9 @@ def guarded_generation(self,prepared:PreparedTensors,active:str,*,pre_call=None)
+ 
+ 
+ def resource(self):
++    validate_guard_argument(self.permit,self.ledger,getattr(self,'resource_policy',None))
++    if getattr(self,'resource_policy',None) is not None:
++        return self.resource_policy.sample(self._resource_point)
+     return inspect_gpu(self.permit.gpu_uuid,allowed_pids={os.getpid()},require_owned_context=True)
+ 
+ 
+diff --git a/src/self_improvement/si_s01/shared_resource.py b/src/self_improvement/si_s01/shared_resource.py
+new file mode 100644
+index 0000000..6412435
+--- /dev/null
++++ b/src/self_improvement/si_s01/shared_resource.py
+@@ -0,0 +1,142 @@
++"""Explicit shared-container CUDA policy. No authority or CUDA calls at import."""
++from __future__ import annotations
++from copy import deepcopy
++from pathlib import Path
++import hashlib,json,math,os
++from types import SimpleNamespace
++from self_improvement.si_p3.runtime_backend import verify_cuda_uuid
++from .contract import insist,digest,canonical
++
++POLICY='SHARED_CONTAINER_CUDA_V1'
++CONTRACT_SHA256='d908573f0c6d9518aec0a9b6b0a48c24648a26c3c708652b185a7cfe7b7e2489'
++CONTRACT_PATH=Path(__file__).resolve().parents[3]/'configs/experiments/si_s01_shared_resource_v1.json'
++STATS=('allocated_bytes.all.current','allocated_bytes.all.peak','reserved_bytes.all.current','reserved_bytes.all.peak','num_ooms','num_alloc_retries')
++CLAIMS={'scientific_execution_behavior_changed':True,'offline_evidence_validation_behavior_changed':True,'source_treatment_semantics_changed':False,'exclusive_gpu':False,'NVML_to_local_PID_mapping':'UNPROVEN_NOT_ASSERTED','whole_process_vram_cap':False,'device_wide_delta_attribution':False}
++V1=('SI_S01_AUTHORIZATION_V1','SI_S01_ENGINEERING_AUTHORIZATION_V1')
++V2=('SI_S01_AUTHORIZATION_V2','SI_S01_ENGINEERING_AUTHORIZATION_V2')
++
++def contract():
++    raw=CONTRACT_PATH.read_bytes();insist(hashlib.sha256(raw).hexdigest()==CONTRACT_SHA256,'shared portable contract bytes')
++    return json.loads(raw)
++
++def binding():
++    c=contract();return {'policy':POLICY,'contract_sha256':CONTRACT_SHA256,'proposal_sha256':c['proposal_sha256'],**CLAIMS}
++
++def policy_binding(authorization):
++    schema=authorization.get('schema')
++    if schema in V1:
++        insist('resource_policy' not in authorization,'V1 remains strict; no resource downgrade')
++        return None
++    insist(schema in V2 and type(authorization.get('resource_policy')) is dict and canonical(authorization['resource_policy'])==canonical(binding()),'explicit V2 shared resource binding')
++    env=authorization['environment']
++    insist(not any(k in env for k in ('PYTORCH_NO_CUDA_MEMORY_CACHING','PYTORCH_NO_HIP_MEMORY_CACHING')),'shared uncached allocator environment forbidden')
++    insist(env.get('PYTORCH_CUDA_ALLOC_CONF')==contract()['allocator_config'],'shared fixed native allocator configuration')
++    return binding()
++
++def review_binding(review,authorization,expected):
++    b=policy_binding(authorization)
++    if b is not None:expected=expected|{'schema':expected['schema'].removesuffix('V1')+'V2','resource_policy':b}
++    insist(review==expected,'independent exact shared/strict policy review')
++
++def local_identity():
++    return {'pid':os.getpid(),'uid':os.getuid(),'start_tick':int(Path('/proc/self/stat').read_text().rsplit(')',1)[1].split()[19]),'pgid':os.getpgid(0),'sid':os.getsid(0)}
++
++def authority(permit):
++    context=permit.context_evidence
++    return {'authorization_sha256':permit.authorization_sha256,'proposal_sha256':permit.proposal_sha256,'source_sha':permit.authorization['source_sha'],'run_id':permit.authorization['run_id'],'context':deepcopy(context)}
++
++def checked_context(permit,identity):
++    if permit.context_evidence is None:
++        insist(permit.authorization['evidence_class']=='synthetic_software_fixture','shared live resource requires supervisor context')
++        return
++    c=permit.context_evidence
++    from .gate import bound
++    w=json.loads(bound(c['worker_path'],c['worker_sha256']));launch=json.loads(bound(c['launch_path'],c['launch_sha256']))
++    insist((identity['pid'],identity['uid'],identity['start_tick'],identity['pgid'],identity['sid'])==(w['pid'],w['uid'],w['start_tick'],w['pgid'],w.get('sid',w['pgid'])),'shared local worker PID/UID/starttick/PGID/SID')
++    insist(w['authorization_sha256']==permit.authorization_sha256 and w['launch_context_sha256']==c['launch_sha256'] and launch['allocation_started_monotonic']<=w['started_monotonic'],'shared external worker/context binding')
++    name='engineering_binding' if 'ENGINEERING' in permit.authorization['schema'] else 'source_binding'
++    from .engineering_gate import engineering_binding
++    from .gate import source_binding
++    insist(launch[name]==(engineering_binding(permit) if name=='engineering_binding' else source_binding(permit)),'shared launch resource policy binding')
++
++def guard_for(permit,ledger):
++    return SharedGuard(permit,ledger) if policy_binding(permit.authorization) is not None else None
++
++class SharedGuard:
++    def __init__(self,permit,ledger):
++        self.permit,self.ledger=permit,ledger;self.binding=policy_binding(permit.authorization)
++        insist(self.binding is not None and permit.authorization['execution_uid']==os.getuid(),'shared typed worker authority')
++        self.identity=local_identity();checked_context(permit,self.identity)
++        self.authorization=authority(permit);self.config=contract();self.ordinal=0;self.previous=None;self.configured=False
++    def envelope(self,point):
++        self.ledger.check_time();unit=self.ledger.active
++        insist(unit in self.ledger.units,'shared resource requires persistent active reservation')
++        return {'schema':'SI_S01_SHARED_RESOURCE_RECEIPT_V1','resource_policy':deepcopy(self.binding),'authority':deepcopy(self.authorization),'local_worker':dict(self.identity),'point':point,'unit':unit,'ordinal':self.ordinal,'observed_monotonic':self.ledger.journal.clock(),'NVML':{'status':'NOT_COLLECTED','mapping':'UNPROVEN_NOT_ASSERTED'}}
++    def intent(self):
++        unit=self.ledger.units[self.ledger.active];insist(unit['identity']['kind'] in ('model_load','context_probe'),'shared initialization reservation')
++        self.ledger.runtime('shared_resource_intent',self.envelope('intent_before_cuda'))
++    def configure(self,torch):
++        self.torch=torch;insist(not self.configured,'shared allocator configured once')
++        insist(dict(os.environ)==self.permit.authorization['environment'],'shared effective exact environment')
++        policy_binding(self.permit.authorization)
++        memory=torch.cuda.memory
++        insist(memory.get_allocator_backend()=='native','shared native caching allocator required')
++        free,total=torch.cuda.mem_get_info(0)
++        insist(type(total) is int and type(free) is int and 0<=free<=total and total>=self.config['preweight_global_free_min_bytes'],'shared actual total/global free')
++        self.total=total;self.fraction=self.config['allocator_cap_bytes']/total;self.effective=int(self.fraction*float(total))
++        insist(0<self.effective<=self.config['allocator_cap_bytes'],'shared conservative allocator cap rounding')
++        memory.set_per_process_memory_fraction(self.fraction,0)
++        self.configured=True
++        self.ledger.runtime('shared_allocator_configured',self.sample('configured_before_probe'))
++    def sample(self,point):
++        raw=self.envelope(point)
++        try:
++            insist(self.configured,'shared allocator not configured')
++            torch=self.torch;policy_binding(self.permit.authorization)
++            insist(os.environ.get('PYTORCH_CUDA_ALLOC_CONF')==self.config['allocator_config'] and not any(k in os.environ for k in ('PYTORCH_NO_CUDA_MEMORY_CACHING','PYTORCH_NO_HIP_MEMORY_CACHING')),'shared effective allocator environment drift')
++            current=local_identity();checked_context(self.permit,current);insist(current==self.identity,'shared local worker drift')
++            uuid=[]
++            def observe(kind,data):
++                uuid.append(data);self.ledger.runtime(kind,data)
++            verify_cuda_uuid(torch,SimpleNamespace(append=observe),self.permit.gpu_uuid,point='shared_'+point)
++            memory=torch.cuda.memory;backend=memory.get_allocator_backend();fraction=memory.get_per_process_memory_fraction(0)
++            free,total=torch.cuda.mem_get_info(0);stats=memory.memory_stats(0)
++            raw.update(cuda={'device_count':torch.cuda.device_count(),'ordinal':0,'uuid':self.permit.gpu_uuid,'observation':uuid[-1]},allocator={'backend':backend,'requested_fraction':self.fraction,'readback_fraction':fraction,'effective_limit_bytes':self.effective,'configuration':self.config['allocator_config'],'stats':{k:stats[k] for k in STATS if k in stats}},global_memory={'free_bytes':free,'total_bytes':total},probe={'bytes':1,'synchronized':True} if point=='one_byte_before_weights' else None)
++            insist(raw['cuda']['device_count']==1 and backend=='native','shared device/backend drift')
++            insist(type(total) is int and total==self.total and type(free) is int and 0<=free<=total,'shared global memory shape/total drift')
++            insist(type(fraction) is float and math.isfinite(fraction) and 0<fraction<=1 and abs(fraction*total-self.effective)<=1,'shared allocator fraction readback')
++            insist(all(k in stats and type(stats[k]) is int and stats[k]>=0 for k in STATS),'shared mandatory explicit allocator stats')
++            a,ap,r,rp=(stats[k] for k in STATS[:4]);insist(a<=r<=self.effective and a<=ap<=rp<=self.effective and r<=rp,'shared allocator stats/cap consistency')
++            if point=='one_byte_before_weights':insist(a>=1 and r>=a,'shared live one-byte caching stats')
++            if self.previous is not None:insist(all(stats[k]>=self.previous[k] for k in (STATS[1],STATS[3],STATS[4],STATS[5])),'shared allocator peak/counter rollback')
++            threshold=self.config['preweight_global_free_min_bytes'] if point=='one_byte_before_weights' else self.config['later_global_free_min_bytes']
++            if point!='configured_before_probe':insist(free>=threshold,'shared sampled global free below threshold')
++            if hasattr(self,'readback'):insist(fraction==self.readback,'shared configured allocator readback drift')
++            self.readback=fraction
++            self.previous={k:stats[k] for k in STATS};self.ordinal+=1
++            return raw
++        except BaseException as error:
++            self.ledger.runtime('shared_resource_rejected',safe_observation(raw)|{'error':{'exception':type(error).__name__,'message':str(error)}})
++            error.resource_evidence=safe_observation(raw);raise
++
++
++def shared_header_metadata(permit):
++    b=policy_binding(permit.authorization)
++    return {'resource_policy':b} if b is not None else {}
++
++
++def safe_observation(value):
++    if isinstance(value,dict):return {str(k):safe_observation(v) for k,v in value.items()}
++    if isinstance(value,(list,tuple)):return [safe_observation(v) for v in value]
++    if type(value) is float and not math.isfinite(value):return {'invalid_nonfinite_repr':repr(value)}
++    if value is None or type(value) in (str,int,float,bool):return value
++    return {'invalid_type':type(value).__name__,'repr':repr(value)}
++
++
++def validate_guard_argument(permit,ledger,guard):
++    authorization=getattr(permit,'authorization',None)
++    if authorization is None:
++        insist(guard is None,'shared guard requires explicit typed authority');return
++    b=policy_binding(authorization)
++    if b is None:insist(guard is None,'strict authority cannot inject shared guard')
++    else:insist(type(guard) is SharedGuard and guard.permit is permit and guard.ledger is ledger and guard.binding==b,'shared runtime guard/authority identity')
+diff --git a/src/self_improvement/si_s01/shared_resource_audit.py b/src/self_improvement/si_s01/shared_resource_audit.py
+new file mode 100644
+index 0000000..d0f4e0e
+--- /dev/null
++++ b/src/self_improvement/si_s01/shared_resource_audit.py
+@@ -0,0 +1,96 @@
++"""Pure offline shared-resource reconstruction; no Torch/runtime guard calls."""
++from __future__ import annotations
++from copy import deepcopy
++import math
++from .contract import insist
++from .shared_resource import policy_binding,binding,contract,authority,STATS,checked_context
++from self_improvement.si_p3.runtime_backend import cuda_uuid_matches
++
++
++def validate_receipt(raw,permit,header,*,point=None,unit=None):
++    fields={'schema','resource_policy','authority','local_worker','point','unit','ordinal','observed_monotonic','NVML','cuda','allocator','global_memory','probe'}
++    insist(set(raw)==fields and raw['schema']=='SI_S01_SHARED_RESOURCE_RECEIPT_V1','shared resource receipt exact fields/schema')
++    insist(raw['resource_policy']==binding() and raw['authority']==authority(permit),'shared resource external authority/policy')
++    if point is not None:insist(raw['point']==point,'shared resource point binding')
++    if unit is not None:insist(raw['unit']==unit,'shared resource unit binding')
++    insist(type(raw['ordinal']) is int and raw['ordinal']>=0 and type(raw['observed_monotonic']) in (int,float) and math.isfinite(raw['observed_monotonic']),'shared resource ordinal/time')
++    identity=raw['local_worker'];insist(set(identity)=={'pid','uid','start_tick','pgid','sid'} and all(type(v) is int and v>0 for k,v in identity.items() if k!='uid') and type(identity['uid']) is int and identity['uid']>=0,'shared local identity shape')
++    worker=header.get('live_binding',header)
++    insist(identity['pid']==worker['worker_pid'] and identity['uid']==worker['worker_uid']==permit.authorization['execution_uid'],'shared local resource/header identity')
++    checked_context(permit,identity)
++    nvml=raw['NVML'];insist(nvml=={'status':'NOT_COLLECTED','mapping':'UNPROVEN_NOT_ASSERTED'},'shared NVML must not assert ownership')
++    device=raw['cuda'];insist(set(device)=={'device_count','ordinal','uuid','observation'} and type(device['device_count']) is int and device['device_count']==1 and type(device['ordinal']) is int and device['ordinal']==0 and device['uuid']==permit.gpu_uuid,'shared actual CUDA device binding')
++    observed=device['observation'];insist(observed['point']=='shared_'+raw['point'] and observed['observed']['expected_uuid']==permit.gpu_uuid and observed['observed']['device']==0 and cuda_uuid_matches(observed['observed']['uuid']['str'],permit.gpu_uuid),'shared observed raw CUDA UUID')
++    memory=raw['global_memory'];insist(set(memory)=={'free_bytes','total_bytes'} and all(type(v) is int for v in memory.values()) and 0<=memory['free_bytes']<=memory['total_bytes'],'shared global memory integer bounds')
++    c=contract();total=memory['total_bytes'];insist(total>=c['preweight_global_free_min_bytes'],'shared device total capacity')
++    alloc=raw['allocator'];insist(set(alloc)=={'backend','requested_fraction','readback_fraction','effective_limit_bytes','configuration','stats'} and alloc['backend']=='native' and alloc['configuration']==c['allocator_config'],'shared native allocator evidence')
++    requested=c['allocator_cap_bytes']/total;effective=int(requested*float(total));readback=alloc['readback_fraction']
++    insist(type(alloc['requested_fraction']) is float and alloc['requested_fraction']==requested and type(alloc['effective_limit_bytes']) is int and alloc['effective_limit_bytes']==effective and 0<effective<=c['allocator_cap_bytes'],'shared independent fraction/cap reconstruction')
++    insist(type(readback) is float and math.isfinite(readback) and 0<readback<=1 and abs(readback*total-effective)<=c['readback_reconstruction_tolerance_bytes'],'shared independent readback reconstruction')
++    stats=alloc['stats'];insist(set(stats)==set(STATS) and all(type(v) is int and v>=0 for v in stats.values()),'shared explicit mandatory stats; no default zero')
++    a,ap,r,rp=(stats[k] for k in STATS[:4]);insist(a<=r<=effective and a<=ap<=rp<=effective and r<=rp,'shared independent stats/cap consistency')
++    if raw['point']=='one_byte_before_weights':insist(raw['probe']=={'bytes':1,'synchronized':True} and a>=1 and r>=a,'shared live synchronized probe evidence')
++    else:insist(raw['probe'] is None,'shared probe only at original point')
++    if raw['point']!='configured_before_probe':
++        floor=c['preweight_global_free_min_bytes'] if raw['point']=='one_byte_before_weights' else c['later_global_free_min_bytes']
++        insist(memory['free_bytes']>=floor,'shared independent sampled free threshold')
++    return stats
++
++
++def audit_resources(events,permit,header):
++    """Require successful physical units' full resource chain, retaining failed prefixes."""
++    b=policy_binding(permit.authorization)
++    if b is None:return None
++    worker=header.get('live_binding',header)
++    insist(worker.get('resource_policy')==b,'shared externally bound event header resource policy')
++    units={};points={};uuids={};ordinal=0;previous=None;last=header['allocation_started_monotonic'];intent=None;configured=None;rejected=False;count=0;allocator_binding=None;worker_identity=None
++    def accept(raw,point,unit,event):
++        nonlocal ordinal,previous,last,count,allocator_binding
++        stats=validate_receipt(raw,permit,header,point=point,unit=unit)
++        insist(raw['local_worker']==worker_identity,'shared worker identity changed after initialization intent')
++        observed_binding=(raw['global_memory']['total_bytes'],raw['allocator']['requested_fraction'],raw['allocator']['readback_fraction'],raw['allocator']['effective_limit_bytes'],raw['allocator']['configuration'],raw['allocator']['backend'])
++        if allocator_binding is None:
++            insist(point=='configured_before_probe','shared initial configured allocator binding');allocator_binding=observed_binding
++        insist(observed_binding==allocator_binding,'shared allocator configured total/fraction/configuration drift')
++        insist(raw['ordinal']==ordinal and last<=raw['observed_monotonic']<=event['monotonic'],'shared resource monotonic ordinal/sequence')
++        insist(units[unit]['started_monotonic']<=raw['observed_monotonic'],'shared sample predates durable unit reservation')
++        insist(uuids.get((unit,point))==raw['cuda']['observation'],'shared raw UUID observation/event link')
++        if previous is not None:insist(all(stats[k]>=previous[k] for k in (STATS[1],STATS[3],STATS[4],STATS[5])),'shared independent peak/counter rollback')
++        insist(point not in points.setdefault(unit,set()),'shared repeated resource point')
++        points[unit].add(point);ordinal+=1;previous=deepcopy(stats);last=raw['observed_monotonic'];count+=1
++    for event in events[1:]:
++        kind=event['kind'];p=event['payload']
++        if kind=='unit_started':
++            units[p['unit']]={'kind':p['identity']['kind'],'finished':False,'failed':False,'started_monotonic':event['monotonic']}
++            if rejected:insist(p['identity']['kind']=='env_close','shared external unit after resource rejection')
++        elif kind=='runtime_evidence':
++            unit=p['unit'];tag=p['kind'];data=p['data']
++            if tag=='resource':
++                insist(intent is not None,'shared CUDA observation before durable initialization intent')
++            if tag=='resource' and data.get('point','').startswith('shared_'):
++                point=data['point'].removeprefix('shared_');insist((unit,point) not in uuids,'shared repeated UUID point');uuids[unit,point]=data
++            elif tag=='shared_resource_intent':
++                insist(intent is None and units[unit]['kind'] in ('model_load','context_probe') and data['unit']==unit and data['authority']==authority(permit) and data['resource_policy']==b and data['point']=='intent_before_cuda','shared pre-CUDA persistent intent')
++                checked_context(permit,data['local_worker']);intent=unit;worker_identity=deepcopy(data['local_worker'])
++                insist(max(header['allocation_started_monotonic'],units[unit]['started_monotonic'])<=data['observed_monotonic']<=event['monotonic'],'shared initialization intent allocation/reservation timing')
++            elif tag=='shared_allocator_configured':
++                insist(intent==unit and configured is None,'shared setup intent/order');accept(data,'configured_before_probe',unit,event);configured=unit
++            elif tag=='one_byte_before_weights':
++                insist(configured==unit,'shared original one-byte after setup');accept(data,'one_byte_before_weights',unit,event)
++            elif tag=='model_loaded':
++                insist(configured is not None and 'one_byte_before_weights' in points[configured] and units[unit]['kind']=='model_load','shared model after bounded original probe');accept(data['resource'],'model_loaded',unit,event)
++            elif tag=='resource_before_generation':
++                insist(units[unit]['kind']=='generation' and any('model_loaded' in v for v in points.values()),'shared generation after guarded load');accept(data,'before_generation',unit,event)
++            elif tag=='generation_returned':
++                insist('before_generation' in points.get(unit,set()),'shared actual return lacks pre-call resource evidence')
++            elif tag=='shared_resource_rejected':
++                insist(data['authority']==authority(permit) and data['resource_policy']==b and data['unit']==unit,'shared failure evidence binding');rejected=True
++        elif kind in ('unit_completed','unit_failed'):
++            unit=p['unit'];op=units[unit]['kind'];units[unit]['failed']=kind=='unit_failed';units[unit]['finished']=kind=='unit_completed'
++            if kind=='unit_failed':continue
++            if op=='model_load':insist('model_loaded' in points.get(unit,set()),'shared completed load lacks resource evidence')
++            if op=='context_probe':insist({'configured_before_probe','one_byte_before_weights'}<=points.get(unit,set()),'shared completed probe lacks evidence')
++            if op=='generation':
++                insist('before_generation' in points.get(unit,set()),'shared completed generation lacks precheck')
++                accept(p['data']['runtime']['resource_after'],'after_generation',unit,event)
++    return {'resource_policy':b,'validated_resource_samples':count,'resource_rejected':rejected,'resource_accounting':'FULL_ONE_DEVICE_ELAPSED_SHARED_NONEXCLUSIVE','NVML_mapping':'UNPROVEN_NOT_ASSERTED'}
+diff --git a/tests/si_s01_shared_support.py b/tests/si_s01_shared_support.py
+new file mode 100644
+index 0000000..eea4676
+--- /dev/null
++++ b/tests/si_s01_shared_support.py
+@@ -0,0 +1,37 @@
++"""Only fake raw CUDA/model/world edges; production guards, parser and auditors stay real."""
++from dataclasses import replace
++from types import SimpleNamespace
++import os,sys,json
++from pathlib import Path
++from si_s01_engineering_support import fixture_setup,file_binding
++from self_improvement.si_s01.shared_resource import binding,local_identity,STATS
++from self_improvement.si_s01.contract import canonical
++
++
++def shared_fixture(tmp,monkeypatch):
++    f=fixture_setup(tmp,monkeypatch);f.auth['schema']='SI_S01_ENGINEERING_AUTHORIZATION_V2';f.auth['resource_policy']=binding()
++    f.auth['environment']['PYTORCH_CUDA_ALLOC_CONF']='backend:native'
++    review=Path(f.auth['review']['path']);v=json.loads(review.read_text());v['schema']='SI_S01_ENGINEERING_REVIEW_V2';v['resource_policy']=binding();review.write_text(canonical(v));f.auth['review']=file_binding(review)
++    f.save();f.permit=replace(f.permit,authorization_sha256=file_binding(f.ap)['sha256'],proposal_sha256=file_binding(f.pp)['sha256'])
++    s=f.state;s.total=48*1024**3+13;s.free_before=35*1024**3;s.free_later=12*1024**3;s.backend='native';s.fraction=None;s.readback_delta=0.;s.stat_fault=None;s.peak=0;s.retries=0;s.ooms=0;s.post_free=None
++    torch=sys.modules['torch']
++    def info(device):
++        assert device==0
++        free=s.free_later if s.calls['base_load_fake'] else s.free_before
++        if s.calls['generation'] and s.post_free is not None:free=s.post_free
++        return free,s.total
++    def fraction(value,device):
++        assert device==0 and s.calls['one_byte_fake']==s.calls['base_load_fake']==0
++        s.calls['fraction_set_fake']+=1;s.fraction=value
++    def get_fraction(device):return int(s.fraction*float(s.total))/s.total+s.readback_delta
++    def stats(device):
++        a=16*1024**3 if s.calls['base_load_fake'] else 512 if s.calls['one_byte_fake'] else 0
++        r=a if a>512 else 2*1024**2 if a else 0;s.peak=max(s.peak,r)
++        result=dict(zip(STATS,[a,max(a,s.peak),r,s.peak,s.ooms,s.retries]))
++        if s.stat_fault:s.stat_fault(result)
++        return result
++    torch.cuda.mem_get_info=info
++    torch.cuda.memory=SimpleNamespace(get_allocator_backend=lambda:s.backend,set_per_process_memory_fraction=fraction,get_per_process_memory_fraction=get_fraction,memory_stats=stats)
++    monkeypatch.setattr(os,'environ',os.environ) # ordinary exact environment, restored by monkeypatch below
++    monkeypatch.setattr(os,'environ',dict(f.auth['environment']))
++    return f
+diff --git a/tests/test_si_s01_engineering_parity.py b/tests/test_si_s01_engineering_parity.py
+index d5c14e9..5156893 100644
+--- a/tests/test_si_s01_engineering_parity.py
++++ b/tests/test_si_s01_engineering_parity.py
+@@ -22,7 +22,16 @@ def method(tree,cls,name):
+ def test_load_and_generation_shared_core_AST_exact_except_approved_hooks_and_class_label():
+     old=ast.parse(frozen('src/self_improvement/si_s01/runtime.py'));new=ast.parse(Path(runtime_core.__file__).read_text());source=ast.parse(Path(runtime.__file__).read_text())
+     class Normalize(ast.NodeTransformer):
++        def visit_Expr(self,node):
++            if isinstance(node.value,ast.Call) and isinstance(node.value.func,ast.Name) and node.value.func.id=='validate_guard_argument':return None
++            return self.generic_visit(node)
++        def visit_Assign(self,node):
++            if any(isinstance(t,ast.Attribute) and t.attr in ('resource_policy','_resource_point') for t in node.targets):return None
++            return self.generic_visit(node)
+         def visit_If(self,node):
++            if isinstance(node.test,ast.Compare) and isinstance(node.test.left,ast.Name) and node.test.left.id=='resource_policy':
++                return [self.visit(x) for x in (node.body if isinstance(node.test.ops[0],ast.Is) else node.orelse)]
++            if isinstance(node.test,ast.Compare) and isinstance(node.test.left,ast.Call) and isinstance(node.test.left.func,ast.Name) and node.test.left.func.id=='getattr' and any(isinstance(x,ast.Constant) and x.value=='resource_policy' for x in node.test.left.args):return None
+             if isinstance(node.test,ast.Compare) and isinstance(node.test.left,ast.Name) and node.test.left.id in ('probe_started','probe_completed','pre_call'):
+                 assert len(node.body)==1 and isinstance(node.body[0],ast.Expr) and isinstance(node.body[0].value,ast.Call) and node.body[0].value.func.id==node.test.left.id
+                 return None
+@@ -34,7 +43,7 @@ def test_load_and_generation_shared_core_AST_exact_except_approved_hooks_and_cla
+     assert body(Normalize().visit(copy.deepcopy(load)).body)==body(method(old,'LiveProducer','load').body[2:])
+     assert body(Normalize().visit(copy.deepcopy(raw)).body)==body(method(old,'LiveProducer','_raw').body[5:])
+     assert body(method(source,'LiveProducer','_raw').body[:5])==body(method(old,'LiveProducer','_raw').body[:5])
+-    assert body(next(n for n in new.body if isinstance(n,ast.FunctionDef) and n.name=='resource').body)==body(method(old,'LiveProducer','resource').body)
++    assert body(Normalize().visit(copy.deepcopy(next(n for n in new.body if isinstance(n,ast.FunctionDef) and n.name=='resource'))).body)==body(method(old,'LiveProducer','resource').body)
+     assert EngineeringProducer.prepare is Producer.prepare and EngineeringProducer.decode is Producer.decode
+ 
+ 
+diff --git a/tests/test_si_s01_shared_gate.py b/tests/test_si_s01_shared_gate.py
+new file mode 100644
+index 0000000..a8803da
+--- /dev/null
++++ b/tests/test_si_s01_shared_gate.py
+@@ -0,0 +1,59 @@
++"""Actual isolated V2 software gate fixtures; never real preflight authority/runtime."""
++from pathlib import Path
++import json,subprocess
++import pytest
++from self_improvement.si_s01.contract import canonical
++from self_improvement.si_s01.shared_resource import binding,policy_binding
++from si_s01_shared_support import shared_fixture
++from si_s01_engineering_support import file_binding,REPO
++from si_s01_support import gate_fixture
++
++
++def test_v2_engineering_software_gate_binds_policy_without_constructing_runtime(tmp_path,monkeypatch):
++    f=shared_fixture(tmp_path,monkeypatch)
++    p=subprocess.run(f.save(),cwd=REPO,env=f.auth['environment'],capture_output=True,timeout=30)
++    (tmp_path/'software_gate.stdout').write_bytes(p.stdout);(tmp_path/'software_gate.stderr').write_bytes(p.stderr)
++    assert p.returncode==0,p.stderr.decode();row=json.loads(p.stdout)
++    assert row['models']==row['CUDA_initializations']==row['units']==0 and not f.permit.output.exists()
++
++
++def test_v2_source_software_gate_produces_only_bound_zero_science_receipt(tmp_path):
++    a,p,ap,pp,save=gate_fixture(tmp_path,REPO);a['schema']='SI_S01_AUTHORIZATION_V2';a['resource_policy']=binding();a['environment']['PYTORCH_CUDA_ALLOC_CONF']='backend:native'
++    review=Path(a['review']['path']);v=json.loads(review.read_text());v.update(schema='SI_S01_INDEPENDENT_REVIEW_V2',resource_policy=binding());review.write_text(canonical(v));a['review']=file_binding(review)
++    r=subprocess.run(save(),cwd=REPO,env=a['environment'],capture_output=True,timeout=30)
++    (tmp_path/'software_gate.stdout').write_bytes(r.stdout);(tmp_path/'software_gate.stderr').write_bytes(r.stderr)
++    assert r.returncode==0,r.stderr.decode();receipt=json.loads(Path(a['preflight_receipt_path']).read_text())
++    assert receipt['schema']=='SI_S01_PREFLIGHT_RECEIPT_V2' and receipt['binding']['resource_policy']==binding() and all(type(v) is int and v==0 for v in receipt['counters'].values())
++    assert not Path(a['output_path']).exists()
++
++
++@pytest.mark.parametrize('attack',['V1_shared','missing','unknown','hash','claim','boolean_type','backend','uncached0'])
++def test_resource_authority_schema_negatives_have_no_cuda_side_effects(tmp_path,monkeypatch,attack):
++    f=shared_fixture(tmp_path,monkeypatch)
++    if attack=='V1_shared':f.auth['schema']='SI_S01_ENGINEERING_AUTHORIZATION_V1'
++    elif attack=='missing':f.auth.pop('resource_policy')
++    elif attack=='unknown':f.auth['schema']='SI_S01_ENGINEERING_AUTHORIZATION_V999'
++    elif attack=='hash':f.auth['resource_policy']['contract_sha256']='0'*64
++    elif attack=='claim':f.auth['resource_policy']['exclusive_gpu']=True
++    elif attack=='boolean_type':f.auth['resource_policy']['scientific_execution_behavior_changed']=1
++    elif attack=='backend':f.auth['environment']['PYTORCH_CUDA_ALLOC_CONF']='backend:cudaMallocAsync'
++    elif attack=='uncached0':f.auth['environment']['PYTORCH_NO_CUDA_MEMORY_CACHING']='0'
++    from self_improvement.si_s01.contract import ContractError
++    with pytest.raises(ContractError):policy_binding(f.auth)
++    assert f.state.calls['CUDA_init_fake']==0
++
++
++def test_v2_source_clearance_keeps_resource_binding_and_rejects_old_or_changed_contract(tmp_path):
++    from si_s01_support import fixture_permit,clearance_fixture
++    from self_improvement.si_s01.gate import check_clearance
++    from self_improvement.si_s01.contract import ContractError
++    a,p,ap,pp,save=gate_fixture(tmp_path,REPO);a['schema']='SI_S01_AUTHORIZATION_V2';a['resource_policy']=binding();a['environment']['PYTORCH_CUDA_ALLOC_CONF']='backend:native'
++    review=Path(a['review']['path']);v=json.loads(review.read_text());v.update(schema='SI_S01_INDEPENDENT_REVIEW_V2',resource_policy=binding());review.write_text(canonical(v));a['review']=file_binding(review)
++    argv=save();r=subprocess.run(argv,cwd=REPO,env=a['environment'],capture_output=True,timeout=30);assert r.returncode==0,r.stderr.decode()
++    permit=fixture_permit(tmp_path,REPO,a,p,ap,pp);c,path,save_c=clearance_fixture(tmp_path,permit,argv,r.returncode)
++    execution=Path(c['preflight_execution']['path']);v=json.loads(execution.read_text());v['schema']='SI_S01_PREFLIGHT_EXECUTION_V2';execution.write_text(canonical(v));c['preflight_execution']['sha256']=file_binding(execution)['sha256']
++    c['schema']='SI_S01_LAUNCH_CLEARANCE_V2';sha=save_c();assert check_clearance(permit,path,sha)['binding']['resource_policy']==binding()
++    c['schema']='SI_S01_LAUNCH_CLEARANCE_V1'
++    with pytest.raises(ContractError):check_clearance(permit,path,save_c())
++    c['schema']='SI_S01_LAUNCH_CLEARANCE_V2';c['binding']['resource_policy']['contract_sha256']='0'*64
++    with pytest.raises(ContractError):check_clearance(permit,path,save_c())
+diff --git a/tests/test_si_s01_shared_resource.py b/tests/test_si_s01_shared_resource.py
+new file mode 100644
+index 0000000..5207e2e
+--- /dev/null
++++ b/tests/test_si_s01_shared_resource.py
+@@ -0,0 +1,144 @@
++"""Shared-resource production observer and independent audit tests, fake external edges only."""
++from copy import deepcopy
++from pathlib import Path
++from dataclasses import replace
++import json,os,sys
++import pytest
++from self_improvement.si_s01.contract import ContractError,canonical
++from self_improvement.si_s01.shared_resource import binding,guard_for,STATS
++from self_improvement.si_s01.engineering_runtime import EngineeringRun,EngineeringProducer
++from self_improvement.si_s01.engineering_audit import audit_engineering
++from self_improvement.si_s01.evidence import read_events
++from si_s01_engineering_support import reseal_engineering
++from si_s01_shared_support import shared_fixture
++
++
++def run(f):
++    result=EngineeringRun(f.permit,f.permit.output).run()
++    return int(result['status']!='OBSERVED_PUBLIC_PATH_COMPATIBLE_NOT_RNG_RECONSTRUCTED')
++def encoder(f):return EngineeringProducer(f.state.tokenizer,None,evidence_class='synthetic_software_fixture')
++def report(f):return json.loads((f.permit.output/'engineering_report.json').read_text())
++def events(f):return read_events(f.permit.output/'engineering_events.jsonl')
++
++
++def test_shared_nonempty_production_coupled_path_and_independent_audit(tmp_path,monkeypatch):
++    f=shared_fixture(tmp_path,monkeypatch);f.state.foreign_post=True;assert run(f)==0
++    r=report(f);assert r['physical']['completed']['generation']==1 and r['physical']['completed']['step']==6
++    assert f.state.calls['one_byte_fake']==1 and f.state.calls['fraction_set_fake']==1 and f.state.calls['base_load_fake']==1
++    assert f.state.calls['resource_query_fake']==0 # unmapped NVML processes cannot become own evidence or kill targets
++    assert r['shared_resource']['validated_resource_samples']==5 and not r['shared_resource']['resource_rejected']
++    assert r['shared_resource']['resource_policy']==binding() and r['shared_resource']['NVML_mapping']=='UNPROVEN_NOT_ASSERTED'
++    assert r['historical_science_unchanged']=={'model_generations':5142,'environment_operations':7949}
++    assert audit_engineering(f.permit.output/'engineering_events.jsonl',f.permit,encoder(f))==r
++
++
++@pytest.mark.parametrize('value',[28*1024**3,28*1024**3-1])
++def test_before_weights_exact_threshold(tmp_path,monkeypatch,value):
++    f=shared_fixture(tmp_path,monkeypatch);f.state.free_before=value;code=run(f)
++    assert code==int(value<28*1024**3)
++    assert f.state.calls['base_load_fake']==int(value>=28*1024**3)
++    if code:assert report(f)['physical']['reserved_or_spent']['model_load']==1
++
++
++@pytest.mark.parametrize('value',[2*1024**3,2*1024**3-1])
++def test_running_global_free_threshold_and_no_call_retry(tmp_path,monkeypatch,value):
++    f=shared_fixture(tmp_path,monkeypatch);f.state.free_later=value;code=run(f)
++    assert code==int(value<2*1024**3) and f.state.calls['generation']==int(value>=2*1024**3)
++
++
++def test_postcall_memory_failure_preserves_durable_actual_return_and_reservation(tmp_path,monkeypatch):
++    f=shared_fixture(tmp_path,monkeypatch);f.state.post_free=2*1024**3-1;assert run(f)==1
++    r=report(f);assert f.state.calls['generation']==1 and r['physical']['observed_generation_returns']==1
++    assert r['physical']['observed_returned_output_tokens']==5 and r['physical']['reserved_or_spent']['generated_tokens']==16
++    assert r['shared_resource']['resource_rejected'] and r['status']=='ENGINEERING_STOP_NO_COMPATIBILITY_CLAIM'
++    assert any(e['payload']['kind']=='generation_returned' for e in events(f) if e['kind']=='runtime_evidence')
++
++
++@pytest.mark.parametrize('fault',['backend','readback','missing','bool','negative','overcap','nan','UUID','total','cached_probe'])
++def test_shared_bad_device_allocator_stats_reject_before_weights(tmp_path,monkeypatch,fault):
++    f=shared_fixture(tmp_path,monkeypatch)
++    if fault=='backend':f.state.backend='cudaMallocAsync'
++    elif fault=='readback':f.state.readback_delta=.01
++    elif fault=='missing':f.state.stat_fault=lambda s:s.pop('reserved_bytes.all.peak')
++    elif fault=='bool':f.state.stat_fault=lambda s:s.update({'num_ooms':False})
++    elif fault=='negative':f.state.stat_fault=lambda s:s.update({'num_alloc_retries':-1})
++    elif fault=='overcap':f.state.stat_fault=lambda s:s.update({'reserved_bytes.all.peak':25*1024**3})
++    elif fault=='nan':f.state.stat_fault=lambda s:s.update({'allocated_bytes.all.current':float('nan')})
++    elif fault=='UUID':f.state.uuid='GPU-deadbeef-abcd-abcd-abcd-123456789abc'
++    elif fault=='total':f.state.total=26*1024**3
++    elif fault=='cached_probe':f.state.stat_fault=lambda s:s.update(dict.fromkeys(STATS[:4],0))
++    assert run(f)==1 and f.state.calls['base_load_fake']==f.state.calls['generation']==0
++
++
++@pytest.mark.parametrize('variable',['PYTORCH_NO_CUDA_MEMORY_CACHING','PYTORCH_NO_HIP_MEMORY_CACHING'])
++@pytest.mark.parametrize('value',['0','1',''])
++def test_uncached_environment_presence_rejected_before_cuda(tmp_path,monkeypatch,variable,value):
++    f=shared_fixture(tmp_path,monkeypatch);f.auth['environment'][variable]=value;os.environ[variable]=value
++    with pytest.raises(ContractError,match='uncached'):guard_for(f.permit,object())
++    assert f.state.calls['CUDA_init_fake']==f.state.calls['one_byte_fake']==0
++
++
++@pytest.mark.parametrize('attack',['policy','authority','local_pid','unit','ordinal','free','missing','peak','UUID','NVML_owned','coherent_total','pre_reservation'])
++def test_independent_auditor_rejects_coherently_rehashed_resource_forgery(tmp_path,monkeypatch,attack):
++    f=shared_fixture(tmp_path,monkeypatch);assert run(f)==0;path=f.permit.output/'engineering_events.jsonl'
++    def mutate(rows):
++        e=next(r for r in rows if r['kind']=='runtime_evidence' and r['payload']['kind']=='resource_before_generation');p=e['payload']['data']
++        if attack=='policy':p['resource_policy']['contract_sha256']='0'*64
++        elif attack=='authority':p['authority']['run_id']='0'*32
++        elif attack=='local_pid':p['local_worker']['pid']+=1000000
++        elif attack=='unit':p['unit']='0'*64
++        elif attack=='ordinal':p['ordinal']=0
++        elif attack=='free':p['global_memory']['free_bytes']=0
++        elif attack=='missing':p['allocator']['stats'].pop(STATS[0])
++        elif attack=='peak':p['allocator']['stats'][STATS[1]]=0
++        elif attack=='UUID':p['cuda']['observation']['observed']['uuid']['str']='GPU-deadbeef-abcd-abcd-abcd-123456789abc'
++        elif attack=='NVML_owned':p['NVML']['mapping']='OWNED'
++        elif attack=='pre_reservation':
++            started=next(x for x in rows if x['kind']=='unit_started' and x['payload']['unit']==p['unit'])
++            p['observed_monotonic']=started['monotonic']-.000001
++        elif attack=='coherent_total':
++            total=p['global_memory']['total_bytes']+12345;p['global_memory']['total_bytes']=total
++            a=p['allocator'];a['requested_fraction']=25769803776/total;a['effective_limit_bytes']=int(a['requested_fraction']*float(total));a['readback_fraction']=a['effective_limit_bytes']/total
++    reseal_engineering(path,mutate)
++    with pytest.raises((ContractError,KeyError)):audit_engineering(path,f.permit,encoder(f))
++
++
++@pytest.mark.parametrize('tag',['shared_resource_intent','shared_allocator_configured','one_byte_before_weights','resource_before_generation'])
++def test_missing_required_resource_point_is_not_success(tmp_path,monkeypatch,tag):
++    f=shared_fixture(tmp_path,monkeypatch);assert run(f)==0;path=f.permit.output/'engineering_events.jsonl'
++    def omit(rows):
++        rows.remove(next(r for r in rows if r['kind']=='runtime_evidence' and r['payload']['kind']==tag))
++        for i,row in enumerate(rows):row['sequence']=i
++    reseal_engineering(path,omit)
++    with pytest.raises((ContractError,KeyError)):audit_engineering(path,f.permit,encoder(f))
++
++
++def test_allocator_internal_retry_counter_is_recorded_without_external_retry(tmp_path,monkeypatch):
++    f=shared_fixture(tmp_path,monkeypatch);f.state.retries=3;assert run(f)==0
++    assert f.state.calls['generation']==1 and f.state.calls['base_load_fake']==1
++    data=next(r['payload']['data'] for r in events(f) if r['kind']=='runtime_evidence' and r['payload']['kind']=='resource_before_generation')
++    assert data['allocator']['stats']['num_alloc_retries']==3
++
++
++def test_shared_oom_is_one_failed_external_unit_without_retry_or_lost_cost(tmp_path,monkeypatch):
++    f=shared_fixture(tmp_path,monkeypatch)
++    def oom(**kwargs):
++        f.state.calls['generation']+=1
++        raise RuntimeError('explicit synthetic CUDA OutOfMemoryError boundary')
++    monkeypatch.setattr(f.state.model,'generate',oom)
++    assert run(f)==1
++    r=report(f);assert f.state.calls['generation']==1 and r['physical']['reserved_or_spent']['generation']==1
++    assert r['physical']['reserved_or_spent']['generated_tokens']==16 and r['physical']['observed_generation_returns']==0 and r['physical']['completed']['step']==0
++
++
++def test_shared_deadline_before_initialization_keeps_reserved_probe_without_cuda(tmp_path,monkeypatch):
++    f=shared_fixture(tmp_path,monkeypatch)
++    class Clock:
++        calls=0
++        def __call__(self):
++            self.calls+=1
++            return 0.0 if self.calls<7 else 601.0
++    r=EngineeringRun(f.permit,f.permit.output,clock=Clock()).run()
++    assert r['status']=='ENGINEERING_STOP_NO_COMPATIBILITY_CLAIM' and f.state.calls['CUDA_init_fake']==0
++    assert r['physical']['reserved_or_spent']['model_load']==1 and r['physical']['reserved_or_spent']['context_probe']==1
++    assert f.state.calls['base_load_fake']==f.state.calls['generation']==0
+diff --git a/tests/test_si_s01_shared_source.py b/tests/test_si_s01_shared_source.py
+new file mode 100644
+index 0000000..d12c597
+--- /dev/null
++++ b/tests/test_si_s01_shared_source.py
+@@ -0,0 +1,56 @@
++"""Full96 synthetic source pipeline through real collector/actor/guards/independent auditor."""
++from dataclasses import replace
++from pathlib import Path
++from copy import deepcopy
++import json,os,sys
++import pytest
++from self_improvement.si_s01.contract import canonical,ContractError
++from self_improvement.si_s01.gate import Permit
++from self_improvement.si_s01.runtime import LiveProducer
++from self_improvement.si_s01.runtime_core import load_guarded
++from self_improvement.si_s01.shared_resource import guard_for,binding,local_identity
++from self_improvement.si_s01.collector import Collector
++from self_improvement.si_s01.audit import audit
++from si_s01_shared_support import shared_fixture
++from si_s01_support import gate_fixture,plan,FakeEnv,context_fixture
++from si_s01_engineering_support import file_binding
++
++
++def source_fixture(tmp,monkeypatch,*,stop=False):
++    f=shared_fixture(tmp/'edges',monkeypatch);d=tmp/'source';d.mkdir();a,p,ap,pp,save=gate_fixture(d,Path(__file__).resolve().parents[1])
++    a['schema']='SI_S01_AUTHORIZATION_V2';a['resource_policy']=binding();a['environment']=deepcopy(f.auth['environment']);p['packages']=deepcopy(f.proposal['packages']);p['model']=deepcopy(f.proposal['model']);pp.write_text(canonical(p));a['proposal_sha256']=file_binding(pp)['sha256'];ap.write_text(canonical(a))
++    permit=Permit(a,p,plan(),Path(__file__).resolve().parents[1],file_binding(ap)['sha256'],file_binding(pp)['sha256']);permit=context_fixture(d,permit)
++    worker=Path(permit.context_evidence['worker_path']);value=json.loads(worker.read_text());identity=local_identity();value.update(start_tick=identity['start_tick'],pgid=identity['pgid'],sid=identity['sid']);worker.write_text(canonical(value));permit=replace(permit,context_evidence=permit.context_evidence|{'worker_sha256':file_binding(worker)['sha256']})
++    if stop:f.state.post_free=0
++    def loader(ledger):return load_guarded(LiveProducer,permit,ledger,evidence_class=permit.plan.evidence_class,resource_policy=guard_for(permit,ledger))
++    collector=Collector(permit.plan,loader,lambda slot:FakeEnv(slot,{}),permit.output,run_id=a['run_id'],ceilings=permit.ceilings,devices=1,started_at=json.loads(Path(permit.context_evidence['launch_path']).read_text())['allocation_started_monotonic'],live_permit=permit)
++    producer,reason=collector.run()
++    return f,permit,collector,producer,reason
++
++
++def test_shared_full96_production_source_pipeline_with_no_teacher_or_NVML_ownership(tmp_path,monkeypatch):
++    f,p,c,producer,reason=source_fixture(tmp_path,monkeypatch);assert reason is None
++    r=audit(p.output/'source_events.jsonl',p.output/'source_trajectories.jsonl',p.plan,producer,authority=p)
++    assert r['source_phase_sealed'] and r['normal_sources']==96 and r['all_YT'] is None
++    assert r['physical']['completed']['generations']==672 and r['shared_resource']['validated_resource_samples']==3+2*672
++    assert f.state.calls['resource_query_fake']==0 and f.state.calls['one_byte_fake']==1
++    assert all(x['Y0']==1 and x['YT'] is None for x in c.rows)
++
++
++def test_shared_resource_technical_stop_is_not_task_failure_or_structural_no_go(tmp_path,monkeypatch):
++    f,p,c,producer,reason=source_fixture(tmp_path,monkeypatch,stop=True);assert reason is not None
++    r=audit(p.output/'source_events.jsonl',p.output/'source_trajectories.jsonl',p.plan,producer,authority=p)
++    assert not r['source_phase_sealed'] and r['upper_bounds'] is None and r['normal_sources']==0
++    assert r['status']!='COMPLETE_SOURCE96_STRUCTURAL_NO_GO' and all(x['Y0'] is None and x['disposition']=='NOT_NORMAL_SOURCE' for x in c.rows)
++    assert r['physical']['observed_returned_generation_boundaries']==1 and f.state.calls['generation']==1
++
++
++def test_source_auditor_rejects_wrong_resource_mode_before_scientific_summary(tmp_path,monkeypatch):
++    f,p,c,producer,reason=source_fixture(tmp_path,monkeypatch,stop=True)
++    from si_s01_engineering_support import reseal_engineering
++    path=p.output/'source_events.jsonl'
++    def mutate(rows):
++        row=next(x for x in rows if x['kind']=='runtime_evidence' and x['payload']['kind']=='resource_before_generation')
++        row['payload']['data']['resource_policy']['contract_sha256']='0'*64
++    reseal_engineering(path,mutate)
++    with pytest.raises(ContractError,match='external authority/policy'):audit(path,p.output/'source_trajectories.jsonl',p.plan,producer,authority=p)

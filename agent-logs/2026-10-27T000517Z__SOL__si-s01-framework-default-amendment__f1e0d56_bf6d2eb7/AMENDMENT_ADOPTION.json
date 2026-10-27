@@ -1,0 +1,79 @@
+{
+  "schema": "ROOT_FRAMEWORK_DEFAULT_ENGINEERING_AMENDMENT_ADOPTION_V1",
+  "status": "ADOPTED_NEW_PLAN_NOT_OLD_CLEARANCE_REUSE",
+  "created_utc": "2026-10-27T00:05:17.797532Z",
+  "issuer": "INDEPENDENT_ROOT",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "proposal": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T235523Z__SOL__si-s01-cuda-default-env-audit__f1e0d56_f6e90694/FRAMEWORK_DEFAULT_ENV_AMENDMENT_PROPOSAL.json",
+    "sha256": "73b8a89be0871c4d0ef398b7b0d04a9df975feaf82e66d271ea737781956a5f5"
+  },
+  "independent_adjudication": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T000206Z__ASTRA__framework-default-env-amendment-review__96cb79b1/REVIEW.md",
+    "sha256": "6cf06dfa0ff1fdad8e9f984c2232e2622e7fea7819db5ff31a570f0d50a42ffc"
+  },
+  "independent_bindings": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-27T000206Z__ASTRA__framework-default-env-amendment-review__96cb79b1/BINDINGS.json",
+    "sha256": "9ff260e5c337345310f559e2f048f9387f7537d78af0d56b4eee28f876d853d9"
+  },
+  "human_scope": "Standing task-specific runtime adaptation and continue-until-start delegation, independently checked by Astra; no fresh human approval invented, FullAccess not budget waiver.",
+  "correction": {
+    "CUDA_MODULE_LOADING": "LAZY",
+    "other_environment_values_unchanged": true,
+    "full_guard_unchanged": true,
+    "science_code_or_semantics_changed": false
+  },
+  "family": {
+    "old_plan_exhausted": true,
+    "maximum_live_cli": 3,
+    "already_consumed": 2,
+    "new_live_allowed": 1,
+    "model_load_reservations_failed_before": 1,
+    "context_probe_reservations_failed_before": 1,
+    "aggregate_model_load_reservation_limit": 2,
+    "aggregate_context_probe_reservation_limit": 2,
+    "CUDA_initializations_observed_before": 1,
+    "maximum_CUDA_initializations_after": 2,
+    "no_failed_reservations_refunded": true
+  },
+  "budget": {
+    "first_conservative_debit_seconds": 22,
+    "second_authentic_supervisor_seconds": 67.34844062384218,
+    "second_conservative_debit_seconds": 68,
+    "total_debit_seconds": 90,
+    "new_supervisor_cap_seconds": 510,
+    "aggregate_accounted_cap_seconds": 600,
+    "full_CLI_durations_recorded_separately": true
+  },
+  "single_invocation_ceilings": {
+    "model_load": 1,
+    "context_probe": 1,
+    "generation": 1,
+    "env_construct": 1,
+    "reset": 1,
+    "step": 6,
+    "env_close": 1,
+    "environment_operations": 7,
+    "generated_tokens": 16,
+    "input_tokens": 8192,
+    "seconds": 510
+  },
+  "actual_weights_load_onebyte_generation_limits_each": 1,
+  "old_claims_immutable": [
+    {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/artifacts/runtime/si_s01_engineering_shared_cuda_v1_f1e0d56_cfce7ad1c9e3437a9edc2a0f4b6ae5bf.launch_claim.json",
+      "sha256": "2387d1181ee8a32006c3ab84e2e5e938bb95c45bd400f5f952e8e9fbfc2d12b2"
+    },
+    {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/artifacts/runtime/si_s01_engineering_shared_cuda_v1_f1e0d56_af705f48405544e9a86eb1da437335a1.launch_claim.json",
+      "sha256": "bff6abccf28699649be0d69d8d2f88b8960c71e61237efe6360a6972ace62e4f"
+    }
+  ],
+  "preserve_old_failures_and_all_costs": true,
+  "historical_science_unchanged": {
+    "generations": 5142,
+    "environment_operations": 7949
+  },
+  "source_A96_teacher_train_eval": "NOT_RELEASED",
+  "further_restart_or_automatic_amendment": "NOT_AUTHORIZED"
+}

@@ -1,0 +1,259 @@
+{
+  "schema": "ROOT_SHARED_GPU_IMPLEMENTATION_TASK_V1",
+  "created_utc": "2026-10-26T21:46:05.237977+00:00",
+  "status": "ADOPTED_FOR_IMPLEMENTATION_ONLY_NO_EXECUTION_RELEASE",
+  "coordinator": "Sol Designer",
+  "developer_thread": "01a165de-c75e-7120-abc9-fa74cde1f17f",
+  "base_sha": "e5f09c05824cb61cb35ccbbf4e189b04e8829cea",
+  "worktree": "/home/lizening/wt-si-s01-shared-gpu-adapter",
+  "branch": "codex/si-s01-shared-gpu-adapter",
+  "adoption": "Adopt SHARED_CONTAINER_CUDA_V1 under all cited final Astra and Sol conditions. This is explicitly different from old strict ownership policy. Native-host SSH is not prerequisite. User authorizes shared A40 use; no NVML mapping, exclusive use, continuous fairness or full-process memory guarantee is asserted.",
+  "changes": {
+    "resource_admission_policy_changed": true,
+    "scientific_execution_behavior_changed": true,
+    "offline_evidence_validation_behavior_changed": true,
+    "source_treatment_semantics_changed": false
+  },
+  "immutable_reference_precedence": [
+    "This task authorizes code implementation only.",
+    "Final Astra review and Sol FINAL_SCOPE_ADDENDUM/FINAL_CONDITIONS are mandatory.",
+    "Original proposal and scope review apply with those final clarifications."
+  ],
+  "inputs": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T212726Z__SOL__si-s01-shared-gpu-contract-proposal__7f224c89/SHARED_GPU_RESOURCE_CONTRACT_PROPOSAL.json",
+      "sha256": "6998fe2ffcfd583741cd12ecf6b08638ed0e5da16d671f761a0af1df59c4dc5a"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T212726Z__SOL__si-s01-shared-gpu-contract-proposal__7f224c89/USER_SMOKE_REVIEW.json",
+      "sha256": "5623f6d449e623762d6c1a585ea31ede38facb8460951afcab75fadec8b5017e"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T213025Z__ASTRA__shared-gpu-contract-review__1d224b39/REVIEW.md",
+      "sha256": "33ab2c389a228fd80a23cf8895eed4f8a368a32364613f68742810ddb0a833ae"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T213423Z__CODEX__si-s01-shared-gpu-static-scope__e5f09c0/SHARED_GPU_STATIC_SCOPE_REVIEW.md",
+      "sha256": "bb18c1e50de8e78cc025628fbb1aef207739ced12f3daa3e9e39e2823c50f9d0"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T213423Z__CODEX__si-s01-shared-gpu-static-scope__e5f09c0/FINAL_SCOPE_ADDENDUM.md",
+      "sha256": "41003d65b04707a9a5911a03ecfdb89f653ee239060b6768388a6b639dd113f1"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T213423Z__CODEX__si-s01-shared-gpu-static-scope__e5f09c0/FINAL_CONDITIONS.json",
+      "sha256": "38ba3341f878dde4d28066aab066b827b517d7f80aaf9dfc4d77436fdf01ac0c"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T213423Z__CODEX__si-s01-shared-gpu-static-scope__e5f09c0/PROPOSED_METHOD_SCOPE.json",
+      "sha256": "cb08fe282e3b8aae40ce5ce7b45fb10a03e087fe88bc57e5abadfb6f270051cf"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T213005Z__LUNA__si-s01-shared-gpu-preparation__7f224c89/READ_ONLY_PREPARATION.json",
+      "sha256": "ebac2f53be9fa6211e5b62a1693550b90cd752cd66cbeb15b6cd0be723968224"
+    }
+  ],
+  "existing_method_whitelist": [
+    {
+      "path": "src/self_improvement/si_s01/runtime_core.py",
+      "method": "load_guarded",
+      "line": 19,
+      "end_line": 47,
+      "historical_ast_sha256": "168c25aab96922510d63d7f73589d47de2704fe59c67563d2783c69a875bec44"
+    },
+    {
+      "path": "src/self_improvement/si_s01/runtime_core.py",
+      "method": "guarded_generation",
+      "line": 50,
+      "end_line": 92,
+      "historical_ast_sha256": "fa2f2ef5a810d37f3f24f87345ab5d2937db0a5697e7440d012adcbc99e06100"
+    },
+    {
+      "path": "src/self_improvement/si_s01/runtime_core.py",
+      "method": "resource",
+      "line": 95,
+      "end_line": 96,
+      "historical_ast_sha256": "7f7f3146d358979215a157cc903fc8e633c518a1375c6ab25aea5673001be6fe"
+    },
+    {
+      "path": "src/self_improvement/si_s01/runtime.py",
+      "method": "LiveProducer.load",
+      "line": 17,
+      "end_line": 20,
+      "historical_ast_sha256": "effe82c6cd562eb8c722fe302da310e5ff44f6c14f370cf5cd6789def94a04d6"
+    },
+    {
+      "path": "src/self_improvement/si_s01/runtime.py",
+      "method": "LiveProducer.resource",
+      "line": 21,
+      "end_line": 21,
+      "historical_ast_sha256": "6ecbeb31c6298bc5c07d697bf1975c0c5aa30c5bb194a6db161982697d85db11"
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_runtime.py",
+      "method": "EngineeringProducer.load",
+      "line": 25,
+      "end_line": 35,
+      "historical_ast_sha256": "0a11805c8d47c88be252916e30bc1c0211fcda93fa2b03ee56a2dbeccfd46590"
+    },
+    {
+      "path": "src/self_improvement/si_s01/gate.py",
+      "method": "authenticate",
+      "line": 68,
+      "end_line": 131,
+      "historical_ast_sha256": "aa964d5acbcba350c0ebc6ec7d5abfb34583f666fbb045f8d88e566c0c0a03a9"
+    },
+    {
+      "path": "src/self_improvement/si_s01/gate.py",
+      "method": "source_binding",
+      "line": 136,
+      "end_line": 141,
+      "historical_ast_sha256": "2c8c53e62fa59f47308353b6268b7e252962dd10de2d7a67b5f4c906925aea72"
+    },
+    {
+      "path": "src/self_improvement/si_s01/gate.py",
+      "method": "complete_preflight",
+      "line": 143,
+      "end_line": 153,
+      "historical_ast_sha256": "03a1b180abd735be6a7c2a5b22495d8ce20cdeb7be10f022d53ab6bc1e660d54"
+    },
+    {
+      "path": "src/self_improvement/si_s01/gate.py",
+      "method": "check_clearance",
+      "line": 160,
+      "end_line": 181,
+      "historical_ast_sha256": "ffca72e7130156f5de53ae2020911cc8e8363ca9526273116839538764d5b4a5"
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_gate.py",
+      "method": "authenticate_engineering",
+      "line": 51,
+      "end_line": 93,
+      "historical_ast_sha256": "ab7a5c3056ece2da9728e1158741c174fb884c24c10623dda5fb83c90291d143"
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_gate.py",
+      "method": "engineering_binding",
+      "line": 13,
+      "end_line": 19,
+      "historical_ast_sha256": "d456db9bd055db541f42d5235713d2bbf61360208b7d147bc562d6dc4337d084"
+    },
+    {
+      "path": "src/self_improvement/si_s01/collector.py",
+      "method": "Collector.__init__",
+      "line": 38,
+      "end_line": 50,
+      "historical_ast_sha256": "1937d789afb731a18915e045317165cea69155bd08b44e6cd57b652c302f2879"
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_evidence.py",
+      "method": "EngineeringLedger.__init__",
+      "line": 25,
+      "end_line": 34,
+      "historical_ast_sha256": "c8a19cc72d4853a5d8c7039957c4b0468bfe3941640b8ef390518e56fa1040b9"
+    },
+    {
+      "path": "src/self_improvement/si_s01/audit.py",
+      "method": "audit",
+      "line": 13,
+      "end_line": 157,
+      "historical_ast_sha256": "30ddb16118702a731bec192b69a34f627685fdc1b7c65e0cd127d4451440bf0b"
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_audit.py",
+      "method": "resource_receipt",
+      "line": 15,
+      "end_line": 25,
+      "historical_ast_sha256": "28785ad0db23b5e1c6ec111fc758454f8696d5addd0b8e6dea1302d7379a4833"
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_audit.py",
+      "method": "audit_engineering",
+      "line": 28,
+      "end_line": 126,
+      "historical_ast_sha256": "34af253294ca95825bc84d1adde635ccc6991ebc894e08b5f5617b08fc1f2d04"
+    }
+  ],
+  "allowed_additions": [
+    "src/self_improvement/si_s01/shared_resource.py",
+    "src/self_improvement/si_s01/shared_resource_audit.py",
+    "configs/experiments/si_s01_shared_resource_v1.json",
+    "Focused meaningful software test modules and narrowly necessary test fixture/schema compatibility updates. New helper functions and imports in whitelisted modules are allowed only for the authorized resource contract."
+  ],
+  "scope_rules": [
+    "Read applicable AGENTS and PROJECT/PAPER_PROPOSAL/EXPERIMENT_PLAN/IMPLEMENTATION_PHASES/reports/SPRINT_1_5_FINAL before editing. Work only in new isolated worktree from exact base. Preserve old worktree/ref and authoritative tree.",
+    "Do not change si_p3, R19, supervisor_core/engineering_supervisor mechanics or caps, source collection loop, schedule, scientific costs/statistics, model generation/prompt/parser/environment semantics. Another existing-method dependency requires concrete reproduction and root narrow ruling first.",
+    "Shared mode explicitly selected by verified versioned engineering/source auth and exact policy/review hashes, not exception fallback. Old V1 remains strict. No new CLI flag is necessary.",
+    "Bind resource policy in authorization/review/source binding/preflight/clearance/context/header/resource evidence/report. Pure independent engineering AND source auditors must validate all required raw resource points; no fabricated own-NVML proof.",
+    "Collector and EngineeringLedger changes are header metadata only. Keep original production functions; only external model/env/CUDA observations may be synthetic in software tests."
+  ],
+  "fixed_resource_policy": {
+    "name": "SHARED_CONTAINER_CUDA_V1",
+    "allocator_cap_bytes": 25769803776,
+    "preweight_global_free_min_bytes": 30064771072,
+    "later_global_free_min_bytes": 2147483648,
+    "claims": "Unmeasured fixed admission/stop limits, not model-fit, exclusive capacity, all-process VRAM hard limit or latency/fairness guarantee.",
+    "fraction": "requested=25769803776/actual CUDA mem_get_info total; pinned native effective=int(requested*float(total)); 0<effective<=cap. Readback reconstructed bytes tolerance <=1 byte cannot increase predicted cap. No free/nominal48GiB/0.5 denominator.",
+    "allocator": "Native only, ordinary caching allocator. Reject presence of PYTORCH_NO_CUDA_MEMORY_CACHING and PYTORCH_NO_HIP_MEMORY_CACHING even value 0. No custom pool/backend/caching disable/tuning. Keep one-byte allocation alive through positive explicit stats proof.",
+    "mandatory_nonbool_nonnegative_integer_stats": [
+      "allocated_bytes.all.current",
+      "allocated_bytes.all.peak",
+      "reserved_bytes.all.current",
+      "reserved_bytes.all.peak",
+      "num_ooms",
+      "num_alloc_retries"
+    ],
+    "stat_semantics": "Missing keys reject; no convenience default0. Check consistency/monotone peaks and counters, never reset. Internal allocator retries recorded, not confused with external unit retries; do not alter framework algorithms.",
+    "order": "Auth and all parameters -> durable model-load and original context-probe reservation plus real supervisor timing -> any lazy-init-capable CUDA API -> setup/readback -> original single one-byte synchronized probe -> immediately-before-weights >=28GiB sample -> weights -> model_loaded and original subsequent resource points >=2GiB.",
+    "identity": "Full CUDA UUID selected and actually verified; own local PID/UID/starttick/PGID/SID/context authenticated. Preserve P0/adapter/tensor checks. NVML rows optional RAW_UNMAPPED only; other shared users allowed; never signal NVML/foreign IDs.",
+    "auditing": "External policy authority and journal independently determine required point/sequence/unit/context bindings. Reject missing, duplicate, stale, wrong-unit, inconsistent mode/hash or coherently rehashed fabricated proof; do not trust receipt PASS. Shared global free/total must not be summed with local allocator stats as whole-card ownership."
+  },
+  "failure_accounting": [
+    "Auth/resource/source/device mismatch, missing evidence, setup failure, low memory, OOM/deadline/owned-cleanup failure stop without external-unit retry, tuning, task replacement or budget extension.",
+    "Durable actual generation return/raw/tokens precedes post-check. Failed post-check preserves returned data/cost and incomplete unit.",
+    "Charge full authentic one-device supervisor interval including initialization/load/exit/cleanup, conservatively. Do not label exclusive allocation, actual utilization fraction or subtract shared tasks.",
+    "Incomplete source stays NOT_NORMAL_SOURCE with unknown Y0. No structural E/F/S decision until all96 sealed normal; no backfill.",
+    "Historical science 5142 generations/7949 reset-inclusive operations unchanged; previous engineering costs retained separately; user tiny CUDA costs unknown and nonzero."
+  ],
+  "frozen_engineering_caps": {
+    "model_load": 1,
+    "context_probe": 1,
+    "generation": 1,
+    "input_tokens": 8192,
+    "output_tokens": 16,
+    "env_construct": 1,
+    "reset": 1,
+    "saved_steps": 6,
+    "env_close": 1,
+    "reset_inclusive_environment_operations": 7,
+    "supervisor_seconds": 600
+  },
+  "frozen_source_protocol": {
+    "sha256": "daa1d787f9ef13f5927dcf696a2be4c6328dc159b3eb39b5f0f5f520582ebb72",
+    "tasks": 96,
+    "generations": 4800,
+    "environment_operations": 4896,
+    "generated_tokens": 76800,
+    "input_tokens": 16000000,
+    "per_call_input": 8192,
+    "device_hours": 4.0,
+    "remaining": "Order, family quotas, pool/reset42, S5, H50, exclusions, NA/structural thresholds all unchanged. No teacher/recovery/train/eval/heldout."
+  },
+  "required_verification": [
+    "Real nonempty production integration shared and strict modes, model/env/CUDA edges synthetic only; no mocked validator/collector/parser PASS.",
+    "All auth/schema/policy/context/cross-use and strict-no-fallback negative cases in cited Sol scope; wrong UUID/local identity/multiple devices/tensor/P0 mismatch fail.",
+    "Uncached variables including 0, unsupported allocator, fraction/readback error, non-48GiB and nondivisible totals, bad/missing/NaN/inf/bool stats, counter/peak rollback and cap violation cases.",
+    "28/2GiB exact equality and one-byte short boundaries; preweights failure loads0, precall failure generates0; postcall resource failure retains actual return/cost; no external retry/tuning.",
+    "Independent raw-resource sequence coverage rejects coherent rehash forgery, missing/repeated/wrong-unit samples. Shared foreign/unmapped PIDs never become owned/kill targets; original strict rejects as before.",
+    "Frozen actor/science parity and existing dirty-worktree fail-closed behavior retained. Focused tests pass. Pinned clean full suite has no new failure/error IDs versus exact e5 known3failed77errors; do not repair historical missing artifacts.",
+    "py_compile and diff --check pass. Archive exact commands, authentic subprocess exit receipts, raw focused/full logs, ID comparison, complete base-to-final delta/method hashes, untouched-input evidence. Commit clean, nonforce push own branch, verify live remote exact SHA."
+  ],
+  "delivery": "Frozen exact SHA and HANDOFF with scope/delta/flags/tests/limitations and own compact evidence inventory. Developer confers no independent PASS or execution authority. Own unique provenance directory only; no shared INDEX/inventory staging/push, no other agent files.",
+  "not_authorized": [
+    "Actual CUDA probe/helper/model load/generation/ALFWorld calls",
+    "Production preflight/supervisor/scientific invocation",
+    "Creating real executable gate/auth/clearance or reusing old consumed allowance",
+    "Modifying original evidence, frozen inputs, authoritative worktree or old refs"
+  ],
+  "dependency": "Implementation -> root independent exact-SHA review -> Luna fresh concrete proposal/preflight -> new root bounded engineering release -> authentic engineering acceptance -> separate frozen source-only authorization. Tests with explicitly synthetic external edges are authorized."
+}

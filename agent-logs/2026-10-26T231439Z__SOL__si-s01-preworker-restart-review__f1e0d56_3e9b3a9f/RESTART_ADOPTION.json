@@ -1,0 +1,42 @@
+{
+  "schema": "ROOT_CONTROLLED_PREWORKER_RESTART_ADOPTION_V1",
+  "status": "ADOPTED_RECOVERY_NEW_PREFLIGHT_REQUIRED_NO_LIVE_CLEARANCE",
+  "created_utc": "2026-10-26T23:31:48.836944Z",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "standing_human_authority": "Continue until experiment begins and runtime-adaptation/GPU preparation instructions verified by Astra from original human messages; not FullAccess alone or fabricated new approval.",
+  "independent_reviews": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T231851Z__ASTRA__preworker-restart-review__cdec2e72/REVIEW.md",
+      "sha256": "87c0d2277c2b4435465b42e8fd5a6650850d1f9ad3bb1f765c50dd0b2f119f21"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T231851Z__ASTRA__preworker-restart-review__cdec2e72/REVOCATION_ADDENDUM.md",
+      "sha256": "43ff1c51062c1a88ae48a7c2f5fd8986c03d5dd927281ade8c3ca1e5edfb8b79"
+    }
+  ],
+  "old_authority_permanently_revoked_by_new_guard": {
+    "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/artifacts/runtime/si_s01_engineering_shared_cuda_v1_f1e0d56_cfce7ad1c9e3437a9edc2a0f4b6ae5bf.launch_claim.json",
+    "sha256": "2387d1181ee8a32006c3ab84e2e5e938bb95c45bd400f5f952e8e9fbfc2d12b2",
+    "schema": "ROOT_REVOKED_CONSUMED_ENGINEERING_AUTHORITY_GUARD_V1"
+  },
+  "old_failure_bytes_unchanged": true,
+  "new_family_cli_limit": 2,
+  "cli_attempts_already_consumed": 1,
+  "remaining_cli_attempts": 1,
+  "per_new_authorization_maximum_launches": 1,
+  "prior_conservative_charge_seconds": 22,
+  "new_supervisor_limit_seconds": 578,
+  "combined_accounted_supervisor_budget_seconds": 600,
+  "timer_scope": "22 seconds conservative first-CLI debit plus new authenticated supervisor interval <=600; NOT a claim that complete two-CLI lifecycles sum<=600. Preserve new full caller duration and list nonoverlap startup/exit differences.",
+  "actual_GPU_allocation_cost_first_attempt": "UNOBSERVED_NOT_ZERO_MEASUREMENT",
+  "combined_model_load_probe_generation_limits_each": 1,
+  "combined_env_construct_reset_close_limits_each": 1,
+  "combined_saved_steps": 6,
+  "combined_reset_inclusive_operations": 7,
+  "input_output_token_caps": [
+    8192,
+    16
+  ],
+  "source_code_or_treatment_changed": false,
+  "next": "Fresh root auth/run/output and one zero-science preflight, independent verification then fresh exact live clearance. Any second live failure stops; no automatic retry/new probes/teacher/A96/training/eval."
+}

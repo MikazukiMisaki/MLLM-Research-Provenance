@@ -1,0 +1,19 @@
+{
+  "schema": "SI_S01_POST_PREFLIGHT_READ_ONLY_CHECKS_V1",
+  "checks": {
+    "checkout_head": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+    "checkout_branch": "codex/si-s01-shared-gpu-adapter",
+    "checkout_status_porcelain_empty": true,
+    "old_consumed_claim_sha256": "2387d1181ee8a32006c3ab84e2e5e938bb95c45bd400f5f952e8e9fbfc2d12b2",
+    "old_consumed_claim_matches_release": true,
+    "new_output_directory_absent": true,
+    "new_launch_claim_absent": true,
+    "active_matching_worker_process_observed": false,
+    "release_sha256": "db57025026fae065725dc459a52bc92b688ceb32a38c70fcf2ac433e22f9f6a4",
+    "commands_sha256_matches_release": true,
+    "authorization_sha256_matches_release": true,
+    "proposal_sha256_matches_release": true,
+    "review_sha256_matches_release": true
+  },
+  "scope_note": "Read-only post-preflight checks only. The preflight stdout explicitly reports that whole-file hashes were referenced from a prior certificate rather than rehashed and historical input IDs were unrecorded. This result therefore cannot establish runtime readiness."
+}

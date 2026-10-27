@@ -1,0 +1,157 @@
+{
+  "schema": "ROOT_STATIC_SCOPE_INSPECTION_V1",
+  "python": "3.10.20 (main, Jun 11 2026, 15:17:37) [GCC 14.3.0]",
+  "base": "e5f09c05824cb61cb35ccbbf4e189b04e8829cea",
+  "candidate": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "task_sha256": "4612edeebe00ce3e5b42eeed7d5a58202c533371e491a6b913a71546f4c08f6d",
+  "files": [
+    {
+      "path": "configs/experiments/si_s01_shared_resource_v1.json",
+      "old_sha256": null,
+      "new_sha256": "d908573f0c6d9518aec0a9b6b0a48c24648a26c3c708652b185a7cfe7b7e2489",
+      "category": "Authorized resource addition"
+    },
+    {
+      "path": "src/self_improvement/si_s01/audit.py",
+      "old_sha256": "9e29731041245282dc9243a381222fab5fc2e6d95c94d688edfa5c59b913bea8",
+      "new_sha256": "b7324f3bcbba953e017681e3d4aac0b121c1bb20022b7b5c97d335b25dc13704",
+      "changed_existing_functions": [
+        "audit"
+      ],
+      "new_functions": [],
+      "requires_manual_review": "Imports, class/module constants, helper additions, unchanged scientific behavior and full delta still require independent review."
+    },
+    {
+      "path": "src/self_improvement/si_s01/collector.py",
+      "old_sha256": "02c6a0fe8a213885bf46801847d517f1ee564f97de7c026762af8a92f401ca6a",
+      "new_sha256": "2cf24b4200fb15dd6d1dd764062846e70e7a68ccb024b00ba9c11179db956c3a",
+      "changed_existing_functions": [
+        "Collector.__init__"
+      ],
+      "new_functions": [],
+      "requires_manual_review": "Imports, class/module constants, helper additions, unchanged scientific behavior and full delta still require independent review."
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_audit.py",
+      "old_sha256": "69b631fd939b8b01c95ed253ad7508d36bb6262f1f144c79c864a7437b126197",
+      "new_sha256": "272d0e7529ea51282f33e359568c590669b93b8cef1382d5db2cdefce77b7b48",
+      "changed_existing_functions": [
+        "resource_receipt",
+        "audit_engineering"
+      ],
+      "new_functions": [],
+      "requires_manual_review": "Imports, class/module constants, helper additions, unchanged scientific behavior and full delta still require independent review."
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_evidence.py",
+      "old_sha256": "b6657bbf88d3c27c456d1269b1099ab0c0a25fb8326d4a8be6399f56536019d5",
+      "new_sha256": "776b9ce46393257ca3a5a0acf3b6050a8a3b942743a9a35716f491712be7dc54",
+      "changed_existing_functions": [
+        "EngineeringLedger.__init__"
+      ],
+      "new_functions": [],
+      "requires_manual_review": "Imports, class/module constants, helper additions, unchanged scientific behavior and full delta still require independent review."
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_gate.py",
+      "old_sha256": "e037c48a5a080e45a1dc4425e340eb64f34be964ce5db7ea970b3d2f6bc26796",
+      "new_sha256": "ff62ec4d6db94be5c09c5a2e89cb3599fd851805fbdb01729c07de263128d0c0",
+      "changed_existing_functions": [
+        "engineering_binding",
+        "authenticate_engineering"
+      ],
+      "new_functions": [],
+      "requires_manual_review": "Imports, class/module constants, helper additions, unchanged scientific behavior and full delta still require independent review."
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_runtime.py",
+      "old_sha256": "68ab269d985df46ffa22594684bf41131ceff40be9246583101f3d2361696238",
+      "new_sha256": "c455c92a41122a5749461aded67d6dcac6c965c32ef1d6d1bc127ad088807655",
+      "changed_existing_functions": [
+        "EngineeringProducer.load"
+      ],
+      "new_functions": [],
+      "requires_manual_review": "Imports, class/module constants, helper additions, unchanged scientific behavior and full delta still require independent review."
+    },
+    {
+      "path": "src/self_improvement/si_s01/gate.py",
+      "old_sha256": "cde29b94d87070a117825cc1ec80aec23f098ee14550690b5e820d3fe15ea6a8",
+      "new_sha256": "74b32fdccd84492e54453ad32f4cae16bbe6b621d24dcbc9bde9e450056080bf",
+      "changed_existing_functions": [
+        "authenticate",
+        "source_binding",
+        "complete_preflight",
+        "check_clearance"
+      ],
+      "new_functions": [],
+      "requires_manual_review": "Imports, class/module constants, helper additions, unchanged scientific behavior and full delta still require independent review."
+    },
+    {
+      "path": "src/self_improvement/si_s01/runtime.py",
+      "old_sha256": "c258700e366ee701b177098ed47950ee67f1ea690c6e6a29205a873209d1f043",
+      "new_sha256": "9b33feea6ab55f84768fcdc052212d5c807b23f3a2cad7590e601411acb1d4dd",
+      "changed_existing_functions": [
+        "LiveProducer.load"
+      ],
+      "new_functions": [],
+      "requires_manual_review": "Imports, class/module constants, helper additions, unchanged scientific behavior and full delta still require independent review."
+    },
+    {
+      "path": "src/self_improvement/si_s01/runtime_core.py",
+      "old_sha256": "58f0266f2e34a6b5061038b493ddc4bd7d9c282b74a636bbdfa8bf8a45b0b3e0",
+      "new_sha256": "9b1995acac95b2b425d818900811588fd6cdd8a77d37a8d751e4f5b76250ed04",
+      "changed_existing_functions": [
+        "load_guarded",
+        "guarded_generation",
+        "resource"
+      ],
+      "new_functions": [],
+      "requires_manual_review": "Imports, class/module constants, helper additions, unchanged scientific behavior and full delta still require independent review."
+    },
+    {
+      "path": "src/self_improvement/si_s01/shared_resource.py",
+      "old_sha256": null,
+      "new_sha256": "c9431b11bf90e07a2828d02b998c83cb79c8497d8014a4fbc73f7841a0ba557e",
+      "category": "Authorized resource addition"
+    },
+    {
+      "path": "src/self_improvement/si_s01/shared_resource_audit.py",
+      "old_sha256": null,
+      "new_sha256": "f9ab7d218a06cdbba6d4746a46b6e6889b5a966477621ef1f7a531f13ad74c1f",
+      "category": "Authorized resource addition"
+    },
+    {
+      "path": "tests/si_s01_shared_support.py",
+      "old_sha256": null,
+      "new_sha256": "dcf7729de4e384407a41c39c1413782557d3561df7c770450dc12e554e95c67b",
+      "category": "Test delta requires meaningful test/compatibility review"
+    },
+    {
+      "path": "tests/test_si_s01_engineering_parity.py",
+      "old_sha256": "6819bb7e39906d7f64ffa1a5fd02ff32af7db5567900552c9d04546d3a4833c3",
+      "new_sha256": "81e8964d4a244cea9ce898da23fce34755d9fc3d368f23f355ac2c742aaeea69",
+      "category": "Test delta requires meaningful test/compatibility review"
+    },
+    {
+      "path": "tests/test_si_s01_shared_gate.py",
+      "old_sha256": null,
+      "new_sha256": "fced579d987b4e39873863acbfd2bf0dc64c6662c9839d583ff5964a11c1476e",
+      "category": "Test delta requires meaningful test/compatibility review"
+    },
+    {
+      "path": "tests/test_si_s01_shared_resource.py",
+      "old_sha256": null,
+      "new_sha256": "1e4fe61700d771178c63f784c7620a63c646f7adebc4cec33ed2f8139266a85a",
+      "category": "Test delta requires meaningful test/compatibility review"
+    },
+    {
+      "path": "tests/test_si_s01_shared_source.py",
+      "old_sha256": null,
+      "new_sha256": "9f89066447723998e9b7b7e59c113064d568770baff079c417b90f6c0a816dc7",
+      "category": "Test delta requires meaningful test/compatibility review"
+    }
+  ],
+  "violations": [],
+  "decision": "SCOPE_CHECK_ONLY_NOT_IMPLEMENTATION_PASS",
+  "imports_executed": false
+}

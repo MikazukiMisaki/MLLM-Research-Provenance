@@ -1,0 +1,37 @@
+{
+  "schema": "SI_S01_POST_PREFLIGHT_INPUT_CHECKS_V1",
+  "returncode": 0,
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "source_worktree_clean": true,
+  "verified_unchanged_hashes": {
+    "release": "dcd0ae2ec1ca8cf6d86979f14818a05410814dcbf34f948f97f52546deff3f20",
+    "commands": "c4858c54d325144da159114245bd0130f53b637b21d96a0111bdc0879397ba75",
+    "authorization": "114a051124f701c118db39650c8b0386e58da01fdf5c32517ac0007793c9fab2",
+    "proposal": "a9b1c43ebdafbb2d7e33a2377c34428a5788d91afc140d5bbcf1957d08881c2a",
+    "corrected_review": "d2f98aa5ae379273f5ecd98d38f3dbba9c7a92f840ec9c9e68623c3b9ea668ae",
+    "resource_policy": "d908573f0c6d9518aec0a9b6b0a48c24648a26c3c708652b185a7cfe7b7e2489",
+    "pinned_interpreter": "560aa01150e792ac8efc5f0e55db51e7175623437a2c2d7e62b2ec2cd9973449",
+    "historical_game": "e393d4f3f521c7ceba7a6201a09884aec0f8941b4c87bcd4d427ea33a717bb99",
+    "historical_traj_data": "eb817b82a0b7d4f3d08bebe43a581194f8dc796fb894b17f826c0c1c16ede385"
+  },
+  "outputs": {
+    "scientific_output_exists": false,
+    "launch_claim_exists": false,
+    "child_process_proc_entry_exists": false
+  },
+  "static_counters_from_authentic_preflight_stdout": {
+    "models": 0,
+    "CUDA_initializations": 0,
+    "environment_constructs": 0,
+    "generations": 0,
+    "resets": 0,
+    "steps": 0,
+    "units": 0
+  },
+  "whole_historical_trajectory_and_event_file_hashes": "prior certificate reference; not rehashed by preflight or post-check",
+  "ancillary_local_check": {
+    "first_attempt": "A stdlib-only post-check script referenced a nonexistent top-level release.sha256 field and exited with KeyError before computing any hashes; it did not invoke project code or alter files.",
+    "corrected_attempt": "Used the release hash constant and nested authorization/proposal/review references; all listed hashes and output/process checks passed.",
+    "no_preflight_retry": true
+  }
+}

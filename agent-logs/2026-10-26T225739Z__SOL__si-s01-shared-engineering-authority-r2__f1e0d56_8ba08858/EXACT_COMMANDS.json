@@ -1,0 +1,53 @@
+{
+  "schema": "ROOT_REVIEWED_SHARED_ENGINEERING_COMMANDS_V1",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "cwd": "/home/lizening/wt-si-s01-shared-gpu-adapter",
+  "environment": {
+    "ALFWORLD_CONFIG_PATH": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml",
+    "ALFWORLD_DATA": "/home/lizening/alfworld_data",
+    "CUDA_VISIBLE_DEVICES": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+    "HF_HOME": "/home/lizening/.cache/huggingface",
+    "HF_HUB_CACHE": "/home/lizening/.cache/huggingface/hub",
+    "HF_HUB_OFFLINE": "1",
+    "HOME": "/home/lizening",
+    "LC_CTYPE": "C.UTF-8",
+    "PATH": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTORCH_CUDA_ALLOC_CONF": "backend:native",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "inherit_environment": false,
+  "environment_sha256": "ee0ee968bb128b6ed5249fb39b7d84334f232f0f6b134e0519469db312294ff9",
+  "preflight_argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "/home/lizening/wt-si-s01-shared-gpu-adapter/scripts/run_si_s01_engineering_once.py",
+    "--authorization",
+    "/home/lizening/research-notes/agent-logs/2026-10-26T225739Z__SOL__si-s01-shared-engineering-authority-r2__f1e0d56_8ba08858/ROOT_ENGINEERING_AUTHORIZATION_V2.json",
+    "--authorization-sha256",
+    "114a051124f701c118db39650c8b0386e58da01fdf5c32517ac0007793c9fab2",
+    "--proposal",
+    "/home/lizening/research-notes/agent-logs/2026-10-26T225739Z__SOL__si-s01-shared-engineering-authority-r2__f1e0d56_8ba08858/PRODUCTION_PROPOSAL.json",
+    "--preflight-only"
+  ],
+  "preflight_argv_sha256": "876c4e6edaaf9c7c7df992231cd9d5ac2a638454a1eb031941c34040bbfc883e",
+  "live_argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "/home/lizening/wt-si-s01-shared-gpu-adapter/scripts/run_si_s01_engineering_once.py",
+    "--authorization",
+    "/home/lizening/research-notes/agent-logs/2026-10-26T225739Z__SOL__si-s01-shared-engineering-authority-r2__f1e0d56_8ba08858/ROOT_ENGINEERING_AUTHORIZATION_V2.json",
+    "--authorization-sha256",
+    "114a051124f701c118db39650c8b0386e58da01fdf5c32517ac0007793c9fab2",
+    "--proposal",
+    "/home/lizening/research-notes/agent-logs/2026-10-26T225739Z__SOL__si-s01-shared-engineering-authority-r2__f1e0d56_8ba08858/PRODUCTION_PROPOSAL.json",
+    "--live"
+  ],
+  "live_argv_sha256": "52cf78de46894c3f436a9b4f58d0bd927dacded1db0cef84fb43e4e39cb4fada",
+  "worker_template": "Production supervisor only; never invoke manually.",
+  "authorization_sha256": "114a051124f701c118db39650c8b0386e58da01fdf5c32517ac0007793c9fab2",
+  "proposal_sha256": "a9b1c43ebdafbb2d7e33a2377c34428a5788d91afc140d5bbcf1957d08881c2a",
+  "output_path": "/home/lizening/wt-si-s01-shared-gpu-adapter/artifacts/runtime/si_s01_engineering_shared_cuda_v1_f1e0d56_cfce7ad1c9e3437a9edc2a0f4b6ae5bf",
+  "max_engineering_live_invocations": 1,
+  "retry": false
+}

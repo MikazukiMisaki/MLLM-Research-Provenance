@@ -1,0 +1,97 @@
+{
+  "schema": "ROOT_ONE_CONTROLLED_ENGINEERING_RESTART_LIVE_CLEARANCE_V1",
+  "status": "CLEARED_ONE_CONTROLLED_RESTART_ENGINEERING_ONLY",
+  "issuer": "INDEPENDENT_ROOT",
+  "created_utc": "2026-10-26T23:41:13.361260Z",
+  "expires_utc": "2026-10-27T03:31:48.836944Z",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "authorization": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/ROOT_ENGINEERING_AUTHORIZATION_V2.json",
+    "sha256": "8829121a1a6f78ccaaab1010980d9b41a3f7fbbff36120facfa36f1d876851ad"
+  },
+  "proposal": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/PRODUCTION_PROPOSAL.json",
+    "sha256": "a9b1c43ebdafbb2d7e33a2377c34428a5788d91afc140d5bbcf1957d08881c2a"
+  },
+  "commands": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/EXACT_COMMANDS.json",
+    "sha256": "7755960626e6345a2f4da712284fe9239d590dad792eadfae418e137293f3a99"
+  },
+  "software_review": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/ENGINEERING_SOFTWARE_REVIEW.json",
+    "sha256": "72bcfcdc5e930cfa34f5526f2e5d6399068f09b7d1ced8897897be6584d280e4"
+  },
+  "restart_adoption": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T231439Z__SOL__si-s01-preworker-restart-review__f1e0d56_3e9b3a9f/RESTART_ADOPTION.json",
+    "sha256": "280dc432de41e48f67319e5eb4874ed5e69c6e2cac325c89ab828a142eea4027"
+  },
+  "positive_preflight_verification": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/PREFLIGHT_INDEPENDENT_VERIFICATION.json",
+    "sha256": "8116e80b000e916a42ba79b5b6dfc8db35e85282364cc4fbe84f0d6ccc136ed3"
+  },
+  "old_authority_revocation_guard": {
+    "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/artifacts/runtime/si_s01_engineering_shared_cuda_v1_f1e0d56_cfce7ad1c9e3437a9edc2a0f4b6ae5bf.launch_claim.json",
+    "sha256": "2387d1181ee8a32006c3ab84e2e5e938bb95c45bd400f5f952e8e9fbfc2d12b2"
+  },
+  "run_id": "af705f48405544e9a86eb1da437335a1",
+  "output_path": "/home/lizening/wt-si-s01-shared-gpu-adapter/artifacts/runtime/si_s01_engineering_shared_cuda_v1_f1e0d56_af705f48405544e9a86eb1da437335a1",
+  "cwd": "/home/lizening/wt-si-s01-shared-gpu-adapter",
+  "allowed_live_argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "/home/lizening/wt-si-s01-shared-gpu-adapter/scripts/run_si_s01_engineering_once.py",
+    "--authorization",
+    "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/ROOT_ENGINEERING_AUTHORIZATION_V2.json",
+    "--authorization-sha256",
+    "8829121a1a6f78ccaaab1010980d9b41a3f7fbbff36120facfa36f1d876851ad",
+    "--proposal",
+    "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/PRODUCTION_PROPOSAL.json",
+    "--live"
+  ],
+  "allowed_live_argv_sha256": "9bcb8263035995b3094c317b18c5d9e7538ccbde9e975dd5445f8cd77312b348",
+  "environment_sha256": "ee0ee968bb128b6ed5249fb39b7d84334f232f0f6b134e0519469db312294ff9",
+  "maximum_this_authorization_live_invocations": 1,
+  "maximum_family_cli_invocations": 2,
+  "family_previous_cli_consumed": 1,
+  "family_remaining_after_this": 0,
+  "ceilings": {
+    "model_load": 1,
+    "context_probe": 1,
+    "generation": 1,
+    "env_construct": 1,
+    "reset": 1,
+    "step": 6,
+    "env_close": 1,
+    "environment_operations": 7,
+    "generated_tokens": 16,
+    "input_tokens": 8192,
+    "seconds": 578
+  },
+  "accounting": {
+    "prior_cli_authentic_elapsed_seconds": 21.601499736,
+    "prior_conservative_one_device_debit_seconds": 22,
+    "new_authenticated_supervisor_interval_ceiling_seconds": 578,
+    "aggregate_budget_endpoint": "22 + new authenticated supervisor seconds <=600; not a bound on two complete CLI lifecycle durations. Record current whole CLI duration separately and do not double-count overlapping intervals.",
+    "prior_actual_GPU_allocation_peak": "UNOBSERVED_NOT_ASSERTED_ZERO"
+  },
+  "scope": "Same one-model-load/originalone-byteprobe/one-generation/reset30000+6savedsteps/close bounded historical source verification, new pool42, actual public/render/count/raw/parser/map/command joint match before step1, then six exact saved transitions. No reconstruction of unrecorded historical input IDs/RNG claimed.",
+  "resource_policy": {
+    "policy": "SHARED_CONTAINER_CUDA_V1",
+    "contract_sha256": "d908573f0c6d9518aec0a9b6b0a48c24648a26c3c708652b185a7cfe7b7e2489",
+    "proposal_sha256": "6998fe2ffcfd583741cd12ecf6b08638ed0e5da16d671f761a0af1df59c4dc5a",
+    "scientific_execution_behavior_changed": true,
+    "offline_evidence_validation_behavior_changed": true,
+    "source_treatment_semantics_changed": false,
+    "exclusive_gpu": false,
+    "NVML_to_local_PID_mapping": "UNPROVEN_NOT_ASSERTED",
+    "whole_process_vram_cap": false,
+    "device_wide_delta_attribution": false
+  },
+  "science_authorized": false,
+  "A96_teacher_training_evaluation_G4": "NOT_AUTHORIZED",
+  "stop_on_any_failure_mismatch_OOM_deadline_or_cleanup_uncertainty": true,
+  "retry_or_further_restart_authorized": false,
+  "no_extra_probe_or_external_ownership_wrapper": true,
+  "preserve": "All original failed bytes/absence snapshots and new post-failure revocation guard remain immutable. Actual returns/open units/full authoritative costs retained. Historical science5142/7949 and prior other engineering/smoke costs separate.",
+  "instruction": "Verify exact scope/source/authority/payload/commands/env/outputparent/oldguard once more, then exactly allowed argv with explicit environment and no shell. Production supervisor alone creates worker. No manual worker, model/env probes, cap changes or reuse of any old argv/clearance. This is the final permitted live CLI under this recovery plan; on any failure stop and preserve, no additional release inferred."
+}

@@ -1,0 +1,161 @@
+{
+  "schema": "ROOT_SHARED_GPU_STATIC_MATH_AND_SCOPE_PROBE_V1",
+  "status": "STATIC_ONLY_NOT_HARDWARE_OR_CANDIDATE_PASS",
+  "python": "3.10.20 pinned",
+  "fraction_cases": [
+    {
+      "actual_total": 48305799168,
+      "requested_fraction": 0.5334722584006252,
+      "predicted_effective_bytes": 25769803776,
+      "readback_fraction": 0.5334722584006252,
+      "reconstruction_error_bytes": 0.0
+    },
+    {
+      "actual_total": 51539607552,
+      "requested_fraction": 0.5,
+      "predicted_effective_bytes": 25769803776,
+      "readback_fraction": 0.5,
+      "reconstruction_error_bytes": 0.0
+    },
+    {
+      "actual_total": 50465865731,
+      "requested_fraction": 0.510638297841985,
+      "predicted_effective_bytes": 25769803776,
+      "readback_fraction": 0.510638297841985,
+      "reconstruction_error_bytes": 3.814697265625e-06
+    },
+    {
+      "actual_total": 42949673073,
+      "requested_fraction": 0.5999999984214083,
+      "predicted_effective_bytes": 25769803776,
+      "readback_fraction": 0.5999999984214083,
+      "reconstruction_error_bytes": 0.0
+    },
+    {
+      "actual_total": 25769803776,
+      "requested_fraction": 1.0,
+      "predicted_effective_bytes": 25769803776,
+      "readback_fraction": 1.0,
+      "reconstruction_error_bytes": 0.0
+    },
+    {
+      "actual_total": 25769803777,
+      "requested_fraction": 0.9999999999611949,
+      "predicted_effective_bytes": 25769803776,
+      "readback_fraction": 0.9999999999611949,
+      "reconstruction_error_bytes": 0.0
+    },
+    {
+      "actual_total": 68719476735,
+      "requested_fraction": 0.37500000000545697,
+      "predicted_effective_bytes": 25769803776,
+      "readback_fraction": 0.37500000000545697,
+      "reconstruction_error_bytes": 0.0
+    }
+  ],
+  "authorized_baseline_methods": [
+    {
+      "path": "src/self_improvement/si_s01/runtime_core.py",
+      "method": "load_guarded",
+      "pinned_ast_sha256": "168c25aab96922510d63d7f73589d47de2704fe59c67563d2783c69a875bec44",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/runtime_core.py",
+      "method": "guarded_generation",
+      "pinned_ast_sha256": "fa2f2ef5a810d37f3f24f87345ab5d2937db0a5697e7440d012adcbc99e06100",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/runtime_core.py",
+      "method": "resource",
+      "pinned_ast_sha256": "7f7f3146d358979215a157cc903fc8e633c518a1375c6ab25aea5673001be6fe",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/runtime.py",
+      "method": "LiveProducer.load",
+      "pinned_ast_sha256": "effe82c6cd562eb8c722fe302da310e5ff44f6c14f370cf5cd6789def94a04d6",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/runtime.py",
+      "method": "LiveProducer.resource",
+      "pinned_ast_sha256": "6ecbeb31c6298bc5c07d697bf1975c0c5aa30c5bb194a6db161982697d85db11",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_runtime.py",
+      "method": "EngineeringProducer.load",
+      "pinned_ast_sha256": "0a11805c8d47c88be252916e30bc1c0211fcda93fa2b03ee56a2dbeccfd46590",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/gate.py",
+      "method": "authenticate",
+      "pinned_ast_sha256": "aa964d5acbcba350c0ebc6ec7d5abfb34583f666fbb045f8d88e566c0c0a03a9",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/gate.py",
+      "method": "source_binding",
+      "pinned_ast_sha256": "2c8c53e62fa59f47308353b6268b7e252962dd10de2d7a67b5f4c906925aea72",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/gate.py",
+      "method": "complete_preflight",
+      "pinned_ast_sha256": "03a1b180abd735be6a7c2a5b22495d8ce20cdeb7be10f022d53ab6bc1e660d54",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/gate.py",
+      "method": "check_clearance",
+      "pinned_ast_sha256": "ffca72e7130156f5de53ae2020911cc8e8363ca9526273116839538764d5b4a5",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_gate.py",
+      "method": "authenticate_engineering",
+      "pinned_ast_sha256": "ab7a5c3056ece2da9728e1158741c174fb884c24c10623dda5fb83c90291d143",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_gate.py",
+      "method": "engineering_binding",
+      "pinned_ast_sha256": "d456db9bd055db541f42d5235713d2bbf61360208b7d147bc562d6dc4337d084",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/collector.py",
+      "method": "Collector.__init__",
+      "pinned_ast_sha256": "1937d789afb731a18915e045317165cea69155bd08b44e6cd57b652c302f2879",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_evidence.py",
+      "method": "EngineeringLedger.__init__",
+      "pinned_ast_sha256": "c8a19cc72d4853a5d8c7039957c4b0468bfe3941640b8ef390518e56fa1040b9",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/audit.py",
+      "method": "audit",
+      "pinned_ast_sha256": "30ddb16118702a731bec192b69a34f627685fdc1b7c65e0cd127d4451440bf0b",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_audit.py",
+      "method": "resource_receipt",
+      "pinned_ast_sha256": "28785ad0db23b5e1c6ec111fc758454f8696d5addd0b8e6dea1302d7379a4833",
+      "matches": true
+    },
+    {
+      "path": "src/self_improvement/si_s01/engineering_audit.py",
+      "method": "audit_engineering",
+      "pinned_ast_sha256": "34af253294ca95825bc84d1adde635ccc6991ebc894e08b5f5617b08fc1f2d04",
+      "matches": true
+    }
+  ],
+  "hardware_calls": 0
+}

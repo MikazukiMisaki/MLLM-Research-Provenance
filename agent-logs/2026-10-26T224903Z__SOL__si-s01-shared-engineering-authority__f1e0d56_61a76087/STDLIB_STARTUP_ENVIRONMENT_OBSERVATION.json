@@ -1,0 +1,48 @@
+{
+  "schema": "ROOT_STDLIB_STARTUP_ENVIRONMENT_OBSERVATION_V1",
+  "authentic_returncode": 0,
+  "argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "-B",
+    "-c",
+    "import os,json; print(json.dumps(dict(os.environ),sort_keys=True))"
+  ],
+  "requested_environment": {
+    "ALFWORLD_CONFIG_PATH": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml",
+    "ALFWORLD_DATA": "/home/lizening/alfworld_data",
+    "CUDA_VISIBLE_DEVICES": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+    "HF_HOME": "/home/lizening/.cache/huggingface",
+    "HF_HUB_CACHE": "/home/lizening/.cache/huggingface/hub",
+    "HF_HUB_OFFLINE": "1",
+    "HOME": "/home/lizening",
+    "PATH": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTORCH_CUDA_ALLOC_CONF": "backend:native",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "actual_environment": {
+    "ALFWORLD_CONFIG_PATH": "/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml",
+    "ALFWORLD_DATA": "/home/lizening/alfworld_data",
+    "CUDA_VISIBLE_DEVICES": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+    "HF_HOME": "/home/lizening/.cache/huggingface",
+    "HF_HUB_CACHE": "/home/lizening/.cache/huggingface/hub",
+    "HF_HUB_OFFLINE": "1",
+    "HOME": "/home/lizening",
+    "LC_CTYPE": "C.UTF-8",
+    "PATH": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTORCH_CUDA_ALLOC_CONF": "backend:native",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "delta": {
+    "LC_CTYPE": {
+      "requested": null,
+      "actual": "C.UTF-8"
+    }
+  },
+  "stdout": "{\"ALFWORLD_CONFIG_PATH\": \"/home/lizening/wt-r19-recovery-duration-v1/configs/local/r19_b1_g2_alfworld.yaml\", \"ALFWORLD_DATA\": \"/home/lizening/alfworld_data\", \"CUDA_VISIBLE_DEVICES\": \"GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a\", \"HF_HOME\": \"/home/lizening/.cache/huggingface\", \"HF_HUB_CACHE\": \"/home/lizening/.cache/huggingface/hub\", \"HF_HUB_OFFLINE\": \"1\", \"HOME\": \"/home/lizening\", \"LC_CTYPE\": \"C.UTF-8\", \"PATH\": \"/home/lizening/miniconda3/envs/alfworld-self-improve/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\", \"PYTHONDONTWRITEBYTECODE\": \"1\", \"PYTORCH_CUDA_ALLOC_CONF\": \"backend:native\", \"TRANSFORMERS_OFFLINE\": \"1\"}\n",
+  "stderr": "",
+  "models_or_CUDA_or_environment_constructs": 0,
+  "project_preflight_invoked": false
+}

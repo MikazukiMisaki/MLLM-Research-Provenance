@@ -1,0 +1,135 @@
+{
+  "schema": "ROOT_CORRECTED_CONCRETE_ENGINEERING_PROPOSAL_REVIEW_V1",
+  "decision": "PASS_CORRECTED_ROOT_MATERIALIZATION_ONLY",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "original_luna_proposal": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T222916Z__LUNA__si-s01-concrete-shared-gpu-proposal__f1e0d56/ENGINEERING_PROPOSAL_REVISION_2.json",
+    "sha256": "08c9d1740d27a90f0a000a96469aa72edd96ac53782b9253d08e5a9419484c75",
+    "as_is": "NOT_APPROVED"
+  },
+  "corrections": [
+    {
+      "path": "packages.alfworld.version",
+      "old": "0.4.2",
+      "new": "",
+      "reason": "Actual module_origin getattr(__version__, empty) observed in CPU-only pinned subprocess; distro version is a distinct quantity."
+    },
+    {
+      "path": "packages.alfworld.agents.environment.alfred_tw_env.version",
+      "old": "0.4.2",
+      "new": "",
+      "reason": "Actual module_origin getattr(__version__, empty) observed in CPU-only pinned subprocess; distro version is a distinct quantity."
+    },
+    {
+      "path": "packages.textworld.gym.version",
+      "old": "1.7.0",
+      "new": "",
+      "reason": "Actual module_origin getattr(__version__, empty) observed in CPU-only pinned subprocess; distro version is a distinct quantity."
+    },
+    {
+      "field": "old06ef/f336/f733 authority hashes",
+      "action": "Not carried into current authority; historical consumed SI-E2 references only. New root task4612 and current reviews bind this fresh auth."
+    },
+    {
+      "field": "merges.txt inventory typo",
+      "old": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d12",
+      "correct": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "action": "Use original frozen/fresh manifest; original model bytes unchanged."
+    },
+    {
+      "field": "future paths",
+      "action": "Root-owned meaningful filenames replace NOT_CREATED sentinels; rebuild and bind exact argv/auth/payload hashes."
+    },
+    {
+      "field": "GPU/preflight claim",
+      "action": "Root read-only NVIDIA metadata observed matching A40 UUID46068MiB total45390MiB free0%util; snapshot only. Production preflight is static0science and cannot establish actual CUDA/P0 readiness; actual CUDA UUID checked before weights only in separately released engineering."
+    }
+  ],
+  "payload": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T224903Z__SOL__si-s01-shared-engineering-authority__f1e0d56_61a76087/PRODUCTION_PROPOSAL.json",
+    "sha256": "a9b1c43ebdafbb2d7e33a2377c34428a5788d91afc140d5bbcf1957d08881c2a"
+  },
+  "authority": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T224903Z__SOL__si-s01-shared-engineering-authority__f1e0d56_61a76087/ROOT_ENGINEERING_AUTHORIZATION_V2.json",
+    "sha256": "5a0fe764665a09e1ced5c387ad03bc9835013f892b63fca41d9562c277187db4"
+  },
+  "independent_software_review": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/INDEPENDENT_REVIEW.json",
+    "sha256": "3ec9c0873700dfa41f99d079a268219187bcc26cf48d678f041380af47c92163"
+  },
+  "CPU_origin_receipt": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/ACTUAL_PACKAGE_ORIGINS_RECEIPT.json",
+    "sha256": "d356d2d5c8c4bbcf9ffd0544c89417b47fa1e7cccf537a1ffe38c8470defe739"
+  },
+  "read_deviation_adjudication": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T214753Z__SOL__si-s01-shared-gpu-independent-review-preparation__cf9f34cb/READ_BOUNDARY_DEVIATION_ADJUDICATION.json",
+    "sha256": "da542d7a869e740932c744d33bd8af25cb5e9943785c3b45066cf65533fd1312"
+  },
+  "frozen_model_file_hashes": [
+    {
+      "name": "model-00001-of-00005.safetensors",
+      "bytes": 3996250744,
+      "sha256": "31d6a825ae35f11fb85b195b4c42c146c051e446433125a215336abdf95cbf5f"
+    },
+    {
+      "name": "model-00002-of-00005.safetensors",
+      "bytes": 3993160032,
+      "sha256": "5991236cea6fe21f3d43cab0f0e84448734fbbe0789816202989f2ddc9d18282"
+    },
+    {
+      "name": "model-00003-of-00005.safetensors",
+      "bytes": 3959604768,
+      "sha256": "c5185c4794be2d8a9784d5753c9922db38df478ce11f9ed0b415b7304d896836"
+    },
+    {
+      "name": "model-00004-of-00005.safetensors",
+      "bytes": 3187841392,
+      "sha256": "b5ee7de71fbf17db3d5704e0c8f2bc7d005ca9e1d7ca2aeb19827b0cfcaa917a"
+    },
+    {
+      "name": "model-00005-of-00005.safetensors",
+      "bytes": 1244659840,
+      "sha256": "20c2d6366ab85c90786ccdd829cd2b9e7d30ef3b2ebbb998280e7e4014b542ff"
+    },
+    {
+      "name": "config.json",
+      "bytes": 728,
+      "sha256": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30"
+    },
+    {
+      "name": "generation_config.json",
+      "bytes": 239,
+      "sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2"
+    },
+    {
+      "name": "model.safetensors.index.json",
+      "bytes": 32878,
+      "sha256": "f9fdbcb91c23971c13ec5d5f2573d2349e8f61f2f049371ec699281748fdb1bc"
+    },
+    {
+      "name": "tokenizer.json",
+      "bytes": 11422654,
+      "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+    },
+    {
+      "name": "tokenizer_config.json",
+      "bytes": 9732,
+      "sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+    },
+    {
+      "name": "vocab.json",
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    {
+      "name": "merges.txt",
+      "bytes": 1671853,
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    }
+  ],
+  "scientific_parameters_changed": false,
+  "budget_increased": false,
+  "old_run_or_output_reused": false,
+  "engineering_live_release": "NOT_GRANTED_BY_THIS_FILE",
+  "source_science": "NOT_AUTHORIZED"
+}

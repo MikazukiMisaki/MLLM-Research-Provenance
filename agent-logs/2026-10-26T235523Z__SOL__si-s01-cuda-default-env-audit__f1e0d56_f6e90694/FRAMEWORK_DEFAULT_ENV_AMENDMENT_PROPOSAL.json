@@ -1,0 +1,65 @@
+{
+  "schema": "ROOT_FRAMEWORK_DEFAULT_ENVIRONMENT_CORRECTION_AMENDMENT_PROPOSAL_V1",
+  "status": "PROPOSED_ONLY_NO_NEW_LIVE_AUTHORITY",
+  "created_utc": "2026-10-26T23:58:21.952016Z",
+  "frozen_source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "exhausted_plan": "Family limit2 consumed; prior final clearance remains spent. No further command is authorized under that plan. Both actual failures and all failed/open reservations remain immutable.",
+  "actual_second_failure": {
+    "run_id": "af705f48405544e9a86eb1da437335a1",
+    "supervisor_receipt": {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/artifacts/runtime/si_s01_engineering_shared_cuda_v1_f1e0d56_af705f48405544e9a86eb1da437335a1/supervisor_exit.json",
+      "sha256": "dbd65fd7aa18adab1d064d886facec2b005acb49feb32db9014b6b98af2a9c86"
+    },
+    "engineering_report": {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/artifacts/runtime/si_s01_engineering_shared_cuda_v1_f1e0d56_af705f48405544e9a86eb1da437335a1/engineering_report.json",
+      "sha256": "5bb2b02b49b728c5c506d1adc2e3d19c0b0e42748b06a06ac51df854e70c76a6"
+    },
+    "authentic_returncode": 1,
+    "supervisor_seconds": 67.34844062384218,
+    "CUDA_initialization_and_UUID": "OBSERVED_SOURCE_BEFORE_CONTEXT_PROBE_MATCHED_BOUND_UUID",
+    "original_one_byte_allocation": "NOT_REACHED_BY_CODE_ORDER",
+    "actual_Qwen_weights_or_generation_or_environment": "NOT_REACHED_BY_CODE_ORDER",
+    "failed_reserved_model_load_and_probe_units_each": 1,
+    "completed_model_generation_environment_units": 0,
+    "cleanup_established": true
+  },
+  "root_cause_evidence": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-26T235523Z__SOL__si-s01-cuda-default-env-audit__f1e0d56_f6e90694/CUDA_DEFAULT_ENVIRONMENT_FINDING.json",
+    "sha256": "e4dc88c721fc9b7a49cd8f356dc4aa581b2ec916e7e27b4af941ab0990d6b101"
+  },
+  "correction": "Predeclare CUDA_MODULE_LOADING=LAZY in the exact root environment, matching the default already inserted by installed pinned torch.cuda._lazy_init before its successful initialization. Retain full exact-environment validation unchanged; no science code/model/prompt/decoding/dtype/allocator/data/task/seed/schedule/quota/exclusion change. Complete runtime diff was not captured; do not invent it.",
+  "explicit_scope_change_needing_adjudication": {
+    "family_live_cli_limit_from2_to3": true,
+    "aggregate_model_load_reservation_attempt_limit_from1_to2": true,
+    "aggregate_context_probe_reservation_attempt_limit_from1_to2": true,
+    "completed_attempts_not_refunded_or_relabelled": true,
+    "actual_Qwen_weights_load_limit": 1,
+    "actual_original_one_byte_allocation_limit": 1,
+    "actual_generation_limit": 1,
+    "actual_env_construct_reset_close_limits_each": 1,
+    "actual_saved_steps_limit": 6,
+    "actual_reset_inclusive_env_ops_limit": 7,
+    "source_science_or_teacher_train_eval_budget_increase": false
+  },
+  "budget": {
+    "original_accounted_supervisor_seconds": 600,
+    "prior_preworker_conservative_seconds": 22,
+    "second_authentic_supervisor_seconds": 67.34844062384218,
+    "second_conservative_debit_seconds": 68,
+    "total_upfront_conservative_debit_seconds": 90,
+    "new_supervisor_ceiling_seconds": 510,
+    "endpoint_note": "Sum of conservative debits plus new authentic supervisor interval<=600. Preserve all complete CLI durations separately; not claim complete CLI lifecycles <=600. Prior other engineering/manual smoke costs remain separately unchanged/nonzero."
+  },
+  "authorization_question": "Does original human continue-until-start/runtime-adaptation delegation support this narrow pre-data operational amendment under fixed actual weight-load/generation/env caps and fixed600-second budget, despite exhausted prior Root-created family2/reservation1 plan? Do not use FullAccess alone, fake approval, or call a third run authorized now. If a new human-specific authorization is required for increased reservation-attempt cardinality, identify it explicitly.",
+  "necessary_conditions": [
+    "Source remains exactf1/clean; input hashes and science protocol unchanged.",
+    "Bind explicit defaultLAZY, fresh auth/run/output/review/preflight/exact clearance; old real sourceclaim already blocks af705 authority and cfce administrative guard stays.",
+    "Only one additional attempt if authorized; no automatic retry or further extension after it. No source/A96 until actual engineering acceptance or separately reviewed protocol decision.",
+    "Never report failed reservation counts as0 or call all attempt caps unchanged. Record extra initialization/attempt reservations separately from scientific generation/env counters.",
+    "No live/model/CUDA/env/science in this review. Model weight loading/inference/env operation has not occurred in this family."
+  ],
+  "source_treatment_semantics_changed": false,
+  "scientific_execution_behavior_changed": true,
+  "new_engineering_attempt_reservation_caps_changed": true,
+  "source_scientific_budget_or_treatment_changed": false
+}

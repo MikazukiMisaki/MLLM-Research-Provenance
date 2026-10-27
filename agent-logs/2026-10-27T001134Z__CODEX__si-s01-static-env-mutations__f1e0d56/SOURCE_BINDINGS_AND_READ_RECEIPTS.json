@@ -1,0 +1,1709 @@
+{
+  "schema": "STATIC_SOURCE_READ_RECEIPTS_V1",
+  "read_errors": [],
+  "files": [
+    {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/src/self_improvement/si_s01/engineering_gate.py",
+      "bytes": 12563,
+      "sha256": "ff62ec4d6db94be5c09c5a2e89cb3599fd851805fbdb01729c07de263128d0c0",
+      "access": "stdlib static read; module not imported",
+      "excerpts": [
+        {
+          "start_line": 74,
+          "end_line": 80,
+          "lines": [
+            {
+              "line": 74,
+              "text": "    insist(set(p['environment'])=={'config','data_root','game','traj_data','logic_files'} and set(p['environment']['logic_files'])=={'domain','grammar'} and set(p['original_files_by_reference'])=={'trajectory','events'},'single historical environment/certifications')"
+            },
+            {
+              "line": 75,
+              "text": "    history=read_historical(bound(p['history_manifest']['path'],p['history_manifest']['sha256']),evidence_class=a['evidence_class'],expected_manifest_sha256=p['history_manifest']['sha256'])"
+            },
+            {
+              "line": 76,
+              "text": "    permit=EngineeringPermit(a,p,authorization_sha256,hashlib.sha256(pbytes).hexdigest(),repository,history)"
+            },
+            {
+              "line": 77,
+              "text": "    insist(type(a['execution_uid']) is int and a['execution_uid']==os.getuid(),'engineering execution UID')"
+            },
+            {
+              "line": 78,
+              "text": "    insist(dict(os.environ)==a['environment'] and not any(k in os.environ for k in ('PYTHONPATH','PYTHONHOME','LD_PRELOAD')) and all(os.environ.get(k)=='1' for k in ('HF_HUB_OFFLINE','TRANSFORMERS_OFFLINE','PYTHONDONTWRITEBYTECODE')),'exact isolated engineering environment')"
+            },
+            {
+              "line": 79,
+              "text": "    insist(re.fullmatch(r'GPU-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}',a['gpu_uuid']) is not None and os.environ.get('CUDA_VISIBLE_DEVICES')==(a['gpu_uuid'] if permit.evidence_class==MODE else ''),'bound UUID/mode')"
+            },
+            {
+              "line": 80,
+              "text": "    token='@ENGINEERING_AUTHORIZATION_SHA256@'"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/src/self_improvement/si_s01/gate.py",
+      "bytes": 17693,
+      "sha256": "74b32fdccd84492e54453ad32f4cae16bbe6b621d24dcbc9bde9e450056080bf",
+      "access": "stdlib static read; module not imported",
+      "excerpts": [
+        {
+          "start_line": 92,
+          "end_line": 96,
+          "lines": [
+            {
+              "line": 92,
+              "text": "    insist(set(p['environment'])=={'config','data_root','logic_files','games'} and set(p['environment']['logic_files'])=={'domain','grammar'},'source environment fields')"
+            },
+            {
+              "line": 93,
+              "text": "    insist(set(p['model'])==({'base_snapshot','adapter_path'} if a['evidence_class']=='live_source_only' else {'base_snapshot','adapter_path','synthetic_files'}),'model fields/mode')"
+            },
+            {
+              "line": 94,
+              "text": "    insist(dict(os.environ)==a['environment'],'exact noninherited environment')"
+            },
+            {
+              "line": 95,
+              "text": "    insist(not any(k in os.environ for k in ('PYTHONPATH','PYTHONHOME','LD_PRELOAD')) and os.environ.get('PYTHONDONTWRITEBYTECODE')=='1' and os.environ.get('HF_HUB_OFFLINE')=='1' and os.environ.get('TRANSFORMERS_OFFLINE')=='1','clean offline interpreter environment')"
+            },
+            {
+              "line": 96,
+              "text": "    insist(re.fullmatch(r'GPU-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}',a['gpu_uuid']) is not None,'full GPU UUID')"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/src/self_improvement/si_s01/shared_resource.py",
+      "bytes": 11015,
+      "sha256": "c9431b11bf90e07a2828d02b998c83cb79c8497d8014a4fbc73f7841a0ba557e",
+      "access": "stdlib static read; module not imported",
+      "excerpts": [
+        {
+          "start_line": 25,
+          "end_line": 34,
+          "lines": [
+            {
+              "line": 25,
+              "text": "def policy_binding(authorization):"
+            },
+            {
+              "line": 26,
+              "text": "    schema=authorization.get('schema')"
+            },
+            {
+              "line": 27,
+              "text": "    if schema in V1:"
+            },
+            {
+              "line": 28,
+              "text": "        insist('resource_policy' not in authorization,'V1 remains strict; no resource downgrade')"
+            },
+            {
+              "line": 29,
+              "text": "        return None"
+            },
+            {
+              "line": 30,
+              "text": "    insist(schema in V2 and type(authorization.get('resource_policy')) is dict and canonical(authorization['resource_policy'])==canonical(binding()),'explicit V2 shared resource binding')"
+            },
+            {
+              "line": 31,
+              "text": "    env=authorization['environment']"
+            },
+            {
+              "line": 32,
+              "text": "    insist(not any(k in env for k in ('PYTORCH_NO_CUDA_MEMORY_CACHING','PYTORCH_NO_HIP_MEMORY_CACHING')),'shared uncached allocator environment forbidden')"
+            },
+            {
+              "line": 33,
+              "text": "    insist(env.get('PYTORCH_CUDA_ALLOC_CONF')==contract()['allocator_config'],'shared fixed native allocator configuration')"
+            },
+            {
+              "line": 34,
+              "text": "    return binding()"
+            }
+          ]
+        },
+        {
+          "start_line": 78,
+          "end_line": 96,
+          "lines": [
+            {
+              "line": 78,
+              "text": "    def configure(self,torch):"
+            },
+            {
+              "line": 79,
+              "text": "        self.torch=torch;insist(not self.configured,'shared allocator configured once')"
+            },
+            {
+              "line": 80,
+              "text": "        insist(dict(os.environ)==self.permit.authorization['environment'],'shared effective exact environment')"
+            },
+            {
+              "line": 81,
+              "text": "        policy_binding(self.permit.authorization)"
+            },
+            {
+              "line": 82,
+              "text": "        memory=torch.cuda.memory"
+            },
+            {
+              "line": 83,
+              "text": "        insist(memory.get_allocator_backend()=='native','shared native caching allocator required')"
+            },
+            {
+              "line": 84,
+              "text": "        free,total=torch.cuda.mem_get_info(0)"
+            },
+            {
+              "line": 85,
+              "text": "        insist(type(total) is int and type(free) is int and 0<=free<=total and total>=self.config['preweight_global_free_min_bytes'],'shared actual total/global free')"
+            },
+            {
+              "line": 86,
+              "text": "        self.total=total;self.fraction=self.config['allocator_cap_bytes']/total;self.effective=int(self.fraction*float(total))"
+            },
+            {
+              "line": 87,
+              "text": "        insist(0<self.effective<=self.config['allocator_cap_bytes'],'shared conservative allocator cap rounding')"
+            },
+            {
+              "line": 88,
+              "text": "        memory.set_per_process_memory_fraction(self.fraction,0)"
+            },
+            {
+              "line": 89,
+              "text": "        self.configured=True"
+            },
+            {
+              "line": 90,
+              "text": "        self.ledger.runtime('shared_allocator_configured',self.sample('configured_before_probe'))"
+            },
+            {
+              "line": 91,
+              "text": "    def sample(self,point):"
+            },
+            {
+              "line": 92,
+              "text": "        raw=self.envelope(point)"
+            },
+            {
+              "line": 93,
+              "text": "        try:"
+            },
+            {
+              "line": 94,
+              "text": "            insist(self.configured,'shared allocator not configured')"
+            },
+            {
+              "line": 95,
+              "text": "            torch=self.torch;policy_binding(self.permit.authorization)"
+            },
+            {
+              "line": 96,
+              "text": "            insist(os.environ.get('PYTORCH_CUDA_ALLOC_CONF')==self.config['allocator_config'] and not any(k in os.environ for k in ('PYTORCH_NO_CUDA_MEMORY_CACHING','PYTORCH_NO_HIP_MEMORY_CACHING')),'shared effective allocator environment drift')"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/src/self_improvement/si_s01/runtime_core.py",
+      "bytes": 8263,
+      "sha256": "9b1995acac95b2b425d818900811588fd6cdd8a77d37a8d751e4f5b76250ed04",
+      "access": "stdlib static read; module not imported",
+      "excerpts": [
+        {
+          "start_line": 20,
+          "end_line": 43,
+          "lines": [
+            {
+              "line": 20,
+              "text": "def load_guarded(cls,permit:RuntimeBinding,ledger,*,evidence_class:str,probe_started=None,probe_completed=None,resource_policy=None):"
+            },
+            {
+              "line": 21,
+              "text": "    validate_guard_argument(permit,ledger,resource_policy)"
+            },
+            {
+              "line": 22,
+              "text": "    import torch,transformers,peft"
+            },
+            {
+              "line": 23,
+              "text": "    from models.qwen import QwenPolicy,QwenPolicyConfig"
+            },
+            {
+              "line": 24,
+              "text": "    from models.policy import GenerationOptions"
+            },
+            {
+              "line": 25,
+              "text": "    for name,module in [('torch',torch),('transformers',transformers),('peft',peft)]:"
+            },
+            {
+              "line": 26,
+              "text": "        insist(module_origin(module)==permit.proposal['packages'][name],'actual module origin/version: '+name)"
+            },
+            {
+              "line": 27,
+              "text": "    if probe_started is not None:probe_started()"
+            },
+            {
+              "line": 28,
+              "text": "    if resource_policy is not None:resource_policy.intent()"
+            },
+            {
+              "line": 29,
+              "text": "    insist(torch.cuda.is_available() and torch.cuda.device_count()==1,'one visible CUDA device')"
+            },
+            {
+              "line": 30,
+              "text": "    torch.cuda.init()"
+            },
+            {
+              "line": 31,
+              "text": "    verify_cuda_uuid(torch,RuntimeSink(ledger),permit.gpu_uuid,point='source_before_context_probe')"
+            },
+            {
+              "line": 32,
+              "text": "    if resource_policy is not None:resource_policy.configure(torch)"
+            },
+            {
+              "line": 33,
+              "text": "    probe=torch.empty(1,dtype=torch.uint8,device='cuda:0')"
+            },
+            {
+              "line": 34,
+              "text": "    if resource_policy is None:"
+            },
+            {
+              "line": 35,
+              "text": "        ledger.runtime('one_byte_before_weights',inspect_gpu(permit.gpu_uuid,allowed_pids={os.getpid()},require_owned_context=True))"
+            },
+            {
+              "line": 36,
+              "text": "    else:"
+            },
+            {
+              "line": 37,
+              "text": "        torch.cuda.synchronize()"
+            },
+            {
+              "line": 38,
+              "text": "        ledger.runtime('one_byte_before_weights',resource_policy.sample('one_byte_before_weights'))"
+            },
+            {
+              "line": 39,
+              "text": "    del probe"
+            },
+            {
+              "line": 40,
+              "text": "    if probe_completed is not None:probe_completed()"
+            },
+            {
+              "line": 41,
+              "text": "    configured=QwenPolicy(QwenPolicyConfig(model_id=permit.proposal['model']['base_snapshot'],device='cuda:0',dtype='bfloat16',local_files_only=True,trust_remote_code=False,enable_thinking=False,generation=GenerationOptions(max_new_tokens=16,do_sample=False)))"
+            },
+            {
+              "line": 42,
+              "text": "    tokenizer,base,_=configured._load()"
+            },
+            {
+              "line": 43,
+              "text": "    model=peft.PeftModel.from_pretrained(base,permit.proposal['model']['adapter_path'],is_trainable=False,local_files_only=True)"
+            }
+          ]
+        },
+        {
+          "start_line": 61,
+          "end_line": 80,
+          "lines": [
+            {
+              "line": 61,
+              "text": "def guarded_generation(self,prepared:PreparedTensors,active:str,*,pre_call=None):"
+            },
+            {
+              "line": 62,
+              "text": "    insist(self.prepare(prepared.prepared.prompt)==prepared,'prepared drift before actual generation')"
+            },
+            {
+              "line": 63,
+              "text": "    self.model.eval();insist(all(not p.requires_grad for p in self.model.parameters()),'frozen inference')"
+            },
+            {
+              "line": 64,
+              "text": "    before=adapter_state(self.model);verify_adapter_state(before,enabled=True)"
+            },
+            {
+              "line": 65,
+              "text": "    encoded=self.tokenizer(text=prepared.prepared.rendered_prompt,add_special_tokens=True,return_tensors='pt')"
+            },
+            {
+              "line": 66,
+              "text": "    insist(set(encoded)=={'input_ids','attention_mask'},'actual tensor keys')"
+            },
+            {
+              "line": 67,
+              "text": "    inputs={k:v.to(self.model.device) for k,v in encoded.items()}"
+            },
+            {
+              "line": 68,
+              "text": "    insist(all(v.ndim==2 and v.shape[0]==1 for v in inputs.values()),'single full row')"
+            },
+            {
+              "line": 69,
+              "text": "    sent=prepared.prepared.to_dict()|{'input_ids':inputs['input_ids'][0].tolist(),'attention_mask':inputs['attention_mask'][0].tolist()}"
+            },
+            {
+              "line": 70,
+              "text": "    insist(sent==prepared.to_dict(),'actual input IDs/mask')"
+            },
+            {
+              "line": 71,
+              "text": "    during=adapter_state(self.model);verify_adapter_state(during,enabled=True)"
+            },
+            {
+              "line": 72,
+              "text": "    self._resource_point='before_generation'"
+            },
+            {
+              "line": 73,
+              "text": "    self.ledger.runtime('resource_before_generation',self.resource())"
+            },
+            {
+              "line": 74,
+              "text": "    generated=None;returned=None"
+            },
+            {
+              "line": 75,
+              "text": "    try:"
+            },
+            {
+              "line": 76,
+              "text": "        self.torch.cuda.synchronize();at=time.perf_counter()"
+            },
+            {
+              "line": 77,
+              "text": "        if pre_call is not None:pre_call()"
+            },
+            {
+              "line": 78,
+              "text": "        with self.torch.no_grad():"
+            },
+            {
+              "line": 79,
+              "text": "            generated=self.model.generate(**inputs,max_new_tokens=16,do_sample=False,return_dict_in_generate=True,output_scores=True)"
+            },
+            {
+              "line": 80,
+              "text": "        self.torch.cuda.synchronize();elapsed=time.perf_counter()-at"
+            }
+          ]
+        },
+        {
+          "start_line": 108,
+          "end_line": 113,
+          "lines": [
+            {
+              "line": 108,
+              "text": "def resource(self):"
+            },
+            {
+              "line": 109,
+              "text": "    validate_guard_argument(self.permit,self.ledger,getattr(self,'resource_policy',None))"
+            },
+            {
+              "line": 110,
+              "text": "    if getattr(self,'resource_policy',None) is not None:"
+            },
+            {
+              "line": 111,
+              "text": "        return self.resource_policy.sample(self._resource_point)"
+            },
+            {
+              "line": 112,
+              "text": "    return inspect_gpu(self.permit.gpu_uuid,allowed_pids={os.getpid()},require_owned_context=True)"
+            },
+            {
+              "line": 113,
+              "text": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/src/self_improvement/si_s01/engineering_runtime.py",
+      "bytes": 13266,
+      "sha256": "c455c92a41122a5749461aded67d6dcac6c965c32ef1d6d1bc127ad088807655",
+      "access": "stdlib static read; module not imported",
+      "excerpts": [
+        {
+          "start_line": 91,
+          "end_line": 104,
+          "lines": [
+            {
+              "line": 91,
+              "text": "def real_environment(permit:EngineeringPermit):"
+            },
+            {
+              "line": 92,
+              "text": "    import importlib"
+            },
+            {
+              "line": 93,
+              "text": "    origins={}"
+            },
+            {
+              "line": 94,
+              "text": "    for name in ('alfworld','alfworld.agents.environment.alfred_tw_env','textworld','textworld.gym','yaml'):"
+            },
+            {
+              "line": 95,
+              "text": "        origins[name]=module_origin(importlib.import_module(name))"
+            },
+            {
+              "line": 96,
+              "text": "        insist(origins[name]==permit.proposal['packages'][name],'actual engineering environment module: '+name)"
+            },
+            {
+              "line": 97,
+              "text": "    from env.alfworld import AlfWorldConfig"
+            },
+            {
+              "line": 98,
+              "text": "    from self_improvement.si_p3.runtime_environment import ReadIsolatedEnvironment"
+            },
+            {
+              "line": 99,
+              "text": "    from .gate import bound"
+            },
+            {
+              "line": 100,
+              "text": "    p=permit.proposal['environment']"
+            },
+            {
+              "line": 101,
+              "text": "    bound(p['game']['path'],p['game']['sha256']);bound(p['traj_data']['path'],p['traj_data']['sha256'])"
+            },
+            {
+              "line": 102,
+              "text": "    result=ReadIsolatedEnvironment(AlfWorldConfig(Path(p['config']['path']),split='train',data_path=Path(p['data_root'])),"
+            },
+            {
+              "line": 103,
+              "text": "        game=Path(p['game']['path']),pool_seed=42)"
+            },
+            {
+              "line": 104,
+              "text": "    result.engineering_package_origins=origins;return result"
+            }
+          ]
+        },
+        {
+          "start_line": 117,
+          "end_line": 127,
+          "lines": [
+            {
+              "line": 117,
+              "text": "        try:"
+            },
+            {
+              "line": 118,
+              "text": "            box={}"
+            },
+            {
+              "line": 119,
+              "text": "            def load():"
+            },
+            {
+              "line": 120,
+              "text": "                box['producer']=self.loader(self.permit,ledger)"
+            },
+            {
+              "line": 121,
+              "text": "                insist(box['producer'].evidence_class==self.permit.evidence_class,'engineering producer mode')"
+            },
+            {
+              "line": 122,
+              "text": "                return {'mode':'P0','adapter_sha256':P0_SHA256}"
+            },
+            {
+              "line": 123,
+              "text": "            ledger.call('model_load',0,load);producer=box['producer']"
+            },
+            {
+              "line": 124,
+              "text": "            def construct():"
+            },
+            {
+              "line": 125,
+              "text": "                nonlocal env"
+            },
+            {
+              "line": 126,
+              "text": "                env=self.factory(self.permit);return dict(env.initialize())|{'package_origins':env.engineering_package_origins}"
+            },
+            {
+              "line": 127,
+              "text": "            isolation=ledger.call('env_construct',0,construct,request={'pool_seed':42,'historical_internal_rng':RNG_STATUS})"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/src/self_improvement/si_s01/runtime.py",
+      "bytes": 4681,
+      "sha256": "9b33feea6ab55f84768fcdc052212d5c807b23f3a2cad7590e601411acb1d4dd",
+      "access": "stdlib static read; module not imported",
+      "excerpts": [
+        {
+          "start_line": 40,
+          "end_line": 53,
+          "lines": [
+            {
+              "line": 40,
+              "text": "    def initialize(self):"
+            },
+            {
+              "line": 41,
+              "text": "        import importlib"
+            },
+            {
+              "line": 42,
+              "text": "        origins={}"
+            },
+            {
+              "line": 43,
+              "text": "        for name in ('alfworld','alfworld.agents.environment.alfred_tw_env','textworld','textworld.gym','yaml'):"
+            },
+            {
+              "line": 44,
+              "text": "            module=importlib.import_module(name);origins[name]=module_origin(module)"
+            },
+            {
+              "line": 45,
+              "text": "            insist(origins[name]==self.permit.proposal['packages'][name],'actual environment module origin/version: '+name)"
+            },
+            {
+              "line": 46,
+              "text": "        from env.alfworld import AlfWorldConfig"
+            },
+            {
+              "line": 47,
+              "text": "        from self_improvement.si_p3.runtime_environment import ReadIsolatedEnvironment"
+            },
+            {
+              "line": 48,
+              "text": "        from .gate import bound"
+            },
+            {
+              "line": 49,
+              "text": "        row=next(r for r in self.permit.proposal['environment']['games'] if r['task_id']==self.slot.task_id)"
+            },
+            {
+              "line": 50,
+              "text": "        bound(row['game'],row['game_sha256']);bound(row['traj_data'],row['traj_data_sha256'])"
+            },
+            {
+              "line": 51,
+              "text": "        env=self.permit.proposal['environment']"
+            },
+            {
+              "line": 52,
+              "text": "        self.env=ReadIsolatedEnvironment(AlfWorldConfig(Path(env['config']['path']),split='train',data_path=Path(env['data_root'])),game=Path(row['game']),pool_seed=42)"
+            },
+            {
+              "line": 53,
+              "text": "        return dict(self.env.initialize())|{'package_origins':origins}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/src/self_improvement/si_p3/runtime_environment.py",
+      "bytes": 12770,
+      "sha256": "d563f8235c8890f98375932089bd6abbf9cfcb1a1e7478f9e069b1ac6a2e590d",
+      "access": "stdlib static read; module not imported",
+      "excerpts": [
+        {
+          "start_line": 99,
+          "end_line": 120,
+          "lines": [
+            {
+              "line": 99,
+              "text": "    def __init__(self, config: AlfWorldConfig, *, game: Path, pool_seed: int,"
+            },
+            {
+              "line": 100,
+              "text": "                 factory_boundary: Any = None) -> None:"
+            },
+            {
+              "line": 101,
+              "text": "        require(config.split == \"train\" and game.name == \"game.tw-pddl\", \"exact historical TRAIN game\")"
+            },
+            {
+              "line": 102,
+              "text": "        super().__init__(config)"
+            },
+            {
+              "line": 103,
+              "text": "        self.game, self.pool_seed, self.factory_boundary = game, pool_seed, factory_boundary"
+            },
+            {
+              "line": 104,
+              "text": "        self.isolation: dict[str, Any] = {}"
+            },
+            {
+              "line": 105,
+              "text": "        self.previous_data_environment = os.environ.get(\"ALFWORLD_DATA\")"
+            },
+            {
+              "line": 106,
+              "text": ""
+            },
+            {
+              "line": 107,
+              "text": "    def _get_environment(self) -> Any:"
+            },
+            {
+              "line": 108,
+              "text": "        if self._environment is not None: return self._environment"
+            },
+            {
+              "line": 109,
+              "text": "        import yaml"
+            },
+            {
+              "line": 110,
+              "text": "        if self._config.data_path is not None: os.environ[\"ALFWORLD_DATA\"] = str(self._config.data_path)"
+            },
+            {
+              "line": 111,
+              "text": "        configuration = _expand_environment(yaml.safe_load(self._config.config_path.read_text()))"
+            },
+            {
+              "line": 112,
+              "text": "        # Apply BEFORE __init__: stock AlfredTWEnv otherwise opens all TRAIN bodies."
+            },
+            {
+              "line": 113,
+              "text": "        configuration = copy.deepcopy(configuration)"
+            },
+            {
+              "line": 114,
+              "text": "        configuration[\"dataset\"][\"data_path\"] = str(self.game.parent)"
+            },
+            {
+              "line": 115,
+              "text": "        self.isolation = {\"original_config_unchanged\": True, \"effective_dataset_data_path\": str(self.game.parent),"
+            },
+            {
+              "line": 116,
+              "text": "                          \"exact_game\": str(self.game), \"pool_seed\": self.pool_seed,"
+            },
+            {
+              "line": 117,
+              "text": "                          \"discovery\": \"explicit_no_scan_subclass\", \"scope\": ISOLATION_RULING}"
+            },
+            {
+              "line": 118,
+              "text": "        if self._config.data_path is not None: os.environ[\"ALFWORLD_DATA\"] = str(self._config.data_path)"
+            },
+            {
+              "line": 119,
+              "text": "        if self.factory_boundary is None:"
+            },
+            {
+              "line": 120,
+              "text": "            from alfworld.agents.environment.alfred_tw_env import AlfredTWEnv"
+            }
+          ]
+        },
+        {
+          "start_line": 141,
+          "end_line": 146,
+          "lines": [
+            {
+              "line": 141,
+              "text": "    def close(self) -> None:"
+            },
+            {
+              "line": 142,
+              "text": "        if self._environment is not None:"
+            },
+            {
+              "line": 143,
+              "text": "            self._environment.close()"
+            },
+            {
+              "line": 144,
+              "text": "            self._environment = None"
+            },
+            {
+              "line": 145,
+              "text": "        if self.previous_data_environment is None: os.environ.pop(\"ALFWORLD_DATA\", None)"
+            },
+            {
+              "line": 146,
+              "text": "        else: os.environ[\"ALFWORLD_DATA\"] = self.previous_data_environment"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/home/lizening/wt-si-s01-shared-gpu-adapter/src/models/qwen.py",
+      "bytes": 17076,
+      "sha256": "ee3a5a599a8dece7b206b2aa675004723fa343bcbd8844063d00a7af154140eb",
+      "access": "stdlib static read; module not imported",
+      "excerpts": [
+        {
+          "start_line": 200,
+          "end_line": 234,
+          "lines": [
+            {
+              "line": 200,
+              "text": "    def _load(self) -> tuple[Any, Any, Any]:"
+            },
+            {
+              "line": 201,
+              "text": "        if self._tokenizer is not None and self._model is not None:"
+            },
+            {
+              "line": 202,
+              "text": "            import torch"
+            },
+            {
+              "line": 203,
+              "text": ""
+            },
+            {
+              "line": 204,
+              "text": "            return self._tokenizer, self._model, torch"
+            },
+            {
+              "line": 205,
+              "text": "        try:"
+            },
+            {
+              "line": 206,
+              "text": "            import torch"
+            },
+            {
+              "line": 207,
+              "text": "            from transformers import AutoModelForCausalLM, AutoTokenizer"
+            },
+            {
+              "line": 208,
+              "text": "        except ImportError as error:"
+            },
+            {
+              "line": 209,
+              "text": "            raise RuntimeError("
+            },
+            {
+              "line": 210,
+              "text": "                \"Qwen baseline collection requires torch and transformers. \""
+            },
+            {
+              "line": 211,
+              "text": "                \"Install the model runtime before running the collection script.\""
+            },
+            {
+              "line": 212,
+              "text": "            ) from error"
+            },
+            {
+              "line": 213,
+              "text": "        dtype = getattr(torch, self._config.dtype)"
+            },
+            {
+              "line": 214,
+              "text": "        self._tokenizer = AutoTokenizer.from_pretrained("
+            },
+            {
+              "line": 215,
+              "text": "            self._config.model_id,"
+            },
+            {
+              "line": 216,
+              "text": "            trust_remote_code=self._config.trust_remote_code,"
+            },
+            {
+              "line": 217,
+              "text": "            revision=self._config.revision,"
+            },
+            {
+              "line": 218,
+              "text": "            local_files_only=self._config.local_files_only,"
+            },
+            {
+              "line": 219,
+              "text": "        )"
+            },
+            {
+              "line": 220,
+              "text": "        if self._tokenizer.pad_token is None:"
+            },
+            {
+              "line": 221,
+              "text": "            self._tokenizer.pad_token = self._tokenizer.eos_token"
+            },
+            {
+              "line": 222,
+              "text": "        model_kwargs: dict[str, Any] = {"
+            },
+            {
+              "line": 223,
+              "text": "            \"dtype\": dtype,"
+            },
+            {
+              "line": 224,
+              "text": "            \"trust_remote_code\": self._config.trust_remote_code,"
+            },
+            {
+              "line": 225,
+              "text": "            \"revision\": self._config.revision,"
+            },
+            {
+              "line": 226,
+              "text": "            \"local_files_only\": self._config.local_files_only,"
+            },
+            {
+              "line": 227,
+              "text": "        }"
+            },
+            {
+              "line": 228,
+              "text": "        if self._config.device == \"auto\":"
+            },
+            {
+              "line": 229,
+              "text": "            model_kwargs[\"device_map\"] = \"auto\""
+            },
+            {
+              "line": 230,
+              "text": "        self._model = AutoModelForCausalLM.from_pretrained(self._config.model_id, **model_kwargs)"
+            },
+            {
+              "line": 231,
+              "text": "        if self._config.device not in {\"auto\", \"cpu\"}:"
+            },
+            {
+              "line": 232,
+              "text": "            self._model = self._model.to(self._config.device)"
+            },
+            {
+              "line": 233,
+              "text": "        self._model.eval()"
+            },
+            {
+              "line": 234,
+              "text": "        return self._tokenizer, self._model, torch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/torch/cuda/__init__.py",
+      "bytes": 57055,
+      "sha256": "5ea744be28280dad724cb2a3697e8c4d3da190b64767c93d0b1e0402a9aa46aa",
+      "access": "stdlib static read; module not imported",
+      "excerpts": [
+        {
+          "start_line": 275,
+          "end_line": 286,
+          "lines": [
+            {
+              "line": 275,
+              "text": "def init():"
+            },
+            {
+              "line": 276,
+              "text": "    r\"\"\"Initialize PyTorch's CUDA state."
+            },
+            {
+              "line": 277,
+              "text": ""
+            },
+            {
+              "line": 278,
+              "text": "    You may need to call this explicitly if you are interacting with"
+            },
+            {
+              "line": 279,
+              "text": "    PyTorch via its C API, as Python bindings for CUDA functionality"
+            },
+            {
+              "line": 280,
+              "text": "    will not be available until this initialization takes place."
+            },
+            {
+              "line": 281,
+              "text": "    Ordinary users should not need this, as all of PyTorch's CUDA methods"
+            },
+            {
+              "line": 282,
+              "text": "    automatically initialize CUDA state on-demand."
+            },
+            {
+              "line": 283,
+              "text": ""
+            },
+            {
+              "line": 284,
+              "text": "    Does nothing if the CUDA state is already initialized."
+            },
+            {
+              "line": 285,
+              "text": "    \"\"\""
+            },
+            {
+              "line": 286,
+              "text": "    _lazy_init()"
+            }
+          ]
+        },
+        {
+          "start_line": 289,
+          "end_line": 319,
+          "lines": [
+            {
+              "line": 289,
+              "text": "def _lazy_init():"
+            },
+            {
+              "line": 290,
+              "text": "    global _initialized, _queued_calls"
+            },
+            {
+              "line": 291,
+              "text": "    if is_initialized() or hasattr(_tls, \"is_initializing\"):"
+            },
+            {
+              "line": 292,
+              "text": "        return"
+            },
+            {
+              "line": 293,
+              "text": "    with _initialization_lock:"
+            },
+            {
+              "line": 294,
+              "text": "        # We be double-checked locking, boys!  This is OK because"
+            },
+            {
+              "line": 295,
+              "text": "        # the above test was GIL protected anyway.  The inner test"
+            },
+            {
+              "line": 296,
+              "text": "        # is for when a thread blocked on some other thread which was"
+            },
+            {
+              "line": 297,
+              "text": "        # doing the initialization; when they get the lock, they will"
+            },
+            {
+              "line": 298,
+              "text": "        # find there is nothing left to do."
+            },
+            {
+              "line": 299,
+              "text": "        if is_initialized():"
+            },
+            {
+              "line": 300,
+              "text": "            return"
+            },
+            {
+              "line": 301,
+              "text": "        # It is important to prevent other threads from entering _lazy_init"
+            },
+            {
+              "line": 302,
+              "text": "        # immediately, while we are still guaranteed to have the GIL, because some"
+            },
+            {
+              "line": 303,
+              "text": "        # of the C calls we make below will release the GIL"
+            },
+            {
+              "line": 304,
+              "text": "        if _is_in_bad_fork():"
+            },
+            {
+              "line": 305,
+              "text": "            raise RuntimeError("
+            },
+            {
+              "line": 306,
+              "text": "                \"Cannot re-initialize CUDA in forked subprocess. To use CUDA with \""
+            },
+            {
+              "line": 307,
+              "text": "                \"multiprocessing, you must use the 'spawn' start method\""
+            },
+            {
+              "line": 308,
+              "text": "            )"
+            },
+            {
+              "line": 309,
+              "text": "        if not hasattr(torch._C, \"_cuda_getDeviceCount\"):"
+            },
+            {
+              "line": 310,
+              "text": "            raise AssertionError(\"Torch not compiled with CUDA enabled\")"
+            },
+            {
+              "line": 311,
+              "text": "        if _cudart is None:"
+            },
+            {
+              "line": 312,
+              "text": "            raise AssertionError("
+            },
+            {
+              "line": 313,
+              "text": "                \"libcudart functions unavailable. It looks like you have a broken build?\""
+            },
+            {
+              "line": 314,
+              "text": "            )"
+            },
+            {
+              "line": 315,
+              "text": "        # This function throws if there's a driver initialization error, no GPUs"
+            },
+            {
+              "line": 316,
+              "text": "        # are found or any other error occurs"
+            },
+            {
+              "line": 317,
+              "text": "        if \"CUDA_MODULE_LOADING\" not in os.environ:"
+            },
+            {
+              "line": 318,
+              "text": "            os.environ[\"CUDA_MODULE_LOADING\"] = \"LAZY\""
+            },
+            {
+              "line": 319,
+              "text": "        torch._C._cuda_init()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/generation/utils.py",
+      "bytes": 242859,
+      "sha256": "df1d630d771f802e7f0f9dbc8ded9bbfb5197714a5faa8ee307079457bd6860e",
+      "access": "stdlib static read; module not imported",
+      "excerpts": [
+        {
+          "start_line": 1998,
+          "end_line": 2008,
+          "lines": [
+            {
+              "line": 1998,
+              "text": "            elif \"dynamic\" in generation_config.cache_implementation:"
+            },
+            {
+              "line": 1999,
+              "text": "                model_kwargs[cache_name] = DynamicCache(**dynamic_cache_kwargs)"
+            },
+            {
+              "line": 2000,
+              "text": ""
+            },
+            {
+              "line": 2001,
+              "text": "        # Use DynamicCache instance by default. This will avoid back and forth from legacy format that"
+            },
+            {
+              "line": 2002,
+              "text": "        # keeps copying the cache thus using much more memory"
+            },
+            {
+              "line": 2003,
+              "text": "        else:"
+            },
+            {
+              "line": 2004,
+              "text": "            model_kwargs[cache_name] = ("
+            },
+            {
+              "line": 2005,
+              "text": "                DynamicCache(**dynamic_cache_kwargs)"
+            },
+            {
+              "line": 2006,
+              "text": "                if not requires_cross_attention_cache"
+            },
+            {
+              "line": 2007,
+              "text": "                else EncoderDecoderCache(DynamicCache(**dynamic_cache_kwargs), DynamicCache(**dynamic_cache_kwargs))"
+            },
+            {
+              "line": 2008,
+              "text": "            )"
+            }
+          ]
+        },
+        {
+          "start_line": 2099,
+          "end_line": 2138,
+          "lines": [
+            {
+              "line": 2099,
+              "text": "    def _valid_auto_compile_criteria(self, model_kwargs: dict, generation_config: GenerationConfig) -> bool:"
+            },
+            {
+              "line": 2100,
+              "text": "        \"\"\""
+            },
+            {
+              "line": 2101,
+              "text": "        Determines whether to trigger auto-compilation of the model's forward pass at generation time."
+            },
+            {
+              "line": 2102,
+              "text": "        \"\"\""
+            },
+            {
+              "line": 2103,
+              "text": "        # Override: honor `disable_compile` flag"
+            },
+            {
+              "line": 2104,
+              "text": "        if generation_config.disable_compile:"
+            },
+            {
+              "line": 2105,
+              "text": "            return False"
+            },
+            {
+              "line": 2106,
+              "text": ""
+            },
+            {
+              "line": 2107,
+              "text": "        # Base logic"
+            },
+            {
+              "line": 2108,
+              "text": "        valid_hardware = self.device.type == \"cuda\" or bool("
+            },
+            {
+              "line": 2109,
+              "text": "            generation_config.compile_config is not None and generation_config.compile_config._compile_all_devices"
+            },
+            {
+              "line": 2110,
+              "text": "        )"
+            },
+            {
+              "line": 2111,
+              "text": "        using_compilable_cache = ("
+            },
+            {
+              "line": 2112,
+              "text": "            isinstance(model_kwargs.get(\"past_key_values\"), Cache) and model_kwargs[\"past_key_values\"].is_compileable"
+            },
+            {
+              "line": 2113,
+              "text": "        )"
+            },
+            {
+              "line": 2114,
+              "text": "        can_compile = valid_hardware and using_compilable_cache"
+            },
+            {
+              "line": 2115,
+              "text": ""
+            },
+            {
+              "line": 2116,
+              "text": "        # Exception 1: Some quantization methods do not support compilation"
+            },
+            {
+              "line": 2117,
+              "text": "        if getattr(self, \"hf_quantizer\", None) is not None:"
+            },
+            {
+              "line": 2118,
+              "text": "            can_compile &= self.hf_quantizer.is_compileable"
+            },
+            {
+              "line": 2119,
+              "text": ""
+            },
+            {
+              "line": 2120,
+              "text": "        if hasattr(self, \"hf_device_map\"):"
+            },
+            {
+              "line": 2121,
+              "text": "            all_model_devices = set(self.hf_device_map.values())"
+            },
+            {
+              "line": 2122,
+              "text": "            # Exception 2: Don't compile if the model is using CPU offload (as of April 2025, this results in a crash)"
+            },
+            {
+              "line": 2123,
+              "text": "            has_cpu_offload = \"cpu\" in all_model_devices and len(all_model_devices) > 1"
+            },
+            {
+              "line": 2124,
+              "text": "            can_compile &= not has_cpu_offload"
+            },
+            {
+              "line": 2125,
+              "text": ""
+            },
+            {
+              "line": 2126,
+              "text": "            # Exception 3: Disk offload is not supported for compilation"
+            },
+            {
+              "line": 2127,
+              "text": "            has_disk_offload = \"disk\" in all_model_devices"
+            },
+            {
+              "line": 2128,
+              "text": "            can_compile &= not has_disk_offload"
+            },
+            {
+              "line": 2129,
+              "text": ""
+            },
+            {
+              "line": 2130,
+              "text": "        # Finally: if the user has manually specified compilation options, but compilation is not possible, let's warn"
+            },
+            {
+              "line": 2131,
+              "text": "        # them"
+            },
+            {
+              "line": 2132,
+              "text": "        if generation_config.compile_config is not None and not can_compile:"
+            },
+            {
+              "line": 2133,
+              "text": "            logger.warning_once("
+            },
+            {
+              "line": 2134,
+              "text": "                \"You have set `compile_config`, but we are unable to meet the criteria for compilation. Compilation \""
+            },
+            {
+              "line": 2135,
+              "text": "                \"will be skipped.\""
+            },
+            {
+              "line": 2136,
+              "text": "            )"
+            },
+            {
+              "line": 2137,
+              "text": ""
+            },
+            {
+              "line": 2138,
+              "text": "        return can_compile"
+            }
+          ]
+        },
+        {
+          "start_line": 2837,
+          "end_line": 2841,
+          "lines": [
+            {
+              "line": 2837,
+              "text": "        model_forward = self.__call__"
+            },
+            {
+              "line": 2838,
+              "text": "        compile_forward = self._valid_auto_compile_criteria(model_kwargs, generation_config)"
+            },
+            {
+              "line": 2839,
+              "text": "        if compile_forward:"
+            },
+            {
+              "line": 2840,
+              "text": "            os.environ[\"TOKENIZERS_PARALLELISM\"] = \"0\""
+            },
+            {
+              "line": 2841,
+              "text": "            # If we use FA2 and a static cache, we cannot compile with fullgraph"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/cache_utils.py",
+      "bytes": 68319,
+      "sha256": "9192c53314b5d6b31bd8ef91e56e559035961a764301fc82e6e7f64365405836",
+      "access": "stdlib static read; module not imported",
+      "excerpts": [
+        {
+          "start_line": 26,
+          "end_line": 29,
+          "lines": [
+            {
+              "line": 26,
+              "text": "class CacheLayerMixin(ABC):"
+            },
+            {
+              "line": 27,
+              "text": "    \"\"\"Base, abstract class for a single layer's cache.\"\"\""
+            },
+            {
+              "line": 28,
+              "text": ""
+            },
+            {
+              "line": 29,
+              "text": "    is_compileable = False"
+            }
+          ]
+        },
+        {
+          "start_line": 82,
+          "end_line": 84,
+          "lines": [
+            {
+              "line": 82,
+              "text": "class DynamicLayer(CacheLayerMixin):"
+            },
+            {
+              "line": 83,
+              "text": "    \"\"\""
+            },
+            {
+              "line": 84,
+              "text": "    A cache layer that grows dynamically as more tokens are generated. This is the default for generative models."
+            }
+          ]
+        },
+        {
+          "start_line": 916,
+          "end_line": 921,
+          "lines": [
+            {
+              "line": 916,
+              "text": "    def is_compileable(self) -> bool:"
+            },
+            {
+              "line": 917,
+              "text": "        \"\"\"Return whether the cache is compileable\"\"\""
+            },
+            {
+              "line": 918,
+              "text": "        # For DynamicCache dispatching the layers lazily (otherwise, all([]) is True)"
+            },
+            {
+              "line": 919,
+              "text": "        if len(self.layers) == 0:"
+            },
+            {
+              "line": 920,
+              "text": "            return False"
+            },
+            {
+              "line": 921,
+              "text": "        return all(layer.is_compileable for layer in self.layers)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/alfworld/info.py",
+      "bytes": 522,
+      "sha256": "c0359024a8fe1dd41bf0c2ee9f6856d7f7440393faa0da2f7ddebcaeadc4b461",
+      "access": "stdlib static read; module not imported",
+      "excerpts": [
+        {
+          "start_line": 3,
+          "end_line": 11,
+          "lines": [
+            {
+              "line": 3,
+              "text": "import os"
+            },
+            {
+              "line": 4,
+              "text": "from os.path import join as pjoin"
+            },
+            {
+              "line": 5,
+              "text": ""
+            },
+            {
+              "line": 6,
+              "text": "from alfworld.utils import mkdirs"
+            },
+            {
+              "line": 7,
+              "text": ""
+            },
+            {
+              "line": 8,
+              "text": ""
+            },
+            {
+              "line": 9,
+              "text": "_default_alfworld_cache = os.path.expanduser(\"~/.cache/alfworld\")"
+            },
+            {
+              "line": 10,
+              "text": "ALFWORLD_DATA = mkdirs(os.getenv(\"ALFWORLD_DATA\", _default_alfworld_cache))"
+            },
+            {
+              "line": 11,
+              "text": "os.environ[\"ALFWORLD_DATA\"] = ALFWORLD_DATA  # Set the environment variable, in case it wasn't."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/alfworld/utils.py",
+      "bytes": 413,
+      "sha256": "628d2f7dbc2189089644a6dcbdf300b8af3654cca7bdde38de04061ee45f6f97",
+      "access": "stdlib static read; module not imported",
+      "excerpts": [
+        {
+          "start_line": 4,
+          "end_line": 20,
+          "lines": [
+            {
+              "line": 4,
+              "text": "def mkdirs(dirpath: str) -> str:"
+            },
+            {
+              "line": 5,
+              "text": "    \"\"\" Create a directory and all its parents."
+            },
+            {
+              "line": 6,
+              "text": ""
+            },
+            {
+              "line": 7,
+              "text": "    If the folder already exists, its path is returned without raising any exceptions."
+            },
+            {
+              "line": 8,
+              "text": ""
+            },
+            {
+              "line": 9,
+              "text": "    Arguments:"
+            },
+            {
+              "line": 10,
+              "text": "        dirpath: Path where a folder need to be created."
+            },
+            {
+              "line": 11,
+              "text": ""
+            },
+            {
+              "line": 12,
+              "text": "    Returns:"
+            },
+            {
+              "line": 13,
+              "text": "        Path to the (created) folder."
+            },
+            {
+              "line": 14,
+              "text": "    \"\"\""
+            },
+            {
+              "line": 15,
+              "text": "    try:"
+            },
+            {
+              "line": 16,
+              "text": "        os.makedirs(dirpath)"
+            },
+            {
+              "line": 17,
+              "text": "    except FileExistsError:"
+            },
+            {
+              "line": 18,
+              "text": "        pass"
+            },
+            {
+              "line": 19,
+              "text": ""
+            },
+            {
+              "line": 20,
+              "text": "    return dirpath"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/modeling_utils.py",
+      "bytes": 314691,
+      "sha256": "fde37eeec1333d2022b9f925907f707503d4199b7946a890adbd170b9c3a307f",
+      "access": "stdlib static read; module not imported",
+      "excerpts": []
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/tokenization_utils_base.py",
+      "bytes": 210613,
+      "sha256": "2e2dada865cce42b73387240716a12ff5c0a56977cfd680dc8fa937b0dc0ef51",
+      "access": "stdlib static read; module not imported",
+      "excerpts": []
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/tokenization_utils_fast.py",
+      "bytes": 41357,
+      "sha256": "546f0bed7f7c97ef7fca2511424a6cfaa2ef39cd82941386b5429ba234d61f17",
+      "access": "stdlib static read; module not imported",
+      "excerpts": []
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/tokenization_utils.py",
+      "bytes": 47766,
+      "sha256": "91543bcbcda9cc62d08c15a6854c9c70efaf1d3135929c11a2950243e76bd6a6",
+      "access": "stdlib static read; module not imported",
+      "excerpts": []
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/models/auto/tokenization_auto.py",
+      "bytes": 56944,
+      "sha256": "b0cd25702a99bfdf1cd93edcb1f3793a7d422ed5b4f053d4a9e71cf678b79fa0",
+      "access": "stdlib static read; module not imported",
+      "excerpts": []
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py",
+      "bytes": 47212,
+      "sha256": "04c0b61097c533459ecf74ee8b9d730abd4febbbfa4a9f73841fb7ff49c8eee2",
+      "access": "stdlib static read; module not imported",
+      "excerpts": []
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/models/qwen3/modeling_qwen3.py",
+      "bytes": 23067,
+      "sha256": "4b95c371fd26d40c69083dab36ac1eafd8cf82b415a0bb827275097c5ad2305b",
+      "access": "stdlib static read; module not imported",
+      "excerpts": []
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/peft/peft_model.py",
+      "bytes": 156704,
+      "sha256": "2307ebeb101baff53b19ce5a0f109885d99b64ab147d67cba19719b6097c3e10",
+      "access": "stdlib static read; module not imported",
+      "excerpts": []
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/peft/utils/save_and_load.py",
+      "bytes": 34607,
+      "sha256": "849282f01e69b7055cc499e67f279cde3f489421aea212f59f701f45755de26b",
+      "access": "stdlib static read; module not imported",
+      "excerpts": []
+    },
+    {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/peft/tuners/lora/model.py",
+      "bytes": 45130,
+      "sha256": "9eec396e506134e50afa41ff21b2608a3307f8f07207f460506d2da33d7bc2f7",
+      "access": "stdlib static read; module not imported",
+      "excerpts": []
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/EXACT_COMMANDS.json",
+      "bytes": 3044,
+      "sha256": "7755960626e6345a2f4da712284fe9239d590dad792eadfae418e137293f3a99",
+      "access": "stdlib static read; module not imported",
+      "excerpts": []
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/ROOT_ENGINEERING_AUTHORIZATION_V2.json",
+      "bytes": 4305,
+      "sha256": "8829121a1a6f78ccaaab1010980d9b41a3f7fbbff36120facfa36f1d876851ad",
+      "access": "stdlib static read; module not imported",
+      "excerpts": []
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-26T233148Z__SOL__si-s01-controlled-engineering-restart__f1e0d56_c66ea6e2/PRODUCTION_PROPOSAL.json",
+      "bytes": 5287,
+      "sha256": "a9b1c43ebdafbb2d7e33a2377c34428a5788d91afc140d5bbcf1957d08881c2a",
+      "access": "stdlib static read; module not imported",
+      "excerpts": []
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/home/lizening/wt-si-s01-shared-gpu-adapter",
+      "returncode": 0,
+      "stdout": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1"
+      ],
+      "cwd": "/home/lizening/wt-si-s01-shared-gpu-adapter",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "rg",
+        "-n",
+        "os\\.environ|os\\.putenv|patch_environment|clear_environment",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/modeling_utils.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/tokenization_utils_base.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/tokenization_utils_fast.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/tokenization_utils.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/models/auto/tokenization_auto.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/models/qwen3/modeling_qwen3.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/peft/peft_model.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/peft/utils/save_and_load.py",
+        "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/peft/tuners/lora/model.py"
+      ],
+      "cwd": "/home/lizening/wt-si-s01-shared-gpu-adapter",
+      "returncode": 0,
+      "stdout": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/modeling_utils.py:172:XLA_USE_BF16 = os.environ.get(\"XLA_USE_BF16\", \"0\").upper()\n/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/modeling_utils.py:173:XLA_DOWNCAST_BF16 = os.environ.get(\"XLA_DOWNCAST_BF16\", \"0\").upper()\n/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/modeling_utils.py:184:        and int(os.environ.get(\"LOCAL_RANK\", \"-1\")) == 0\n/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/modeling_utils.py:968:    num_workers = int(os.environ.get(\"HF_PARALLEL_LOADING_WORKERS\", \"8\"))\n/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/modeling_utils.py:4814:        if device_map == \"auto\" and int(os.environ.get(\"WORLD_SIZE\", \"0\")):\n/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/modeling_utils.py:4835:                device_map = torch.device(f\"{device_mesh.device_type}:{int(os.environ['LOCAL_RANK'])}\")\n/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/modeling_utils.py:5632:            os.environ.get(\"HF_ENABLE_PARALLEL_LOADING\", \"\").upper() in ENV_VARS_TRUE_VALUES\n",
+      "stderr": ""
+    }
+  ],
+  "exploratory_read_note": "An earlier exploratory rg named nonexistent si_s01/engineering.py; corrected read uses engineering_runtime.py. Search absence in tokenizers Python/Rust-source glob returned rc1 (no matches); not proof about its native extension. Final bound source reads above succeeded. No earlier frozen files changed."
+}

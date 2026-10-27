@@ -1,0 +1,38 @@
+{
+  "schema": "SI_S01_USER_LOCAL_CUDA_SMOKE_REVIEW_V1",
+  "status": "SOURCE_INSPECTED_USER_REPORTED_LOCAL_CUDA_PASS_NOT_FORMAL_ENGINEERING_PASS",
+  "source": {
+    "path": "/home/lizening/Alfworld-Self-Improvement-Project/scripts/a40_connectivity_smoke.py",
+    "bytes": 3891,
+    "sha256": "c365797a656633f978261832a301ed7c9d62dde6f541247fdce8dab0b2bc20dc"
+  },
+  "source_git_status": "UNTRACKED_USER_FILE; untouched in authoritative worktree",
+  "reported_runtime": {
+    "hostname": "acc28b43e0d2",
+    "python": "3.10.20",
+    "torch": "2.6.0+cu124",
+    "gpu_name": "NVIDIA A40",
+    "tiny_cuda_arithmetic": "([1,2,3]*2).sum()==12",
+    "status": "PASS"
+  },
+  "reported_invocations_minimum": 1,
+  "exact_invocation_count": "NOT_INDEPENDENTLY_OBSERVED",
+  "GPU_context_and_arithmetic_nonzero": true,
+  "elapsed_device_hours_and_peak_memory": "UNRECORDED_NOT_ZERO",
+  "model_generations_and_environment_operations": 0,
+  "not_proven": [
+    "Current GPU UUID binding",
+    "Actual P0/base snapshot or adapter load",
+    "Production actor invocation",
+    "Historical first-input/action join",
+    "ALFWorld path compatibility",
+    "Full A96 resource envelope",
+    "GPU exclusivity or host/container PID mapping",
+    "Authentic supervised exit or cost interval"
+  ],
+  "root_reran_probe": false,
+  "existing_scientific_cumulative_preserved": {
+    "generations": 5142,
+    "reset_inclusive_environment_operations": 7949
+  }
+}
