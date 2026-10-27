@@ -1,0 +1,85 @@
+{
+  "schema": "SI_S01_POST_HOC_SCIENTIFIC_INTERPRETATION_V1",
+  "status": "DESIGN_ONLY_NO_NEW_EXPERIMENT",
+  "created_utc": "2026-10-27T02:27:15.668258+00:00",
+  "source_run_id": "f96b86f3391940eaa9d75040c444a8e4",
+  "source_sha": "f1e0d56a1be2a65876bbec5b8950fb76cda3eace",
+  "source_trajectory_sha256_observed": "5e74691cee1cddae2c58191a524970fb0bd8a6f5517f40b4daa17c77d5fa3848",
+  "accepted_event_ledger_sha256_recount_matched": "04ce4c0f32f40a3dbff6f42fec3c54107534ec45dd005795bd52014442513105",
+  "N": 96,
+  "success": 79,
+  "failure": 17,
+  "family": [
+    {
+      "family": "pick_and_place_simple",
+      "label": "简单放置",
+      "N": 35,
+      "success": 35,
+      "failure": 0
+    },
+    {
+      "family": "pick_clean_then_place_in_recep",
+      "label": "清洗后放置",
+      "N": 26,
+      "success": 24,
+      "failure": 2
+    },
+    {
+      "family": "pick_cool_then_place_in_recep",
+      "label": "冷却后放置",
+      "N": 16,
+      "success": 10,
+      "failure": 6
+    },
+    {
+      "family": "pick_heat_then_place_in_recep",
+      "label": "加热后放置",
+      "N": 9,
+      "success": 8,
+      "failure": 1
+    },
+    {
+      "family": "pick_two_obj_and_place",
+      "label": "双物体放置",
+      "N": 10,
+      "success": 2,
+      "failure": 8
+    }
+  ],
+  "prior_production_gate": {
+    "E": 89,
+    "F": 17,
+    "S": 72,
+    "status": "COMPLETE_SOURCE96_STRUCTURAL_NO_GO"
+  },
+  "independent_cycle_recount": {
+    "method": "Exact two adjacent repeated blocks of (command, literal before/after observation, full ordered action map, reward), periods1..10. Descriptive only, no production changes.",
+    "actual_tool_session_id": 52862,
+    "actual_tool_returncode": 0,
+    "failure_cases": 17,
+    "failures_with_cycle": 12,
+    "success_cases": 79,
+    "successes_with_cycle": 4,
+    "cycles_confirmed_by_S5": 0,
+    "failure_actions": 850,
+    "all_generation_step_pairs": 1959,
+    "cautions": [
+      "Variable episode lengths and post-hoc definition prevent causal interpretation or validated failure detection.",
+      "Future Y0 failure does not establish incorrect or teachable S5 first action.",
+      "Public state recurrence does not prove complete latent simulator state equality."
+    ]
+  },
+  "semantic_limits": [
+    "79/96 is TRAIN acquisition description, not heldout accuracy or self-improvement effect.",
+    "F17 bounds prospective C from above before teacher/Q filtering; it is not actual C size or B_pool size.",
+    "C is subset of B_pool under frozen protocol; controls must retain this definition.",
+    "24 is a preregistered recipe investment guard, not a universal minimum learnable sample size.",
+    "Current NO_GO is preserved; no topup, task replacement, seed changes or retrospective quota relaxation."
+  ],
+  "new_model_calls": 0,
+  "new_ALFWorld_calls": 0,
+  "new_tokenizer_calls": 0,
+  "new_training_or_evaluation_or_heldout": 0,
+  "source_code_edits": 0,
+  "next_step": "Offline learning-target audit and prospective minimal mechanism protocol design only; teacher/training/new collection not launched."
+}
