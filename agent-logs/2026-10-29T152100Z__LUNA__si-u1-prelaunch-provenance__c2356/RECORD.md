@@ -1,0 +1,7 @@
+# SI-U1 c2356 prelaunch evidence
+
+Status: CONDITIONAL_CLEARANCE_NOT_DISPATCH_READY. This private package preserves the authentic production-supervised zero-effect preflight and independent review, represented-identity isolation proof and caveats, exact stage-two candidate protocol/runtime and analysis review, independently reviewed v4 process supervision, and coordinator's conditional one-shot clearance. The separate original f342 process and conflict review are referenced without relabelling its non-native receipt.
+
+The current clearance is conditional: the output-bound extraction specification and independent approval, current drift/resource checks, and an actual one-shot dispatch decision remain outstanding. This package is not a preflight retry, a launch or a scientific result; no model, CUDA, environment or evaluation was invoked while packaging it. A positive preflight establishes static input bindings, not runtime feasibility or outcome.
+
+The deterministic private archive contains 42 byte-verified source records, reviewed source files and candidate metadata, with original paths and SHA256 values in PUBLICATION_MANIFEST.json. It includes private task identity/path/hash metadata, but excludes task prose, dataset content and model weights. CPU process-persistence tests support tool-call exit only within the continuing container; app/container/host termination survival remains unproven.
