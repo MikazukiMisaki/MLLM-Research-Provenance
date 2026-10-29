@@ -1,0 +1,52 @@
+{
+  "actual_argv_environment_stdout_stderr_verified": true,
+  "actual_child_exit_code": 0,
+  "allocation_seconds": 5400,
+  "arm": "C",
+  "authorization_path": "/home/lizening/wt-si-self-imitation-train/configs/local/si_pilot82_c_authorization_d83bc760a92f468abe7d3e300450eb5e.json",
+  "authorization_sha256": "894ad5322b371924554990936676406f8f86cebe7440eaa7b4389ad7626b5d31",
+  "b_acceptance_sha256": "32a7b319ea2ed5f865659949ed5a320af5c4fbd435eb737511bad8926252c32d",
+  "base_P0_full_tree_rehashed": true,
+  "child_pid": 937533,
+  "child_start_tick": 513267657,
+  "conditions": [
+    "Coordinator must obtain current shared-GPU free/cap/UUID/no-overlap check and issue a fresh one-shot C clearance bound to this actual preflight and exact authorization.",
+    "Run only C from original frozen P0, never from B final adapter, fixed1248microbatches/78updates/6240supervised tokens, final checkpoint only, deadline5400seconds; failure stops without retry or extra allocation.",
+    "B real result accepted independently; retain its883.2235775915906 seconds in science budget and all prior engineering costs separately.",
+    "No live C or scientific evaluation authorization is granted; final B/C evaluator lineage/runtime/analysis binding remains pending."
+  ],
+  "current_remaining_window_seconds": 14218.136089,
+  "decision": "PASS_C_PREFLIGHT_ELIGIBLE_FOR_SEPARATE_ONE_SHOT_C_CLEARANCE",
+  "effects": {
+    "cuda": 0,
+    "environment": 0,
+    "model": 0,
+    "tokenizer": 0,
+    "training": 0
+  },
+  "engineering_spent_separate_seconds": 455.8560599721968,
+  "fresh_output_claim_absent": true,
+  "interpreter_and_all_seven_package_trees_rehashed": true,
+  "limitations": [
+    "CPU static preflight does not load or test real model/runtime imports; actual worker verifies pinned imports before model use.",
+    "Engineering residual and shared-resource variability remain documented; no exclusive GPU claim or future fit guarantee."
+  ],
+  "manifest_and_paired_data_reviews_rehashed": true,
+  "pair_review_sha256": "7b7a0fd73429b7b91009234d49f8f8e7068c31b922860192c498def4dd579df9",
+  "preflight_path": "/home/lizening/research-notes/agent-logs/2026-10-29T125500Z__SOL__si-pilot82-bc-authorization-drafts__9bbaa/run_parent/C_preflight_d83bc760a92f468abe7d3e300450eb5e.json",
+  "preflight_sha256": "6b01bf1334d3ba09aa91a1aa30d37484fcf1e3d1a9c0bdd0ea461a7a93fd30a0",
+  "process_receipt_path": "/home/lizening/research-notes/agent-logs/2026-10-29T140200Z__LUNA__si-pilot82-c-static__9bbaa/C_PREFLIGHT_PROCESS_RECEIPT.json",
+  "process_receipt_sha256": "0763c4b1f9cd8c303b5d3c58be3f7fcfd642352601da061eaa9953b175236380",
+  "protocol_sha256": "f72e1de1b27659f0c0cb187c276c7c60483af089d4a756fbe3c3d7819dcc5698",
+  "readiness_dependency_hashes": {
+    "ENGINEERING_REAL_SUCCESS_AUDIT_9BBAA.json": "eeb6cd2f0bbbebfbfea8c24f0c2acf19772480d3e4341c85c384127921cb5a94",
+    "EVAL_ENGINEERING_REAL_RESULT_REVIEW_8532275.json": "0132bc3b58d12c89bbf12cc8da78052d6518a49eb1c8e2fb96d83582358cb195",
+    "SCIENCE_EVALUATOR853_AND_B_PREFLIGHT_READINESS.json": "8cfeacdb5524c379d9365fc72ce30ca695cc795ff4122a8432d11450a18db8de"
+  },
+  "reviewed_utc": "2026-10-29T14:05:35.959980+00:00",
+  "schema": "SI_U1_INDEPENDENT_C_TRAINING_PREFLIGHT_REVIEW_V1",
+  "scientific_training_spent_before_C_seconds": 883.2235775915906,
+  "source_sha": "9bbaa12c2d8177a60ec5a74ed2f970ef29a57bce",
+  "static_preparation_failure": "Prior static assertion confused312 samples with1248 exposures; failed before authorization/preflight. Corrected metadata check is separate; no retry of actual preflight.",
+  "wrapper_pid": 937527
+}
