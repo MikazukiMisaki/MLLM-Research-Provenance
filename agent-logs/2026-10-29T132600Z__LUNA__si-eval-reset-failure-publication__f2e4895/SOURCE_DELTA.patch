@@ -1,0 +1,306 @@
+diff --git a/scripts/run_si_transfer_engineering.py b/scripts/run_si_transfer_engineering.py
+index afe4001..a1e4ffc 100644
+--- a/scripts/run_si_transfer_engineering.py
++++ b/scripts/run_si_transfer_engineering.py
+@@ -39,8 +39,8 @@ def main():
+             finally:resource.close()
+         _need(a.launch_context_sha256 is None,'engineering supervisor invocation')
+         from self_improvement.si_transfer_eval.supervisor import supervise
+-        from self_improvement.si_p3.runtime_gate import utc
+-        remaining=(min(utc(permit.auth['expires']),utc(permit.clearance['expires']))-datetime.now(timezone.utc)).total_seconds();_need(remaining>=600,'insufficient engineering time window')
++        from self_improvement.si_transfer_eval.time_window import parse_utc
++        remaining=(min(parse_utc(permit.auth['expires']),parse_utc(permit.clearance['expires']))-datetime.now(timezone.utc)).total_seconds();_need(remaining>=600,'insufficient engineering time window')
+         command=['--worker' if x=='--live' else x for x in sys.orig_argv]
+         context={'authorization_sha256':permit.auth_sha,'source_sha':permit.auth['source_sha'],'evidence_class':'live_engineering_only','binding':permit.binding,'clearance_sha256':permit.clearance_sha,'allocation_started_monotonic':entered,'max_allocation_seconds':600,'supervisor_argv':list(sys.orig_argv)}
+         exit=supervise(command,permit.output,context=context,seconds=600,environment=permit.auth['environment'],capability=permit)
+diff --git a/scripts/run_si_transfer_eval.py b/scripts/run_si_transfer_eval.py
+index c69d8bd..6f7fcf9 100644
+--- a/scripts/run_si_transfer_eval.py
++++ b/scripts/run_si_transfer_eval.py
+@@ -47,8 +47,8 @@ def main():
+             finally:resource.close()
+         _need(args.launch_context_sha256 is None,'live supervisor cannot accept worker context')
+         from self_improvement.si_transfer_eval.supervisor import supervise
+-        from self_improvement.si_p3.runtime_gate import utc
+-        remaining=(min(utc(permit.authorization['expires']),utc(permit.clearance['expires']))-datetime.now(timezone.utc)).total_seconds()
++        from self_improvement.si_transfer_eval.time_window import parse_utc
++        remaining=(min(parse_utc(permit.authorization['expires']),parse_utc(permit.clearance['expires']))-datetime.now(timezone.utc)).total_seconds()
+         _need(remaining>=permit.manifest['limits']['elapsed_seconds'], 'insufficient authorization window for full frozen allocation')
+         seconds=permit.manifest['limits']['elapsed_seconds']
+         command=['--worker' if x=='--live' else x for x in sys.orig_argv]
+diff --git a/src/self_improvement/si_transfer_eval/engineering_gate.py b/src/self_improvement/si_transfer_eval/engineering_gate.py
+index a0743b9..ca05885 100644
+--- a/src/self_improvement/si_transfer_eval/engineering_gate.py
++++ b/src/self_improvement/si_transfer_eval/engineering_gate.py
+@@ -10,6 +10,7 @@ from .engineering import ENGINEERING_LIMITS
+ from .gate import _git
+ from .protocol import RESOURCE_CONTRACT_SHA256,GIB
+ from .runtime_identity import verify_static as verify_static_identity
++from .time_window import parse_utc as _utc
+ from self_improvement.si_m1.gate import arm_parent_death
+ 
+ P0_LEGACY='6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11'
+@@ -40,10 +41,6 @@ class EngineeringWorkerPermit:
+     def adapter_sha256(self):return self.permit.runtime['p0']['sha256']
+ 
+ 
+-def _utc(v):
+-    dt=datetime.fromisoformat(v.replace('Z','+00:00'));_need(dt.tzinfo is not None,'timezone required');return dt.astimezone(timezone.utc)
+-
+-
+ def validate_engineering_plan(plan: dict, *, candidate_sha256: str, environment: dict) -> None:
+     plan_fields={'schema','status','candidate_sha256','limits','aggregate_engineering_seconds','training_reserved_seconds','resource'}
+     _need(type(plan) is dict and set(plan)==plan_fields and plan['schema']=='SI_U1_EVAL_ENGINEERING_PLAN_V1' and plan['status']=='FROZEN_FOR_REVIEW' and plan['candidate_sha256']==candidate_sha256 and plan['limits']==ENGINEERING_LIMITS and all(type(v) is int for v in plan['limits'].values()) and type(plan['aggregate_engineering_seconds']) is int and plan['aggregate_engineering_seconds']==1800 and type(plan['training_reserved_seconds']) is int and plan['training_reserved_seconds']==1200, 'engineering exact cap/plan')
+diff --git a/src/self_improvement/si_transfer_eval/gate.py b/src/self_improvement/si_transfer_eval/gate.py
+index 6e3dd04..b0145d5 100644
+--- a/src/self_improvement/si_transfer_eval/gate.py
++++ b/src/self_improvement/si_transfer_eval/gate.py
+@@ -16,6 +16,7 @@ from .runtime_binding import file_binding, verify_static_runtime
+ from .protocol import validate_frozen_protocol
+ from .isolation import validate_isolation_spec
+ from .runtime_identity import verify_static as verify_static_identity
++from .time_window import parse_utc
+ 
+ 
+ def _git(repository: Path) -> tuple[str, bool]:
+@@ -33,9 +34,7 @@ def authenticate_preflight(repository: Path, authorization_path: Path, expected_
+     _need(type(a['environment']) is dict and dict(os.environ)==a['environment'], 'effective process environment')
+     _need(not any(k in a['environment'] for k in ('PYTHONPATH','PYTHONHOME','LD_PRELOAD')) and all(a['environment'].get(k)=='1' for k in ('HF_HUB_OFFLINE','TRANSFORMERS_OFFLINE','PYTHONDONTWRITEBYTECODE')), 'offline/isolated env')
+     _need(Path(sys.executable).resolve()==Path(a['interpreter']).resolve() and sys.flags.isolated==1, 'pinned isolated interpreter')
+-    def utc(value):
+-        parsed=datetime.fromisoformat(value.replace('Z','+00:00'));_need(parsed.tzinfo is not None,'timezone required');return parsed.astimezone(timezone.utc)
+-    now=datetime.now(timezone.utc);_need(utc(a['not_before'])<=now<utc(a['expires']),'preflight time window')
++    now=datetime.now(timezone.utc);_need(parse_utc(a['not_before'])<=now<parse_utc(a['expires']),'preflight time window')
+     receipt=Path(a['receipt_path']); output=Path(a['output_path'])
+     _need(receipt.is_absolute() and receipt.parent.is_dir() and not receipt.is_symlink() and output.is_absolute() and not output.is_symlink() and output.parent.is_dir() and output.parent.stat().st_uid==os.getuid() and output.parent.stat().st_mode & 0o022==0 and not receipt.is_relative_to(output), 'safe receipt/output parent')
+     _need((receipt.is_file() if _release_recheck else not receipt.exists()) and (_release_recheck or not output.exists()), 'fresh receipt/output')
+diff --git a/src/self_improvement/si_transfer_eval/live_gate.py b/src/self_improvement/si_transfer_eval/live_gate.py
+index b6891bc..df56cef 100644
+--- a/src/self_improvement/si_transfer_eval/live_gate.py
++++ b/src/self_improvement/si_transfer_eval/live_gate.py
+@@ -7,6 +7,7 @@ from pathlib import Path
+ from .evaluator import _need
+ from .gate import authenticate_preflight
+ from .runtime_binding import file_binding
++from .time_window import parse_utc
+ from self_improvement.si_m1.gate import arm_parent_death
+ 
+ @dataclass(frozen=True)
+@@ -42,9 +43,7 @@ def authenticate_live(repository: Path, auth_path: Path, auth_sha: str, clearanc
+     _need(set(c)==fields and c['schema']=='SI_U1_EVAL_CLEARANCE_V1' and c['decision']=='RELEASE_ONE_THREE_ARM_EVALUATION' and c['authorization_sha256']==auth_sha and c['preflight_receipt_sha256']==hashlib.sha256(receipt_raw).hexdigest(), 'one clearance bound to genuine preflight')
+     _need(c['source_sha']==a['source_sha'] and all(c[k+'_sha256']==a[k]['sha256'] for k in ('manifest','runtime_spec','review','plan','protocol')), 'clearance exact source/artifacts')
+     _need(type(c['maximum_launches']) is int and c['maximum_launches']==1 and c['retry_authorized'] is False and re.fullmatch('[0-9a-f]{32}',c['run_id']), 'one distinct no-retry run')
+-    def utc(x):
+-        v=datetime.fromisoformat(x.replace('Z','+00:00'));_need(v.tzinfo is not None,'UTC timezone');return v.astimezone(timezone.utc)
+-    now=datetime.now(timezone.utc);_need(utc(c['not_before'])<=now<utc(c['expires']) and utc(c['expires'])<=utc(a['expires']), 'clearance window')
++    now=datetime.now(timezone.utc);_need(parse_utc(c['not_before'])<=now<parse_utc(c['expires']) and parse_utc(c['expires'])<=parse_utc(a['expires']), 'clearance window')
+     execution=json.loads(file_binding(c['preflight_execution']).read_bytes())
+     required={'schema','authentic_returncode','authorization_sha256','preflight_receipt_sha256','argv','source_sha','cwd','child_pid','child_start_tick','timed_out','supervisor_error','stdout_sha256','stderr_sha256','elapsed_seconds'}
+     _need(type(execution) is dict and set(execution)==required and execution['schema']=='SI_U1_PREFLIGHT_EXECUTION_V1' and execution['authentic_returncode']==0 and execution['authorization_sha256']==auth_sha and execution['preflight_receipt_sha256']==c['preflight_receipt_sha256'] and execution['argv']==preflight_argv and execution['source_sha']==a['source_sha'] and execution['cwd']==str(repository) and type(execution['child_pid']) is int and execution['child_pid']>0 and type(execution['child_start_tick']) is int and execution['child_start_tick']>0 and execution['timed_out'] is False and execution['supervisor_error'] is None, 'authentic preflight execution binding')
+diff --git a/src/self_improvement/si_transfer_eval/time_window.py b/src/self_improvement/si_transfer_eval/time_window.py
+new file mode 100644
+index 0000000..38377e0
+--- /dev/null
++++ b/src/self_improvement/si_transfer_eval/time_window.py
+@@ -0,0 +1,10 @@
++"""One timezone-aware timestamp contract for preflight, clearance, and launch."""
++from datetime import datetime, timezone
++from .evaluator import _need
++
++
++def parse_utc(value: str) -> datetime:
++    _need(type(value) is str, 'timestamp string required')
++    parsed = datetime.fromisoformat(value.replace('Z', '+00:00'))
++    _need(parsed.tzinfo is not None, 'timezone required')
++    return parsed.astimezone(timezone.utc)
+diff --git a/tests/test_si_transfer_engineering_gate.py b/tests/test_si_transfer_engineering_gate.py
+index 8db9ad7..2501849 100644
+--- a/tests/test_si_transfer_engineering_gate.py
++++ b/tests/test_si_transfer_engineering_gate.py
+@@ -1,4 +1,5 @@
+-import copy,subprocess,sys
++import copy,json,subprocess,sys
++from datetime import datetime,timedelta,timezone
+ from pathlib import Path
+ import pytest
+ from self_improvement.si_transfer_eval.engineering_gate import validate_engineering_plan
+@@ -26,3 +27,35 @@ def test_engineering_cli_without_clearance_fails_before_inputs(tmp_path):
+     script=Path(__file__).resolve().parents[1]/'scripts/run_si_transfer_engineering.py'
+     p=subprocess.run([sys.executable,'-I',str(script),'--live','--authorization',str(tmp_path/'missing'),'--authorization-sha256','0'*64],capture_output=True,text=True)
+     assert p.returncode==1 and 'independent engineering clearance required' in p.stderr and not list(tmp_path.iterdir())
++
++
++@pytest.mark.parametrize('style',['offset','zulu','expired','naive'])
++def test_engineering_clearance_accepts_same_aware_forms_as_preflight(tmp_path,monkeypatch,style):
++    """Actual clearance gate over software fixtures; static expensive edge is isolated."""
++    from self_improvement.si_transfer_eval import engineering_gate as gate
++    from self_improvement.si_transfer_eval.runtime_binding import file_sha256
++    def write(path,obj):path.write_text(json.dumps(obj));return {'path':str(path),'sha256':file_sha256(path)}
++    repo=tmp_path/'repo';repo.mkdir();output=tmp_path/'output';ap=tmp_path/'auth.json';cp=tmp_path/'clearance.json';receipt=tmp_path/'receipt.json';expected={'synthetic':'preflight-only'};receipt.write_text(json.dumps(expected))
++    now=datetime.now(timezone.utc)
++    def fmt(t):
++        if style=='zulu':return t.isoformat().replace('+00:00','Z')
++        if style=='naive':return t.replace(tzinfo=None).isoformat()
++        return t.isoformat()
++    refs={k:write(tmp_path/(k+'.json'),{}) for k in ('candidate','plan','runtime','review')}
++    pre=['fake-python','-I','fake-preflight','--authorization-sha256','@AUTHORIZATION_SHA256@']
++    auth={'source_sha':'a'*40,'interpreter':'fake-python','output_path':str(output),'receipt_path':str(receipt),'expires':fmt(now+timedelta(hours=1)),'preflight_argv':pre,**refs};ap.write_text(json.dumps(auth));ah=file_sha256(ap)
++    actual_pre=[ah if x=='@AUTHORIZATION_SHA256@' else x for x in pre]
++    record=tmp_path/'preflight';record.mkdir();(record/'stdout').write_text('synthetic');(record/'stderr').write_text('')
++    execution={'schema':'SI_U1_PREFLIGHT_EXECUTION_V1','authentic_returncode':0,'authorization_sha256':ah,'preflight_receipt_sha256':file_sha256(receipt),'argv':actual_pre,'source_sha':auth['source_sha'],'cwd':str(repo),'child_pid':7,'child_start_tick':5,'timed_out':False,'supervisor_error':None,'stdout_sha256':file_sha256(record/'stdout'),'stderr_sha256':file_sha256(record/'stderr')}
++    ex=write(record/'preflight_execution.json',execution)
++    template=['fake-python','-I',str(repo/'scripts/run_si_transfer_engineering.py'),'--live','--authorization',str(ap),'--authorization-sha256','@AUTHORIZATION_SHA256@','--clearance',str(cp),'--clearance-sha256','@CLEARANCE_SHA256@']
++    clearance={'schema':'SI_U1_EVAL_ENGINEERING_CLEARANCE_V1','decision':'RELEASE_ONE_ENGINEERING_ONLY','authorization_sha256':ah,'preflight_receipt_sha256':file_sha256(receipt),'preflight_execution':ex,'source_sha':auth['source_sha'],**{k+'_sha256':refs[k]['sha256'] for k in refs},'run_id':'1'*32,'not_before':fmt(now-timedelta(minutes=2)),'expires':fmt(now-timedelta(minutes=1) if style=='expired' else now+timedelta(minutes=20)),'maximum_launches':1,'retry_authorized':False,'live_argv':template}
++    cp.write_text(json.dumps(clearance));ch=file_sha256(cp);argv=[ah if x=='@AUTHORIZATION_SHA256@' else ch if x=='@CLEARANCE_SHA256@' else x for x in template]
++    plan={'resource':{'gpu_uuid':'GPU-synthetic'}};monkeypatch.setattr(gate,'authenticate_static',lambda *a,**k:(auth,plan,{}, {},{},expected))
++    if style in ('expired','naive'):
++        with pytest.raises(EvaluationError,match='time|timezone'):
++            gate.authenticate_live(repo,ap,ah,cp,ch,mode='live',argv=argv)
++    else:
++        result=gate.authenticate_live(repo,ap,ah,cp,ch,mode='live',argv=argv)
++        assert result.binding['run_id']=='1'*32
++    assert not output.exists()
+diff --git a/tests/test_si_transfer_gate.py b/tests/test_si_transfer_gate.py
+index 205040e..441789b 100644
+--- a/tests/test_si_transfer_gate.py
++++ b/tests/test_si_transfer_gate.py
+@@ -10,7 +10,8 @@ from self_improvement.si_transfer_eval import gate
+ from self_improvement.si_s01.shared_resource import contract as _preloaded_resource_contract
+ 
+ 
+-def test_preflight_auth_logic_only_and_no_overwrite(tmp_path, monkeypatch):
++@pytest.mark.parametrize('utc_style', ['offset','zulu'])
++def test_preflight_auth_logic_only_and_no_overwrite(tmp_path, monkeypatch, utc_style):
+     spec,m=fixture_spec(tmp_path); repo=tmp_path/'repo';repo.mkdir()
+     spec['p0_legacy_sha256']='6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11';spec['base_path']=str(tmp_path/'b968826d9c46dd6066d109eabc6255188de91218')
+     monkeypatch.setattr(gate,'validate_frozen_protocol',lambda *a,**k:None);monkeypatch.setattr(gate,'validate_isolation_spec',lambda *a,**k:None);monkeypatch.setattr(gate,'verify_static_runtime',lambda *a,**k:{'synthetic':True})
+@@ -24,7 +25,8 @@ def test_preflight_auth_logic_only_and_no_overwrite(tmp_path, monkeypatch):
+     auth_path=tmp_path/'authorization.json';interpreter=sys.executable;receipt=tmp_path/'receipt.json';out=tmp_path/'output'
+     argv=[interpreter,'-I',str(repo/'scripts/run_si_transfer_eval.py'),'--preflight-only','--authorization',str(auth_path),'--authorization-sha256','@AUTHORIZATION_SHA256@']
+     now=datetime.now(timezone.utc)
+-    a={'schema':'SI_TRANSFER_EVAL_AUTHORIZATION_V1','purpose':'PREFLIGHT_ONLY','source_sha':sha,'uid':os.getuid(),'environment':env,'manifest':bind(manifest),'runtime_spec':bind(runtime),'review':bind(review),'plan':bind(plan),'protocol':bind(protocol),'schedule':bind(schedule),'analysis':bind(analysis),'not_before':(now-timedelta(minutes=1)).isoformat(),'expires':(now+timedelta(minutes=1)).isoformat(),'receipt_path':str(receipt),'output_path':str(out),'interpreter':interpreter,'preflight_argv':argv}
++    fmt=lambda t:t.isoformat().replace('+00:00','Z') if utc_style=='zulu' else t.isoformat()
++    a={'schema':'SI_TRANSFER_EVAL_AUTHORIZATION_V1','purpose':'PREFLIGHT_ONLY','source_sha':sha,'uid':os.getuid(),'environment':env,'manifest':bind(manifest),'runtime_spec':bind(runtime),'review':bind(review),'plan':bind(plan),'protocol':bind(protocol),'schedule':bind(schedule),'analysis':bind(analysis),'not_before':fmt(now-timedelta(minutes=1)),'expires':fmt(now+timedelta(minutes=1)),'receipt_path':str(receipt),'output_path':str(out),'interpreter':interpreter,'preflight_argv':argv}
+     auth_path.write_text(json.dumps(a));h=bind(auth_path)['sha256'];actual=[h if x=='@AUTHORIZATION_SHA256@' else x for x in argv]
+     auth,result=gate.authenticate_preflight(repo,auth_path,h,argv=actual,git_identity=lambda p:(sha,True))
+     assert result['status']=='PREFLIGHT_ONLY_PASS_NOT_LAUNCH_AUTHORITY' and not out.exists()
+diff --git a/tests/test_si_transfer_live_gate.py b/tests/test_si_transfer_live_gate.py
+index e0b5a45..96b8970 100644
+--- a/tests/test_si_transfer_live_gate.py
++++ b/tests/test_si_transfer_live_gate.py
+@@ -10,23 +10,25 @@ from self_improvement.si_transfer_eval.runtime_binding import file_sha256
+ 
+ def write(path,obj):path.write_text(json.dumps(obj));return {'path':str(path),'sha256':file_sha256(path)}
+ 
+-def setup(tmp_path,monkeypatch):
++def setup(tmp_path,monkeypatch,utc_style='offset'):
+     repo=tmp_path/'repo';repo.mkdir();output=tmp_path/'output';auth_path=tmp_path/'auth.json';clear_path=tmp_path/'clear.json';receipt=tmp_path/'receipt.json';receipt.write_text(json.dumps({'expected':'synthetic'}))
+     refs={k:write(tmp_path/(k+'.json'),{'resource':{'gpu_uuid':'GPU-fake'}} if k=='protocol' else {}) for k in ('manifest','runtime_spec','review','plan','protocol')}
+     now=datetime.now(timezone.utc);preargv=['fake-python','-I','fake-preflight','--authorization-sha256','@AUTHORIZATION_SHA256@']
+-    a={'source_sha':'a'*40,'interpreter':'fake-python','output_path':str(output),'receipt_path':str(receipt),'expires':(now+timedelta(days=1)).isoformat(),'preflight_argv':preargv,**refs}
++    fmt=lambda t:t.isoformat().replace('+00:00','Z') if utc_style=='zulu' else t.isoformat()
++    a={'source_sha':'a'*40,'interpreter':'fake-python','output_path':str(output),'receipt_path':str(receipt),'expires':fmt(now+timedelta(days=1)),'preflight_argv':preargv,**refs}
+     auth_path.write_text(json.dumps(a));ah=file_sha256(auth_path);actual_pre=[ah if x=='@AUTHORIZATION_SHA256@' else x for x in preargv]
+     record=tmp_path/'preflight-record';record.mkdir();(record/'stdout').write_text('ok');(record/'stderr').write_text('')
+     execution={'schema':'SI_U1_PREFLIGHT_EXECUTION_V1','authentic_returncode':0,'authorization_sha256':ah,'preflight_receipt_sha256':file_sha256(receipt),'argv':actual_pre,'source_sha':a['source_sha'],'cwd':str(repo),'child_pid':7,'child_start_tick':5,'timed_out':False,'supervisor_error':None,'stdout_sha256':file_sha256(record/'stdout'),'stderr_sha256':file_sha256(record/'stderr'),'elapsed_seconds':1.0}
+     eref=write(record/'preflight_execution.json',execution)
+     template=['fake-python','-I',str(repo/'scripts/run_si_transfer_eval.py'),'--live','--authorization',str(auth_path),'--authorization-sha256','@AUTHORIZATION_SHA256@','--clearance',str(clear_path),'--clearance-sha256','@CLEARANCE_SHA256@']
+-    c={'schema':'SI_U1_EVAL_CLEARANCE_V1','decision':'RELEASE_ONE_THREE_ARM_EVALUATION','authorization_sha256':ah,'preflight_receipt_sha256':file_sha256(receipt),'preflight_execution':eref,'source_sha':a['source_sha'],**{k+'_sha256':refs[k]['sha256'] for k in refs},'run_id':'1'*32,'not_before':(now-timedelta(minutes=1)).isoformat(),'expires':(now+timedelta(hours=13)).isoformat(),'maximum_launches':1,'retry_authorized':False,'live_argv':template}
++    c={'schema':'SI_U1_EVAL_CLEARANCE_V1','decision':'RELEASE_ONE_THREE_ARM_EVALUATION','authorization_sha256':ah,'preflight_receipt_sha256':file_sha256(receipt),'preflight_execution':eref,'source_sha':a['source_sha'],**{k+'_sha256':refs[k]['sha256'] for k in refs},'run_id':'1'*32,'not_before':fmt(now-timedelta(minutes=1)),'expires':fmt(now+timedelta(hours=13)),'maximum_launches':1,'retry_authorized':False,'live_argv':template}
+     clear_path.write_text(json.dumps(c));ch=file_sha256(clear_path);argv=[ah if x=='@AUTHORIZATION_SHA256@' else ch if x=='@CLEARANCE_SHA256@' else x for x in template]
+     monkeypatch.setattr(live_gate,'authenticate_preflight',lambda *args,**kwargs:(a,{'expected':'synthetic'}))
+     return repo,auth_path,ah,clear_path,ch,argv,output
+ 
+-def test_one_shot_parent_binding_and_consumed_claim_rejected(tmp_path,monkeypatch):
+-    repo,ap,ah,cp,ch,argv,out=setup(tmp_path,monkeypatch)
++@pytest.mark.parametrize('utc_style', ['offset','zulu'])
++def test_one_shot_parent_binding_and_consumed_claim_rejected(tmp_path,monkeypatch,utc_style):
++    repo,ap,ah,cp,ch,argv,out=setup(tmp_path,monkeypatch,utc_style)
+     permit=live_gate.authenticate_live(repo,ap,ah,cp,ch,mode='live',argv=argv)
+     assert permit.binding['run_id']=='1'*32 and not out.exists()
+     (out.parent/(out.name+'.launch_claim.json')).write_text('{}')
+@@ -38,3 +40,14 @@ def test_rejects_altered_execution_log(tmp_path,monkeypatch):
+     (tmp_path/'preflight-record'/'stdout').write_text('tampered')
+     with pytest.raises(EvaluationError,match='raw subprocess logs'):
+         live_gate.authenticate_live(repo,ap,ah,cp,ch,mode='live',argv=argv)
++
++
++@pytest.mark.parametrize('case',['expired','naive'])
++def test_science_clearance_rejects_expired_or_naive_timestamp(tmp_path,monkeypatch,case):
++    repo,ap,ah,cp,ch,argv,out=setup(tmp_path,monkeypatch)
++    obj=json.loads(cp.read_text());now=datetime.now(timezone.utc)
++    obj['expires']=(now-timedelta(seconds=1)).isoformat() if case=='expired' else (now+timedelta(hours=13)).replace(tzinfo=None).isoformat()
++    cp.write_text(json.dumps(obj));new=file_sha256(cp);argv[-1]=new
++    with pytest.raises(EvaluationError,match='clearance window|timezone'):
++        live_gate.authenticate_live(repo,ap,ah,cp,new,mode='live',argv=argv)
++    assert not out.exists()
+diff --git a/tests/test_si_transfer_utc_contract.py b/tests/test_si_transfer_utc_contract.py
+new file mode 100644
+index 0000000..de66fae
+--- /dev/null
++++ b/tests/test_si_transfer_utc_contract.py
+@@ -0,0 +1,64 @@
++"""CPU-only UTC regression: real CLI code, synthetic gate and supervisor edges."""
++import subprocess
++import sys
++from datetime import datetime, timezone
++from pathlib import Path
++import pytest
++from self_improvement.si_transfer_eval.evaluator import EvaluationError
++from self_improvement.si_transfer_eval.time_window import parse_utc
++
++
++def test_preflight_and_clearance_share_one_utc_parser():
++    from self_improvement.si_transfer_eval import gate, engineering_gate, live_gate
++    assert gate.parse_utc is engineering_gate._utc is live_gate.parse_utc is parse_utc
++
++
++@pytest.mark.parametrize('value', ['2026-10-29T12:00:00Z', '2026-10-29T12:00:00+00:00', '2026-10-29T14:00:00+02:00'])
++def test_equivalent_aware_timestamp_forms(value):
++    assert parse_utc(value)==datetime(2026,10,29,12,0,tzinfo=timezone.utc)
++
++
++@pytest.mark.parametrize('value', ['2026-10-29T12:00:00', '', 'not-a-time', None])
++def test_invalid_or_naive_timestamp_rejected(value):
++    with pytest.raises((ValueError,EvaluationError)):
++        parse_utc(value)
++
++
++@pytest.mark.parametrize('kind', ['engineering','science'])
++@pytest.mark.parametrize('style,should_reach', [('offset',True),('zulu',True),('naive',False),('too_short',False)])
++def test_real_cli_reaches_only_synthetic_supervisor_for_allowed_time(tmp_path,kind,style,should_reach):
++    """Execute production main under -I; no real authorization, worker or GPU."""
++    root=Path(__file__).resolve().parents[1]
++    wrapper=tmp_path/'isolated_cli_fixture.py'
++    wrapper.write_text('''import runpy,sys
++from pathlib import Path
++from datetime import datetime,timedelta,timezone
++from types import SimpleNamespace
++root=Path(sys.argv[1]);kind=sys.argv[2];style=sys.argv[3]
++sys.path.insert(0,str(root/'src'))
++import self_improvement.si_transfer_eval.supervisor as supervisor
++now=datetime.now(timezone.utc);future=now+timedelta(seconds=30 if style=='too_short' else 50000)
++value=future.replace(tzinfo=None).isoformat() if style=='naive' else future.isoformat()
++if style=='zulu':value=value.replace('+00:00','Z')
++permit=SimpleNamespace(output=Path('/synthetic/no-output'),binding={'fixture':True},clearance={'expires':value},clearance_sha='c'*64,clearance_sha256='c'*64,auth_sha='a'*64,authorization_sha256='a'*64,auth={'expires':value,'source_sha':'a'*40,'environment':{}},authorization={'expires':value,'source_sha':'a'*40,'environment':{}},manifest={'limits':{'elapsed_seconds':43200},'arm_limits':{'elapsed_seconds':14400}})
++if kind=='engineering':
++ import self_improvement.si_transfer_eval.engineering_gate as gate
++ script=root/'scripts/run_si_transfer_engineering.py'
++else:
++ import self_improvement.si_transfer_eval.live_gate as gate
++ script=root/'scripts/run_si_transfer_eval.py'
++gate.authenticate_live=lambda *a,**k:permit
++def safe_supervisor(*a,**k):
++ print('SYNTHETIC_SUPERVISOR_BOUNDARY_REACHED')
++ return {'authentic_returncode':0,'execution_status':'EXIT_RECORDED','child_report_present':True}
++supervisor.supervise=safe_supervisor
++sys.argv=[str(script),'--live','--authorization','/synthetic/absent-auth','--authorization-sha256','a'*64,'--clearance','/synthetic/absent-clearance','--clearance-sha256','c'*64]
++sys.orig_argv=[sys.executable,'-I',*sys.argv]
++runpy.run_path(str(script),run_name='__main__')
++''')
++    result=subprocess.run([sys.executable,'-I',str(wrapper),str(root),kind,style],capture_output=True,text=True)
++    assert ('SYNTHETIC_SUPERVISOR_BOUNDARY_REACHED' in result.stdout)==should_reach
++    assert result.returncode==(0 if should_reach else 1)
++    if style=='naive':assert 'timezone required' in result.stderr
++    if style=='too_short':assert 'insufficient' in result.stderr
++    assert sorted(p.name for p in tmp_path.iterdir())==['isolated_cli_fixture.py']

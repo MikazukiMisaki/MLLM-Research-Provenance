@@ -1,0 +1,122 @@
+{
+  "build_steps": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "--quiet"
+      ],
+      "exitcode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "fetch",
+        "--no-tags",
+        "/home/lizening/wt-si-self-imitation-evaluator",
+        "f2e4895af83e8b4a94fbcd0bc4719ac1c91f8f2b"
+      ],
+      "exitcode": 0,
+      "stderr": "From /home/lizening/wt-si-self-imitation-evaluator\n * branch            f2e4895af83e8b4a94fbcd0bc4719ac1c91f8f2b -> FETCH_HEAD\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "update-ref",
+        "refs/heads/candidate",
+        "f2e4895af83e8b4a94fbcd0bc4719ac1c91f8f2b"
+      ],
+      "exitcode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "bundle",
+        "create",
+        "/home/lizening/research-notes/agent-logs/2026-10-29T132600Z__LUNA__si-eval-reset-failure-publication__f2e4895/si-eval-utc-f2e4895-source.bundle",
+        "refs/heads/candidate",
+        "^9112a48df70994ead5df89d8b01d0bde12a4160f"
+      ],
+      "exitcode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "bundle",
+        "list-heads",
+        "/home/lizening/research-notes/agent-logs/2026-10-29T132600Z__LUNA__si-eval-reset-failure-publication__f2e4895/si-eval-utc-f2e4895-source.bundle"
+      ],
+      "exitcode": 0,
+      "stderr": "",
+      "stdout": "f2e4895af83e8b4a94fbcd0bc4719ac1c91f8f2b refs/heads/candidate\n"
+    }
+  ],
+  "prerequisite": "9112a48df70994ead5df89d8b01d0bde12a4160f",
+  "prerequisite_source_bundle_sha256": "1b4349c3d40a7a7617a80e537552879a5a7982e2bdca3898c5530f15f0474ed7",
+  "source_bundle_sha256": "70b00164f66e8cbf0b56aef08a67665c1bfc4053b30bc559dc6b298a115ae37a",
+  "status": "PASS",
+  "target": "f2e4895af83e8b4a94fbcd0bc4719ac1c91f8f2b",
+  "verify_steps": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "--quiet"
+      ],
+      "exitcode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "fetch",
+        "--no-tags",
+        "/home/lizening/wt-si-self-imitation-evaluator",
+        "9112a48df70994ead5df89d8b01d0bde12a4160f"
+      ],
+      "exitcode": 0,
+      "stderr": "From /home/lizening/wt-si-self-imitation-evaluator\n * branch            9112a48df70994ead5df89d8b01d0bde12a4160f -> FETCH_HEAD\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "bundle",
+        "verify",
+        "/home/lizening/research-notes/agent-logs/2026-10-29T132600Z__LUNA__si-eval-reset-failure-publication__f2e4895/si-eval-utc-f2e4895-source.bundle"
+      ],
+      "exitcode": 0,
+      "stderr": "/home/lizening/research-notes/agent-logs/2026-10-29T132600Z__LUNA__si-eval-reset-failure-publication__f2e4895/si-eval-utc-f2e4895-source.bundle is okay\n",
+      "stdout": "The bundle contains this ref:\nf2e4895af83e8b4a94fbcd0bc4719ac1c91f8f2b refs/heads/candidate\nThe bundle requires this ref:\n9112a48df70994ead5df89d8b01d0bde12a4160f \n"
+    },
+    {
+      "argv": [
+        "git",
+        "fetch",
+        "/home/lizening/research-notes/agent-logs/2026-10-29T132600Z__LUNA__si-eval-reset-failure-publication__f2e4895/si-eval-utc-f2e4895-source.bundle",
+        "refs/heads/candidate"
+      ],
+      "exitcode": 0,
+      "stderr": "From /home/lizening/research-notes/agent-logs/2026-10-29T132600Z__LUNA__si-eval-reset-failure-publication__f2e4895/si-eval-utc-f2e4895-source.bundle\n * branch            candidate  -> FETCH_HEAD\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "FETCH_HEAD"
+      ],
+      "exitcode": 0,
+      "stderr": "",
+      "stdout": "f2e4895af83e8b4a94fbcd0bc4719ac1c91f8f2b\n"
+    }
+  ]
+}
