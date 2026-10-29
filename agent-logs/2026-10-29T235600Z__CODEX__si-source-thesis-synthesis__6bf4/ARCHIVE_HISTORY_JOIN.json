@@ -1,0 +1,160 @@
+{
+  "archive_added_game_members": 1207,
+  "baseline_and_conservative_results": {
+    "plus_old_proposal_reservation": {
+      "archive_distinct_game_hashes": 950,
+      "archive_distinct_trajectory_hashes": 950,
+      "archive_vs_local_game_sha_overlap": 0,
+      "archive_vs_local_parent_overlap": 1,
+      "archive_vs_local_trajectory_sha_overlap": 0,
+      "by_split": {
+        "train": {
+          "archive_local_parent_overlap": 0,
+          "archive_local_union_parents": 325,
+          "families": {
+            "look_at_obj_in_light": 142,
+            "pick_and_place_simple": 52,
+            "pick_clean_then_place_in_recep": 30,
+            "pick_cool_then_place_in_recep": 32,
+            "pick_heat_then_place_in_recep": 24,
+            "pick_two_obj_and_place": 45
+          },
+          "local_parents": 0,
+          "parents": 325,
+          "rows": 863
+        },
+        "valid_seen": {
+          "archive_local_parent_overlap": 0,
+          "archive_local_union_parents": 31,
+          "families": {
+            "look_at_obj_in_light": 15,
+            "pick_and_place_simple": 7,
+            "pick_clean_then_place_in_recep": 4,
+            "pick_cool_then_place_in_recep": 1,
+            "pick_heat_then_place_in_recep": 3,
+            "pick_two_obj_and_place": 1
+          },
+          "local_parents": 0,
+          "parents": 31,
+          "rows": 33
+        },
+        "valid_train": {
+          "archive_local_parent_overlap": 0,
+          "archive_local_union_parents": 0,
+          "families": {},
+          "local_parents": 0,
+          "parents": 0,
+          "rows": 0
+        },
+        "valid_unseen": {
+          "archive_local_parent_overlap": 1,
+          "archive_local_union_parents": 24,
+          "families": {
+            "look_at_obj_in_light": 12,
+            "pick_and_place_simple": 2,
+            "pick_cool_then_place_in_recep": 3,
+            "pick_heat_then_place_in_recep": 2
+          },
+          "local_parents": 6,
+          "parents": 19,
+          "rows": 54
+        }
+      },
+      "existing_local_parents_after_same_policy": 6,
+      "existing_local_rows_after_same_policy": 17,
+      "limitations": "path+hash evidence only; no extraction; task not executed; unknown historical records, original local data version, semantic/layout identity and historical upstream model exposure",
+      "parents": 345,
+      "rows": 950,
+      "union_distinct_parents": 350
+    },
+    "recorded_and_sft_replay": {
+      "archive_distinct_game_hashes": 960,
+      "archive_distinct_trajectory_hashes": 960,
+      "archive_vs_local_game_sha_overlap": 0,
+      "archive_vs_local_parent_overlap": 9,
+      "archive_vs_local_trajectory_sha_overlap": 0,
+      "by_split": {
+        "train": {
+          "archive_local_parent_overlap": 8,
+          "archive_local_union_parents": 354,
+          "families": {
+            "look_at_obj_in_light": 142,
+            "pick_and_place_simple": 54,
+            "pick_clean_then_place_in_recep": 35,
+            "pick_cool_then_place_in_recep": 33,
+            "pick_heat_then_place_in_recep": 24,
+            "pick_two_obj_and_place": 45
+          },
+          "local_parents": 29,
+          "parents": 333,
+          "rows": 872
+        },
+        "valid_seen": {
+          "archive_local_parent_overlap": 0,
+          "archive_local_union_parents": 32,
+          "families": {
+            "look_at_obj_in_light": 15,
+            "pick_and_place_simple": 7,
+            "pick_clean_then_place_in_recep": 5,
+            "pick_cool_then_place_in_recep": 1,
+            "pick_heat_then_place_in_recep": 3,
+            "pick_two_obj_and_place": 1
+          },
+          "local_parents": 0,
+          "parents": 32,
+          "rows": 34
+        },
+        "valid_train": {
+          "archive_local_parent_overlap": 0,
+          "archive_local_union_parents": 14,
+          "families": {},
+          "local_parents": 14,
+          "parents": 0,
+          "rows": 0
+        },
+        "valid_unseen": {
+          "archive_local_parent_overlap": 1,
+          "archive_local_union_parents": 24,
+          "families": {
+            "look_at_obj_in_light": 12,
+            "pick_and_place_simple": 2,
+            "pick_cool_then_place_in_recep": 3,
+            "pick_heat_then_place_in_recep": 2
+          },
+          "local_parents": 6,
+          "parents": 19,
+          "rows": 54
+        }
+      },
+      "existing_local_parents_after_same_policy": 35,
+      "existing_local_rows_after_same_policy": 85,
+      "limitations": "path+hash evidence only; no extraction; task not executed; unknown historical records, original local data version, semantic/layout identity and historical upstream model exposure",
+      "parents": 353,
+      "rows": 960,
+      "union_distinct_parents": 379
+    }
+  },
+  "comparison_scope": "registry, full 1200 balanced expert, 1350 initial and 519 extension SFT candidate IDs, authentic 82 eval and B/C parents, two engineering probes, available local protected game/traj SHA and matching archive protected games; prior proposal reservation in second policy only",
+  "does_not_prove": "unseen layout, heldout, original archive game version, runnable state, absent unknown history, suitable power or approved experiment",
+  "inputs_sha256": {
+    "archive": "d376c4bbb097c068528a2a9805e358e4cd14bc75c4d68a24e5141aebd234ef67",
+    "archive_small": "eea90499df27b9cb3147d1d1927264146d38194b575e25f70a82875545742dcb",
+    "bindings82": "a9e130a33e2ae611563bbbc6dd2afa65f8d711f55631c9aa8b1039b9264379cc",
+    "bmanifest": "d8639217e98b8bc96725408245ab9b59ff53070ae476682fb99ce6ee7ab13e6b",
+    "cmanifest": "dcc1c38e4fde2f1751fcf17425a908da9ab8ee3ae9f665cbb2a56f2023d4452e",
+    "expert": "c547e8f0c5988b29288f2a097169c7859741b7d4f53f222af31f5e2889d516cf",
+    "extension_sft": "e22e13ea4122540e816bd48d1751bca0c4cdfe5c0df214c2e63cef561eb256ea",
+    "g1_schedule": "7ce71ad01bd03ad8a018104f3edacc4310e9a1b5fc6e015d808152f316e4e13e",
+    "initial_sft": "5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56",
+    "local_conservative": "b3fe10154e0b11753f6d58ccd2192cace46ec392a06c6bc87cfaefe6afa472c5",
+    "local_wide": "a4e0b9049f53fc8fec7da0d8e98ce6c3aa049b6fe5eaec0b95b26e3229e18a52",
+    "probe1": "7672feaaa6ccf83652ed85759dd4ff954ca2fa533b007daa7f82a643edb430d0",
+    "probe2": "660ef3fec2480db0f65514a8468c92d25a1b5084d5252d4dbfa3fa7475719c06",
+    "proposal": "fd145fe6abee849b44231e1d0c816aa65813be2b67c48715f7ce7d2635e98d23",
+    "registry": "98580db9a8322c52c87d6f30dcb75858b00f3b0ec6d3494a4a87923504ddca60",
+    "schedule82": "c352a0d708b910bb3703c63009aed3a800b5ba4d40f95021f3bd30db0e4823cd"
+  },
+  "local_missing_and_sibling_trajectory_present": 1207,
+  "operation": "Metadata-only task/parent and streaming SHA256; no candidate content emitted; no environment/model/CUDA/selection",
+  "schema": "SI_OFFICIAL_ARCHIVE_HISTORY_JOIN_V1"
+}

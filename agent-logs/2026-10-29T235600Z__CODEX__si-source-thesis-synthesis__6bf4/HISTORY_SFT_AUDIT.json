@@ -1,0 +1,97 @@
+{
+  "balanced_output_rows": 20967,
+  "balanced_output_unique_ids": 1200,
+  "extension_manifest_train_validation_count": 519,
+  "extension_output_rows": 4339,
+  "extension_output_unique_ids": 133,
+  "initial_manifest_train_validation_count": 1350,
+  "initial_output_rows": 17588,
+  "initial_output_unique_ids": 1140,
+  "input_sha256": {
+    "accepted": "9c374fafdcc7d7db77e878d23e852a0ec55eedcc3886cb0cebe7491d67e564e5",
+    "balanced_data": "c547e8f0c5988b29288f2a097169c7859741b7d4f53f222af31f5e2889d516cf",
+    "candidates": "a4e0b9049f53fc8fec7da0d8e98ce6c3aa049b6fe5eaec0b95b26e3229e18a52",
+    "collector": "26f01b4e9c51165ca049e9afaf8ea6d012369097051373150b2646ae826edcaa",
+    "conservative": "b3fe10154e0b11753f6d58ccd2192cace46ec392a06c6bc87cfaefe6afa472c5",
+    "ext_data": "9c580f60e48cb3ad9ba7159318b9ab9bfd61d2e92576c126326adda3e8d2788b",
+    "extension": "e22e13ea4122540e816bd48d1751bca0c4cdfe5c0df214c2e63cef561eb256ea",
+    "initial": "5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56",
+    "initial_data": "75a244205ab0895ba577805ec4884378b3016d42d90f74edc1cab313c60a4523",
+    "probe1": "7672feaaa6ccf83652ed85759dd4ff954ca2fa533b007daa7f82a643edb430d0",
+    "probe2": "660ef3fec2480db0f65514a8468c92d25a1b5084d5252d4dbfa3fa7475719c06",
+    "report": "4f72c4bf45765c7461ecd59821ef13b204568052a63cca31fd9afa233baeb137"
+  },
+  "interpretation": "Initial candidate replay manifest identity exposure is distinct from model training exposure. The audit report says 1869 candidate tasks replayed; raw per-task rejection receipts not independently inspected. Conservative proposed-parent exclusion recommended; exclude by parent. Exact dataset no hit does not prove no model pretraining or other historical exposure.",
+  "joined": {
+    "candidates": {
+      "accepted_manifest_exact_overlap": 0,
+      "after_probe_parents": 40,
+      "after_probe_rows": 98,
+      "balanced_output_exact_overlap": 0,
+      "extension_manifest_exact_overlap": 0,
+      "extension_manifest_parent_overlap": 0,
+      "extension_output_exact_overlap": 0,
+      "initial_collected_output_exact_overlap": 0,
+      "initial_manifest_exact_task_overlap": 5,
+      "initial_manifest_parent_overlap": 5,
+      "remaining_by_split": {
+        "train": {
+          "parents": 29,
+          "rows": 54
+        },
+        "valid_seen": {
+          "parents": 0,
+          "rows": 0
+        },
+        "valid_train": {
+          "parents": 14,
+          "rows": 14
+        },
+        "valid_unseen": {
+          "parents": 6,
+          "rows": 17
+        }
+      },
+      "remaining_total_parents": 35,
+      "removed_rows_after_excluding_initial_and_extension_parent": 13
+    },
+    "conservative": {
+      "accepted_manifest_exact_overlap": 0,
+      "after_probe_parents": 6,
+      "after_probe_rows": 17,
+      "balanced_output_exact_overlap": 0,
+      "extension_manifest_exact_overlap": 0,
+      "extension_manifest_parent_overlap": 0,
+      "extension_output_exact_overlap": 0,
+      "initial_collected_output_exact_overlap": 0,
+      "initial_manifest_exact_task_overlap": 0,
+      "initial_manifest_parent_overlap": 0,
+      "remaining_by_split": {
+        "train": {
+          "parents": 0,
+          "rows": 0
+        },
+        "valid_seen": {
+          "parents": 0,
+          "rows": 0
+        },
+        "valid_train": {
+          "parents": 0,
+          "rows": 0
+        },
+        "valid_unseen": {
+          "parents": 6,
+          "rows": 17
+        }
+      },
+      "remaining_total_parents": 6,
+      "removed_rows_after_excluding_initial_and_extension_parent": 0
+    }
+  },
+  "limits": [
+    "No source/game exact original replay log per rejected task examined; document distinction is proposed/replay report not individual receipt",
+    "The wider policy omits unexecuted reserve by design; those reservations remain binding pending decision",
+    "No unexposed or clean/heldout certification."
+  ],
+  "scope": "Metadata-only joins, hashes of already collected historical files, no reading of candidate task bodies, no outcomes, no new schedule/run."
+}

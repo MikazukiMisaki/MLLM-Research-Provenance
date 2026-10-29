@@ -1,0 +1,93 @@
+{
+  "archives": {
+    "0.2.2": {
+      "duplicate_member_paths": 0,
+      "member_count": 5234,
+      "sha256": "d376c4bbb097c068528a2a9805e358e4cd14bc75c4d68a24e5141aebd234ef67",
+      "split_counts": {
+        "train": 4652,
+        "valid_seen": 187,
+        "valid_train": 200,
+        "valid_unseen": 195
+      },
+      "unexpected_files": 0,
+      "unique_member_paths": 5234
+    },
+    "0.2.2-old": {
+      "duplicate_member_paths": 0,
+      "member_count": 5234,
+      "sha256": "2259f0ce8ad460ff9ee11f5edbbd4830b8685618b80e3400031797395871647d",
+      "split_counts": {
+        "train": 4652,
+        "valid_seen": 187,
+        "valid_train": 200,
+        "valid_unseen": 195
+      },
+      "unexpected_files": 0,
+      "unique_member_paths": 5234
+    },
+    "0.4.0": {
+      "duplicate_member_paths": 0,
+      "member_count": 4027,
+      "sha256": "eea90499df27b9cb3147d1d1927264146d38194b575e25f70a82875545742dcb",
+      "split_counts": {
+        "train": 3553,
+        "valid_seen": 140,
+        "valid_train": 200,
+        "valid_unseen": 134
+      },
+      "unexpected_files": 0,
+      "unique_member_paths": 4027
+    }
+  },
+  "installed_vs_040": {
+    "archive_count": 4027,
+    "archive_only": 0,
+    "different_sha256": 0,
+    "local_count": 4027,
+    "local_only": 0,
+    "same_sha256": 4027,
+    "shared_paths": 4027
+  },
+  "limits": [
+    "Version compatibility, game solvability and historical or semantic exposure were not tested.",
+    "Upstream release API digest was null; computed hashes identify downloaded bytes, not an official published checksum.",
+    "Parent counts by split not deduplicated across splits or checked against historical usage.",
+    "No inference that old-only members are eligible or that original absent files are recoverable in current treatment."
+  ],
+  "older_only": {
+    "by_split": {
+      "train": 1099,
+      "valid_seen": 47,
+      "valid_unseen": 61
+    },
+    "distinct_parent_by_split": {
+      "train": 521,
+      "valid_seen": 45,
+      "valid_unseen": 25
+    },
+    "has_local_trajectory_file_by_split": {
+      "train": 1099,
+      "valid_seen": 47,
+      "valid_unseen": 61
+    },
+    "member_count": 1207
+  },
+  "pairwise": {
+    "0.2.2__0.2.2-old": {
+      "different_digest": 1,
+      "only_first": 0,
+      "only_second": 0,
+      "same_digest": 5233,
+      "shared": 5234
+    },
+    "0.2.2__0.4.0": {
+      "different_digest": 4027,
+      "only_first": 1207,
+      "only_second": 0,
+      "same_digest": 0,
+      "shared": 4027
+    }
+  },
+  "scope": "independent read-only zip streaming and local game byte hash, no archive extraction, task content/output or env/model/CUDA"
+}
