@@ -1,0 +1,15 @@
+# Recheck of directly related self-training literature
+
+Status: **no material factual error found in the two named-paper summaries, within the scope checked**. This is a source-level recheck by the same agent that wrote the reading notes; it is not an independent second-person review, an exhaustive novelty search, or a validation of the other two references in those notes. No model, environment, or statistical computation was run. Original notes remain unchanged.
+
+Reviewed: `/home/lizening/research-notes/agent-logs/2026-10-29T235519Z__SOL__si-related-work-reading/RELATED_WORK_READING_NOTES.md`, SHA-256 `9135cb0e94813907bcbb8c8a939ada16af5eb9a35805bbc20b130055e4de6b43`.
+
+## Dou et al. (Re-ReST)
+
+[ACL Anthology record](https://aclanthology.org/2024.emnlp-main.861/) and [published PDF](https://aclanthology.org/2024.emnlp-main.861.pdf) confirm authors Zi-Yi Dou, Cheng-Fu Yang, Xueqing Wu, Kai-Wei Chang, and Nanyun Peng; EMNLP 2024; pages 15394–15411; DOI 10.18653/v1/2024.emnlp-main.861. Paper §2.2–2.3 (PDF pp. 3–4; printed pp. 15396–15397) describes sampling agent-generated candidates, selection by external evaluation, and likelihood training; Re-ReST further trains a separate reflector and augments agent training with corrected samples. Section 3.2 (PDF p. 5; printed p. 15398) gives the ALFWorld binary success feedback, Llama-2-7B, LoRA and evaluation on 134 environments described by the authors as unseen. Table 2 identifies a separate plain self-training baseline. The original note accurately distinguishes this established overlap from SI-U1's action-only, shared-P0, expert-replay comparison and does not equate task sets or establish SI-U1 causal attribution.
+
+## Sarukkai et al. (self-generated examples)
+
+[Version-pinned arXiv record](https://arxiv.org/abs/2505.00234v3) confirms authors Vishnu Sarukkai, Zhiqiang Xie and Kayvon Fatahalian, title, 2025 and arXiv v3. [Full text §3 and §5.1](https://arxiv.org/html/2505.00234v3) states the main database approach accumulates successful agent trajectories and is presented with a small initial set of human-generated examples; §5.1 notes that the initial set could be empty. [Appendix C and Table 4](https://arxiv.org/html/2505.00234v3) explicitly describe GPT-4o-mini fine-tuning with the curated self-collected database, including ALFWorld, and compare it to the in-context variant. The note correctly says that training is included in the appendix rather than characterizing the paper as prompting-only. The cited appendix reports authors' averages over five trials; these are not independently reproduced and are not directly comparable to SI-U1.
+
+The initial human-example assumption in the note is correctly qualified as the paper's setup, not a universal requirement. The original notes' claim that SI-U1 differs by exact Qwen3/P0/control/metric choices is a description of this project, not proof those design features are uniquely new. Broader review and citation-style verification remain necessary before any novelty claim or thesis submission.
