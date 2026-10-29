@@ -1,0 +1,97 @@
+{
+  "arms": {
+    "B": {
+      "actual_input_mean_per_presentation": 530.1442307692307,
+      "conflicting_target_prompt_hashes": 0,
+      "counts_from_actual_training_result": {
+        "input_tokens": 661620,
+        "microbatches_completed": 1248,
+        "microbatches_started": 1248,
+        "optimizer_steps": 78,
+        "padded_input_tokens": 661620,
+        "supervised_tokens": 6240
+      },
+      "dataset_sha256": "5ae321d250a5607337af8c7cbba6a4372f60805c20811ad76f0617a50ec93350",
+      "duplicate_prompt_occurrences": 0,
+      "epochs_checked": 4,
+      "examples": 312,
+      "family_parent_counts": {
+        "pick_and_place_simple": 34,
+        "pick_clean_then_place_in_recep": 24,
+        "pick_cool_then_place_in_recep": 10,
+        "pick_heat_then_place_in_recep": 8,
+        "pick_two_obj_and_place": 2
+      },
+      "family_row_counts": {
+        "pick_and_place_simple": 136,
+        "pick_clean_then_place_in_recep": 96,
+        "pick_cool_then_place_in_recep": 40,
+        "pick_heat_then_place_in_recep": 32,
+        "pick_two_obj_and_place": 8
+      },
+      "independent_parent_groups": 78,
+      "invalid_action_id_syntax": 0,
+      "manifest_sha256": "d8639217e98b8bc96725408245ab9b59ff53070ae476682fb99ce6ee7ab13e6b",
+      "max_length": 2048,
+      "prompt_sha_mismatches": 0,
+      "review_sha256": "72d1e954e0f06b342e276bb64a9748e2d9f54d86385fff168c3605f82c2e0b63",
+      "rows_per_parent": 4,
+      "training_result_sha256": "e7d304b2a06195ea24555ec95be971b248bf5a9e86a9ee6955396e7f748f1150",
+      "unique_rendered_prompt_hashes": 312
+    },
+    "C": {
+      "actual_input_mean_per_presentation": 557.5897435897435,
+      "conflicting_target_prompt_hashes": 0,
+      "counts_from_actual_training_result": {
+        "input_tokens": 695872,
+        "microbatches_completed": 1248,
+        "microbatches_started": 1248,
+        "optimizer_steps": 78,
+        "padded_input_tokens": 695872,
+        "supervised_tokens": 6240
+      },
+      "dataset_sha256": "0735422fbeb3285256290ef0ec81923d5954b370b341b6a76a293c205804628d",
+      "duplicate_prompt_occurrences": 0,
+      "epochs_checked": 4,
+      "examples": 312,
+      "family_parent_counts": {
+        "pick_and_place_simple": 34,
+        "pick_clean_then_place_in_recep": 24,
+        "pick_cool_then_place_in_recep": 10,
+        "pick_heat_then_place_in_recep": 8,
+        "pick_two_obj_and_place": 2
+      },
+      "family_row_counts": {
+        "pick_and_place_simple": 136,
+        "pick_clean_then_place_in_recep": 96,
+        "pick_cool_then_place_in_recep": 40,
+        "pick_heat_then_place_in_recep": 32,
+        "pick_two_obj_and_place": 8
+      },
+      "independent_parent_groups": 78,
+      "invalid_action_id_syntax": 0,
+      "manifest_sha256": "dcc1c38e4fde2f1751fcf17425a908da9ab8ee3ae9f665cbb2a56f2023d4452e",
+      "max_length": 2048,
+      "prompt_sha_mismatches": 0,
+      "review_sha256": "c40e1f8c01c55706f16ab3f7387aa8ec3cc8bb632397fbcef1b694518de34a1b",
+      "rows_per_parent": 4,
+      "training_result_sha256": "446b28796de612072ada2503d4af338ff911d8007d83fa7b4ed40539c63bf421",
+      "unique_rendered_prompt_hashes": 312
+    }
+  },
+  "cross_arm": {
+    "C_minus_B_input_tokens": 34252,
+    "C_over_B_input_token_ratio": 1.0517698981288353,
+    "common_parent_groups": 0,
+    "common_rendered_prompt_hashes": 0
+  },
+  "limitations": [
+    "parent and prompt equality are byte/identifier-level and do not prove semantic/layout independence",
+    "prompt uniqueness and action syntax do not prove label semantic correctness",
+    "sequence distribution and per-example five loss tokens rely on separately pinned independent tokenizer feasibility/data reviews, not re-tokenized here",
+    "self-generated examples selected retrospectively from successful P0 trajectories; attribution to data origin is not isolated from other data and domain differences",
+    "single initialization and run per arm; uncertainty and transfer not established by training checks",
+    "No model, environment, evaluation result or task text was emitted"
+  ],
+  "schema": "SI_U1_TRAINING_COVERAGE_READ_ONLY_V1"
+}

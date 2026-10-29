@@ -1,0 +1,147 @@
+{
+  "checks": [
+    "Re-selected all outcome-discordant tasks directly from approved82 paired records; union9 plus all8 pick-two disjoint gives17, not cherry-picked examples within these categories.",
+    "Read authenticated original events and checked2206 raw outputs through frozen production parser, actual command/action-map requests, exact generation/step event IDs and sequence anchors.",
+    "Recomputed first differing executed command independently for all11 discordant pair comparisons; exact recorded prompt/rendered/inputIDs/mask hashes and observation/action list hashes match across arms at that index.",
+    "Recomputed adjacent exactly repeated command blocks width2/3/4 with two repetitions and all reported counts; recomputed no adjacent exact observation/action-list repeat.",
+    "Read actual312 selected rows per arm; hashed prompt bytes, checked unique samples, strict ASCII actionID syntax, per-epoch multisets,78parents and2pick-two parents/8pick-two rows each; cross-arm parent/prompt overlap0.",
+    "Input difference34252/661620=5.1769898128835284%, consistent with accepted training receipts."
+  ],
+  "corrections_or_precision_notes": [
+    "No numerical discrepancy found in shareable summary.",
+    "Use terminal-at-step50 with done=true/reward0; do not call these evaluator horizon terminations. In the frozen report they are terminal, not horizon. Coincidence withH50 does not identify policy or environment cause.",
+    "Repeated-block detector also counts blocks composed of identical repeated commands and can overlap windows; it is a literal pattern flag, not a semantic loop taxonomy.",
+    "Same recorded input at first different command establishes local input equality only, not complete hidden-state identity or the cause of final success/failure.",
+    "Exact prompt conflict absence only applies to selected frozen prompt bytes; it does not rule out semantically equivalent states with inconsistent actions."
+  ],
+  "created_utc": "2026-10-29T22:30:22.815817+00:00",
+  "decision": "ACCEPT_DESCRIPTIVE_COUNTS_WITH_EXPLICIT_NONCAUSAL_LIMITS",
+  "does_not_change_preregistered_inconclusive_result": true,
+  "future_power_guard": "A complete green rule requiring both significance and observed effect>=10pp is not powered by a single McNemar test calculation. At true10pp boundary the point-estimate gate tends toward about50%, not80%; joint contrasts and family warning must be included. Future thresholds/estimands/power assumptions require a new prospective protocol, not changes to this one.",
+  "independent_evidence": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/POSTRESULT_DIAGNOSTIC_INDEPENDENT/PROCESS.json",
+      "sha256": "2529a34e6491d65fba7b9decf22a060d70e76ac4526b677924f19480530e235a"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/POSTRESULT_DIAGNOSTIC_INDEPENDENT/RESULT.json",
+      "sha256": "263256948a6ccabd54f61ef56c1dad64ff36f9405bf409e4f0a82ef907d078c3"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/POSTRESULT_DIAGNOSTIC_INDEPENDENT/check.py",
+      "sha256": "faf4a96bcfc8289ee1a73d8069a1fe9aded7a8dda1f94ff4657e75cf8e1d3c75"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/POSTRESULT_DIAGNOSTIC_INDEPENDENT/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/POSTRESULT_DIAGNOSTIC_INDEPENDENT/stdout",
+      "sha256": "fad7123aed30fa1730df552d1087779426087c09cb7f289f8ad5ff4365338db3"
+    }
+  ],
+  "independently_reconstructed": {
+    "adjacent_identical_observation_and_map": 0,
+    "all37_failures_50_steps_done_true_reward_zero": true,
+    "disagreement_tasks": 9,
+    "first_divergence_equal_recorded_inputs_comparisons": 11,
+    "generations": 2206,
+    "input_difference_relative_to_B": 0.051769898128835284,
+    "input_difference_tokens": 34252,
+    "model_environment_calls": 0,
+    "no_private_identifiers_emitted": true,
+    "outcomes": {
+      "A": {
+        "failure": 14,
+        "success": 3
+      },
+      "B": {
+        "failure": 11,
+        "success": 6
+      },
+      "C": {
+        "failure": 12,
+        "success": 5
+      }
+    },
+    "pick_two_tasks": 8,
+    "repeated_block_2_to_4_counts": {
+      "A": {
+        "failure": 11,
+        "pick_two": 6,
+        "success": 0
+      },
+      "B": {
+        "failure": 5,
+        "pick_two": 5,
+        "success": 0
+      },
+      "C": {
+        "failure": 11,
+        "pick_two": 7,
+        "success": 0
+      }
+    },
+    "selected_tasks": 17,
+    "status": "PASS_DESCRIPTIVE_COUNTS_AND_METHOD_WITH_LIMITS",
+    "training_coverage": {
+      "B": {
+        "exact_prompt_conflicts": 0,
+        "parents": 78,
+        "pick_two_parents": 2,
+        "pick_two_rows": 8,
+        "rows": 312,
+        "unique_prompts": 312
+      },
+      "C": {
+        "exact_prompt_conflicts": 0,
+        "parents": 78,
+        "pick_two_parents": 2,
+        "pick_two_rows": 8,
+        "rows": 312,
+        "unique_prompts": 312
+      }
+    },
+    "trajectories": 51
+  },
+  "inputs": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T222600Z__SOL__si-u1-disagreement-diagnostic__c2356/SHAREABLE_DESCRIPTIVE_SUMMARY.md",
+      "sha256": "55011613bf674adbd23a08e4b4a278572fccb4c35da2e6fe42143bc53dbaa5e8"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T222600Z__SOL__si-u1-disagreement-diagnostic__c2356/PRIVATE_CASE_TABLE.json",
+      "sha256": "457ea036370d49ad6b9d4cc959225af0737b043ad3a50a15bcd348d81be42d6f"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T222600Z__SOL__si-u1-disagreement-diagnostic__c2356/PRIVATE_FIRST_DIVERGENCE.json",
+      "sha256": "a184dabb493313aabb9853770a81f398e88149ce221504a3abfde4dc67535b7c"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T222600Z__SOL__si-u1-disagreement-diagnostic__c2356/PATTERN_SUMMARY.json",
+      "sha256": "d5954a85d6feaeccacadfed2935552e431bfb21b92bc4173b620c59f0a7f0667"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T222600Z__SOL__si-u1-disagreement-diagnostic__c2356/FIRST_DIVERGENCE_AGGREGATE.json",
+      "sha256": "5ef0f6f4e86b3d1045f38da167200606b70ed6ee88bfbf2a85d728ddb0adcb54"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T230000Z__SOL__si-u1-training-coverage-audit__independent/RECORD.md",
+      "sha256": "bcb555c8901ea2fba010a6eabcf3dc64f4bc16982fa5c840d20f43f656b8c9dc"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T230000Z__SOL__si-u1-training-coverage-audit__independent/TRAINING_COVERAGE_AUDIT.json",
+      "sha256": "439ec1cc3c7747a722efd8bd4670a74ed7b3cc59c75307a5eac18d53cdd12515"
+    }
+  ],
+  "model_environment_or_training_calls": 0,
+  "privacy": "No private task IDs, commands, observations, prompts or training text emitted in this review. Private source paths/hashes remain references only.",
+  "schema": "ASTRA_POSTRESULT_DESCRIPTIVE_DIAGNOSTIC_REVIEW_V1",
+  "scientific_limits": [
+    "Post-outcome selected subset: 51 trajectories and2206 generations are not independent population samples. Nine tasks may contribute to both contrasts, so11 comparisons are not11 independent tasks.",
+    "Failure traces all50 steps while success traces shorter; repetition detection opportunities are unequal. Do not attribute failure to repetition or compare rates as efficacy evidence.",
+    "Two-parent pick-two coverage per training arm is limited descriptively, but all arms includingP0 failed the8 eval tasks; this does not identify limited training coverage as the cause.",
+    "Same6240 supervised tokens does not equal same input/computational exposure; source/task/state distribution and label provenance vary jointly.",
+    "No recovery-specific intervention was tested and no selector, memory, new training or replay is justified by this diagnostic alone."
+  ]
+}

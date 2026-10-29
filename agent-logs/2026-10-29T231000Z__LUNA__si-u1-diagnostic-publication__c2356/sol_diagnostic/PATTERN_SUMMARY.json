@@ -1,0 +1,108 @@
+{
+  "case_count": 17,
+  "created_utc": "2026-10-29T22:26:14.021180+00:00",
+  "definitions": {
+    "diagnostic_unit": "Selected outcome-conditioned cases only; no estimate of population frequency.",
+    "identical_2_to_4_step_block_repeated": "At least one adjacent repetition of an exactly matching command-string block of length 2,3 or 4; may be purposeful and is not proof of a loop or cause.",
+    "same_observation_and_action_map_adjacent": "Adjacent identical observation text and available-action list, not full prompt or hidden state.",
+    "token_cap": "Model output flagged token_cap_reached, not itself invalid parse."
+  },
+  "disagreement_observation_map_comparisons": {
+    "C_vs_A_disagreement": 4,
+    "C_vs_A_same_observation_map_at_first_command_difference": 4,
+    "C_vs_B_disagreement": 7,
+    "C_vs_B_same_observation_map_at_first_command_difference": 7
+  },
+  "groups": {
+    "A_failure": {
+      "done_true_reward_zero": 14,
+      "episodes": 14,
+      "identical_2_to_4_step_block_repeated": 11,
+      "one_or_more_incomplete_output": 0,
+      "one_or_more_token_cap": 0,
+      "same_observation_and_action_map_adjacent": 0,
+      "selected_parser_actions": 700,
+      "steps_50": 14,
+      "unselected_parser_actions": 0
+    },
+    "A_success": {
+      "done_true_reward_zero": 0,
+      "episodes": 3,
+      "identical_2_to_4_step_block_repeated": 0,
+      "one_or_more_incomplete_output": 0,
+      "one_or_more_token_cap": 0,
+      "same_observation_and_action_map_adjacent": 0,
+      "selected_parser_actions": 79,
+      "steps_50": 0,
+      "unselected_parser_actions": 0
+    },
+    "B_failure": {
+      "done_true_reward_zero": 11,
+      "episodes": 11,
+      "identical_2_to_4_step_block_repeated": 5,
+      "one_or_more_incomplete_output": 0,
+      "one_or_more_token_cap": 0,
+      "same_observation_and_action_map_adjacent": 0,
+      "selected_parser_actions": 550,
+      "steps_50": 11,
+      "unselected_parser_actions": 0
+    },
+    "B_success": {
+      "done_true_reward_zero": 0,
+      "episodes": 6,
+      "identical_2_to_4_step_block_repeated": 0,
+      "one_or_more_incomplete_output": 0,
+      "one_or_more_token_cap": 0,
+      "same_observation_and_action_map_adjacent": 0,
+      "selected_parser_actions": 188,
+      "steps_50": 0,
+      "unselected_parser_actions": 0
+    },
+    "C_failure": {
+      "done_true_reward_zero": 12,
+      "episodes": 12,
+      "identical_2_to_4_step_block_repeated": 11,
+      "one_or_more_incomplete_output": 0,
+      "one_or_more_token_cap": 0,
+      "same_observation_and_action_map_adjacent": 0,
+      "selected_parser_actions": 600,
+      "steps_50": 12,
+      "unselected_parser_actions": 0
+    },
+    "C_success": {
+      "done_true_reward_zero": 0,
+      "episodes": 5,
+      "identical_2_to_4_step_block_repeated": 0,
+      "one_or_more_incomplete_output": 0,
+      "one_or_more_token_cap": 0,
+      "same_observation_and_action_map_adjacent": 0,
+      "selected_parser_actions": 89,
+      "steps_50": 0,
+      "unselected_parser_actions": 0
+    },
+    "pick_two_A": {
+      "done_true_reward_zero": 8,
+      "episodes": 8,
+      "identical_2_to_4_step_block_repeated": 6,
+      "selected_parser_actions": 400,
+      "steps_50": 8
+    },
+    "pick_two_B": {
+      "done_true_reward_zero": 8,
+      "episodes": 8,
+      "identical_2_to_4_step_block_repeated": 5,
+      "selected_parser_actions": 400,
+      "steps_50": 8
+    },
+    "pick_two_C": {
+      "done_true_reward_zero": 8,
+      "episodes": 8,
+      "identical_2_to_4_step_block_repeated": 7,
+      "selected_parser_actions": 400,
+      "steps_50": 8
+    }
+  },
+  "private_case_table_sha256": "457ea036370d49ad6b9d4cc959225af0737b043ad3a50a15bcd348d81be42d6f",
+  "schema": "SI_U1_SELECTED_CASE_PATTERN_SUMMARY_V1",
+  "unreviewed_single_analyst": true
+}

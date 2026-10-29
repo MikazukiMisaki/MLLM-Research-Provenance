@@ -1,0 +1,51 @@
+{
+  "arm_counts": {
+    "A": {
+      "failure_terminal": 14,
+      "success_terminal": 3
+    },
+    "B": {
+      "failure_terminal": 11,
+      "success_terminal": 6
+    },
+    "C": {
+      "failure_terminal": 12,
+      "success_terminal": 5
+    }
+  },
+  "created_utc": "2026-10-29T22:25:49.789286+00:00",
+  "definitions": {
+    "consecutive_identical_command_ge3": "At least three consecutive identical executed command strings; does not establish a harmful loop.",
+    "consecutive_same_observation_and_map": "At least one adjacent pair of steps with identical observable text and available-action list; excludes prior history and is not full prompt equality.",
+    "diagnostic_cause": "UNKNOWN unless separately supported; outcome and repeated patterns are descriptive only."
+  },
+  "input_sha256": {
+    "FINAL_PILOT82_PAIRED_ANALYSIS_C2356.json": "4a3ea016d4c06022980482ac9dbc58155a68bbe20fbc723a68ce49c7c345ea9b",
+    "events.jsonl": "6146bb79faeb572c3674ff9ba907fac4be25eff4c2bd161a3d7cf3156d81c96e",
+    "manifest.json": "7d1b61a9054f99a40fe895c7bb292a81e7a578bbd5fc6bf0777157676213e338",
+    "report.json": "a85369db004a81533caa73a8cb6fdabed449d112027190c0d1727263e00eebf1"
+  },
+  "limitations": [
+    "Selection is outcome-informed, post-hoc and not a randomized or confirmatory analysis.",
+    "Single analyst; full independent case review pending.",
+    "No inference that observed repetition caused failure or that training source caused a difference.",
+    "Remainder of 82-task cohort is not the denominator for selected-case summaries."
+  ],
+  "no_models_environment_training_or_scientific_reexecution": true,
+  "pair_directions": {
+    "C_vs_A_loss": 1,
+    "C_vs_A_win": 3,
+    "C_vs_B_loss": 4,
+    "C_vs_B_win": 3
+  },
+  "run_id": "c2356bbda2b44159a333e7c9d24fc2d4",
+  "schema": "SI_U1_POSTRESULT_DESCRIPTIVE_DIAGNOSTIC_V1",
+  "selected_episode_count": 51,
+  "selection_counts": {
+    "C_vs_A_disagreement_tasks": 4,
+    "C_vs_B_disagreement_tasks": 7,
+    "both_comparisons_disagreement": 2,
+    "pick_two_tasks": 8,
+    "selected_union": 17
+  }
+}
