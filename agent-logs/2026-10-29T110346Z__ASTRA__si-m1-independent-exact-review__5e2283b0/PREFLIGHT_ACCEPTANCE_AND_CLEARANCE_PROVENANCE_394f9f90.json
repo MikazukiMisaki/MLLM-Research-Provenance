@@ -1,0 +1,63 @@
+{
+  "decision": "ACCEPT_ZERO_SCIENCE_PREFLIGHT_AND_RELEASE_ONE_PROBE",
+  "reviewer_identity": "Current Astra collaboration agent /root/astra_exact_review, independent resumed review; not the historical original Astra thread",
+  "authorization_sha256": "fbe05c06d52b30f8c473978c1b5891a38e72f5269738bf8690ae3e130cb41706",
+  "source_sha": "dfa382ad0ab604746690e96537dc4009cfeeefd0",
+  "preflight_receipt_sha256": "328f5a859982d37b00345d952b8c1167dc49161de027a75ec9f1953905f0f165",
+  "preflight_exit_sha256": "8e53d174f21bbb1571b8de76db09816a7a310fbaa7441d248d98d5a825b39e06",
+  "preflight_start_sha256": "1365ad22b6e8968c9530edf5b44cb6901af204c221e79c72a55f62d79278954a",
+  "preflight_dispatch_claim_sha256": "bb0cd65adfa89ce038f5f78b0ca9b5099f79639af0821a769659c64f24bb526d",
+  "preflight_returncode": 0,
+  "preflight_side_effects": {
+    "CUDA": 0,
+    "env_construct": 0,
+    "generation": 0,
+    "model_load": 0,
+    "reset": 0,
+    "step": 0,
+    "tokenizer": 0
+  },
+  "independent_binding_reconstruction": "Actual read_source of eight immutable accepted source artifacts plus Permit.binding; exact equality with preflight receipt and stdout",
+  "case_order": [
+    [
+      "C088",
+      11
+    ],
+    [
+      "C091",
+      8
+    ],
+    [
+      "C093",
+      16
+    ],
+    [
+      "C094",
+      12
+    ],
+    [
+      "C095",
+      8
+    ]
+  ],
+  "clearance_path": "/home/lizening/research-notes/agent-logs/2026-10-29T110346Z__ASTRA__si-m1-independent-exact-review__5e2283b0/ONE_LIVE_CLEARANCE_394f9f90869dd8505844caa7ea1a7e9f.json",
+  "clearance_sha256": "dc77fbaf5056b81c8887c8346cc1ac01ce825d7edb89a7511de13f2497c6ecf3",
+  "accepted_scope": "One frozen five-case single-step mechanism probe only: no P0 suffix, fresh CONTINUE, retries, extra cases, training or held-out claims. Ten generations /65 envops /280 output /81920 input /8192 per-call /0.5 allocated-device-hour caps unchanged.",
+  "failure_rule": "Any integrity/resource/unknown-cost/cleanup failure, missing receipts or cgroup/session termination: preserve evidence, stop, no retry or replacement output path.",
+  "detach_limitation": "nohup/setsid only established launch-shell survival; no App/container/cgroup teardown guarantee; reviewed run_once has no independent cleanup guarantee if wrapper abruptly dies.",
+  "resource_ruling": "Most recent read-only GPU UUID matched authorization; free45390MiB util0; live guard must revalidate actual allocator/free thresholds. Not exclusive GPU, whole-process VRAM cap or NVML-to-PID proof.",
+  "launch_artifacts_absent_at_signing": [
+    "/tmp/si_m1_uid-2000_run-394f9f90869dd8505844caa7ea1a7e9f_35jwli1v/output",
+    "/tmp/si_m1_uid-2000_run-394f9f90869dd8505844caa7ea1a7e9f_35jwli1v/output.launch_claim.json",
+    "/tmp/si_m1_uid-2000_run-394f9f90869dd8505844caa7ea1a7e9f_35jwli1v/control/live_dispatch_claim.json",
+    "/tmp/si_m1_uid-2000_run-394f9f90869dd8505844caa7ea1a7e9f_35jwli1v/control/live_invocation_start.json",
+    "/tmp/si_m1_uid-2000_run-394f9f90869dd8505844caa7ea1a7e9f_35jwli1v/control/live_invocation_exit.json",
+    "/tmp/si_m1_uid-2000_run-394f9f90869dd8505844caa7ea1a7e9f_35jwli1v/control/live.stdout",
+    "/tmp/si_m1_uid-2000_run-394f9f90869dd8505844caa7ea1a7e9f_35jwli1v/control/live.stderr"
+  ],
+  "time_window": {
+    "not_before_utc": "2026-10-29T11:12:28.298195Z",
+    "expires_utc": "2026-10-29T11:57:28.298195Z"
+  },
+  "actions_performed": "Read-only receipts/source/binding/process-path/GPU observations and issuance of this unique clearance only; no preflight rerun, wrapper launch, CUDA/model/tokenizer/environment execution."
+}

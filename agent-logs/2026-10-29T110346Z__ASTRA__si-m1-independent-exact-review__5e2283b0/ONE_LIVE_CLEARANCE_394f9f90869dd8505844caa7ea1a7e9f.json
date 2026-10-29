@@ -1,0 +1,62 @@
+{
+  "argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-I",
+    "/home/lizening/wt-si-five-case-probe/scripts/run_si_m1_probe.py",
+    "--live",
+    "--authorization",
+    "/home/lizening/wt-si-five-case-probe/configs/local/si_m1_authorization_e37046d42289de2898d82bddd04b5f14.json",
+    "--authorization-sha256",
+    "fbe05c06d52b30f8c473978c1b5891a38e72f5269738bf8690ae3e130cb41706",
+    "--proposal",
+    "/home/lizening/wt-si-five-case-probe/configs/local/si_m1_single_step_proposal_draft.json",
+    "--clearance",
+    "/home/lizening/research-notes/agent-logs/2026-10-29T110346Z__ASTRA__si-m1-independent-exact-review__5e2283b0/ONE_LIVE_CLEARANCE_394f9f90869dd8505844caa7ea1a7e9f.json",
+    "--clearance-sha256",
+    "@CLEARANCE_SHA256@"
+  ],
+  "binding": {
+    "authorization_sha256": "fbe05c06d52b30f8c473978c1b5891a38e72f5269738bf8690ae3e130cb41706",
+    "cases_sha256": "b9c41266ae153600571a139e1ae14128ff28417114b68102fb51b854a94be864",
+    "ceilings": {
+      "device_hours": 0.5,
+      "environment_operations": 65,
+      "generated_tokens": 280,
+      "generations": 10,
+      "input_tokens": 81920,
+      "per_call_input": 8192
+    },
+    "contract_sha256": "a0a17e9f28217e10d6913a9de1050b52be68be9c0b6c6ea27f627e820c1755ae",
+    "design_sha256": "c1c8e3eca3b812f633c4cb2531533fc5a2785bc3870ae5c7f5095deb5f4abeb2",
+    "environment_sha256": "a4ec1864fac27a73c0142494dc9f9228b3a5bdd1d1693944795e047f80ecee8b",
+    "evidence_class": "live_single_step_probe",
+    "execution_uid": 2000,
+    "output_path": "/tmp/si_m1_uid-2000_run-394f9f90869dd8505844caa7ea1a7e9f_35jwli1v/output",
+    "proposal_sha256": "caf6325dcb2498508c5988588210d8d074895bee95443a0f15b3755aed0d15c7",
+    "resource_policy": {
+      "NVML_to_local_PID_mapping": "UNPROVEN_NOT_ASSERTED",
+      "contract_sha256": "d908573f0c6d9518aec0a9b6b0a48c24648a26c3c708652b185a7cfe7b7e2489",
+      "device_wide_delta_attribution": false,
+      "exclusive_gpu": false,
+      "offline_evidence_validation_behavior_changed": true,
+      "policy": "SHARED_CONTAINER_CUDA_V1",
+      "proposal_sha256": "6998fe2ffcfd583741cd12ecf6b08638ed0e5da16d671f761a0af1df59c4dc5a",
+      "scientific_execution_behavior_changed": true,
+      "source_treatment_semantics_changed": false,
+      "whole_process_vram_cap": false
+    },
+    "run_id": "394f9f90869dd8505844caa7ea1a7e9f",
+    "schema": "SI_M1_BINDING_V1",
+    "source_sha": "dfa382ad0ab604746690e96537dc4009cfeeefd0"
+  },
+  "decision": "RELEASE_ONE_PROBE",
+  "expires_utc": "2026-10-29T11:57:28.298195Z",
+  "maximum_launches": 1,
+  "not_before_utc": "2026-10-29T11:12:28.298195Z",
+  "preflight_receipt": {
+    "path": "/tmp/si_m1_uid-2000_run-394f9f90869dd8505844caa7ea1a7e9f_35jwli1v/control/preflight_receipt.json",
+    "sha256": "328f5a859982d37b00345d952b8c1167dc49161de027a75ec9f1953905f0f165"
+  },
+  "retry_authorized": false,
+  "schema": "SI_M1_CLEARANCE_V1"
+}

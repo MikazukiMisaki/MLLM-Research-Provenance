@@ -1,0 +1,31 @@
+{
+  "command": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_si_m1_probe.py",
+    "tests/test_si_m1_audit.py",
+    "tests/test_si_m1_gate.py",
+    "tests/test_si_m1_supervisor.py",
+    "tests/test_si_m1_return_boundaries.py",
+    "tests/test_si_m1_resource.py",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp=/tmp/si_m1_resumed_tests_074qkihu/fixtures",
+    "--junitxml=/home/lizening/research-notes/agent-logs/2026-10-29T110216Z__SOL__si-m1-resumed-independent-review__dfa382/focused.xml"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 36.07920506503433,
+  "head": "dfa382ad0ab604746690e96537dc4009cfeeefd0",
+  "post_status": "",
+  "environment_overrides": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "PYTHONPATH": "/home/lizening/wt-si-five-case-probe/src:/home/lizening/wt-si-five-case-probe/tests"
+  },
+  "test_data": "CPU synthetic software fixtures only",
+  "fixtures": "/tmp/si_m1_resumed_tests_074qkihu"
+}
