@@ -1,0 +1,41 @@
+{
+  "schema": "ASTRA_ENGINEERING_PREFLIGHT_INDEPENDENT_REVIEW_V1",
+  "decision": "PASS_PREFLIGHT_FOR_ONE_SEPARATELY_CLEARED_ENGINEERING_RUN",
+  "checked_utc": "2026-10-29T12:29:59.342975+00:00",
+  "checks": {
+    "auth_bytes": true,
+    "receipt_bytes": true,
+    "stdout_bytes": true,
+    "stderr_bytes": true,
+    "stdout_matches_receipt": true,
+    "auth_environment": true,
+    "exit0_no_timeout": true,
+    "clean_exact_source": true,
+    "zero_effect_counts": true,
+    "unique_unused_output": true,
+    "private_parent": true,
+    "current_window": true,
+    "enough_window_for1200": true,
+    "exact_engineering_scope": true,
+    "review_plan_protocol_current": true,
+    "interpreter_bytes": true,
+    "runtime_digest": true
+  },
+  "authorization_sha256": "d2dd951b2b139d5859d22083afb4cee627a075a011c811e2914bf9e8910b2099",
+  "preflight_receipt_sha256": "788c2e51546ae0ff3dee657f8058e1735708a38a84e65b1b022017dcfe7f33f0",
+  "process_receipt_sha256": "cc3722225dfa68660fed4cf74cb66d3cc78ec1223582e442c48fc15d6799d273",
+  "source_sha": "15e2e62ec5be4817622be5538ee2b657faae7928",
+  "effects_of_this_review": "read-only filesystem/hash/git inspection; no preflight/worker/model/CUDA/environment execution",
+  "limitations": [
+    "process receipt supplied by coordinator; verified against stdout and exact reviewed preflight code",
+    "current GPU free memory not newly sampled by reviewer; guarded worker must enforce28/24/2GiB and1200s",
+    "seven package trees checked by real preflight; worker must recheck imports before loading",
+    "this is not permission for scientific training or evaluation"
+  ],
+  "release_conditions": [
+    "only original run_id/output with one-shot claim",
+    "no retry, no cap transfer, no data/task text",
+    "separate hash-bound clearance and real supervisor mandatory",
+    "any failed resource/identity/deadline/cleanup => stop"
+  ]
+}

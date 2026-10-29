@@ -1,0 +1,202 @@
+{
+  "archive_bytes": 10852,
+  "archive_member_hashes_verified": true,
+  "archive_members": {
+    "authority/engineering_auth.json": {
+      "bytes": 2911,
+      "sha256": "d2dd951b2b139d5859d22083afb4cee627a075a011c811e2914bf9e8910b2099"
+    },
+    "authority/independent_review.json": {
+      "bytes": 514,
+      "sha256": "248c034879e93f7870383a2a149ebd0ddeffda87221b1a2bd56917213b626699"
+    },
+    "luna/LAUNCHER_EXIT.json": {
+      "bytes": 1146,
+      "sha256": "7bacc054de08b18b7249c040eb698f2cc7caf3200e2441291bd18c48e4f08bb6"
+    },
+    "luna/LAUNCHER_START.json": {
+      "bytes": 798,
+      "sha256": "85475f580ddfd448c4d7bad53100468ee74d247369d9e58dd7536af4b8119b41"
+    },
+    "luna/ONE_SHOT_DISPATCH.json": {
+      "bytes": 2501,
+      "sha256": "aed6b1105d1f0281271798aaf1dc8632ccd1af0614e2bf5197d8d6807522996f"
+    },
+    "luna/gpu_samples.jsonl": {
+      "bytes": 3179,
+      "sha256": "b57452c31b84c25b314106a9e41607e4d15f65aa1f74882eb7f378cbb126cce1"
+    },
+    "luna/launch_once.py": {
+      "bytes": 6322,
+      "sha256": "d8174fa4a197a1641cd807be6cf9400668cad5bc1aaf41eb21d27c9b19ed27b6"
+    },
+    "luna/launcher.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "luna/launcher.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preflight/ENGINEERING_CLEARANCE_ONE_SHOT.json": {
+      "bytes": 1116,
+      "sha256": "08455a74a1c4980baeed1160cd2ccfed17859051d5358c18d518cc3d05f874ae"
+    },
+    "preflight/engineering_preflight.json": {
+      "bytes": 1106,
+      "sha256": "788c2e51546ae0ff3dee657f8058e1735708a38a84e65b1b022017dcfe7f33f0"
+    },
+    "preflight/preflight.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preflight/preflight.stdout": {
+      "bytes": 1145,
+      "sha256": "4188c991b9e812c36136db478b34f042495131ed4d442a8ff07b91860d672e4f"
+    },
+    "preflight/preflight_process_receipt.json": {
+      "bytes": 1992,
+      "sha256": "cc3722225dfa68660fed4cf74cb66d3cc78ec1223582e442c48fc15d6799d273"
+    },
+    "run/engineering_assessment.json": {
+      "bytes": 495,
+      "sha256": "7388659581dba16c3f8b84be31ec8da79a5133a9cdd860229ac2e58ba40a38fa"
+    },
+    "run/engineering_events.jsonl": {
+      "bytes": 11533,
+      "sha256": "7160c5de52045704e2aafe9fb00b145e042d7bc8367bf90a8889b0140f1a7501"
+    },
+    "run/engineering_result.json": {
+      "bytes": 882,
+      "sha256": "fc913135fa6c21f14ebc22d095075181e4ea7f86349c60de90bdc4ff59607cf9"
+    },
+    "run/launch_context.json": {
+      "bytes": 1071,
+      "sha256": "e20d805c59a1e06a539b817df781cfd52278de12e020735b88ff405a8d3b6bb8"
+    },
+    "run/resource.jsonl": {
+      "bytes": 20434,
+      "sha256": "58c9b12e0a208fe57f80a9705863cc54a6ed7abdf2a3df1c7eb5bd27965e6c10"
+    },
+    "run/runtime_import_receipt.json": {
+      "bytes": 3239,
+      "sha256": "2b43a20923bff1f67399e7986cb535c63a6897cd25347077f87a77cb426749fe"
+    },
+    "run/supervisor_exit.json": {
+      "bytes": 1666,
+      "sha256": "b9c3559966da806b2f25effa4a1478abbe9c30333a490983036f109c48f977ba"
+    },
+    "run/worker.stderr": {
+      "bytes": 589,
+      "sha256": "1557a85213a7ec60360aed2f32bd1fbcac343f70add6ec6a3c9fc7926f9d268e"
+    },
+    "run/worker.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "run/worker_start.json": {
+      "bytes": 920,
+      "sha256": "cc9c9822f15ec303bfcb3510db665f795d2ff2bac6176613c84f09be6f0ec516"
+    },
+    "run_claim.json": {
+      "bytes": 937,
+      "sha256": "d893ab29828d76103c8894e28c94a8e3f3373983d36529a82590e4a1bb7d6f7d"
+    }
+  },
+  "archive_sha256": "e7bb4d5f1a7a67a54bed120e691fe6de549a51d30c79959b5c41256572f653b2",
+  "assessment": {
+    "evidence_class": "engineering_live",
+    "extrapolation": "all measured non-step supervisor elapsed plus 78 times slower observed complete optimizer step",
+    "fit_multiplier": 1.5,
+    "future_shared_gpu_performance_guaranteed": false,
+    "projection_seconds": null,
+    "projection_valid_for_real_device": false,
+    "schema": "SI_CONTINUATION_ENGINEERING_ASSESSMENT_V1",
+    "science_allocation_seconds": 5400,
+    "scientific_checkpoint_eligible": false,
+    "scope": "ENGINEERING_ONLY_NOT_SCIENTIFIC_RESULT",
+    "status": "STOP_OR_INCONCLUSIVE"
+  },
+  "cleanup_established": true,
+  "duration_seconds": 117.84366761054844,
+  "engineering_allocation_cap_seconds": 1200,
+  "engineering_device_hours": 0.03273435211404123,
+  "environment_operations": 0,
+  "event_counts": {
+    "engineering_failed": 1,
+    "microbatch_completed": 32,
+    "microbatch_started": 32,
+    "model_load_completed": 1,
+    "model_load_started": 1,
+    "optimizer_step_completed": 2,
+    "optimizer_step_started": 2,
+    "trial_deleted": 1,
+    "trial_save_started": 1,
+    "trial_saved": 1
+  },
+  "launcher_rc": 1,
+  "min_device_free_bytes": 24565317632,
+  "model_generation_calls": 0,
+  "no_scientific_training_or_evaluation": true,
+  "original_pre_post_hashes_identical": true,
+  "peak_allocated_bytes": 22262761472,
+  "peak_reserved_bytes": 22676504576,
+  "postrun_model_tree": {
+    "bytes": 16397431693,
+    "file_count": 12,
+    "sha256": "0239d34c87594c9d86c2fe5e81e515fa871809fa18b9ed67856fd0dc8e19c00b"
+  },
+  "postrun_p0_tree": {
+    "bytes": 365138109,
+    "file_count": 11,
+    "sha256": "6b13612c33d96ae9bbda041c08d33e0e1888406c4782670e90c8ebd27467b5a5"
+  },
+  "postrun_tree_hashes_match": true,
+  "recorded_utc": "2026-10-29T12:33:42.840208+00:00",
+  "resource_ooms_max": 0,
+  "resource_retries_max": 0,
+  "resource_rows": 39,
+  "retry_authorized": false,
+  "run_id": "342daf138bc741188ce18550a05f97ed",
+  "schema": "SI_U1_LUNA_ENGINEERING_FAILURE_AUDIT_V1",
+  "scientific_cost_base_unchanged": {
+    "environment_operations": 10068,
+    "generations": 7111
+  },
+  "shared_gpu_devicewide_measurements_not_attributed_to_a_pid": true,
+  "source_sha": "15e2e62ec5be4817622be5538ee2b657faae7928",
+  "status": "FAILED_STOP_NO_RETRY",
+  "supervisor_error": null,
+  "supervisor_exit_rc": 1,
+  "timeout": false,
+  "worker_result": {
+    "counts": {
+      "input_tokens": 65536,
+      "microbatches_completed": 32,
+      "microbatches_started": 32,
+      "optimizer_steps_completed": 2,
+      "optimizer_steps_started": 2,
+      "supervised_tokens": 160,
+      "trial_saves_completed": 1,
+      "trial_saves_started": 1
+    },
+    "error": "ContractError: PyTorch allocations remain after engineering cleanup",
+    "evidence_class": "engineering_live",
+    "load_seconds": 5.181811180897057,
+    "optimizer_step_seconds": [
+      33.862798548303545,
+      33.71576281543821
+    ],
+    "post_cleanup_allocated_bytes": 17956864,
+    "post_cleanup_reserved_bytes": 121634816,
+    "retry_authorized": false,
+    "save_hash_delete_seconds": 0.7601418271660805,
+    "schema": "SI_CONTINUATION_ENGINEERING_RESULT_V1",
+    "scientific_checkpoint_eligible": false,
+    "scope": "SYNTHETIC_TOKEN_ENGINEERING_ONLY",
+    "status": "FAILED",
+    "trial_adapter_bytes": 349250053,
+    "trial_adapter_deleted": true,
+    "trial_adapter_sha256": "814ac9b2670f19be00bf36924c5bc72cbd324572544efba8960a858c36c9ad16"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "schema": "ASTRA_REAL_ENGINEERING_FAILURE_AUDIT_V1",
+  "decision": "FAILED_NO_SCIENTIFIC_PASS_NO_AUTOMATIC_RETRY",
+  "evidence_class": "READ_ONLY_REAL_ENGINEERING_RECEIPTS",
+  "run_path": "/home/lizening/research-notes/agent-logs/2026-10-29T122500Z__SOL__si-training-engineering-draft__15e2e62/run_parent/engineering_run_342daf138bc741188ce18550a05f97ed",
+  "source_sha": "15e2e62ec5be4817622be5538ee2b657faae7928",
+  "hashes_verified": {
+    "result": "fc913135fa6c21f14ebc22d095075181e4ea7f86349c60de90bdc4ff59607cf9",
+    "resource": "58c9b12e0a208fe57f80a9705863cc54a6ed7abdf2a3df1c7eb5bd27965e6c10",
+    "runtime_import": "2b43a20923bff1f67399e7986cb535c63a6897cd25347077f87a77cb426749fe",
+    "supervisor_exit": "b9c3559966da806b2f25effa4a1478abbe9c30333a490983036f109c48f977ba",
+    "events": "7160c5de52045704e2aafe9fb00b145e042d7bc8367bf90a8889b0140f1a7501"
+  },
+  "authentic_returncode": 1,
+  "elapsed_allocated_seconds": 117.84366761054844,
+  "allocated_A40_hours": 0.03273435211404123,
+  "deadline_triggered": false,
+  "process_cleanup_established": true,
+  "worker_zero_allocator_cleanup_passed": false,
+  "remaining_allocated_bytes": 17956864,
+  "remaining_reserved_bytes": 121634816,
+  "completed_counts": {
+    "input_tokens": 65536,
+    "microbatches_completed": 32,
+    "microbatches_started": 32,
+    "optimizer_steps_completed": 2,
+    "optimizer_steps_started": 2,
+    "supervised_tokens": 160,
+    "trial_saves_completed": 1,
+    "trial_saves_started": 1
+  },
+  "event_counts": {
+    "model_load_started": 1,
+    "model_load_completed": 1,
+    "microbatch_started": 32,
+    "microbatch_completed": 32,
+    "optimizer_step_started": 2,
+    "optimizer_step_completed": 2,
+    "trial_save_started": 1,
+    "trial_saved": 1,
+    "trial_deleted": 1,
+    "engineering_failed": 1
+  },
+  "trial_artifact_removed": true,
+  "resource_rows": 39,
+  "resource_all_pass": true,
+  "max_allocated_peak": 22262761472,
+  "max_reserved_peak": 22676504576,
+  "min_global_free": 24565317632,
+  "max_ooms": 0,
+  "max_retries": 0,
+  "step_seconds": [
+    33.862798548303545,
+    33.71576281543821
+  ],
+  "diagnostic_only_conservative_projection_seconds": 4037.3450895217247,
+  "projection_is_not_fit_pass": true,
+  "root_cause": "UNPROVEN: parameter/buffer/reference/backend workspace allocation not distinguished by present receipts",
+  "local_static_candidate": "pinned torch exposes CUDAContextLight.h clearCublasWorkspaces and torch._C._cuda_clearCublasWorkspaces; no assertion that these allocations are cuBLAS",
+  "minimum_next_software_work": [
+    "track CPU parameter AND buffer weakrefs",
+    "review pinned CUDA workspace cleanup API and preserve before/after allocation receipts",
+    "keep exact zero-allocation criterion and failure record; do not weaken threshold"
+  ],
+  "budget": {
+    "original_training_engineering_cap_seconds": 1200,
+    "spent_seconds": 117.84366761054844,
+    "arithmetical_unspent_seconds": 1082.1563323894516,
+    "unused_is_not_retry_authority": true,
+    "evaluation_engineering_reserved_seconds": 600,
+    "retry_requires_explicit_prospective_amendment": true,
+    "if_amended_reuse_original_training_cap_max_new_seconds": 1082.1563323894516
+  },
+  "scientific_runs": 0
+}
