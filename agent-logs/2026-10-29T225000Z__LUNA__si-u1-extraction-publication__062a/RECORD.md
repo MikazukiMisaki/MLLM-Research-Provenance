@@ -1,0 +1,3 @@
+# SI-U1 offline extraction evidence publication
+
+Private evidence: the first authorized extraction failed before full audit and statistics; the later exact 062a offline extraction succeeded after the accepted post-evaluation technical supplement. The original preregistration was not changed and absence of previous human outcome access is not proven. Both attempts, approval, independent reviews, frozen statistics, exact result and sources are retained. No model, GPU, ALFWorld or evaluation rerun occurred. The result contains private task identifiers. Scientific interpretation awaits independent review.

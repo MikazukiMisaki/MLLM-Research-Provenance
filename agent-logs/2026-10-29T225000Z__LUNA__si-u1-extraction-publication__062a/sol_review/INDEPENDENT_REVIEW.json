@@ -1,0 +1,41 @@
+{
+  "bound_artifact_sha256": {
+    "diagnosis": "c21d94d1ba8257d6fa96e850e9e335fbcb26cb5f0bf6860cf929b6d3d254ea47",
+    "extractor": "336d4c95c51df2bac97fac13bdc91791a64afce5c68a64cdee1c48f3b03648e9",
+    "failure_after": "2a37e24c29eabb4eee402ec9484e84280dff0e4c608b76fe9a93579c1dac21c9",
+    "failure_before": "2a37e24c29eabb4eee402ec9484e84280dff0e4c608b76fe9a93579c1dac21c9",
+    "failure_receipt": "65450aa4b9c10574d0c1dd463ee33c12b7950c889845b26efc4bdf6b955e1241",
+    "old_approval": "6859dd5f7c6bb88ba8c749e882579daa3c472963f97591b98883116e00335e7d",
+    "plan": "7643900c2b417e9d2497d8acb195f6754ebe04f3f2c6242625948874100dc23f",
+    "review": "3a7b2bd851440711773fb724df4dd1b8f9325d57db99e91a576daf849c423e20",
+    "spec": "6d5e1625a28c41651756de561d8a141df42d4398db3dcc9d0c9e6588b4de318d",
+    "supplement": "5848521f3908c1bdf42cc988777dc562539f4606fefece49c0c1ef904fe00ceb"
+  },
+  "conditions": [
+    "Root and another independent reviewer accept exact supplement; separate new approval must bind the unchanged spec and stats plus new extractor hash.",
+    "Preserve original plan, prior approval, failed execution record and outputs; explicitly report the post-evaluation pre-disclosure amendment and actual byte-read caveat.",
+    "One offline extraction with immutable evidence capture, no retries; do not release result before full production auditor and frozen statistics succeed."
+  ],
+  "decision": "TECHNICAL_SUPPLEMENT_ACCEPTED_CONDITIONAL_NOT_EXECUTION_APPROVAL",
+  "delta": "Adds strict tokenizer snapshot-child binding via production file_binding and replaces precisely two pre/post tokenizer calls; rest of extractor unchanged. Generic file binding remains strict non-symlink. Git diff and tests inspected. Production target must be a file with approved sha256; parent snapshot identity and filename binding apply; symlink target location is not independently restricted beyond content.",
+  "evaluator_commit": "8532275932dabddc498c23a2b6d9a045647542f0",
+  "failure": "Authentic exit 1 before tokenizer construction, full auditor and statistics. Prior authenticate_run did stream the raw event ledger and report for SHA256 integrity; it did not parse or disclose scientific outcomes in that path. Do not describe this as no byte reads. Original before and after inventories have identical hashes.",
+  "frozen_code_commit": "062a757646c5403f71377ee74ae12291bbcf3e0e",
+  "frozen_code_sha256": "336d4c95c51df2bac97fac13bdc91791a64afce5c68a64cdee1c48f3b03648e9",
+  "frozen_schedule_sha256": "c352a0d708b910bb3703c63009aed3a800b5ba4d40f95021f3bd30db0e4823cd",
+  "frozen_statistics_sha256": "dc65a06fda495517bc76357022a90a0622d1b17c11ee101e19d958aebb5e3251",
+  "limitations": [
+    "Post hoc technical supplement followed evaluation and failed extraction; it was not part of the original preregistration.",
+    "No released result is known from the provided receipts, but absence of any prior human access or outcome disclosure cannot be proved from byte hashes and subprocess receipt alone.",
+    "Before/after equality proves recorded endpoints, not absence of transient changes between endpoints.",
+    "Acceptance does not establish empirical result validity and does not authorize extraction."
+  ],
+  "old_approval_authorizes_new_extractor": false,
+  "original_plan_amended_retroactively": false,
+  "original_plan_and_old_approval_bind_old_extractor": true,
+  "reviewed_at_utc": "2026-10-29T22:17:19.771495+00:00",
+  "schema": "SI_U1_EXTRACTOR_INDEPENDENT_TECHNICAL_REVIEW_V1",
+  "scope": "Read-only independent code and metadata audit plus entirely synthetic CPU tests; no live extraction, scientific outcome viewing, model or ALFWorld",
+  "tests": "Independent CPU synthetic pytest: 71 passed, authentic exit 0; recorded in synthetic_pytest.log. Synthetic uses fake generation/environment and fake tokenizer, not the live run.",
+  "tokenizer_before_after_byte_and_symlink_equal": true
+}

@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/lizening/wt-si-u1-result-extractor/si_u1_extract.py", line 185, in <module>
+    if __name__=='__main__':main()
+  File "/home/lizening/wt-si-u1-result-extractor/si_u1_extract.py", line 180, in main
+    s=check_approval(a.spec,a.spec_sha256,a.approval,a.approval_sha256);result=execute(s,a.approval_sha256)
+  File "/home/lizening/wt-si-u1-result-extractor/si_u1_extract.py", line 154, in execute
+    for f in token_files:need(Path(f['path']).parent==base,'tokenizer path');binding(f)
+  File "/home/lizening/wt-si-u1-result-extractor/si_u1_extract.py", line 41, in binding
+    p=Path(x['path']);need(p.is_absolute() and p.is_file() and not p.is_symlink() and sha(p)==x['sha256'],'bound byte mismatch')
+  File "/home/lizening/wt-si-u1-result-extractor/si_u1_extract.py", line 21, in need
+    if not ok: raise Rejected(message)
+__main__.Rejected: bound byte mismatch
