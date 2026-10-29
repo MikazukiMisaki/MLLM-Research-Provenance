@@ -1,0 +1,2762 @@
+diff --git a/docs/si_continuation_primitives.md b/docs/si_continuation_primitives.md
+new file mode 100644
+index 0000000..0258517
+--- /dev/null
++++ b/docs/si_continuation_primitives.md
+@@ -0,0 +1,97 @@
++# P0 continuation primitives: engineering interface
++
++This code is a candidate building block, not an experiment protocol, actual
++preflight receipt, or launch clearance. No data, step count, split, optimizer
++configuration, device budget, or model is selected by this module. The
++independent protocol reviewer must approve those separately.
++
++An arm manifest (`SI_CONTINUATION_DATA_V1`) binds `arm` B or C, the base and
++P0 adapter tree hashes, the exact `training_config`, and a JSONL dataset hash.
++Its `sample_schedule` lists every dataset sample exactly once with its explicit
++`sample_id`, `task_group`, and integer `exposures`; the dataset provides those
++same identifiers plus `prompt` and `completion`. The `ordered_sample_ids`
++array gives the full order, including repetitions across distinct passes; it
++must exactly match the per-sample exposure counts. There is no reshuffle.
++Epoch lengths and whether each sample must appear exactly once per epoch are
++explicit, and declared task-group exposure totals must match the full order.
++The dataset review JSON is itself hashed and binds the dataset hash, arm, and
++SHA-256 of those schedule, order, epoch and task-exposure fields encoded as
++compact UTF-8 JSON with sorted keys. Its
++`PASS_DATA_ONLY` field is a binding interface, not an authentication of the
++reviewer or an independent scientific verdict. A separate gate must validate
++the reviewer and full experiment protocol. The `compare_initial_conditions`
++helper checks identical B/C model, P0 and training config; it does not certify
++task isolation, matching, token balance, or independence.
++
++The adapter is loaded with PEFT's `is_trainable=True` from the supplied P0,
++then the saved adapter tensors are compared to the loaded tensors and only
++LoRA parameters may be trainable. Both arms must be separately initialized.
++The module performs no evaluation or best-checkpoint selection and saves only
++the final adapter after successful completion. A fresh output path is required.
++The journal records start/completion of model loading, microbatches and
++optimizer steps, including sample IDs and task groups. Started forward tokens
++are conservatively charged even when a forward fails; completion is separate.
++The input ceiling counts non-padding full input IDs including completion. Both
++padded and non-padding inputs and causally supervised tokens are recorded. The mean
++loss of each microbatch is weighted by its active causal label tokens over the
++whole optimizer update. AdamW fused or non-fused mode, gradient checkpointing,
++and the warmup/cosine schedule are explicit frozen settings. The recorded LR
++is the LR actually applied at each optimizer step. No mode falls back silently.
++For update `s` from 1 through `N`, warmup `W`, base rate `L` and floor ratio
++`r`, the rate is `L*s/W` when `s <= W`, otherwise
++`L*(r+(1-r)/2*(1+cos(pi*(s-W)/(N-W))))`. This exact convention is an explicit
++candidate protocol choice and is not claimed to match historical HF Trainer.
++EOS is explicitly supervised and overlength rows are rejected, not truncated.
++
++The wall clock check is cooperative: it cannot interrupt a blocked model load,
++forward, save, device cleanup, initial hash calculation, or process shutdown.
++A separate single-use CLI supervisor is provided as candidate code; its
++independent exact-SHA review, production preflight and release are still
++required. It must enforce hard wall/device-time, resource and cleanup bounds
++and record an authentic exit before any live launch can be accepted.
++Injected loaders enable CPU tests; production launch must bind the local-only
++loaders and exact environment/source independently. Hashing follows individual
++file links in the HF cache and hashes resolved bytes; directory links fail.
++The reviewed data files and frozen inputs are rechecked before final save.
++Partially written outputs and begun operations must be retained on failure;
++there is no automatic retry. None of this authorizes a GPU/model invocation.
++
++The interpreter bytes and full Python version, plus the versions, actual
++entrypoints and entire package source/resource/binary trees of torch, peft,
++transformers, tokenizers, safetensors, accelerate and huggingface_hub, are
++bound by the independently reviewed runtime identity. Package trees use
++Python `Path` component lexicographic ordering over relative paths; the SHA256
++input is compact UTF-8 JSON of `[relative_path, size, file_sha256]` records.
++Only `__pycache__` directories and `.pyc`/`.pyo` files are omitted; symlinks
++are rejected. Static preflight reads file origins and distribution metadata
++without importing these packages. An authenticated worker imports each and
++writes a separate actual-origin/version/hash receipt before model work. This
++does not fingerprint external shared libraries or the entire environment.
++
++The static CLI preflight binds both arm manifests, common P0/model/optimizer,
++protocol bytes, a separately reviewed pair decision, arm review, interpreter,
++exact environment, budget, output path and unique run ID. It must not load a
++tokenizer or model, initialize CUDA, or construct an environment. A separate
++one-shot clearance binds its exact receipt. Software integration tests use only
++tiny locally generated CPU fixtures and cannot establish real-device behavior.
++The shared CUDA guard checks the UUID and signed allocator/global-free limits
++but makes no exclusive-device or device-wide ownership attribution claim.
++
++`run_si_continuation_engineering.py` is a separate engineering-only gate,
++preflight, clearance, worker and supervisor: its authorization has no dataset,
++task, evaluation or source-trajectory field. In its real-device mode the
++independently bound engineering plan permits only 32 synthetic sequences of
++length 2,048, two fused/checkpointed AdamW updates, and 1,200 seconds including
++cleanup. The model and existing P0 must match separately reviewed hashes. A
++unique engineering trial adapter is saved once, hashed and deleted; it is not
++eligible as a scientific checkpoint. The receipt records exact tokens,
++updates, losses, finite gradients, GPU allocator peaks, OOM/retry counters,
++artifact hash/deletion, real child exit and cleanup. Failure preserves events
++and forbids retry. Synthetic CPU tests are explicitly labelled software-only.
++
++The engineering projection includes all observed non-step supervisor time plus
++78 times the slower measured update, multiplied by 1.5; it must fit the frozen
++scientific-arm allocation. This is an engineering feasibility estimate, not a
++guarantee of shared-GPU availability, later training completion or model
++quality. Independent exact-SHA review and an engineering-only authorization and
++clearance are required before any real model or GPU invocation.
+diff --git a/scripts/run_si_continuation.py b/scripts/run_si_continuation.py
+new file mode 100644
+index 0000000..2d40247
+--- /dev/null
++++ b/scripts/run_si_continuation.py
+@@ -0,0 +1,80 @@
++#!/usr/bin/env python3
++"""Isolated static preflight or independently cleared one-arm continuation."""
++from __future__ import annotations
++import argparse
++import json
++import sys
++import time
++from datetime import datetime, timezone
++from pathlib import Path
++
++sys.dont_write_bytecode = True
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT / "src"))
++from self_improvement.continuation.gate import verify, preflight
++from self_improvement.si_p3.runtime_gate import utc
++
++
++def main(argv=None):
++    entered = time.monotonic()
++    parser = argparse.ArgumentParser(description=__doc__)
++    modes = parser.add_mutually_exclusive_group(required=True)
++    modes.add_argument("--preflight-only", action="store_true")
++    modes.add_argument("--live", action="store_true")
++    modes.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
++    parser.add_argument("--authorization", type=Path, required=True)
++    parser.add_argument("--authorization-sha256", required=True)
++    parser.add_argument("--clearance", type=Path)
++    parser.add_argument("--clearance-sha256")
++    parser.add_argument("--launch-context-sha256", help=argparse.SUPPRESS)
++    args = parser.parse_args(argv)
++    mode = "preflight" if args.preflight_only else "worker" if args.worker else "live"
++    try:
++        authorization, binding = verify(ROOT, args.authorization, args.authorization_sha256,
++            mode=mode, argv=list(sys.orig_argv), clearance_path=args.clearance,
++            clearance_sha=args.clearance_sha256, launch_context_sha=args.launch_context_sha256)
++        if mode == "preflight":
++            print(json.dumps(preflight(authorization, binding)))
++            return 0
++        if mode == "worker":
++            from self_improvement.continuation.training import load_reviewed_manifest, load_frozen_local_base, load_frozen_local_tokenizer, read_bound_json, train_from_p0
++            from self_improvement.continuation.gate import bind_protocol_training
++            manifest, _ = load_reviewed_manifest(Path(authorization["manifest"]["path"]), authorization["manifest"]["sha256"])
++            protocol = read_bound_json(Path(authorization["protocol"]["path"]), authorization["protocol"]["sha256"])
++            from self_improvement.continuation.runtime_identity import verify_actual_imports
++            verify_actual_imports(protocol["runtime_identity"], Path(authorization["output_path"]) / "runtime_import_receipt.json")
++            _, rows = load_reviewed_manifest(Path(authorization["manifest"]["path"]), authorization["manifest"]["sha256"])
++            expected = bind_protocol_training(protocol, manifest, rows, authorization["arm"])
++            resource = None
++            device = "cpu"
++            if authorization["evidence_class"] == "live":
++                from self_improvement.continuation.resource import SharedResource
++                resource = SharedResource(authorization["gpu"], Path(authorization["output_path"]) / "resource.jsonl")
++                device = "cuda:0"
++            result = train_from_p0(base_dir=Path(authorization["base"]["path"]), base_sha256=authorization["base"]["sha256"],
++                adapter_dir=Path(authorization["adapter"]["path"]), adapter_sha256=authorization["adapter"]["sha256"],
++                manifest_path=Path(authorization["manifest"]["path"]), manifest_sha256=authorization["manifest"]["sha256"],
++                config=manifest["training_config"], output_dir=Path(authorization["output_path"]) / "training",
++                model_loader=load_frozen_local_base, tokenizer_loader=load_frozen_local_tokenizer,
++                device=device, resource_check=resource, expected_totals=expected,
++                expected_supervised_per_example=protocol["dose"]["supervised_tokens_per_example_including_EOS"])
++            if device == "cuda:0":
++                import torch
++                torch.cuda.synchronize()
++                torch.cuda.empty_cache()
++            return 0 if result["status"] == "COMPLETED" else 1
++        from self_improvement.continuation.supervisor import supervise
++        remaining = (utc(authorization["expires"]) - datetime.now(timezone.utc)).total_seconds()
++        seconds = min(authorization["allocation_seconds"], remaining)
++        command = ["--worker" if x == "--live" else x for x in sys.orig_argv]
++        receipt = supervise(command, Path(authorization["output_path"]), binding=binding,
++            environment=authorization["environment"], seconds=seconds, entered=entered,
++            gpu_allocated=int(authorization["evidence_class"] == "live"))
++        return 0 if receipt["authentic_returncode"] == 0 and receipt["status"] == "EXIT_RECORDED" and receipt["training_result_sha256"] else 1
++    except Exception as error:
++        print(json.dumps({"status": "REJECTED_OR_INCONCLUSIVE", "exception": type(error).__name__, "message": str(error)}), file=sys.stderr)
++        return 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/scripts/run_si_continuation_engineering.py b/scripts/run_si_continuation_engineering.py
+new file mode 100644
+index 0000000..10c8c14
+--- /dev/null
++++ b/scripts/run_si_continuation_engineering.py
+@@ -0,0 +1,77 @@
++#!/usr/bin/env python3
++"""One separately supervised synthetic-token engineering probe only."""
++from __future__ import annotations
++import argparse
++import json
++import sys
++import time
++from datetime import datetime, timezone
++from pathlib import Path
++
++sys.dont_write_bytecode = True
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT / "src"))
++from self_improvement.continuation.engineering_gate import preflight, verify
++from self_improvement.si_p3.runtime_gate import utc
++from self_improvement.si_s01.evidence import atomic_fresh_json
++
++
++def main(argv=None):
++    entered = time.monotonic()
++    parser = argparse.ArgumentParser(description=__doc__)
++    modes = parser.add_mutually_exclusive_group(required=True)
++    modes.add_argument("--preflight-only", action="store_true")
++    modes.add_argument("--live", action="store_true")
++    modes.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
++    parser.add_argument("--authorization", type=Path, required=True)
++    parser.add_argument("--authorization-sha256", required=True)
++    parser.add_argument("--clearance", type=Path)
++    parser.add_argument("--clearance-sha256")
++    parser.add_argument("--launch-context-sha256", help=argparse.SUPPRESS)
++    args = parser.parse_args(argv)
++    mode = "preflight" if args.preflight_only else "worker" if args.worker else "live"
++    try:
++        a, binding, plan, protocol = verify(ROOT, args.authorization, args.authorization_sha256, mode=mode,
++            argv=list(sys.orig_argv), clearance_path=args.clearance, clearance_sha=args.clearance_sha256,
++            launch_context_sha=args.launch_context_sha256)
++        if mode == "preflight":
++            print(json.dumps(preflight(a, binding)))
++            return 0
++        if mode == "worker":
++            from self_improvement.continuation.runtime_identity import verify_actual_imports
++            from self_improvement.continuation.engineering_worker import run_engineering
++            output = Path(a["output_path"])
++            verify_actual_imports(protocol["runtime_identity"], output / "runtime_import_receipt.json")
++            resource, device = None, "cpu"
++            if a["evidence_class"] == "engineering_live":
++                from self_improvement.continuation.resource import SharedResource
++                resource = SharedResource(a["gpu"], output / "resource.jsonl", strict_no_allocator_retry=True)
++                device = "cuda:0"
++            result = run_engineering(a, plan, protocol, output, device=device, resource=resource)
++            return 0 if result["status"] == "ENGINEERING_COMPLETED" else 1
++        from self_improvement.continuation.supervisor import supervise
++        from self_improvement.continuation.engineering_worker import assess_engineering
++        remaining = (utc(a["expires"]) - datetime.now(timezone.utc)).total_seconds()
++        command = ["--worker" if x == "--live" else x for x in sys.orig_argv]
++        output = Path(a["output_path"])
++        receipt = supervise(command, output, binding=binding, environment=a["environment"],
++            seconds=min(a["allocation_seconds"], remaining), entered=entered, gpu_allocated=int(a["evidence_class"] == "engineering_live"),
++            receipt_schema="SI_CONTINUATION_ENGINEERING_SUPERVISOR_EXIT_V1", result_relative="engineering_result.json", result_key="engineering_result_sha256")
++        result_path = output / "engineering_result.json"
++        result = json.loads(result_path.read_text()) if result_path.is_file() else {}
++        resource_path = output / "resource.jsonl"
++        observations = [json.loads(line) for line in resource_path.read_text().splitlines()] if resource_path.is_file() else []
++        if resource_path.is_file():
++            from self_improvement.continuation.training import file_sha256
++            if receipt["resource_receipt_sha256"] != file_sha256(resource_path):
++                raise RuntimeError("engineering resource observations changed after supervisor exit")
++        assessment = assess_engineering(result, receipt, plan=plan, evidence_class=a["evidence_class"], science_seconds=protocol["runtime"]["B"]["allocation_seconds"], resource_observations=observations)
++        atomic_fresh_json(output / "engineering_assessment.json", assessment)
++        return 0 if assessment["status"] in ("FIT_MODEL_PASS", "SYNTHETIC_SOFTWARE_ONLY") else 1
++    except Exception as error:
++        print(json.dumps({"status": "REJECTED_OR_INCONCLUSIVE", "exception": type(error).__name__, "message": str(error)}), file=sys.stderr)
++        return 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/src/self_improvement/continuation/__init__.py b/src/self_improvement/continuation/__init__.py
+new file mode 100644
+index 0000000..525cbca
+--- /dev/null
++++ b/src/self_improvement/continuation/__init__.py
+@@ -0,0 +1 @@
++"""Offline-reviewed P0 adapter continuation building blocks."""
+diff --git a/src/self_improvement/continuation/engineering_gate.py b/src/self_improvement/continuation/engineering_gate.py
+new file mode 100644
+index 0000000..f275177
+--- /dev/null
++++ b/src/self_improvement/continuation/engineering_gate.py
+@@ -0,0 +1,159 @@
++"""Separate one-shot authority for synthetic-token engineering only."""
++from __future__ import annotations
++
++import hashlib
++import json
++import math
++import os
++import re
++import sys
++import time
++from datetime import datetime, timezone
++from pathlib import Path
++
++from self_improvement.si_m1.gate import arm_parent_death
++from self_improvement.si_p3.runtime_gate import utc
++from self_improvement.si_s01.evidence import atomic_fresh_json
++from .gate import bind, need, source_identity
++from .runtime_identity import PACKAGES, identity_digest, verify_static
++from .training import file_sha256, learning_rate_for_step, tree_sha256, validate_config
++
++
++def engineering_source_identity(root: Path, evidence: str) -> str:
++    if evidence == "engineering_live":
++        return source_identity(root, "live")
++    need(evidence == "engineering_synthetic_cpu", "invalid engineering evidence class")
++    source = source_identity(root, "synthetic_cpu")
++    entry = file_sha256(root / "scripts/run_si_continuation_engineering.py")
++    return hashlib.sha256(json.dumps([source, entry], separators=(",", ":")).encode()).hexdigest()
++
++
++def _bind_remediation_budget(remediation: dict, a: dict) -> None:
++    """Debit an independently reviewed failed predecessor; never reuse its identity."""
++    need(type(remediation) is dict and set(remediation) == {"schema", "previous_run_id", "previous_source_sha", "previous_plan_sha256", "supervisor", "result"} and remediation["schema"] == "SI_U1_ENGINEERING_REMEDIATION_BINDING_V1", "strict remediation predecessor binding")
++    for name in ("supervisor", "result"):
++        record = remediation[name]
++        need(type(record) is dict and set(record) == {"path", "sha256"}, "remediation evidence shape")
++        path = Path(record["path"])
++        need(path.is_absolute() and path == path.resolve() and path.name == ("supervisor_exit.json" if name == "supervisor" else "engineering_result.json"), "remediation evidence path")
++    supervisor = bind(remediation["supervisor"]["path"], remediation["supervisor"]["sha256"])
++    result = bind(remediation["result"]["path"], remediation["result"]["sha256"])
++    prior = supervisor.get("binding", {})
++    prior_dir = Path(remediation["supervisor"]["path"]).parent
++    need(Path(remediation["result"]["path"]).parent == prior_dir and prior.get("output_path") == str(prior_dir), "same original output")
++    need(supervisor.get("schema") == "SI_CONTINUATION_ENGINEERING_SUPERVISOR_EXIT_V1" and supervisor.get("status") == "EXIT_RECORDED" and supervisor.get("authentic_returncode") == 1 and supervisor.get("cleanup_established") is True and supervisor.get("deadline_triggered") is False and supervisor.get("engineering_result_sha256") == remediation["result"]["sha256"], "authentic failed predecessor receipt")
++    counts = result.get("counts", {})
++    need(result.get("schema") == "SI_CONTINUATION_ENGINEERING_RESULT_V1" and result.get("status") == "FAILED" and result.get("evidence_class") == "engineering_live" and result.get("retry_authorized") is False and result.get("error") == "ContractError: PyTorch allocations remain after engineering cleanup" and result.get("trial_adapter_deleted") is True and counts.get("microbatches_completed") == 32 and counts.get("optimizer_steps_completed") == 2, "original cleanup failure remains failed")
++    need(prior.get("run_id") == remediation["previous_run_id"] and re.fullmatch("[0-9a-f]{32}", remediation["previous_run_id"]) and prior["run_id"] != a["run_id"] and prior.get("source_sha") == remediation["previous_source_sha"] and prior.get("plan_sha256") == remediation["previous_plan_sha256"], "distinct run and exact predecessor")
++    need(prior.get("protocol_sha256") == a["protocol"]["sha256"] and prior.get("base_sha256") == a["base"]["sha256"] and prior.get("p0_adapter_sha256") == a["adapter"]["sha256"] and prior.get("scope") == "SYNTHETIC_TOKEN_ENGINEERING_ONLY" and prior.get("evidence_class") == "engineering_live" and not Path(a["output_path"]).is_relative_to(prior_dir), "same frozen inputs and new output")
++    spent = supervisor.get("elapsed_seconds")
++    need(type(spent) in (int, float) and math.isfinite(spent) and spent > 0 and a["allocation_seconds"] == 1080 and spent + a["allocation_seconds"] <= 1200, "prior cost debited from original 1200 second budget")
++
++
++def bind_engineering_plan(plan: dict, protocol: dict, a: dict) -> None:
++    need(plan.get("schema") == "SI_U1_ENGINEERING_PLAN_V1" and plan.get("retry_authorized") is False, "engineering-only plan")
++    t = plan["training"]
++    need(plan["resource"] == a["gpu"] and t["allocation_seconds"] == a["allocation_seconds"], "engineering resource or time drift")
++    need(type(a["allocation_seconds"]) in (int, float) and 0 < a["allocation_seconds"] <= 1200, "engineering allocation cap")
++    for field in ("sequence_length", "active_target_tokens_per_sequence_with_EOS", "microbatch_size", "gradient_accumulation_steps", "maximum_microbatches", "maximum_optimizer_steps", "maximum_nonpad_input_tokens", "maximum_supervised_tokens", "maximum_artifact_saves"):
++        need(type(t[field]) is int and t[field] > 0, "positive engineering limits")
++    need(t["microbatch_size"] == 1 and t["maximum_optimizer_steps"] == 2 and t["maximum_microbatches"] == 2 * t["gradient_accumulation_steps"], "exact two-update engineering scope")
++    need(t["maximum_nonpad_input_tokens"] == t["sequence_length"] * t["maximum_microbatches"] and t["maximum_supervised_tokens"] == t["active_target_tokens_per_sequence_with_EOS"] * t["maximum_microbatches"], "engineering token reservations")
++    need(t["maximum_artifact_saves"] == 1 and t["gradient_checkpointing"] is True and t["use_cache"] is False, "single ephemeral artifact and checkpointing")
++    if a["evidence_class"] == "engineering_live":
++        need(plan.get("total_allocated_device_seconds") == 1800 and plan.get("unused_cap_transfer_authorized") is False and plan.get("evaluation", {}).get("allocation_seconds") == 600, "separate 1200/600 engineering allocations; no cap transfer")
++        if "remediation" in plan:
++            _bind_remediation_budget(plan["remediation"], a)
++        else:
++            need(a["allocation_seconds"] == 1200, "original allocation remains 1200 seconds")
++        need(t["sequence_length"] == 2048 and t["active_target_tokens_per_sequence_with_EOS"] == 5 and t["gradient_accumulation_steps"] == 16 and t["maximum_microbatches"] == 32 and t["maximum_nonpad_input_tokens"] == 65536 and t["maximum_supervised_tokens"] == 160, "exact real engineering dose")
++        need(a["gpu"]["allocator_cap_bytes"] == 25769803776 and a["gpu"]["preweight_free_bytes"] == 30064771072 and a["gpu"]["later_free_bytes"] == 2147483648, "exact shared GPU ceilings")
++        need(protocol["runtime"]["B"]["gpu"] == a["gpu"] == protocol["runtime"]["C"]["gpu"] and protocol["runtime"]["B"]["allocation_seconds"] == protocol["runtime"]["C"]["allocation_seconds"] == 5400 and protocol["training_config"]["max_length"] == t["sequence_length"] and protocol["training_config"]["optimizer_steps"] == 78, "engineering device, sequence and 78-step projection must match both frozen science arms")
++    else:
++        need(a["evidence_class"] == "engineering_synthetic_cpu" and a["gpu"] == {} and t["sequence_length"] <= 256 and t["maximum_microbatches"] <= 32, "bounded CPU toy engineering")
++    config = protocol["training_config"]
++    validate_config(config, config["batch_size"] * config["gradient_accumulation_steps"] * config["optimizer_steps"])
++    need(config["batch_size"] == 1 and config["gradient_accumulation_steps"] == t["gradient_accumulation_steps"] and config["gradient_checkpointing"] is True and config["use_cache"] is False and config["optimizer_fused"] is True, "same scientific optimizer and checkpointing")
++    need(t["learning_rates"] == [learning_rate_for_step(config, step) for step in range(2)], "first two frozen scientific learning rates")
++
++
++def verify(root: Path, auth_path: Path, auth_sha: str, *, mode: str, argv: list[str], clearance_path: Path | None = None, clearance_sha: str | None = None, launch_context_sha: str | None = None):
++    need(mode in ("preflight", "live", "worker") and sys.flags.isolated == 1, "isolated explicit engineering mode")
++    a = bind(auth_path, auth_sha)
++    fields = {"schema", "purpose", "evidence_class", "source_sha", "base", "adapter", "plan", "protocol", "review", "interpreter", "environment", "uid", "output_path", "preflight_path", "not_before", "expires", "allocation_seconds", "gpu", "run_id", "maximum_launches"}
++    need(set(a) == fields and a["schema"] == "SI_CONTINUATION_ENGINEERING_AUTH_V1" and a["purpose"] == "SYNTHETIC_TOKEN_P0_LOAD_AND_TWO_UPDATES_ONLY", "strict engineering authorization; no data or task path")
++    need(a["maximum_launches"] == 1 and type(a["maximum_launches"]) is int and re.fullmatch("[0-9a-f]{32}", a["run_id"]) and a["uid"] == os.getuid() and type(a["uid"]) is int, "unique engineering run and UID")
++    need(utc(a["not_before"]) <= datetime.now(timezone.utc) < utc(a["expires"]), "engineering authorization expired")
++    need(engineering_source_identity(root, a["evidence_class"]) == a["source_sha"], "exact engineering source")
++    need(type(a["environment"]) is dict and all(type(k) is str and type(v) is str for k, v in a["environment"].items()) and dict(os.environ) == a["environment"], "engineering exact environment")
++    need(all(a["environment"].get(k) == "1" for k in ("HF_HUB_OFFLINE", "TRANSFORMERS_OFFLINE", "PYTHONDONTWRITEBYTECODE")) and not any(k in a["environment"] for k in ("PYTHONPATH", "PYTHONHOME", "LD_PRELOAD", "PYTORCH_NO_CUDA_MEMORY_CACHING", "PYTORCH_NO_HIP_MEMORY_CACHING")), "engineering offline safe environment")
++    if a["evidence_class"] == "engineering_live":
++        need(set(a["gpu"]) == {"uuid", "allocator_cap_bytes", "preweight_free_bytes", "later_free_bytes"} and re.fullmatch(r"GPU-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}", a["gpu"]["uuid"]) and a["environment"].get("CUDA_VISIBLE_DEVICES") == a["gpu"]["uuid"] and a["environment"].get("PYTORCH_CUDA_ALLOC_CONF") == "backend:native", "engineering GPU binding")
++    else:
++        need(a["evidence_class"] == "engineering_synthetic_cpu" and a["environment"].get("CUDA_VISIBLE_DEVICES") == "", "CPU fixture CUDA isolation")
++    for key in ("base", "adapter", "plan", "protocol", "review"):
++        need(type(a[key]) is dict and set(a[key]) == {"path", "sha256"}, "engineering bound input shape")
++        p = Path(a[key]["path"])
++        need(p.is_absolute() and p == p.resolve(), "engineering canonical input")
++    plan = bind(a["plan"]["path"], a["plan"]["sha256"])
++    protocol = bind(a["protocol"]["path"], a["protocol"]["sha256"])
++    need(protocol.get("schema") == "SI_CONTINUATION_PROTOCOL_V1", "frozen scientific protocol identity")
++    bind_engineering_plan(plan, protocol, a)
++    if mode == "preflight":
++        need(not any(name in sys.modules for name in PACKAGES), "engineering static preflight imported package")
++    verify_static(protocol["runtime_identity"], a["interpreter"], protocol["epoch_shuffle_rule"])
++    if mode == "preflight":
++        need(not any(name in sys.modules for name in PACKAGES), "engineering static preflight imported package")
++    for name in ("base", "adapter"):
++        path = Path(a[name]["path"])
++        if a["evidence_class"] == "engineering_synthetic_cpu":
++            need(sum(p.stat().st_size for p in path.rglob("*") if p.is_file()) <= 10_000_000, "engineering toy bytes cap")
++        need(tree_sha256(path) == a[name]["sha256"], "engineering base or P0 bytes differ")
++    if a["evidence_class"] == "engineering_synthetic_cpu":
++        toy = json.loads((Path(a["base"]["path"]) / "config.json").read_text())
++        need(toy.get("model_type") == "gpt2" and all(type(toy.get(k)) is int and 0 < toy[k] <= v for k, v in {"n_embd": 64, "n_layer": 2, "n_head": 4, "vocab_size": 1024, "n_positions": 256}.items()), "explicit tiny CPU toy config")
++    expected_review = {"schema": "SI_CONTINUATION_ENGINEERING_REVIEW_V1", "decision": "PASS_ENGINEERING_SOFTWARE_ONLY", "source_sha": a["source_sha"], "plan_sha256": a["plan"]["sha256"], "protocol_sha256": a["protocol"]["sha256"], "base_sha256": a["base"]["sha256"], "p0_adapter_sha256": a["adapter"]["sha256"]}
++    need(bind(a["review"]["path"], a["review"]["sha256"]) == expected_review, "separate engineering exact review")
++    output, preflight = Path(a["output_path"]), Path(a["preflight_path"])
++    need(output.is_absolute() and output == output.resolve() and output.parent.is_dir() and output.parent.stat().st_uid == os.getuid() and not output.parent.stat().st_mode & 0o022, "private engineering output parent")
++    need(preflight.is_absolute() and preflight == preflight.resolve() and preflight.parent.is_dir() and not preflight.is_relative_to(output), "separate engineering preflight")
++    claim = output.parent / (output.name + ".claim.json")
++    args = [a["interpreter"], "-I", str(root / "scripts/run_si_continuation_engineering.py"), {"preflight": "--preflight-only", "live": "--live", "worker": "--worker"}[mode], "--authorization", str(auth_path), "--authorization-sha256", auth_sha]
++    binding = {"scope": "SYNTHETIC_TOKEN_ENGINEERING_ONLY", "authorization_sha256": auth_sha, "source_sha": a["source_sha"], "protocol_sha256": a["protocol"]["sha256"], "plan_sha256": a["plan"]["sha256"], "runtime_identity_sha256": identity_digest(protocol["runtime_identity"]), "base_sha256": a["base"]["sha256"], "p0_adapter_sha256": a["adapter"]["sha256"], "output_path": a["output_path"], "run_id": a["run_id"], "evidence_class": a["evidence_class"]}
++    if mode == "preflight":
++        need(argv == args and not output.exists() and not claim.exists() and not preflight.exists(), "fresh zero-effect engineering preflight")
++        return a, binding, plan, protocol
++    need(clearance_path is not None and clearance_sha is not None, "separate engineering clearance")
++    clearance = bind(clearance_path, clearance_sha)
++    need(clearance == {"schema": "SI_CONTINUATION_ENGINEERING_CLEARANCE_V1", "decision": "RELEASE_ONE_ENGINEERING_RUN", "binding": binding, "preflight_sha256": file_sha256(preflight), "maximum_launches": 1, "retry_authorized": False}, "one engineering release only")
++    receipt = bind(preflight, clearance["preflight_sha256"])
++    need(receipt == preflight_value(binding), "matching engineering preflight")
++    args += ["--clearance", str(clearance_path), "--clearance-sha256", clearance_sha]
++    if mode == "live":
++        need(argv == args and not output.exists() and not claim.exists(), "one fresh engineering launch")
++    else:
++        args += ["--launch-context-sha256", launch_context_sha]
++        need(argv == args and launch_context_sha is not None, "engineering worker argv")
++        context = bind(output / "launch_context.json", launch_context_sha)
++        need(context["binding"] == binding and context["supervisor_pid"] == os.getppid(), "engineering real supervisor")
++        parent_args = [x.decode() for x in Path(f"/proc/{os.getppid()}/cmdline").read_bytes().split(b"\0") if x]
++        need(parent_args == ["--live" if x == "--worker" else x for x in args[:-2]], "engineering real parent argv")
++        start = output / "worker_start.json"
++        until = time.monotonic() + 3
++        while not start.exists() and time.monotonic() < until:
++            time.sleep(.01)
++        record = json.loads(start.read_bytes())
++        tick = int(Path("/proc/self/stat").read_text().rsplit(")", 1)[1].split()[19])
++        need(record == {"pid": os.getpid(), "uid": os.getuid(), "start_tick": tick, "pgid": os.getpgid(0), "sid": os.getsid(0), "argv": argv, "launch_context_sha256": launch_context_sha}, "engineering child identity")
++        arm_parent_death(context["supervisor_pid"], context["supervisor_start_tick"])
++    return a, binding, plan, protocol
++
++
++def preflight_value(binding):
++    return {"schema": "SI_CONTINUATION_ENGINEERING_PREFLIGHT_V1", "binding": binding, "status": "PREFLIGHT_ONLY_PASS", "runtime_check": "STATIC_METADATA_ONLY_NO_PACKAGE_IMPORTS", "effects": {"tokenizer": 0, "model": 0, "cuda": 0, "training": 0, "environment": 0}}
++
++
++def preflight(a, binding):
++    value = preflight_value(binding)
++    atomic_fresh_json(Path(a["preflight_path"]), value)
++    return value
+diff --git a/src/self_improvement/continuation/engineering_worker.py b/src/self_improvement/continuation/engineering_worker.py
+new file mode 100644
+index 0000000..a0c1ccc
+--- /dev/null
++++ b/src/self_improvement/continuation/engineering_worker.py
+@@ -0,0 +1,229 @@
++"""Only bounded synthetic-token engineering; no dataset or scientific result."""
++from __future__ import annotations
++
++import gc
++import json
++import math
++import os
++import shutil
++import time
++from pathlib import Path
++
++from self_improvement.si_s01.evidence import atomic_fresh_json
++from .training import ContractError, load_frozen_local_base, load_p0_adapter, tree_sha256
++
++
++def _cleanup_cuda_allocator(torch, result: dict, event) -> None:
++    """Measure cleanup; a CUDA workspace is a candidate, not a diagnosis."""
++    torch.cuda.synchronize()
++    torch.cuda.empty_cache()
++    torch.cuda.synchronize()
++    result["pre_workspace_clear_allocated_bytes"] = int(torch.cuda.memory_allocated(0))
++    result["pre_workspace_clear_reserved_bytes"] = int(torch.cuda.memory_reserved(0))
++    clear = getattr(torch._C, "_cuda_clearCublasWorkspaces", None)
++    result["cublas_workspace_clear_available"] = callable(clear)
++    result["cublas_workspace_clear_attempted"] = False
++    event("allocator_cleanup_measured", allocated_bytes=result["pre_workspace_clear_allocated_bytes"],
++          reserved_bytes=result["pre_workspace_clear_reserved_bytes"], workspace_clear_available=callable(clear))
++    if (result["pre_workspace_clear_allocated_bytes"] or result["pre_workspace_clear_reserved_bytes"]) and callable(clear):
++        result["cublas_workspace_clear_attempted"] = True
++        event("cublas_workspace_clear_started")
++        clear()
++        event("cublas_workspace_clear_completed")
++        torch.cuda.synchronize()
++        torch.cuda.empty_cache()
++        torch.cuda.synchronize()
++    result["post_cleanup_allocated_bytes"] = int(torch.cuda.memory_allocated(0))
++    result["post_cleanup_reserved_bytes"] = int(torch.cuda.memory_reserved(0))
++    event("allocator_cleanup_final", allocated_bytes=result["post_cleanup_allocated_bytes"],
++          reserved_bytes=result["post_cleanup_reserved_bytes"])
++    if result["post_cleanup_allocated_bytes"] != 0 or result["post_cleanup_reserved_bytes"] != 0:
++        raise ContractError("PyTorch allocations remain after engineering cleanup")
++
++
++def run_engineering(a: dict, plan: dict, protocol: dict, output: Path, *, device: str, resource=None, cleanup_observer=None) -> dict:
++    """Run two synthetic-only updates; trial adapter is hashed then removed."""
++    import torch
++
++    t = plan["training"]
++    config = protocol["training_config"]
++    journal = output / "engineering_events.jsonl"
++    counts = {"microbatches_started": 0, "microbatches_completed": 0, "optimizer_steps_started": 0, "optimizer_steps_completed": 0, "input_tokens": 0, "supervised_tokens": 0, "trial_saves_started": 0, "trial_saves_completed": 0}
++    result = {"schema": "SI_CONTINUATION_ENGINEERING_RESULT_V1", "scope": "SYNTHETIC_TOKEN_ENGINEERING_ONLY", "evidence_class": a["evidence_class"], "status": "FAILED", "scientific_checkpoint_eligible": False, "retry_authorized": False, "counts": counts}
++    start = time.monotonic()
++    model = base = optimizer = None
++    scratch = output / "engineering_trial_adapter"
++    scratch_created = False
++
++    def event(kind, **kwargs):
++        with journal.open("a", encoding="utf-8") as handle:
++            handle.write(json.dumps({"kind": kind, "monotonic": time.monotonic(), **kwargs}, sort_keys=True) + "\n")
++            handle.flush()
++            os.fsync(handle.fileno())
++
++    def check_time():
++        if time.monotonic() - start >= a["allocation_seconds"]:
++            raise ContractError("engineering worker time budget exceeded")
++
++    def sync():
++        if device == "cuda:0":
++            torch.cuda.synchronize()
++
++    try:
++        torch.manual_seed(config["seed"])
++        check_time()
++        if resource:
++            resource("before_model_load")
++        event("model_load_started")
++        started_load = time.monotonic()
++        base = load_frozen_local_base(Path(a["base"]["path"]))
++        model = load_p0_adapter(base, Path(a["adapter"]["path"]))
++        model.config.use_cache = False
++        if model.config.use_cache is not False or not getattr(model, "supports_gradient_checkpointing", False):
++            raise ContractError("engineering checkpoint/cache model invariant")
++        model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
++        if model.is_gradient_checkpointing is not True:
++            raise ContractError("engineering checkpointing not enabled")
++        model.to(device)
++        model.train()
++        sync()
++        result["load_seconds"] = time.monotonic() - started_load
++        event("model_load_completed", duration_seconds=result["load_seconds"], initial_p0_tensors_match=True, base_frozen=True)
++        if resource:
++            resource("after_model_load")
++        optimizer = torch.optim.AdamW((p for p in model.parameters() if p.requires_grad), lr=config["learning_rate"], weight_decay=config["weight_decay"], betas=(config["adam_beta1"], config["adam_beta2"]), eps=config["adam_epsilon"], fused=True)
++        if optimizer.defaults.get("fused") is not True or optimizer.state:
++            raise ContractError("engineering fused fresh optimizer invariant")
++        vocab = model.config.vocab_size
++        eos = model.config.eos_token_id
++        if isinstance(eos, list):
++            eos = eos[0] if eos else None
++        if type(vocab) is not int or vocab < 6 or type(eos) is not int or not 0 <= eos < vocab:
++            raise ContractError("synthetic token IDs outside model vocabulary")
++        length, active = t["sequence_length"], t["active_target_tokens_per_sequence_with_EOS"]
++        if active != 5 or length <= active:
++            raise ContractError("five synthetic targets including EOS are required")
++        ids = [1] * (length - active) + [1, 2, 3, 4, eos]
++        labels = [-100] * (length - active) + ids[-active:]
++        step_times = []
++        for step in range(2):
++            check_time()
++            step_started = time.monotonic()
++            lr = t["learning_rates"][step]
++            for group in optimizer.param_groups:
++                group["lr"] = lr
++            optimizer.zero_grad(set_to_none=True)
++            for micro in range(t["gradient_accumulation_steps"]):
++                check_time()
++                if resource:
++                    resource("before_microbatch")
++                if counts["input_tokens"] + length > t["maximum_nonpad_input_tokens"] or counts["supervised_tokens"] + active > t["maximum_supervised_tokens"]:
++                    raise ContractError("synthetic token reservation exceeds engineering budget")
++                counts["microbatches_started"] += 1
++                counts["input_tokens"] += length
++                counts["supervised_tokens"] += active
++                event("microbatch_started", optimizer_step=step, microbatch=micro, input_tokens=length, supervised_tokens=active)
++                begun = time.monotonic()
++                batch = {"input_ids": torch.tensor([ids], dtype=torch.long, device=device), "attention_mask": torch.ones((1, length), dtype=torch.long, device=device), "labels": torch.tensor([labels], dtype=torch.long, device=device)}
++                loss = model(**batch).loss
++                if not bool(torch.isfinite(loss).item()):
++                    raise ContractError("non-finite synthetic engineering loss")
++                (loss / t["gradient_accumulation_steps"]).backward()
++                sync()
++                counts["microbatches_completed"] += 1
++                event("microbatch_completed", optimizer_step=step, microbatch=micro, duration_seconds=time.monotonic() - begun, loss=float(loss.detach().cpu()))
++            for param in model.parameters():
++                if param.requires_grad and (param.grad is None or not bool(torch.isfinite(param.grad).all().item())):
++                    raise ContractError("missing or non-finite synthetic engineering gradient")
++            torch.nn.utils.clip_grad_norm_((p for p in model.parameters() if p.requires_grad), config["max_grad_norm"], error_if_nonfinite=True)
++            counts["optimizer_steps_started"] += 1
++            event("optimizer_step_started", optimizer_step=step, learning_rate=lr)
++            optimizer.step()
++            sync()
++            counts["optimizer_steps_completed"] += 1
++            duration = time.monotonic() - step_started
++            step_times.append(duration)
++            event("optimizer_step_completed", optimizer_step=step, duration_seconds=duration, finite_gradients=True)
++            if resource:
++                resource("after_optimizer_step")
++        result["optimizer_step_seconds"] = step_times
++        check_time()
++        if resource:
++            resource("before_trial_save")
++        if scratch.exists() or scratch.is_symlink() or scratch.parent != output:
++            raise ContractError("engineering scratch must be new and owned by this run")
++        begun = time.monotonic()
++        counts["trial_saves_started"] += 1
++        event("trial_save_started", scientific_checkpoint_eligible=False)
++        scratch.mkdir(exist_ok=False)
++        scratch_created = True
++        model.save_pretrained(str(scratch))
++        result["trial_adapter_sha256"] = tree_sha256(scratch)
++        result["trial_adapter_bytes"] = sum(p.stat().st_size for p in scratch.rglob("*") if p.is_file())
++        counts["trial_saves_completed"] += 1
++        event("trial_saved", sha256=result["trial_adapter_sha256"], bytes=result["trial_adapter_bytes"], scientific_checkpoint_eligible=False)
++        if resource:
++            resource("after_trial_save")
++        if scratch.is_symlink() or scratch.resolve().parent != output.resolve():
++            raise ContractError("engineering scratch path changed")
++        shutil.rmtree(scratch)
++        scratch_created = False
++        result["trial_adapter_deleted"] = not scratch.exists() and not scratch.is_symlink()
++        if not result["trial_adapter_deleted"]:
++            raise ContractError("engineering trial adapter deletion not confirmed")
++        result["save_hash_delete_seconds"] = time.monotonic() - begun
++        event("trial_deleted", confirmed=True, duration_seconds=result["save_hash_delete_seconds"])
++        if resource:
++            resource("after_trial_delete")
++        begun = time.monotonic()
++        # The optimizer loop's final group retains the parameter list even after
++        # deleting the optimizer; drop it before measuring CUDA cleanup.
++        del optimizer, model, base, batch, loss, param, group
++        optimizer = model = base = None
++        gc.collect()
++        if cleanup_observer is not None:
++            cleanup_observer()
++        if device == "cuda:0":
++            _cleanup_cuda_allocator(torch, result, event)
++        result["cleanup_seconds"] = time.monotonic() - begun
++        event("worker_cleanup_completed", duration_seconds=result["cleanup_seconds"])
++        if tree_sha256(Path(a["base"]["path"])) != a["base"]["sha256"] or tree_sha256(Path(a["adapter"]["path"])) != a["adapter"]["sha256"]:
++            raise ContractError("frozen model or P0 bytes changed during engineering")
++        event("frozen_inputs_reverified")
++        check_time()
++        result["status"] = "ENGINEERING_COMPLETED"
++    except BaseException as exc:
++        result["error"] = f"{type(exc).__name__}: {exc}"
++        event("engineering_failed", error=result["error"], scratch_present=scratch.exists())
++        if scratch_created and scratch.exists() and not scratch.is_symlink() and scratch.resolve().parent == output.resolve():
++            shutil.rmtree(scratch)
++            event("failed_trial_deleted", confirmed=not scratch.exists())
++        atomic_fresh_json(output / "engineering_result.json", result)
++        raise
++    result["elapsed_worker_seconds"] = time.monotonic() - start
++    atomic_fresh_json(output / "engineering_result.json", result)
++    return result
++
++
++def assess_engineering(result: dict, receipt: dict, *, plan: dict, evidence_class: str, science_seconds: float, resource_observations: list[dict] | None = None) -> dict:
++    """Conservative model: all non-step supervised elapsed plus 78 slow steps."""
++    steps = result.get("optimizer_step_seconds", [])
++    t = plan["training"]
++    expected_counts = {"microbatches_started": t["maximum_microbatches"], "microbatches_completed": t["maximum_microbatches"], "optimizer_steps_started": 2, "optimizer_steps_completed": 2, "input_tokens": t["maximum_nonpad_input_tokens"], "supervised_tokens": t["maximum_supervised_tokens"], "trial_saves_started": 1, "trial_saves_completed": 1}
++    valid = (result.get("schema") == "SI_CONTINUATION_ENGINEERING_RESULT_V1" and result.get("evidence_class") == evidence_class and receipt.get("binding", {}).get("evidence_class") == evidence_class and result.get("status") == "ENGINEERING_COMPLETED" and result.get("scientific_checkpoint_eligible") is False and result.get("trial_adapter_deleted") is True and result.get("counts") == expected_counts and type(result.get("trial_adapter_bytes")) is int and result["trial_adapter_bytes"] > 0 and isinstance(result.get("trial_adapter_sha256"), str) and len(result["trial_adapter_sha256"]) == 64 and len(steps) == 2 and all(type(x) in (int, float) and math.isfinite(x) and x > 0 for x in steps) and receipt.get("authentic_returncode") == 0 and receipt.get("status") == "EXIT_RECORDED" and receipt.get("cleanup_established") is True and receipt.get("within_time_cap") is True and bool(receipt.get("engineering_result_sha256")) and bool(receipt.get("runtime_import_receipt_sha256")))
++    if evidence_class == "engineering_live":
++        valid = valid and result.get("post_cleanup_allocated_bytes") == 0 and result.get("post_cleanup_reserved_bytes") == 0
++        expected_points = (["before_model_load", "after_model_load"] + ["before_microbatch"] * t["gradient_accumulation_steps"] + ["after_optimizer_step"] + ["before_microbatch"] * t["gradient_accumulation_steps"] + ["after_optimizer_step", "before_trial_save", "after_trial_save", "after_trial_delete"])
++        valid = valid and bool(receipt.get("resource_receipt_sha256")) and isinstance(resource_observations, list) and [row.get("point") for row in resource_observations] == expected_points and all(row.get("status") == "PASS" and row.get("allocator_ooms") == 0 and row.get("allocator_retries") == 0 for row in resource_observations)
++    durations = [result.get("load_seconds"), result.get("save_hash_delete_seconds"), result.get("cleanup_seconds"), receipt.get("elapsed_seconds")]
++    valid = valid and all(type(x) in (int, float) and math.isfinite(x) and x > 0 for x in durations)
++    if valid:
++        valid = sum(steps) + sum(durations[:3]) <= durations[3] + .05
++    projected = None
++    if valid:
++        nonstep = max(0., receipt["elapsed_seconds"] - sum(steps))
++        projected = 1.5 * (nonstep + 78 * max(steps))
++    status = "STOP_OR_INCONCLUSIVE"
++    if valid and projected < science_seconds:
++        status = "FIT_MODEL_PASS" if evidence_class == "engineering_live" else "SYNTHETIC_SOFTWARE_ONLY"
++    return {"schema": "SI_CONTINUATION_ENGINEERING_ASSESSMENT_V1", "scope": "ENGINEERING_ONLY_NOT_SCIENTIFIC_RESULT", "evidence_class": evidence_class, "status": status, "projection_seconds": projected, "projection_valid_for_real_device": valid and evidence_class == "engineering_live", "science_allocation_seconds": science_seconds, "fit_multiplier": 1.5, "extrapolation": "all measured non-step supervisor elapsed plus 78 times slower observed complete optimizer step", "scientific_checkpoint_eligible": False, "future_shared_gpu_performance_guaranteed": False}
+diff --git a/src/self_improvement/continuation/gate.py b/src/self_improvement/continuation/gate.py
+new file mode 100644
+index 0000000..d6d0877
+--- /dev/null
++++ b/src/self_improvement/continuation/gate.py
+@@ -0,0 +1,188 @@
++"""Static exact-source/data gate for one separately cleared continuation arm."""
++from __future__ import annotations
++
++import hashlib
++import json
++import math
++import os
++import re
++import sys
++import time
++from datetime import datetime, timezone
++from pathlib import Path
++
++from self_improvement.si_m1.gate import arm_parent_death
++from self_improvement.si_p3.runtime_gate import git_state, utc
++from self_improvement.si_s01.evidence import atomic_fresh_json
++from .training import ContractError, compare_initial_conditions, file_sha256, learning_rate_for_step, load_reviewed_manifest, read_bound_json, tree_sha256, validate_config
++from .runtime_identity import PACKAGES, identity_digest, verify_static
++
++
++def need(value, message):
++    if not value:
++        raise ContractError(message)
++
++
++def bind(path, digest):
++    return read_bound_json(Path(path), digest)
++
++
++def source_identity(root: Path, evidence_class: str) -> str:
++    if evidence_class == "live":
++        sha, clean = git_state(root)
++        need(clean, "live source tree must be clean")
++        return sha
++    need(evidence_class == "synthetic_cpu", "unknown evidence class")
++    # Synthetic-only mode binds the actual implementation bytes without asking
++    # a developer's dirty checkout to masquerade as a clean live commit.
++    files = [root / "scripts/run_si_continuation.py", *sorted((root / "src/self_improvement/continuation").glob("*.py"))]
++    return hashlib.sha256(json.dumps([[str(p.relative_to(root)), file_sha256(p)] for p in files], separators=(",", ":")).encode()).hexdigest()
++
++
++def bind_protocol_runtime(protocol: dict, authorization: dict) -> None:
++    """The pre-registered arm policy is authoritative, including GPU and time."""
++    need(protocol.get("schema") == "SI_CONTINUATION_PROTOCOL_V1", "continuation protocol schema")
++    runtime = protocol.get("runtime")
++    need(type(runtime) is dict and set(runtime) == {"B", "C"}, "both per-arm runtime policies required")
++    expected = {"allocation_seconds": authorization["allocation_seconds"], "gpu": authorization["gpu"]}
++    need(runtime[authorization["arm"]] == expected, "runtime/time/GPU differs from frozen arm protocol")
++
++
++def bind_protocol_training(protocol: dict, manifest: dict, rows: list[dict], arm: str) -> dict[str, int]:
++    """Fail closed on preregistered config, full dose, family counts and LR."""
++    from collections import Counter
++    config = manifest["training_config"]
++    need(protocol.get("training_config") == config, "training config differs from frozen protocol")
++    rates = protocol.get("learning_rate_definition", {}).get("values_by_one_based_step")
++    need(type(rates) is list and len(rates) == config["optimizer_steps"] and all(type(rate) in (int, float) and math.isfinite(rate) and math.isclose(rate, learning_rate_for_step(config, i), rel_tol=1e-14, abs_tol=1e-16) for i, rate in enumerate(rates)), "optimizer LR sequence differs from frozen protocol")
++    dose = protocol.get("dose")
++    need(type(dose) is dict, "explicit frozen training dose required")
++    distinct = {row["sample_id"]: row for row in rows}
++    need(len(distinct) == dose["unique_examples_per_arm"] and len(rows) == dose["complete_ordered_example_ids_required"], "unique or exposed sample count differs from frozen dose")
++    need(manifest["epoch_lengths"] == dose["epoch_lengths"] and manifest["epoch_each_sample_once"] is dose["each_example_once_per_epoch"] and len(manifest["epoch_lengths"]) == dose["epochs"], "epoch schedule differs from frozen dose")
++    shuffle = protocol.get("epoch_shuffle_rule")
++    need(type(shuffle) is dict and shuffle.get("implementation") == "python_random_Random_shuffle" and shuffle.get("initial_order") == "ascending sample_id string" and shuffle.get("epoch_seed") == f"{config['seed']} + zero_based_epoch" and shuffle.get("epochs") == dose["epochs"] and type(shuffle.get("python_version_binding")) is str and bool(shuffle["python_version_binding"]), "frozen epoch shuffle rule")
++    import random
++    expected_order = []
++    for epoch in range(dose["epochs"]):
++        ids = sorted(distinct)
++        random.Random(config["seed"] + epoch).shuffle(ids)
++        expected_order.extend(ids)
++    need(manifest["ordered_sample_ids"] == expected_order, "ordered IDs differ from frozen shuffle")
++    groups = Counter(row["task_group"] for row in distinct.values())
++    count_groups = dose["distinct_parent_directories_per_arm"]
++    need(type(count_groups) is int and count_groups > 0 and type(dose["unique_examples_per_arm"]) is int, "positive task and sample counts required")
++    need(len(groups) == count_groups and dose["unique_examples_per_arm"] % count_groups == 0 and all(v == dose["unique_examples_per_arm"] // count_groups for v in groups.values()), "per-parent sample counts differ from frozen dose")
++    families = {}
++    for row in distinct.values():
++        need(type(row.get("family")) is str and bool(row["family"]), "source family required")
++        old = families.setdefault(row["task_group"], row["family"])
++        need(old == row["family"], "one parent has multiple families")
++    need(dict(Counter(families.values())) == dose["family_parent_counts"], "family parent counts differ from frozen dose")
++    need(config["optimizer_steps"] == dose["required_actual_optimizer_steps_per_arm"], "optimizer step dose mismatch")
++    expected = {"input_tokens": dose["actual_unpadded_sequence_tokens_four_passes"][arm], "supervised_tokens": dose["required_total_supervised_tokens_per_arm"]}
++    need(all(type(v) is int and v > 0 for v in expected.values()) and expected["input_tokens"] <= config["max_input_tokens"] and expected["supervised_tokens"] <= config["max_supervised_tokens"], "expected token totals exceed caps")
++    need(type(dose["supervised_tokens_per_example_including_EOS"]) is int and dose["supervised_tokens_per_example_including_EOS"] > 0, "frozen per-example label count")
++    return expected
++
++
++def verify(root: Path, auth_path: Path, auth_sha: str, *, mode: str, argv: list[str],
++           clearance_path: Path | None = None, clearance_sha: str | None = None,
++           launch_context_sha: str | None = None):
++    need(mode in ("preflight", "live", "worker"), "unknown mode")
++    need(sys.flags.isolated == 1, "isolated Python required")
++    a = bind(auth_path, auth_sha)
++    expected_fields = {"schema", "arm", "evidence_class", "source_sha", "manifest", "paired_manifest", "protocol", "pair_review", "base", "adapter", "review", "interpreter", "environment", "uid", "output_path", "preflight_path", "not_before", "expires", "allocation_seconds", "gpu", "run_id", "maximum_launches"}
++    need(set(a) == expected_fields and a["schema"] == "SI_CONTINUATION_AUTH_V1" and a["arm"] in ("B", "C"), "authorization schema")
++    need(a["maximum_launches"] == 1 and type(a["maximum_launches"]) is int and re.fullmatch("[0-9a-f]{32}", a["run_id"]) is not None, "one run identity")
++    need(a["uid"] == os.getuid() and type(a["uid"]) is int, "execution UID")
++    need(type(a["allocation_seconds"]) in (int, float) and 0 < a["allocation_seconds"] <= 86400, "bounded hard allocation")
++    need(utc(a["not_before"]) <= datetime.now(timezone.utc) < utc(a["expires"]), "authorization expired")
++    need(source_identity(root, a["evidence_class"]) == a["source_sha"], "exact source identity")
++    need(Path(a["interpreter"]).resolve() == Path(sys.executable).resolve(), "pinned interpreter")
++    need(type(a["environment"]) is dict and all(type(k) is str and type(v) is str for k, v in a["environment"].items()) and dict(os.environ) == a["environment"], "exact environment")
++    need(all(a["environment"].get(k) == "1" for k in ("HF_HUB_OFFLINE", "TRANSFORMERS_OFFLINE", "PYTHONDONTWRITEBYTECODE")), "offline environment")
++    need(not any(k in a["environment"] for k in ("PYTHONPATH", "PYTHONHOME", "LD_PRELOAD", "PYTORCH_NO_CUDA_MEMORY_CACHING", "PYTORCH_NO_HIP_MEMORY_CACHING")), "unsafe inherited environment")
++    gpu = a["gpu"]
++    if a["evidence_class"] == "synthetic_cpu":
++        need(gpu == {} and a["environment"].get("CUDA_VISIBLE_DEVICES") == "", "software fixture must not see CUDA")
++    else:
++        need(set(gpu) == {"uuid", "allocator_cap_bytes", "preweight_free_bytes", "later_free_bytes"}, "explicit GPU policy")
++        need(re.fullmatch(r"GPU-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}", gpu["uuid"]) is not None and a["environment"].get("CUDA_VISIBLE_DEVICES") == gpu["uuid"], "exact GPU")
++        need(a["environment"].get("PYTORCH_CUDA_ALLOC_CONF") == "backend:native", "native allocator")
++        need(all(type(gpu[k]) is int and gpu[k] > 0 for k in ("allocator_cap_bytes", "preweight_free_bytes", "later_free_bytes")), "positive resource bounds")
++    for key in ("manifest", "paired_manifest", "protocol", "pair_review", "base", "adapter", "review"):
++        need(type(a[key]) is dict and set(a[key]) == {"path", "sha256"}, "bound input format")
++        p = Path(a[key]["path"])
++        need(p.is_absolute() and p == p.resolve(), "canonical input path")
++    manifest, rows = load_reviewed_manifest(Path(a["manifest"]["path"]), a["manifest"]["sha256"])
++    need(manifest["arm"] == a["arm"] and manifest["base_sha256"] == a["base"]["sha256"] and manifest["p0_adapter_sha256"] == a["adapter"]["sha256"], "arm/base/P0 manifest mismatch")
++    validate_config(manifest["training_config"], len(rows))
++    other, other_rows = load_reviewed_manifest(Path(a["paired_manifest"]["path"]), a["paired_manifest"]["sha256"])
++    validate_config(other["training_config"], len(other_rows))
++    b, c = (manifest, other) if a["arm"] == "B" else (other, manifest)
++    compare_initial_conditions(b, c)
++    protocol = bind(a["protocol"]["path"], a["protocol"]["sha256"])
++    if mode == "preflight":
++        need(not any(name in sys.modules for name in PACKAGES), "preflight package already imported")
++    bind_protocol_runtime(protocol, a)
++    bind_protocol_training(protocol, manifest, rows, a["arm"])
++    bind_protocol_training(protocol, other, other_rows, other["arm"])
++    verify_static(protocol.get("runtime_identity"), a["interpreter"], protocol.get("epoch_shuffle_rule", {}))
++    if mode == "preflight":
++        need(not any(name in sys.modules for name in PACKAGES), "preflight imported a target package")
++    b_sha, c_sha = ((a["manifest"]["sha256"], a["paired_manifest"]["sha256"]) if a["arm"] == "B" else (a["paired_manifest"]["sha256"], a["manifest"]["sha256"]))
++    pair_review = bind(a["pair_review"]["path"], a["pair_review"]["sha256"])
++    need(pair_review == {"schema": "SI_CONTINUATION_PAIR_REVIEW_V1", "decision": "PASS_PROTOCOL_AND_PAIR", "source_sha": a["source_sha"], "b_manifest_sha256": b_sha, "c_manifest_sha256": c_sha, "protocol_sha256": a["protocol"]["sha256"]}, "independent protocol and pair review")
++    for key in ("base", "adapter"):
++        path = Path(a[key]["path"])
++        if a["evidence_class"] == "synthetic_cpu":
++            need(sum(x.stat().st_size for x in path.rglob("*") if x.is_file()) <= 10_000_000, "software model too large")
++        need(tree_sha256(path) == a[key]["sha256"], "model artifact hash mismatch")
++    if a["evidence_class"] == "synthetic_cpu":
++        toy = json.loads((Path(a["base"]["path"]) / "config.json").read_text())
++        need(toy.get("model_type") == "gpt2" and all(type(toy.get(k)) is int and 0 < toy[k] <= v for k, v in {"n_embd": 64, "n_layer": 2, "n_head": 4, "vocab_size": 1024, "n_positions": 256}.items()), "software fixture requires explicitly tiny GPT2 config")
++    review = bind(a["review"]["path"], a["review"]["sha256"])
++    need(review == {"schema": "SI_CONTINUATION_REVIEW_V1", "decision": "PASS_SOFTWARE_ONLY", "source_sha": a["source_sha"], "manifest_sha256": a["manifest"]["sha256"], "arm": a["arm"]}, "independent exact review")
++    output = Path(a["output_path"])
++    preflight = Path(a["preflight_path"])
++    need(output.is_absolute() and output == output.resolve() and output.parent.is_dir() and output.parent.stat().st_uid == os.getuid() and not output.parent.stat().st_mode & 0o022, "private canonical output parent")
++    need(preflight.is_absolute() and preflight == preflight.resolve() and preflight.parent.is_dir() and not preflight.is_relative_to(output), "separate canonical preflight")
++    claim = output.parent / (output.name + ".claim.json")
++    base_args = [a["interpreter"], "-I", str(root / "scripts/run_si_continuation.py")]
++    flag = {"preflight": "--preflight-only", "live": "--live", "worker": "--worker"}[mode]
++    expected_argv = base_args + [flag, "--authorization", str(auth_path), "--authorization-sha256", auth_sha]
++    binding = {"authorization_sha256": auth_sha, "manifest_sha256": a["manifest"]["sha256"], "paired_manifest_sha256": a["paired_manifest"]["sha256"], "protocol_sha256": a["protocol"]["sha256"], "pair_review_sha256": a["pair_review"]["sha256"], "runtime_identity_sha256": identity_digest(protocol["runtime_identity"]), "source_sha": a["source_sha"], "arm": a["arm"], "run_id": a["run_id"], "output_path": a["output_path"], "evidence_class": a["evidence_class"]}
++    if mode == "preflight":
++        need(argv == expected_argv and not output.exists() and not claim.exists() and not preflight.exists(), "fresh zero-science preflight")
++        return a, binding
++    need(clearance_path is not None and clearance_sha is not None, "separate launch clearance required")
++    clearance = bind(clearance_path, clearance_sha)
++    need(clearance == {"schema": "SI_CONTINUATION_CLEARANCE_V1", "decision": "RELEASE_ONE_ARM", "binding": binding, "preflight_sha256": file_sha256(preflight), "maximum_launches": 1, "retry_authorized": False}, "exact separate clearance")
++    previous = bind(preflight, clearance["preflight_sha256"])
++    need(previous == {"schema": "SI_CONTINUATION_PREFLIGHT_V1", "binding": binding, "status": "PREFLIGHT_ONLY_PASS", "runtime_check": "STATIC_METADATA_ONLY_NO_PACKAGE_IMPORTS", "effects": {"tokenizer": 0, "model": 0, "cuda": 0, "training": 0, "environment": 0}}, "matching zero-science receipt")
++    expected_argv += ["--clearance", str(clearance_path), "--clearance-sha256", clearance_sha]
++    if mode == "live":
++        need(argv == expected_argv and not output.exists() and not claim.exists(), "one exact fresh launch")
++    else:
++        expected_argv += ["--launch-context-sha256", launch_context_sha]
++        need(argv == expected_argv and launch_context_sha is not None, "exact worker invocation")
++        context = bind(output / "launch_context.json", launch_context_sha)
++        need(context["binding"] == binding and context["supervisor_pid"] == os.getppid(), "same real supervisor")
++        actual_parent = [x.decode() for x in Path(f"/proc/{os.getppid()}/cmdline").read_bytes().split(b"\0") if x]
++        need(actual_parent == ["--live" if x == "--worker" else x for x in expected_argv[:-2]], "real supervisor argv")
++        until = time.monotonic() + 3
++        start = output / "worker_start.json"
++        while not start.exists() and time.monotonic() < until:
++            time.sleep(.01)
++        w = json.loads(start.read_bytes())
++        tick = int(Path("/proc/self/stat").read_text().rsplit(")", 1)[1].split()[19])
++        need(w == {"pid": os.getpid(), "uid": os.getuid(), "start_tick": tick, "pgid": os.getpgid(0), "sid": os.getsid(0), "argv": argv, "launch_context_sha256": launch_context_sha}, "real child process identity")
++        arm_parent_death(context["supervisor_pid"], context["supervisor_start_tick"])
++    return a, binding
++
++
++def preflight(a, binding):
++    value = {"schema": "SI_CONTINUATION_PREFLIGHT_V1", "binding": binding, "status": "PREFLIGHT_ONLY_PASS", "runtime_check": "STATIC_METADATA_ONLY_NO_PACKAGE_IMPORTS", "effects": {"tokenizer": 0, "model": 0, "cuda": 0, "training": 0, "environment": 0}}
++    atomic_fresh_json(Path(a["preflight_path"]), value)
++    return value
+diff --git a/src/self_improvement/continuation/resource.py b/src/self_improvement/continuation/resource.py
+new file mode 100644
+index 0000000..582087d
+--- /dev/null
++++ b/src/self_improvement/continuation/resource.py
+@@ -0,0 +1,64 @@
++"""Shared GPU guard: device identity and allocator, not exclusive ownership."""
++from __future__ import annotations
++import json
++import os
++import time
++from pathlib import Path
++
++from self_improvement.si_p3.runtime_backend import cuda_uuid_matches
++from .training import ContractError
++
++
++class SharedResource:
++    def __init__(self, gpu: dict, record_path: Path, *, strict_no_allocator_retry: bool = False):
++        self.gpu = gpu
++        self.record_path = record_path
++        self.strict_no_allocator_retry = strict_no_allocator_retry
++        self.configured = False
++
++    def __call__(self, point: str):
++        import torch
++        row = {"point": point, "observed_monotonic": time.monotonic(), "exclusive_gpu": False, "device_wide_delta_attribution": False, "nvml_process_mapping": "UNPROVEN"}
++        try:
++            if torch.cuda.device_count() != 1:
++                raise ContractError("exactly one visible CUDA device required")
++            observed = str(getattr(torch.cuda.get_device_properties(0), "uuid", ""))
++            row["observed_uuid"] = observed
++            if not cuda_uuid_matches(observed, self.gpu["uuid"]):
++                raise ContractError("CUDA UUID mismatch or unavailable")
++            if torch.cuda.memory.get_allocator_backend() != "native":
++                raise ContractError("native CUDA allocator required")
++            free, total = torch.cuda.mem_get_info(0)
++            if not self.configured:
++                if point != "before_model_load" or free < self.gpu["preweight_free_bytes"] or self.gpu["allocator_cap_bytes"] > total:
++                    raise ContractError("preweight GPU capacity insufficient")
++                fraction = self.gpu["allocator_cap_bytes"] / total
++                torch.cuda.memory.set_per_process_memory_fraction(fraction, 0)
++                self.configured = True
++            fraction = torch.cuda.memory.get_per_process_memory_fraction(0)
++            stats = torch.cuda.memory.memory_stats(0)
++            reserved = stats.get("reserved_bytes.all.current")
++            allocated = stats.get("allocated_bytes.all.current")
++            row.update(free_bytes=free, total_bytes=total, reserved_bytes=reserved, allocator_fraction=fraction,
++                       allocated_bytes=allocated,
++                       allocated_peak_bytes=stats.get("allocated_bytes.all.peak"), reserved_peak_bytes=stats.get("reserved_bytes.all.peak"),
++                       allocator_ooms=stats.get("num_ooms"), allocator_retries=stats.get("num_alloc_retries"))
++            if any(type(row[key]) is not int or row[key] < 0 for key in ("allocated_bytes", "reserved_bytes", "allocator_ooms", "allocator_retries", "allocated_peak_bytes", "reserved_peak_bytes")):
++                raise ContractError("allocator peak/OOM/retry counters unavailable")
++            if row["allocator_ooms"] != 0:
++                raise ContractError("allocator OOM detected")
++            if self.strict_no_allocator_retry and row["allocator_retries"] != 0:
++                raise ContractError("allocator allocation retry detected")
++            if not (allocated <= reserved <= row["reserved_peak_bytes"] <= self.gpu["allocator_cap_bytes"] and allocated <= row["allocated_peak_bytes"] <= row["reserved_peak_bytes"]) or abs(fraction * total - self.gpu["allocator_cap_bytes"]) > 1:
++                raise ContractError("allocator cap drift")
++            if free < (self.gpu["preweight_free_bytes"] if point == "before_model_load" else self.gpu["later_free_bytes"]):
++                raise ContractError("global free memory below frozen threshold")
++            row["status"] = "PASS"
++        except BaseException as exc:
++            row.update(status="FAILED", error=f"{type(exc).__name__}: {exc}")
++            raise
++        finally:
++            with self.record_path.open("a", encoding="utf-8") as handle:
++                handle.write(json.dumps(row, sort_keys=True) + "\n")
++                handle.flush()
++                os.fsync(handle.fileno())
+diff --git a/src/self_improvement/continuation/runtime_identity.py b/src/self_improvement/continuation/runtime_identity.py
+new file mode 100644
+index 0000000..cf8561f
+--- /dev/null
++++ b/src/self_improvement/continuation/runtime_identity.py
+@@ -0,0 +1,122 @@
++"""Pinned interpreter and package identity, separating static from real import."""
++from __future__ import annotations
++
++import hashlib
++import importlib
++import importlib.metadata
++import importlib.util
++import json
++import os
++import sys
++from pathlib import Path
++
++from self_improvement.si_s01.evidence import atomic_fresh_json
++from .training import ContractError, file_sha256
++
++PACKAGES = {"torch": "torch", "peft": "peft", "transformers": "transformers", "tokenizers": "tokenizers", "safetensors": "safetensors", "accelerate": "accelerate", "huggingface_hub": "huggingface-hub"}
++
++
++def python_version() -> str:
++    return sys.version
++
++
++def package_tree_sha256(root: Path) -> str:
++    """All package source, assets and binaries; omit only Python bytecode caches.
++
++    Symlinks are rejected rather than following mutable links outside the tree.
++    This does not claim to hash external shared libraries or the whole environment.
++    """
++    if root.is_symlink() or not root.is_dir():
++        raise ContractError("package root must be an ordinary directory")
++    entries = []
++    for current, directories, files in os.walk(root, followlinks=False):
++        parent = Path(current)
++        directories[:] = sorted(d for d in directories if d != "__pycache__")
++        if any((parent / d).is_symlink() for d in directories):
++            raise ContractError("package tree directory symlink is forbidden")
++        for name in sorted(files):
++            if name.endswith((".pyc", ".pyo")):
++                continue
++            path = parent / name
++            if path.is_symlink() or not path.is_file():
++                raise ContractError("package tree non-ordinary file or symlink")
++            entries.append([path.relative_to(root).as_posix(), path.stat().st_size, file_sha256(path)])
++    if not entries:
++        raise ContractError("empty package tree")
++    # Path component ordering matches the independent protocol fingerprint.
++    entries.sort(key=lambda entry: Path(entry[0]))
++    return hashlib.sha256(json.dumps(entries, ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
++
++
++def static_identity() -> dict:
++    """Observe locations and metadata without importing the target packages."""
++    interpreter = Path(sys.executable).resolve()
++    packages = {}
++    for name, distribution in PACKAGES.items():
++        spec = importlib.util.find_spec(name)
++        if spec is None or not isinstance(spec.origin, str):
++            raise ContractError(f"missing static package origin: {name}")
++        path = Path(spec.origin).resolve()
++        if not path.is_file():
++            raise ContractError(f"package origin is not a file: {name}")
++        packages[name] = {"path": str(path), "sha256": file_sha256(path), "version": importlib.metadata.version(distribution), "tree_sha256": package_tree_sha256(path.parent)}
++    return {"interpreter": {"path": str(interpreter), "sha256": file_sha256(interpreter), "python_version": python_version()}, "packages": packages}
++
++
++def identity_digest(expected: dict) -> str:
++    return hashlib.sha256(json.dumps(expected, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
++
++
++def verify_static(expected: dict, interpreter: str, shuffle: dict) -> None:
++    """Check signed expectations, interpreter bytes, module spec and metadata."""
++    if not isinstance(expected, dict) or set(expected) != {"interpreter", "packages"}:
++        raise ContractError("runtime identity schema")
++    if not isinstance(expected["interpreter"], dict) or set(expected["interpreter"]) != {"path", "sha256", "python_version"}:
++        raise ContractError("interpreter identity schema")
++    if not isinstance(expected["packages"], dict) or set(expected["packages"]) != set(PACKAGES):
++        raise ContractError("runtime package identity set")
++    for name, item in expected["packages"].items():
++        if not isinstance(item, dict) or set(item) != {"path", "sha256", "version", "tree_sha256"}:
++            raise ContractError(f"runtime package identity schema: {name}")
++    if Path(interpreter).resolve() != Path(expected["interpreter"]["path"]) or Path(interpreter).resolve() != Path(sys.executable).resolve():
++        raise ContractError("pinned interpreter path differs")
++    if shuffle.get("python_version_binding") != expected["interpreter"]["python_version"]:
++        raise ContractError("shuffle Python version is not the pinned version")
++    interpreter_path = Path(sys.executable).resolve()
++    if file_sha256(interpreter_path) != expected["interpreter"]["sha256"] or python_version() != expected["interpreter"]["python_version"]:
++        raise ContractError("static interpreter bytes or version mismatch")
++    for name, distribution in PACKAGES.items():
++        spec = importlib.util.find_spec(name)
++        if spec is None or not isinstance(spec.origin, str):
++            raise ContractError(f"missing static package origin: {name}")
++        path = Path(spec.origin).resolve()
++        signed = expected["packages"][name]
++        if str(path) != signed["path"] or file_sha256(path) != signed["sha256"] or importlib.metadata.version(distribution) != signed["version"]:
++            raise ContractError(f"static package origin, version or entrypoint mismatch: {name}")
++    for name in PACKAGES:
++        signed = expected["packages"][name]
++        if package_tree_sha256(Path(signed["path"]).parent) != signed["tree_sha256"]:
++            raise ContractError(f"static package tree mismatch: {name}")
++
++
++def verify_actual_imports(expected: dict, receipt_path: Path) -> dict:
++    """Import actual modules once and persist observations before model work."""
++    result = {"schema": "SI_CONTINUATION_RUNTIME_IMPORT_V1", "runtime_identity_sha256": identity_digest(expected), "python_version": python_version(), "modules": {}, "status": "FAILED"}
++    try:
++        if result["python_version"] != expected["interpreter"]["python_version"] or Path(sys.executable).resolve() != Path(expected["interpreter"]["path"]) or file_sha256(Path(sys.executable).resolve()) != expected["interpreter"]["sha256"]:
++            raise ContractError("actual interpreter identity drift")
++        for name in PACKAGES:
++            module = importlib.import_module(name)
++            path = Path(module.__file__).resolve()
++            actual = {"path": str(path), "sha256": file_sha256(path), "version": str(module.__version__), "tree_sha256": package_tree_sha256(path.parent), "spec_origin": str(Path(module.__spec__.origin).resolve())}
++            result["modules"][name] = actual
++            signed = expected["packages"][name]
++            if {k: actual[k] for k in ("path", "sha256", "version", "tree_sha256")} != signed or actual["spec_origin"] != signed["path"]:
++                raise ContractError(f"actual imported package identity mismatch: {name}")
++        result["status"] = "PASS_ACTUAL_IMPORTED_MODULES"
++    except BaseException as exc:
++        result["error"] = f"{type(exc).__name__}: {exc}"
++        atomic_fresh_json(receipt_path, result)
++        raise
++    atomic_fresh_json(receipt_path, result)
++    return result
+diff --git a/src/self_improvement/continuation/supervisor.py b/src/self_improvement/continuation/supervisor.py
+new file mode 100644
+index 0000000..547e4e8
+--- /dev/null
++++ b/src/self_improvement/continuation/supervisor.py
+@@ -0,0 +1,121 @@
++"""One allocation, one child, hard timeout, descendant cleanup, exit receipt."""
++from __future__ import annotations
++
++import ctypes
++import os
++import subprocess
++import time
++from pathlib import Path
++
++from self_improvement.si_p3.runtime_supervisor import process_table, group_members, descendants, kill_identities
++from self_improvement.si_s01.evidence import atomic_fresh_json, fresh_json
++from .training import file_sha256
++
++
++def supervise(command, output: Path, *, binding, environment, seconds, entered, gpu_allocated,
++              receipt_schema="SI_CONTINUATION_SUPERVISOR_EXIT_V1", result_relative="training/training_result.json", result_key="training_result_sha256"):
++    if (receipt_schema, result_relative, result_key) not in (
++        ("SI_CONTINUATION_SUPERVISOR_EXIT_V1", "training/training_result.json", "training_result_sha256"),
++        ("SI_CONTINUATION_ENGINEERING_SUPERVISOR_EXIT_V1", "engineering_result.json", "engineering_result_sha256"),
++    ):
++        raise ValueError("unrecognized supervisor result contract")
++    claim = output.parent / (output.name + ".claim.json")
++    fresh_json(claim, {"binding": binding, "maximum_launches": 1, "retry_authorized": False})
++    output.mkdir(exist_ok=False)
++    deadline = entered + seconds
++    baseline = {pid for pid, info in process_table().items() if info[0] == os.getpid()}
++    libc = ctypes.CDLL(None, use_errno=True)
++    previous = ctypes.c_int()
++    have_old = False
++    process = None
++    returncode = None
++    timed_out = False
++    failure = None
++    known = {}
++    context_sha = None
++    before = []
++    worker_identity = None
++
++    def discover():
++        table = process_table()
++        if process is not None:
++            known.update(descendants(process.pid, table))
++        known.update({pid: info for pid, info in table.items() if info[0] == os.getpid() and pid not in baseline and (process is None or pid != process.pid)})
++        return table
++
++    try:
++        if time.monotonic() >= deadline:
++            raise RuntimeError("deadline expired before spawn")
++        if libc.prctl(37, ctypes.byref(previous), 0, 0, 0) != 0:
++            raise RuntimeError("cannot get subreaper state")
++        have_old = True
++        if libc.prctl(36, 1, 0, 0, 0) != 0:
++            raise RuntimeError("cannot set subreaper")
++        tick = int(Path("/proc/self/stat").read_text().rsplit(")", 1)[1].split()[19])
++        context = {"binding": binding, "supervisor_pid": os.getpid(), "supervisor_start_tick": tick,
++                   "allocation_started_monotonic": entered, "absolute_deadline_monotonic": deadline,
++                   "retry_authorized": False}
++        fresh_json(output / "launch_context.json", context)
++        context_sha = file_sha256(output / "launch_context.json")
++        worker_argv = list(command) + ["--launch-context-sha256", context_sha]
++        with (output / "worker.stdout").open("xb") as stdout, (output / "worker.stderr").open("xb") as stderr:
++            process = subprocess.Popen(worker_argv, stdout=stdout, stderr=stderr, env=dict(environment), start_new_session=True)
++            worker_identity = process_table().get(process.pid)
++            if worker_identity is None:
++                raise RuntimeError("cannot observe worker start")
++            atomic_fresh_json(output / "worker_start.json", {"pid": process.pid, "uid": os.getuid(), "start_tick": worker_identity[1], "pgid": process.pid, "sid": process.pid, "argv": worker_argv, "launch_context_sha256": context_sha})
++            try:
++                returncode = process.wait(timeout=max(0, deadline - min(2, seconds / 10) - time.monotonic()))
++            except subprocess.TimeoutExpired:
++                timed_out = True
++    except BaseException as exc:
++        failure = {"type": type(exc).__name__, "message": str(exc)}
++    finally:
++        if process is not None:
++            before = group_members(process.pid)
++            discover()
++            if worker_identity is not None:
++                kill_identities({process.pid: worker_identity})
++            elif process.poll() is None:
++                process.kill()  # unreaped Popen child; PID cannot yet be reused
++            kill_identities(known)
++            try:
++                returncode = process.wait(timeout=max(0, deadline - time.monotonic()))
++            except subprocess.TimeoutExpired:
++                pass
++            until = max(time.monotonic() + .05, min(deadline, time.monotonic() + 1))
++            while True:
++                discover()
++                kill_identities(known)
++                for pid in list(known):
++                    try:
++                        os.waitpid(pid, os.WNOHANG)
++                    except ChildProcessError:
++                        pass
++                table = discover()
++                alive = [pid for pid, info in known.items() if pid in table and table[pid][1:] == info[1:]]
++                if not group_members(process.pid) and not alive:
++                    break
++                if time.monotonic() >= until:
++                    break
++                time.sleep(.005)
++            if returncode is None:
++                returncode = process.poll()
++        table = discover()
++        remaining = sorted(set(group_members(process.pid) if process else []) | {pid for pid, info in known.items() if pid in table and table[pid][1:] == info[1:]})
++        restored = have_old and libc.prctl(36, previous.value, 0, 0, 0) == 0
++        elapsed = time.monotonic() - entered
++        cleanup = returncode is not None and not remaining
++        receipt = {"schema": receipt_schema, "binding": binding,
++                   "authentic_returncode": returncode, "deadline_triggered": timed_out, "supervisor_error": failure,
++                   "members_before_cleanup": before, "members_after_cleanup": remaining,
++                   "cleanup_established": cleanup, "subreaper_restored": restored,
++                   "elapsed_seconds": elapsed, "allocated_device_hours": gpu_allocated * elapsed / 3600,
++                   "within_time_cap": elapsed <= seconds, "retry_authorized": False,
++                   "launch_context_sha256": context_sha,
++                   "runtime_import_receipt_sha256": file_sha256(output / "runtime_import_receipt.json") if (output / "runtime_import_receipt.json").is_file() else None,
++                   "resource_receipt_sha256": file_sha256(output / "resource.jsonl") if (output / "resource.jsonl").is_file() else None,
++                   result_key: file_sha256(output / result_relative) if (output / result_relative).is_file() else None}
++        receipt["status"] = "EXIT_RECORDED" if cleanup and restored and not timed_out and not failure and elapsed <= seconds else "INCONCLUSIVE"
++        fresh_json(output / "supervisor_exit.json", receipt)
++    return receipt
+diff --git a/src/self_improvement/continuation/training.py b/src/self_improvement/continuation/training.py
+new file mode 100644
+index 0000000..ee891fc
+--- /dev/null
++++ b/src/self_improvement/continuation/training.py
+@@ -0,0 +1,414 @@
++"""Frozen-P0 continuation primitives. This module does not grant run authority.
++
++The caller must supply an independently reviewed manifest and implement a
++separate supervised launcher, wall-clock enforcement and resource gate. No
++configuration, data selection, evaluation or restart policy is implicit here.
++"""
++
++from __future__ import annotations
++
++import hashlib
++import json
++import math
++import os
++import time
++from pathlib import Path
++from typing import Any, Callable
++
++from sft.masking import tokenize_prompt_completion
++
++
++class ContractError(ValueError):
++    pass
++
++
++def file_sha256(path: Path) -> str:
++    digest = hashlib.sha256()
++    with path.open("rb") as handle:
++        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
++            digest.update(chunk)
++    return digest.hexdigest()
++
++
++def tree_sha256(path: Path) -> str:
++    """Hash file names, sizes and contents; allow file links in HF snapshots."""
++    if path.is_symlink() or not path.is_dir():
++        raise ContractError("model and adapter must be ordinary directories")
++    entries = []
++    for item in sorted(path.rglob("*")):
++        if item.is_symlink() and not item.is_file():
++            raise ContractError("broken or directory symlink in frozen artifact tree")
++        if item.is_file():
++            entries.append([item.relative_to(path).as_posix(), item.stat().st_size, file_sha256(item)])
++        elif not item.is_dir():
++            raise ContractError("unexpected non-file in frozen artifact tree")
++    if not entries:
++        raise ContractError("frozen artifact tree is empty")
++    return hashlib.sha256(json.dumps(entries, ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
++
++
++def _positive_int(value: Any, field: str) -> int:
++    if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
++        raise ContractError(f"{field} must be a positive integer")
++    return value
++
++
++def _finite(value: Any, field: str, *, positive: bool = False) -> float:
++    if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
++        raise ContractError(f"{field} must be finite")
++    value = float(value)
++    if value < 0 or (positive and value == 0):
++        raise ContractError(f"{field} is outside its allowed range")
++    return value
++
++
++def read_bound_json(path: Path, expected: str) -> dict[str, Any]:
++    contents = path.read_bytes()
++    if not isinstance(expected, str) or len(expected) != 64 or hashlib.sha256(contents).hexdigest() != expected:
++        raise ContractError(f"hash mismatch for {path}")
++    result = json.loads(contents)
++    if not isinstance(result, dict):
++        raise ContractError("bound document must be a JSON object")
++    return result
++
++
++def load_reviewed_manifest(path: Path, sha256: str) -> tuple[dict[str, Any], list[dict[str, Any]]]:
++    """Verify exact bytes and explicit sample order, groups and exposure counts.
++
++    The external audit file is *bound*, not independently adjudicated by this
++    function. A separate protocol gate must decide whether its review is valid.
++    """
++    manifest = read_bound_json(path, sha256)
++    if manifest.get("schema") != "SI_CONTINUATION_DATA_V1" or manifest.get("arm") not in ("B", "C"):
++        raise ContractError("unexpected manifest schema or arm")
++    binding = manifest.get("dataset")
++    review = manifest.get("independent_review")
++    if not isinstance(binding, dict) or not isinstance(review, dict):
++        raise ContractError("dataset and independent review bindings are required")
++    review_doc = read_bound_json(Path(review["path"]), review["sha256"])
++    if review_doc.get("decision") != "PASS_DATA_ONLY":
++        raise ContractError("data review decision is not PASS_DATA_ONLY")
++    if review_doc.get("dataset_sha256") != binding.get("sha256"):
++        raise ContractError("data review does not bind dataset bytes")
++    dataset_path = Path(binding["path"])
++    dataset_contents = dataset_path.read_bytes()
++    if hashlib.sha256(dataset_contents).hexdigest() != binding.get("sha256"):
++        raise ContractError("dataset hash mismatch")
++    rows = []
++    for line in dataset_contents.decode("utf-8").splitlines():
++        row = json.loads(line)
++        if not isinstance(row, dict) or any(not isinstance(row.get(k), str) or not row[k] for k in ("sample_id", "task_group", "prompt", "completion")):
++            raise ContractError("invalid source row")
++        rows.append(row)
++    by_id = {r["sample_id"]: r for r in rows}
++    if not rows or len(by_id) != len(rows):
++        raise ContractError("empty dataset or duplicate sample IDs")
++    schedule = manifest.get("sample_schedule")
++    if not isinstance(schedule, list) or not schedule:
++        raise ContractError("explicit sample schedule is required")
++    order = manifest.get("ordered_sample_ids")
++    if not isinstance(order, list) or not order or any(not isinstance(x, str) for x in order):
++        raise ContractError("explicit complete training order is required")
++    epochs = manifest.get("epoch_lengths")
++    each_once = manifest.get("epoch_each_sample_once")
++    task_exposures = manifest.get("task_exposures")
++    if not isinstance(epochs, list) or not epochs or type(each_once) is not bool or not isinstance(task_exposures, dict):
++        raise ContractError("explicit epoch and task exposure policy required")
++    if any(_positive_int(x, "epoch length") <= 0 for x in epochs) or sum(epochs) != len(order):
++        raise ContractError("epoch lengths do not cover complete training order")
++    binding = {"sample_schedule": schedule, "ordered_sample_ids": order, "epoch_lengths": epochs,
++               "epoch_each_sample_once": each_once, "task_exposures": task_exposures}
++    schedule_hash = hashlib.sha256(json.dumps(binding, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
++    if review_doc.get("schedule_sha256") != schedule_hash or review_doc.get("arm") != manifest["arm"]:
++        raise ContractError("data review does not bind arm and exact schedule")
++    seen: set[str] = set()
++    required_counts: dict[str, int] = {}
++    for entry in schedule:
++        if not isinstance(entry, dict) or entry.get("sample_id") not in by_id:
++            raise ContractError("schedule references missing sample")
++        sample_id = entry["sample_id"]
++        if sample_id in seen:
++            raise ContractError("duplicate schedule sample")
++        seen.add(sample_id)
++        row = by_id[sample_id]
++        if entry.get("task_group") != row["task_group"]:
++            raise ContractError("task grouping does not match reviewed source")
++        exposures = _positive_int(entry.get("exposures"), "exposures")
++        required_counts[sample_id] = exposures
++    if seen != set(by_id):
++        raise ContractError("schedule must explicitly disposition every dataset sample")
++    from collections import Counter
++    if Counter(order) != Counter(required_counts):
++        raise ContractError("training order differs from declared sample exposure counts")
++    if each_once:
++        cursor = 0
++        for length in epochs:
++            if Counter(order[cursor:cursor + length]) != Counter({key: 1 for key in by_id}):
++                raise ContractError("epoch omits or duplicates a reviewed sample")
++            cursor += length
++    actual_task_exposures = Counter()
++    for sample_id in order:
++        actual_task_exposures[by_id[sample_id]["task_group"]] += 1
++    if any(type(v) is not int or v <= 0 for v in task_exposures.values()) or dict(actual_task_exposures) != task_exposures:
++        raise ContractError("task exposure counts differ from frozen schedule")
++    return manifest, [by_id[sample_id] for sample_id in order]
++
++
++def encode_examples(tokenizer: Any, rows: list[dict[str, Any]], max_length: int) -> list[dict[str, Any]]:
++    _positive_int(max_length, "max_length")
++    if not getattr(tokenizer, "eos_token", None) or getattr(tokenizer, "eos_token_id", None) is None:
++        raise ContractError("tokenizer must supply EOS string and token ID")
++    encoded = []
++    for row in rows:
++        tokens = tokenize_prompt_completion(tokenizer, row["prompt"], row["completion"], max_length=max_length)
++        if tokens["input_ids"][-1] != tokenizer.eos_token_id or tokens["labels"][-1] != tokenizer.eos_token_id:
++            raise ContractError("active final EOS token required")
++        supervised = sum(x != -100 for x in tokens["labels"][1:])
++        if supervised == 0:
++            raise ContractError("no causally supervised tokens")
++        encoded.append({**tokens, "sample_id": row["sample_id"], "task_group": row["task_group"], "supervised_tokens": supervised})
++    return encoded
++
++
++def collate(items: list[dict[str, Any]], pad_token_id: int) -> dict[str, Any]:
++    import torch
++    length = max(len(x["input_ids"]) for x in items)
++    result = {"input_ids": [], "attention_mask": [], "labels": []}
++    for item in items:
++        pad = length - len(item["input_ids"])
++        result["input_ids"].append(item["input_ids"] + [pad_token_id] * pad)
++        result["attention_mask"].append(item["attention_mask"] + [0] * pad)
++        result["labels"].append(item["labels"] + [-100] * pad)
++    return {key: torch.tensor(value, dtype=torch.long) for key, value in result.items()}
++
++
++def validate_config(config: dict[str, Any], n: int) -> None:
++    required = {"seed", "batch_size", "gradient_accumulation_steps", "optimizer_steps", "learning_rate", "weight_decay", "max_grad_norm", "max_length", "max_supervised_tokens", "max_input_tokens", "max_wall_seconds", "adam_beta1", "adam_beta2", "adam_epsilon", "gradient_checkpointing", "use_cache", "optimizer", "optimizer_fused", "scheduler", "warmup_steps", "min_lr_ratio", "loss_normalization"}
++    if set(config) != required:
++        raise ContractError("training config has missing or unexpected keys")
++    for field in ("batch_size", "gradient_accumulation_steps", "optimizer_steps", "max_length", "max_supervised_tokens", "max_input_tokens"):
++        _positive_int(config[field], field)
++    if isinstance(config["seed"], bool) or not isinstance(config["seed"], int) or config["seed"] < 0:
++        raise ContractError("seed must be a nonnegative integer")
++    if type(config["gradient_checkpointing"]) is not bool or config["use_cache"] is not False:
++        raise ContractError("gradient_checkpointing must be bool and use_cache must be false")
++    if config["optimizer"] != "adamw" or type(config["optimizer_fused"]) is not bool or config["scheduler"] != "cosine" or config["loss_normalization"] != "active_tokens":
++        raise ContractError("unsupported optimizer, scheduler or loss normalization")
++    warmup = config["warmup_steps"]
++    if type(warmup) is not int or not 0 <= warmup < config["optimizer_steps"]:
++        raise ContractError("warmup_steps must leave at least one cosine update")
++    if _finite(config["min_lr_ratio"], "min_lr_ratio") > 1:
++        raise ContractError("minimum LR ratio must be at most one")
++    for field in ("learning_rate", "max_grad_norm", "max_wall_seconds", "adam_epsilon"):
++        _finite(config[field], field, positive=True)
++    _finite(config["weight_decay"], "weight_decay")
++    for field in ("adam_beta1", "adam_beta2"):
++        if _finite(config[field], field) >= 1:
++            raise ContractError(f"{field} must be < 1")
++    consumed = config["batch_size"] * config["gradient_accumulation_steps"] * config["optimizer_steps"]
++    if consumed != n:
++        raise ContractError("schedule exposure count must exactly match the configured training steps")
++
++
++def learning_rate_for_step(config: dict[str, Any], step: int) -> float:
++    """One-based linear warmup, then cosine to the frozen minimum at last step."""
++    total, warmup = config["optimizer_steps"], config["warmup_steps"]
++    if type(step) is not int or not 0 <= step < total:
++        raise ContractError("optimizer step outside frozen range")
++    if step < warmup:
++        factor = (step + 1) / warmup
++    else:
++        progress = (step + 1 - warmup) / (total - warmup)
++        floor = config["min_lr_ratio"]
++        factor = floor + (1 - floor) * (1 + math.cos(math.pi * progress)) / 2
++    return config["learning_rate"] * factor
++
++
++def compare_initial_conditions(manifest_b: dict[str, Any], manifest_c: dict[str, Any]) -> None:
++    """Check comparable initial conditions; data balance is reviewed separately."""
++    if manifest_b.get("arm") != "B" or manifest_c.get("arm") != "C":
++        raise ContractError("expected B and C arm manifests")
++    for key in ("base_sha256", "p0_adapter_sha256", "training_config"):
++        if key not in manifest_b or manifest_b[key] != manifest_c.get(key):
++            raise ContractError(f"B/C initial condition mismatch: {key}")
++
++
++def load_p0_adapter(base_model: Any, adapter_dir: Path) -> Any:
++    """Load the *existing* adapter, and verify that only LoRA weights train."""
++    from peft import PeftModel, get_peft_model_state_dict
++    from safetensors.torch import load_file
++    import torch
++    model = PeftModel.from_pretrained(base_model, str(adapter_dir), is_trainable=True)
++    trainable = [name for name, param in model.named_parameters() if param.requires_grad]
++    if not trainable or any("lora_" not in name for name in trainable):
++        raise ContractError("base or non-LoRA adapter parameters are trainable")
++    saved = load_file(str(adapter_dir / "adapter_model.safetensors"), device="cpu")
++    loaded = get_peft_model_state_dict(model)
++    if set(saved) != set(loaded) or any(not torch.equal(saved[k], loaded[k].detach().cpu()) for k in saved):
++        raise ContractError("loaded P0 adapter tensors differ from frozen adapter")
++    return model
++
++
++def load_frozen_local_base(base_dir: Path) -> Any:
++    """Production local-only BF16 model loader; never downloads code or weights."""
++    import torch
++    from transformers import AutoModelForCausalLM
++    return AutoModelForCausalLM.from_pretrained(
++        str(base_dir), torch_dtype=torch.bfloat16, local_files_only=True,
++        trust_remote_code=False, low_cpu_mem_usage=True,
++    )
++
++
++def load_frozen_local_tokenizer(base_dir: Path) -> Any:
++    from transformers import AutoTokenizer
++    return AutoTokenizer.from_pretrained(str(base_dir), local_files_only=True, trust_remote_code=False)
++
++
++def train_from_p0(*, base_dir: Path, base_sha256: str, adapter_dir: Path, adapter_sha256: str,
++                  manifest_path: Path, manifest_sha256: str, config: dict[str, Any], output_dir: Path,
++                  model_loader: Callable[[Path], Any], tokenizer_loader: Callable[[Path], Any],
++                  device: str, clock: Callable[[], float] = time.monotonic,
++                  resource_check: Callable[[str], None] | None = None,
++                  expected_totals: dict[str, int] | None = None,
++                  expected_supervised_per_example: int | None = None) -> dict[str, Any]:
++    """Run a bounded continuation. The calling supervisor must enforce deadlines.
++
++    Explicit injected loaders support testing and reviewed runtime integration.
++    They are not evidence of runtime identity; the launcher must bind loaders.
++    """
++    import torch
++    if output_dir.exists():
++        raise ContractError("output already exists")
++    if tree_sha256(base_dir) != base_sha256 or tree_sha256(adapter_dir) != adapter_sha256:
++        raise ContractError("P0 or base artifact hash mismatch")
++    manifest, rows = load_reviewed_manifest(manifest_path, manifest_sha256)
++    if manifest.get("base_sha256") != base_sha256 or manifest.get("p0_adapter_sha256") != adapter_sha256:
++        raise ContractError("manifest does not bind exact base and P0 adapter")
++    config = json.loads(json.dumps(config, allow_nan=False))
++    if manifest.get("training_config") != config:
++        raise ContractError("training config is not frozen by the manifest")
++    validate_config(config, len(rows))
++    output_dir.mkdir(parents=True, exist_ok=False)
++    started = clock()
++    counts = {"input_tokens": 0, "padded_input_tokens": 0, "supervised_tokens": 0, "microbatches_started": 0, "microbatches_completed": 0, "optimizer_steps": 0}
++    journal_path = output_dir / "training_events.jsonl"
++
++    def event(kind: str, **fields: Any) -> None:
++        with journal_path.open("a", encoding="utf-8") as handle:
++            handle.write(json.dumps({"kind": kind, **fields}, sort_keys=True) + "\n")
++            handle.flush()
++            os.fsync(handle.fileno())
++
++    def deadline() -> None:
++        if clock() - started > config["max_wall_seconds"]:
++            raise ContractError("cooperative wall-clock budget exceeded; supervisor must enforce hard deadline")
++
++    def result(status: str, error: str | None = None) -> dict[str, Any]:
++        return {"schema": "SI_CONTINUATION_RESULT_V1", "status": status, "arm": manifest["arm"],
++                "base_sha256": base_sha256, "p0_adapter_sha256": adapter_sha256,
++                "manifest_sha256": manifest_sha256, "config": config, "counts": counts,
++                "elapsed_seconds": clock() - started, "final_adapter_sha256": None, "error": error}
++
++    try:
++        torch.manual_seed(config["seed"])
++        tokenizer = tokenizer_loader(base_dir)
++        encoded = encode_examples(tokenizer, rows, config["max_length"])
++        actual_totals = {"input_tokens": sum(len(x["input_ids"]) for x in encoded), "supervised_tokens": sum(x["supervised_tokens"] for x in encoded)}
++        if actual_totals["input_tokens"] > config["max_input_tokens"] or actual_totals["supervised_tokens"] > config["max_supervised_tokens"]:
++            raise ContractError("scheduled token exposure exceeds frozen budget before model load")
++        if expected_totals is not None and actual_totals != expected_totals:
++            raise ContractError("encoded token totals differ from frozen protocol before model load")
++        if expected_supervised_per_example is not None and any(x["supervised_tokens"] != expected_supervised_per_example for x in encoded):
++            raise ContractError("per-example supervised token count differs from frozen protocol")
++        event("encoded_schedule_verified", **actual_totals)
++        pad_id = tokenizer.pad_token_id if tokenizer.pad_token_id is not None else tokenizer.eos_token_id
++        deadline()
++        if resource_check:
++            resource_check("before_model_load")
++        event("model_load_started")
++        base = model_loader(base_dir)
++        model = load_p0_adapter(base, adapter_dir)
++        model.to(device)
++        if not hasattr(model, "config"):
++            raise ContractError("model has no verifiable config")
++        model.config.use_cache = config["use_cache"]
++        if model.config.use_cache is not False:
++            raise ContractError("model did not disable cache")
++        if config["gradient_checkpointing"]:
++            if not getattr(model, "supports_gradient_checkpointing", False):
++                raise ContractError("model does not support gradient checkpointing")
++            model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
++            if getattr(model, "is_gradient_checkpointing", None) is not True:
++                raise ContractError("gradient checkpointing not actually enabled")
++        elif getattr(model, "is_gradient_checkpointing", False) is not False:
++            raise ContractError("gradient checkpointing unexpectedly enabled")
++        event("model_load_completed")
++        if resource_check:
++            resource_check("after_model_load")
++        deadline()
++        model.train()
++        optimizer = torch.optim.AdamW((p for p in model.parameters() if p.requires_grad),
++            lr=config["learning_rate"], weight_decay=config["weight_decay"],
++            betas=(config["adam_beta1"], config["adam_beta2"]), eps=config["adam_epsilon"],
++            fused=config["optimizer_fused"])
++        if optimizer.defaults.get("fused") is not config["optimizer_fused"] or len(optimizer.state) != 0:
++            raise ContractError("optimizer mode or fresh-state invariant failed")
++        event("optimizer_configured", optimizer="adamw", fused=optimizer.defaults["fused"], initial_state_entries=len(optimizer.state), scheduler="cosine", loss_normalization="active_tokens")
++        cursor = 0
++        for step in range(config["optimizer_steps"]):
++            optimizer.zero_grad(set_to_none=True)
++            learning_rate = learning_rate_for_step(config, step)
++            for group in optimizer.param_groups:
++                group["lr"] = learning_rate
++            update_size = config["batch_size"] * config["gradient_accumulation_steps"]
++            update_active = sum(item["supervised_tokens"] for item in encoded[cursor:cursor + update_size])
++            if update_active <= 0:
++                raise ContractError("optimizer update has no active label tokens")
++            for _ in range(config["gradient_accumulation_steps"]):
++                deadline()
++                if resource_check:
++                    resource_check("before_microbatch")
++                batch_items = encoded[cursor:cursor + config["batch_size"]]
++                cursor += len(batch_items)
++                input_tokens = sum(len(item["input_ids"]) for item in batch_items)
++                padded_tokens = len(batch_items) * max(len(item["input_ids"]) for item in batch_items)
++                supervised = sum(item["supervised_tokens"] for item in batch_items)
++                if counts["input_tokens"] + input_tokens > config["max_input_tokens"] or counts["supervised_tokens"] + supervised > config["max_supervised_tokens"]:
++                    raise ContractError("token budget exceeded before forward")
++                counts["microbatches_started"] += 1
++                # Reserve before input transfer/forward; charge if either fails.
++                counts["input_tokens"] += input_tokens
++                counts["padded_input_tokens"] += padded_tokens
++                counts["supervised_tokens"] += supervised
++                event("microbatch_started", optimizer_step=step, sample_ids=[x["sample_id"] for x in batch_items], task_groups=[x["task_group"] for x in batch_items], input_tokens=input_tokens, padded_input_tokens=padded_tokens, supervised_tokens=supervised)
++                batch = {k: v.to(device) for k, v in collate(batch_items, pad_id).items()}
++                loss = model(**batch).loss
++                if not bool(torch.isfinite(loss).item()):
++                    raise ContractError("non-finite training loss")
++                (loss * (supervised / update_active)).backward()
++                counts["microbatches_completed"] += 1
++                event("microbatch_completed", optimizer_step=step, loss=float(loss.detach().cpu()))
++            deadline()
++            torch.nn.utils.clip_grad_norm_((p for p in model.parameters() if p.requires_grad), config["max_grad_norm"], error_if_nonfinite=True)
++            event("optimizer_step_started", optimizer_step=step, learning_rate=learning_rate, active_tokens=update_active)
++            optimizer.step()
++            counts["optimizer_steps"] += 1
++            event("optimizer_step_completed", optimizer_step=step)
++            if resource_check:
++                resource_check("after_optimizer_step")
++        deadline()
++        if tree_sha256(base_dir) != base_sha256 or tree_sha256(adapter_dir) != adapter_sha256:
++            raise ContractError("frozen inputs changed during training")
++        load_reviewed_manifest(manifest_path, manifest_sha256)
++        model.save_pretrained(str(output_dir / "final_adapter"))
++        final_hash = tree_sha256(output_dir / "final_adapter")
++        event("final_adapter_saved", sha256=final_hash)
++        outcome = result("COMPLETED")
++        outcome["final_adapter_sha256"] = final_hash
++    except BaseException as exc:
++        outcome = result("FAILED", f"{type(exc).__name__}: {exc}")
++        event("training_failed", error=outcome["error"])
++        (output_dir / "training_result.json").write_text(json.dumps(outcome, indent=2, sort_keys=True) + "\n", encoding="utf-8")
++        raise
++    (output_dir / "training_result.json").write_text(json.dumps(outcome, indent=2, sort_keys=True) + "\n", encoding="utf-8")
++    return outcome
+diff --git a/tests/test_si_continuation_cli.py b/tests/test_si_continuation_cli.py
+new file mode 100644
+index 0000000..72c3070
+--- /dev/null
++++ b/tests/test_si_continuation_cli.py
+@@ -0,0 +1,310 @@
++"""Actual isolated CLI + supervisor with local CPU toy model only."""
++import hashlib
++import json
++import os
++import subprocess
++import sys
++import time
++from datetime import datetime, timedelta, timezone
++from pathlib import Path
++
++import pytest
++import torch
++from peft import LoraConfig, get_peft_model
++from tokenizers import Tokenizer
++from tokenizers.models import WordLevel
++from tokenizers.pre_tokenizers import Whitespace
++from transformers import GPT2Config, GPT2LMHeadModel, PreTrainedTokenizerFast
++
++from self_improvement.continuation.gate import bind_protocol_runtime, bind_protocol_training, source_identity
++from self_improvement.continuation.runtime_identity import static_identity
++from self_improvement.continuation.training import ContractError, file_sha256, learning_rate_for_step, load_reviewed_manifest, tree_sha256
++
++ROOT = Path(__file__).resolve().parents[1]
++PYTHON = Path(os.sys.executable).resolve()
++SCRIPT = ROOT / "scripts/run_si_continuation.py"
++
++
++def write(path, value):
++    path.write_text(json.dumps(value, sort_keys=True) + "\n")
++    return file_sha256(path)
++
++
++@pytest.fixture(scope="session")
++def runtime_identity_snapshot():
++    return static_identity()
++
++
++@pytest.fixture
++def case(tmp_path, runtime_identity_snapshot):
++    torch.set_num_threads(1)
++    base = tmp_path / "base"
++    base.mkdir()
++    tokenizer = Tokenizer(WordLevel({"[UNK]": 0, "[EOS]": 1, "hello": 2, "world": 3, "A1": 4, "A2": 5}, unk_token="[UNK]"))
++    tokenizer.pre_tokenizer = Whitespace()
++    PreTrainedTokenizerFast(tokenizer_object=tokenizer, unk_token="[UNK]", eos_token="[EOS]", pad_token="[EOS]").save_pretrained(base)
++    torch.manual_seed(42)
++    model = GPT2LMHeadModel(GPT2Config(vocab_size=6, n_positions=16, n_embd=8, n_layer=1, n_head=2, bos_token_id=1, eos_token_id=1, pad_token_id=1))
++    model.save_pretrained(base)
++    p0 = get_peft_model(model, LoraConfig(r=2, lora_alpha=4, target_modules=["c_attn"], task_type="CAUSAL_LM"))
++    adapter = tmp_path / "adapter"
++    p0.save_pretrained(adapter)
++    rows = [{"sample_id": "a", "task_group": "one", "family": "alpha", "prompt": "hello", "completion": " A1"},
++            {"sample_id": "b", "task_group": "two", "family": "beta", "prompt": "world", "completion": " A2"}]
++    data = tmp_path / "data.jsonl"
++    data.write_text("".join(json.dumps(x) + "\n" for x in rows))
++    schedule = [{"sample_id": x["sample_id"], "task_group": x["task_group"], "exposures": 1} for x in rows]
++    binding = {"sample_schedule": schedule, "ordered_sample_ids": ["a", "b"], "epoch_lengths": [2], "epoch_each_sample_once": True, "task_exposures": {"one": 1, "two": 1}}
++    digest = hashlib.sha256(json.dumps(binding, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
++    data_review = tmp_path / "data_review.json"
++    write(data_review, {"decision": "PASS_DATA_ONLY", "dataset_sha256": file_sha256(data), "schedule_sha256": digest, "arm": "B"})
++    config = {"seed": 9, "batch_size": 1, "gradient_accumulation_steps": 1, "optimizer_steps": 2,
++              "learning_rate": .01, "weight_decay": 0., "max_grad_norm": 1., "max_length": 16,
++              "max_supervised_tokens": 100, "max_input_tokens": 100, "max_wall_seconds": 120.,
++              "adam_beta1": .9, "adam_beta2": .999, "adam_epsilon": 1e-8,
++              "gradient_checkpointing": False, "use_cache": False, "optimizer": "adamw", "optimizer_fused": False,
++              "scheduler": "cosine", "warmup_steps": 0, "min_lr_ratio": .1, "loss_normalization": "active_tokens"}
++    manifest = tmp_path / "manifest.json"
++    b_manifest = {"schema": "SI_CONTINUATION_DATA_V1", "arm": "B", "base_sha256": tree_sha256(base), "p0_adapter_sha256": tree_sha256(adapter),
++                     "dataset": {"path": str(data), "sha256": file_sha256(data)}, "independent_review": {"path": str(data_review), "sha256": file_sha256(data_review)},
++                     "training_config": config, **binding}
++    write(manifest, b_manifest)
++    c_review = tmp_path / "c_data_review.json"
++    write(c_review, {"decision": "PASS_DATA_ONLY", "dataset_sha256": file_sha256(data), "schedule_sha256": digest, "arm": "C"})
++    c_manifest = tmp_path / "c_manifest.json"
++    write(c_manifest, {**b_manifest, "arm": "C", "independent_review": {"path": str(c_review), "sha256": file_sha256(c_review)}})
++    source = source_identity(ROOT, "synthetic_cpu")
++    protocol = tmp_path / "protocol.json"
++    write(protocol, {"schema": "SI_CONTINUATION_PROTOCOL_V1", "runtime": {"B": {"allocation_seconds": 120, "gpu": {}}, "C": {"allocation_seconds": 120, "gpu": {}}},
++        "training_config": config, "learning_rate_definition": {"values_by_one_based_step": [learning_rate_for_step(config, i) for i in range(2)]},
++        "runtime_identity": runtime_identity_snapshot,
++        "epoch_shuffle_rule": {"implementation": "python_random_Random_shuffle", "initial_order": "ascending sample_id string", "epoch_seed": "9 + zero_based_epoch", "epochs": 1, "python_version_binding": runtime_identity_snapshot["interpreter"]["python_version"]},
++        "dose": {"unique_examples_per_arm": 2, "complete_ordered_example_ids_required": 2, "epoch_lengths": [2], "each_example_once_per_epoch": True, "epochs": 1,
++                 "distinct_parent_directories_per_arm": 2, "family_parent_counts": {"alpha": 1, "beta": 1}, "required_actual_optimizer_steps_per_arm": 2,
++                 "actual_unpadded_sequence_tokens_four_passes": {"B": 6, "C": 6}, "required_total_supervised_tokens_per_arm": 4, "supervised_tokens_per_example_including_EOS": 2}})
++    pair_review = tmp_path / "pair_review.json"
++    write(pair_review, {"schema": "SI_CONTINUATION_PAIR_REVIEW_V1", "decision": "PASS_PROTOCOL_AND_PAIR", "source_sha": source, "b_manifest_sha256": file_sha256(manifest), "c_manifest_sha256": file_sha256(c_manifest), "protocol_sha256": file_sha256(protocol)})
++    review = tmp_path / "review.json"
++    write(review, {"schema": "SI_CONTINUATION_REVIEW_V1", "decision": "PASS_SOFTWARE_ONLY", "source_sha": source, "manifest_sha256": file_sha256(manifest), "arm": "B"})
++    env = {"PATH": os.environ.get("PATH", "/usr/bin:/bin"), "CUDA_VISIBLE_DEVICES": "", "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1", "PYTHONDONTWRITEBYTECODE": "1", "OMP_NUM_THREADS": "1", "LC_ALL": "C.UTF-8"}
++    now = datetime.now(timezone.utc)
++    stamp = lambda d: d.isoformat().replace("+00:00", "Z")
++    auth = tmp_path / "auth.json"
++    record = {"schema": "SI_CONTINUATION_AUTH_V1", "arm": "B", "evidence_class": "synthetic_cpu", "source_sha": source,
++              "manifest": {"path": str(manifest), "sha256": file_sha256(manifest)}, "paired_manifest": {"path": str(c_manifest), "sha256": file_sha256(c_manifest)},
++              "protocol": {"path": str(protocol), "sha256": file_sha256(protocol)}, "pair_review": {"path": str(pair_review), "sha256": file_sha256(pair_review)}, "base": {"path": str(base), "sha256": tree_sha256(base)},
++              "adapter": {"path": str(adapter), "sha256": tree_sha256(adapter)}, "review": {"path": str(review), "sha256": file_sha256(review)},
++              "interpreter": str(PYTHON), "environment": env, "uid": os.getuid(), "output_path": str(tmp_path / "out"), "preflight_path": str(tmp_path / "preflight.json"),
++              "not_before": stamp(now - timedelta(minutes=1)), "expires": stamp(now + timedelta(minutes=10)), "allocation_seconds": 120, "gpu": {}, "run_id": "a" * 32, "maximum_launches": 1}
++    write(auth, record)
++    return {"auth": auth, "record": record, "env": env, "tmp": tmp_path}
++
++
++def cli(case, mode, extra=()):
++    return subprocess.run([str(PYTHON), "-I", str(SCRIPT), mode, "--authorization", str(case["auth"]), "--authorization-sha256", file_sha256(case["auth"]), *extra],
++                          capture_output=True, text=True, env=case["env"], timeout=150)
++
++
++def release(case):
++    p = cli(case, "--preflight-only")
++    assert p.returncode == 0, p.stderr
++    receipt = json.loads(Path(case["record"]["preflight_path"]).read_text())
++    assert receipt["effects"] == {"tokenizer": 0, "model": 0, "cuda": 0, "training": 0, "environment": 0}
++    clearance = case["tmp"] / "clearance.json"
++    write(clearance, {"schema": "SI_CONTINUATION_CLEARANCE_V1", "decision": "RELEASE_ONE_ARM", "binding": receipt["binding"],
++                      "preflight_sha256": file_sha256(Path(case["record"]["preflight_path"])), "maximum_launches": 1, "retry_authorized": False})
++    return ["--clearance", str(clearance), "--clearance-sha256", file_sha256(clearance)]
++
++
++def test_real_cli_cpu_synthetic_preflight_supervision_and_no_retry(case):
++    extra = release(case)
++    p = cli(case, "--live", extra)
++    out = Path(case["record"]["output_path"])
++    assert p.returncode == 0, (p.stderr, (out / "worker.stderr").read_text() if out.exists() else "no output")
++    exit_record = json.loads((out / "supervisor_exit.json").read_text())
++    result = json.loads((out / "training/training_result.json").read_text())
++    assert exit_record["authentic_returncode"] == 0 and exit_record["status"] == "EXIT_RECORDED"
++    assert exit_record["cleanup_established"] and exit_record["allocated_device_hours"] == 0
++    observed = json.loads((out / "runtime_import_receipt.json").read_text())
++    assert observed["status"] == "PASS_ACTUAL_IMPORTED_MODULES"
++    assert exit_record["runtime_import_receipt_sha256"] == file_sha256(out / "runtime_import_receipt.json")
++    assert result["counts"]["optimizer_steps"] == 2 and result["status"] == "COMPLETED"
++    assert (out / "training/final_adapter/adapter_model.safetensors").is_file()
++    assert cli(case, "--live", extra).returncode != 0
++
++
++def test_real_cli_deadline_hard_stop_and_no_retry(case):
++    case["record"]["allocation_seconds"] = .2
++    protocol = Path(case["record"]["protocol"]["path"])
++    doc = json.loads(protocol.read_text())
++    doc["runtime"]["B"]["allocation_seconds"] = .2
++    write(protocol, doc)
++    case["record"]["protocol"]["sha256"] = file_sha256(protocol)
++    pair_review = Path(case["record"]["pair_review"]["path"])
++    doc = json.loads(pair_review.read_text())
++    doc["protocol_sha256"] = file_sha256(protocol)
++    write(pair_review, doc)
++    case["record"]["pair_review"]["sha256"] = file_sha256(pair_review)
++    write(case["auth"], case["record"])
++    extra = release(case)
++    p = cli(case, "--live", extra)
++    out = Path(case["record"]["output_path"])
++    assert p.returncode != 0
++    result = json.loads((out / "supervisor_exit.json").read_text())
++    assert result["status"] == "INCONCLUSIVE"
++    assert ((result["deadline_triggered"] and result["cleanup_established"]) or
++            (result["authentic_returncode"] is None and result["supervisor_error"]["message"] == "deadline expired before spawn"))
++    assert not (out / "training/final_adapter").exists()
++    assert cli(case, "--live", extra).returncode != 0
++
++
++def test_supervisor_hard_timeout_reaps_actual_synthetic_child(tmp_path):
++    from self_improvement.continuation.supervisor import supervise
++    started = time.monotonic()
++    result = supervise([sys.executable, "-c", "import time; time.sleep(10)"], tmp_path / "timeout",
++                       binding={"scope": "synthetic timeout"}, environment=dict(os.environ),
++                       seconds=.5, entered=started, gpu_allocated=0)
++    assert result["deadline_triggered"] and result["cleanup_established"]
++    assert result["authentic_returncode"] != 0 and result["status"] == "INCONCLUSIVE"
++    with pytest.raises(FileExistsError):
++        supervise([sys.executable, "-c", "pass"], tmp_path / "timeout", binding={}, environment=dict(os.environ), seconds=.5, entered=time.monotonic(), gpu_allocated=0)
++
++
++@pytest.mark.parametrize("change,value", [
++    ("allocation_seconds", 121), ("uuid", "GPU-00000000-0000-0000-0000-000000000000"),
++    ("allocator_cap_bytes", 31), ("preweight_free_bytes", 69), ("later_free_bytes", 9),
++])
++def test_frozen_protocol_rejects_gpu_or_time_drift(change, value):
++    gpu = {"uuid": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a", "allocator_cap_bytes": 30, "preweight_free_bytes": 70, "later_free_bytes": 10}
++    auth = {"arm": "B", "allocation_seconds": 120, "gpu": dict(gpu)}
++    protocol = {"schema": "SI_CONTINUATION_PROTOCOL_V1", "runtime": {"B": {"allocation_seconds": 120, "gpu": dict(gpu)}, "C": {"allocation_seconds": 120, "gpu": dict(gpu)}}}
++    bind_protocol_runtime(protocol, auth)
++    if change == "allocation_seconds":
++        auth[change] = value
++    else:
++        auth["gpu"][change] = value
++    with pytest.raises(ContractError, match="differs from frozen"):
++        bind_protocol_runtime(protocol, auth)
++
++
++def test_preflight_rejects_tampered_paired_manifest_without_side_effects(case):
++    path = Path(case["record"]["paired_manifest"]["path"])
++    doc = json.loads(path.read_text())
++    doc["training_config"]["optimizer_steps"] = 3
++    write(path, doc)
++    case["record"]["paired_manifest"]["sha256"] = file_sha256(path)
++    write(case["auth"], case["record"])
++    p = cli(case, "--preflight-only")
++    assert p.returncode != 0
++    assert not Path(case["record"]["preflight_path"]).exists()
++    assert not Path(case["record"]["output_path"]).exists()
++
++
++def test_cli_preflight_rejects_time_budget_relaxation(case):
++    case["record"]["allocation_seconds"] = 121
++    write(case["auth"], case["record"])
++    p = cli(case, "--preflight-only")
++    assert p.returncode != 0 and "runtime/time/GPU differs" in p.stderr
++    assert not Path(case["record"]["preflight_path"]).exists()
++    assert not Path(case["record"]["output_path"]).exists()
++
++
++def test_frozen_shuffle_rule_recomputed_not_merely_hash_bound(case):
++    protocol = json.loads(Path(case["record"]["protocol"]["path"]).read_text())
++    manifest, rows = load_reviewed_manifest(Path(case["record"]["manifest"]["path"]), case["record"]["manifest"]["sha256"])
++    bind_protocol_training(protocol, manifest, rows, "B")
++    manifest["ordered_sample_ids"] = list(reversed(manifest["ordered_sample_ids"]))
++    with pytest.raises(ContractError, match="ordered IDs differ"):
++        bind_protocol_training(protocol, manifest, rows, "B")
++
++
++@pytest.mark.parametrize("section", ["training_config", "family_parent_counts", "learning_rates", "interpreter_bytes", "python_version", "package_entrypoint_hash", "package_tree_hash", "package_version", "package_origin", "shuffle_python"])
++def test_cli_preflight_rejects_protocol_drift_even_if_rehashed(case, section):
++    protocol = Path(case["record"]["protocol"]["path"])
++    doc = json.loads(protocol.read_text())
++    if section == "training_config":
++        doc["training_config"]["learning_rate"] *= 2
++    elif section == "family_parent_counts":
++        doc["dose"]["family_parent_counts"]["alpha"] = 2
++    elif section == "learning_rates":
++        doc["learning_rate_definition"]["values_by_one_based_step"][0] *= 2
++    elif section == "interpreter_bytes":
++        doc["runtime_identity"]["interpreter"]["sha256"] = "0" * 64
++    elif section == "python_version":
++        doc["runtime_identity"]["interpreter"]["python_version"] = "0.0.0"
++        doc["epoch_shuffle_rule"]["python_version_binding"] = "0.0.0"
++    elif section == "package_entrypoint_hash":
++        doc["runtime_identity"]["packages"]["torch"]["sha256"] = "0" * 64
++    elif section == "package_tree_hash":
++        doc["runtime_identity"]["packages"]["torch"]["tree_sha256"] = "0" * 64
++    elif section == "package_version":
++        doc["runtime_identity"]["packages"]["peft"]["version"] = "0.0.0"
++    elif section == "package_origin":
++        doc["runtime_identity"]["packages"]["tokenizers"]["path"] = "/unknown/tokenizers/__init__.py"
++    else:
++        doc["epoch_shuffle_rule"]["python_version_binding"] = "0.0.0"
++    write(protocol, doc)
++    case["record"]["protocol"]["sha256"] = file_sha256(protocol)
++    pair_review = Path(case["record"]["pair_review"]["path"])
++    review = json.loads(pair_review.read_text())
++    review["protocol_sha256"] = file_sha256(protocol)
++    write(pair_review, review)
++    case["record"]["pair_review"]["sha256"] = file_sha256(pair_review)
++    write(case["auth"], case["record"])
++    p = cli(case, "--preflight-only")
++    assert p.returncode != 0
++    assert not Path(case["record"]["output_path"]).exists()
++    assert not Path(case["record"]["preflight_path"]).exists()
++
++
++def test_actual_linux_parent_death_guard_stops_synthetic_child(tmp_path):
++    ready = tmp_path / "ready"
++    code = r'''
++import json, os, sys, time
++from pathlib import Path
++sys.path.insert(0, sys.argv[1])
++from self_improvement.si_m1.gate import arm_parent_death
++parent = os.getpid()
++tick = int(Path('/proc/self/stat').read_text().rsplit(')',1)[1].split()[19])
++child = os.fork()
++if child == 0:
++    arm_parent_death(parent, tick)
++    identity = {'pid': os.getpid(), 'start_tick': int(Path('/proc/self/stat').read_text().rsplit(')',1)[1].split()[19])}
++    Path(sys.argv[2]).write_text(json.dumps(identity))
++    while True: time.sleep(1)
++while True: time.sleep(1)
++'''
++    parent = subprocess.Popen([sys.executable, "-I", "-c", code, str(ROOT / "src"), str(ready)])
++    child = None
++    child_tick = None
++    try:
++        deadline = time.monotonic() + 10
++        while not ready.exists() and time.monotonic() < deadline:
++            assert parent.poll() is None
++            time.sleep(.02)
++        assert ready.exists()
++        identity = json.loads(ready.read_text())
++        child, child_tick = identity["pid"], identity["start_tick"]
++        parent.kill()
++        assert parent.wait(timeout=5) != 0
++        until = time.monotonic() + 5
++        while time.monotonic() < until:
++            path = Path(f"/proc/{child}/stat")
++            if not path.exists() or path.read_text().rsplit(")", 1)[1].split()[0] == "Z":
++                break
++            time.sleep(.02)
++        else:
++            pytest.fail("child survived supervisor death")
++    finally:
++        if parent.poll() is None:
++            parent.kill()
++            parent.wait()
++        if child is not None:
++            try:
++                parts = Path(f"/proc/{child}/stat").read_text().rsplit(")", 1)[1].split()
++                if int(parts[19]) == child_tick and parts[0] != "Z":
++                    os.kill(child, 9)
++            except ProcessLookupError:
++                pass
++            except FileNotFoundError:
++                pass
+diff --git a/tests/test_si_continuation_engineering.py b/tests/test_si_continuation_engineering.py
+new file mode 100644
+index 0000000..182e5c9
+--- /dev/null
++++ b/tests/test_si_continuation_engineering.py
+@@ -0,0 +1,313 @@
++"""Actual isolated engineering-only CLI on a tiny local CPU toy model."""
++import json
++import os
++import subprocess
++import sys
++import weakref
++from pathlib import Path
++from types import SimpleNamespace
++
++import pytest
++
++from self_improvement.continuation.engineering_gate import bind_engineering_plan, engineering_source_identity
++from self_improvement.continuation.training import ContractError, file_sha256, learning_rate_for_step
++from test_si_continuation_cli import ROOT, PYTHON, case, runtime_identity_snapshot, write
++
++SCRIPT = ROOT / "scripts/run_si_continuation_engineering.py"
++
++
++@pytest.fixture
++def engineering_case(case):
++    root = case["tmp"]
++    protocol_path = Path(case["record"]["protocol"]["path"])
++    protocol = json.loads(protocol_path.read_text())
++    config = protocol["training_config"]
++    config.update(gradient_accumulation_steps=2, optimizer_steps=2, gradient_checkpointing=True, optimizer_fused=True)
++    protocol["runtime"]["B"]["allocation_seconds"] = 10000
++    write(protocol_path, protocol)
++    training = {"allocation_seconds": 120, "sequence_length": 8, "active_target_tokens_per_sequence_with_EOS": 5,
++                "microbatch_size": 1, "gradient_accumulation_steps": 2, "maximum_microbatches": 4,
++                "maximum_optimizer_steps": 2, "maximum_nonpad_input_tokens": 32, "maximum_supervised_tokens": 20,
++                "learning_rates": [learning_rate_for_step(config, i) for i in range(2)],
++                "gradient_checkpointing": True, "use_cache": False, "maximum_artifact_saves": 1}
++    plan = root / "engineering_plan.json"
++    write(plan, {"schema": "SI_U1_ENGINEERING_PLAN_V1", "retry_authorized": False, "resource": {}, "training": training})
++    source = engineering_source_identity(ROOT, "engineering_synthetic_cpu")
++    review = root / "engineering_review.json"
++    write(review, {"schema": "SI_CONTINUATION_ENGINEERING_REVIEW_V1", "decision": "PASS_ENGINEERING_SOFTWARE_ONLY", "source_sha": source,
++                   "plan_sha256": file_sha256(plan), "protocol_sha256": file_sha256(protocol_path),
++                   "base_sha256": case["record"]["base"]["sha256"], "p0_adapter_sha256": case["record"]["adapter"]["sha256"]})
++    auth = root / "engineering_auth.json"
++    record = {"schema": "SI_CONTINUATION_ENGINEERING_AUTH_V1", "purpose": "SYNTHETIC_TOKEN_P0_LOAD_AND_TWO_UPDATES_ONLY", "evidence_class": "engineering_synthetic_cpu",
++              "source_sha": source, "base": case["record"]["base"], "adapter": case["record"]["adapter"],
++              "plan": {"path": str(plan), "sha256": file_sha256(plan)}, "protocol": {"path": str(protocol_path), "sha256": file_sha256(protocol_path)},
++              "review": {"path": str(review), "sha256": file_sha256(review)}, "interpreter": str(PYTHON), "environment": case["env"], "uid": os.getuid(),
++              "output_path": str(root / "engineering_output"), "preflight_path": str(root / "engineering_preflight.json"), "not_before": case["record"]["not_before"],
++              "expires": case["record"]["expires"], "allocation_seconds": 120, "gpu": {}, "run_id": "b" * 32, "maximum_launches": 1}
++    write(auth, record)
++    return {"auth": auth, "record": record, "env": case["env"], "tmp": root}
++
++
++def cli(case, mode, extra=()):
++    return subprocess.run([str(PYTHON), "-I", str(SCRIPT), mode, "--authorization", str(case["auth"]), "--authorization-sha256", file_sha256(case["auth"]), *extra], env=case["env"], capture_output=True, text=True, timeout=150)
++
++
++def engineering_release(case):
++    p = cli(case, "--preflight-only")
++    assert p.returncode == 0, p.stderr
++    preflight = Path(case["record"]["preflight_path"])
++    receipt = json.loads(preflight.read_text())
++    assert receipt["binding"]["scope"] == "SYNTHETIC_TOKEN_ENGINEERING_ONLY"
++    assert receipt["effects"] == {"tokenizer": 0, "model": 0, "cuda": 0, "training": 0, "environment": 0}
++    clearance = case["tmp"] / "engineering_clearance.json"
++    write(clearance, {"schema": "SI_CONTINUATION_ENGINEERING_CLEARANCE_V1", "decision": "RELEASE_ONE_ENGINEERING_RUN", "binding": receipt["binding"], "preflight_sha256": file_sha256(preflight), "maximum_launches": 1, "retry_authorized": False})
++    return ["--clearance", str(clearance), "--clearance-sha256", file_sha256(clearance)]
++
++
++def test_engineering_actual_toy_cli_two_steps_then_delete_artifact(engineering_case):
++    extra = engineering_release(engineering_case)
++    p = cli(engineering_case, "--live", extra)
++    output = Path(engineering_case["record"]["output_path"])
++    assert p.returncode == 0, (p.stderr, (output / "worker.stderr").read_text() if output.exists() else "no output")
++    result = json.loads((output / "engineering_result.json").read_text())
++    exit_record = json.loads((output / "supervisor_exit.json").read_text())
++    assessment = json.loads((output / "engineering_assessment.json").read_text())
++    assert result["status"] == "ENGINEERING_COMPLETED" and result["scientific_checkpoint_eligible"] is False
++    assert result["trial_adapter_deleted"] is True and not (output / "engineering_trial_adapter").exists()
++    assert result["counts"]["microbatches_completed"] == 4 and result["counts"]["optimizer_steps_completed"] == 2
++    assert result["counts"]["input_tokens"] == 32 and result["counts"]["supervised_tokens"] == 20
++    assert exit_record["schema"] == "SI_CONTINUATION_ENGINEERING_SUPERVISOR_EXIT_V1" and exit_record["authentic_returncode"] == 0
++    assert assessment["status"] == "SYNTHETIC_SOFTWARE_ONLY" and assessment["scientific_checkpoint_eligible"] is False and assessment["projection_valid_for_real_device"] is False
++    assert not (output / "training/training_result.json").exists()
++    assert cli(engineering_case, "--live", extra).returncode != 0
++
++
++def test_engineering_gate_rejects_any_dataset_path(engineering_case):
++    engineering_case["record"]["dataset"] = {"path": "/forbidden", "sha256": "0" * 64}
++    write(engineering_case["auth"], engineering_case["record"])
++    p = cli(engineering_case, "--preflight-only")
++    assert p.returncode != 0 and "no data or task path" in p.stderr
++    assert not Path(engineering_case["record"]["output_path"]).exists()
++
++
++def test_cpu_cleanup_drops_model_parameters_buffers_and_optimizer_state(engineering_case, monkeypatch):
++    import torch
++    import self_improvement.continuation.engineering_worker as worker
++    original_load = worker.load_p0_adapter
++    tracked = {"models": [], "parameters": [], "buffers": [], "optimizer_states": []}
++    observations = []
++    original_step = torch.optim.AdamW.step
++    def step_and_track(optimizer, *args, **kwargs):
++        result = original_step(optimizer, *args, **kwargs)
++        tracked["optimizer_states"].extend(weakref.ref(value) for state in optimizer.state.values()
++                                          for value in state.values() if isinstance(value, torch.Tensor))
++        return result
++    def load_and_track(base, adapter):
++        model = original_load(base, adapter)
++        model.register_buffer("cleanup_probe_buffer", torch.ones(3), persistent=False)
++        tracked["models"].append(weakref.ref(model))
++        tracked["parameters"].extend(weakref.ref(parameter) for parameter in model.parameters())
++        tracked["buffers"].extend(weakref.ref(buffer) for buffer in model.buffers())
++        return model
++    def observe():
++        observations.append({name: sum(ref() is not None for ref in refs) for name, refs in tracked.items()})
++    monkeypatch.setattr(worker, "load_p0_adapter", load_and_track)
++    monkeypatch.setattr(torch.optim.AdamW, "step", step_and_track)
++    out = engineering_case["tmp"] / "weakref_output"
++    out.mkdir()
++    plan = json.loads(Path(engineering_case["record"]["plan"]["path"]).read_text())
++    protocol = json.loads(Path(engineering_case["record"]["protocol"]["path"]).read_text())
++    result = worker.run_engineering(engineering_case["record"], plan, protocol, out, device="cpu", cleanup_observer=observe)
++    assert result["status"] == "ENGINEERING_COMPLETED"
++    assert all(tracked.values())
++    assert observations == [{name: 0 for name in tracked}]
++
++
++@pytest.mark.parametrize("initial,clear_mode,expected_final,raises", [
++    ((0, 0), "available", (0, 0), False),
++    ((17, 120), "available", (0, 0), False),
++    ((17, 120), "unavailable", (17, 120), True),
++    ((17, 120), "ineffective", (17, 120), True),
++])
++def test_cuda_cleanup_order_and_fail_closed_without_cuda(initial, clear_mode, expected_final, raises):
++    from self_improvement.continuation.engineering_worker import _cleanup_cuda_allocator
++    calls, events, state, result = [], [], list(initial), {}
++    cuda = SimpleNamespace(
++        synchronize=lambda: calls.append("synchronize"),
++        empty_cache=lambda: calls.append("empty_cache"),
++        memory_allocated=lambda device: state[0],
++        memory_reserved=lambda device: state[1],
++    )
++    def clear():
++        calls.append("clear_cublas")
++        if clear_mode == "available":
++            state[:] = [0, 0]
++    backend = SimpleNamespace() if clear_mode == "unavailable" else SimpleNamespace(_cuda_clearCublasWorkspaces=clear)
++    fake_torch = SimpleNamespace(cuda=cuda, _C=backend)
++    def record(kind, **kwargs):
++        events.append((kind, kwargs))
++    if raises:
++        with pytest.raises(ContractError, match="allocations remain"):
++            _cleanup_cuda_allocator(fake_torch, result, record)
++    else:
++        _cleanup_cuda_allocator(fake_torch, result, record)
++    assert (result["pre_workspace_clear_allocated_bytes"], result["pre_workspace_clear_reserved_bytes"]) == initial
++    assert (result["post_cleanup_allocated_bytes"], result["post_cleanup_reserved_bytes"]) == expected_final
++    assert calls[:3] == ["synchronize", "empty_cache", "synchronize"]
++    assert result["cublas_workspace_clear_attempted"] == (bool(any(initial)) and clear_mode != "unavailable")
++    assert events[-1][0] == "allocator_cleanup_final"
++    if result["cublas_workspace_clear_attempted"]:
++        assert calls[3:] == ["clear_cublas", "synchronize", "empty_cache", "synchronize"]
++
++
++def test_workspace_clear_exception_preserves_before_measurement_without_false_completion():
++    from self_improvement.continuation.engineering_worker import _cleanup_cuda_allocator
++    events, result = [], {}
++    def fail_clear():
++        raise RuntimeError("synthetic backend failure")
++    cuda = SimpleNamespace(synchronize=lambda: None, empty_cache=lambda: None,
++                           memory_allocated=lambda device: 17, memory_reserved=lambda device: 120)
++    with pytest.raises(RuntimeError, match="synthetic backend failure"):
++        _cleanup_cuda_allocator(SimpleNamespace(cuda=cuda, _C=SimpleNamespace(_cuda_clearCublasWorkspaces=fail_clear)),
++                                result, lambda kind, **kwargs: events.append(kind))
++    assert result["pre_workspace_clear_allocated_bytes"] == 17
++    assert result["cublas_workspace_clear_attempted"] is True
++    assert "post_cleanup_allocated_bytes" not in result
++    assert events == ["allocator_cleanup_measured", "cublas_workspace_clear_started"]
++
++
++def test_cpu_failure_after_trial_delete_keeps_failed_result(engineering_case):
++    from self_improvement.continuation.engineering_worker import run_engineering
++    out = engineering_case["tmp"] / "injected_failure_output"
++    out.mkdir()
++    plan = json.loads(Path(engineering_case["record"]["plan"]["path"]).read_text())
++    protocol = json.loads(Path(engineering_case["record"]["protocol"]["path"]).read_text())
++    def resource(point):
++        if point == "after_trial_delete":
++            raise ContractError("injected post-deletion failure")
++    with pytest.raises(ContractError, match="injected post-deletion failure"):
++        run_engineering(engineering_case["record"], plan, protocol, out, device="cpu", resource=resource)
++    result = json.loads((out / "engineering_result.json").read_text())
++    assert result["status"] == "FAILED" and result["trial_adapter_deleted"] is True
++    assert result["counts"]["optimizer_steps_completed"] == 2
++    assert not (out / "engineering_trial_adapter").exists()
++    assert "engineering_failed" in (out / "engineering_events.jsonl").read_text()
++
++
++@pytest.mark.parametrize("change", ["valid", "receipt_hash", "result_hash", "wrong_exit", "success_result", "elapsed_over_budget", "larger_cap", "same_run", "same_output", "wrong_base", "wrong_protocol", "wrong_old_source", "wrong_old_plan", "different_directory", "extra_field"])
++def test_remediation_budget_debits_authenticated_failed_predecessor(tmp_path, change):
++    from self_improvement.continuation.engineering_gate import _bind_remediation_budget
++    old = tmp_path / "old"
++    old.mkdir()
++    result_path = old / "engineering_result.json"
++    result = {"schema": "SI_CONTINUATION_ENGINEERING_RESULT_V1", "status": "FAILED", "evidence_class": "engineering_live", "retry_authorized": False,
++              "error": "ContractError: PyTorch allocations remain after engineering cleanup", "trial_adapter_deleted": True,
++              "counts": {"microbatches_completed": 32, "optimizer_steps_completed": 2}}
++    if change == "success_result":
++        result["status"] = "ENGINEERING_COMPLETED"
++    write(result_path, result)
++    receipt_path = old / "supervisor_exit.json"
++    prior = {"run_id": "a" * 32, "source_sha": "1" * 40, "plan_sha256": "2" * 64,
++             "protocol_sha256": "3" * 64, "base_sha256": "4" * 64, "p0_adapter_sha256": "5" * 64,
++             "scope": "SYNTHETIC_TOKEN_ENGINEERING_ONLY", "evidence_class": "engineering_live", "output_path": str(old)}
++    receipt = {"schema": "SI_CONTINUATION_ENGINEERING_SUPERVISOR_EXIT_V1", "status": "EXIT_RECORDED", "authentic_returncode": 1,
++               "cleanup_established": True, "deadline_triggered": False, "elapsed_seconds": 117.84,
++               "engineering_result_sha256": file_sha256(result_path), "binding": prior}
++    if change == "wrong_exit":
++        receipt["authentic_returncode"] = 0
++    if change == "elapsed_over_budget":
++        receipt["elapsed_seconds"] = 120.01
++    write(receipt_path, receipt)
++    remediation = {"schema": "SI_U1_ENGINEERING_REMEDIATION_BINDING_V1", "previous_run_id": prior["run_id"],
++                   "previous_source_sha": prior["source_sha"], "previous_plan_sha256": prior["plan_sha256"],
++                   "supervisor": {"path": str(receipt_path), "sha256": file_sha256(receipt_path)},
++                   "result": {"path": str(result_path), "sha256": file_sha256(result_path)}}
++    a = {"run_id": "b" * 32, "output_path": str(tmp_path / "new"), "allocation_seconds": 1080,
++         "protocol": {"sha256": "3" * 64}, "base": {"sha256": "4" * 64}, "adapter": {"sha256": "5" * 64}}
++    if change == "receipt_hash": remediation["supervisor"]["sha256"] = "0" * 64
++    if change == "result_hash": remediation["result"]["sha256"] = "0" * 64
++    if change == "larger_cap": a["allocation_seconds"] = 1081
++    if change == "same_run": a["run_id"] = prior["run_id"]
++    if change == "same_output": a["output_path"] = str(old)
++    if change == "wrong_base": a["base"]["sha256"] = "0" * 64
++    if change == "wrong_protocol": a["protocol"]["sha256"] = "0" * 64
++    if change == "wrong_old_source": remediation["previous_source_sha"] = "0" * 40
++    if change == "wrong_old_plan": remediation["previous_plan_sha256"] = "0" * 64
++    if change == "different_directory":
++        other = tmp_path / "other"
++        other.mkdir()
++        other_result = other / "engineering_result.json"
++        write(other_result, result)
++        remediation["result"]["path"] = str(other_result)
++    if change == "extra_field": remediation["unreviewed"] = True
++    if change == "valid":
++        _bind_remediation_budget(remediation, a)
++    else:
++        with pytest.raises(ContractError):
++            _bind_remediation_budget(remediation, a)
++
++
++def test_assessment_rejects_unverified_cleanup_or_incomplete_tokens():
++    from self_improvement.continuation.engineering_worker import assess_engineering
++    plan = {"training": {"maximum_microbatches": 4, "maximum_nonpad_input_tokens": 32, "maximum_supervised_tokens": 20}}
++    result = {"schema": "SI_CONTINUATION_ENGINEERING_RESULT_V1", "evidence_class": "engineering_synthetic_cpu", "status": "ENGINEERING_COMPLETED", "scientific_checkpoint_eligible": False,
++              "trial_adapter_deleted": True, "trial_adapter_bytes": 100, "trial_adapter_sha256": "a" * 64,
++              "optimizer_step_seconds": [1., 1.], "load_seconds": 1., "save_hash_delete_seconds": 1., "cleanup_seconds": 1., "counts": {"microbatches_started": 4, "microbatches_completed": 4, "optimizer_steps_started": 2, "optimizer_steps_completed": 2,
++              "input_tokens": 32, "supervised_tokens": 20, "trial_saves_started": 1, "trial_saves_completed": 1}}
++    receipt = {"authentic_returncode": 0, "status": "EXIT_RECORDED", "cleanup_established": True, "within_time_cap": True, "binding": {"evidence_class": "engineering_synthetic_cpu"},
++               "engineering_result_sha256": "a", "runtime_import_receipt_sha256": "b", "elapsed_seconds": 10.}
++    assert assess_engineering(result, receipt, plan=plan, evidence_class="engineering_synthetic_cpu", science_seconds=10000)["status"] == "SYNTHETIC_SOFTWARE_ONLY"
++    receipt["cleanup_established"] = False
++    assert assess_engineering(result, receipt, plan=plan, evidence_class="engineering_synthetic_cpu", science_seconds=10000)["status"] == "STOP_OR_INCONCLUSIVE"
++    receipt["cleanup_established"] = True
++    result["counts"]["input_tokens"] = 31
++    assert assess_engineering(result, receipt, plan=plan, evidence_class="engineering_synthetic_cpu", science_seconds=10000)["status"] == "STOP_OR_INCONCLUSIVE"
++
++
++def test_live_assessment_requires_complete_oom_free_resource_observations():
++    from self_improvement.continuation.engineering_worker import assess_engineering
++    t = {"maximum_microbatches": 4, "gradient_accumulation_steps": 2, "maximum_nonpad_input_tokens": 32, "maximum_supervised_tokens": 20}
++    result = {"schema": "SI_CONTINUATION_ENGINEERING_RESULT_V1", "evidence_class": "engineering_live", "status": "ENGINEERING_COMPLETED", "scientific_checkpoint_eligible": False,
++              "trial_adapter_deleted": True, "trial_adapter_bytes": 100, "trial_adapter_sha256": "a" * 64, "post_cleanup_allocated_bytes": 0, "post_cleanup_reserved_bytes": 0,
++              "optimizer_step_seconds": [1., 1.], "load_seconds": 1., "save_hash_delete_seconds": 1., "cleanup_seconds": 1., "counts": {"microbatches_started": 4, "microbatches_completed": 4, "optimizer_steps_started": 2, "optimizer_steps_completed": 2,
++              "input_tokens": 32, "supervised_tokens": 20, "trial_saves_started": 1, "trial_saves_completed": 1}}
++    receipt = {"authentic_returncode": 0, "status": "EXIT_RECORDED", "cleanup_established": True, "within_time_cap": True, "binding": {"evidence_class": "engineering_live"},
++               "engineering_result_sha256": "a", "runtime_import_receipt_sha256": "b", "resource_receipt_sha256": "c", "elapsed_seconds": 10.}
++    points = ["before_model_load", "after_model_load"] + ["before_microbatch"] * 2 + ["after_optimizer_step"] + ["before_microbatch"] * 2 + ["after_optimizer_step", "before_trial_save", "after_trial_save", "after_trial_delete"]
++    rows = [{"point": point, "status": "PASS", "allocator_ooms": 0, "allocator_retries": 0} for point in points]
++    assert assess_engineering(result, receipt, plan={"training": t}, evidence_class="engineering_live", science_seconds=10000, resource_observations=rows)["status"] == "FIT_MODEL_PASS"
++    rows[3]["allocator_retries"] = 1
++    assert assess_engineering(result, receipt, plan={"training": t}, evidence_class="engineering_live", science_seconds=10000, resource_observations=rows)["status"] == "STOP_OR_INCONCLUSIVE"
++
++
++@pytest.mark.parametrize("change", ["three_steps", "short_context", "extra_microbatch", "budget", "gpu", "learning_rate", "checkpointing"])
++def test_real_engineering_plan_is_fixed_without_gpu_calls(engineering_case, change):
++    protocol = json.loads(Path(engineering_case["record"]["protocol"]["path"]).read_text())
++    cfg = protocol["training_config"]
++    cfg.update(gradient_accumulation_steps=16, optimizer_steps=78, warmup_steps=3, learning_rate=1e-4, min_lr_ratio=.1, max_length=2048)
++    gpu = {"uuid": "GPU-aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "allocator_cap_bytes": 25769803776, "preweight_free_bytes": 30064771072, "later_free_bytes": 2147483648}
++    protocol["runtime"] = {arm: {"allocation_seconds": 5400, "gpu": dict(gpu)} for arm in ("B", "C")}
++    training = {"allocation_seconds": 1200, "sequence_length": 2048, "active_target_tokens_per_sequence_with_EOS": 5,
++                "microbatch_size": 1, "gradient_accumulation_steps": 16, "maximum_microbatches": 32, "maximum_optimizer_steps": 2,
++                "maximum_nonpad_input_tokens": 65536, "maximum_supervised_tokens": 160, "learning_rates": [learning_rate_for_step(cfg, i) for i in range(2)],
++                "gradient_checkpointing": True, "use_cache": False, "maximum_artifact_saves": 1}
++    plan = {"schema": "SI_U1_ENGINEERING_PLAN_V1", "retry_authorized": False, "resource": dict(gpu), "training": training,
++            "total_allocated_device_seconds": 1800, "unused_cap_transfer_authorized": False, "evaluation": {"allocation_seconds": 600}}
++    auth = {"evidence_class": "engineering_live", "allocation_seconds": 1200, "gpu": dict(gpu)}
++    bind_engineering_plan(plan, protocol, auth)
++    if change == "three_steps":
++        training["maximum_optimizer_steps"] = 3
++    elif change == "short_context":
++        training["sequence_length"] = 1024
++    elif change == "extra_microbatch":
++        training["maximum_microbatches"] = 33
++    elif change == "budget":
++        auth["allocation_seconds"] = 1201
++    elif change == "gpu":
++        auth["gpu"]["uuid"] = "GPU-00000000-0000-0000-0000-000000000000"
++    elif change == "learning_rate":
++        training["learning_rates"][0] *= 2
++    else:
++        training["gradient_checkpointing"] = False
++    with pytest.raises(ContractError):
++        bind_engineering_plan(plan, protocol, auth)
+diff --git a/tests/test_si_continuation_resource.py b/tests/test_si_continuation_resource.py
+new file mode 100644
+index 0000000..cf97b0e
+--- /dev/null
++++ b/tests/test_si_continuation_resource.py
+@@ -0,0 +1,45 @@
++"""Allocator and global free checks with a synthetic CUDA edge only."""
++import json
++import sys
++from types import SimpleNamespace
++
++import pytest
++
++from self_improvement.continuation.resource import SharedResource
++from self_improvement.continuation.training import ContractError
++
++
++def test_synthetic_resource_cap_free_and_drift(monkeypatch, tmp_path):
++    state = {"fraction": None, "free": 90, "reserved": 0, "ooms": 0, "retries": 0}
++    memory = SimpleNamespace(
++        get_allocator_backend=lambda: "native",
++        set_per_process_memory_fraction=lambda value, device: state.update(fraction=value),
++        get_per_process_memory_fraction=lambda device: state["fraction"],
++        memory_stats=lambda device: {"allocated_bytes.all.current": 0, "reserved_bytes.all.current": state["reserved"], "reserved_bytes.all.peak": state["reserved"], "allocated_bytes.all.peak": 0, "num_ooms": state["ooms"], "num_alloc_retries": state["retries"]},
++    )
++    cuda = SimpleNamespace(device_count=lambda: 1, get_device_properties=lambda device: SimpleNamespace(uuid="b08bc603-ebdb-787d-b5b6-ec796ea3022a"),
++                           mem_get_info=lambda device: (state["free"], 100), memory=memory)
++    monkeypatch.setitem(sys.modules, "torch", SimpleNamespace(cuda=cuda))
++    gpu = {"uuid": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a", "allocator_cap_bytes": 30, "preweight_free_bytes": 70, "later_free_bytes": 10}
++    path = tmp_path / "resource.jsonl"
++    guard = SharedResource(gpu, path, strict_no_allocator_retry=True)
++    guard("before_model_load")
++    state.update(reserved=20, free=15)
++    guard("after_model_load")
++    state["free"] = 9
++    with pytest.raises(ContractError, match="global free"):
++        guard("before_microbatch")
++    records = [json.loads(line) for line in path.read_text().splitlines()]
++    assert [row["status"] for row in records] == ["PASS", "PASS", "FAILED"]
++    assert all(row["exclusive_gpu"] is False for row in records)
++    state.update(free=90, retries=1)
++    with pytest.raises(ContractError, match="allocation retry"):
++        guard("before_microbatch")
++    science_guard = SharedResource(gpu, tmp_path / "science_resource.jsonl")
++    science_guard("before_model_load")
++    assert json.loads((tmp_path / "science_resource.jsonl").read_text())["allocator_retries"] == 1
++    state["ooms"] = 1
++    with pytest.raises(ContractError, match="OOM"):
++        science_guard("before_microbatch")
++    science_rows = [json.loads(line) for line in (tmp_path / "science_resource.jsonl").read_text().splitlines()]
++    assert science_rows[-1]["allocator_ooms"] == 1 and science_rows[-1]["status"] == "FAILED"
+diff --git a/tests/test_si_continuation_runtime_identity.py b/tests/test_si_continuation_runtime_identity.py
+new file mode 100644
+index 0000000..2179d4f
+--- /dev/null
++++ b/tests/test_si_continuation_runtime_identity.py
+@@ -0,0 +1,62 @@
++"""Actual import observations are distinct from static, model-free checks."""
++import copy
++import hashlib
++import json
++import sys
++
++import pytest
++
++from self_improvement.continuation.runtime_identity import package_tree_sha256, static_identity, verify_actual_imports, verify_static
++from self_improvement.continuation.training import ContractError
++
++
++def test_static_identity_does_not_import_modules_in_clean_child():
++    # Isolated subprocess is covered by actual CLI preflight, which must say
++    # STATIC_METADATA_ONLY_NO_PACKAGE_IMPORTS. Here static lookup is exercised
++    # independently, while this test's process may already have other imports.
++    identity = static_identity()
++    verify_static(identity, sys.executable, {"python_version_binding": identity["interpreter"]["python_version"]})
++
++
++def test_actual_import_mismatch_records_failure_without_pass(tmp_path):
++    identity = copy.deepcopy(static_identity())
++    identity["packages"]["torch"]["version"] = "0.0.0"
++    receipt = tmp_path / "actual.json"
++    with pytest.raises(ContractError, match="actual imported package identity mismatch"):
++        verify_actual_imports(identity, receipt)
++    observed = json.loads(receipt.read_text())
++    assert observed["status"] == "FAILED"
++    assert observed["modules"]["torch"]["version"] != "0.0.0"
++
++
++def test_static_versions_and_origins_are_not_actual_import_receipts():
++    identity = static_identity()
++    assert set(identity) == {"interpreter", "packages"}
++    assert "status" not in identity
++
++
++def test_package_tree_binds_source_and_binary_but_ignores_only_bytecode(tmp_path):
++    (tmp_path / "__init__.py").write_text("v1")
++    (tmp_path / "kernel.so").write_bytes(b"binary1")
++    before = package_tree_sha256(tmp_path)
++    (tmp_path / "__pycache__").mkdir()
++    (tmp_path / "__pycache__" / "mod.pyc").write_bytes(b"ignored")
++    assert package_tree_sha256(tmp_path) == before
++    (tmp_path / "kernel.so").write_bytes(b"binary2")
++    assert package_tree_sha256(tmp_path) != before
++    (tmp_path / "other").symlink_to(tmp_path / "kernel.so")
++    with pytest.raises(ContractError, match="symlink"):
++        package_tree_sha256(tmp_path)
++
++
++def test_package_tree_order_uses_path_components(tmp_path):
++    (tmp_path / "_C").mkdir()
++    (tmp_path / "_C/a.py").write_text("a")
++    (tmp_path / "_C.so").write_text("b")
++    rows = []
++    for path in sorted(tmp_path.rglob("*")):
++        if path.is_file():
++            rows.append([path.relative_to(tmp_path).as_posix(), path.stat().st_size, hashlib.sha256(path.read_bytes()).hexdigest()])
++    assert [row[0] for row in rows] == ["_C/a.py", "_C.so"]
++    expected = hashlib.sha256(json.dumps(rows, ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
++    assert package_tree_sha256(tmp_path) == expected
+diff --git a/tests/test_si_continuation_training.py b/tests/test_si_continuation_training.py
+new file mode 100644
+index 0000000..9d58134
+--- /dev/null
++++ b/tests/test_si_continuation_training.py
+@@ -0,0 +1,384 @@
++"""Small CPU-only exercises of the actual continuation contract."""
++from __future__ import annotations
++
++import hashlib
++import json
++import math
++import random
++from pathlib import Path
++
++import pytest
++import torch
++from peft import LoraConfig, get_peft_model
++from transformers import GPT2Config, GPT2LMHeadModel
++
++from self_improvement.continuation.training import (
++    ContractError, collate, compare_initial_conditions, encode_examples, file_sha256, learning_rate_for_step, load_p0_adapter,
++    load_reviewed_manifest, train_from_p0, tree_sha256, validate_config,
++)
++
++
++class CharacterTokenizer:
++    eos_token = "~"
++    eos_token_id = 127
++    pad_token_id = None
++
++    def __call__(self, *, text, add_special_tokens):
++        assert add_special_tokens
++        return {"input_ids": [1] + [127 if c == "~" else ord(c) % 100 + 2 for c in text]}
++
++
++def tiny_base(_path=None):
++    with torch.random.fork_rng():
++        torch.manual_seed(99)
++        return GPT2LMHeadModel(GPT2Config(vocab_size=128, n_positions=64, n_ctx=64,
++                                        n_embd=8, n_layer=1, n_head=2, resid_pdrop=0,
++                                        embd_pdrop=0, attn_pdrop=0))
++
++
++def schedule_digest(doc):
++    binding = {k: doc[k] for k in ("sample_schedule", "ordered_sample_ids", "epoch_lengths", "epoch_each_sample_once", "task_exposures")}
++    return hashlib.sha256(json.dumps(binding, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
++
++
++@pytest.fixture
++def inputs(tmp_path):
++    base = tmp_path / "base"
++    base.mkdir()
++    (base / "weights.identity").write_text("synthetic-base")
++    adapter = tmp_path / "p0"
++    p0 = get_peft_model(tiny_base(), LoraConfig(r=2, lora_alpha=4, target_modules=["c_attn"], task_type="CAUSAL_LM"))
++    with torch.no_grad():
++        for name, param in p0.named_parameters():
++            if "lora_B" in name:
++                param.fill_(0.25)
++    p0.save_pretrained(adapter)
++    rows = [
++        {"sample_id": "a", "task_group": "task-1", "prompt": "first?", "completion": "A1"},
++        {"sample_id": "b", "task_group": "task-1", "prompt": "second?", "completion": "A2"},
++    ]
++    data = tmp_path / "data.jsonl"
++    data.write_text("".join(json.dumps(r) + "\n" for r in rows))
++    config = {"seed": 9, "batch_size": 1, "gradient_accumulation_steps": 1, "optimizer_steps": 2,
++              "learning_rate": 0.01, "weight_decay": 0., "max_grad_norm": 1., "max_length": 64,
++              "max_supervised_tokens": 100, "max_input_tokens": 100, "max_wall_seconds": 300.,
++              "adam_beta1": 0.9, "adam_beta2": 0.999, "adam_epsilon": 1e-8,
++              "gradient_checkpointing": False, "use_cache": False, "optimizer": "adamw", "optimizer_fused": False,
++              "scheduler": "cosine", "warmup_steps": 0, "min_lr_ratio": .1, "loss_normalization": "active_tokens"}
++    schedule = [{"sample_id": r["sample_id"], "task_group": r["task_group"], "exposures": 1} for r in rows]
++    order = [r["sample_id"] for r in rows]
++    schedule_binding = {"sample_schedule": schedule, "ordered_sample_ids": order, "epoch_lengths": [2], "epoch_each_sample_once": True, "task_exposures": {"task-1": 2}}
++    sh = schedule_digest(schedule_binding)
++    review = tmp_path / "review.json"
++    review.write_text(json.dumps({"decision": "PASS_DATA_ONLY", "dataset_sha256": file_sha256(data), "schedule_sha256": sh, "arm": "B"}))
++    manifest = tmp_path / "manifest.json"
++    manifest.write_text(json.dumps({"schema": "SI_CONTINUATION_DATA_V1", "arm": "B", "base_sha256": tree_sha256(base), "p0_adapter_sha256": tree_sha256(adapter), "dataset": {"path": str(data), "sha256": file_sha256(data)},
++                                    "independent_review": {"path": str(review), "sha256": file_sha256(review)},
++                                    **schedule_binding, "training_config": config}))
++    return {"base": base, "adapter": adapter, "rows": rows, "config": config, "manifest": manifest, "data": data, "review": review}
++
++
++def run(inputs, output, **changes):
++    kwargs = {"base_dir": inputs["base"], "base_sha256": tree_sha256(inputs["base"]),
++              "adapter_dir": inputs["adapter"], "adapter_sha256": tree_sha256(inputs["adapter"]),
++              "manifest_path": inputs["manifest"], "manifest_sha256": file_sha256(inputs["manifest"]),
++              "config": inputs["config"], "output_dir": output,
++              "model_loader": tiny_base, "tokenizer_loader": lambda _: CharacterTokenizer(), "device": "cpu"}
++    kwargs.update(changes)
++    return train_from_p0(**kwargs)
++
++
++def test_real_peft_p0_identity_and_freeze(inputs):
++    a = load_p0_adapter(tiny_base(), inputs["adapter"])
++    b = load_p0_adapter(tiny_base(), inputs["adapter"])
++    av = {n: p.detach().clone() for n, p in a.named_parameters()}
++    bv = {n: p.detach().clone() for n, p in b.named_parameters()}
++    assert av.keys() == bv.keys()
++    assert all(torch.equal(av[n], bv[n]) for n in av)
++    assert any("lora_B" in n and torch.all(p == .25) for n, p in av.items())
++    assert all(("lora_" in n) == p.requires_grad for n, p in a.named_parameters())
++
++
++def test_comparable_arms_require_identical_base_adapter_and_config(inputs):
++    arm_b = json.loads(inputs["manifest"].read_text())
++    arm_c = dict(arm_b, arm="C")
++    compare_initial_conditions(arm_b, arm_c)
++    for field in ("base_sha256", "p0_adapter_sha256", "training_config"):
++        with pytest.raises(ContractError, match="initial condition mismatch"):
++            compare_initial_conditions(arm_b, dict(arm_c, **{field: "different"}))
++
++
++def test_frozen_warmup_cosine_learning_rates(inputs):
++    cfg = dict(inputs["config"], optimizer_steps=6, warmup_steps=2, learning_rate=1., min_lr_ratio=0.)
++    values = [learning_rate_for_step(cfg, step) for step in range(6)]
++    assert values == pytest.approx([.5, 1., .8535533905932737, .5, .14644660940672627, 0.])
++    with pytest.raises(ContractError):
++        learning_rate_for_step(cfg, 6)
++
++
++def test_causal_masks_eos_and_padding(inputs):
++    encoded = encode_examples(CharacterTokenizer(), inputs["rows"], 64)
++    for row, tokens in zip(inputs["rows"], encoded):
++        boundary = len(row["prompt"]) + 1
++        assert tokens["labels"][:boundary] == [-100] * boundary
++        assert tokens["labels"][boundary:] == tokens["input_ids"][boundary:]
++        assert tokens["labels"][-1] == 127
++        assert tokens["supervised_tokens"] == len(row["completion"]) + 1
++    batch = collate(encoded, 127)
++    assert batch["labels"][0, -1].item() == -100
++    assert batch["attention_mask"][0, -1].item() == 0
++
++
++def test_end_to_end_real_peft_production_loop_and_no_eval(inputs, tmp_path):
++    out = tmp_path / "out"
++    res = run(inputs, out)
++    assert res["status"] == "COMPLETED"
++    assert res["counts"] == {"input_tokens": 21, "padded_input_tokens": 21, "supervised_tokens": 6, "microbatches_started": 2, "microbatches_completed": 2, "optimizer_steps": 2}
++    assert (out / "final_adapter" / "adapter_model.safetensors").exists()
++    assert not (out / "checkpoints").exists()
++    events = [json.loads(x) for x in (out / "training_events.jsonl").read_text().splitlines()]
++    assert [e["kind"] for e in events].count("microbatch_started") == 2
++    assert [e["sample_ids"] for e in events if e["kind"] == "microbatch_started"] == [["a"], ["b"]]
++    assert all(e.get("task_groups") == ["task-1"] for e in events if e["kind"] == "microbatch_started")
++    trained = load_p0_adapter(tiny_base(), out / "final_adapter")
++    initial = load_p0_adapter(tiny_base(), inputs["adapter"])
++    assert any(not torch.equal(p, dict(initial.named_parameters())[n]) for n, p in trained.named_parameters() if "lora_" in n)
++    with pytest.raises(ContractError, match="already exists"):
++        run(inputs, out)
++
++
++def test_manifest_rejects_modified_task_group_and_review(inputs):
++    doc = json.loads(inputs["manifest"].read_text())
++    doc["sample_schedule"][0]["task_group"] = "wrong"
++    inputs["manifest"].write_text(json.dumps(doc))
++    with pytest.raises(ContractError, match="schedule"):
++        load_reviewed_manifest(inputs["manifest"], file_sha256(inputs["manifest"]))
++
++
++def test_predeclared_multiple_passes_preserved_and_reordering_rejected(inputs):
++    doc = json.loads(inputs["manifest"].read_text())
++    for row in doc["sample_schedule"]:
++        row["exposures"] = 2
++    doc["ordered_sample_ids"] = ["a", "b", "b", "a"]
++    doc["epoch_lengths"] = [2, 2]
++    doc["task_exposures"] = {"task-1": 4}
++    review = json.loads(inputs["review"].read_text())
++    review["schedule_sha256"] = schedule_digest(doc)
++    inputs["review"].write_text(json.dumps(review))
++    doc["independent_review"]["sha256"] = file_sha256(inputs["review"])
++    inputs["manifest"].write_text(json.dumps(doc))
++    _, rows = load_reviewed_manifest(inputs["manifest"], file_sha256(inputs["manifest"]))
++    assert [row["sample_id"] for row in rows] == ["a", "b", "b", "a"]
++    doc["ordered_sample_ids"] = ["a", "a", "b", "b"]
++    inputs["manifest"].write_text(json.dumps(doc))
++    with pytest.raises(ContractError, match="schedule"):
++        load_reviewed_manifest(inputs["manifest"], file_sha256(inputs["manifest"]))
++
++
++def test_exposure_count_cannot_be_changed_by_rebinding_manifest_and_review(inputs):
++    doc = json.loads(inputs["manifest"].read_text())
++    doc["ordered_sample_ids"] = ["a", "a"]
++    review = json.loads(inputs["review"].read_text())
++    review["schedule_sha256"] = schedule_digest(doc)
++    inputs["review"].write_text(json.dumps(review))
++    doc["independent_review"]["sha256"] = file_sha256(inputs["review"])
++    inputs["manifest"].write_text(json.dumps(doc))
++    with pytest.raises(ContractError, match="exposure counts"):
++        load_reviewed_manifest(inputs["manifest"], file_sha256(inputs["manifest"]))
++
++
++def test_duplicate_in_epoch_rejected_even_when_total_counts_match(inputs):
++    doc = json.loads(inputs["manifest"].read_text())
++    for row in doc["sample_schedule"]:
++        row["exposures"] = 2
++    doc["ordered_sample_ids"] = ["a", "a", "b", "b"]
++    doc["epoch_lengths"] = [2, 2]
++    doc["task_exposures"] = {"task-1": 4}
++    review = json.loads(inputs["review"].read_text())
++    review["schedule_sha256"] = schedule_digest(doc)
++    inputs["review"].write_text(json.dumps(review))
++    doc["independent_review"]["sha256"] = file_sha256(inputs["review"])
++    inputs["manifest"].write_text(json.dumps(doc))
++    with pytest.raises(ContractError, match="epoch omits or duplicates"):
++        load_reviewed_manifest(inputs["manifest"], file_sha256(inputs["manifest"]))
++
++
++def test_token_budget_fail_closed_before_model_load_preserves_receipt(inputs, tmp_path):
++    config = dict(inputs["config"], max_input_tokens=1)
++    manifest = json.loads(inputs["manifest"].read_text())
++    manifest["training_config"] = config
++    inputs["manifest"].write_text(json.dumps(manifest))
++    out = tmp_path / "out"
++    calls = []
++    with pytest.raises(ContractError, match="before model load"):
++        run(inputs, out, config=config, model_loader=lambda _: calls.append("load"))
++    result = json.loads((out / "training_result.json").read_text())
++    assert result["status"] == "FAILED" and result["counts"]["microbatches_started"] == 0
++    assert calls == [] and not (out / "final_adapter").exists()
++
++
++def test_encoded_protocol_total_mismatch_stops_before_model_load(inputs, tmp_path):
++    out = tmp_path / "wrong-total"
++    calls = []
++    with pytest.raises(ContractError, match="encoded token totals"):
++        run(inputs, out, expected_totals={"input_tokens": 22, "supervised_tokens": 6}, model_loader=lambda _: calls.append("load"))
++    assert calls == [] and not (out / "final_adapter").exists()
++    assert json.loads((out / "training_result.json").read_text())["status"] == "FAILED"
++
++
++def test_timeout_and_bad_inputs_stop_before_model_load(inputs, tmp_path):
++    with pytest.raises(ContractError, match="hash mismatch"):
++        run(inputs, tmp_path / "bad", adapter_sha256="0" * 64)
++    times = iter([0., 301., 301.])
++    with pytest.raises(ContractError, match="wall-clock"):
++        run(inputs, tmp_path / "timeout", clock=lambda: next(times))
++    result = json.loads((tmp_path / "timeout" / "training_result.json").read_text())
++    assert result["status"] == "FAILED" and result["counts"]["microbatches_started"] == 0
++
++
++def test_failed_forward_is_charged_and_has_no_final_adapter(inputs, tmp_path, monkeypatch):
++    import self_improvement.continuation.training as module
++    real_load = module.load_p0_adapter
++
++    def broken_forward(base, adapter):
++        model = real_load(base, adapter)
++        def fail(*args, **kwargs):
++            raise RuntimeError("synthetic forward failure")
++        model.forward = fail
++        return model
++
++    monkeypatch.setattr(module, "load_p0_adapter", broken_forward)
++    out = tmp_path / "broken"
++    with pytest.raises(RuntimeError, match="synthetic forward failure"):
++        run(inputs, out)
++    result = json.loads((out / "training_result.json").read_text())
++    assert result["status"] == "FAILED"
++    assert result["counts"]["microbatches_started"] == 1
++    assert result["counts"]["microbatches_completed"] == 0
++    assert result["counts"]["input_tokens"] == 10
++    assert not (out / "final_adapter").exists()
++
++
++def test_production_loop_enables_real_gradient_checkpointing(inputs, tmp_path, monkeypatch):
++    import self_improvement.continuation.training as module
++    config = dict(inputs["config"], gradient_checkpointing=True)
++    doc = json.loads(inputs["manifest"].read_text())
++    doc["training_config"] = config
++    inputs["manifest"].write_text(json.dumps(doc))
++    real_load = module.load_p0_adapter
++    captured = []
++    def capture(base, adapter):
++        model = real_load(base, adapter)
++        captured.append(model)
++        return model
++    monkeypatch.setattr(module, "load_p0_adapter", capture)
++    result = run(inputs, tmp_path / "checkpointed", config=config)
++    assert result["status"] == "COMPLETED"
++    assert captured[0].is_gradient_checkpointing is True
++    assert captured[0].config.use_cache is False
++
++
++def test_explicit_fused_optimizer_flag_is_recorded_without_fallback(inputs, tmp_path):
++    config = dict(inputs["config"], optimizer_fused=True)
++    doc = json.loads(inputs["manifest"].read_text())
++    doc["training_config"] = config
++    inputs["manifest"].write_text(json.dumps(doc))
++    result = run(inputs, tmp_path / "fused", config=config)
++    assert result["status"] == "COMPLETED"
++    events = [json.loads(line) for line in (tmp_path / "fused/training_events.jsonl").read_text().splitlines()]
++    options = [row for row in events if row["kind"] == "optimizer_configured"]
++    assert len(options) == 1 and options[0]["fused"] is True and options[0]["initial_state_entries"] == 0
++    steps = [row for row in events if row["kind"] == "optimizer_step_started"]
++    assert [row["learning_rate"] for row in steps] == pytest.approx([config["learning_rate"] * .55, config["learning_rate"] * .1])
++
++
++def test_accumulation_weights_each_active_token_like_combined_batch(inputs, tmp_path, monkeypatch):
++    inputs["rows"][1]["completion"] = "A2long"
++    inputs["data"].write_text("".join(json.dumps(r) + "\n" for r in inputs["rows"]))
++    review = json.loads(inputs["review"].read_text())
++    review["dataset_sha256"] = file_sha256(inputs["data"])
++    inputs["review"].write_text(json.dumps(review))
++    manifest = json.loads(inputs["manifest"].read_text())
++    manifest["dataset"]["sha256"] = file_sha256(inputs["data"])
++    manifest["independent_review"]["sha256"] = file_sha256(inputs["review"])
++    original_step = torch.optim.AdamW.step
++    gradients = []
++    def capture(optimizer, *args, **kwargs):
++        gradients.append([p.grad.detach().clone() for group in optimizer.param_groups for p in group["params"] if p.grad is not None])
++        return original_step(optimizer, *args, **kwargs)
++    monkeypatch.setattr(torch.optim.AdamW, "step", capture)
++    for name, batch, accum in (("micro", 1, 2), ("batch", 2, 1)):
++        cfg = dict(inputs["config"], batch_size=batch, gradient_accumulation_steps=accum, optimizer_steps=1)
++        manifest["training_config"] = cfg
++        inputs["manifest"].write_text(json.dumps(manifest))
++        run(inputs, tmp_path / name, config=cfg)
++    assert len(gradients) == 2 and len(gradients[0]) == len(gradients[1])
++    assert any(torch.any(g != 0) for g in gradients[0])
++    assert all(torch.allclose(a, b, atol=1e-6, rtol=1e-5) for a, b in zip(*gradients))
++    a = load_p0_adapter(tiny_base(), tmp_path / "micro/final_adapter")
++    b = load_p0_adapter(tiny_base(), tmp_path / "batch/final_adapter")
++    bp = dict(b.named_parameters())
++    assert all(torch.allclose(p, bp[n], atol=1e-6, rtol=1e-5) for n, p in a.named_parameters() if "lora_" in n)
++
++
++def test_full_synthetic_1248_sequence_and_78_recorded_lr_steps(inputs, tmp_path):
++    """Software-only 4-epoch accounting; synthetic IDs, no scientific data."""
++    torch.set_num_threads(1)
++    rows = [{"sample_id": f"s{i:03}", "task_group": f"t{i // 4:02}", "prompt": "p", "completion": "A123"} for i in range(312)]
++    inputs["data"].write_text("".join(json.dumps(row) + "\n" for row in rows))
++    doc = json.loads(inputs["manifest"].read_text())
++    doc["dataset"]["sha256"] = file_sha256(inputs["data"])
++    doc["sample_schedule"] = [{"sample_id": row["sample_id"], "task_group": row["task_group"], "exposures": 4} for row in rows]
++    order = []
++    for epoch in range(4):
++        ids = [row["sample_id"] for row in rows]
++        random.Random(42 + epoch).shuffle(ids)
++        order.extend(ids)
++    doc["ordered_sample_ids"] = order
++    doc["epoch_lengths"] = [312] * 4
++    doc["epoch_each_sample_once"] = True
++    doc["task_exposures"] = {f"t{i:02}": 16 for i in range(78)}
++    config = dict(inputs["config"], batch_size=1, gradient_accumulation_steps=16, optimizer_steps=78,
++                  learning_rate=1e-4, warmup_steps=3, min_lr_ratio=.1, optimizer_fused=True,
++                  gradient_checkpointing=True, max_input_tokens=20_000, max_supervised_tokens=6_240)
++    doc["training_config"] = config
++    review = json.loads(inputs["review"].read_text())
++    review["dataset_sha256"] = file_sha256(inputs["data"])
++    review["schedule_sha256"] = schedule_digest(doc)
++    inputs["review"].write_text(json.dumps(review))
++    doc["independent_review"]["sha256"] = file_sha256(inputs["review"])
++    inputs["manifest"].write_text(json.dumps(doc))
++    result = run(inputs, tmp_path / "full", config=config)
++    events = [json.loads(line) for line in (tmp_path / "full/training_events.jsonl").read_text().splitlines()]
++    started = [e for e in events if e["kind"] == "microbatch_started"]
++    steps = [e for e in events if e["kind"] == "optimizer_step_started"]
++    assert [e["sample_ids"][0] for e in started] == order
++    assert len(started) == 1248 and len(steps) == 78
++    assert result["counts"]["supervised_tokens"] == 6240
++    assert all(row["active_tokens"] == 80 for row in steps)
++    for s, event in enumerate(steps, 1):
++        expected = 1e-4 * (s / 3 if s <= 3 else .1 + .9 / 2 * (1 + math.cos(math.pi * (s - 3) / 75)))
++        assert event["learning_rate"] == pytest.approx(expected, rel=1e-14, abs=1e-16)
++    assert steps[2]["learning_rate"] == pytest.approx(1e-4)
++    assert steps[3]["learning_rate"] < 1e-4
++    assert steps[-1]["learning_rate"] == pytest.approx(1e-5)
++
++
++def test_frozen_file_symlink_hashes_target_bytes_and_rejects_dangling(tmp_path):
++    external = tmp_path / "blob"
++    external.write_text("first")
++    snapshot = tmp_path / "snapshot"
++    snapshot.mkdir()
++    (snapshot / "weights").symlink_to(external)
++    before = tree_sha256(snapshot)
++    external.write_text("changed")
++    assert tree_sha256(snapshot) != before
++    external.unlink()
++    with pytest.raises(ContractError, match="symlink"):
++        tree_sha256(snapshot)
++
++
++@pytest.mark.parametrize("field,value", [("seed", True), ("batch_size", 0), ("learning_rate", float("nan")), ("adam_beta1", 1.), ("gradient_checkpointing", 1), ("use_cache", True)])
++def test_invalid_config_rejected(inputs, field, value):
++    with pytest.raises(ContractError):
++        validate_config(dict(inputs["config"], **{field: value}), 2)

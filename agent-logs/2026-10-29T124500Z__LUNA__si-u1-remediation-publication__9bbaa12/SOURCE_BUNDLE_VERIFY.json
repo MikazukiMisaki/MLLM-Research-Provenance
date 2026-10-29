@@ -1,0 +1,63 @@
+{
+  "candidate": "9bbaa12c2d8177a60ec5a74ed2f970ef29a57bce",
+  "git_bundle_sha256": "f5e639bf7d2f27bb2bc0b879e576778e2488c6d3559d1868da31ffab2596df6d",
+  "prerequisite": "dfa382ad0ab604746690e96537dc4009cfeeefd0",
+  "prerequisite_source": "seeded from local scientific repository in fresh temporary repository; previously preserved source bundle sha e21602fde8aa08396cbdeab61ab75dcc95b63077ef6a926803814ddc893e6e70",
+  "status": "PASS",
+  "steps": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "--quiet"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "fetch",
+        "--no-tags",
+        "/home/lizening/wt-si-self-imitation-train",
+        "dfa382ad0ab604746690e96537dc4009cfeeefd0"
+      ],
+      "returncode": 0,
+      "stderr": "From /home/lizening/wt-si-self-imitation-train\n * branch            dfa382ad0ab604746690e96537dc4009cfeeefd0 -> FETCH_HEAD\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "bundle",
+        "verify",
+        "/home/lizening/research-notes/agent-logs/2026-10-29T124500Z__LUNA__si-u1-remediation-publication__9bbaa12/si-u1-remediation-9bbaa12-source.bundle"
+      ],
+      "returncode": 0,
+      "stderr": "/home/lizening/research-notes/agent-logs/2026-10-29T124500Z__LUNA__si-u1-remediation-publication__9bbaa12/si-u1-remediation-9bbaa12-source.bundle is okay\n",
+      "stdout": "The bundle contains this ref:\n9bbaa12c2d8177a60ec5a74ed2f970ef29a57bce HEAD\nThe bundle requires this ref:\ndfa382ad0ab604746690e96537dc4009cfeeefd0 \n"
+    },
+    {
+      "argv": [
+        "git",
+        "fetch",
+        "/home/lizening/research-notes/agent-logs/2026-10-29T124500Z__LUNA__si-u1-remediation-publication__9bbaa12/si-u1-remediation-9bbaa12-source.bundle",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "stderr": "From /home/lizening/research-notes/agent-logs/2026-10-29T124500Z__LUNA__si-u1-remediation-publication__9bbaa12/si-u1-remediation-9bbaa12-source.bundle\n * branch            HEAD       -> FETCH_HEAD\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "FETCH_HEAD"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "9bbaa12c2d8177a60ec5a74ed2f970ef29a57bce\n"
+    }
+  ]
+}

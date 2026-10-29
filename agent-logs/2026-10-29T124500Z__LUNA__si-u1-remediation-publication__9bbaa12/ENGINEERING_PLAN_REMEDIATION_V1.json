@@ -1,0 +1,105 @@
+{
+  "schema": "SI_U1_ENGINEERING_PLAN_V1",
+  "status": "REMEDIATION_DESIGN_ONLY_NOT_AUTHORIZATION_OR_CLEARANCE",
+  "total_allocated_device_seconds": 1800,
+  "unused_cap_transfer_authorized": false,
+  "retry_authorized": false,
+  "resource": {
+    "uuid": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+    "allocator_cap_bytes": 25769803776,
+    "preweight_free_bytes": 30064771072,
+    "later_free_bytes": 2147483648
+  },
+  "training": {
+    "allocation_seconds": 1080,
+    "inputs": "synthetic tokens only; no source, expert, evaluation or reserve task text",
+    "base_and_p0": "same exact artifacts as prospective science; verify loaded P0 tensors",
+    "sequence_length": 2048,
+    "active_target_tokens_per_sequence_with_EOS": 5,
+    "microbatch_size": 1,
+    "gradient_accumulation_steps": 16,
+    "maximum_microbatches": 32,
+    "maximum_optimizer_steps": 2,
+    "maximum_nonpad_input_tokens": 65536,
+    "maximum_supervised_tokens": 160,
+    "learning_rates": [
+      3.3333333333333335e-05,
+      6.666666666666667e-05
+    ],
+    "optimizer": "same AdamW fused parameters as scientific protocol",
+    "gradient_checkpointing": true,
+    "use_cache": false,
+    "maximum_artifact_saves": 1,
+    "artifact_policy": "save only this run engineering adapter in unique engineering-owned temporary directory; hash and record bytes then remove only that newly created artifact; never overwrite/delete P0 or prior evidence; no upload; never eligible as scientific checkpoint",
+    "required_measurements": [
+      "load duration",
+      "per-microbatch and per-step durations",
+      "save/hash/delete duration",
+      "cleanup duration",
+      "allocated and reserved peaks",
+      "global free memory",
+      "allocator oom and retry counters",
+      "finite loss and gradients",
+      "actual initial P0 tensor identity",
+      "artifact hash bytes and deletion confirmation"
+    ],
+    "fit_projection": "1.5*(measured_load_seconds + 78*max_observed_complete_optimizer_step_seconds + measured_save_hash_delete_seconds + measured_cleanup_seconds) < 5400",
+    "success_requires": [
+      "exact32 microbatches and2 optimizer steps if complete",
+      "finite loss and gradients",
+      "no OOM and no allocator retry",
+      "all memory checks pass",
+      "authentic exit0",
+      "cleanup and engineering artifact deletion established",
+      "time<=1080",
+      "fit projection passes"
+    ],
+    "interpretation": "hardware and implementation stress only; no learning/performance evidence; does not guarantee all78steps or future shared-device conditions"
+  },
+  "evaluation": {
+    "allocation_seconds": 600,
+    "selection": "original engineering_development only; exclude final82/history/source parents; tagged SHA-min metadata candidate; raw game hash must not intersect final/source/expert; no reserve",
+    "maximum_resets": 1,
+    "maximum_generations": 1,
+    "maximum_steps": 1,
+    "maximum_environment_operations": 2,
+    "maximum_input_tokens": 8192,
+    "maximum_generated_tokens": 16,
+    "maximum_new_tokens": 16,
+    "suffix_authorized": false,
+    "uses_only_frozen_P0": true,
+    "success_requires": [
+      "real reset and exact admissible map",
+      "one real generation valid parsed action",
+      "one exact mapped step with receipt",
+      "stop after step regardless of terminal reward",
+      "authentic exit0",
+      "cleanup established",
+      "time<=600"
+    ],
+    "interpretation": "integration/load/accounting only; no scientific success estimate or B/C load guarantee"
+  },
+  "release_requires": [
+    "independently reviewed exact engineering-only code",
+    "hash-bound separate engineering authorization and one-shot clearance",
+    "actual metadata-selected engineering task and raw artifact hashes independently reviewed",
+    "7-package/interpreter identity accepted",
+    "fresh resource snapshot",
+    "reviewed remediation amendment with real predecessor cost and unchanged scientific plan; new unique run identity"
+  ],
+  "no_live_release": true,
+  "remediation": {
+    "schema": "SI_U1_ENGINEERING_REMEDIATION_BINDING_V1",
+    "previous_run_id": "342daf138bc741188ce18550a05f97ed",
+    "previous_source_sha": "15e2e62ec5be4817622be5538ee2b657faae7928",
+    "previous_plan_sha256": "446740c0a8fcacaee492ddd77f11fbf86456b085952734d64131de6255b52336",
+    "supervisor": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T122500Z__SOL__si-training-engineering-draft__15e2e62/run_parent/engineering_run_342daf138bc741188ce18550a05f97ed/supervisor_exit.json",
+      "sha256": "b9c3559966da806b2f25effa4a1478abbe9c30333a490983036f109c48f977ba"
+    },
+    "result": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T122500Z__SOL__si-training-engineering-draft__15e2e62/run_parent/engineering_run_342daf138bc741188ce18550a05f97ed/engineering_result.json",
+      "sha256": "fc913135fa6c21f14ebc22d095075181e4ea7f86349c60de90bdc4ff59607cf9"
+    }
+  }
+}

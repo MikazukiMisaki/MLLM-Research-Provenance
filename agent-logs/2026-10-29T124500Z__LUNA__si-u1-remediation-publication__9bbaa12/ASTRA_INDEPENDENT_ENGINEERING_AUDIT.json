@@ -1,0 +1,48 @@
+{
+  "schema": "ASTRA_REAL_ENGINEERING_REMEDIATION_RESULT_AUDIT_V1",
+  "decision": "PASS_ENGINEERING_FIT_ONLY_NOT_SCIENCE",
+  "source_sha": "9bbaa12c2d8177a60ec5a74ed2f970ef29a57bce",
+  "run_id": "db9c2a798f8a41719cd595ebff05dfb0",
+  "result_sha256": "2842ab650571602087a82346c26a1aebf2f96b238ef8e5978a5202ee7a5c26f3",
+  "supervisor_sha256": "9f11162ae91e3db9505518ee871c97b1c378acd68c5a5f853973e8fe8d5c1e65",
+  "events_sha256": "8473904657a8660c66a6b3446f3e762c91426fcbcef591c740d2308d900c75af",
+  "resource_sha256": "294f3dfda40573156cfab0a2d9827ae79a6a1877e1bd0a5da381967ed88183dd",
+  "assessment_sha256": "9c97d35283a49ac62604528365357550f9cbf27a15ceef340fbb6874949d4ea0",
+  "authentic_returncode": 0,
+  "cleanup_in_worker_allocated_reserved": [
+    0,
+    0
+  ],
+  "process_cleanup_established": true,
+  "counts": {
+    "input_tokens": 65536,
+    "microbatches_completed": 32,
+    "microbatches_started": 32,
+    "optimizer_steps_completed": 2,
+    "optimizer_steps_started": 2,
+    "supervised_tokens": 160,
+    "trial_saves_completed": 1,
+    "trial_saves_started": 1
+  },
+  "resource_rows": 39,
+  "peak_allocated_bytes": 22262761472,
+  "peak_reserved_bytes": 22676504576,
+  "ooms_and_retries_zero": true,
+  "trial_adapter_deleted": true,
+  "step_seconds": [
+    33.869217708706856,
+    33.6709006940946
+  ],
+  "projection_seconds_independently_recomputed": 4060.718257045839,
+  "fit_cap_seconds": 5400,
+  "actual_engineering_seconds": 132.8866418208927,
+  "cumulative_training_engineering_seconds": 250.73030943144113,
+  "cumulative_training_engineering_A40hours": 0.06964730817540031,
+  "old_failure_retained": true,
+  "interpretation": "In this new run the measured remaining allocation was cleared after explicit cuBLAS workspace release plus synchronization/empty_cache. This supports this cleanup path in this run; it does not retroactively prove the old failure allocation source or guarantee future78step shared-device fit.",
+  "restrictions": [
+    "no scientificcheckpoint eligible",
+    "no scientific preflight/launch granted",
+    "no retries or spending unallocated balance without new scope"
+  ]
+}
