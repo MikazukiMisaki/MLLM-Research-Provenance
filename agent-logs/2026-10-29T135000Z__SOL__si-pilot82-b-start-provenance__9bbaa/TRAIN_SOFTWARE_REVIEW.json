@@ -1,0 +1,36 @@
+{
+  "schema": "ASTRA_CONTINUATION_INDEPENDENT_EXACT_REVIEW_V1",
+  "decision": "PASS_SCIENTIFIC_SOFTWARE_AND_BOUND_PAIR_ONLY_NOT_LIVE_RELEASE",
+  "source_sha": "9bbaa12c2d8177a60ec5a74ed2f970ef29a57bce",
+  "delta_base_independently_reviewed": "b9aa5fcc481ed0a3ff1602140babe271ee62639c",
+  "scope": "Full8file delta; science training/gate/runtime_identity/CLI unchanged, shared resource/supervisor explicitly re-reviewed",
+  "resource_semantics": "OOM0 for science; allocator retry allowed and logged for science, forbidden engineering only;actual/peak cap and missing counters fail closed",
+  "supervisor_semantics": "Science defaults retain result path/schema; engineering alternative requires exact separate contract; added resource hash does not replace training result binding",
+  "data_continuity_sha256": "181d6ca1e61c2c935e0a8e936f37052485e79f65e46258d407b60b91e4ec71c0",
+  "independent_regression": {
+    "count": 94,
+    "returncode": 0,
+    "receipt_sha256": "2e188615bd9cf7b613b9afd4f32aae36d3009cbb956d7f29398343ba2ee91a17"
+  },
+  "own_static_and_real_tinyCPU_CLI": {
+    "returncode": 0,
+    "receipt_sha256": "fb688b8911eded0ae78d698b50603631f98c2772e3987090452de5732c1cb79c",
+    "checks_sha256": "b8b4fde27e492e9a569a72876353833c073542783a257ac972700c354b7c41af"
+  },
+  "reviews": {
+    "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/B_SOFTWARE_REVIEW_9BBAA.json": "eefe47ad055cf82ea7e29bff3f8fa0cf82711d0e4a713e06c2ecd7cd8fe0a891",
+    "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/C_SOFTWARE_REVIEW_9BBAA.json": "84a566148d840c190410654416fa49b300fa6272bbaf00f32875dbf081bfcbb7",
+    "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/PAIR_PROTOCOL_REVIEW_9BBAA.json": "7b7a0fd73429b7b91009234d49f8f8e7068c31b922860192c498def4dd579df9"
+  },
+  "not_granted": [
+    "scientific preflight",
+    "scientific training launch",
+    "scientific result or real B/C checkpoint approval"
+  ],
+  "required_next": [
+    "separate B/C exact source/manifest/protocol authorizations and fresh genuine preflights",
+    "independent one-shot science clearance only after all readiness gates",
+    "actual resource5400seconds perarm enforced, failures stop without retry"
+  ],
+  "engineering_evidence_not_used_as_science_test": true
+}

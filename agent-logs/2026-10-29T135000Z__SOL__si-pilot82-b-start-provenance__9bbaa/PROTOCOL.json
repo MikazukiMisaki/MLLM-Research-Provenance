@@ -1,0 +1,249 @@
+{
+  "schema": "SI_CONTINUATION_PROTOCOL_V1",
+  "protocol_id": "SI-U1-PILOT82-v1",
+  "status": "PROSPECTIVE_SPECIFICATION_NOT_LIVE_CLEARANCE",
+  "runtime": {
+    "B": {
+      "allocation_seconds": 5400,
+      "gpu": {
+        "uuid": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+        "allocator_cap_bytes": 25769803776,
+        "preweight_free_bytes": 30064771072,
+        "later_free_bytes": 2147483648
+      }
+    },
+    "C": {
+      "allocation_seconds": 5400,
+      "gpu": {
+        "uuid": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+        "allocator_cap_bytes": 25769803776,
+        "preweight_free_bytes": 30064771072,
+        "later_free_bytes": 2147483648
+      }
+    }
+  },
+  "training_config": {
+    "seed": 42,
+    "batch_size": 1,
+    "gradient_accumulation_steps": 16,
+    "optimizer_steps": 78,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "max_length": 2048,
+    "max_supervised_tokens": 6240,
+    "max_input_tokens": 700000,
+    "max_wall_seconds": 5400,
+    "adam_beta1": 0.9,
+    "adam_beta2": 0.999,
+    "adam_epsilon": 1e-08,
+    "gradient_checkpointing": true,
+    "use_cache": false,
+    "optimizer": "adamw",
+    "optimizer_fused": true,
+    "scheduler": "cosine",
+    "warmup_steps": 3,
+    "min_lr_ratio": 0.1,
+    "loss_normalization": "active_tokens"
+  },
+  "learning_rate_definition": {
+    "step_index": "one_based_actual_optimizer_step_set_lr_before_step",
+    "warmup_formula": "base_lr*s/3 for integer s in [1,3]",
+    "cosine_formula": "base_lr*(0.1+0.9/2*(1+cos(pi*(s-3)/75))) for integer s in [4,78]",
+    "values_by_one_based_step": [
+      3.3333333333333335e-05,
+      6.666666666666667e-05,
+      0.0001,
+      9.996052735444863e-05,
+      9.98421786662277e-05,
+      9.964516155915151e-05,
+      9.936982166817273e-05,
+      9.901664203302126e-05,
+      9.858624225078841e-05,
+      9.807937738894303e-05,
+      9.749693666068665e-05,
+      9.683994186497132e-05,
+      9.610954559391703e-05,
+      9.530702921077358e-05,
+      9.443380060197387e-05,
+      9.349139170722281e-05,
+      9.248145583195448e-05,
+      9.140576474687264e-05,
+      9.02662055796628e-05,
+      8.906477750432904e-05,
+      8.780358823396352e-05,
+      8.648485032310146e-05,
+      8.511087728614862e-05,
+      8.368407953869104e-05,
+      8.220696016880688e-05,
+      8.068211054579944e-05,
+      7.911220577405484e-05,
+      7.75e-05,
+      7.58483215803938e-05,
+      7.416006812042828e-05,
+      7.243820139034464e-05,
+      7.068574212948169e-05,
+      6.890576474687263e-05,
+      6.710139192768695e-05,
+      6.527578915497951e-05,
+      6.343215915635762e-05,
+      6.157373628530852e-05,
+      5.970378084704442e-05,
+      5.782557337881911e-05,
+      5.594240889475107e-05,
+      5.405759110524895e-05,
+      5.217442662118091e-05,
+      5.0296219152955604e-05,
+      4.84262637146915e-05,
+      4.65678408436424e-05,
+      4.47242108450205e-05,
+      4.2898608072313064e-05,
+      4.109423525312738e-05,
+      3.9314257870518325e-05,
+      3.756179860965538e-05,
+      3.583993187957173e-05,
+      3.415167841960624e-05,
+      3.249999999999999e-05,
+      3.088779422594517e-05,
+      2.931788945420058e-05,
+      2.7793039831193136e-05,
+      2.6315920461308964e-05,
+      2.488912271385138e-05,
+      2.3515149676898555e-05,
+      2.219641176603649e-05,
+      2.093522249567097e-05,
+      1.9733794420337214e-05,
+      1.8594235253127375e-05,
+      1.7518544168045525e-05,
+      1.6508608292777204e-05,
+      1.556619939802614e-05,
+      1.4692970789226431e-05,
+      1.3890454406082968e-05,
+      1.3160058135028691e-05,
+      1.2503063339313356e-05,
+      1.1920622611056975e-05,
+      1.1413757749211602e-05,
+      1.098335796697875e-05,
+      1.0630178331827276e-05,
+      1.0354838440848503e-05,
+      1.0157821333772305e-05,
+      1.0039472645551373e-05,
+      1e-05
+    ],
+    "not_historical_HF_schedule_equivalence": true
+  },
+  "dose": {
+    "distinct_parent_directories_per_arm": 78,
+    "unique_examples_per_arm": 312,
+    "epochs": 4,
+    "complete_ordered_example_ids_required": 1248,
+    "epoch_lengths": [
+      312,
+      312,
+      312,
+      312
+    ],
+    "each_example_once_per_epoch": true,
+    "supervised_tokens_per_example_including_EOS": 5,
+    "required_total_supervised_tokens_per_arm": 6240,
+    "required_actual_optimizer_steps_per_arm": 78,
+    "family_parent_counts": {
+      "pick_and_place_simple": 34,
+      "pick_clean_then_place_in_recep": 24,
+      "pick_cool_then_place_in_recep": 10,
+      "pick_heat_then_place_in_recep": 8,
+      "pick_two_obj_and_place": 2
+    },
+    "actual_unpadded_sequence_tokens_four_passes": {
+      "B": 661620,
+      "C": 695872
+    },
+    "max_input_tokens_semantics": "sum nonpadding full input_ids including completion; identical cap700000 both arms; actual totals must match bound encoded manifest"
+  },
+  "checkpoint_rule": "fixed_final_step78_only_no_loss_or_online_selection",
+  "ordered_schedule_rule": "four complete epochs; microbatch1 accumulation16 crosses epoch boundaries; full ordered IDs independently bound",
+  "initialization": "same verified existing P0 adapter; frozen base; fresh identical optimizer; no new adapter",
+  "evaluation_metadata_schedule_sha256": "c352a0d708b910bb3703c63009aed3a800b5ba4d40f95021f3bd30db0e4823cd",
+  "budget": {
+    "science_total_allocated_A40_hours": 15,
+    "training_each_hours": 1.5,
+    "evaluation_each_hours": 4,
+    "engineering_separate_hours": 0.5,
+    "retry_authorized": false,
+    "unused_cap_transfer_authorized": false
+  },
+  "resource_claims": {
+    "exclusive_gpu": false,
+    "whole_process_vram_cap": false,
+    "NVML_PID_mapping_proven": false,
+    "devicewide_delta_attribution": false,
+    "allocator": "native",
+    "fresh_measurement_and_engineering_fit_required": true
+  },
+  "release_requirements": [
+    "final exact source independent acceptance",
+    "artifact hash bridge and full P0 tensor equality",
+    "paired dataset and ordered exposure manifests accepted",
+    "engineering receipt independently accepted under separate engineering-only schema",
+    "machine authorization exact runtime match",
+    "separate one-shot science launch clearance"
+  ],
+  "epoch_shuffle_rule": {
+    "implementation": "python_random_Random_shuffle",
+    "initial_order": "ascending sample_id string",
+    "epoch_seed": "42 + zero_based_epoch",
+    "epochs": 4,
+    "python_version_binding": "3.10.20 (main, Jun 11 2026, 15:17:37) [GCC 14.3.0]"
+  },
+  "runtime_identity": {
+    "interpreter": {
+      "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python3.10",
+      "sha256": "560aa01150e792ac8efc5f0e55db51e7175623437a2c2d7e62b2ec2cd9973449",
+      "python_version": "3.10.20 (main, Jun 11 2026, 15:17:37) [GCC 14.3.0]"
+    },
+    "packages": {
+      "torch": {
+        "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/torch/__init__.py",
+        "sha256": "5a190666c3853aa236c4d48ed64e2d4bbcd23bd32c21e64c0867646a6852e43f",
+        "version": "2.6.0+cu124",
+        "tree_sha256": "241f7179a9c8d1aa7376f97f5f41444e98d59c74ac84fb26f74a22937d0e8f9f"
+      },
+      "peft": {
+        "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/peft/__init__.py",
+        "sha256": "efabc3b44d7326eee59c07910e426fa38ee0c6419b773e8f75af87ae61d3fa32",
+        "version": "0.17.1",
+        "tree_sha256": "1af7a95fcc37fde5c1a2840733cee2d776082267ec56eabcfc8dffb7534ca75d"
+      },
+      "transformers": {
+        "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/transformers/__init__.py",
+        "sha256": "2f92b5a7b85d2cbce640da83b48c032d1bf6b383963a779a1458c94f2f4ae89d",
+        "version": "4.56.2",
+        "tree_sha256": "441d5e0b2844f5de4d2aade19b498e2edb6cde22f9486801f164b7c6c8b2d43d"
+      },
+      "tokenizers": {
+        "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/tokenizers/__init__.py",
+        "sha256": "148ecb122f3fee03be9abb1fe213dd85fbc691bf2ad2b437ff531533781a6a3a",
+        "version": "0.22.2",
+        "tree_sha256": "c757c7e252945cde70d5984d63a0e10c3025d802fb51f15596030ea371e2ee26"
+      },
+      "safetensors": {
+        "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/safetensors/__init__.py",
+        "sha256": "92c988289b8c225a92f25e487ad5d7a1eb7e326eec0fedfc6b75e6f04d85e32f",
+        "version": "0.8.0",
+        "tree_sha256": "e59fd6e2378ecf675ca67aee838d6ffb37acfc235c68c7fe72626aa24af84429"
+      },
+      "accelerate": {
+        "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/accelerate/__init__.py",
+        "sha256": "68f56baac9b078db4735567649441ef28932a946b400bf8d8c2519b0a5b94b89",
+        "version": "1.10.1",
+        "tree_sha256": "9b9ac92110ca026bd7009c173f952bc4c050228c81b5c1708ee007434690032a"
+      },
+      "huggingface_hub": {
+        "path": "/home/lizening/miniconda3/envs/alfworld-self-improve/lib/python3.10/site-packages/huggingface_hub/__init__.py",
+        "sha256": "e586b64612482128fd24119364bc4dc6dca938407134e454a5e876341b364e35",
+        "version": "0.36.2",
+        "tree_sha256": "21f232f1008515a9961c27bfaf925f935dfb552e8a50af1f4e7146ded3b5f3e1"
+      }
+    }
+  }
+}

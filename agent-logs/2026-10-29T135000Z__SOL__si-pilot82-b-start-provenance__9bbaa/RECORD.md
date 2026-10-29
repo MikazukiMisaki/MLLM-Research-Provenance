@@ -1,0 +1,5 @@
+# SI-U1 B training startup provenance
+
+Status at snapshot: `B_IN_PROGRESS_AT_SNAPSHOT`, 2026-10-29T13:50:17.690496+00:00. This is evidence of authorized start and process presence only, not completed training, checkpoint acceptance, successful evaluation, or scientific results. The B run identity is `064d0c7f39f14414acf24f399188f85f`; source `9bbaa12c2d8177a60ec5a74ed2f970ef29a57bce`. The independently reviewed preflight and one-shot B clearance are copied unchanged, along with frozen protocol, private schedule and data-manifest metadata, reviews and immutable supervisor/worker startup records. The package does not contain model weights, dataset rows or ongoing logs; original runtime evidence remains untouched. B completion, C continuation and evaluation each require their own evidence and independent acceptance.
+
+The source files were read twice and matched; linkage checks and snapshot claims are in PACKAGE_SUMMARY.json. Sensitive task identity metadata is suitable only for the verified private provenance repository.

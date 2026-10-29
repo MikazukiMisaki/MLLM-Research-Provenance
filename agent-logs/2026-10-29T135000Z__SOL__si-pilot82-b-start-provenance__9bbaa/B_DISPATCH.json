@@ -1,0 +1,63 @@
+{
+  "allocation_seconds": 5400,
+  "argv": [
+    "/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python3.10",
+    "-I",
+    "/home/lizening/wt-si-self-imitation-train/scripts/run_si_continuation.py",
+    "--live",
+    "--authorization",
+    "/home/lizening/wt-si-self-imitation-train/configs/local/si_pilot82_b_authorization_064d0c7f39f14414acf24f399188f85f.json",
+    "--authorization-sha256",
+    "b34fbf7d608aae53a492fc243d76230442221446974e25f856a0e8948c7f983f",
+    "--clearance",
+    "/home/lizening/research-notes/agent-logs/2026-10-29T134800Z__CODEX__si-pilot82-b-release__9bbaa/B_TRAINING_CLEARANCE_ONE_SHOT.json",
+    "--clearance-sha256",
+    "5dbd959930bbf6df91c7ad1d93968009589c8ab372b6c48e3f7dd9371061dad9"
+  ],
+  "authorization_sha256": "b34fbf7d608aae53a492fc243d76230442221446974e25f856a0e8948c7f983f",
+  "c_automatically_started": false,
+  "clearance_sha256": "5dbd959930bbf6df91c7ad1d93968009589c8ab372b6c48e3f7dd9371061dad9",
+  "compute_apps_before": {
+    "argv": [
+      "nvidia-smi",
+      "--query-compute-apps=pid,process_name,used_gpu_memory",
+      "--format=csv,noheader,nounits"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "",
+    "utc": "2026-10-29T13:41:12.854993+00:00"
+  },
+  "cwd": "/home/lizening/wt-si-self-imitation-train",
+  "engineering_device_seconds_separate": 455.8560599721968,
+  "environment": {
+    "CUDA_MODULE_LOADING": "LAZY",
+    "CUDA_VISIBLE_DEVICES": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a",
+    "HF_HOME": "/home/lizening/.cache/huggingface",
+    "HF_HUB_CACHE": "/home/lizening/.cache/huggingface/hub",
+    "HF_HUB_OFFLINE": "1",
+    "HOME": "/home/lizening",
+    "LC_ALL": "C.UTF-8",
+    "PATH": "/home/lizening/miniconda3/envs/alfworld-self-improve/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTORCH_CUDA_ALLOC_CONF": "backend:native",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "gpu_before_devicewide": {
+    "argv": [
+      "nvidia-smi",
+      "--query-gpu=uuid,memory.used,memory.free,utilization.gpu",
+      "--format=csv,noheader,nounits"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a, 14, 45390, 0\n",
+    "utc": "2026-10-29T13:41:12.829534+00:00"
+  },
+  "preflight_sha256": "79033dc27df69c3b6d52d8995cedccc587d41fb682a5764d65f393a7895d3268",
+  "remaining_authorization_seconds_at_dispatch": 14163.521916,
+  "retry_authorized": false,
+  "schema": "SI_U1_LUNA_B_LIVE_DISPATCH_V1",
+  "source_sha": "9bbaa12c2d8177a60ec5a74ed2f970ef29a57bce",
+  "utc": "2026-10-29T13:41:12.855330+00:00"
+}
