@@ -1,0 +1,9 @@
+# SI-U1 c2356 full raw evidence and no-outcome operational audit
+
+The single c2356 evaluation naturally completed under its genuine production supervisor: authentic worker return code 0, exit recorded, cleanup established and allocation 4263.280576453544 device seconds. The detached wrapper recorded production supervisor return code 0. These are operational observations; independent full provenance and scientific analysis remain separate.
+
+The offline checks in OPERATIONAL_AUDIT_NO_OUTCOMES.json verified the production authentic-run and resource validators, complete chained event journal and monotonic sequence, three arm starts/finishes, 246 completed environment constructs/resets/closes, 5,001 completed generations and steps, 5,247 reset-inclusive environment operations and zero incomplete or failed units. No success outcomes were extracted or disclosed. B/C prior training allocation 1800.0549747627228 seconds and engineering 455.8560599721968 seconds remain separate; science training plus evaluation allocation is 6063.335551216267 seconds.
+
+The complete original 32-member raw evidence archive was byte-verified against every original before and after compression. It is stored as ordered 4 MiB files raw_parts/part_000 through raw_parts/part_011. Reassemble by concatenating these in lexical order; the resulting gzip SHA256 must be 71eb69cf4422bdbefd19485cc4fc5b7d4618ce974013a5882f1334784e8779d3 and length 46536262 bytes. RAW_PART_HASHES.sha256 binds each part. RAW_EVIDENCE_INVENTORY_PRIVATE.json binds original member bytes and hashes.
+
+This is a PRIVATE-ONLY archive containing scientific task text and unextracted outcome evidence. It includes no model weights or input dataset files; targeted credential scans found no matches, not a guarantee of absence. The archival process invoked no model, CUDA or ALFWorld and performed no outcome analysis. A published raw archive is not an independent audit or a claim of scientific success.
