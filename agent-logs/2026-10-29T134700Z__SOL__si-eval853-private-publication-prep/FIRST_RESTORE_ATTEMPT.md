@@ -1,0 +1,3 @@
+# Initial restore attempt
+
+The first isolated attempt started from an empty repository with the dfa382 bundle as its first input. It failed because the bundle itself requires commit f1e0d56a1be2a65876bbec5b8950fb76cda3eace. Its original `source_bundle_build.stderr`, `.stdout`, `.exit`, script and first bundle are retained in this local directory. The v2 check used an independently initialized repository, explicitly fetched this exact anchor from the local scientific repository, applied the dfa, 9112, f2, and 853 bundles, then verified commit/tree and connectivity. The package is incremental and is not self-contained without the anchor. Coordinator separately reports the f1e commit API visible, but stable ref/remote fetchability was not independently established.

@@ -1,0 +1,87 @@
+{
+  "budget": {
+    "engineering_total_device_seconds": 1800,
+    "evaluation_total_device_seconds": 600,
+    "new_run_max_device_seconds": 499,
+    "no_budget_transfer": true,
+    "remaining_unallocated_seconds": 0.299480970948927,
+    "training_engineering_device_seconds_already_spent": 250.73030943144113
+  },
+  "cumulative_evaluation_engineering_limits": {
+    "elapsed_seconds": 600,
+    "environment_operations": 3,
+    "generations": 1,
+    "input_tokens": 8192,
+    "output_tokens": 16,
+    "resets": 2,
+    "steps": 1
+  },
+  "explicit_change": "One additional physical reset and environment operation versus original engineering action allowance; prior reset is spent and remains failed. No increase in total evaluation device seconds, generations, steps or token allowance.",
+  "gate_requirements": [
+    "Verify predecessor raw hashes, actual exit/status and authoritative supervisor elapsed; do not trust copied claimed cost alone.",
+    "Machine plan, auth, clearance, worker binding and outer supervisor must all use exact new 499-second cap; deadline remaining>=499, no inherited 600-second execution cap.",
+    "Bind new candidate and exact reviewed codec/budget source SHA; current amendment is design only and cannot supply execution authority.",
+    "Fresh unique run/output/claim/authorization; fresh supervised zero-effect preflight, independent review and one-shot clearance.",
+    "New codec must pass CPU actual TextWorld raw-to-normalized-to-offline-audit success chain and malformed/unsupported failure cases while preserving pre-encoding returned marker.",
+    "Resource policy unchanged: 24GiB allocator/28GiB preweight free/2GiB later free, OOM0 and allocator retry0.",
+    "Any failure stops; no automatic retry or result-driven substitute; all physical operations and reserved uncertain costs retained."
+  ],
+  "new_run_limits": {
+    "elapsed_seconds": 499,
+    "environment_operations": 2,
+    "generations": 1,
+    "input_tokens": 8192,
+    "output_tokens": 16,
+    "per_call_input": 8192,
+    "resets": 1,
+    "steps": 1
+  },
+  "predecessor": {
+    "allocated_device_seconds": 100.70051902905107,
+    "generations": 0,
+    "independent_review": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/EVAL_RESET_FAILURE_INDEPENDENT_AUDIT_F2E4895.json",
+      "sha256": "6d75770413e1cf395bf77b0bba0b269bfd61fd4ab7d0c2d70e68a886a9189099"
+    },
+    "journal": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T130400Z__LUNA__si-eval-utc-remediation-draft__f2e4895/run_parent/si_eval_engineering_4411861740ba4a7b8465eb0857d8f0e1/engineering/engineering_events.jsonl",
+      "sha256": "3e3289ef0ed7b1e1edd0d2f4f7647d6c6941005e1367e586d08d519deb5b4f5b"
+    },
+    "physical_resets": 1,
+    "report": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T130400Z__LUNA__si-eval-utc-remediation-draft__f2e4895/run_parent/si_eval_engineering_4411861740ba4a7b8465eb0857d8f0e1/engineering/engineering_report.json",
+      "sha256": "03eefea49a4c937740e9dc61ff5e91a6324107aff36ce54761d343c128cdec18"
+    },
+    "required_exit_code": 1,
+    "required_report_status": "STOPPED",
+    "run_id": "4411861740ba4a7b8465eb0857d8f0e1",
+    "source_sha": "f2e4895af83e8b4a94fbcd0bc4719ac1c91f8f2b",
+    "steps": 0,
+    "supervisor": {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T130400Z__LUNA__si-eval-utc-remediation-draft__f2e4895/run_parent/si_eval_engineering_4411861740ba4a7b8465eb0857d8f0e1/supervisor_exit.json",
+      "sha256": "90110c2e1ae2982090ceab9ff9dbda7e09ee578aae8c17dddb8dd6419196d51c"
+    }
+  },
+  "schema": "SI_U1_EVAL_ENGINEERING_REMEDIATION_AMENDMENT_V1",
+  "scientific_release": false,
+  "selection": {
+    "byte_exclusions": [
+      "source96 game/traj",
+      "registered expert game/traj",
+      "final82 game/traj",
+      "previous real engineering game/traj"
+    ],
+    "empty_pool": "STOP_NO_REPLACEMENT",
+    "exclude_parent_sets": [
+      "all represented known use",
+      "all source96",
+      "all final82",
+      "all reserve",
+      "previous real engineering task parent"
+    ],
+    "new_identity_required": true,
+    "order_rule": "minimum SHA256(SI-U1-engineering-v1|task| + task_id) after metadata exclusions and exact-byte overlap checks",
+    "pool": "original engineering_development_train reservations only"
+  },
+  "status": "FROZEN_DESIGN_NOT_EXECUTION_AUTHORITY"
+}

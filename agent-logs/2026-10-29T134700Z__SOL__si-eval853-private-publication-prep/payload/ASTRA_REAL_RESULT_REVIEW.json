@@ -1,0 +1,87 @@
+{
+  "actual_input_ids_reencoded_match": true,
+  "actual_output_ids_decoded_match": true,
+  "cleanup_interpretation": "Frozen evaluation plan enforces allocator cap/free thresholds, OOM0/retry0 and supervisor process cleanup; it does not impose training-engineering worker allocator-zero criterion. Residual remains explicitly disclosed, not relabeled zero.",
+  "cumulative_all_engineering_device_seconds": 455.8560599721968,
+  "cumulative_eval_device_seconds": 205.1257505407557,
+  "decision": "PASS_ENGINEERING_CHAIN_ONLY_NOT_SCIENCE",
+  "elapsed_device_seconds": 104.42523151170462,
+  "eos_completed": true,
+  "journal_sha256": "c76a8855b54c067123826960cc0efeb964cb0e8e4f0075d7ab86904736ea3682",
+  "limitations": [
+    "One P0 engineering action is not task success or three-arm scientific efficacy.",
+    "Does not demonstrate B/C adapters or whole82-task/three-arm runtime fit.",
+    "Worker allocator residual root cause and persistence across arm transitions remain unproven; supervisor process cleanup is a distinct verified condition.",
+    "Original failed reset remains failed and charged; no retry or budget transfer.",
+    "Audit invokes only offline tokenizer and return reconstruction, never model generation, CUDA or environment construction."
+  ],
+  "model_closed_worker_allocated_bytes": 8519680,
+  "model_closed_worker_reserved_bytes": 20971520,
+  "model_environment_input_binding": "Frozen base/P0 input tree checks already performed preflight; recorded model adapter state, runtime import identity receipts, exact config and logic file hashes verified by this audit. No real weights loaded.",
+  "physical_operations_cumulative_eval": {
+    "environment_operations": 3,
+    "generations": 1,
+    "resets": 2,
+    "steps": 1
+  },
+  "physical_operations_new": {
+    "generations": 1,
+    "resets": 1,
+    "steps": 1
+  },
+  "prior_failed_eval_device_seconds": 100.70051902905107,
+  "production_offline_audit": {
+    "completed": {
+      "environment_operations": 2,
+      "generations": 1,
+      "input_tokens": 831,
+      "output_tokens": 5
+    },
+    "cumulative_remediation": {
+      "cumulative_evaluation_device_seconds": 205.1257505407557,
+      "environment_operations_reserved_or_spent": 3,
+      "generations_reserved_or_spent": 1,
+      "new_run_allocation_ceiling_seconds": 499,
+      "predecessor_elapsed_seconds": 100.70051902905107,
+      "resets_reserved_or_spent": 2,
+      "steps_reserved_or_spent": 1
+    },
+    "generation_return_observation": {
+      "observed_output_tokens": 5,
+      "returned_generations": 1,
+      "unknown_output_sequences": 0
+    },
+    "report_status": "COMPLETED",
+    "reserved_or_spent": {
+      "environment_operations": 2,
+      "generations": 1,
+      "input_tokens": 831,
+      "output_tokens": 5
+    },
+    "resource": {
+      "after_generation": {
+        "A": 1
+      },
+      "before_generation": {
+        "A": 1
+      },
+      "resource_rows": 7,
+      "resource_sha256": "265859bec81ab3ab495df597ae6b07548a436ee6b37593d94d5b71cdcb7c8423"
+    },
+    "scientific_result": false,
+    "status": "ENGINEERING_AUDIT_PASS_ONLY",
+    "step_executed": true
+  },
+  "raw_normalized_and_action_mapping_verified_by_full_production_auditor": true,
+  "report_sha256": "283984b329e1398ab86c3b1b2fb03b7f8c4a646228c64dbbbf305fc293bb3535",
+  "reviewed_utc": "2026-10-29T13:35:17.161643+00:00",
+  "run_path": "/home/lizening/research-notes/agent-logs/2026-10-29T133000Z__LUNA__si-eval499-remediation-draft__pending/run_parent/si_eval_engineering_12558b4c8f23489b88cab1f9198a405f",
+  "schema": "SI_U1_INDEPENDENT_REAL_ENGINEERING_RESULT_REVIEW_V1",
+  "selected_candidate_and_current_raw_game_traj_hashes_verified": true,
+  "source_sha": "8532275932dabddc498c23a2b6d9a045647542f0",
+  "supervisor_process_cleanup_established": true,
+  "supervisor_sha256": "0aed72b19616d3524a0fa8506cd24ac14f7b6a7a4bf5d31b8efda05b9c23f830",
+  "tokenizer_json_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+  "training_engineering_device_seconds": 250.73030943144113,
+  "worker_allocator_zero": false
+}

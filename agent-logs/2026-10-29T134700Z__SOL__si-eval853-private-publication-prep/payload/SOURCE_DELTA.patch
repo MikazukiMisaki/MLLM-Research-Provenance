@@ -1,0 +1,702 @@
+diff --git a/scripts/run_si_transfer_engineering.py b/scripts/run_si_transfer_engineering.py
+index a1e4ffc..9c283a8 100644
+--- a/scripts/run_si_transfer_engineering.py
++++ b/scripts/run_si_transfer_engineering.py
+@@ -40,10 +40,11 @@ def main():
+         _need(a.launch_context_sha256 is None,'engineering supervisor invocation')
+         from self_improvement.si_transfer_eval.supervisor import supervise
+         from self_improvement.si_transfer_eval.time_window import parse_utc
+-        remaining=(min(parse_utc(permit.auth['expires']),parse_utc(permit.clearance['expires']))-datetime.now(timezone.utc)).total_seconds();_need(remaining>=600,'insufficient engineering time window')
++        allocation=permit.allocation_seconds
++        remaining=(min(parse_utc(permit.auth['expires']),parse_utc(permit.clearance['expires']))-datetime.now(timezone.utc)).total_seconds();_need(remaining>=allocation,'insufficient engineering time window')
+         command=['--worker' if x=='--live' else x for x in sys.orig_argv]
+-        context={'authorization_sha256':permit.auth_sha,'source_sha':permit.auth['source_sha'],'evidence_class':'live_engineering_only','binding':permit.binding,'clearance_sha256':permit.clearance_sha,'allocation_started_monotonic':entered,'max_allocation_seconds':600,'supervisor_argv':list(sys.orig_argv)}
+-        exit=supervise(command,permit.output,context=context,seconds=600,environment=permit.auth['environment'],capability=permit)
++        context={'authorization_sha256':permit.auth_sha,'source_sha':permit.auth['source_sha'],'evidence_class':'live_engineering_only','binding':permit.binding,'clearance_sha256':permit.clearance_sha,'allocation_started_monotonic':entered,'max_allocation_seconds':allocation,'supervisor_argv':list(sys.orig_argv)}
++        exit=supervise(command,permit.output,context=context,seconds=allocation,environment=permit.auth['environment'],capability=permit)
+         return 0 if exit['authentic_returncode']==0 and exit['execution_status']=='EXIT_RECORDED' and exit['child_report_present'] else 1
+     except Exception as exc:
+         print(json.dumps({'status':'REJECTED_OR_INCONCLUSIVE','exception':type(exc).__name__,'message':str(exc)}),file=sys.stderr);return 1
+diff --git a/src/self_improvement/si_transfer_eval/engineering.py b/src/self_improvement/si_transfer_eval/engineering.py
+index 9fe5403..95de5ca 100644
+--- a/src/self_improvement/si_transfer_eval/engineering.py
++++ b/src/self_improvement/si_transfer_eval/engineering.py
+@@ -8,14 +8,20 @@ from models.protocol_stability import parse_p2_selection
+ from self_improvement.si_p3.contract import PublicState,projection
+ 
+ ENGINEERING_LIMITS={'generations':1,'environment_operations':2,'input_tokens':8192,'output_tokens':16,'per_call_input':8192,'elapsed_seconds':600}
++REMEDIATION_LIMITS=ENGINEERING_LIMITS|{'elapsed_seconds':499}
+ 
+ class EngineeringRunner:
+     def __init__(self, *, task, adapter_sha256, output:Path, producer_factory, environment_factory,
+-                 evidence_class='synthetic', allocation_started_at=None, live_permit=None):
++                 evidence_class='synthetic', allocation_started_at=None, live_permit=None, limits=None):
+         if evidence_class=='live_engineering_only':
+             from .engineering_gate import EngineeringWorkerPermit
+             _need(isinstance(live_permit,EngineeringWorkerPermit) and Path(output)==live_permit.output/'engineering' and task==live_permit.task and adapter_sha256==live_permit.adapter_sha256 and allocation_started_at==live_permit.allocation_started_monotonic, 'reviewed engineering worker required')
++            _need(limits is None, 'live limits derived only from reviewed permit')
++            limits=ENGINEERING_LIMITS|{'elapsed_seconds':live_permit.permit.allocation_seconds}
+         else:_need(evidence_class=='synthetic' and live_permit is None, 'engineering synthetic/live mode')
++        if limits is None:limits=ENGINEERING_LIMITS
++        _need(type(limits) is dict and limits in (ENGINEERING_LIMITS,REMEDIATION_LIMITS) and all(type(v) is int for v in limits.values()), 'exact engineering limits')
++        self.limits=dict(limits)
+         _need(type(task) is dict and set(task)=={'task_id','family','seed','game_sha256'}, 'engineering task identity')
+         _need(type(task['seed']) is int and task['seed']==42 and type(adapter_sha256) is str and len(adapter_sha256)==64, 'engineering fixed seed/adapter')
+         self.task,self.adapter_sha256,self.output=task,adapter_sha256,Path(output)
+@@ -24,10 +30,10 @@ class EngineeringRunner:
+         self.started=False;self.units=set();self.active=None;self.return_events={};self.used=dict.fromkeys(COUNTERS,0);self.completed=dict.fromkeys(COUNTERS,0)
+ 
+     def call(self, journal, op, fn, debit, *, prepared=None, request=None):
+-        if op not in ('environment_close','model_close'):_need(time.monotonic()-self.start <= ENGINEERING_LIMITS['elapsed_seconds'], 'engineering elapsed cap')
++        if op not in ('environment_close','model_close'):_need(time.monotonic()-self.start <= self.limits['elapsed_seconds'], 'engineering elapsed cap')
+         _need(op not in self.units and self.active is None, 'engineering unit replay/overlap')
+-        _need(all(self.used[k]+debit[k]<=ENGINEERING_LIMITS[k] for k in COUNTERS), 'engineering physical cap')
+-        if op=='generation':_need(debit['input_tokens']<=ENGINEERING_LIMITS['per_call_input'], 'engineering input cap')
++        _need(all(self.used[k]+debit[k]<=self.limits[k] for k in COUNTERS), 'engineering physical cap')
++        if op=='generation':_need(debit['input_tokens']<=self.limits['per_call_input'], 'engineering input cap')
+         self.units.add(op);self.active=op;self.return_events[op]=[];self.used={k:self.used[k]+debit[k] for k in COUNTERS}
+         started=journal.append('unit_started',{'op':op,'prepared':prepared,'request':request,'reservation':debit})
+         try:
+@@ -46,7 +52,7 @@ class EngineeringRunner:
+         _need(not self.started,'engineering retry forbidden');self.started=True;now=time.monotonic();self.start=now if self.allocation_started_at is None else self.allocation_started_at
+         _need(type(self.start) in (int,float) and math.isfinite(self.start) and self.start<=now,'allocation clock')
+         self.output.mkdir(parents=False,exist_ok=False)
+-        j=Journal(self.output/'engineering_events.jsonl',{'schema':'SI_U1_EVAL_ENGINEERING_EVENTS_V1','evidence_class':self.evidence_class,'task':self.task,'adapter_sha256':self.adapter_sha256,'limits':ENGINEERING_LIMITS,'scientific_result':False,'live_binding':({'binding':self.live_permit.permit.binding,'launch_context_sha256':self.live_permit.launch_context_sha256,'worker_start_sha256':self.live_permit.worker_start_sha256} if self.evidence_class=='live_engineering_only' else None)})
++        j=Journal(self.output/'engineering_events.jsonl',{'schema':'SI_U1_EVAL_ENGINEERING_EVENTS_V1','evidence_class':self.evidence_class,'task':self.task,'adapter_sha256':self.adapter_sha256,'limits':self.limits,'scientific_result':False,'live_binding':({'binding':self.live_permit.permit.binding,'launch_context_sha256':self.live_permit.launch_context_sha256,'worker_start_sha256':self.live_permit.worker_start_sha256} if self.evidence_class=='live_engineering_only' else None)})
+         def record_return(boundary,data):
+             _need(self.active is not None,'engineering return requires active unit')
+             event=j.append('external_returned',{'op':self.active,'boundary':boundary,'data':data});self.return_events[self.active].append(event)
+@@ -79,7 +85,7 @@ class EngineeringRunner:
+                     try:self.call(j,op,lambda:obj.close() or {'closed':True},z)
+                     except BaseException as exc:
+                         if stop is None:stop={'type':type(exc).__name__,'message':str(exc)}
+-            if time.monotonic()-self.start>ENGINEERING_LIMITS['elapsed_seconds'] and stop is None:stop={'type':'BudgetStop','message':'engineering elapsed cap including cleanup'}
++            if time.monotonic()-self.start>self.limits['elapsed_seconds'] and stop is None:stop={'type':'BudgetStop','message':'engineering elapsed cap including cleanup'}
+             report={'schema':'SI_U1_EVAL_ENGINEERING_REPORT_V1','status':'COMPLETED' if stop is None else 'STOPPED','evidence_class':self.evidence_class,'scientific_result':False,'task_id':self.task['task_id'],'parse_status':parse_status,'step_executed':step_executed,'completed':self.completed,'reserved_or_spent':self.used,'stop':stop}
+             j.append('run_closed',report);j.close()
+             with (self.output/'engineering_report.json').open('x') as f:f.write(json.dumps(report,sort_keys=True,separators=(',',':'))+'\n');f.flush();os.fsync(f.fileno())
+diff --git a/src/self_improvement/si_transfer_eval/engineering_audit.py b/src/self_improvement/si_transfer_eval/engineering_audit.py
+index 5841959..9d6e5f0 100644
+--- a/src/self_improvement/si_transfer_eval/engineering_audit.py
++++ b/src/self_improvement/si_transfer_eval/engineering_audit.py
+@@ -5,7 +5,7 @@ from pathlib import Path
+ from models.action_parser import action_id_mapping
+ from models.protocol_stability import parse_p2_selection
+ from self_improvement.si_p3.contract import PublicState,projection
+-from .engineering import ENGINEERING_LIMITS
++from .engineering import ENGINEERING_LIMITS,REMEDIATION_LIMITS
+ from .evaluator import COUNTERS,OUTPUT_CAP,_hash,_need,validate_generation
+ from .return_audit import add_return, generation_observation, validate_completed
+ 
+@@ -17,7 +17,7 @@ def audit_interrupted(path:Path):
+     prev=None
+     for i,row in enumerate(rows):
+         _need(row['sequence']==i and row['previous']==prev and row['event_id']==_hash({k:v for k,v in row.items() if k!='event_id'}),'interrupted engineering chain');prev=row['event_id']
+-    h=rows[0]['payload'];_need(h['schema']=='SI_U1_EVAL_ENGINEERING_EVENTS_V1' and h['limits']==ENGINEERING_LIMITS and h['scientific_result'] is False,'engineering header')
++    h=rows[0]['payload'];_need(h['schema']=='SI_U1_EVAL_ENGINEERING_EVENTS_V1' and type(h['limits']) is dict and h['limits'] in (ENGINEERING_LIMITS,REMEDIATION_LIMITS) and all(type(v) is int for v in h['limits'].values()) and h['scientific_result'] is False,'engineering header')
+     units={};active=None;spent=dict.fromkeys(COUNTERS,0)
+     for row in rows[1:]:
+         p=row['payload'];kind=row['kind']
+@@ -27,7 +27,7 @@ def audit_interrupted(path:Path):
+             if op=='generation':
+                 prep=p['prepared'];_need(type(prep) is dict and type(prep.get('input_ids')) is list and bool(prep['input_ids']),'engineering input')
+                 debit.update(generations=1,input_tokens=len(prep['input_ids']),output_tokens=OUTPUT_CAP)
+-            _need(p['reservation']==debit and all(spent[k]+debit[k]<=ENGINEERING_LIMITS[k] for k in COUNTERS),'engineering debit')
++            _need(p['reservation']==debit and all(spent[k]+debit[k]<=h['limits'][k] for k in COUNTERS),'engineering debit')
+             spent={k:spent[k]+debit[k] for k in COUNTERS};units[op]={'event_id':row['event_id'],'prepared':p['prepared'],'returns':[],'debit':debit};active=op
+         elif kind=='external_returned':
+             op=p['op'];_need(active==op,'engineering return identity');add_return(units[op],op,row)
+@@ -47,11 +47,12 @@ def audit(path:Path,*,decode,eos_ids,live_binding=None,live_output:Path|None=Non
+     prev=None
+     for i,row in enumerate(rows):
+         _need(row['sequence']==i and row['previous']==prev and row['event_id']==_hash({k:v for k,v in row.items() if k!='event_id'}),'engineering journal chain');prev=row['event_id']
+-    h=rows[0]['payload'];_need(h['schema']=='SI_U1_EVAL_ENGINEERING_EVENTS_V1' and h['limits']==ENGINEERING_LIMITS and h['scientific_result'] is False,'engineering-only header')
++    h=rows[0]['payload'];_need(h['schema']=='SI_U1_EVAL_ENGINEERING_EVENTS_V1' and type(h['limits']) is dict and h['limits'] in (ENGINEERING_LIMITS,REMEDIATION_LIMITS) and all(type(v) is int for v in h['limits'].values()) and h['scientific_result'] is False,'engineering-only header')
+     if h['evidence_class']=='synthetic':_need(h['live_binding'] is None and live_binding is None and live_output is None,'synthetic binding')
+     else:
+         from .live_audit import authenticate_engineering_run
+         _need(h['evidence_class']=='live_engineering_only' and live_output is not None and Path(path)==Path(live_output)/'engineering'/'engineering_events.jsonl' and h['live_binding']==authenticate_engineering_run(live_output) and (live_binding is None or live_binding==h['live_binding']),'real engineering provenance')
++        _need(h['live_binding']['binding'].get('allocation_seconds',600)==h['limits']['elapsed_seconds'],'engineering reviewed allocation binding')
+     task=h['task'];units={};active=None;completed=dict.fromkeys(COUNTERS,0);used=dict.fromkeys(COUNTERS,0);state=None;parsed=None;step=False
+     for row in rows[1:-1]:
+         p=row['payload']
+@@ -62,7 +63,7 @@ def audit(path:Path,*,decode,eos_ids,live_binding=None,live_output:Path|None=Non
+             if op=='generation':
+                 prepared=p['prepared'];_need(type(prepared) is dict and prepared['prompt']==projection(state,[])['public_prompt'] and type(prepared['input_ids']) is list and bool(prepared['input_ids']) and prepared['attention_mask']==[1]*len(prepared['input_ids']),'engineering causal input')
+                 debit.update(generations=1,input_tokens=len(prepared['input_ids']),output_tokens=OUTPUT_CAP)
+-            _need(debit==p['reservation'] and all(used[k]+debit[k]<=ENGINEERING_LIMITS[k] for k in COUNTERS),'engineering reservation')
++            _need(debit==p['reservation'] and all(used[k]+debit[k]<=h['limits'][k] for k in COUNTERS),'engineering reservation')
+             if op=='step':_need(parsed is not None and parsed.selection_status=='selected' and p['request']=={'action_id':parsed.action_id,'command':parsed.action,'action_map':action_id_mapping(state.valid_actions)},'engineering action binding')
+             used={k:used[k]+debit[k] for k in COUNTERS};units[op]={'event_id':row['event_id'],'reservation':debit,'prepared':p['prepared'],'returns':[]};active=op
+         elif row['kind']=='external_returned':
+@@ -91,4 +92,10 @@ def audit(path:Path,*,decode,eos_ids,live_binding=None,live_output:Path|None=Non
+         from .live_audit import audit_resources
+         resource=audit_resources(live_output,{'adapters':{'A':h['adapter_sha256']}},engineering_only=True)
+         _need(resource['before_generation']['A']==completed['generations'] and resource['after_generation']['A']==completed['generations'],'engineering resource generation observations')
+-    return {'status':'ENGINEERING_AUDIT_PASS_ONLY','report_status':result['status'],'scientific_result':False,'completed':completed,'reserved_or_spent':used,'step_executed':step,'generation_return_observation':generation_observation(units.values()),'resource':resource}
++    cumulative=None
++    if h['evidence_class']=='live_engineering_only' and h['limits']==REMEDIATION_LIMITS:
++        prior=h['live_binding']['binding']['remediation'];_need(prior['environment_operations']==prior['resets']==1 and prior['generations']==prior['steps']==0,'remediation prior physical costs')
++        supervisor=json.loads((Path(live_output)/'supervisor_exit.json').read_bytes())
++        cumulative={'environment_operations_reserved_or_spent':prior['environment_operations']+used['environment_operations'],'generations_reserved_or_spent':prior['generations']+used['generations'],'resets_reserved_or_spent':prior['resets']+int('reset' in units),'steps_reserved_or_spent':prior['steps']+int('step' in units),'predecessor_elapsed_seconds':prior['elapsed_seconds'],'new_run_allocation_ceiling_seconds':499,'cumulative_evaluation_device_seconds':supervisor['cumulative_evaluation_device_seconds']}
++        _need(cumulative['environment_operations_reserved_or_spent']<=3 and cumulative['generations_reserved_or_spent']<=1 and cumulative['resets_reserved_or_spent']<=2 and cumulative['steps_reserved_or_spent']<=1 and cumulative['predecessor_elapsed_seconds']+499<=600,'remediation cumulative caps')
++    return {'status':'ENGINEERING_AUDIT_PASS_ONLY','report_status':result['status'],'scientific_result':False,'completed':completed,'reserved_or_spent':used,'step_executed':step,'generation_return_observation':generation_observation(units.values()),'resource':resource,'cumulative_remediation':cumulative}
+diff --git a/src/self_improvement/si_transfer_eval/engineering_gate.py b/src/self_improvement/si_transfer_eval/engineering_gate.py
+index ca05885..25757b7 100644
+--- a/src/self_improvement/si_transfer_eval/engineering_gate.py
++++ b/src/self_improvement/si_transfer_eval/engineering_gate.py
+@@ -6,7 +6,8 @@ from pathlib import Path
+ import hashlib,json,os,re,sys,time
+ from .evaluator import _need
+ from .runtime_binding import file_binding,tree_sha256,legacy_directory_sha256,file_sha256
+-from .engineering import ENGINEERING_LIMITS
++from .engineering import ENGINEERING_LIMITS, REMEDIATION_LIMITS
++from .engineering_remediation import verify_remediation
+ from .gate import _git
+ from .protocol import RESOURCE_CONTRACT_SHA256,GIB
+ from .runtime_identity import verify_static as verify_static_identity
+@@ -27,6 +28,9 @@ class EngineeringPermit:
+     binding: dict
+     runtime: dict
+ 
++    @property
++    def allocation_seconds(self):return self.binding.get('allocation_seconds',600)
++
+ @dataclass(frozen=True)
+ class EngineeringWorkerPermit:
+     permit: EngineeringPermit
+@@ -43,13 +47,19 @@ class EngineeringWorkerPermit:
+ 
+ def validate_engineering_plan(plan: dict, *, candidate_sha256: str, environment: dict) -> None:
+     plan_fields={'schema','status','candidate_sha256','limits','aggregate_engineering_seconds','training_reserved_seconds','resource'}
+-    _need(type(plan) is dict and set(plan)==plan_fields and plan['schema']=='SI_U1_EVAL_ENGINEERING_PLAN_V1' and plan['status']=='FROZEN_FOR_REVIEW' and plan['candidate_sha256']==candidate_sha256 and plan['limits']==ENGINEERING_LIMITS and all(type(v) is int for v in plan['limits'].values()) and type(plan['aggregate_engineering_seconds']) is int and plan['aggregate_engineering_seconds']==1800 and type(plan['training_reserved_seconds']) is int and plan['training_reserved_seconds']==1200, 'engineering exact cap/plan')
++    _need(type(plan) is dict and set(plan) in (plan_fields,plan_fields|{'remediation'}) and plan['schema']=='SI_U1_EVAL_ENGINEERING_PLAN_V1' and plan['status']=='FROZEN_FOR_REVIEW' and plan['candidate_sha256']==candidate_sha256 and plan['limits']==(REMEDIATION_LIMITS if 'remediation' in plan else ENGINEERING_LIMITS) and all(type(v) is int for v in plan['limits'].values()) and type(plan['aggregate_engineering_seconds']) is int and plan['aggregate_engineering_seconds']==1800 and type(plan['training_reserved_seconds']) is int and plan['training_reserved_seconds']==1200, 'engineering exact cap/plan')
+     resource=plan['resource'];_need(type(resource) is dict and set(resource)=={'policy','contract_sha256','gpu_uuid','allocator_cap_bytes','preweight_global_free_min_bytes','later_global_free_min_bytes'} and resource['policy']=='SHARED_CONTAINER_CUDA_V1' and resource['contract_sha256']==RESOURCE_CONTRACT_SHA256 and type(resource['allocator_cap_bytes']) is int and resource['allocator_cap_bytes']==24*GIB and type(resource['preweight_global_free_min_bytes']) is int and resource['preweight_global_free_min_bytes']==28*GIB and type(resource['later_global_free_min_bytes']) is int and resource['later_global_free_min_bytes']==2*GIB and type(resource['gpu_uuid']) is str and re.fullmatch(r'GPU-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}',resource['gpu_uuid']) and environment.get('CUDA_VISIBLE_DEVICES')==resource['gpu_uuid'], 'engineering shared GPU')
+ 
++
++def validate_authorization_allocation(auth:dict,plan:dict)->None:
++    if 'remediation' in plan:_need(type(auth.get('allocation_seconds')) is int and auth['allocation_seconds']==plan['limits']['elapsed_seconds']==499,'remediation authorization allocation')
++    else:_need('allocation_seconds' not in auth and plan['limits']==ENGINEERING_LIMITS,'original authorization schema')
++
++
+ def authenticate_static(repository: Path, auth_path: Path, auth_sha: str, *, recheck=False):
+     auth_path=auth_path.resolve();auth=json.loads(file_binding({'path':str(auth_path),'sha256':auth_sha}).read_bytes())
+     fields={'schema','purpose','source_sha','uid','environment','candidate','plan','runtime','review','not_before','expires','preflight_argv','receipt_path','output_path','interpreter'}
+-    _need(set(auth)==fields and auth['schema']=='SI_U1_EVAL_ENGINEERING_AUTHORIZATION_V1' and auth['purpose']=='ENGINEERING_PREFLIGHT_ONLY' and auth['uid']==os.getuid(),'engineering-only authorization')
++    _need(set(auth) in (fields,fields|{'allocation_seconds'}) and auth['schema']=='SI_U1_EVAL_ENGINEERING_AUTHORIZATION_V1' and auth['purpose']=='ENGINEERING_PREFLIGHT_ONLY' and auth['uid']==os.getuid(),'engineering-only authorization')
+     sha,clean=_git(repository);_need(clean and sha==auth['source_sha'] and sys.flags.isolated==1 and Path(sys.executable).resolve()==Path(auth['interpreter']).resolve(),'engineering exact clean SHA/interpreter')
+     env=auth['environment'];_need(type(env) is dict and dict(os.environ)==env and not any(k in env for k in ('PYTHONPATH','PYTHONHOME','LD_PRELOAD')) and all(env.get(k)=='1' for k in ('HF_HUB_OFFLINE','TRANSFORMERS_OFFLINE','PYTHONDONTWRITEBYTECODE')) and env.get('PYTORCH_CUDA_ALLOC_CONF')=='backend:native' and env.get('CUDA_MODULE_LOADING')=='LAZY','engineering environment')
+     _need(_utc(auth['not_before'])<=datetime.now(timezone.utc)<_utc(auth['expires']), 'engineering authorization window')
+@@ -57,6 +67,9 @@ def authenticate_static(repository: Path, auth_path: Path, auth_sha: str, *, rec
+     _need((receipt.is_file() if recheck else not receipt.exists()) and (recheck or not output.exists()), 'engineering fresh preflight')
+     plan=json.loads(file_binding(auth['plan']).read_bytes());candidate=json.loads(file_binding(auth['candidate']).read_bytes());runtime=json.loads(file_binding(auth['runtime']).read_bytes());review=json.loads(file_binding(auth['review']).read_bytes())
+     validate_engineering_plan(plan,candidate_sha256=auth['candidate']['sha256'],environment=env)
++    validate_authorization_allocation(auth,plan)
++    if 'remediation' in plan:
++        verify_remediation(plan['remediation'],candidate)
+     expected_review={'schema':'SI_U1_EVAL_ENGINEERING_REVIEW_V1','decision':'PASS_ENGINEERING_ONLY','source_sha':auth['source_sha'],'candidate_sha256':auth['candidate']['sha256'],'plan_sha256':auth['plan']['sha256'],'runtime_sha256':auth['runtime']['sha256']}
+     _need(review==expected_review,'independent engineering exact review')
+     _need(candidate['status']=='METADATA_AND_BYTE_ONLY_NOT_AUTHORIZED' and candidate['candidate_exists'] is True and type(candidate.get('inputs')) is dict and len(candidate['inputs'])>=6,'reviewed engineering candidate')
+@@ -94,6 +107,8 @@ def authenticate_live(repository,auth_path,auth_sha,clearance_path,clearance_sha
+     receipt=Path(auth['receipt_path']);rr=receipt.read_bytes();_need(json.loads(rr)==expected,'engineering real positive preflight')
+     clear_path=clearance_path.resolve();c=json.loads(file_binding({'path':str(clear_path),'sha256':clearance_sha}).read_bytes())
+     fields={'schema','decision','authorization_sha256','preflight_receipt_sha256','preflight_execution','source_sha','candidate_sha256','plan_sha256','runtime_sha256','review_sha256','run_id','not_before','expires','maximum_launches','retry_authorized','live_argv'}
++    if 'remediation' in plan:
++        fields.add('allocation_seconds');_need(type(c.get('allocation_seconds')) is int and c['allocation_seconds']==auth['allocation_seconds']==plan['limits']['elapsed_seconds']==499,'remediation clearance allocation')
+     _need(set(c)==fields and c['schema']=='SI_U1_EVAL_ENGINEERING_CLEARANCE_V1' and c['decision']=='RELEASE_ONE_ENGINEERING_ONLY' and c['authorization_sha256']==auth_sha and c['preflight_receipt_sha256']==hashlib.sha256(rr).hexdigest() and c['source_sha']==auth['source_sha'] and all(c[k+'_sha256']==auth[k]['sha256'] for k in ('candidate','plan','runtime','review')),'engineering one-shot clearance')
+     _need(type(c['maximum_launches']) is int and c['maximum_launches']==1 and c['retry_authorized'] is False and re.fullmatch('[0-9a-f]{32}',c['run_id']) and _utc(c['not_before'])<=datetime.now(timezone.utc)<_utc(c['expires'])<=_utc(auth['expires']), 'engineering no-retry/time')
+     execution=json.loads(file_binding(c['preflight_execution']).read_bytes());pre=[auth_sha if x=='@AUTHORIZATION_SHA256@' else x for x in auth['preflight_argv']]
+@@ -108,12 +123,16 @@ def authenticate_live(repository,auth_path,auth_sha,clearance_path,clearance_sha
+     if mode=='live':_need(not output.exists() and not claim.exists() and not claim.is_symlink(),'engineering fresh one-shot output')
+     else:_need(output.is_dir() and claim.is_file() and json.loads(claim.read_bytes())=={'authorization_sha256':auth_sha,'source_sha':auth['source_sha'],'maximum_launches':1,'retry_authorized':False},'engineering supervisor claim')
+     binding={'schema':'SI_U1_EVAL_ENGINEERING_BINDING_V1','authorization_sha256':auth_sha,'clearance_sha256':clearance_sha,'run_id':c['run_id'],'source_sha':auth['source_sha'],'candidate_sha256':auth['candidate']['sha256'],'plan_sha256':auth['plan']['sha256'],'runtime_sha256':auth['runtime']['sha256'],'output_path':str(output),'gpu_uuid':plan['resource']['gpu_uuid']}
++    if 'remediation' in plan:
++        prior=verify_remediation(plan['remediation'],candidate)
++        _need(c['run_id']!=prior['run_id'],'distinct remediation run identity')
++        binding.update(allocation_seconds=499,remediation=prior,cumulative_limits=plan['remediation']['cumulative_limits'])
+     return EngineeringPermit(auth,auth_sha,c,clearance_sha,output,task,binding,runtime)
+ 
+ 
+ def authenticate_worker(permit,launch_sha,*,argv):
+     lp=permit.output/'launch_context.json';launch=json.loads(file_binding({'path':str(lp),'sha256':launch_sha}).read_bytes())
+-    _need(launch['binding']==permit.binding and launch['evidence_class']=='live_engineering_only' and launch['allocated_devices']==1 and launch['science_authorized'] is False and launch['authorization_sha256']==permit.auth_sha and launch['max_allocation_seconds']==600,'engineering supervisor binding')
++    _need(launch['binding']==permit.binding and launch['evidence_class']=='live_engineering_only' and launch['allocated_devices']==1 and launch['science_authorized'] is False and launch['authorization_sha256']==permit.auth_sha and launch['max_allocation_seconds']==permit.allocation_seconds,'engineering supervisor binding')
+     parent=[x.decode() for x in Path('/proc/'+str(os.getppid())+'/cmdline').read_bytes().split(b'\0') if x]
+     expected=[permit.auth_sha if x=='@AUTHORIZATION_SHA256@' else permit.clearance_sha if x=='@CLEARANCE_SHA256@' else x for x in permit.clearance['live_argv']]
+     _need(parent==expected and launch['supervisor_pid']==os.getppid() and os.getsid(0)==os.getpid(),'engineering real supervisor parent')
+diff --git a/src/self_improvement/si_transfer_eval/engineering_remediation.py b/src/self_improvement/si_transfer_eval/engineering_remediation.py
+new file mode 100644
+index 0000000..d0da7fe
+--- /dev/null
++++ b/src/self_improvement/si_transfer_eval/engineering_remediation.py
+@@ -0,0 +1,47 @@
++"""One frozen engineering-only cost debit, bound to authentic predecessor bytes."""
++from __future__ import annotations
++import json, math
++from pathlib import Path
++from .evaluator import _hash, _need
++from .runtime_binding import file_binding, file_sha256
++
++AMENDMENT_SHA256='e6cec45c8b1f5a4dfa315a8c1f54fab0cf1ce85486a1a32f33d998e25a36629c'
++PREDECESSOR_RUN='4411861740ba4a7b8465eb0857d8f0e1'
++PREDECESSOR_SOURCE='f2e4895af83e8b4a94fbcd0bc4719ac1c91f8f2b'
++PREDECESSOR_SECONDS=100.70051902905107
++REMEDIATION_SECONDS=499
++
++
++def verify_remediation(remediation:dict, candidate:dict) -> dict:
++    """Reconstruct the already-spent reset from actual, independently pinned files."""
++    fields={'amendment','prior_elapsed_seconds','prior_environment_operations','prior_resets','cumulative_limits'}
++    _need(type(remediation) is dict and set(remediation)==fields and remediation['amendment']['sha256']==AMENDMENT_SHA256, 'frozen remediation amendment binding')
++    amendment=json.loads(file_binding(remediation['amendment']).read_bytes())
++    _need(amendment.get('schema')=='SI_U1_EVAL_ENGINEERING_REMEDIATION_AMENDMENT_V1' and amendment.get('status')=='FROZEN_DESIGN_NOT_EXECUTION_AUTHORITY' and amendment.get('scientific_release') is False,'remediation design scope')
++    old=amendment['predecessor'];limits=amendment['cumulative_evaluation_engineering_limits'];budget=amendment['budget'];new=amendment['new_run_limits']
++    expected_cumulative={'elapsed_seconds':600,'environment_operations':3,'generations':1,'input_tokens':8192,'output_tokens':16,'resets':2,'steps':1}
++    _need(limits==expected_cumulative and remediation['cumulative_limits']==expected_cumulative and all(type(v) is int for v in limits.values()) and all(type(v) is int for v in remediation['cumulative_limits'].values()) and type(remediation['prior_environment_operations']) is int and type(remediation['prior_resets']) is int and remediation['prior_environment_operations']==remediation['prior_resets']==1 and type(remediation['prior_elapsed_seconds']) in (int,float) and remediation['prior_elapsed_seconds']==PREDECESSOR_SECONDS,'remediation prior debit/cumulative limits')
++    _need(old['run_id']==PREDECESSOR_RUN and old['source_sha']==PREDECESSOR_SOURCE and old['allocated_device_seconds']==PREDECESSOR_SECONDS and old['physical_resets']==1 and old['generations']==old['steps']==0 and budget['evaluation_total_device_seconds']==600 and budget['engineering_total_device_seconds']==1800 and budget['new_run_max_device_seconds']==REMEDIATION_SECONDS and budget['no_budget_transfer'] is True and new=={'elapsed_seconds':499,'environment_operations':2,'generations':1,'input_tokens':8192,'output_tokens':16,'per_call_input':8192,'resets':1,'steps':1} and PREDECESSOR_SECONDS+REMEDIATION_SECONDS<=600,'remediation fixed physical budget')
++    supervisor_path=file_binding(old['supervisor']);report_path=file_binding(old['report']);journal_path=file_binding(old['journal']);review_path=file_binding(old['independent_review'])
++    output=supervisor_path.parent;_need(report_path==output/'engineering'/'engineering_report.json' and journal_path==output/'engineering'/'engineering_events.jsonl','predecessor artifact paths')
++    supervisor=json.loads(supervisor_path.read_bytes());report=json.loads(report_path.read_bytes());review=json.loads(review_path.read_bytes())
++    _need(supervisor.get('schema')=='SI_U1_EVAL_ENGINEERING_SUPERVISOR_EXIT_V1' and supervisor.get('evidence_class')=='live_engineering_only' and supervisor.get('science_authorized') is False and supervisor.get('scope')=='one_task_engineering_only' and supervisor.get('source_sha')==PREDECESSOR_SOURCE and supervisor.get('authentic_returncode')==1 and supervisor.get('execution_status')=='EXIT_RECORDED' and supervisor.get('deadline_triggered') is False and supervisor.get('cleanup_established') is True and supervisor.get('cleanup_within_budget') is True and supervisor.get('within_time_cap') is True and supervisor.get('retry_authorized') is False and supervisor.get('allocated_devices')==1 and supervisor.get('elapsed_seconds')==PREDECESSOR_SECONDS and math.isclose(supervisor.get('allocated_device_hours',-1)*3600,PREDECESSOR_SECONDS,rel_tol=0,abs_tol=1e-9),'predecessor actual supervisor exit/elapsed')
++    from .supervisor import artifact_snapshot
++    _need(supervisor.get('artifact_snapshot_error') is None and supervisor.get('artifact_snapshot')==artifact_snapshot(output,engineering_scope=True),'predecessor actual output snapshot')
++    lp=output/'launch_context.json';wp=output/'worker_start.json';_need(file_sha256(lp)==supervisor['launch_context_sha256'] and file_sha256(wp)==supervisor['worker_start_sha256'],'predecessor process artifact hashes')
++    launch=json.loads(lp.read_bytes());worker=json.loads(wp.read_bytes());binding=launch['binding']
++    command=[supervisor['launch_context_sha256'] if x=='@LAUNCH_CONTEXT_SHA256@' else x for x in launch['argv']]
++    _need(binding['run_id']==PREDECESSOR_RUN and binding['source_sha']==PREDECESSOR_SOURCE and binding['output_path']==str(output) and launch['evidence_class']=='live_engineering_only' and launch['science_authorized'] is False and launch['allocated_devices']==1 and launch['max_allocation_seconds']==launch['deadline_seconds']==600 and type(launch['supervisor_pid']) is int and launch['supervisor_pid']>0 and type(launch['supervisor_start_tick']) is int and launch['supervisor_start_tick']>0 and worker['uid']==launch['supervisor_uid'] and launch['authorization_sha256']==supervisor['authorization_sha256'] and launch['source_sha']==PREDECESSOR_SOURCE and worker['authorization_sha256']==launch['authorization_sha256'] and worker['launch_context_sha256']==supervisor['launch_context_sha256'] and worker['argv']==command and worker['pid']==worker['pgid']==worker['sid'] and type(worker['start_tick']) is int and worker['start_tick']>0,'predecessor launch and worker identity')
++    argv=launch['supervisor_argv'];_need(type(argv) is list and argv.count('--authorization')==1,'predecessor authorization argument')
++    auth_path=Path(argv[argv.index('--authorization')+1]);auth=json.loads(file_binding({'path':str(auth_path),'sha256':launch['authorization_sha256']}).read_bytes());_need(auth['source_sha']==PREDECESSOR_SOURCE and auth['output_path']==str(output),'predecessor original authorization binding');old_candidate=json.loads(file_binding(auth['candidate']).read_bytes())['candidate']
++    _need(old_candidate['task_id']==report['task_id'] and old_candidate['parent']==report['task_id'].split('/')[0],'predecessor candidate identity')
++    current=candidate['candidate'];_need(candidate.get('amendment_sha256')==AMENDMENT_SHA256 and current['parent']!=old_candidate['parent'] and current['task_id']!=old_candidate['task_id'] and current['game']['sha256']!=old_candidate['game']['sha256'] and current['traj_data']['sha256']!=old_candidate['traj_data']['sha256'],'distinct remediation task/parent/artifacts')
++    _need(report.get('schema')=='SI_U1_EVAL_ENGINEERING_REPORT_V1' and report.get('evidence_class')=='live_engineering_only' and report.get('scientific_result') is False and report.get('status')=='STOPPED' and report.get('step_executed') is False and report.get('parse_status') is None and report.get('reserved_or_spent')=={'environment_operations':1,'generations':0,'input_tokens':0,'output_tokens':0} and report.get('completed')=={'environment_operations':0,'generations':0,'input_tokens':0,'output_tokens':0},'predecessor failed reset accounting')
++    _need(review.get('schema')=='SI_U1_INDEPENDENT_ENGINEERING_RESET_FAILURE_V1' and review.get('decision')=='CONFIRMED_STOPPED_NO_SCIENCE_RELEASE' and review.get('source_sha')==PREDECESSOR_SOURCE and review.get('supervisor_sha256')==old['supervisor']['sha256'] and review.get('report_sha256')==old['report']['sha256'] and review.get('journal_sha256')==old['journal']['sha256'] and review.get('elapsed_device_allocation_seconds')==PREDECESSOR_SECONDS and review.get('physical_reset_returns')==1 and review.get('generations')==review.get('steps')==0 and review.get('supervisor_snapshot_all_files_verified') is True,'independent predecessor audit')
++    rows=[json.loads(line) for line in journal_path.read_bytes().splitlines()];previous=None
++    for i,row in enumerate(rows):
++        _need(row.get('sequence')==i and row.get('previous')==previous and row.get('event_id')==_hash({k:v for k,v in row.items() if k!='event_id'}),'predecessor journal chain');previous=row['event_id']
++    _need(rows and rows[0]['kind']=='run_opened' and rows[-1]['kind']=='run_closed' and rows[-1]['payload']==report and rows[0]['payload']['task']['task_id']==report['task_id'] and rows[0]['payload']['live_binding']=={'binding':binding,'launch_context_sha256':supervisor['launch_context_sha256'],'worker_start_sha256':supervisor['worker_start_sha256']},'predecessor journal/header/report binding')
++    units=[r['payload']['op'] for r in rows if r['kind']=='unit_started'];returned=[r for r in rows if r['kind']=='external_returned' and r['payload']['op']=='reset'];returns=[r['payload'] for r in returned];failed=[r['payload'] for r in rows if r['kind']=='unit_failed' and r['payload']['op']=='reset'];started=[r for r in rows if r['kind']=='unit_started' and r['payload']['op']=='reset']
++    _need(units==['model_load','environment_construct','reset','environment_close','model_close'] and all(any(r['kind']=='unit_completed' and r['payload']['op']==op for r in rows) for op in ('model_load','environment_construct','environment_close','model_close')) and [x['boundary'] for x in returns]==['raw_reset_call_returned','raw_reset_returned'] and all(x['data'].get('returned') is True for x in returns) and returns[1]['data'].get('lossless') is False and len(failed)==len(started)==1 and started[0]['payload']['reservation']=={'environment_operations':1,'generations':0,'input_tokens':0,'output_tokens':0} and failed[0]['exception']=='EvaluationError' and failed[0]['started_event']==started[0]['event_id'] and failed[0]['return_events']==[r['event_id'] for r in returned], 'predecessor physical reset return')
++    return {'run_id':PREDECESSOR_RUN,'source_sha':PREDECESSOR_SOURCE,'elapsed_seconds':PREDECESSOR_SECONDS,'environment_operations':1,'resets':1,'generations':0,'steps':0,'amendment_sha256':AMENDMENT_SHA256}
+diff --git a/src/self_improvement/si_transfer_eval/live_audit.py b/src/self_improvement/si_transfer_eval/live_audit.py
+index d4be3d5..43761e9 100644
+--- a/src/self_improvement/si_transfer_eval/live_audit.py
++++ b/src/self_improvement/si_transfer_eval/live_audit.py
+@@ -108,6 +108,16 @@ def authenticate_engineering_run(output: Path) -> dict:
+     _need(exit.get('schema')=='SI_U1_EVAL_ENGINEERING_SUPERVISOR_EXIT_V1' and exit.get('evidence_class')=='live_engineering_only' and exit.get('science_authorized') is False and exit.get('authentic_returncode')==0 and exit.get('execution_status')=='EXIT_RECORDED' and exit.get('deadline_triggered') is False and exit.get('cleanup_established') is True and exit.get('cleanup_within_budget') is True and exit.get('within_time_cap') is True and exit.get('retry_authorized') is False and exit.get('child_report_present') is True,'engineering supervisor completion')
+     _need(exit.get('launch_context_sha256')==_sha(lp) and exit.get('worker_start_sha256')==_sha(wp) and exit.get('source_sha')==launch.get('source_sha') and exit.get('authorization_sha256')==launch.get('authorization_sha256'),'engineering supervisor receipt hashes')
+     binding=launch.get('binding');_need(type(binding) is dict and binding.get('schema')=='SI_U1_EVAL_ENGINEERING_BINDING_V1' and binding.get('output_path')==str(output) and binding.get('source_sha')==launch.get('source_sha') and binding.get('authorization_sha256')==launch.get('authorization_sha256'),'engineering external binding')
++    cap=binding.get('allocation_seconds',600);_need(type(cap) is int and cap in (499,600) and launch.get('max_allocation_seconds')==cap and launch.get('deadline_seconds')==cap and type(exit.get('elapsed_seconds')) in (int,float) and 0<=exit['elapsed_seconds']<=cap,'engineering actual allocation ceiling')
++    if cap==499:
++        from .runtime_binding import file_binding
++        from .engineering_remediation import verify_remediation
++        argv=launch['supervisor_argv'];_need(argv.count('--authorization')==1,'remediation authorization argument')
++        auth=json.loads(file_binding({'path':argv[argv.index('--authorization')+1],'sha256':launch['authorization_sha256']}).read_bytes())
++        plan=json.loads(file_binding(auth['plan']).read_bytes());candidate=json.loads(file_binding(auth['candidate']).read_bytes())
++        prior=verify_remediation(plan['remediation'],candidate)
++        _need(auth.get('allocation_seconds')==499 and plan['limits']['elapsed_seconds']==499 and binding.get('remediation')==prior and binding.get('cumulative_limits')==plan['remediation']['cumulative_limits'],'engineering authentic predecessor debit')
++        _need(exit.get('cumulative_evaluation_device_cap_seconds')==600 and type(exit.get('cumulative_evaluation_device_seconds')) in (int,float) and math.isfinite(exit['cumulative_evaluation_device_seconds']) and math.isclose(exit['cumulative_evaluation_device_seconds'],prior['elapsed_seconds']+exit['elapsed_seconds'],rel_tol=0,abs_tol=1e-9) and exit['cumulative_evaluation_device_seconds']<=600,'engineering cumulative device elapsed')
+     _need(launch.get('evidence_class')=='live_engineering_only' and launch.get('allocated_devices')==1 and launch.get('science_authorized') is False and worker.get('authorization_sha256')==launch.get('authorization_sha256') and worker.get('launch_context_sha256')==_sha(lp) and type(worker.get('pid')) is int and type(worker.get('start_tick')) is int and worker.get('pgid')==worker.get('pid') and worker.get('sid')==worker.get('pid'),'engineering worker identity')
+     command=[_sha(lp) if x=='@LAUNCH_CONTEXT_SHA256@' else x for x in launch.get('argv',[])];_need(worker.get('argv')==command,'engineering worker argv')
+     return {'binding':binding,'launch_context_sha256':_sha(lp),'worker_start_sha256':_sha(wp)}
+diff --git a/src/self_improvement/si_transfer_eval/live_runtime.py b/src/self_improvement/si_transfer_eval/live_runtime.py
+index 939d91b..3ebf9f2 100644
+--- a/src/self_improvement/si_transfer_eval/live_runtime.py
++++ b/src/self_improvement/si_transfer_eval/live_runtime.py
+@@ -28,6 +28,12 @@ def _raw_wire(value, *, preserve_tuples=False):
+     if type(value) is float:
+         return (value,True) if math.isfinite(value) else ({'unsupported_nonfinite':repr(value)},False)
+     if dataclasses.is_dataclass(value):return _raw_wire(dataclasses.asdict(value),preserve_tuples=preserve_tuples)
++    if preserve_tuples and type(value).__module__=='textworld.logic' and type(value).__qualname__=='Proposition':
++        # Preserve the ordered logical identity, not a lossy repr.  Accept only
++        # exact, internally consistent TextWorld classes; unknowns fail closed.
++        from textworld.logic import Proposition, Variable
++        if type(value) is Proposition and type(value.name) is str and type(value.arguments) is tuple and all(type(v) is Variable and type(v.name) is str and type(v.type) is str and hash(v)==hash((v.name,v.type)) for v in value.arguments) and value.signature.name==value.name and tuple(value.signature.types)==tuple(v.type for v in value.arguments) and hash(value)==hash((value.name,value.arguments)):
++            return {'wire_type':'textworld_proposition_v1','name':value.name,'arguments':[{'name':v.name,'type':v.type} for v in value.arguments]},True
+     if type(value).__module__.startswith('numpy') and hasattr(value,'dtype') and hasattr(value,'tobytes'):
+         try:
+             if bool(getattr(value.dtype,'hasobject',False)):raise ValueError('object dtype')
+diff --git a/src/self_improvement/si_transfer_eval/return_audit.py b/src/self_improvement/si_transfer_eval/return_audit.py
+index 92ad4dc..d13faab 100644
+--- a/src/self_improvement/si_transfer_eval/return_audit.py
++++ b/src/self_improvement/si_transfer_eval/return_audit.py
+@@ -6,6 +6,11 @@ from .evaluator import _need
+ def _decode_wire(value):
+     if type(value) is list: return [_decode_wire(x) for x in value]
+     if type(value) is dict:
++        if value.get('wire_type') == 'textworld_proposition_v1' and set(value)=={'wire_type','name','arguments'}:
++            from textworld.logic import Proposition, Variable
++            args=value['arguments']
++            _need(type(value['name']) is str and type(args) is list and all(type(v) is dict and set(v)=={'name','type'} and type(v['name']) is str and type(v['type']) is str for v in args),'raw proposition wire')
++            return Proposition(value['name'],[Variable(v['name'],v['type']) for v in args])
+         if value.get('wire_type') == 'python_tuple' and set(value)=={'wire_type','items'}:
+             return tuple(_decode_wire(x) for x in value['items'])
+         if value.get('wire_type') == 'python_dict' and set(value)=={'wire_type','items'}:
+@@ -69,7 +74,7 @@ def validate_completed(unit, op, data, *, require_live):
+     elif op in ('reset', 'step'):
+         _need(names == ['raw_' + op + '_call_returned', 'raw_' + op + '_returned', 'normalized_' + op + '_returned'] and all(x['data']['lossless'] for x in returns[1:]), 'completed environment return evidence')
+         norm = returns[-1]['data']['value']; _need(type(norm) is dict, 'normalized environment object')
+-        if require_live: _check_raw_normalized(op, returns[1]['data']['value'], norm)
++        _check_raw_normalized(op, returns[1]['data']['value'], norm)
+         _need(norm['observation'] == data['observation'] and norm['valid_actions'] == data['valid_actions'], 'normalized observation/action map binding')
+         if op == 'reset':
+             _need(norm['task']['task_id'] == data['task_id'] and norm['task']['text'] == data['goal'], 'normalized reset identity')
+diff --git a/src/self_improvement/si_transfer_eval/supervisor.py b/src/self_improvement/si_transfer_eval/supervisor.py
+index 4b48892..946cdc0 100644
+--- a/src/self_improvement/si_transfer_eval/supervisor.py
++++ b/src/self_improvement/si_transfer_eval/supervisor.py
+@@ -39,7 +39,7 @@ def supervise(command,output,*,context,seconds,environment,capability=None):
+         require(isinstance(capability,LivePermit) and output==capability.output and context['binding']==capability.binding and environment==capability.authorization['environment'] and context['per_arm_allocation_seconds']==capability.manifest['arm_limits']['elapsed_seconds'] and context['max_allocation_seconds']==capability.manifest['limits']['elapsed_seconds'], 'authenticated live supervisor required')
+     elif context['evidence_class'] == ENGINEERING:
+         from .engineering_gate import EngineeringPermit
+-        require(isinstance(capability,EngineeringPermit) and output==capability.output and context['binding']==capability.binding and environment==capability.auth['environment'] and context['max_allocation_seconds']==600 and seconds<=600, 'authenticated engineering supervisor required')
++        require(isinstance(capability,EngineeringPermit) and type(capability.allocation_seconds) is int and capability.allocation_seconds in (499,600) and output==capability.output and context['binding']==capability.binding and environment==capability.auth['environment'] and context['max_allocation_seconds']==capability.allocation_seconds and (seconds==499 if capability.allocation_seconds==499 else seconds<=600), 'authenticated engineering supervisor required')
+     else:
+         require(context['evidence_class']==SOFTWARE and capability is None, 'supervisor mode')
+     engineering_scope = context['evidence_class']==ENGINEERING or (context['evidence_class']==SOFTWARE and context.get('scope')=='one_task_engineering_only')
+@@ -131,6 +131,10 @@ def supervise(command,output,*,context,seconds,environment,capability=None):
+         receipt['artifact_snapshot']=snapshot;receipt['artifact_snapshot_error']=snapshot_error
+         if snapshot_error is not None:receipt['execution_status']='INCONCLUSIVE'
+         if context['evidence_class'] in (LIVE,ENGINEERING) and code==0 and (snapshot is None or any(value is None for value in snapshot.values())):receipt['execution_status']='INCONCLUSIVE'
++        if context['evidence_class']==ENGINEERING and context['binding'].get('allocation_seconds')==499:
++            prior=context['binding']['remediation'];receipt['cumulative_evaluation_device_seconds']=prior['elapsed_seconds']+elapsed
++            receipt['cumulative_evaluation_device_cap_seconds']=600
++            if not (0<=receipt['cumulative_evaluation_device_seconds']<=600):receipt['execution_status']='INCONCLUSIVE'
+         receipt['final_arm_cleanup_within_cap'] = final_arm_deadline is None or time.monotonic() <= final_arm_deadline
+         if not receipt['final_arm_cleanup_within_cap']:receipt['execution_status']='INCONCLUSIVE'
+         restore_error=None
+diff --git a/tests/test_si_transfer_engineering_remediation.py b/tests/test_si_transfer_engineering_remediation.py
+new file mode 100644
+index 0000000..f45b305
+--- /dev/null
++++ b/tests/test_si_transfer_engineering_remediation.py
+@@ -0,0 +1,130 @@
++"""Synthetic predecessor and budget wiring; no model or environment runtime."""
++import json
++from datetime import datetime,timedelta,timezone
++from pathlib import Path
++import pytest
++from self_improvement.si_transfer_eval import engineering_remediation as rm
++from self_improvement.si_transfer_eval.evaluator import EvaluationError, Journal
++from self_improvement.si_transfer_eval.runtime_binding import file_sha256
++from self_improvement.si_transfer_eval.supervisor import artifact_snapshot, supervise
++from self_improvement.si_transfer_eval.engineering import ENGINEERING_LIMITS, REMEDIATION_LIMITS, EngineeringRunner
++from self_improvement.si_transfer_eval.engineering_gate import EngineeringPermit, validate_authorization_allocation, validate_engineering_plan
++from self_improvement.si_transfer_eval.engineering_audit import audit
++from test_si_transfer_eval import FakeProducer, FakeEnv, manifest
++from test_si_transfer_engineering_gate import plan
++
++
++def fixture(tmp_path,monkeypatch):
++    def write(path,obj):
++        path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(obj));return {'path':str(path),'sha256':file_sha256(path)}
++    output=tmp_path/'predecessor';(output/'engineering').mkdir(parents=True)
++    old={'candidate':{'task_id':'old-parent/old-trial','parent':'old-parent','game':{'sha256':'1'*64},'traj_data':{'sha256':'2'*64}}}
++    oldref=write(tmp_path/'old-candidate.json',old);authref=write(tmp_path/'old-auth.json',{'candidate':oldref,'source_sha':rm.PREDECESSOR_SOURCE,'output_path':str(output)})
++    binding={'run_id':rm.PREDECESSOR_RUN,'source_sha':rm.PREDECESSOR_SOURCE,'output_path':str(output)}
++    launch={'allocated_devices':1,'max_allocation_seconds':600,'deadline_seconds':600,'supervisor_uid':2000,'supervisor_pid':10,'supervisor_start_tick':99,'binding':binding,'evidence_class':'live_engineering_only','science_authorized':False,'authorization_sha256':authref['sha256'],'source_sha':rm.PREDECESSOR_SOURCE,'supervisor_argv':['fake','--authorization',authref['path']],'argv':['fake','--launch-context-sha256','@LAUNCH_CONTEXT_SHA256@']}
++    launchref=write(output/'launch_context.json',launch)
++    worker={'uid':2000,'authorization_sha256':authref['sha256'],'launch_context_sha256':launchref['sha256'],'pid':42,'pgid':42,'sid':42,'start_tick':123,'argv':['fake','--launch-context-sha256',launchref['sha256']]}
++    workerref=write(output/'worker_start.json',worker)
++    report={'schema':'SI_U1_EVAL_ENGINEERING_REPORT_V1','evidence_class':'live_engineering_only','scientific_result':False,'status':'STOPPED','task_id':old['candidate']['task_id'],'step_executed':False,'parse_status':None,'reserved_or_spent':{'environment_operations':1,'generations':0,'input_tokens':0,'output_tokens':0},'completed':{'environment_operations':0,'generations':0,'input_tokens':0,'output_tokens':0}}
++    reportref=write(output/'engineering'/'engineering_report.json',report)
++    journal=Journal(output/'engineering'/'engineering_events.jsonl',{'task':{'task_id':report['task_id']},'live_binding':{'binding':binding,'launch_context_sha256':launchref['sha256'],'worker_start_sha256':workerref['sha256']}})
++    def complete(op):
++        start=journal.append('unit_started',{'op':op});journal.append('unit_completed',{'op':op,'started_event':start})
++    complete('model_load');complete('environment_construct');start=journal.append('unit_started',{'op':'reset','reservation':{'environment_operations':1,'generations':0,'input_tokens':0,'output_tokens':0}})
++    r1=journal.append('external_returned',{'op':'reset','boundary':'raw_reset_call_returned','data':{'returned':True}})
++    r2=journal.append('external_returned',{'op':'reset','boundary':'raw_reset_returned','data':{'returned':True,'lossless':False}})
++    journal.append('unit_failed',{'op':'reset','exception':'EvaluationError','started_event':start,'return_events':[r1,r2]});complete('environment_close');complete('model_close');journal.append('run_closed',report);journal.close()
++    journalref={'path':str(output/'engineering'/'engineering_events.jsonl'),'sha256':file_sha256(output/'engineering'/'engineering_events.jsonl')}
++    supervisor={'schema':'SI_U1_EVAL_ENGINEERING_SUPERVISOR_EXIT_V1','evidence_class':'live_engineering_only','science_authorized':False,'scope':'one_task_engineering_only','source_sha':rm.PREDECESSOR_SOURCE,'authentic_returncode':1,'execution_status':'EXIT_RECORDED','deadline_triggered':False,'cleanup_established':True,'cleanup_within_budget':True,'within_time_cap':True,'retry_authorized':False,'allocated_devices':1,'elapsed_seconds':rm.PREDECESSOR_SECONDS,'allocated_device_hours':rm.PREDECESSOR_SECONDS/3600,'artifact_snapshot_error':None,'artifact_snapshot':artifact_snapshot(output,engineering_scope=True),'launch_context_sha256':launchref['sha256'],'worker_start_sha256':workerref['sha256'],'authorization_sha256':authref['sha256']}
++    supref=write(output/'supervisor_exit.json',supervisor)
++    review={'schema':'SI_U1_INDEPENDENT_ENGINEERING_RESET_FAILURE_V1','decision':'CONFIRMED_STOPPED_NO_SCIENCE_RELEASE','source_sha':rm.PREDECESSOR_SOURCE,'supervisor_sha256':supref['sha256'],'report_sha256':reportref['sha256'],'journal_sha256':journalref['sha256'],'elapsed_device_allocation_seconds':rm.PREDECESSOR_SECONDS,'physical_reset_returns':1,'generations':0,'steps':0,'supervisor_snapshot_all_files_verified':True}
++    reviewref=write(tmp_path/'review.json',review)
++    cumulative={'elapsed_seconds':600,'environment_operations':3,'generations':1,'input_tokens':8192,'output_tokens':16,'resets':2,'steps':1}
++    amendment={'schema':'SI_U1_EVAL_ENGINEERING_REMEDIATION_AMENDMENT_V1','status':'FROZEN_DESIGN_NOT_EXECUTION_AUTHORITY','scientific_release':False,'predecessor':{'run_id':rm.PREDECESSOR_RUN,'source_sha':rm.PREDECESSOR_SOURCE,'allocated_device_seconds':rm.PREDECESSOR_SECONDS,'physical_resets':1,'generations':0,'steps':0,'supervisor':supref,'report':reportref,'journal':journalref,'independent_review':reviewref},'budget':{'evaluation_total_device_seconds':600,'engineering_total_device_seconds':1800,'new_run_max_device_seconds':499,'no_budget_transfer':True},'new_run_limits':{'elapsed_seconds':499,'environment_operations':2,'generations':1,'input_tokens':8192,'output_tokens':16,'per_call_input':8192,'resets':1,'steps':1},'cumulative_evaluation_engineering_limits':cumulative}
++    aref=write(tmp_path/'amendment.json',amendment);monkeypatch.setattr(rm,'AMENDMENT_SHA256',aref['sha256'])
++    remediation={'amendment':aref,'prior_elapsed_seconds':rm.PREDECESSOR_SECONDS,'prior_environment_operations':1,'prior_resets':1,'cumulative_limits':cumulative}
++    candidate={'amendment_sha256':aref['sha256'],'candidate':{'task_id':'new-parent/new-trial','parent':'new-parent','game':{'sha256':'3'*64},'traj_data':{'sha256':'4'*64}}}
++    return remediation,candidate,output
++
++
++def test_actual_predecessor_contract_with_distinct_synthetic_candidate(tmp_path,monkeypatch):
++    remediation,candidate,output=fixture(tmp_path,monkeypatch);result=rm.verify_remediation(remediation,candidate)
++    assert result['elapsed_seconds']==rm.PREDECESSOR_SECONDS and result['resets']==1 and result['environment_operations']==1 and result['generations']==result['steps']==0
++
++
++@pytest.mark.parametrize('tamper',['elapsed','debit','cumulative','same_parent','same_game','same_traj','amendment_hash','raw_report'])
++def test_forged_debit_predecessor_or_identity_rejected(tmp_path,monkeypatch,tamper):
++    remediation,candidate,output=fixture(tmp_path,monkeypatch)
++    if tamper=='elapsed':remediation['prior_elapsed_seconds']-=1
++    if tamper=='debit':remediation['prior_resets']=0
++    if tamper=='cumulative':remediation['cumulative_limits']['environment_operations']=2
++    if tamper=='same_parent':candidate['candidate']['parent']='old-parent'
++    if tamper=='same_game':candidate['candidate']['game']['sha256']='1'*64
++    if tamper=='same_traj':candidate['candidate']['traj_data']['sha256']='2'*64
++    if tamper=='amendment_hash':remediation['amendment']['sha256']='0'*64
++    if tamper=='raw_report':(output/'engineering'/'engineering_report.json').write_text('{}')
++    with pytest.raises((EvaluationError,ValueError,KeyError)):rm.verify_remediation(remediation,candidate)
++
++
++@pytest.mark.parametrize('seconds',[498,500,600])
++def test_remediation_plan_refuses_any_cap_except_499(tmp_path,seconds):
++    p=plan();p['limits']=dict(REMEDIATION_LIMITS);p['limits']['elapsed_seconds']=seconds;p['remediation']={}
++    with pytest.raises(EvaluationError,match='exact cap/plan'):validate_engineering_plan(p,candidate_sha256='a'*64,environment={'CUDA_VISIBLE_DEVICES':p['resource']['gpu_uuid']})
++
++
++def test_499_machine_plan_and_600_original_are_distinct():
++    p=plan();env={'CUDA_VISIBLE_DEVICES':p['resource']['gpu_uuid']};validate_engineering_plan(p,candidate_sha256='a'*64,environment=env)
++    p['limits']=dict(REMEDIATION_LIMITS);p['remediation']={};validate_engineering_plan(p,candidate_sha256='a'*64,environment=env)
++
++
++@pytest.mark.parametrize('cap',[None,498,500,600,True])
++def test_remediation_authorization_rejects_missing_or_changed_cap(cap):
++    p=plan();p['limits']=dict(REMEDIATION_LIMITS);p['remediation']={};auth={} if cap is None else {'allocation_seconds':cap}
++    with pytest.raises(EvaluationError,match='authorization allocation'):validate_authorization_allocation(auth,p)
++
++
++def test_authorization_preserves_original_600_schema_and_accepts_exact_499():
++    p=plan();validate_authorization_allocation({},p)
++    with pytest.raises(EvaluationError,match='original authorization'):validate_authorization_allocation({'allocation_seconds':600},p)
++    p['limits']=dict(REMEDIATION_LIMITS);p['remediation']={};validate_authorization_allocation({'allocation_seconds':499},p)
++
++
++def test_499_runner_and_auditor_use_exact_same_limits(tmp_path):
++    t=manifest()['tasks'][0].copy();t['seed']=42;out=tmp_path/'synthetic'
++    report=EngineeringRunner(task=t,adapter_sha256='a'*64,output=out,producer_factory=lambda a,s:FakeProducer(a,s),environment_factory=FakeEnv,limits=dict(REMEDIATION_LIMITS)).run()
++    header=json.loads((out/'engineering_events.jsonl').read_text().splitlines()[0])['payload']
++    assert report['status']=='COMPLETED' and header['limits']==REMEDIATION_LIMITS
++    assert audit(out/'engineering_events.jsonl',decode=lambda ids:'A000',eos_ids=(10,))['report_status']=='COMPLETED'
++
++
++def test_499_supervisor_refuses_600_before_creating_output(tmp_path):
++    auth={'environment':{}};permit=EngineeringPermit(auth,'a'*64,{},'c'*64,tmp_path/'out',{}, {'allocation_seconds':499}, {})
++    context={'evidence_class':'live_engineering_only','source_sha':'a'*40,'authorization_sha256':'b'*64,'max_allocation_seconds':600,'allocation_started_monotonic':0,'binding':permit.binding}
++    with pytest.raises(EvaluationError):supervise(['never'],permit.output,context=context,seconds=600,environment={},capability=permit)
++    assert not permit.output.exists()
++
++
++@pytest.mark.parametrize('variant',['valid','wrong_clearance_cap','missing_clearance_cap','same_run'])
++def test_real_clearance_gate_binds_499_and_new_identity(tmp_path,monkeypatch,variant):
++    """Real gate logic; precursor heavy file check is an explicit synthetic edge."""
++    from self_improvement.si_transfer_eval import engineering_gate as gate
++    def write(path,obj):path.write_text(json.dumps(obj));return {'path':str(path),'sha256':file_sha256(path)}
++    repo=tmp_path/'repo';repo.mkdir();out=tmp_path/'out';ap=tmp_path/'auth.json';cp=tmp_path/'clearance.json';receipt=tmp_path/'receipt.json';expected={'synthetic':'preflight'};receipt.write_text(json.dumps(expected))
++    now=datetime.now(timezone.utc);refs={k:write(tmp_path/(k+'.json'),{}) for k in ('candidate','plan','runtime','review')}
++    pre=['fake','-I','fake-preflight','--authorization-sha256','@AUTHORIZATION_SHA256@'];auth={'source_sha':'a'*40,'interpreter':'fake','output_path':str(out),'receipt_path':str(receipt),'expires':(now+timedelta(hours=1)).isoformat(),'preflight_argv':pre,'allocation_seconds':499,**refs};ap.write_text(json.dumps(auth));ah=file_sha256(ap)
++    record=tmp_path/'record';record.mkdir();(record/'stdout').write_text('synthetic');(record/'stderr').write_text('')
++    preactual=[ah if x=='@AUTHORIZATION_SHA256@' else x for x in pre]
++    execution={'schema':'SI_U1_PREFLIGHT_EXECUTION_V1','authentic_returncode':0,'authorization_sha256':ah,'preflight_receipt_sha256':file_sha256(receipt),'argv':preactual,'source_sha':auth['source_sha'],'cwd':str(repo),'child_pid':7,'child_start_tick':5,'timed_out':False,'supervisor_error':None,'stdout_sha256':file_sha256(record/'stdout'),'stderr_sha256':file_sha256(record/'stderr')};ex=write(record/'preflight_execution.json',execution)
++    template=['fake','-I',str(repo/'scripts/run_si_transfer_engineering.py'),'--live','--authorization',str(ap),'--authorization-sha256','@AUTHORIZATION_SHA256@','--clearance',str(cp),'--clearance-sha256','@CLEARANCE_SHA256@']
++    clear={'schema':'SI_U1_EVAL_ENGINEERING_CLEARANCE_V1','decision':'RELEASE_ONE_ENGINEERING_ONLY','authorization_sha256':ah,'preflight_receipt_sha256':file_sha256(receipt),'preflight_execution':ex,'source_sha':auth['source_sha'],**{k+'_sha256':refs[k]['sha256'] for k in refs},'run_id':rm.PREDECESSOR_RUN if variant=='same_run' else '1'*32,'not_before':(now-timedelta(minutes=1)).isoformat(),'expires':(now+timedelta(minutes=20)).isoformat(),'maximum_launches':1,'retry_authorized':False,'live_argv':template,'allocation_seconds':600 if variant=='wrong_clearance_cap' else 499}
++    if variant=='missing_clearance_cap':del clear['allocation_seconds']
++    cp.write_text(json.dumps(clear));ch=file_sha256(cp);argv=[ah if x=='@AUTHORIZATION_SHA256@' else ch if x=='@CLEARANCE_SHA256@' else x for x in template]
++    prior={'run_id':rm.PREDECESSOR_RUN,'elapsed_seconds':rm.PREDECESSOR_SECONDS,'environment_operations':1,'resets':1,'generations':0,'steps':0};candidate={'candidate':{}}
++    p={'resource':{'gpu_uuid':'GPU-synthetic'},'limits':dict(REMEDIATION_LIMITS),'remediation':{'cumulative_limits':{'resets':2}}}
++    monkeypatch.setattr(gate,'authenticate_static',lambda *a,**k:(auth,p,candidate,{}, {},expected));monkeypatch.setattr(gate,'verify_remediation',lambda *a,**k:prior)
++    if variant=='valid':
++        permit=gate.authenticate_live(repo,ap,ah,cp,ch,mode='live',argv=argv)
++        assert permit.allocation_seconds==499 and permit.binding['remediation']==prior and permit.binding['allocation_seconds']==499
++    else:
++        with pytest.raises(EvaluationError,match='allocation|distinct'):gate.authenticate_live(repo,ap,ah,cp,ch,mode='live',argv=argv)
++    assert not out.exists()
+diff --git a/tests/test_si_transfer_live_ports.py b/tests/test_si_transfer_live_ports.py
+index e2db460..a734883 100644
+--- a/tests/test_si_transfer_live_ports.py
++++ b/tests/test_si_transfer_live_ports.py
+@@ -112,14 +112,14 @@ def test_actual_environment_port_persists_return_before_rejecting_map(tmp_path,
+     from self_improvement.si_transfer_eval.audit import audit
+ 
+     class ExternalWorld:
+-        def reset(self): return ['initial'], {'actions': ['take object']}
++        def reset(self): return ['observed'], {'admissible_commands': [['take object']]}
+         def step(self, command): return ['after'], [1.0], [True], {'admissible_commands': bad_map}
+ 
+     class Normalizer:
+         def __init__(self, task): self._environment=ExternalWorld();self.task=task
+         def reset(self, *, seed):
+-            self._environment.reset()
+-            return ResetResult('observed',Task(self.task['task_id'],'take object','train',self.task['family']),('take object',))
++            _,info=self._environment.reset()
++            return ResetResult('observed',Task(self.task['task_id'],'take object','train',self.task['family']),('take object',),{'alfworld_info':info})
+         def step(self, command):
+             obs,reward,done,info=self._environment.step(command)
+             return Transition(obs[0],reward[0],done[0],False,info['admissible_commands'])
+@@ -240,12 +240,12 @@ def test_environment_return_marked_before_unserializable_raw_value(tmp_path):
+     class BrokenRepr:
+         def __repr__(self):raise ValueError('synthetic unrepresentable raw object')
+     class World:
+-        def reset(self):return ['initial'],{'admissible_commands':[['take object']]}
++        def reset(self):return ['observed'],{'admissible_commands':[['take object']]}
+         def step(self,command):return ['after'],[1.0],[True],{'opaque':BrokenRepr()}
+     class Normalizer:
+         def __init__(self,task):self._environment=World();self.task=task
+         def reset(self,*,seed):
+-            self._environment.reset();return ResetResult('observed',Task(self.task['task_id'],'take object','train',self.task['family']),('take object',))
++            _,info=self._environment.reset();return ResetResult('observed',Task(self.task['task_id'],'take object','train',self.task['family']),('take object',),{'alfworld_info':info})
+         def step(self,command):self._environment.step(command);raise AssertionError('serialization should fail first')
+         def close(self):pass
+     def environment(task):
+diff --git a/tests/test_si_transfer_textworld_wire.py b/tests/test_si_transfer_textworld_wire.py
+new file mode 100644
+index 0000000..3297cfb
+--- /dev/null
++++ b/tests/test_si_transfer_textworld_wire.py
+@@ -0,0 +1,111 @@
++"""CPU-only synthetic TextWorld logic values, without a simulator or model."""
++import pytest
++from textworld.logic import Proposition, Variable
++from env.alfworld import AlfWorldTextEnvironment
++from env.base import ResetResult, Task, Transition
++from self_improvement.si_transfer_eval.evaluator import EvaluationError, _hash
++from self_improvement.si_transfer_eval.live_runtime import ProductionEnvironment, _ReturnBoundary, _raw_wire
++from self_improvement.si_transfer_eval.return_audit import _check_raw_normalized, _decode_wire, validate_completed
++
++
++def test_real_textworld_proposition_identity_and_order_round_trip():
++    left=Variable('synthetic_left','kind_a');right=Variable('synthetic_right','kind_b')
++    original=Proposition('synthetic_predicate',[left,right,left])
++    wire,lossless=_raw_wire(original,preserve_tuples=True)
++    assert lossless and wire['wire_type']=='textworld_proposition_v1'
++    decoded=_decode_wire(wire)
++    assert type(decoded) is Proposition and decoded==original and repr(decoded)==repr(original)
++    assert [(v.name,v.type) for v in decoded.arguments]==[(left.name,left.type),(right.name,right.type),(left.name,left.type)]
++    # Distinct two-argument ordering is preserved, including name and type.
++    distinct=Proposition('synthetic_predicate',[left,right]);dw,ok=_raw_wire(distinct,preserve_tuples=True)
++    assert ok and _decode_wire(dw)!=Proposition('synthetic_predicate',[right,left])
++
++
++def test_actual_193_type_raw_reset_is_lossless_and_auditable():
++    """Only synthetic facts are used; production boundary and audit both run."""
++    facts=[Proposition('synthetic_predicate_'+str(i),[Variable('synthetic_a','type_a'),Variable('synthetic_b','type_b')]) for i in range(193)]
++    info={'admissible_commands':[['synthetic action']],'facts':[facts]}
++    class SyntheticEdge:
++        def reset(self):return ['synthetic observation'],info
++    events=[];boundary=_ReturnBoundary(SyntheticEdge(),lambda kind,data:events.append((kind,data)))
++    result=boundary.reset()
++    assert result[1] is info and [event[0] for event in events]==['raw_reset_call_returned','raw_reset_returned'] and events[-1][1]['lossless'] is True
++    decoded=_decode_wire(events[-1][1]['value']);restored=decoded[1]['facts'][0]
++    assert len(restored)==193 and all(type(v) is Proposition for v in restored) and restored==facts
++    task=Task('synthetic_parent/synthetic_trial','synthetic goal','train','pick_and_place_simple')
++    # Match AlfWorldTextEnvironment.reset's actual normalized dataclass and
++    # metadata conversion; only synthetic data and an in-memory edge are used.
++    normalized_result=ResetResult('synthetic observation',task,('synthetic action',),{'alfworld_info':AlfWorldTextEnvironment._info_dict(info)})
++    normalized,lossless=_raw_wire(normalized_result,preserve_tuples=False)
++    assert lossless and len(normalized['metadata']['alfworld_info']['facts'][0])==193 and all(type(v) is str for v in normalized['metadata']['alfworld_info']['facts'][0])
++    _check_raw_normalized('reset',events[-1][1]['value'],normalized)
++    unit={'returns':[{'boundary':'raw_reset_call_returned','data':events[0][1]},{'boundary':'raw_reset_returned','data':events[1][1]},{'boundary':'normalized_reset_returned','data':{'returned':True,'value':normalized,'lossless':lossless}}]}
++    public={'task_id':task.task_id,'family':task.family,'goal':task.text,'observation':'synthetic observation','valid_actions':['synthetic action'],'done':False,'reward':0.0,'truncated':False}
++    validate_completed(unit,'reset',public,require_live=True)
++
++
++def test_unknown_or_forged_type_remains_fail_closed():
++    class Unknown:pass
++    wire,lossless=_raw_wire(Unknown(),preserve_tuples=True)
++    assert lossless is False and wire['unsupported_type'].endswith('.Unknown')
++    Spoof=type('Proposition',(),{'__module__':'textworld.logic'})
++    wire,lossless=_raw_wire(Spoof(),preserve_tuples=True)
++    assert lossless is False
++    class SyntheticEdge:
++        def reset(self):return Unknown()
++    events=[]
++    with pytest.raises(EvaluationError,match='cannot be losslessly recorded'):
++        _ReturnBoundary(SyntheticEdge(),lambda kind,data:events.append((kind,data))).reset()
++    assert [event[0] for event in events]==['raw_reset_call_returned','raw_reset_returned'] and events[-1][1]['lossless'] is False
++
++
++def test_synthetic_engineering_raw_to_normalized_to_full_auditor(tmp_path):
++    """Real production runner/journal/auditor; only model and world edges are synthetic."""
++    import json
++    from test_si_transfer_eval import FakeProducer, manifest
++    from self_improvement.si_transfer_eval.engineering import EngineeringRunner
++    from self_improvement.si_transfer_eval.engineering_audit import audit
++    facts=[Proposition('synthetic_fact_'+str(i),[Variable('synthetic_object','synthetic_type')]) for i in range(193)]
++    info={'admissible_commands':[['take object']],'facts':[facts]}
++    class SyntheticWorld:
++        def reset(self):return ['observed'],info
++        def step(self,command):return ['after'],[0.0],[False],info
++    class SyntheticNormalizer:
++        def __init__(self,task):self.task=task;self._environment=SyntheticWorld()
++        def reset(self,*,seed):
++            obs,raw_info=self._environment.reset()
++            return ResetResult(obs[0],Task(self.task['task_id'],'take object','train',self.task['family']),('take object',),{'alfworld_info':AlfWorldTextEnvironment._info_dict(raw_info)})
++        def step(self,command):
++            obs,reward,done,raw_info=self._environment.step(command)
++            return Transition(obs[0],float(reward[0]),bool(done[0]),False,('take object',),{'alfworld_info':AlfWorldTextEnvironment._info_dict(raw_info)})
++        def close(self):pass
++    def environment(task):
++        p=ProductionEnvironment.__new__(ProductionEnvironment);p.task=task;p.started=False;p.goal=None;p.recorder=None;p.env=SyntheticNormalizer(task);return p
++    task=manifest()['tasks'][0].copy();task['seed']=42;out=tmp_path/'synthetic'
++    result=EngineeringRunner(task=task,adapter_sha256='a'*64,output=out,producer_factory=lambda arm,sha:FakeProducer(arm,sha),environment_factory=environment).run()
++    assert result['status']=='COMPLETED' and result['step_executed'] and result['completed']['environment_operations']==2
++    path=out/'engineering_events.jsonl';checked=audit(path,decode=lambda ids:'A000',eos_ids=(10,))
++    assert checked['report_status']=='COMPLETED' and checked['scientific_result'] is False
++    rows=[json.loads(x) for x in path.read_text().splitlines()]
++    raw=next(r['payload']['data']['value'] for r in rows if r['kind']=='external_returned' and r['payload']['boundary']=='raw_reset_returned')
++    normalized=next(r['payload']['data']['value'] for r in rows if r['kind']=='external_returned' and r['payload']['boundary']=='normalized_reset_returned')
++    assert len(_decode_wire(raw)[1]['facts'][0])==len(normalized['metadata']['alfworld_info']['facts'][0])==193
++    # Even a coherent journal rehash cannot hide a changed normalized fact.
++    normalized['metadata']['alfworld_info']['facts'][0][0]='tampered synthetic fact'
++    previous=None;changed={}
++    for row in rows:
++        old=row['event_id'];p=row['payload']
++        if row['kind'] in ('unit_completed','unit_failed'):
++            p['started_event']=changed[p['started_event']];p['return_events']=[changed[x] for x in p['return_events']]
++        row['previous']=previous;row['event_id']=_hash({k:v for k,v in row.items() if k!='event_id'});changed[old]=row['event_id'];previous=row['event_id']
++    path.write_text(''.join(json.dumps(r)+'\n' for r in rows))
++    with pytest.raises(EvaluationError,match='raw info reconstruction'):audit(path,decode=lambda ids:'A000',eos_ids=(10,))
++
++
++@pytest.mark.parametrize('bad',[
++    {'wire_type':'textworld_proposition_v1','name':'synthetic','arguments':[{'name':'x'}]},
++    {'wire_type':'textworld_proposition_v1','name':'synthetic','arguments':[{'name':'x','type':None}]},
++    {'wire_type':'textworld_proposition_v1','name':'synthetic','arguments':[], 'extra':'x'},
++])
++def test_malformed_proposition_wire_is_rejected(bad):
++    with pytest.raises(EvaluationError):_decode_wire(bad)
+diff --git a/tests/test_si_transfer_utc_contract.py b/tests/test_si_transfer_utc_contract.py
+index de66fae..1c7e8d8 100644
+--- a/tests/test_si_transfer_utc_contract.py
++++ b/tests/test_si_transfer_utc_contract.py
+@@ -40,7 +40,7 @@ import self_improvement.si_transfer_eval.supervisor as supervisor
+ now=datetime.now(timezone.utc);future=now+timedelta(seconds=30 if style=='too_short' else 50000)
+ value=future.replace(tzinfo=None).isoformat() if style=='naive' else future.isoformat()
+ if style=='zulu':value=value.replace('+00:00','Z')
+-permit=SimpleNamespace(output=Path('/synthetic/no-output'),binding={'fixture':True},clearance={'expires':value},clearance_sha='c'*64,clearance_sha256='c'*64,auth_sha='a'*64,authorization_sha256='a'*64,auth={'expires':value,'source_sha':'a'*40,'environment':{}},authorization={'expires':value,'source_sha':'a'*40,'environment':{}},manifest={'limits':{'elapsed_seconds':43200},'arm_limits':{'elapsed_seconds':14400}})
++permit=SimpleNamespace(output=Path('/synthetic/no-output'),allocation_seconds=600,binding={'fixture':True},clearance={'expires':value},clearance_sha='c'*64,clearance_sha256='c'*64,auth_sha='a'*64,authorization_sha256='a'*64,auth={'expires':value,'source_sha':'a'*40,'environment':{}},authorization={'expires':value,'source_sha':'a'*40,'environment':{}},manifest={'limits':{'elapsed_seconds':43200},'arm_limits':{'elapsed_seconds':14400}})
+ if kind=='engineering':
+  import self_improvement.si_transfer_eval.engineering_gate as gate
+  script=root/'scripts/run_si_transfer_engineering.py'
+@@ -62,3 +62,32 @@ runpy.run_path(str(script),run_name='__main__')
+     if style=='naive':assert 'timezone required' in result.stderr
+     if style=='too_short':assert 'insufficient' in result.stderr
+     assert sorted(p.name for p in tmp_path.iterdir())==['isolated_cli_fixture.py']
++
++
++@pytest.mark.parametrize('remaining,should_reach', [(510,True),(490,False)])
++def test_real_engineering_cli_uses_499_remaining_window_and_supervisor_cap(tmp_path,remaining,should_reach):
++    """Production main with synthetic gate/supervisor edges; no live subprocess."""
++    root=Path(__file__).resolve().parents[1];wrapper=tmp_path/'remediation_cli_fixture.py'
++    wrapper.write_text('''import runpy,sys
++from pathlib import Path
++from datetime import datetime,timedelta,timezone
++from types import SimpleNamespace
++root=Path(sys.argv[1]);remaining=int(sys.argv[2]);sys.path.insert(0,str(root/'src'))
++import self_improvement.si_transfer_eval.engineering_gate as gate
++import self_improvement.si_transfer_eval.supervisor as supervisor
++expires=(datetime.now(timezone.utc)+timedelta(seconds=remaining)).isoformat()
++permit=SimpleNamespace(output=Path('/synthetic/no-output'),allocation_seconds=499,binding={'allocation_seconds':499},clearance={'expires':expires},clearance_sha='c'*64,auth_sha='a'*64,auth={'expires':expires,'source_sha':'a'*40,'environment':{}})
++gate.authenticate_live=lambda *a,**k:permit
++def safe_supervisor(*a,**k):
++ print('SYNTHETIC_SUPERVISOR_SECONDS='+str(k['seconds']))
++ return {'authentic_returncode':0,'execution_status':'EXIT_RECORDED','child_report_present':True}
++supervisor.supervise=safe_supervisor
++script=root/'scripts/run_si_transfer_engineering.py'
++sys.argv=[str(script),'--live','--authorization','/synthetic/absent-auth','--authorization-sha256','a'*64,'--clearance','/synthetic/absent-clearance','--clearance-sha256','c'*64]
++sys.orig_argv=[sys.executable,'-I',*sys.argv]
++runpy.run_path(str(script),run_name='__main__')
++''')
++    result=subprocess.run([sys.executable,'-I',str(wrapper),str(root),str(remaining)],capture_output=True,text=True)
++    assert ('SYNTHETIC_SUPERVISOR_SECONDS=499' in result.stdout)==should_reach and result.returncode==(0 if should_reach else 1)
++    if not should_reach:assert 'insufficient engineering time window' in result.stderr
++    assert sorted(p.name for p in tmp_path.iterdir())==['remediation_cli_fixture.py']
