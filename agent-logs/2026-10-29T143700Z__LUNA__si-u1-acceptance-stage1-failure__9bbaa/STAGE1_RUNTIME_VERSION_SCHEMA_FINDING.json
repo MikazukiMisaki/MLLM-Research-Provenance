@@ -1,0 +1,21 @@
+{
+  "schema": "ASTRA_STAGE1_FAILURE_REVIEW_V1",
+  "decision": "CONFIRMED_CONSTRUCTOR_SCHEMA_MISMATCH",
+  "process_receipt_sha256": "5f325412a1113c349fde4e59dd79e2252392740026d3204af3abfdeb943fd720",
+  "runtime_draft_sha256": "d5093589b7b41b9e6c4139564b3062383fc7c77a2c88710de1f1db59493b75be",
+  "empty_version_modules": [
+    "alfworld",
+    "alfworld.agents.environment.alfred_tw_env",
+    "textworld.gym"
+  ],
+  "all_eight_entry_file_hashes_currently_match": true,
+  "stage1_output_absent": true,
+  "cause": "builder.py:64 requires nonempty module version; frozen production module_origin serializes absent __version__ as empty string and production runtime schema accepts strings. This differs from seven distribution/tree identities, whose versions remain nonempty.",
+  "minimal_fix": "Remove only bool(entry[version]) for eight runtime module schema. Preserve exact strings, path/hash bindings, frozen draft hash, three model-module equality to f72, all seven package-tree version requirements and live exact module_origin comparison.",
+  "required_tests": [
+    "Real frozen eight module metadata including exact three empty strings, no imports",
+    "Reject nonstring/missing version, invalid path/hash, and mismatched model-module identity",
+    "Independent synthetic isolated subprocess rerun after new builder/bootstrap hashes"
+  ],
+  "scientific_impact": "No training/evaluation/model/environment action or dose change; readonly construction rejected before output creation. Original failure remains recorded. No permission to rerun stage1 from this finding."
+}

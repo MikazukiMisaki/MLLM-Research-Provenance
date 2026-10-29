@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/home/lizening/wt-si-u1-finalizer-bootstrap/bootstrap.py", line 51, in <module>
+    if __name__=='__main__':main()
+  File "/home/lizening/wt-si-u1-finalizer-bootstrap/bootstrap.py", line 49, in main
+    finalizer=load_reviewed_modules();finalizer.main()
+  File "/home/lizening/wt-si-u1-eval-artifact-builder/finalizer.py", line 112, in main
+    verify_evaluator_source();refs=read_ref({'path':args.refs,'sha256':args.refs_sha256});stage=stage1_from_refs(refs)
+  File "/home/lizening/wt-si-u1-eval-artifact-builder/finalizer.py", line 96, in stage1_from_refs
+    return stage1(inputs,refs,EXPECTED)
+  File "/home/lizening/wt-si-u1-eval-artifact-builder/finalizer.py", line 46, in stage1
+    prepared=b.assemble(inputs['manifest_draft'],inputs['runtime_draft'],inputs['plan_draft'],inputs['schedule'],inputs['byte'],inputs['training'],inputs['b_accept'],inputs['b_result'],inputs['b_exit'],inputs['b_manifest'],refs,expected=expected)
+  File "/home/lizening/wt-si-u1-eval-artifact-builder/builder.py", line 64, in assemble
+    require(type(entry) is dict and set(entry)=={'path','sha256','version'} and Path(entry['path']).is_absolute() and valid(entry['sha256']) and type(entry['version']) is str and bool(entry['version']),'eight runtime module identities')
+  File "/home/lizening/wt-si-u1-eval-artifact-builder/builder.py", line 29, in require
+    if not x:raise Rejected(why)
+builder.Rejected: eight runtime module identities

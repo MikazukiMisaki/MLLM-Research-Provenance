@@ -1,0 +1,7 @@
+# SI-U1 B/C acceptance and first stage-one construction failure
+
+This private provenance package copies the original independent B and C training acceptance records, C post-exit supplement, C review binding, and evidence of the first evaluation stage-one constructor invocation. SOURCE_AND_COPY_MANIFEST.json binds each original absolute source path, byte length and SHA256 to an exact copied file; originals were not moved or modified.
+
+The first stage-one constructor exited 1 on 2026-10-29 at 14:30:30 UTC. The actual process receipt and stderr are copied verbatim. The independently reviewed failure was a schema mismatch: the builder required a nonempty module version while the frozen runtime representation allows an empty version for three module origins. The contemporaneous read-only finding records that stage-one output was absent; no scientific preflight, model, CUDA or environment operation occurred during this failed constructor. It is recorded as FAILED_STOP, never as a pass or scientific result; the process record says no retry.
+
+B and C acceptance cover the fixed final checkpoints and training audit, not future evaluation results. Their scientific device allocations and separate engineering costs are documented in the included C supplement. This package contains no model weights or dataset content. Subsequent repair, tests or construction have separate provenance and are not implied by this historical failure record.
