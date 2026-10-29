@@ -1,0 +1,7 @@
+# SI-U1 repaired stage-one candidate and construction review
+
+Status: CANDIDATE_ONLY_NO_EXECUTION_RELEASE. The separately recorded repaired stage-one constructor used exact independently reviewed builder 3da63f4e3b0150c3ebb681a0d66dd87c22f7c3aa, isolated bootstrap 2060cc8a20dfc6dafa3b4053043f6eab67ef7410 and evaluator 8532275932dabddc498c23a2b6d9a045647542f0. The genuine constructor process returned 0 and wrote the candidate manifest, runtime draft, plan and stage-one receipt. This does not authorize or establish evaluation, preflight, scientific outcomes or independently verified task isolation.
+
+The private archive preserves the candidate files and actual process stdout/stderr/receipt, the independent software review, its checks and receipts, development test records, reviewed source files, and frozen references. All 58 archive members were checked byte-for-byte against source files before and after packaging; PUBLICATION_MANIFEST.json maps original paths and SHA256s to archive members. The archive contains private task identity and path/hash metadata but no task prose or model weights.
+
+The earlier stage-one failure remains separately recorded in provenance commit d7da7fd280c4f2d6f8493161672607dc1966af28. The present record does not amend, certify or replace the independent task-isolation review, which is the responsibility of Astra. No task bodies, scientific preflight, model, CUDA or environment were invoked in this archival task.
