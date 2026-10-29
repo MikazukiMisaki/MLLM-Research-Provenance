@@ -1,0 +1,3 @@
+# SI-U1 independent scientific review publication
+
+Private archive contains Astra’s signed-by-provenance independent acceptance with all original v1/v2 scripts, receipts, stdout and stderr, preserving the original failed reviewer attempt, and Sol’s full independent recomputation plus its pre-outcome frozen method and tests. Source paths and byte hashes are recorded in MANIFEST.json. The reviewed analysis hash is 4a3ea016d4c06022980482ac9dbc58155a68bbe20fbc723a68ce49c7c345ea9b. The post-evaluation extraction technical supplement V2 and previously failed extractor remain separately archived in commit 389ae86b217f200af90a3c8f0f4f0f4935815cc8. No extraction or experiment was rerun for this publication.

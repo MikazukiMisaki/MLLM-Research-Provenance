@@ -1,0 +1,227 @@
+{
+  "analysis": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/FINAL_PILOT82_PAIRED_ANALYSIS_C2356.json",
+    "sha256": "4a3ea016d4c06022980482ac9dbc58155a68bbe20fbc723a68ce49c7c345ea9b"
+  },
+  "cost": {
+    "engineering_separate_seconds": 455.8560599721968,
+    "evaluation_device_seconds": 4263.280576453544,
+    "training_plus_evaluation_device_hours": 1.684259875337852,
+    "training_plus_evaluation_device_seconds": 6063.335551216267
+  },
+  "created_utc": "2026-10-29T22:24:29.350665+00:00",
+  "decision": "ACCEPT_AUDITED_FIXED_SCHEDULE_RESULTS_WITH_PREREGISTERED_INCONCLUSIVE_CONCLUSION",
+  "evidence": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/C2356_SCIENTIFIC_INDEPENDENT/INDEPENDENT_CI.json",
+      "sha256": "5b42206b8456453be4878d0fe5754c77d3f167a6c81dd72a91236b61910f2465"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/C2356_SCIENTIFIC_INDEPENDENT/PROCESS.json",
+      "sha256": "085428e5d8dfd124dc91ffc1ac9c69d582baaedbf19cb8b9d8752ced30ceeb96"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/C2356_SCIENTIFIC_INDEPENDENT/PROCESS_V2.json",
+      "sha256": "95833cb7b1e4642ef32ad0ff9e326f58db0c388708b7e4c2bb1f562d35f61b80"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/C2356_SCIENTIFIC_INDEPENDENT/RESULT_V2.json",
+      "sha256": "b5175069ca909ec89b70fe98cf6d04796dd08e5190df96d1d9469d47cb3be9b2"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/C2356_SCIENTIFIC_INDEPENDENT/check.py",
+      "sha256": "98bebccb1c85ec46ff5d074a9c8984ffdb7f4d0d8dfaaabd37994bafeb1e67bf"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/C2356_SCIENTIFIC_INDEPENDENT/check_v2.py",
+      "sha256": "8abeb2dc0ec3a2650d9a03c49a608e5c9f9338d4da4b2ac220354472be88a800"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/C2356_SCIENTIFIC_INDEPENDENT/stderr",
+      "sha256": "4402677ab7c3ea91c09c9f7dff752b4c50fd6e5a9ae8757830f7ad7315226b4b"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/C2356_SCIENTIFIC_INDEPENDENT/stderr_v2",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/C2356_SCIENTIFIC_INDEPENDENT/stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/C2356_SCIENTIFIC_INDEPENDENT/stdout_v2",
+      "sha256": "e09d2d93451a327567222c14fcfced0872564e994a14566d243035c2c8503c9c"
+    }
+  ],
+  "extractor_rerun_by_reviewer": false,
+  "extractor_review": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/EXTRACTOR_062_INDEPENDENT_REVIEW.json",
+    "sha256": "3a7b2bd851440711773fb724df4dd1b8f9325d57db99e91a576daf849c423e20"
+  },
+  "future_work_boundary": "Any new experimental stage needs its own prospective design, disjoint identity audit, precision/power and budget plan; current result authorizes no automatic retry, resampling or training.",
+  "independent_semantic_checks": [
+    "Entire journal parsed read-only to reconstruct each last reset/step state, pending action-parser state, steps and termination.",
+    "Success recomputed as terminal done and reward>0; all246 outcome/seed/family/end_state records agree with frozen82-task sequence and report.",
+    "Rebuilt82 boolean paired records exactly equal final analysis. All246 episodes terminal, zero selection-failure episodes.",
+    "Exact discordant-pair binomial p-values, Holm and integer warning/signal boundaries recomputed independently.",
+    "Confidence endpoints recomputed using independently implemented binomial-CDF inversion; match within1e-12.",
+    "All five output evidence hashes and all actual repaired-extraction process input hashes verified, before/after raw evidence inventories equal.",
+    "Actual repaired extraction approval binds new336d4 code and unchangedspec6d5; accepted technical supplement preserves original764 plan, old6859 approval and first rc1 evidence."
+  ],
+  "interpretation": [
+    "Self-success continuation C gained2/82 net successes versus frozenP0 A (+2.44pp) and lost1/82 versus dose-matched expert continuation B (-1.22pp) on this fixed validation schedule.",
+    "Neither planned superiority comparison meets the preregistered Holm threshold. No evidence here establishes self-success continuation superiority to either comparator.",
+    "Nonsignificance is not equivalence, no-effect or safety/nonharm proof; conservative intervals include meaningful losses and gains. The -5pp nonharm condition fails.",
+    "No prespecified >=10pp primary/family harm warning triggered; this does not establish absence of smaller harms.",
+    "All arms failed all8 two-object evaluation cases. This is descriptive and not evidence that continuation caused that weakness.",
+    "The protocol produced an auditable comparison with matched supervision dose and fixed-final checkpoints; it did not establish effective general self-improvement."
+  ],
+  "limits": [
+    "Only one training realization/seed per continuation and one fixed82-parent evaluation schedule; stochastic training variation not estimated.",
+    "TRAIN-directory represented identity separation does not prove heldout, unseen layouts, semantic separation, or complete historical nonexposure.",
+    "Family sizes especiallyheat5/two8 are small; C training two-object support is only2parents. Family comparisons are descriptive, not subgroup efficacy claims.",
+    "Conservative population intervals/tests require stated sampling/exchangeability assumptions; schedule is not a random population sample.",
+    "Original evaluation remains exact853; repaired offline extraction is post-evaluation technical correction062, explicitly documented rather than retroactively treated as original preregistration.",
+    "Operational ownership does not prove exclusive shared-GPU use; logged allocation/free-memory and process cleanup met frozen limits."
+  ],
+  "operational_review": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/C2356_REAL_EVALUATION_OPERATIONAL_INDEPENDENT_REVIEW.json",
+    "sha256": "bbf43bd32f994eb948fc6cc02b4d6ff25e902d6fa2eab20524f562d0688d4600"
+  },
+  "original_preregistration": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/FINAL_ANALYSIS_PLAN_PILOT82.json",
+    "sha256": "7643900c2b417e9d2497d8acb195f6754ebe04f3f2c6242625948874100dc23f"
+  },
+  "production_auditor": {
+    "completed": {
+      "environment_operations": 5247,
+      "generations": 5001,
+      "input_tokens": 2734940,
+      "output_tokens": 25005
+    },
+    "episode_count": 246,
+    "generation_return_observation": {
+      "observed_output_tokens": 25005,
+      "returned_generations": 5001,
+      "unknown_output_sequences": 0
+    },
+    "pending_na_count": 0,
+    "report_status": "COMPLETE",
+    "reserved_or_spent": {
+      "environment_operations": 5247,
+      "generations": 5001,
+      "input_tokens": 2734940,
+      "output_tokens": 25005
+    },
+    "resource": {
+      "after_generation": {
+        "A": 1713,
+        "B": 1661,
+        "C": 1627
+      },
+      "before_generation": {
+        "A": 1713,
+        "B": 1661,
+        "C": 1627
+      },
+      "resource_rows": 10017,
+      "resource_sha256": "b00942048a1bbfa8fb04728f6a5f43a5a03211851dc3332869e55ad38f583de9"
+    },
+    "status": "AUDIT_PASS_LIVE"
+  },
+  "real_process_exit_code": 0,
+  "results": {
+    "contrasts": {
+      "C-A": {
+        "delta": 0.024390243902439025,
+        "holm_adjusted_p": 1.0,
+        "losses": 1,
+        "mcnemar_two_sided_p": 0.625,
+        "n": 82,
+        "simultaneous_95pct_conservative_ci": [
+          -0.07977905321615618,
+          0.1242057690762273
+        ],
+        "ties": 78,
+        "wins": 3
+      },
+      "C-B": {
+        "delta": -0.012195121951219513,
+        "holm_adjusted_p": 1.0,
+        "losses": 4,
+        "mcnemar_two_sided_p": 1.0,
+        "n": 82,
+        "simultaneous_95pct_conservative_ci": [
+          -0.13783461515828918,
+          0.11541382014188549
+        ],
+        "ties": 75,
+        "wins": 3
+      }
+    },
+    "families": {
+      "pick_and_place_simple": {
+        "A_success": 37,
+        "B_success": 40,
+        "C_minus_A": 0.023809523809523808,
+        "C_success": 38,
+        "n": 42
+      },
+      "pick_clean_then_place_in_recep": {
+        "A_success": 17,
+        "B_success": 18,
+        "C_minus_A": 0.05263157894736842,
+        "C_success": 18,
+        "n": 19
+      },
+      "pick_cool_then_place_in_recep": {
+        "A_success": 7,
+        "B_success": 6,
+        "C_minus_A": 0.0,
+        "C_success": 7,
+        "n": 8
+      },
+      "pick_heat_then_place_in_recep": {
+        "A_success": 4,
+        "B_success": 4,
+        "C_minus_A": 0.0,
+        "C_success": 4,
+        "n": 5
+      },
+      "pick_two_obj_and_place": {
+        "A_success": 0,
+        "B_success": 0,
+        "C_minus_A": 0.0,
+        "C_success": 0,
+        "n": 8
+      }
+    },
+    "family_or_primary_warning_triggered": false,
+    "five_pp_nonharm_established": false,
+    "n": 82,
+    "preregistered_decision": "INCONCLUSIVE",
+    "rates": {
+      "A": 0.7926829268292683,
+      "B": 0.8292682926829268,
+      "C": 0.8170731707317073
+    },
+    "successes": {
+      "A": 65,
+      "B": 68,
+      "C": 67
+    }
+  },
+  "reviewer_model_environment_calls": 0,
+  "reviewer_script_error_preserved": {
+    "cause": "Reviewer initially indexed task_id for model-load units that correctly lack task_id.",
+    "fix": "check_v2 handles nontask units; completed independently with rc0. No experiment or original artifact changed.",
+    "returncode": 1,
+    "script": "check.py"
+  },
+  "run_id": "c2356bbda2b44159a333e7c9d24fc2d4",
+  "schema": "SI_U1_INDEPENDENT_SCIENTIFIC_RESULT_ACCEPTANCE_V1",
+  "technical_supplement": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-29T113523Z__ASTRA__three-arm-prospective-design__a55d1af9/ANALYSIS_TECHNICAL_SUPPLEMENT_TOKENIZER_062_PROPOSAL_V2.json",
+    "sha256": "526cc76d3be966f19e866656ea76f9f639223fffb8860a432d4a9f3ba615adb0"
+  }
+}
