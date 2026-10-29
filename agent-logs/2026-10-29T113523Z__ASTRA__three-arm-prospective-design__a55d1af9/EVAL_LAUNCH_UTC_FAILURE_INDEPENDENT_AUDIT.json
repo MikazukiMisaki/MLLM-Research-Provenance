@@ -1,0 +1,51 @@
+{
+  "schema": "ASTRA_EVAL_LAUNCH_FAILURE_INDEPENDENT_AUDIT_V1",
+  "decision": "FAILED_BEFORE_WORKER_NO_RETRY_OF_OLD_RUN",
+  "source_sha": "9112a48df70994ead5df89d8b01d0bde12a4160f",
+  "authorization_sha256": "5d9845eaecc5732af320b13137bd77d8ce1b174c800064f8760dd286b8f83702",
+  "clearance_sha256": "115bf68e4337391321e4f9f04da2b603dd4a8f0cffba388dbbb4aa87709647ca",
+  "launcher_exit_sha256": "3fbb84c1ed1c225f083278edaf718ac871c58a17759ea25dc8f554cd46fcf01d",
+  "launcher_stderr_sha256": "723ac2507e358209e86e49102897d8e10343a845209f285d04b6281a41c75897",
+  "authentic_returncode": 1,
+  "launcher_elapsed_wall_seconds": 40.2396681830287,
+  "device_allocation_started": false,
+  "allocated_device_seconds": 0,
+  "observed_model_generation_reset_step_counts": {
+    "model": 0,
+    "generation": 0,
+    "reset": 0,
+    "step": 0
+  },
+  "evidence_basis": [
+    "exact reviewed source invokes rejecting UTC conversion before supervise/claim/Popen",
+    "original bound UTC strings reproduced preflight acceptance/live rejection using CPU-only parsers",
+    "real stderr and exit match this branch",
+    "output/claim absent and no worker artifacts",
+    "device-wide samples corroborate but are not used alone as process attribution"
+  ],
+  "parser_reproduction": [
+    {
+      "field": "auth_expires",
+      "preflight_accepts": true,
+      "live_rejects": true
+    },
+    {
+      "field": "clearance_expires",
+      "preflight_accepts": true,
+      "live_rejects": true
+    }
+  ],
+  "review_blind_spot": "Previous software review did not exercise actual launcher deadline conversion with accepted offset timestamps; old software PASS is not extended to new release.",
+  "old_failure_unchanged": true,
+  "prospective_design_supported": true,
+  "new_run_conditions": [
+    "new exact SHA unifies engineering and science preflight/live deadline parsing without editing frozen legacy operator",
+    "CPU actual CLI path must demonstrate accepted timestamps reach mocked supervisor and invalid timestamps fail before it",
+    "old auth/clearance/output/run identity never reused or rewritten;old attempt remains consumed",
+    "new distinct auth/run/preflight and independent release required",
+    "same original candidate/P0 and limits1reset1generation1step600seconds;no reserve/no suffix",
+    "device spend remains0 for failed launcher;250.73030943144113seconds prior training engineering separately retained",
+    "no automatic retries or allowance increase;fresh resource/non-overlap required"
+  ],
+  "scientific_release": false
+}

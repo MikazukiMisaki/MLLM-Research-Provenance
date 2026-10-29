@@ -1,0 +1,112 @@
+{
+  "all_archive_member_hashes_match_original": true,
+  "allocated_device_seconds": 0,
+  "archive_members": {
+    "authorization.json": {
+      "bytes": 2977,
+      "sha256": "5d9845eaecc5732af320b13137bd77d8ce1b174c800064f8760dd286b8f83702"
+    },
+    "clearance.json": {
+      "bytes": 1750,
+      "sha256": "115bf68e4337391321e4f9f04da2b603dd4a8f0cffba388dbbb4aa87709647ca"
+    },
+    "launch/LAUNCHER_EXIT.json": {
+      "bytes": 1143,
+      "sha256": "3fbb84c1ed1c225f083278edaf718ac871c58a17759ea25dc8f554cd46fcf01d"
+    },
+    "launch/LAUNCHER_START.json": {
+      "bytes": 797,
+      "sha256": "e92a2a1767df918efa8b37cddda4b53f91ddbc1e1b1f5c182aa8cac45dd2967a"
+    },
+    "launch/ONE_SHOT_DISPATCH.json": {
+      "bytes": 2692,
+      "sha256": "f26454cfe868f461021273d940cfa604ad963253e8b979d29b4364b8ccc839c1"
+    },
+    "launch/gpu_samples.jsonl": {
+      "bytes": 1048,
+      "sha256": "b755c0421c1b12bf1e151a1da3de109561c94e1de3327b321796619a4d18be91"
+    },
+    "launch/launch_once.py": {
+      "bytes": 6728,
+      "sha256": "f4c85f793baeb50da3da516b69ecab5d5bfaa2ea84ebe708ca1d8cd2cc542bef"
+    },
+    "launch/launcher.stderr": {
+      "bytes": 111,
+      "sha256": "723ac2507e358209e86e49102897d8e10343a845209f285d04b6281a41c75897"
+    },
+    "launch/launcher.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preflight_receipt.json": {
+      "bytes": 706,
+      "sha256": "54cf1f5fbd4202f331db6fafe1b4d5fc024d4da9671b4d70b3112131a258c53f"
+    },
+    "preflight_supervisor/preflight_execution.json": {
+      "bytes": 1086,
+      "sha256": "f361a1077ce5247bc715d550e73207f62ebe4423fa372bec3b4f2ad6aeb2ad9f"
+    },
+    "preflight_supervisor/stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preflight_supervisor/stdout": {
+      "bytes": 736,
+      "sha256": "379ff2ba25a29d24741d6f73feb941f9ba81b92113e8039058a72c943c173d05"
+    },
+    "preflight_wrapper/DISPATCH_ONCE.json": {
+      "bytes": 1656,
+      "sha256": "8ae08dbaf5964dffd471699c44a15b025bb37f93288d3ab103f812c1cd51cad6"
+    },
+    "preflight_wrapper/FILE_HASHES.sha256": {
+      "bytes": 608,
+      "sha256": "d0e1551c5c608834bf548ae3fc63ebe257d21b138d18488d395c9a23edbf9b73"
+    },
+    "preflight_wrapper/RECORD.md": {
+      "bytes": 2029,
+      "sha256": "6128218aab0470c01b687f666b51f2bf4c0f1bedade31fce574ac553bc5826af"
+    },
+    "preflight_wrapper/STATIC_CHECKS.json": {
+      "bytes": 8858,
+      "sha256": "52ee6a31bccbc9b8f47260963a17a3f6f5aabb9c909e8f7eda797ea00fb0da30"
+    },
+    "preflight_wrapper/SUPERVISOR_PROCESS_RECEIPT.json": {
+      "bytes": 1167,
+      "sha256": "1038755c681d791556fc45a088ed5dc4706ae976efc583e4107080515bd57c65"
+    },
+    "preflight_wrapper/supervisor.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preflight_wrapper/supervisor.stdout": {
+      "bytes": 1120,
+      "sha256": "6df26c5be574ed44b0b43bcf9500cd53cdce573d2ed840487627d5d3ede71691"
+    }
+  },
+  "archive_sha256": "d1268d5766eb5e2d822fbc21d5cee9dc5ff663f30c8dc0ea1b80469a9c78b38f",
+  "auth_or_clearance_never_rewritten": true,
+  "gpu_allocation_started": false,
+  "launcher_error": {
+    "exception": "ContractError",
+    "message": "UTC timestamp must end in Z",
+    "status": "REJECTED_OR_INCONCLUSIVE"
+  },
+  "launcher_returncode": 1,
+  "new_clearance_required_for_any_future_attempt": true,
+  "no_live_output_or_claim": true,
+  "no_model_cuda_environment_calls": true,
+  "no_worker_created": true,
+  "originals_before_after_unchanged": true,
+  "outer_launcher_pid": 929728,
+  "preflight_effects_zero": true,
+  "root_cause_evidence": [
+    "src/self_improvement/si_transfer_eval/engineering_gate.py:43 allows timezone-aware offset",
+    "src/self_improvement/si_p3/runtime_gate.py:47 requires UTC string ending Z",
+    "scripts/run_si_transfer_engineering.py:43 calls strict utc before line 46 calls supervise"
+  ],
+  "run_id": "53cb282cb1dc472da46dc53fe52a7ff9",
+  "schema": "SI_U1_LUNA_EVAL_ENGINEERING_STOP_V1",
+  "source_sha": "9112a48df70994ead5df89d8b01d0bde12a4160f",
+  "status": "STOP_NO_RETRY",
+  "wrapper_elapsed_cpu_seconds": 40.2396681830287
+}

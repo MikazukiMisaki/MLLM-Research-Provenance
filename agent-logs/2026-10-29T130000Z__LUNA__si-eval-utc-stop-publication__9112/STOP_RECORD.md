@@ -1,0 +1,11 @@
+# SI-U1 evaluator engineering: stopped before supervisor
+
+Status: **STOP_NO_RETRY**. The single cleared engineering launch on source `9112a48df70994ead5df89d8b01d0bde12a4160f` returned 1 from launcher PID 929728. Its actual stderr reports `ContractError: UTC timestamp must end in Z`. No live supervisor or worker was created; the proposed output and one-shot claim remain absent. No model, CUDA initialization, environment construction, reset, action or generation occurred. The GPU remained at its 14 MiB device-wide baseline; no device allocation was started. The outer wrapper elapsed about 40.24 seconds of wall time, including CPU input verification and monitoring, and must not be counted as GPU allocation.
+
+The preflight authorization constructed for this task used a timezone-aware `+00:00` timestamp. The preflight gate's `_utc` accepts that representation, but the live entry point subsequently uses `si_p3.runtime_gate.utc`, which requires a `Z` suffix before it invokes the supervisor. This format inconsistency explains the recorded rejection. The authorization, clearance, preflight receipt and existing evidence were preserved unchanged. The one permitted launcher invocation was consumed; no automatic retry occurred. Any future attempt requires an independently reviewed plan and new authority.
+
+The zero-effect preflight succeeded previously with a real child exit code 0; it did not establish live readiness. Frozen candidate inputs and engineering budgets were rechecked before the failed launch. Previous training engineering expenditure remains 250.73030943144113 seconds; this rejected launch adds zero allocated evaluation device seconds.
+
+The deterministic 20-member local `RAW_EVIDENCE.tar.gz` contains launcher stdout/stderr, monitored device snapshots, preflight supervisor and wrapper receipts, authorization and clearance. All archive members were checked against original bytes, with original pre/post hashes matching. Archive SHA256 `d1268d5766eb5e2d822fbc21d5cee9dc5ff663f30c8dc0ea1b80469a9c78b38f`; stop audit SHA256 `bd51915b5f2ab87a4c159a5cc45af6414d5e1ded77391f584481d9445b290255`.
+
+The evidence is local pending coordinator publication; no shared INDEX was edited. No science, retrial, or new engineering action is authorized by this record.
