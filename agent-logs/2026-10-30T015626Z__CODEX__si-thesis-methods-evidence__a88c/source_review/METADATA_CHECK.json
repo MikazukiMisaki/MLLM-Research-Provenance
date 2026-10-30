@@ -1,0 +1,118 @@
+{
+  "checked_at_utc": "2026-10-30T01:48:43.293601+00:00",
+  "files": {
+    "g1_manifest": {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-valid-unseen-g1-20260829T031028Z/run_manifest.json",
+      "sha256_before": "2688277c62ed488255754643d1d744748441de975babe9c1eac1680496d06552",
+      "sha256_after": "2688277c62ed488255754643d1d744748441de975babe9c1eac1680496d06552",
+      "unchanged": true
+    },
+    "g1_trajectory": {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/validation/sft-valid-unseen-g1-20260829T031028Z/trajectories.jsonl",
+      "sha256_before": "aaf6c90fc686eebb8efffd1ef80ef702677426dadbe127d8ca6a6013bc692f8e",
+      "sha256_after": "aaf6c90fc686eebb8efffd1ef80ef702677426dadbe127d8ca6a6013bc692f8e",
+      "unchanged": true
+    },
+    "g1_schedule": {
+      "path": "/home/lizening/wt-codex-r18c2/configs/evaluation/sft_heldout_valid_unseen_schedule.json",
+      "sha256_before": "7ce71ad01bd03ad8a018104f3edacc4310e9a1b5fc6e015d808152f316e4e13e",
+      "sha256_after": "7ce71ad01bd03ad8a018104f3edacc4310e9a1b5fc6e015d808152f316e4e13e",
+      "unchanged": true
+    },
+    "training_result": {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/training_result.json",
+      "sha256_before": "e6a47124200cacba4d1f3eaf97fdf79657d7df04f072a4d5446c2bec677c399e",
+      "sha256_after": "e6a47124200cacba4d1f3eaf97fdf79657d7df04f072a4d5446c2bec677c399e",
+      "unchanged": true
+    },
+    "adapter_config": {
+      "path": "/home/lizening/Alfworld-Self-Improvement-Project/artifacts/runtime/model-artifacts/sft-policy-bootstrap/full/final_adapter/adapter_config.json",
+      "sha256_before": "94090ee7ddaf2dd9e6500e43867c3c1c823b9bd02379eabc50c8345d18503d92",
+      "sha256_after": "94090ee7ddaf2dd9e6500e43867c3c1c823b9bd02379eabc50c8345d18503d92",
+      "unchanged": true
+    },
+    "split": {
+      "path": "/home/lizening/wt-codex-r18c2/configs/sft/sft_task_splits.json",
+      "sha256_before": "5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56",
+      "sha256_after": "5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56",
+      "unchanged": true
+    },
+    "exclusions": {
+      "path": "/home/lizening/wt-codex-r18c2/configs/sft/sft_task_exclusions.json",
+      "sha256_before": "fdbe3b1c2d8162fa7c95ff25b57ace1eaf01c1224d42f9f1f447bf7a859541c5",
+      "sha256_after": "fdbe3b1c2d8162fa7c95ff25b57ace1eaf01c1224d42f9f1f447bf7a859541c5",
+      "unchanged": true
+    },
+    "protocol": {
+      "path": "/home/lizening/wt-codex-r18c2/configs/sft/sft_training_protocol.json",
+      "sha256_before": "dd06d08773e9842b2302263429c7a1752e968dcb30d2dd89f185c01ef9605155",
+      "sha256_after": "dd06d08773e9842b2302263429c7a1752e968dcb30d2dd89f185c01ef9605155",
+      "unchanged": true
+    }
+  },
+  "g1": {
+    "created_at": "2026-08-29T03:10:32.133358+00:00",
+    "completed_at": "2026-08-29T03:24:51.372870+00:00",
+    "accepted_episodes": 60,
+    "episodes": 60,
+    "split": "valid_unseen",
+    "base_model_name": "Qwen/Qwen3-8B",
+    "adapter_sha256": "6e403d85b150a74dfcc176f1f180ce4baf6fdacd922d2f96b3ceef0a21100f11",
+    "schedule_raw_sha256_matches": true,
+    "trajectory_raw_sha256_matches": true
+  },
+  "training": {
+    "base_model": "Qwen/Qwen3-8B",
+    "training_result_sha256": "e6a47124200cacba4d1f3eaf97fdf79657d7df04f072a4d5446c2bec677c399e",
+    "adapter_config_model_name": "Qwen/Qwen3-8B",
+    "adapter_config_revision": null,
+    "training_result_keys_contain_revision": false
+  },
+  "canonical_hashes": {
+    "split": "e6695359f2e6b53b74c54e9d9712b1f8bc8534487d85b659151c71eb1441e25d",
+    "exclusions": "8e0d04d315a16d4fd28ef04bf9bf92212ebc98bbba8a10dfe0e3acb2b9fbf798"
+  },
+  "official_release_api": {
+    "source": "https://api.github.com/repos/alfworld/alfworld/releases?per_page=100",
+    "response_sha256": "39096d15e106aea81e0d8b9e7cc8bc9c4f1538e31558a0b5b1ef22beecc23b3b",
+    "pagination_header": null,
+    "count": 7,
+    "releases": [
+      {
+        "tag": "0.4.2",
+        "published_at": "2025-01-06T19:49:52Z",
+        "asset_count": 1
+      },
+      {
+        "tag": "0.4.0",
+        "published_at": "2024-11-25T19:30:30Z",
+        "asset_count": 1
+      },
+      {
+        "tag": "0.3.5",
+        "published_at": "2024-06-18T17:38:04Z",
+        "asset_count": 0
+      },
+      {
+        "tag": "0.3.3",
+        "published_at": "2024-03-02T12:04:37Z",
+        "asset_count": 0
+      },
+      {
+        "tag": "0.3.2",
+        "published_at": "2024-01-05T20:47:19Z",
+        "asset_count": 0
+      },
+      {
+        "tag": "0.3.1",
+        "published_at": "2023-12-18T16:43:37Z",
+        "asset_count": 0
+      },
+      {
+        "tag": "0.2.2",
+        "published_at": "2023-04-26T19:00:35Z",
+        "asset_count": 12
+      }
+    ]
+  }
+}
