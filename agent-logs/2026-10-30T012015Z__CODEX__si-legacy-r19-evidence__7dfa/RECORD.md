@@ -1,0 +1,7 @@
+# R19 appendix and SI historical task-source investigation
+
+Status: R19 appendix V3 independently accepted as a private thesis working appendix; historical source work is SOURCE_INVENTORY_ONLY with independent, runnable tasks NOT_ESTABLISHED. See the exact-SHA review records. This package does not authorize or design a new evaluation.
+
+The old archive has 1,207 game paths absent in the later archive, corresponding to 556 distinct parent-name strings; 210 names occur in later game archives and 346 do not. All 1,207 corresponding local trajectory-metadata siblings exist; that fact alone does not establish execution or exposure. Independent cross-version comparison of 60 already executed historical examples found 60/60 differing grammar/domain fields and 60/60 matching problem/solvable fields; field equality or difference does not establish runtime behavior. These are aggregate records and source metadata, not newly qualified samples.
+
+The event-order recount inspects selected fields of retained evidence, not a new complete journal integrity analysis. No task game content, identifiers, weights, trajectories or original full ledgers are bundled. No model, CUDA, ALFWorld, task generation/migration, training or formal evaluation was invoked. All four previously frozen prerequisites, including evidence for independent tasks, remain to be established and independently reviewed before designing a new evaluation.
