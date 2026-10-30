@@ -1,0 +1,50 @@
+{
+  "archive_sha256": "5df77ea759f2211a4106082839ddbbb790f1ba4e7d097ed732cf453f72aa36cf",
+  "by_split": {
+    "train": {
+      "changed_version_paths": 0,
+      "distinct_scene_suffixes": 0,
+      "parent_count": 0,
+      "parents_matching_any_training_source_or_execution_suffix": 0,
+      "parents_matching_g1_suffix": 0
+    },
+    "valid_seen": {
+      "changed_version_paths": 0,
+      "distinct_scene_suffixes": 0,
+      "parent_count": 0,
+      "parents_matching_any_training_source_or_execution_suffix": 0,
+      "parents_matching_g1_suffix": 0
+    },
+    "valid_train": {
+      "changed_version_paths": 0,
+      "distinct_scene_suffixes": 0,
+      "parent_count": 0,
+      "parents_matching_any_training_source_or_execution_suffix": 0,
+      "parents_matching_g1_suffix": 0
+    },
+    "valid_unseen": {
+      "changed_version_paths": 17,
+      "distinct_scene_suffixes": 2,
+      "parent_count": 6,
+      "parents_matching_any_training_source_or_execution_suffix": 6,
+      "parents_matching_g1_suffix": 6
+    }
+  },
+  "changed_total_paths": 334,
+  "filter_scope": "prior conservative protected histories and proposal, candidate family, source trajectory exists, game+trajectory byte hashes not in protected sets; changed version games of protected parents added to protected game hashes; unlike old-only filter, local file is expected to exist",
+  "filtered_summary": {
+    "changed_version_paths": 17,
+    "distinct_scene_suffixes": 2,
+    "parent_count": 6,
+    "parents_matching_any_training_source_or_execution_suffix": 6,
+    "parents_matching_g1_suffix": 6
+  },
+  "limits": [
+    "changed bytes on the same existing identity do not create a new task or prove semantic change",
+    "version-specific game compatibility and data licensing unknown",
+    "scene suffix is a name proxy and cannot prove model exposure, identical layout or held-out status",
+    "no candidate task contents interpreted, IDs emitted, task selected, environment or model run"
+  ],
+  "new_archive_and_prior_script_unchanged": true,
+  "prior_scene_audit_script_sha256": "2a525a220c8f4311245c28135c6eb3a2ece70d6b96124a73d33f44385f682788"
+}

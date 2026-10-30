@@ -1,0 +1,63 @@
+{
+  "status": "PASS_TARGETED_V2_ACCOUNTING_REVIEW",
+  "review_date_utc": "2026-10-30",
+  "reviewer": "Current-thread Astra advisor /root/astra_planning; not historical Astra Main.",
+  "reviewed_bindings": {
+    "PARTIAL_ACTUAL_LEDGER_V2.json": "3c9060003bbf4b96e49afa596cabedbd53a5a6448edc611227d2ac2395937470",
+    "RECORD.md": "960ccb06ea670996b18f18bfb60785a2ccae0e71920cc02d2c6914a1a099e34d",
+    "reconcile.py": "64aa7af4c24b899f8dcab17b356f92a34c788a6876c3c24bcc26b49585b04077",
+    "original_v1_snapshot": "1f55ee5cc4404e3566e53d8897620c1f0bf50f5764bf2e14d2f5bba712f9ab59"
+  },
+  "scope": "Independent read-only review of the four previously identified accounting issues, selected-phase arithmetic, current source bindings and the archived failed-reset event linkage. No complete historical project ledger or scientific efficacy result is certified.",
+  "four_issues": [
+    {
+      "issue": "Physically returned reset omitted from common completed fields",
+      "resolution": "RESOLVED: failed-reset row has one normalized physical reset and one budgeted physical environment operation while preserving zero logical completions and one logical failure; reservation is not another operation."
+    },
+    {
+      "issue": "Environment subtotal could be mistaken for all environment lifecycle calls",
+      "resolution": "RESOLVED: metric definitions explicitly include counted reset/transition operations and exclude construct/close, model loading and wrapper aliases; 342 constructions plus 342 closes are separately identified."
+    },
+    {
+      "issue": "Unattributed 1-generation/7-operation engineering observation looked like an additive leaf",
+      "resolution": "RESOLVED: is_additive=false and attribution_pending=true prevent this unresolved observation from entering a verified total. Its values and history are preserved."
+    },
+    {
+      "issue": "Partly hard-coded V1 builder could be mistaken for an independent source validator",
+      "resolution": "RESOLVED for the claimed scope: V2 binds the original snapshot and 16 expected input hashes, checks selected structured fields, and labels manual summary transcriptions separately from the raw reset recount. The record explicitly rejects treating the V1 builder as independent source verification."
+    }
+  ],
+  "independent_checks": {
+    "source_hash_matches": 16,
+    "old_snapshot_unchanged": true,
+    "v2_and_failure_archive_unchanged_during_check": true,
+    "selected_known_generations": 12112,
+    "selected_known_budgeted_reset_and_transition_operations": 15315,
+    "siu1_engineering_pair_physical_resets": 2,
+    "siu1_engineering_pair_physical_steps": 1,
+    "siu1_engineering_pair_budgeted_physical_environment_operations": 3,
+    "known_additional_constructions_source96_and_siu1_eval": 342,
+    "known_additional_closes_source96_and_siu1_eval": 342,
+    "four_distinct_siu1_engineering_allocation_seconds_decimal": "455.85605997219683",
+    "cumulative_double_counting": "No extra addition of R19's 177/342 predecessor aggregate, its already inclusive 5142/7949 total, or SI-U1's 455.856... engineering aggregate was found in the checked leaf arithmetic."
+  },
+  "raw_reset_check": {
+    "archive_sha256": "f17526737a8c050a9cfc7f6b4373a626ea99b9fbfd08dd323c2565a2460e3cdf",
+    "member": "run/engineering/engineering_events.jsonl",
+    "member_sha256": "3e3289ef0ed7b1e1edd0d2f4f7647d6c6941005e1367e586d08d519deb5b4f5b",
+    "unit_started": 1,
+    "external_returned_boundary_events": 2,
+    "physical_reset_calls_returned": 1,
+    "logical_unit_failed": 1,
+    "logical_unit_completed": 0,
+    "interpretation": "The call-return and non-lossless snapshot are two linked boundary events for one reset. The original failure references the same start and both returns; the return flag is true and snapshot lossless flag false. This says nothing about scientific task success or failure."
+  },
+  "remaining_limits": [
+    "The selected scientific/technical phase subtotal is not a full project total or even all physical calls within its phases; lifecycle operations are separately counted where known.",
+    "Earlier SFT/G1/recovery/preflight/engineering invocations, incomplete ownership and attribution, and missing token/time/storage fields remain explicit historical gaps.",
+    "Many rows still depend on accepted narrative summaries rather than a fresh raw-event recount; the verification-level fields correctly retain this limitation.",
+    "Nested diagnostic clocks, failed/open model-load reservations and unknown CPU-tokenizer input remain distinct; they must not be summed as independent time intervals or set to zero.",
+    "This review did not rerun reconcile.py or the original builder, reconstruct every raw historical ledger, or certify a new study budget."
+  ],
+  "actions": "Independently read and hash documents and 16 source files; read one tar member in memory without filesystem extraction; check reset identities and recompute selected arithmetic using standard-library code; write this review only. No reviewed file, original evidence, model, environment, CUDA state or scientific protocol was modified or executed."
+}

@@ -1,0 +1,23 @@
+# Append-only correction: physical reset and environment-cost definitions
+
+Status: PARTIAL_LEDGER_CORRECTED; FULL_PROJECT_COST_UNKNOWN. This record and `PARTIAL_ACTUAL_LEDGER_V2.json` supersede the earlier static resource snapshot **for the accounting fields listed here**; they do not alter its bytes or any original scientific or engineering evidence. They are not a new study budget or execution authority. No model, CUDA, ALFWorld, preflight or science process was started in this task.
+
+## What was wrong and what changed
+
+The earlier snapshot preserved a physically returned failed reset as `env_reset_physical_returned=1` and one reserved/spent operation, but did not populate the common reset/physical-completed fields. A generic summation by those fields would omit the physically performed reset. In the new snapshot it is explicitly `env_reset_physical_completed=1` and `budgeted_env_operations_physical_completed=1`, while `reset_unit_logical_completed=0` and `reset_unit_logical_failed=1` remain. Reservation and physical-return observations describe **one** operation and must not be added together.
+
+This correction was independently checked against the preserved original failure archive, whose SHA256 is `f17526737a8c050a9cfc7f6b4373a626ea99b9fbfd08dd323c2565a2460e3cdf`. Its `run/engineering/engineering_events.jsonl` has SHA256 `3e3289ef0ed7b1e1edd0d2f4f7647d6c6941005e1367e586d08d519deb5b4f5b`. One reset start, one physical call-return event, the following non-lossless returned snapshot and one logical failed unit are linked by the original event identifiers. The call-return flag is true, the snapshot lossless flag is false, and there is no logical reset-completed event. These checks do not establish a scientific task outcome.
+
+Across that failed engineering attempt and the separately launched successful engineering check, the corrected physical subtotal is **2 resets + 1 step = 3 budgeted environment operations**, plus 1 generation. The logical resets remain 1 failed and 1 completed. These engineering totals remain separate from scientific totals and are not an additional charge for any reservation.
+
+## Meaning of operation counts
+
+The normalized `budgeted_env_operations_physical_completed` is the source's counted resets plus recorded non-reset steps/transition operations. It excludes environment construction and close, model load, aliases, and journal wrapper events. The selected known scientific/technical leaf subtotal remains 12,112 completed generations and 15,315 budgeted reset-plus-transition operations; it is neither all physical calls nor an all-project total. Two included runs additionally report 342 constructions and 342 closes: source96 has 96 of each and SI-U1 evaluation has 246 of each. These **684 known lifecycle calls are outside the 15,315**, and further earlier/science/engineering lifecycle calls remain unknown. Do not infer totals by adding aliased operations or assume every non-reset operation is a literal environment step.
+
+Four distinct SI-U1 engineering allocation intervals sum to 455.85605997219683 seconds using exact decimal arithmetic on the recorded displayed numbers. The old display 455.8560599721968 is the same quantity rounded. It is not inserted as a fifth leaf. A pre-source96 engineering aggregate reported as 1 generation and 7 operations lacks a confirmed original leaf ID here; it is explicitly `is_additive=false`, `attribution_pending=true`. It cannot enter an automated total until raw lineage and overlap are resolved.
+
+## Evidence and verification limits
+
+`reconcile.py` independently rehashes and compares all 16 source files against the earlier hash-bound snapshot, verifies the old snapshot and failure archive hashes before and after, checks the archived failed reset's identity links, and matches selected structured source fields for G2, G3 predecessor, B/C training, SI-U1 evaluation and the SI-E2 supervisor exit. Other historical values that only had manually transcribed summary evidence are labeled `manual_source_summary_not_full_independent_raw_recount`; the script does not convert them into primary-ledger verification. The original `build_ledger.py` is an initial partially hard-coded snapshot, not a source-validation program, and must not be used as proof of such verification. Unknown or omitted values are not zero.
+
+Reproduce `python reconcile.py` and then `sha256sum -c FILE_HASHES.sha256` in this directory. `PARTIAL_ACTUAL_LEDGER_V2.json` records per-row additive/verification states, definitions, source hashes, exact raw reset linkage, known subtotals and unresolved limitations. Source archive contains private task evidence and is not republished by this record.

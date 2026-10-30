@@ -1,0 +1,23 @@
+{
+  "status": "PASS_NEW_REFERENCE_AND_NOVELTY_BOUNDARY_ONLY",
+  "reviewed_at_utc": "2026-10-30 00:37:51 UTC",
+  "reviewer": "Current-thread Astra advisor /root/astra_planning; not historical Astra Main; no communication with that historical thread is claimed.",
+  "reviewed_file": "THESIS_CHAPTER_REVISED.md",
+  "reviewed_sha256": "8c28cd16aa600664bdd18206466a12bf6a3168654c8b1085494d87ba3c654879",
+  "scope": "Independent verification of the newly added Micheli and Fleuret reference [5], its description in Position in prior research, and the resulting boundary on methodological novelty. This is not renewed acceptance of the entire chapter, its complete bibliography, statistical outputs or the new R19 case-level sentence.",
+  "primary_source": {
+    "url": "https://aclanthology.org/2021.emnlp-main.734.pdf",
+    "title": "Language Models are Few-Shot Butlers",
+    "authors": ["Vincent Micheli", "François Fleuret"],
+    "publication": "Proceedings of EMNLP 2021, pages 9312–9318",
+    "access": "Read the official ACL PDF through the web tool; no local PDF checksum or reproduction of the paper's experiments is claimed."
+  },
+  "source_checks": [
+    "Section 2.2, printed page 9313: action modeling maximizes the likelihood of action tokens rather than the entire trajectory.",
+    "Section 2.3, printed page 9313: IAM starts with an expert-demonstration-trained language model, collects environment interactions, and further trains with action modeling on successful trajectories.",
+    "Section 3.2, printed page 9314: the paper implements the procedure with GPT2-medium in ALFWorld after initial expert training."
+  ],
+  "decision": "The new citation and chronological description are supported. The draft correctly declines to introduce successful-trajectory training as a new method. Expert initialization and action-only supervision themselves also have direct precedent here; the narrower shared-checkpoint comparison does not by itself establish methodological novelty.",
+  "remaining_work": "Broader literature coverage and institution-specific citation formatting remain pending. Different models, protocols and task distributions prevent direct numerical comparison with this thesis.",
+  "actions": "Read the primary PDF and current chapter, hash the chapter, and write this independent review. The chapter and scientific artifacts were not modified; no model, environment or experiment was run."
+}

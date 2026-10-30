@@ -1,0 +1,65 @@
+{
+  "archive_inputs_unchanged": true,
+  "archives": {
+    "0.2.2": {
+      "archive_sha256": "d376c4bbb097c068528a2a9805e358e4cd14bc75c4d68a24e5141aebd234ef67",
+      "by_split": {
+        "train": 4652,
+        "valid_seen": 187,
+        "valid_train": 200,
+        "valid_unseen": 195
+      },
+      "files": 5234
+    },
+    "0.4.0": {
+      "archive_sha256": "eea90499df27b9cb3147d1d1927264146d38194b575e25f70a82875545742dcb",
+      "by_split": {
+        "train": 3553,
+        "valid_seen": 140,
+        "valid_train": 200,
+        "valid_unseen": 134
+      },
+      "files": 4027
+    },
+    "0.4.2": {
+      "archive_sha256": "5df77ea759f2211a4106082839ddbbb790f1ba4e7d097ed732cf453f72aa36cf",
+      "by_split": {
+        "train": 3553,
+        "valid_seen": 140,
+        "valid_train": 200,
+        "valid_unseen": 134
+      },
+      "files": 4027
+    }
+  },
+  "scope": "stream archive game bytes only for SHA, local game bytes for comparison; no task content parsed, no execution, no candidate IDs emitted",
+  "source": "official GitHub 0.4.2 release, API digest null; obtained archive SHA identifies downloaded bytes not vendor-signed checksum",
+  "v042_vs_archive": {
+    "0.2.2": {
+      "common_paths": 4027,
+      "new_version_only_paths": 0,
+      "old_version_only_paths": 1207,
+      "shared_changed_sha256": 4027,
+      "shared_identical_sha256": 0
+    },
+    "0.4.0": {
+      "common_paths": 4027,
+      "new_version_only_paths": 0,
+      "old_version_only_paths": 0,
+      "shared_changed_sha256": 334,
+      "shared_identical_sha256": 3693
+    }
+  },
+  "v042_vs_local": {
+    "common_paths": 4027,
+    "local_only_paths": 0,
+    "shared_changed_by_split": {
+      "valid_train": 200,
+      "valid_unseen": 134
+    },
+    "shared_changed_sha256": 334,
+    "shared_identical_sha256": 3693,
+    "v042_only_by_split": {},
+    "v042_only_paths": 0
+  }
+}

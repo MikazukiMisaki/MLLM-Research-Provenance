@@ -1,0 +1,91 @@
+{
+  "status": "NO_GO_FOR_NEW_EVALUATION_DESIGN",
+  "recorded_at_utc": "2026-10-30 00:32:24 UTC",
+  "reviewer": "当前线程 Astra 顾问 /root/astra_planning；不是旧 Astra Main，会话之间没有被声称发生通信。",
+  "scope": "阶段3的研究问题、估计对象和统计精度前置条件可行性判断。不是新评估协议、预注册、任务选择或运行安排；不以改称开发研究绕过当前四项前提。",
+  "decision": "当前证据足以形成有限、可检验的概念问题，但不足以成立新的独立评估总体、所需统计精度和完整资源预算。停止本轮新评估设计路线，保留论文与静态证据工作。NO_GO可被列明的新证据改变，不是新研究永远不可能的判断。",
+  "plan_binding": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-30T002800Z__CODEX__si-long-term-research-plan__a40/LONG_TERM_PLAN.md",
+    "sha256": "ed3d5429e220fcbf7911480ebf39f052976dfeb6e5005616e973a0fa622842ff"
+  },
+  "matrix_binding": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-30T002800Z__CODEX__si-long-term-research-plan__a40/EVIDENCE_AND_CLAIM_MATRIX.md",
+    "sha256": "5fc3dc198ac37a3805cd01547b6b260d9e91c343c40d99c685a1e10ed91daa4a"
+  },
+  "observations_not_hypotheses": [
+    "现有固定TRAIN样本A/B/C为65/68/67成功，总数各82；C-A为+2.44个百分点，C-B为-1.22个百分点，两项Holm调整p值均为1.00，冻结决策为INCONCLUSIVE。该结论不表示零效应、等效或无害。",
+    "B/C同起点、相同监督token剂量和家族级parent数量，但训练任务、状态、动作上下文和输入token总量不同；每臂仅有一个训练seed。",
+    "8个已评估two-object任务三臂均失败，每个续训臂该类仅2个训练parent、8个唯一示例。失败诊断为事后选定子集，不能据此证明覆盖不足造成失败。",
+    "保护旧提议的350个潜在parent中，346个名称场景编号代理与四类历史来源或评估记录编号集合重合；24个valid_unseen parent的编号均与已执行G1编号集合重合。四类来源的证据强度不同，这不是346个已训练或已运行候选，也不是346个不同几何场景。",
+    "若研究主张要求与上述历史类别的场景编号完全不重合，当前元数据筛查只剩至多4个parent且valid_unseen为0；剩余者仍不保证独立、可运行或可抽样。该条件不等于场景编号隔离规则已经被采用。",
+    "旧游戏的版本兼容、资格及语义关系未成立；旧8532275评估器绑定TRAIN/82任务/三臂，不能直接接入其他split或legacy游戏。"
+  ],
+  "conceptual_questions_not_selected_designs": [
+    {
+      "question": "从共同P0起点出发，在明确的数据构建条件和目标任务总体下，pure self-success续训配方的任务成功率是否优于匹配专家续训配方？",
+      "what_it_tests": "完整训练配方的平均差异，包括成功筛选后形成的任务和状态分布；不自动识别数据来源的单独因果作用。",
+      "what_must_be_defined": "pure self-success允许哪些轨迹来源和筛选信息；专家臂匹配监督剂量、任务分布、计算成本中的哪些量；训练数据构建随机性是否属于估计对象；目标任务总体和训练随机性的范围。",
+      "current_status": "概念上可检验，但处理定义、可用总体、精度和预算尚未共同成立；不选定为正式主要比较。"
+    },
+    {
+      "question": "在不改变其他已定义处理的情况下，增加某类可获得的自生成成功状态覆盖，是否改变该类任务成功率？",
+      "what_it_tests": "覆盖处理的前瞻效应；现有零成功类别仅提供提出问题的动机。",
+      "feasibility_limit": "若P0不能产生该类别的成功轨迹，pure success-only构建没有该类别支持，无法仅靠增加成功筛选补齐覆盖。加入专家轨迹成为混合经验问题；引入其他恢复或采集机制也是处理改变，不能默认为已经获准。",
+      "current_status": "条件性备选假说，数据支持与可识别性未成立；不是追加训练或采集建议。"
+    }
+  ],
+  "estimand_boundaries": {
+    "existing_finite_sample": "现有C-A和C-B是已完成82个任务、现存checkpoint和各自一次训练实现的配对成功率差。它们可作为明确范围的描述；不能不加假设推广到新场景或随机训练seed。",
+    "conditional_population_recipe_effect": "若将来可信目标分布P(Q)、训练随机性分布P(U)及数据构建规则D得到事先定义，可考虑Delta_recipe = E_{Q,U}[success(C_D(U), Q) - success(B_D(U), Q)]。如果D本身随机，应声明条件于固定D，还是对D的预定抽样分布取期望。这里的表达只说明待定义对象，不选任务、不分配seed、不指定运行协议。",
+    "base_reference": "与P0比较回答相对共同起点是否改善；与专家续训比较回答相对另一配方是否改善。这是不同问题。现有两比较及阈值保持不变；未来若提出不同主要问题，必须另有科学理由和前瞻审查，不能回改旧协议。",
+    "source_only_effect": "当前B/C的任务与状态分布随来源变化，缺少同一目标状态分布下的可比支持；匹配家族计数或监督token不能消除混杂。若把来源定义成生成整个数据集的干预，能够讨论的是该数据构建策略的整体效应，不能同时宣称隔离了示例来源这一单一属性。",
+    "conditioning_risk": "成功筛选是pure self-success配方的一部分，也会限制其支持范围。仅比较模型能成功的状态不能自动推断该配方对失败类型或全部任务的作用；不得以测试结果选择有利类别。",
+    "scene_claim": "同parent隔离、场景编号隔离、实际布局隔离、初始物体配置隔离与来自新任务分布是不同主张。应先说明论文需要哪一种，再评价证据；不能因元数据筛查后数量不足，把编号不重合或编号重合重新命名为已证实几何独立。"
+  },
+  "statistical_precision_prerequisites": [
+    "先说明希望估计的量、最小有意义效应或允许区间宽度、覆盖概率与适用总体。当前没有为新研究选择数值门槛；旧SI-U1阈值不能事后改写。",
+    "任务/parent与场景簇可能相关。需要可辩护的簇定义、抽样框及任务或场景权重；许多parent位于少数场景时，parent计数不是独立场景样本量。未知的编号-布局关系不能当作已知独立性。",
+    "训练seed与评估任务形成交叉依赖：同一训练模型共享于所有任务，同一任务又被多个模型评价。增加训练seed不会创造新任务，增加同场景任务也不会创造新场景。",
+    "固定若干训练seed的平均表现与训练算法对随机seed的期望是两个估计对象。一个seed无法估计训练随机性；三个seed也不是稳定估计或高功效的保证。确定性greedy重复同模型/任务不自动增加独立信息。",
+    "对多个seed平均后的非二元配对结果，不能直接套用旧单seed二元McNemar检验。任何方法需要解释其任务抽样、场景聚类和seed依赖假设；当前不指定新的检验或重采样流程。",
+    "若未来保留多个主要比较、观察效应阈值、家族警报和完整性条件，需评价整个决策规则；单项检验80%功效不代表全规则80%通过。若采取精度目标，也须说明是否为同时区间以及聚类、seed不确定性的处理。",
+    "配对差的精度依赖不一致概率、两比较关联和依赖层级，不只取决于边际成功率。现有少量不一致事件不能被乐观外推为新总体所需方差；应给出可辩护的假设区间及敏感性，而不是只报一个有利情形。",
+    "原N=6不可同时通过两项Holm调整精确McNemar检验是特定数学结论；原40-parent模拟只是限定假设、不含全部停止/警报及seed变化的例子。两者均不能替代本次尚未成立的新总体精度论证。",
+    "需要事前解释合法零奖励、未完成/缺失和工程中断对估计对象及结论的影响。合法失败必须保留，不得以结果不利停止或补换任务；工程失效需要保留证据和物理成本。"
+  ],
+  "budget_prerequisites": {
+    "known": "历史B/C训练加正式评估合计6063.34 allocated device-seconds，工程455.86秒另计；这些是历史阶段成本。共享A40轻载快照不代表独占、未来可用或新流程一定适配。",
+    "unknown": "新的可用任务数、数据构建成功产率、训练seed层级、版本兼容验证成本、最大token输入输出、模型加载切换和关闭成本、失败/中断成本、磁盘和日志峰值、共享资源监控及可承担总额未形成经审查的完整预算。",
+    "conditional_arithmetic_only": "既有示例7N条评估轨迹、350N次生成和357N次含reset环境操作，依赖每动作一次生成、每条一次reset和50步上限且无额外恢复/重试。它既不是选定设计，也不涵盖采集、训练、兼容工程或全部失败成本。",
+    "required_evidence": "对明确但尚未执行的科学问题给出完整成本分解、守恒计数、可解释的保守上限和资源可用约束；不能用旧平均成本乘候选数视为充分预算。可行性预算不等于运行授权。"
+  },
+  "four_gate_status": [
+    {"gate": "独立任务", "status": "NOT_ESTABLISHED", "reason": "当前只有条件性parent清单及scene编号代理，缺少符合预期推广主张的可抽样独立总体，且legacy资格/版本仍未知。"},
+    {"gate": "可检验假说", "status": "FORMULATABLE_NOT_FROZEN", "reason": "配方整体比较可概念化，来源单因素因果主张不被现有设计识别；覆盖假说也缺少pure success-only数据支持。"},
+    {"gate": "统计精度", "status": "NOT_ESTABLISHED", "reason": "总体、独立簇数、训练seed目标、允许精度和完整决策规则未共同成立；旧单seed功效例子不适用作新结论。"},
+    {"gate": "完整预算", "status": "NOT_ESTABLISHED", "reason": "只有旧成本和评估子项算式，无新研究全流程可审计上限或可靠资源合同。"}
+  ],
+  "evidence_that_could_change_no_go": [
+    "新增的可追溯身份与暴露证据形成符合事先声明目标的任务/场景抽样框，清楚区分已知、UNKNOWN及保护项；数量与权重足以支持拟议精度。不能仅靠取消旧保护或重命名TRAIN得到该证据。",
+    "对legacy版本和必要变换的适用性、资格及政策可见接口形成独立审查证据；仅有旧归档或相同编号不充分。若后续必须通过工程运行获得证据，该工程工作仍须单独满足当时的范围、资源和授权，不能由本记录启动。",
+    "明确处理是pure self-success数据构建配方还是来源属性，证明所需训练数据支持及对照可比性，并事前说明训练与数据构建随机性对应的估计对象。若改为混合经验，明确承认研究问题改变。",
+    "在上述真实抽样框和依赖假设下，有独立审核的精度或全规则功效敏感性证据，并预先规定有科学意义的效应/精度标准；不得把旧结果重新用于调旧阈值。",
+    "与上述可行性一致的全流程成本上限、共享资源和失败记账约束得到审核；历史空闲GPU或已完成旧运行不能替代。",
+    "全部四项同时成立且经独立复核，才重新审议是否进入新前瞻协议阶段；任何单项改善均不单独放行。"
+  ],
+  "thesis_path_without_new_positive_experiment": {
+    "defensible_conclusion": "在一个可审计的固定TRAIN探索样本、共同专家SFT起点和相同监督剂量下，自身成功经验续训没有建立优于未续训或专家续训的证据；现有区间与单seed限制也不足以证明等效或无害。训练来源同时改变任务/状态分布，不能将观察差异识别为来源的单因素效应。",
+    "contribution": "提供可复现的三臂配对实证、成本和数据覆盖核查、明确的不确定结果及因果/泛化边界；R19作为单独探索章节说明事后时长机会不等于可部署收益。该贡献不依赖新实验得到正结果，也不声称算法首创。",
+    "limits": "这仍是论文研究材料，是否符合具体学院学位要求需要导师判断；更完整文献、格式与引用审核继续进行。"
+  },
+  "source_records": [
+    "/home/lizening/research-notes/agent-logs/2026-10-29T231000Z__CODEX__si-u1-scientific-review__c2356/SI_U1_SCIENTIFIC_REVIEW_AND_THESIS_NEXT_STEPS.md",
+    "/home/lizening/research-notes/agent-logs/2026-10-29T230000Z__SOL__si-u1-training-coverage-audit__independent/RECORD.md",
+    "/home/lizening/research-notes/agent-logs/2026-10-29T232200Z__CODEX__si-next-feasibility-decision/SI_NEXT_FEASIBILITY_DECISION.md",
+    "/home/lizening/research-notes/agent-logs/2026-10-30T003000Z__CODEX__si-scene-independent-recount/INDEPENDENT_SCENE_REVIEW.md",
+    "/home/lizening/research-notes/agent-logs/2026-10-29T235900Z__CODEX__si-source-history-correction__c260/LEGACY_STATIC_COMPATIBILITY.md",
+    "/home/lizening/research-notes/agent-logs/2026-10-30T002200Z__CODEX__si-long-plan-resource-evidence__8d14/RESOURCE_AND_COMPATIBILITY_EVIDENCE.md"
+  ],
+  "review_limit": "基于本顾问当前会话已只读审查的已验收来源形成独立科学判断；没有重新计算原始科学统计、重建全部原始journal、认证未知历史或新任务可用性。",
+  "actions_and_authority": "仅读取时间、核对计划与矩阵哈希并写本记录；没有选择候选、读取新候选结果、运行模型/CUDA/ALFWorld、迁移、采集、训练或评估。没有形成新运行协议或授予执行许可。"
+}

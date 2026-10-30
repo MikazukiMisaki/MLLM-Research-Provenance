@@ -1,0 +1,626 @@
+{
+  "schema": "SI_PROJECT_PARTIAL_RESOURCE_LEDGER_V2",
+  "status": "APPEND_ONLY_CORRECTION_PARTIAL_NOT_GLOBAL_TOTAL",
+  "supersedes_for_accounting_only": {
+    "old_snapshot_path": "/home/lizening/research-notes/agent-logs/2026-10-30T004400Z__CODEX__si-project-resource-ledger-static/PARTIAL_ACTUAL_LEDGER.json",
+    "sha256": "1f55ee5cc4404e3566e53d8897620c1f0bf50f5764bf2e14d2f5bba712f9ab59",
+    "old_snapshot_unmodified": true
+  },
+  "source_bindings": {
+    "r19_reconciliation": {
+      "expected": "08a33c05c1174986db4b6e90c1a524a6bdb1a81522dfee54f23fab669f4b7d7f",
+      "actual": "08a33c05c1174986db4b6e90c1a524a6bdb1a81522dfee54f23fab669f4b7d7f",
+      "matches": true
+    },
+    "r19_final": {
+      "expected": "a03eeb58f77669bd7bbd475579dcb12c8e53f988546d0f07e635eee6cd75f175",
+      "actual": "a03eeb58f77669bd7bbd475579dcb12c8e53f988546d0f07e635eee6cd75f175",
+      "matches": true
+    },
+    "s01": {
+      "expected": "b66699ee0942a327d5e4696ecd121712ab07aaad18c7903bb8c597c6d7e1a4a4",
+      "actual": "b66699ee0942a327d5e4696ecd121712ab07aaad18c7903bb8c597c6d7e1a4a4",
+      "matches": true
+    },
+    "m1": {
+      "expected": "0d6cd87e969f41f6db642ac9edf36f982ca02eb0ea4ce13be3b3f4aa3a6048ac",
+      "actual": "0d6cd87e969f41f6db642ac9edf36f982ca02eb0ea4ce13be3b3f4aa3a6048ac",
+      "matches": true
+    },
+    "siu1_budget": {
+      "expected": "beb754e7a88b06ff9af07b1836885b5feb314b30dc94c59a443f8e1b10a917ac",
+      "actual": "beb754e7a88b06ff9af07b1836885b5feb314b30dc94c59a443f8e1b10a917ac",
+      "matches": true
+    },
+    "siu1_eval_ops": {
+      "expected": "ed7f944f0bd9e5ac25cdbda4318227b96a876ef7106d1f4f981ca9341009e490",
+      "actual": "ed7f944f0bd9e5ac25cdbda4318227b96a876ef7106d1f4f981ca9341009e490",
+      "matches": true
+    },
+    "training_B": {
+      "expected": "32a7b319ea2ed5f865659949ed5a320af5c4fbd435eb737511bad8926252c32d",
+      "actual": "32a7b319ea2ed5f865659949ed5a320af5c4fbd435eb737511bad8926252c32d",
+      "matches": true
+    },
+    "training_C": {
+      "expected": "6603562a9853ff302f7b71995fe2657825ca9480b0cc1530ba2dca63a715a7ce",
+      "actual": "6603562a9853ff302f7b71995fe2657825ca9480b0cc1530ba2dca63a715a7ce",
+      "matches": true
+    },
+    "eng_train_fail": {
+      "expected": "c54f47434cdcbf5ce8e9b331ecc7013f7c85f2072bb8894da170d509a99c8526",
+      "actual": "c54f47434cdcbf5ce8e9b331ecc7013f7c85f2072bb8894da170d509a99c8526",
+      "matches": true
+    },
+    "eng_train_fix": {
+      "expected": "f8f4e85ea492eb341d99abc66027f23fb327c658291d8465d83810b507865adc",
+      "actual": "f8f4e85ea492eb341d99abc66027f23fb327c658291d8465d83810b507865adc",
+      "matches": true
+    },
+    "eng_eval_fail": {
+      "expected": "4cb9b9613a1155bbfbada8233e1001ff9463399e1944f194505a3935b0929f75",
+      "actual": "4cb9b9613a1155bbfbada8233e1001ff9463399e1944f194505a3935b0929f75",
+      "matches": true
+    },
+    "eng_eval_fix": {
+      "expected": "a8091a4f8f459c61c2367c70ddfebf321e68e541b37c4ef54843bdff53d59caa",
+      "actual": "a8091a4f8f459c61c2367c70ddfebf321e68e541b37c4ef54843bdff53d59caa",
+      "matches": true
+    },
+    "e2_fail": {
+      "expected": "02455ad9fe81368e230c85ee3d037aeff7690db1d109a34017cbcd50c7d3efd3",
+      "actual": "02455ad9fe81368e230c85ee3d037aeff7690db1d109a34017cbcd50c7d3efd3",
+      "matches": true
+    },
+    "e2_exit": {
+      "expected": "0c7a4598d43a0fe993ca5e941edf9aa99104e0b4a8aa4ad46c1f8cda06ab701b",
+      "actual": "0c7a4598d43a0fe993ca5e941edf9aa99104e0b4a8aa4ad46c1f8cda06ab701b",
+      "matches": true
+    },
+    "e2_id": {
+      "expected": "64ccec685dadbe204a9baa02e170803a22ff6303ed88b31c14bca5b74fab742c",
+      "actual": "64ccec685dadbe204a9baa02e170803a22ff6303ed88b31c14bca5b74fab742c",
+      "matches": true
+    },
+    "e2_id_clock": {
+      "expected": "aa88599462d4cc7b13c2ce88242bf0f085193bd2fecb85db687c440239d78cd7",
+      "actual": "aa88599462d4cc7b13c2ce88242bf0f085193bd2fecb85db687c440239d78cd7",
+      "matches": true
+    }
+  },
+  "raw_failure_event_archive": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-29T131100Z__LUNA__si-u1-eval-engineering__f2e4895/RAW_EVIDENCE_PRIVATE.tar.gz",
+    "sha256": "f17526737a8c050a9cfc7f6b4373a626ea99b9fbfd08dd323c2565a2460e3cdf",
+    "member": "run/engineering/engineering_events.jsonl",
+    "member_sha256": "3e3289ef0ed7b1e1edd0d2f4f7647d6c6941005e1367e586d08d519deb5b4f5b",
+    "start_count": 1,
+    "physical_returned_count": 1,
+    "lossless_false_count": 1,
+    "unit_failed_count": 1,
+    "logical_completed_count": 0,
+    "start_and_return_links_verified": true
+  },
+  "metric_definition": "budgeted physical env operations = resets plus recorded steps/nonreset transitions, excludes construct/close; logical failures/reservations describe the same call and are not added",
+  "corrected_engineering_pair": {
+    "physical_resets": 2,
+    "physical_nonreset_steps": 1,
+    "budgeted_env_operations_physical_completed": 3,
+    "logical_failed_resets": 1,
+    "logical_completed_resets": 1,
+    "generation_completed": 1,
+    "method": "separate leaves; failed reset returned physically despite logical failure"
+  },
+  "known_science_subset": {
+    "generation_completed": 12112,
+    "budgeted_env_operations_physical_completed": 15315,
+    "additional_constructs_source96_plus_eval": 342,
+    "additional_closes_source96_plus_eval": 342,
+    "additional_construct_and_close_calls": 684,
+    "scope": "Selected known leaves, construct/close separate; unknown earlier research and engineering excluded; not a full project total."
+  },
+  "known_siu1_four_engineering_allocations_decimal_seconds": "455.85605997219683",
+  "rows": [
+    {
+      "ledger_id": "r19.g2.failed-replay",
+      "stage": "G2 replay",
+      "class": "science_or_technical_run",
+      "status": "failed",
+      "source_keys": [
+        "r19_reconciliation"
+      ],
+      "physical_known": {
+        "generation_completed": 0,
+        "env_step_completed": 18,
+        "env_reset_completed": 1,
+        "env_operations_including_reset_completed": 19,
+        "external_incomplete": 0,
+        "env_reset_physical_completed": 1,
+        "budgeted_env_operations_physical_completed": 19,
+        "budgeted_env_nonreset_physical_completed": 18
+      },
+      "logical_known": {},
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "structured_source_summary_matched_not_raw_recounted",
+      "budgeted_env_measure_definition": "physical reset plus recorded step/nonreset transition operations, excluding construct/close; aliases/wrappers excluded"
+    },
+    {
+      "ledger_id": "r19.g2.successful-smoke",
+      "stage": "G2 smoke",
+      "class": "science_or_technical_run",
+      "status": "complete",
+      "source_keys": [
+        "r19_reconciliation"
+      ],
+      "physical_known": {
+        "generation_completed": 176,
+        "env_nonreset_operations_completed": 312,
+        "env_reset_completed": 10,
+        "env_operations_including_reset_completed": 322,
+        "input_tokens": 112527,
+        "output_tokens": 1021,
+        "external_incomplete": 0,
+        "env_reset_physical_completed": 10,
+        "budgeted_env_operations_physical_completed": 322,
+        "budgeted_env_nonreset_physical_completed": 312
+      },
+      "logical_known": {},
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "structured_source_summary_matched_not_raw_recounted",
+      "budgeted_env_measure_definition": "physical reset plus recorded step/nonreset transition operations, excluding construct/close; aliases/wrappers excluded"
+    },
+    {
+      "ledger_id": "r19.g3.import-fail-a0de",
+      "stage": "G3 predecessor",
+      "class": "science_or_technical_run",
+      "status": "failed_before_output",
+      "source_keys": [
+        "r19_reconciliation"
+      ],
+      "physical_known": {
+        "generation_completed": 0,
+        "env_step_completed": 0,
+        "env_reset_completed": 0,
+        "env_operations_including_reset_completed": 0,
+        "external_incomplete": 0,
+        "env_reset_physical_completed": 0,
+        "budgeted_env_operations_physical_completed": 0,
+        "budgeted_env_nonreset_physical_completed": 0
+      },
+      "logical_known": {},
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "structured_source_summary_matched_not_raw_recounted",
+      "budgeted_env_measure_definition": "physical reset plus recorded step/nonreset transition operations, excluding construct/close; aliases/wrappers excluded"
+    },
+    {
+      "ledger_id": "r19.g3.failed-3d1c",
+      "stage": "G3 predecessor",
+      "class": "science",
+      "status": "failed",
+      "source_keys": [
+        "r19_reconciliation"
+      ],
+      "physical_known": {
+        "generation_completed": 1,
+        "env_step_completed": 0,
+        "env_reset_completed": 1,
+        "env_operations_including_reset_completed": 1,
+        "input_tokens": 267,
+        "output_tokens": 5,
+        "external_incomplete": 0,
+        "env_reset_physical_completed": 1,
+        "budgeted_env_operations_physical_completed": 1,
+        "budgeted_env_nonreset_physical_completed": 0
+      },
+      "logical_known": {
+        "source_unit_started": 1,
+        "source_unit_completed": 0
+      },
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [
+        "Unit remains incomplete in original registry; do not assign it success/failure."
+      ],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "structured_source_summary_matched_not_raw_recounted",
+      "budgeted_env_measure_definition": "physical reset plus recorded step/nonreset transition operations, excluding construct/close; aliases/wrappers excluded"
+    },
+    {
+      "ledger_id": "r19.g3.live-2604",
+      "stage": "G3 successor",
+      "class": "science",
+      "status": "completed",
+      "source_keys": [
+        "r19_final"
+      ],
+      "physical_known": {
+        "generation_completed": 4965,
+        "env_nonreset_operations_completed": 7273,
+        "env_reset_completed": 334,
+        "env_operations_including_reset_completed": 7607,
+        "external_incomplete": 0,
+        "env_reset_physical_completed": 334,
+        "budgeted_env_operations_physical_completed": 7607,
+        "budgeted_env_nonreset_physical_completed": 7273
+      },
+      "logical_known": {
+        "source_episodes_completed": 127,
+        "recovery_attempts": 39,
+        "eligible_states": 36
+      },
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [
+        "Do not add the prior 177/342 aggregate separately."
+      ],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "manual_source_summary_not_full_independent_raw_recount",
+      "budgeted_env_measure_definition": "physical reset plus recorded step/nonreset transition operations, excluding construct/close; aliases/wrappers excluded"
+    },
+    {
+      "ledger_id": "si.s01.source-f96",
+      "stage": "source acquisition 96",
+      "class": "science",
+      "status": "completed",
+      "source_keys": [
+        "s01"
+      ],
+      "physical_known": {
+        "generation_completed": 1959,
+        "env_step_completed": 1959,
+        "env_reset_completed": 96,
+        "env_operations_including_reset_completed": 2055,
+        "env_construct_completed": 96,
+        "env_close_completed": 96,
+        "model_load_completed": 1,
+        "input_tokens": 1164593,
+        "output_tokens": 9795,
+        "allocated_device_seconds": 2024.9118513343856,
+        "external_incomplete": 0,
+        "env_reset_physical_completed": 96,
+        "budgeted_env_operations_physical_completed": 2055,
+        "budgeted_env_nonreset_physical_completed": 1959
+      },
+      "logical_known": {
+        "source_units_completed": 96
+      },
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [
+        "Structural no-go, not learned-policy evaluation."
+      ],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "manual_source_summary_not_full_independent_raw_recount",
+      "budgeted_env_measure_definition": "physical reset plus recorded step/nonreset transition operations, excluding construct/close; aliases/wrappers excluded"
+    },
+    {
+      "ledger_id": "si.m1.394f",
+      "stage": "five-state teacher probe",
+      "class": "science",
+      "status": "completed",
+      "source_keys": [
+        "m1"
+      ],
+      "physical_known": {
+        "generation_completed": 10,
+        "env_step_completed": 59,
+        "env_reset_completed": 5,
+        "env_operations_including_reset_completed": 64,
+        "input_tokens": 5846,
+        "output_tokens": 184,
+        "allocated_device_hours": 0.03112463014743601,
+        "external_incomplete": 0,
+        "env_reset_physical_completed": 5,
+        "budgeted_env_operations_physical_completed": 64,
+        "budgeted_env_nonreset_physical_completed": 59
+      },
+      "logical_known": {
+        "case_closures": 5
+      },
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [
+        "Nonterminal/invalid or NA are not successes; no inferred unseen cases."
+      ],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "manual_source_summary_not_full_independent_raw_recount",
+      "budgeted_env_measure_definition": "physical reset plus recorded step/nonreset transition operations, excluding construct/close; aliases/wrappers excluded"
+    },
+    {
+      "ledger_id": "si.u1.train.B",
+      "stage": "B/C single-seed training",
+      "class": "science",
+      "status": "completed",
+      "source_keys": [
+        "training_B"
+      ],
+      "physical_known": {
+        "allocated_device_seconds": 883.2235775915906,
+        "input_tokens_padded": 661620,
+        "supervised_tokens": 6240
+      },
+      "logical_known": {
+        "microbatches_started_completed": 1248,
+        "optimizer_updates": 78
+      },
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [
+        "One observed trained realization; no inference generation count inferred from absence of this field."
+      ],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "structured_source_summary_matched_not_raw_recounted"
+    },
+    {
+      "ledger_id": "si.u1.train.C",
+      "stage": "B/C single-seed training",
+      "class": "science",
+      "status": "completed",
+      "source_keys": [
+        "training_C"
+      ],
+      "physical_known": {
+        "allocated_device_seconds": 916.8313971711323,
+        "input_tokens_padded": 695872,
+        "supervised_tokens": 6240
+      },
+      "logical_known": {
+        "microbatches_started_completed": 1248,
+        "optimizer_updates": 78
+      },
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [
+        "One observed trained realization; no inference generation count inferred from absence of this field."
+      ],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "structured_source_summary_matched_not_raw_recounted"
+    },
+    {
+      "ledger_id": "si.u1.eval.c2356",
+      "stage": "three-arm evaluation",
+      "class": "science",
+      "status": "completed",
+      "source_keys": [
+        "siu1_eval_ops",
+        "siu1_budget"
+      ],
+      "physical_known": {
+        "generation_completed": 5001,
+        "env_step_completed": 5001,
+        "env_reset_completed": 246,
+        "env_operations_including_reset_completed": 5247,
+        "input_tokens": 2734940,
+        "output_tokens": 25005,
+        "allocated_device_seconds": 4263.280576453544,
+        "env_construct_completed": 246,
+        "env_close_completed": 246,
+        "model_load_completed": 3,
+        "external_incomplete": 0,
+        "env_reset_physical_completed": 246,
+        "budgeted_env_operations_physical_completed": 5247,
+        "budgeted_env_nonreset_physical_completed": 5001
+      },
+      "logical_known": {
+        "arms_completed": 3,
+        "trajectories_completed": 246
+      },
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "structured_source_summary_matched_not_raw_recounted",
+      "budgeted_env_measure_definition": "physical reset plus recorded step/nonreset transition operations, excluding construct/close; aliases/wrappers excluded"
+    },
+    {
+      "ledger_id": "si.u1.eng.train.failed",
+      "stage": "training engineering",
+      "class": "engineering",
+      "status": "failed",
+      "source_keys": [
+        "eng_train_fail"
+      ],
+      "physical_known": {
+        "generation_completed": 0,
+        "env_operations_including_reset_completed": 0,
+        "allocated_device_seconds": 117.84366761054844,
+        "budgeted_env_operations_physical_completed": 0
+      },
+      "logical_known": {
+        "microbatches_completed": 32,
+        "optimizer_updates": 2
+      },
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [
+        "Resource cleanup failure; engineering adapter discarded."
+      ],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "manual_source_summary_not_full_independent_raw_recount",
+      "budgeted_env_measure_definition": "physical reset plus recorded step/nonreset transition operations, excluding construct/close; aliases/wrappers excluded"
+    },
+    {
+      "ledger_id": "si.u1.eng.train.remediation",
+      "stage": "training engineering",
+      "class": "engineering",
+      "status": "completed",
+      "source_keys": [
+        "eng_train_fix"
+      ],
+      "physical_known": {
+        "generation_completed": 0,
+        "env_operations_including_reset_completed": 0,
+        "allocated_device_seconds": 132.8866418208927,
+        "budgeted_env_operations_physical_completed": 0
+      },
+      "logical_known": {
+        "microbatches_completed": 32,
+        "optimizer_updates": 2
+      },
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [
+        "Separately authorized identity, not a hidden retry of the failed run."
+      ],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "manual_source_summary_not_full_independent_raw_recount",
+      "budgeted_env_measure_definition": "physical reset plus recorded step/nonreset transition operations, excluding construct/close; aliases/wrappers excluded"
+    },
+    {
+      "ledger_id": "si.u1.eng.eval.failed-reset",
+      "stage": "evaluation engineering",
+      "class": "engineering",
+      "status": "failed",
+      "source_keys": [
+        "eng_eval_fail"
+      ],
+      "physical_known": {
+        "generation_completed": 0,
+        "env_reset_physical_returned": 1,
+        "env_step_completed": 0,
+        "env_operations_reserved_or_spent": 1,
+        "allocated_device_seconds": 100.70051902905107,
+        "budgeted_env_nonreset_physical_completed": 0,
+        "env_reset_physical_completed": 1,
+        "budgeted_env_operations_physical_completed": 1
+      },
+      "logical_known": {
+        "reset_unit_logical_completed": 0,
+        "reset_unit_logical_failed": 1
+      },
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [
+        "Physical reset returned while logical lossless recorder failed; do not misstate as zero physical reset."
+      ],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "raw_archived_reset_event_linkage_recounted",
+      "budgeted_env_measure_definition": "physical reset plus recorded step/nonreset transition operations, excluding construct/close; aliases/wrappers excluded"
+    },
+    {
+      "ledger_id": "si.u1.eng.eval.completed",
+      "stage": "evaluation engineering",
+      "class": "engineering",
+      "status": "completed",
+      "source_keys": [
+        "eng_eval_fix"
+      ],
+      "physical_known": {
+        "generation_completed": 1,
+        "env_reset_completed": 1,
+        "env_step_completed": 1,
+        "env_operations_including_reset_completed": 2,
+        "input_tokens": 831,
+        "output_tokens": 5,
+        "allocated_device_seconds": 104.42523151170462,
+        "env_reset_physical_completed": 1,
+        "budgeted_env_operations_physical_completed": 2,
+        "budgeted_env_nonreset_physical_completed": 1
+      },
+      "logical_known": {},
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "manual_source_summary_not_full_independent_raw_recount",
+      "budgeted_env_measure_definition": "physical reset plus recorded step/nonreset transition operations, excluding construct/close; aliases/wrappers excluded"
+    },
+    {
+      "ledger_id": "si.e2.initial-uuid-stop",
+      "stage": "CUDA identity engineering",
+      "class": "engineering",
+      "status": "failed",
+      "source_keys": [
+        "e2_fail",
+        "e2_exit"
+      ],
+      "physical_known": {
+        "generation_completed": 0,
+        "env_reset_completed": 0,
+        "env_step_completed": 0,
+        "allocated_device_seconds": 23.847133793868124,
+        "model_load_external_started": 1,
+        "model_load_external_failed": 1,
+        "model_load_external_open": 1,
+        "output_tokens": 0,
+        "env_reset_physical_completed": 0,
+        "budgeted_env_nonreset_physical_completed": 0
+      },
+      "logical_known": {},
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [
+        "External model-load unit failed/open before weight load, so preserve reservation; CPU tokenizer lengths unrecorded, do not infer actual tokens from ledger input=0."
+      ],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "structured_exit_matched_failure_detail_manual_summary"
+    },
+    {
+      "ledger_id": "si.e2.identity-diagnostic",
+      "stage": "CUDA identity engineering",
+      "class": "engineering",
+      "status": "failed",
+      "source_keys": [
+        "e2_id",
+        "e2_id_clock"
+      ],
+      "physical_known": {
+        "model_load_completed": 0,
+        "generation_completed": 0,
+        "env_operations_including_reset_completed": 0,
+        "cuda_tensor_elements_completed": 1,
+        "diagnostic_elapsed_seconds": 2.059623308,
+        "launcher_elapsed_seconds": 2.571492359,
+        "outer_elapsed_seconds": 2.671079574,
+        "budgeted_env_operations_physical_completed": 0
+      },
+      "logical_known": {},
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [
+        "Distinct nested clocks not three independent runs; GPU ownership remains unproven."
+      ],
+      "is_additive": true,
+      "attribution_pending": false,
+      "verification_level": "manual_source_summary_not_full_independent_raw_recount",
+      "budgeted_env_measure_definition": "physical reset plus recorded step/nonreset transition operations, excluding construct/close; aliases/wrappers excluded"
+    },
+    {
+      "ledger_id": "si.pre-s01.unnamed-engineering",
+      "stage": "historical engineering not fully reconstructed",
+      "class": "engineering",
+      "status": "completed_as_reported",
+      "source_keys": [
+        "s01"
+      ],
+      "physical_known": {
+        "generation_completed": 1,
+        "env_operations_including_reset_completed": 7,
+        "budgeted_env_operations_physical_completed": 7
+      },
+      "logical_known": {},
+      "omitted_metrics": "unknown_or_not_applicable_not_zero",
+      "notes": [
+        "Aggregate reported before source96, no stable run ID independently bound in this partial ledger; retain attribution uncertainty and verify before project roll-up."
+      ],
+      "is_additive": false,
+      "attribution_pending": true,
+      "verification_level": "manual_source_summary_not_full_independent_raw_recount",
+      "budgeted_env_measure_definition": "physical reset plus recorded step/nonreset transition operations, excluding construct/close; aliases/wrappers excluded"
+    }
+  ],
+  "omitted_metrics": "unknown_or_not_applicable_never_zero",
+  "recount_limits": [
+    "Only failed reset raw archived event linkage is independently reconstructed here; structured sources matched for enumerated fields.",
+    "Many historical figures are manual source-summary transcriptions, not raw-ledger recomputations; unknowns remain.",
+    "Attribution-pending engineering aggregate is explicitly non-additive until verified.",
+    "No CUDA/model/environment or old evidence mutation."
+  ]
+}
