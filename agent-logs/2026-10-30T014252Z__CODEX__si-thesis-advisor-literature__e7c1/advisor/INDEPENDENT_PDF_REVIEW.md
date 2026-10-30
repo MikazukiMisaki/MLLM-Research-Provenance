@@ -1,0 +1,10 @@
+# Independent exact-SHA review — advisor brief PDF V2
+
+**Decision: PASS for one-page content, recorded statistics and inspected screen layout.** Reviewed PDF `/home/lizening/research-notes/agent-logs/2026-10-30T013239Z__CODEX__si-advisor-brief__bf83/SI_U1_RESEARCH_UPDATE_FOR_ADVISOR_V2.pdf`, SHA-256 `82a9af193feb1bffe7e1027e52e4b876d73d5e4c5625db55cc2765472643adae`, against the same source `ADVISOR_BRIEF_V2.md` SHA `aa4252c6d2d4a14148c0627a7531e8fc1e13f353f728e817d83a28039270a0c9`. Old PDF retains SHA `9cd997aaf61409ac5d76889e61217a93bbca3f96c5dd184a55c33349121927a8` and was not modified.
+
+- PDF has one A4-sized page. Its extracted text, whitespace-normalized and excluding the generated footer, exactly matches all 3,634 characters of the rendered Markdown text. Text extraction independently confirms 10-point body and table text; title is 15 points and footer is 7 points.
+- Independently rendered the actual PDF using PDFium and inspected `PDF_RENDER_INDEPENDENT.png` as well as the supplied preview. The title, body, table and footer are visible with no apparent clipping or overlapping. All 3,632 nonempty character boxes lie within page boundaries. This is screen/layout verification, not proof of a physical printer's output.
+- Rechecked frozen aggregate SI-U1 counts, paired differences and Holm p-values, two-object sample/parent counts, and R19 36/30/32 plus the two oracle-over-K2 cases already successful under CONTINUE. Same bounded source Markdown and scientific caveats as the previously reviewed PDF; no separate experiment or new scientific finding is claimed.
+- The brief says supporting records are in the accompanying thesis but has no direct links inside the PDF. If supplied alone, make the cited evidence accessible separately. This is a presentation caveat, not a review failure.
+
+Machine check `VERIFICATION.json` records source hashes and constraints; `verify_brief_v2.py` is the reproducible script. This review did not modify the original PDF, source or earlier review, run model/CUDA/ALFWorld or contact the professor.
