@@ -1,0 +1,5 @@
+# Advisor discussion materials
+
+This working package contains an English thesis draft with its aggregate figure, a one-page research brief, and an independently reviewed aggregate evidence note. No raw task identifiers, prompts, trajectories, model weights or datasets are included. Run IDs, commit IDs and record hashes can be linked to internal research records; share this packet only with intended, authorized recipients. Original records and further reproducibility appendices are access-controlled and require separate arrangement.
+
+The thesis draft differs from the independently reviewed private manuscript only by replacing references to non-included local appendices with a controlled-access note. The one-page PDF and aggregate evidence note were separately reviewed. The underlying original records and full runtime environment are not included, so this package is not a full reproduction. Research findings remain inconclusive, and the thesis is not a final submission. This packet has not been sent; public dissemination and institutional requirements remain subject to separate review.

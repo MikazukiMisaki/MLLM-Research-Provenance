@@ -1,0 +1,12 @@
+# Thesis composition: independent exact-SHA review
+
+**Decision: ACCEPT_AS_REVIEWED_WORKING_DRAFT.** The composed text `/home/lizening/research-notes/agent-logs/2026-10-30T015138Z__CODEX__si-thesis-composition__42de/THESIS_COMPLETE_WORKING_DRAFT.md` independently hashes to `43a3a097a713600ae1011346a60b9502657d749fdd0b0bab671c70f284d14140`. It is explicitly titled “Master’s Thesis — Working Draft” and notes pending review, permissions and institutional requirements. This is not certification as a final thesis or approval for an evaluation.
+
+## Direct composition checks
+
+- The accepted abstract and conclusion V2, SHA `3dcfd5fc78d3ccdfa26ad41a9996a37c86155a24e69b59ba43ded61e91271490`, are each present exactly once and unchanged at paragraph text level. The abstract precedes the introduction; the conclusion follows the discussion and precedes the evidence/confidentiality appendix.
+- Removing the inserted abstract and conclusion sections including their headings from the composed file yields the entire independently accepted literature-integrated thesis V2 byte-for-byte, SHA `37d7c34ff2659a194df6849fb1b27494ca181dcec182effd87dd5ec7e9943203`. Accordingly the original introduction, methods, SI-U1/R19 numerical results, retrospective/provenance qualifications, no-new-evaluation four-prerequisite boundary, appendix and references were preserved. Earlier substantive reviews still apply; this check does not independently re-execute a scientific analysis.
+- The figure reference resolves to the copied SVG; all three figure files independently hash identically to the accepted thesis V2 package: SVG `e60ecbf7a84768226db99ecdc7e957e109aa45e3d8f2c4c3831e63727395dfd2`, PDF `7f64ecb093a057700ce113498d836ab66982b3cca3cd99f5c17461f5983c458a`, preview PNG `912abdd0c0904976e34be33431a0c6d5fc8fb009d9a7c7d677e2f69c7f3c20bd`. Existing caption and sampling limitations are retained unchanged.
+- Reference numbers 1–17 are unique; a body-to-reference check found all cited and no dangling numbered citations. This is a structural check, not a new verification of each publication or an exhaustive literature review.
+
+The source files and figures were not modified. Scope was read-only bytes/text and hashes; no model, environment, evaluation, analyzer, statistical extraction, or new experiments were run. See `COMPOSITION_CHECK.json` for individual checks and hashes. The accepted source V2 and abstract/conclusion V2 carry their own scientific reviews, limits, and permissions qualifications.
