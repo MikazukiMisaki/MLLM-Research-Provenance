@@ -1,0 +1,61 @@
+{
+  "candidate": {
+    "local_parents": 6,
+    "local_rows": 17,
+    "old_archive_added_rows": 950,
+    "old_archive_parents": 345,
+    "union_parents": 350,
+    "unseen_parents": 24
+  },
+  "g1_actual": {
+    "actual_ids_match_registry": true,
+    "manifest_hash_bindings_match": true,
+    "matched_by_index_task_split_game": 60,
+    "raw_rows": 60,
+    "unique_parents": 41
+  },
+  "historical_sft_candidate_suffix_check": {
+    "floorplan_matches_num": 1410,
+    "historical_rows": 1410,
+    "suffix_matches_scene_num": 1410
+  },
+  "input_sha256": {
+    "b": "d8639217e98b8bc96725408245ab9b59ff53070ae476682fb99ce6ee7ab13e6b",
+    "c": "dcc1c38e4fde2f1751fcf17425a908da9ab8ee3ae9f665cbb2a56f2023d4452e",
+    "eval": "c352a0d708b910bb3703c63009aed3a800b5ba4d40f95021f3bd30db0e4823cd",
+    "eval_bind": "a9e130a33e2ae611563bbbc6dd2afa65f8d711f55631c9aa8b1039b9264379cc",
+    "expert": "c547e8f0c5988b29288f2a097169c7859741b7d4f53f222af31f5e2889d516cf",
+    "g1": "7ce71ad01bd03ad8a018104f3edacc4310e9a1b5fc6e015d808152f316e4e13e",
+    "g1manifest": "2688277c62ed488255754643d1d744748441de975babe9c1eac1680496d06552",
+    "g1raw": "aaf6c90fc686eebb8efffd1ef80ef702677426dadbe127d8ca6a6013bc692f8e",
+    "local": "b3fe10154e0b11753f6d58ccd2192cace46ec392a06c6bc87cfaefe6afa472c5",
+    "newzip": "eea90499df27b9cb3147d1d1927264146d38194b575e25f70a82875545742dcb",
+    "oldzip": "d376c4bbb097c068528a2a9805e358e4cd14bc75c4d68a24e5141aebd234ef67",
+    "probe1": "7672feaaa6ccf83652ed85759dd4ff954ca2fa533b007daa7f82a643edb430d0",
+    "probe2": "660ef3fec2480db0f65514a8468c92d25a1b5084d5252d4dbfa3fa7475719c06",
+    "proposal": "fd145fe6abee849b44231e1d0c816aa65813be2b67c48715f7ce7d2635e98d23",
+    "registry": "98580db9a8322c52c87d6f30dcb75858b00f3b0ec6d3494a4a87923504ddca60",
+    "sft": "5347163365e77f46517756156c22e803a7e5a6a54009f7151eab92fb51e6ff56",
+    "sft_ext": "e22e13ea4122540e816bd48d1751bca0c4cdfe5c0df214c2e63cef561eb256ea"
+  },
+  "limitations": [
+    "Integer suffix is an operational proxy, supported by old training rows only; equal suffix is not verified geometry, individual exposure, leakage, or task outcome.",
+    "Source materialization, actual schedule execution, candidate pool, and reservation are different evidence classes.",
+    "Candidate content was hashed as bytes only, not parsed.",
+    "G1 raw index/task/split/game matched the accepted run and bound schedule; does not prove other historical activities are fully captured."
+  ],
+  "scope": "independent archive metadata+hash recount; no candidate task content inspected, no model/CUDA/ALFWorld",
+  "union_parent_suffix_overlap": {
+    "b_c_materialized_source": 210,
+    "expert_dataset_source": 322,
+    "g1_actual": 24,
+    "si_u1_schedule": 151,
+    "union": 346
+  },
+  "unseen_parent_suffix_overlap": {
+    "b_c_materialized_source": 0,
+    "expert_dataset_source": 0,
+    "g1_actual": 24,
+    "si_u1_schedule": 0
+  }
+}

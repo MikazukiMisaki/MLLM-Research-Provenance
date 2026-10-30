@@ -1,0 +1,76 @@
+{
+  "scope": "read-only hardware management and source hashes; no CUDA context, models or ALFWorld",
+  "hostname": "acc28b43e0d2",
+  "observations": [
+    {
+      "argv": [
+        "nvidia-smi",
+        "--query-gpu=index,uuid,name,memory.total,memory.used,utilization.gpu,temperature.gpu,power.draw",
+        "--format=csv,noheader,nounits"
+      ],
+      "timestamp_utc": "2026-10-30T00:22:40.846899+00:00",
+      "returncode": 0,
+      "stdout": "0, GPU-b08bc603-ebdb-787d-b5b6-ec796ea3022a, NVIDIA A40, 46068, 14, 0, 35, 21.86\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "nvidia-smi",
+        "--query-compute-apps=pid,process_name,used_memory",
+        "--format=csv,noheader,nounits"
+      ],
+      "timestamp_utc": "2026-10-30T00:22:40.876035+00:00",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "filesystem": {
+    "mount_checked": "/home/lizening/research-notes",
+    "available_bytes": 41882669056
+  },
+  "source_file_sha256": {
+    "/home/lizening/research-notes/agent-logs/2026-10-29T231600Z__CODEX__si-next-readonly-budget/BUDGET_EVIDENCE.json": "beb754e7a88b06ff9af07b1836885b5feb314b30dc94c59a443f8e1b10a917ac",
+    "/home/lizening/research-notes/agent-logs/2026-10-29T232200Z__CODEX__si-next-feasibility-decision/SI_NEXT_FEASIBILITY_DECISION.md": "a31c23b0afea5804a68fb2eec2138e37979a4e30ed3d06b5cfbc2c4517367f4a",
+    "/home/lizening/research-notes/agent-logs/2026-10-29T235900Z__CODEX__si-source-history-correction__c260/LEGACY_STATIC_COMPATIBILITY.md": "4fb2acb2f0c6537d16f683e7346e08dd56f7c3c932f0032db66d4f52ee887575",
+    "/home/lizening/research-notes/agent-logs/2026-10-23T024714Z__LUNA__r19-g3-final-audit-archive__2da980f/POST_RUN_AUDIT_ADDENDUM.md": "a03eeb58f77669bd7bbd475579dcb12c8e53f988546d0f07e635eee6cd75f175"
+  },
+  "source_bindings": {
+    "report": {
+      "sha256_expected": "26d979669a77b1f867df6a54a3789e8a3a6b69d8b12e5c1f0015a18f107f4173",
+      "sha256_actual": "26d979669a77b1f867df6a54a3789e8a3a6b69d8b12e5c1f0015a18f107f4173",
+      "match": true
+    },
+    "b_acceptance": {
+      "sha256_expected": "32a7b319ea2ed5f865659949ed5a320af5c4fbd435eb737511bad8926252c32d",
+      "sha256_actual": "32a7b319ea2ed5f865659949ed5a320af5c4fbd435eb737511bad8926252c32d",
+      "match": true
+    },
+    "c_acceptance": {
+      "sha256_expected": "6603562a9853ff302f7b71995fe2657825ca9480b0cc1530ba2dca63a715a7ce",
+      "sha256_actual": "6603562a9853ff302f7b71995fe2657825ca9480b0cc1530ba2dca63a715a7ce",
+      "match": true
+    },
+    "evaluation_acceptance": {
+      "sha256_expected": "6530145ac3ac579d00cdb57c28f3fa9bb07b27b990cfe0fba6e93b7fcca5eacd",
+      "sha256_actual": "6530145ac3ac579d00cdb57c28f3fa9bb07b27b990cfe0fba6e93b7fcca5eacd",
+      "match": true
+    },
+    "engineering_eval": {
+      "sha256_expected": "0132bc3b58d12c89bbf12cc8da78052d6518a49eb1c8e2fb96d83582358cb195",
+      "sha256_actual": "0132bc3b58d12c89bbf12cc8da78052d6518a49eb1c8e2fb96d83582358cb195",
+      "match": true
+    },
+    "operational_audit": {
+      "sha256_expected": "ed7f944f0bd9e5ac25cdbda4318227b96a876ef7106d1f4f981ca9341009e490",
+      "sha256_actual": "ed7f944f0bd9e5ac25cdbda4318227b96a876ef7106d1f4f981ca9341009e490",
+      "match": true
+    },
+    "evaluation_plan": {
+      "sha256_expected": "697003d21a41befe649f9554a397a7431baa0788667c1329baf1c714a98ba0ef",
+      "sha256_actual": "697003d21a41befe649f9554a397a7431baa0788667c1329baf1c714a98ba0ef",
+      "match": true
+    }
+  },
+  "interpretation": "snapshot of a shared GPU only; empty process table does not prove exclusive use, host PID observability, ownership, or future capacity"
+}
