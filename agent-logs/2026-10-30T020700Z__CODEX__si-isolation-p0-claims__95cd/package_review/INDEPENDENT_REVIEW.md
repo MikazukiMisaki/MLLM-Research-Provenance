@@ -1,0 +1,19 @@
+# Independent review: private thesis P0 appendix update
+
+**Decision: ACCEPT_AS_SCOPED_PRIVATE_WORKING_PACKAGE**, limited to the 23-file exact inventory in `PACKAGE_CHECK.json`. The thesis remains a working draft and this is neither a complete reproducibility package, final thesis certification nor new-experiment permission.
+
+## File identity and controlled changes
+
+Comparison is against the previously accepted 21-file `PACKAGE_REVIEW_DATA.json`, SHA `a4e3e47bdf10fa8db23a5261d6a6ea8ca64990a7e2517db887ca99990ac9f775`. No previous file was removed. Exactly two existing files changed: `PACKAGE_GUIDE.md` to SHA `54ab7fb25505848cf0b4e4b0c39ea8fcf570375c220a2adf515d9d8879c43d09`, and `appendices/si_u1/SI_U1_REPRODUCIBILITY_APPENDIX.md` to SHA `24b37dec134ca4ac00e168c02d26c0c05a39b50a2192e5faf71269190715d1aa`. Exactly two files were added: `appendices/si_u1/EVIDENCE_MAP_V3.md` SHA `8e4ce306af4d9558745751e3779214bf0fffcce2c92db2a1f8c15d7e10b71ee8` and `P0_V2_INTEGRATION_REVIEW.md` SHA `b5ceb54eff2e67487b390b899429a13b365cd4e9d784e885739a8cf98239f481`. All 19 other files match the prior inventory byte-for-byte.
+
+The main thesis SHA remains `2db4d3bdee3bdbf5c7fd6e657724a74a2f6c5daffdac7143763286a362b1afd9`; the three figures, statistical and R19 appendices, corrected SI-U1 map V2, and earlier review records are unchanged. Thus the thesis's original claims, relative citations and uncertainty wording remain as previously accepted.
+
+## Review of changed appendix, map, and guide
+
+Full appendix diff contains only three sentences in the P0 section. They accurately limit the new claim to present saved-file continuity: the current final adapter tree matches the digest recorded in a historical Git report, seven tokenizer files currently match the selected checkpoint, and three files match a current cache while one differs and three have no same-named file. Historical base weights and actual loaded tokenizer revision remain unestablished; byte differences do not establish functional incompatibility. This agrees with the separately authored independent P0 review SHA `268f9943a264926018934968ad4e638b979f38ad34cf28b335c8a547ff407977`. The original section C appropriately says the *appendix's particular local check* did not rehash all base/adapter trees; the new targeted P0 audit is separate.
+
+Full V3 map diff is one P0 evidence row; V2 remains present and unchanged. We independently rehashed the 17 explicit absolute-path/64-hex pairs in V3 and found 17 matches. This narrow test does not resolve shorthand companion paths or authenticate prior observations or remote availability. The added integration review accurately identifies its author/source-audit relationship and the separately authored P0 review, so it does not pass off the source audit as an independent re-run.
+
+The guide identifies V2 appendix, V3 map, old V2 map, P0 integration review, unresolved historical revisions, original directories for the SI-U1 checks, privacy and external permission/redaction requirements. V1 appendix bytes are retained in the previously accepted package, not separately included as a V1 file here; readers seeking them need that earlier private package. This does not change the present appendix's reviewed bytes. Paths in maps and reviews are local private references; including a relative link to the appendix does not transport those dependencies.
+
+All five Markdown relative links in the 23-file package resolve to files within the package, and the main figure link resolves. Ten Markdown absolute links remain machine-local references, not portable sources. The link scan excludes external URLs, anchors and backtick-only path references; it is not proof all evidence is bundled. No candidate data, models or original science was loaded or changed; no scientific process, environment or training was invoked. Recompute the inventory if the package is subsequently edited.
