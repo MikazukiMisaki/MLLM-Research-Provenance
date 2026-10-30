@@ -1,0 +1,8 @@
+"""Inspect citation labels and pre/post hash, never alter input."""
+import collections,hashlib,json,re
+from pathlib import Path
+p=Path('/home/lizening/research-notes/agent-logs/2026-10-30T013200Z__CODEX__si-thesis-assembly__f7e2/THESIS_ASSEMBLED_WORKING_DRAFT.md');raw=p.read_bytes();before=hashlib.sha256(raw).hexdigest();s=raw.decode();body,refs=s.split('\n## References\n',1)
+uses=collections.Counter(re.findall(r'\[(\d+)\]',body));defs=collections.Counter(re.findall(r'^\[(\d+)\]\s',refs,re.M)); assert set(uses)==set(defs)==set(map(str,range(1,10))) and all(v==1 for v in defs.values())
+expected=['ALFWorld: Aligning Text and Embodied Environments','Qwen3 Technical Report','A Reduction of Imitation Learning','Language Models are Few-Shot Butlers','Re-ReST: Reflection-Reinforced Self-Training','Self-Generated In-Context Examples Improve','Imitation Learning for Multi-turn','Agent Learning via Early Experience','Deep Reinforcement Learning at the Edge']
+lines=[line for line in refs.splitlines() if re.match(r'^\[\d+\]\s',line)];assert all(needle in lines[i] for i,needle in enumerate(expected))
+result={'draft_sha256':before,'post_read_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'unique_defined_labels':len(defs),'all_one_definition':True,'undefined_body_labels':[],'unused_definitions':[],'expected_bibliographic_title_matches':len(expected),'body_counts':dict(uses),'limits':['Title-label checking alone does not verify full reference accuracy or that each use supports its claim; see separate manual review.']};assert result['draft_sha256']==result['post_read_sha256'];print(json.dumps(result,indent=2,sort_keys=True))

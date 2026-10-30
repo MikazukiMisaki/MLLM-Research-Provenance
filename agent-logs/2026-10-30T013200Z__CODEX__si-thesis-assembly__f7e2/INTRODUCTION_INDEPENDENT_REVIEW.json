@@ -1,0 +1,163 @@
+{
+  "review_identity": "Current-thread Astra advisor session /root/astra_planning. Not the historical Astra Main thread; no communication with that historical thread is claimed.",
+  "created_at_utc": "2026-10-30T00:50:37.853722+00:00",
+  "decision": "PASS_WORKING_INTRODUCTION_SOURCE_AND_CLAIM_REVIEW",
+  "scope": "Full text of the exact final introduction revision, numerical claims against accepted evidence and arithmetic, all nine local citations against primary sources, and an independent read-only recount of the historical R19 rows. This is not whole-thesis acceptance, exhaustive literature review, independent replication of all SI-U1 raw outputs, graduation approval, or authorization for a new evaluation.",
+  "reviewed_target": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-30T012000Z__CODEX__si-thesis-review-update__50d8/THESIS_INTRODUCTION_REVISED.md",
+    "sha256": "71a1d937a77645e73e3050079f83845e7d6283fcf0aa86160881dfd92fac6a5c"
+  },
+  "original_draft": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-30T011100Z__SOL__si-thesis-introduction__working/THESIS_INTRODUCTION_WORKING_DRAFT.md",
+    "sha256": "e38c03ad72ebef7fe1523323cf577bc58e322a5fb5ab558d38e15ecbad0d4ef9"
+  },
+  "separate_outline_and_defense_artifact": {
+    "path": "/home/lizening/research-notes/agent-logs/2026-10-30T012000Z__ASTRA__si-thesis-outline-defense/THESIS_OUTLINE_AND_DEFENSE_DRAFT.txt",
+    "sha256": "5e6155f705b1c6725abeb225ebe3df71801cfaf7dbd03208be6e2946b7e6304f",
+    "status": "Previously written supervisor-discussion draft, unchanged during introduction review; no graduation guarantee."
+  },
+  "required_revisions_remaining": [],
+  "resolved_issues": [
+    "Expert-annotation savings are conditional; no claim that self-generated data necessarily reduce total cost.",
+    "Lauffer expert-data mixtures are acknowledged.",
+    "ALE matched-step main-text statement is distinguished from appendix update/epoch descriptions and from total data-collection cost.",
+    "The decision rule, not the observed inconclusive outcome, is described as predeclared.",
+    "RQ2 covers the union of C−A and C−B disagreement tasks, rather than inaccurately describing all selected disagreements as B−C.",
+    "Agarwal’s few-run deep-RL caution is separated from this study’s additional task-population assumptions."
+  ],
+  "numerical_checks": {
+    "SI_U1": {
+      "n_fixed_TRAIN_parents": 82,
+      "A_success": 65,
+      "B_success": 68,
+      "C_success": 67,
+      "C_minus_A_pp": 2.4390243902439024,
+      "C_minus_B_pp": -1.2195121951219512,
+      "paired_discordances_C_A": [
+        3,
+        1
+      ],
+      "paired_discordances_C_B": [
+        3,
+        4
+      ],
+      "exact_two_sided_McNemar_p": [
+        0.625,
+        1.0
+      ],
+      "Holm_adjusted_p": [
+        1.0,
+        1.0
+      ],
+      "decision": "INCONCLUSIVE under the predeclared rule; not equivalence, non-harm or efficacy. Paired task analysis does not estimate variation across independently trained checkpoints."
+    },
+    "diagnostic_scope": {
+      "selected_tasks": 17,
+      "trajectories": 51,
+      "disagreement_union_tasks": 9,
+      "two_object_tasks": 8,
+      "fifty_action_failure_pattern": "Accepted descriptive record supports the reported pattern; its cause is not established. Outcome-dependent selection is acknowledged."
+    },
+    "R19_direct_static_recount": {
+      "source": "/home/lizening/wt-r19-recovery-duration-v1/artifacts/runtime/r19_b1_g3_successor_after_3d1ccea7_20261023T002200Z/branches.jsonl",
+      "sha256": "eff9b5e74d3d5daa928cb662dcc59fc3f434f66796b673679d40b374f3c8636f",
+      "all_rows": 39,
+      "eligible_rows": 36,
+      "continue_successes": 30,
+      "K_1_to_5_successes": [
+        29,
+        30,
+        28,
+        25,
+        24
+      ],
+      "best_fixed_K": 2,
+      "best_fixed_successes": 30,
+      "any_tested_K_hindsight_successes": 32,
+      "extra_over_best_fixed_cases": 2,
+      "those_extra_cases_already_continue_successes": 2,
+      "boundary": "Hindsight on tested development paths; neither an online stopping rule nor a general population upper bound."
+    }
+  },
+  "causal_and_generalization_boundaries": "Matched family counts and supervised-token dose do not control task identities, encountered states, input-token totals or success-selection effects. Each continuation has one training seed. Identity/hash checks do not certify unseen scene layouts or eliminate historical exposure. The introduction retains these limitations.",
+  "accepted_evidence_sources": [
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T231000Z__CODEX__si-u1-scientific-review__c2356/SI_U1_SCIENTIFIC_REVIEW_AND_THESIS_NEXT_STEPS.md",
+      "sha256_at_review": "26d979669a77b1f867df6a54a3789e8a3a6b69d8b12e5c1f0015a18f107f4173"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T230000Z__SOL__si-u1-training-coverage-audit__independent/RECORD.md",
+      "sha256_at_review": "bcb555c8901ea2fba010a6eabcf3dc64f4bc16982fa5c840d20f43f656b8c9dc"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-29T222600Z__SOL__si-u1-disagreement-diagnostic__c2356/SHAREABLE_DESCRIPTIVE_SUMMARY.md",
+      "sha256_at_review": "55011613bf674adbd23a08e4b4a278572fccb4c35da2e6fe42143bc53dbaa5e8"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-25T040304Z__SOL__r19-g4-independent-result-review__85cbb923_dffaf4/INDEPENDENT_G4_REVIEW.md",
+      "sha256_at_review": "e7941a530d60e97821bfa6931a2c142d31ef711c25019ba2ad502dd54066128e"
+    },
+    {
+      "path": "/home/lizening/research-notes/agent-logs/2026-10-30T003000Z__CODEX__si-scene-independent-recount/INDEPENDENT_SCENE_REVIEW.md",
+      "sha256_at_review": "f375fb0ff7273f9c6f8d88431083b96a36116a3a0609ad668f3f601d68e949b6"
+    }
+  ],
+  "citation_checks": [
+    {
+      "id": 1,
+      "url": "https://arxiv.org/abs/2010.03768v2",
+      "location": "Official ALFWorld paper, abstract and environment description",
+      "finding": "Supports a text-based household-task environment. The draft does not equate its TRAIN schedule with the benchmark held-out split."
+    },
+    {
+      "id": 2,
+      "url": "https://arxiv.org/html/2505.09388v1",
+      "location": "Qwen3 Technical Report, model architecture table",
+      "finding": "Supports Qwen3-8B as the eight-billion-parameter dense model class. This source does not verify which local checkpoint was loaded."
+    },
+    {
+      "id": 3,
+      "url": "https://proceedings.mlr.press/v15/ross11a.html",
+      "location": "AISTATS 2011 primary publication abstract and sequential imitation-learning formulation",
+      "finding": "Supports dependence of encountered states on prior actions and distribution mismatch. It does not prove the cause of this project’s observed failures."
+    },
+    {
+      "id": 4,
+      "url": "https://aclanthology.org/2021.emnlp-main.734.pdf",
+      "location": "Sections 2.2–2.3; ALFWorld setting in section 3.2",
+      "finding": "Directly supports expert initialization followed by action modeling on the agent’s own successful trajectories. These components cannot be claimed as novel here."
+    },
+    {
+      "id": 5,
+      "url": "https://aclanthology.org/2024.emnlp-main.861/",
+      "location": "Primary ACL publication abstract; scoped claim only",
+      "finding": "Supports self-generated reasoning/action trajectories and feedback-based reflection. The introduction makes no detailed algorithmic or quantitative comparison requiring a full independent implementation audit."
+    },
+    {
+      "id": 6,
+      "url": "https://arxiv.org/html/2505.00234v3",
+      "location": "Self-generated example database; section 6.4 and Appendix C",
+      "finding": "Supports both in-context use and fine-tuning with successful self-generated experience. It should not be described as prompting-only prior work."
+    },
+    {
+      "id": 7,
+      "url": "https://arxiv.org/html/2512.14895v1",
+      "location": "Methods and experiments; dataset-scaling discussion with OEC plus BC mixtures",
+      "finding": "Supports comparisons of expert, learner-generated and expert-corrected constructions in software-engineering agents. The final draft explicitly acknowledges expert-data mixtures; it does not call this a clean source-only causal comparison."
+    },
+    {
+      "id": 8,
+      "url": "https://arxiv.org/html/2510.08558v3",
+      "location": "Early-experience objectives; main experiment text and Appendix B.2",
+      "finding": "Supports expert-augmented experience supervision. Main text reports matched step budgets; Appendix B.2 states equal total updates for IWM and equal epochs for SR. The draft preserves that distinction and does not infer equal collection cost."
+    },
+    {
+      "id": 9,
+      "url": "https://proceedings.neurips.cc/paper/2021/hash/f514cec81cb148559cf475e7426eed5e-Abstract.html",
+      "location": "NeurIPS 2021 abstract and discussion of evaluation with few independent runs",
+      "finding": "Supports caution about point estimates and uncertainty with few runs in deep RL. The draft separately states its own task-sampling and relatedness assumptions; it does not transfer a bootstrap guarantee to this fixed single-seed study."
+    }
+  ],
+  "actions": "Read existing documents and historical JSONL; check hashes and simple counts; inspect primary publications; write this review only. No model, environment, recovery runner, training, candidate selection or new evaluation protocol was executed or designed.",
+  "remaining_editorial_work": "Integrate local citation numbering into the thesis bibliography and obtain supervisor feedback on scope and institutional thesis requirements. No scientific claim revision is required by this bounded review."
+}
