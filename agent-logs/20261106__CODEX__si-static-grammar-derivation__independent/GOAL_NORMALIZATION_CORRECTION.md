@@ -1,0 +1,7 @@
+# Correction to the one-action probe draft
+
+The earlier draft said to supply the manual's public goal directly as `Task.text`. That is inconsistent with the inspected standard ALFWorld adapter: `_task_from` strips whitespace and trailing periods from a goal extracted from the introductory observation. The self-authored manual goal has a trailing period. This correction supersedes that single instruction; it does not alter the original draft or the frozen SFT-P0 policy.
+
+For any future direct-engine probe, check that the actual initial feedback contains the intended goal, pass that actual feedback through the real production extractor in a safe non-factory context, require the resulting `Task.text` to equal the normalized manual declaration, and use the extractor's text for the P0 request. Do not assume that a synthetic intro proves the real reset's feedback or that matching token counts imply byte-identical prompts. The derived grammar retains one final period so that the standard extractor can perform its existing normalization.
+
+A separate CPU-only check using the actual extractor on a synthetic intro observed the normalized text and measured four partial-history token counts of 177, 183, 205 and 251. Those counts happen to match the earlier non-normalized measurements, but all four prompt and rendered-prompt hashes differ. No real model or environment was called for that correction. This does not establish full initial-observation behavior, model output or independent evaluation.
