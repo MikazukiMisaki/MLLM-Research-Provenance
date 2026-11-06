@@ -1,0 +1,7 @@
+# Independent review: synthetic parent-death handshake v2
+
+Decision: **PASS for the two exercised synthetic corrections only; NOT A REAL-WORK RELEASE**. The revised child SHA256 is `e802241d4ec70f7eea88d62cac44fa790820c8f55aaace387533306eac081f20`; owner `26a9d91cbadb21ec53bd844cc66be41d83459131d73ead4965c0f536770f310b`; tests `4423d668f85306314a2a807f03971ec2432c63783dba4ae66fa08821be3a94e1`. The developer's nine synthetic tests passed; an independent reviewer replayed both original counterexamples and checked open-start/unknown handling on GO pipe failure.
+
+In the observed process tests, the owner durably completed the conservative `work.started` write before sending GO; an injected delay around that write did not allow the child marker to appear early. Under inherited blocked SIGTERM plus an extra GO-pipe writer, the synthetic child explicitly unblocked SIGTERM and exited by that signal when its owner was killed, without relying on EOF. These observations address the recorded v1 failure cases; they do not prove absence of all races or guarantee behavior on another kernel or execution environment.
+
+Owner or recorder failure, later signal-mask changes, remaining inherited file descriptors, descendant processes, host or filesystem failure, uninterruptible kernel work and already submitted GPU work remain unproven. A durable start with no durable return remains UNKNOWN and cannot be automatically retried or counted as zero. Neither this synthetic handshake nor its tests implement a real model, accelerator monitor or training release.
