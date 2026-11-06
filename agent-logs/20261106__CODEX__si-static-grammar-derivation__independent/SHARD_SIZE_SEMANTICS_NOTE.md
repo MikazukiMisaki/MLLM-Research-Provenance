@@ -1,0 +1,7 @@
+# Context for the failed shard aggregate comparison
+
+The earlier read-only scan's real exit code remains 1. All five streamed SHA256 values matched local cache references, but an invalid check equated physical safetensors file sizes to index `metadata.total_size`; that aggregate comparison failed by 46,056 bytes. No shard was reopened for this note.
+
+As an explanatory source check, the currently installed `huggingface_hub.serialization._base.split_state_dict_into_shards_factory` builds its `total_size` by summing per-tensor storage sizes and places that value in the shard metadata. This shows that at least this current serialization implementation uses tensor-storage size, not necessarily the total bytes of serialized shard files. It makes the earlier equality assumption unjustified; it does not establish which serializer produced this historical index, identify the actual 46,056-byte difference, or prove the historical files' complete provenance. Do not rewrite the original exit, claim the overall scan passed, or treat current local cache references as independent upstream signatures.
+
+An independently reviewed future exact runtime binding may consider the separately matched individual digests and the known failed aggregate check as distinct evidence; whether that is sufficient depends on the explicit model-provenance requirement, source stability and actual load observations.
