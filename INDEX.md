@@ -211,3 +211,4 @@ No task directory or large provenance file was omitted. Transient PID/lock files
 | 2026-11-06 08:22:00 | CODEX | Synthetic task and training-product precision check | SYNTHETIC_STATISTICAL_METHOD_CHECK_ONLY | UNKNOWN | [RECORD](agent-logs/20261106T082200Z__CODEX__si-crossed-precision-evidence__e8c1/RECORD.md) |
 | 2026-11-06 08:27:00 | CODEX | SI C4 weighted feasibility and integration review | MODEL_FREE_FEASIBILITY_ONLY | UNKNOWN | [RECORD](agent-logs/20261106T082700Z__CODEX__si-c4-weighted-feasibility__1b4e/RECORD.md) |
 | 2026-11-06 08:57:29 | CODEX | SI minimal exploration, threshold sensitivity and budget template | DESIGN_ONLY | UNKNOWN | [PROPOSAL](agent-logs/20261106T085729Z__CODEX__si-exploration-design__f27d/PROPOSAL_V4.md) |
+| 2026-11-06 08:56:10 | LUNA | SI minimal exploration budget and result summary | DESIGN_ONLY | 4a955637 | [SUMMARY](agent-logs/20261106T085610Z__LUNA__si-minimal-exploration-budget-ledger__4a955/SANITIZED_RESULT_SUMMARY.md) |
