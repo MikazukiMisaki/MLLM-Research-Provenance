@@ -1,0 +1,7 @@
+# One slice CPU engineering witness release
+
+Release one unique attempt on the distinct self-authored DEVELOPMENT_ONLY slice draft. No model or GPU invocation is intended. The failed toggle attempt is not retried or overwritten. At most one construct, load, reset, grounded step and close may be started; command, identity, selected facts or input mismatch stops before any further scientific action. No retry is permitted, and any already started work remains charged.
+
+Externally pinned launcher SHA256 cdfae87fe4a690940b36d1b6c84d8976b2846d21c8058fc8ae442e114a1e1c34; owner 50e6636302f789195584eebc377abf6a6feaccd9c578a2667f3d9b559f51b69a; worker 35fcaad3cf3ec45ebd99549987a4fe4ab55bb8db3ccb5c8ecb8887d1485dc47c; independent review 4fe26d30f5a380a245007f676daa89d533501d52f51b2014057661d2ae630dee. Source inventory and bound inputs matched immediately before release; claim and output were absent. Memory available 125989112 kB and filesystem free 35660248 KiB are point-in-time observations, not reservations.
+
+Externally observed actual outer exit 0, direct child exit 0 and complete reconcilable original event and selected-return evidence are jointly required for the narrow engineering pass. A readable success-looking row alone is insufficient. Direct-process limits and best-effort sampling do not bound all descendants, native/translation activity, shared resources or kernel tails; runtime closure and cleanup remain UNKNOWN. The case is not an independent evaluation, model efficacy result, or evidence of self-improvement.
