@@ -1,0 +1,11 @@
+# Independent review of generic weighted-loss synthetic fixture
+
+Decision: **PASS FOR SCOPED CPU FLOAT64 ARITHMETIC ONLY; NOT PRODUCTION READY**. This is not a model, task, training run or efficacy experiment.
+
+Reviewed fixture SHA256 `c7ff018c478023c02bf4802fe8b9dbed08f3f44b98d15cf04b241b5b7b630e72`; tests SHA256 `acaa6909dfb675d64510190554f0a909cc8636a96318fae3428143928be4201d`. The independent pinned-interpreter test captured in `independent_test.log` exited 0 with 6 tests passing. It compares the unweighted C1 result and gradient against flattened native PyTorch CE, compares C4 against a per-token reference, covers token shift/ignore, different active counts, partial and homogeneous windows, global dataset weights, sequential backward and selected invalid inputs. A separate reviewer also checked hand-derived losses and gradients with absolute tolerance and no relative tolerance. These are synthetic tensor calculations, not verification that a real model's native loss path was executed.
+
+The first version had accepted K=0 or K=M. It was rejected in review; revised code rejects both for both arms. The original source, tests and output remain in `review_v1_snapshot`, and the developer's change record explains the fix. A passing old test run does not establish that the first version was sound.
+
+Important numeric limitation: the fixture applies cross-entropy directly to its input dtype. The audited Qwen native causal-loss path casts logits to float32 before cross-entropy. A separate synthetic BF16 example found CE 0.4765625 without this cast versus approximately 0.47370842 with it. Thus the float64 fixture does not establish equivalence in BF16/FP16 or equivalence with the actual Qwen model runtime.
+
+Attention masks and EOS policy, real provenance and labels, data order/identity, failure/optimizer orchestration, actual production source dispatch, training cost and memory, and actual model-side C4 optimizer behavior remain unverified. These gaps preclude a real training release or research-effect claim. The full-window denominator is the unweighted active supervised-token count, with global data-set weights; no batch-weight-sum renormalization is accepted under the stated contract.
