@@ -214,3 +214,4 @@ No task directory or large provenance file was omitted. Transient PID/lock files
 | 2026-11-06 08:56:10 | LUNA | SI minimal exploration budget and result summary | DESIGN_ONLY | 4a955637 | [SUMMARY](agent-logs/20261106T085610Z__LUNA__si-minimal-exploration-budget-ledger__4a955/SANITIZED_RESULT_SUMMARY.md) |
 | 2026-11-06 09:15:29 | CODEX | SI training semantics and synthetic arithmetic review | DESIGN_AND_MATH_ONLY | UNKNOWN | [SPEC](agent-logs/20261106T091529Z__CODEX__si-training-semantics__e69b/TRAINING_SEMANTICS_SPEC_V1.md) |
 | 2026-11-06 10:30:00 | CODEX | SI self-authored witness failure and parent identity fixture | ENGINEERING_FAIL_NO_RETRY | UNKNOWN | [SUMMARY](agent-logs/20261106__CODEX__si-pddl-witness-failure-publication__sanitized_v1/SUMMARY.md) |
+| 2026-11-06 10:55:00 | CODEX | SI constructed topology variation and split review | DESIGN_ONLY | UNKNOWN | [DESIGN](agent-logs/20261106__CODEX__si-topology-variation__independent/DESIGN.md) |
