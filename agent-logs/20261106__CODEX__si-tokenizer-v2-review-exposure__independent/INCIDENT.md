@@ -1,0 +1,5 @@
+# Review-scope metadata exposure
+
+During independent review of the tokenizer semantic candidate v2, a reviewer inspected the header of an explicitly listed production import to check source bindings and displayed historical planning seed-range constants. The reviewer reported no opening of individual task instances, trajectories, association tables, or a separate schedule. This is a metadata exposure, not evidence that all protected task assets were opened, and it must not be reclassified as no exposure. Exact historical values are intentionally not reproduced here.
+
+The review stopped displaying the affected source. Avoid broad output from protected-adjacent files; use narrowly scoped import/source checks and bounded output in future. Future confirmatory randomness must be generated and held under an actual independently controlled boundary if an independent-custody claim is made. With the present shared-access setup, such custody and historical/pretraining exposure remain UNKNOWN. No model, CUDA, environment, or scientific evaluation was run by this incident.
