@@ -1,0 +1,18 @@
+test_invalid_result_is_not_reported_returned (test_guard_v3.GuardTest) ... ok
+test_ledger_failure_after_claim_prevents_invocation_and_retry (test_guard_v3.GuardTest) ... ok
+test_mismatched_attention_mask_rejected (test_guard_v3.GuardTest) ... ok
+test_model_failure_logged_and_no_second_attempt (test_guard_v3.GuardTest) ... ok
+test_oversize_and_new_object_retry_fail_closed (test_guard_v3.GuardTest) ... ok
+test_preexisting_ledger_is_never_modified_or_used (test_guard_v3.GuardTest) ... ok
+test_real_call_forwarded_once_and_new_object_cannot_repeat (test_guard_v3.GuardTest) ... ok
+test_two_simultaneous_objects_in_one_directory_only_one_calls_model (test_guard_v3.GuardTest) ... ok
+test_unexpected_kwargs_and_beam_settings_fail_before_model (test_guard_v3.GuardTest) ... ok
+test_actual_policy_routes_one_synthetic_generation_and_cannot_repeat (test_p0_v3.P0Test) ... ok
+test_failure_after_model_leaves_started_only_and_blocks_retry (test_crash_windows_v3.FailureWindows) ... ok
+test_failure_before_start_prevents_call_but_claim_remains (test_crash_windows_v3.FailureWindows) ... ok
+test_killed_after_start_preserves_claim_and_rejects_new_process (test_process_crash.ProcessCrashTest) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.228s
+
+OK

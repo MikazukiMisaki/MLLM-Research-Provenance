@@ -1,0 +1,5 @@
+# Synthetic counterexample: pre-existing ledger
+
+After the initial nine fake-edge tests passed, a separate temporary-directory probe created a pre-existing `generation_events.jsonl` without a claim file, then invoked the v2 guard with a fake model. The guard accepted the directory, appended new events after the old event and called the fake model once. The caller observed exit zero and `preexisting_ledger_accepted True`; no model, GPU or environment was used. This is a concrete evidence-mixing defect, not merely a hypothetical concern.
+
+The v2 candidate must not be used for a real run. A new candidate should exclusively create its ledger after claiming the run directory and stop without invoking the model when any prior ledger exists; it must retain the prior evidence unchanged. Exclusive file creation within one trusted run directory is not an OS sandbox or a global no-retry proof. A crash or filesystem error between claiming and writing the first event remains a consumed/unknown attempt. The prior tests and receipt remain as originally recorded and are insufficient to establish the missing invariant.
