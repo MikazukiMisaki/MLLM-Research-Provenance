@@ -1,0 +1,9 @@
+# One CPU-only development witness release
+
+Decision: release exactly one attempt of the self-authored clean-1 case, not a scientific efficacy experiment. No model or GPU use is intended. The earlier parser acceptance does not prove solvability or task independence. No historical protected case is used.
+
+Exact enabled launcher SHA256 e9ee6269a7043787da8511236d73684ccb4d0dfb5af1c0ad996c4ea858cbd809; owner 58d5dd10c0f6214f145249c25001743dc09a2f5717ffe7e0ebcc3a376c59598b; worker 1a9b79984cfccae34824d223a0e46af8ea73130be2b7ef3b4e32fad20f840233; source delta 2ab74f08838aa1cfa1466f500e9b6185fe331354e53c6174b6f05ac09ed0f516. The source manifest and all bound inputs verified before release; claim and attempt directory were absent. Independent fake review found the enabled delta confined to flags, fixed path and pins, with no observed concrete blocker.
+
+The only permitted sequence contains at most one construct, load, reset, six ordered steps, and close; maximum starts reset+step = 7. This is a narrow revision of the previous five-step case budget. Any exception, mismatch, timeout or uncertain outcome stops the attempt; no retry. All started operations count even if incomplete. The direct worker CPU, virtual-address and per-file limits and sampled resource checks do not prove bounded aggregate descendant use, complete dependency closure, or cleanup of descendants or kernel activity. The 30-second parent deadline is best-effort: time spent in journal persistence or validation can result in ACK after the nominal deadline, before the next deadline check. No hard device isolation is claimed.
+
+Fresh pre-release system observation: MemAvailable 126168720 kB; available filesystem space 35736636 KiB. These are observations, not reservations. User authorization covers this low-impact engineering verification, and the unique attempt consumes this release regardless of outcome.
