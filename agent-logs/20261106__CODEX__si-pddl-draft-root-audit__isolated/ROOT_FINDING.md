@@ -1,0 +1,7 @@
+# Independent finding: development PDDL static checker v1
+
+Decision: **FAIL for malformed problem-header rejection; no inference of real engine failure**. Four self-authored development drafts and their checker were tested statically; no ALFWorld engine, Fast Downward parser, model or GPU was invoked. The independent source inspection found the installed Fast Downward parser requires the `problem` declaration to have exactly two elements.
+
+For each of the four original, correctly formed draft headers, a separate reviewer replaced only that declaration with `(problem)` and `(problem <name> extra)` respectively. The v1 static checker incorrectly returned `DEVELOPMENT_ONLY_STATIC_PASS` for all eight malformed variants. Its source checked the first item but did not enforce a single valid problem name. The original four draft headers were not malformed, so this evidence does **not** establish that they would fail a real parser or engine.
+
+The original nine tests and symbolic 6/12-step action replays passed, as did independently exercised goal-mismatch rejection. Nevertheless this defect invalidates a general claim that malformed PDDL is rejected. Repair must be separately versioned, preserve the v1 bytes and tests, reject missing/extra/invalid names with negative tests and receive an independent exact-byte re-review. Runtime parsing, grounding, PDDL domain compatibility, terminal success, production wrapper behavior and independent-task provenance remain unverified. The old five-step engineering allowance does not cover the proposed 6/12-step witnesses.
