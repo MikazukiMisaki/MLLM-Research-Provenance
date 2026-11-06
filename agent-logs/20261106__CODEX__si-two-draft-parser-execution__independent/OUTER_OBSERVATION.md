@@ -1,0 +1,5 @@
+# Outer process observation
+
+The coordinator invoked one shell through the execution tool with the candidate directory as working directory. The shell used `set -o noclobber`; it ran an empty inherited environment except PATH=/usr/bin:/bin, LANG=C.UTF-8, LC_ALL=C.UTF-8, CUDA_VISIBLE_DEVICES empty and OMP_NUM_THREADS=1. The child argv consisted of the pinned interpreter, `-I`, `-B`, the fixed enabled candidate launcher, and `--execute-reviewed-once`. Its stdout and stderr were redirected to fresh outer files, and its actual shell `$?` was written to outer.exit before the shell exited with that code.
+
+The tool returned a completed result with exit_code=0, wall_time_seconds=0.25651405, no session ID and empty tool output. This is a coordinator transcription of the tool result, not an independently signed external receipt. The outer.exit file reports 0. Independent reviewers can compare local child and journal evidence, but cannot independently authenticate the historical tool output from this transcription alone. Exact local paths are retained in the original tool call and local source bindings, not reproduced here.
