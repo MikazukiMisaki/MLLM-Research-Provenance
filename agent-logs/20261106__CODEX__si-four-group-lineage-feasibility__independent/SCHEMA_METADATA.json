@@ -1,0 +1,34 @@
+{
+  "artifact_type": "declarative_abstract_schema_metadata",
+  "status": "DEVELOPMENT_ONLY_NOT_INSTANTIATED_NOT_VALIDATED",
+  "case_bytes_created": false,
+  "pddl_generated": false,
+  "eval_split_created": false,
+  "valid_distinct_specific_components": "UNKNOWN",
+  "custody": "UNKNOWN",
+  "historical_or_pretraining_overlap": "UNKNOWN",
+  "public_ancestors": ["public_alfworld_domain", "public_grammar", "authored_multiscene_support_spec"],
+  "specific_concrete_ancestors": "UNKNOWN_UNTIL_INDEPENDENTLY_MANIFESTED",
+  "common_role_constraints": {
+    "source_processor_destination_locations": "distinct",
+    "actor_start": "processor_location",
+    "hand": "empty",
+    "goals_initially_satisfied": false,
+    "receptacles_initially_accessible": true,
+    "typed_affordances": "must be confirmed against pinned public domain and grammar"
+  },
+  "schemas": [
+    {"id":"SCHEMA_C1", "processor":"clean", "target_count":1, "source_partition":[[1]], "destination_partition":[[1]], "goal":"each target clean and in assigned destination", "specific_component":"UNKNOWN"},
+    {"id":"SCHEMA_H1", "processor":"heat", "target_count":1, "source_partition":[[1]], "destination_partition":[[1]], "goal":"each target hot and in assigned destination", "specific_component":"UNKNOWN"},
+    {"id":"SCHEMA_C2_SHARED", "processor":"clean", "target_count":2, "source_partition":[[1,2]], "destination_partition":[[1,2]], "goal":"each target clean and in assigned destination", "specific_component":"UNKNOWN"},
+    {"id":"SCHEMA_H2_SHARED", "processor":"heat", "target_count":2, "source_partition":[[1,2]], "destination_partition":[[1,2]], "goal":"each target hot and in assigned destination", "specific_component":"UNKNOWN"}
+  ],
+  "declared_abstract_relations": [
+    {"left":"SCHEMA_C1", "right":"SCHEMA_H1", "relation":"same_goal_blind_source_destination_partition_after_abstraction_of_processing_kind", "actual_specific_ancestry":"UNKNOWN"},
+    {"left":"SCHEMA_C2_SHARED", "right":"SCHEMA_H2_SHARED", "relation":"same_goal_blind_source_destination_partition_after_abstraction_of_processing_kind", "actual_specific_ancestry":"UNKNOWN"},
+    {"left":"SCHEMA_C1", "right":"SCHEMA_C2_SHARED", "relation":"single_target_role_graph_embeds_in_two_target_role_graph", "actual_specific_ancestry":"UNKNOWN"},
+    {"left":"SCHEMA_H1", "right":"SCHEMA_H2_SHARED", "relation":"single_target_role_graph_embeds_in_two_target_role_graph", "actual_specific_ancestry":"UNKNOWN"}
+  ],
+  "edge_policy": "Existing broad-family sharing alone is not a specific-ancestry edge. A frozen application-specific near-duplicate rule may flag the declared graph similarities; unknown policy/evidence stays UNKNOWN. Never count abstract schemas as independent cases.",
+  "group_partition_assignment": null
+}

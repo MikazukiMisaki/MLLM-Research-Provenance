@@ -1,0 +1,6 @@
+{"audit_status": "UNKNOWN", "audit_terminal": "ATTEMPT_RETURN", "case": "success_terminal_fsync_failure", "fake_generation_calls": 2, "ledger_healthy": false, "run_status": "UNKNOWN", "same_handle_retry": "RuntimeError:attempt_consumed_no_retry"}
+{"audit_status": "UNKNOWN", "audit_terminal": "ATTEMPT_RETURN", "case": "success_terminal_interrupted", "fake_generation_calls": 2, "ledger_healthy": false, "run_status": "INTERRUPTED", "same_handle_retry": "RuntimeError:attempt_consumed_no_retry"}
+{"audit_status": "UNKNOWN", "audit_terminal": "ATTEMPT_UNKNOWN", "case": "unknown_terminal_fsync_failure", "fake_generation_calls": 1, "ledger_healthy": false, "run_status": "UNKNOWN", "same_handle_retry": "RuntimeError:attempt_consumed_no_retry"}
+{"case": "claim_fsync_failure", "initial_create": "failed", "same_directory_retry": "denied", "visible_claim": true}
+{"audit": {"error_type": "FileNotFoundError", "independent_completion": "UNESTABLISHED", "reason": "JOURNAL_UNAVAILABLE", "status": "UNKNOWN", "terminal": "UNOBSERVED"}, "case": "missing_journal"}
+{"audit": {"error_type": "JSONDecodeError", "independent_completion": "UNESTABLISHED", "reason": "INVALID_OR_UNREADABLE_LOCAL_EVIDENCE", "status": "UNKNOWN", "terminal": "UNTRUSTED_OR_UNREADABLE"}, "case": "corrupted_journal"}
