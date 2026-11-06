@@ -1,0 +1,5 @@
+# Independent-review correction
+
+The previous fake-only version caught only `Stop`, `ValueError` and `TypeError`. An ordinary `RuntimeError` after a partially mutated fake step escaped without the fake attempt-UNKNOWN event. Its exact source, tests, documentation, output and original checksum list are retained in `review_v1_snapshot/`; its earlier passing tests do not establish acceptance.
+
+The revised fake attempt catches ordinary `Exception` and attempts to append UNKNOWN. If that fake append itself fails with an ordinary exception, it reports that the fake ledger is unavailable. The claim remains consumed in this in-memory instance. Tests inject `RuntimeError` into forward, backward, clip and partially mutated step operations, plus an unavailable fake ledger; they also check `KeyboardInterrupt` and `SystemExit` propagate. These tests do not establish behavior under real process signals, durable persistence, or independent ownership. The revised candidate remains DISABLED and awaits independent review.
