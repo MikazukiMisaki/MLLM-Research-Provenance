@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "method": "64-point Gauss-Hermite exact crossed variance decomposition; compares simulation to analytical SD within 5 approximate Monte Carlo SD errors",
+  "checks": [
+    {
+      "N": 80,
+      "K": 4,
+      "sigma_product": 0.7,
+      "mean_quadrature": 0.0542651499657133,
+      "variance_components": {
+        "single_paired_cell": 0.4068138821993223,
+        "shared_task_covariance": 0.002648886898744566,
+        "shared_product_pair_covariance": 0.03350940317030876
+      },
+      "analytic_sd": 0.09782004193527309,
+      "simulated_sd": 0.09650461153402716,
+      "sim_sd_approx_mcse": 0.0012460768744669308,
+      "difference_in_approx_mcse": -1.0556575025185908
+    },
+    {
+      "N": 320,
+      "K": 4,
+      "sigma_product": 0.7,
+      "mean_quadrature": 0.0542651499657133,
+      "variance_components": {
+        "single_paired_cell": 0.4068138821993223,
+        "shared_task_covariance": 0.002648886898744566,
+        "shared_product_pair_covariance": 0.03350940317030876
+      },
+      "analytic_sd": 0.09314077112353934,
+      "simulated_sd": 0.09441546356031631,
+      "sim_sd_approx_mcse": 0.0012191015938456246,
+      "difference_in_approx_mcse": 1.0455998443542225
+    },
+    {
+      "N": 80,
+      "K": 16,
+      "sigma_product": 0.7,
+      "mean_quadrature": 0.0542651499657133,
+      "variance_components": {
+        "single_paired_cell": 0.4068138821993223,
+        "shared_task_covariance": 0.002648886898744566,
+        "shared_product_pair_covariance": 0.03350940317030876
+      },
+      "analytic_sd": 0.049163232864920275,
+      "simulated_sd": 0.04981529006362375,
+      "sim_sd_approx_mcse": 0.000643219841585051,
+      "difference_in_approx_mcse": 1.013739248305286
+    },
+    {
+      "N": 320,
+      "K": 16,
+      "sigma_product": 0.7,
+      "mean_quadrature": 0.0542651499657133,
+      "variance_components": {
+        "single_paired_cell": 0.4068138821993223,
+        "shared_task_covariance": 0.002648886898744566,
+        "shared_product_pair_covariance": 0.03350940317030876
+      },
+      "analytic_sd": 0.04663699325686442,
+      "simulated_sd": 0.046592342622702815,
+      "sim_sd_approx_mcse": 0.0006016048326241796,
+      "difference_in_approx_mcse": -0.07421920792564263
+    },
+    {
+      "N": 80,
+      "K": 4,
+      "sigma_product": 0.0,
+      "mean_quadrature": 0.05914216261899186,
+      "variance_components": {
+        "single_paired_cell": 0.3939681391862779,
+        "shared_task_covariance": 0.0029976785750070256,
+        "shared_product_pair_covariance": 2.7755575615628914e-17
+      },
+      "analytic_sd": 0.03548596443099463,
+      "simulated_sd": 0.03541213748283314,
+      "sim_sd_approx_mcse": 0.00045724494292423754,
+      "difference_in_approx_mcse": -0.1614603929555662
+    }
+  ]
+}

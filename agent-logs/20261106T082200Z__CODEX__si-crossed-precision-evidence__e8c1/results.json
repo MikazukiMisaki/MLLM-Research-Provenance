@@ -1,0 +1,349 @@
+{
+  "schema": "synthetic_crossed_precision_v1",
+  "seed": 20261106,
+  "replicates_per_scenario": 3000,
+  "python": "3.10.20",
+  "numpy": "1.26.4",
+  "self_check": {
+    "quadrature_1d_vs_2d_abs_error": 2.552402733613235e-13,
+    "arm_exchange_null": true,
+    "fixed_arm_swap": true
+  },
+  "data": "entirely synthetic; no real tasks, manifests, models, or environment",
+  "model": {
+    "intercept_C": -0.7,
+    "intercept_B": -0.44999999999999996,
+    "task_slopes_B_C": [
+      1.15,
+      0.85
+    ],
+    "task_latent": "i.i.d. standard normal shared across arms and products",
+    "product_latent": "independent normal per B/C product, fixed within column across tasks",
+    "noise": "independent Bernoulli draws conditional on task and product",
+    "unit": "paired B and C output for a task and product-index pair",
+    "formula": "P(Y_aik=1)=logistic(intercept_a+task_slope_a*T_i+U_ak)"
+  },
+  "interval": "nominal 95% Wald z=1.95996; invalid negative crossed variance excluded and explicitly counted",
+  "results": [
+    {
+      "N": 80,
+      "K_pairs": 4,
+      "products_per_arm": 4,
+      "sigma_product": 0.7,
+      "target_type": "random_products",
+      "target": 0.05426514996545739,
+      "mean_estimate": 0.054815625,
+      "bias": 0.0005504750345426065,
+      "mean_bias_mcse": 0.0017619250880153302,
+      "methods": {
+        "naive_N_times_K": {
+          "mean_estimated_se": 0.035314046673882785,
+          "empirical_sd": 0.09650461153402716,
+          "empirical_sd_approx_mcse": 0.0012460768744669308,
+          "coverage": 0.5353333333333333,
+          "coverage_mcse": 0.009105887391417994,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "task_cluster": {
+          "mean_estimated_se": 0.03445153744106293,
+          "empirical_sd": 0.09650461153402716,
+          "empirical_sd_approx_mcse": 0.0012460768744669308,
+          "coverage": 0.524,
+          "coverage_mcse": 0.009118186954287202,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "two_way_cluster_asymptotic": {
+          "mean_estimated_se": 0.09006612571448881,
+          "empirical_sd": 0.09650461153402716,
+          "empirical_sd_approx_mcse": 0.0012460768744669308,
+          "coverage": 0.8541875208541875,
+          "coverage_mcse": 0.006446597964485134,
+          "coverage_valid_replicates": 2997,
+          "invalid_variance_fraction": 0.001
+        }
+      }
+    },
+    {
+      "N": 320,
+      "K_pairs": 4,
+      "products_per_arm": 4,
+      "sigma_product": 0.7,
+      "target_type": "random_products",
+      "target": 0.05426514996545739,
+      "mean_estimate": 0.05248515625,
+      "bias": -0.001779993715457393,
+      "mean_bias_mcse": 0.0017237826389764088,
+      "methods": {
+        "naive_N_times_K": {
+          "mean_estimated_se": 0.017657227736503217,
+          "empirical_sd": 0.09441546356031631,
+          "empirical_sd_approx_mcse": 0.0012191015938456246,
+          "coverage": 0.287,
+          "coverage_mcse": 0.008258954736123291,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "task_cluster": {
+          "mean_estimated_se": 0.017253535418156683,
+          "empirical_sd": 0.09441546356031631,
+          "empirical_sd_approx_mcse": 0.0012191015938456246,
+          "coverage": 0.2786666666666667,
+          "coverage_mcse": 0.008185588057791075,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "two_way_cluster_asymptotic": {
+          "mean_estimated_se": 0.08631553188059032,
+          "empirical_sd": 0.09441546356031631,
+          "empirical_sd_approx_mcse": 0.0012191015938456246,
+          "coverage": 0.845,
+          "coverage_mcse": 0.006607445295523326,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        }
+      }
+    },
+    {
+      "N": 80,
+      "K_pairs": 16,
+      "products_per_arm": 16,
+      "sigma_product": 0.7,
+      "target_type": "random_products",
+      "target": 0.05426514996545739,
+      "mean_estimate": 0.05409479166666667,
+      "bias": -0.00017035829879072668,
+      "mean_bias_mcse": 0.0009094986025503229,
+      "methods": {
+        "naive_N_times_K": {
+          "mean_estimated_se": 0.017781453086634858,
+          "empirical_sd": 0.04981529006362375,
+          "empirical_sd_approx_mcse": 0.000643219841585051,
+          "coverage": 0.5183333333333333,
+          "coverage_mcse": 0.00912257070656601,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "task_cluster": {
+          "mean_estimated_se": 0.017924750337051997,
+          "empirical_sd": 0.04981529006362375,
+          "empirical_sd_approx_mcse": 0.000643219841585051,
+          "coverage": 0.52,
+          "coverage_mcse": 0.009121403400793104,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "two_way_cluster_asymptotic": {
+          "mean_estimated_se": 0.048399729751630254,
+          "empirical_sd": 0.04981529006362375,
+          "empirical_sd_approx_mcse": 0.000643219841585051,
+          "coverage": 0.925,
+          "coverage_mcse": 0.004808846015417835,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        }
+      }
+    },
+    {
+      "N": 320,
+      "K_pairs": 16,
+      "products_per_arm": 16,
+      "sigma_product": 0.7,
+      "target_type": "random_products",
+      "target": 0.05426514996545739,
+      "mean_estimate": 0.054045572916666666,
+      "bias": -0.00021957704879072633,
+      "mean_bias_mcse": 0.0008506559020487914,
+      "methods": {
+        "naive_N_times_K": {
+          "mean_estimated_se": 0.008892427479195305,
+          "empirical_sd": 0.046592342622702815,
+          "empirical_sd_approx_mcse": 0.0006016048326241796,
+          "coverage": 0.2856666666666667,
+          "coverage_mcse": 0.00824744853923972,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "task_cluster": {
+          "mean_estimated_se": 0.008977436441893208,
+          "empirical_sd": 0.046592342622702815,
+          "empirical_sd_approx_mcse": 0.0006016048326241796,
+          "coverage": 0.28933333333333333,
+          "coverage_mcse": 0.00827887986697789,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "two_way_cluster_asymptotic": {
+          "mean_estimated_se": 0.045715175926957084,
+          "empirical_sd": 0.046592342622702815,
+          "empirical_sd_approx_mcse": 0.0006016048326241796,
+          "coverage": 0.9293333333333333,
+          "coverage_mcse": 0.0046787779347777295,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        }
+      }
+    },
+    {
+      "N": 80,
+      "K_pairs": 4,
+      "products_per_arm": 4,
+      "sigma_product": 0.0,
+      "target_type": "random_products",
+      "target": 0.059142162618987915,
+      "mean_estimate": 0.059228125,
+      "bias": 8.596238101208531e-05,
+      "mean_bias_mcse": 0.0006465342169607307,
+      "methods": {
+        "naive_N_times_K": {
+          "mean_estimated_se": 0.03506104597240924,
+          "empirical_sd": 0.03541213748283314,
+          "empirical_sd_approx_mcse": 0.00045724494292423754,
+          "coverage": 0.9416666666666667,
+          "coverage_mcse": 0.004279040217757387,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "task_cluster": {
+          "mean_estimated_se": 0.035346014063761984,
+          "empirical_sd": 0.03541213748283314,
+          "empirical_sd_approx_mcse": 0.00045724494292423754,
+          "coverage": 0.944,
+          "coverage_mcse": 0.004197777189577044,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "two_way_cluster_asymptotic": {
+          "mean_estimated_se": 0.033516424396784025,
+          "empirical_sd": 0.03541213748283314,
+          "empirical_sd_approx_mcse": 0.00045724494292423754,
+          "coverage": 0.8657423063916131,
+          "coverage_mcse": 0.0062695771255773065,
+          "coverage_valid_replicates": 2957,
+          "invalid_variance_fraction": 0.014333333333333333
+        }
+      }
+    },
+    {
+      "N": 80,
+      "K_pairs": 4,
+      "products_per_arm": 4,
+      "sigma_product": 0.7,
+      "target_type": "fixed_products",
+      "target": 0.03308791097419987,
+      "mean_estimate": 0.03368854166666667,
+      "bias": 0.0006006306924667953,
+      "mean_bias_mcse": 0.0006373766214917087,
+      "methods": {
+        "naive_N_times_K": {
+          "mean_estimated_se": 0.03535237724749204,
+          "empirical_sd": 0.03491055532174409,
+          "empirical_sd_approx_mcse": 0.0004507684655658697,
+          "coverage": 0.9496666666666667,
+          "coverage_mcse": 0.003991653328671755,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "task_cluster": {
+          "mean_estimated_se": 0.03487041604126285,
+          "empirical_sd": 0.03491055532174409,
+          "empirical_sd_approx_mcse": 0.0004507684655658697,
+          "coverage": 0.9456666666666667,
+          "coverage_mcse": 0.004138486930518699,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "two_way_cluster_asymptotic": {
+          "mean_estimated_se": 0.0639154816980961,
+          "empirical_sd": 0.03491055532174409,
+          "empirical_sd_approx_mcse": 0.0004507684655658697,
+          "coverage": 0.9869956652217405,
+          "coverage_mcse": 0.002068775957677831,
+          "coverage_valid_replicates": 2999,
+          "invalid_variance_fraction": 0.0003333333333333333
+        }
+      }
+    },
+    {
+      "N": 320,
+      "K_pairs": 4,
+      "products_per_arm": 4,
+      "sigma_product": 0.7,
+      "target_type": "fixed_products",
+      "target": 0.034055341234832504,
+      "mean_estimate": 0.03389609375,
+      "bias": -0.0001592474848325036,
+      "mean_bias_mcse": 0.00030596485127690654,
+      "methods": {
+        "naive_N_times_K": {
+          "mean_estimated_se": 0.018394057163115443,
+          "empirical_sd": 0.016758385084807505,
+          "empirical_sd_approx_mcse": 0.00021638588846323856,
+          "coverage": 0.9673333333333334,
+          "coverage_mcse": 0.0032454868949335124,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "task_cluster": {
+          "mean_estimated_se": 0.0167564874750991,
+          "empirical_sd": 0.016758385084807505,
+          "empirical_sd_approx_mcse": 0.00021638588846323856,
+          "coverage": 0.9506666666666667,
+          "coverage_mcse": 0.003953882292783283,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "two_way_cluster_asymptotic": {
+          "mean_estimated_se": 0.15888623153138287,
+          "empirical_sd": 0.016758385084807505,
+          "empirical_sd_approx_mcse": 0.00021638588846323856,
+          "coverage": 1.0,
+          "coverage_mcse": 0.0,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        }
+      }
+    },
+    {
+      "N": 80,
+      "K_pairs": 16,
+      "products_per_arm": 16,
+      "sigma_product": 0.7,
+      "target_type": "fixed_products",
+      "target": 0.09239029150715634,
+      "mean_estimate": 0.0924609375,
+      "bias": 7.064599284365584e-05,
+      "mean_bias_mcse": 0.000332905123623798,
+      "methods": {
+        "naive_N_times_K": {
+          "mean_estimated_se": 0.01742936922748365,
+          "empirical_sd": 0.018233964571780014,
+          "empirical_sd_approx_mcse": 0.00023543871346223778,
+          "coverage": 0.9373333333333334,
+          "coverage_mcse": 0.004424912637764936,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "task_cluster": {
+          "mean_estimated_se": 0.01796552490099768,
+          "empirical_sd": 0.018233964571780014,
+          "empirical_sd_approx_mcse": 0.00023543871346223778,
+          "coverage": 0.9423333333333334,
+          "coverage_mcse": 0.004256024053120557,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        },
+        "two_way_cluster_asymptotic": {
+          "mean_estimated_se": 0.03996774252091944,
+          "empirical_sd": 0.018233964571780014,
+          "empirical_sd_approx_mcse": 0.00023543871346223778,
+          "coverage": 1.0,
+          "coverage_mcse": 0.0,
+          "coverage_valid_replicates": 3000,
+          "invalid_variance_fraction": 0.0
+        }
+      }
+    }
+  ]
+}
