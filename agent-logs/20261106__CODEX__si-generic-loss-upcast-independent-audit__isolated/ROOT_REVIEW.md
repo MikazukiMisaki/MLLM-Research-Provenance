@@ -1,0 +1,9 @@
+# Independent review: float32-upcast weighted loss fixture
+
+Decision: **PASS for the tested CPU synthetic loss arithmetic only; real training is NOT READY**. This candidate explicitly converts logits to float32 before cross-entropy, in line with the inspected installed Transformers `ForCausalLMLoss` implementation. It does not load a model or test actual Qwen model dispatch.
+
+Fixture SHA256 `a4b75c769bf5e4fac778dfefd45876975849103ea32c7af8a09f226373d6d785`; test SHA256 `bd0eb1282f709158200448e1c487a13ff9ca314c340616d9d97344d9d0d7d99b`. The separately recorded pinned-interpreter run in `independent_test.log` exited 0, four tests passing. These cover BF16/FP16/FP32 synthetic logits, C1/C4, mixed and partial windows, losses/gradients, ignored labels, tail logits and selected invalid/nonfinite cases. C1 is also compared to the installed Transformers causal loss on invented tensors.
+
+Another reviewer independently compared C1/C4 hand-weighted losses and shared-parameter gradients for all three dtypes and separately checked endpoint/invalid-input rejections; their independent tests and input/code identities are preserved in the accompanying audit directory. The previous float64-only fixture and the failed low-precision equivalence assumption remain separately recorded; this candidate does not retroactively change those observations.
+
+The evidence does not establish a real model forward/backward, a full optimizer operation or finite-gradient failure handling, data/label identity, attention masks, task isolation, GPU training fit, runtime resource safety or a treatment effect. The test's references and synthetic CPU calculations establish only the stated numerical contract under their tested conditions. Actual integration and a separately reviewed bounded engineering run are prerequisites for training acceptance.
