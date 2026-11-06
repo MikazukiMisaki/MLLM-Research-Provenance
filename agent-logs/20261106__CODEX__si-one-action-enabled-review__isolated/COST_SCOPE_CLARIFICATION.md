@@ -1,0 +1,5 @@
+# Cost-scope clarification to source review
+
+The source review's phrase "the complete cumulative cost record" requires clarification. Reconcile every available prior cost and all operation starts/returns relevant to this bounded engineering attempt, identify the selected historical subtotal and explicitly retain all unobserved or unlocated historical usage as UNKNOWN. Do not present the selected subtotal as all-project usage, and do not treat unknown past cost as zero. A small bounded engineering probe can be evaluated with this disclosed uncertainty; it does not establish the complete numeric resource budget or independent task lineage needed for a later multi-run scientific comparison.
+
+The scoped source-review JSON, manifest and source-binding bytes are unchanged. This clarification does not grant launch clearance or relax the one-attempt, resource-admission or evidence requirements. The human source review was briefly edited during drafting of this clarification and restored byte-for-byte before the clarification was saved; it retains the independently checked SHA256 `201c2eb6cdceeaa74be3792fe6bbe694749c0e93403c101100560fae00343e16`.
