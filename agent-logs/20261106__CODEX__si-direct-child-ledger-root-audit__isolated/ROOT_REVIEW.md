@@ -1,0 +1,7 @@
+# Root review: direct-child synthetic ledger
+
+Decision: **PASS only for exercised synthetic direct-child cases in trusted directories; NOT READY for real workloads**. Actual model and GPU code is disabled. Source SHA256 `60bd01cc2618699fec0669346a638b6db5edf39a58a30931a5a841c45e243258`, test SHA256 `29ffa06f605ff9585817b88070997bce295fad39cff78b6641585a980890c10c`. The independently rerun candidate suite recorded here exited 0 with eight passing tests.
+
+A separate reviewer exercised a same-name two-process claim race, leaf-symlink collision, existing-ledger collision and a failed child-pidfd acquisition, in addition to reviewing the original direct-child, timeout and write-failure tests. The tested claim is one-shot only for the same identity in the same trusted directory. The leaf-symlink checks rejected the tested paths, but a parent-directory symlink was followed; no hostile-path or replacement-race protection is established. A ledger collision after a successful claim consumes the claim.
+
+No independent owner or external audit anchor protects the local journal; fsync and hash chaining do not establish physical crash durability. Parent death, machine failure, orphaned children, descendant processes, kernel/I/O stalls, uncertain GPU work, end-to-end deadlines and actual device/resource monitoring remain unhandled or unproven. A wait timeout is not a hard bound on setup, fsync, spawn, signals or cleanup. There is no basis to release a real model or training attempt from these synthetic tests.
