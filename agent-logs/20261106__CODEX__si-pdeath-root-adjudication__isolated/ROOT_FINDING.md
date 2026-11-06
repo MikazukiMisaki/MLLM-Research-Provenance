@@ -1,0 +1,9 @@
+# Independent finding: synthetic parent-death handshake v1
+
+Decision: **FAIL for pre-operation durable-start ordering and unconditional parent-death termination**. This is a deliberately disabled synthetic direct-child test, not a real training incident.
+
+Reviewed child SHA256 `09e9878cae415b5092259f609e89500e0fc8e673b47562bae169c45a4eec5210`, owner SHA256 `4d1077701bc5fe27765a5e1d993bfc8b8d500134808fd25cb3b19880ac5de793`, test SHA256 `f76bbc972d58db80218ef15fd54c1f36de305d4993f91fb3aaa026dbed802221`. The original five synthetic tests passed, but source review found the owner sends GO and observes BEGIN before appending/fsyncing `work.started`; the child can do work immediately after sending BEGIN. An independent controlled delay reproduced completion of synthetic work while the ledger lacked `work.started`. The earlier `go.started` record reflects authorization, not a precise returned work operation.
+
+A separate injected test started an owned child with SIGTERM blocked in its inherited mask and retained an extra GO-pipe writer. After the synthetic owner was killed, the child remained alive; closing the owned extra writer produced EOF and child exit. Installing a default SIGTERM disposition alone does not unblock an inherited signal mask. This is an explicitly injected fake-process observation, not a claim that a real model was orphaned.
+
+A revised design must record/fsync the conservative work-start liability before GO, reject or unblock an inherited blocked termination signal and control pipe inheritance. Failed/partial writes, a GO failure after durable start, interrupted owners and open operations must stay UNKNOWN with no automatic retry. None of these changes can prove that previously submitted GPU work, all descendants or uninterruptible kernel activity has ended; the original test process, logs and limits remain preserved.
