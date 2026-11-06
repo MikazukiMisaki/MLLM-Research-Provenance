@@ -1,0 +1,3 @@
+# Index time correction
+
+Three recent INDEX rows were assigned estimated future minute values while being assembled. They were not authoritative observed execution timestamps. The index has been corrected to the UTC minute of each actual publication commit, using 21:15 for the ledger retest and lineage row, 21:22 for the native schema row, and 21:27 for the three-arm fake-entry and probe-assessment row. Exact commit timestamps and immutable commit objects remain available from the repository history. No original evidence, execution result or reviewed artifact was altered. These are publication-minute labels, not estimates of the underlying experimental operation times.
