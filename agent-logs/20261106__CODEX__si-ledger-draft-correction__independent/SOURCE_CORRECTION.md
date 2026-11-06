@@ -1,0 +1,5 @@
+# Ledger design source-hash correction
+
+The earlier ledger design SHA256 `685058c7d8d4f159e6809a9068e5fa9261f49ebe1de2d1a26662410b318db70e` cited matched-extra draft SHA256 `0b778fa6c21e0f937298fe7acfdbd7630fe049592573471bf05e1af54cf673dc` as observed during its preparation. The author subsequently found the same local path contained final candidate bytes SHA256 `fa5a3c3a9b46ef2308e0426963aa7c7b99032ef8bfd26f3a2d1e25c11e1c2eca`. Whether the earlier bytes were separately archived and their exact difference from the final bytes are unknown. The original design was not altered.
+
+A separate reviewer later reviewed the final candidate and reports only a limited synthetic wiring PASS; the control is not a live three-arm implementation. The source-hash addendum author did not independently review the final candidate. The original machine-specific addendum remains local with SHA256 `0e4b44ef091ad63694acb7b9e7641a1380f4fedcfe7dde6b4f1890e419a37c50`; this path-free transcription does not purport to be that original file.
