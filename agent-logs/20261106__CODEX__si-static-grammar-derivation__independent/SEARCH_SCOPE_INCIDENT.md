@@ -1,0 +1,5 @@
+# Search scope incident
+
+While inspecting model/runtime settings, a broad text search included the experiments configuration directory. At least one returned line was an existing known-failure adjudication record containing a historical task identity and schedule position. The returned output was truncated, so the full extent of any other exposed metadata is not established. These fields were not needed for the current task. The search output was generated in the tool transcript; it was not copied into the new research reports or task files. No historical task instance or trajectory file was deliberately opened, and no model inference was run, as part of this search.
+
+The broad search was stopped immediately. Subsequent reviews must use specifically identified source or configuration files and exclude historical unit identities, schedules and association data. This record deliberately does not repeat the task identity or position. The incident does not change the provenance uncertainty or justify any inference about historical dataset independence.
