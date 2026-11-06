@@ -1,0 +1,11 @@
+# SI engineering budget bridge
+
+Reconciled from existing sanitized/own records; distinct campaigns remain separate until their scope and accounting basis are verified.
+
+* Earlier SI P0 engineering smoke: one generation, 267 input and 5 output tokens, one reset and one step. Its outer runtime does not establish exact physical GPU allocation; retain that allocation as unknown.
+* Self-authored witness V2: supervisor and worker started, parent identity check failed before environment import/construction; zero model calls and zero environment operations. Sampled process CPU and memory are observations, not exact total resource use.
+* Self-authored witness V4: one construction, one load, one reset, three steps and zero model calls. On a reset-plus-step basis this is four operations; construction/load and inferred internal translations are separate, not extra resets or steps. About 1.64 seconds is the recorded monitor interval; CPU/RSS/disk peaks are sampled, and unobserved escaped descendants/cleanup tails remain uncertain.
+
+For a potential next model-free check of three separately identified self-authored cases with prespecified action limits 5, 3 and 5, fail-stop and no retry, the conditional maximum is three constructions, three loads, three resets and 13 steps: 16 reset-plus-step operations, zero model generations. Actual completed work can be lower; charge failed or incomplete starts and resource tails separately. If the exact 5/3/5 sequences are not bound and only a generic per-case five-step cap applies, the looser ceiling is 15 steps plus three resets, or 18 reset-plus-step operations. Neither number includes internal translations or is an observed expenditure.
+
+These ceilings are not a complete research budget. Verify legitimate task population and split size, actual acquisition and failed-operation costs, model/token and training ceilings, model load and checkpoint time, GPU/device ownership and allocation, RAM/disk, validation, supervision, and cleanup/unknown tail costs. A proposed device-hour monitoring threshold alone is not an exact hard cap or full cost estimate. Do not silently add R19 campaign totals to this SI ledger without establishing the reporting scope.
