@@ -1,0 +1,9 @@
+# Independent review of synthetic draw and lineage prototype
+
+Disposition: `SYNTHETIC_TESTS_PASS / REAL_GENERATOR_NOT_VALIDATED`. Source SHA256 `a2745695db7895f96104f8d9735c9b797b470c40e6d92bbc39e3245a20ba91d6`, tests SHA256 `d735a3a8638564d3fdbc5a98b8d279b2fd989e87e1aa461a9c0e3fbf459bc648`. An initial independent invocation exited 1 before running tests because isolated Python did not include the script directory; its raw output and exit are retained. A second, distinct synthetic invocation explicitly included only the prototype directory, ran all 19 tests, and exited 0. No real tasks, model, CUDA or environment were invoked.
+
+The candidate separates deterministic pseudorandom streams by draw, attempt and field, records synthetic rejected candidates, stops on exhaustion, and refuses overlapping declared fixture families. These checks are suitable for an isolated software prototype. The test seed is public; the prototype does not demonstrate private evaluation custody, crash-durable records, actual procedural randomness, task validity, real lineage isolation, or real independent samples. In particular, passing a seed into an actual generator does not establish that its solver, cache, grammar or module-global RNG obeys this interface.
+
+The declared mixture is a proposal distribution before rejection. In a real generator, family-dependent validity or rejection can change the accepted-family mixture even when rules are treatment independent. The confirmatory estimand must explicitly specify the post-validation distribution or implement and verify a sampling procedure that achieves the intended mixture, retaining all failures. Equality of family weights must not be inferred from the fake validator's independent, uniform marker.
+
+The prototype has no real input path, evaluator, external process control, independent custody or failure-resistant journal; neither its passing tests nor the theoretical IID calculation authorizes an efficacy run.

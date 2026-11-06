@@ -1,0 +1,5 @@
+# Fake adapter-cache bridge check
+
+Two fake-edge tests used the actual production `SFTP0QwenPolicy._load` and guard v4, with a fake backend and fake `peft` module; they did not load a real adapter, tokenizer, model, GPU or environment. Pinned Python observed exit 0 and both tests passed. Source SHA256 `4da2e819542b3d6b318dda560a14174ee77da1c27b2da3ec9b9fc8c30a5df2fc`, test log SHA256 `ccf48313176606409b15cce5f911e0bb14f668b4cd0d0b646a7b370aeaa037b0`, exit file SHA256 `9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa`.
+
+The positive example loads the fake adapter through the production loader first, then replaces the backend's cached model with the guard; a subsequent `_load` returns that guard without reattaching the adapter. A negative example installs the guard before the first adapter attachment: the adapter then wraps the guard and the cached return is outside it. This demonstrates a wiring-order hazard with fake objects only; it does not establish compatibility with actual PEFT, guarantee no bypassing model references, or authorize runtime execution.
