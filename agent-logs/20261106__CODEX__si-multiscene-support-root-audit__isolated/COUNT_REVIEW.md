@@ -1,0 +1,7 @@
+# Independent check: proposed abstract role-graph counts
+
+Status: **ABSTRACT COUNT CHECK ONLY; NO TASK OR INDEPENDENCE CLAIM**. For n objects, a structure is a pair of set partitions: shared-source groups and shared-destination groups, jointly relabelled by the same target permutation. I independently recomputed the number of orbits using Burnside's lemma: enumerate each permutation, count partitions it fixes, square that number for independent source/destination partition choices, sum and divide by n!. Results are n=1..5: **1, 4, 10, 33, 91**, total 139; the partition counts themselves were 1, 2, 5, 15, 52.
+
+This arithmetic confirms only the mathematical count for that equivalence relation. It does not verify type-compatible ALFWorld assets, action preconditions, truthful instructions, solvability, actual runtime transitions, meaningful semantic distance, provenance, independent custody, or any usable train/evaluation group. An alternative near-duplicate relation and its transitive closure can merge many structures. The intended original feasibility allocation remains 40 acquisition groups plus 20 feasibility groups; any future confirmation is additional. The proposed longer task validation budget is not part of the old 5-step allowance.
+
+The check used only invented integer partitions/permutations and Python standard-library arithmetic; no historical tasks, trajectories, seeds, model, GPU or environment were accessed. The original specification is unchanged.
