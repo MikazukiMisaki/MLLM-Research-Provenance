@@ -1,0 +1,20 @@
+{
+  "status": "DECLARATIVE_SCHEMA_ONLY_DEVELOPMENT_ONLY",
+  "domain_sha256": "f1473041ed01da514de1f87adfd7ef0804862361f83ccf63c75e43633b0eb280",
+  "grammar_sha256": "c5b22f0f73309a7fd7c8e5b71de42ad4803b60766ab4a51cc2feb34162be036b",
+  "case_instances_created": false,
+  "pddl_created": false,
+  "evaluation_sets_created": false,
+  "usable_independent_group_count": "UNKNOWN",
+  "schema_goal_aware_role_graph_count": 4,
+  "schema_goal_aware_role_graph_count_is_not_group_count": true,
+  "schemas": [
+    {"id":"PROCESS_CLEAN_DELIVER", "unsatisfied_goal_atoms":["isClean(target)","inReceptacle(target,destination)"], "core_action":"CleanObject", "required_roles":["agent","target:cleanable,pickupable","processor:SinkBasinType","destination:canContain target"], "core_preconditions":["agent_at_processor", "processor_at_agent_location", "agent_holds_target"], "core_effects":["isClean(target)"], "runtime_validity":"UNKNOWN"},
+    {"id":"PROCESS_HEAT_DELIVER", "unsatisfied_goal_atoms":["isHot(target)","inReceptacle(target,destination)"], "core_action":"HeatObject", "required_roles":["agent","target:heatable,pickupable","processor:MicrowaveType","destination:canContain target"], "core_preconditions":["agent_at_processor", "processor_at_agent_location", "agent_holds_target"], "core_effects":["isHot(target)","not isCool(target)"], "runtime_validity":"UNKNOWN"},
+    {"id":"LOCATED_TOGGLE", "unsatisfied_goal_atoms":["isToggled(target)"], "core_action":"ToggleObject", "required_roles":["agent","target:toggleable","receptacle"], "core_preconditions":["target_in_receptacle", "receptacle_at_agent_location"], "core_effects":["isToggled(target)","toggle isOn(target)"], "runtime_validity":"UNKNOWN"},
+    {"id":"TOOL_SLICE", "unsatisfied_goal_atoms":["isSliced(target)"], "core_action":"SliceObject", "required_roles":["agent","target:sliceable","tool:KnifeType_or_ButterKnifeType"], "core_preconditions":["target_at_agent_location", "agent_holds_tool"], "core_effects":["isSliced(target)"], "runtime_validity":"UNKNOWN"}
+  ],
+  "ancestor_declarations": {"public_domain_and_grammar":"shared_broad_ancestors", "specific_concrete_parents":"UNKNOWN_NOT_INSTANTIATED"},
+  "overlap_edges":"not_computed_no_concrete_instances; no declared conflict is not proof of independence",
+  "data_split": null
+}
