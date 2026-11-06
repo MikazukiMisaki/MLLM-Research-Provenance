@@ -1,0 +1,5 @@
+# Synthetic counterexample: canonical event hash versus raw bytes
+
+The candidate event hash is computed over canonical JSON fields, but the v1 reader parses a line and re-canonicalizes the result before validating it. In a synthetic temporary-directory probe, rewriting a one-line event with different JSON spacing changed the raw ledger bytes while `verify(..., expected_head=original_head)` still returned `CHAIN_ANCHORED`. A multi-line rewrite was rejected by the line parser. No real experiment, tokenizer, model, GPU or environment was invoked.
+
+This is an exact-byte audit gap, not evidence that the event's parsed fields changed. The existing v1 candidate must not be treated as sufficient to attest the original ledger bytes. A revision can require the exact canonical serialized line and an external SHA256 of the complete raw file; an independently stored final head and file hash are still needed to detect suffix loss or whole-file substitution. The prior record and raw tests remain unchanged, and any filesystem interruption continues to require unknown/consumed accounting.
