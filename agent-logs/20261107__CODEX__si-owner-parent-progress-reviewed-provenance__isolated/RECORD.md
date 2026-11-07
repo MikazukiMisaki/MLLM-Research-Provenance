@@ -1,0 +1,3 @@
+# Reviewed provenance publication
+
+These are byte-identical copies of three independently reviewed local records, manually inspected and screened for known path, credential and e-mail patterns. Pattern screening cannot prove the absence of every secret. The owner FAIL and parent-dedup review apply only to synthetic fixtures. The progress document is a point-in-time checkpoint: its remote provenance SHA is historical, not a claim about the current head. C-low outer status remains UNKNOWN. None of these records grants execution clearance or establishes a held-out result. No experiment or protected task was run during publication.
