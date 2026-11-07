@@ -1,0 +1,25 @@
+# Independent exact-commit review: B/C development unit candidate
+
+## Decision and scope
+
+* `1bf7a19bcd9894eb9e1bffdd864bec7ddfba7432`: **FAIL**, genuine independently reviewed audit is Markdown but `_verify_low_outer` calls `_bound_object`, which requires a JSON object. Its recorded audit hash is 3f505e64f9413492b9492ee9c43b4c8f30d1db37925790f46a0d0ab564b5e0f7. The 1bf synthetic fixture used JSON and missed the real contract. This was independently observed from the existing original bytes; no evidence was modified.
+* `c90878eda6f131f96149bde8a546b0bb538637dd`, direct repair after 1bf: **PASS for the narrowly reviewed unit-level changes and real outer-evidence contract**, conditional on the limitations below. This is **not** six-unit campaign readiness, an evaluation clearance, nor a scientific result. Full delta from 54d986c28b23d1a7d82019313c90e8c0220c11ff comprises five prototype files; no frozen baseline files changed. Candidate worktree was clean at that commit at verification.
+* **Campaign BLOCKED:** independent outer owner, complete one-shot six-unit orchestration and integrated resource ledger require separate implementation and exact-byte review; no real evaluator invocation was authorized by this review.
+
+## Concrete repair and evidence
+
+The c908 diff replaces the audit JSON-object requirement with an exact raw hash/regular-file check followed by nonempty strict UTF-8 validation; other outer items remain strict JSON with duplicate-key and nonfinite-value rejection. The 1bf defect is resolved without mutating the historical audit or weakening its required pinned SHA. Independently calling c908 `_verify_low_outer` on the five existing real outer evidence files returned `INNER_COMPLETED_OUTER_UNKNOWN_NO_RETRY`. This read-only test checked the real guardian/outer/adjudication/audit/addendum documents, using their verified hashes and adjudication cross-bindings. It did not verify or reload the adapter tree, model, or the underlying full inner training data. The direct tool-exit observation is a coordinator's recorded observation, not a cryptographically signed tool receipt; outer exit 1 and unknown cleanup remain distinct from the inner completion. The adjudication explicitly does not authorize evaluation or training retry.
+
+The pinned-interpreter run of five relevant CPU/fake suites produced **36 passed** (see c908_fake_tests.log). A separate evidence check read the authentic Markdown and original outer records, then exercised synthetic reservation records only (independent_checks.log). My first attempt to run pytest with the system Python failed because pytest is not installed there; that raw attempt remains preserved as fake_tests.log, and the successful run used the project interpreter. No real task, GPU, model, environment, preflight, or evaluation was run.
+
+## Source and treatment limits
+
+The worker wraps unchanged P0 production policy for every named arm and checks the same public-prompt marker and action mapping before delegating to the unchanged action policy. The fake lifecycle tests cover ordinary versus explicit forbidden marker for all three named arms; their model/environment edges are synthetic. Marker filtering is not a proof that every possible hidden fact is absent. The freeze comparison found no changes outside the prototype directory and independent source checks verified eight specified project source SHA-256 values plus the historical episode source SHA. Pinned finder compiles captured verified bytes for those eight modules, the historical episode, and two explicitly bound TextWorld modules, preventing reuse of timestamp-valid stale bytecode for those selected names; the fake stale-cache regression passes. It does not authenticate every transitive import, interpreter/library/native dependency, parent package, filesystem state, or future runtime; the exact TextWorld source bindings and runtime identity must still be independently checked for any later approved run.
+
+## Remaining operational and scientific boundaries
+
+`ReservationJournal` is not wired into `real_bc_unit_worker`; separate fake probing confirms its `start` accepts a generation before actor load, environment construction/load, or reset. It is therefore not a stand-alone physical operation-order enforcer. A future integration must explicitly enforce lifecycle order, caps and stop/unknown behavior with independent supervisor evidence; current fake generation acceptance is not a real generation.
+
+The proposed schedule is B: P0, C-high, C-low; C: C-low, C-high, P0. C-high is second in both, and two exposed development cases cannot separate order effects or establish statistically meaningful three-arm success effects. This is an engineering feasibility comparison, not held-out evaluation, unbiased effect estimation, or evidence of generalization.
+
+No candidate or historical original was edited. No retries or scientific actions occurred. Raw logs and the small independent checks are retained beside this report. Source and plan bindings are not a substitute for fresh process, authorization, resource, isolation and independent exact-SHA assessment.
