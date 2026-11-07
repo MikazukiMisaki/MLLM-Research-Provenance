@@ -1,0 +1,7 @@
+# Independent read-only audit: second shared GPU admission observation
+
+Observed terminal result `PASS_SHARED_DEVICE_OBSERVATION` is supported for the recorded interval. Raw JSONL SHA256 `1cd987091c65e944da3650831cd7386b3f3a0da7f7e6ba6dc3b8d6c03f6d6695`; script SHA256 `02dd05e765fd10cf6e97cfe686b8b56fad1ef85ce8b55fa19e078aa9efdab2a0`. Byte comparison to the earlier independently reviewed script (`7d3b9bf223ce8beef8cba7feab90d0193593923f5057f06aa3fab7a0d14481fb`) shows exactly one source change: the output filename. This audit did not invoke the sampler or GPU.
+
+Recorded sequence comprises STARTED, 16 ordered samples indexed 0–15 and RETURNED. Every UUID agrees with the current authorization and device visibility binding. All 16 report 45,390 MiB free and 0% utilization. First-to-last query starts span 60.000118144s; largest query-start gap 4.003634081s; longest query duration 0.063964536s. These meet the stated 30 GiB/20% and query-start cadence policy. The coordinator directly observed outer exit 0; the auditor did not independently rerun it, and that observation is not an independently signed receipt.
+
+The result describes the recorded shared GPU observation only. Actual hardware measurement instants lie within each query interval; the sample cannot exclude intermediate spikes, other users, or later drift. It is not proof of exclusive GPU ownership or authorization for any model, training or environment execution. No real sampling or model/environment invocation was performed by this audit.

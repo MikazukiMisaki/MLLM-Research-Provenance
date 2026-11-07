@@ -1,0 +1,5 @@
+# Independent review of final prospective dispatch clock addendum
+
+Final reviewed bytes SHA256 `8f18fb0d72a685eeea00fc58473c8392de239d9bc681d99dd24598d074509fcd`. The final text clarifies that cleanup is timed but may continue beyond 1,800 seconds. It also identifies the main CLI's earliest current draft clock point immediately after `time` import, with interpreter startup and that first import outside the bound. The prior independent review of the narrower operational policy applies, with the precise final digest substituted; the scientific treatment, inner protocol, single-attempt rule and no-retry policy are unchanged.
+
+This is a prospective, limited operational boundary, conditional on exact final entry/adapter time propagation and separately observed process start/exit. It is not an enforced hard total-resource or process-tail cap, not an independent signature, and does not authorize a launch. The final reviewed entry and actual pin must bind this exact digest and still require independent audit. No model, GPU, preflight, environment or training was invoked for this review.
