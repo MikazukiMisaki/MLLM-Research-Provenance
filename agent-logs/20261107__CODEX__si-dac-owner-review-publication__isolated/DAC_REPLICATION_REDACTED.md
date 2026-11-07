@@ -1,0 +1,13 @@
+> Publication copy: generic absolute system paths redacted. Original SHA-256: `842ddf9601393d8935dee5471fd8b6d2a57a46dd75726f52b73c531e57d4f980`.
+
+# Independent synthetic DAC replication
+
+**Decision: observed limited ordinary Linux DAC separation on fake files; NOT independent scientific custody and NOT ready for real evaluation.** Re-ran an independently copied byte-identical probe, SHA256 `b1b67cd20ea38af7ea0b87ddde047333228fa2af7277291816faa2b6aae1ebbf`, with a fresh private output directory. Actual tool-observed process exit was 0; all 15 synthetic checks and its own temporary-tree cleanup reported true. The independently produced `receipt.json` is retained here; the original was not modified.
+
+The `nobody` child, with no effective capabilities according to its own `[SYSTEM_PROCESS_PATH_REDACTED]` report, read the allowed fake input but was denied the checked private paths and directory enumeration. The ordinary coordinator UID could not read the fake child-owned 0700 output directory, so actual integration needs a separately reviewed output-ingestion channel. This is a useful OS permission observation for the tested paths, not an attestation of a hardened sandbox or authenticated producer.
+
+The same ordinary coordinator can execute `sudo -n` for the harness's root-owned operations; therefore root can bypass these discretionary file permissions and the arrangement is not a separate independent custodian. A direct extra check also observed that `nobody` can read the world-readable `[SYSTEM_RELEASE_PATH_REDACTED]`; access is not confined to the allowlisted fake file. Inherited file descriptors, environment, other world-readable paths, processes, network, libraries and side channels were not comprehensively tested. The child reports its own observations and is not an independently trusted security monitor.
+
+Even a correctly isolated actor UID does not hide private state from actor code when the same process contains both the PDDL environment and model. A credible development design needs a separate environment process, an allowlisted public projection across a bounded authenticated channel, independently reviewed ingress/egress, and faithful state/action handling; this probe implements none of that. Such a design alone would still not prove an independently unseen task set, completeness of past-use history, pretraining non-overlap, or a sample of independent task families. Shared administrative control remains explicit.
+
+No real task, witness, model, ALFWorld, CUDA or scientific experiment was read or run. This does not authorize actual staging or live inference.
