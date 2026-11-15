@@ -1,0 +1,111 @@
+{
+  "completion": {
+    "elapsed_seconds": 20.068998,
+    "forward_count": 128,
+    "max_rss_kib": 4658556,
+    "prompt_count": 32,
+    "system_cpu_seconds": 5.608017,
+    "user_cpu_seconds": 15.617466
+  },
+  "conditions": {
+    "false_correct": {
+      "canonical_argmax_matches_recorded_greedy": 8,
+      "canonical_suffix_matches_recorded": 8,
+      "planned": 8,
+      "undo_minus_take_log_score_median": -20.875,
+      "undo_minus_take_log_score_range": [
+        -24.500125885009766,
+        -18.625
+      ],
+      "undo_weight_above_0_9": 0,
+      "undo_weight_median": 8.659380215523691e-10,
+      "undo_weight_range": [
+        2.2894466166408878e-11,
+        8.152020626398143e-09
+      ],
+      "valid": 8
+    },
+    "false_wrong": {
+      "canonical_argmax_matches_recorded_greedy": 8,
+      "canonical_suffix_matches_recorded": 8,
+      "planned": 8,
+      "undo_minus_take_log_score_median": 16.99999994039536,
+      "undo_minus_take_log_score_range": [
+        14.25000035762804,
+        19.5
+      ],
+      "undo_weight_above_0_9": 8,
+      "undo_weight_median": 0.9999999386452996,
+      "undo_weight_range": [
+        0.9999993518640866,
+        0.9999999941168296
+      ],
+      "valid": 8
+    },
+    "old_correct": {
+      "canonical_argmax_matches_recorded_greedy": 8,
+      "canonical_suffix_matches_recorded": 8,
+      "planned": 8,
+      "undo_minus_take_log_score_median": -20.75,
+      "undo_minus_take_log_score_range": [
+        -26.125083923339844,
+        -20.0
+      ],
+      "undo_weight_above_0_9": 0,
+      "undo_weight_median": 9.73620026239699e-10,
+      "undo_weight_range": [
+        4.508376865965975e-12,
+        2.0611536172309476e-09
+      ],
+      "valid": 8
+    },
+    "old_wrong": {
+      "canonical_argmax_matches_recorded_greedy": 8,
+      "canonical_suffix_matches_recorded": 8,
+      "planned": 8,
+      "undo_minus_take_log_score_median": 10.625000298582108,
+      "undo_minus_take_log_score_range": [
+        -10.249999881416443,
+        17.625
+      ],
+      "undo_weight_above_0_9": 7,
+      "undo_weight_median": 0.9999707941277188,
+      "undo_weight_range": [
+        3.535625436900264e-05,
+        0.9999999672960986
+      ],
+      "valid": 8
+    }
+  },
+  "forward_input_tokens": 31216,
+  "max_prompt_seconds": 0.698343,
+  "paired_undo_weight_changes": {
+    "diagnosis_given_injected_goal": {
+      "decrease": 1,
+      "equal": 0,
+      "increase": 7,
+      "valid": 8
+    },
+    "diagnosis_given_original_goal": {
+      "decrease": 3,
+      "equal": 0,
+      "increase": 5,
+      "valid": 8
+    },
+    "goal_given_injected_diagnosis": {
+      "decrease": 0,
+      "equal": 0,
+      "increase": 8,
+      "valid": 8
+    },
+    "goal_given_original_diagnosis": {
+      "decrease": 0,
+      "equal": 0,
+      "increase": 8,
+      "valid": 8
+    }
+  },
+  "sampled_gpu_max_mib": 16228,
+  "scope": "same-operator recomputation of recorded fictional-prompt scores; no model execution or provenance authentication",
+  "source_sha256": "70b823a1c74c9fdce74337e78e5f93a9c22f1b87567b3931e073da81aec6a035"
+}

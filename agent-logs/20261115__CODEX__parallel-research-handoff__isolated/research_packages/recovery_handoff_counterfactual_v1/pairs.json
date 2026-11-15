@@ -1,0 +1,337 @@
+{
+  "records": [
+    {
+      "baseline": {
+        "decoded": "A000",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          15,
+          151645
+        ]
+      },
+      "baseline_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two mugs in cabinet.\n\nCurrent pre-action observation:\nmug 1 is in cabinet. mug 2 is visible on countertop; cabinet is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put mug 1 in cabinet\nResult: mug 1 is in cabinet.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nMug 2 is not in inventory, preventing task completion.\n\nFrozen Stage-1 immediate subgoal:\nTake mug 2 from countertop.\n\nIndexed admissible-action mapping:\n[A000] take mug 2 from countertop\n[A001] take mug 1 from cabinet\n[A002] look\n[A003] inventory\n\nYour response:",
+      "intervention": {
+        "decoded": "A001",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          16,
+          151645
+        ]
+      },
+      "intervention_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two mugs in cabinet.\n\nCurrent pre-action observation:\nmug 1 is in cabinet. mug 2 is visible on countertop; cabinet is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put mug 1 in cabinet\nResult: mug 1 is in cabinet.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nMug 2 is not in inventory, preventing task completion.\n\nFrozen Stage-1 immediate subgoal:\nTake mug 1 from cabinet.\n\nIndexed admissible-action mapping:\n[A000] take mug 2 from countertop\n[A001] take mug 1 from cabinet\n[A002] look\n[A003] inventory\n\nYour response:",
+      "key": "01",
+      "mapping": {
+        "A000": "take mug 2 from countertop",
+        "A001": "take mug 1 from cabinet",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "take_second": "take mug 2 from countertop",
+      "undo_first": "take mug 1 from cabinet"
+    },
+    {
+      "baseline": {
+        "decoded": "A003",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          18,
+          151645
+        ]
+      },
+      "baseline_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two books in box.\n\nCurrent pre-action observation:\nbook 1 is in box. book 2 is visible on desk; box is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put book 1 in box\nResult: book 1 is in box.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nBook 2 is not in inventory, box is accessible.\n\nFrozen Stage-1 immediate subgoal:\nTake book 2 from desk.\n\nIndexed admissible-action mapping:\n[A000] take book 1 from box\n[A001] look\n[A002] inventory\n[A003] take book 2 from desk\n\nYour response:",
+      "intervention": {
+        "decoded": "A000",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          15,
+          151645
+        ]
+      },
+      "intervention_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two books in box.\n\nCurrent pre-action observation:\nbook 1 is in box. book 2 is visible on desk; box is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put book 1 in box\nResult: book 1 is in box.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nBook 2 is not in inventory, box is accessible.\n\nFrozen Stage-1 immediate subgoal:\nTake book 1 from box.\n\nIndexed admissible-action mapping:\n[A000] take book 1 from box\n[A001] look\n[A002] inventory\n[A003] take book 2 from desk\n\nYour response:",
+      "key": "02",
+      "mapping": {
+        "A000": "take book 1 from box",
+        "A001": "look",
+        "A002": "inventory",
+        "A003": "take book 2 from desk"
+      },
+      "take_second": "take book 2 from desk",
+      "undo_first": "take book 1 from box"
+    },
+    {
+      "baseline": {
+        "decoded": "A002",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          17,
+          151645
+        ]
+      },
+      "baseline_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two spoons in drawer.\n\nCurrent pre-action observation:\nspoon 1 is in drawer. spoon 2 is visible on tray; drawer is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put spoon 1 in drawer\nResult: spoon 1 is in drawer.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nSpoon 2 is not in inventory, drawer already contains spoon 1.\n\nFrozen Stage-1 immediate subgoal:\nTake spoon 2 from tray.\n\nIndexed admissible-action mapping:\n[A000] look\n[A001] inventory\n[A002] take spoon 2 from tray\n[A003] take spoon 1 from drawer\n\nYour response:",
+      "intervention": {
+        "decoded": "A003",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          18,
+          151645
+        ]
+      },
+      "intervention_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two spoons in drawer.\n\nCurrent pre-action observation:\nspoon 1 is in drawer. spoon 2 is visible on tray; drawer is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put spoon 1 in drawer\nResult: spoon 1 is in drawer.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nSpoon 2 is not in inventory, drawer already contains spoon 1.\n\nFrozen Stage-1 immediate subgoal:\nTake spoon 1 from drawer.\n\nIndexed admissible-action mapping:\n[A000] look\n[A001] inventory\n[A002] take spoon 2 from tray\n[A003] take spoon 1 from drawer\n\nYour response:",
+      "key": "03",
+      "mapping": {
+        "A000": "look",
+        "A001": "inventory",
+        "A002": "take spoon 2 from tray",
+        "A003": "take spoon 1 from drawer"
+      },
+      "take_second": "take spoon 2 from tray",
+      "undo_first": "take spoon 1 from drawer"
+    },
+    {
+      "baseline": {
+        "decoded": "A001",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          16,
+          151645
+        ]
+      },
+      "baseline_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two plates in shelf.\n\nCurrent pre-action observation:\nplate 1 is in shelf. plate 2 is visible on table; shelf is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put plate 1 in shelf\nResult: plate 1 is in shelf.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nPlate 2 is not in inventory, preventing placement on shelf.\n\nFrozen Stage-1 immediate subgoal:\nTake plate 2 from table to inventory.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take plate 2 from table\n[A002] take plate 1 from shelf\n[A003] look\n\nYour response:",
+      "intervention": {
+        "decoded": "A002",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          17,
+          151645
+        ]
+      },
+      "intervention_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two plates in shelf.\n\nCurrent pre-action observation:\nplate 1 is in shelf. plate 2 is visible on table; shelf is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put plate 1 in shelf\nResult: plate 1 is in shelf.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nPlate 2 is not in inventory, preventing placement on shelf.\n\nFrozen Stage-1 immediate subgoal:\nTake plate 1 from shelf.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take plate 2 from table\n[A002] take plate 1 from shelf\n[A003] look\n\nYour response:",
+      "key": "04",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take plate 2 from table",
+        "A002": "take plate 1 from shelf",
+        "A003": "look"
+      },
+      "take_second": "take plate 2 from table",
+      "undo_first": "take plate 1 from shelf"
+    },
+    {
+      "baseline": {
+        "decoded": "A000",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          15,
+          151645
+        ]
+      },
+      "baseline_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two towels in basket.\n\nCurrent pre-action observation:\ntowel 1 is in basket. towel 2 is visible on rack; basket is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put towel 1 in basket\nResult: towel 1 is in basket.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nTowel 2 is not in inventory, basket already contains towel 1.\n\nFrozen Stage-1 immediate subgoal:\nTake towel 2 from rack.\n\nIndexed admissible-action mapping:\n[A000] take towel 2 from rack\n[A001] take towel 1 from basket\n[A002] look\n[A003] inventory\n\nYour response:",
+      "intervention": {
+        "decoded": "A001",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          16,
+          151645
+        ]
+      },
+      "intervention_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two towels in basket.\n\nCurrent pre-action observation:\ntowel 1 is in basket. towel 2 is visible on rack; basket is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put towel 1 in basket\nResult: towel 1 is in basket.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nTowel 2 is not in inventory, basket already contains towel 1.\n\nFrozen Stage-1 immediate subgoal:\nTake towel 1 from basket.\n\nIndexed admissible-action mapping:\n[A000] take towel 2 from rack\n[A001] take towel 1 from basket\n[A002] look\n[A003] inventory\n\nYour response:",
+      "key": "05",
+      "mapping": {
+        "A000": "take towel 2 from rack",
+        "A001": "take towel 1 from basket",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "take_second": "take towel 2 from rack",
+      "undo_first": "take towel 1 from basket"
+    },
+    {
+      "baseline": {
+        "decoded": "A003",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          18,
+          151645
+        ]
+      },
+      "baseline_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two keys in drawer.\n\nCurrent pre-action observation:\nkey 1 is in drawer. key 2 is visible on countertop; drawer is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put key 1 in drawer\nResult: key 1 is in drawer.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nMissing key 2 in inventory, drawer already contains key 1.\n\nFrozen Stage-1 immediate subgoal:\nTake key 2 from countertop.\n\nIndexed admissible-action mapping:\n[A000] take key 1 from drawer\n[A001] look\n[A002] inventory\n[A003] take key 2 from countertop\n\nYour response:",
+      "intervention": {
+        "decoded": "A003",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          18,
+          151645
+        ]
+      },
+      "intervention_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two keys in drawer.\n\nCurrent pre-action observation:\nkey 1 is in drawer. key 2 is visible on countertop; drawer is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put key 1 in drawer\nResult: key 1 is in drawer.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nMissing key 2 in inventory, drawer already contains key 1.\n\nFrozen Stage-1 immediate subgoal:\nTake key 1 from drawer.\n\nIndexed admissible-action mapping:\n[A000] take key 1 from drawer\n[A001] look\n[A002] inventory\n[A003] take key 2 from countertop\n\nYour response:",
+      "key": "06",
+      "mapping": {
+        "A000": "take key 1 from drawer",
+        "A001": "look",
+        "A002": "inventory",
+        "A003": "take key 2 from countertop"
+      },
+      "take_second": "take key 2 from countertop",
+      "undo_first": "take key 1 from drawer"
+    },
+    {
+      "baseline": {
+        "decoded": "A002",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          17,
+          151645
+        ]
+      },
+      "baseline_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two hats in box.\n\nCurrent pre-action observation:\nhat 1 is in box. hat 2 is visible on chair; box is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put hat 1 in box\nResult: hat 1 is in box.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nHat 2 is not in inventory, box already contains hat 1.\n\nFrozen Stage-1 immediate subgoal:\nTake hat 2 from chair.\n\nIndexed admissible-action mapping:\n[A000] look\n[A001] inventory\n[A002] take hat 2 from chair\n[A003] take hat 1 from box\n\nYour response:",
+      "intervention": {
+        "decoded": "A003",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          18,
+          151645
+        ]
+      },
+      "intervention_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two hats in box.\n\nCurrent pre-action observation:\nhat 1 is in box. hat 2 is visible on chair; box is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put hat 1 in box\nResult: hat 1 is in box.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nHat 2 is not in inventory, box already contains hat 1.\n\nFrozen Stage-1 immediate subgoal:\nTake hat 1 from box.\n\nIndexed admissible-action mapping:\n[A000] look\n[A001] inventory\n[A002] take hat 2 from chair\n[A003] take hat 1 from box\n\nYour response:",
+      "key": "07",
+      "mapping": {
+        "A000": "look",
+        "A001": "inventory",
+        "A002": "take hat 2 from chair",
+        "A003": "take hat 1 from box"
+      },
+      "take_second": "take hat 2 from chair",
+      "undo_first": "take hat 1 from box"
+    },
+    {
+      "baseline": {
+        "decoded": "A001",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          16,
+          151645
+        ]
+      },
+      "baseline_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two shoes in cabinet.\n\nCurrent pre-action observation:\nshoe 1 is in cabinet. shoe 2 is visible on floor; cabinet is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put shoe 1 in cabinet\nResult: shoe 1 is in cabinet.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nShoe 2 is not in inventory, preventing completion of task goal.\n\nFrozen Stage-1 immediate subgoal:\nTake shoe 2 from floor.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take shoe 2 from floor\n[A002] take shoe 1 from cabinet\n[A003] look\n\nYour response:",
+      "intervention": {
+        "decoded": "A002",
+        "eos_ids": [
+          151645,
+          151643
+        ],
+        "token_ids": [
+          32,
+          15,
+          15,
+          17,
+          151645
+        ]
+      },
+      "intervention_prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut two shoes in cabinet.\n\nCurrent pre-action observation:\nshoe 1 is in cabinet. shoe 2 is visible on floor; cabinet is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\nAction: put shoe 1 in cabinet\nResult: shoe 1 is in cabinet.\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nShoe 2 is not in inventory, preventing completion of task goal.\n\nFrozen Stage-1 immediate subgoal:\nTake shoe 1 from cabinet.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take shoe 2 from floor\n[A002] take shoe 1 from cabinet\n[A003] look\n\nYour response:",
+      "key": "08",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take shoe 2 from floor",
+        "A002": "take shoe 1 from cabinet",
+        "A003": "look"
+      },
+      "take_second": "take shoe 2 from floor",
+      "undo_first": "take shoe 1 from cabinet"
+    }
+  ],
+  "schema": "recovery_handoff_counterfactual_v1",
+  "source_sha256": {
+    "baseline": "ea1ef47972d23e5b76e2a6d979650e499ef3002ab34b9ba6b75cc4b4931d2c9b",
+    "intervention": "f7257a33a936856b933c6c9b4a12094d7b91d1c5ec75eb5997616fd7608307be"
+  }
+}

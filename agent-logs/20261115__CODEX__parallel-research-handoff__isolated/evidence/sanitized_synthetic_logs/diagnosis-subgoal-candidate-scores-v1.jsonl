@@ -1,0 +1,389 @@
+{"elapsed_seconds": 0.066607, "event": "gpu_sample", "label": "before_loading", "used_mib": 14}
+{"elapsed_seconds": 3.483125, "event": "loading_start", "script_sha256": "9180d5ef0fb028141960ba3d3d35d5a4c9a8ad5e3e1136e6ed5bea6c913efab3", "sources_sha256": {"diagnosis": "83b39d630630ab34d9d4fc6627440c0621e2b6400e5cbe26f1a9bca52c4fcdf2", "goal": "f7257a33a936856b933c6c9b4a12094d7b91d1c5ec75eb5997616fd7608307be", "original": "ea1ef47972d23e5b76e2a6d979650e499ef3002ab34b9ba6b75cc4b4931d2c9b"}, "torch_version": "2.6.0+cu124", "transformers_version": "4.56.2"}
+{"elapsed_seconds": 7.405469, "event": "gpu_sample", "label": "after_loading", "used_mib": 16052}
+{"chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8", "elapsed_seconds": 7.409592, "event": "loading_complete", "suffixes": {"A000": [32, 15, 15, 15, 151645], "A001": [32, 15, 15, 16, 151645], "A002": [32, 15, 15, 17, 151645], "A003": [32, 15, 15, 18, 151645]}, "tokenizer_class": "Qwen2TokenizerFast"}
+{"elapsed_seconds": 7.435296, "event": "gpu_sample", "label": "before_01-old_correct", "used_mib": 16052}
+{"correct_action": "take mug 2 from countertop", "elapsed_seconds": 7.470995, "event": "prepared", "input_token_count": 244, "key": "01-old_correct", "mapping": {"A000": "take mug 2 from countertop", "A001": "take mug 1 from cabinet", "A002": "look", "A003": "inventory"}, "undo_action": "take mug 1 from cabinet"}
+{"candidate": "A000", "elapsed_seconds": 7.474247, "event": "forward_start", "key": "01-old_correct"}
+{"candidate": "A000", "elapsed_seconds": 7.93697, "event": "score", "forward_input_tokens": 249, "key": "01-old_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 7.940167, "event": "forward_start", "key": "01-old_correct"}
+{"candidate": "A001", "elapsed_seconds": 8.015006, "event": "score", "forward_input_tokens": 249, "key": "01-old_correct", "log_probability": -20.0, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 8.017923, "event": "forward_start", "key": "01-old_correct"}
+{"candidate": "A002", "elapsed_seconds": 8.092245, "event": "score", "forward_input_tokens": 249, "key": "01-old_correct", "log_probability": -22.625, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 8.095113, "event": "forward_start", "key": "01-old_correct"}
+{"candidate": "A003", "elapsed_seconds": 8.169247, "event": "score", "forward_input_tokens": 249, "key": "01-old_correct", "log_probability": -21.875, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 8.172095, "event": "prompt_complete", "key": "01-old_correct", "request_seconds": 0.698343}
+{"elapsed_seconds": 8.200821, "event": "gpu_sample", "label": "after_01-old_correct", "used_mib": 16228}
+{"elapsed_seconds": 8.22599, "event": "gpu_sample", "label": "before_01-old_wrong", "used_mib": 16228}
+{"correct_action": "take mug 2 from countertop", "elapsed_seconds": 8.232235, "event": "prepared", "input_token_count": 243, "key": "01-old_wrong", "mapping": {"A000": "take mug 2 from countertop", "A001": "take mug 1 from cabinet", "A002": "look", "A003": "inventory"}, "undo_action": "take mug 1 from cabinet"}
+{"candidate": "A000", "elapsed_seconds": 8.235109, "event": "forward_start", "key": "01-old_wrong"}
+{"candidate": "A000", "elapsed_seconds": 8.311659, "event": "score", "forward_input_tokens": 248, "key": "01-old_wrong", "log_probability": -11.25001335144043, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 8.314789, "event": "forward_start", "key": "01-old_wrong"}
+{"candidate": "A001", "elapsed_seconds": 8.388287, "event": "score", "forward_input_tokens": 248, "key": "01-old_wrong", "log_probability": -1.2993727978027891e-05, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 8.391074, "event": "forward_start", "key": "01-old_wrong"}
+{"candidate": "A002", "elapsed_seconds": 8.464697, "event": "score", "forward_input_tokens": 248, "key": "01-old_wrong", "log_probability": -20.75001335144043, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 8.467854, "event": "forward_start", "key": "01-old_wrong"}
+{"candidate": "A003", "elapsed_seconds": 8.54265, "event": "score", "forward_input_tokens": 248, "key": "01-old_wrong", "log_probability": -24.00001335144043, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 8.54548, "event": "prompt_complete", "key": "01-old_wrong", "request_seconds": 0.310692}
+{"elapsed_seconds": 8.571858, "event": "gpu_sample", "label": "after_01-old_wrong", "used_mib": 16228}
+{"elapsed_seconds": 8.596689, "event": "gpu_sample", "label": "before_01-false_correct", "used_mib": 16228}
+{"correct_action": "take mug 2 from countertop", "elapsed_seconds": 8.602784, "event": "prepared", "input_token_count": 240, "key": "01-false_correct", "mapping": {"A000": "take mug 2 from countertop", "A001": "take mug 1 from cabinet", "A002": "look", "A003": "inventory"}, "undo_action": "take mug 1 from cabinet"}
+{"candidate": "A000", "elapsed_seconds": 8.605875, "event": "forward_start", "key": "01-false_correct"}
+{"candidate": "A000", "elapsed_seconds": 8.683304, "event": "score", "forward_input_tokens": 245, "key": "01-false_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 8.686269, "event": "forward_start", "key": "01-false_correct"}
+{"candidate": "A001", "elapsed_seconds": 8.761449, "event": "score", "forward_input_tokens": 245, "key": "01-false_correct", "log_probability": -18.625, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 8.764538, "event": "forward_start", "key": "01-false_correct"}
+{"candidate": "A002", "elapsed_seconds": 8.837996, "event": "score", "forward_input_tokens": 245, "key": "01-false_correct", "log_probability": -21.25, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 8.841163, "event": "forward_start", "key": "01-false_correct"}
+{"candidate": "A003", "elapsed_seconds": 8.914796, "event": "score", "forward_input_tokens": 245, "key": "01-false_correct", "log_probability": -20.0, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 8.917428, "event": "prompt_complete", "key": "01-false_correct", "request_seconds": 0.311877}
+{"elapsed_seconds": 8.944412, "event": "gpu_sample", "label": "after_01-false_correct", "used_mib": 16228}
+{"elapsed_seconds": 8.968574, "event": "gpu_sample", "label": "before_01-false_wrong", "used_mib": 16228}
+{"correct_action": "take mug 2 from countertop", "elapsed_seconds": 8.974749, "event": "prepared", "input_token_count": 239, "key": "01-false_wrong", "mapping": {"A000": "take mug 2 from countertop", "A001": "take mug 1 from cabinet", "A002": "look", "A003": "inventory"}, "undo_action": "take mug 1 from cabinet"}
+{"candidate": "A000", "elapsed_seconds": 8.97785, "event": "forward_start", "key": "01-false_wrong"}
+{"candidate": "A000", "elapsed_seconds": 9.055537, "event": "score", "forward_input_tokens": 244, "key": "01-false_wrong", "log_probability": -16.375001907348633, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 9.058643, "event": "forward_start", "key": "01-false_wrong"}
+{"candidate": "A001", "elapsed_seconds": 9.133173, "event": "score", "forward_input_tokens": 244, "key": "01-false_wrong", "log_probability": -1.1920928244535389e-07, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 9.136317, "event": "forward_start", "key": "01-false_wrong"}
+{"candidate": "A002", "elapsed_seconds": 9.210064, "event": "score", "forward_input_tokens": 244, "key": "01-false_wrong", "log_probability": -18.125, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 9.212973, "event": "forward_start", "key": "01-false_wrong"}
+{"candidate": "A003", "elapsed_seconds": 9.287777, "event": "score", "forward_input_tokens": 244, "key": "01-false_wrong", "log_probability": -21.125, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 9.290624, "event": "prompt_complete", "key": "01-false_wrong", "request_seconds": 0.313086}
+{"elapsed_seconds": 9.317993, "event": "gpu_sample", "label": "after_01-false_wrong", "used_mib": 16228}
+{"elapsed_seconds": 9.345112, "event": "gpu_sample", "label": "before_02-old_correct", "used_mib": 16228}
+{"correct_action": "take book 2 from desk", "elapsed_seconds": 9.351393, "event": "prepared", "input_token_count": 238, "key": "02-old_correct", "mapping": {"A000": "take book 1 from box", "A001": "look", "A002": "inventory", "A003": "take book 2 from desk"}, "undo_action": "take book 1 from box"}
+{"candidate": "A000", "elapsed_seconds": 9.354287, "event": "forward_start", "key": "02-old_correct"}
+{"candidate": "A000", "elapsed_seconds": 9.431994, "event": "score", "forward_input_tokens": 243, "key": "02-old_correct", "log_probability": -26.125083923339844, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 9.435076, "event": "forward_start", "key": "02-old_correct"}
+{"candidate": "A001", "elapsed_seconds": 9.508602, "event": "score", "forward_input_tokens": 243, "key": "02-old_correct", "log_probability": -25.5, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 9.511421, "event": "forward_start", "key": "02-old_correct"}
+{"candidate": "A002", "elapsed_seconds": 9.584509, "event": "score", "forward_input_tokens": 243, "key": "02-old_correct", "log_probability": -21.375, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 9.587519, "event": "forward_start", "key": "02-old_correct"}
+{"candidate": "A003", "elapsed_seconds": 9.66114, "event": "score", "forward_input_tokens": 243, "key": "02-old_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 9.663864, "event": "prompt_complete", "key": "02-old_correct", "request_seconds": 0.309813}
+{"elapsed_seconds": 9.691385, "event": "gpu_sample", "label": "after_02-old_correct", "used_mib": 16228}
+{"elapsed_seconds": 9.715751, "event": "gpu_sample", "label": "before_02-old_wrong", "used_mib": 16228}
+{"correct_action": "take book 2 from desk", "elapsed_seconds": 9.722218, "event": "prepared", "input_token_count": 238, "key": "02-old_wrong", "mapping": {"A000": "take book 1 from box", "A001": "look", "A002": "inventory", "A003": "take book 2 from desk"}, "undo_action": "take book 1 from box"}
+{"candidate": "A000", "elapsed_seconds": 9.725469, "event": "forward_start", "key": "02-old_wrong"}
+{"candidate": "A000", "elapsed_seconds": 9.803114, "event": "score", "forward_input_tokens": 243, "key": "02-old_wrong", "log_probability": -0.0011701886542141438, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 9.806293, "event": "forward_start", "key": "02-old_wrong"}
+{"candidate": "A001", "elapsed_seconds": 9.880798, "event": "score", "forward_input_tokens": 243, "key": "02-old_wrong", "log_probability": -21.001171112060547, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 9.883962, "event": "forward_start", "key": "02-old_wrong"}
+{"candidate": "A002", "elapsed_seconds": 9.958601, "event": "score", "forward_input_tokens": 243, "key": "02-old_wrong", "log_probability": -23.251171112060547, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 9.961367, "event": "forward_start", "key": "02-old_wrong"}
+{"candidate": "A003", "elapsed_seconds": 10.036308, "event": "score", "forward_input_tokens": 243, "key": "02-old_wrong", "log_probability": -6.7511701583862305, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 10.039109, "event": "prompt_complete", "key": "02-old_wrong", "request_seconds": 0.313958}
+{"elapsed_seconds": 10.067208, "event": "gpu_sample", "label": "after_02-old_wrong", "used_mib": 16228}
+{"elapsed_seconds": 10.091769, "event": "gpu_sample", "label": "before_02-false_correct", "used_mib": 16228}
+{"correct_action": "take book 2 from desk", "elapsed_seconds": 10.098161, "event": "prepared", "input_token_count": 234, "key": "02-false_correct", "mapping": {"A000": "take book 1 from box", "A001": "look", "A002": "inventory", "A003": "take book 2 from desk"}, "undo_action": "take book 1 from box"}
+{"candidate": "A000", "elapsed_seconds": 10.101305, "event": "forward_start", "key": "02-false_correct"}
+{"candidate": "A000", "elapsed_seconds": 10.178064, "event": "score", "forward_input_tokens": 239, "key": "02-false_correct", "log_probability": -24.500125885009766, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 10.18121, "event": "forward_start", "key": "02-false_correct"}
+{"candidate": "A001", "elapsed_seconds": 10.254821, "event": "score", "forward_input_tokens": 239, "key": "02-false_correct", "log_probability": -23.625, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 10.25794, "event": "forward_start", "key": "02-false_correct"}
+{"candidate": "A002", "elapsed_seconds": 10.332144, "event": "score", "forward_input_tokens": 239, "key": "02-false_correct", "log_probability": -20.25, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 10.335253, "event": "forward_start", "key": "02-false_correct"}
+{"candidate": "A003", "elapsed_seconds": 10.408409, "event": "score", "forward_input_tokens": 239, "key": "02-false_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 10.411202, "event": "prompt_complete", "key": "02-false_correct", "request_seconds": 0.310085}
+{"elapsed_seconds": 10.43835, "event": "gpu_sample", "label": "after_02-false_correct", "used_mib": 16228}
+{"elapsed_seconds": 10.463285, "event": "gpu_sample", "label": "before_02-false_wrong", "used_mib": 16228}
+{"correct_action": "take book 2 from desk", "elapsed_seconds": 10.469618, "event": "prepared", "input_token_count": 234, "key": "02-false_wrong", "mapping": {"A000": "take book 1 from box", "A001": "look", "A002": "inventory", "A003": "take book 2 from desk"}, "undo_action": "take book 1 from box"}
+{"candidate": "A000", "elapsed_seconds": 10.472686, "event": "forward_start", "key": "02-false_wrong"}
+{"candidate": "A000", "elapsed_seconds": 10.550292, "event": "score", "forward_input_tokens": 239, "key": "02-false_wrong", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 10.553208, "event": "forward_start", "key": "02-false_wrong"}
+{"candidate": "A001", "elapsed_seconds": 10.626497, "event": "score", "forward_input_tokens": 239, "key": "02-false_wrong", "log_probability": -21.0, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 10.629417, "event": "forward_start", "key": "02-false_wrong"}
+{"candidate": "A002", "elapsed_seconds": 10.702431, "event": "score", "forward_input_tokens": 239, "key": "02-false_wrong", "log_probability": -25.875, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 10.705251, "event": "forward_start", "key": "02-false_wrong"}
+{"candidate": "A003", "elapsed_seconds": 10.779207, "event": "score", "forward_input_tokens": 239, "key": "02-false_wrong", "log_probability": -16.75, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 10.782141, "event": "prompt_complete", "key": "02-false_wrong", "request_seconds": 0.309658}
+{"elapsed_seconds": 10.809792, "event": "gpu_sample", "label": "after_02-false_wrong", "used_mib": 16228}
+{"elapsed_seconds": 10.834655, "event": "gpu_sample", "label": "before_03-old_correct", "used_mib": 16228}
+{"correct_action": "take spoon 2 from tray", "elapsed_seconds": 10.840875, "event": "prepared", "input_token_count": 244, "key": "03-old_correct", "mapping": {"A000": "look", "A001": "inventory", "A002": "take spoon 2 from tray", "A003": "take spoon 1 from drawer"}, "undo_action": "take spoon 1 from drawer"}
+{"candidate": "A000", "elapsed_seconds": 10.844088, "event": "forward_start", "key": "03-old_correct"}
+{"candidate": "A000", "elapsed_seconds": 10.921354, "event": "score", "forward_input_tokens": 249, "key": "03-old_correct", "log_probability": -18.875072479248047, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 10.924535, "event": "forward_start", "key": "03-old_correct"}
+{"candidate": "A001", "elapsed_seconds": 10.998747, "event": "score", "forward_input_tokens": 249, "key": "03-old_correct", "log_probability": -17.75, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 11.001793, "event": "forward_start", "key": "03-old_correct"}
+{"candidate": "A002", "elapsed_seconds": 11.075987, "event": "score", "forward_input_tokens": 249, "key": "03-old_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 11.079074, "event": "forward_start", "key": "03-old_correct"}
+{"candidate": "A003", "elapsed_seconds": 11.153157, "event": "score", "forward_input_tokens": 249, "key": "03-old_correct", "log_probability": -20.625, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 11.155974, "event": "prompt_complete", "key": "03-old_correct", "request_seconds": 0.312207}
+{"elapsed_seconds": 11.183479, "event": "gpu_sample", "label": "after_03-old_correct", "used_mib": 16228}
+{"elapsed_seconds": 11.20957, "event": "gpu_sample", "label": "before_03-old_wrong", "used_mib": 16228}
+{"correct_action": "take spoon 2 from tray", "elapsed_seconds": 11.216094, "event": "prepared", "input_token_count": 244, "key": "03-old_wrong", "mapping": {"A000": "look", "A001": "inventory", "A002": "take spoon 2 from tray", "A003": "take spoon 1 from drawer"}, "undo_action": "take spoon 1 from drawer"}
+{"candidate": "A000", "elapsed_seconds": 11.219344, "event": "forward_start", "key": "03-old_wrong"}
+{"candidate": "A000", "elapsed_seconds": 11.29993, "event": "score", "forward_input_tokens": 249, "key": "03-old_wrong", "log_probability": -24.250444412231445, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 11.302764, "event": "forward_start", "key": "03-old_wrong"}
+{"candidate": "A001", "elapsed_seconds": 11.379116, "event": "score", "forward_input_tokens": 249, "key": "03-old_wrong", "log_probability": -18.125, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 11.382331, "event": "forward_start", "key": "03-old_wrong"}
+{"candidate": "A002", "elapsed_seconds": 11.462963, "event": "score", "forward_input_tokens": 249, "key": "03-old_wrong", "log_probability": -16.0, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 11.466094, "event": "forward_start", "key": "03-old_wrong"}
+{"candidate": "A003", "elapsed_seconds": 11.542299, "event": "score", "forward_input_tokens": 249, "key": "03-old_wrong", "log_probability": -1.1920928244535389e-07, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 11.544944, "event": "prompt_complete", "key": "03-old_wrong", "request_seconds": 0.32592}
+{"elapsed_seconds": 11.57558, "event": "gpu_sample", "label": "after_03-old_wrong", "used_mib": 16228}
+{"elapsed_seconds": 11.602591, "event": "gpu_sample", "label": "before_03-false_correct", "used_mib": 16228}
+{"correct_action": "take spoon 2 from tray", "elapsed_seconds": 11.609178, "event": "prepared", "input_token_count": 237, "key": "03-false_correct", "mapping": {"A000": "look", "A001": "inventory", "A002": "take spoon 2 from tray", "A003": "take spoon 1 from drawer"}, "undo_action": "take spoon 1 from drawer"}
+{"candidate": "A000", "elapsed_seconds": 11.612459, "event": "forward_start", "key": "03-false_correct"}
+{"candidate": "A000", "elapsed_seconds": 11.690497, "event": "score", "forward_input_tokens": 242, "key": "03-false_correct", "log_probability": -18.875030517578125, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 11.693771, "event": "forward_start", "key": "03-false_correct"}
+{"candidate": "A001", "elapsed_seconds": 11.769748, "event": "score", "forward_input_tokens": 242, "key": "03-false_correct", "log_probability": -18.0, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 11.772961, "event": "forward_start", "key": "03-false_correct"}
+{"candidate": "A002", "elapsed_seconds": 11.848886, "event": "score", "forward_input_tokens": 242, "key": "03-false_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 11.852183, "event": "forward_start", "key": "03-false_correct"}
+{"candidate": "A003", "elapsed_seconds": 11.927871, "event": "score", "forward_input_tokens": 242, "key": "03-false_correct", "log_probability": -20.75, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 11.930903, "event": "prompt_complete", "key": "03-false_correct", "request_seconds": 0.318813}
+{"elapsed_seconds": 11.960573, "event": "gpu_sample", "label": "after_03-false_correct", "used_mib": 16228}
+{"elapsed_seconds": 11.98711, "event": "gpu_sample", "label": "before_03-false_wrong", "used_mib": 16228}
+{"correct_action": "take spoon 2 from tray", "elapsed_seconds": 11.993713, "event": "prepared", "input_token_count": 237, "key": "03-false_wrong", "mapping": {"A000": "look", "A001": "inventory", "A002": "take spoon 2 from tray", "A003": "take spoon 1 from drawer"}, "undo_action": "take spoon 1 from drawer"}
+{"candidate": "A000", "elapsed_seconds": 11.997077, "event": "forward_start", "key": "03-false_wrong"}
+{"candidate": "A000", "elapsed_seconds": 12.075087, "event": "score", "forward_input_tokens": 242, "key": "03-false_wrong", "log_probability": -25.250267028808594, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 12.078366, "event": "forward_start", "key": "03-false_wrong"}
+{"candidate": "A001", "elapsed_seconds": 12.154254, "event": "score", "forward_input_tokens": 242, "key": "03-false_wrong", "log_probability": -17.125, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 12.157071, "event": "forward_start", "key": "03-false_wrong"}
+{"candidate": "A002", "elapsed_seconds": 12.233604, "event": "score", "forward_input_tokens": 242, "key": "03-false_wrong", "log_probability": -17.25, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 12.23676, "event": "forward_start", "key": "03-false_wrong"}
+{"candidate": "A003", "elapsed_seconds": 12.313035, "event": "score", "forward_input_tokens": 242, "key": "03-false_wrong", "log_probability": -1.1920928244535389e-07, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 12.315821, "event": "prompt_complete", "key": "03-false_wrong", "request_seconds": 0.319097}
+{"elapsed_seconds": 12.344926, "event": "gpu_sample", "label": "after_03-false_wrong", "used_mib": 16228}
+{"elapsed_seconds": 12.371608, "event": "gpu_sample", "label": "before_04-old_correct", "used_mib": 16228}
+{"correct_action": "take plate 2 from table", "elapsed_seconds": 12.378599, "event": "prepared", "input_token_count": 241, "key": "04-old_correct", "mapping": {"A000": "inventory", "A001": "take plate 2 from table", "A002": "take plate 1 from shelf", "A003": "look"}, "undo_action": "take plate 1 from shelf"}
+{"candidate": "A000", "elapsed_seconds": 12.381692, "event": "forward_start", "key": "04-old_correct"}
+{"candidate": "A000", "elapsed_seconds": 12.459827, "event": "score", "forward_input_tokens": 246, "key": "04-old_correct", "log_probability": -19.25, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 12.463162, "event": "forward_start", "key": "04-old_correct"}
+{"candidate": "A001", "elapsed_seconds": 12.5397, "event": "score", "forward_input_tokens": 246, "key": "04-old_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 12.542963, "event": "forward_start", "key": "04-old_correct"}
+{"candidate": "A002", "elapsed_seconds": 12.619527, "event": "score", "forward_input_tokens": 246, "key": "04-old_correct", "log_probability": -21.5, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 12.622821, "event": "forward_start", "key": "04-old_correct"}
+{"candidate": "A003", "elapsed_seconds": 12.699182, "event": "score", "forward_input_tokens": 246, "key": "04-old_correct", "log_probability": -24.250001907348633, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 12.702116, "event": "prompt_complete", "key": "04-old_correct", "request_seconds": 0.32067}
+{"elapsed_seconds": 12.732302, "event": "gpu_sample", "label": "after_04-old_correct", "used_mib": 16228}
+{"elapsed_seconds": 12.758853, "event": "gpu_sample", "label": "before_04-old_wrong", "used_mib": 16228}
+{"correct_action": "take plate 2 from table", "elapsed_seconds": 12.765449, "event": "prepared", "input_token_count": 239, "key": "04-old_wrong", "mapping": {"A000": "inventory", "A001": "take plate 2 from table", "A002": "take plate 1 from shelf", "A003": "look"}, "undo_action": "take plate 1 from shelf"}
+{"candidate": "A000", "elapsed_seconds": 12.768275, "event": "forward_start", "key": "04-old_wrong"}
+{"candidate": "A000", "elapsed_seconds": 12.845742, "event": "score", "forward_input_tokens": 244, "key": "04-old_wrong", "log_probability": -20.500125885009766, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 12.848557, "event": "forward_start", "key": "04-old_wrong"}
+{"candidate": "A001", "elapsed_seconds": 12.924386, "event": "score", "forward_input_tokens": 244, "key": "04-old_wrong", "log_probability": -9.000123023986816, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 12.92751, "event": "forward_start", "key": "04-old_wrong"}
+{"candidate": "A002", "elapsed_seconds": 13.00379, "event": "score", "forward_input_tokens": 244, "key": "04-old_wrong", "log_probability": -0.00012337400403339416, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 13.007182, "event": "forward_start", "key": "04-old_wrong"}
+{"candidate": "A003", "elapsed_seconds": 13.083178, "event": "score", "forward_input_tokens": 244, "key": "04-old_wrong", "log_probability": -25.250123977661133, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 13.086066, "event": "prompt_complete", "key": "04-old_wrong", "request_seconds": 0.318024}
+{"elapsed_seconds": 13.11586, "event": "gpu_sample", "label": "after_04-old_wrong", "used_mib": 16228}
+{"elapsed_seconds": 13.142657, "event": "gpu_sample", "label": "before_04-false_correct", "used_mib": 16228}
+{"correct_action": "take plate 2 from table", "elapsed_seconds": 13.149719, "event": "prepared", "input_token_count": 236, "key": "04-false_correct", "mapping": {"A000": "inventory", "A001": "take plate 2 from table", "A002": "take plate 1 from shelf", "A003": "look"}, "undo_action": "take plate 1 from shelf"}
+{"candidate": "A000", "elapsed_seconds": 13.153178, "event": "forward_start", "key": "04-false_correct"}
+{"candidate": "A000", "elapsed_seconds": 13.232157, "event": "score", "forward_input_tokens": 241, "key": "04-false_correct", "log_probability": -18.25, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 13.235464, "event": "forward_start", "key": "04-false_correct"}
+{"candidate": "A001", "elapsed_seconds": 13.311166, "event": "score", "forward_input_tokens": 241, "key": "04-false_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 13.31434, "event": "forward_start", "key": "04-false_correct"}
+{"candidate": "A002", "elapsed_seconds": 13.389936, "event": "score", "forward_input_tokens": 241, "key": "04-false_correct", "log_probability": -19.875, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 13.393222, "event": "forward_start", "key": "04-false_correct"}
+{"candidate": "A003", "elapsed_seconds": 13.468724, "event": "score", "forward_input_tokens": 241, "key": "04-false_correct", "log_probability": -22.875001907348633, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 13.471727, "event": "prompt_complete", "key": "04-false_correct", "request_seconds": 0.318811}
+{"elapsed_seconds": 13.502084, "event": "gpu_sample", "label": "after_04-false_correct", "used_mib": 16228}
+{"elapsed_seconds": 13.528728, "event": "gpu_sample", "label": "before_04-false_wrong", "used_mib": 16228}
+{"correct_action": "take plate 2 from table", "elapsed_seconds": 13.535573, "event": "prepared", "input_token_count": 234, "key": "04-false_wrong", "mapping": {"A000": "inventory", "A001": "take plate 2 from table", "A002": "take plate 1 from shelf", "A003": "look"}, "undo_action": "take plate 1 from shelf"}
+{"candidate": "A000", "elapsed_seconds": 13.53868, "event": "forward_start", "key": "04-false_wrong"}
+{"candidate": "A000", "elapsed_seconds": 13.616902, "event": "score", "forward_input_tokens": 239, "key": "04-false_wrong", "log_probability": -21.375001907348633, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 13.620167, "event": "forward_start", "key": "04-false_wrong"}
+{"candidate": "A001", "elapsed_seconds": 13.696199, "event": "score", "forward_input_tokens": 239, "key": "04-false_wrong", "log_probability": -14.250000953674316, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 13.699585, "event": "forward_start", "key": "04-false_wrong"}
+{"candidate": "A002", "elapsed_seconds": 13.775201, "event": "score", "forward_input_tokens": 239, "key": "04-false_wrong", "log_probability": -5.960462772236497e-07, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 13.778407, "event": "forward_start", "key": "04-false_wrong"}
+{"candidate": "A003", "elapsed_seconds": 13.853963, "event": "score", "forward_input_tokens": 239, "key": "04-false_wrong", "log_probability": -24.625, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 13.857002, "event": "prompt_complete", "key": "04-false_wrong", "request_seconds": 0.318671}
+{"elapsed_seconds": 13.887256, "event": "gpu_sample", "label": "after_04-false_wrong", "used_mib": 16228}
+{"elapsed_seconds": 13.913457, "event": "gpu_sample", "label": "before_05-old_correct", "used_mib": 16228}
+{"correct_action": "take towel 2 from rack", "elapsed_seconds": 13.920859, "event": "prepared", "input_token_count": 243, "key": "05-old_correct", "mapping": {"A000": "take towel 2 from rack", "A001": "take towel 1 from basket", "A002": "look", "A003": "inventory"}, "undo_action": "take towel 1 from basket"}
+{"candidate": "A000", "elapsed_seconds": 13.924183, "event": "forward_start", "key": "05-old_correct"}
+{"candidate": "A000", "elapsed_seconds": 14.003397, "event": "score", "forward_input_tokens": 248, "key": "05-old_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 14.006662, "event": "forward_start", "key": "05-old_correct"}
+{"candidate": "A001", "elapsed_seconds": 14.082831, "event": "score", "forward_input_tokens": 248, "key": "05-old_correct", "log_probability": -20.75, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 14.086154, "event": "forward_start", "key": "05-old_correct"}
+{"candidate": "A002", "elapsed_seconds": 14.162408, "event": "score", "forward_input_tokens": 248, "key": "05-old_correct", "log_probability": -23.25, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 14.165552, "event": "forward_start", "key": "05-old_correct"}
+{"candidate": "A003", "elapsed_seconds": 14.241492, "event": "score", "forward_input_tokens": 248, "key": "05-old_correct", "log_probability": -22.5, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 14.244271, "event": "prompt_complete", "key": "05-old_correct", "request_seconds": 0.320477}
+{"elapsed_seconds": 14.273799, "event": "gpu_sample", "label": "after_05-old_correct", "used_mib": 16228}
+{"elapsed_seconds": 14.300323, "event": "gpu_sample", "label": "before_05-old_wrong", "used_mib": 16228}
+{"correct_action": "take towel 2 from rack", "elapsed_seconds": 14.306951, "event": "prepared", "input_token_count": 243, "key": "05-old_wrong", "mapping": {"A000": "take towel 2 from rack", "A001": "take towel 1 from basket", "A002": "look", "A003": "inventory"}, "undo_action": "take towel 1 from basket"}
+{"candidate": "A000", "elapsed_seconds": 14.31003, "event": "forward_start", "key": "05-old_wrong"}
+{"candidate": "A000", "elapsed_seconds": 14.388797, "event": "score", "forward_input_tokens": 248, "key": "05-old_wrong", "log_probability": -17.625, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 14.391908, "event": "forward_start", "key": "05-old_wrong"}
+{"candidate": "A001", "elapsed_seconds": 14.467995, "event": "score", "forward_input_tokens": 248, "key": "05-old_wrong", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 14.471261, "event": "forward_start", "key": "05-old_wrong"}
+{"candidate": "A002", "elapsed_seconds": 14.54752, "event": "score", "forward_input_tokens": 248, "key": "05-old_wrong", "log_probability": -18.125, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 14.55094, "event": "forward_start", "key": "05-old_wrong"}
+{"candidate": "A003", "elapsed_seconds": 14.626693, "event": "score", "forward_input_tokens": 248, "key": "05-old_wrong", "log_probability": -20.5, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 14.629599, "event": "prompt_complete", "key": "05-old_wrong", "request_seconds": 0.319929}
+{"elapsed_seconds": 14.659184, "event": "gpu_sample", "label": "after_05-old_wrong", "used_mib": 16228}
+{"elapsed_seconds": 14.685835, "event": "gpu_sample", "label": "before_05-false_correct", "used_mib": 16228}
+{"correct_action": "take towel 2 from rack", "elapsed_seconds": 14.692533, "event": "prepared", "input_token_count": 236, "key": "05-false_correct", "mapping": {"A000": "take towel 2 from rack", "A001": "take towel 1 from basket", "A002": "look", "A003": "inventory"}, "undo_action": "take towel 1 from basket"}
+{"candidate": "A000", "elapsed_seconds": 14.695845, "event": "forward_start", "key": "05-false_correct"}
+{"candidate": "A000", "elapsed_seconds": 14.772783, "event": "score", "forward_input_tokens": 241, "key": "05-false_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 14.775765, "event": "forward_start", "key": "05-false_correct"}
+{"candidate": "A001", "elapsed_seconds": 14.8507, "event": "score", "forward_input_tokens": 241, "key": "05-false_correct", "log_probability": -18.875, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 14.853957, "event": "forward_start", "key": "05-false_correct"}
+{"candidate": "A002", "elapsed_seconds": 14.929908, "event": "score", "forward_input_tokens": 241, "key": "05-false_correct", "log_probability": -21.0, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 14.93318, "event": "forward_start", "key": "05-false_correct"}
+{"candidate": "A003", "elapsed_seconds": 15.008835, "event": "score", "forward_input_tokens": 241, "key": "05-false_correct", "log_probability": -20.5, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 15.011765, "event": "prompt_complete", "key": "05-false_correct", "request_seconds": 0.316267}
+{"elapsed_seconds": 15.041635, "event": "gpu_sample", "label": "after_05-false_correct", "used_mib": 16228}
+{"elapsed_seconds": 15.06835, "event": "gpu_sample", "label": "before_05-false_wrong", "used_mib": 16228}
+{"correct_action": "take towel 2 from rack", "elapsed_seconds": 15.075179, "event": "prepared", "input_token_count": 236, "key": "05-false_wrong", "mapping": {"A000": "take towel 2 from rack", "A001": "take towel 1 from basket", "A002": "look", "A003": "inventory"}, "undo_action": "take towel 1 from basket"}
+{"candidate": "A000", "elapsed_seconds": 15.078382, "event": "forward_start", "key": "05-false_wrong"}
+{"candidate": "A000", "elapsed_seconds": 15.156718, "event": "score", "forward_input_tokens": 241, "key": "05-false_wrong", "log_probability": -19.5, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 15.159971, "event": "forward_start", "key": "05-false_wrong"}
+{"candidate": "A001", "elapsed_seconds": 15.23625, "event": "score", "forward_input_tokens": 241, "key": "05-false_wrong", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 15.239335, "event": "forward_start", "key": "05-false_wrong"}
+{"candidate": "A002", "elapsed_seconds": 15.315577, "event": "score", "forward_input_tokens": 241, "key": "05-false_wrong", "log_probability": -19.875, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 15.318488, "event": "forward_start", "key": "05-false_wrong"}
+{"candidate": "A003", "elapsed_seconds": 15.394494, "event": "score", "forward_input_tokens": 241, "key": "05-false_wrong", "log_probability": -22.625, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 15.397338, "event": "prompt_complete", "key": "05-false_wrong", "request_seconds": 0.319313}
+{"elapsed_seconds": 15.426518, "event": "gpu_sample", "label": "after_05-false_wrong", "used_mib": 16228}
+{"elapsed_seconds": 15.453492, "event": "gpu_sample", "label": "before_06-old_correct", "used_mib": 16228}
+{"correct_action": "take key 2 from countertop", "elapsed_seconds": 15.46023, "event": "prepared", "input_token_count": 243, "key": "06-old_correct", "mapping": {"A000": "take key 1 from drawer", "A001": "look", "A002": "inventory", "A003": "take key 2 from countertop"}, "undo_action": "take key 1 from drawer"}
+{"candidate": "A000", "elapsed_seconds": 15.463467, "event": "forward_start", "key": "06-old_correct"}
+{"candidate": "A000", "elapsed_seconds": 15.542212, "event": "score", "forward_input_tokens": 248, "key": "06-old_correct", "log_probability": -25.625036239624023, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 15.545239, "event": "forward_start", "key": "06-old_correct"}
+{"candidate": "A001", "elapsed_seconds": 15.620926, "event": "score", "forward_input_tokens": 248, "key": "06-old_correct", "log_probability": -25.125, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 15.623909, "event": "forward_start", "key": "06-old_correct"}
+{"candidate": "A002", "elapsed_seconds": 15.699602, "event": "score", "forward_input_tokens": 248, "key": "06-old_correct", "log_probability": -19.375, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 15.702802, "event": "forward_start", "key": "06-old_correct"}
+{"candidate": "A003", "elapsed_seconds": 15.778722, "event": "score", "forward_input_tokens": 248, "key": "06-old_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 15.781787, "event": "prompt_complete", "key": "06-old_correct", "request_seconds": 0.318694}
+{"elapsed_seconds": 15.812163, "event": "gpu_sample", "label": "after_06-old_correct", "used_mib": 16228}
+{"elapsed_seconds": 15.839037, "event": "gpu_sample", "label": "before_06-old_wrong", "used_mib": 16228}
+{"correct_action": "take key 2 from countertop", "elapsed_seconds": 15.845796, "event": "prepared", "input_token_count": 242, "key": "06-old_wrong", "mapping": {"A000": "take key 1 from drawer", "A001": "look", "A002": "inventory", "A003": "take key 2 from countertop"}, "undo_action": "take key 1 from drawer"}
+{"candidate": "A000", "elapsed_seconds": 15.849162, "event": "forward_start", "key": "06-old_wrong"}
+{"candidate": "A000", "elapsed_seconds": 15.92816, "event": "score", "forward_input_tokens": 247, "key": "06-old_wrong", "log_probability": -10.250035285949707, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 15.931489, "event": "forward_start", "key": "06-old_wrong"}
+{"candidate": "A001", "elapsed_seconds": 16.007864, "event": "score", "forward_input_tokens": 247, "key": "06-old_wrong", "log_probability": -21.000036239624023, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 16.011138, "event": "forward_start", "key": "06-old_wrong"}
+{"candidate": "A002", "elapsed_seconds": 16.087912, "event": "score", "forward_input_tokens": 247, "key": "06-old_wrong", "log_probability": -18.000036239624023, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 16.091165, "event": "forward_start", "key": "06-old_wrong"}
+{"candidate": "A003", "elapsed_seconds": 16.166958, "event": "score", "forward_input_tokens": 247, "key": "06-old_wrong", "log_probability": -3.540453326422721e-05, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 16.169821, "event": "prompt_complete", "key": "06-old_wrong", "request_seconds": 0.321067}
+{"elapsed_seconds": 16.199025, "event": "gpu_sample", "label": "after_06-old_wrong", "used_mib": 16228}
+{"elapsed_seconds": 16.22797, "event": "gpu_sample", "label": "before_06-false_correct", "used_mib": 16228}
+{"correct_action": "take key 2 from countertop", "elapsed_seconds": 16.234502, "event": "prepared", "input_token_count": 237, "key": "06-false_correct", "mapping": {"A000": "take key 1 from drawer", "A001": "look", "A002": "inventory", "A003": "take key 2 from countertop"}, "undo_action": "take key 1 from drawer"}
+{"candidate": "A000", "elapsed_seconds": 16.237549, "event": "forward_start", "key": "06-false_correct"}
+{"candidate": "A000", "elapsed_seconds": 16.315969, "event": "score", "forward_input_tokens": 242, "key": "06-false_correct", "log_probability": -24.375032424926758, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 16.318766, "event": "forward_start", "key": "06-false_correct"}
+{"candidate": "A001", "elapsed_seconds": 16.394334, "event": "score", "forward_input_tokens": 242, "key": "06-false_correct", "log_probability": -23.0, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 16.397555, "event": "forward_start", "key": "06-false_correct"}
+{"candidate": "A002", "elapsed_seconds": 16.473603, "event": "score", "forward_input_tokens": 242, "key": "06-false_correct", "log_probability": -19.25, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 16.476822, "event": "forward_start", "key": "06-false_correct"}
+{"candidate": "A003", "elapsed_seconds": 16.552562, "event": "score", "forward_input_tokens": 242, "key": "06-false_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 16.555481, "event": "prompt_complete", "key": "06-false_correct", "request_seconds": 0.318358}
+{"elapsed_seconds": 16.585426, "event": "gpu_sample", "label": "after_06-false_correct", "used_mib": 16228}
+{"elapsed_seconds": 16.612147, "event": "gpu_sample", "label": "before_06-false_wrong", "used_mib": 16228}
+{"correct_action": "take key 2 from countertop", "elapsed_seconds": 16.619795, "event": "prepared", "input_token_count": 236, "key": "06-false_wrong", "mapping": {"A000": "take key 1 from drawer", "A001": "look", "A002": "inventory", "A003": "take key 2 from countertop"}, "undo_action": "take key 1 from drawer"}
+{"candidate": "A000", "elapsed_seconds": 16.623186, "event": "forward_start", "key": "06-false_wrong"}
+{"candidate": "A000", "elapsed_seconds": 16.701954, "event": "score", "forward_input_tokens": 241, "key": "06-false_wrong", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 16.705294, "event": "forward_start", "key": "06-false_wrong"}
+{"candidate": "A001", "elapsed_seconds": 16.780831, "event": "score", "forward_input_tokens": 241, "key": "06-false_wrong", "log_probability": -22.0, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 16.78433, "event": "forward_start", "key": "06-false_wrong"}
+{"candidate": "A002", "elapsed_seconds": 16.860554, "event": "score", "forward_input_tokens": 241, "key": "06-false_wrong", "log_probability": -26.625, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 16.863939, "event": "forward_start", "key": "06-false_wrong"}
+{"candidate": "A003", "elapsed_seconds": 16.939997, "event": "score", "forward_input_tokens": 241, "key": "06-false_wrong", "log_probability": -17.5, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 16.942808, "event": "prompt_complete", "key": "06-false_wrong", "request_seconds": 0.319989}
+{"elapsed_seconds": 16.972506, "event": "gpu_sample", "label": "after_06-false_wrong", "used_mib": 16228}
+{"elapsed_seconds": 17.001428, "event": "gpu_sample", "label": "before_07-old_correct", "used_mib": 16228}
+{"correct_action": "take hat 2 from chair", "elapsed_seconds": 17.01003, "event": "prepared", "input_token_count": 241, "key": "07-old_correct", "mapping": {"A000": "look", "A001": "inventory", "A002": "take hat 2 from chair", "A003": "take hat 1 from box"}, "undo_action": "take hat 1 from box"}
+{"candidate": "A000", "elapsed_seconds": 17.013128, "event": "forward_start", "key": "07-old_correct"}
+{"candidate": "A000", "elapsed_seconds": 17.090454, "event": "score", "forward_input_tokens": 246, "key": "07-old_correct", "log_probability": -19.000032424926758, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 17.093745, "event": "forward_start", "key": "07-old_correct"}
+{"candidate": "A001", "elapsed_seconds": 17.169686, "event": "score", "forward_input_tokens": 246, "key": "07-old_correct", "log_probability": -17.875, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 17.172895, "event": "forward_start", "key": "07-old_correct"}
+{"candidate": "A002", "elapsed_seconds": 17.249398, "event": "score", "forward_input_tokens": 246, "key": "07-old_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 17.252749, "event": "forward_start", "key": "07-old_correct"}
+{"candidate": "A003", "elapsed_seconds": 17.328954, "event": "score", "forward_input_tokens": 246, "key": "07-old_correct", "log_probability": -20.25, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 17.331799, "event": "prompt_complete", "key": "07-old_correct", "request_seconds": 0.319065}
+{"elapsed_seconds": 17.361776, "event": "gpu_sample", "label": "after_07-old_correct", "used_mib": 16228}
+{"elapsed_seconds": 17.388852, "event": "gpu_sample", "label": "before_07-old_wrong", "used_mib": 16228}
+{"correct_action": "take hat 2 from chair", "elapsed_seconds": 17.395644, "event": "prepared", "input_token_count": 241, "key": "07-old_wrong", "mapping": {"A000": "look", "A001": "inventory", "A002": "take hat 2 from chair", "A003": "take hat 1 from box"}, "undo_action": "take hat 1 from box"}
+{"candidate": "A000", "elapsed_seconds": 17.398855, "event": "forward_start", "key": "07-old_wrong"}
+{"candidate": "A000", "elapsed_seconds": 17.477251, "event": "score", "forward_input_tokens": 246, "key": "07-old_wrong", "log_probability": -26.875133514404297, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 17.480535, "event": "forward_start", "key": "07-old_wrong"}
+{"candidate": "A001", "elapsed_seconds": 17.556864, "event": "score", "forward_input_tokens": 246, "key": "07-old_wrong", "log_probability": -21.5, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 17.559988, "event": "forward_start", "key": "07-old_wrong"}
+{"candidate": "A002", "elapsed_seconds": 17.63644, "event": "score", "forward_input_tokens": 246, "key": "07-old_wrong", "log_probability": -17.25, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 17.639433, "event": "forward_start", "key": "07-old_wrong"}
+{"candidate": "A003", "elapsed_seconds": 17.71608, "event": "score", "forward_input_tokens": 246, "key": "07-old_wrong", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 17.719189, "event": "prompt_complete", "key": "07-old_wrong", "request_seconds": 0.32071}
+{"elapsed_seconds": 17.74918, "event": "gpu_sample", "label": "after_07-old_wrong", "used_mib": 16228}
+{"elapsed_seconds": 17.776368, "event": "gpu_sample", "label": "before_07-false_correct", "used_mib": 16228}
+{"correct_action": "take hat 2 from chair", "elapsed_seconds": 17.78282, "event": "prepared", "input_token_count": 234, "key": "07-false_correct", "mapping": {"A000": "look", "A001": "inventory", "A002": "take hat 2 from chair", "A003": "take hat 1 from box"}, "undo_action": "take hat 1 from box"}
+{"candidate": "A000", "elapsed_seconds": 17.785904, "event": "forward_start", "key": "07-false_correct"}
+{"candidate": "A000", "elapsed_seconds": 17.863819, "event": "score", "forward_input_tokens": 239, "key": "07-false_correct", "log_probability": -19.62505340576172, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 17.867273, "event": "forward_start", "key": "07-false_correct"}
+{"candidate": "A001", "elapsed_seconds": 17.942849, "event": "score", "forward_input_tokens": 239, "key": "07-false_correct", "log_probability": -18.625, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 17.946154, "event": "forward_start", "key": "07-false_correct"}
+{"candidate": "A002", "elapsed_seconds": 18.022191, "event": "score", "forward_input_tokens": 239, "key": "07-false_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 18.025448, "event": "forward_start", "key": "07-false_correct"}
+{"candidate": "A003", "elapsed_seconds": 18.100882, "event": "score", "forward_input_tokens": 239, "key": "07-false_correct", "log_probability": -21.0, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 18.103853, "event": "prompt_complete", "key": "07-false_correct", "request_seconds": 0.318247}
+{"elapsed_seconds": 18.134389, "event": "gpu_sample", "label": "after_07-false_correct", "used_mib": 16228}
+{"elapsed_seconds": 18.162005, "event": "gpu_sample", "label": "before_07-false_wrong", "used_mib": 16228}
+{"correct_action": "take hat 2 from chair", "elapsed_seconds": 18.168519, "event": "prepared", "input_token_count": 234, "key": "07-false_wrong", "mapping": {"A000": "look", "A001": "inventory", "A002": "take hat 2 from chair", "A003": "take hat 1 from box"}, "undo_action": "take hat 1 from box"}
+{"candidate": "A000", "elapsed_seconds": 18.171465, "event": "forward_start", "key": "07-false_wrong"}
+{"candidate": "A000", "elapsed_seconds": 18.248162, "event": "score", "forward_input_tokens": 239, "key": "07-false_wrong", "log_probability": -26.000152587890625, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 18.251162, "event": "forward_start", "key": "07-false_wrong"}
+{"candidate": "A001", "elapsed_seconds": 18.326235, "event": "score", "forward_input_tokens": 239, "key": "07-false_wrong", "log_probability": -18.25, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 18.329236, "event": "forward_start", "key": "07-false_wrong"}
+{"candidate": "A002", "elapsed_seconds": 18.404751, "event": "score", "forward_input_tokens": 239, "key": "07-false_wrong", "log_probability": -17.625, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 18.407922, "event": "forward_start", "key": "07-false_wrong"}
+{"candidate": "A003", "elapsed_seconds": 18.483574, "event": "score", "forward_input_tokens": 239, "key": "07-false_wrong", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 18.486737, "event": "prompt_complete", "key": "07-false_wrong", "request_seconds": 0.315625}
+{"elapsed_seconds": 18.517541, "event": "gpu_sample", "label": "after_07-false_wrong", "used_mib": 16228}
+{"elapsed_seconds": 18.544814, "event": "gpu_sample", "label": "before_08-old_correct", "used_mib": 16228}
+{"correct_action": "take shoe 2 from floor", "elapsed_seconds": 18.551865, "event": "prepared", "input_token_count": 242, "key": "08-old_correct", "mapping": {"A000": "inventory", "A001": "take shoe 2 from floor", "A002": "take shoe 1 from cabinet", "A003": "look"}, "undo_action": "take shoe 1 from cabinet"}
+{"candidate": "A000", "elapsed_seconds": 18.554962, "event": "forward_start", "key": "08-old_correct"}
+{"candidate": "A000", "elapsed_seconds": 18.633605, "event": "score", "forward_input_tokens": 247, "key": "08-old_correct", "log_probability": -18.62500762939453, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 18.636873, "event": "forward_start", "key": "08-old_correct"}
+{"candidate": "A001", "elapsed_seconds": 18.713219, "event": "score", "forward_input_tokens": 247, "key": "08-old_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 18.7165, "event": "forward_start", "key": "08-old_correct"}
+{"candidate": "A002", "elapsed_seconds": 18.792564, "event": "score", "forward_input_tokens": 247, "key": "08-old_correct", "log_probability": -20.75, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 18.795563, "event": "forward_start", "key": "08-old_correct"}
+{"candidate": "A003", "elapsed_seconds": 18.871423, "event": "score", "forward_input_tokens": 247, "key": "08-old_correct", "log_probability": -23.7500057220459, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 18.874292, "event": "prompt_complete", "key": "08-old_correct", "request_seconds": 0.319593}
+{"elapsed_seconds": 18.904064, "event": "gpu_sample", "label": "after_08-old_correct", "used_mib": 16228}
+{"elapsed_seconds": 18.931518, "event": "gpu_sample", "label": "before_08-old_wrong", "used_mib": 16228}
+{"correct_action": "take shoe 2 from floor", "elapsed_seconds": 18.937982, "event": "prepared", "input_token_count": 242, "key": "08-old_wrong", "mapping": {"A000": "inventory", "A001": "take shoe 2 from floor", "A002": "take shoe 1 from cabinet", "A003": "look"}, "undo_action": "take shoe 1 from cabinet"}
+{"candidate": "A000", "elapsed_seconds": 18.941282, "event": "forward_start", "key": "08-old_wrong"}
+{"candidate": "A000", "elapsed_seconds": 19.019825, "event": "score", "forward_input_tokens": 247, "key": "08-old_wrong", "log_probability": -19.00004768371582, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 19.022908, "event": "forward_start", "key": "08-old_wrong"}
+{"candidate": "A001", "elapsed_seconds": 19.099122, "event": "score", "forward_input_tokens": 247, "key": "08-old_wrong", "log_probability": -10.000045776367188, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 19.102446, "event": "forward_start", "key": "08-old_wrong"}
+{"candidate": "A002", "elapsed_seconds": 19.178561, "event": "score", "forward_input_tokens": 247, "key": "08-old_wrong", "log_probability": -4.5536915422417223e-05, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 19.181786, "event": "forward_start", "key": "08-old_wrong"}
+{"candidate": "A003", "elapsed_seconds": 19.257906, "event": "score", "forward_input_tokens": 247, "key": "08-old_wrong", "log_probability": -22.625045776367188, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 19.260963, "event": "prompt_complete", "key": "08-old_wrong", "request_seconds": 0.320075}
+{"elapsed_seconds": 19.290777, "event": "gpu_sample", "label": "after_08-old_wrong", "used_mib": 16228}
+{"elapsed_seconds": 19.318202, "event": "gpu_sample", "label": "before_08-false_correct", "used_mib": 16228}
+{"correct_action": "take shoe 2 from floor", "elapsed_seconds": 19.32476, "event": "prepared", "input_token_count": 236, "key": "08-false_correct", "mapping": {"A000": "inventory", "A001": "take shoe 2 from floor", "A002": "take shoe 1 from cabinet", "A003": "look"}, "undo_action": "take shoe 1 from cabinet"}
+{"candidate": "A000", "elapsed_seconds": 19.327992, "event": "forward_start", "key": "08-false_correct"}
+{"candidate": "A000", "elapsed_seconds": 19.406523, "event": "score", "forward_input_tokens": 241, "key": "08-false_correct", "log_probability": -19.375003814697266, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 19.40979, "event": "forward_start", "key": "08-false_correct"}
+{"candidate": "A001", "elapsed_seconds": 19.485647, "event": "score", "forward_input_tokens": 241, "key": "08-false_correct", "log_probability": 0.0, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 19.488919, "event": "forward_start", "key": "08-false_correct"}
+{"candidate": "A002", "elapsed_seconds": 19.565006, "event": "score", "forward_input_tokens": 241, "key": "08-false_correct", "log_probability": -21.5, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 19.568274, "event": "forward_start", "key": "08-false_correct"}
+{"candidate": "A003", "elapsed_seconds": 19.643863, "event": "score", "forward_input_tokens": 241, "key": "08-false_correct", "log_probability": -24.625001907348633, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 19.646686, "event": "prompt_complete", "key": "08-false_correct", "request_seconds": 0.318947}
+{"elapsed_seconds": 19.676434, "event": "gpu_sample", "label": "after_08-false_correct", "used_mib": 16228}
+{"elapsed_seconds": 19.705452, "event": "gpu_sample", "label": "before_08-false_wrong", "used_mib": 16228}
+{"correct_action": "take shoe 2 from floor", "elapsed_seconds": 19.712212, "event": "prepared", "input_token_count": 236, "key": "08-false_wrong", "mapping": {"A000": "inventory", "A001": "take shoe 2 from floor", "A002": "take shoe 1 from cabinet", "A003": "look"}, "undo_action": "take shoe 1 from cabinet"}
+{"candidate": "A000", "elapsed_seconds": 19.715508, "event": "forward_start", "key": "08-false_wrong"}
+{"candidate": "A000", "elapsed_seconds": 19.794127, "event": "score", "forward_input_tokens": 241, "key": "08-false_wrong", "log_probability": -19.875001907348633, "suffix_token_ids": [32, 15, 15, 15, 151645]}
+{"candidate": "A001", "elapsed_seconds": 19.797131, "event": "forward_start", "key": "08-false_wrong"}
+{"candidate": "A001", "elapsed_seconds": 19.872947, "event": "score", "forward_input_tokens": 241, "key": "08-false_wrong", "log_probability": -15.0, "suffix_token_ids": [32, 15, 15, 16, 151645]}
+{"candidate": "A002", "elapsed_seconds": 19.876354, "event": "forward_start", "key": "08-false_wrong"}
+{"candidate": "A002", "elapsed_seconds": 19.953236, "event": "score", "forward_input_tokens": 241, "key": "08-false_wrong", "log_probability": -3.576278118089249e-07, "suffix_token_ids": [32, 15, 15, 17, 151645]}
+{"candidate": "A003", "elapsed_seconds": 19.956337, "event": "forward_start", "key": "08-false_wrong"}
+{"candidate": "A003", "elapsed_seconds": 20.03215, "event": "score", "forward_input_tokens": 241, "key": "08-false_wrong", "log_probability": -22.125, "suffix_token_ids": [32, 15, 15, 18, 151645]}
+{"elapsed_seconds": 20.035095, "event": "prompt_complete", "key": "08-false_wrong", "request_seconds": 0.319968}
+{"elapsed_seconds": 20.065917, "event": "gpu_sample", "label": "after_08-false_wrong", "used_mib": 16228}
+{"elapsed_seconds": 20.068998, "event": "complete", "forward_count": 128, "max_rss_kib": 4658556, "prompt_count": 32, "system_cpu_seconds": 5.608017, "user_cpu_seconds": 15.617466}
