@@ -171,7 +171,8 @@
     "RECORD.md",
     "commands.log",
     "PUBLICATION_MANIFEST.json",
-    "FILE_HASHES.sha256"
+    "FILE_HASHES.sha256",
+    "HASH_CORRECTION.md"
   ],
   "task_content_files": [
     {
@@ -302,13 +303,25 @@
     },
     {
       "path": "agent-logs/20261116T120407Z__LUNA__parallel-research-github-sync__r9m2/RECORD.md",
-      "sha256": "d8494ba60b7ab568da0edc6f138f9e30e260d7dfb81148dab92cac5132e565d2",
+      "sha256": "2d734955f816950d4493f14a8903a2f47716cd7bcc9cfd2b9d0e6cea83162a4d",
       "bytes": 3631
     },
     {
       "path": "agent-logs/20261116T120407Z__LUNA__parallel-research-github-sync__r9m2/commands.log",
-      "sha256": "4ff0516807c400cbe5a1377daa999a6b5f44d97de0339eae2d40eeb2570db0f5",
+      "sha256": "0e56828b894ddd625f97b3af1ff5bb140af1c317fc5f63fd42e6dad8f127ed83",
       "bytes": 9744
+    },
+    {
+      "path": "agent-logs/20261116T120407Z__LUNA__parallel-research-github-sync__r9m2/HASH_CORRECTION.md",
+      "sha256": "ef4b0fdb10430f9dca37a51ec3c82c10b7486cb33ca74ae11a80fecd160905e8",
+      "bytes": 2511
     }
-  ]
+  ],
+  "metadata_hash_correction": {
+    "status": "CORRECTED_APPEND_ONLY",
+    "initial_publication_commit": "bdd42ee01e153838c17b3c5f423e4c83d26ccff0",
+    "correction_note": "HASH_CORRECTION.md",
+    "source_payload_files_verified": 21,
+    "scope": "metadata digest correction only; package and report payloads unchanged"
+  }
 }
