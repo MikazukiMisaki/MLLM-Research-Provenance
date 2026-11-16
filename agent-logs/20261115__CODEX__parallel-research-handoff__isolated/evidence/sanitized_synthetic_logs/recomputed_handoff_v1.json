@@ -1,0 +1,259 @@
+{
+  "conditions": {
+    "false_correct": {
+      "canonical_argmax_matches_recorded_greedy": 8,
+      "canonical_suffix_matches_recorded": 8,
+      "planned": 8,
+      "undo_minus_take_log_score_median": -20.875,
+      "undo_minus_take_log_score_range": [
+        -24.500125885009766,
+        -18.625
+      ],
+      "undo_weight_above_0_9": 0,
+      "undo_weight_median": 8.659380215523691e-10,
+      "undo_weight_range": [
+        2.2894466166408878e-11,
+        8.152020626398143e-09
+      ],
+      "valid": 8
+    },
+    "false_wrong": {
+      "canonical_argmax_matches_recorded_greedy": 8,
+      "canonical_suffix_matches_recorded": 8,
+      "planned": 8,
+      "undo_minus_take_log_score_median": 16.99999994039536,
+      "undo_minus_take_log_score_range": [
+        14.25000035762804,
+        19.5
+      ],
+      "undo_weight_above_0_9": 8,
+      "undo_weight_median": 0.9999999386452996,
+      "undo_weight_range": [
+        0.9999993518640866,
+        0.9999999941168296
+      ],
+      "valid": 8
+    },
+    "old_correct": {
+      "canonical_argmax_matches_recorded_greedy": 8,
+      "canonical_suffix_matches_recorded": 8,
+      "planned": 8,
+      "undo_minus_take_log_score_median": -20.75,
+      "undo_minus_take_log_score_range": [
+        -26.125083923339844,
+        -20.0
+      ],
+      "undo_weight_above_0_9": 0,
+      "undo_weight_median": 9.73620026239699e-10,
+      "undo_weight_range": [
+        4.508376865965975e-12,
+        2.0611536172309476e-09
+      ],
+      "valid": 8
+    },
+    "old_wrong": {
+      "canonical_argmax_matches_recorded_greedy": 8,
+      "canonical_suffix_matches_recorded": 8,
+      "planned": 8,
+      "undo_minus_take_log_score_median": 10.625000298582108,
+      "undo_minus_take_log_score_range": [
+        -10.249999881416443,
+        17.625
+      ],
+      "undo_weight_above_0_9": 7,
+      "undo_weight_median": 0.9999707941277188,
+      "undo_weight_range": [
+        3.535625436900264e-05,
+        0.9999999672960986
+      ],
+      "valid": 8
+    }
+  },
+  "decision_counts": {
+    "false_correct": {
+      "take_second": 8
+    },
+    "false_wrong": {
+      "undo_first": 8
+    },
+    "old_correct": {
+      "take_second": 8
+    },
+    "old_wrong": {
+      "take_second": 1,
+      "undo_first": 7
+    }
+  },
+  "diagnosis_given_injected_goal_weight_decreases": {
+    "07": -1.3218157679517617e-09
+  },
+  "forward_count": 128,
+  "forward_input_tokens": 31216,
+  "generation_call_counts": {
+    "base": 24,
+    "diagnosis": 16,
+    "subgoal": 8
+  },
+  "generation_tokens": {
+    "base": {
+      "generated": 315,
+      "input": 5576
+    },
+    "diagnosis": {
+      "generated": 80,
+      "input": 3776
+    },
+    "subgoal": {
+      "generated": 40,
+      "input": 1932
+    }
+  },
+  "greedy_argmax_and_suffix_matches": 32,
+  "inputs_sha256": {
+    "diagnosis-subgoal-candidate-scores-v1.jsonl": "13252ea885b312b36853389856ca2859ada0765104c5e1c69f380437e6e9cc60",
+    "incorrect-diagnosis-handoff-v1.jsonl": "b5229948da614c74e81a8601ea4a1c3658c4b8d926bc263b5ff95eeade86a350",
+    "incorrect-subgoal-handoff-v1.jsonl": "41fbf15e1e0fc5f00d76fd352279989b70cf77e00950ed740f07e1d4ee073b52",
+    "second-object-visible-acquisition-v1.jsonl": "3149cf08c7226a9a7984a6955ddb7fbeece2d4fb8de53b02f60b04cd91197327"
+  },
+  "interaction_per_case": [
+    {
+      "diagnosis_given_injected_goal": 5.125001430426899,
+      "diagnosis_given_original_goal": 1.375,
+      "goal_given_injected_diagnosis": 35.00000178813935,
+      "goal_given_original_diagnosis": 31.25000035771245,
+      "interaction": 3.7500014304268987,
+      "key": "01"
+    },
+    {
+      "diagnosis_given_injected_goal": 10.000000030267984,
+      "diagnosis_given_original_goal": 1.6249580383300781,
+      "goal_given_injected_diagnosis": 41.250125885009766,
+      "goal_given_original_diagnosis": 32.87508389307186,
+      "interaction": 8.375041991937906,
+      "key": "02"
+    },
+    {
+      "diagnosis_given_injected_goal": 1.25,
+      "diagnosis_given_original_goal": -0.125,
+      "goal_given_injected_diagnosis": 37.99999988079072,
+      "goal_given_original_diagnosis": 36.62499988079072,
+      "interaction": 1.375,
+      "key": "03"
+    },
+    {
+      "diagnosis_given_injected_goal": 5.250000707645256,
+      "diagnosis_given_original_goal": 1.625,
+      "goal_given_injected_diagnosis": 34.12500035762804,
+      "goal_given_original_diagnosis": 30.499999649982783,
+      "interaction": 3.625000707645256,
+      "key": "04"
+    },
+    {
+      "diagnosis_given_injected_goal": 1.875,
+      "diagnosis_given_original_goal": 1.875,
+      "goal_given_injected_diagnosis": 38.375,
+      "goal_given_original_diagnosis": 38.375,
+      "interaction": 0.0,
+      "key": "05"
+    },
+    {
+      "diagnosis_given_injected_goal": 27.749999881416443,
+      "diagnosis_given_original_goal": 1.2500038146972656,
+      "goal_given_injected_diagnosis": 41.87503242492676,
+      "goal_given_original_diagnosis": 15.37503635820758,
+      "interaction": 26.499996066719177,
+      "key": "06"
+    },
+    {
+      "diagnosis_given_injected_goal": 0.375,
+      "diagnosis_given_original_goal": -0.75,
+      "goal_given_injected_diagnosis": 38.625,
+      "goal_given_original_diagnosis": 37.5,
+      "interaction": 1.125,
+      "key": "07"
+    },
+    {
+      "diagnosis_given_injected_goal": 4.999999402920423,
+      "diagnosis_given_original_goal": -0.75,
+      "goal_given_injected_diagnosis": 36.49999964237219,
+      "goal_given_original_diagnosis": 30.750000239451765,
+      "interaction": 5.749999402920423,
+      "key": "08"
+    }
+  ],
+  "interaction_summaries": {
+    "diagnosis_given_injected_goal": {
+      "maximum": 27.749999881416443,
+      "median": 5.062500416673661,
+      "minimum": 0.375,
+      "n": 8,
+      "negative": 0,
+      "positive": 8,
+      "zero": 0
+    },
+    "diagnosis_given_original_goal": {
+      "maximum": 1.875,
+      "median": 1.3125019073486328,
+      "minimum": -0.75,
+      "n": 8,
+      "negative": 3,
+      "positive": 5,
+      "zero": 0
+    },
+    "goal_given_injected_diagnosis": {
+      "maximum": 41.87503242492676,
+      "median": 38.187499940395355,
+      "minimum": 34.12500035762804,
+      "n": 8,
+      "negative": 0,
+      "positive": 8,
+      "zero": 0
+    },
+    "goal_given_original_diagnosis": {
+      "maximum": 38.375,
+      "median": 32.062542125392156,
+      "minimum": 15.37503635820758,
+      "n": 8,
+      "negative": 0,
+      "positive": 8,
+      "zero": 0
+    },
+    "interaction": {
+      "maximum": 26.499996066719177,
+      "median": 3.6875010690360774,
+      "minimum": 0.0,
+      "n": 8,
+      "negative": 0,
+      "positive": 7,
+      "zero": 1
+    }
+  },
+  "matched_uploaded_summaries": true,
+  "paired_undo_weight_changes": {
+    "diagnosis_given_injected_goal": {
+      "decrease": 1,
+      "equal": 0,
+      "increase": 7,
+      "valid": 8
+    },
+    "diagnosis_given_original_goal": {
+      "decrease": 3,
+      "equal": 0,
+      "increase": 5,
+      "valid": 8
+    },
+    "goal_given_injected_diagnosis": {
+      "decrease": 0,
+      "equal": 0,
+      "increase": 8,
+      "valid": 8
+    },
+    "goal_given_original_diagnosis": {
+      "decrease": 0,
+      "equal": 0,
+      "increase": 8,
+      "valid": 8
+    }
+  },
+  "scope": "Saved fictional-prompt outputs and scores only; no model/environment execution or authentication."
+}
