@@ -1,0 +1,205 @@
+{
+  "by_case": {
+    "cleaning-01": {
+      "compatible_vs_conflicting_changed": true,
+      "conditions": {
+        "compatible": {
+          "action": "take plate 1 from cabinet",
+          "id": "A002",
+          "status": "acceptable"
+        },
+        "conflicting": {
+          "action": "take plate 2 from cabinet",
+          "id": "A003",
+          "status": "local_conflict"
+        },
+        "neutral": {
+          "action": "take plate 1 from cabinet",
+          "id": "A002",
+          "status": "acceptable"
+        }
+      },
+      "family": "cleaning",
+      "neutral_vs_compatible_changed": false
+    },
+    "cleaning-02": {
+      "compatible_vs_conflicting_changed": true,
+      "conditions": {
+        "compatible": {
+          "action": "take pan 1 from cupboard",
+          "id": "A003",
+          "status": "acceptable"
+        },
+        "conflicting": {
+          "action": "take pan 2 from cupboard",
+          "id": "A000",
+          "status": "local_conflict"
+        },
+        "neutral": {
+          "action": "take pan 1 from cupboard",
+          "id": "A003",
+          "status": "acceptable"
+        }
+      },
+      "family": "cleaning",
+      "neutral_vs_compatible_changed": false
+    },
+    "completed-01": {
+      "compatible_vs_conflicting_changed": true,
+      "conditions": {
+        "compatible": {
+          "action": "look",
+          "id": "A002",
+          "status": "acceptable"
+        },
+        "conflicting": {
+          "action": "take glass 1 from cabinet",
+          "id": "A003",
+          "status": "local_conflict"
+        },
+        "neutral": {
+          "action": "inventory",
+          "id": "A000",
+          "status": "acceptable"
+        }
+      },
+      "family": "completed",
+      "neutral_vs_compatible_changed": true
+    },
+    "holding-01": {
+      "compatible_vs_conflicting_changed": true,
+      "conditions": {
+        "compatible": {
+          "action": "put mug 2 in cabinet",
+          "id": "A001",
+          "status": "acceptable"
+        },
+        "conflicting": {
+          "action": "put mug 2 on table",
+          "id": "A002",
+          "status": "local_conflict"
+        },
+        "neutral": {
+          "action": "put mug 2 in cabinet",
+          "id": "A001",
+          "status": "acceptable"
+        }
+      },
+      "family": "holding",
+      "neutral_vs_compatible_changed": false
+    },
+    "obstruction-01": {
+      "compatible_vs_conflicting_changed": true,
+      "conditions": {
+        "compatible": {
+          "action": "take box 1 from chest",
+          "id": "A000",
+          "status": "acceptable"
+        },
+        "conflicting": {
+          "action": "take box 2 from workbench",
+          "id": "A001",
+          "status": "local_conflict"
+        },
+        "neutral": {
+          "action": "take box 1 from chest",
+          "id": "A000",
+          "status": "acceptable"
+        }
+      },
+      "family": "obstruction",
+      "neutral_vs_compatible_changed": false
+    },
+    "unknown-01": {
+      "compatible_vs_conflicting_changed": true,
+      "conditions": {
+        "compatible": {
+          "action": "open desk drawer",
+          "id": "A003",
+          "status": "acceptable"
+        },
+        "conflicting": {
+          "action": "take book 1 from cabinet",
+          "id": "A000",
+          "status": "local_conflict"
+        },
+        "neutral": {
+          "action": "open storage drawer",
+          "id": "A001",
+          "status": "acceptable"
+        }
+      },
+      "family": "unknown",
+      "neutral_vs_compatible_changed": true
+    },
+    "visible-01": {
+      "compatible_vs_conflicting_changed": true,
+      "conditions": {
+        "compatible": {
+          "action": "take cup 2 from counter",
+          "id": "A000",
+          "status": "acceptable"
+        },
+        "conflicting": {
+          "action": "take cup 1 from cupboard",
+          "id": "A001",
+          "status": "local_conflict"
+        },
+        "neutral": {
+          "action": "take cup 2 from counter",
+          "id": "A000",
+          "status": "acceptable"
+        }
+      },
+      "family": "visible",
+      "neutral_vs_compatible_changed": false
+    },
+    "visible-02": {
+      "compatible_vs_conflicting_changed": true,
+      "conditions": {
+        "compatible": {
+          "action": "take bowl 2 from table",
+          "id": "A001",
+          "status": "acceptable"
+        },
+        "conflicting": {
+          "action": "take bowl 1 from hutch",
+          "id": "A002",
+          "status": "local_conflict"
+        },
+        "neutral": {
+          "action": "take bowl 2 from table",
+          "id": "A001",
+          "status": "acceptable"
+        }
+      },
+      "family": "visible",
+      "neutral_vs_compatible_changed": false
+    }
+  },
+  "condition_totals": {
+    "compatible": {
+      "counts": {
+        "acceptable": 8
+      },
+      "planned": 8
+    },
+    "conflicting": {
+      "counts": {
+        "local_conflict": 8
+      },
+      "planned": 8
+    },
+    "neutral": {
+      "counts": {
+        "acceptable": 8
+      },
+      "planned": 8
+    }
+  },
+  "journal_completed": true,
+  "planned_calls": 24,
+  "recorded_decisions": 24,
+  "scope": "8 fictional cases in six authored structures; exploration only; no environment or held-out inference",
+  "started_calls": 24
+}

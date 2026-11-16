@@ -1,0 +1,146 @@
+[
+  {
+    "case_id": "ordinary-01",
+    "conflicting_action": "take teacup 1 from display cupboard",
+    "family": "ordinary",
+    "first_action": "take teacup 1 from display cupboard",
+    "goal_consistent_action": "take teacup 2 from side table",
+    "mapping": {
+      "A000": "take teacup 2 from side table",
+      "A001": "take teacup 1 from display cupboard",
+      "A002": "look",
+      "A003": "inventory"
+    },
+    "prompts": {
+      "compatible": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both teacups in the display cupboard.\n\nCurrent pre-action observation:\nThe teacup 1 is in the display cupboard; the teacup 2 is visible on the side table. The display cupboard is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe teacup 2 is not yet in the display cupboard.\n\nFrozen Stage-1 immediate subgoal:\nTake teacup 2 from side table.\n\nIndexed admissible-action mapping:\n[A000] take teacup 2 from side table\n[A001] take teacup 1 from display cupboard\n[A002] look\n[A003] inventory\n\nYour response:",
+      "conflicting": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both teacups in the display cupboard.\n\nCurrent pre-action observation:\nThe teacup 1 is in the display cupboard; the teacup 2 is visible on the side table. The display cupboard is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe teacup 2 is not yet in the display cupboard.\n\nFrozen Stage-1 immediate subgoal:\nTake teacup 1 from display cupboard.\n\nIndexed admissible-action mapping:\n[A000] take teacup 2 from side table\n[A001] take teacup 1 from display cupboard\n[A002] look\n[A003] inventory\n\nYour response:"
+    },
+    "second_action": "take teacup 2 from side table"
+  },
+  {
+    "case_id": "ordinary-02",
+    "conflicting_action": "take saucer 1 from wall cabinet",
+    "family": "ordinary",
+    "first_action": "take saucer 1 from wall cabinet",
+    "goal_consistent_action": "take saucer 2 from worktop",
+    "mapping": {
+      "A000": "inventory",
+      "A001": "take saucer 2 from worktop",
+      "A002": "take saucer 1 from wall cabinet",
+      "A003": "look"
+    },
+    "prompts": {
+      "compatible": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both saucers in the wall cabinet.\n\nCurrent pre-action observation:\nThe saucer 1 is in the wall cabinet; the saucer 2 is visible on the worktop. The wall cabinet is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe saucer 2 is not yet in the wall cabinet.\n\nFrozen Stage-1 immediate subgoal:\nTake saucer 2 from worktop.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take saucer 2 from worktop\n[A002] take saucer 1 from wall cabinet\n[A003] look\n\nYour response:",
+      "conflicting": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both saucers in the wall cabinet.\n\nCurrent pre-action observation:\nThe saucer 1 is in the wall cabinet; the saucer 2 is visible on the worktop. The wall cabinet is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe saucer 2 is not yet in the wall cabinet.\n\nFrozen Stage-1 immediate subgoal:\nTake saucer 1 from wall cabinet.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take saucer 2 from worktop\n[A002] take saucer 1 from wall cabinet\n[A003] look\n\nYour response:"
+    },
+    "second_action": "take saucer 2 from worktop"
+  },
+  {
+    "case_id": "ordinary-03",
+    "conflicting_action": "take glass 1 from wooden hutch",
+    "family": "ordinary",
+    "first_action": "take glass 1 from wooden hutch",
+    "goal_consistent_action": "take glass 2 from coffee table",
+    "mapping": {
+      "A000": "look",
+      "A001": "inventory",
+      "A002": "take glass 2 from coffee table",
+      "A003": "take glass 1 from wooden hutch"
+    },
+    "prompts": {
+      "compatible": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both glasss in the wooden hutch.\n\nCurrent pre-action observation:\nThe glass 1 is in the wooden hutch; the glass 2 is visible on the coffee table. The wooden hutch is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe glass 2 is not yet in the wooden hutch.\n\nFrozen Stage-1 immediate subgoal:\nTake glass 2 from coffee table.\n\nIndexed admissible-action mapping:\n[A000] look\n[A001] inventory\n[A002] take glass 2 from coffee table\n[A003] take glass 1 from wooden hutch\n\nYour response:",
+      "conflicting": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both glasss in the wooden hutch.\n\nCurrent pre-action observation:\nThe glass 1 is in the wooden hutch; the glass 2 is visible on the coffee table. The wooden hutch is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe glass 2 is not yet in the wooden hutch.\n\nFrozen Stage-1 immediate subgoal:\nTake glass 1 from wooden hutch.\n\nIndexed admissible-action mapping:\n[A000] look\n[A001] inventory\n[A002] take glass 2 from coffee table\n[A003] take glass 1 from wooden hutch\n\nYour response:"
+    },
+    "second_action": "take glass 2 from coffee table"
+  },
+  {
+    "case_id": "ordinary-04",
+    "conflicting_action": "take mug 1 from metal cupboard",
+    "family": "ordinary",
+    "first_action": "take mug 1 from metal cupboard",
+    "goal_consistent_action": "take mug 2 from breakfast bar",
+    "mapping": {
+      "A000": "take mug 1 from metal cupboard",
+      "A001": "look",
+      "A002": "inventory",
+      "A003": "take mug 2 from breakfast bar"
+    },
+    "prompts": {
+      "compatible": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both mugs in the metal cupboard.\n\nCurrent pre-action observation:\nThe mug 1 is in the metal cupboard; the mug 2 is visible on the breakfast bar. The metal cupboard is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe mug 2 is not yet in the metal cupboard.\n\nFrozen Stage-1 immediate subgoal:\nTake mug 2 from breakfast bar.\n\nIndexed admissible-action mapping:\n[A000] take mug 1 from metal cupboard\n[A001] look\n[A002] inventory\n[A003] take mug 2 from breakfast bar\n\nYour response:",
+      "conflicting": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both mugs in the metal cupboard.\n\nCurrent pre-action observation:\nThe mug 1 is in the metal cupboard; the mug 2 is visible on the breakfast bar. The metal cupboard is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe mug 2 is not yet in the metal cupboard.\n\nFrozen Stage-1 immediate subgoal:\nTake mug 1 from metal cupboard.\n\nIndexed admissible-action mapping:\n[A000] take mug 1 from metal cupboard\n[A001] look\n[A002] inventory\n[A003] take mug 2 from breakfast bar\n\nYour response:"
+    },
+    "second_action": "take mug 2 from breakfast bar"
+  },
+  {
+    "case_id": "necessary_retrieval-01",
+    "conflicting_action": "take plate 2 from cupboard",
+    "family": "necessary_retrieval",
+    "first_action": "take plate 1 from cupboard",
+    "goal_consistent_action": "take plate 1 from cupboard",
+    "mapping": {
+      "A000": "take plate 1 from cupboard",
+      "A001": "take plate 2 from cupboard",
+      "A002": "look",
+      "A003": "inventory"
+    },
+    "prompts": {
+      "compatible": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean plates in the cupboard.\n\nCurrent pre-action observation:\nThe plate 1 and plate 2 are both in the cupboard. The plate 1 is dirty; the plate 2 is clean. A sink is available. The cupboard is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe plate 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake plate 1 from cupboard.\n\nIndexed admissible-action mapping:\n[A000] take plate 1 from cupboard\n[A001] take plate 2 from cupboard\n[A002] look\n[A003] inventory\n\nYour response:",
+      "conflicting": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean plates in the cupboard.\n\nCurrent pre-action observation:\nThe plate 1 and plate 2 are both in the cupboard. The plate 1 is dirty; the plate 2 is clean. A sink is available. The cupboard is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe plate 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake plate 2 from cupboard.\n\nIndexed admissible-action mapping:\n[A000] take plate 1 from cupboard\n[A001] take plate 2 from cupboard\n[A002] look\n[A003] inventory\n\nYour response:"
+    },
+    "second_action": "take plate 2 from cupboard"
+  },
+  {
+    "case_id": "necessary_retrieval-02",
+    "conflicting_action": "take bowl 2 from hutch",
+    "family": "necessary_retrieval",
+    "first_action": "take bowl 1 from hutch",
+    "goal_consistent_action": "take bowl 1 from hutch",
+    "mapping": {
+      "A000": "inventory",
+      "A001": "take bowl 1 from hutch",
+      "A002": "take bowl 2 from hutch",
+      "A003": "look"
+    },
+    "prompts": {
+      "compatible": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean bowls in the hutch.\n\nCurrent pre-action observation:\nThe bowl 1 and bowl 2 are both in the hutch. The bowl 1 is dirty; the bowl 2 is clean. A sink is available. The hutch is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe bowl 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake bowl 1 from hutch.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take bowl 1 from hutch\n[A002] take bowl 2 from hutch\n[A003] look\n\nYour response:",
+      "conflicting": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean bowls in the hutch.\n\nCurrent pre-action observation:\nThe bowl 1 and bowl 2 are both in the hutch. The bowl 1 is dirty; the bowl 2 is clean. A sink is available. The hutch is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe bowl 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake bowl 2 from hutch.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take bowl 1 from hutch\n[A002] take bowl 2 from hutch\n[A003] look\n\nYour response:"
+    },
+    "second_action": "take bowl 2 from hutch"
+  },
+  {
+    "case_id": "necessary_retrieval-03",
+    "conflicting_action": "take pan 2 from storage cabinet",
+    "family": "necessary_retrieval",
+    "first_action": "take pan 1 from storage cabinet",
+    "goal_consistent_action": "take pan 1 from storage cabinet",
+    "mapping": {
+      "A000": "look",
+      "A001": "inventory",
+      "A002": "take pan 1 from storage cabinet",
+      "A003": "take pan 2 from storage cabinet"
+    },
+    "prompts": {
+      "compatible": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean pans in the storage cabinet.\n\nCurrent pre-action observation:\nThe pan 1 and pan 2 are both in the storage cabinet. The pan 1 is dirty; the pan 2 is clean. A sink is available. The storage cabinet is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe pan 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake pan 1 from storage cabinet.\n\nIndexed admissible-action mapping:\n[A000] look\n[A001] inventory\n[A002] take pan 1 from storage cabinet\n[A003] take pan 2 from storage cabinet\n\nYour response:",
+      "conflicting": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean pans in the storage cabinet.\n\nCurrent pre-action observation:\nThe pan 1 and pan 2 are both in the storage cabinet. The pan 1 is dirty; the pan 2 is clean. A sink is available. The storage cabinet is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe pan 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake pan 2 from storage cabinet.\n\nIndexed admissible-action mapping:\n[A000] look\n[A001] inventory\n[A002] take pan 1 from storage cabinet\n[A003] take pan 2 from storage cabinet\n\nYour response:"
+    },
+    "second_action": "take pan 2 from storage cabinet"
+  },
+  {
+    "case_id": "necessary_retrieval-04",
+    "conflicting_action": "take vase 2 from glass cabinet",
+    "family": "necessary_retrieval",
+    "first_action": "take vase 1 from glass cabinet",
+    "goal_consistent_action": "take vase 1 from glass cabinet",
+    "mapping": {
+      "A000": "take vase 2 from glass cabinet",
+      "A001": "look",
+      "A002": "inventory",
+      "A003": "take vase 1 from glass cabinet"
+    },
+    "prompts": {
+      "compatible": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean vases in the glass cabinet.\n\nCurrent pre-action observation:\nThe vase 1 and vase 2 are both in the glass cabinet. The vase 1 is dirty; the vase 2 is clean. A sink is available. The glass cabinet is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe vase 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake vase 1 from glass cabinet.\n\nIndexed admissible-action mapping:\n[A000] take vase 2 from glass cabinet\n[A001] look\n[A002] inventory\n[A003] take vase 1 from glass cabinet\n\nYour response:",
+      "conflicting": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean vases in the glass cabinet.\n\nCurrent pre-action observation:\nThe vase 1 and vase 2 are both in the glass cabinet. The vase 1 is dirty; the vase 2 is clean. A sink is available. The glass cabinet is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe vase 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake vase 2 from glass cabinet.\n\nIndexed admissible-action mapping:\n[A000] take vase 2 from glass cabinet\n[A001] look\n[A002] inventory\n[A003] take vase 1 from glass cabinet\n\nYour response:"
+    },
+    "second_action": "take vase 2 from glass cabinet"
+  }
+]

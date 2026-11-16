@@ -1,0 +1,154 @@
+# Read-only audit and transfer receipts
+
+All source commands ran from the isolated Parallel worktree. Package data were not re-executed. Empty grep output with exit 1 means no pattern matches (ripgrep's normal no-match exit).
+
+## Retrieval package
+
+Command: find research_packages/subgoal_necessary_retrieval_pilot_v1 -maxdepth 1 -type f -printf '%f\t%s bytes\n' | sort
+Exit: 0
+Stdout:
+MANIFEST.json	1315 bytes
+PROTOCOL.md	4035 bytes
+RESULTS.md	3228 bytes
+analyze.py	2447 bytes
+build_cases.py	3373 bytes
+cases.json	20441 bytes
+results.json	2692 bytes
+run.py	7814 bytes
+sanitized_events.jsonl	73734 bytes
+
+
+Command: sha256sum research_packages/subgoal_necessary_retrieval_pilot_v1/MANIFEST.json research_packages/subgoal_necessary_retrieval_pilot_v1/PROTOCOL.md research_packages/subgoal_necessary_retrieval_pilot_v1/RESULTS.md research_packages/subgoal_necessary_retrieval_pilot_v1/build_cases.py research_packages/subgoal_necessary_retrieval_pilot_v1/cases.json research_packages/subgoal_necessary_retrieval_pilot_v1/run.py research_packages/subgoal_necessary_retrieval_pilot_v1/analyze.py research_packages/subgoal_necessary_retrieval_pilot_v1/results.json research_packages/subgoal_necessary_retrieval_pilot_v1/sanitized_events.jsonl
+Exit: 0
+Stdout:
+aa12b49b501d91ae82d6b39eada6dcbbffb45be3b411caa918ac1859bb188e4d  research_packages/subgoal_necessary_retrieval_pilot_v1/MANIFEST.json
+bc2004f0481ccde91b67fb24c753cd639708d4986997836e1967b89749b430a4  research_packages/subgoal_necessary_retrieval_pilot_v1/PROTOCOL.md
+1c013e8cd1c22b0aa75c42883160fbc0a33de40dd9076e3be476a6f497e5a4ad  research_packages/subgoal_necessary_retrieval_pilot_v1/RESULTS.md
+556cea2704d05f7cd93f6030d17306ef6c24d80ddf1792a12c164c932bfa681f  research_packages/subgoal_necessary_retrieval_pilot_v1/build_cases.py
+0b4fe41d9378def250ade4e1e71049878e9e34643108108034c28d2728ccdc6f  research_packages/subgoal_necessary_retrieval_pilot_v1/cases.json
+47e80752c9961d5ea84085ce9138550f5ec7a2dd29d97942de37bb2e2e1d5414  research_packages/subgoal_necessary_retrieval_pilot_v1/run.py
+49c9c68f9144fd8fad805fb4fd9cc3906fb4903de9bafef39fba28d88664164d  research_packages/subgoal_necessary_retrieval_pilot_v1/analyze.py
+e33e68b08992312bd5e355211ec19d1243880d5a8de99e242b2aed6352556a69  research_packages/subgoal_necessary_retrieval_pilot_v1/results.json
+ae7f79d78bd800a046b07d556194f496330a3a904531eab123e8ab12c4502fcf  research_packages/subgoal_necessary_retrieval_pilot_v1/sanitized_events.jsonl
+
+
+Initial manifest-check attempt (not relied on):
+Command: python3 -c 'import hashlib,json,pathlib; d=pathlib.Path("research_packages/subgoal_necessary_retrieval_pilot_v1"); m=json.loads((d/"MANIFEST.json").read_text()); bad=[]
+for x in m["files"]:
+ b=(d/x["path"]).read_bytes()
+ if len(b)!=x["bytes"] or hashlib.sha256(b).hexdigest()!=x["sha256"]: bad.append(x["path"])
+print(f"listed={len(m[\"files\"])} mismatches={len(bad)}")
+raise SystemExit(bool(bad))'
+Exit: 1
+Stdout:
+  File "<string>", line 5
+    print(f"listed={len(m[\"files\"])} mismatches={len(bad)}")
+                           ^
+SyntaxError: unexpected character after line continuation character
+
+
+Corrected manifest check:
+Command: python3 -c 'import hashlib,json,pathlib; d=pathlib.Path("research_packages/subgoal_necessary_retrieval_pilot_v1"); m=json.loads((d/"MANIFEST.json").read_text()); bad=[]
+for x in m["files"]:
+ b=(d/x["path"]).read_bytes()
+ if len(b)!=x["bytes"] or hashlib.sha256(b).hexdigest()!=x["sha256"]: bad.append(x["path"])
+print("listed={} mismatches={}".format(len(m["files"]),len(bad)))
+raise SystemExit(bool(bad))'
+Exit: 0
+Stdout:
+listed=8 mismatches=0
+
+Command: targeted pattern scan (absolute host paths, credential-token shapes, and private-key markers) over research_packages/subgoal_necessary_retrieval_pilot_v1; literal pattern omitted from retained log to prevent scanner self-matches.
+Exit: 1
+Stdout: (empty; no matches)
+
+Source identity:
+- git rev-parse HEAD -> e537f441010077123a307e9d50ea40cf8dad8547
+- git branch --show-current -> codex/parallel-research-pilots-isolated
+- git status --short -- research_packages/subgoal_necessary_retrieval_pilot_v1 -> ?? research_packages/subgoal_necessary_retrieval_pilot_v1/
+
+## Neutral-controls package
+
+Command: find research_packages/subgoal_neutral_controls_development_v1 -maxdepth 1 -type f -printf '%f\t%s bytes\n' | sort
+Exit: 0
+Stdout:
+MANIFEST.json	1626 bytes
+PAPER_INSERT_ZH.md	1431 bytes
+PROTOCOL.md	5314 bytes
+REAL_DATA_LINKAGE.md	2040 bytes
+RESULTS.md	4583 bytes
+analyze.py	3613 bytes
+build_cases.py	4980 bytes
+cases.json	27719 bytes
+results.json	5304 bytes
+run.py	7855 bytes
+sanitized_events.jsonl	105977 bytes
+
+
+Command: sha256sum research_packages/subgoal_neutral_controls_development_v1/*
+Exit: 0
+Stdout:
+0167068d55432a76429bbfe64e2f783a8fcc27f24d8fd76695d93fe15b387836  research_packages/subgoal_neutral_controls_development_v1/MANIFEST.json
+f0a2c45d66557b4e4c65b87a8fe14f3c4882d2336b96f656cb71fcbf8833071b  research_packages/subgoal_neutral_controls_development_v1/PAPER_INSERT_ZH.md
+f61ea2d46d1d3b5ba9b89cb225975528556791552e417529f0926ce39edd038f  research_packages/subgoal_neutral_controls_development_v1/PROTOCOL.md
+a121b1f3d6f96268a98c652d32cee7a99e0a9d898423fe6f49b14772b3375962  research_packages/subgoal_neutral_controls_development_v1/REAL_DATA_LINKAGE.md
+001387424c7c24e361dbf9e80dfda61ad1c2d84b2559f6180dc935f2c153930a  research_packages/subgoal_neutral_controls_development_v1/RESULTS.md
+9b4bfe122764e6ff84144127ea24c164cfbfecce9602ade1f58f026b49d2306f  research_packages/subgoal_neutral_controls_development_v1/analyze.py
+700682e69682c6c30416807066759d3f3fb0e24c1c1cb5a11b9cacdab1d9938b  research_packages/subgoal_neutral_controls_development_v1/build_cases.py
+03a9fee21f68605bb83467c41573e91997220366fe52e1173daf02cb857cc5eb  research_packages/subgoal_neutral_controls_development_v1/cases.json
+fe0935d249d3c8a7c6702d684253cbdc2dba12d068459c297c9d17aef4535554  research_packages/subgoal_neutral_controls_development_v1/results.json
+08d9c7ef2b2ee2b05ac8f689a42d513781599056680395e88121625dafd97365  research_packages/subgoal_neutral_controls_development_v1/run.py
+363e0e6465c9889e95e35f8e6ec0a8d29135c9dd93e429de3408632350e65fbf  research_packages/subgoal_neutral_controls_development_v1/sanitized_events.jsonl
+
+
+Command: python3 -c 'import hashlib,json,pathlib; d=pathlib.Path("research_packages/subgoal_neutral_controls_development_v1"); m=json.loads((d/"MANIFEST.json").read_text()); bad=[]
+for x in m["files"]:
+ b=(d/x["path"]).read_bytes()
+ if len(b)!=x["bytes"] or hashlib.sha256(b).hexdigest()!=x["sha256"]: bad.append(x["path"])
+print("listed={} mismatches={}".format(len(m["files"]),len(bad)))
+raise SystemExit(bool(bad))'
+Exit: 0
+Stdout:
+listed=10 mismatches=0
+
+
+Command: rg sensitive/absolute-path pattern scan for research_packages/subgoal_neutral_controls_development_v1
+Exit: 1
+Stdout: (empty; no matches)
+
+Source identity:
+- git rev-parse HEAD -> e537f441010077123a307e9d50ea40cf8dad8547
+- git branch --show-current -> codex/parallel-research-pilots-isolated
+- git status --short -- research_packages/subgoal_neutral_controls_development_v1 -> ?? research_packages/subgoal_neutral_controls_development_v1/
+
+## Separate evidence-boundary report
+
+- sha256sum reports/parallel_research_round5/MAINLINE_PARALLEL_SHARED_EVIDENCE_BOUNDARY_20261116_V1.md -> 65fb6fcd530ab62cd23cb7a3c6c2c5a91e7f79cc9465f16706c16eccda461e02  reports/parallel_research_round5/MAINLINE_PARALLEL_SHARED_EVIDENCE_BOUNDARY_20261116_V1.md
+- targeted secret/absolute-path scan -> exit 1; no matches.
+- Separate report copied unchanged; it is not part of either frozen package manifest.
+
+## Source-worktree cross-check
+
+- git rev-parse HEAD -> e537f441010077123a307e9d50ea40cf8dad8547
+agent/codex-r18c2
+MikazukiMisaki/Alfworld-Self-Improvement-Project.git
+; branch -> undefined; git status --short was empty.
+- git ls-remote origin refs/heads/main -> exit 128; output: ERROR: Repository not found.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.. This CLI failure was not used as remote proof.
+- GitHub API read-only search confirmed current project-repository main commit 730078305e8c09c2d86d3898b5d561cf27cd00e1; commit message: Add current research and evidence entry points.
+- GitHub API found earlier package-curation commit 36facd0f5efe04f4d633ab077fe4b640b82fd3e0 (PR #14). The Terra results file exists at 730078305e8c09c2d86d3898b5d561cf27cd00e1; GitHub blob SHA-1 453020ec144fedbed035e553698a1d6b541108e0.
+- Terra reviewer note SHA-256 72aa5eedd9975244e581fe4c4715338200c7317dceec28fb8678671bcf406b67 independently reports retrieval sanitized-ledger CPU recomputation matched its result JSON; neutral reviewer note SHA-256 499407f136b883112a1e257ba59146b2c4f9de571a60193b797e1e49f2d1cc1a reports record-level consistency. Neither reviewer file was uploaded.
+
+## Provenance destination read-only preflight
+
+- GitHub API latest commit for MikazukiMisaki/MLLM-Research-Provenance main: 8ceb530e587329acbf1e31f6bb33f9e729260970.
+- INDEX.md at that commit: blob SHA-1 c1392302939f1972d47379ee0a538e0719684ff9, 92722 characters.
+- FILE_HASHES.sha256 at that commit: blob SHA-1 21ddd3869012f5bedd3b3b25d98ae8c401c0d518, 881370 characters.
+- New task path was absent from the fetched base tree. Neither root index nor inventory had been modified before publication.
+
+## Transfer preparation
+
+The allowlisted source files were read with base64 -w0 and passed directly as base64 blobs. The source SHA-256/length receipts above were cross-checked against the captured encoded payloads before writing. The large payload stdout is intentionally not duplicated here. No project script, unit test, model, tokenizer, training, or environment command was run.

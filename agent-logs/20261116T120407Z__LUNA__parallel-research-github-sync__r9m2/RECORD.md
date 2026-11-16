@@ -1,0 +1,18 @@
+# Parallel Research package publication record
+
+- Agent: Luna
+- Task: curate and publish two sanitized Parallel Research development packages plus the separately versioned shared-evidence-boundary report.
+- Status: PUBLISHED_TO_PRIVATE_PROVENANCE; DEVELOPMENT_ONLY; NO_ENVIRONMENT_SUCCESS_EVIDENCE.
+- Start UTC: 2026-11-16T12:04:07Z.
+- Content freeze UTC: 2026-11-16T12:30:55Z. Remote publication and byte verification are reported in the task completion handoff.
+- Source checkout: Alfworld-Self-Improvement-Project, branch codex/parallel-research-pilots-isolated, HEAD e537f441010077123a307e9d50ea40cf8dad8547. The two package directories and the boundary report were untracked at that checkout. No source-tree file was staged, edited, or committed.
+- Destination: MikazukiMisaki/MLLM-Research-Provenance, private main; base commit 8ceb530e587329acbf1e31f6bb33f9e729260970. Only the files enumerated by this task's PUBLICATION_MANIFEST.json and the root INDEX.md / FILE_HASHES.sha256 updates are in scope.
+- Package scope: one fictional retrieval pilot (8 prompts over two artificial structures; producer report describes 16 action generations) and one fictional neutral-controls pilot (8 prompts, 6 structural types, 3 conditions, 24 reported greedy generations). The neutral package's independent review checked record consistency only. Neither package measures ALFWorld transitions, environment success, held-out performance, or generalization.
+- Independent review evidence: retrieval handoff note SHA-256 72aa5eedd9975244e581fe4c4715338200c7317dceec28fb8678671bcf406b67; neutral-control review note SHA-256 499407f136b883112a1e257ba59146b2c4f9de571a60193b797e1e49f2d1cc1a. The reviewer notes remain local and were not copied because their content includes local-worktree context. Their conclusions are limited to record/hash/analysis consistency and do not attest physical device, model-weight identity, or full logits. The retrieval package's review also reports CPU recomputation matched its results; the neutral package review reports 24 records and 5,702 input / 120 output tokens, with the same limitations.
+- Related Terra Designer publication: the curated Terra package was already present in the project repository by commit 36facd0f5efe04f4d633ab077fe4b640b82fd3e0 (PR #14); the current project-main snapshot was 730078305e8c09c2d86d3898b5d561cf27cd00e1. This task did not duplicate or modify that package.
+- Checks performed: exact manifest-file count and SHA-256/byte-length validation for both package allowlists; exact directory inventories; targeted secret/absolute-machine-path scan (no matches); source worktree HEAD/branch/status; read-only GitHub checks of the destination base files and existing Terra package.
+- Project execution: no package scripts, project tests, model, tokenizer, training, ALFWorld, or environment operation was run by this publisher. Publisher-originated scientific calls: 0.
+- Existing package contents report 16 and 24 generation records respectively; these are preserved as supplied, not newly executed or independently authenticated as physical model/device calls.
+- Excluded from publication: raw runtime directories and logs, device identity, local configuration, model weights/adapters/cache, task/environment dataset payloads, real trajectories, and both local reviewer-note files. Only allowlisted package bytes and the separately allowlisted boundary report are included.
+- Provenance files: PUBLICATION_MANIFEST.json, commands.log, and FILE_HASHES.sha256 provide the task payload inventory and receipts. Scientific SHA is UNKNOWN for this fictional development package.
+
