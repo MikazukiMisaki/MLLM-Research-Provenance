@@ -1,0 +1,53 @@
+# Read-only package synchronization receipts
+# Captured from the Parallel Research isolated worktree; no package files were modified.
+
+$ git rev-parse HEAD
+e537f441010077123a307e9d50ea40cf8dad8547
+exit_code=0
+
+$ git branch --show-current
+codex/parallel-research-pilots-isolated
+exit_code=0
+
+$ git status --short -- research_packages/two_object_context_aggregate_20261116_v1
+?? research_packages/two_object_context_aggregate_20261116_v1/
+exit_code=0
+
+$ find research_packages/two_object_context_aggregate_20261116_v1 -maxdepth 1 -type f -printf '%f\t%s bytes\n' | sort
+MANIFEST.json	274 bytes
+README.md	1326 bytes
+exit_code=0
+
+$ sha256sum research_packages/two_object_context_aggregate_20261116_v1/MANIFEST.json research_packages/two_object_context_aggregate_20261116_v1/README.md
+e267fd08201c7e83342fc1c38a789e3a99a63be46148995787bb912abea93b5f  research_packages/two_object_context_aggregate_20261116_v1/MANIFEST.json
+07da79454a9012313d3ee07297eca6fdc20b4c35426bbb608daf50db8ac9dc77  research_packages/two_object_context_aggregate_20261116_v1/README.md
+exit_code=0
+
+$ sed -n '1,100p' research_packages/two_object_context_aggregate_20261116_v1/MANIFEST.json
+{
+  "scope": "anonymous aggregate; author-constructed development configurations; private provenance use only",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1326,
+      "sha256": "07da79454a9012313d3ee07297eca6fdc20b4c35426bbb608daf50db8ac9dc77"
+    }
+  ]
+}
+exit_code=0
+
+$ sed -n '1,100p' research_packages/two_object_context_aggregate_20261116_v1/README.md
+# 双物体开发失败：匿名聚合观察
+
+在两个研究者构造的双物体开发构型中，所检查的策略均未在预算内完成任务。去除重复的基线运行后，研究者检查了六条已保存的直接动作模型轨迹，其中共有 31 次从目标容器取回此前放入的物体。
+
+这些记录中的每次取回前，先前放入动作均不在保存的最近四条动作／结果中；当前观察仍提及目标中的该物体，保存的提示中也包含前往另一来源的导航选项。这里的分母是**两个有意选取的开发构型、六条轨迹及其 31 次相关动作**，不是 31 个独立任务。
+
+上述观察不估计总体发生率，不证明模型是否注意或理解选项，也不能认定短窗口、遗忘或其他单一因素造成了动作选择或任务失败。另一来源的内容未通过这些轨迹观测；所选行为不证明实际后续不可恢复。本分析没有新增模型调用或环境续行。直接动作模型没有采集诊断和子目标，应标记为未采集；虚构题面上的子目标干预不能解释为已经应用于这些真实轨迹。
+
+本摘要仅用于私有研究记录。逐事件数据、原始提示、动作映射、任务标识、模型路径和原始账本不包含在此包中，不因此获得公开许可。
+exit_code=0
+
+$ rg -n -i '/home/|/mnt/|gh[pousr]_[[:alnum:]_]{20,}|bearer[[:space:]]+[[:alnum:]._-]{20,}|api[_-]?key[[:space:]]*[:=]' research_packages/two_object_context_aggregate_20261116_v1/MANIFEST.json research_packages/two_object_context_aggregate_20261116_v1/README.md
+no matches; stdout empty
+exit_code=1
