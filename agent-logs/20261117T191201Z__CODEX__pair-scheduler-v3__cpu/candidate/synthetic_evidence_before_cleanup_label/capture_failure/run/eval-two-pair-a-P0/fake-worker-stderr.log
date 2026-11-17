@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "/home/lizening/research-notes/agent-logs/20261118__CODEX__pair-owned-scheduler-v3__private/fake_worker.py", line 103, in <module>
+    run_arm(output=config['output'],budget_fd=fd,case=config['case'],arm=config['arm'],
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            previous_initial=config['previous_initial'],inputs=config['inputs'],seed=42,journal_class=ipc.Journal,
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+            projection=None,source_worker=None,load_producer=None,parser=None,parse_value=None,
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            state_factory=None,expected_eos=[151645,151643],expected_pad=151643)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lizening/research-notes/agent-logs/20261118__CODEX__pair-owned-scheduler-v3__private/fixed_product_dev/arm_stage.py", line 100, in run_arm
+    result = episode(
+        arm=arm, previous_initial=previous_initial, controller=controller,
+    ...<2 lines>...
+        parse_value=parse_value, state_factory=state_factory,
+        expected_game=str(game), expected_eos=expected_eos, expected_pad=expected_pad)
+  File "/home/lizening/research-notes/agent-logs/20261118__CODEX__pair-owned-scheduler-v3__private/fake_worker.py", line 76, in fake_episode
+    env=controller.effect('env_construct',env_factory,lambda _:{'arm':arm})
+  File "/home/lizening/research-notes/agent-logs/20261116__CODEX__two-object-paired-eval__candidate/gate-live/effect_ipc.py", line 89, in effect
+    ticket=self.owner.start(kind,{})
+  File "/home/lizening/research-notes/agent-logs/20261116__CODEX__two-object-paired-eval__candidate/gate-live/effect_ipc.py", line 66, in start
+    seq=self.seq;self._exchange({'kind':'reserve','seq':seq,'operation':operation})
+                 ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lizening/research-notes/agent-logs/20261116__CODEX__two-object-paired-eval__candidate/gate-live/effect_ipc.py", line 55, in _exchange
+    self.sock.sendall(data);res=bytearray()
+    ~~~~~~~~~~~~~~~~~^^^^^^
+BrokenPipeError: [Errno 32] Broken pipe

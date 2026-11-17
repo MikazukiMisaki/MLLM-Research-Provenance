@@ -1,0 +1,315 @@
+--- v2/global_owner.py
++++ v3/global_owner.py
+@@ -12,6 +12,8 @@
+ CAPS={'materialize':4,'env_construct':8,'env_init':8,'reset':8,'model_load':8,'generation':400,'step':400}
+ TOKEN_CAPS={'input':400*4096,'output':400*16}
+ ARM_CAPS={'env_construct':1,'env_init':1,'reset':1,'model_load':1,'generation':50,'step':50}
++EXPECTED_KWARGS={'max_new_tokens':16,'do_sample':False,'num_beams':1,
++                 'num_return_sequences':1,'return_dict_in_generate':True,'output_scores':True}
+ class Stop(RuntimeError):pass
+ 
+ def canonical(x):return json.dumps(x,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
+@@ -38,28 +40,39 @@
+     pending=[r for r in rows if r['kind']=='prepared' and r['seq']>last_return]
+     if len(pending)!=1 or any(r['kind']=='generation_started' and r['seq']>last_return for r in rows):
+         raise Stop('missing, duplicate or already started prepared claim')
+-    row=pending[0];data=row['payload'];ids=data.get('input_ids');mask=data.get('attention_mask');kw=data.get('kwargs');config=data.get('generation_config')
+-    expected_kw={'max_new_tokens':16,'do_sample':False,'num_beams':1,'num_return_sequences':1,
+-                 'return_dict_in_generate':True,'output_scores':True}
+-    if (set(data)!={'public','rendered_prompt','input_ids','attention_mask','generation_config','kwargs','eos_ids'} or
+-        type(ids) is not list or not 1<=len(ids)<=4096 or any(type(x) is not int or x<0 for x in ids) or
++    row=pending[0];data=row['payload']
++    if type(data) is not dict or set(data)!={'public','rendered_prompt','input_ids','attention_mask','generation_config','kwargs','eos_ids'}:
++        raise Stop('prepared claim fields')
++    ids=data['input_ids'];mask=data['attention_mask'];kw=data['kwargs'];config=data['generation_config']
++    public=data['public'];rendered=data['rendered_prompt'];eos=data['eos_ids']
++    fields={'action_map','goal','observation','public_prompt','public_prompt_sha256','recent_history','valid_actions'}
++    if (type(public) is not dict or set(public)!=fields or
++        any(type(public[k]) is not str or not public[k] for k in ('goal','observation','public_prompt')) or
++        type(public['public_prompt_sha256']) is not str or
++        public['public_prompt_sha256']!=sha(public['public_prompt'].encode('utf-8')) or
++        type(public['recent_history']) is not list or
++        any(type(h) is not list or len(h)!=2 or any(type(s) is not str for s in h) for h in public['recent_history']) or
++        type(public['valid_actions']) is not list or not public['valid_actions'] or
++        any(type(a) is not str or not a for a in public['valid_actions']) or
++        len(set(public['valid_actions']))!=len(public['valid_actions']) or type(public['action_map']) is not dict or
++        public['action_map']!={f'A{i:03d}':a for i,a in enumerate(public['valid_actions'])} or
++        type(rendered) is not str or not rendered):
++        raise Stop('prepared public or rendered prompt shape')
++    if (type(ids) is not list or not 1<=len(ids)<=4096 or any(type(x) is not int or x<0 for x in ids) or
+         type(mask) is not list or len(mask)!=len(ids) or any(type(x) is not int or x!=1 for x in mask) or
+-        type(kw) is not dict or canonical(kw)!=canonical(expected_kw) or
+-        type(config) is not dict or config.get('eos_token_id')!=[151645,151643] or
++        type(kw) is not dict or set(kw)!=set(EXPECTED_KWARGS) or
++        any(type(kw[k]) is not type(v) or kw[k]!=v for k,v in EXPECTED_KWARGS.items()) or
++        type(config) is not dict or len(canonical(config))>128*1024 or
++        type(eos) is not list or any(type(x) is not int for x in eos) or eos!=[151645,151643] or
++        type(config.get('eos_token_id')) is not list or any(type(x) is not int for x in config['eos_token_id']) or config['eos_token_id']!=eos or
+         type(config.get('pad_token_id')) is not int or config['pad_token_id']!=151643 or
+-        'forced_eos_token_id' not in config or config['forced_eos_token_id'] is not None or
+-        data['eos_ids']!=[151645,151643] or type(data['rendered_prompt']) is not str or not data['rendered_prompt']):
++        'forced_eos_token_id' not in config or config['forced_eos_token_id'] is not None):
+         raise Stop('prepared input or generation limit mismatch')
+-    public=data['public']
+-    if (type(public) is not dict or set(public)!={'goal','observation','recent_history','valid_actions','public_prompt','public_prompt_sha256','action_map'} or
+-        type(public['public_prompt']) is not str or not public['public_prompt'] or
+-        public['public_prompt_sha256']!=sha(public['public_prompt'].encode()) or
+-        type(public['valid_actions']) is not list or not public['valid_actions'] or
+-        any(type(x) is not str or not x for x in public['valid_actions']) or
+-        len(set(public['valid_actions']))!=len(public['valid_actions']) or
+-        public['action_map']!={'A%03d'%i:action for i,action in enumerate(public['valid_actions'])}):
+-        raise Stop('public prompt or action map claim mismatch')
+-    return {'seq':row['seq'],'digest':row['digest'],'input_ids':ids}
++    return {'seq':row['seq'],'digest':row['digest'],'input_ids':ids,
++            'public_sha256':sha(canonical(public)), 'public_prompt_sha256':sha(public['public_prompt'].encode('utf-8')),
++            'rendered_prompt_sha256':sha(rendered.encode('utf-8')), 'input_ids_sha256':sha(canonical(ids)),
++            'attention_mask_sha256':sha(canonical(mask)), 'kwargs_sha256':sha(canonical(kw)),
++            'generation_config_sha256':sha(canonical(config)), 'eos_ids_sha256':sha(canonical(eos))}
+ 
+ def claimed_receipt(path,operation,seq,receipt):
+     """Verify format/chain and operation-start/return; child claims are not physical proof."""
+@@ -156,6 +169,7 @@
+                     raise Stop('global token reservation exceeded')
+                 ticket.update({'prepared_seq':prepared['seq'],'prepared_digest':prepared['digest'],
+                                'input_tokens_reserved':4096,'output_tokens_reserved':16})
++                ticket.update({k:v for k,v in prepared.items() if k.endswith('_sha256')})
+             self.record('reserve',ticket);self.counts[operation]+=1;self.local[self.current][operation]+=1;self.active=ticket
+             if operation=='generation':
+                 self.tokens['input']+=4096;self.tokens['output']+=16
+--- v2/fake_worker.py
++++ v3/fake_worker.py
+@@ -1,6 +1,6 @@
+ """Test-only independent process exercising real StageBudgetChannel wire client.
+ 
+-Fake episode deliberately does not call a tokenizer, model, or ALFWorld.
++Fake episode uses fictional tokenizer/model boundaries and never invokes ALFWorld.
+ """
+ import hashlib
+ import json
+@@ -17,6 +17,10 @@
+ raw=SOURCE.read_bytes()
+ if hashlib.sha256(raw).hexdigest()!='046c0c48291efdae06457d87343d084357ae5a1774c3d670e3e232b15fd16dd8':raise SystemExit('effect source drift')
+ ipc=types.ModuleType('effect_ipc_bound');exec(compile(raw,str(SOURCE),'exec'),ipc.__dict__)
++SOURCE_WORKER=SOURCE.with_name('source_worker.py')
++source_raw=SOURCE_WORKER.read_bytes()
++if hashlib.sha256(source_raw).hexdigest()!='36f4d2a4d82e5798a5d3fd786fa80505fe3c345ff7333aa8bdfaf52581a34111':raise SystemExit('source worker drift')
++source_worker=types.ModuleType('source_worker_bound');exec(compile(source_raw,str(SOURCE_WORKER),'exec'),source_worker.__dict__)
+ config=json.loads(Path(sys.argv[1]).read_text());fd=int(sys.argv[2]);mode=sys.argv[3]
+ cases={'synthetic':{'family':'two','inputs':config['inputs']}}
+ _,verify,_=production_adapter.load_synthetic_bound(Path(config['port_source']),Path(config['fixture_root']),cases)
+@@ -31,31 +35,68 @@
+     def reset(self):return (State(self.case_id),self.game,{'candidate_native_reset':{'won_batch':[False],'won_batch_type':'list'}})
+     def close(self):pass
+ 
++class Row:
++    def __init__(self, values):self.values=values
++    def tolist(self):return self.values
++class Tensor:
++    def __init__(self, values):self.values=values;self.shape=(1,len(values))
++    def to(self, device):return self
++    def __getitem__(self, index):return Row(self.values)
++class Tokenizer:
++    eos_token_id=151645;pad_token_id=151643
++    def __call__(self, **kw):return {'input_ids':Tensor([4,5]),'attention_mask':Tensor([1,1])}
++class Config:
++    def to_dict(self):return {'eos_token_id':[151645,151643],'pad_token_id':151643,'forced_eos_token_id':None}
++class Model:
++    device='SYNTHETIC';generation_config=Config()
++    def eval(self):pass
++    def parameters(self):return []
++    def generate(self, **kwargs):
++        if mode=='interrupt':os._exit(7)
++        return types.SimpleNamespace(sequences=Tensor([4,5,99,151645]),scores=[None,None])
++class Torch:
++    cuda=types.SimpleNamespace(synchronize=lambda:None)
++    @staticmethod
++    def no_grad():
++        class Context:
++            def __enter__(self):pass
++            def __exit__(self,*args):pass
++        return Context()
++class Resource:
++    def before_generation(self,*a,**kw):pass
++    def after_generation(self,*a,**kw):pass
++class Producer:
++    tokenizer=Tokenizer();model=Model();torch=Torch();resource=Resource();eos_ids=[151645];arm='P0'
++    def prepare(self,prompt):return {'prompt':prompt,'rendered_prompt':'synthetic rendered prompt','input_ids':[4,5],'attention_mask':[1,1]}
++    def decode(self, ids):return 'A000'
++    def verify_state(self):return 'synthetic state'
++
+ def fake_episode(*,arm,previous_initial,controller,env_factory,**unused):
++    controller.journal.emit('synthetic_generation_source_binding', {'source_sha256':hashlib.sha256(source_raw).hexdigest(), 'function':source_worker._generation.__code__.co_filename, 'scope':'original generation with fictional boundaries'})
+     env=controller.effect('env_construct',env_factory,lambda _:{'arm':arm})
+     controller.effect('env_init',env.initialize,lambda _:{'arm':arm})
+     reset=controller.effect('reset',env.reset,lambda v:{'arm':arm,'state':v[0].to_dict(),'gamefile':v[1],
+                 'candidate_native_reset':v[2]['candidate_native_reset']})
+     if previous_initial is not None and previous_initial!=reset[0].to_dict():raise ValueError('synthetic initial mismatch')
+     controller.effect('model_load',lambda:'FAKE MODEL LABEL',lambda _:{'arm':arm})
+-    if mode!='missing_prepared':
+-        prompt='fictional public prompt [A000] fictional action'
+-        public={'goal':'fictional','observation':'fixture '+config['case']['case'],'recent_history':[],
+-                'valid_actions':['fictional action'],'public_prompt':prompt,
+-                'public_prompt_sha256':hashlib.sha256(prompt.encode()).hexdigest(),
+-                'action_map':{'A000':'fictional action'}}
+-        prepared={'public':public,'rendered_prompt':'fictional rendered prompt',
+-                  'input_ids':[4,5],'attention_mask':[1,1],
+-                  'kwargs':{'max_new_tokens':16,'do_sample':False,'num_beams':1,'num_return_sequences':1,
+-                            'return_dict_in_generate':True,'output_scores':True},'eos_ids':[151645,151643],
+-                  'generation_config':{'eos_token_id':[151645,151643],'pad_token_id':151643,'forced_eos_token_id':None}}
+-        controller.journal.emit('prepared',prepared)
+-        if mode=='duplicate_prepared':controller.journal.emit('prepared',prepared)
+-    def fake_generation():
+-        if mode=='interrupt':os._exit(7)
+-        return None
+-    controller.effect('generation',fake_generation,lambda _:{'shape':[1,4],'sequence':[4,5,99,151645],
+-                                        'output_ids':[99,151645],'decoder_stop_reason':'NOT_OBSERVED'})
++    prompt='synthetic public prompt'
++    public={'goal':'fictional','observation':'synthetic', 'public_prompt':prompt,
++            'public_prompt_sha256':hashlib.sha256(prompt.encode()).hexdigest(), 'recent_history':[],
++            'valid_actions':['fictional action'], 'action_map':{'A000':'fictional action'}}
++    original=controller.journal
++    class JournalWrapper:
++        def emit(self,kind,payload):
++            if kind=='prepared':
++                if mode=='missing_prepared':return None
++                if mode=='bad_public':payload['public']['public_prompt_sha256']='0'*64
++                if mode=='bad_kwargs':payload['kwargs']['num_return_sequences']=2
++                result=original.emit(kind,payload)
++                if mode=='duplicate_prepared':original.emit(kind,payload)
++                return result
++            return original.emit(kind,payload)
++    controller.journal=JournalWrapper()
++    try:source_worker._generation(Producer(),public,controller,[151645,151643],151643)
++    finally:controller.journal=original
+     env.close()
+     return {'arm':arm,'initial_public':reset[0].to_dict(),'won':False,'steps':0,'termination':'FAKE_ONLY'}
+ 
+--- v2/scheduler_synthetic.py
++++ v3/scheduler_synthetic.py
+@@ -16,7 +16,7 @@
+     def __init__(self,owner,case,arm):self.owner=owner;self.case=case;self.arm=arm
+     def emit(self,event,payload):self.owner.record('channel_'+event,{'case':self.case,'arm':self.arm,'payload':payload})
+ 
+-def run_fixture(root,fixture_root,inputs,materialize,verify,*,linger_case=None):
++def run_fixture(root,fixture_root,inputs,materialize,verify,*,linger_case=None,mode_by_case=None):
+     """Fixed fake executable only. It cannot launch the scientific worker."""
+     root=Path(root);root.mkdir(mode=0o700,parents=True,exist_ok=False)
+     owner=GlobalOwner(root/'owner')
+@@ -39,7 +39,7 @@
+                 try:
+                     with stderr_path.open('wb') as stderr:
+                         proc=subprocess.Popen([sys.executable,'-I','-B',str(HERE/'fake_worker.py'),
+-                            str(config_path),str(child.fileno()),'linger' if linger_case==case else 'normal'],
++                            str(config_path),str(child.fileno()),'linger' if linger_case==case else (mode_by_case or {}).get(case,'normal')],
+                             pass_fds=(child.fileno(),),start_new_session=True,stdout=subprocess.DEVNULL,stderr=stderr)
+                         child.close();ident=capture_owned(proc)
+                         owner.record('synthetic_child_started',{'case':case,'arm':arm,'pid':proc.pid,'identity':ident})
+@@ -60,7 +60,17 @@
+                     owner.close_arm_after_cleanup(case,arm,cleanup,inputs[case],verify)
+                 except BaseException as error:
+                     if not owner.failed:owner.abort(type(error).__name__+': '+str(error))
+-                    if proc is not None and ident is not None:
++                    if proc is not None and ident is None:
++                        # Close only our IPC endpoints, then wait on the Popen child.
++                        # Without a verified identity we never send a signal.
++                        parent.close();child.close()
++                        try:rc=proc.wait(timeout=3)
++                        except subprocess.TimeoutExpired:rc=None
++                        try:owner.record('synthetic_cleanup_after_abort',{'case':case,'arm':arm,'pid':proc.pid,
++                            'observed_returncode':rc,'cleanup_status':'DIRECT_CHILD_REAPED_DESCENDANTS_UNKNOWN' if rc is not None else 'UNKNOWN_DIRECT_CHILD_STILL_UNREAPED', 'signal_sent':False,
++                            'scope':'direct wait only; identity and descendants unknown'})
++                        except BaseException:pass
++                    elif proc is not None:
+                         try:
+                             stop_direct_if_same(proc,ident)
+                             owner.record('synthetic_cleanup_after_abort',{'case':case,'arm':arm,'pid':proc.pid,
+--- v2/test_scheduler.py
++++ v3/test_scheduler.py
+@@ -2,7 +2,9 @@
+ import json
+ from pathlib import Path
+ import tempfile
++import subprocess
+ import unittest
++from unittest.mock import patch
+ import global_owner
+ import production_adapter
+ import scheduler_synthetic
+@@ -46,6 +48,17 @@
+             self.assertEqual(per[0]['child_result_claim']['initial_public']['task_id'],case)
+             self.assertTrue(all(r['cleanup']['visible_group_members']==[] for r in per))
+         self.assertNotEqual(closed[0]['child_result_claim']['initial_public'],closed[2]['child_result_claim']['initial_public'])
++        generation=[r['payload'] for r in rows if r['event']=='reserve' and r['payload']['operation']=='generation']
++        self.assertEqual(len(generation),8)
++        self.assertTrue(all('kwargs_sha256' in x and 'rendered_prompt_sha256' in x for x in generation))
++        for case,order in global_owner.SCHEDULE:
++            for arm in order:
++                log=self.out/(case+'-'+arm)/'output'/'worker_events.jsonl'
++                events=[json.loads(line) for line in log.read_text().splitlines()]
++                binding=next(x['payload'] for x in events if x['kind']=='synthetic_generation_source_binding')
++                self.assertEqual(binding['source_sha256'],'36f4d2a4d82e5798a5d3fd786fa80505fe3c345ff7333aa8bdfaf52581a34111')
++                self.assertTrue(any(x['kind']=='prepared' for x in events))
++                self.assertTrue(any(x['kind']=='generation_returned' for x in events))
+         with self.assertRaises(FileExistsError):scheduler_synthetic.run_fixture(self.out,self.root,self.inputs,self.setup,self.verify)
+     def test_owned_cleanup_timeout_stops_and_keeps_reservation(self):
+         with self.assertRaises(Exception):
+@@ -61,6 +74,59 @@
+         self.assertEqual(len([r for r in rows if r['event']=='arm_closed']),2)
+         self.assertFalse(any(r['event']=='synthetic_batch_complete' for r in rows))
+         with self.assertRaises(FileExistsError):scheduler_synthetic.run_fixture(self.out,self.root,self.inputs,self.setup,self.verify)
++
++    def test_real_generation_bad_kwargs_stops_before_generation_reserve(self):
++        case=global_owner.SCHEDULE[0][0]
++        with self.assertRaises(Exception):
++            scheduler_synthetic.run_fixture(self.out,self.root,self.inputs,self.setup,self.verify,mode_by_case={case:'bad_kwargs'})
++        rows=self.rows()
++        self.assertIn('aborted',[r['event'] for r in rows])
++        reserves=[r['payload'] for r in rows if r['event']=='reserve']
++        self.assertEqual(sum(r['operation']=='materialize' for r in reserves),1)
++        self.assertEqual(sum(r['operation']=='model_load' for r in reserves),1)
++        self.assertEqual(sum(r['operation']=='generation' for r in reserves),0)
++        self.assertFalse(any(r['event']=='synthetic_batch_complete' for r in rows))
++
++    def test_capture_failure_waits_only_for_own_direct_child_without_signal(self):
++        with patch.object(scheduler_synthetic,'capture_owned',side_effect=RuntimeError('synthetic capture failure')):
++            with self.assertRaisesRegex(RuntimeError,'synthetic capture failure'):
++                scheduler_synthetic.run_fixture(self.out,self.root,self.inputs,self.setup,self.verify)
++        rows=self.rows()
++        self.assertIn('aborted',[r['event'] for r in rows])
++        cleanup=[r['payload'] for r in rows if r['event']=='synthetic_cleanup_after_abort']
++        self.assertEqual(len(cleanup),1)
++        self.assertFalse(cleanup[0]['signal_sent'])
++        self.assertIsNotNone(cleanup[0]['observed_returncode'])
++        self.assertEqual(cleanup[0]['cleanup_status'],'DIRECT_CHILD_REAPED_DESCENDANTS_UNKNOWN')
++        self.assertEqual(cleanup[0]['scope'],'direct wait only; identity and descendants unknown')
++        self.assertFalse(any(r['event']=='synthetic_batch_complete' for r in rows))
++
++    def test_capture_failure_wait_timeout_is_unknown_and_stops(self):
++        real_popen=subprocess.Popen
++        owned=[]
++        class TimedOutWaitProxy:
++            def __init__(self,proc): self.proc=proc
++            def __getattr__(self,key): return getattr(self.proc,key)
++            def wait(self,timeout=None): raise subprocess.TimeoutExpired(self.proc.args,timeout)
++        def create_child(*args,**kwargs):
++            proc=real_popen(*args,**kwargs);owned.append(proc);return TimedOutWaitProxy(proc)
++        try:
++            with patch.object(scheduler_synthetic.subprocess,'Popen',side_effect=create_child), \
++                 patch.object(scheduler_synthetic,'capture_owned',side_effect=RuntimeError('synthetic capture failure')):
++                with self.assertRaisesRegex(RuntimeError,'synthetic capture failure'):
++                    scheduler_synthetic.run_fixture(self.out,self.root,self.inputs,self.setup,self.verify)
++            rows=self.rows()
++            cleanup=[r['payload'] for r in rows if r['event']=='synthetic_cleanup_after_abort']
++            self.assertEqual(len(cleanup),1)
++            self.assertEqual(cleanup[0]['cleanup_status'],'UNKNOWN_DIRECT_CHILD_STILL_UNREAPED')
++            self.assertIsNone(cleanup[0]['observed_returncode'])
++            self.assertFalse(cleanup[0]['signal_sent'])
++            self.assertFalse(any(r['event']=='synthetic_batch_complete' for r in rows))
++            with self.assertRaises(FileExistsError):
++                scheduler_synthetic.run_fixture(self.out,self.root,self.inputs,self.setup,self.verify)
++        finally:
++            for proc in owned:
++                proc.wait(timeout=5)  # test owns exactly this cooperative child; never signal it
+ 
+     def test_claimed_prepared_rejects_multiple_outputs_and_missing_public(self):
+         prompt='fictional prompt';base={'public':{'goal':'fictional','observation':'fictional',
