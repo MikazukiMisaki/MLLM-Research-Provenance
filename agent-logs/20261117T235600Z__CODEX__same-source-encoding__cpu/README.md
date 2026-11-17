@@ -1,0 +1,7 @@
+# Self-success encoding: compact evidence
+
+The single offline CPU preparation completed with real return code 0. The aggregate, path-free plan and sanitized receipt are provided here. Original receipt SHA256: 61b33d962079b79332a88d2e0274c229b9927b3b0f01c8315e47c1ed709724d0. The unchanged aggregate is byte-identical to the local original.
+
+The bound private output has 99 records from 10 parents, SHA256 fafd33ba8c05480a5d16ca73764d0082f5c8d76c53538a81c1d4092ff401e682, 54,063 sequence tokens of which 495 are supervised, and maximum length 1,054. Input event ledger SHA256 a1ab34fb287372be582648295eb7a506a8ed70174b1689e0f7c2cfd7d4e4a799; completed-run summary SHA256 ca0ec8f64db8257a9fcb9a7d02a5a0355391acad90813c2ff6c2bdf5a409dfc1; manifest SHA256 cf978725c718e89b96d80ed56b468d9c8e00a6e22fafc43acaa38dd65181d71f; C-quarter adapter tree SHA256 fdaa5ce9a1dc3e38ed78b39ba71a5c7c28b23fb637f786d52d8bec3a2ad58e1e.
+
+The encoded row contents, source script, full execution log and original receipt remain local; they are not in this bundle. Machine paths, task content, token arrays, model weights and credentials are omitted. New encoding does not establish historical generated token identity, optimal labels, independent held-out results or training/evaluation completion. Allocated CPU runtime and RSS are process measurements, not model/GPU use. File hashes identify bytes; they do not attest scientific correctness.

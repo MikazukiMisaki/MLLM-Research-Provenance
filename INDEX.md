@@ -377,3 +377,5 @@ No task directory or large provenance file was omitted. Transient PID/lock files
 | 2026-11-17 23:40:00 | CODEX | Research brief and anonymous paired failure diagnosis | EXPOSED DEV; OBSERVATIONAL; NO INDEPENDENT CLAIM | 10/12 each; two shared failure cases | [brief](agent-logs/20261117T234000Z__CODEX__research-brief-and-failure-diagnosis__private/RESEARCH_BRIEF_ZH.md), [diagnosis](agent-logs/20261117T234000Z__CODEX__research-brief-and-failure-diagnosis__private/ANONYMOUS_FAILURE_DIAGNOSIS.md) |
 
 - `agent-logs/20261117T234900Z__CODEX__self-success-weight-feasibility__private/`: predeclared same-source weighting feasibility; no repeated public states, so no training.
+
+- `agent-logs/20261117T235600Z__CODEX__same-source-encoding__cpu/`: offline reconstructed 99-row training input preparation, aggregate and redacted receipt.
