@@ -1,0 +1,7 @@
+# Self-success C: structural same-prompt pair upper bound
+
+One predeclared CPU-only pass over the bound C dataset (SHA256 `0735422fbeb3285256290ef0ec81923d5954b370b341b6a76a293c205804628d`) finished with authentic exit 0. Among 312 rows and 78 distinct recorded task groups, no group had two distinct recorded source events with exactly equal prompt text and rendered-prompt hash but different completion strings. No required fields were missing; known and conservative possible group bounds were both 0. The input, plan and code identities and exact recorded counts are in `result.json`; `launcher_receipt.json` records the process result.
+
+This rules out the proposed exact-string paired-label construction in this particular C file, not label diversity in all possible self-success data, another normalization or expert data. It does not independently validate event authenticity, model input token identity, action validity, task independence, training eligibility or model performance. This one-shot analysis did not call a model, environment, GPU, tokenizer or evaluation; no source task content was emitted. The reviewer inspected plan/code/receipts without reprocessing the data; see `REVIEW.md`.
+
+The private plan and executable contain machine-specific local paths and remain local. Published files contain aggregate results and hashes only; no dataset, prompt, completion, task identifier, credentials or model weights are included.
