@@ -1,0 +1,485 @@
+{
+  "calls": [
+    {
+      "call_id": "visible-01-plain-bare",
+      "case_id": "visible-01",
+      "family": "visible",
+      "mapping": {
+        "A000": "take second cup from counter",
+        "A001": "take first cup from cabinet",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both cups in the cabinet.\n\nCurrent observation:\nThe first cup is in the cabinet. The second cup is visible on the counter.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake second cup from counter.\n\nCurrently available actions:\nA000  take second cup from counter\nA001  take first cup from cabinet\nA002  look\nA003  inventory\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "take second cup from counter"
+    },
+    {
+      "call_id": "visible-01-plain-bracket",
+      "case_id": "visible-01",
+      "family": "visible",
+      "mapping": {
+        "A000": "take second cup from counter",
+        "A001": "take first cup from cabinet",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both cups in the cabinet.\n\nCurrent observation:\nThe first cup is in the cabinet. The second cup is visible on the counter.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake second cup from counter.\n\nCurrently available actions:\nA000  take second cup from counter\nA001  take first cup from cabinet\nA002  look\nA003  inventory\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "take second cup from counter"
+    },
+    {
+      "call_id": "visible-01-bracket-bare",
+      "case_id": "visible-01",
+      "family": "visible",
+      "mapping": {
+        "A000": "take second cup from counter",
+        "A001": "take first cup from cabinet",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both cups in the cabinet.\n\nCurrent observation:\nThe first cup is in the cabinet. The second cup is visible on the counter.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake second cup from counter.\n\nCurrently available actions:\n[A000]  take second cup from counter\n[A001]  take first cup from cabinet\n[A002]  look\n[A003]  inventory\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "take second cup from counter"
+    },
+    {
+      "call_id": "visible-01-bracket-bracket",
+      "case_id": "visible-01",
+      "family": "visible",
+      "mapping": {
+        "A000": "take second cup from counter",
+        "A001": "take first cup from cabinet",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both cups in the cabinet.\n\nCurrent observation:\nThe first cup is in the cabinet. The second cup is visible on the counter.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake second cup from counter.\n\nCurrently available actions:\n[A000]  take second cup from counter\n[A001]  take first cup from cabinet\n[A002]  look\n[A003]  inventory\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "take second cup from counter"
+    },
+    {
+      "call_id": "visible-02-plain-bracket",
+      "case_id": "visible-02",
+      "family": "visible",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take second bowl from table",
+        "A002": "take first bowl from shelf",
+        "A003": "look"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both bowls in the shelf.\n\nCurrent observation:\nThe first bowl is in the shelf. The second bowl is visible on the table.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake second bowl from table.\n\nCurrently available actions:\nA000  inventory\nA001  take second bowl from table\nA002  take first bowl from shelf\nA003  look\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "take second bowl from table"
+    },
+    {
+      "call_id": "visible-02-bracket-bare",
+      "case_id": "visible-02",
+      "family": "visible",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take second bowl from table",
+        "A002": "take first bowl from shelf",
+        "A003": "look"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both bowls in the shelf.\n\nCurrent observation:\nThe first bowl is in the shelf. The second bowl is visible on the table.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake second bowl from table.\n\nCurrently available actions:\n[A000]  inventory\n[A001]  take second bowl from table\n[A002]  take first bowl from shelf\n[A003]  look\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "take second bowl from table"
+    },
+    {
+      "call_id": "visible-02-bracket-bracket",
+      "case_id": "visible-02",
+      "family": "visible",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take second bowl from table",
+        "A002": "take first bowl from shelf",
+        "A003": "look"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both bowls in the shelf.\n\nCurrent observation:\nThe first bowl is in the shelf. The second bowl is visible on the table.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake second bowl from table.\n\nCurrently available actions:\n[A000]  inventory\n[A001]  take second bowl from table\n[A002]  take first bowl from shelf\n[A003]  look\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "take second bowl from table"
+    },
+    {
+      "call_id": "visible-02-plain-bare",
+      "case_id": "visible-02",
+      "family": "visible",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take second bowl from table",
+        "A002": "take first bowl from shelf",
+        "A003": "look"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both bowls in the shelf.\n\nCurrent observation:\nThe first bowl is in the shelf. The second bowl is visible on the table.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake second bowl from table.\n\nCurrently available actions:\nA000  inventory\nA001  take second bowl from table\nA002  take first bowl from shelf\nA003  look\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "take second bowl from table"
+    },
+    {
+      "call_id": "cleaning-01-bracket-bare",
+      "case_id": "cleaning-01",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "look",
+        "A001": "inventory",
+        "A002": "take first plate from cupboard",
+        "A003": "take second plate from cupboard"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both clean plates in the cupboard.\n\nCurrent observation:\nBoth plates are in the cupboard. The first plate is dirty and the second is clean. Cleaning requires holding the dirty object.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake first plate from cupboard.\n\nCurrently available actions:\n[A000]  look\n[A001]  inventory\n[A002]  take first plate from cupboard\n[A003]  take second plate from cupboard\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "take first plate from cupboard"
+    },
+    {
+      "call_id": "cleaning-01-bracket-bracket",
+      "case_id": "cleaning-01",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "look",
+        "A001": "inventory",
+        "A002": "take first plate from cupboard",
+        "A003": "take second plate from cupboard"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both clean plates in the cupboard.\n\nCurrent observation:\nBoth plates are in the cupboard. The first plate is dirty and the second is clean. Cleaning requires holding the dirty object.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake first plate from cupboard.\n\nCurrently available actions:\n[A000]  look\n[A001]  inventory\n[A002]  take first plate from cupboard\n[A003]  take second plate from cupboard\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "take first plate from cupboard"
+    },
+    {
+      "call_id": "cleaning-01-plain-bare",
+      "case_id": "cleaning-01",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "look",
+        "A001": "inventory",
+        "A002": "take first plate from cupboard",
+        "A003": "take second plate from cupboard"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both clean plates in the cupboard.\n\nCurrent observation:\nBoth plates are in the cupboard. The first plate is dirty and the second is clean. Cleaning requires holding the dirty object.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake first plate from cupboard.\n\nCurrently available actions:\nA000  look\nA001  inventory\nA002  take first plate from cupboard\nA003  take second plate from cupboard\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "take first plate from cupboard"
+    },
+    {
+      "call_id": "cleaning-01-plain-bracket",
+      "case_id": "cleaning-01",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "look",
+        "A001": "inventory",
+        "A002": "take first plate from cupboard",
+        "A003": "take second plate from cupboard"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both clean plates in the cupboard.\n\nCurrent observation:\nBoth plates are in the cupboard. The first plate is dirty and the second is clean. Cleaning requires holding the dirty object.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake first plate from cupboard.\n\nCurrently available actions:\nA000  look\nA001  inventory\nA002  take first plate from cupboard\nA003  take second plate from cupboard\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "take first plate from cupboard"
+    },
+    {
+      "call_id": "cleaning-02-bracket-bracket",
+      "case_id": "cleaning-02",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "take second pan from rack",
+        "A001": "look",
+        "A002": "inventory",
+        "A003": "take first pan from rack"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both clean pans in the rack.\n\nCurrent observation:\nBoth pans are in the rack. The first pan is dirty and the second is clean. Cleaning requires holding the dirty object.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake first pan from rack.\n\nCurrently available actions:\n[A000]  take second pan from rack\n[A001]  look\n[A002]  inventory\n[A003]  take first pan from rack\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "take first pan from rack"
+    },
+    {
+      "call_id": "cleaning-02-plain-bare",
+      "case_id": "cleaning-02",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "take second pan from rack",
+        "A001": "look",
+        "A002": "inventory",
+        "A003": "take first pan from rack"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both clean pans in the rack.\n\nCurrent observation:\nBoth pans are in the rack. The first pan is dirty and the second is clean. Cleaning requires holding the dirty object.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake first pan from rack.\n\nCurrently available actions:\nA000  take second pan from rack\nA001  look\nA002  inventory\nA003  take first pan from rack\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "take first pan from rack"
+    },
+    {
+      "call_id": "cleaning-02-plain-bracket",
+      "case_id": "cleaning-02",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "take second pan from rack",
+        "A001": "look",
+        "A002": "inventory",
+        "A003": "take first pan from rack"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both clean pans in the rack.\n\nCurrent observation:\nBoth pans are in the rack. The first pan is dirty and the second is clean. Cleaning requires holding the dirty object.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake first pan from rack.\n\nCurrently available actions:\nA000  take second pan from rack\nA001  look\nA002  inventory\nA003  take first pan from rack\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "take first pan from rack"
+    },
+    {
+      "call_id": "cleaning-02-bracket-bare",
+      "case_id": "cleaning-02",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "take second pan from rack",
+        "A001": "look",
+        "A002": "inventory",
+        "A003": "take first pan from rack"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both clean pans in the rack.\n\nCurrent observation:\nBoth pans are in the rack. The first pan is dirty and the second is clean. Cleaning requires holding the dirty object.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nTake first pan from rack.\n\nCurrently available actions:\n[A000]  take second pan from rack\n[A001]  look\n[A002]  inventory\n[A003]  take first pan from rack\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "take first pan from rack"
+    },
+    {
+      "call_id": "holding-01-plain-bare",
+      "case_id": "holding-01",
+      "family": "holding",
+      "mapping": {
+        "A000": "put second mug in cabinet",
+        "A001": "put second mug on counter",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both mugs in the cabinet.\n\nCurrent observation:\nThe first mug is in the cabinet; the cabinet is accessible.\n\nCurrent inventory:\nThe second mug is held.\n\nImmediate subgoal:\nPut second mug in cabinet.\n\nCurrently available actions:\nA000  put second mug in cabinet\nA001  put second mug on counter\nA002  look\nA003  inventory\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "put second mug in cabinet"
+    },
+    {
+      "call_id": "holding-01-plain-bracket",
+      "case_id": "holding-01",
+      "family": "holding",
+      "mapping": {
+        "A000": "put second mug in cabinet",
+        "A001": "put second mug on counter",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both mugs in the cabinet.\n\nCurrent observation:\nThe first mug is in the cabinet; the cabinet is accessible.\n\nCurrent inventory:\nThe second mug is held.\n\nImmediate subgoal:\nPut second mug in cabinet.\n\nCurrently available actions:\nA000  put second mug in cabinet\nA001  put second mug on counter\nA002  look\nA003  inventory\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "put second mug in cabinet"
+    },
+    {
+      "call_id": "holding-01-bracket-bare",
+      "case_id": "holding-01",
+      "family": "holding",
+      "mapping": {
+        "A000": "put second mug in cabinet",
+        "A001": "put second mug on counter",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both mugs in the cabinet.\n\nCurrent observation:\nThe first mug is in the cabinet; the cabinet is accessible.\n\nCurrent inventory:\nThe second mug is held.\n\nImmediate subgoal:\nPut second mug in cabinet.\n\nCurrently available actions:\n[A000]  put second mug in cabinet\n[A001]  put second mug on counter\n[A002]  look\n[A003]  inventory\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "put second mug in cabinet"
+    },
+    {
+      "call_id": "holding-01-bracket-bracket",
+      "case_id": "holding-01",
+      "family": "holding",
+      "mapping": {
+        "A000": "put second mug in cabinet",
+        "A001": "put second mug on counter",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both mugs in the cabinet.\n\nCurrent observation:\nThe first mug is in the cabinet; the cabinet is accessible.\n\nCurrent inventory:\nThe second mug is held.\n\nImmediate subgoal:\nPut second mug in cabinet.\n\nCurrently available actions:\n[A000]  put second mug in cabinet\n[A001]  put second mug on counter\n[A002]  look\n[A003]  inventory\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "put second mug in cabinet"
+    },
+    {
+      "call_id": "holding-02-plain-bracket",
+      "case_id": "holding-02",
+      "family": "holding",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "put second glass in shelf",
+        "A002": "put second glass on table",
+        "A003": "look"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both glasss in the shelf.\n\nCurrent observation:\nThe first glass is in the shelf; the shelf is accessible.\n\nCurrent inventory:\nThe second glass is held.\n\nImmediate subgoal:\nPut second glass in shelf.\n\nCurrently available actions:\nA000  inventory\nA001  put second glass in shelf\nA002  put second glass on table\nA003  look\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "put second glass in shelf"
+    },
+    {
+      "call_id": "holding-02-bracket-bare",
+      "case_id": "holding-02",
+      "family": "holding",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "put second glass in shelf",
+        "A002": "put second glass on table",
+        "A003": "look"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both glasss in the shelf.\n\nCurrent observation:\nThe first glass is in the shelf; the shelf is accessible.\n\nCurrent inventory:\nThe second glass is held.\n\nImmediate subgoal:\nPut second glass in shelf.\n\nCurrently available actions:\n[A000]  inventory\n[A001]  put second glass in shelf\n[A002]  put second glass on table\n[A003]  look\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "put second glass in shelf"
+    },
+    {
+      "call_id": "holding-02-bracket-bracket",
+      "case_id": "holding-02",
+      "family": "holding",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "put second glass in shelf",
+        "A002": "put second glass on table",
+        "A003": "look"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both glasss in the shelf.\n\nCurrent observation:\nThe first glass is in the shelf; the shelf is accessible.\n\nCurrent inventory:\nThe second glass is held.\n\nImmediate subgoal:\nPut second glass in shelf.\n\nCurrently available actions:\n[A000]  inventory\n[A001]  put second glass in shelf\n[A002]  put second glass on table\n[A003]  look\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "put second glass in shelf"
+    },
+    {
+      "call_id": "holding-02-plain-bare",
+      "case_id": "holding-02",
+      "family": "holding",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "put second glass in shelf",
+        "A002": "put second glass on table",
+        "A003": "look"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both glasss in the shelf.\n\nCurrent observation:\nThe first glass is in the shelf; the shelf is accessible.\n\nCurrent inventory:\nThe second glass is held.\n\nImmediate subgoal:\nPut second glass in shelf.\n\nCurrently available actions:\nA000  inventory\nA001  put second glass in shelf\nA002  put second glass on table\nA003  look\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "put second glass in shelf"
+    },
+    {
+      "call_id": "unknown-01-bracket-bare",
+      "case_id": "unknown-01",
+      "family": "unknown",
+      "mapping": {
+        "A000": "take first book from cabinet",
+        "A001": "inventory",
+        "A002": "open left drawer",
+        "A003": "open storage box"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both books in the cabinet.\n\nCurrent observation:\nThe first book is in the cabinet. The second book is not visible. Neither the left drawer nor the storage box has been inspected.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nOpen left drawer.\n\nCurrently available actions:\n[A000]  take first book from cabinet\n[A001]  inventory\n[A002]  open left drawer\n[A003]  open storage box\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "open left drawer"
+    },
+    {
+      "call_id": "unknown-01-bracket-bracket",
+      "case_id": "unknown-01",
+      "family": "unknown",
+      "mapping": {
+        "A000": "take first book from cabinet",
+        "A001": "inventory",
+        "A002": "open left drawer",
+        "A003": "open storage box"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both books in the cabinet.\n\nCurrent observation:\nThe first book is in the cabinet. The second book is not visible. Neither the left drawer nor the storage box has been inspected.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nOpen left drawer.\n\nCurrently available actions:\n[A000]  take first book from cabinet\n[A001]  inventory\n[A002]  open left drawer\n[A003]  open storage box\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "open left drawer"
+    },
+    {
+      "call_id": "unknown-01-plain-bare",
+      "case_id": "unknown-01",
+      "family": "unknown",
+      "mapping": {
+        "A000": "take first book from cabinet",
+        "A001": "inventory",
+        "A002": "open left drawer",
+        "A003": "open storage box"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both books in the cabinet.\n\nCurrent observation:\nThe first book is in the cabinet. The second book is not visible. Neither the left drawer nor the storage box has been inspected.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nOpen left drawer.\n\nCurrently available actions:\nA000  take first book from cabinet\nA001  inventory\nA002  open left drawer\nA003  open storage box\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "open left drawer"
+    },
+    {
+      "call_id": "unknown-01-plain-bracket",
+      "case_id": "unknown-01",
+      "family": "unknown",
+      "mapping": {
+        "A000": "take first book from cabinet",
+        "A001": "inventory",
+        "A002": "open left drawer",
+        "A003": "open storage box"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both books in the cabinet.\n\nCurrent observation:\nThe first book is in the cabinet. The second book is not visible. Neither the left drawer nor the storage box has been inspected.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nOpen left drawer.\n\nCurrently available actions:\nA000  take first book from cabinet\nA001  inventory\nA002  open left drawer\nA003  open storage box\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "open left drawer"
+    },
+    {
+      "call_id": "unknown-02-bracket-bracket",
+      "case_id": "unknown-02",
+      "family": "unknown",
+      "mapping": {
+        "A000": "open storage box",
+        "A001": "take first box from shelf",
+        "A002": "inventory",
+        "A003": "open upper drawer"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both boxs in the shelf.\n\nCurrent observation:\nThe first box is in the shelf. The second box is not visible. Neither the upper drawer nor the storage box has been inspected.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nOpen upper drawer.\n\nCurrently available actions:\n[A000]  open storage box\n[A001]  take first box from shelf\n[A002]  inventory\n[A003]  open upper drawer\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "open upper drawer"
+    },
+    {
+      "call_id": "unknown-02-plain-bare",
+      "case_id": "unknown-02",
+      "family": "unknown",
+      "mapping": {
+        "A000": "open storage box",
+        "A001": "take first box from shelf",
+        "A002": "inventory",
+        "A003": "open upper drawer"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both boxs in the shelf.\n\nCurrent observation:\nThe first box is in the shelf. The second box is not visible. Neither the upper drawer nor the storage box has been inspected.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nOpen upper drawer.\n\nCurrently available actions:\nA000  open storage box\nA001  take first box from shelf\nA002  inventory\nA003  open upper drawer\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "open upper drawer"
+    },
+    {
+      "call_id": "unknown-02-plain-bracket",
+      "case_id": "unknown-02",
+      "family": "unknown",
+      "mapping": {
+        "A000": "open storage box",
+        "A001": "take first box from shelf",
+        "A002": "inventory",
+        "A003": "open upper drawer"
+      },
+      "output_format": "bracket",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID enclosed in square brackets. Do not output anything else.\n\nTask goal:\nPut both boxs in the shelf.\n\nCurrent observation:\nThe first box is in the shelf. The second box is not visible. Neither the upper drawer nor the storage box has been inspected.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nOpen upper drawer.\n\nCurrently available actions:\nA000  open storage box\nA001  take first box from shelf\nA002  inventory\nA003  open upper drawer\n\nYour response:",
+      "row_format": "plain",
+      "specified_action": "open upper drawer"
+    },
+    {
+      "call_id": "unknown-02-bracket-bare",
+      "case_id": "unknown-02",
+      "family": "unknown",
+      "mapping": {
+        "A000": "open storage box",
+        "A001": "take first box from shelf",
+        "A002": "inventory",
+        "A003": "open upper drawer"
+      },
+      "output_format": "bare",
+      "prompt": "Select the currently available action that best executes the given immediate subgoal.\nReturn exactly one action ID without surrounding square brackets. Do not output anything else.\n\nTask goal:\nPut both boxs in the shelf.\n\nCurrent observation:\nThe first box is in the shelf. The second box is not visible. Neither the upper drawer nor the storage box has been inspected.\n\nCurrent inventory:\nThe hand is empty.\n\nImmediate subgoal:\nOpen upper drawer.\n\nCurrently available actions:\n[A000]  open storage box\n[A001]  take first box from shelf\n[A002]  inventory\n[A003]  open upper drawer\n\nYour response:",
+      "row_format": "bracket",
+      "specified_action": "open upper drawer"
+    }
+  ],
+  "schema": "action_id_format_factorial_dev_v1"
+}

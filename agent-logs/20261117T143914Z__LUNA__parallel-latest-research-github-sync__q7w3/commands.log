@@ -1,0 +1,37 @@
+# Captured publication command receipts
+
+Timestamp: 2026-11-17T14:39:14Z (UTC)
+
+1. Manifest allowlist, size, and SHA-256 audit
+   - Command: `python3 - <<'PY' [read each of the three MANIFEST.json files and only their listed payload paths; verify manifest SHA-256, each payload SHA-256/byte count, path containment and unlisted-name-only inventory] PY`
+   - Exit: 0
+   - Captured stdout SHA-256: `2dd998ba425df707415ce8ee44d59e64c73309c5d8e8391be666ba0f347bed79`
+   - Captured stdout: `{"status":"PASS","packages":[{"package":"research_packages/progress_rule_probe_development_v1","manifest_sha256":"2ea7ebeabf74948f5c597e24af316b8bffbfc07c04b851120ba0d24bc2b77167","payload_files":17,"payload_bytes":270415,"unlisted_names_only":["__pycache__/analyze.cpython-313.pyc","__pycache__/audit_unstripped_tokens.cpython-310.pyc","cases.draft.json"]},{"package":"research_packages/action_id_format_factorial_dev_v1","manifest_sha256":"41e9c075b30baf30a33c1fde3758d81ad2267f0ba3a888d7ce99255294faae53","payload_files":18,"payload_bytes":247808,"unlisted_names_only":["__pycache__/analyze.cpython-313.pyc","__pycache__/audit_unstripped_tokens.cpython-310.pyc","cases.draft.json","cases.draft.v1.json"]},{"package":"research_packages/execution_contract_factorial_dev_v1","manifest_sha256":"f2dce25cca1a67df2fb3fd3e90e16d7e1888640daf67d043d63341f175fbdc58","payload_files":10,"payload_bytes":86156,"unlisted_names_only":[]}]}
+`
+
+2. Source worktree identity/status receipt
+   - Command: `git rev-parse HEAD; git branch --show-current; git status --porcelain --untracked-files=all | wc -l`
+   - Exit: 0
+   - Captured stdout:
+```
+e537f441010077123a307e9d50ea40cf8dad8547
+codex/parallel-research-pilots-isolated
+2611
+```
+   - Scope: this status count is recorded for context; only the three fixed package manifests were used.
+
+3. Previously completed CPU-only package checks (not rerun during this upload)
+   - Progress primary analyzer: exit 0; stdout SHA-256 `7d956e85c273d75c01207c1c6d69f2fa824b6edbd0abcc2077cb7836432d1015`; 16 planned / 16 decisions.
+   - Progress post-hoc bracket-text analyzer: exit 0; stdout SHA-256 `a6f5ba1eaac1630c36b63d8e6672b9c9db56617cb0dcc2472f71fc39840cb0de`; 16 fictional outputs, post-hoc text only.
+   - Action-ID primary analyzer: exit 0; stdout SHA-256 `6147976931e49e0196cfcdc0499db8eea6e94285da213121335972a2c43f16b6`; 32 planned / 32 decisions.
+   - Action-ID standard-library independent recompute: exit 0; stdout SHA-256 `d83eac75abac3813d5f3e0204bbd5eb028f24622818ff415a921f9e4908c3754`; 32 unique keys, no classification discrepancies.
+   - Execution-contract partial analyzer: exit 0; stdout SHA-256 `e5b31ba1c88882f784e712b1cb584b5b7fa0ce964662b2b72cf53f7dc831ad22`; 32 planned / 0 started / 0 decisions.
+   - A prior shell-quoting attempt raised a Python SyntaxError before the analyzer process started; it is not counted as an analyzer run. Corrected CPU receipts above are the successful runs. No tokenizer audit script was executed.
+
+4. Transfer verifier recovery
+   - One intermediate in-memory SHA-256 helper had a missing round constant and rejected a source file before creating its blob. The helper was corrected, checked against the standard empty-string and `hello` vectors, and every transferred source payload was then matched to its manifest SHA-256 and byte count before blob creation. No incorrect package bytes were committed.
+
+5. GitHub destinations
+   - Project main pre-write: `730078305e8c09c2d86d3898b5d561cf27cd00e1`; project commit: `1fbad4721ed2c68bbeaedf7364995c7348035e48`.
+   - Provenance main pre-write: `346648570e2883f50ed23c0ff95ea8dfb06c8881`.
+   - Provenance tree/commit and remote byte-verification results are represented by the containing Git commit and the final handoff receipt.

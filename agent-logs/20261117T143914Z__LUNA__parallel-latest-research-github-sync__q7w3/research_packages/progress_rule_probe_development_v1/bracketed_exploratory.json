@@ -1,0 +1,122 @@
+{
+  "by_case": {
+    "clean": {
+      "follow_0": {
+        "author_progress_rule_match": true,
+        "hypothetical_action": "take A from target",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A002]"
+      },
+      "follow_1": {
+        "author_progress_rule_match": false,
+        "hypothetical_action": "take B from target",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A003]"
+      },
+      "progress_0": {
+        "author_progress_rule_match": true,
+        "hypothetical_action": "take A from target",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A002]"
+      },
+      "progress_1": {
+        "author_progress_rule_match": false,
+        "hypothetical_action": "take B from target",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A003]"
+      }
+    },
+    "tight": {
+      "follow_0": {
+        "author_progress_rule_match": true,
+        "hypothetical_action": "take B from source",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A000]"
+      },
+      "follow_1": {
+        "author_progress_rule_match": false,
+        "hypothetical_action": "take A from target",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A001]"
+      },
+      "progress_0": {
+        "author_progress_rule_match": true,
+        "hypothetical_action": "take B from source",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A000]"
+      },
+      "progress_1": {
+        "author_progress_rule_match": false,
+        "hypothetical_action": "take A from target",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A001]"
+      }
+    },
+    "unknown": {
+      "follow_0": {
+        "author_progress_rule_match": null,
+        "hypothetical_action": "take A from target",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A003]"
+      },
+      "follow_1": {
+        "author_progress_rule_match": null,
+        "hypothetical_action": "take B from source",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A000]"
+      },
+      "progress_0": {
+        "author_progress_rule_match": null,
+        "hypothetical_action": "take A from target",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A003]"
+      },
+      "progress_1": {
+        "author_progress_rule_match": null,
+        "hypothetical_action": "take B from source",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A000]"
+      }
+    },
+    "wide": {
+      "follow_0": {
+        "author_progress_rule_match": true,
+        "hypothetical_action": "take B from source",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A000]"
+      },
+      "follow_1": {
+        "author_progress_rule_match": false,
+        "hypothetical_action": "take A from target",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A001]"
+      },
+      "progress_0": {
+        "author_progress_rule_match": true,
+        "hypothetical_action": "take B from source",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A000]"
+      },
+      "progress_1": {
+        "author_progress_rule_match": false,
+        "hypothetical_action": "take A from target",
+        "mentioned_subgoal_id": true,
+        "recorded_output": "[A001]"
+      }
+    }
+  },
+  "contract_pairs": {
+    "same_id": 8
+  },
+  "status": "post-hoc text description, not a valid action, parser repair, or environment execution",
+  "totals": {
+    "bracketed_outputs": 16,
+    "mentioned_subgoal_id": 16,
+    "progress_directive_0_judged": 3,
+    "progress_directive_0_matched": 3,
+    "progress_directive_1_judged": 3,
+    "progress_directive_1_matched": 0,
+    "progress_rule_judged": 6,
+    "progress_rule_matched": 3
+  }
+}

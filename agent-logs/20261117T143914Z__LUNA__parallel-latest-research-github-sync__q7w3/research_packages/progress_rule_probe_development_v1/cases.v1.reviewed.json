@@ -1,0 +1,433 @@
+{
+  "calls": [
+    {
+      "call_id": "tight-follow-0",
+      "case_id": "tight",
+      "contract": "follow",
+      "directive_index": 0,
+      "family": "unnecessary_budget_critical",
+      "labels": {
+        "adjudication": "determinate",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target"
+        ],
+        "rule_consistent": [
+          "take B from source"
+        ]
+      },
+      "mapping": {
+        "A000": "take B from source",
+        "A001": "take A from target",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are clean and in the target.\n\nCurrent state:\nA is clean and in the target. B is clean and at the source. The hand is empty. Exactly 2 steps remain, including the current action.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. The target is unobstructed. A held object can be put in the target or at the source. Taking and putting each consume one action. No other action changes object locations.\n\nFrozen immediate subgoal:\nTake B from the source.\n\nCurrently available action IDs:\n[A000] take B from source\n[A001] take A from target\n[A002] look\n[A003] inventory\n\nYour response:"
+    },
+    {
+      "call_id": "tight-follow-1",
+      "case_id": "tight",
+      "contract": "follow",
+      "directive_index": 1,
+      "family": "unnecessary_budget_critical",
+      "labels": {
+        "adjudication": "determinate",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target"
+        ],
+        "rule_consistent": [
+          "take B from source"
+        ]
+      },
+      "mapping": {
+        "A000": "take B from source",
+        "A001": "take A from target",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are clean and in the target.\n\nCurrent state:\nA is clean and in the target. B is clean and at the source. The hand is empty. Exactly 2 steps remain, including the current action.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. The target is unobstructed. A held object can be put in the target or at the source. Taking and putting each consume one action. No other action changes object locations.\n\nFrozen immediate subgoal:\nTake A from the target.\n\nCurrently available action IDs:\n[A000] take B from source\n[A001] take A from target\n[A002] look\n[A003] inventory\n\nYour response:"
+    },
+    {
+      "call_id": "tight-progress-0",
+      "case_id": "tight",
+      "contract": "progress",
+      "directive_index": 0,
+      "family": "unnecessary_budget_critical",
+      "labels": {
+        "adjudication": "determinate",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target"
+        ],
+        "rule_consistent": [
+          "take B from source"
+        ]
+      },
+      "mapping": {
+        "A000": "take B from source",
+        "A001": "take A from target",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "prompt": "Select one currently available action to advance the overall task. Prefer an advancing action that does not undo a condition already achieved. If undoing an achieved condition is necessary to complete the task within the remaining steps, allow that undoing.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are clean and in the target.\n\nCurrent state:\nA is clean and in the target. B is clean and at the source. The hand is empty. Exactly 2 steps remain, including the current action.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. The target is unobstructed. A held object can be put in the target or at the source. Taking and putting each consume one action. No other action changes object locations.\n\nFrozen immediate subgoal:\nTake B from the source.\n\nCurrently available action IDs:\n[A000] take B from source\n[A001] take A from target\n[A002] look\n[A003] inventory\n\nYour response:"
+    },
+    {
+      "call_id": "tight-progress-1",
+      "case_id": "tight",
+      "contract": "progress",
+      "directive_index": 1,
+      "family": "unnecessary_budget_critical",
+      "labels": {
+        "adjudication": "determinate",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target"
+        ],
+        "rule_consistent": [
+          "take B from source"
+        ]
+      },
+      "mapping": {
+        "A000": "take B from source",
+        "A001": "take A from target",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "prompt": "Select one currently available action to advance the overall task. Prefer an advancing action that does not undo a condition already achieved. If undoing an achieved condition is necessary to complete the task within the remaining steps, allow that undoing.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are clean and in the target.\n\nCurrent state:\nA is clean and in the target. B is clean and at the source. The hand is empty. Exactly 2 steps remain, including the current action.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. The target is unobstructed. A held object can be put in the target or at the source. Taking and putting each consume one action. No other action changes object locations.\n\nFrozen immediate subgoal:\nTake A from the target.\n\nCurrently available action IDs:\n[A000] take B from source\n[A001] take A from target\n[A002] look\n[A003] inventory\n\nYour response:"
+    },
+    {
+      "call_id": "wide-follow-1",
+      "case_id": "wide",
+      "contract": "follow",
+      "directive_index": 1,
+      "family": "unnecessary_budget_slack",
+      "labels": {
+        "adjudication": "determinate",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target"
+        ],
+        "rule_consistent": [
+          "take B from source"
+        ]
+      },
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take B from source",
+        "A002": "take A from target",
+        "A003": "look"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are clean and in the target.\n\nCurrent state:\nA is clean and in the target. B is clean and at the source. The hand is empty. Exactly 4 steps remain, including the current action.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. The target is unobstructed. A held object can be put in the target or at the source. Taking and putting each consume one action. No other action changes object locations.\n\nFrozen immediate subgoal:\nTake A from the target.\n\nCurrently available action IDs:\n[A000] inventory\n[A001] take B from source\n[A002] take A from target\n[A003] look\n\nYour response:"
+    },
+    {
+      "call_id": "wide-progress-0",
+      "case_id": "wide",
+      "contract": "progress",
+      "directive_index": 0,
+      "family": "unnecessary_budget_slack",
+      "labels": {
+        "adjudication": "determinate",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target"
+        ],
+        "rule_consistent": [
+          "take B from source"
+        ]
+      },
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take B from source",
+        "A002": "take A from target",
+        "A003": "look"
+      },
+      "prompt": "Select one currently available action to advance the overall task. Prefer an advancing action that does not undo a condition already achieved. If undoing an achieved condition is necessary to complete the task within the remaining steps, allow that undoing.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are clean and in the target.\n\nCurrent state:\nA is clean and in the target. B is clean and at the source. The hand is empty. Exactly 4 steps remain, including the current action.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. The target is unobstructed. A held object can be put in the target or at the source. Taking and putting each consume one action. No other action changes object locations.\n\nFrozen immediate subgoal:\nTake B from the source.\n\nCurrently available action IDs:\n[A000] inventory\n[A001] take B from source\n[A002] take A from target\n[A003] look\n\nYour response:"
+    },
+    {
+      "call_id": "wide-progress-1",
+      "case_id": "wide",
+      "contract": "progress",
+      "directive_index": 1,
+      "family": "unnecessary_budget_slack",
+      "labels": {
+        "adjudication": "determinate",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target"
+        ],
+        "rule_consistent": [
+          "take B from source"
+        ]
+      },
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take B from source",
+        "A002": "take A from target",
+        "A003": "look"
+      },
+      "prompt": "Select one currently available action to advance the overall task. Prefer an advancing action that does not undo a condition already achieved. If undoing an achieved condition is necessary to complete the task within the remaining steps, allow that undoing.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are clean and in the target.\n\nCurrent state:\nA is clean and in the target. B is clean and at the source. The hand is empty. Exactly 4 steps remain, including the current action.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. The target is unobstructed. A held object can be put in the target or at the source. Taking and putting each consume one action. No other action changes object locations.\n\nFrozen immediate subgoal:\nTake A from the target.\n\nCurrently available action IDs:\n[A000] inventory\n[A001] take B from source\n[A002] take A from target\n[A003] look\n\nYour response:"
+    },
+    {
+      "call_id": "wide-follow-0",
+      "case_id": "wide",
+      "contract": "follow",
+      "directive_index": 0,
+      "family": "unnecessary_budget_slack",
+      "labels": {
+        "adjudication": "determinate",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target"
+        ],
+        "rule_consistent": [
+          "take B from source"
+        ]
+      },
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take B from source",
+        "A002": "take A from target",
+        "A003": "look"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are clean and in the target.\n\nCurrent state:\nA is clean and in the target. B is clean and at the source. The hand is empty. Exactly 4 steps remain, including the current action.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. The target is unobstructed. A held object can be put in the target or at the source. Taking and putting each consume one action. No other action changes object locations.\n\nFrozen immediate subgoal:\nTake B from the source.\n\nCurrently available action IDs:\n[A000] inventory\n[A001] take B from source\n[A002] take A from target\n[A003] look\n\nYour response:"
+    },
+    {
+      "call_id": "clean-progress-0",
+      "case_id": "clean",
+      "contract": "progress",
+      "directive_index": 0,
+      "family": "necessary_rollback",
+      "labels": {
+        "adjudication": "determinate",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target",
+          "take B from target"
+        ],
+        "rule_consistent": [
+          "take A from target"
+        ]
+      },
+      "mapping": {
+        "A000": "look",
+        "A001": "inventory",
+        "A002": "take A from target",
+        "A003": "take B from target"
+      },
+      "prompt": "Select one currently available action to advance the overall task. Prefer an advancing action that does not undo a condition already achieved. If undoing an achieved condition is necessary to complete the task within the remaining steps, allow that undoing.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are clean and in the target.\n\nCurrent state:\nA and B are both in the target. A is dirty and B is clean. The hand is empty. Exactly 3 steps remain, including the current action.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. The only way to clean A is to hold A and use one clean action. Cleaning A does not put it down. A held object can be put into the target or at the source. Taking, cleaning, and putting each consume one action. No other action cleans an object.\n\nFrozen immediate subgoal:\nTake A from the target.\n\nCurrently available action IDs:\n[A000] look\n[A001] inventory\n[A002] take A from target\n[A003] take B from target\n\nYour response:"
+    },
+    {
+      "call_id": "clean-progress-1",
+      "case_id": "clean",
+      "contract": "progress",
+      "directive_index": 1,
+      "family": "necessary_rollback",
+      "labels": {
+        "adjudication": "determinate",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target",
+          "take B from target"
+        ],
+        "rule_consistent": [
+          "take A from target"
+        ]
+      },
+      "mapping": {
+        "A000": "look",
+        "A001": "inventory",
+        "A002": "take A from target",
+        "A003": "take B from target"
+      },
+      "prompt": "Select one currently available action to advance the overall task. Prefer an advancing action that does not undo a condition already achieved. If undoing an achieved condition is necessary to complete the task within the remaining steps, allow that undoing.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are clean and in the target.\n\nCurrent state:\nA and B are both in the target. A is dirty and B is clean. The hand is empty. Exactly 3 steps remain, including the current action.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. The only way to clean A is to hold A and use one clean action. Cleaning A does not put it down. A held object can be put into the target or at the source. Taking, cleaning, and putting each consume one action. No other action cleans an object.\n\nFrozen immediate subgoal:\nTake B from the target.\n\nCurrently available action IDs:\n[A000] look\n[A001] inventory\n[A002] take A from target\n[A003] take B from target\n\nYour response:"
+    },
+    {
+      "call_id": "clean-follow-0",
+      "case_id": "clean",
+      "contract": "follow",
+      "directive_index": 0,
+      "family": "necessary_rollback",
+      "labels": {
+        "adjudication": "determinate",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target",
+          "take B from target"
+        ],
+        "rule_consistent": [
+          "take A from target"
+        ]
+      },
+      "mapping": {
+        "A000": "look",
+        "A001": "inventory",
+        "A002": "take A from target",
+        "A003": "take B from target"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are clean and in the target.\n\nCurrent state:\nA and B are both in the target. A is dirty and B is clean. The hand is empty. Exactly 3 steps remain, including the current action.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. The only way to clean A is to hold A and use one clean action. Cleaning A does not put it down. A held object can be put into the target or at the source. Taking, cleaning, and putting each consume one action. No other action cleans an object.\n\nFrozen immediate subgoal:\nTake A from the target.\n\nCurrently available action IDs:\n[A000] look\n[A001] inventory\n[A002] take A from target\n[A003] take B from target\n\nYour response:"
+    },
+    {
+      "call_id": "clean-follow-1",
+      "case_id": "clean",
+      "contract": "follow",
+      "directive_index": 1,
+      "family": "necessary_rollback",
+      "labels": {
+        "adjudication": "determinate",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target",
+          "take B from target"
+        ],
+        "rule_consistent": [
+          "take A from target"
+        ]
+      },
+      "mapping": {
+        "A000": "look",
+        "A001": "inventory",
+        "A002": "take A from target",
+        "A003": "take B from target"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are clean and in the target.\n\nCurrent state:\nA and B are both in the target. A is dirty and B is clean. The hand is empty. Exactly 3 steps remain, including the current action.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. The only way to clean A is to hold A and use one clean action. Cleaning A does not put it down. A held object can be put into the target or at the source. Taking, cleaning, and putting each consume one action. No other action cleans an object.\n\nFrozen immediate subgoal:\nTake B from the target.\n\nCurrently available action IDs:\n[A000] look\n[A001] inventory\n[A002] take A from target\n[A003] take B from target\n\nYour response:"
+    },
+    {
+      "call_id": "unknown-progress-1",
+      "case_id": "unknown",
+      "contract": "progress",
+      "directive_index": 1,
+      "family": "unobserved_obstruction",
+      "labels": {
+        "adjudication": "unknown",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target"
+        ],
+        "rule_consistent": []
+      },
+      "mapping": {
+        "A000": "take B from source",
+        "A001": "look",
+        "A002": "inventory",
+        "A003": "take A from target"
+      },
+      "prompt": "Select one currently available action to advance the overall task. Prefer an advancing action that does not undo a condition already achieved. If undoing an achieved condition is necessary to complete the task within the remaining steps, allow that undoing.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are in the target.\n\nCurrent state:\nA is in the target and B is at the source. The hand is empty. Exactly 6 steps remain, including the current action. A may or may not obstruct B's target slot; this cannot currently be observed.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. If A obstructs B's slot, A must be removed and put at the staging area before B can be put into the target. If A does not obstruct it, B can be put into the target immediately. After B is in the target, A can be returned to the target without displacing B. A held object can be put at the source, staging area, or target, subject to the stated obstruction. Taking and putting each consume one action. No other action changes locations.\n\nFrozen immediate subgoal:\nTake B from the source.\n\nCurrently available action IDs:\n[A000] take B from source\n[A001] look\n[A002] inventory\n[A003] take A from target\n\nYour response:"
+    },
+    {
+      "call_id": "unknown-follow-0",
+      "case_id": "unknown",
+      "contract": "follow",
+      "directive_index": 0,
+      "family": "unobserved_obstruction",
+      "labels": {
+        "adjudication": "unknown",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target"
+        ],
+        "rule_consistent": []
+      },
+      "mapping": {
+        "A000": "take B from source",
+        "A001": "look",
+        "A002": "inventory",
+        "A003": "take A from target"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are in the target.\n\nCurrent state:\nA is in the target and B is at the source. The hand is empty. Exactly 6 steps remain, including the current action. A may or may not obstruct B's target slot; this cannot currently be observed.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. If A obstructs B's slot, A must be removed and put at the staging area before B can be put into the target. If A does not obstruct it, B can be put into the target immediately. After B is in the target, A can be returned to the target without displacing B. A held object can be put at the source, staging area, or target, subject to the stated obstruction. Taking and putting each consume one action. No other action changes locations.\n\nFrozen immediate subgoal:\nTake A from the target.\n\nCurrently available action IDs:\n[A000] take B from source\n[A001] look\n[A002] inventory\n[A003] take A from target\n\nYour response:"
+    },
+    {
+      "call_id": "unknown-follow-1",
+      "case_id": "unknown",
+      "contract": "follow",
+      "directive_index": 1,
+      "family": "unobserved_obstruction",
+      "labels": {
+        "adjudication": "unknown",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target"
+        ],
+        "rule_consistent": []
+      },
+      "mapping": {
+        "A000": "take B from source",
+        "A001": "look",
+        "A002": "inventory",
+        "A003": "take A from target"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are in the target.\n\nCurrent state:\nA is in the target and B is at the source. The hand is empty. Exactly 6 steps remain, including the current action. A may or may not obstruct B's target slot; this cannot currently be observed.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. If A obstructs B's slot, A must be removed and put at the staging area before B can be put into the target. If A does not obstruct it, B can be put into the target immediately. After B is in the target, A can be returned to the target without displacing B. A held object can be put at the source, staging area, or target, subject to the stated obstruction. Taking and putting each consume one action. No other action changes locations.\n\nFrozen immediate subgoal:\nTake B from the source.\n\nCurrently available action IDs:\n[A000] take B from source\n[A001] look\n[A002] inventory\n[A003] take A from target\n\nYour response:"
+    },
+    {
+      "call_id": "unknown-progress-0",
+      "case_id": "unknown",
+      "contract": "progress",
+      "directive_index": 0,
+      "family": "unobserved_obstruction",
+      "labels": {
+        "adjudication": "unknown",
+        "nonadvancing": [
+          "look",
+          "inventory"
+        ],
+        "reversal": [
+          "take A from target"
+        ],
+        "rule_consistent": []
+      },
+      "mapping": {
+        "A000": "take B from source",
+        "A001": "look",
+        "A002": "inventory",
+        "A003": "take A from target"
+      },
+      "prompt": "Select one currently available action to advance the overall task. Prefer an advancing action that does not undo a condition already achieved. If undoing an achieved condition is necessary to complete the task within the remaining steps, allow that undoing.\nReturn exactly one bare action ID, such as A000. Do not give an explanation.\n\nTask goal:\nBoth A and B are in the target.\n\nCurrent state:\nA is in the target and B is at the source. The hand is empty. Exactly 6 steps remain, including the current action. A may or may not obstruct B's target slot; this cannot currently be observed.\n\nAction rules:\nEach listed action consumes exactly one step, including the action you choose now. An action that reaches the goal on the last allowed step counts as success. Only one object can be held at a time. You can take an object only with an empty hand. Putting a held object down leaves the hand empty. Look and inventory each consume one step and change no objects. There is no automatic placement, swapping, teleporting, or hidden action. If A obstructs B's slot, A must be removed and put at the staging area before B can be put into the target. If A does not obstruct it, B can be put into the target immediately. After B is in the target, A can be returned to the target without displacing B. A held object can be put at the source, staging area, or target, subject to the stated obstruction. Taking and putting each consume one action. No other action changes locations.\n\nFrozen immediate subgoal:\nTake A from the target.\n\nCurrently available action IDs:\n[A000] take B from source\n[A001] look\n[A002] inventory\n[A003] take A from target\n\nYour response:"
+    }
+  ],
+  "schema": "progress_rule_probe_development_v1"
+}

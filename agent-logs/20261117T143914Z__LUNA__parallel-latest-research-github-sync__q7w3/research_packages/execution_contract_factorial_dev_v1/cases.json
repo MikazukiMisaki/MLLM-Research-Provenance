@@ -1,0 +1,590 @@
+{
+  "calls": [
+    {
+      "acceptable_actions": [
+        "take cup 2 from counter"
+      ],
+      "call_id": "visible-01-follow_compatible",
+      "case_id": "visible-01",
+      "conflicting_action": "take cup 1 from cupboard",
+      "contract": "follow",
+      "family": "visible",
+      "mapping": {
+        "A000": "take cup 2 from counter",
+        "A001": "take cup 1 from cupboard",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both cups in the cupboard.\n\nCurrent pre-action observation:\nThe cup 1 is in the cupboard; the cup 2 is visible on the counter. The cupboard is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe cup 2 is not yet in the cupboard.\n\nFrozen Stage-1 immediate subgoal:\nTake cup 2 from counter.\n\nIndexed admissible-action mapping:\n[A000] take cup 2 from counter\n[A001] take cup 1 from cupboard\n[A002] look\n[A003] inventory\n\nYour response:",
+      "subgoal_condition": "compatible"
+    },
+    {
+      "acceptable_actions": [
+        "take cup 2 from counter"
+      ],
+      "call_id": "visible-01-follow_conflicting",
+      "case_id": "visible-01",
+      "conflicting_action": "take cup 1 from cupboard",
+      "contract": "follow",
+      "family": "visible",
+      "mapping": {
+        "A000": "take cup 2 from counter",
+        "A001": "take cup 1 from cupboard",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both cups in the cupboard.\n\nCurrent pre-action observation:\nThe cup 1 is in the cupboard; the cup 2 is visible on the counter. The cupboard is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe cup 2 is not yet in the cupboard.\n\nFrozen Stage-1 immediate subgoal:\nTake cup 1 from cupboard.\n\nIndexed admissible-action mapping:\n[A000] take cup 2 from counter\n[A001] take cup 1 from cupboard\n[A002] look\n[A003] inventory\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "take cup 2 from counter"
+      ],
+      "call_id": "visible-01-task_priority_compatible",
+      "case_id": "visible-01",
+      "conflicting_action": "take cup 1 from cupboard",
+      "contract": "task_priority",
+      "family": "visible",
+      "mapping": {
+        "A000": "take cup 2 from counter",
+        "A001": "take cup 1 from cupboard",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both cups in the cupboard.\n\nCurrent pre-action observation:\nThe cup 1 is in the cupboard; the cup 2 is visible on the counter. The cupboard is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe cup 2 is not yet in the cupboard.\n\nFrozen Stage-1 immediate subgoal:\nTake cup 2 from counter.\n\nIndexed admissible-action mapping:\n[A000] take cup 2 from counter\n[A001] take cup 1 from cupboard\n[A002] look\n[A003] inventory\n\nYour response:",
+      "subgoal_condition": "compatible"
+    },
+    {
+      "acceptable_actions": [
+        "take cup 2 from counter"
+      ],
+      "call_id": "visible-01-task_priority_conflicting",
+      "case_id": "visible-01",
+      "conflicting_action": "take cup 1 from cupboard",
+      "contract": "task_priority",
+      "family": "visible",
+      "mapping": {
+        "A000": "take cup 2 from counter",
+        "A001": "take cup 1 from cupboard",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both cups in the cupboard.\n\nCurrent pre-action observation:\nThe cup 1 is in the cupboard; the cup 2 is visible on the counter. The cupboard is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe cup 2 is not yet in the cupboard.\n\nFrozen Stage-1 immediate subgoal:\nTake cup 1 from cupboard.\n\nIndexed admissible-action mapping:\n[A000] take cup 2 from counter\n[A001] take cup 1 from cupboard\n[A002] look\n[A003] inventory\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "take bowl 2 from table"
+      ],
+      "call_id": "visible-02-follow_conflicting",
+      "case_id": "visible-02",
+      "conflicting_action": "take bowl 1 from hutch",
+      "contract": "follow",
+      "family": "visible",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take bowl 2 from table",
+        "A002": "take bowl 1 from hutch",
+        "A003": "look"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both bowls in the hutch.\n\nCurrent pre-action observation:\nThe bowl 1 is in the hutch; the bowl 2 is visible on the table. The hutch is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe bowl 2 is not yet in the hutch.\n\nFrozen Stage-1 immediate subgoal:\nTake bowl 1 from hutch.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take bowl 2 from table\n[A002] take bowl 1 from hutch\n[A003] look\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "take bowl 2 from table"
+      ],
+      "call_id": "visible-02-task_priority_compatible",
+      "case_id": "visible-02",
+      "conflicting_action": "take bowl 1 from hutch",
+      "contract": "task_priority",
+      "family": "visible",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take bowl 2 from table",
+        "A002": "take bowl 1 from hutch",
+        "A003": "look"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both bowls in the hutch.\n\nCurrent pre-action observation:\nThe bowl 1 is in the hutch; the bowl 2 is visible on the table. The hutch is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe bowl 2 is not yet in the hutch.\n\nFrozen Stage-1 immediate subgoal:\nTake bowl 2 from table.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take bowl 2 from table\n[A002] take bowl 1 from hutch\n[A003] look\n\nYour response:",
+      "subgoal_condition": "compatible"
+    },
+    {
+      "acceptable_actions": [
+        "take bowl 2 from table"
+      ],
+      "call_id": "visible-02-task_priority_conflicting",
+      "case_id": "visible-02",
+      "conflicting_action": "take bowl 1 from hutch",
+      "contract": "task_priority",
+      "family": "visible",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take bowl 2 from table",
+        "A002": "take bowl 1 from hutch",
+        "A003": "look"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both bowls in the hutch.\n\nCurrent pre-action observation:\nThe bowl 1 is in the hutch; the bowl 2 is visible on the table. The hutch is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe bowl 2 is not yet in the hutch.\n\nFrozen Stage-1 immediate subgoal:\nTake bowl 1 from hutch.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take bowl 2 from table\n[A002] take bowl 1 from hutch\n[A003] look\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "take bowl 2 from table"
+      ],
+      "call_id": "visible-02-follow_compatible",
+      "case_id": "visible-02",
+      "conflicting_action": "take bowl 1 from hutch",
+      "contract": "follow",
+      "family": "visible",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take bowl 2 from table",
+        "A002": "take bowl 1 from hutch",
+        "A003": "look"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both bowls in the hutch.\n\nCurrent pre-action observation:\nThe bowl 1 is in the hutch; the bowl 2 is visible on the table. The hutch is accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe bowl 2 is not yet in the hutch.\n\nFrozen Stage-1 immediate subgoal:\nTake bowl 2 from table.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take bowl 2 from table\n[A002] take bowl 1 from hutch\n[A003] look\n\nYour response:",
+      "subgoal_condition": "compatible"
+    },
+    {
+      "acceptable_actions": [
+        "take plate 1 from cabinet"
+      ],
+      "call_id": "cleaning-01-task_priority_compatible",
+      "case_id": "cleaning-01",
+      "conflicting_action": "take plate 2 from cabinet",
+      "contract": "task_priority",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "look",
+        "A001": "inventory",
+        "A002": "take plate 1 from cabinet",
+        "A003": "take plate 2 from cabinet"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean plates in the cabinet.\n\nCurrent pre-action observation:\nThe plate 1 and plate 2 are in the cabinet; the plate 1 is dirty and the plate 2 is clean. The cabinet and sink are accessible. Cleaning requires holding the object at the sink.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe plate 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake plate 1 from cabinet.\n\nIndexed admissible-action mapping:\n[A000] look\n[A001] inventory\n[A002] take plate 1 from cabinet\n[A003] take plate 2 from cabinet\n\nYour response:",
+      "subgoal_condition": "compatible"
+    },
+    {
+      "acceptable_actions": [
+        "take plate 1 from cabinet"
+      ],
+      "call_id": "cleaning-01-task_priority_conflicting",
+      "case_id": "cleaning-01",
+      "conflicting_action": "take plate 2 from cabinet",
+      "contract": "task_priority",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "look",
+        "A001": "inventory",
+        "A002": "take plate 1 from cabinet",
+        "A003": "take plate 2 from cabinet"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean plates in the cabinet.\n\nCurrent pre-action observation:\nThe plate 1 and plate 2 are in the cabinet; the plate 1 is dirty and the plate 2 is clean. The cabinet and sink are accessible. Cleaning requires holding the object at the sink.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe plate 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake plate 2 from cabinet.\n\nIndexed admissible-action mapping:\n[A000] look\n[A001] inventory\n[A002] take plate 1 from cabinet\n[A003] take plate 2 from cabinet\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "take plate 1 from cabinet"
+      ],
+      "call_id": "cleaning-01-follow_compatible",
+      "case_id": "cleaning-01",
+      "conflicting_action": "take plate 2 from cabinet",
+      "contract": "follow",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "look",
+        "A001": "inventory",
+        "A002": "take plate 1 from cabinet",
+        "A003": "take plate 2 from cabinet"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean plates in the cabinet.\n\nCurrent pre-action observation:\nThe plate 1 and plate 2 are in the cabinet; the plate 1 is dirty and the plate 2 is clean. The cabinet and sink are accessible. Cleaning requires holding the object at the sink.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe plate 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake plate 1 from cabinet.\n\nIndexed admissible-action mapping:\n[A000] look\n[A001] inventory\n[A002] take plate 1 from cabinet\n[A003] take plate 2 from cabinet\n\nYour response:",
+      "subgoal_condition": "compatible"
+    },
+    {
+      "acceptable_actions": [
+        "take plate 1 from cabinet"
+      ],
+      "call_id": "cleaning-01-follow_conflicting",
+      "case_id": "cleaning-01",
+      "conflicting_action": "take plate 2 from cabinet",
+      "contract": "follow",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "look",
+        "A001": "inventory",
+        "A002": "take plate 1 from cabinet",
+        "A003": "take plate 2 from cabinet"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean plates in the cabinet.\n\nCurrent pre-action observation:\nThe plate 1 and plate 2 are in the cabinet; the plate 1 is dirty and the plate 2 is clean. The cabinet and sink are accessible. Cleaning requires holding the object at the sink.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe plate 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake plate 2 from cabinet.\n\nIndexed admissible-action mapping:\n[A000] look\n[A001] inventory\n[A002] take plate 1 from cabinet\n[A003] take plate 2 from cabinet\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "take pan 1 from cupboard"
+      ],
+      "call_id": "cleaning-02-task_priority_conflicting",
+      "case_id": "cleaning-02",
+      "conflicting_action": "take pan 2 from cupboard",
+      "contract": "task_priority",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "take pan 2 from cupboard",
+        "A001": "look",
+        "A002": "inventory",
+        "A003": "take pan 1 from cupboard"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean pans in the cupboard.\n\nCurrent pre-action observation:\nThe pan 1 and pan 2 are in the cupboard; the pan 1 is dirty and the pan 2 is clean. The cupboard and sink are accessible. Cleaning requires holding the object at the sink.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe pan 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake pan 2 from cupboard.\n\nIndexed admissible-action mapping:\n[A000] take pan 2 from cupboard\n[A001] look\n[A002] inventory\n[A003] take pan 1 from cupboard\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "take pan 1 from cupboard"
+      ],
+      "call_id": "cleaning-02-follow_compatible",
+      "case_id": "cleaning-02",
+      "conflicting_action": "take pan 2 from cupboard",
+      "contract": "follow",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "take pan 2 from cupboard",
+        "A001": "look",
+        "A002": "inventory",
+        "A003": "take pan 1 from cupboard"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean pans in the cupboard.\n\nCurrent pre-action observation:\nThe pan 1 and pan 2 are in the cupboard; the pan 1 is dirty and the pan 2 is clean. The cupboard and sink are accessible. Cleaning requires holding the object at the sink.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe pan 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake pan 1 from cupboard.\n\nIndexed admissible-action mapping:\n[A000] take pan 2 from cupboard\n[A001] look\n[A002] inventory\n[A003] take pan 1 from cupboard\n\nYour response:",
+      "subgoal_condition": "compatible"
+    },
+    {
+      "acceptable_actions": [
+        "take pan 1 from cupboard"
+      ],
+      "call_id": "cleaning-02-follow_conflicting",
+      "case_id": "cleaning-02",
+      "conflicting_action": "take pan 2 from cupboard",
+      "contract": "follow",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "take pan 2 from cupboard",
+        "A001": "look",
+        "A002": "inventory",
+        "A003": "take pan 1 from cupboard"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean pans in the cupboard.\n\nCurrent pre-action observation:\nThe pan 1 and pan 2 are in the cupboard; the pan 1 is dirty and the pan 2 is clean. The cupboard and sink are accessible. Cleaning requires holding the object at the sink.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe pan 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake pan 2 from cupboard.\n\nIndexed admissible-action mapping:\n[A000] take pan 2 from cupboard\n[A001] look\n[A002] inventory\n[A003] take pan 1 from cupboard\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "take pan 1 from cupboard"
+      ],
+      "call_id": "cleaning-02-task_priority_compatible",
+      "case_id": "cleaning-02",
+      "conflicting_action": "take pan 2 from cupboard",
+      "contract": "task_priority",
+      "family": "cleaning",
+      "mapping": {
+        "A000": "take pan 2 from cupboard",
+        "A001": "look",
+        "A002": "inventory",
+        "A003": "take pan 1 from cupboard"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both clean pans in the cupboard.\n\nCurrent pre-action observation:\nThe pan 1 and pan 2 are in the cupboard; the pan 1 is dirty and the pan 2 is clean. The cupboard and sink are accessible. Cleaning requires holding the object at the sink.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe pan 1 is dirty and needs cleaning.\n\nFrozen Stage-1 immediate subgoal:\nTake pan 1 from cupboard.\n\nIndexed admissible-action mapping:\n[A000] take pan 2 from cupboard\n[A001] look\n[A002] inventory\n[A003] take pan 1 from cupboard\n\nYour response:",
+      "subgoal_condition": "compatible"
+    },
+    {
+      "acceptable_actions": [
+        "take box 1 from chest"
+      ],
+      "call_id": "obstruction-01-follow_compatible",
+      "case_id": "obstruction-01",
+      "conflicting_action": "take box 2 from workbench",
+      "contract": "follow",
+      "family": "obstruction",
+      "mapping": {
+        "A000": "take box 1 from chest",
+        "A001": "take box 2 from workbench",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both boxs in the chest.\n\nCurrent pre-action observation:\nThe box 1 is in the chest and blocks its entry. The box 2 is on the workbench; both objects fit once rearranged. First moving box 1 aside makes the entry accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe box 1 blocks access for the box 2.\n\nFrozen Stage-1 immediate subgoal:\nTake box 1 from chest.\n\nIndexed admissible-action mapping:\n[A000] take box 1 from chest\n[A001] take box 2 from workbench\n[A002] look\n[A003] inventory\n\nYour response:",
+      "subgoal_condition": "compatible"
+    },
+    {
+      "acceptable_actions": [
+        "take box 1 from chest"
+      ],
+      "call_id": "obstruction-01-follow_conflicting",
+      "case_id": "obstruction-01",
+      "conflicting_action": "take box 2 from workbench",
+      "contract": "follow",
+      "family": "obstruction",
+      "mapping": {
+        "A000": "take box 1 from chest",
+        "A001": "take box 2 from workbench",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both boxs in the chest.\n\nCurrent pre-action observation:\nThe box 1 is in the chest and blocks its entry. The box 2 is on the workbench; both objects fit once rearranged. First moving box 1 aside makes the entry accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe box 1 blocks access for the box 2.\n\nFrozen Stage-1 immediate subgoal:\nTake box 2 from workbench.\n\nIndexed admissible-action mapping:\n[A000] take box 1 from chest\n[A001] take box 2 from workbench\n[A002] look\n[A003] inventory\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "take box 1 from chest"
+      ],
+      "call_id": "obstruction-01-task_priority_compatible",
+      "case_id": "obstruction-01",
+      "conflicting_action": "take box 2 from workbench",
+      "contract": "task_priority",
+      "family": "obstruction",
+      "mapping": {
+        "A000": "take box 1 from chest",
+        "A001": "take box 2 from workbench",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both boxs in the chest.\n\nCurrent pre-action observation:\nThe box 1 is in the chest and blocks its entry. The box 2 is on the workbench; both objects fit once rearranged. First moving box 1 aside makes the entry accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe box 1 blocks access for the box 2.\n\nFrozen Stage-1 immediate subgoal:\nTake box 1 from chest.\n\nIndexed admissible-action mapping:\n[A000] take box 1 from chest\n[A001] take box 2 from workbench\n[A002] look\n[A003] inventory\n\nYour response:",
+      "subgoal_condition": "compatible"
+    },
+    {
+      "acceptable_actions": [
+        "take box 1 from chest"
+      ],
+      "call_id": "obstruction-01-task_priority_conflicting",
+      "case_id": "obstruction-01",
+      "conflicting_action": "take box 2 from workbench",
+      "contract": "task_priority",
+      "family": "obstruction",
+      "mapping": {
+        "A000": "take box 1 from chest",
+        "A001": "take box 2 from workbench",
+        "A002": "look",
+        "A003": "inventory"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both boxs in the chest.\n\nCurrent pre-action observation:\nThe box 1 is in the chest and blocks its entry. The box 2 is on the workbench; both objects fit once rearranged. First moving box 1 aside makes the entry accessible.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe box 1 blocks access for the box 2.\n\nFrozen Stage-1 immediate subgoal:\nTake box 2 from workbench.\n\nIndexed admissible-action mapping:\n[A000] take box 1 from chest\n[A001] take box 2 from workbench\n[A002] look\n[A003] inventory\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "put mug 2 in cabinet"
+      ],
+      "call_id": "holding-01-follow_conflicting",
+      "case_id": "holding-01",
+      "conflicting_action": "put mug 2 on table",
+      "contract": "follow",
+      "family": "holding",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "put mug 2 in cabinet",
+        "A002": "put mug 2 on table",
+        "A003": "look"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both mugs in the cabinet.\n\nCurrent pre-action observation:\nThe mug 1 is in the cabinet; the cabinet is open and accessible.\n\nCurrent inventory:\nThe mug 2 is held.\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe mug 2 is held and not yet placed.\n\nFrozen Stage-1 immediate subgoal:\nPut mug 2 on table.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] put mug 2 in cabinet\n[A002] put mug 2 on table\n[A003] look\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "put mug 2 in cabinet"
+      ],
+      "call_id": "holding-01-task_priority_compatible",
+      "case_id": "holding-01",
+      "conflicting_action": "put mug 2 on table",
+      "contract": "task_priority",
+      "family": "holding",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "put mug 2 in cabinet",
+        "A002": "put mug 2 on table",
+        "A003": "look"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both mugs in the cabinet.\n\nCurrent pre-action observation:\nThe mug 1 is in the cabinet; the cabinet is open and accessible.\n\nCurrent inventory:\nThe mug 2 is held.\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe mug 2 is held and not yet placed.\n\nFrozen Stage-1 immediate subgoal:\nPut mug 2 in cabinet.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] put mug 2 in cabinet\n[A002] put mug 2 on table\n[A003] look\n\nYour response:",
+      "subgoal_condition": "compatible"
+    },
+    {
+      "acceptable_actions": [
+        "put mug 2 in cabinet"
+      ],
+      "call_id": "holding-01-task_priority_conflicting",
+      "case_id": "holding-01",
+      "conflicting_action": "put mug 2 on table",
+      "contract": "task_priority",
+      "family": "holding",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "put mug 2 in cabinet",
+        "A002": "put mug 2 on table",
+        "A003": "look"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both mugs in the cabinet.\n\nCurrent pre-action observation:\nThe mug 1 is in the cabinet; the cabinet is open and accessible.\n\nCurrent inventory:\nThe mug 2 is held.\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe mug 2 is held and not yet placed.\n\nFrozen Stage-1 immediate subgoal:\nPut mug 2 on table.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] put mug 2 in cabinet\n[A002] put mug 2 on table\n[A003] look\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "put mug 2 in cabinet"
+      ],
+      "call_id": "holding-01-follow_compatible",
+      "case_id": "holding-01",
+      "conflicting_action": "put mug 2 on table",
+      "contract": "follow",
+      "family": "holding",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "put mug 2 in cabinet",
+        "A002": "put mug 2 on table",
+        "A003": "look"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both mugs in the cabinet.\n\nCurrent pre-action observation:\nThe mug 1 is in the cabinet; the cabinet is open and accessible.\n\nCurrent inventory:\nThe mug 2 is held.\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe mug 2 is held and not yet placed.\n\nFrozen Stage-1 immediate subgoal:\nPut mug 2 in cabinet.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] put mug 2 in cabinet\n[A002] put mug 2 on table\n[A003] look\n\nYour response:",
+      "subgoal_condition": "compatible"
+    },
+    {
+      "acceptable_actions": [
+        "look",
+        "inventory"
+      ],
+      "call_id": "completed-01-task_priority_compatible",
+      "case_id": "completed-01",
+      "conflicting_action": "take glass 1 from cabinet",
+      "contract": "task_priority",
+      "family": "completed",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take glass 2 from cabinet",
+        "A002": "look",
+        "A003": "take glass 1 from cabinet"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both glasss in the cabinet.\n\nCurrent pre-action observation:\nBoth glass 1 and glass 2 are already in the cabinet. The task goal is already satisfied.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe stated task goal is already satisfied.\n\nFrozen Stage-1 immediate subgoal:\nLook.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take glass 2 from cabinet\n[A002] look\n[A003] take glass 1 from cabinet\n\nYour response:",
+      "subgoal_condition": "compatible"
+    },
+    {
+      "acceptable_actions": [
+        "look",
+        "inventory"
+      ],
+      "call_id": "completed-01-task_priority_conflicting",
+      "case_id": "completed-01",
+      "conflicting_action": "take glass 1 from cabinet",
+      "contract": "task_priority",
+      "family": "completed",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take glass 2 from cabinet",
+        "A002": "look",
+        "A003": "take glass 1 from cabinet"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both glasss in the cabinet.\n\nCurrent pre-action observation:\nBoth glass 1 and glass 2 are already in the cabinet. The task goal is already satisfied.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe stated task goal is already satisfied.\n\nFrozen Stage-1 immediate subgoal:\nTake glass 1 from cabinet.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take glass 2 from cabinet\n[A002] look\n[A003] take glass 1 from cabinet\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "look",
+        "inventory"
+      ],
+      "call_id": "completed-01-follow_compatible",
+      "case_id": "completed-01",
+      "conflicting_action": "take glass 1 from cabinet",
+      "contract": "follow",
+      "family": "completed",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take glass 2 from cabinet",
+        "A002": "look",
+        "A003": "take glass 1 from cabinet"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both glasss in the cabinet.\n\nCurrent pre-action observation:\nBoth glass 1 and glass 2 are already in the cabinet. The task goal is already satisfied.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe stated task goal is already satisfied.\n\nFrozen Stage-1 immediate subgoal:\nLook.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take glass 2 from cabinet\n[A002] look\n[A003] take glass 1 from cabinet\n\nYour response:",
+      "subgoal_condition": "compatible"
+    },
+    {
+      "acceptable_actions": [
+        "look",
+        "inventory"
+      ],
+      "call_id": "completed-01-follow_conflicting",
+      "case_id": "completed-01",
+      "conflicting_action": "take glass 1 from cabinet",
+      "contract": "follow",
+      "family": "completed",
+      "mapping": {
+        "A000": "inventory",
+        "A001": "take glass 2 from cabinet",
+        "A002": "look",
+        "A003": "take glass 1 from cabinet"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both glasss in the cabinet.\n\nCurrent pre-action observation:\nBoth glass 1 and glass 2 are already in the cabinet. The task goal is already satisfied.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe stated task goal is already satisfied.\n\nFrozen Stage-1 immediate subgoal:\nTake glass 1 from cabinet.\n\nIndexed admissible-action mapping:\n[A000] inventory\n[A001] take glass 2 from cabinet\n[A002] look\n[A003] take glass 1 from cabinet\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "open desk drawer",
+        "open storage drawer"
+      ],
+      "call_id": "unknown-01-task_priority_conflicting",
+      "case_id": "unknown-01",
+      "conflicting_action": "take book 1 from cabinet",
+      "contract": "task_priority",
+      "family": "unknown",
+      "mapping": {
+        "A000": "take book 1 from cabinet",
+        "A001": "open storage drawer",
+        "A002": "inventory",
+        "A003": "open desk drawer"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both books in the cabinet.\n\nCurrent pre-action observation:\nThe book 1 is in the cabinet. The book 2 is not visible and its location is unknown. The desk drawer and the storage drawer have not been inspected; both may be opened.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe location of book 2 is unknown.\n\nFrozen Stage-1 immediate subgoal:\nTake book 1 from cabinet.\n\nIndexed admissible-action mapping:\n[A000] take book 1 from cabinet\n[A001] open storage drawer\n[A002] inventory\n[A003] open desk drawer\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "open desk drawer",
+        "open storage drawer"
+      ],
+      "call_id": "unknown-01-follow_compatible",
+      "case_id": "unknown-01",
+      "conflicting_action": "take book 1 from cabinet",
+      "contract": "follow",
+      "family": "unknown",
+      "mapping": {
+        "A000": "take book 1 from cabinet",
+        "A001": "open storage drawer",
+        "A002": "inventory",
+        "A003": "open desk drawer"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both books in the cabinet.\n\nCurrent pre-action observation:\nThe book 1 is in the cabinet. The book 2 is not visible and its location is unknown. The desk drawer and the storage drawer have not been inspected; both may be opened.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe location of book 2 is unknown.\n\nFrozen Stage-1 immediate subgoal:\nOpen desk drawer.\n\nIndexed admissible-action mapping:\n[A000] take book 1 from cabinet\n[A001] open storage drawer\n[A002] inventory\n[A003] open desk drawer\n\nYour response:",
+      "subgoal_condition": "compatible"
+    },
+    {
+      "acceptable_actions": [
+        "open desk drawer",
+        "open storage drawer"
+      ],
+      "call_id": "unknown-01-follow_conflicting",
+      "case_id": "unknown-01",
+      "conflicting_action": "take book 1 from cabinet",
+      "contract": "follow",
+      "family": "unknown",
+      "mapping": {
+        "A000": "take book 1 from cabinet",
+        "A001": "open storage drawer",
+        "A002": "inventory",
+        "A003": "open desk drawer"
+      },
+      "prompt": "Select the one currently available action that best executes the frozen immediate subgoal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both books in the cabinet.\n\nCurrent pre-action observation:\nThe book 1 is in the cabinet. The book 2 is not visible and its location is unknown. The desk drawer and the storage drawer have not been inspected; both may be opened.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe location of book 2 is unknown.\n\nFrozen Stage-1 immediate subgoal:\nTake book 1 from cabinet.\n\nIndexed admissible-action mapping:\n[A000] take book 1 from cabinet\n[A001] open storage drawer\n[A002] inventory\n[A003] open desk drawer\n\nYour response:",
+      "subgoal_condition": "conflicting"
+    },
+    {
+      "acceptable_actions": [
+        "open desk drawer",
+        "open storage drawer"
+      ],
+      "call_id": "unknown-01-task_priority_compatible",
+      "case_id": "unknown-01",
+      "conflicting_action": "take book 1 from cabinet",
+      "contract": "task_priority",
+      "family": "unknown",
+      "mapping": {
+        "A000": "take book 1 from cabinet",
+        "A001": "open storage drawer",
+        "A002": "inventory",
+        "A003": "open desk drawer"
+      },
+      "prompt": "Select the one currently available action that best advances the overall task goal. If the frozen immediate subgoal conflicts with the task goal or the current situation, prioritize the task goal.\nReturn exactly one bare action ID in this format:\nAxyz\nChoose one ID exactly as written in the indexed admissible-action mapping.\nDo not output a label, command, explanation, reasoning, extra line, or <think> tag.\n\nTask goal:\nPut both books in the cabinet.\n\nCurrent pre-action observation:\nThe book 1 is in the cabinet. The book 2 is not visible and its location is unknown. The desk drawer and the storage drawer have not been inspected; both may be opened.\n\nCurrent inventory:\n(empty)\n\nRecent action/result transitions (last 4):\n(none)\n\nObservable recent diagnostics:\nAdjacent repeated actions: 0\nTwo-action cycle events: 0\n\nFrozen Stage-1 diagnosis:\nThe location of book 2 is unknown.\n\nFrozen Stage-1 immediate subgoal:\nOpen desk drawer.\n\nIndexed admissible-action mapping:\n[A000] take book 1 from cabinet\n[A001] open storage drawer\n[A002] inventory\n[A003] open desk drawer\n\nYour response:",
+      "subgoal_condition": "compatible"
+    }
+  ],
+  "schema": "fictional_contract_factorial_dev_v1",
+  "source_sha256": "03a9fee21f68605bb83467c41573e91997220366fe52e1173daf02cb857cc5eb"
+}

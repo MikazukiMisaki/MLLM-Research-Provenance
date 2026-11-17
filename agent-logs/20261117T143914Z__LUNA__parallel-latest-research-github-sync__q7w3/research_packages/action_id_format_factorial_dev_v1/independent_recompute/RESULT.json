@@ -1,0 +1,100 @@
+{
+  "classification_discrepancies": [],
+  "completion_after_all_decisions": true,
+  "conditions": [
+    {
+      "bare_reference": 8,
+      "output_format": "bare",
+      "planned": 8,
+      "row_format": "plain",
+      "shape": 8,
+      "specified_joint": 8,
+      "valid": 8
+    },
+    {
+      "bare_reference": 6,
+      "output_format": "bare",
+      "planned": 8,
+      "row_format": "bracket",
+      "shape": 6,
+      "specified_joint": 6,
+      "valid": 6
+    },
+    {
+      "bare_reference": 0,
+      "output_format": "bracket",
+      "planned": 8,
+      "row_format": "plain",
+      "shape": 8,
+      "specified_joint": 8,
+      "valid": 8
+    },
+    {
+      "bare_reference": 0,
+      "output_format": "bracket",
+      "planned": 8,
+      "row_format": "bracket",
+      "shape": 8,
+      "specified_joint": 8,
+      "valid": 8
+    }
+  ],
+  "each_key_once_in_each_stage": true,
+  "event_counts": {
+    "call_start": 32,
+    "complete": 1,
+    "decision": 32,
+    "gpu_sample": 66,
+    "loading_complete": 1,
+    "loading_start": 1,
+    "prepared": 32,
+    "raw_result": 32
+  },
+  "fixed_prompts_metadata_and_ordered_mappings_match": true,
+  "input_sha256": {
+    "cases.json": "2873429462c3fe2b7f4b30e049b258d5caf31826c7fbf2e34342cf3ec851ec46",
+    "sanitized_events.jsonl": "4a8b5a4a5251d9060bfc95603d9925ea9c7e3dfc92e5f9270646dbd753957d0e"
+  },
+  "invalid_calls": [
+    {
+      "action": null,
+      "call_id": "unknown-01-bracket-bare",
+      "decoded": "[A002]",
+      "shape": false
+    },
+    {
+      "action": null,
+      "call_id": "unknown-02-bracket-bare",
+      "decoded": "[A003]",
+      "shape": false
+    }
+  ],
+  "loading_record_cases_hash_matches": true,
+  "pairs_by_output_requirement": {
+    "bare": {
+      "both_match_subgoal": 6,
+      "both_valid": 6,
+      "bracket_only": 0,
+      "neither": 0,
+      "plain_only": 2,
+      "planned_pairs": 8,
+      "same_valid_action": 6,
+      "same_valid_id": 6
+    },
+    "bracket": {
+      "both_match_subgoal": 8,
+      "both_valid": 8,
+      "bracket_only": 0,
+      "neither": 0,
+      "plain_only": 0,
+      "planned_pairs": 8,
+      "same_valid_action": 8,
+      "same_valid_id": 8
+    }
+  },
+  "per_key_event_chronology": true,
+  "scope": "Independent recomputation from saved decoded text; no token decoding or physical attestation",
+  "source_bytes_unchanged": true,
+  "stage_order_matches_plan": true,
+  "unique_planned_keys": 32
+}
