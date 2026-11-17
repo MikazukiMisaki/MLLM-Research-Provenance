@@ -1,0 +1,78 @@
+--- v1/bridge.py
++++ v2/bridge.py
+@@ -146,9 +146,14 @@
+                             if op=='reset':
+                                 if (not isinstance(evidence,dict) or set(evidence)!={'arm','state','gamefile','candidate_native_reset'} or
+                                     evidence.get('arm')!=arm or not isinstance(evidence.get('state'),dict) or
+-                                    evidence.get('gamefile')!=self.bound_files[0]['path'] or
+-                                    evidence.get('candidate_native_reset')!={'won_batch':[False]}):
++                                    evidence.get('gamefile')!=self.bound_files[0]['path']):
+                                     raise Stop('fake reset claim invalid')
++                                native=evidence.get('candidate_native_reset')
++                                if (type(native) is not dict or set(native)!={'won_batch','won_batch_type'} or
++                                    type(native['won_batch']) is not list or len(native['won_batch'])!=1 or
++                                    native['won_batch'][0] is not False or type(native['won_batch_type']) is not str or
++                                    native['won_batch_type'] not in ('list','tuple')):
++                                    raise Stop('fake native reset claim malformed')
+                                 claim=evidence['state']
+                                 if set(claim)!={'task_id','family','goal','observation','valid_actions','done','reward','truncated'}:
+                                     raise Stop('fake public state shape')
+--- v1/fake_arm.py
++++ v2/fake_arm.py
+@@ -20,8 +20,16 @@
+     state={'task_id':'synthetic','family':'synthetic','goal':'fictional goal',
+            'observation':'B differs' if mode=='mismatch' and arm=='B' else 'same fake observation',
+            'valid_actions':['fake action'],'done':False,'reward':0,'truncated':False}
++    native={'won_batch':[False], 'won_batch_type':'tuple' if mode=='tuple' else 'list'}
++    if arm=='B':
++        if mode=='bad_true': native['won_batch']=[True]
++        if mode=='bad_integer': native['won_batch']=[0]
++        if mode=='bad_type': native['won_batch_type']='array'
++        if mode=='bad_missing': native.pop('won_batch_type')
++        if mode=='bad_extra': native['other']=False
++        if mode=='bad_length': native['won_batch']=[False,False]
+     controller.effect('reset',lambda:state,lambda x:{'arm':arm,'state':x,'gamefile':paths[0],
+-                                                      'candidate_native_reset':{'won_batch':[False]}})
++                                                      'candidate_native_reset':native})
+     if mode=='interrupt' and arm=='A':
+         owner.start('model_load',{})
+         import os
+--- v1/test_pair.py
++++ v2/test_pair.py
+@@ -67,4 +67,36 @@
+         with self.assertRaises(ValueError):pair_synthetic.run_pair(self.output,self.inputs,self.setup,self.verify,hook=tamper)
+         self.assertFalse((self.output/'arm-B').exists());self.assertEqual(self.rows()[-1]['event'],'aborted')
+ 
++    def test_tuple_origin_claim_matches_serialized_real_shape(self):
++        owner=pair_synthetic.run_pair(self.output,self.inputs,self.setup,self.verify,mode='tuple')
++        self.assertEqual(owner.finished,['A','B'])
++        for arm in ('A','B'):
++            rows=[json.loads(line) for line in (self.output/('arm-'+arm)/'worker.jsonl').read_text().splitlines()]
++            reset=next(row for row in rows if row['kind']=='reset_returned')
++            self.assertEqual(reset['payload']['evidence']['candidate_native_reset'],
++                             {'won_batch':[False],'won_batch_type':'tuple'})
++
++    def test_real_shape_list_origin_is_explicit(self):
++        pair_synthetic.run_pair(self.output,self.inputs,self.setup,self.verify)
++        rows=[json.loads(line) for line in (self.output/'arm-A'/'worker.jsonl').read_text().splitlines()]
++        reset=next(row for row in rows if row['kind']=='reset_returned')
++        self.assertEqual(reset['payload']['evidence']['candidate_native_reset'],
++                         {'won_batch':[False],'won_batch_type':'list'})
++
++    def test_malformed_or_true_claims_stop_before_second_model_and_keep_cost(self):
++        for mode in ('bad_true','bad_integer','bad_type','bad_missing','bad_extra','bad_length'):
++            with self.subTest(mode=mode), tempfile.TemporaryDirectory() as temp:
++                root=Path(temp).resolve();inputs,setup,verify=fixture(root);out=root/'run'
++                with self.assertRaises(bridge.Stop):pair_synthetic.run_pair(out,inputs,setup,verify,mode=mode)
++                rows=[json.loads(line) for line in (out/'owner'/'parent-ledger.jsonl').read_text().splitlines()]
++                reserved=[r['payload'] for r in rows if r['event']=='reserved']
++                returned=[r['payload'] for r in rows if r['event']=='returned']
++                self.assertEqual(sum(r.get('operation')=='materialize' for r in reserved),1)
++                self.assertEqual(sum(r.get('operation')=='reset' for r in reserved),2)
++                self.assertEqual(sum(r.get('operation')=='reset' for r in returned),2)
++                self.assertEqual(sum(r.get('operation')=='model_load' for r in reserved),1)
++                self.assertEqual(rows[-1]['event'],'aborted')
++                self.assertFalse(any(r['event']=='synthetic_pair_complete' for r in rows))
++                with self.assertRaises(FileExistsError):pair_synthetic.run_pair(out,inputs,setup,verify,mode=mode)
++
+ if __name__=='__main__':unittest.main(verbosity=2)
