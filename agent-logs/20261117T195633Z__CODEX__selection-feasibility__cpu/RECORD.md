@@ -1,0 +1,3 @@
+# Prospective fixed-roster selection feasibility
+
+Design and CPU arithmetic only. Requiring sixteen predetermined parents all to qualify is very unlikely under many illustrative qualification rates. A new prospective candidate fixes an ordered roster of at most 128 parents before inspection and selects the first sixteen qualifying episodes, with no episode substitution, no later expansion and UNKNOWN fail-stop. Sensitivity calculations assume independent equal-probability parents and are not measured project rates; source availability and screening budget are unverified. No real screening, model, GPU, environment or experiment occurred. Previous designs and run holds remain unchanged.

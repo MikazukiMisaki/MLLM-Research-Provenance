@@ -1,0 +1,22 @@
+# Independent scientific review: selection proposal v6
+
+**Design review: targeted UNKNOWN-classification wording must be resolved before a protocol can be frozen.** The v6 ordered finite-candidate amendment is otherwise explicit; neither source feasibility nor an execution release is established.
+
+## Evidence and scope
+
+`/home/lizening/research-notes/agent-logs/20261118__CODEX__self_improvement_loop_hypothesis_v6__private/RESEARCH_DESIGN.md` SHA256 `bb3f979aa6e2b07569c5a8068a87e873bf2c903d309153efc961a869e95b2f04`; `revision.diff` SHA256 `a8480287ec52d7e113175d219e3da125e291ae8227e3b5f9738ae40c7580b713`; `FILE_HASHES.sha256` SHA256 `1750e863da35437410a95206bd2d20853611243ec0d435c289d601b6c5ebc3df`. All six manifest entries matched. Independently generated v5→v6 diff hunks match declared hunks exactly (SHA256 `1c8397b3c2c8f64bbc56fe2ee5e272c84ffe53b41fb3b926086ff16807b6e8d8`). Only proposal and fictional example were read; no real task assets, model or environment were accessed or run.
+
+## One decision ambiguity
+
+At line 13, inability to verify a candidate's required identity, input bytes, evidence or scan ledger is technical UNKNOWN and **stops** the scan. Line 23 still says “Filter out truncated, unknown, ambiguous, duplicated or unverifiable examples,” which can instead be read to allow screening past unverifiable/UNKNOWN evidence. This is material once the rule permits scanning up to 128 candidates: reject-and-continue can select a different 16-parent cohort than stop-on-UNKNOWN. Prospectively specify the granularity and precedence: known, evidence-complete nonqualification is a reason-coded rejection and scanning may continue; an inability to verify any evidence required for evaluating the parent/episode or an ambiguous required identity/effect is UNKNOWN and stops; define how an optional decision that is known ineligible differs from missing or untrusted required decision evidence. Do not inspect a replacement episode or treat UNKNOWN as an ordinary negative. Preserve UNKNOWN and every unscanned row in the ledger.
+
+## Verified planned boundaries
+
+- Before any screening the proposal requires a **specific finite ordered roster of at most 128**, first recorded episode identity per parent independent of outcome, frozen matching rules, and independently fixed evaluation roster/lineage. Screening is in order, selects first 16 qualifying parents, stops at 16, marks later rows `NOT_SCANNED_AFTER_SELECTION`, and on fewer than 16 stops with original denominator. It does not permit a later episode, adding parents or post hoc expansion. The source roster's existence and authenticity are not established.
+- All accepted/rejected/UNKNOWN/unscanned candidates must be ledgered. The evaluation parents and known variants must be isolated from the **entire candidate roster**, not merely selected 16; unknown lineage prevents an isolation claim. Shared family is not itself proof of independence.
+- The only prevalence illustration assumes independent identical q=.5 and computes .5^16≈0.00153%; it is explicitly hypothetical, not measured match frequency, power or proof of 128 usable parents. Related parents could violate iid. Successful-episode selection still restricts the estimand to a selected corpus.
+- Screening file/bytes/CPU/wall/RAM/output/failure ceilings are **not yet measured or frozen**, and the proposal explicitly does not release screening without them. Zero scan model/GPU/environment calls is a proposed boundary. Device/time limits for later work remain unmeasured caps and previous physical costs must be retained.
+- V5 protocol-defined success=1, completed native/horizon/policy failure=0 and technical/ambiguous outcome UNKNOWN remain in the outcome table; the P0 ≥+1/16 and target−control ≥+1/16 exploratory resource-screen thresholds are retained. Neither is a confirmatory claim. Seed/parent clustering, per-pair label/mask, training/inference combined context and model parameters still require the actual preregistered bindings and implementation.
+- The bundled fake selector belongs to an earlier rule and is expressly not a test or implementation of v6's finite ordered screening. A new fictional CPU implementation and tests must independently verify rejected/UNKNOWN/stop behavior and full roster accounting before applying the design.
+
+Proposal remains design-only. No real source, evaluator, native outcome, complete budget, model identity or scientific benefit was verified, and no launch authorization follows.
