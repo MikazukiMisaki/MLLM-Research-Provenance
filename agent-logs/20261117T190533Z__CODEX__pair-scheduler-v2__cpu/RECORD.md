@@ -1,0 +1,3 @@
+# Four-pair fictional scheduler and real-generation boundary integration
+
+CPU-only fictional tasks and model/environment edges. Candidate scheduler exercised four fake pairs and conservative reservations; independent review reproduced a failure to clean a just-started child if identity capture fails. The review retains HOLD. Separately, the genuine generation function was tested with fictional edges and the real IPC budget interface, but that work is not yet integrated into this scheduler. No model, GPU, environment, real task or scientific run occurred. Existing stopped batches remain unchanged.

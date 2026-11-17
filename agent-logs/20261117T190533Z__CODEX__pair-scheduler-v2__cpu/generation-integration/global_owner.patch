@@ -1,0 +1,63 @@
+--- /home/lizening/research-notes/agent-logs/20261118__CODEX__pair-owned-real-interface__private/global_owner.py	2026-11-17 18:54:04.976914688 +0000
++++ global_owner.py	2026-11-17 19:01:26.403038788 +0000
+@@ -11,6 +11,8 @@
+ CAPS={'materialize':4,'env_construct':8,'env_init':8,'reset':8,'model_load':8,'generation':400,'step':400}
+ TOKEN_CAPS={'input':400*4096,'output':400*16}
+ ARM_CAPS={'env_construct':1,'env_init':1,'reset':1,'model_load':1,'generation':50,'step':50}
++EXPECTED_KWARGS={'max_new_tokens':16,'do_sample':False,'num_beams':1,
++                 'num_return_sequences':1,'return_dict_in_generate':True,'output_scores':True}
+ class Stop(RuntimeError):pass
+ 
+ def canonical(x):return json.dumps(x,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
+@@ -37,15 +39,39 @@
+     pending=[r for r in rows if r['kind']=='prepared' and r['seq']>last_return]
+     if len(pending)!=1 or any(r['kind']=='generation_started' and r['seq']>last_return for r in rows):
+         raise Stop('missing, duplicate or already started prepared claim')
+-    row=pending[0];data=row['payload'];ids=data.get('input_ids');mask=data.get('attention_mask');kw=data.get('kwargs');config=data.get('generation_config')
++    row=pending[0];data=row['payload']
++    if type(data) is not dict or set(data)!={'public','rendered_prompt','input_ids','attention_mask','generation_config','kwargs','eos_ids'}:
++        raise Stop('prepared claim fields')
++    ids=data['input_ids'];mask=data['attention_mask'];kw=data['kwargs'];config=data['generation_config']
++    public=data['public'];rendered=data['rendered_prompt'];eos=data['eos_ids']
++    fields={'action_map','goal','observation','public_prompt','public_prompt_sha256','recent_history','valid_actions'}
++    if (type(public) is not dict or set(public)!=fields or
++        any(type(public[k]) is not str or not public[k] for k in ('goal','observation','public_prompt')) or
++        type(public['public_prompt_sha256']) is not str or
++        public['public_prompt_sha256']!=sha(public['public_prompt'].encode('utf-8')) or
++        type(public['recent_history']) is not list or
++        any(type(h) is not list or len(h)!=2 or any(type(s) is not str for s in h) for h in public['recent_history']) or
++        type(public['valid_actions']) is not list or not public['valid_actions'] or
++        any(type(a) is not str or not a for a in public['valid_actions']) or
++        len(set(public['valid_actions']))!=len(public['valid_actions']) or type(public['action_map']) is not dict or
++        public['action_map']!={f'A{i:03d}':a for i,a in enumerate(public['valid_actions'])} or
++        type(rendered) is not str or not rendered):
++        raise Stop('prepared public or rendered prompt shape')
+     if (type(ids) is not list or not 1<=len(ids)<=4096 or any(type(x) is not int or x<0 for x in ids) or
+         type(mask) is not list or len(mask)!=len(ids) or any(type(x) is not int or x!=1 for x in mask) or
+-        type(kw) is not dict or type(kw.get('max_new_tokens')) is not int or kw['max_new_tokens']!=16 or kw.get('do_sample') is not False or
+-        type(config) is not dict or config.get('eos_token_id')!=[151645,151643] or
++        type(kw) is not dict or set(kw)!=set(EXPECTED_KWARGS) or
++        any(type(kw[k]) is not type(v) or kw[k]!=v for k,v in EXPECTED_KWARGS.items()) or
++        type(config) is not dict or len(canonical(config))>128*1024 or
++        type(eos) is not list or any(type(x) is not int for x in eos) or eos!=[151645,151643] or
++        type(config.get('eos_token_id')) is not list or any(type(x) is not int for x in config['eos_token_id']) or config['eos_token_id']!=eos or
+         type(config.get('pad_token_id')) is not int or config['pad_token_id']!=151643 or
+         'forced_eos_token_id' not in config or config['forced_eos_token_id'] is not None):
+         raise Stop('prepared input or generation limit mismatch')
+-    return {'seq':row['seq'],'digest':row['digest'],'input_ids':ids}
++    return {'seq':row['seq'],'digest':row['digest'],'input_ids':ids,
++            'public_sha256':sha(canonical(public)), 'public_prompt_sha256':sha(public['public_prompt'].encode('utf-8')),
++            'rendered_prompt_sha256':sha(rendered.encode('utf-8')), 'input_ids_sha256':sha(canonical(ids)),
++            'attention_mask_sha256':sha(canonical(mask)), 'kwargs_sha256':sha(canonical(kw)),
++            'generation_config_sha256':sha(canonical(config)), 'eos_ids_sha256':sha(canonical(eos))}
+ 
+ def claimed_receipt(path,operation,seq,receipt):
+     """Verify format/chain and operation-start/return; child claims are not physical proof."""
+@@ -141,6 +167,7 @@
+                     raise Stop('global token reservation exceeded')
+                 ticket.update({'prepared_seq':prepared['seq'],'prepared_digest':prepared['digest'],
+                                'input_tokens_reserved':4096,'output_tokens_reserved':16})
++                ticket.update({k:v for k,v in prepared.items() if k.endswith('_sha256')})
+             self.record('reserve',ticket);self.counts[operation]+=1;self.local[self.current][operation]+=1;self.active=ticket
+             if operation=='generation':
+                 self.tokens['input']+=4096;self.tokens['output']+=16
