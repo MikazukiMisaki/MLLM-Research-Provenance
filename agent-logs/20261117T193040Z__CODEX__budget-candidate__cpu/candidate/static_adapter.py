@@ -1,0 +1,131 @@
+"""Read-only interface candidate. No launcher, effects, or permission to run science."""
+import ast
+import copy
+import hashlib
+import json
+import os
+import re
+from pathlib import Path
+from budget_contract import validate_budget, BudgetError
+
+class ContractError(ValueError): pass
+
+# Byte hashes of the candidate frozen in the preceding CPU-only review.
+SOURCE_HASHES={
+ 'fixed_product_dev/worker.py':'867ba0b620b02d10269bd4c2c838f7dd8a9c9deec5ae8e74af565135bd50aa77',
+ 'fixed_product_dev/arm_stage.py':'d68653a6e8c80f148e414a9089c3d291c6c94580db938fc8a131013c933a050d',
+ 'fixed_product_dev/arm_budget.py':'583bb81e202ad25d16863aba120d349f91c82bc5d8ee13925d9b89391bc55fae',
+ 'fixed_product_dev/episode.py':'06922aed662e84c1366624600c361f64ca7fba1ee93daccf83ff8de7a174a21b',
+ 'global_owner.py':'8d741f0e4c748d8ef24d16515a0c334392a3d37275e115a7db5bc1a0d0f9d9c6',
+ 'scheduler_synthetic.py':'e3f2439b59195f7f5dd2d0caba24bbfe723b68bbdb38dc7fe99a750d0123a8fb',
+ 'process_guard.py':'8e1ce0319ab0fe222d751ea332297da983c9ca3fe741ea58cbe858a2b25af1e4',
+}
+LIMITS={'episodes':8,'generation':400,'model_load':8,'reset':8,'step':400,
+        'materialize':4,'env_construct':8,'env_init':8,
+        'input_tokens_per_generation':4096,'output_tokens_per_generation':16}
+METRICS=('generation','environment_operations','materialize')
+def digest(v): return hashlib.sha256(v).hexdigest()
+def canonical(v): return json.dumps(v,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
+def sha(v):
+ if type(v) is not str or re.fullmatch('[0-9a-f]{64}',v) is None: raise ContractError('bad sha256')
+def absolute(v):
+ if type(v) is not str or not Path(v).is_absolute() or '..' in Path(v).parts:raise ContractError('invalid path claim')
+def read_bound(path,expected):
+ sha(expected);fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC)
+ try:
+  before=os.fstat(fd)
+  if before.st_size<1 or before.st_size>2*1024*1024:raise ContractError('source size')
+  with os.fdopen(fd,'rb',closefd=False) as f:data=f.read(2*1024*1024+1)
+  after=os.fstat(fd)
+  if (before.st_dev,before.st_ino,before.st_size,before.st_mtime_ns,before.st_ctime_ns)!=(after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns,after.st_ctime_ns) or digest(data)!=expected:raise ContractError('source mismatch')
+  return data
+ finally:os.close(fd)
+def check_source_contract(root):
+ """Read code bytes only; verifies reviewed candidate shapes, never imports them."""
+ root=Path(root);sources={name:read_bound(root/name,h) for name,h in SOURCE_HASHES.items()}
+ worker=ast.parse(sources['fixed_product_dev/worker.py']);f=next((x for x in worker.body if isinstance(x,ast.FunctionDef) and x.name=='main'),None)
+ if f is None or not f.body or not isinstance(f.body[0],ast.Raise):raise ContractError('worker hold missing')
+ stage=ast.parse(sources['fixed_product_dev/arm_stage.py']);fun=next((x for x in stage.body if isinstance(x,ast.FunctionDef) and x.name=='run_arm'),None)
+ if fun is None or 'pair_binding' not in [x.arg for x in fun.args.kwonlyargs]:raise ContractError('arm pair interface mismatch')
+ budget=ast.parse(sources['fixed_product_dev/arm_budget.py']);cls=next((x for x in budget.body if isinstance(x,ast.ClassDef) and x.name=='StageBudgetChannel'),None)
+ init=next((x for x in cls.body if isinstance(x,ast.FunctionDef) and x.name=='__init__'),None) if cls else None
+ if init is None or not {'global_owner','case','arm'} <= {x.arg for x in init.args.kwonlyargs}:raise ContractError('budget interface mismatch')
+ return {'status':'BOUND_CODE_BYTES_ONLY_HOLD','sha256':dict(SOURCE_HASHES),'physical_runtime_verified':False}
+def validate_plan(plan, frozen_product_bytes, product_digest):
+ """Check in-memory declarations and externally supplied frozen product record bytes.
+ Caller must independently authenticate the expected product record digest and historical ledger;
+ no claimed field constitutes an experiment authorization or verifies model files.
+ """
+ if type(plan) is not dict or plan.get('schema')!='STATIC_PAIR_ADAPTER_V1':raise ContractError('schema')
+ sha(product_digest)
+ if digest(frozen_product_bytes)!=product_digest:raise ContractError('product record digest')
+ try:product=json.loads(frozen_product_bytes)
+ except (ValueError,TypeError):raise ContractError('product record encoding')
+ if plan.get('products')!=product or type(product) is not dict or set(product)!={'base_path','base_tree_sha256','products'}:raise ContractError('product binding')
+ absolute(product['base_path']);sha(product['base_tree_sha256'])
+ if type(product['products']) is not dict or set(product['products'])!={'P0','CANDIDATE'}:raise ContractError('product arms')
+ for arm in ('P0','CANDIDATE'):
+  item=product['products'][arm]
+  if type(item) is not dict or set(item)!={'adapter_path','adapter_tree_sha256'}:raise ContractError('adapter shape')
+  absolute(item['adapter_path']);sha(item['adapter_tree_sha256'])
+ if plan.get('limits')!=LIMITS:raise ContractError('worker limits')
+ if type(plan.get('env_seed')) is not int:raise ContractError('seed')
+ cases=plan.get('cases')
+ if type(cases) is not list or len(cases)!=4:raise ContractError('case count')
+ seen=set()
+ for i,row in enumerate(cases):
+  if type(row) is not dict or type(row.get('case')) is not str or not row['case'] or row['case'] in seen:raise ContractError('case identity')
+  if type(row.get('public_goal')) is not str or not row['public_goal']:raise ContractError('case public goal')
+  input_map=row.get('input_sha256')
+  if type(input_map) is not dict or set(input_map)!={'game','routing','config'}:raise ContractError('case input digest map')
+  for value in input_map.values():sha(value)
+  seen.add(row['case']);expected=['P0','CANDIDATE'] if i%2==0 else ['CANDIDATE','P0']
+  if row.get('order')!=expected:raise ContractError('case order')
+ budget=plan.get('budget')
+ try:budget_result=validate_budget(budget)
+ except BudgetError as error:raise ContractError('budget: '+str(error)) from error
+ return {'status':'DECLARATIONS_CONSISTENT_NOT_AUTHORIZED','product_record_digest':product_digest,
+         'budget':budget_result,'historical_cost_verified':False,'runtime_files_verified':False,
+         'execution_authorized':False}
+
+def draft_arm_config(plan,product_bytes,product_digest,*,case,arm,previous_initial,output,manifest_path,manifest_sha256,manifest_bytes,inputs,pair_binding,source_root,legacy_dir,candidate_root,code_files,runtime_extra):
+ """Produce a detached in-memory candidate matching held worker config; never write/run."""
+ validate_plan(plan,product_bytes,product_digest);sha(manifest_sha256)
+ if digest(manifest_bytes)!=manifest_sha256:raise ContractError('manifest digest')
+ try:manifest=json.loads(manifest_bytes)
+ except (ValueError,TypeError):raise ContractError('manifest encoding')
+ if (type(manifest) is not dict or manifest.get('schema')!='FIXED_PRODUCT_FOUR_PAIR_DEV_V1' or manifest.get('cases')!=plan['cases'] or manifest.get('env_seed')!=plan['env_seed'] or manifest.get('horizon')!=50 or manifest.get('limits')!=LIMITS):raise ContractError('manifest claims mismatch')
+ for p in (output,manifest_path,source_root,legacy_dir,candidate_root):absolute(p)
+ matches=[r for r in plan['cases'] if r['case']==case]
+ if len(matches)!=1 or arm not in matches[0]['order']:raise ContractError('arm/case')
+ index=matches[0]['order'].index(arm)
+ if (index==0 and previous_initial is not None) or (index==1 and type(previous_initial) is not dict):raise ContractError('previous reset claim')
+ if type(pair_binding) is not dict or set(pair_binding)!={'root','game','config','data_root','sha256'}:raise ContractError('pair binding shape')
+ for k in ('root','game','config','data_root'):absolute(pair_binding[k])
+ root=Path(pair_binding['root']);data=Path(pair_binding['data_root']);game=Path(pair_binding['game']);cfg=Path(pair_binding['config'])
+ if not all(x.is_relative_to(root) for x in (data,game,cfg)) or game!=data/'authored-eprime-only'/'game.tw-pddl':raise ContractError('pair lexical layout')
+ if type(pair_binding['sha256']) is not dict or set(pair_binding['sha256'])!={'game','routing','config'}:raise ContractError('pair digests')
+ for x in pair_binding['sha256'].values():sha(x)
+ if type(inputs) is not dict or set(inputs)!={'game','routing','config'}:raise ContractError('input shape')
+ for item in inputs.values():
+  if type(item) is not dict or set(item)!={'path','sha256'}:raise ContractError('input claim')
+  absolute(item['path']);sha(item['sha256'])
+ if matches[0].get('input_sha256')!={k:v['sha256'] for k,v in inputs.items()}:raise ContractError('case input digest claim')
+ if type(code_files) is not list or not code_files:raise ContractError('code manifest absent')
+ for item in code_files:
+  if type(item) is not dict or set(item)!={'path','sha256'}:raise ContractError('code claim')
+  absolute(item['path']);sha(item['sha256'])
+ paths=[x['path'] for x in code_files]
+ if len(paths)!=len(set(paths)):raise ContractError('duplicate code claim')
+ code_map={x['path']:x['sha256'] for x in code_files}
+ if any(code_map.get(str(Path(candidate_root)/name))!=h for name,h in SOURCE_HASHES.items()):raise ContractError('missing candidate source binding')
+ if type(runtime_extra) is not dict or set(runtime_extra)!={'gpu_uuid','packages','runtime_identity'}:raise ContractError('runtime shape')
+ runtime=dict(copy.deepcopy(plan['products']),**copy.deepcopy(runtime_extra))
+ config={'manifest_path':manifest_path,'manifest_sha256':manifest_sha256,'case':case,'seed':plan['env_seed'],'arm':arm,
+         'previous_initial':copy.deepcopy(previous_initial),'limits':copy.deepcopy(LIMITS),'output':output,'legacy_dir':legacy_dir,
+         'source_root':source_root,'code_files':copy.deepcopy(code_files),'runtime':runtime,'inputs':copy.deepcopy(inputs),
+         'pair_binding':copy.deepcopy(pair_binding),'expected_eos':[151645,151643],'expected_pad':151643}
+ return {'draft_only':True,'worker_config':config,'canonical_sha256':digest(canonical(config)),
+         'verification_status':'DECLARATIONS_ONLY_NOT_LAUNCHABLE'}
+def launch(*_args,**_kwargs):
+ raise RuntimeError('RESEARCH_HOLD: static adapter cannot launch or authorize execution')

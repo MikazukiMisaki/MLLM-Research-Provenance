@@ -1,0 +1,34 @@
+--- previous/static_adapter.py
++++ candidate/static_adapter.py
+@@ -6,6 +6,7 @@
+ import os
+ import re
+ from pathlib import Path
++from budget_contract import validate_budget, BudgetError
+ 
+ class ContractError(ValueError): pass
+ 
+@@ -80,16 +81,13 @@
+   for value in input_map.values():sha(value)
+   seen.add(row['case']);expected=['P0','CANDIDATE'] if i%2==0 else ['CANDIDATE','P0']
+   if row.get('order')!=expected:raise ContractError('case order')
+- budget=plan.get('budget');
+- if type(budget) is not dict or set(budget)!={'historical_ledger_sha256','historical_used','prospective_ceiling','proposed_additional'}:raise ContractError('historical cost missing')
+- sha(budget['historical_ledger_sha256'])
+- for field in ('historical_used','prospective_ceiling','proposed_additional'):
+-  vals=budget[field]
+-  if type(vals) is not dict or set(vals)!=set(METRICS) or any(type(v) is not int or v<0 for v in vals.values()):raise ContractError('cost shape')
+- if not any(budget['historical_used'].values()):raise ContractError('unknown or zero historical cost requires adjudication')
+- for metric in METRICS:
+-  if budget['historical_used'][metric]+budget['proposed_additional'][metric]>budget['prospective_ceiling'][metric]:raise ContractError('would omit historical cost or exceed ceiling')
+- return {'status':'DECLARATIONS_CONSISTENT_NOT_AUTHORIZED','product_record_digest':product_digest,'historical_ledger_sha256':budget['historical_ledger_sha256'],'historical_cost_verified':False,'runtime_files_verified':False,'execution_authorized':False}
++ budget=plan.get('budget')
++ try:budget_result=validate_budget(budget)
++ except BudgetError as error:raise ContractError('budget: '+str(error)) from error
++ return {'status':'DECLARATIONS_CONSISTENT_NOT_AUTHORIZED','product_record_digest':product_digest,
++         'budget':budget_result,'historical_cost_verified':False,'runtime_files_verified':False,
++         'execution_authorized':False}
++
+ def draft_arm_config(plan,product_bytes,product_digest,*,case,arm,previous_initial,output,manifest_path,manifest_sha256,manifest_bytes,inputs,pair_binding,source_root,legacy_dir,candidate_root,code_files,runtime_extra):
+  """Produce a detached in-memory candidate matching held worker config; never write/run."""
+  validate_plan(plan,product_bytes,product_digest);sha(manifest_sha256)
