@@ -1,0 +1,153 @@
+--- v2/candidate.py
++++ v3/candidate.py
+@@ -10,7 +10,10 @@
+ import stat
+ import subprocess
+ 
+-PAIRS = ('one', 'two', 'three', 'four')
++# Fictitious fixed schedule. Production schedule binding is NOT implemented.
++SCHEDULE = (('one', ('A','B')), ('two', ('B','A')),
++            ('three', ('A','B')), ('four', ('B','A')))
++PAIRS = tuple(pair for pair, _ in SCHEDULE)
+ GLOBAL_CAP = {'materialize': 4, 'env_construct': 8, 'env_init': 8, 'reset': 8,
+               'model_load': 8, 'generation': 400, 'step': 400}
+ ARM_CAP = {'env_construct': 1, 'env_init': 1, 'reset': 1, 'model_load': 1,
+@@ -51,6 +54,7 @@
+         self.prepared = set()
+         self.states = {}
+         self.returned_local = {}
++        self.pair_index = 0
+         self.finished = False
+         self.failed = False
+ 
+@@ -79,13 +83,23 @@
+         finally: os.close(fd)
+         self._syncdir(); self.seq += 1; self.prev = h
+ 
++    def expected_pair(self):
++        if self.pair_index >= len(SCHEDULE): raise Stop('schedule exhausted')
++        return SCHEDULE[self.pair_index]
++
++    def expected_arm(self):
++        pair, order = self.expected_pair()
++        if self.states.get((pair,order[0])) != 'closed': return pair, order[0]
++        return pair, order[1]
++
+     def reserve(self, pair, arm, kind):
+         if (self.failed or self.finished or self.open is not None or pair not in PAIRS or kind not in GLOBAL_CAP or
+             self.count[kind] >= GLOBAL_CAP[kind]): raise Stop('budget/ambiguous reservation')
+         if kind == 'materialize':
+-            if arm is not None or pair in self.used_setup: raise Stop('duplicate setup')
++            if arm is not None or pair in self.used_setup or pair != self.expected_pair()[0]: raise Stop('duplicate or out-of-order setup')
+         else:
+-            if arm not in ('A','B') or (pair, arm) not in self.used_arm: raise Stop('unbound arm')
++            if ((pair,arm) != self.expected_arm() or self.states.get((pair,arm)) != 'started' or
++                arm not in ('A','B') or (pair, arm) not in self.used_arm): raise Stop('unbound or out-of-order arm')
+             local = self.local[(pair,arm)]
+             if local[kind] >= ARM_CAP[kind]: raise Stop('arm cap')
+             returned = self.returned_local[(pair,arm)]
+@@ -108,13 +122,15 @@
+         self.open = None
+ 
+     def mark_pre(self, pair, arm):
+-        if self.failed or self.finished or self.open is not None or pair not in self.returned_setup or (pair,arm) in self.prepared:
++        if (self.failed or self.finished or self.open is not None or pair not in self.returned_setup or
++            (pair,arm) != self.expected_arm() or (pair,arm) in self.prepared):
+             raise Stop('invalid pre-verification')
+         self.write('arm_pre_verified', {'pair':pair,'arm':arm})
+         self.prepared.add((pair,arm))
+ 
+     def start_arm(self, pair, arm):
+-        if self.failed or self.finished or self.open is not None or (pair,arm) not in self.prepared or (pair,arm) in self.used_arm or arm not in ('A','B'):
++        if (self.failed or self.finished or self.open is not None or (pair,arm) != self.expected_arm() or
++            (pair,arm) not in self.prepared or (pair,arm) in self.used_arm or arm not in ('A','B')):
+             raise Stop('bad arm start')
+         self.write('arm_start', {'pair':pair,'arm':arm})
+         self.used_arm.add((pair,arm))
+@@ -144,6 +160,9 @@
+         if self.states.get(key) != 'verified' or self.open is not None: raise Stop('arm not verified')
+         self.write('arm_closed', {'pair':pair,'arm':arm})
+         self.states[key]='closed'
++        expected_pair, order = self.expected_pair()
++        if pair == expected_pair and all(self.states.get((pair,a)) == 'closed' for a in order):
++            self.pair_index += 1
+ 
+     def abort(self, reason):
+         if self.finished or self.failed: return
+@@ -156,7 +175,7 @@
+ 
+     def complete(self):
+         expected={(pair,arm) for pair in PAIRS for arm in ('A','B')}
+-        if (self.failed or self.finished or self.open is not None or self.returned_setup != set(PAIRS) or
++        if (self.failed or self.finished or self.open is not None or self.pair_index != len(SCHEDULE) or self.returned_setup != set(PAIRS) or
+             set(self.states) != expected or any(self.states[k] != 'closed' for k in expected)):
+             raise Stop('batch incomplete or failed')
+         self.write('complete', {'counts':self.count.copy()}); self.finished=True
+@@ -209,7 +228,7 @@
+     spawn(pair,arm,paths,fd) -> a supervised child (Popen-compatible).
+     Production resource and model bindings are NOT implemented.
+     """
+-    if pair_id not in PAIRS or tuple(order) not in (('A','B'),('B','A')): raise Stop('pair/order')
++    if (pair_id, tuple(order)) != owner.expected_pair(): raise Stop('pair/order differs from frozen schedule')
+     root=owner.root/('pair-'+pair_id); root.mkdir(mode=0o700)
+     token=owner.reserve(pair_id,None,'materialize')
+     def journal(event, payload): owner.write('setup_detail', {'event':event,'payload':payload})
+--- v2/fake_arm.py
++++ v3/fake_arm.py
+@@ -17,7 +17,7 @@
+         if mode=='open' and kind=='generation': raise SystemExit(4)
+         send({'type':'return','token':token,'receipt':{'synthetic':True}})
+     for op in ('env_construct','env_init','reset'): effect(op)
+-    send({'type':'initial','state':{'task':'fictional','x': 2 if mode=='mismatch' and arm=='B' else 1}})
++    send({'type':'initial','state':{'task':'fictional','x': 2 if ((mode=='mismatch' and arm=='B') or (mode=='mismatch_second_reversed' and arm=='A')) else 1}})
+     if mode=='no_model':
+         send({'type':'done','won':True})
+         raise SystemExit(0)
+--- v2/test_candidate.py
++++ v3/test_candidate.py
+@@ -103,13 +103,13 @@
+         self.assertEqual(self.owner.count['generation'],2)
+ 
+     def test_fourth_pair_second_initial_mismatch_cannot_complete(self):
+-        for case in c.PAIRS[:3]: self.run_pair(case)
+-        with self.assertRaises(c.Stop): self.run_pair('four',mode='mismatch')
++        for i,case in enumerate(c.PAIRS[:3]): self.run_pair(case, order=('A','B') if i%2==0 else ('B','A'))
++        with self.assertRaises(c.Stop): self.run_pair('four',order=('B','A'),mode='mismatch_second_reversed')
+         self.assertEqual(len(self.owner.used_arm),8)
+         self.assertEqual(sum(state == 'closed' for state in self.owner.states.values()),7)
+         self.assertTrue(self.owner.failed)
+         with self.assertRaises(c.Stop): self.owner.complete()
+-        with self.assertRaises(c.Stop): self.owner.reserve('four','B','model_load')
++        with self.assertRaises(c.Stop): self.owner.reserve('four','A','model_load')
+ 
+     def test_dotdot_path_escape_rejected(self):
+         outside=Path(self.tmp.name)/'outside'
+@@ -127,4 +127,28 @@
+         with self.assertRaises(c.Stop): self.owner.complete()
+         with self.assertRaises(c.Stop): self.run_pair('two')
+ 
++    def test_skip_first_pair_fails_before_setup_and_latches(self):
++        with self.assertRaises(c.Stop): self.run_pair('two',order=('B','A'))
++        self.assertTrue(self.owner.failed)
++        self.assertEqual(self.owner.count['materialize'],0)
++        with self.assertRaises(c.Stop): self.run_pair('one')
++
++    def test_wrong_arm_order_fails_before_setup_and_latches(self):
++        with self.assertRaises(c.Stop): self.run_pair('one',order=('B','A'))
++        self.assertTrue(self.owner.failed)
++        self.assertEqual(self.owner.count['materialize'],0)
++        with self.assertRaises(c.Stop): self.owner.complete()
++
++    def test_owner_rejects_second_pair_before_first_pair_closed(self):
++        token=self.owner.reserve('one',None,'materialize'); self.owner.returned(token,{})
++        with self.assertRaises(c.Stop): self.owner.reserve('two',None,'materialize')
++        with self.assertRaises(c.Stop): self.owner.mark_pre('one','B')
++        self.assertEqual(self.owner.count['materialize'],1)
++
++    def test_second_pair_requires_reverse_order(self):
++        self.run_pair('one')
++        with self.assertRaises(c.Stop): self.run_pair('two',order=('A','B'))
++        self.assertTrue(self.owner.failed)
++        self.assertEqual(self.owner.count['materialize'],1)
++
+ if __name__=='__main__': unittest.main(verbosity=2)
