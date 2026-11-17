@@ -1,0 +1,70 @@
+test_disconnect_after_ack_retains_reservation (test_bridge.BridgeTest.test_disconnect_after_ack_retains_reservation) ... ok
+test_malformed_order_duplicate_and_fake_receipt_fail (test_bridge.BridgeTest.test_malformed_order_duplicate_and_fake_receipt_fail) ... ok
+test_real_client_unknown_aborts (test_bridge.BridgeTest.test_real_client_unknown_aborts) ... FAIL
+test_shared_cap_stops_second_child (test_bridge.BridgeTest.test_shared_cap_stops_second_child) ... ERROR
+test_two_real_protocol_clients_share_total_counts (test_bridge.BridgeTest.test_two_real_protocol_clients_share_total_counts) ... ERROR
+test_wrong_arm_order_stops_batch (test_bridge.BridgeTest.test_wrong_arm_order_stops_batch) ... ok
+
+======================================================================
+ERROR: test_shared_cap_stops_second_child (test_bridge.BridgeTest.test_shared_cap_stops_second_child)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/lizening/research-notes/agent-logs/20261118__CODEX__effect-ipc-bridge-candidate__private/bridge.py", line 112, in serve
+    stream.write(canon({'kind':'ack','seq':expected,'allowed':True})+b'\n')
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lizening/miniconda3/lib/python3.13/socket.py", line 737, in write
+    return self._sock.send(b)
+           ~~~~~~~~~~~~~~~^^^
+BrokenPipeError: [Errno 32] Broken pipe
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/lizening/research-notes/agent-logs/20261118__CODEX__effect-ipc-bridge-candidate__private/test_bridge.py", line 59, in test_shared_cap_stops_second_child
+    self.run_child(b,'A')
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/home/lizening/research-notes/agent-logs/20261118__CODEX__effect-ipc-bridge-candidate__private/test_bridge.py", line 26, in run_child
+    try:budget.serve(parent,arm,log)
+        ~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/lizening/research-notes/agent-logs/20261118__CODEX__effect-ipc-bridge-candidate__private/bridge.py", line 117, in serve
+    raise Stop('fail stop: '+str(error)) from error
+bridge.Stop: fail stop: [Errno 32] Broken pipe
+
+======================================================================
+ERROR: test_two_real_protocol_clients_share_total_counts (test_bridge.BridgeTest.test_two_real_protocol_clients_share_total_counts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/lizening/research-notes/agent-logs/20261118__CODEX__effect-ipc-bridge-candidate__private/bridge.py", line 112, in serve
+    stream.write(canon({'kind':'ack','seq':expected,'allowed':True})+b'\n')
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lizening/miniconda3/lib/python3.13/socket.py", line 737, in write
+    return self._sock.send(b)
+           ~~~~~~~~~~~~~~~^^^
+BrokenPipeError: [Errno 32] Broken pipe
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/lizening/research-notes/agent-logs/20261118__CODEX__effect-ipc-bridge-candidate__private/test_bridge.py", line 36, in test_two_real_protocol_clients_share_total_counts
+    rc,log=self.run_child(b,arm)
+           ~~~~~~~~~~~~~~^^^^^^^
+  File "/home/lizening/research-notes/agent-logs/20261118__CODEX__effect-ipc-bridge-candidate__private/test_bridge.py", line 26, in run_child
+    try:budget.serve(parent,arm,log)
+        ~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/lizening/research-notes/agent-logs/20261118__CODEX__effect-ipc-bridge-candidate__private/bridge.py", line 117, in serve
+    raise Stop('fail stop: '+str(error)) from error
+bridge.Stop: fail stop: [Errno 32] Broken pipe
+
+======================================================================
+FAIL: test_real_client_unknown_aborts (test_bridge.BridgeTest.test_real_client_unknown_aborts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/lizening/research-notes/agent-logs/20261118__CODEX__effect-ipc-bridge-candidate__private/test_bridge.py", line 55, in test_real_client_unknown_aborts
+    self.assertIn('unknown',[r['event'] for r in rows])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'unknown' not found in ['reserved', 'aborted']
+
+----------------------------------------------------------------------
+Ran 6 tests in 30.840s
+
+FAILED (failures=1, errors=2)
