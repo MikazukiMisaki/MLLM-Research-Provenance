@@ -1,0 +1,24 @@
+# Independent review: v7 to SFT fictional adapter
+
+**HOLD; interface incompatibility is real, and the fixture preview is not training-ready.** Two additional trainer lifecycle differences must be addressed before a future v7 training design can be implemented: baseline best-checkpoint selection conflicts with the proposed final-checkpoint rule, and the four-row native one-step routine cannot simply be called sixteen times as a continuous run.
+
+## Exact evidence
+
+Candidate `/home/lizening/research-notes/agent-logs/20261118__CODEX__si-v7-sft-fixture-adapter__private/`: all 9 inventory entries and all 11 listed source hashes independently matched. `fixture_adapter.py` SHA256 `31454f481fbc04aaefd2c3bd30afb3f7101b8aea6c87eb8b67b055edfca38e4f`; `TRAINER_CONTRACT.md` `4892c8de478230f30a7235d8d31567c1faec3d2cafb4445783fe37659fce205d`; `fixture.json` `0fcb3fc579a256667ccb833e61e473615d9fd42415e549c57abac58862580d30`; `test_fixture_adapter.py` `fcab76ffaf48c0ba001b1921227574b334330419345e7483960167122c68d6e1`. Independent pinned-Python fictional CPU test run: 3 tests passed, exit 0; `tests.log` SHA256 `a04a33b21519a880293a4aec67cd9af7385f0e8931b68f862ca0e9026d1802ad`. No actual sample, tokenizer, model, GPU, environment or training was loaded or run.
+
+## Verified contracts
+
+The v7 selector output stores selection labels/masks, counts and references, not a complete row of verified prompt token IDs. Resolving referenced artifacts needs separately reviewed provenance, identity and semantic binding. Supplied hashes and self-declared authentication are not source proof.
+
+`src/sft/training.py:65–82,134–149` checks text rows using the local tokenization helper, then gives prompt/completion strings to TRL; its actual internal tokenization/masking equivalence is not demonstrated by this static check. The local helper enforces prefix and refuses overlength; the checked-in SFT config uses max_length 2048 (its config also describes a selection rule for larger limits), not an unconditional v7 4096. The baseline initializes base model then a fresh LoRA, not the P0 adapter specified by this proposed design.
+
+`native_update.py:54–72,116–128` takes exactly four immutable `Row(prompt,generated)` values, a reviewed recipe handoff, and limits prompt+generated to 4096 and generated to 16; it reconstructs all prompt positions as -100 and all generated positions as active. It executes four microbatches and a single optimizer update, not v7's full 16-row, 4-epoch/16-update run. Exact equivalence to the v7 full mask holds only for the stated contiguous prompt-zero/target-one representation, with separately verified tokenizer/EOS and source records. 4096 is a code bound, not observed actual context or memory capability.
+
+The exact pinned fictional two-row fixture has distinct prompt arrays, equal generated labels and matching masks. The three tests check exact array/mask projection, failure on non-pinned inputs or self-declared authentication, and fake alias/mask/length failures. `convert_fixture` accepts only the pinned fiction and returns `UNAUTHENTICATED_FAKE`, `trainer_compatible=false`, HOLD; `convert_for_training` unconditionally raises. These are only a single hardcoded fictional example, not proof of general source-to-trainer equivalence. Its helper deliberately requires all four references to differ, which is stricter than the selector's legitimate shared individual label artifact behavior; this is acceptable for a fixed preview but not a general adapter contract.
+
+## Additional scientific-implementation boundaries
+
+1. The non-smoke baseline training path sets `load_best_model_at_end=True` with `eval_loss` (`training.py:111–115`), unlike the v7 predeclared no-best-checkpoint/final-checkpoint rule. It must not be used unchanged under that protocol.
+2. Native `run_one_update` documents a **fresh P0** producer and constructs a **new AdamW** internally on every invocation. Sixteen naive invocations are not shown to be one continuous 16-step trajectory: they would reset the optimizer and, if fresh P0 is honored each time, the weights. A compatible reviewed implementation must load each arm/seed P0 once, maintain the same optimizer/model state for all 16 declared updates, fix data ordering and loss weighting, preserve global physical budgets, and produce the final checkpoint without best selection. A four-row synthetic pass alone does not establish that lifecycle.
+
+Next minimal work is a separately scoped, fictional-CPU interface/lifecycle candidate that resolves selected referenced records against authenticated source contracts, preserves exact token IDs/masks and full combined context, and tests multi-step optimizer continuity and output identity under a fixed v7 recipe. Actual P0 model identity, source/lineage/native evidence, permitted parents, trainer/runtime compatibility, physical cost and scientific effects remain UNKNOWN. No launch or training clearance is granted.
