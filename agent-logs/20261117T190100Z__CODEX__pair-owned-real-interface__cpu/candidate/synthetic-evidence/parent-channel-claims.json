@@ -1,0 +1,119 @@
+[
+  [
+    "operation_reserved",
+    {
+      "cost": "STARTED_OR_UNKNOWN_UNTIL_CHILD_PROOF",
+      "count": 1,
+      "operation": "env_construct",
+      "seq": 0,
+      "stage": "EVAL"
+    }
+  ],
+  [
+    "operation_returned",
+    {
+      "child_claim_only": true,
+      "operation": "env_construct",
+      "receipt_sha256": "924ca9c2ac0632895061fcab9290c7c3cb99cb75caba805da77f0b7fe58fcfc5",
+      "seq": 0,
+      "stage": "EVAL"
+    }
+  ],
+  [
+    "operation_reserved",
+    {
+      "cost": "STARTED_OR_UNKNOWN_UNTIL_CHILD_PROOF",
+      "count": 1,
+      "operation": "env_init",
+      "seq": 1,
+      "stage": "EVAL"
+    }
+  ],
+  [
+    "operation_returned",
+    {
+      "child_claim_only": true,
+      "operation": "env_init",
+      "receipt_sha256": "1b0481d8e56d0cb6de5d77090756cb7aa553803dcfd6cf607dac2878b7275868",
+      "seq": 1,
+      "stage": "EVAL"
+    }
+  ],
+  [
+    "operation_reserved",
+    {
+      "cost": "STARTED_OR_UNKNOWN_UNTIL_CHILD_PROOF",
+      "count": 1,
+      "operation": "reset",
+      "seq": 2,
+      "stage": "EVAL"
+    }
+  ],
+  [
+    "operation_returned",
+    {
+      "child_claim_only": true,
+      "operation": "reset",
+      "receipt_sha256": "6cc3a7f664ffc7119e051e1e4a9bf9749f78e89f2626bff85a70b7a3e396829e",
+      "seq": 2,
+      "stage": "EVAL"
+    }
+  ],
+  [
+    "operation_reserved",
+    {
+      "cost": "STARTED_OR_UNKNOWN_UNTIL_CHILD_PROOF",
+      "count": 1,
+      "operation": "model_load",
+      "seq": 3,
+      "stage": "EVAL"
+    }
+  ],
+  [
+    "operation_returned",
+    {
+      "child_claim_only": true,
+      "operation": "model_load",
+      "receipt_sha256": "928294a6c4fa245b54ec2fe79fb787403a8e22af0509ef5afb974b85f6c304c5",
+      "seq": 3,
+      "stage": "EVAL"
+    }
+  ],
+  [
+    "operation_reserved",
+    {
+      "cost": "STARTED_OR_UNKNOWN_UNTIL_CHILD_PROOF",
+      "count": 1,
+      "operation": "generation",
+      "seq": 4,
+      "stage": "EVAL"
+    }
+  ],
+  [
+    "operation_returned",
+    {
+      "child_claim_only": true,
+      "operation": "generation",
+      "receipt_sha256": "411eae011da096413386074e3f86b6204221c336226b575c19d985c44401396f",
+      "seq": 4,
+      "stage": "EVAL"
+    }
+  ],
+  [
+    "worker_budget_finished",
+    {
+      "child_claim_only": true,
+      "counts": {
+        "env_construct": 1,
+        "env_init": 1,
+        "generation": 1,
+        "model_load": 1,
+        "reset": 1,
+        "step": 0
+      },
+      "seq": 5,
+      "stage": "EVAL",
+      "status": "COMPLETED"
+    }
+  ]
+]

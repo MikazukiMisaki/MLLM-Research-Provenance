@@ -1,0 +1,561 @@
+--- original/fixed_product_dev/arm_stage.py
++++ candidate/fixed_product_dev/arm_stage.py
+@@ -4,14 +4,47 @@
+ The parent must bind the task, product, previous public reset, budget and GPU.
+ """
+ from pathlib import Path
++import hashlib
++import os
++import stat
+ 
+ 
+-ARM_CAPS = {"materialize": 1, "env_construct": 1, "env_init": 1,
++ARM_CAPS = {"env_construct": 1, "env_init": 1,
+             "reset": 1, "model_load": 1, "generation": 50, "step": 50}
+ 
+ 
++def bound_paths(binding):
++    """Check shared pair paths, exact bytes and lexical containment. Not OS isolation."""
++    if type(binding) is not dict or set(binding)!={'root','game','config','data_root','sha256'}:
++        raise ValueError('pair binding shape')
++    root=Path(binding['root'])
++    if not root.is_absolute() or '..' in root.parts or root.is_symlink():raise ValueError('pair root')
++    game,config,data_root=(Path(binding[k]) for k in ('game','config','data_root'))
++    if game!=data_root/'authored-eprime-only'/'game.tw-pddl':raise ValueError('pair layout')
++    for path in (game,config,data_root):
++        if not path.is_absolute() or '..' in path.parts or not path.is_relative_to(root):raise ValueError('pair containment')
++        cursor=root
++        for part in path.relative_to(root).parts:
++            cursor=cursor/part
++            if cursor.is_symlink():raise ValueError('symlink in pair path')
++    files={'game':game,'routing':game.parent/'traj_data.json','config':config}
++    if type(binding['sha256']) is not dict or set(binding['sha256'])!=set(files):raise ValueError('pair digest map')
++    for name,path in files.items():
++        fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC)
++        try:
++            before=os.fstat(fd)
++            if not stat.S_ISREG(before.st_mode) or before.st_nlink!=1 or before.st_size>1_000_000:raise ValueError('pair file shape')
++            with os.fdopen(fd,'rb',closefd=False) as f:data=f.read(1_000_001)
++            after=os.fstat(fd)
++            if ((before.st_dev,before.st_ino,before.st_size,before.st_mtime_ns,before.st_ctime_ns)!=
++                (after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns,after.st_ctime_ns) or
++                hashlib.sha256(data).hexdigest()!=binding['sha256'][name]):raise ValueError('pair file drift')
++        finally:os.close(fd)
++    return game,config,data_root
++
++
+ def run_arm(*, output, budget_fd, case, arm, previous_initial, inputs, seed,
+-            journal_class, owner_class, controller_class, materialize,
++            journal_class, owner_class, controller_class, pair_binding,
+             verify_materialized, environment_class, step_wrapper, episode,
+             projection, source_worker, load_producer, parser, parse_value,
+             state_factory, expected_eos, expected_pad):
+@@ -37,12 +70,10 @@
+         journal.emit("fixed_product_arm_started", {
+             "case": case["case"], "arm": arm, "seed": seed,
+             "scope": "EXPOSED_AUTHORED_DEV", "horizon": 50})
+-        game, config, data_root = controller.effect(
+-            "materialize", lambda: materialize(output, inputs, journal.emit, family="two"),
+-            lambda values: {"game": str(values[0]), "config": str(values[1]),
+-                            "data_root": str(values[2])})
++        game, config, data_root = bound_paths(pair_binding)
+         materialized = (game, config, data_root)
+         verify_materialized(game, config, data_root, inputs, journal.emit, "pre")
++        bound_paths(pair_binding)
+ 
+         class BoundEnvironment:
+             def __init__(self):
+@@ -76,6 +107,7 @@
+                 not isinstance(result.get("initial_public"), dict)):
+             raise ValueError("invalid arm outcome")
+         verify_materialized(game, config, data_root, inputs, journal.emit, "post")
++        bound_paths(pair_binding)
+         post_verified = True
+         journal.emit("fixed_product_arm_result", result)
+         owner.finish("COMPLETED")
+--- original/fixed_product_dev/arm_budget.py
++++ candidate/fixed_product_dev/arm_budget.py
+@@ -9,9 +9,9 @@
+ 
+ PROFILES={
+  'UPDATE':{'model_load':1,'zero_grad':1,'forward':4,'backward':4,'optimizer_step':1,'checkpoint_save':1,'checkpoint_readback':1,'model_reload':1},
+- 'EVAL':{'materialize':1,'env_construct':1,'env_init':1,'reset':1,'model_load':1,'generation':50,'step':50},
++ 'EVAL':{'env_construct':1,'env_init':1,'reset':1,'model_load':1,'generation':50,'step':50},
+ }
+-MANDATORY={'UPDATE':dict(PROFILES['UPDATE']),'EVAL':{'materialize':1,'env_construct':1,'env_init':1,'reset':1,'model_load':1}}
++MANDATORY={'UPDATE':dict(PROFILES['UPDATE']),'EVAL':{'env_construct':1,'env_init':1,'reset':1,'model_load':1}}
+ UPDATE_ORDER=('model_load','zero_grad')+('forward','backward')*4+('optimizer_step','checkpoint_save','checkpoint_readback','model_reload')
+ class Stop(Exception):pass
+ 
+@@ -25,12 +25,18 @@
+ def canonical(v):return json.dumps(v,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
+ 
+ class StageBudgetChannel:
+- def __init__(self,stage,sock,journal):
++ def __init__(self,stage,sock,journal,*,global_owner,case,arm):
+   if type(stage) is not str or stage not in PROFILES:raise Stop('unreviewed_stage')
+   self.stage=stage;self.caps=dict(PROFILES[stage]);self.mandatory=dict(MANDATORY[stage]);self.sock=sock;self.journal=journal
++  self.global_owner=global_owner;self.case=case;self.arm=arm
+   self.buffer=b'';self.pending_ack=b'';self.ack_deadline=None;self.counts={k:0 for k in self.caps}
+   self.next_seq=0;self.outstanding=None;self.finished=None;self.unknown=False;self.returned_count=0
+  def receive(self,data):
++  try:return self._receive(data)
++  except BaseException as error:
++   self.global_owner.abort(type(error).__name__+': '+str(error))
++   raise
++ def _receive(self,data):
+   if self.pending_ack:raise Stop('frame_before_ack')
+   self.buffer+=data
+   if len(self.buffer)>4096:raise Stop('frame_too_large')
+@@ -45,21 +51,30 @@
+    op=msg['operation']
+    if type(op) is not str or op not in self.caps or self.counts[op]>=self.caps[op]:raise Stop('cap')
+    if self.stage=='UPDATE' and (self.returned_count>=len(UPDATE_ORDER) or op!=UPDATE_ORDER[self.returned_count]):raise Stop('update_order')
++   self.global_owner.reserve(self.case,self.arm,op,seq)
+    self.counts[op]+=1;self.outstanding={'seq':seq,'operation':op};self.next_seq+=1
+    self.journal.emit('operation_reserved',{'stage':self.stage,'seq':seq,'operation':op,'count':self.counts[op],'cost':'STARTED_OR_UNKNOWN_UNTIL_CHILD_PROOF'})
+   elif kind in ('returned','unknown'):
+    if set(msg)!={'kind','seq','operation','receipt_sha256'} or self.outstanding!={'seq':seq,'operation':msg.get('operation')} or type(msg.get('receipt_sha256')) is not str or re.fullmatch('[0-9a-f]{64}',msg['receipt_sha256']) is None:raise Stop('return_order')
++   if kind=='unknown':raise Stop('unknown_effect_fail_stop')
++   self.global_owner.returned(self.case,self.arm,msg['operation'],seq,msg['receipt_sha256'])
+    self.journal.emit('operation_'+kind,{'stage':self.stage,'seq':seq,'operation':msg['operation'],'receipt_sha256':msg['receipt_sha256'],'child_claim_only':True})
+    self.outstanding=None
+    if kind=='unknown':self.unknown=True
+    else:self.returned_count+=1
+   elif kind=='finished':
+    if set(msg)!={'kind','seq','status'} or seq!=self.next_seq or self.outstanding is not None or self.finished is not None or msg['status'] not in ('COMPLETED','STOPPED'):raise Stop('finish_order')
++   if msg['status']!='COMPLETED':raise Stop('worker_stopped_fail_stop')
+    if msg['status']=='COMPLETED' and (self.unknown or any(self.counts[k]!=v for k,v in self.mandatory.items()) or (self.stage=='EVAL' and self.counts['generation']<1)):raise Stop('finish_unproved')
+    self.journal.emit('worker_budget_finished',{'stage':self.stage,'seq':seq,'status':msg['status'],'counts':dict(self.counts),'child_claim_only':True});self.finished=msg['status']
+   else:raise Stop('kind')
+   self.pending_ack=canonical({'kind':'ack','seq':seq,'allowed':True})+b'\n';self.ack_deadline=time.monotonic()+2.0
+  def write_ack(self):
++  try:return self._write_ack()
++  except BaseException as error:
++   self.global_owner.abort(type(error).__name__+': '+str(error))
++   raise
++ def _write_ack(self):
+   if not self.pending_ack:raise Stop('unexpected_ack_write')
+   try:n=self.sock.send(self.pending_ack)
+   except BlockingIOError:return
+@@ -67,4 +82,8 @@
+   self.pending_ack=self.pending_ack[n:]
+   if not self.pending_ack:self.ack_deadline=None
+  def eof(self):
+-  if self.buffer or self.pending_ack or self.outstanding is not None or self.finished is None:raise Stop('incomplete_eof')
++  try:
++   if self.buffer or self.pending_ack or self.outstanding is not None or self.finished is None:raise Stop('incomplete_eof')
++  except BaseException as error:
++   self.global_owner.abort(type(error).__name__+': '+str(error))
++   raise
+--- original/fixed_product_dev/worker.py
++++ candidate/fixed_product_dev/worker.py
+@@ -41,6 +41,8 @@
+ 
+ 
+ def main():
++    # The parent bound is conservative; trusted real-worker binding and cleanup remain unreviewed.
++    raise RuntimeError("RESEARCH_HOLD: production token provenance and cleanup gates are not implemented")
+     ap = argparse.ArgumentParser()
+     ap.add_argument("--config", required=True)
+     ap.add_argument("--config-sha256", required=True)
+@@ -73,7 +75,7 @@
+         raise ValueError("arm is not in the fixed order")
+     required_limits = {"episodes": 8, "generation": 400, "model_load": 8,
+                        "reset": 8, "step": 400,
+-                       "materialize": 8, "env_construct": 8, "env_init": 8,
++                       "materialize": 4, "env_construct": 8, "env_init": 8,
+                        "input_tokens_per_generation": 4096,
+                        "output_tokens_per_generation": 16}
+     if manifest["limits"] != required_limits or config["limits"] != required_limits:
+@@ -94,7 +96,7 @@
+     from fixed_product_dev.arm_stage import run_arm
+     from fixed_product_dev.episode import run_episode
+     from effect_ipc import Journal, EffectOwner, Controller
+-    from eprime_ports import materialize, verify_materialized, EPrimeEnvironment
++    from eprime_ports import verify_materialized, EPrimeEnvironment
+     from environment_step import StepEnabledAuthoredEnv
+     import source_worker
+     from producer_port import ProducerPort
+@@ -151,7 +153,7 @@
+     run_arm(output=output, budget_fd=args.budget_fd, case=case, arm=arm,
+             previous_initial=previous_initial, inputs=config["inputs"],
+             seed=config["seed"], journal_class=Journal, owner_class=EffectOwner,
+-            controller_class=Controller, materialize=materialize,
++            controller_class=Controller, pair_binding=config["pair_binding"],
+             verify_materialized=verify_materialized, environment_class=EPrimeEnvironment,
+             step_wrapper=StepEnabledAuthoredEnv, episode=run_episode,
+             projection=projection, source_worker=source_worker, load_producer=load_product,
+--- original/global_owner.py
++++ candidate/global_owner.py
+@@ -0,0 +1,191 @@
++"""Unreleased pair-owned source interface; scientific execution is hard-disabled."""
++import hashlib
++import json
++import math
++import os
++from pathlib import Path
++from fixed_product_dev.arm_stage import bound_paths
++
++SCHEDULE=(('eval-two-pair-a',('P0','CANDIDATE')),('eval-two-pair-b',('CANDIDATE','P0')),
++          ('eval-two-pair-c',('P0','CANDIDATE')),('eval-two-pair-d',('CANDIDATE','P0')))
++CAPS={'materialize':4,'env_construct':8,'env_init':8,'reset':8,'model_load':8,'generation':400,'step':400}
++TOKEN_CAPS={'input':400*4096,'output':400*16}
++ARM_CAPS={'env_construct':1,'env_init':1,'reset':1,'model_load':1,'generation':50,'step':50}
++class Stop(RuntimeError):pass
++
++def canonical(x):return json.dumps(x,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
++def sha(x):return hashlib.sha256(x).hexdigest()
++
++def digest_file(path):
++    # This is followed by bound_paths which performs nofollow and stable-stat checks.
++    return sha(Path(path).read_bytes())
++
++def read_child_rows(path):
++    """Read a chained child-claimed journal. Not authenticated physical evidence."""
++    raw=Path(path).read_bytes()
++    if not raw or not raw.endswith(b'\n'):raise Stop('unclosed child journal')
++    rows=[];prev='0'*64
++    for i,line in enumerate(raw.splitlines(keepends=True)):
++        row=json.loads(line);h=row.pop('digest')
++        if row['seq']!=i or row['previous']!=prev or sha(canonical(row))!=h:raise Stop('child journal chain')
++        prev=h;row['digest']=h;rows.append(row)
++    return raw,rows
++
++def claimed_prepared(path):
++    raw,rows=read_child_rows(path)
++    last_return=max((r['seq'] for r in rows if r['kind']=='generation_returned'),default=-1)
++    pending=[r for r in rows if r['kind']=='prepared' and r['seq']>last_return]
++    if len(pending)!=1 or any(r['kind']=='generation_started' and r['seq']>last_return for r in rows):
++        raise Stop('missing, duplicate or already started prepared claim')
++    row=pending[0];data=row['payload'];ids=data.get('input_ids');mask=data.get('attention_mask');kw=data.get('kwargs');config=data.get('generation_config')
++    if (type(ids) is not list or not 1<=len(ids)<=4096 or any(type(x) is not int or x<0 for x in ids) or
++        type(mask) is not list or len(mask)!=len(ids) or any(type(x) is not int or x!=1 for x in mask) or
++        type(kw) is not dict or type(kw.get('max_new_tokens')) is not int or kw['max_new_tokens']!=16 or kw.get('do_sample') is not False or
++        type(config) is not dict or config.get('eos_token_id')!=[151645,151643] or
++        type(config.get('pad_token_id')) is not int or config['pad_token_id']!=151643 or
++        'forced_eos_token_id' not in config or config['forced_eos_token_id'] is not None):
++        raise Stop('prepared input or generation limit mismatch')
++    return {'seq':row['seq'],'digest':row['digest'],'input_ids':ids}
++
++def claimed_receipt(path,operation,seq,receipt):
++    """Verify format/chain and operation-start/return; child claims are not physical proof."""
++    raw,rows=read_child_rows(path);last=rows[-1]
++    if (sha(raw.splitlines(keepends=True)[-1])!=receipt or last['kind']!=operation+'_returned' or
++        last['payload'].get('owner_seq')!=seq):raise Stop('child return binding')
++    found=[r for r in rows if r['kind']==operation+'_started' and r['payload'].get('owner_seq')==seq]
++    if len(found)!=1:raise Stop('child start missing/duplicate')
++    return last['payload'].get('evidence'),rows
++
++class GlobalOwner:
++    def __init__(self,root):
++        self.root=Path(root)
++        self.root.mkdir(mode=0o700,parents=True,exist_ok=False)
++        fd=os.open(self.root/'claim',os.O_CREAT|os.O_EXCL|os.O_WRONLY|os.O_NOFOLLOW,0o600)
++        try:os.write(fd,b'RESEARCH HOLD; NO RESUME\n');os.fsync(fd)
++        finally:os.close(fd)
++        self.path=self.root/'global.jsonl'
++        fd=os.open(self.path,os.O_CREAT|os.O_EXCL|os.O_WRONLY|os.O_NOFOLLOW,0o600)
++        try:os.fsync(fd)
++        finally:os.close(fd)
++        self.counts={k:0 for k in CAPS};self.local={};self.returned_ops={};self.seq=0;self.prev='0'*64
++        self.pair_index=0;self.arm_index=0;self.binding=None;self.active=None;self.failed=False
++        self.initial=None;self.reset_checked=set();self.worker_log=None;self.current=None;self.setup_used=set()
++        self.closed=set();self.completed=False;self.tokens={'input':0,'output':0};self.pending_prepared=None;self.used_prepared=set()
++    def record(self,event,payload):
++        if self.completed:raise Stop('owner closed')
++        row={'seq':self.seq,'previous':self.prev,'event':event,'payload':payload}
++        h=sha(canonical(row));line=canonical(dict(row,digest=h))+b'\n'
++        fd=os.open(self.path,os.O_APPEND|os.O_WRONLY|os.O_NOFOLLOW)
++        try:
++            view=memoryview(line)
++            while view:
++                n=os.write(fd,view)
++                if n<=0:raise OSError('short write')
++                view=view[n:]
++            os.fsync(fd)
++        finally:os.close(fd)
++        dfd=os.open(self.root,os.O_RDONLY|os.O_DIRECTORY)
++        try:os.fsync(dfd)
++        finally:os.close(dfd)
++        self.seq+=1;self.prev=h
++    def abort(self,reason):
++        if self.failed:return
++        try:self.record('aborted',{'reason':str(reason),'active':self.active})
++        except BaseException:pass
++        finally:self.failed=True
++    def expected(self):
++        if self.failed or self.completed or self.pair_index>=len(SCHEDULE):raise Stop('not runnable')
++        return SCHEDULE[self.pair_index]
++    def materialize_pair(self,case,inputs,materialize,verify):
++        try:
++            if case!=self.expected()[0] or self.active or self.binding or case in self.setup_used or self.counts['materialize']>=4:
++                raise Stop('out-of-order setup')
++            output=self.root/('pair-'+str(self.pair_index));output.mkdir(mode=0o700)
++            ticket={'case':case,'operation':'materialize'}
++            self.record('reserve',ticket);self.counts['materialize']+=1;self.setup_used.add(case);self.active=ticket
++            def journal(event,payload):self.record('setup_detail',{'event':event,'payload':payload})
++            game,config,data_root=materialize(output,inputs,journal,family='two')
++            verify(game,config,data_root,inputs,journal,'pre')
++            binding={'root':str(output),'game':str(game),'config':str(config),'data_root':str(data_root),
++                     'sha256':{'game':digest_file(game),'routing':digest_file(Path(game).parent/'traj_data.json'),'config':digest_file(config)}}
++            bound_paths(binding)
++            self.record('returned',dict(ticket,binding=binding));self.active=None;self.binding=binding
++            return binding
++        except BaseException as error:
++            self.abort(type(error).__name__+': '+str(error));raise
++    def begin_arm(self,case,arm,worker_journal,inputs,verify):
++        try:
++            expected,order=self.expected()
++            if case!=expected or self.binding is None or self.active or arm!=order[self.arm_index] or self.current is not None:
++                raise Stop('out-of-order arm')
++            def journal(event,payload):self.record('verification_detail',{'event':event,'payload':payload})
++            paths=bound_paths(self.binding);verify(*paths,inputs,journal,'pre');bound_paths(self.binding)
++            self.current=(case,arm);self.worker_log=Path(worker_journal);self.local[self.current]={k:0 for k in ARM_CAPS};self.returned_ops[self.current]={k:0 for k in ARM_CAPS}
++            self.record('arm_started',{'case':case,'arm':arm,'binding':self.binding})
++        except BaseException as error:
++            self.abort(type(error).__name__+': '+str(error));raise
++    def reserve(self,case,arm,operation,seq):
++        try:
++            if self.failed or self.current!=(case,arm) or self.active or operation not in ARM_CAPS:raise Stop('invalid operation')
++            if self.counts[operation]>=CAPS[operation] or self.local[self.current][operation]>=ARM_CAPS[operation]:raise Stop('budget exceeded')
++            prerequisite={'env_init':'env_construct','reset':'env_init','model_load':'reset','generation':'model_load','step':'generation'}
++            if operation in prerequisite and self.returned_ops[self.current][prerequisite[operation]]<1:raise Stop('operation order')
++            if operation=='model_load' and self.current not in self.reset_checked:raise Stop('reset comparison not passed')
++            ticket={'case':case,'arm':arm,'operation':operation,'seq':seq}
++            if operation=='generation':
++                prepared=claimed_prepared(self.worker_log)
++                key=(case,arm,prepared['seq'],prepared['digest'])
++                if key in self.used_prepared:raise Stop('prepared claim reused')
++                # Conservative upper bound: never refund even for smaller child claims.
++                if self.tokens['input']+4096>TOKEN_CAPS['input'] or self.tokens['output']+16>TOKEN_CAPS['output']:
++                    raise Stop('global token reservation exceeded')
++                ticket.update({'prepared_seq':prepared['seq'],'prepared_digest':prepared['digest'],
++                               'input_tokens_reserved':4096,'output_tokens_reserved':16})
++            self.record('reserve',ticket);self.counts[operation]+=1;self.local[self.current][operation]+=1;self.active=ticket
++            if operation=='generation':
++                self.tokens['input']+=4096;self.tokens['output']+=16
++                self.pending_prepared=prepared;self.used_prepared.add(key)
++        except BaseException as error:
++            self.abort(type(error).__name__+': '+str(error));raise
++    def returned(self,case,arm,operation,seq,receipt):
++        try:
++            ticket={'case':case,'arm':arm,'operation':operation,'seq':seq}
++            if self.failed or self.active is None or any(self.active.get(k)!=v for k,v in ticket.items()):raise Stop('unmatched return')
++            evidence,rows=claimed_receipt(self.worker_log,operation,seq,receipt)
++            if operation=='generation':
++                p=self.pending_prepared
++                if p is None or rows[p['seq']]['digest']!=p['digest'] or rows[p['seq']]['kind']!='prepared':raise Stop('prepared claim changed')
++                if type(evidence) is not dict:raise Stop('generation claim shape')
++                sequence=evidence.get('sequence');out=evidence.get('output_ids');shape=evidence.get('shape')
++                if (type(sequence) is not list or type(out) is not list or not 1<=len(out)<=16 or
++                    any(type(x) is not int or x<0 for x in sequence+out) or
++                    sequence!=p['input_ids']+out or type(shape) is not list or len(shape)!=2 or
++                    any(type(v) is not int for v in shape) or shape!=[1,len(sequence)]):raise Stop('generation claim mismatch')
++            self.record('returned',dict(self.active,receipt_sha256=receipt,child_claim_only=True));self.active=None
++            self.returned_ops[self.current][operation]+=1
++            if operation=='generation':self.pending_prepared=None
++            if operation=='reset':
++                if type(evidence) is not dict or set(evidence)!={'arm','state','gamefile','candidate_native_reset'} or evidence['arm']!=arm or evidence['gamefile']!=self.binding['game']:
++                    raise Stop('reset evidence binding')
++                native=evidence['candidate_native_reset'];state=evidence['state']
++                if (type(native) is not dict or set(native)!={'won_batch','won_batch_type'} or
++                    type(native['won_batch']) is not list or len(native['won_batch'])!=1 or native['won_batch'][0] is not False or
++                    native['won_batch_type'] not in ('list','tuple') or type(state) is not dict):raise Stop('reset claim malformed')
++                if (set(state)!={'task_id','family','goal','observation','valid_actions','done','reward','truncated'} or
++                    any(type(state[k]) is not str or not state[k] for k in ('task_id','family','goal','observation')) or
++                    type(state['valid_actions']) is not list or not state['valid_actions'] or
++                    any(type(x) is not str or not x for x in state['valid_actions']) or
++                    len(set(state['valid_actions']))!=len(state['valid_actions']) or
++                    state['done'] is not False or state['truncated'] is not False or type(state['reward']) not in (int,float) or not math.isfinite(state['reward'])):
++                    raise Stop('public reset shape')
++                if self.initial is None:self.initial=state
++                elif canonical(state)!=canonical(self.initial):raise Stop('initial mismatch')
++                self.record('reset_claim_accepted',{'case':case,'arm':arm,'child_claim_only':True});self.reset_checked.add((case,arm))
++        except BaseException as error:
++            self.abort(type(error).__name__+': '+str(error));raise
++    def close_arm_after_cleanup(self,*args,**kwargs):
++        self.abort('HOLD: independently verified owned process-tree cleanup is not implemented')
++        raise Stop('HOLD: cleanup integration unavailable')
++    def complete(self):
++        self.abort('HOLD: trusted worker binding and cleanup integration are not implemented')
++        raise Stop('HOLD: cannot complete scientific batch')
+--- original/fake_worker.py
++++ candidate/fake_worker.py
+@@ -0,0 +1,58 @@
++"""Test-only independent process exercising real StageBudgetChannel wire client.
++
++Fake episode deliberately does not call a tokenizer, model, or ALFWorld.
++"""
++import hashlib
++import json
++import os
++from pathlib import Path
++import sys
++import types
++
++HERE=Path(__file__).parent
++sys.path.insert(0,str(HERE))
++from fixed_product_dev.arm_stage import run_arm
++import production_adapter
++SOURCE=Path('/home/lizening/research-notes/agent-logs/20261116__CODEX__two-object-paired-eval__candidate/gate-live/effect_ipc.py')
++raw=SOURCE.read_bytes()
++if hashlib.sha256(raw).hexdigest()!='046c0c48291efdae06457d87343d084357ae5a1774c3d670e3e232b15fd16dd8':raise SystemExit('effect source drift')
++ipc=types.ModuleType('effect_ipc_bound');exec(compile(raw,str(SOURCE),'exec'),ipc.__dict__)
++config=json.loads(Path(sys.argv[1]).read_text());fd=int(sys.argv[2]);mode=sys.argv[3]
++cases={'synthetic':{'family':'two','inputs':config['inputs']}}
++_,verify,_=production_adapter.load_synthetic_bound(Path(config['port_source']),Path(config['fixture_root']),cases)
++class State:
++    goal='fictional';family='pick_two_obj_and_place'
++    def to_dict(self):return {'task_id':'synthetic','family':self.family,'goal':self.goal,'observation':'fixture',
++                              'valid_actions':['fictional action'],'done':False,'reward':0,'truncated':False}
++class Env:
++    def __init__(self,game,config_path,data_root,seed,*,family,case_id):self.game=str(game)
++    def initialize(self):return {'synthetic':True}
++    def reset(self):return (State(),self.game,{'candidate_native_reset':{'won_batch':[False],'won_batch_type':'list'}})
++    def close(self):pass
++
++def fake_episode(*,arm,previous_initial,controller,env_factory,**unused):
++    env=controller.effect('env_construct',env_factory,lambda _:{'arm':arm})
++    controller.effect('env_init',env.initialize,lambda _:{'arm':arm})
++    reset=controller.effect('reset',env.reset,lambda v:{'arm':arm,'state':v[0].to_dict(),'gamefile':v[1],
++                'candidate_native_reset':v[2]['candidate_native_reset']})
++    controller.effect('model_load',lambda:'FAKE MODEL LABEL',lambda _:{'arm':arm})
++    if mode!='missing_prepared':
++        prepared={'input_ids':[4,5],'attention_mask':[1,1],
++                  'kwargs':{'max_new_tokens':16,'do_sample':False},
++                  'generation_config':{'eos_token_id':[151645,151643],'pad_token_id':151643,'forced_eos_token_id':None}}
++        controller.journal.emit('prepared',prepared)
++        if mode=='duplicate_prepared':controller.journal.emit('prepared',prepared)
++    def fake_generation():
++        if mode=='interrupt':os._exit(7)
++        return None
++    controller.effect('generation',fake_generation,lambda _:{'shape':[1,4],'sequence':[4,5,99,151645],
++                                        'output_ids':[99,151645],'decoder_stop_reason':'NOT_OBSERVED'})
++    env.close()
++    return {'arm':arm,'initial_public':reset[0].to_dict(),'won':False,'steps':0,'termination':'FAKE_ONLY'}
++
++run_arm(output=config['output'],budget_fd=fd,case=config['case'],arm=config['arm'],
++        previous_initial=None,inputs=config['inputs'],seed=42,journal_class=ipc.Journal,
++        owner_class=ipc.EffectOwner,controller_class=ipc.Controller,pair_binding=config['binding'],
++        verify_materialized=verify,environment_class=Env,step_wrapper=lambda x:x,episode=fake_episode,
++        projection=None,source_worker=None,load_producer=None,parser=None,parse_value=None,
++        state_factory=None,expected_eos=[151645,151643],expected_pad=151643)
+--- original/test_candidate.py
++++ candidate/test_candidate.py
+@@ -0,0 +1,115 @@
++"""No-op integration with original file/IPC interfaces and isolated candidate stage."""
++import hashlib
++import json
++from pathlib import Path
++import select
++import socket
++import subprocess
++import sys
++import tempfile
++import time
++import unittest
++import global_owner
++import production_adapter
++from fixed_product_dev.arm_budget import StageBudgetChannel
++from fixed_product_dev.arm_stage import bound_paths
++
++HERE=Path(__file__).parent
++PORT=Path('/home/lizening/research-notes/agent-logs/20261116__CODEX__two-object-paired-eval__candidate/gate-live/eprime_ports.py')
++CASE='eval-two-pair-a'
++class ParentJournal:
++    def __init__(self):self.rows=[]
++    def emit(self,k,v):self.rows.append((k,v))
++
++def fixture(root):
++    source=root/'fake-inputs';source.mkdir()
++    content={'game':b'fictional game',
++      'routing':json.dumps({'task_type':'pick_two_obj_and_place'}).encode(),
++      'config':json.dumps({'dataset':{'data_path':'REPLACE_ONLY_WITH_THIS_PARENT_PRIVATE_ROOT','num_train_games':1},
++       'env':{'domain_randomization':False,'expert_type':'handcoded','goal_desc_human_anns_prob':0.0,'task_types':[6]},
++       'general':{'training_method':'dqn'},'rl':{'training':{'max_nb_steps_per_episode':50}}}).encode()}
++    inputs={}
++    for k,v in content.items():
++        p=source/(k+'.json');p.write_bytes(v);inputs[k]={'path':str(p),'sha256':hashlib.sha256(v).hexdigest()}
++    setup,verify,_=production_adapter.load_synthetic_bound(PORT,root,{'synthetic':{'family':'two','inputs':inputs}})
++    return inputs,setup,verify
++
++class CandidateTest(unittest.TestCase):
++    def setUp(self):
++        self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
++        self.root=Path(self.tmp.name).resolve();self.inputs,self.setup,self.verify=fixture(self.root)
++        self.owner=global_owner.GlobalOwner(self.root/'global')
++        self.binding=self.owner.materialize_pair(CASE,self.inputs,self.setup,self.verify)
++    def run_arm(self,mode='normal',first_state=None):
++        armroot=self.root/('worker-'+mode);armroot.mkdir()
++        work=armroot/'output';work.mkdir()
++        case={'case':CASE,'order':['P0','CANDIDATE'],'seed':42,'public_goal':'fictional',
++              'input_sha256':{k:v['sha256'] for k,v in self.inputs.items()}}
++        cfg={'output':str(work),'case':case,'arm':'P0','inputs':self.inputs,'binding':self.binding,
++             'port_source':str(PORT),'fixture_root':str(self.root)}
++        config=armroot/'config.json';config.write_text(json.dumps(cfg))
++        self.owner.initial=first_state
++        self.owner.begin_arm(CASE,'P0',work/'worker_events.jsonl',self.inputs,self.verify)
++        parent,child=socket.socketpair();parent.setblocking(False)
++        proc=subprocess.Popen([sys.executable,'-I','-B',str(HERE/'fake_worker.py'),str(config),str(child.fileno()),mode],
++                 pass_fds=(child.fileno(),),stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
++        child.close();stage=StageBudgetChannel('EVAL',parent,ParentJournal(),global_owner=self.owner,case=CASE,arm='P0')
++        error=None;deadline=time.monotonic()+10
++        try:
++            while time.monotonic()<deadline:
++                readable,writable,_=select.select([parent],[parent] if stage.pending_ack else [],[],0.1)
++                if writable:stage.write_ack()
++                if readable:
++                    data=parent.recv(8192)
++                    if not data:
++                        stage.eof();break
++                    stage.receive(data)
++            else:raise RuntimeError('synthetic test deadline')
++        except BaseException as exc:
++            error=exc
++        finally:
++            parent.close()
++            try:_,stderr=proc.communicate(timeout=8)
++            except subprocess.TimeoutExpired:
++                proc.terminate();_,stderr=proc.communicate(timeout=3)
++        return proc.returncode,stage,error,stderr,work
++    def test_shared_paths_real_stage_protocol_and_token_full_debit(self):
++        self.assertEqual(self.owner.counts['materialize'],1)
++        paths=bound_paths(self.binding)
++        self.assertEqual(str(paths[0]),self.binding['game'])
++        rc,stage,error,stderr,work=self.run_arm()
++        self.assertIsNone(error,stderr.decode());self.assertEqual(rc,0,stderr.decode())
++        self.assertEqual(stage.finished,'COMPLETED')
++        self.assertEqual(self.owner.tokens,{'input':4096,'output':16})
++        self.assertEqual(self.owner.counts['generation'],1)
++        self.assertTrue((work/'worker_events.jsonl').exists())
++        with self.assertRaises(global_owner.Stop):self.owner.close_arm_after_cleanup()
++        self.assertTrue(self.owner.failed)
++        with self.assertRaises(global_owner.Stop):self.owner.complete()
++    def test_missing_and_duplicate_prepared_fail_before_reservation(self):
++        for mode in ('missing_prepared','duplicate_prepared'):
++            with self.subTest(mode=mode),tempfile.TemporaryDirectory() as t:
++                root=Path(t).resolve();inputs,setup,verify=fixture(root);owner=global_owner.GlobalOwner(root/'global')
++                binding=owner.materialize_pair(CASE,inputs,setup,verify)
++                self.root,self.inputs,self.setup,self.verify,self.owner,self.binding=root,inputs,setup,verify,owner,binding
++                rc,stage,error,stderr,work=self.run_arm(mode)
++                self.assertIsNotNone(error);self.assertTrue(owner.failed)
++                self.assertEqual(owner.counts['generation'],0);self.assertEqual(owner.tokens,{'input':0,'output':0})
++    def test_generation_ack_then_interrupt_not_refunded(self):
++        rc,stage,error,stderr,work=self.run_arm('interrupt')
++        self.assertIsNotNone(error);self.assertTrue(self.owner.failed)
++        self.assertEqual(self.owner.counts['generation'],1)
++        self.assertEqual(self.owner.tokens,{'input':4096,'output':16})
++        self.assertEqual(self.owner.active['operation'],'generation')
++    def test_reset_claim_mismatch_denies_model_admission(self):
++        rc,stage,error,stderr,work=self.run_arm(first_state={'observation':'different'})
++        self.assertIsNotNone(error);self.assertTrue(self.owner.failed)
++        self.assertEqual(self.owner.counts['reset'],1);self.assertEqual(self.owner.counts['model_load'],0)
++    def test_pair_input_hash_drift_rejected(self):
++        Path(self.binding['game']).write_bytes(b'tampered fake')
++        with self.assertRaises(ValueError):bound_paths(self.binding)
++    def test_actual_worker_main_stays_hard_blocked(self):
++        p=subprocess.run([sys.executable,'-I','-B',str(HERE/'fixed_product_dev'/'worker.py')],capture_output=True,text=True)
++        self.assertNotEqual(p.returncode,0);self.assertIn('RESEARCH_HOLD',p.stderr)
++
++if __name__=='__main__':unittest.main(verbosity=2)

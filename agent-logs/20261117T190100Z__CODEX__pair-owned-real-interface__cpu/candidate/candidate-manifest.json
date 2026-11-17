@@ -1,0 +1,29 @@
+{
+  "caps": {
+    "env_construct": 8,
+    "env_init": 8,
+    "generation": 400,
+    "input_tokens_reserved": 1638400,
+    "materialize": 4,
+    "model_load": 8,
+    "output_tokens_reserved": 6400,
+    "reset": 8,
+    "step": 400
+  },
+  "cleanup_transition": "UNIMPLEMENTED_FAIL_CLOSED",
+  "eos_candidate_not_independently_accepted": true,
+  "eos_candidate_reference_sha256": "d1acf6f80086576dcfc4cbad257e47e9e7eef3a79672bd047221f28b46e4fec1",
+  "global_scheduler": "UNIMPLEMENTED",
+  "loaded_actual_runtime_eos_pad_forced_eos": "NOT_OBSERVED",
+  "per_arm_input_binding": "pair owned absolute paths and sha256, real port pre/post verify",
+  "schema": "PAIR_OWNED_INTERFACE_CANDIDATE_V1",
+  "scientific_schedule": [
+    "eval-two-pair-a:P0,CANDIDATE",
+    "eval-two-pair-b:CANDIDATE,P0",
+    "eval-two-pair-c:P0,CANDIDATE",
+    "eval-two-pair-d:CANDIDATE,P0"
+  ],
+  "scientific_worker_main": "UNCONDITIONAL_HOLD",
+  "status": "HOLD_NOT_LAUNCHABLE",
+  "token_policy": "4096 input and 16 output conservatively reserved per generation, no refunds; prepared+receipt child claims, not trusted physical evidence"
+}
