@@ -1,0 +1,168 @@
+--- source-episode/bridge.py
++++ production-projection/bridge.py
+@@ -9,7 +9,7 @@
+ 
+ SHA_RE=re.compile(r'^[0-9a-f]{64}$')
+ OPS=('env_construct','env_init','reset','model_load','generation','step')
+-ARM_CAPS={arm:{op:1 for op in OPS} for arm in ('A','B')}
++ARM_CAPS={arm:{op:(2 if op in ('generation','step') else 1) for op in OPS} for arm in ('A','B')}
+ class Stop(RuntimeError): pass
+ 
+ def canon(x): return json.dumps(x,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
+--- source-episode/pair_synthetic.py
++++ production-projection/pair_synthetic.py
+@@ -11,7 +11,7 @@
+ 
+ def run_pair(root,inputs,setup,verify,mode='normal',hook=None):
+     root=Path(root);root.mkdir(mode=0o700,parents=True,exist_ok=False)
+-    caps={'materialize':1, **{op:2 for op in bridge.OPS}}
++    caps={'materialize':1, **{op:(4 if op in ('generation','step') else 2) for op in bridge.OPS}}
+     owner=bridge.Budget(root/'owner',caps)
+     pairroot=root/'pair';pairroot.mkdir(mode=0o700)
+     proc=None
+--- source-episode/fake_arm.py
++++ production-projection/fake_arm.py
+@@ -24,7 +24,17 @@
+  str(SOURCE_ROOT/'models/policy.py'):'afbb9544e2ea0c2aa73d3f7dcfbf7e366f1daf6eb95fd4e89fefe0c913dda469',
+  str(SOURCE_ROOT/'models/qwen.py'):'ee3a5a599a8dece7b206b2aa675004723fa343bcbd8844063d00a7af154140eb',
+  str(SOURCE_ROOT/'env/__init__.py'):'6a4a3de8e04902930dff5a78aaaa27b546d335d4d15d717908561fa7b6e6a831',
+- str(SOURCE_ROOT/'env/base.py'):'a3ae633aa79c8f80a70629fd398b880ea9c1807e7c219717b98e518b12496abb'}
++ str(SOURCE_ROOT/'env/base.py'):'a3ae633aa79c8f80a70629fd398b880ea9c1807e7c219717b98e518b12496abb',
++ str(SOURCE_ROOT/'self_improvement/__init__.py'):'84ba2265d10e0d1bec7c1ea8da5ef4d7e6ee2d1272a04ad63bb1b2f00ca8b272',
++ str(SOURCE_ROOT/'self_improvement/si_p3/__init__.py'):'16d722a95f36a7d6a36dcce9757b940b4310960eab7f990e32bf61dc2cbb87be',
++ str(SOURCE_ROOT/'self_improvement/si_p3/contract.py'):'2d7b05d5c230cb45c2ad90c7507c11a5c76ce52f7335548c46a48d78e8842239',
++ str(SOURCE_ROOT/'recovery/__init__.py'):'7acbbbda9e57a74450898d3764135724006fb747f5e2419b32079ba994805352',
++ str(SOURCE_ROOT/'recovery/corpus.py'):'14d8ee0f4059f43e76cd94f6511f4ad1e40b4c97377e9bce987d48b59e66a6a1',
++ str(SOURCE_ROOT/'recovery/fixed.py'):'2f8e1c6366e873aed0f804d021072bd7d7efc32fa109483a7e47dfbcefdd177f',
++ str(SOURCE_ROOT/'recovery/pilot.py'):'f60af87ec1a5e762afaefd26c048a103de7bc538cedff3afc4281a3a613bbd72',
++ str(SOURCE_ROOT/'recovery/two_stage.py'):'7fbdfa36268083a167ff1ce04f8dcb33b20024ee115ed65424e1c257b9329629',
++ str(SOURCE_ROOT/'sft/__init__.py'):'7e4d035251916371c0129102558ab9f242ae7afe75ed5f69dcdeb4b1fafe4877',
++ str(SOURCE_ROOT/'sft/protocol.py'):'cb9a8ee23d1208064348810ef3580773ba14403bfaac6a4e7f4a43c5540178a8'}
+ raw={}
+ for path,expected in BINDINGS.items():
+     data=Path(path).read_bytes()
+@@ -41,30 +51,38 @@
+ sys.path.insert(0,str(SOURCE_ROOT))
+ from models.protocol_stability import parse_p2_selection
+ import models.protocol_stability as parser_module
++from self_improvement.si_p3.contract import PublicState, projection
++import self_improvement.si_p3.contract as contract_module
++if Path(contract_module.__file__).resolve() != (SOURCE_ROOT/'self_improvement/si_p3/contract.py').resolve():
++    raise SystemExit('unexpected production contract origin')
+ if Path(parser_module.__file__).resolve() != (SOURCE_ROOT/'models/protocol_stability.py').resolve():
+     raise SystemExit('unexpected parser origin')
+ if 'torch' in sys.modules or 'transformers' in sys.modules:raise SystemExit('unexpected real runtime import')
++for name,module in tuple(sys.modules.items()):
++    if not (name=='models' or name.startswith(('models.','env.','recovery.','sft.','self_improvement.')) or name in ('env','recovery','sft','self_improvement')):continue
++    path=getattr(module,'__file__',None)
++    if path is None:continue
++    actual=str(Path(path).resolve())
++    if actual not in BINDINGS or hashlib.sha256(Path(actual).read_bytes()).hexdigest()!=BINDINGS[actual]:
++        raise SystemExit('unbound production import: '+name)
+ 
+ fd=int(sys.argv[1]);log=sys.argv[2];arm=sys.argv[3];paths=json.loads(sys.argv[4]);mode=sys.argv[5]
+ previous=json.loads(sys.argv[6])
+ journal=ipc.Journal(log,1024*1024)
+-owner=ipc.EffectOwner(fd,journal,{op:1 for op in ('env_construct','env_init','reset','model_load','generation','step')})
++owner=ipc.EffectOwner(fd,journal,{'env_construct':1,'env_init':1,'reset':1,'model_load':1,'generation':2,'step':2})
+ controller=ipc.Controller(owner)
+ journal.emit('synthetic_input_paths',{'paths':paths})
+-journal.emit('synthetic_source_bindings',{'hashes':BINDINGS,'scope':'original functions, fake model/environment edges'})
++journal.emit('synthetic_source_bindings',{'hashes':BINDINGS,'projection_module':projection.__module__,
++  'public_state_module':PublicState.__module__,'parser_module':parse_p2_selection.__module__,
++  'scope':'original functions, fake model/environment edges'})
+ 
+-class FakeState:
+-    def __init__(self,observation):
+-        self.task_id='synthetic';self.family='synthetic';self.goal='fictional goal';self.observation=observation
+-        self.valid_actions=('fictional action',);self.done=False;self.reward=0;self.truncated=False;self.ended=False
+-    def to_dict(self):
+-        return {'task_id':self.task_id,'family':self.family,'goal':self.goal,'observation':self.observation,
+-                'valid_actions':list(self.valid_actions),'done':self.done,'reward':self.reward,'truncated':self.truncated}
+ 
+ class FakeEnvironment:
++    def __init__(self):self.steps=0
+     def initialize(self):return {'synthetic':True}
+     def reset(self):
+-        state=FakeState('B differs' if mode=='mismatch' and arm=='B' else 'same fake observation')
++        state=PublicState('synthetic','synthetic','fictional goal',
++          'B differs' if mode=='mismatch' and arm=='B' else 'same fake observation',('fictional action',))
+         native={'won_batch':[False],'won_batch_type':'tuple' if mode=='tuple' else 'list'}
+         if arm=='B':
+             if mode=='bad_true':native['won_batch']=[True]
+@@ -76,9 +94,12 @@
+         return state,paths[0],{'candidate_native_reset':native}
+     def step(self,action):
+         if action!='fictional action':raise ValueError('unexpected fictional action')
+-        return types.SimpleNamespace(observation='fictional completed',reward=1,done=True,truncated=False,
+-          valid_actions=('fictional action',),metadata={'alfworld_info':{'won':[True]},
+-          'candidate_native_done_batch':[True],'candidate_native_won_batch':[True]})
++        self.steps+=1
++        done=self.steps==2
++        return types.SimpleNamespace(observation='fictional completed' if done else 'first fictional observation',
++          reward=1 if done else 0,done=done,truncated=False,valid_actions=('fictional action',),
++          metadata={'alfworld_info':{'won':[done]},'candidate_native_done_batch':[done],
++                    'candidate_native_won_batch':[done]})
+     def close(self):pass
+ 
+ class FakeRow:
+@@ -117,9 +138,10 @@
+ def load_producer(_):
+     if mode=='interrupt' and arm=='A':os._exit(7)
+     return FakeProducer()
+-def projection(state,history):return {'public_prompt':'fictional prompt','action_map':{'A000':'fictional action'}}
+ def parse(raw,actions):return parse_p2_selection(raw,actions,reflection_required=False)
+-def state_factory(old,after):raise AssertionError('not used: fake terminal occurs on first step')
++def state_factory(old,after):
++    return PublicState(old.task_id,old.family,old.goal,after['observation'],tuple(after['valid_actions']),
++                       after['done'],after['reward'],after['truncated'])
+ try:
+     result=episode.run_episode(arm=arm,controller=controller,env_factory=FakeEnvironment,
+        load_producer=load_producer,projection=projection,source_worker=source,parser=parse,
+--- source-episode/test_pair.py
++++ production-projection/test_pair.py
+@@ -32,7 +32,7 @@
+         return [json.loads(line) for line in (self.output/'owner'/'parent-ledger.jsonl').read_text().splitlines()]
+     def test_one_setup_two_fake_arms_same_paths_and_state(self):
+         owner=pair_synthetic.run_pair(self.output,self.inputs,self.setup,self.verify)
+-        self.assertEqual(owner.counts,{'materialize':1, **{op:2 for op in bridge.OPS}})
++        self.assertEqual(owner.counts,{'materialize':1, **{op:(4 if op in ('generation','step') else 2) for op in bridge.OPS}})
+         self.assertEqual(owner.finished,['A','B']);self.assertEqual(owner.closed,{'A','B'})
+         paths=[]
+         for arm in ('A','B'):
+@@ -41,15 +41,26 @@
+             self.assertEqual(events[0]['kind'],'synthetic_input_paths')
+             self.assertIn('reset_returned',[e['kind'] for e in events])
+             kinds=[e['kind'] for e in events]
++            bindings=next(e['payload'] for e in events if e['kind']=='synthetic_source_bindings')
++            self.assertEqual(bindings['projection_module'],'self_improvement.si_p3.contract')
++            self.assertEqual(bindings['public_state_module'],'self_improvement.si_p3.contract')
++            self.assertEqual(bindings['parser_module'],'models.protocol_stability')
+             for name in ('synthetic_source_bindings','prepared','generation_returned','dev_parser_returned','step_returned','fixed_product_episode_outcome_known','synthetic_observed_episode_returned'):
+                 self.assertIn(name,kinds)
+             selection=next(e['payload']['result'] for e in events if e['kind']=='dev_parser_returned')
+             self.assertEqual(selection['action_id'],'A000')
+             self.assertEqual(selection['selection_status'],'selected')
+             result=next(e['payload']['result'] for e in events if e['kind']=='synthetic_observed_episode_returned')
+-            self.assertEqual((result['won'],result['steps'],result['termination']),(True,1,'TERMINAL'))
++            self.assertEqual((result['won'],result['steps'],result['termination']),(True,2,'TERMINAL'))
+             generated=next(e['payload']['evidence'] for e in events if e['kind']=='generation_returned')
+             self.assertEqual(generated['output_ids'],[99,151645])
++            prepared=[e['payload']['public'] for e in events if e['kind']=='prepared']
++            self.assertEqual(len(prepared),2)
++            self.assertEqual(prepared[0]['action_map'],{'A000':'fictional action'})
++            self.assertIn('[A000] fictional action',prepared[0]['public_prompt'])
++            self.assertEqual(prepared[0]['recent_history'],[])
++            self.assertEqual(prepared[1]['recent_history'],[['same fake observation','fictional action']])
++            self.assertEqual(prepared[1]['observation'],'first fictional observation')
+         self.assertEqual(paths[0],paths[1]);self.assertNotEqual(self.output/'arm-A',self.output/'arm-B')
+         rows=self.rows();events=[r['event'] for r in rows]
+         self.assertEqual(events.count('public_claim_matched'),2)
+--- source-episode/synthetic_evidence.py
++++ production-projection/synthetic_evidence.py
+@@ -1,4 +1,4 @@
+-"""Persist one fictional example. Never use with real task or model inputs."""
++"""Retain one fictional two-step pair; never use real task/model assets."""
+ import json
+ from pathlib import Path
+ from test_pair import fixture
