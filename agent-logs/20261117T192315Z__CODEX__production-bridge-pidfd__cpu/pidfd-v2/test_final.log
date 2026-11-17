@@ -1,0 +1,17 @@
+test_actual_pidfd_signal_and_reap (test_owner.Tests) ... EVIDENCE {"case": "actual_pidfd", "child_pid": 1688419, "durable": true, "journal": "test-evidence/fake-4p83azut/owner/owner.jsonl", "reap_returncode": -15, "state": "REAPED"}
+ok
+test_open_keyboardinterrupt_propagates_and_retains (test_owner.Tests) ... EVIDENCE {"case": "open_interrupt", "child_pid": 1688420, "durable": true, "journal": "test-evidence/fake-17g7hci5/owner/owner.jsonl", "reap_returncode": 0, "state": "UNKNOWN"}
+ok
+test_open_runtimeerror_retains_child (test_owner.Tests) ... EVIDENCE {"case": "open_runtimeerror", "child_pid": 1688421, "durable": true, "journal": "test-evidence/fake-4t71x_op/owner/owner.jsonl", "reap_returncode": 0, "state": "UNKNOWN"}
+ok
+test_send_runtimeerror_closes_fd_and_retains (test_owner.Tests) ... EVIDENCE {"case": "send_runtimeerror", "child_pid": 1688422, "durable": true, "journal": "test-evidence/fake-o3s6p1oz/owner/owner.jsonl", "reap_returncode": 0, "state": "UNKNOWN"}
+ok
+test_sigint_before_popen_return_is_deferred_until_owned (test_owner.Tests) ... EVIDENCE {"case": "spawn_sigint", "child_pid": 1688423, "durable": true, "journal": "test-evidence/fake-x4q1w2lx/owner/owner.jsonl", "reap_returncode": 0, "state": "UNKNOWN"}
+ok
+test_sigint_propagates_after_open_closes_fd_retains (test_owner.Tests) ... EVIDENCE {"case": "send_sigint", "child_pid": 1688424, "durable": true, "journal": "test-evidence/fake-f3l9i3w2/owner/owner.jsonl", "reap_returncode": 0, "state": "UNKNOWN"}
+ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 3.383s
+
+OK

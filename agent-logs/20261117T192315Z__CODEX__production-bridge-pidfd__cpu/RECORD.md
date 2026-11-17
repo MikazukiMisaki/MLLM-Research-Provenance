@@ -1,0 +1,3 @@
+# Fictional production bridge and direct-child ownership candidates
+
+CPU-only synthetic boundary work. Independent review reports that a fictional CLI connects the held worker configuration reader, budget IPC and real source episode; actual production worker remains disabled and budget sufficiency remains unverified. The static budget declaration admits zero increments and is not evidence of sufficiency. A separate pidfd component tests direct owned-child lifecycle only under explicit assumptions; no host/descendant/GPU conclusion follows. All prior holds remain in effect. No model, GPU, real task, environment or scientific run occurred.

@@ -1,0 +1,17 @@
+# Persistent direct-child owner: synthetic revision, HOLD
+
+This isolated revision responds to `20261118__REVIEW__pidfd__hRXkEx/REVIEW.md`; the prior candidate and review are untouched. Six tests use only own finite-lived fictional children; no model, GPU, environment or task was used. **This is not integrated, production-ready, or clearance.**
+
+`Owner` is deliberately retained by its caller. Immediately after `Popen` returns, the returned object is assigned to `owner.child` before pidfd open or signaling; failures after that retain it. For the tested dedicated single-threaded process with default `SIGINT`/`SIGCHLD` and no other reaper, SIGINT during Popen is deferred through a temporary handler until the handle has been stored, then the usual KeyboardInterrupt is re-raised. Exceptions and interrupts in later pidfd operations produce a fsynced UNKNOWN claim where possible and retain the child reference; `KeyboardInterrupt` and `SystemExit` propagate. A failed UNKNOWN journal write marks the in-memory durability flag false rather than claiming it was saved. Natural exit/reap is recorded separately and does not rewrite the prior UNKNOWN decision.
+
+The prior exact `checked_pidfd_open` code remains copied unmodified. It checks the local x86_64 syscall header before fallback, and the declared no-reaper conditions remain essential. The candidate checks `/proc/self/fdinfo/<fd>` Pid equals the child's PID and verifies waitability via `waitid(P_PIDFD,...WNOWAIT)`, then signals only through pidfd. An acquired descriptor is closed in `finally`, following the v3 guardian ownership lesson. Descriptor close failure is UNKNOWN, never a successful cleanup claim.
+
+Authentic pinned-Python run: 6 tests passed, exit 0. Tests injected RuntimeError and KeyboardInterrupt during open; RuntimeError and actual SIGINT after pidfd open; and actual SIGINT before Popen returns to the owner. UNKNOWN state and child handles were retained, interrupts propagated, and two post-open pidfds were independently confirmed closed via EBADF. Each affected fake child then exited naturally and was waited for; JSONL owner journals from the final run are identified in `test_final_v2.log`. A separate normal case sent SIGTERM by pidfd and reaped that direct child with return -15.
+
+The assumptions do not cover Popen raising internally before returning a handle, SIGKILL or owner death, arbitrary interpreter-level asynchronous exceptions between bytecodes, other unobserved reapers, process descendants, host PID namespaces or GPU cleanup. The deferred handler is specific to default SIGINT, not an assertion that all signals or repeated interrupts are preserved. No durable record can be assured after filesystem failure or process death; the durability flag exposes recording exceptions in surviving owners. Further fault injection, review and controlled integration remain necessary. Positive direct-child reap does not release another arm.
+
+```
+/home/lizening/miniconda3/envs/alfworld-self-improve/bin/python -I -B -c 'import sys,unittest;sys.path.insert(0,".");unittest.main(module="test_owner",verbosity=2)'
+```
+
+`owner.py` SHA256 `d3f4805d35d451b533b73831236e32ecfdea3e4177701d64b04756f0de887fbe`; `prior_candidate.py` SHA256 `4ba5ac6e9926f2d2c0fd20e3164e140fe28833773d46a5a00c9f896e6689f40a`; `test_owner.py` SHA256 `6d769d26d4d4033134c7b9aaf98f077afe07ba5d12c0f00a46ec182b25f4b996`; `test_final_v2.log` SHA256 `aee31e8e08bbc00a896be7f932a3ae30e3e5160f0b87e25eceea073f6f8d2ab6`. Earlier `test.log`/`test_final.log` and evidence directories are retained.

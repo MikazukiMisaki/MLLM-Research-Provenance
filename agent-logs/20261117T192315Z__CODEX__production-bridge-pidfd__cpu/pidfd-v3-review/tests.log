@@ -1,0 +1,9 @@
+test_parent_directory_then_owner_directory_synced (test_directory_sync.DirectorySyncTests) ... ok
+test_parent_fsync_failure_prevents_owner_and_spawn (test_directory_sync.DirectorySyncTests) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.005s
+
+OK
+EVIDENCE observed fsync order parent directory, owner directory, journal
+EVIDENCE parent fsync failure propagated; no journal or child; directory retained
