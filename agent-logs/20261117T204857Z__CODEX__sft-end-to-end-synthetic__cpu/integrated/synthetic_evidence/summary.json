@@ -1,0 +1,65 @@
+{
+  "interrupt_after_checkpoint": {
+    "artifact_sha256": "c7df47d8c757af1b3157e5ff256bb0ba67a6fd18c1f94b86e3bc49d52201dba3",
+    "disk_receipt": {
+      "format": "safetensors",
+      "keys": [
+        "fictional.weight"
+      ],
+      "scientific_use": "HOLD",
+      "scope": "FICTIONAL_CPU_ONLY_NOT_LORA_NOT_SCIENCE",
+      "sha256": "c7df47d8c757af1b3157e5ff256bb0ba67a6fd18c1f94b86e3bc49d52201dba3",
+      "status": "RELOAD_CHECKED_CALLBACK_RETURN_REQUIRED",
+      "step": 16
+    },
+    "result": {
+      "active": [
+        162,
+        "checkpoint_final"
+      ],
+      "counts": {
+        "backward": 64,
+        "checkpoint_final": 1,
+        "forward": 64,
+        "optimizer_step": 16,
+        "set_train_mode": 1,
+        "validate_model": 1,
+        "zero_grad": 16
+      },
+      "outcome": "UNKNOWN",
+      "reason": "Stop: EOF before completed finish",
+      "returncode": 24,
+      "scientific_use": "HOLD"
+    }
+  },
+  "normal": {
+    "artifact_sha256": "b92828dc420b406ca14818d7f10cdaddc5d2455f5e4e7fee35ac71bd47dd60f0",
+    "disk_receipt": {
+      "format": "safetensors",
+      "keys": [
+        "fictional.weight"
+      ],
+      "scientific_use": "HOLD",
+      "scope": "FICTIONAL_CPU_ONLY_NOT_LORA_NOT_SCIENCE",
+      "sha256": "b92828dc420b406ca14818d7f10cdaddc5d2455f5e4e7fee35ac71bd47dd60f0",
+      "status": "RELOAD_CHECKED_CALLBACK_RETURN_REQUIRED",
+      "step": 16
+    },
+    "result": {
+      "active": null,
+      "counts": {
+        "backward": 64,
+        "checkpoint_final": 1,
+        "forward": 64,
+        "optimizer_step": 16,
+        "set_train_mode": 1,
+        "validate_model": 1,
+        "zero_grad": 16
+      },
+      "outcome": "FICTIONAL_COMPLETE",
+      "reason": null,
+      "returncode": 0,
+      "scientific_use": "HOLD"
+    }
+  }
+}

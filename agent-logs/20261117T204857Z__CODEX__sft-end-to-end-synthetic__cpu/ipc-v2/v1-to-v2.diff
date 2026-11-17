@@ -1,0 +1,140 @@
+--- v1/parent_bridge.py
++++ v2/parent_bridge.py
+@@ -5,6 +5,7 @@
+ CAPS={'validate_model':1,'set_train_mode':1,'zero_grad':16,'forward':64,'backward':64,'optimizer_step':16,'checkpoint_final':1}
+ ORDER=['validate_model','set_train_mode']+sum((['zero_grad']+['forward','backward']*4+['optimizer_step'] for _ in range(16)),[])+['checkpoint_final']
+ class Stop(RuntimeError):pass
++class LedgerCreationUnknown(Stop):pass
+ def canonical(x):return json.dumps(x,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
+ def pairs(items):
+  d={}
+@@ -13,7 +14,26 @@
+   d[key]=value
+  return d
+ class Ledger:
+- def __init__(self,path):self.fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW|os.O_CLOEXEC,0o600);self.prev='0'*64;self.seq=0
++ def __init__(self,path):
++  self.fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW|os.O_CLOEXEC,0o600);self.prev='0'*64;self.seq=0
++  try:
++   os.fsync(self.fd)
++   directory_fd=os.open(Path(path).parent,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW|os.O_CLOEXEC)
++   try:os.fsync(directory_fd)
++   finally:os.close(directory_fd)
++  except BaseException as error:
++   # Creation durability is unproved; a marker is best effort, not a guarantee.
++   try:
++    row={'seq':0,'previous':'0'*64,'kind':'creation_unknown','payload':{'error_type':type(error).__name__,'no_execution':True}}
++    row['digest']=hashlib.sha256(canonical(row)).hexdigest();view=memoryview(canonical(row)+b'\n')
++    while view:
++     n=os.write(self.fd,view)
++     if n<=0:raise OSError('short unknown marker')
++     view=view[n:]
++    os.fsync(self.fd)
++   except BaseException:pass
++   os.close(self.fd)
++   raise LedgerCreationUnknown('ledger creation durability unknown; no child started') from error
+  def append(self,kind,payload):
+   row={'seq':self.seq,'previous':self.prev,'kind':kind,'payload':payload};row['digest']=hashlib.sha256(canonical(row)).hexdigest();data=canonical(row)+b'\n';view=memoryview(data)
+   while view:
+@@ -23,17 +43,31 @@
+   os.fsync(self.fd);self.prev=row['digest'];self.seq+=1
+  def close(self):os.close(self.fd)
+ def receipt_check(path,operation,seq,receipt,kind):
++ if type(operation) is not str or operation not in CAPS or type(seq) is not int or seq<0 or kind not in ('returned','unknown') or type(receipt) is not str or re.fullmatch('[0-9a-f]{64}',receipt) is None:raise Stop('receipt argument shape')
+  data=path.read_bytes()
+  if not data or not data.endswith(b'\n'):raise Stop('partial child ledger')
+  lines=data.splitlines(keepends=True)
+  if hashlib.sha256(lines[-1]).hexdigest()!=receipt:raise Stop('receipt hash mismatch')
+- prev='0'*64;rows=[]
++ prev='0'*64;rows=[];keys={'schema','seq','previous','monotonic_ns','kind','payload','digest'}
+  for idx,line in enumerate(lines):
+-  row=json.loads(line,object_pairs_hook=pairs);without=dict(row);digest=without.pop('digest',None)
+-  if row.get('seq')!=idx or row.get('previous')!=prev or hashlib.sha256(canonical(without)).hexdigest()!=digest:raise Stop('child chain mismatch')
++  row=json.loads(line,object_pairs_hook=pairs)
++  if type(row) is not dict or set(row)!=keys or row['schema']!='SI_STAGE_WORKER_V1' or type(row['seq']) is not int or row['seq']!=idx or type(row['monotonic_ns']) is not int or row['monotonic_ns']<0 or type(row['kind']) is not str or type(row['payload']) is not dict:raise Stop('child event schema')
++  if 'owner_seq' in row['payload'] and (type(row['payload']['owner_seq']) is not int or row['payload']['owner_seq']<0):raise Stop('child owner seq type')
++  for op in CAPS:
++   payload=row['payload']
++   if row['kind']==op+'_started' and (set(payload)!={'request','owner_seq','effect_if_unreturned'} or type(payload.get('owner_seq')) is not int or type(payload.get('request')) is not dict or payload.get('effect_if_unreturned')!='UNKNOWN'):raise Stop('child started schema')
++   if row['kind']==op+'_returned' and (set(payload)!={'owner_seq','evidence'} or type(payload.get('owner_seq')) is not int or type(payload.get('evidence')) is not dict):raise Stop('child return schema')
++   if row['kind']==op+'_unknown' and (set(payload)!={'owner_seq','effect'} or type(payload.get('owner_seq')) is not int or payload.get('effect')!='UNKNOWN'):raise Stop('child unknown schema')
++  without=dict(row);digest=without.pop('digest')
++  if type(row['previous']) is not str or row['previous']!=prev or type(digest) is not str or re.fullmatch('[0-9a-f]{64}',digest) is None or hashlib.sha256(canonical(without)).hexdigest()!=digest:raise Stop('child chain mismatch')
+   rows.append(row);prev=digest
+  last=rows[-1];matches=[x for x in rows if x['kind']==operation+'_started' and x['payload'].get('owner_seq')==seq]
+- if len(matches)!=1 or last['kind']!=operation+'_'+kind or last['payload'].get('owner_seq')!=seq:raise Stop('child receipt operation mismatch')
++ if len(matches)!=1:raise Stop('child start mismatch')
++ started=matches[0]['payload'];payload=last['payload']
++ if set(started)!={'request','owner_seq','effect_if_unreturned'} or type(started['request']) is not dict or started['effect_if_unreturned']!='UNKNOWN':raise Stop('child started schema')
++ if last['kind']!=operation+'_'+kind or type(payload.get('owner_seq')) is not int or payload['owner_seq']!=seq:raise Stop('child receipt operation mismatch')
++ if kind=='returned' and (set(payload)!={'owner_seq','evidence'} or type(payload['evidence']) is not dict):raise Stop('child return schema')
++ if kind=='unknown' and (set(payload)!={'owner_seq','effect'} or payload['effect']!='UNKNOWN'):raise Stop('child unknown schema')
+  return {'receipt_sha256':receipt,'child_event':last['kind'],'child_claim_only':True}
+ def run_fake(root,mode):
+  if mode not in ('normal','interrupt_after_first_step'):raise Stop('fiction only')
+@@ -55,17 +89,17 @@
+     if type(msg) is not dict or type(msg.get('seq')) is not int:raise Stop('frame shape')
+     kind=msg.get('kind');n=msg['seq']
+     if kind=='reserve':
+-     if set(msg)!={'kind','seq','operation'} or active is not None or n!=seq or seq>=len(ORDER) or msg['operation']!=ORDER[seq]:raise Stop('reserve sequence')
++     if set(msg)!={'kind','seq','operation'} or active is not None or n!=seq or seq>=len(ORDER) or type(msg['operation']) is not str or msg['operation']!=ORDER[seq]:raise Stop('reserve sequence')
+      op=msg['operation']
+      if counts[op]>=CAPS[op]:raise Stop('cap')
+      # Durable reservation before ACK; no refund on later EOF/ACK failure.
+      ledger.append('reserve',{'seq':seq,'operation':op,'cost':'STARTED_OR_UNKNOWN'});counts[op]+=1;active=(seq,op)
+     elif kind in ('returned','unknown'):
+-     if set(msg)!={'kind','seq','operation','receipt_sha256'} or active!=(n,msg.get('operation')) or not re.fullmatch('[0-9a-f]{64}',msg.get('receipt_sha256','')):raise Stop('receipt sequence')
++     if set(msg)!={'kind','seq','operation','receipt_sha256'} or active!=(n,msg.get('operation')) or type(msg.get('operation')) is not str or type(msg.get('receipt_sha256')) is not str or re.fullmatch('[0-9a-f]{64}',msg['receipt_sha256']) is None:raise Stop('receipt sequence')
+      bound=receipt_check(root/'worker_events.jsonl',active[1],n,msg['receipt_sha256'],kind)
+      ledger.append(kind,{'seq':n,'operation':active[1],**bound});active=None;seq+=1
+     elif kind=='finished':
+-     if set(msg)!={'kind','seq','status'} or active is not None or n!=seq or seq!=len(ORDER) or counts!=CAPS or msg['status']!='COMPLETED':raise Stop('incomplete finish')
++     if set(msg)!={'kind','seq','status'} or active is not None or n!=seq or seq!=len(ORDER) or counts!=CAPS or type(msg['status']) is not str or msg['status']!='COMPLETED':raise Stop('incomplete finish')
+      ledger.append('finished',{'seq':seq,'scope':'CHILD_CLAIMS_ONLY'});finished=True
+     else:raise Stop('unknown frame kind')
+     # sendall handles partial writes. ACK errors leave prior reservations charged.
+--- v1/test_parent_bridge.py
++++ v2/test_parent_bridge.py
+@@ -1,4 +1,5 @@
+-import json,tempfile,unittest
++import hashlib,json,os,stat,tempfile,unittest
++from unittest.mock import patch
+ from pathlib import Path
+ import parent_bridge as p
+ class BridgeTest(unittest.TestCase):
+@@ -16,4 +17,35 @@
+   self.assertEqual(result['counts']['optimizer_step'],1);self.assertEqual(result['counts']['checkpoint_final'],0)
+   self.assertTrue(any(x['kind']=='stopped_unknown' and x['payload']['no_refund'] for x in rows));self.assertFalse(any(x['kind']=='finished' for x in rows))
+   with self.assertRaises(RuntimeError):p.dispatch_real()
++ def test_child_seq_and_owner_seq_reject_bool_and_float(self):
++  def make_rows(seq_override=None,owner_override=None):
++   previous='0'*64;raw=[]
++   for index,kind in enumerate(('validate_model_started','validate_model_returned')):
++    owner=0 if owner_override is None else owner_override
++    payload={'request':{},'owner_seq':owner,'effect_if_unreturned':'UNKNOWN'} if index==0 else {'owner_seq':owner,'evidence':{'returned':True}}
++    row={'schema':'SI_STAGE_WORKER_V1','seq':index if seq_override is None or index!=0 else seq_override,
++         'previous':previous,'monotonic_ns':1,'kind':kind,'payload':payload}
++    row['digest']=hashlib.sha256(p.canonical(row)).hexdigest();previous=row['digest'];raw.append(p.canonical(row)+b'\n')
++   path=self.root/'synthetic-child.jsonl';path.write_bytes(b''.join(raw));return path,hashlib.sha256(raw[-1]).hexdigest()
++  path,h=make_rows();p.receipt_check(path,'validate_model',0,h,'returned')
++  for bad in (False,0.0):
++   with self.subTest(field='seq',value=bad):
++    path,h=make_rows(seq_override=bad)
++    with self.assertRaises(p.Stop):p.receipt_check(path,'validate_model',0,h,'returned')
++   with self.subTest(field='owner_seq',value=bad):
++    path,h=make_rows(owner_override=bad)
++    with self.assertRaises(p.Stop):p.receipt_check(path,'validate_model',0,h,'returned')
++  path,h=make_rows()
++  with self.assertRaises(p.Stop):p.receipt_check(path,'validate_model',False,h,'returned')
++  with self.assertRaises(p.Stop):p.receipt_check(path,'validate_model',0.0,h,'returned')
++ def test_parent_directory_sync_failure_stops_before_child(self):
++  root=self.root/'no-sync';real_fsync=os.fsync
++  def injected(fd):
++   if stat.S_ISDIR(os.fstat(fd).st_mode):raise OSError('FICTIONAL directory fsync failure')
++   return real_fsync(fd)
++  with patch.object(p.os,'fsync',side_effect=injected):
++   with self.assertRaises(p.LedgerCreationUnknown):p.run_fake(root,'normal')
++  entries=[json.loads(x) for x in (root/'parent.jsonl').read_text().splitlines()]
++  self.assertEqual(entries[0]['kind'],'creation_unknown');self.assertTrue(entries[0]['payload']['no_execution'])
++  self.assertFalse((root/'worker_events.jsonl').exists());self.assertFalse((root/'child.stderr').exists())
+ if __name__=='__main__':unittest.main(verbosity=2)
