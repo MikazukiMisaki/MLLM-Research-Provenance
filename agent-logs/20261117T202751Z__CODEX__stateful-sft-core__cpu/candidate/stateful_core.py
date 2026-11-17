@@ -1,0 +1,72 @@
+"""CPU research core; injected arguments are untrusted. NOT a sandbox or release."""
+import math
+
+class Stop(ValueError):pass
+
+def need(condition,message):
+ if not condition:raise Stop(message)
+
+def validate_rows(rows,*,vocab_size,eos_token_id,pad_token_id):
+ need(type(rows) is list and len(rows)==16,'exactly 16 rows')
+ need(type(vocab_size) is int and vocab_size>1 and type(eos_token_id) is int and type(pad_token_id) is int and
+      0<=eos_token_id<vocab_size and 0<=pad_token_id<vocab_size and eos_token_id!=pad_token_id,'EOS/pad/vocabulary')
+ ids_seen=set()
+ for r in rows:
+  need(type(r) is dict and set(r)=={'row_id','input_ids','loss_mask','prompt_length'},'row shape')
+  name=r['row_id'];ids=r['input_ids'];mask=r['loss_mask'];p=r['prompt_length']
+  need(type(name) is str and bool(name) and name not in ids_seen,'row identity');ids_seen.add(name)
+  need(type(ids) is list and 1<len(ids)<=4096 and all(type(x) is int and 0<=x<vocab_size for x in ids),'no truncation / vocab')
+  need(type(p) is int and 1<=p<len(ids) and len(ids)-p<=16,'prompt/target length')
+  need(type(mask) is list and all(type(x) is int for x in mask) and mask==[0]*p+[1]*(len(ids)-p),'exact completion mask')
+  generated=ids[p:]
+  need(generated[-1]==eos_token_id and eos_token_id not in generated[:-1] and pad_token_id not in generated,'completion EOS/pad')
+ return rows
+
+def run_cpu_research_core(*,model,rows,checkpoint_writer,vocab_size,eos_token_id,pad_token_id,seed=42):
+ """Injected CPU-only illustrative core. Caller owns provenance, isolation and budgets.
+
+ This is neither a dispatch entry nor a security boundary. Checkpoint writer is
+ untrusted and must only be a fake callback in current review.
+ """
+ validate_rows(rows,vocab_size=vocab_size,eos_token_id=eos_token_id,pad_token_id=pad_token_id)
+ need(type(seed) is int and callable(checkpoint_writer),'seed / fake checkpoint callback')
+ import torch
+ import torch.nn.functional as F
+ parameters=[p for p in model.parameters() if p.requires_grad]
+ need(parameters and all(p.device.type=='cpu' and p.is_floating_point() and bool(torch.isfinite(p).all().item()) for p in parameters),'CPU trainable parameters')
+ need(all(p.device.type=='cpu' for p in model.parameters()),'CPU model required')
+ torch.random.default_generator.manual_seed(seed);model.train(True)
+ optimizer=torch.optim.AdamW(parameters,lr=3e-5,betas=(0.9,0.999),eps=1e-8,weight_decay=0.0,amsgrad=False,foreach=False,capturable=False,maximize=False,fused=False)
+ model_identity=id(model);optimizer_identity=id(optimizer);param_identities=tuple(id(p) for p in parameters)
+ history=[];micro=0
+ for epoch in range(4):
+  for start in range(0,16,4):
+   batch=rows[start:start+4];active=sum(sum(r['loss_mask'][1:]) for r in batch)
+   need(len(batch)==4 and active>0,'zero target count')
+   optimizer.zero_grad(set_to_none=True);total_loss=0.0
+   for row in batch:
+    ids=row['input_ids'];labels=[token if mask else -100 for token,mask in zip(ids,row['loss_mask'])]
+    x=torch.tensor([ids],dtype=torch.long,device='cpu');y=torch.tensor([labels],dtype=torch.long,device='cpu')
+    out=model(input_ids=x,attention_mask=torch.ones_like(x),use_cache=False)
+    logits=out.logits
+    need(tuple(logits.shape)==(1,len(ids),vocab_size) and logits.device.type=='cpu','model output')
+    loss=F.cross_entropy(logits[:,:-1,:].float().reshape(-1,vocab_size),y[:,1:].reshape(-1),ignore_index=-100,reduction='sum')
+    need(bool(torch.isfinite(loss).item()),'nonfinite loss')
+    (loss/active).backward();total_loss+=float(loss.detach().item());micro+=1
+   need(all(p.grad is not None and bool(torch.isfinite(p.grad).all().item()) for p in parameters),'nonfinite or absent gradient')
+   optimizer.step()
+   for p in parameters:
+    state=optimizer.state[p]
+    need(bool(torch.isfinite(p).all().item()) and all(not torch.is_tensor(v) or bool(torch.isfinite(v).all().item()) for v in state.values()),'nonfinite optimizer state')
+    need(int(state['step'].item())==len(history)+1,'optimizer step sequence')
+   need(id(model)==model_identity and id(optimizer)==optimizer_identity and tuple(id(p) for p in model.parameters() if p.requires_grad)==param_identities,'model / optimizer identity')
+   history.append({'epoch':epoch,'batch_start':start,'row_ids':[r['row_id'] for r in batch],
+                   'active_target_count':active,'loss_sum':total_loss,'optimizer_step':len(history)+1})
+ need(micro==64 and len(history)==16,'incomplete steps')
+ metadata={'selection':'FINAL_ONLY_NO_BEST','seed':seed,'epochs':4,'microbatches':micro,'optimizer_steps':16}
+ # Single callback after all effects; unknown callback errors propagate; no retry.
+ checkpoint_receipt=checkpoint_writer(model,optimizer,dict(metadata))
+ return {'status':'CPU_RESEARCH_CORE_RETURNED_NOT_SCIENTIFIC','history':history,'metadata':metadata,'checkpoint_receipt':checkpoint_receipt}
+
+def run_real_training(*_args,**_kwargs):
+ raise RuntimeError('RESEARCH_HOLD: no authenticated input, complete budget, or approved real dispatch')

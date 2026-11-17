@@ -1,0 +1,226 @@
+--- native_update.py
++++ stateful_core.py
+@@ -1,157 +1,72 @@
+-"""One LoRA update port. Import is inert; NOT a runnable training release.
++"""CPU research core; injected arguments are untrusted. NOT a sandbox or release."""
++import math
+ 
+-Caller must supply reviewed live owner, reviewed source handoff, frozen
+-configuration and the exact production producer loader. This module cannot
+-ensure physical limits, isolate task data, authenticate IPC, or authorize a run.
+-"""
+-import hashlib
+-import json
+-from pathlib import Path
+-from source_handoff import Row, digest
++class Stop(ValueError):pass
+ 
++def need(condition,message):
++ if not condition:raise Stop(message)
+ 
+-def _effect(owner, name, request, func, summarize=lambda _: {'returned':True}):
+-    """Owner must durably reserve/record before/after; any interruption is UNKNOWN."""
+-    ticket=owner.start(name, request)
+-    if ticket is None: raise RuntimeError('missing reservation')
+-    try:
+-        value=func()
+-        owner.returned(ticket, name, summarize(value))
+-        return value
+-    except BaseException:
+-        try: owner.unknown(ticket,name)
+-        except BaseException: pass
+-        raise
++def validate_rows(rows,*,vocab_size,eos_token_id,pad_token_id):
++ need(type(rows) is list and len(rows)==16,'exactly 16 rows')
++ need(type(vocab_size) is int and vocab_size>1 and type(eos_token_id) is int and type(pad_token_id) is int and
++      0<=eos_token_id<vocab_size and 0<=pad_token_id<vocab_size and eos_token_id!=pad_token_id,'EOS/pad/vocabulary')
++ ids_seen=set()
++ for r in rows:
++  need(type(r) is dict and set(r)=={'row_id','input_ids','loss_mask','prompt_length'},'row shape')
++  name=r['row_id'];ids=r['input_ids'];mask=r['loss_mask'];p=r['prompt_length']
++  need(type(name) is str and bool(name) and name not in ids_seen,'row identity');ids_seen.add(name)
++  need(type(ids) is list and 1<len(ids)<=4096 and all(type(x) is int and 0<=x<vocab_size for x in ids),'no truncation / vocab')
++  need(type(p) is int and 1<=p<len(ids) and len(ids)-p<=16,'prompt/target length')
++  need(type(mask) is list and all(type(x) is int for x in mask) and mask==[0]*p+[1]*(len(ids)-p),'exact completion mask')
++  generated=ids[p:]
++  need(generated[-1]==eos_token_id and eos_token_id not in generated[:-1] and pad_token_id not in generated,'completion EOS/pad')
++ return rows
+ 
++def run_cpu_research_core(*,model,rows,checkpoint_writer,vocab_size,eos_token_id,pad_token_id,seed=42):
++ """Injected CPU-only illustrative core. Caller owns provenance, isolation and budgets.
+ 
+-def _tensor_digest(torch, parameters):
+-    h=hashlib.sha256()
+-    for name,tensor in parameters:
+-        h.update(name.encode()); h.update(str(tuple(tensor.shape)).encode());h.update(str(tensor.dtype).encode())
+-        h.update(tensor.detach().cpu().contiguous().view(torch.uint8).numpy().tobytes())
+-    return h.hexdigest()
++ This is neither a dispatch entry nor a security boundary. Checkpoint writer is
++ untrusted and must only be a fake callback in current review.
++ """
++ validate_rows(rows,vocab_size=vocab_size,eos_token_id=eos_token_id,pad_token_id=pad_token_id)
++ need(type(seed) is int and callable(checkpoint_writer),'seed / fake checkpoint callback')
++ import torch
++ import torch.nn.functional as F
++ parameters=[p for p in model.parameters() if p.requires_grad]
++ need(parameters and all(p.device.type=='cpu' and p.is_floating_point() and bool(torch.isfinite(p).all().item()) for p in parameters),'CPU trainable parameters')
++ need(all(p.device.type=='cpu' for p in model.parameters()),'CPU model required')
++ torch.random.default_generator.manual_seed(seed);model.train(True)
++ optimizer=torch.optim.AdamW(parameters,lr=3e-5,betas=(0.9,0.999),eps=1e-8,weight_decay=0.0,amsgrad=False,foreach=False,capturable=False,maximize=False,fused=False)
++ model_identity=id(model);optimizer_identity=id(optimizer);param_identities=tuple(id(p) for p in parameters)
++ history=[];micro=0
++ for epoch in range(4):
++  for start in range(0,16,4):
++   batch=rows[start:start+4];active=sum(sum(r['loss_mask'][1:]) for r in batch)
++   need(len(batch)==4 and active>0,'zero target count')
++   optimizer.zero_grad(set_to_none=True);total_loss=0.0
++   for row in batch:
++    ids=row['input_ids'];labels=[token if mask else -100 for token,mask in zip(ids,row['loss_mask'])]
++    x=torch.tensor([ids],dtype=torch.long,device='cpu');y=torch.tensor([labels],dtype=torch.long,device='cpu')
++    out=model(input_ids=x,attention_mask=torch.ones_like(x),use_cache=False)
++    logits=out.logits
++    need(tuple(logits.shape)==(1,len(ids),vocab_size) and logits.device.type=='cpu','model output')
++    loss=F.cross_entropy(logits[:,:-1,:].float().reshape(-1,vocab_size),y[:,1:].reshape(-1),ignore_index=-100,reduction='sum')
++    need(bool(torch.isfinite(loss).item()),'nonfinite loss')
++    (loss/active).backward();total_loss+=float(loss.detach().item());micro+=1
++   need(all(p.grad is not None and bool(torch.isfinite(p.grad).all().item()) for p in parameters),'nonfinite or absent gradient')
++   optimizer.step()
++   for p in parameters:
++    state=optimizer.state[p]
++    need(bool(torch.isfinite(p).all().item()) and all(not torch.is_tensor(v) or bool(torch.isfinite(v).all().item()) for v in state.values()),'nonfinite optimizer state')
++    need(int(state['step'].item())==len(history)+1,'optimizer step sequence')
++   need(id(model)==model_identity and id(optimizer)==optimizer_identity and tuple(id(p) for p in model.parameters() if p.requires_grad)==param_identities,'model / optimizer identity')
++   history.append({'epoch':epoch,'batch_start':start,'row_ids':[r['row_id'] for r in batch],
++                   'active_target_count':active,'loss_sum':total_loss,'optimizer_step':len(history)+1})
++ need(micro==64 and len(history)==16,'incomplete steps')
++ metadata={'selection':'FINAL_ONLY_NO_BEST','seed':seed,'epochs':4,'microbatches':micro,'optimizer_steps':16}
++ # Single callback after all effects; unknown callback errors propagate; no retry.
++ checkpoint_receipt=checkpoint_writer(model,optimizer,dict(metadata))
++ return {'status':'CPU_RESEARCH_CORE_RETURNED_NOT_SCIENTIFIC','history':history,'metadata':metadata,'checkpoint_receipt':checkpoint_receipt}
+ 
+-
+-def _all_finite(torch, values, *, require=True):
+-    count=0
+-    for v in values:
+-        if v is None: raise RuntimeError('missing gradient/state')
+-        if torch.is_tensor(v):
+-            count+=v.numel()
+-            if not bool(torch.isfinite(v).all().item()): raise RuntimeError('nonfinite tensor')
+-        elif isinstance(v,(int,float)):
+-            import math
+-            if not math.isfinite(v): raise RuntimeError('nonfinite scalar')
+-    if require and count==0: raise RuntimeError('empty measurement')
+-    return count
+-
+-
+-def _state_values(optimizer):
+-    for d in optimizer.state.values():
+-        for value in d.values(): yield value
+-
+-
+-def run_one_update(*, rows, handoff, producer, owner, config, checkpoint_dir):
+-    """Perform four exact P/G microbatches and one optimizer step.
+-
+-    `producer` must be a fresh ProductionProducer.load P0 instance. Owner must
+-    enforce one use and all start/return budgets independently. A failure after
+-    a start is UNKNOWN; this function performs no rollback or retry. Checkpoint
+-    size is measured after write, not a hard filesystem limit.
+-    """
+-    if type(rows) is not tuple or len(rows)!=4 or any(type(r) is not Row for r in rows):
+-        raise ValueError('four immutable source rows required')
+-    rows_hash=digest([{'prompt':list(r.prompt),'generated':list(r.generated)} for r in rows])
+-    if (rows_hash != handoff.get('rows_sha256') or not handoff.get('source_selection_sha256') or
+-        not handoff.get('selection_review_sha256') or handoff.get('recipe') not in ('single','multi')):
+-        raise ValueError('independently reviewed source-selection binding')
+-    if any(not r.prompt or not r.generated or len(r.generated)>16 or len(r.prompt)+len(r.generated)>4096 or
+-           any(type(t) is not int or t<0 for t in r.prompt+r.generated) for r in rows):
+-        raise ValueError('row size or token type')
+-    if set(config) != {'learning_rate','weight_decay','betas','eps','trainable_names','seed','train_mode','eos_ids','vocab_size','checkpoint_byte_cap'}:
+-        raise ValueError('exact reviewed optimizer/training manifest required')
+-    names=config['trainable_names']; vocab=config['vocab_size']; eos=config['eos_ids']
+-    if (type(names) is not list or not names or len(set(names))!=len(names) or type(vocab) is not int or vocab<=0 or
+-        type(eos) is not list or not eos or any(type(i) is not int or not 0<=i<vocab for i in eos) or
+-        any(any(t>=vocab for t in r.prompt+r.generated) or r.generated[-1] not in eos or
+-            any(t in eos for t in r.generated[:-1]) for r in rows)):
+-        raise ValueError('vocabulary/EOS/trainable contract')
+-    if type(config['seed']) is not int or type(config['train_mode']) is not bool or type(config['checkpoint_byte_cap']) is not int or config['checkpoint_byte_cap']<=0:
+-        raise ValueError('training controls')
+-    import math
+-    if (any(type(config[k]) not in (int,float) or not math.isfinite(config[k]) for k in ('learning_rate','weight_decay','eps')) or
+-        config['learning_rate']<=0 or config['weight_decay']<0 or config['eps']<=0 or
+-        type(config['betas']) is not list or len(config['betas'])!=2 or
+-        any(type(x) not in (int,float) or not math.isfinite(x) or not 0<=x<1 for x in config['betas'])):
+-        raise ValueError('optimizer hyperparameters')
+-    torch=producer.torch; model=producer.model
+-    if model is None or producer.adapter_sha256 is None: raise ValueError('fresh P0 producer required')
+-    configured_eos=model.generation_config.eos_token_id
+-    configured_eos=[configured_eos] if type(configured_eos) is int else configured_eos
+-    token_eos=producer.tokenizer.eos_token_id
+-    pad=model.generation_config.pad_token_id
+-    if (configured_eos!=eos or type(token_eos) is not int or token_eos not in eos or
+-        type(pad) is not int or producer.tokenizer.pad_token_id!=pad or token_eos==pad or
+-        any(r.generated[-1]!=token_eos or any(t==pad for t in r.generated) for r in rows)):
+-        raise ValueError('configured EOS vs tokenizer eligible EOS/pad mismatch')
+-    adapter_config=model.peft_config.get('default')
+-    if (getattr(adapter_config,'lora_dropout',None)!=0.05 or getattr(adapter_config,'r',None)!=32 or
+-        getattr(adapter_config,'lora_alpha',None)!=64):
+-        raise ValueError('original P0 LoRA architecture mismatch')
+-    if any(p.is_floating_point() and ('lora_' not in n) and p.dtype!=torch.bfloat16 for n,p in model.named_parameters()):
+-        raise ValueError('unexpected base precision')
+-    allparams=dict(model.named_parameters())
+-    actual_lora={name for name in allparams if 'lora_' in name}
+-    if not actual_lora or set(names)!=actual_lora:raise ValueError('not all and only reviewed LoRA names')
+-    for n,p in allparams.items(): p.requires_grad_(n in names)
+-    trainable=[(n,allparams[n]) for n in names]
+-    if any(not p.requires_grad for _,p in trainable) or any(p.requires_grad for n,p in allparams.items() if n not in names):
+-        raise ValueError('trainable state mismatch')
+-    # Seed CPU once and only the actual model's CUDA device domain. A CPU
+-    # synthetic integration must not initialize or seed CUDA as a side effect.
+-    torch.random.default_generator.manual_seed(config['seed'])
+-    if str(model.device).startswith('cuda:'):
+-        torch.cuda.manual_seed_all(config['seed'])
+-    model.train(config['train_mode'])
+-    optimizer=torch.optim.AdamW([p for _,p in trainable], lr=config['learning_rate'],weight_decay=config['weight_decay'],betas=tuple(config['betas']),eps=config['eps'],amsgrad=False,foreach=False,capturable=False,maximize=False,fused=False)
+-    _all_finite(torch,(p for _,p in trainable)); before=_tensor_digest(torch,trainable)
+-    _effect(owner,'zero_grad',{'rows_sha256':rows_hash},lambda:optimizer.zero_grad(set_to_none=True))
+-    active_total=sum(len(r.generated) for r in rows)
+-    token_counts=[len(r.generated) for r in rows]
+-    owner.journal.emit('loss_normalization_audit',{'rows_sha256':rows_hash,'target_token_counts':token_counts,'active_target_total':active_total,'loss_reduction':'sum_cross_entropy_ignoring_prompt_then_divide_by_active_target_total','per_token_weight':1.0/active_total,'per_row_weight':[n/active_total for n in token_counts],'eos_included':True})
+-    for i,row in enumerate(rows):
+-        ids=row.prompt+row.generated; labels=(-100,)*len(row.prompt)+row.generated
+-        x=torch.tensor([ids],dtype=torch.long,device=model.device); y=torch.tensor([labels],dtype=torch.long,device=model.device)
+-        attention=torch.ones_like(x)
+-        def forward():
+-            result=model(input_ids=x,attention_mask=attention,use_cache=False)
+-            loss=torch.nn.functional.cross_entropy(result.logits[:,:-1,:].float().reshape(-1,result.logits.shape[-1]), y[:,1:].reshape(-1),ignore_index=-100,reduction='sum')
+-            if not bool(torch.isfinite(loss).item()): raise RuntimeError('nonfinite loss')
+-            return loss
+-        loss=_effect(owner,'forward',{'row':i,'tokens':len(ids),'targets':len(row.generated),'rows_sha256':rows_hash},forward,
+-                     lambda v:{'returned':True,'loss_sum':float(v.detach().item())})
+-        _effect(owner,'backward',{'row':i,'active_total':active_total},lambda:(loss/active_total).backward())
+-        _all_finite(torch,(p.grad for _,p in trainable))
+-    def guarded_step():
+-        _all_finite(torch,(p for _,p in trainable)); _all_finite(torch,(p.grad for _,p in trainable))
+-        _all_finite(torch,_state_values(optimizer),require=False)
+-        optimizer.step()
+-        _all_finite(torch,(p for _,p in trainable)); _all_finite(torch,(p.grad for _,p in trainable))
+-        _all_finite(torch,_state_values(optimizer))
+-    _effect(owner,'optimizer_step',{'rows_sha256':rows_hash},guarded_step)
+-    after=_tensor_digest(torch,trainable)
+-    if before==after: raise RuntimeError('no observed adapter change')
+-    checkpoint_dir=Path(checkpoint_dir)
+-    checkpoint_dir.mkdir(mode=0o700,parents=False,exist_ok=False)
+-    _effect(owner,'checkpoint_save',{'path':str(checkpoint_dir),'cap':config['checkpoint_byte_cap']},
+-            lambda:model.save_pretrained(str(checkpoint_dir),safe_serialization=True))
+-    paths=sorted(p for p in checkpoint_dir.rglob('*') if p.is_file())
+-    if not paths or any(p.is_symlink() for p in paths): raise RuntimeError('invalid checkpoint tree')
+-    entries=[]
+-    for path in paths:
+-        data=path.read_bytes(); entries.append({'path':str(path.relative_to(checkpoint_dir)),'size':len(data),'sha256':hashlib.sha256(data).hexdigest()})
+-    if sum(e['size'] for e in entries)>config['checkpoint_byte_cap']: raise RuntimeError('checkpoint cap exceeded')
+-    return {'status':'UPDATE_RETURNED_RELOAD_NOT_YET_VERIFIED','rows_sha256':rows_hash,'source':handoff,
+-            'before_trainable_sha256':before,'after_trainable_sha256':after,'checkpoint_entries':entries,
+-            'checkpoint_manifest_sha256':digest(entries),'actual_optimizer_steps_started':1,
+-            'target_token_counts':token_counts,'active_target_total':active_total,'per_token_weight':1.0/active_total,'per_row_weight':[n/active_total for n in token_counts],'loss_normalization':'sum_over_generated_targets_divided_by_total_including_eos'}
++def run_real_training(*_args,**_kwargs):
++ raise RuntimeError('RESEARCH_HOLD: no authenticated input, complete budget, or approved real dispatch')

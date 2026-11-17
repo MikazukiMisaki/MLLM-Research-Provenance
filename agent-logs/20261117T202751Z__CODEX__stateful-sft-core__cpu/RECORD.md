@@ -1,0 +1,3 @@
+# Injected stateful SFT research core
+
+A CPU-only candidate operates on a fictional injected model and token rows, retains one AdamW optimizer for 64 microbatches/16 steps, and exposes one final-only callback. An independent test checked all 16 gradient accumulations and invalid cases. Finiteness checks cover trainable parameters, not all frozen parameters; errors after optimizer.step cannot be called a rollback. This is not a real Qwen/PEFT training implementation, production checkpoint, authenticated data pipeline or complete budget; real dispatch remains HOLD. No real model weights, GPU computation, task, environment, training or scientific run occurred.
