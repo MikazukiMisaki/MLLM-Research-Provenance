@@ -1,0 +1,54 @@
+{
+  "q_per_comparison": 0.3,
+  "delta_per_comparison": 0.15,
+  "p_C": 0.5,
+  "required_observed_delta": 0.1,
+  "p_method": "two-sided exact McNemar; Holm both",
+  "scenario_note": "conditional on C, each comparison has disagreement .45 when C=1 and .15 when C=0. Dependence independent or identical conditional on C.",
+  "results": [
+    {
+      "n": 82,
+      "dependence": "independent_given_c",
+      "runs": 20000,
+      "seed": 20261199,
+      "joint_success_count": 8909,
+      "joint_power": 0.44545,
+      "mc_standard_error": 0.0035144295234077463,
+      "single_A_conservative": 0.53515,
+      "single_B_conservative": 0.54155
+    },
+    {
+      "n": 82,
+      "dependence": "same_given_c",
+      "runs": 20000,
+      "seed": 20271199,
+      "joint_success_count": 10892,
+      "joint_power": 0.5446,
+      "mc_standard_error": 0.0035214403303193993,
+      "single_A_conservative": 0.5446,
+      "single_B_conservative": 0.5446
+    },
+    {
+      "n": 200,
+      "dependence": "independent_given_c",
+      "runs": 20000,
+      "seed": 20261317,
+      "joint_success_count": 17108,
+      "joint_power": 0.8554,
+      "mc_standard_error": 0.002486873941316688,
+      "single_A_conservative": 0.9212,
+      "single_B_conservative": 0.918
+    },
+    {
+      "n": 200,
+      "dependence": "same_given_c",
+      "runs": 20000,
+      "seed": 20271317,
+      "joint_success_count": 18429,
+      "joint_power": 0.92145,
+      "mc_standard_error": 0.0019023655997205166,
+      "single_A_conservative": 0.92145,
+      "single_B_conservative": 0.92145
+    }
+  ]
+}
