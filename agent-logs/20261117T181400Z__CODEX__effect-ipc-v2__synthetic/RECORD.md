@@ -1,0 +1,7 @@
+# EffectOwner bridge v2: synthetic CPU revision
+
+The isolated v2 uses exact source SHA `046c0c48291efdae06457d87343d084357ae5a1774c3d670e3e232b15fd16dd8` of existing EffectOwner/Journal/Controller with fictional no-op effects, not real model/task/environment calls. Its parent refuses a preexisting ledger, fails closed on BaseException, enforces fictional per-arm maxima independently of the child, and checks started/returned or unknown child journal events by owner sequence and operation while permitting ordinary intermediate entries. Twelve author tests and an independent repeat passed; original synthetic failure log was preserved. Independent reviewer records exact file hashes and scope.
+
+The saved v1 already used `sock.sendall`; no v1 short-write defect was proven. Luna withdrew that earlier observation in the preserved erratum. v2 implements a send loop and a forced short-write fixture as a testable alternative, not a repair of an established v1 error. Child records remain claims, not independent physical-effect proof.
+
+This fragment is not an actual production runner: it does not join the pair materializer, real worker/actor/manifest, native success, aggregate campaign and token/time/GPU budgets or descendant cleanup. It does not alter past run/cost records, grant a new allocation or lift the existing HOLD/no-retry. No real scientific task, model, tokenizer, GPU or environment was invoked.

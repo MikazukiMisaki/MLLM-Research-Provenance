@@ -1,0 +1,38 @@
+test_baseexception_permanently_latches_owner (test_bridge.BridgeTest.test_baseexception_permanently_latches_owner) ... ok
+test_claimed_return_needs_matching_start_same_operation (test_bridge.BridgeTest.test_claimed_return_needs_matching_start_same_operation) ... 
+  test_claimed_return_needs_matching_start_same_operation (test_bridge.BridgeTest.test_claimed_return_needs_matching_start_same_operation) (mode='wrong_started') ... FAIL
+test_disconnect_after_ack_retains_reservation (test_bridge.BridgeTest.test_disconnect_after_ack_retains_reservation) ... ok
+test_existing_ledger_without_claim_refuses_reuse (test_bridge.BridgeTest.test_existing_ledger_without_claim_refuses_reuse) ... ok
+test_malformed_order_duplicate_and_fake_receipt_fail (test_bridge.BridgeTest.test_malformed_order_duplicate_and_fake_receipt_fail) ... ok
+test_parent_per_arm_cap_not_child_cap (test_bridge.BridgeTest.test_parent_per_arm_cap_not_child_cap) ... ok
+test_real_client_unknown_aborts (test_bridge.BridgeTest.test_real_client_unknown_aborts) ... ok
+test_shared_cap_stops_second_child (test_bridge.BridgeTest.test_shared_cap_stops_second_child) ... ok
+test_short_write_ack_with_original_client (test_bridge.BridgeTest.test_short_write_ack_with_original_client) ... ok
+test_two_real_protocol_clients_share_total_counts (test_bridge.BridgeTest.test_two_real_protocol_clients_share_total_counts) ... ERROR
+test_wrong_arm_order_stops_batch (test_bridge.BridgeTest.test_wrong_arm_order_stops_batch) ... ok
+
+======================================================================
+ERROR: test_two_real_protocol_clients_share_total_counts (test_bridge.BridgeTest.test_two_real_protocol_clients_share_total_counts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/lizening/research-notes/agent-logs/20261118__CODEX__effect-ipc-bridge-v2__private/test_bridge.py", line 43, in test_two_real_protocol_clients_share_total_counts
+    with self.assertRaises(FileExistsError): bridge.Budget(self.root/'budget',{'generation':1})
+                                             ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lizening/research-notes/agent-logs/20261118__CODEX__effect-ipc-bridge-v2__private/bridge.py", line 60, in __init__
+    if os.path.lexists(self.path): raise Stop('existing ledger: no reuse')
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+bridge.Stop: existing ledger: no reuse
+
+======================================================================
+FAIL: test_claimed_return_needs_matching_start_same_operation (test_bridge.BridgeTest.test_claimed_return_needs_matching_start_same_operation) (mode='wrong_started')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/lizening/research-notes/agent-logs/20261118__CODEX__effect-ipc-bridge-v2__private/test_bridge.py", line 123, in test_claimed_return_needs_matching_start_same_operation
+    self.assertTrue(b.failed);self.assertIsNotNone(b.active)
+                              ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+AssertionError: unexpectedly None
+
+----------------------------------------------------------------------
+Ran 11 tests in 1.341s
+
+FAILED (failures=1, errors=1)
