@@ -1,0 +1,69 @@
+--- /dev/null
++++ torch_fixture_kernel.py
+@@ -0,0 +1,66 @@
++"""One fixed fictional CPU training demonstration; real path remains HOLD.
++
++This is an engineering example, not a sandbox or authorization mechanism.
++"""
++import hashlib,json
++FIXTURE_SHA256='768fc562e2d32681d13fe8738c4a4804e7b3c0a191d26fd0a634b375102cb3d5'
++SEED=42;VOCAB=4;EOS=3;MAX_LENGTH=4096;EPOCHS=4;ACCUMULATION=4
++class Rejected(ValueError):pass
++def need(condition,message):
++ if not condition:raise Rejected(message)
++def canonical(v):return json.dumps(v,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
++def _validate_fake_rows(doc):
++ need(type(doc) is dict and set(doc)=={'scope','rows'} and doc['scope']=='FICTIONAL_UNAUTHENTICATED','fictional scope')
++ rows=doc['rows'];need(type(rows) is list and len(rows)==16,'sixteen rows')
++ for i,r in enumerate(rows):
++  need(type(r) is dict and set(r)=={'row_id','input_ids','loss_mask','prompt_length'} and r['row_id']==f'FAKE-{i:02d}','row order')
++  ids=r['input_ids'];mask=r['loss_mask'];p=r['prompt_length']
++  need(type(ids) is list and 1<len(ids)<=MAX_LENGTH and all(type(t) is int and 0<=t<VOCAB for t in ids),'token bounds')
++  need(type(p) is int and 1<=p<len(ids) and len(ids)-p<=16,'prompt/target bounds')
++  need(type(mask) is list and all(type(x) is int for x in mask) and mask==[0]*p+[1]*(len(ids)-p),'completion mask')
++  need(ids[-1]==EOS and EOS not in ids[p:-1],'fake EOS')
++ return rows
++
++def run_fictional_torch_cpu(raw):
++ """Execute fixed synthetic 16×4 rows on one tiny CPU model and optimizer."""
++ need(type(raw) is bytes and hashlib.sha256(raw).hexdigest()==FIXTURE_SHA256,'not pinned fake bytes')
++ rows=_validate_fake_rows(json.loads(raw))
++ import torch
++ import torch.nn.functional as F
++ torch.random.default_generator.manual_seed(SEED)
++ model=torch.nn.Linear(VOCAB,VOCAB,bias=False,dtype=torch.float64,device='cpu')
++ optimizer=torch.optim.AdamW(model.parameters(),lr=3e-5,betas=(0.9,0.999),eps=1e-8,weight_decay=0.0,foreach=False,fused=False)
++ param=model.weight;model_identity=id(model);optimizer_identity=id(optimizer);parameter_identity=id(param)
++ micro=0;trace=[]
++ for epoch in range(EPOCHS):
++  for start in range(0,len(rows),ACCUMULATION):
++   batch=rows[start:start+ACCUMULATION];need(len(batch)==4,'accumulation batch')
++   active=sum(sum(row['loss_mask'][1:]) for row in batch);need(active>0,'no target tokens')
++   optimizer.zero_grad(set_to_none=True);before=param.detach().tolist();loss_sum=0.0;batch_trace=[]
++   for row in batch:
++    ids=row['input_ids'];mask=row['loss_mask'];labels=[t if m else -100 for t,m in zip(ids,mask)]
++    x=torch.tensor(ids,dtype=torch.long,device='cpu');y=torch.tensor(labels,dtype=torch.long,device='cpu')
++    logits=model(F.one_hot(x,num_classes=VOCAB).to(dtype=torch.float64))
++    loss=F.cross_entropy(logits[:-1],y[1:],ignore_index=-100,reduction='sum')
++    need(bool(torch.isfinite(loss).item()),'nonfinite loss')
++    (loss/active).backward();loss_sum+=float(loss.detach().item());micro+=1
++    batch_trace.append({'row_id':row['row_id'],'input_ids':list(ids),'loss_mask':list(mask),'labels':labels})
++   need(param.grad is not None and bool(torch.isfinite(param.grad).all().item()),'nonfinite gradient')
++   grad=param.grad.detach().tolist();optimizer.step()
++   state=optimizer.state[param];step=int(state['step'].item())
++   need(bool(torch.isfinite(param).all().item()) and bool(torch.isfinite(state['exp_avg']).all().item()) and bool(torch.isfinite(state['exp_avg_sq']).all().item()),'nonfinite state')
++   need(id(model)==model_identity and id(optimizer)==optimizer_identity and id(model.weight)==parameter_identity,'identity changed')
++   need(step==len(trace)+1 and param.device.type=='cpu' and state['exp_avg'].device.type=='cpu','optimizer step/device')
++   trace.append({'epoch':epoch,'batch_start':start,'rows':batch_trace,'active_targets':active,'loss_sum':loss_sum,
++      'weights_before':before,'gradient':grad,'weights_after':param.detach().tolist(),'optimizer_step':step,
++      'moment_1':state['exp_avg'].tolist(),'moment_2':state['exp_avg_sq'].tolist()})
++ need(micro==64 and len(trace)==16,'unexpected step count')
++ checkpoint={'scope':'FICTIONAL_CPU_ONLY','selection':'FINAL_ONLY_NO_BEST','step':16,
++     'weights':param.detach().tolist(),'optimizer_moment_1':optimizer.state[param]['exp_avg'].tolist(),
++     'optimizer_moment_2':optimizer.state[param]['exp_avg_sq'].tolist()}
++ return {'scope':'FICTIONAL_UNAUTHENTICATED_NOT_SCIENCE','seed':SEED,'microbatches':micro,'optimizer_steps':16,
++     'model_initializations':1,'optimizer_initializations':1,'trace':trace,'checkpoint':checkpoint,
++     'checkpoint_sha256':hashlib.sha256(canonical(checkpoint)).hexdigest(),'scientific_use':'HOLD'}
++
++def run_real_training(*_args,**_kwargs):
++ raise RuntimeError('RESEARCH_HOLD: real model/data/identity/complete budget not authorized')

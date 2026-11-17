@@ -1,0 +1,3 @@
+# Stateful synthetic PyTorch SFT and screening ledger v3
+
+CPU-only fictional artifacts. An independently reviewed small PyTorch candidate retains one model and AdamW optimizer over 64 microbatches and 16 steps, with token-weighted causal loss; the reference tests have disclosed limits. A separate screening read-ledger revision rejects the named malformed synthetic event sequences. Neither is a real Qwen/PEFT trainer, source authentication, full resource budget or physical I/O proof. No real model weights, GPU computation, task, environment, training or science run occurred. Prior holds remain.

@@ -1,0 +1,69 @@
+--- /dev/null
++++ fake_stateful_sft.py
+@@ -0,0 +1,66 @@
++"""Fixed fictional CPU optimizer demonstration; never trains a real model."""
++import hashlib,json,math,random
++FIXTURE_SHA256='768fc562e2d32681d13fe8738c4a4804e7b3c0a191d26fd0a634b375102cb3d5'
++SEED=42;EPOCHS=4;ACCUMULATION=4;MAX_LENGTH=4096;VOCAB=4;EOS=3
++class Invalid(ValueError):pass
++def require(ok,message):
++ if not ok:raise Invalid(message)
++def canonical(x):return json.dumps(x,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
++def _validated_fake_rows(doc):
++ require(type(doc) is dict and set(doc)=={'scope','rows'} and doc['scope']=='FICTIONAL_UNAUTHENTICATED','fictional scope')
++ rows=doc['rows'];require(type(rows) is list and len(rows)==16,'sixteen rows')
++ for i,r in enumerate(rows):
++  require(type(r) is dict and set(r)=={'row_id','input_ids','loss_mask','prompt_length'} and r['row_id']==f'FAKE-{i:02d}','row order')
++  ids=r['input_ids'];mask=r['loss_mask'];p=r['prompt_length']
++  require(type(ids) is list and 1<len(ids)<=MAX_LENGTH and all(type(t) is int and 0<=t<VOCAB for t in ids),'full token bounds')
++  require(type(p) is int and 1<=p<len(ids) and len(ids)-p<=16,'prompt/output length')
++  require(type(mask) is list and all(type(x) is int for x in mask) and mask==[0]*p+[1]*(len(ids)-p),'exact complete mask')
++  require(ids[-1]==EOS and EOS not in ids[p:-1],'complete fake output')
++ return rows
++class FakeModel:
++ def __init__(self):
++  rng=random.Random(SEED);self.weights=[rng.uniform(-0.1,0.1) for _ in range(VOCAB)]
++ def distribution(self):
++  base=max(self.weights);exp=[math.exp(x-base) for x in self.weights];den=sum(exp);return [x/den for x in exp]
++class FakeAdam:
++ def __init__(self,model):self.model=model;self.step_number=0;self.m=[0.0]*VOCAB;self.v=[0.0]*VOCAB
++ def step(self,grad):
++  self.step_number+=1;t=self.step_number
++  for j,g in enumerate(grad):
++   self.m[j]=0.9*self.m[j]+0.1*g;self.v[j]=0.999*self.v[j]+0.001*g*g
++   self.model.weights[j]-=0.00003*(self.m[j]/(1-0.9**t))/(math.sqrt(self.v[j]/(1-0.999**t))+1e-8)
++ def state(self):return {'step':self.step_number,'m':list(self.m),'v':list(self.v)}
++def run_fake_fixture(raw):
++ """Four epochs, 16 fixed fake rows; strict fixed bytes prohibit real-data input."""
++ require(type(raw) is bytes and hashlib.sha256(raw).hexdigest()==FIXTURE_SHA256,'not pinned fake fixture')
++ rows=_validated_fake_rows(json.loads(raw));model=FakeModel();optimizer=FakeAdam(model)
++ initial=list(model.weights);trace=[];micro=0
++ for epoch in range(EPOCHS):
++  for start in range(0,len(rows),ACCUMULATION):
++   batch=rows[start:start+ACCUMULATION];total=sum(sum(r['loss_mask'][1:]) for r in batch)
++   require(len(batch)==ACCUMULATION and total>0,'accumulation shape')
++   prev=optimizer.state();grad=[0.0]*VOCAB;batch_rows=[];loss_sum=0.0
++   for row in batch:
++    ids=row['input_ids'];mask=row['loss_mask'];labels=[t if m else -100 for t,m in zip(ids,mask)]
++    probs=model.distribution()
++    # Position j logits predict labels[j+1], as in native_update's causal shift.
++    targets=[labels[j+1] for j in range(len(ids)-1) if labels[j+1]!=-100]
++    require(len(targets)==sum(mask) and targets==ids[row['prompt_length']:],'causal target mismatch')
++    for target in targets:
++     loss_sum-=math.log(probs[target])
++     for k in range(VOCAB):grad[k]+=(probs[k]-(1 if k==target else 0))/total
++    batch_rows.append({'row_id':row['row_id'],'input_ids':list(ids),'loss_mask':list(mask),'labels':labels,'target_count':len(targets)})
++    micro+=1
++   optimizer.step(grad)
++   trace.append({'epoch':epoch,'batch_start':start,'active_targets':total,'loss_sum':loss_sum,
++                 'prior_optimizer':prev,'after_optimizer':optimizer.state(),'rows':batch_rows})
++ require(micro==64 and optimizer.step_number==16,'step count')
++ fake_checkpoint={'scope':'FICTIONAL_MODEL_AND_OPTIMIZER','epoch':3,'steps':optimizer.step_number,
++                  'weights':list(model.weights),'optimizer':optimizer.state(),'selection':'FINAL_ONLY_NO_BEST'}
++ return {'scope':'FICTIONAL_UNAUTHENTICATED_NOT_TRAINING','seed':SEED,'initialization_count':1,
++         'optimizer_initialization_count':1,'epochs':EPOCHS,'microbatches':micro,'optimizer_steps':optimizer.step_number,
++         'initial_weights':initial,'trace':trace,'final_checkpoint':fake_checkpoint,
++         'checkpoint_sha256':hashlib.sha256(canonical(fake_checkpoint)).hexdigest(),
++         'scientific_use':'HOLD','model_identity':'FAKE_ONLY','optimizer':'FAKE_ADAM_CPU_PYTHON'}
++def run_training(*_args,**_kwargs):
++ raise RuntimeError('RESEARCH_HOLD: real data, model, identity and complete budget not verified')
