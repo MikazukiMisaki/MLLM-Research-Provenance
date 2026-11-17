@@ -1,0 +1,52 @@
+{
+  "schema": "FORWARD_EOS_CONTRACT_CORRECTION_CANDIDATE_V1",
+  "status": "CANDIDATE_NOT_INDEPENDENTLY_ACCEPTED_NOT_LAUNCH_AUTHORIZATION",
+  "scope": "STATIC_METADATA_AND_EXISTING_ACTOR_RULES_ONLY",
+  "original_plan": {
+    "path": "/home/lizening/research-notes/agent-handoff/grok-codex/2026-11-17__LUNA__fixed-product-four-pair-mainline-manifest-v1.json",
+    "sha256": "3df73994bc2aba5912959ab7c0970241cba071466f85a8ef440c4b57c5ca03ec",
+    "json_pointer": "/inference_contract/tokenizer_eos_id",
+    "old_primary_eos_id": 151643,
+    "original_is_preserved": true
+  },
+  "forward_correction": {
+    "primary_tokenizer_eos_id": 151645,
+    "primary_tokenizer_eos_token": "<|im_end|>",
+    "model_generation_stop_ids": [151645, 151643],
+    "pad_id": 151643,
+    "pad_token": "<|endoftext|>",
+    "forced_eos_token_id": null,
+    "accepted_final_nonpad_producer_eos_ids": [151645],
+    "secondary_stop_equal_to_pad_is_not_valid_actor_termination": true,
+    "actor_output_padding_disposition": "POLICY_FAILURE_OUTPUT_PADDING",
+    "intermediate_generation_stop_disposition": "POLICY_FAILURE_EARLIER_EOS"
+  },
+  "bound_static_files": {
+    "tokenizer_config": {
+      "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/tokenizer_config.json",
+      "sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+    },
+    "generation_config": {
+      "path": "/home/lizening/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/generation_config.json",
+      "sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2"
+    },
+    "episode_source": {
+      "path": "/home/lizening/research-notes/agent-logs/20261118__CODEX__fixed_product_per_arm__private/runtime/fixed_product_dev/episode.py",
+      "sha256": "06922aed662e84c1366624600c361f64ca7fba1ee93daccf83ff8de7a174a21b"
+    },
+    "generation_source": {
+      "path": "/home/lizening/research-notes/agent-logs/20261116__CODEX__two-object-paired-eval__candidate/gate-live/source_worker.py",
+      "sha256": "36f4d2a4d82e5798a5d3fd786fa80505fe3c345ff7333aa8bdfaf52581a34111"
+    },
+    "producer_source": {
+      "path": "/home/lizening/.codex/worktrees/parallel-goal-runtime-9dd/src/self_improvement/si_transfer_eval/live_runtime.py",
+      "sha256": "c247df8e1ac8985dc569b67c4ab3f3e2efceef1b837973e861a085a95fd3b2bc"
+    },
+    "controlled_cpu_test_source": {
+      "path": "/home/lizening/research-notes/agent-logs/20261118__REVIEW__eos_pad_contract__Nuy8wQ/test_eos_pad_contract.py",
+      "sha256": "0d8a40bb3e6c69cccabc8ba3a4547b91791103a0d3b265449f378b197f4c6cbc"
+    }
+  },
+  "runtime_observation": "NOT_OBSERVED_BY_THIS_STATIC_BINDING",
+  "scientific_execution_authorization": "NOT_GRANTED_BY_THIS_ARTIFACT"
+}
