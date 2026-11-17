@@ -1,0 +1,114 @@
+{
+  "audit_status": "PASS_LEDGER_RECONCILIATION",
+  "checks": {
+    "authentic_exit_failed": true,
+    "claim_tokens_match_summary": true,
+    "effect_starts_match_returns": true,
+    "last_is_fourth_episode_step49": true,
+    "no_external_unknown": true,
+    "one_stop": true,
+    "operation_counts_match_expected": true,
+    "reserved_tokens_match_summary": true,
+    "seq_contiguous": true,
+    "source_files_unchanged_during_audit": true,
+    "stop_cause_matches": true,
+    "summary_counts_match": true,
+    "summary_unknown": true
+  },
+  "cleanup_event_counts": {
+    "cleanup_returned": 2,
+    "cleanup_started": 2
+  },
+  "completed_episodes": 3,
+  "completed_first_parent_arm_outcomes": {
+    "C-old": "SUCCESS",
+    "C-quarter": "SUCCESS",
+    "P0": "SUCCESS"
+  },
+  "direct_supervisor_exit": {
+    "device_allocated_seconds": 162.78758373018354,
+    "elapsed_seconds": 162.78758373018354,
+    "physical_descendant_cleanup": "NOT_PROVEN",
+    "returncode": 1,
+    "status": "UNKNOWN"
+  },
+  "event_count": 876,
+  "external_returned": {
+    "cuda_guard": 4,
+    "environment_close": 3,
+    "environment_construct": 4,
+    "environment_reset": 4,
+    "environment_step": 74,
+    "model_close": 3,
+    "model_generation": 74,
+    "model_load": 4,
+    "tokenizer_preview": 74
+  },
+  "external_started": {
+    "cuda_guard": 4,
+    "environment_close": 3,
+    "environment_construct": 4,
+    "environment_reset": 4,
+    "environment_step": 74,
+    "model_close": 3,
+    "model_generation": 74,
+    "model_load": 4,
+    "tokenizer_preview": 74
+  },
+  "external_unknown_count": 0,
+  "first_parent_interpretation": "one exposed DEV task only",
+  "last_transition": {
+    "arm": "P0",
+    "done": true,
+    "lost_present": false,
+    "parent_index": 1,
+    "step_index": 49,
+    "truncated": false,
+    "won": [
+      false
+    ]
+  },
+  "orphan_return_count": 0,
+  "pilot_budget": {
+    "additional_planning_unknown_reserve_seconds": 60,
+    "charged_plus_reserve_seconds": 1175,
+    "previous_training_charge_seconds": 952,
+    "sum_charges_seconds": 1115,
+    "this_run_charge_ceil_seconds": 163,
+    "unbounded_unknown_tail": "NOT_PROVEN"
+  },
+  "scope": "post-stop aggregate-only; no reevaluation, no retry, no causal or population claims",
+  "second_parent_arm_states": {
+    "C-old": "NOT_STARTED",
+    "C-quarter": "NOT_STARTED",
+    "P0": "IN_PROGRESS"
+  },
+  "source_sha256": {
+    "../proposed-live-2518d243e6154d5bb059293cc3eed52a.claim.json": "44c52749661984b74acf99bf3339db2e516f8db7166bad0f8db61469e15c0737",
+    "gpu_samples.jsonl": "05ca41adecc1a890cd0284b4c4ced070098b54516dac704c6b36146ba6a353e4",
+    "resource.jsonl": "7d38c817768b90381823269083e1d715d62680b0b1a5ba23b637d97fd516c023",
+    "results/events.jsonl": "8b4026a0059e3386a8d1ca284d0f4defa12f5b20c9ef049349c787f172f88613",
+    "results/summary.json": "e470eb85dbf7c59e17c366e13825efdf7384e76a42f788f31a64501aa436ed24",
+    "supervisor_exit.json": "5af93232e690d408b9879e11b172e1ee6dbc3f1f54619b625942b499267e021e",
+    "supervisor_start.json": "824b0dffaf7b2daf7e081da9929006814562a56bca0c8c0751e8b4e4550f4992",
+    "worker.stderr": "086da1320fbf9c73f66b26b58523034f9a88a29cf071f8fc73ef191cefcc6065",
+    "worker.stdout": "eee3d480cb4f5bcae681e03384918010cb1be1519a3420192aabd80dd1798023"
+  },
+  "time_unix": 1794956062.3008647,
+  "tokens_reserved": {
+    "input_tokens": 53157,
+    "output_tokens": 1184
+  },
+  "tokens_worker_reported_completed": {
+    "input_tokens": 53157,
+    "output_tokens": 370
+  },
+  "unreturned_count": 0,
+  "visible_process_check": {
+    "exact_cli_matches": 0,
+    "inaccessible_or_disappeared_proc_entries": 1,
+    "known_prior_pid_1708765_visible": false,
+    "known_prior_pid_1708770_visible": false,
+    "scope": "visible /proc at audit time only; host PID namespaces, detached descendants and GPU context remain unproven"
+  }
+}
