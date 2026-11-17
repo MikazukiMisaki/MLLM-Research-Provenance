@@ -1,0 +1,3 @@
+# Independent verification addendum
+
+The predeclared 16-scenario numerical grid was independently checked using dynamic programming and small-discordant manual cases. Maximum absolute discrepancy 4.65e-13. Exact two-sided McNemar calculations are consistent within the stated grid. Independent review SHA256 14b18406dd2ab1e7bedf722ea2657f484666605c0aaa3364dacd36df5cc38dbb. The alpha 0.025 calculation is a conservative single-comparison planning quantity, not joint power for two Holm comparisons. Boundary scenarios q=0 or directional probability 0 or 1 are not supported by this script and were not part of the grid. Independence, constant-discordance, fixed-effect and source-provenance caveats in NOTE.md continue to apply; no study effect is inferred.
