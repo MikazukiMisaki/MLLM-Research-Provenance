@@ -1,0 +1,11 @@
+# Independent anonymous review: three toy text-only DEV templates
+
+**PASS for the reported engineering-ledger consistency and the three observed hand-authored toy plans.** This is not a model/agent success-rate measurement, an actual ALFWorld adapter run, a representative benchmark, a source-independent task pool, or evidence of independent confirmatory parents. No environment or model was executed by this review.
+
+The original 64-event ledger SHA256 is `b5beb8ef863a9bf2138d2c6c7387077903e64807c9017dc1e68e2eff4fb6da4e`; authentic launcher receipt SHA256 `3cec3bee1b997c32914322acc187d1aed86d50b1199bcafc7d1874e09a84134a` records worker rc=0, status RETURNED, stop=null, retry=false. Independent counts show three each construction/init/load/reset starts and returns, six step starts/returns, 12 pddl2sas starts/returns, three completed plan markers and one run-complete marker. The prelaunch hashes of plan, worker and launcher and all 14 listed final inventory hashes match.
+
+In each of three anonymized cases the reset recorded won=false; step 0 recorded done=false/won=false; step 1 recorded done=true/won=true and reward=1. Each case records two original conversion returns inside load and two inside reset, none during the two steps. These are returned native PddlEnv events for the fixed artificial plans; there is no observation of an autonomous model, normal ALFWorld wrapper, native roster loader or real-task generalization. Source inspection confirms the conversion instrumentation wraps and calls the original `fast_downward.pddl2sas`, then logs return, rather than substituting its result.
+
+Launcher reports 2.035877412 s wall, child user CPU 1.54892 s, system CPU 0.132808 s, peak RSS 71,804 KiB. Device/model generation is not part of the declared run. Filesystem space was sampled and per-file capped; total physical I/O and escaped/invisible descendant costs remain UNKNOWN. The audit does not infer independent GPU/process ownership from these records.
+
+The original `EXECUTION_RECORD.md` SHA256 is `441916df4d3287a3f4b8b59e71bfbf220bfad937ab97740dcb327e44c8670eef`. Source event bytes were unchanged between the audit's initial read and re-read. Anonymized aggregate/individual-case checks are in `audit.json`; no new task was created and no original evidence modified.
