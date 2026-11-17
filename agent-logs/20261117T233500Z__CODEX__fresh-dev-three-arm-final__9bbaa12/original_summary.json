@@ -1,0 +1,186 @@
+{
+  "error": null,
+  "known_completed_generation_tokens": {
+    "input_tokens": 320009,
+    "output_tokens": 3005
+  },
+  "open_effect": null,
+  "operation_starts": {
+    "cuda_guard": 36,
+    "environment_close": 36,
+    "environment_construct": 36,
+    "environment_reset": 36,
+    "environment_step": 601,
+    "model_close": 36,
+    "model_generation": 601,
+    "model_load": 36,
+    "tokenizer_preview": 601
+  },
+  "physical_cleanup": "NOT_PROVEN",
+  "reserved_tokens": {
+    "input_tokens": 320009,
+    "output_tokens": 9616
+  },
+  "retry": false,
+  "rows": [
+    {
+      "arm_order": [
+        "P0",
+        "C-old",
+        "C-quarter"
+      ],
+      "arms": {
+        "C-old": "SUCCESS",
+        "C-quarter": "SUCCESS",
+        "P0": "SUCCESS"
+      },
+      "index": 0
+    },
+    {
+      "arm_order": [
+        "P0",
+        "C-quarter",
+        "C-old"
+      ],
+      "arms": {
+        "C-old": "SUCCESS",
+        "C-quarter": "SUCCESS",
+        "P0": "SUCCESS"
+      },
+      "index": 1
+    },
+    {
+      "arm_order": [
+        "C-old",
+        "P0",
+        "C-quarter"
+      ],
+      "arms": {
+        "C-old": "SUCCESS",
+        "C-quarter": "SUCCESS",
+        "P0": "SUCCESS"
+      },
+      "index": 2
+    },
+    {
+      "arm_order": [
+        "C-old",
+        "C-quarter",
+        "P0"
+      ],
+      "arms": {
+        "C-old": "SUCCESS",
+        "C-quarter": "SUCCESS",
+        "P0": "SUCCESS"
+      },
+      "index": 3
+    },
+    {
+      "arm_order": [
+        "C-quarter",
+        "P0",
+        "C-old"
+      ],
+      "arms": {
+        "C-old": "SUCCESS",
+        "C-quarter": "SUCCESS",
+        "P0": "SUCCESS"
+      },
+      "index": 4
+    },
+    {
+      "arm_order": [
+        "C-quarter",
+        "C-old",
+        "P0"
+      ],
+      "arms": {
+        "C-old": "HORIZON_FAILURE",
+        "C-quarter": "HORIZON_FAILURE",
+        "P0": "HORIZON_FAILURE"
+      },
+      "index": 5
+    },
+    {
+      "arm_order": [
+        "P0",
+        "C-old",
+        "C-quarter"
+      ],
+      "arms": {
+        "C-old": "HORIZON_FAILURE",
+        "C-quarter": "HORIZON_FAILURE",
+        "P0": "HORIZON_FAILURE"
+      },
+      "index": 6
+    },
+    {
+      "arm_order": [
+        "P0",
+        "C-quarter",
+        "C-old"
+      ],
+      "arms": {
+        "C-old": "SUCCESS",
+        "C-quarter": "SUCCESS",
+        "P0": "SUCCESS"
+      },
+      "index": 7
+    },
+    {
+      "arm_order": [
+        "C-old",
+        "P0",
+        "C-quarter"
+      ],
+      "arms": {
+        "C-old": "SUCCESS",
+        "C-quarter": "SUCCESS",
+        "P0": "SUCCESS"
+      },
+      "index": 8
+    },
+    {
+      "arm_order": [
+        "C-old",
+        "C-quarter",
+        "P0"
+      ],
+      "arms": {
+        "C-old": "SUCCESS",
+        "C-quarter": "SUCCESS",
+        "P0": "SUCCESS"
+      },
+      "index": 9
+    },
+    {
+      "arm_order": [
+        "C-quarter",
+        "P0",
+        "C-old"
+      ],
+      "arms": {
+        "C-old": "SUCCESS",
+        "C-quarter": "SUCCESS",
+        "P0": "SUCCESS"
+      },
+      "index": 10
+    },
+    {
+      "arm_order": [
+        "C-quarter",
+        "C-old",
+        "P0"
+      ],
+      "arms": {
+        "C-old": "SUCCESS",
+        "C-quarter": "SUCCESS",
+        "P0": "SUCCESS"
+      },
+      "index": 11
+    }
+  ],
+  "scope": "EXPOSED_DEV",
+  "status": "COMPLETE",
+  "token_measurement_complete": true
+}
