@@ -1,0 +1,147 @@
+--- v3/production_adapter.py
++++ v4/production_adapter.py
+@@ -0,0 +1,73 @@
++"""Test-only binding to pinned production port code with synthetic CASES.
++
++This is deliberately not a real-run launcher or a production admission gate.
++"""
++import hashlib
++import inspect
++import os
++from pathlib import Path
++import stat
++import sys
++import types
++
++SOURCE_SHA256 = 'a1c5d80d58d0b4219ed813f7d61e30fe0e1a02ddca273f93b6734799e491e20e'
++
++class BindingError(ValueError):
++    pass
++
++def load_synthetic_bound(source_path, fixture_root, synthetic_cases, expected_sha=SOURCE_SHA256):
++    """Execute exact checked source bytes; replace `forward_specs.CASES` for fixtures.
++
++    No import of the real forward_specs. This synthetic-only binding never claims
++    the real CASES registry, production roster, or genuine task assets were checked.
++    """
++    source_path=Path(source_path)
++    fixture_root=Path(fixture_root).resolve(strict=True)
++    if not source_path.is_absolute() or not fixture_root.is_dir() or not synthetic_cases:
++        raise BindingError('fixture/source shape')
++    fd=os.open(source_path,os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC)
++    try:
++        before=os.fstat(fd)
++        if not stat.S_ISREG(before.st_mode) or before.st_size>1_000_000: raise BindingError('source shape')
++        with os.fdopen(fd,'rb',closefd=False) as source: raw=source.read(1_000_001)
++        after=os.fstat(fd)
++        if (before.st_dev,before.st_ino,before.st_size,before.st_mtime_ns,before.st_ctime_ns)!=(after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns,after.st_ctime_ns):
++            raise BindingError('source drift')
++    finally: os.close(fd)
++    if hashlib.sha256(raw).hexdigest()!=expected_sha or expected_sha != SOURCE_SHA256:
++        raise BindingError('source hash mismatch')
++    for key, spec in synthetic_cases.items():
++        if not isinstance(key,str) or spec.get('family')!='two': raise BindingError('fixture case')
++        for value in spec['inputs'].values():
++            path=Path(value['path'])
++            if not path.is_absolute() or '..' in path.parts or not path.resolve(strict=True).is_relative_to(fixture_root):
++                raise BindingError('input outside fixture root')
++    fake=types.ModuleType('forward_specs')
++    fake.CASES=synthetic_cases
++    module=types.ModuleType('eprime_ports_synthetic_bound')
++    module.__file__=str(source_path)
++    prior=sys.modules.get('forward_specs')
++    try:
++        sys.modules['forward_specs']=fake
++        exec(compile(raw,str(source_path),'exec'),module.__dict__)
++    finally:
++        if prior is None: sys.modules.pop('forward_specs',None)
++        else: sys.modules['forward_specs']=prior
++    if (module.CASES is not synthetic_cases or module.materialize.__code__.co_filename != str(source_path) or
++        module.verify_materialized.__code__.co_filename != str(source_path)):
++        raise BindingError('wrong functions/registry')
++    if str(inspect.signature(module.materialize)) != '(output, manifest, journal, *, family)':
++        raise BindingError('materialize signature')
++    if str(inspect.signature(module.verify_materialized)) != '(game, config_path, dataset, manifest, journal, phase)':
++        raise BindingError('verify signature')
++
++    def setup(output, inputs, journal, *, family):
++        if inputs not in [spec['inputs'] for spec in synthetic_cases.values()]: raise BindingError('unregistered fixture')
++        if not Path(output).resolve(strict=True).is_relative_to(fixture_root): raise BindingError('output outside fixture')
++        return module.materialize(output, inputs, journal, family=family)
++
++    def verify(game, config, dataset, inputs, journal, phase):
++        if inputs not in [spec['inputs'] for spec in synthetic_cases.values()]: raise BindingError('unregistered fixture')
++        return module.verify_materialized(game, config, dataset, inputs, journal, phase)
++
++    return setup, verify, module
+--- v3/test_production_adapter.py
++++ v4/test_production_adapter.py
+@@ -0,0 +1,68 @@
++"""Actual pinned port functions, temporary fake cases, no environment/model/GPU."""
++import hashlib
++import json
++import os
++from pathlib import Path
++import tempfile
++import unittest
++import candidate
++import production_adapter as adapter
++from test_candidate import spawn_for
++
++SOURCE=Path('/home/lizening/research-notes/agent-logs/20261116__CODEX__two-object-paired-eval__candidate/gate-live/eprime_ports.py')
++
++def make_fixture(root,case):
++    base=root/case; base.mkdir()
++    objects={'game':b'synthetic game; not ALFWorld data',
++             'routing':json.dumps({'task_type':'pick_two_obj_and_place'}).encode(),
++             'config':json.dumps({'dataset':{'data_path':'REPLACE_ONLY_WITH_THIS_PARENT_PRIVATE_ROOT','num_train_games':1},
++                 'env':{'domain_randomization':False,'expert_type':'handcoded','goal_desc_human_anns_prob':0.0,'task_types':[6]},
++                 'general':{'training_method':'dqn'},'rl':{'training':{'max_nb_steps_per_episode':50}}}).encode()}
++    result={}
++    for key,value in objects.items():
++        path=base/(key+'.json');path.write_bytes(value)
++        result[key]={'path':str(path),'sha256':hashlib.sha256(value).hexdigest()}
++    return result
++
++class AdapterTest(unittest.TestCase):
++    def setUp(self):
++        self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
++        self.root=Path(self.tmp.name).resolve()
++        self.fixture=self.root/'inputs';self.fixture.mkdir()
++        self.manifests={key:make_fixture(self.fixture,key) for key in candidate.PAIRS}
++        self.cases={key:{'family':'two','inputs':manifest} for key,manifest in self.manifests.items()}
++        self.setup_port,self.verify_port,self.module=adapter.load_synthetic_bound(SOURCE,self.root,self.cases)
++        self.owner=candidate.Owner(self.root/'out')
++
++    def test_four_pairs_actual_production_ports_fake_cases(self):
++        seen=[]
++        for pair,order in candidate.SCHEDULE:
++            candidate.pair(self.owner,pair,order,self.manifests[pair],self.setup_port,self.verify_port,spawn_for(seen=seen))
++        self.owner.complete()
++        entries=[json.loads(line) for line in self.owner.log.read_text().splitlines()]
++        details=[e['data']['event'] for e in entries if e['type']=='setup_detail']
++        self.assertEqual(details.count('eprime_materialization_started'),4)
++        self.assertEqual(details.count('eprime_materialization_returned'),4)
++        self.assertEqual(details.count('eprime_byte_verification_returned'),16)
++        self.assertEqual(self.owner.count['materialize'],4)
++        self.assertEqual(len(seen),8)
++        self.assertTrue(all([seen[i][2]==seen[i+1][2] for i in range(0,8,2)]))
++        self.assertIs(self.module.CASES,self.cases)
++        self.assertEqual(self.module.materialize.__code__.co_filename,str(SOURCE))
++
++    def test_wrong_source_digest_is_rejected(self):
++        with self.assertRaises(adapter.BindingError): adapter.load_synthetic_bound(SOURCE,self.root,self.cases,'0'*64)
++
++    def test_fixture_escape_is_rejected_before_port_call(self):
++        bad={'bad':{'family':'two','inputs':dict(self.manifests['one'])}}
++        bad['bad']['inputs']['game']={'path':'/etc/hosts','sha256':'0'*64}
++        with self.assertRaises(adapter.BindingError): adapter.load_synthetic_bound(SOURCE,self.root,bad)
++
++    def test_real_port_detects_modified_fake_materialization(self):
++        out=self.root/'single';out.mkdir()
++        journal=lambda *_:None
++        paths=self.setup_port(out,self.manifests['one'],journal,family='two')
++        Path(paths[0]).write_text('tampered')
++        with self.assertRaises(ValueError): self.verify_port(*paths,self.manifests['one'],journal,'post')
++
++if __name__=='__main__':unittest.main(verbosity=2)
