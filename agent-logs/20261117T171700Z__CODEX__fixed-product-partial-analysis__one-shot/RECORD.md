@@ -1,0 +1,7 @@
+# Partial fixed-product DEV: independent recount and follow-up
+
+The one-shot batch and all raw evidence are recorded in `agent-logs/20261117T171200Z__CODEX__fixed-product-dev-interrupted__one-shot/` (commit 4f51184444a86bffecd856e0689a9d7bbf8cfd0a). A separate reviewer read the raw logs, independently reproduced both complete-pair outcomes and operation/token counts, and checked the sequence/previous/digest chain of all six worker journals. The case c candidate's final owner reservation has no corresponding worker step_started. The examined supervisor code raises before sending its ACK, but the owner reservation remains unclosed in the unmodified evidence. The actual stop-or-deadline error does not identify which condition occurred.
+
+ROSTER_BOUNDS.md provides full-four-case worst-case bounds; TRAJECTORY_DESCRIPTIVE_NOTE.md records the observed repeated actions. Both are DEV-only, not confirmatory outcomes.
+
+A separate engineering reviewer created a future-only isolated candidate to record the stop signal and expired deadline independently in that specific ACK guard. Candidate supervisor SHA256 89c6894e02440b9a21e7319918a7e705179399f5a5779175e76c3a9fe051d937; two CPU-only tests passed according to that review. It cannot reconstruct the original stop reason or eliminate all signal races, and was not used in this run. It would need fresh code binding and review before any prospective execution. No retry or further science is represented here.
