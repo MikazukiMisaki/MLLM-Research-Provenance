@@ -1,0 +1,27 @@
+# Independent scientific re-review: state-selected self-improvement v3
+
+**HOLD for a small but material protocol-text correction; no scientific execution or real-data feasibility has been established.** The intended outcome coding, inference-context and P0 screen are substantially improved, but a contradictory leftover sentence could cause completed failures to be treated as UNKNOWN. The primary endpoint is also labelled native-only despite including explicitly defined non-native policy failures.
+
+## Exact reviewed bytes and scope
+
+Candidate `/home/lizening/research-notes/agent-logs/20261118__CODEX__self_improvement_loop_hypothesis_v3__private/RESEARCH_DESIGN.md` SHA256 `76f17ffc36ccc8a776104dc2394bfa4246e2697e2990a530eb0169599159e4ce`. All 5 inventory entries verified; `FILE_HASHES.sha256` SHA256 `b056fa779cea3d042c507eae117c42eea0add21ee073aab235d3e3eb940df0b8`. Fictional `screen_examples.py` SHA256 `5f43cc90c9ec4184afed86d2a38869d91bb9d05175f56a00c5581f34e47ec6d8`; its three shown examples and exact-Fraction formulas were read as fictional arithmetic, not scientific evidence. I did not inspect real task assets or run model/environment/experiment. Historical statements quoted by the plan were not independently re-established.
+
+## Completed fixes and remaining text contradiction
+
+The outcome section at lines 34–40 explicitly distinguishes native won success=1, verified completed task or predefined policy failure=0, and missing, technical, interrupted, contradictory, invalid-legal-mapping or unstarted observations=UNKNOWN. It states no fabricated action for a parser failure and no retrospective reclassification. **However, line 42 retains “Failed/unstarted/unknown results remain UNKNOWN”, contradicting the completed failure=0 definition at line 37.** Before freezing replace that sentence with explicit language such as: “Completed protocol-defined task/policy failures are 0; only unstarted, technical, interrupted or otherwise indeterminate outcomes remain UNKNOWN.” This is not merely cosmetic: the alternatives change the primary success denominator and screen.
+
+Line 42 also calls the primary observation “native per-parent task success”, whereas line 37 deliberately counts parser termination and H50 policy exhaustion as completed 0 even when the native environment has not terminated. Rename it “protocol-defined per-parent episode success” and retain native success receipts as its success condition, to avoid claiming that policy terminations were native terminal results. Fix both prospectively and apply the exact same rule to all seven products; do not reclassify earlier runs.
+
+The inference context section now requires fully templated/encoded prompt IDs plus 16 reserved output IDs to fit the verified effective runtime/model context; 4096 total implies ≤4080 prompt IDs. The independently conservative 4096-input and 16-output accounting maxima cannot be used together to claim 4096 context feasibility. This correctly resolves the design ambiguity, conditional on confirming the actual tokenizer/model/runtime and no hidden truncation.
+
+## P0 screen and interpretation
+
+The proposed screen now requires target−control ≥1/16 **and** seed-averaged target−P0 ≥1/16 across the 16 parents, plus ≤2 strict-majority control wins, completed 112 outcomes and audit/budget conditions. The v2 counterexample target 9/16, control 8/16, P0 16/16 no longer passes. The fictional screen uses exact rational arithmetic and rejects missing values; it is not the production evaluator. The screen is an exploratory resource decision with low resolution and arbitrary design-stage thresholds, not statistical proof, and cannot measure the effect of data source or establish that the loop action caused success. Per-parent/seed harm, cost and uncertainty remain important; if scientific/compute costs matter to a follow-up decision, specify a prospective cost guardrail rather than selecting one after results.
+
+Three seed models per arm are repeatedly measured on the same 16 parents; parent-clustered descriptive intervals preserve that pairing and are conditional on this chosen corpus/seeds and nonrandom roster. They do not make 48 independent tasks or provide reliable evidence across training seeds. A separate future confirmatory protocol requires justified precision, multiplicity and genuinely suitable independent parent provenance. None is established by this draft.
+
+## Bounds and feasibility
+
+Conditional arithmetic checks: 16 training examples × 4 epochs × 6 runs = 384 microbatches; accumulation 4 gives 96 optimizer steps. Marginal training maxima 384×4096=1,572,864 input and 384×16=6,144 label IDs; joint 4096 total remains mandatory. Seven products × 16 parents = 112 episodes; H50 gives 5,600 generation/steps, 112 resets, 5,712 step-plus-reset environment operations, and marginal 22,937,600/89,600 input/output token maxima. Training load, CPU/I/O/cleanup and previously incurred physical costs remain additional. No arithmetic error found within these assumptions.
+
+Four device-hours and six wall-hours are proposed stop limits, not measured feasibility or a reservation. No qualifying 16-parent, first-episode corpus, authenticated shared P0 product, full trainer transformation, valid evaluator, independent task lineage, exact source identity or real budgets have been established here. Freeze identities, roster, source selection, environment seeds, complete hyperparameters and unknown/outcome handling before any execution. This review grants no run permission and makes no claim of real efficacy.

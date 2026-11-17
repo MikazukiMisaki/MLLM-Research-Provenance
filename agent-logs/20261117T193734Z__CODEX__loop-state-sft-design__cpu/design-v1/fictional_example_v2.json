@@ -1,0 +1,41 @@
+{
+  "n_pairs": 1,
+  "pairs": [
+    {
+      "control": {
+        "action_map": {
+          "A000": "look",
+          "A001": "go to example"
+        },
+        "history": [
+          "look"
+        ],
+        "index": 0,
+        "prompt": "FICTIONAL control",
+        "prompt_sha256": "ddaaa0f26530d7f7f2b0a574c3d006abc2c9ac8a920c76706488f724cc9d3906",
+        "target_command": "go to example",
+        "target_id": "A001"
+      },
+      "episode": "FAKE_SUCCESS",
+      "parent": "FAKE_PARENT_1",
+      "target": {
+        "action_map": {
+          "A000": "look",
+          "A001": "go to example"
+        },
+        "history": [
+          "look",
+          "examine example",
+          "look",
+          "examine example"
+        ],
+        "index": 8,
+        "prompt": "FICTIONAL target",
+        "prompt_sha256": "5786b6dbe332d1788200e590cc542d19b307b4fb85c497327ded6c79271c6ecf",
+        "target_command": "go to example",
+        "target_id": "A001"
+      }
+    }
+  ],
+  "status": "FICTIONAL_NOT_TRAINING_DATA"
+}

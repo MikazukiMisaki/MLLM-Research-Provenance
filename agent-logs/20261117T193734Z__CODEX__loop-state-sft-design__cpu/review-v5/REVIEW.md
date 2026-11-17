@@ -1,0 +1,9 @@
+# Independent narrow diff review: self-improvement design v5
+
+**PASS for the requested wording-only design clarification. DESIGN ONLY; no experiment clearance.** The P0 comparison remains descriptive/nonconfirmatory, and target-versus-P0 ≥ +1/16 remains a necessary prespecified follow-up resource-screen condition. All other scientific conditions and outstanding limitations from the v4 independent review remain unchanged.
+
+V5 `RESEARCH_DESIGN.md` SHA256 `c609e51b1d55be4bb88b6e7fddb24be4cd354dc6a54f0940855c4a6dec6ce40b`; `revision.diff` `e3d5c5236f7d669b4483bd5e2b53c2b41abeb383e3ec38b0a5e1c42fe4cb039e`; `FILE_HASHES.sha256` `ac1968b64ca16fefae256c47d2b0179a5673c658516ec103f5cda6351c33b6b4`. All six inventoried files matched. Independently compared v4-to-v5 diff hunks against declared diff: exact match, SHA256 `0d0bc7013e99c94ef536808977f3e23d310cd07206c77e77d394a0b95d66a207`. Apart from revision number/title and final supersession text, the sole substantive change adds this P0 clarification. No screen threshold or outcome, source/seed/task, context or budget condition changed.
+
+Prior review: `/home/lizening/research-notes/agent-logs/20261118__REVIEW__self_improvement_design_v4__Nxmb3o/REVIEW.md`. It is still conditional on truthful prospective outcome classification, source/product/task and runtime identities, parent isolation, available suitable materials, full real budget and independent implementation review. Three seeds / 16 nonrandom parents support only exploratory interpretation; fixed four device-hour / six wall-hour caps are not measured feasibility. The user’s intended self-improvement outcome is unproven.
+
+Only plan and fictional materials were read. No real task data, model, environment or experiment was accessed or run; no real efficacy or execution permission is inferred.
