@@ -1,0 +1,276 @@
+{
+  "cases": {
+    "a": {
+      "CANDIDATE": {
+        "action_types": {
+          "examine": 25,
+          "look": 25
+        },
+        "consecutive_identical_pairs": 0,
+        "generation_returned": 50,
+        "input_token_ids": 13175,
+        "output_token_ids_including_eos": 250,
+        "owner_sha256": "b4e1f0312c205df553c52ab3111533720565ede9d5f83aa884c9997ec5c54e77",
+        "reserved": {
+          "env_construct": 1,
+          "env_init": 1,
+          "generation": 50,
+          "materialize": 1,
+          "model_load": 1,
+          "reset": 1,
+          "step": 50
+        },
+        "return_to_action_two_steps_later": 48,
+        "returned": {
+          "env_construct": 1,
+          "env_init": 1,
+          "generation": 50,
+          "materialize": 1,
+          "model_load": 1,
+          "reset": 1,
+          "step": 50
+        },
+        "selection_statuses": {
+          "selected": 50
+        },
+        "steps_committed": 50,
+        "termination": "TERMINAL",
+        "won": false,
+        "worker_sha256": "91da6d5cd4e4f7348db4005fd0e1320177ee1cb95b97d3f2d3835d680afe0543"
+      },
+      "P0": {
+        "action_types": {
+          "examine": 25,
+          "look": 25
+        },
+        "consecutive_identical_pairs": 0,
+        "generation_returned": 50,
+        "input_token_ids": 13175,
+        "output_token_ids_including_eos": 250,
+        "owner_sha256": "87a504af1b214134f21ada69ba1809a377ef52265fc093131985574b02925833",
+        "reserved": {
+          "env_construct": 1,
+          "env_init": 1,
+          "generation": 50,
+          "materialize": 1,
+          "model_load": 1,
+          "reset": 1,
+          "step": 50
+        },
+        "return_to_action_two_steps_later": 48,
+        "returned": {
+          "env_construct": 1,
+          "env_init": 1,
+          "generation": 50,
+          "materialize": 1,
+          "model_load": 1,
+          "reset": 1,
+          "step": 50
+        },
+        "selection_statuses": {
+          "selected": 50
+        },
+        "steps_committed": 50,
+        "termination": "TERMINAL",
+        "won": false,
+        "worker_sha256": "b1ad9e4c26b90a9f0ff9fde0b0d553753a2ee499d318d60fca47c374094a333e"
+      },
+      "comparison": {
+        "first_divergent_action_step_1based": null,
+        "first_divergent_types": null,
+        "input_token_difference_candidate_minus_p0": 0,
+        "output_token_difference_candidate_minus_p0": 0,
+        "positional_matches_in_common_prefix_length": 50,
+        "public_initial_equal": true,
+        "shared_prefix_same_actions": 50
+      }
+    },
+    "b": {
+      "CANDIDATE": {
+        "action_types": {
+          "go to": 3,
+          "look": 4,
+          "other": 2,
+          "take": 2
+        },
+        "consecutive_identical_pairs": 0,
+        "generation_returned": 11,
+        "input_token_ids": 3546,
+        "output_token_ids_including_eos": 55,
+        "owner_sha256": "9892f6c2c6c0f2def2400e8478c6a21f428b4a7049944b3bce04b390741686b2",
+        "reserved": {
+          "env_construct": 1,
+          "env_init": 1,
+          "generation": 11,
+          "materialize": 1,
+          "model_load": 1,
+          "reset": 1,
+          "step": 11
+        },
+        "return_to_action_two_steps_later": 1,
+        "returned": {
+          "env_construct": 1,
+          "env_init": 1,
+          "generation": 11,
+          "materialize": 1,
+          "model_load": 1,
+          "reset": 1,
+          "step": 11
+        },
+        "selection_statuses": {
+          "selected": 11
+        },
+        "steps_committed": 11,
+        "termination": "TERMINAL",
+        "won": true,
+        "worker_sha256": "2292259d1eed9ea07e6777cfa692a08dfcdd11ab68b3775bdc0ff2bf398fcd14"
+      },
+      "P0": {
+        "action_types": {
+          "go to": 3,
+          "look": 2,
+          "other": 2,
+          "take": 2
+        },
+        "consecutive_identical_pairs": 0,
+        "generation_returned": 9,
+        "input_token_ids": 2936,
+        "output_token_ids_including_eos": 45,
+        "owner_sha256": "d23bb512e7db4abc5c5d23bf9df14e593f3050b5f9eabf0ea107fef3122045b8",
+        "reserved": {
+          "env_construct": 1,
+          "env_init": 1,
+          "generation": 9,
+          "materialize": 1,
+          "model_load": 1,
+          "reset": 1,
+          "step": 9
+        },
+        "return_to_action_two_steps_later": 0,
+        "returned": {
+          "env_construct": 1,
+          "env_init": 1,
+          "generation": 9,
+          "materialize": 1,
+          "model_load": 1,
+          "reset": 1,
+          "step": 9
+        },
+        "selection_statuses": {
+          "selected": 9
+        },
+        "steps_committed": 9,
+        "termination": "TERMINAL",
+        "won": true,
+        "worker_sha256": "437827414e4bb5b530d5abd9cfc2eb91c9386f193903d4ea98b566f8884e67ab"
+      },
+      "comparison": {
+        "first_divergent_action_step_1based": 3,
+        "first_divergent_types": {
+          "CANDIDATE": "look",
+          "P0": "go to"
+        },
+        "input_token_difference_candidate_minus_p0": 610,
+        "output_token_difference_candidate_minus_p0": 10,
+        "positional_matches_in_common_prefix_length": 2,
+        "public_initial_equal": true,
+        "shared_prefix_same_actions": 2
+      }
+    },
+    "c": {
+      "CANDIDATE": {
+        "action_types": {
+          "go to": 13,
+          "look": 6,
+          "open": 1,
+          "other": 4,
+          "take": 4
+        },
+        "consecutive_identical_pairs": 0,
+        "generation_returned": 29,
+        "input_token_ids": 10370,
+        "output_token_ids_including_eos": 145,
+        "owner_sha256": "a022e03445082dc272e4cac154dc638037d944662b1d976efca647391766c367",
+        "reserved": {
+          "env_construct": 1,
+          "env_init": 1,
+          "generation": 29,
+          "materialize": 1,
+          "model_load": 1,
+          "reset": 1,
+          "step": 29
+        },
+        "return_to_action_two_steps_later": 0,
+        "returned": {
+          "env_construct": 1,
+          "env_init": 1,
+          "generation": 29,
+          "materialize": 1,
+          "model_load": 1,
+          "reset": 1,
+          "step": 28
+        },
+        "selection_statuses": {
+          "selected": 29
+        },
+        "steps_committed": 28,
+        "termination": "UNKNOWN",
+        "won": "UNKNOWN",
+        "worker_sha256": "a4b9063ef537271d7e03e7857051b57c11903cd39ef3c999501ef3a26cebaf13"
+      },
+      "P0": {
+        "action_types": {
+          "go to": 24,
+          "look": 13,
+          "open": 1,
+          "other": 6,
+          "take": 6
+        },
+        "consecutive_identical_pairs": 0,
+        "generation_returned": 50,
+        "input_token_ids": 18021,
+        "output_token_ids_including_eos": 250,
+        "owner_sha256": "3485457bb94e7a8d633204aab68e9ffeb5ced86ae6421381640426046c42f447",
+        "reserved": {
+          "env_construct": 1,
+          "env_init": 1,
+          "generation": 50,
+          "materialize": 1,
+          "model_load": 1,
+          "reset": 1,
+          "step": 50
+        },
+        "return_to_action_two_steps_later": 0,
+        "returned": {
+          "env_construct": 1,
+          "env_init": 1,
+          "generation": 50,
+          "materialize": 1,
+          "model_load": 1,
+          "reset": 1,
+          "step": 50
+        },
+        "selection_statuses": {
+          "selected": 50
+        },
+        "steps_committed": 50,
+        "termination": "TERMINAL",
+        "won": false,
+        "worker_sha256": "82d4ffd48060b6294dd7f854dc0b8d5081ca76eebd2642959f7f80a60d748731"
+      },
+      "comparison": {
+        "first_divergent_action_step_1based": 1,
+        "first_divergent_types": {
+          "CANDIDATE": "take",
+          "P0": "look"
+        },
+        "input_token_difference_candidate_minus_p0": -7651,
+        "output_token_difference_candidate_minus_p0": -105,
+        "positional_matches_in_common_prefix_length": 0,
+        "public_initial_equal": "NOT_COMPARABLE",
+        "shared_prefix_same_actions": 0
+      }
+    }
+  },
+  "scope": "interrupted, previously exposed and related DEV; not an accepted confirmatory comparison"
+}

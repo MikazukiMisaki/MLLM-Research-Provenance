@@ -1,0 +1,320 @@
+--- previous/bridge.py
++++ four-pair/bridge.py
+@@ -8,6 +8,7 @@
+ import socket
+ 
+ SHA_RE=re.compile(r'^[0-9a-f]{64}$')
++SCHEDULE=(('one',('A','B')),('two',('B','A')),('three',('A','B')),('four',('B','A')))
+ OPS=('env_construct','env_init','reset','model_load','generation','step')
+ ARM_CAPS={arm:{op:(2 if op in ('generation','step') else 1) for op in OPS} for arm in ('A','B')}
+ class Stop(RuntimeError): pass
+@@ -75,11 +76,12 @@
+         try: os.fsync(ledger_fd)
+         finally: os.close(ledger_fd)
+         self.caps=dict(caps);self.counts={k:0 for k in caps}
+-        self.arm_counts={a:{op:0 for op in ARM_CAPS[a]} for a in ARM_CAPS}
++        self.arm_counts={(p,a):{op:0 for op in ARM_CAPS[a]} for p,order in SCHEDULE for a in order}
+         self.ack_sender=ack_sender
+         self.previous='0'*64;self.seq=0;self.active=None;self.failed=False;self.finished=[]
+         self.setup_returned=False;self.prepared=set();self.closed=set()
+         self.public_claim=None;self.public_checked=set();self.bound_files=None
++        self.pair_index=0;self.arm_index=0;self.setups=set()
+ 
+     def record(self,event,payload):
+         row={'seq':self.seq,'previous':self.previous,'event':event,'payload':payload}
+@@ -103,9 +105,12 @@
+         except BaseException:pass
+         finally:self.failed=True
+ 
+-    def serve(self,sock,arm,journal):
+-        if (self.failed or not self.setup_returned or arm not in self.prepared or self.active is not None or
+-            arm not in ('A','B') or arm in self.finished or (arm=='B' and (self.finished!=['A'] or 'A' not in self.closed))):
++    def serve(self,sock,pair,arm,journal):
++        if (self.failed or self.pair_index>=len(SCHEDULE) or
++            (pair,arm)!=(SCHEDULE[self.pair_index][0],SCHEDULE[self.pair_index][1][self.arm_index]) or
++            not self.setup_returned or (pair,arm) not in self.prepared or self.active is not None or
++            (pair,arm) in self.finished or
++            (self.arm_index==1 and (pair,SCHEDULE[self.pair_index][1][0]) not in self.closed)):
+             if not self.failed: self.abort('invalid arm order or active effect')
+             sock.close()
+             raise Stop('cannot enter arm')
+@@ -127,18 +132,18 @@
+                         if set(msg)!={'kind','seq','operation'}:raise Stop('reserve schema')
+                         op=msg['operation']
+                         if (not isinstance(op,str) or op not in self.caps or op not in ARM_CAPS[arm] or self.active is not None or
+-                            self.counts[op]>=self.caps[op] or self.arm_counts[arm][op]>=ARM_CAPS[arm][op]):
++                            self.counts[op]>=self.caps[op] or self.arm_counts[(pair,arm)][op]>=ARM_CAPS[arm][op]):
+                             raise Stop('global/arm budget or duplicate reserve')
+                         required={'env_init':'env_construct','reset':'env_init','model_load':'reset','generation':'model_load','step':'generation'}
+                         if op in required and arm_returned[required[op]]<1: raise Stop('fake operation order')
+-                        if op=='model_load' and arm not in self.public_checked: raise Stop('reset claim not checked')
+-                        ticket={'arm':arm,'seq':expected,'operation':op}
++                        if op=='model_load' and (pair,arm) not in self.public_checked: raise Stop('reset claim not checked')
++                        ticket={'pair':pair,'arm':arm,'seq':expected,'operation':op}
+                         self.record('reserved',ticket) # durable before ACK and count
+-                        self.counts[op]+=1;self.arm_counts[arm][op]+=1;self.active=ticket;next_seq+=1
++                        self.counts[op]+=1;self.arm_counts[(pair,arm)][op]+=1;self.active=ticket;next_seq+=1
+                     elif kind in ('returned','unknown'):
+                         if set(msg)!={'kind','seq','operation','receipt_sha256'}:raise Stop('return schema')
+                         op=msg['operation'];receipt=msg['receipt_sha256']
+-                        if (type(receipt) is not str or not SHA_RE.fullmatch(receipt) or self.active!={'arm':arm,'seq':expected,'operation':op}):raise Stop('unexpected receipt')
++                        if (type(receipt) is not str or not SHA_RE.fullmatch(receipt) or self.active!={'pair':pair,'arm':arm,'seq':expected,'operation':op}):raise Stop('unexpected receipt')
+                         evidence=valid_receipt(journal,kind,op,expected,receipt)
+                         self.record(kind,dict(self.active,receipt_sha256=receipt));self.active=None
+                         if kind=='returned':
+@@ -159,12 +164,12 @@
+                                     raise Stop('fake public state shape')
+                                 if self.public_claim is None: self.public_claim=claim
+                                 elif canon(claim)!=canon(self.public_claim): raise Stop('fake reset claim mismatch')
+-                                self.record('public_claim_matched',{'arm':arm,'state':claim,'bound_files':self.bound_files})
+-                                self.public_checked.add(arm)
++                                self.record('public_claim_matched',{'pair':pair,'arm':arm,'state':claim,'bound_files':self.bound_files})
++                                self.public_checked.add((pair,arm))
+                     elif kind=='finished':
+                         if (set(msg)!={'kind','seq','status'} or self.active is not None or msg['status']!='COMPLETED' or
+                             any(arm_returned.get(op,0)<1 for op in ('env_construct','env_init','reset','model_load','generation'))): raise Stop('invalid or incomplete finish')
+-                        self.record('finished',{'arm':arm,'seq':expected,'status':'COMPLETED'})
++                        self.record('finished',{'pair':pair,'arm':arm,'seq':expected,'status':'COMPLETED'})
+                     else:raise Stop('unknown request')
+                     # Reject frames already queued before their prior ACK. This is not
+                     # a proof against a concurrent same-UID peer or all timing races.
+@@ -172,7 +177,7 @@
+                     if queued: raise Stop('pipelined frame before ACK')
+                     self.ack_sender(sock,canon({'kind':'ack','seq':expected,'allowed':True})+b'\n')
+                     if kind=='unknown':raise Stop('unknown effect; batch must stop')
+-                    if kind=='finished':self.finished.append(arm);return
++                    if kind=='finished':self.finished.append((pair,arm));return
+         except BaseException as error:
+             self.abort(type(error).__name__+': '+str(error))
+             raise Stop('fail stop: '+str(error)) from error
+--- previous/fake_arm.py
++++ four-pair/fake_arm.py
+@@ -82,7 +82,7 @@
+     def initialize(self):return {'synthetic':True}
+     def reset(self):
+         state=PublicState('synthetic','synthetic','fictional goal',
+-          'B differs' if mode=='mismatch' and arm=='B' else 'same fake observation',('fictional action',))
++          'different fake observation' if ((mode=='mismatch' and arm=='B') or (mode=='mismatch_A' and arm=='A')) else 'same fake observation',('fictional action',))
+         native={'won_batch':[False],'won_batch_type':'tuple' if mode=='tuple' else 'list'}
+         if arm=='B':
+             if mode=='bad_true':native['won_batch']=[True]
+@@ -136,7 +136,7 @@
+     def close(self):pass
+ 
+ def load_producer(_):
+-    if mode=='interrupt' and arm=='A':os._exit(7)
++    if (mode=='interrupt' and arm=='A') or mode=='interrupt_any':os._exit(7)
+     return FakeProducer()
+ def parse(raw,actions):return parse_p2_selection(raw,actions,reflection_required=False)
+ def state_factory(old,after):
+--- previous/batch_synthetic.py
++++ four-pair/batch_synthetic.py
+@@ -0,0 +1,66 @@
++"""Four fictional pairs; no scientific entrypoint and no real environment."""
++import json
++from pathlib import Path
++import socket
++import subprocess
++import sys
++import bridge
++from candidate import snapshot
++
++HERE=Path(__file__).parent
++
++def run_batch(root,inputs,setup,verify,*,schedule=None,mode_by_pair=None):
++    root=Path(root);root.mkdir(mode=0o700,parents=True,exist_ok=False)
++    caps={'materialize':4, **{op:(16 if op in ('generation','step') else 8) for op in bridge.OPS}}
++    owner=bridge.Budget(root/'owner',caps)
++    schedule=bridge.SCHEDULE if schedule is None else tuple(schedule)
++    mode_by_pair={} if mode_by_pair is None else mode_by_pair
++    def journal(event,payload):owner.record('setup_detail',{'event':event,'payload':payload})
++    try:
++        if schedule!=bridge.SCHEDULE or set(inputs)!={p for p,_ in bridge.SCHEDULE}:
++            raise bridge.Stop('fictional schedule mismatch before setup')
++        for pair,order in schedule:
++            if owner.failed or bridge.SCHEDULE[owner.pair_index]!=(pair,order) or owner.active:
++                raise bridge.Stop('pair order or unfinished operation')
++            owner.arm_index=0;owner.setup_returned=False;owner.public_claim=None;owner.bound_files=None
++            pairroot=root/('pair-'+pair);pairroot.mkdir(mode=0o700)
++            if pair in owner.setups or owner.counts['materialize']>=owner.caps['materialize']:
++                raise bridge.Stop('fictional setup cap')
++            ticket={'pair':pair,'arm':None,'seq':0,'operation':'materialize'}
++            owner.record('reserved',ticket);owner.counts['materialize']+=1;owner.active=ticket;owner.setups.add(pair)
++            paths=setup(pairroot,inputs[pair],journal,family='two')
++            if not isinstance(paths,tuple) or len(paths)!=3:raise bridge.Stop('bad synthetic setup')
++            bound=snapshot(paths,pairroot)
++            owner.record('returned',dict(ticket,synthetic_paths=bound));owner.active=None
++            owner.setup_returned=True;owner.bound_files=bound
++            for arm in order:
++                verify(*paths,inputs[pair],journal,'pre')
++                if snapshot(paths,pairroot)!=bound:raise bridge.Stop('input drift before arm')
++                key=(pair,arm)
++                owner.record('arm_pre_verified',{'pair':pair,'arm':arm,'bound':bound});owner.prepared.add(key)
++                armroot=root/('arm-'+pair+'-'+arm);armroot.mkdir(mode=0o700)
++                parent,child=socket.socketpair();proc=None
++                try:
++                    proc=subprocess.Popen([sys.executable,'-I','-B',str(HERE/'fake_arm.py'),str(child.fileno()),
++                        str(armroot/'worker.jsonl'),arm,json.dumps(list(map(str,paths))),mode_by_pair.get(pair,'normal'),
++                        json.dumps(owner.public_claim)],pass_fds=(child.fileno(),),stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
++                    child.close();owner.serve(parent,pair,arm,armroot/'worker.jsonl')
++                    rc=proc.wait(timeout=8);owner.record('synthetic_child_exit',{'pair':pair,'arm':arm,'returncode':rc})
++                    if rc:raise bridge.Stop('fake child nonzero')
++                finally:
++                    parent.close();child.close()
++                    if proc is not None and proc.poll() is None:
++                        proc.terminate();proc.wait(timeout=3)
++                verify(*paths,inputs[pair],journal,'post')
++                if snapshot(paths,pairroot)!=bound:raise bridge.Stop('input drift after arm')
++                owner.record('arm_post_verified',{'pair':pair,'arm':arm});owner.closed.add(key);owner.arm_index+=1
++            owner.pair_index+=1
++        expected=[(p,a) for p,order in bridge.SCHEDULE for a in order]
++        if (owner.failed or owner.active or owner.pair_index!=4 or owner.counts['materialize']!=4 or
++            owner.finished!=expected or owner.closed!=set(expected) or owner.setups!={p for p,_ in bridge.SCHEDULE}):
++            raise bridge.Stop('incomplete synthetic batch')
++        owner.record('synthetic_batch_complete',{'counts':owner.counts.copy()})
++        return owner
++    except BaseException as error:
++        if not owner.failed:owner.abort(type(error).__name__+': '+str(error))
++        raise
+--- previous/test_batch.py
++++ four-pair/test_batch.py
+@@ -0,0 +1,89 @@
++"""Synthetic-only four pair tests; original source functions, fake edges."""
++import hashlib
++import json
++from pathlib import Path
++import socket
++import tempfile
++import unittest
++import batch_synthetic
++import bridge
++import production_adapter
++
++SOURCE=Path('/home/lizening/research-notes/agent-logs/20261116__CODEX__two-object-paired-eval__candidate/gate-live/eprime_ports.py')
++def fixture(root):
++    source=root/'inputs';source.mkdir()
++    manifests={}
++    for pair,_ in bridge.SCHEDULE:
++        p=source/pair;p.mkdir()
++        values={'game':('fabricated game '+pair).encode(),
++          'routing':json.dumps({'task_type':'pick_two_obj_and_place'}).encode(),
++          'config':json.dumps({'dataset':{'data_path':'REPLACE_ONLY_WITH_THIS_PARENT_PRIVATE_ROOT','num_train_games':1},
++             'env':{'domain_randomization':False,'expert_type':'handcoded','goal_desc_human_anns_prob':0.0,'task_types':[6]},
++             'general':{'training_method':'dqn'},'rl':{'training':{'max_nb_steps_per_episode':50}}}).encode()}
++        data={}
++        for k,v in values.items():
++            path=p/(k+'.json');path.write_bytes(v);data[k]={'path':str(path),'sha256':hashlib.sha256(v).hexdigest()}
++        manifests[pair]=data
++    cases={p:{'family':'two','inputs':data} for p,data in manifests.items()}
++    setup,verify,_=production_adapter.load_synthetic_bound(SOURCE,root,cases)
++    return manifests,setup,verify
++
++class BatchTest(unittest.TestCase):
++    def setUp(self):
++        self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
++        self.root=Path(self.tmp.name).resolve()
++        self.inputs,self.setup,self.verify=fixture(self.root);self.out=self.root/'run'
++    def rows(self):return [json.loads(x) for x in (self.out/'owner'/'parent-ledger.jsonl').read_text().splitlines()]
++    def test_four_pairs_eight_arms_one_shared_ledger(self):
++        owner=batch_synthetic.run_batch(self.out,self.inputs,self.setup,self.verify)
++        expected=[(p,a) for p,order in bridge.SCHEDULE for a in order]
++        self.assertEqual(owner.finished,expected);self.assertEqual(owner.closed,set(expected))
++        self.assertEqual(owner.counts,{'materialize':4,'env_construct':8,'env_init':8,'reset':8,'model_load':8,'generation':16,'step':16})
++        rows=self.rows();self.assertEqual(rows[-1]['event'],'synthetic_batch_complete')
++        self.assertEqual(len([r for r in rows if r['event']=='public_claim_matched']),8)
++        exits=[r for r in rows if r['event']=='synthetic_child_exit'];self.assertEqual(len(exits),8)
++        self.assertTrue(all(r['payload']['returncode']==0 for r in exits))
++        for pair,order in bridge.SCHEDULE:
++            paths=[]
++            for arm in order:
++                events=[json.loads(x) for x in (self.out/('arm-'+pair+'-'+arm)/'worker.jsonl').read_text().splitlines()]
++                paths.append(events[0]['payload']['paths'])
++                prepared=[e['payload']['public'] for e in events if e['kind']=='prepared']
++                self.assertEqual(len(prepared),2)
++                self.assertEqual(prepared[1]['recent_history'],[['same fake observation','fictional action']])
++            self.assertEqual(paths[0],paths[1])
++    def test_mid_batch_interrupt_latches_and_keeps_cost(self):
++        saved=[];original=bridge.Budget
++        def capturing(*a,**kw):
++            obj=original(*a,**kw);saved.append(obj);return obj
++        bridge.Budget=capturing
++        try:
++            with self.assertRaises(bridge.Stop):
++                batch_synthetic.run_batch(self.out,self.inputs,self.setup,self.verify,mode_by_pair={'two':'interrupt_any'})
++        finally:bridge.Budget=original
++        owner=saved[0];self.assertTrue(owner.failed)
++        self.assertEqual(owner.counts['materialize'],2);self.assertEqual(owner.counts['model_load'],3)
++        self.assertEqual(owner.counts['generation'],4);self.assertEqual(owner.active['operation'],'model_load')
++        rows=self.rows();self.assertEqual(rows[-1]['event'],'aborted')
++        self.assertFalse(any(r['event']=='synthetic_batch_complete' for r in rows))
++        a,b=socket.socketpair()
++        try:
++            with self.assertRaises(bridge.Stop):owner.serve(a,'two','A',self.out/'unused')
++        finally:a.close();b.close()
++        with self.assertRaises(FileExistsError):batch_synthetic.run_batch(self.out,self.inputs,self.setup,self.verify)
++    def test_wrong_order_stops_before_any_setup(self):
++        bad=(('one',('B','A')),)+bridge.SCHEDULE[1:]
++        with self.assertRaises(bridge.Stop):batch_synthetic.run_batch(self.out,self.inputs,self.setup,self.verify,schedule=bad)
++        rows=self.rows();self.assertEqual(rows[-1]['event'],'aborted')
++        self.assertFalse(any(r['event']=='reserved' for r in rows))
++        with self.assertRaises(FileExistsError):batch_synthetic.run_batch(self.out,self.inputs,self.setup,self.verify)
++    def test_reversed_pair_second_arm_reset_mismatch_prevents_model(self):
++        with self.assertRaises(bridge.Stop):
++            batch_synthetic.run_batch(self.out,self.inputs,self.setup,self.verify,mode_by_pair={'two':'mismatch_A'})
++        rows=self.rows();reservations=[r['payload'] for r in rows if r['event']=='reserved']
++        self.assertTrue(any(r.get('pair')=='two' and r.get('arm')=='A' and r.get('operation')=='reset' for r in reservations))
++        self.assertFalse(any(r.get('pair')=='two' and r.get('arm')=='A' and r.get('operation')=='model_load' for r in reservations))
++        self.assertEqual(rows[-1]['event'],'aborted')
++        self.assertFalse((self.out/'pair-three').exists())
++
++if __name__=='__main__':unittest.main(verbosity=2)
+--- previous/synthetic_evidence.py
++++ four-pair/synthetic_evidence.py
+@@ -1,11 +1,11 @@
+-"""Retain one fictional two-step pair; never use real task/model assets."""
++"""Retain one four-pair fictional software transcript, not an experiment."""
+ import json
+ from pathlib import Path
+-from test_pair import fixture
+-from pair_synthetic import run_pair
++from test_batch import fixture
++from batch_synthetic import run_batch
+ root=Path(__file__).parent/'synthetic-evidence'
+ root.mkdir(mode=0o700)
+ inputs,setup,verify=fixture(root)
+-owner=run_pair(root/'run',inputs,setup,verify)
+-(root/'receipt.json').write_text(json.dumps({'scope':'fictional inputs, fake boundaries and child claims only',
+-  'counts':owner.counts,'finished':owner.finished,'closed':sorted(owner.closed),'failed':owner.failed},sort_keys=True,indent=2)+'\n')
++owner=run_batch(root/'run',inputs,setup,verify)
++(root/'receipt.json').write_text(json.dumps({'scope':'four fictional pairs and fake child claims only',
++ 'counts':owner.counts,'finished':owner.finished,'closed':sorted(owner.closed),'failed':owner.failed},sort_keys=True,indent=2)+'\n')
+--- previous/audit_evidence.py
++++ four-pair/audit_evidence.py
+@@ -0,0 +1,27 @@
++"""Offline verification of fictional journals; not physical-effect proof."""
++import hashlib
++import json
++from pathlib import Path
++
++root=Path(__file__).parent/'synthetic-evidence'/'run'
++def canonical(v):return json.dumps(v,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
++def audit(path):
++    data=path.read_bytes()
++    if not data or not data.endswith(b'\n'):raise ValueError('partial journal')
++    prev='0'*64;rows=[]
++    for i,line in enumerate(data.splitlines(),0):
++        row=json.loads(line);h=row.pop('digest')
++        if row['seq']!=i or row['previous']!=prev or hashlib.sha256(canonical(row)).hexdigest()!=h:
++            raise ValueError('broken journal chain')
++        prev=h;rows.append(row)
++    return rows,{'rows':len(rows),'sha256':hashlib.sha256(data).hexdigest(),'last_digest':prev}
++parent,parent_info=audit(root/'owner'/'parent-ledger.jsonl')
++if parent[-1]['event']!='synthetic_batch_complete':raise ValueError('incomplete fictional transcript')
++children={}
++for pair in ('one','two','three','four'):
++    for arm in ('A','B'):
++        path=root/('arm-'+pair+'-'+arm)/'worker.jsonl';rows,info=audit(path)
++        outcome=[r['payload']['result'] for r in rows if r['kind']=='synthetic_observed_episode_returned']
++        if len(outcome)!=1 or outcome[0]['steps']!=2 or outcome[0]['won'] is not True:raise ValueError('missing fake outcome')
++        children[pair+'-'+arm]=info
++print(json.dumps({'scope':'hash checks on fabricated journals, not proof of physical effects','parent':parent_info,'children':children},sort_keys=True,indent=2))
