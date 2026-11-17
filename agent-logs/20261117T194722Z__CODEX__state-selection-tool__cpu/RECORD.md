@@ -1,0 +1,3 @@
+# Synthetic state-selection tool and reviews
+
+CPU-only fictional manifests/episodes. v1 permitted exact source references to be counted across claimed parents; v2 rejects the independently reproduced identity and hardlink cases while accepting legitimate shared label files. Copied bytes and fabricated different IDs remain undetectable as disclosed. This is a design-time reference selection prototype; source authenticity, parent independence, model inputs, outcome and trainer adaptation remain unverified. No real training data, model, environment, GPU computation or scientific experiment was used.
