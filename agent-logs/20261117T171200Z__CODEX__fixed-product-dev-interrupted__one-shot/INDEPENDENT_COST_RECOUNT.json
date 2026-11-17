@@ -1,0 +1,472 @@
+{
+  "batch_completed": false,
+  "cases": {
+    "eval-two-pair-a": {
+      "1-P0": {
+        "generation_returned": 50,
+        "generation_started": 50,
+        "outcome": {
+          "arm": "P0",
+          "initial_public": {
+            "done": false,
+            "family": "pick_two_obj_and_place",
+            "goal": "put two twopairaitem in twopairatarget 1",
+            "observation": "-= Welcome to TextWorld, ALFRED! =-\n\nYou are facing the twopairatarget 1. Next to it, you see nothing.\n\nYour task is to: put two twopairaitem in twopairatarget 1.",
+            "reward": 0.0,
+            "task_id": "eval-two-pair-a",
+            "truncated": false,
+            "valid_actions": [
+              "examine twopairatarget 1",
+              "go to twopairasource1 1",
+              "help",
+              "inventory",
+              "look"
+            ]
+          },
+          "steps": 50,
+          "termination": "TERMINAL",
+          "won": false
+        },
+        "step_returned": 50,
+        "step_started": 50
+      },
+      "2-CANDIDATE": {
+        "generation_returned": 50,
+        "generation_started": 50,
+        "outcome": {
+          "arm": "CANDIDATE",
+          "initial_public": {
+            "done": false,
+            "family": "pick_two_obj_and_place",
+            "goal": "put two twopairaitem in twopairatarget 1",
+            "observation": "-= Welcome to TextWorld, ALFRED! =-\n\nYou are facing the twopairatarget 1. Next to it, you see nothing.\n\nYour task is to: put two twopairaitem in twopairatarget 1.",
+            "reward": 0.0,
+            "task_id": "eval-two-pair-a",
+            "truncated": false,
+            "valid_actions": [
+              "examine twopairatarget 1",
+              "go to twopairasource1 1",
+              "help",
+              "inventory",
+              "look"
+            ]
+          },
+          "steps": 50,
+          "termination": "TERMINAL",
+          "won": false
+        },
+        "step_returned": 50,
+        "step_started": 50
+      }
+    },
+    "eval-two-pair-b": {
+      "1-CANDIDATE": {
+        "generation_returned": 11,
+        "generation_started": 11,
+        "outcome": {
+          "arm": "CANDIDATE",
+          "initial_public": {
+            "done": false,
+            "family": "pick_two_obj_and_place",
+            "goal": "put two twopairbitem in twopairbtarget 1",
+            "observation": "-= Welcome to TextWorld, ALFRED! =-\n\nYou are facing the twopairbsource1 1. Next to it, you see nothing.\n\nYour task is to: put two twopairbitem in twopairbtarget 1.",
+            "reward": 0.0,
+            "task_id": "eval-two-pair-b",
+            "truncated": false,
+            "valid_actions": [
+              "examine twopairbsource1 1",
+              "go to twopairbtarget 1",
+              "help",
+              "inventory",
+              "look",
+              "take twopairbitem 1 from twopairbsource1 1",
+              "take twopairbitem 2 from twopairbsource1 1"
+            ]
+          },
+          "steps": 11,
+          "termination": "TERMINAL",
+          "won": true
+        },
+        "step_returned": 11,
+        "step_started": 11
+      },
+      "2-P0": {
+        "generation_returned": 9,
+        "generation_started": 9,
+        "outcome": {
+          "arm": "P0",
+          "initial_public": {
+            "done": false,
+            "family": "pick_two_obj_and_place",
+            "goal": "put two twopairbitem in twopairbtarget 1",
+            "observation": "-= Welcome to TextWorld, ALFRED! =-\n\nYou are facing the twopairbsource1 1. Next to it, you see nothing.\n\nYour task is to: put two twopairbitem in twopairbtarget 1.",
+            "reward": 0.0,
+            "task_id": "eval-two-pair-b",
+            "truncated": false,
+            "valid_actions": [
+              "examine twopairbsource1 1",
+              "go to twopairbtarget 1",
+              "help",
+              "inventory",
+              "look",
+              "take twopairbitem 1 from twopairbsource1 1",
+              "take twopairbitem 2 from twopairbsource1 1"
+            ]
+          },
+          "steps": 9,
+          "termination": "TERMINAL",
+          "won": true
+        },
+        "step_returned": 9,
+        "step_started": 9
+      }
+    },
+    "eval-two-pair-c": {
+      "1-P0": {
+        "generation_returned": 50,
+        "generation_started": 50,
+        "outcome": {
+          "arm": "P0",
+          "initial_public": {
+            "done": false,
+            "family": "pick_two_obj_and_place",
+            "goal": "put two twopaircitem in twopairctarget 1",
+            "observation": "-= Welcome to TextWorld, ALFRED! =-\n\nYou are facing the twopaircsource1 1. Next to it, you see nothing.\n\nYour task is to: put two twopaircitem in twopairctarget 1.",
+            "reward": 0.0,
+            "task_id": "eval-two-pair-c",
+            "truncated": false,
+            "valid_actions": [
+              "examine twopaircsource1 1",
+              "go to twopaircsource2 1",
+              "go to twopairctarget 1",
+              "help",
+              "inventory",
+              "look",
+              "take twopaircitem 2 from twopaircsource1 1"
+            ]
+          },
+          "steps": 50,
+          "termination": "TERMINAL",
+          "won": false
+        },
+        "step_returned": 50,
+        "step_started": 50
+      },
+      "2-CANDIDATE": {
+        "generation_returned": 29,
+        "generation_started": 29,
+        "outcome": null,
+        "step_returned": 28,
+        "step_started": 28
+      }
+    }
+  },
+  "counts": {
+    "reserved": {
+      "env_construct": 6,
+      "env_init": 6,
+      "generation": 199,
+      "materialize": 6,
+      "model_load": 6,
+      "reset": 6,
+      "step": 199
+    },
+    "returned": {
+      "env_construct": 6,
+      "env_init": 6,
+      "generation": 199,
+      "materialize": 6,
+      "model_load": 6,
+      "reset": 6,
+      "step": 198
+    }
+  },
+  "inputs_tokens": 61223,
+  "limitations": [
+    "Previously used related DEV tasks; not independent evaluation",
+    "Public reset equality does not establish hidden-state equality",
+    "Interrupted arm is UNKNOWN; absent arm not run",
+    "One step reserved without a corresponding returned receipt; conservative status UNKNOWN",
+    "Stop-or-deadline exception does not distinguish cause"
+  ],
+  "output_tokens": 995,
+  "raw_files": {
+    "live-output/eval-two-pair-a/1-P0/owner/supervisor_events.jsonl": {
+      "bytes": 46638,
+      "sha256": "87a504af1b214134f21ada69ba1809a377ef52265fc093131985574b02925833"
+    },
+    "live-output/eval-two-pair-a/1-P0/owner/worker.stderr": {
+      "bytes": 312,
+      "sha256": "7d0686349173775b0fc77fb149b463ca7e12bf2e4bef4b09a16763deeb13f7e3"
+    },
+    "live-output/eval-two-pair-a/1-P0/owner/worker.stdout": {
+      "bytes": 28,
+      "sha256": "192f7d3255f5bbc24517a77d24f6dc0bca77e2fe847d07aaa05791e0241b5142"
+    },
+    "live-output/eval-two-pair-a/1-P0/worker/eprime_only/actual_config.json": {
+      "bytes": 415,
+      "sha256": "37b1f4eaef8b57e5fc9f7ba69477c24410db1616f1cfa97cc92f0a56dd18393a"
+    },
+    "live-output/eval-two-pair-a/1-P0/worker/eprime_only/dataset/authored-eprime-only/game.tw-pddl": {
+      "bytes": 33471,
+      "sha256": "9c3f75b5fc8278bad3a2b8ee026c0eacbb9243e3bb51e1e72ccec8d64ba494e3"
+    },
+    "live-output/eval-two-pair-a/1-P0/worker/eprime_only/dataset/authored-eprime-only/traj_data.json": {
+      "bytes": 39,
+      "sha256": "9c4a7072be045f5f5f80b66444c917f86405a4f565b585e65e5370d50a1f89a0"
+    },
+    "live-output/eval-two-pair-a/1-P0/worker/load-1/resource.jsonl": {
+      "bytes": 3173767,
+      "sha256": "d08cdc69d8fa941feef5875d1be24fe3ae7ebbf0365e97d4d075eedaffe548f3"
+    },
+    "live-output/eval-two-pair-a/1-P0/worker/load-1/runtime_import_A_after.json": {
+      "bytes": 3235,
+      "sha256": "061059d6acb8a2a689b5a66f2874ef2452b152065cf85743a5234ce3c9fa4980"
+    },
+    "live-output/eval-two-pair-a/1-P0/worker/load-1/runtime_import_A_before.json": {
+      "bytes": 3235,
+      "sha256": "061059d6acb8a2a689b5a66f2874ef2452b152065cf85743a5234ce3c9fa4980"
+    },
+    "live-output/eval-two-pair-a/1-P0/worker/worker_events.jsonl": {
+      "bytes": 590134,
+      "sha256": "b1ad9e4c26b90a9f0ff9fde0b0d553753a2ee499d318d60fca47c374094a333e"
+    },
+    "live-output/eval-two-pair-a/1-P0/worker_config.json": {
+      "bytes": 12383,
+      "sha256": "82a7d834220654e4a899453ba0cea393c09066f17c1cceee148ea8a2627a444d"
+    },
+    "live-output/eval-two-pair-a/2-CANDIDATE/owner/supervisor_events.jsonl": {
+      "bytes": 46639,
+      "sha256": "b4e1f0312c205df553c52ab3111533720565ede9d5f83aa884c9997ec5c54e77"
+    },
+    "live-output/eval-two-pair-a/2-CANDIDATE/owner/worker.stderr": {
+      "bytes": 312,
+      "sha256": "0e179816d53171a2357b0122620aabcf74f1758222a336e44636c94c54fbd50a"
+    },
+    "live-output/eval-two-pair-a/2-CANDIDATE/owner/worker.stdout": {
+      "bytes": 28,
+      "sha256": "192f7d3255f5bbc24517a77d24f6dc0bca77e2fe847d07aaa05791e0241b5142"
+    },
+    "live-output/eval-two-pair-a/2-CANDIDATE/worker/eprime_only/actual_config.json": {
+      "bytes": 422,
+      "sha256": "29dbe87ff5160a698a0985a13b65c19fb0e4185df50d8ce9d26aec03d1c7c510"
+    },
+    "live-output/eval-two-pair-a/2-CANDIDATE/worker/eprime_only/dataset/authored-eprime-only/game.tw-pddl": {
+      "bytes": 33471,
+      "sha256": "9c3f75b5fc8278bad3a2b8ee026c0eacbb9243e3bb51e1e72ccec8d64ba494e3"
+    },
+    "live-output/eval-two-pair-a/2-CANDIDATE/worker/eprime_only/dataset/authored-eprime-only/traj_data.json": {
+      "bytes": 39,
+      "sha256": "9c4a7072be045f5f5f80b66444c917f86405a4f565b585e65e5370d50a1f89a0"
+    },
+    "live-output/eval-two-pair-a/2-CANDIDATE/worker/load-1/resource.jsonl": {
+      "bytes": 3173784,
+      "sha256": "6c06dacc3ce05d2e6fe31b3b89d8fe5bcfee7cacf668b214f61ab46d681a653c"
+    },
+    "live-output/eval-two-pair-a/2-CANDIDATE/worker/load-1/runtime_import_B_after.json": {
+      "bytes": 3235,
+      "sha256": "061059d6acb8a2a689b5a66f2874ef2452b152065cf85743a5234ce3c9fa4980"
+    },
+    "live-output/eval-two-pair-a/2-CANDIDATE/worker/load-1/runtime_import_B_before.json": {
+      "bytes": 3235,
+      "sha256": "061059d6acb8a2a689b5a66f2874ef2452b152065cf85743a5234ce3c9fa4980"
+    },
+    "live-output/eval-two-pair-a/2-CANDIDATE/worker/worker_events.jsonl": {
+      "bytes": 591310,
+      "sha256": "91da6d5cd4e4f7348db4005fd0e1320177ee1cb95b97d3f2d3835d680afe0543"
+    },
+    "live-output/eval-two-pair-a/2-CANDIDATE/worker_config.json": {
+      "bytes": 12830,
+      "sha256": "b86bdd082f843579179f939d8eff301f94915035499b63d438518a6e39e9925c"
+    },
+    "live-output/eval-two-pair-b/1-CANDIDATE/owner/supervisor_events.jsonl": {
+      "bytes": 13534,
+      "sha256": "9892f6c2c6c0f2def2400e8478c6a21f428b4a7049944b3bce04b390741686b2"
+    },
+    "live-output/eval-two-pair-b/1-CANDIDATE/owner/worker.stderr": {
+      "bytes": 312,
+      "sha256": "68990748b950d4a6dd5813f265cb3cb59be77af398a9caaba61317c707a2cf97"
+    },
+    "live-output/eval-two-pair-b/1-CANDIDATE/owner/worker.stdout": {
+      "bytes": 28,
+      "sha256": "192f7d3255f5bbc24517a77d24f6dc0bca77e2fe847d07aaa05791e0241b5142"
+    },
+    "live-output/eval-two-pair-b/1-CANDIDATE/worker/eprime_only/actual_config.json": {
+      "bytes": 422,
+      "sha256": "cedf558f4d9705469ebabdafe229d30c3f4c8b59f3ec09065f84e62644795621"
+    },
+    "live-output/eval-two-pair-b/1-CANDIDATE/worker/eprime_only/dataset/authored-eprime-only/game.tw-pddl": {
+      "bytes": 33472,
+      "sha256": "7dcffdc38914519e7d22b9961d760f9bf3311b632145589c9f5d6b5ed952808d"
+    },
+    "live-output/eval-two-pair-b/1-CANDIDATE/worker/eprime_only/dataset/authored-eprime-only/traj_data.json": {
+      "bytes": 39,
+      "sha256": "9c4a7072be045f5f5f80b66444c917f86405a4f565b585e65e5370d50a1f89a0"
+    },
+    "live-output/eval-two-pair-b/1-CANDIDATE/worker/load-1/resource.jsonl": {
+      "bytes": 748337,
+      "sha256": "6d5a3474005c0e917524eba1752fb625d0f915f82bf6966620c24fe0ba8e0f83"
+    },
+    "live-output/eval-two-pair-b/1-CANDIDATE/worker/load-1/runtime_import_B_after.json": {
+      "bytes": 3235,
+      "sha256": "061059d6acb8a2a689b5a66f2874ef2452b152065cf85743a5234ce3c9fa4980"
+    },
+    "live-output/eval-two-pair-b/1-CANDIDATE/worker/load-1/runtime_import_B_before.json": {
+      "bytes": 3235,
+      "sha256": "061059d6acb8a2a689b5a66f2874ef2452b152065cf85743a5234ce3c9fa4980"
+    },
+    "live-output/eval-two-pair-b/1-CANDIDATE/worker/worker_events.jsonl": {
+      "bytes": 152816,
+      "sha256": "2292259d1eed9ea07e6777cfa692a08dfcdd11ab68b3775bdc0ff2bf398fcd14"
+    },
+    "live-output/eval-two-pair-b/1-CANDIDATE/worker_config.json": {
+      "bytes": 12397,
+      "sha256": "fb731835ad742f02b18e2fa8f7ea56fb02c11af87e1b865b3b41bb2ba180f4e2"
+    },
+    "live-output/eval-two-pair-b/2-P0/owner/supervisor_events.jsonl": {
+      "bytes": 11872,
+      "sha256": "d23bb512e7db4abc5c5d23bf9df14e593f3050b5f9eabf0ea107fef3122045b8"
+    },
+    "live-output/eval-two-pair-b/2-P0/owner/worker.stderr": {
+      "bytes": 312,
+      "sha256": "f11f56eb4266f1f009f0a992b08db1d4f893e0d86a25da8aed2be0df82b8133e"
+    },
+    "live-output/eval-two-pair-b/2-P0/owner/worker.stdout": {
+      "bytes": 28,
+      "sha256": "192f7d3255f5bbc24517a77d24f6dc0bca77e2fe847d07aaa05791e0241b5142"
+    },
+    "live-output/eval-two-pair-b/2-P0/worker/eprime_only/actual_config.json": {
+      "bytes": 415,
+      "sha256": "7038f5cc8a2e0197a77c7f4f71840ba035dcedfe967b82b5fc53d7352816e04b"
+    },
+    "live-output/eval-two-pair-b/2-P0/worker/eprime_only/dataset/authored-eprime-only/game.tw-pddl": {
+      "bytes": 33472,
+      "sha256": "7dcffdc38914519e7d22b9961d760f9bf3311b632145589c9f5d6b5ed952808d"
+    },
+    "live-output/eval-two-pair-b/2-P0/worker/eprime_only/dataset/authored-eprime-only/traj_data.json": {
+      "bytes": 39,
+      "sha256": "9c4a7072be045f5f5f80b66444c917f86405a4f565b585e65e5370d50a1f89a0"
+    },
+    "live-output/eval-two-pair-b/2-P0/worker/load-1/resource.jsonl": {
+      "bytes": 623943,
+      "sha256": "23d3b70997bd30621612210f96a9ec8b3a7c91bf135079634a73f322cdd6f860"
+    },
+    "live-output/eval-two-pair-b/2-P0/worker/load-1/runtime_import_A_after.json": {
+      "bytes": 3235,
+      "sha256": "061059d6acb8a2a689b5a66f2874ef2452b152065cf85743a5234ce3c9fa4980"
+    },
+    "live-output/eval-two-pair-b/2-P0/worker/load-1/runtime_import_A_before.json": {
+      "bytes": 3235,
+      "sha256": "061059d6acb8a2a689b5a66f2874ef2452b152065cf85743a5234ce3c9fa4980"
+    },
+    "live-output/eval-two-pair-b/2-P0/worker/worker_events.jsonl": {
+      "bytes": 127301,
+      "sha256": "437827414e4bb5b530d5abd9cfc2eb91c9386f193903d4ea98b566f8884e67ab"
+    },
+    "live-output/eval-two-pair-b/2-P0/worker_config.json": {
+      "bytes": 12907,
+      "sha256": "b6bcdb0aca2bb518a772eb529cf80578df6595157070e88c95cf4e0540fde6c9"
+    },
+    "live-output/eval-two-pair-c/1-P0/owner/supervisor_events.jsonl": {
+      "bytes": 46642,
+      "sha256": "3485457bb94e7a8d633204aab68e9ffeb5ced86ae6421381640426046c42f447"
+    },
+    "live-output/eval-two-pair-c/1-P0/owner/worker.stderr": {
+      "bytes": 312,
+      "sha256": "a6639b71bbf5fd8f59dbafad9f6306250d4ac9e3c6b1ed599eb96741e63970a4"
+    },
+    "live-output/eval-two-pair-c/1-P0/owner/worker.stdout": {
+      "bytes": 28,
+      "sha256": "192f7d3255f5bbc24517a77d24f6dc0bca77e2fe847d07aaa05791e0241b5142"
+    },
+    "live-output/eval-two-pair-c/1-P0/worker/eprime_only/actual_config.json": {
+      "bytes": 415,
+      "sha256": "158264351dde0f9b117b69332eb18c90c43eeaa7684b93ba23b23ad5e920cb0c"
+    },
+    "live-output/eval-two-pair-c/1-P0/worker/eprime_only/dataset/authored-eprime-only/game.tw-pddl": {
+      "bytes": 33750,
+      "sha256": "3616bd73f03d18fa31cd49213cb71b369297e55264a9c032bdb7694ffea10d07"
+    },
+    "live-output/eval-two-pair-c/1-P0/worker/eprime_only/dataset/authored-eprime-only/traj_data.json": {
+      "bytes": 39,
+      "sha256": "9c4a7072be045f5f5f80b66444c917f86405a4f565b585e65e5370d50a1f89a0"
+    },
+    "live-output/eval-two-pair-c/1-P0/worker/load-1/resource.jsonl": {
+      "bytes": 3173765,
+      "sha256": "2335bfc6a9a5776bd2d0c6bfa720a4888083b758248e653a605fff0d625f522e"
+    },
+    "live-output/eval-two-pair-c/1-P0/worker/load-1/runtime_import_A_after.json": {
+      "bytes": 3235,
+      "sha256": "061059d6acb8a2a689b5a66f2874ef2452b152065cf85743a5234ce3c9fa4980"
+    },
+    "live-output/eval-two-pair-c/1-P0/worker/load-1/runtime_import_A_before.json": {
+      "bytes": 3235,
+      "sha256": "061059d6acb8a2a689b5a66f2874ef2452b152065cf85743a5234ce3c9fa4980"
+    },
+    "live-output/eval-two-pair-c/1-P0/worker/worker_events.jsonl": {
+      "bytes": 687158,
+      "sha256": "82d4ffd48060b6294dd7f854dc0b8d5081ca76eebd2642959f7f80a60d748731"
+    },
+    "live-output/eval-two-pair-c/1-P0/worker_config.json": {
+      "bytes": 12383,
+      "sha256": "ffce19d9467e58fc96d100d06428cc34fbc40567e6616ebcbcc8c3a899a5ec2a"
+    },
+    "live-output/eval-two-pair-c/2-CANDIDATE/owner/supervisor_events.jsonl": {
+      "bytes": 28065,
+      "sha256": "a022e03445082dc272e4cac154dc638037d944662b1d976efca647391766c367"
+    },
+    "live-output/eval-two-pair-c/2-CANDIDATE/owner/worker.stderr": {
+      "bytes": 312,
+      "sha256": "fda2f143a0f825b52df9d02e4d0fc223c2a75122ef34cd352c009e9c6cdcc33b"
+    },
+    "live-output/eval-two-pair-c/2-CANDIDATE/owner/worker.stdout": {
+      "bytes": 28,
+      "sha256": "192f7d3255f5bbc24517a77d24f6dc0bca77e2fe847d07aaa05791e0241b5142"
+    },
+    "live-output/eval-two-pair-c/2-CANDIDATE/worker/eprime_only/actual_config.json": {
+      "bytes": 422,
+      "sha256": "bb618d722139ff29700686604aca1a265b985c878734bac9444519ecb8879c9e"
+    },
+    "live-output/eval-two-pair-c/2-CANDIDATE/worker/eprime_only/dataset/authored-eprime-only/game.tw-pddl": {
+      "bytes": 33750,
+      "sha256": "3616bd73f03d18fa31cd49213cb71b369297e55264a9c032bdb7694ffea10d07"
+    },
+    "live-output/eval-two-pair-c/2-CANDIDATE/worker/eprime_only/dataset/authored-eprime-only/traj_data.json": {
+      "bytes": 39,
+      "sha256": "9c4a7072be045f5f5f80b66444c917f86405a4f565b585e65e5370d50a1f89a0"
+    },
+    "live-output/eval-two-pair-c/2-CANDIDATE/worker/load-1/resource.jsonl": {
+      "bytes": 1867129,
+      "sha256": "5215ea2746c16c001f853c006dc350d7fe76503b8defd2171b37dcdd12de884b"
+    },
+    "live-output/eval-two-pair-c/2-CANDIDATE/worker/load-1/runtime_import_B_after.json": {
+      "bytes": 3235,
+      "sha256": "061059d6acb8a2a689b5a66f2874ef2452b152065cf85743a5234ce3c9fa4980"
+    },
+    "live-output/eval-two-pair-c/2-CANDIDATE/worker/load-1/runtime_import_B_before.json": {
+      "bytes": 3235,
+      "sha256": "061059d6acb8a2a689b5a66f2874ef2452b152065cf85743a5234ce3c9fa4980"
+    },
+    "live-output/eval-two-pair-c/2-CANDIDATE/worker/worker_events.jsonl": {
+      "bytes": 395733,
+      "sha256": "a4b9063ef537271d7e03e7857051b57c11903cd39ef3c999501ef3a26cebaf13"
+    },
+    "live-output/eval-two-pair-c/2-CANDIDATE/worker_config.json": {
+      "bytes": 12902,
+      "sha256": "730548c3edd9b109d88f6b575b3f577cb0eb5594b4a56e4a28b1b2c651cc07ac"
+    }
+  },
+  "supervisor_process_exit": 1,
+  "unreturned_owner_reservations": [
+    {
+      "data": {
+        "cost": "STARTED_OR_UNKNOWN_UNTIL_CHILD_PROOF",
+        "count": 29,
+        "operation": "step",
+        "seq": 62,
+        "stage": "EVAL"
+      },
+      "owner_log": "live-output/eval-two-pair-c/2-CANDIDATE/owner/supervisor_events.jsonl"
+    }
+  ]
+}
