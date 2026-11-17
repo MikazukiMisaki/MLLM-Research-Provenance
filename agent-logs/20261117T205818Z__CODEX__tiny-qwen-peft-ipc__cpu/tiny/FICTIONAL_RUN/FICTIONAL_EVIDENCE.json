@@ -1,0 +1,52 @@
+{
+  "adapter_tensor_exact": true,
+  "core_metadata": {
+    "epochs": 4,
+    "microbatches": 64,
+    "optimizer_steps": 16,
+    "selection": "FINAL_ONLY_NO_BEST"
+  },
+  "device": "cpu",
+  "fake_adapter_files_sha256": {
+    "README.md": "8fbffd891e1d0edd9836a7715a8a26e64395e5426f2eee7713b9d3715fd98eae",
+    "adapter_config.json": "038cd74f3dcd4202f9fcac9c475efeec83a82ab9f79f1ce1852c02513bcd6f7e",
+    "adapter_model.safetensors": "fa2e89cdfa10fb1af00a0723494a6f8bb8213fa71c943de296a9b12af7a8e510"
+  },
+  "fake_adapter_tensor_count": 14,
+  "fake_base_unchanged": true,
+  "fake_logits_max_absolute_difference": 0.0,
+  "fake_lora_changed": true,
+  "fake_owner_counts": {
+    "backward": 64,
+    "checkpoint_final": 1,
+    "forward": 64,
+    "optimizer_step": 16,
+    "set_train_mode": 1,
+    "validate_model": 1,
+    "zero_grad": 16
+  },
+  "fixture_sha256": "768fc562e2d32681d13fe8738c4a4804e7b3c0a191d26fd0a634b375102cb3d5",
+  "lora": {
+    "alpha": 64,
+    "dropout": 0.05,
+    "r": 32,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ]
+  },
+  "scientific_use": "HOLD",
+  "scope": "FICTIONAL_RANDOM_TINY_CPU_NOT_QWEN3_8B_NOT_SCIENCE",
+  "source_sha256": "c610f1cf57b5580e62245099f01d58cd4594de644e77478a714e686f335b0696",
+  "tiny_config": {
+    "head_dim": 8,
+    "hidden_size": 32,
+    "layers": 1,
+    "vocab_size": 16
+  }
+}

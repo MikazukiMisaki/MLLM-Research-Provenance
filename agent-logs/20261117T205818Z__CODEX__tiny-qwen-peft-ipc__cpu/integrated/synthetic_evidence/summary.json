@@ -1,0 +1,91 @@
+{
+  "interrupt_after_checkpoint": {
+    "artifact_sha256": "0c0d34d25eeadca18a8ccc92c76a23e0fc7255d1c53e375a81dd931accbe6e01",
+    "disk_receipt": {
+      "format": "safetensors",
+      "keys": [
+        "fictional.base_model.model.model.layers.0.mlp.down_proj.lora_A.weight",
+        "fictional.base_model.model.model.layers.0.mlp.down_proj.lora_B.weight",
+        "fictional.base_model.model.model.layers.0.mlp.gate_proj.lora_A.weight",
+        "fictional.base_model.model.model.layers.0.mlp.gate_proj.lora_B.weight",
+        "fictional.base_model.model.model.layers.0.mlp.up_proj.lora_A.weight",
+        "fictional.base_model.model.model.layers.0.mlp.up_proj.lora_B.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.k_proj.lora_A.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.k_proj.lora_B.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.o_proj.lora_A.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.o_proj.lora_B.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.q_proj.lora_A.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.q_proj.lora_B.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.v_proj.lora_A.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.v_proj.lora_B.weight"
+      ],
+      "scientific_use": "HOLD",
+      "scope": "FICTIONAL_CPU_ONLY_NOT_LORA_NOT_SCIENCE",
+      "sha256": "0c0d34d25eeadca18a8ccc92c76a23e0fc7255d1c53e375a81dd931accbe6e01",
+      "status": "RELOAD_CHECKED_CALLBACK_RETURN_REQUIRED",
+      "step": 16
+    },
+    "result": {
+      "active": [
+        162,
+        "checkpoint_final"
+      ],
+      "counts": {
+        "backward": 64,
+        "checkpoint_final": 1,
+        "forward": 64,
+        "optimizer_step": 16,
+        "set_train_mode": 1,
+        "validate_model": 1,
+        "zero_grad": 16
+      },
+      "outcome": "UNKNOWN",
+      "reason": "Stop: EOF before completed finish",
+      "returncode": 24,
+      "scientific_use": "HOLD"
+    }
+  },
+  "normal": {
+    "artifact_sha256": "e45c56ea37f05c5b5679cb8fa6f7184e54d6a79b61fadee6f8a15d07e5f99c78",
+    "disk_receipt": {
+      "format": "safetensors",
+      "keys": [
+        "fictional.base_model.model.model.layers.0.mlp.down_proj.lora_A.weight",
+        "fictional.base_model.model.model.layers.0.mlp.down_proj.lora_B.weight",
+        "fictional.base_model.model.model.layers.0.mlp.gate_proj.lora_A.weight",
+        "fictional.base_model.model.model.layers.0.mlp.gate_proj.lora_B.weight",
+        "fictional.base_model.model.model.layers.0.mlp.up_proj.lora_A.weight",
+        "fictional.base_model.model.model.layers.0.mlp.up_proj.lora_B.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.k_proj.lora_A.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.k_proj.lora_B.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.o_proj.lora_A.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.o_proj.lora_B.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.q_proj.lora_A.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.q_proj.lora_B.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.v_proj.lora_A.weight",
+        "fictional.base_model.model.model.layers.0.self_attn.v_proj.lora_B.weight"
+      ],
+      "scientific_use": "HOLD",
+      "scope": "FICTIONAL_CPU_ONLY_NOT_LORA_NOT_SCIENCE",
+      "sha256": "e45c56ea37f05c5b5679cb8fa6f7184e54d6a79b61fadee6f8a15d07e5f99c78",
+      "status": "RELOAD_CHECKED_CALLBACK_RETURN_REQUIRED",
+      "step": 16
+    },
+    "result": {
+      "active": null,
+      "counts": {
+        "backward": 64,
+        "checkpoint_final": 1,
+        "forward": 64,
+        "optimizer_step": 16,
+        "set_train_mode": 1,
+        "validate_model": 1,
+        "zero_grad": 16
+      },
+      "outcome": "FICTIONAL_COMPLETE",
+      "reason": null,
+      "returncode": 0,
+      "scientific_use": "HOLD"
+    }
+  }
+}

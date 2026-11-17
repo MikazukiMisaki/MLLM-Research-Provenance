@@ -1,0 +1,82 @@
+"""Fiction-only socket client for exact, unmodified EffectOwner/Journal."""
+import copy,hashlib,json,os,sys,types
+from pathlib import Path
+import torch
+from transformers import Qwen3Config,Qwen3ForCausalLM
+from peft import LoraConfig,get_peft_model,get_peft_model_state_dict,set_peft_model_state_dict
+from safetensors import safe_open
+HERE=Path(__file__).resolve().parent
+sys.path.insert(0,str(HERE))
+core_raw=(HERE/'device_core.py').read_bytes()
+if hashlib.sha256(core_raw).hexdigest()!='c610f1cf57b5580e62245099f01d58cd4594de644e77478a714e686f335b0696':raise RuntimeError('core source mismatch')
+device_core=types.ModuleType('exact_device_core');device_core.__file__=str(HERE/'device_core.py')
+exec(compile(core_raw,str(HERE/'device_core.py'),'exec'),device_core.__dict__)
+EFFECT=Path('/home/lizening/research-notes/agent-logs/20261115__CODEX__multi-source-training-r4__candidate/effect_ipc.py')
+raw=EFFECT.read_bytes()
+if hashlib.sha256(raw).hexdigest()!='046c0c48291efdae06457d87343d084357ae5a1774c3d670e3e232b15fd16dd8':raise RuntimeError('frozen effect source mismatch')
+ipc=types.ModuleType('effect_ipc_bound');exec(compile(raw,str(EFFECT),'exec'),ipc.__dict__)
+CALLBACK=Path('/home/lizening/research-notes/agent-logs/20261118__CODEX__fictional-final-checkpoint__private/final_checkpoint.py')
+callback_raw=CALLBACK.read_bytes()
+if hashlib.sha256(callback_raw).hexdigest()!='6444205fbf05e0a2f6b39097a4a1841fd175e0e34877e039857b83136b990509':raise RuntimeError('checkpoint source mismatch')
+checkpoint_module=types.ModuleType('exact_fictional_checkpoint');checkpoint_module.__file__=str(CALLBACK)
+exec(compile(callback_raw,str(CALLBACK),'exec'),checkpoint_module.__dict__)
+fixture=(HERE/'fixture.json').read_bytes()
+if hashlib.sha256(fixture).hexdigest()!='768fc562e2d32681d13fe8738c4a4804e7b3c0a191d26fd0a634b375102cb3d5':raise RuntimeError('fictional fixture mismatch')
+rows=json.loads(fixture)['rows'];fd=int(sys.argv[1]);out=Path(sys.argv[2]);mode=sys.argv[3]
+CAPS={'validate_model':1,'set_train_mode':1,'zero_grad':16,'forward':64,'backward':64,'optimizer_step':16,'checkpoint_final':1}
+journal=ipc.Journal(out/'worker_events.jsonl',16*1024*1024);under=ipc.EffectOwner(fd,journal,CAPS)
+class Adapter:
+ def reserve(self,kind,request):return under.start(kind,request)
+ def returned(self,ticket,kind,receipt):
+  if mode=='interrupt_after_first_step' and kind=='optimizer_step':os._exit(23)
+  return under.returned(ticket,kind,receipt)
+ def unknown(self,ticket,kind,error_type):return under.unknown(ticket,kind)
+scenario=os.environ.get('FAKE_CHECKPOINT_SCENARIO','normal')
+if scenario not in ('normal','interrupt_after_checkpoint'):raise ValueError('fictional scenario')
+journal.emit('fake_checkpoint_scenario',{'scope':'FICTIONAL_ONLY','scenario':scenario})
+torch.random.default_generator.manual_seed(42)
+cfg=Qwen3Config(vocab_size=16,hidden_size=32,intermediate_size=64,num_hidden_layers=1,
+ num_attention_heads=4,num_key_value_heads=4,head_dim=8,max_position_embeddings=64,
+ bos_token_id=1,eos_token_id=3,pad_token_id=4,tie_word_embeddings=False)
+cfg._attn_implementation='eager'
+base=Qwen3ForCausalLM(cfg).to('cpu');base_for_reload=copy.deepcopy(base)
+targets=['q_proj','k_proj','v_proj','o_proj','gate_proj','up_proj','down_proj']
+def lora_config():return LoraConfig(r=32,lora_alpha=64,lora_dropout=0.05,target_modules=targets,bias='none',task_type='CAUSAL_LM')
+model=get_peft_model(base,lora_config())
+trainable={n:p for n,p in model.named_parameters() if p.requires_grad}
+if not trainable or any('lora_' not in n for n in trainable) or any(p.device.type!='cpu' for p in model.parameters()):raise ValueError('fake LoRA binding')
+frozen={n:p.detach().clone() for n,p in model.named_parameters() if not p.requires_grad}
+initial={n:p.detach().clone() for n,p in trainable.items()}
+optimizer=torch.optim.AdamW(list(trainable.values()),lr=3e-5,betas=(0.9,0.999),eps=1e-8,weight_decay=0.0,amsgrad=False,foreach=False,capturable=False,maximize=False,fused=False)
+writer=checkpoint_module.FictionalFinalCheckpoint((out/'fake_final').resolve())
+def save_final(m,o,meta):
+ steps={int(o.state[p]['step'].item()) for p in trainable.values()}
+ if meta.get('selection')!='FINAL_ONLY_NO_BEST' or steps!={16}:raise ValueError('fake final selection')
+ state=get_peft_model_state_dict(m)
+ if not state or any(not isinstance(k,str) or k.startswith('fictional.') for k in state):raise ValueError('fake adapter names')
+ prefixed={'fictional.'+k:v for k,v in state.items()}
+ receipt=writer(16,prefixed)
+ if scenario=='interrupt_after_checkpoint':os._exit(24)
+ with safe_open(str(out/'fake_final'/'fictional.safetensors'),framework='pt',device='cpu') as reader:
+  saved={k[len('fictional.'):]:reader.get_tensor(k) for k in reader.keys()}
+ if set(saved)!=set(state) or any(not torch.equal(saved[k],v.detach().cpu()) for k,v in state.items()):raise ValueError('fake tensor reload mismatch')
+ restored=get_peft_model(base_for_reload,lora_config())
+ set_peft_model_state_dict(restored,saved,adapter_name='default')
+ after=get_peft_model_state_dict(restored)
+ if set(after)!=set(state) or any(not torch.equal(after[k],state[k]) for k in state):raise ValueError('fake PEFT reload mismatch')
+ m.eval();restored.eval();tokens=torch.tensor([[0,1,2,3]],dtype=torch.long,device='cpu')
+ with torch.no_grad():a=m(input_ids=tokens,use_cache=False).logits;b=restored(input_ids=tokens,use_cache=False).logits
+ torch.testing.assert_close(a,b,rtol=1e-6,atol=1e-6)
+ if not any(not torch.equal(p,initial[n]) for n,p in trainable.items()):raise ValueError('no fake LoRA update')
+ if any(not torch.equal(p,frozen[n]) for n,p in m.named_parameters() if not p.requires_grad):raise ValueError('fake frozen base changed')
+ return dict(receipt,fixture_adapter_mapping='PREFIXED_STATE_DICT_NOT_PEFT_EXPORT',adapter_tensor_count=len(state),
+   base_unchanged=True,lora_changed=True,adapter_reload_exact=True,logits_max_abs=float((a-b).abs().max().item()))
+
+try:
+ result=device_core.run_injected_core(model=model,optimizer=optimizer,rows=rows,owner=Adapter(),
+  checkpoint_writer=save_final,
+  vocab_size=16,eos_token_id=3,pad_token_id=4)
+ journal.emit('fake_run_result',{'scope':'FICTIONAL_CHILD_CLAIM','metadata':result['metadata'],'callback_receipt':result['checkpoint_receipt']})
+ under.finish('COMPLETED')
+finally:
+ under.close();journal.close()
