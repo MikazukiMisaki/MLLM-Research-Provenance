@@ -1,0 +1,43 @@
+{
+  "arm": "C",
+  "base_sha256": "0239d34c87594c9d86c2fe5e81e515fa871809fa18b9ed67856fd0dc8e19c00b",
+  "config": {
+    "adam_beta1": 0.9,
+    "adam_beta2": 0.999,
+    "adam_epsilon": 1e-08,
+    "batch_size": 1,
+    "gradient_accumulation_steps": 16,
+    "gradient_checkpointing": true,
+    "learning_rate": 2.5e-05,
+    "loss_normalization": "active_tokens",
+    "max_grad_norm": 1.0,
+    "max_input_tokens": 700000,
+    "max_length": 2048,
+    "max_supervised_tokens": 6240,
+    "max_wall_seconds": 5400,
+    "min_lr_ratio": 0.1,
+    "optimizer": "adamw",
+    "optimizer_fused": true,
+    "optimizer_steps": 78,
+    "scheduler": "cosine",
+    "seed": 42,
+    "use_cache": false,
+    "warmup_steps": 3,
+    "weight_decay": 0.0
+  },
+  "counts": {
+    "input_tokens": 695872,
+    "microbatches_completed": 1248,
+    "microbatches_started": 1248,
+    "optimizer_steps": 78,
+    "padded_input_tokens": 695872,
+    "supervised_tokens": 6240
+  },
+  "elapsed_seconds": 886.374901461415,
+  "error": null,
+  "final_adapter_sha256": "fdaa5ce9a1dc3e38ed78b39ba71a5c7c28b23fb637f786d52d8bec3a2ad58e1e",
+  "manifest_sha256": "d6bf7be62b86115d14f64d00247162f77848476789c113be3b31a8d04ae055d2",
+  "p0_adapter_sha256": "6b13612c33d96ae9bbda041c08d33e0e1888406c4782670e90c8ebd27467b5a5",
+  "schema": "SI_CONTINUATION_RESULT_V1",
+  "status": "COMPLETED"
+}
