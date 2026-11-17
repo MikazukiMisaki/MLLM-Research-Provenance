@@ -1,0 +1,29 @@
+@@ -40,19 +40,27 @@
+     try:
+         raw=Path(path).read_bytes()
+         if not raw or not raw.endswith(b'\n'):raise ValueError('incomplete journal')
+-        prev='0'*64;pending={};seen=set();ended=False;scan_unknown=False
++        prev='0'*64;pending={};seen=set();ended=False;scan_unknown=False;limits=None
+         for i,line in enumerate(raw.splitlines()):
++            if ended:raise ValueError('event after read phase complete')
+             row=json.loads(line);h=row.pop('digest')
+             if row['seq']!=i or row['previous']!=prev or hashlib.sha256(canonical(row)).hexdigest()!=h:raise ValueError('chain')
+             prev=h;kind=row['kind'];payload=row['payload']
+             if i==0 and kind!='HEADER':raise ValueError('missing header')
++            if i==0:
++                limits=payload
++                if (type(limits) is not dict or any(type(limits.get(k)) is not int or limits[k]<=0 for k in ('files','bytes'))):
++                    raise ValueError('invalid header limits')
+             if kind=='RESERVE':
+                 rid=payload['id'];n=payload['bytes']
+                 if type(rid) is not int or rid in seen or type(n) is not int or n<0:raise ValueError('reservation')
+                 seen.add(rid);pending[rid]=n;result['reserved_files']+=1;result['reserved_bytes']+=n
++                if result['reserved_files']>limits['files'] or result['reserved_bytes']>limits['bytes']:
++                    raise ValueError('reservation exceeds header limits')
+             elif kind in ('RETURNED','UNKNOWN'):
+                 rid=payload['id'];n=payload['known_bytes']
+                 if rid not in pending or type(n) is not int or n<0 or n>pending[rid]:raise ValueError('return')
++                if kind=='RETURNED' and n!=pending[rid]:raise ValueError('short completed read')
+                 result['returned_bytes_lower_bound']+=n
+                 if kind=='UNKNOWN':result['unknown_reads'].append(rid)
+                 del pending[rid]

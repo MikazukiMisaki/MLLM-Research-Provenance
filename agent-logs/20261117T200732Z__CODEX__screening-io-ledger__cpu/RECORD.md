@@ -1,0 +1,3 @@
+# Fixed-roster synthetic selector and read reservations
+
+CPU-only fictional artifacts. The candidate applies the proposed ordered roster rule and records separate eligible, ineligible, unknown and not-scanned statuses. Later versions reserve user-space read bounds before reads and preserve unknown reservations; independent review found and verified fixes for specific invalid recovery sequences. This is not physical disk metering, a complete resource budget, authenticated real provenance or scientific screening. No model, environment, GPU computation, real task, training or scientific run occurred. Historical holds remain unchanged.
