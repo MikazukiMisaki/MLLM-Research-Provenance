@@ -389,3 +389,5 @@ No task directory or large provenance file was omitted. Transient PID/lock files
 - `agent-logs/20261118T005200Z__CODEX__self-success-restart-interruption__private/`: interrupted manual engineering restart, original path-free ledger and independent audits.
 
 - `agent-logs/20261118T005500Z__CODEX__training-coordination-addendum__private/`: later operator account and coordinating decision hashes; failed runs unchanged.
+
+- `agent-logs/20261118T010000Z__CODEX__research-status__private/`: concise research results, interruptions and thesis limitations.
