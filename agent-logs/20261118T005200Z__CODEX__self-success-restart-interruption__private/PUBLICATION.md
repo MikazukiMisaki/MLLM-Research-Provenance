@@ -1,0 +1,7 @@
+# Interrupted engineering restart of uniform self-imitation
+
+This package contains the original unmodified path-free training ledger and independent reviews. Other receipts and resources are explicitly redacted, not byte-identical. The complete 15-file original run tree, including machine-specific paths, is preserved locally in a verified private archive SHA256 14fa17982a5b6c3d8c2c1f77a4d6c485b540a610ca9cbc882277ded054db335e.
+
+The restart was a new, manually scoped engineering run with no reused partial checkpoint; it received SIGTERM, completed 14 optimizer updates, and left one microbatch without a completion record. No final adapter, B arm or new evaluation exists. The inner receipt reports its visible worker cleanup; the outer overall state remains UNKNOWN. The sender of this restart's signal is unknown. Across the original pilot and two interrupted training runs the observed allocated intervals total at least 2735 seconds; the first interruption has an unbounded unobserved tail.
+
+A separately written operator record SHA256 a67a25d7ce2a33bf9cc48aa83fdb9d9f731bdf745fed3a8666577ee5ed68a31a reports that signals were sent to the first run's process groups due to a coordination disagreement about release evidence. This is a retrospective statement, not a kernel-verified sender attribution, and does not identify the sender of the restart's signal. Both original receipts remain unchanged.

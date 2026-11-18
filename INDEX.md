@@ -385,3 +385,5 @@ No task directory or large provenance file was omitted. Transient PID/lock files
 - `agent-logs/20261118T002900Z__CODEX__self-success-A-interruption__private/`: failed/unknown first uniform training arm, original path-free event ledger and independent audit.
 
 - `agent-logs/20261118T003500Z__CODEX__signal-lifecycle-diagnostic__cpu/`: synthetic three-case reproduction of process termination behavior; historical signal sender unknown.
+
+- `agent-logs/20261118T005200Z__CODEX__self-success-restart-interruption__private/`: interrupted manual engineering restart, original path-free ledger and independent audits.
