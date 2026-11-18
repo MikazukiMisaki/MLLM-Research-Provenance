@@ -1,0 +1,5 @@
+# Interrupted uniform self-imitation arm
+
+This package contains the original unmodified path-free training event ledger and independently reviewed derived records. Resource, outer samples and outer exit have identity fields redacted; they are not byte-identical originals. The complete 14-file original run tree, including machine-specific launch paths, is kept in a private local archive, SHA256 9a4300ba7f517281f6f808107471f9b274f8d7be6251bc304f79b703714234de; every archive member was verified against its original during capture. Original supervisor and worker data remain unchanged locally.
+
+The run failed/unknown after its inner supervisor received SIGTERM from an unknown sender; 348 microbatches started, 347 completed, 28 optimizer updates completed, no final adapter/checkpoint. One microbatch and cleanup are unknown. Last observed worker resource activity was 263.51 seconds after outer start, including 9.81 seconds after outer exit; total tail time is unknown. No B arm, evaluation, retry or success-rate claim follows. See INDEPENDENT_REVIEW.md and OBSERVATION.json.

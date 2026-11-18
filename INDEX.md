@@ -381,3 +381,5 @@ No task directory or large provenance file was omitted. Transient PID/lock files
 - `agent-logs/20261117T235600Z__CODEX__same-source-encoding__cpu/`: offline reconstructed 99-row training input preparation, aggregate and redacted receipt.
 
 - `agent-logs/20261118T000500Z__CODEX__same-source-later-weight-design__private/`: prospective exposed-DEV self-imitation design and prototype review; no training result.
+
+- `agent-logs/20261118T002900Z__CODEX__self-success-A-interruption__private/`: failed/unknown first uniform training arm, original path-free event ledger and independent audit.
