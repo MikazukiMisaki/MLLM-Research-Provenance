@@ -393,3 +393,5 @@ No task directory or large provenance file was omitted. Transient PID/lock files
 - `agent-logs/20261118T010000Z__CODEX__research-status__private/`: concise research results, interruptions and thesis limitations.
 
 - `agent-logs/20261118T010400Z__CODEX__signal-sender-prototype__cpu/`: signal metadata prototype on own fake processes; not production integrated.
+
+- `agent-logs/20261118T011000Z__CODEX__research-status-v2__private/`: clarifies rounded accounting versus physical time in current research status.
