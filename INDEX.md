@@ -383,3 +383,5 @@ No task directory or large provenance file was omitted. Transient PID/lock files
 - `agent-logs/20261118T000500Z__CODEX__same-source-later-weight-design__private/`: prospective exposed-DEV self-imitation design and prototype review; no training result.
 
 - `agent-logs/20261118T002900Z__CODEX__self-success-A-interruption__private/`: failed/unknown first uniform training arm, original path-free event ledger and independent audit.
+
+- `agent-logs/20261118T003500Z__CODEX__signal-lifecycle-diagnostic__cpu/`: synthetic three-case reproduction of process termination behavior; historical signal sender unknown.

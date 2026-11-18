@@ -1,0 +1,1 @@
+Synthetic CPU-only reproduction. The controlled signal reproduces the observed lifecycle pattern, but does not identify the historical signal sender. The harness used a subreaper and has a different ancestor topology. Individual raw process records remain local; their inventory SHA256 is recorded in REPORT.md. No scientific run was repeated.

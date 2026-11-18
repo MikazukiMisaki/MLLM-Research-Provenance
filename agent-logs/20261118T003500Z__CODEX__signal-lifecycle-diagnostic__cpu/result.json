@@ -1,0 +1,136 @@
+{
+  "cases": [
+    {
+      "case": "normal",
+      "inner_monitor": {
+        "allocated_seconds_ceiling": 5,
+        "cleanup": "REQUIRES_INNER_RECEIPT",
+        "direct_child_reaped": true,
+        "gpu_utilization": "NOT_MEASURED",
+        "observed_exit": {
+          "max_rss_kib": 21052,
+          "returncode": 0,
+          "system_cpu_seconds": 0.057215999999999996,
+          "user_cpu_seconds": 0.159193
+        },
+        "outer_error": null,
+        "pid": 1717800,
+        "unknown_effects": "REQUIRES_LEDGER_AUDIT"
+      },
+      "inner_receipt_exists": true,
+      "outer_returncode": 0,
+      "signal_actions": [],
+      "worker_kernel_or_inner_receipt": {
+        "returncode": 0,
+        "source": "inner_supervisor_receipt"
+      },
+      "worker_last_events": [
+        "{\"event\": \"heartbeat\", \"pid\": 1717801, \"ppid\": 1717800, \"monotonic\": 6812106.162458225}",
+        "{\"event\": \"heartbeat\", \"pid\": 1717801, \"ppid\": 1717800, \"monotonic\": 6812106.265633001}",
+        "{\"event\": \"natural_finish\", \"pid\": 1717801, \"ppid\": 1717800, \"monotonic\": 6812106.268441263}"
+      ],
+      "worker_ready": {
+        "pgid": 1717801,
+        "pid": 1717801,
+        "ppid": 1717800,
+        "sid": 1717801,
+        "start_tick": 681210220
+      }
+    },
+    {
+      "case": "term",
+      "inner_monitor": {
+        "allocated_seconds_ceiling": 1,
+        "cleanup": "REQUIRES_INNER_RECEIPT",
+        "direct_child_reaped": true,
+        "gpu_utilization": "NOT_MEASURED",
+        "observed_exit": {
+          "max_rss_kib": 21044,
+          "returncode": -15,
+          "system_cpu_seconds": 0.023039999999999998,
+          "user_cpu_seconds": 0.09764199999999999
+        },
+        "outer_error": null,
+        "pid": 1717812,
+        "unknown_effects": "REQUIRES_LEDGER_AUDIT"
+      },
+      "inner_receipt_exists": false,
+      "outer_returncode": 0,
+      "signal_actions": [
+        {
+          "case": "term",
+          "monotonic": 6812106.616084911,
+          "sender": 1717811,
+          "signal": 15,
+          "target": 1717812
+        }
+      ],
+      "worker_kernel_or_inner_receipt": {
+        "returncode": 0,
+        "system_cpu_seconds": 0.012766999999999999,
+        "user_cpu_seconds": 0.051071
+      },
+      "worker_last_events": [
+        "{\"event\": \"heartbeat\", \"pid\": 1717813, \"ppid\": 1717798, \"monotonic\": 6812110.489914478}",
+        "{\"event\": \"heartbeat\", \"pid\": 1717813, \"ppid\": 1717798, \"monotonic\": 6812110.593098118}",
+        "{\"event\": \"natural_finish\", \"pid\": 1717813, \"ppid\": 1717798, \"monotonic\": 6812110.596209983}"
+      ],
+      "worker_ready": {
+        "pgid": 1717813,
+        "pid": 1717813,
+        "ppid": 1717812,
+        "sid": 1717813,
+        "start_tick": 681210653
+      }
+    },
+    {
+      "case": "monitor_error",
+      "inner_monitor": {
+        "allocated_seconds_ceiling": 1,
+        "cleanup": "REQUIRES_INNER_RECEIPT",
+        "direct_child_reaped": true,
+        "gpu_utilization": "NOT_MEASURED",
+        "observed_exit": {
+          "max_rss_kib": 20952,
+          "returncode": 1,
+          "system_cpu_seconds": 0.033354,
+          "user_cpu_seconds": 0.157502
+        },
+        "outer_error": "ValueError",
+        "pid": 1717823,
+        "unknown_effects": "REQUIRES_LEDGER_AUDIT"
+      },
+      "inner_receipt_exists": true,
+      "outer_returncode": 0,
+      "signal_actions": [
+        {
+          "case": "monitor_error",
+          "monotonic": 6812110.893152851,
+          "sender": 1717822,
+          "signal": 2,
+          "target": 1717823
+        }
+      ],
+      "worker_kernel_or_inner_receipt": {
+        "returncode": -9,
+        "source": "inner_supervisor_receipt"
+      },
+      "worker_last_events": [
+        "{\"event\": \"heartbeat\", \"pid\": 1717825, \"ppid\": 1717823, \"monotonic\": 6812110.946494639}",
+        "{\"event\": \"heartbeat\", \"pid\": 1717825, \"ppid\": 1717823, \"monotonic\": 6812111.049728424}",
+        "{\"event\": \"heartbeat\", \"pid\": 1717825, \"ppid\": 1717823, \"monotonic\": 6812111.153022522}"
+      ],
+      "worker_ready": {
+        "pgid": 1717825,
+        "pid": 1717825,
+        "ppid": 1717823,
+        "sid": 1717825,
+        "start_tick": 681211081
+      }
+    }
+  ],
+  "historical_signal_source": "UNKNOWN",
+  "status": "CASES_FINISHED",
+  "subreaper_topology_differs_from_live": true,
+  "wall_seconds": 9.172490444034338
+}
