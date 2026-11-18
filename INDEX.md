@@ -391,3 +391,5 @@ No task directory or large provenance file was omitted. Transient PID/lock files
 - `agent-logs/20261118T005500Z__CODEX__training-coordination-addendum__private/`: later operator account and coordinating decision hashes; failed runs unchanged.
 
 - `agent-logs/20261118T010000Z__CODEX__research-status__private/`: concise research results, interruptions and thesis limitations.
+
+- `agent-logs/20261118T010400Z__CODEX__signal-sender-prototype__cpu/`: signal metadata prototype on own fake processes; not production integrated.
